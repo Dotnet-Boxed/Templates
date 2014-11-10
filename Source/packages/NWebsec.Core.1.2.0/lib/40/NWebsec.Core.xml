@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NWebsec.Core</name>
+    </assembly>
+    <members>
+        <member name="T:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveConfiguration">
+            <summary>
+                Defines the properties required for CSP directive configuration.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Fluent.IFluentInterface">
+            <summary>
+                Interface that is used to build fluent interfaces and hides methods declared by <see cref="T:System.Object"/> from
+                IntelliSense.
+            </summary>
+            <remarks>
+                Code that consumes implementations of this interface should expect one of two things:
+                <list type="number">
+                    <item>
+                        When referencing the interface from within the same solution (project reference), you will still see the
+                        methods this interface is meant to hide.
+                    </item>
+                    <item>
+                        When referencing the interface through the compiled output assembly (external reference), the standard
+                        Object methods will be hidden as intended.
+                    </item>
+                </list>
+                See http://bit.ly/ifluentinterface for more information.
+            </remarks>
+        </member>
+        <member name="M:NWebsec.Fluent.IFluentInterface.GetType">
+            <summary>
+                Redeclaration that hides the <see cref="M:System.Object.GetType"/> method from IntelliSense.
+            </summary>
+        </member>
+        <member name="M:NWebsec.Fluent.IFluentInterface.GetHashCode">
+            <summary>
+                Redeclaration that hides the <see cref="M:System.Object.GetHashCode"/> method from IntelliSense.
+            </summary>
+        </member>
+        <member name="M:NWebsec.Fluent.IFluentInterface.ToString">
+            <summary>
+                Redeclaration that hides the <see cref="M:System.Object.ToString"/> method from IntelliSense.
+            </summary>
+        </member>
+        <member name="M:NWebsec.Fluent.IFluentInterface.Equals(System.Object)">
+            <summary>
+                Redeclaration that hides the <see cref="M:System.Object.Equals(System.Object)"/> method from IntelliSense.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveConfiguration.Enabled">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveConfiguration.NoneSrc">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveConfiguration.SelfSrc">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveConfiguration.CustomSources">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveUnsafeInlineConfiguration">
+            <summary>
+                Defines the properties required for CSP directive configuration.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveUnsafeInlineConfiguration.UnsafeInlineSrc">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveUnsafeInlineConfiguration.Nonce">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveUnsafeEvalConfiguration">
+            <summary>
+                Defines the properties required for CSP directive configuration.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.ICspDirectiveUnsafeEvalConfiguration.UnsafeEvalSrc">
+            <summary>
+                Infrastructure. Not intended to be used by your code directly. An attempt to hide this from Intellisense has been
+                made.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Core.HttpHeaders.Configuration.IRedirectValidationConfiguration.AllowedUris">
+            <summary>
+                URIs allowed for redirect. Strings in this list should be created with Uri.AbsoluteUri to assure consistency.
+            </summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.Disabled">
+            <summary>Specifies that the X-Frame-Options header should not be set in the HTTP response.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.Deny">
+            <summary>
+                Specifies that the X-Frame-Options header should be set in the HTTP response, instructing the browser to not
+                display the page when it is loaded in an iframe.
+            </summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XFrameOptionsPolicy.SameOrigin">
+            <summary>
+                Specifies that the X-Frame-Options header should be set in the HTTP response, instructing the browser to
+                display the page when it is loaded in an iframe - but only if the iframe is from the same origin as the page.
+            </summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.Disabled">
+            <summary>Specifies that the X-Xss-Protection header should not be set in the HTTP response.</summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.FilterDisabled">
+            <summary>
+                Specifies that the X-Xss-Protection header should be set in the HTTP response, explicitly disabling the IE XSS
+                filter.
+            </summary>
+        </member>
+        <member name="F:NWebsec.HttpHeaders.XXssProtectionPolicy.FilterEnabled">
+            <summary>
+                Specifies that the X-Xss-Protection header should be set in the HTTP response, explicitly enabling the IE XSS
+                filter.
+            </summary>
+        </member>
+    </members>
+</doc>

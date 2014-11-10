@@ -1,0 +1,30 @@
+﻿<configuration>
+    <configSections>
+        <section name="glimpse" type="Glimpse.Core.Configuration.Section, Glimpse.Core" />
+    </configSections>
+    <glimpse defaultRuntimePolicy="On" endpointBaseUri="~/Glimpse.axd">
+      <!-- 
+          For more information on how to configure Glimpse, please visit http://getglimpse.com/Help/Configuration
+          or access {your site}/Glimpse.axd for even more details and a Configuration Tool to support you. 
+      -->
+    </glimpse>
+    <system.web>
+        <!-- Glimpse: This can be commented in to add additional data to the Trace tab when using WebForms
+        <trace writeToDiagnosticsTrace="true" enabled="true" pageOutput="false"/> -->
+        <httpModules>
+            <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet"/>
+        </httpModules>
+        <httpHandlers>
+            <add path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet"/>
+        </httpHandlers>
+    </system.web>
+    <system.webServer>
+        <validation validateIntegratedModeConfiguration="false"/>
+        <modules>
+            <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet" preCondition="integratedMode"/>
+        </modules>
+        <handlers>
+            <add name="Glimpse" path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet"  preCondition="integratedMode" />
+        </handlers>
+    </system.webServer>
+</configuration>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Autofac.Integration.Mvc.Owin</name>
+    </assembly>
+    <members>
+        <member name="T:Owin.AutofacMvcAppBuilderExtensions">
+            <summary>
+            Extension methods for configuring the OWIN pipeline.
+            </summary>
+        </member>
+        <member name="M:Owin.AutofacMvcAppBuilderExtensions.UseAutofacMvc(Owin.IAppBuilder)">
+            <summary>
+            Extends the Autofac lifetime scope added from the OWIN pipeline through to the MVC request lifetime scope.
+            </summary>
+            <param name="app">The application builder.</param>
+            <returns>The application builder.</returns>
+        </member>
+    </members>
+</doc>

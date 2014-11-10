@@ -1,0 +1,3652 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AntiXssLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Security.Application.AntiXss">
+            <summary>
+            Performs encoding of input strings to provide protection against
+            Cross-Site Scripting (XSS) attacks in various contexts.
+            </summary>
+            <remarks>
+            The Anti-Cross Site Scripting Library uses the Principle 
+            of Inclusions, sometimes referred to as "safe listing" to 
+            provide protection against Cross-Site Scripting attacks.  With
+            safe listing protection, algorithms look for valid inputs and 
+            automatically treat everything outside that set as a 
+            potential attack.  This library can be used as a defense in
+            depth approach with other mitigation techniques. It is suitable
+            for applications with high security requirements.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.HtmlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in HTML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in HTML.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using  &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and their related encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS Attack&#33;&#39;&#41;&#59;</description></item>
+            <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.HtmlAttributeEncode(System.String)">
+            <summary>
+            Encodes input strings for use in HTML attributes.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in HTML attributes.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using  &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS&#32;Attack&#33;&#39;&#41;&#59;</description></item>
+            <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&#32;Site&#32;Scripting&#32;Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.UrlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in universal resource locators (URLs).
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX 
+            and %uDOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert%28%27XSS%20Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.UrlEncode(System.String,System.Int32)">
+            <summary>
+            Encodes input strings for use in universal resource locators (URLs).
+            </summary>
+            <param name="input">Input string</param>
+            <param name="codepage">Codepage number of the input</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes the output as per the encoding parameter (codepage) passed to it. It encodes 
+            all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.XmlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+                Encoded string for use in XML.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS Attack&#33;&#39;&#41;&#59;</description></item>
+            <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.XmlAttributeEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML attributes.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in XML attributes.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert&#40;&#39;XSS&#32;Attack&#33;&#39;&#41;&#59;</description></item>
+            <item><term>user@contoso.com</term><description>user&#64;contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&#32;Site&#32;Scripting&#32;Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.JavaScriptEncode(System.String)">
+            <summary>
+            Encodes input strings for use in JavaScript.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in JavaScript.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+            <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.JavaScriptEncode(System.String,System.Boolean)">
+            <summary>
+            Encodes input strings for use in JavaScript.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <param name="flagforQuote">bool flag to determine whether or not to emit quotes. true = emit quote. false = no quote.</param>
+            <returns>
+            Encoded string for use in JavaScript and does not return the output with en quotes.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+            <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.AntiXss.VisualBasicScriptEncode(System.String)">
+            <summary>
+            Encodes input strings for use in Visual Basic Script.
+            </summary>
+            <param name="input">
+            String to be encoded
+            </param>
+            <returns>
+            Encoded string for use in Visual Basic Script.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are 
+            encoded using &amp;chrw(DECIMAL) notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item>
+            <term>a-z</term>
+            <description>Lower case alphabet</description>
+            </item>
+            <item>
+            <term>A-Z</term>
+            <description>Upper case alphabet</description>
+            </item>
+            <item>
+            <term>0-9</term>
+            <description>Numbers</description>
+            </item>
+            <item>
+            <term>,</term>
+            <description>Comma</description>
+            </item>
+            <item>
+            <term>.</term>
+            <description>Period</description>
+            </item>
+            <item>
+            <term>-</term>
+            <description>Dash</description>
+            </item>
+            <item>
+            <term>_</term>
+            <description>Underscore</description>
+            </item>
+            <item>
+            <term> </term>
+            <description>Space</description>
+            </item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item>
+            <term>alert('XSS Attack!');</term>
+            <description>"alert"&amp;chrw(40)&amp;chrw(39)&amp;"XSS Attack"&amp;chrw(33)&amp;chrw(39)&amp;chrw(41)&amp;chrw(59)</description>
+            </item>
+            <item>
+            <term>user@contoso.com</term>
+            <description>"user"&amp;chrw(64)&amp;"contoso.com"</description>
+            </item>
+            <item>
+            <term>Anti-Cross Site Scripting Library</term>
+            <description>"Anti-Cross Site Scripting Library"</description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.CodeChartHelper">
+            <summary>
+            Helper functions to simplify range/safe enumerations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.CodeChartHelper.GetRange(System.Int32,System.Int32,System.Func{System.Int32,System.Boolean})">
+            <summary>
+            Generates a range of numbers starting at <paramref name="min"/>, ending at <paramref name="max"/> and using any exclusions specified in the <paramref name="exclusionFilter"/>.
+            </summary>
+            <param name="min">The starting number.</param>
+            <param name="max">The finishing number.</param>
+            <param name="exclusionFilter">A function returning true for any number to be excluded.</param>
+            <returns>An enumerable collection of integers starting at <paramref name="min"/> and ending at <paramref name="max"/>, with any exclusions specified.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.CodeChartHelper.GetRange(System.Int32,System.Int32)">
+            <summary>
+            Generates a range of numbers with no exclusions.
+            </summary>
+            <param name="min">The starting number.</param>
+            <param name="max">The finishing number.</param>
+            <returns>An enumerable collection of integers starting at <paramref name="min"/> and ending at <paramref name="max"/>.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.CssEncoder">
+            <summary>
+            Provides CSS Encoding methods.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.CssEncoder.characterValuesLazy">
+            <summary>
+            The values to output for each character.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CssEncoder.Encode(System.String)">
+            <summary>
+            Encodes according to the CSS encoding rules.
+            </summary>
+            <param name="input">The string to encode.</param>
+            <returns>The encoded string.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CssEncoder.InitialiseSafeList">
+            <summary>
+            Initializes the CSS safe list.
+            </summary>
+            <returns>
+            The CSS safe list.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CssEncoder.CssSafeList">
+            <summary>
+            Provides the safe characters for CS encoding.
+            </summary>
+            <returns>The safe characters for CSS encoding.</returns>
+            <remarks>See http://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet </remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.LowerCodeCharts">
+            <summary>
+            Values for the lowest section of the UTF8 Unicode code tables, from U0000 to U0FFF.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.None">
+            <summary>
+            No code charts from the lower region of the Unicode tables are safe-listed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.BasicLatin">
+            <summary>
+            The Basic Latin code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0000.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.C1ControlsAndLatin1Supplement">
+            <summary>
+            The C1 Controls and Latin-1 Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0080.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.LatinExtendedA">
+            <summary>
+            The Latin Extended-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0100.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.LatinExtendedB">
+            <summary>
+            The Latin Extended-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0180.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.IpaExtensions">
+            <summary>
+            The IPA Extensions code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0250.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.SpacingModifierLetters">
+            <summary>
+            The Spacing Modifier Letters code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U02B0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.CombiningDiacriticalMarks">
+            <summary>
+            The Combining Diacritical Marks code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0300.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.GreekAndCoptic">
+            <summary>
+            The Greek and Coptic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0370.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Cyrillic">
+            <summary>
+            The Cyrillic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0400.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.CyrillicSupplement">
+            <summary>
+            The Cyrillic Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0500.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Armenian">
+            <summary>
+            The Armenian code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0530.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Hebrew">
+            <summary>
+            The Hebrew code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0590.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Arabic">
+            <summary>
+            The Arabic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0600.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Syriac">
+            <summary>
+            The Syriac code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0700.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.ArabicSupplement">
+            <summary>
+            The Arabic Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0750.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Thaana">
+            <summary>
+            The Thaana code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0780.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Nko">
+            <summary>
+            The Nko code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U07C0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Samaritan">
+            <summary>
+            The Samaritan code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0800.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Devanagari">
+            <summary>
+            The Devanagari code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0900.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Bengali">
+            <summary>
+            The Bengali code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0980.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Gurmukhi">
+            <summary>
+            The Gurmukhi code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0A00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Gujarati">
+            <summary>
+            The Gujarati code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0A80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Oriya">
+            <summary>
+            The Oriya code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0B00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Tamil">
+            <summary>
+            The Tamil code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0B80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Telugu">
+            <summary>
+            The Telugu code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0C00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Kannada">
+            <summary>
+            The Kannada code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0C80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Malayalam">
+            <summary>
+            The Malayalam code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0D00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Sinhala">
+            <summary>
+            The Sinhala code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0D80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Thai">
+            <summary>
+            The Thai code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0E00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Lao">
+            <summary>
+            The Lao code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0E80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Tibetan">
+            <summary>
+            The Tibetan code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U0F00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerCodeCharts.Default">
+            <summary>
+            The default code tables marked as safe on initialisation.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Security.Application.LowerMidCodeCharts">
+            <summary>
+            Values for the lower-mid section of the UTF8 Unicode code tables, from U1000 to U1EFF.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.None">
+            <summary>
+            No code charts from the lower-mid region of the Unicode tables are safe-listed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Myanmar">
+            <summary>
+            The Myanmar code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1000.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Georgian">
+            <summary>
+            The Georgian code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U10A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.HangulJamo">
+            <summary>
+            The Hangul Jamo code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1100.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Ethiopic">
+            <summary>
+            The Ethiopic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1200.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.EthiopicSupplement">
+            <summary>
+            The Ethiopic supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1380.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Cherokee">
+            <summary>
+            The Cherokee code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U13A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabics">
+            <summary>
+            The Unified Canadian Aboriginal Syllabics code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1400.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Ogham">
+            <summary>
+            The Ogham code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1680.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Runic">
+            <summary>
+            The Runic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U16A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Tagalog">
+            <summary>
+            The Tagalog code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1700.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Hanunoo">
+            <summary>
+            The Hanunoo code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1720.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Buhid">
+            <summary>
+            The Buhid code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1740.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Tagbanwa">
+            <summary>
+            The Tagbanwa code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1760.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Khmer">
+            <summary>
+            The Khmer code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1780.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Mongolian">
+            <summary>
+            The Mongolian code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1800.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.UnifiedCanadianAboriginalSyllabicsExtended">
+            <summary>
+            The Unified Canadian Aboriginal Syllabics Extended code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U18B0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Limbu">
+            <summary>
+            The Limbu code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1900.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.TaiLe">
+            <summary>
+            The Tai Le code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1950.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.NewTaiLue">
+            <summary>
+            The New Tai Lue code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1980.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.KhmerSymbols">
+            <summary>
+            The Khmer Symbols code table
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U19E0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Buginese">
+            <summary>
+            The Buginese code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1A00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.TaiTham">
+            <summary>
+            The Tai Tham code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1A20.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Balinese">
+            <summary>
+            The Balinese code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1B00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Sudanese">
+            <summary>
+            The Sudanese code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1B80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.Lepcha">
+            <summary>
+            The Lepcha code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1C00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.OlChiki">
+            <summary>
+            The Ol Chiki code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1C50.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.VedicExtensions">
+            <summary>
+            The Vedic Extensions code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1CD0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.PhoneticExtensions">
+            <summary>
+            The Phonetic Extensions code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1D00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.PhoneticExtensionsSupplement">
+            <summary>
+            The Phonetic Extensions Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1D80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.CombiningDiacriticalMarksSupplement">
+            <summary>
+            The Combining Diacritical Marks Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1DC0.pdf</remarks>        
+        </member>
+        <member name="F:Microsoft.Security.Application.LowerMidCodeCharts.LatinExtendedAdditional">
+            <summary>
+            The Latin Extended Additional code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1E00.pdf</remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.MidCodeCharts">
+            <summary>
+            Values for the middle section of the UTF8 Unicode code tables, from U1F00 to U2DDF
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.None">
+            <summary>
+            No code charts from the lower region of the Unicode tables are safe-listed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.GreekExtended">
+            <summary>
+            The Greek Extended code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U1F00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.GeneralPunctuation">
+            <summary>
+            The General Punctuation code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2000.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.SuperscriptsAndSubscripts">
+            <summary>
+            The Superscripts and Subscripts code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2070.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.CurrencySymbols">
+            <summary>
+            The Currency Symbols code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U20A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.CombiningDiacriticalMarksForSymbols">
+            <summary>
+            The Combining Diacritical Marks for Symbols code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U20D0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.LetterlikeSymbols">
+            <summary>
+            The Letterlike Symbols code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2100.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.NumberForms">
+            <summary>
+            The Number Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2150.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.Arrows">
+            <summary>
+            The Arrows code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2190.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MathematicalOperators">
+            <summary>
+            The Mathematical Operators code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2200.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MiscellaneousTechnical">
+            <summary>
+            The Miscellaneous Technical code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2300.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.ControlPictures">
+            <summary>
+            The Control Pictures code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2400.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.OpticalCharacterRecognition">
+            <summary>
+            The Optical Character Recognition table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2440.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.EnclosedAlphanumerics">
+            <summary>
+            The Enclosed Alphanumeric code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2460.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.BoxDrawing">
+            <summary>
+            The Box Drawing code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2500.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.BlockElements">
+            <summary>
+            The Block Elements code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2580.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.GeometricShapes">
+            <summary>
+            The Geometric Shapes code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U25A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MiscellaneousSymbols">
+            <summary>
+            The Miscellaneous Symbols code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2600.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.Dingbats">
+            <summary>
+            The Dingbats code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2700.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MiscellaneousMathematicalSymbolsA">
+            <summary>
+            The Miscellaneous Mathematical Symbols-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U27C0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.SupplementalArrowsA">
+            <summary>
+            The Supplemental Arrows-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U27F0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.BraillePatterns">
+            <summary>
+            The Braille Patterns code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2800.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.SupplementalArrowsB">
+            <summary>
+            The Supplemental Arrows-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2900.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MiscellaneousMathematicalSymbolsB">
+            <summary>
+            The Miscellaneous Mathematical Symbols-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2980.pdf</remarks>                
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.SupplementalMathematicalOperators">
+            <summary>
+            The Supplemental Mathematical Operators code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2A00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.MiscellaneousSymbolsAndArrows">
+            <summary>
+            The Miscellaneous Symbols and Arrows code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2B00.pdf</remarks>        
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.Glagolitic">
+            <summary>
+            The Glagolitic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2C00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.LatinExtendedC">
+            <summary>
+            The Latin Extended-C code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2C60.pdf</remarks>        
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.Coptic">
+            <summary>
+            The Coptic code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2C80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.GeorgianSupplement">
+            <summary>
+            The Georgian Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2D00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.Tifinagh">
+            <summary>
+            The Tifinagh code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2D30.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.MidCodeCharts.EthiopicExtended">
+            <summary>
+            The Ethiopic Extended code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2D80.pdf</remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.UpperMidCodeCharts">
+            <summary>
+            Values for the upper middle section of the UTF8 Unicode code tables, from U2DE0 to UA8DF
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.None">
+            <summary>
+            No code charts from the lower region of the Unicode tables are safe-listed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CyrillicExtendedA">
+            <summary>
+            The Cyrillic Extended-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2DE0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.SupplementalPunctuation">
+            <summary>
+            The Supplemental Punctuation code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2E00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkRadicalsSupplement">
+            <summary>
+            The CJK Radicials Supplement code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2E80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.KangxiRadicals">
+            <summary>
+            The Kangxi Radicials code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2F00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.IdeographicDescriptionCharacters">
+            <summary>
+            The Ideographic Description Characters code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U2FF0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkSymbolsAndPunctuation">
+            <summary>
+            The CJK Symbols and Punctuation code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3000.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Hiragana">
+            <summary>
+            The Hiragana code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3040.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Katakana">
+            <summary>
+            The Katakana code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U30A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Bopomofo">
+            <summary>
+            The Bopomofo code table.
+            <seealso cref="F:Microsoft.Security.Application.UpperMidCodeCharts.BopomofoExtended"/>
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3100.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.HangulCompatibilityJamo">
+            <summary>
+            The Hangul Compatbility Jamo code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3130.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Kanbun">
+            <summary>
+            The Kanbun code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3190.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.BopomofoExtended">
+            <summary>
+            The Bopomofu Extended code table.
+            <seealso cref="F:Microsoft.Security.Application.UpperMidCodeCharts.Bopomofo"/>
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U31A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkStrokes">
+            <summary>
+            The CJK Strokes code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U31C0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.KatakanaPhoneticExtensions">
+            <summary>
+            The Katakana Phonetic Extensoins code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U31F0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.EnclosedCjkLettersAndMonths">
+            <summary>
+            The Enclosed CJK Letters and Months code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3200.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkCompatibility">
+            <summary>
+            The CJK Compatibility code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3300.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkUnifiedIdeographsExtensionA">
+            <summary>
+            The CJK Unified Ideographs Extension A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U3400.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.YijingHexagramSymbols">
+            <summary>
+            The Yijing Hexagram Symbols code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U4DC0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CjkUnifiedIdeographs">
+            <summary>
+            The CJK Unified Ideographs code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/U4E00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.YiSyllables">
+            <summary>
+            The Yi Syllables code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA000.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.YiRadicals">
+            <summary>
+            The Yi Radicals code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA490.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Lisu">
+            <summary>
+            The Lisu code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA4D0.pdf</remarks>        
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Vai">
+            <summary>
+            The Vai code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA500.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CyrillicExtendedB">
+            <summary>
+            The Cyrillic Extended-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA640.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Bamum">
+            <summary>
+            The Bamum code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA6A0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.ModifierToneLetters">
+            <summary>
+            The Modifier Tone Letters code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA700.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.LatinExtendedD">
+            <summary>
+            The Latin Extended-D code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA720.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.SylotiNagri">
+            <summary>
+            The Syloti Nagri code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA800.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.CommonIndicNumberForms">
+            <summary>
+            The Common Indic Number Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA830.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Phagspa">
+            <summary>
+            The Phags-pa code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA840.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperMidCodeCharts.Saurashtra">
+            <summary>
+            The Saurashtra code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA880.pdf</remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.UpperCodeCharts">
+            <summary>
+            Values for the upper section of the UTF8 Unicode code tables, from UA8E0 to UFFFD
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.None">
+            <summary>
+            No code charts from the upper region of the Unicode tables are safe-listed.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.DevanagariExtended">
+            <summary>
+            The Devanagari Extended code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA8E0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.KayahLi">
+            <summary>
+            The Kayah Li code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA900.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.Rejang">
+            <summary>
+            The Rejang code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA930.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.HangulJamoExtendedA">
+            <summary>
+            The Hangul Jamo Extended-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA960.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.Javanese">
+            <summary>
+            The Javanese code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UA980.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.Cham">
+            <summary>
+            The Cham code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UAA00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.MyanmarExtendedA">
+            <summary>
+            The Myanmar Extended-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UAA60.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.TaiViet">
+            <summary>
+            The Tai Viet code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UAA80.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.MeeteiMayek">
+            <summary>
+            The Meetei Mayek code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UABC0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.HangulSyllables">
+            <summary>
+            The Hangul Syllables code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UAC00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.HangulJamoExtendedB">
+            <summary>
+            The Hangul Jamo Extended-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UD7B0.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.CjkCompatibilityIdeographs">
+            <summary>
+            The CJK Compatibility Ideographs code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UF900.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.AlphabeticPresentationForms">
+            <summary>
+            The Alphabetic Presentation Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFB00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.ArabicPresentationFormsA">
+            <summary>
+            The Arabic Presentation Forms-A code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFB50.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.VariationSelectors">
+            <summary>
+            The Variation Selectors code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.VerticalForms">
+            <summary>
+            The Vertical Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE10.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.CombiningHalfMarks">
+            <summary>
+            The Combining Half Marks code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE20.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.CjkCompatibilityForms">
+            <summary>
+            The CJK Compatibility Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE30.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.SmallFormVariants">
+            <summary>
+            The Small Form Variants code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE50.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.ArabicPresentationFormsB">
+            <summary>
+            The Arabic Presentation Forms-B code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFE70.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.HalfWidthAndFullWidthForms">
+            <summary>
+            The half width and full width Forms code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFF00.pdf</remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.UpperCodeCharts.Specials">
+            <summary>
+            The Specials code table.
+            </summary>
+            <remarks>http://www.unicode.org/charts/PDF/UFFF0.pdf</remarks>
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.Lower">
+            <summary>
+            Provides safe character positions for the lower section of the UTF code tables.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.IsFlagSet(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerCodeCharts)">
+            <summary>
+            Determines if the specified flag is set.
+            </summary>
+            <param name="flags">The value to check.</param>
+            <param name="flagToCheck">The flag to check for.</param>
+            <returns>true if the flag is set, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.BasicLatin">
+            <summary>
+            Provides the safe characters for the Basic Latin code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Latin1Supplement">
+            <summary>
+            Provides the safe characters for the Latin 1 Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.LatinExtendedA">
+            <summary>
+            Provides the safe characters for the Latin Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.LatinExtendedB">
+            <summary>
+            Provides the safe characters for the Latin Extended B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.IpaExtensions">
+            <summary>
+            Provides the safe characters for the IPA Extensions code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.SpacingModifierLetters">
+            <summary>
+            Provides the safe characters for the Spacing Modifiers code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.CombiningDiacriticalMarks">
+            <summary>
+            Provides the safe characters for the Combining Diacritical Marks code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.GreekAndCoptic">
+            <summary>
+            Provides the safe characters for the Greek and Coptic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Cyrillic">
+            <summary>
+            Provides the safe characters for the Cyrillic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.CyrillicSupplement">
+            <summary>
+            Provides the safe characters for the Cyrillic Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Armenian">
+            <summary>
+            Provides the safe characters for the Armenian code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>        
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Hebrew">
+            <summary>
+            Provides the safe characters for the Hebrew code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Arabic">
+            <summary>
+            Provides the safe characters for the Arabic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Syriac">
+            <summary>
+            Provides the safe characters for the Syriac code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.ArabicSupplement">
+            <summary>
+            Provides the safe characters for the Arabic Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Thaana">
+            <summary>
+            Provides the safe characters for the Thaana code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Nko">
+            <summary>
+            Provides the safe characters for the Nko code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Samaritan">
+            <summary>
+            Provides the safe characters for the Samaritan code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Devanagari">
+            <summary>
+            Provides the safe characters for the Devenagari code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Bengali">
+            <summary>
+            Provides the safe characters for the Bengali code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Gurmukhi">
+            <summary>
+            Provides the safe characters for the Gurmukhi code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Gujarati">
+            <summary>
+            Provides the safe characters for the Gujarati code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Oriya">
+            <summary>
+            Provides the safe characters for the Oriya code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Tamil">
+            <summary>
+            Provides the safe characters for the Tamil code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Telugu">
+            <summary>
+            Provides the safe characters for the Telugu code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Kannada">
+            <summary>
+            Provides the safe characters for the Kannada code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>        
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Malayalam">
+            <summary>
+            Provides the safe characters for the Malayalam code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Sinhala">
+            <summary>
+            Provides the safe characters for the Sinhala code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Thai">
+            <summary>
+            Provides the safe characters for the Thai code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Lao">
+            <summary>
+            Provides the safe characters for the Lao code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Lower.Tibetan">
+            <summary>
+            Provides the safe characters for the Tibetan code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.LowerMiddle">
+            <summary>
+            Provides safe character positions for the lower middle section of the UTF code tables.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.IsFlagSet(Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts)">
+            <summary>
+            Determines if the specified flag is set.
+            </summary>
+            <param name="flags">The value to check.</param>
+            <param name="flagToCheck">The flag to check for.</param>
+            <returns>true if the flag is set, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Myanmar">
+            <summary>
+            Provides the safe characters for the Myanmar code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Georgian">
+            <summary>
+            Provides the safe characters for the Georgian code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>        
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.HangulJamo">
+            <summary>
+            Provides the safe characters for the Hangul Jamo code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Ethiopic">
+            <summary>
+            Provides the safe characters for the Ethiopic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.EthiopicSupplement">
+            <summary>
+            Provides the safe characters for the Ethiopic Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Cherokee">
+            <summary>
+            Provides the safe characters for the Cherokee code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.UnifiedCanadianAboriginalSyllabics">
+            <summary>
+            Provides the safe characters for the Unified Canadian Aboriginal Syllabic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Ogham">
+            <summary>
+            Provides the safe characters for the Ogham code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Runic">
+            <summary>
+            Provides the safe characters for the Runic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Tagalog">
+            <summary>
+            Provides the safe characters for the Tagalog code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Hanunoo">
+            <summary>
+            Provides the safe characters for the Hanunoo code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Buhid">
+            <summary>
+            Provides the safe characters for the Buhid code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Tagbanwa">
+            <summary>
+            Provides the safe characters for the Tagbanwa code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Khmer">
+            <summary>
+            Provides the safe characters for the Khmer code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Mongolian">
+            <summary>
+            Provides the safe characters for the Mongolian code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns> 
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.UnifiedCanadianAboriginalSyllabicsExtended">
+            <summary>
+            Provides the safe characters for the Unified Canadian Aboriginal Syllabic Extended code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Limbu">
+            <summary>
+            Provides the safe characters for the Limbu code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.TaiLe">
+            <summary>
+            Provides the safe characters for the Tai Le code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.NewTaiLue">
+            <summary>
+            Provides the safe characters for the New Tai Lue code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>          
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.KhmerSymbols">
+            <summary>
+            Provides the safe characters for the Khmer Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Buginese">
+            <summary>
+            Provides the safe characters for the Khmer Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.TaiTham">
+            <summary>
+            Provides the safe characters for the Tai Tham code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Balinese">
+            <summary>
+            Provides the safe characters for the Balinese code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Sudanese">
+            <summary>
+            Provides the safe characters for the Sudanese code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.Lepcha">
+            <summary>
+            Provides the safe characters for the Lepcha code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>   
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.OlChiki">
+            <summary>
+            Provides the safe characters for the Ol Chiki code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.VedicExtensions">
+            <summary>
+            Provides the safe characters for the Vedic Extensions code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.PhoneticExtensions">
+            <summary>
+            Provides the safe characters for the Phonetic Extensions code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.PhoneticExtensionsSupplement">
+            <summary>
+            Provides the safe characters for the Phonetic Extensions Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.CombiningDiacriticalMarksSupplement">
+            <summary>
+            Provides the safe characters for the Combining Diacritical Marks Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.LowerMiddle.LatinExtendedAdditional">
+            <summary>
+            Provides the safe characters for the Latin Extended Addition code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>  
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.Middle">
+            <summary>
+            Provides safe character positions for the middle section of the UTF code tables.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.IsFlagSet(Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.MidCodeCharts)">
+            <summary>
+            Determines if the specified flag is set.
+            </summary>
+            <param name="flags">The value to check.</param>
+            <param name="flagToCheck">The flag to check for.</param>
+            <returns>true if the flag is set, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.GreekExtended">
+            <summary>
+            Provides the safe characters for the Greek Extended code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.GeneralPunctuation">
+            <summary>
+            Provides the safe characters for the General Punctuation code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.SuperscriptsAndSubscripts">
+            <summary>
+            Provides the safe characters for the Superscripts and subscripts code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.CurrencySymbols">
+            <summary>
+            Provides the safe characters for the Currency Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.CombiningDiacriticalMarksForSymbols">
+            <summary>
+            Provides the safe characters for the Combining Diacritrical Marks for Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.LetterlikeSymbols">
+            <summary>
+            Provides the safe characters for the Letterlike Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.NumberForms">
+            <summary>
+            Provides the safe characters for the Number Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.Arrows">
+            <summary>
+            Provides the safe characters for the Arrows code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MathematicalOperators">
+            <summary>
+            Provides the safe characters for the Mathematical Operators code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MiscellaneousTechnical">
+            <summary>
+            Provides the safe characters for the Miscellaneous Technical code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.ControlPictures">
+            <summary>
+            Provides the safe characters for the Control Pictures code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.OpticalCharacterRecognition">
+            <summary>
+            Provides the safe characters for the OCR code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.EnclosedAlphanumerics">
+            <summary>
+            Provides the safe characters for the Enclosed Alphanumerics code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.BoxDrawing">
+            <summary>
+            Provides the safe characters for the Box Drawing code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.BlockElements">
+            <summary>
+            Provides the safe characters for the Block Elements code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.GeometricShapes">
+            <summary>
+            Provides the safe characters for the Geometric Shapes code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MiscellaneousSymbols">
+            <summary>
+            Provides the safe characters for the Miscellaneous Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.Dingbats">
+            <summary>
+            Provides the safe characters for the Dingbats code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MiscellaneousMathematicalSymbolsA">
+            <summary>
+            Provides the safe characters for the Miscellaneous Mathematical Symbols A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.SupplementalArrowsA">
+            <summary>
+            Provides the safe characters for the Supplemental Arrows A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.BraillePatterns">
+            <summary>
+            Provides the safe characters for the Braille Patterns code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.SupplementalArrowsB">
+            <summary>
+            Provides the safe characters for the Supplemental Arrows B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MiscellaneousMathematicalSymbolsB">
+            <summary>
+            Provides the safe characters for the Miscellaneous Mathematical Symbols B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.SupplementalMathematicalOperators">
+            <summary>
+            Provides the safe characters for the Supplemental Mathematical Operators code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.MiscellaneousSymbolsAndArrows">
+            <summary>
+            Provides the safe characters for the Miscellaneous Symbols and Arrows code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.Glagolitic">
+            <summary>
+            Provides the safe characters for the Glagolitic code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.LatinExtendedC">
+            <summary>
+            Provides the safe characters for the Latin Extended C code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.Coptic">
+            <summary>
+            Provides the safe characters for the Coptic table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.GeorgianSupplement">
+            <summary>
+            Provides the safe characters for the Georgian Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.Tifinagh">
+            <summary>
+            Provides the safe characters for the Tifinagh code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Middle.EthiopicExtended">
+            <summary>
+            Provides the safe characters for the Ethiopic Extended code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.Upper">
+            <summary>
+            Provides safe character positions for the upper section of the UTF code tables.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.IsFlagSet(Microsoft.Security.Application.UpperCodeCharts,Microsoft.Security.Application.UpperCodeCharts)">
+            <summary>
+            Determines if the specified flag is set.
+            </summary>
+            <param name="flags">The value to check.</param>
+            <param name="flagToCheck">The flag to check for.</param>
+            <returns>true if the flag is set, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.DevanagariExtended">
+            <summary>
+            Provides the safe characters for the Devanagari Extended code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.KayahLi">
+            <summary>
+            Provides the safe characters for the Kayah Li code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.Rejang">
+            <summary>
+            Provides the safe characters for the Rejang code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.HangulJamoExtendedA">
+            <summary>
+            Provides the safe characters for the Hangul Jamo Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.Javanese">
+            <summary>
+            Provides the safe characters for the Javanese code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.Cham">
+            <summary>
+            Provides the safe characters for the Cham code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.MyanmarExtendedA">
+            <summary>
+            Provides the safe characters for the Myanmar Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.TaiViet">
+            <summary>
+            Provides the safe characters for the Myanmar Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.MeeteiMayek">
+            <summary>
+            Provides the safe characters for the Meetei Mayek code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.HangulSyllables">
+            <summary>
+            Provides the safe characters for the Hangul Syllables code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.HangulJamoExtendedB">
+            <summary>
+            Provides the safe characters for the Hangul Jamo Extended B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.CjkCompatibilityIdeographs">
+            <summary>
+            Provides the safe characters for the CJK Compatibility Ideographs code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.AlphabeticPresentationForms">
+            <summary>
+            Provides the safe characters for the Alphabetic Presentation Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.ArabicPresentationFormsA">
+            <summary>
+            Provides the safe characters for the Arabic Presentation Forms A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.VariationSelectors">
+            <summary>
+            Provides the safe characters for the Variation Selectors code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.VerticalForms">
+            <summary>
+            Provides the safe characters for the Vertical Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.CombiningHalfMarks">
+            <summary>
+            Provides the safe characters for the Combining Half Marks code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.CjkCompatibilityForms">
+            <summary>
+            Provides the safe characters for the CJK Compatibility Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.SmallFormVariants">
+            <summary>
+            Provides the safe characters for the Small Form Variants code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.ArabicPresentationFormsB">
+            <summary>
+            Provides the safe characters for the Arabic Presentation Forms B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.HalfWidthAndFullWidthForms">
+            <summary>
+            Provides the safe characters for the Half Width and Full Width Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.Upper.Specials">
+            <summary>
+            Provides the safe characters for the Specials code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.CodeCharts.UpperMiddle">
+            <summary>
+            Provides safe character positions for the upper middle section of the UTF code tables.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.IsFlagSet(Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts)">
+            <summary>
+            Determines if the specified flag is set.
+            </summary>
+            <param name="flags">The value to check.</param>
+            <param name="flagToCheck">The flag to check for.</param>
+            <returns>true if the flag is set, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CyrillicExtendedA">
+            <summary>
+            Provides the safe characters for the Cyrillic Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.SupplementalPunctuation">
+            <summary>
+            Provides the safe characters for the Cyrillic Extended A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkRadicalsSupplement">
+            <summary>
+            Provides the safe characters for the CJK Radicals Supplement code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.KangxiRadicals">
+            <summary>
+            Provides the safe characters for the Kangxi Radicals code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.IdeographicDescriptionCharacters">
+            <summary>
+            Provides the safe characters for the Ideographic Description Characters code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkSymbolsAndPunctuation">
+            <summary>
+            Provides the safe characters for the CJK Symbols and Punctuation code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Hiragana">
+            <summary>
+            Provides the safe characters for the Hiragana code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Katakana">
+            <summary>
+            Provides the safe characters for the Hiragana code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Bopomofo">
+            <summary>
+            Provides the safe characters for the Bopomofo code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.HangulCompatibilityJamo">
+            <summary>
+            Provides the safe characters for the Hangul Compatibility Jamo code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Kanbun">
+            <summary>
+            Provides the safe characters for the Kanbun code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.BopomofoExtended">
+            <summary>
+            Provides the safe characters for the Bopomofo Extended code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkStrokes">
+            <summary>
+            Provides the safe characters for the CJK Strokes code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.KatakanaPhoneticExtensions">
+            <summary>
+            Provides the safe characters for the Katakana Phonetic Extensions code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.EnclosedCjkLettersAndMonths">
+            <summary>
+            Provides the safe characters for the Enclosed CJK Letters and Months code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkCompatibility">
+            <summary>
+            Provides the safe characters for the CJK Compatibility code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkUnifiedIdeographsExtensionA">
+            <summary>
+            Provides the safe characters for the CJK Unified Ideographs Extension A code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.YijingHexagramSymbols">
+            <summary>
+            Provides the safe characters for the Yijing Hexagram Symbols code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CjkUnifiedIdeographs">
+            <summary>
+            Provides the safe characters for the CJK Unified Ideographs code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.YiSyllables">
+            <summary>
+            Provides the safe characters for the Yi Syllables code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.YiRadicals">
+            <summary>
+            Provides the safe characters for the Yi Radicals code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Lisu">
+            <summary>
+            Provides the safe characters for the Lisu code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Vai">
+            <summary>
+            Provides the safe characters for the Vai code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CyrillicExtendedB">
+            <summary>
+            Provides the safe characters for the Cyrillic Extended B code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Bamum">
+            <summary>
+            Provides the safe characters for the Bamum code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.ModifierToneLetters">
+            <summary>
+            Provides the safe characters for the Modifier Tone Letters code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.LatinExtendedD">
+            <summary>
+            Provides the safe characters for the Latin Extended D code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.SylotiNagri">
+            <summary>
+            Provides the safe characters for the Syloti Nagri code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.CommonIndicNumberForms">
+            <summary>
+            Provides the safe characters for the Common Indic Number Forms code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Phagspa">
+            <summary>
+            Provides the safe characters for the Phags-pa code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.CodeCharts.UpperMiddle.Saurashtra">
+            <summary>
+            Provides the safe characters for the Saurashtra code table.
+            </summary>
+            <returns>The safe characters for the code table.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.Encoder">
+            <summary>
+            Performs encoding of input strings to provide protection against
+            Cross-Site Scripting (XSS) attacks and LDAP injection attacks in 
+            various contexts.
+            </summary>
+            <remarks>
+            This encoding library uses the Principle of Inclusions, 
+            sometimes referred to as "safe-listing" to provide protection 
+            against injection attacks.  With safe-listing protection, 
+            algorithms look for valid inputs and automatically treat 
+            everything outside that set as a potential attack.  This library 
+            can be used as a defense in depth approach with other mitigation 
+            techniques. It is suitable for applications with high security 
+            requirements.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.Encoder.VbScriptEmptyString">
+            <summary>
+            Empty string for Visual Basic Script context
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.Encoder.JavaScriptEmptyString">
+            <summary>
+            Empty string for Java Script context
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.Encoder.SafeListCodes">
+            <summary>
+            Initializes character Html encoding array
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.LdapFilterEncode(System.String)">
+            <summary>
+            Encodes input strings for use as a value  in Lightweight Directory Access Protocol (LDAP) filter queries.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>Encoded string for use as a value in LDAP filter queries.</returns>
+            <remarks>
+            This method encodes all but known safe characters defined in the safe list.
+            <newpara/>
+            RFC 4515 defines the format in which special characters need to be 
+            escaped to be used inside a search filter. Special characters need to be 
+            encoded in \XX format where XX is the hex representation of the character.
+            <newpara/>
+            The following examples illustrate the use of the escaping mechanism.
+            <list type="table">
+            <item><term>Parens R Us (for all your parenthetical needs)</term><description>Parens R Us \28for all your parenthetical needs\29</description></item>
+            <item><term>*</term><description>\2A</description></item>
+            <item><term>C:\MyFile</term><description>C:\5CMyFile</description></item>
+            <item><term>NULLNULLNULLEOT (binary)</term><description>\00\00\00\04</description></item>
+            <item><term>Lučić</term><description>Lu\C4\8Di\C4\87</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.LdapDistinguishedNameEncode(System.String)">
+            <summary>
+            Encodes input strings for use as a value in Lightweight Directory Access Protocol (LDAP) DNs.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>Encoded string for use as a value in LDAP DNs.</returns>
+            <remarks>This method encodes all but known safe characters defined in the safe list.
+            <newpara/>
+            RFC 2253 defines the format in which special characters need to be 
+            escaped to be used inside a search filter. Special characters need to be 
+            encoded in #XX format where XX is the hex representation of the character or a 
+            specific \ escape format.
+            <newpara/>
+            The following examples illustrate the use of the escaping mechanism.
+            <list type="table">
+            <item><term>, + \ " \ &lt; &gt;</term><description>\, \+ \" \\ \&lt; \&gt;</description></item>
+            <item><term> hello</term><description>\ hello</description></item>
+            <item><term>hello </term><description>hello \ </description></item>
+            <item><term>#hello</term><description>\#hello</description></item>
+            <item><term>Lučić</term><description>Lu#C4#8Di#C4#87</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.LdapDistinguishedNameEncode(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Encodes input strings for use as a value in Lightweight Directory Access Protocol (LDAP) DNs.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="useInitialCharacterRules">Value indicating whether the special case rules for encoding of spaces and octothorpes at the start of a string are used.</param>
+            <param name="useFinalCharacterRule">Value indicating whether the special case for encoding of final character spaces is used.</param>
+            <returns>Encoded string for use as a value in LDAP DNs.</returns>\
+            <remarks>This method encodes all but known safe characters defined in the safe list.
+            <newpara/>
+            RFC 2253 defines the format in which special characters need to be 
+            escaped to be used inside a search filter. Special characters need to be 
+            encoded in #XX format where XX is the hex representation of the character or a 
+            specific \ escape format.
+            <newpara/>
+            The following examples illustrate the use of the escaping mechanism.
+            <list type="table">
+            <item><term>, + \ " \ &lt; &gt;</term><description>\, \+ \" \\ \&lt; \&gt;</description></item>
+            <item><term> hello</term><description>\ hello</description></item>
+            <item><term>hello </term><description>hello\ </description></item>
+            <item><term>#hello</term><description>\#hello</description></item>
+            <item><term>Lučić</term><description>Lu#C4#8Di#C4#87</description></item>
+            </list>
+            If useInitialCharacterRules is set to false then escaping of the initial space or octothorpe characters is not performed;
+            <list type="table">
+            <item><term>, + \ " \ &lt; &gt;</term><description>\, \+ \" \\ \&lt; \&gt;</description></item>
+            <item><term> hello</term><description> hello</description></item>
+            <item><term>hello </term><description>hello\ </description></item>
+            <item><term>#hello</term><description>#hello</description></item>
+            <item><term>Lučić</term><description>Lu#C4#8Di#C4#87</description></item>
+            </list>
+            If useFinalCharacterRule is set to false then escaping of a space at the end of a string is not performed;
+            <list type="table">
+            <item><term>, + \ " \ &lt; &gt;</term><description>\, \+ \" \\ \&lt; \&gt;</description></item>
+            <item><term> hello</term><description> hello</description></item>
+            <item><term>hello </term><description>hello </description></item>
+            <item><term>#hello</term><description>#hello</description></item>
+            <item><term>Lučić</term><description>Lu#C4#8Di#C4#87</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.LdapEncode(System.String)">
+            <summary>
+            Encodes input strings to be used as a value in Lightweight Directory Access Protocol (LDAP) search queries.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>Encoded string for use in LDAP search queries.</returns>
+            <remarks>This method encodes all but known safe characters defined in the safe list.
+            <newpara/>
+            RFC 4515 defines the format in which special characters need to be 
+            escaped to be used inside a search filter. Special characters need to be 
+            encoded in \XX format where XX is the hex representation of the character.
+            <newpara/>
+            The following examples illustrate the use of the escaping mechanism.
+            <list type="table">
+            <item><term>Parens R Us (for all your parenthetical needs)</term><description>Parens R Us \28for all your parenthetical needs\29</description></item>
+            <item><term>*</term><description>\2A</description></item>
+            <item><term>C:\MyFile</term><description>C:\5CMyFile</description></item>
+            <item><term>NULLNULLNULLEOT (binary)</term><description>\00\00\00\04</description></item>
+            <item><term>Lučić</term><description>Lu\C4\8Di\C4\87</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.CssEncode(System.String)">
+            <summary>
+            Encodes the specified string for use in Cascading Style Sheet (CSS) attributes. The return value from this function is expected to be
+            used in building an attribute string. CSS string attributes should be quoted values.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>Encoded string for use in CSS element values.</returns>
+            <remarks>This method encodes all characters except those that are in the safe list.
+            <newpara/>
+            The following table lists the default safe characters.
+            <list type="table">
+            <listheader><term>Unicode Code Chart</term><term>Characters(s)</term><description>Description</description></listheader>
+            <item><term>C0 Controls and Basic Latin</term><term>A-Z</term><description>Uppercase alphabetic letters</description>></item>
+            <item><term>C0 Controls and Basic Latin</term><term>a-z</term><description>Lowercase alphabetic letters</description>></item>
+            <item><term>C0 Controls and Basic Latin</term><term>0-9</term><description>Numbers</description>></item>
+            </list>
+            <newpara />
+            The CSS character escape sequence consists of a backslash character (\) followed by up to six hexadecimal digits that represent a character code from the ISO 10646 standard. 
+            (The ISO 10646 standard is effectively equivalent to Unicode.) Any character other than a hexadecimal digit terminates the escape sequence. If a character that follows the 
+            escape sequence is also a valid hexadecimal digit, it must either include six digits in the escape sequence or use a whitespace character to terminate the escape sequence. 
+            For example, \000020 denotes a space.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in HTML.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in HTML.
+            </returns>
+            <remarks>
+            All characters not safe listed are encoded to their Unicode decimal value, using &amp;#DECIMAL; notation.
+            The default safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>'</term><description>Apostrophe</description></item>
+            <item><term> </term><description>Space</description></item>
+            </list>
+            The safe list may be adjusted using <see cref="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)"/>.
+            <newpara/>
+            Example inputs and their related encoded outputs:
+            <list type="table">
+            <item><term>&lt;script&gt;alert('XSS Attack!');&lt;/script&gt;</term><description>&amp;lt;script&amp;gt;alert('XSS Attack!');&amp;lt;/script&amp;gt;</description></item>
+            <item><term>user@contoso.com</term><description>user@contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+            <item><term>"Anti-Cross Site Scripting Library"</term><description>&amp;quote;Anti-Cross Site Scripting Library&amp;quote;</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlEncode(System.String,System.Boolean)">
+            <summary>
+            Encodes input strings for use in HTML.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be used.</param>
+            <returns>
+            Encoded string for use in HTML.
+            </returns>
+            <remarks>
+            All characters not safe listed are encoded to their Unicode decimal value, using &amp;#DECIMAL; notation.
+            If you choose to use named entities then if a character is an HTML4.0 named entity the named entity will be used.
+            The default safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>'</term><description>Apostrophe</description></item>
+            <item><term> </term><description>Space</description></item>
+            </list>
+            The safe list may be adjusted using <see cref="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)"/>.
+            <newpara/>
+            Example inputs and their related encoded outputs:
+            <list type="table">
+            <item><term>&lt;script&gt;alert('XSS Attack!');&lt;/script&gt;</term><description>&amp;lt;script&amp;gt;alert('XSS Attack!');&amp;lt;/script&amp;gt;</description></item>
+            <item><term>user@contoso.com</term><description>user@contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+            <item><term>"Anti-Cross Site Scripting Library"</term><description>&amp;quote;Anti-Cross Site Scripting Library&amp;quote;</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlAttributeEncode(System.String)">
+            <summary>
+            Encodes an input string for use in an HTML attribute.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>The input string encoded for use in an HTML attribute.</returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using  &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            </list>
+            The safe list may be adjusted using <see cref="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)"/>.
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert(&amp;#39;XSS&amp;#32;Attack!&amp;#39;);</description></item>
+            <item><term>user@contoso.com</term><description>user@contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&amp;#32;Site&amp;#32;Scripting&amp;#32;Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.UrlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in universal resource locators (URLs).
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX 
+            and %DOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert%28%27XSS%20Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlFormUrlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in application/x-www-form-urlencoded form submissions.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX 
+            and %DOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert%28%27XSS+Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross+Site+Scripting+Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.UrlEncode(System.String,System.Int32)">
+            <summary>
+            Encodes input strings for use in universal resource locators (URLs).
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="codePage">Codepage number of the input.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes the output as per the encoding parameter (codepage) passed to it. It encodes 
+            all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlFormUrlEncode(System.String,System.Int32)">
+            <summary>
+            Encodes input strings for use in application/x-www-form-urlencoded form submissions.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="codePage">Codepage number of the input.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes the output as per the encoding parameter (codepage) passed to it. It encodes 
+            all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross+Site+Scripting+Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.UrlEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes input strings for use in universal resource locators (URLs).
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="inputEncoding">Input encoding type.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes the output as per the encoding parameter (codepage) passed to it. It encodes 
+            all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+            If the inputEncoding is null then UTF-8 is assumed by default.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross%20Site%20Scripting%20Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.HtmlFormUrlEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes input strings for use in application/x-www-form-urlencoded form submissions.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="inputEncoding">Input encoding type.</param>
+            <returns>
+            Encoded string for use in URLs.
+            </returns>
+            <remarks>
+            This function encodes the output as per the encoding parameter (codepage) passed to it. It encodes 
+            all but known safe characters.  Characters are encoded using %SINGLE_BYTE_HEX and %DOUBLE_BYTE_HEX notation.
+            If the inputEncoding is null then UTF-8 is assumed by default.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term>~</term><description>Tilde</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSSあAttack!');</term><description>alert%28%27XSS%82%a0Attack%21%27%29%3b</description></item>
+            <item><term>user@contoso.com</term><description>user%40contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross+Site+Scripting+Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.UrlPathEncode(System.String)">
+            <summary>
+            URL-encodes the path section of a URL string and returns the encoded string.
+            </summary>
+            <param name="input">The text to URL path encode</param>
+            <returns>The URL path encoded text.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.XmlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in XML.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters. Characters are encoded using &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            </list>
+            The safe list may be adjusted using <see cref="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)"/>.
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert(&amp;apos;XSS Attack!&amp;apos;);</description></item>
+            <item><term>user@contoso.com</term><description>user@contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross Site Scripting Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.XmlAttributeEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML attributes.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in XML attributes.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using &amp;#DECIMAL; notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            </list>
+            The safe list may be adjusted using <see cref="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)"/>.
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>alert(&amp;apos;XSS Attack!&amp;apos);</description></item>
+            <item><term>user@contoso.com</term><description>user@contoso.com</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>Anti-Cross&amp;#32;Site&amp;#32;Scripting&amp;#32;Library</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.JavaScriptEncode(System.String)">
+            <summary>
+            Encodes input strings for use in JavaScript.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in JavaScript.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+            <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.JavaScriptEncode(System.String,System.Boolean)">
+            <summary>
+            Encodes input strings for use in JavaScript.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <param name="emitQuotes">value indicating whether or not to emit quotes. true = emit quote. false = no quote.</param>
+            <returns>
+            Encoded string for use in JavaScript and does not return the output with en quotes.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are encoded using \xSINGLE_BYTE_HEX and \uDOUBLE_BYTE_HEX notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            <item><term> </term><description>Other International character ranges</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>'alert\x28\x27XSS Attack\x21\x27\x29\x3b'</description></item>
+            <item><term>user@contoso.com</term><description>'user\x40contoso.com'</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>'Anti-Cross Site Scripting Library'</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.VisualBasicScriptEncode(System.String)">
+            <summary>
+            Encodes input strings for use in Visual Basic Script.
+            </summary>
+            <param name="input">String to be encoded.</param>
+            <returns>
+            Encoded string for use in Visual Basic Script.
+            </returns>
+            <remarks>
+            This function encodes all but known safe characters.  Characters are 
+            encoded using &#38;chrw(DECIMAL) notation.
+            <newpara/>
+            Safe characters include:
+            <list type="table">
+            <item><term>a-z</term><description>Lower case alphabet</description></item>
+            <item><term>A-Z</term><description>Upper case alphabet</description></item>
+            <item><term>0-9</term><description>Numbers</description></item>
+            <item><term>,</term><description>Comma</description></item>
+            <item><term>.</term><description>Period</description></item>
+            <item><term>-</term><description>Dash</description></item>
+            <item><term>_</term><description>Underscore</description></item>
+            <item><term> </term><description>Space</description></item>
+            </list>
+            <newpara/>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>alert('XSS Attack!');</term><description>"alert"&#38;chrw(40)&#38;chrw(39)&#38;"XSS Attack"&#38;chrw(33)&#38;chrw(39)&#38;chrw(41)&#38;chrw(59)</description></item>
+            <item><term>user@contoso.com</term><description>"user"&#38;chrw(64)&#38;"contoso.com"</description></item>
+            <item><term>Anti-Cross Site Scripting Library</term><description>"Anti-Cross Site Scripting Library"</description></item>
+            </list></remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Encoder.InitializeSafeList">
+            <summary>
+            Initializes the safe list.
+            </summary>
+            <returns>A two dimensional character array containing characters and their encoded values.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.EncoderUtil">
+            <summary>
+            Provides helper methods common to all Anti-XSS encoders.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.EncoderUtil.GetOutputStringBuilder(System.Int32,System.Int32)">
+            <summary>
+            Gets an appropriately-sized StringBuilder for the output of an encoding routine.
+            </summary>
+            <param name="inputLength">The length (in characters) of the input string.</param>
+            <param name="worstCaseOutputCharsPerInputChar">The worst-case ratio of output characters per input character.</param>
+            <returns>A StringBuilder appropriately-sized to hold the output string.</returns>
+        </member>
+        <member name="T:System.Lazy`1">
+            <summary>
+            Re-implements the bare necessities of Lazy for .NET 2.0 and 3.5
+            </summary>
+            <typeparam name="T">Specifies the type of object that is being lazily initialized.</typeparam>
+        </member>
+        <member name="F:System.Lazy`1.synclock">
+            <summary>
+            Lock object for thread safety.
+            </summary>
+        </member>
+        <member name="F:System.Lazy`1.valueFactory">
+            <summary>
+            Creation delegate
+            </summary>
+        </member>
+        <member name="F:System.Lazy`1.created">
+            <summary>
+            Value indicating whether the creation delegate has been called.
+            </summary>
+        </member>
+        <member name="F:System.Lazy`1.value">
+            <summary>
+            The actual value.
+            </summary>
+        </member>
+        <member name="M:System.Lazy`1.#ctor(System.Func{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Lazy`1"/> class. 
+            When lazy initialization occurs, the specified initialization function is used.
+            </summary>
+            <param name="valueFactory">The delegate that produces the value when it is needed.</param>
+        </member>
+        <member name="M:System.Lazy`1.ToString">
+            <summary>
+            Creates and returns a string representation of the Lazy{T}.Value.
+            </summary>
+            <returns>The string representation of the Lazy{T}.Value property.</returns>
+        </member>
+        <member name="P:System.Lazy`1.Value">
+            <summary>
+            Gets the lazily initialized value of the current Lazy{T} instance.
+            </summary>
+            <value>The lazily initialized value of the current Lazy{T} instance.</value>
+        </member>
+        <member name="P:System.Lazy`1.IsValueCreated">
+            <summary>
+            Gets a value indicating whether whether a value has been created for this Lazy{T} instance.
+            </summary>
+            <returns>true if a value has been created for this Lazy{T} instance; otherwise, false.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.LdapEncoder">
+            <summary>
+            Provides LDAP Encoding methods.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LdapEncoder.filterCharacterValuesLazy">
+            <summary>
+            The values to output for each character when filter encoding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.LdapEncoder.distinguishedNameCharacterValuesLazy">
+            <summary>
+            The values to output for each character when DN encoding.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.FilterEncode(System.String)">
+            <summary>
+            Encodes the input string for use in LDAP filters.
+            </summary>
+            <param name="input">The string to encode.</param>
+            <returns>An encoded version of the input string suitable for use in LDAP filters.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.DistinguishedNameEncode(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Encodes the input string for use in LDAP DNs.
+            </summary>
+            <param name="input">The string to encode.</param>
+            <param name="useInitialCharacterRules">Value indicating whether the special case rules for encoding of spaces and octothorpes at the start of a string are used.</param>
+            <param name="useFinalCharacterRule">Value indicating whether the special case for encoding of final character spaces is used.</param>
+            <returns>An encoded version of the input string suitable for use in LDAP DNs.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.InitialiseFilterSafeList">
+            <summary>
+            Initializes the LDAP filter safe list.
+            </summary>
+            <returns>The LDAP filter safe list.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.FilterEncodingSafeList">
+            <summary>
+            Provides the safe characters for LDAP filter encoding.
+            </summary>
+            <returns>The safe characters for LDAP filter encoding.</returns>
+            <remarks>See http://tools.ietf.org/html/rfc4515/</remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.InitialiseDistinguishedNameSafeList">
+            <summary>
+            Initializes the LDAP DN safe lists.
+            </summary>
+            <returns>The DN safe list.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.DistinguishedNameSafeList">
+            <summary>
+            Provides the safe characters for LDAP filter encoding.
+            </summary>
+            <returns>The safe characters for LDAP filter encoding.</returns>
+            <remarks>See http://www.ietf.org/rfc/rfc2253.txt </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.LdapEncoder.EscapeDistinguisedNameCharacter(System.Char[][]@,System.Char)">
+            <summary>
+            Escapes a special DN character.
+            </summary>
+            <param name="safeList">The safe list to escape the character within.</param>
+            <param name="c">The character to escape.</param>
+        </member>
+        <member name="T:Microsoft.Security.Application.SafeList">
+            <summary>
+            Provides safe list utility functions.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.Generate(System.Int32,Microsoft.Security.Application.SafeList.GenerateSafeValue)">
+            <summary>
+            Generates a new safe list of the specified size, using the specified function to produce safe values.
+            </summary>
+            <param name="length">The length of the safe list to generate.</param>
+            <param name="generateSafeValue">The <see cref="T:Microsoft.Security.Application.SafeList.GenerateSafeValue"/> function to use.</param>
+            <returns>A new safe list.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchUnicodeThrough(System.Char[][]@,Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)">
+            <summary>
+            Marks characters from the specified languages as safe.
+            </summary>
+            <param name="safeList">The safe list to punch holes in.</param>
+            <param name="lowerCodeCharts">The combination of lower code charts to use.</param>
+            <param name="lowerMidCodeCharts">The combination of lower mid code charts to use.</param>
+            <param name="midCodeCharts">The combination of mid code charts to use.</param>
+            <param name="upperMidCodeCharts">The combination of upper mid code charts to use.</param>
+            <param name="upperCodeCharts">The combination of upper code charts to use.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchSafeList(System.Char[][]@,System.Collections.IEnumerable)">
+            <summary>
+            Punches holes as necessary.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="whiteListedCharacters">The list of character positions to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.HashThenValueGenerator(System.Int32)">
+            <summary>
+            Generates a hash prefixed character array representing the specified value.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>#1</description></item>
+            <item><term>10</term><description>#10</description></item>
+            <item><term>100</term><description>#100</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.HashThenHexValueGenerator(System.Int32)">
+            <summary>
+            Generates a hash prefixed character array representing the specified value in hexadecimal.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>#1</description></item>
+            <item><term>10</term><description>#0a</description></item>
+            <item><term>100</term><description>#64</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PercentThenHexValueGenerator(System.Int32)">
+            <summary>
+            Generates a percent prefixed character array representing the specified value in hexadecimal.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>%01</description></item>
+            <item><term>10</term><description>%0a</description></item>
+            <item><term>100</term><description>%64</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.SlashThenHexValueGenerator(System.Int32)">
+            <summary>
+            Generates a slash prefixed character array representing the specified value in hexadecimal.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>\01</description></item>
+            <item><term>10</term><description>\0a</description></item>
+            <item><term>100</term><description>\64</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.SlashThenSixDigitHexValueGenerator(System.Int32)">
+            <summary>
+            Generates a slash prefixed character array representing the specified value in hexadecimal.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>\000001</description></item>
+            <item><term>10</term><description>\000000A</description></item>
+            <item><term>100</term><description>\000064</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.StringToCharArrayWithHashPrefix(System.String)">
+            <summary>
+            Generates a hash prefixed character array from the specified string.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>#1</description></item>
+            <item><term>10</term><description>#10</description></item>
+            <item><term>100</term><description>#100</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.StringToCharArrayWithPercentPrefix(System.String)">
+            <summary>
+            Generates a percent prefixed character array from the specified string.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>%1</description></item>
+            <item><term>10</term><description>%10</description></item>
+            <item><term>100</term><description>%100</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.StringToCharArrayWithSlashPrefix(System.String)">
+            <summary>
+            Generates a slash prefixed character array from the specified string.
+            </summary>
+            <param name="value">The source value.</param>
+            <returns>A character array representing the specified value.</returns>
+            <remarks>
+            Example inputs and encoded outputs:
+            <list type="table">
+            <item><term>1</term><description>\1</description></item>
+            <item><term>10</term><description>\10</description></item>
+            <item><term>100</term><description>\100</description></item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.StringToCharArrayWithPrefix(System.String,System.Char)">
+            <summary>
+            Generates a prefixed character array from the specified string and prefix.
+            </summary>
+            <param name="value">The source value.</param>
+            <param name="prefix">The prefix to use.</param>
+            <returns>A prefixed character array representing the specified value.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchCodeCharts(System.Char[][]@,Microsoft.Security.Application.LowerCodeCharts)">
+            <summary>
+            Punch appropriate holes for the selected code charts.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="codeCharts">The code charts to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchCodeCharts(System.Char[][]@,Microsoft.Security.Application.LowerMidCodeCharts)">
+            <summary>
+            Punch appropriate holes for the selected code charts.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="codeCharts">The code charts to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchCodeCharts(System.Char[][]@,Microsoft.Security.Application.MidCodeCharts)">
+            <summary>
+            Punch appropriate holes for the selected code charts.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="codeCharts">The code charts to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchCodeCharts(System.Char[][]@,Microsoft.Security.Application.UpperMidCodeCharts)">
+            <summary>
+            Punch appropriate holes for the selected code charts.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="codeCharts">The code charts to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchCodeCharts(System.Char[][]@,Microsoft.Security.Application.UpperCodeCharts)">
+            <summary>
+            Punch appropriate holes for the selected code charts.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="codeCharts">The code charts to punch.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.SafeList.PunchHolesIfNeeded(System.Char[][]@,System.Boolean,System.Collections.IEnumerable)">
+            <summary>
+            Punches holes as necessary.
+            </summary>
+            <param name="safeList">The safe list to punch through.</param>
+            <param name="needed">Value indicating whether the holes should be punched.</param>
+            <param name="whiteListedCharacters">The list of character positions to punch.</param>
+        </member>
+        <member name="T:Microsoft.Security.Application.SafeList.GenerateSafeValue">
+            <summary>
+            Generates a safe character array representing the specified value.
+            </summary>
+            <returns>A safe character array representing the specified value.</returns>
+            <param name="value">The value to generate a safe representation for.</param>
+        </member>
+        <member name="T:Microsoft.Security.Application.EncodingType">
+            <summary>
+            The type of space encoding to use.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.EncodingType.QueryString">
+            <summary>
+            Encode spaces for use in query strings
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.EncodingType.HtmlForm">
+            <summary>
+            Encode spaces for use in form data
+            </summary>
+        </member>
+        <member name="T:Microsoft.Security.Application.HtmlParameterEncoder">
+            <summary>
+            Provides Html Parameter Encoding methods.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.HtmlParameterEncoder.QueryStringSpace">
+            <summary>
+            The value to use when encoding a space for query strings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.HtmlParameterEncoder.FormStringSpace">
+            <summary>
+            The value to use when encoding a space for form data.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.HtmlParameterEncoder.characterValuesLazy">
+            <summary>
+            The values to output for each character during parameter encoding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.HtmlParameterEncoder.pathCharacterValuesLazy">
+            <summary>
+            The path character safe list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.QueryStringParameterEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes a string for query string encoding and returns the encoded string.
+            </summary>
+            <param name="s">The text to URL-encode.</param>
+            <param name="encoding">The encoding for the text parameter.</param>
+            <returns>The URL-encoded text.</returns>
+            <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings. 
+            Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers. 
+            As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser 
+            in a request string.</remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the encoding is null.</exception>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.FormStringParameterEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes a string for form URL encoding and returns the encoded string.
+            </summary>
+            <param name="s">The text to URL-encode.</param>
+            <param name="encoding">The encoding for the text parameter.</param>
+            <returns>The URL-encoded text.</returns>
+            <remarks>URL encoding ensures that all browsers will correctly transmit text in URL strings. 
+            Characters such as a question mark (?), ampersand (&amp;), slash mark (/), and spaces might be truncated or corrupted by some browsers. 
+            As a result, these characters must be encoded in &lt;a&gt; tags or in query strings where the strings can be re-sent by a browser 
+            in a request string.</remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if the encoding is null.</exception>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.UrlPathEncode(System.String,System.Text.Encoding)">
+            <summary>
+            Encodes a string as a URL
+            </summary>
+            <param name="s">The string to encode.</param>
+            <param name="encoding">The encoding context to use.</param>
+            <returns>The encoded string.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.FormQueryEncode(System.String,System.Text.Encoding,Microsoft.Security.Application.EncodingType)">
+            <summary>
+            Encodes a string for Query String or Form Data encoding.
+            </summary>
+            <param name="s">The text to URL-encode.</param>
+            <param name="encoding">The encoding for the text parameter.</param>
+            <param name="encodingType">The encoding type to use.</param>
+            <returns>The encoded text.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.FormQueryEncode(System.String,System.Text.Encoding,Microsoft.Security.Application.EncodingType,System.Lazy{System.Char[][]})">
+            <summary>
+            Encodes a string for Query String or Form Data encoding.
+            </summary>
+            <param name="s">The text to URL-encode.</param>
+            <param name="encoding">The encoding for the text parameter.</param>
+            <param name="encodingType">The encoding type to use.</param>
+            <param name="characterValues">A lazy loaded safelist to use.</param>
+            <returns>The encoded text.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.InitialiseSafeList">
+            <summary>
+            Initializes the HTML safe list.
+            </summary>
+            <returns>Creates the safelist</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.UrlParameterSafeList">
+            <summary>
+            Provides the safe characters for URL parameter encoding.
+            </summary>
+            <returns>The safe characters for URL parameter encoding.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.InitialisePathSafeList">
+            <summary>
+            Initializes the Url Path safe list.
+            </summary>
+            <returns>A list of characters and their encoded values for URL encoding.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.HtmlParameterEncoder.UrlPathSafeList">
+            <summary>
+            Provides the safe characters for URL path encoding.
+            </summary>
+            <returns>The safe characters for URL path encoding.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.UnicodeCharacterEncoder">
+            <summary>
+            Provides HTML encoding methods.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.UnicodeSpace">
+            <summary>
+            The HTML escaped value for a space, used in attribute encoding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.UnicodeApostrophe">
+            <summary>
+            The Unicode value for an apostrophe, used in attribute encoding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.XmlApostrophe">
+            <summary>
+            The XML named entity for an apostrophe, used in XML encoding.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.currentLowerCodeChartSettings">
+            <summary>
+            The current lower code chart settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.currentLowerMidCodeChartSettings">
+            <summary>
+            The current lower middle code chart settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.currentMidCodeChartSettings">
+            <summary>
+            The current middle code chart settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.currentUpperMidCodeChartSettings">
+            <summary>
+            The current upper middle code chart settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.currentUpperCodeChartSettings">
+            <summary>
+            The current upper code chart settings.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.characterValues">
+            <summary>
+            The values to output for each character.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.namedEntitiesLazy">
+            <summary>
+            The values to output for HTML named entities.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UnicodeCharacterEncoder.SyncLock">
+            <summary>
+            Lock object
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.AcquireReadLock">
+            <summary>
+            Acquires a read lock.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.ReleaseReadLock">
+            <summary>
+            Releases a read lock.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.AcquireWriteLock">
+            <summary>
+            Acquires a write lock.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.ReleaseWriteLock">
+            <summary>
+            Releases a write lock.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.MarkAsSafe(Microsoft.Security.Application.LowerCodeCharts,Microsoft.Security.Application.LowerMidCodeCharts,Microsoft.Security.Application.MidCodeCharts,Microsoft.Security.Application.UpperMidCodeCharts,Microsoft.Security.Application.UpperCodeCharts)">
+            <summary>
+            Marks characters from the specified languages as safe.
+            </summary>
+            <param name="lowerCodeCharts">The combination of lower code charts to use.</param>
+            <param name="lowerMidCodeCharts">The combination of lower mid code charts to use.</param>
+            <param name="midCodeCharts">The combination of mid code charts to use.</param>
+            <param name="upperMidCodeCharts">The combination of upper mid code charts to use.</param>
+            <param name="upperCodeCharts">The combination of upper code charts to use.</param>
+            <remarks>The safe list affects all HTML and XML encoding functions.</remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.XmlEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in XML.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.XmlAttributeEncode(System.String)">
+            <summary>
+            Encodes input strings for use in XML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in XML.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.HtmlAttributeEncode(System.String)">
+            <summary>
+            Encodes input strings for use in HTML attributes.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <returns>
+            Encoded string for use in HTML attributes.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.HtmlEncode(System.String,System.Boolean)">
+            <summary>
+            Encodes input strings for use in HTML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be used.</param>
+            <returns>
+            Encoded string for use in HTML.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.ApplyHtmlSpecificValues">
+            <summary>
+            Applies Html specific values to the internal value list.
+            </summary>
+            <remarks>
+            ASP.NET 4 and Razor introduced a new syntax &lt;%: %&gt; and @ which are used to HTML-encode values.
+            For example, &lt;%: foo %&gt; is shorthand for &lt;%= HttpUtility.HtmlEncode(foo) %&gt;. Since these could
+            occur inside an attribute, e.g. &lt;a href="@Foo"&gt;, ASP.NET mandates that HtmlEncode also encode
+            characters that are meaningful inside HTML attributes, like the single quote. Encoding spaces
+            isn't mandatory since it's expected that users will surround such variables with quotes.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.HtmlAttributeTweak(System.Char,System.Char[]@)">
+            <summary>
+            HTML Attribute Encoding specific tweaks.
+            </summary>
+            <param name="input">The character to potentially encode.</param>
+            <param name="output">The encoded character, if any.</param>
+            <returns>True if encoding took place, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.XmlTweak(System.Char,System.Char[]@)">
+            <summary>
+            XML specific tweaks.
+            </summary>
+            <param name="input">The character to potentially encode.</param>
+            <param name="output">The encoded character, if any.</param>
+            <returns>True if encoding took place, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.XmlAttributeTweak(System.Char,System.Char[]@)">
+            <summary>
+            XML Attribute Encoding specific tweaks.
+            </summary>
+            <param name="input">The character to potentially encode.</param>
+            <param name="output">The encoded character, if any.</param>
+            <returns>True if encoding took place, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.HtmlEncode(System.String,System.Boolean,Microsoft.Security.Application.UnicodeCharacterEncoder.MethodSpecificEncoder)">
+            <summary>
+            Encodes input strings for use in HTML.
+            </summary>
+            <param name="input">String to be encoded</param>
+            <param name="useNamedEntities">Value indicating if the HTML 4.0 named entities should be used.</param>
+            <param name="encoderTweak">A <see cref="T:Microsoft.Security.Application.UnicodeCharacterEncoder.MethodSpecificEncoder"/> function, if needed.</param>
+            <returns>
+            Encoded string for use in HTML.
+            </returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.InitialiseSafeList">
+            <summary>
+            Initializes the HTML safe list.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UnicodeCharacterEncoder.InitialiseNamedEntityList">
+            <summary>
+            Initializes the HTML named entities list.
+            </summary>
+            <returns>The HTML named entities list.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.UnicodeCharacterEncoder.MethodSpecificEncoder">
+            <summary>
+            Provides method specific encoding of characters.
+            </summary>
+            <param name="input">The character to encode</param>
+            <param name="output">The encoded character, if it has been encoded.</param>
+            <returns>True if the character has been encoded, otherwise false.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.UriUtil">
+            <summary>
+            Contains helpers for URI parsing 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.UriUtil.QueryFragmentSeparators">
+            <summary>
+            Query Fragment separators.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.UriUtil.ExtractQueryAndFragment(System.String,System.String@,System.String@)">
+            <summary>
+            Extracts the query string and fragment from the input path by splitting on the separator characters.
+            Doesn't perform any validation as to whether the input represents a valid URL.
+            Concatenating the pieces back together will form the original input string.
+            </summary>
+            <param name="input">The URL to split.</param>
+            <param name="path">The path portion of <paramref name="input"/>.</param>
+            <param name="queryAndFragment">The query and fragment of <paramref name="input"/>.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.UriUtil.IsSafeScheme(System.String)">
+            <summary>
+            Returns a value indicating whether the schemes used in <paramref name="url"/> is generally considered safe for the purposes of redirects or other places where URLs are rendered to the page.
+            </summary>
+            <param name="url">The URL to parse</param>
+            <returns>true if the scheme is considered safe, otherwise false.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.UriUtil.TrySplitUriForPathEncode(System.String,System.String@,System.String@,System.String@)">
+            <summary>
+            Attempts to split a URI into its constituent pieces.
+            Even if this method returns true, one or more of the out parameters might contain a null or empty string, e.g. if there is no query / fragment.
+            Concatenating the pieces back together will form the original input string.
+            </summary>
+            <param name="input">The input URI to split.</param>
+            <param name="schemeAndAuthority">The scheme and authority used in the <paramref name="input"/> uri.</param>
+            <param name="path">The path contained in the <paramref name="input"/> uri.</param>
+            <param name="queryAndFragment">The query and fragment contained in the <paramref name="input"/> uri.</param>
+            <returns>true if the URI could be split, otherwise false.</returns>
+        </member>
+        <member name="T:Microsoft.Security.Application.Utf16StringReader">
+            <summary>
+            Reads individual scalar values from a UTF-16 input string.
+            </summary>
+            <remarks>
+            For performance reasons, this is a mutable struct. Use caution when capturing instances of this type.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.Utf16StringReader.LeadingSurrogateStart">
+            <summary>
+            Starting code point for the UTF-16 leading surrogates.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.Utf16StringReader.TrailingSurrogateStart">
+            <summary>
+            Starting code point for the UTF-16 trailing surrogates.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.Utf16StringReader.UnicodeReplacementCharacterCodePoint">
+            <summary>
+            The Unicode replacement character U+FFFD.
+            </summary>
+            <remarks>
+            For more info, see http://www.unicode.org/charts/PDF/UFFF0.pdf.
+            </remarks>
+        </member>
+        <member name="F:Microsoft.Security.Application.Utf16StringReader.input">
+            <summary>
+            The input string we're iterating on.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Security.Application.Utf16StringReader.currentOffset">
+            <summary>
+            The current offset into 'input'.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Security.Application.Utf16StringReader.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Security.Application.Utf16StringReader"/> struct with the given UTF-16 input string.
+            </summary>
+            <param name="input">The input string to decompose into scalar values.</param>
+        </member>
+        <member name="M:Microsoft.Security.Application.Utf16StringReader.ReadNextScalarValue">
+            <summary>
+            Reads the next scalar value from the input string.
+            </summary>
+            <returns>The next scalar value. If the input string contains invalid UTF-16, the
+            return value is the Unicode replacement character U+FFFD. If the end of the string
+            is reached, returns -1.</returns>
+        </member>
+        <member name="M:Microsoft.Security.Application.Utf16StringReader.ConvertToUtf32(System.Char,System.Char)">
+            <summary>
+            Similar to Char.ConvertToUtf32, but slightly faster in tight loops since parameter checks are not done.
+            </summary>
+            <param name="leadingSurrogate">The UTF-16 leading surrogate character.</param>
+            <param name="trailingSurrogate">The UTF-16 trailing surrogate character.</param>
+            <returns>The scalar value resulting from combining these two surrogate characters.</returns>
+            <remarks>The caller must ensure that the inputs are valid surrogate characters. If not,
+            the output of this routine is undefined.</remarks>
+        </member>
+        <member name="M:Microsoft.Security.Application.Utf16StringReader.IsValidUnicodeScalarValue(System.Int32)">
+            <summary>
+            Determines whether a given code point is a valid Unicode scalar value.
+            </summary>
+            <param name="codePoint">The code point whose validity is to be checked.</param>
+            <returns>True if the input is a valid Unicode scalar value, false otherwise.</returns>
+        </member>
+    </members>
+</doc>
