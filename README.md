@@ -7,6 +7,7 @@ A professional ASP.NET MVC template for building secure, fast, robust and adapta
 - Search Engine Optimization (SEO)
 - Browser Compatability
 - Resilience and Error Handling
+- Easier Debugging and Performance Testing Tools
 
 <img alt="ASP.NET-MVC-Boilerplate Logo"
      border="5"
