@@ -1,6 +1,14 @@
 <h1><a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">ASP.NET MVC Boilerplate</a></h1>
 
-<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. The main benefits of using this template are:</p>
+<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft.</p>
+
+<img alt="ASP.NET-MVC-Boilerplate Logo"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/Preview%20Image.png"/>
+
+<h2>Why Do I Need It?</h2>
+
+<p>The default MVC template that Visual Studio gives you does not make best use of the tools available. It's insecure, slow, and really has a very basic feature list (That's the point of it). ASP.NET MVC Boilerplate provides you with a few more pieces of the puzzle to get you started quicker. It makes liberal use of comments and even gives you a checklist of tasks which you need to perform to make it even better. The main benefits of using this template are:</p>
 
 <ul>
      <li>Security</li>
@@ -11,14 +19,6 @@
      <li>Easier Debugging and Performance Testing Tools</li>
      <li>Patterns and Practices</li>
 </ul>
-
-<img alt="ASP.NET-MVC-Boilerplate Logo"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/Preview%20Image.png"/>
-
-<h2>Why Do I Need It?</h2>
-
-<p>The default MVC template that Visual Studio gives you does not make best use of the tools available. It's insecure, slow, and really has a very basic feature list (That's the point of it). ASP.NET MVC Boilerplate provides you with a few more pieces of the puzzle to get you started quicker. It makes liberal use of comments and even gives you a checklist of tasks which you need to perform to make it even better.</p>
 
 <h2>Secure By Default</h2>
 
