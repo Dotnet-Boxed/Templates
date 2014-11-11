@@ -20,6 +20,10 @@
             routes.IgnoreRoute("Scripts/{*pathInfo}");
             // Ignore the humans.txt file.
             routes.IgnoreRoute("humans.txt");
+            // Ignore the elmah route.
+            routes.IgnoreRoute("e");
+            // Ignore the glimpse route.
+            routes.IgnoreRoute("glimpse");
 
             // Enable attribute routing.
             routes.MapMvcAttributeRoutes();

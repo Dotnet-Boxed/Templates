@@ -107,8 +107,11 @@
     @* Description - Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description" />
     @* Author - The author of the page. *@
-    <meta name="author" content="Muhammad Rehan Saeed" />
-    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. THe settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
+    @if (ViewBag.Author != null)
+    {
+        <meta name="author" content="@ViewBag.Author" />
+    }
+    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
     @* <link rel="canonical" href=""> *@
 
 
