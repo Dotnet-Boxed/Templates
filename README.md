@@ -15,7 +15,7 @@ A professional ASP.NET MVC template for building secure, fast, robust and adapta
 <h2>Quick start</h2>
 Choose one of the following options:
 <ol>
-  <li>Copy <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Project%20Templates/MvcBoilerplate.zip">this</a> file into your Visual Studio project templates in:
+  <li>Copy <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Project%20Templates/MvcBoilerplate.zip">this</a> file into your Visual Studio project templates directory below and create a new project from it:
   <blockquote>C:\Users\[Your User Name]\Documents\Visual Studio 2013\Templates\ProjectTemplates\Visual C#</blockquote>
   </li>
   <li>
