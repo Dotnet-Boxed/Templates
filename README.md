@@ -69,7 +69,7 @@
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
 <ol>
-  <li>Copy <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Project%20Templates/MvcBoilerplate.zip">this</a> file into your Visual Studio project templates directory below and create a new project from it:
+  <li>Copy the templates from <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/tree/master/Project%20Templates">here</a> into your Visual Studio project templates directory below and create a new project from it:
   <blockquote>C:\Users\[Your User Name]\Documents\Visual Studio 2013\Templates\ProjectTemplates\Visual C#</blockquote>
   </li>
   <li>
