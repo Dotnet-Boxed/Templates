@@ -17,7 +17,11 @@
   Secure the Elmah error log page, so that anonymous users cannot access it. Open the web.config file and look in 'appSettings' for the 
   'elmah.mvc.allowedRoles' or 'elmah.mvc.allowedUsers' setting. You can set this value to restrict the Elmah page to a role or individual user.
   Most likely you will have an 'Administrator' role and you can add this to the 'elmah.mvc.allowedRoles' setting.
-
+  
+- 6/10 Search Engine Optimisation (SEO)
+  Add links to the sitemap.xml file to improve search engine visibility of your site. 
+  Open SitemapService.cs and edit the GetSitemapNodes method. You can decide where or how your links are generated.
+  
 - 5/10 Compatability
   If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open 
   the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
@@ -31,10 +35,14 @@
 - 2/10 Performance
   If running IIS 7.5 or below, disable ETags. Open the web.config file and search for 'setEtag' for further instructions.
   
+- 1/10 Performance
+  The sitemap.xml, robots.txt, not found error page and unauthorized error page are generated programatically and then cached for a day. 
+  If these files won't change much on your site change the length of time they are cached. Open the web.config file and take a look at the caching section.
+  
 - 1/10 Security
   Modify the URL used to access the Elmah error log page. This adds security through obscurity. Open the web.config file and you can set the 
-  page URL in 'appSettings'. The setting is called 'elmah.mvc.route'. The Elmah error log page is 'http://[YOUR DOMAIN].com/e' by default. You can
-  change the value to anything you want.
+  page URL in 'appSettings'. The setting is called 'elmah.mvc.route'. The Elmah error log page is 'http://[YOUR DOMAIN].com/elmah' by default. You can
+  change the value to anything you want. Also, change the elmah route in RouteConfig.cs.
 
 - 1/10 Thank Developers
   Edit the humans.txt file at the root of the site. This is totally optional, you can delete this file if you want (If you delete it, remove 

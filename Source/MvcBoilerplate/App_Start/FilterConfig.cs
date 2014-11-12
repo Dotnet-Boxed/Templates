@@ -16,9 +16,11 @@
         }
 
         /// <summary>
-        /// Several NWebsec Security Filters are added here (See 
-        /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/>
-        /// and <see cref="http://nwebsec.codeplex.com/"/> for more information).
+        /// Several NWebsec Security Filters are added here. 
+        /// (See <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
+        /// <see cref="http://nwebsec.codeplex.com/"/> for more information).
+        /// Note: All of these filters can be applied to individual controllers and actions and indeed
+        /// some of them only make sense when applied to a controller or action instead of globally here.
         /// </summary>
         private static void AddSecurityFilters(GlobalFilterCollection filters)
         {
@@ -56,12 +58,16 @@
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers.
         /// This creates a whitelist from where various content in a webpage can be loaded from. (See
+        /// <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP"/> and
         /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
-        /// <see cref="http://nwebsec.codeplex.com/wikipage?title=Configuring%20Content%20Security%20Policy&referringTitle=NWebsec.Mvc"/>
-        /// and <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives"/> for more information).
+        /// <see cref="http://nwebsec.codeplex.com/wikipage?title=Configuring%20Content%20Security%20Policy&referringTitle=NWebsec.Mvc"/> and 
+        /// <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives"/> for more information).
         /// Note: Not all browsers support this yet but most now do (See http://caniuse.com/#search=CSP for a list).
         /// Note: If you are using the 'Browser Link' feature of the Webs Essentials Visual Studio extension, it will not work
         /// if you enable CSP (See <see cref="http://webessentials.uservoice.com/forums/140520-general/suggestions/6665824-browser-link-support-for-content-security-policy"/>).
+        /// Note: All of these filters can be applied to individual controllers and actions e.g. If an action requires
+        /// access to content from YouTube.com, then you can add the following attribute to the action:
+        /// [CspFrameSrc(CustomSources = "youtube.com")].
         /// </summary>
         private static void AddContentSecurityPolicyFilters(GlobalFilterCollection filters)
         {

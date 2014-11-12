@@ -21,7 +21,7 @@
             // Ignore the humans.txt file.
             routes.IgnoreRoute("humans.txt");
             // Ignore the elmah route.
-            routes.IgnoreRoute("e");
+            routes.IgnoreRoute("elmah");
             // Ignore the glimpse route.
             routes.IgnoreRoute("glimpse");
 

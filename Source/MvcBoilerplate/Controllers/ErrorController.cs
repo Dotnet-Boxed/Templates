@@ -18,7 +18,7 @@
         /// Returns a HTTP 404 Not Found error view. Returns a partial view if the request is an AJAX call.
         /// </summary>
         /// <returns>The partial or full not found view.</returns>
-        [OutputCache(Duration = 60 * 60 * 24, Location = OutputCacheLocation.Any)]
+        [OutputCache(CacheProfile = CacheProfileName.NotFound)]
         [Route("notfound", Name = ErrorControllerRoute.GetNotFound)]
         public ActionResult NotFound()
         {
@@ -29,7 +29,7 @@
         /// Returns a HTTP 401 Unauthorized error view. Returns a partial view if the request is an AJAX call.
         /// </summary>
         /// <returns>The partial or full unauthorized view.</returns>
-        [OutputCache(Duration = 60 * 60 * 24, Location = OutputCacheLocation.Any)]
+        [OutputCache(CacheProfile = CacheProfileName.Unauthorized)]
         [Route("unauthorized", Name = ErrorControllerRoute.GetUnauthorized)]
         public ActionResult Unauthorized()
         {

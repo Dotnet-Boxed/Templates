@@ -193,11 +193,11 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap\bootstrap.css">
-      <DependentUpon>bootstrap.less</DependentUpon>
+    <Content Include="Content\bootstrap\site.css">
+      <DependentUpon>site.less</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap\bootstrap.min.css">
-      <DependentUpon>bootstrap.css</DependentUpon>
+    <Content Include="Content\bootstrap\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
     </Content>
     <Content Include="Content\fontawesome\Site.css">
       <DependentUpon>Site.less</DependentUpon>
@@ -205,8 +205,8 @@
     <Content Include="Content\fontawesome\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="Content\icons\apple-touch-icon-114x114.png" />
     <Content Include="Content\icons\apple-touch-icon-120x120.png" />
     <Content Include="Content\icons\apple-touch-icon-144x144.png" />
@@ -247,6 +247,10 @@
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap\site.less" />
+    <Content Include="Content\bootstrap\site.css.map">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <None Include="Content\Site.less" />
     <Content Include="humans.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -257,10 +261,10 @@
     <Content Include="Scripts\Failover\jqueryvalunobtrusive.js" />
     <Content Include="Scripts\Failover\modernizr.js" />
     <Content Include="Scripts\Failover\respond.js" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome\FontAwesome.otf" />
     <Content Include="Content\fontawesome\variables.less" />
     <Content Include="Content\fontawesome\stacked.less" />
     <Content Include="Content\fontawesome\spinning.less" />
@@ -275,9 +279,9 @@
     <Content Include="Content\fontawesome\extras.less" />
     <Content Include="Content\fontawesome\core.less" />
     <Content Include="Content\fontawesome\bordered-pulled.less" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap\wells.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\utilities.less" />
@@ -348,9 +352,6 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
-    <Content Include="Content\bootstrap\bootstrap.css.map">
-      <DependentUpon>bootstrap.css</DependentUpon>
-    </Content>
     <Content Include="Content\fontawesome\Site.less" />
     <Content Include="Content\fontawesome\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>

@@ -35,7 +35,7 @@
             // Note: No CDN support has been added here. Most likely you will want to customize your copy of bootstrap.
             // Note: If you host any of your CSS on a seperate domain (Like a CDN), then be sure to fix an issue with respond.js which stops working for IE8.
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap/bootstrap.css",
+                "~/Content/bootstrap/site.css",
                 "~/Content/fontawesome/site.css",
                 "~/Content/site.css"));
         }
