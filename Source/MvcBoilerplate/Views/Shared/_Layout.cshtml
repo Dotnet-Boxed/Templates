@@ -148,8 +148,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.RouteLink("About", HomeControllerRoute.GetAbout)</li>
-                    <li>@Html.RouteLink("Contact", HomeControllerRoute.GetContact)</li>
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span class="fa fa-users"></span> About</a></li>
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span class="fa fa-phone"></span> Contact</a></li>
                 </ul>
             </div>
         </div>

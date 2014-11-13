@@ -50,6 +50,8 @@
         [Route("robots.txt", Name = HomeControllerRoute.RobotsText)]
         public ActionResult RobotsText()
         {
+            Trace.WriteLine(string.Format("robots.txt requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
+
             StringBuilder stringBuilder = new StringBuilder();
 
             // Allow all robots.
@@ -93,6 +95,7 @@
         public ActionResult SitemapXml()
         {
             Trace.WriteLine(string.Format("sitemap.xml requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
+
             string content = this.sitemapService.GetSitemapXml();
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }  

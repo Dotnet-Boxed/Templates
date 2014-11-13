@@ -54,6 +54,11 @@
             builder.RegisterControllers(assembly);
         }
 
+
+        /// <summary>
+        /// Sets the ASP.NET MVC dependency resolver.
+        /// </summary>
+        /// <param name="container">The container.</param>
         private static void SetMvcDependencyResolver(IContainer container)
         {
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -9,6 +9,19 @@
   If you are planning on using ASP.NET Web Forms, open the Global.asax.cs file and remove the two lines of code where we are removing the 
   ASP.NET Web Forms view engine for added performance.
 
+- 10/10 Security
+  Content Security Policy (CSP) HTTP headers are sent to the web browser from this site. CSP acts as a whitelist of resources that the 
+  browser is allowed to access. If the browser tries to access a resource, not allowed by your CSP policy it is blocked. Configure your
+  CSP policy globally in FilterConfig.cs or on your individual MVC controllers and actions if they have special access requirements.
+  See FilterConfig.cs for more information.
+
+- 8/10 Security
+  Modernizr does not currently support Content Security Policy (CSP) because it uses inline CSS styles rather than seperate files.
+  To get around this problem, Inline Styles have been set to allowed in the CSP policy (See FilterConfig.cs). This is not a good practice and 
+  reduces some of the security benefits of using it. Keep an eye on the following links for when Modernizr finally adds support for CSP:
+  http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors and 
+  https://github.com/Modernizr/Modernizr/pull/1263
+
 - 7/10 Performance
   Modify the caching settings to increase or decrease the amount of time a file can be cached and where it can be cached. Open the web.config 
   file and under the system.web and caching elements you can find the caching settings.
