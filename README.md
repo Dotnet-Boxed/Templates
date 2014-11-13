@@ -20,6 +20,10 @@
      <li>Patterns and Practices</li>
 </ul>
 
+<img alt="ASP.NET-MVC-Boilerplate Logo"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/Technology%20Map.png"/>
+
 <h2>Secure By Default</h2>
 
 <p>The default MVC template is not as secure as it could be. There are various settings (Mostly in the web.config file) which are insecure by default. For example, it leaks information about which version of IIS you are using and allows external scripts to access cookies by default!</p>
