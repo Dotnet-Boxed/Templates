@@ -32,12 +32,6 @@
 
     @* Apple Icons - You can move all these icons to the root of the site and remove these link elements, if you don't mind the clutter.
         https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
-    @* apple-mobile-web-app-title - The name of the application if pinned to the IOS start screen. *@
-    @* <meta name="apple-mobile-web-app-title" content=""> *@
-    @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'standalone' mode. Any links to other pages that are clicked whilst your app is in standalone mode will launch the full Safari browser. *@
-    @* <meta name="apple-mobile-web-app-capable" content="yes"> *@
-    @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
-    @* <meta name="apple-mobile-web-app-status-bar-style" content="black"> *@
     @* apple-touch-icon-57x57.png - Android Stock Browser and non-Retina iPhone and iPod Touch *@
     <link rel="apple-touch-icon" sizes="57x57" href="/content/icons/apple-touch-icon-57x57.png" />
     @* apple-touch-icon-114x114.png - iPhone (with 2× display) iOS ≤ 6 *@
@@ -57,45 +51,42 @@
     @* apple-touch-icon-180x180.png - iPad and iPad mini (with 2× display) iOS ≥ 8 *@
     <link rel="apple-touch-icon" sizes="180x180" href="/content/icons/apple-touch-icon-180x180.png" />
 
-    @* Apple Startup Images - https://gist.github.com/tfausak/2222823 *@
+    @* apple-mobile-web-app-title - The name of the application if pinned to the IOS start screen. *@
+    @* <meta name="apple-mobile-web-app-title" content=""> *@
+    @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'standalone' mode. Any links to other pages that are clicked whilst your app is in standalone mode will launch the full Safari browser. *@
+    @* <meta name="apple-mobile-web-app-capable" content="yes"> *@
+    @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
+    @* <meta name="apple-mobile-web-app-status-bar-style" content="black"> *@
+    
+    @* Apple Startup Images - These splash screen images are only shown if apple-mobile-web-app-capable is set to true. https://gist.github.com/tfausak/2222823 *@
     @* apple-touch-startup-image-1536x2008.png - iOS 6 & 7 iPad (retina, portrait) *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-1536x2008.png"
-          media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"> *@
     @* apple-touch-startup-image-1496x2048.png - iOS 6 & 7 iPad (retina, landscape) *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-1496x2048.png"
-          media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"> *@
     @* apple-touch-startup-image-768x1004.png - iOS 6 iPad (portrait) *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-768x1004.png"
-          media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)"> *@
     @* apple-touch-startup-image-748x1024.png - iOS 6 iPad (landscape) *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-748x1024.png"
-          media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)"> *@
     @* apple-touch-startup-image-640x1096.png - iOS 6 & 7 iPhone 5 *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-640x1096.png"
-          media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> *@
     @* apple-touch-startup-image-640x920.png - iOS 6 & 7 iPhone (retina) *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-640x920.png"
-          media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> *@
     @* apple-touch-startup-image-320x460.png - iOS 6 iPhone *@
-    <link rel="apple-touch-startup-image"
-          href="/content/icons/apple-touch-startup-image-320x460.png"
-          media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)">
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"> *@
 
-    @* Windows 8+ Icons *@
-    @* application-name - Windows 8+ - The name of the application if pinned to the start screen. *@
+    @* Windows 7 Taskbar - This depends on your site, so no code here. See http://www.buildmypinnedsite.com/windows7 *@
+
+    @* Windows 8 IE10 *@
+    @* application-name - The name of the application if pinned to the start screen. *@
     @* <meta name="application-name" content="" /> *@
-    @* msapplication-TileColor - Windows 8 IE10 - The tile colour which shows around your tile image (msapplication-TileImage). *@
-    <meta name="msapplication-TileColor" content="#5cb95c">
-    @* msapplication-TileImage - Windows 8 IE10 - The tile image. *@
-    <meta name="msapplication-TileImage" content="/content/icons/mstile-144x144.png">
-    @* msapplication-config - Windows 8.1 IE11 - The location of the browser configuration file. If you add an RSS feed, got to
-        http://www.buildmypinnedsite.com/en and regenerate the browserconfig.xml file. You will then have a cool live tile! *@
+    @* msapplication-TileColor - The tile colour which shows around your tile image (msapplication-TileImage). *@
+    @* <meta name="msapplication-TileColor" content="#5cb95c"> *@
+    @* msapplication-TileImage - The tile image. *@
+    @* <meta name="msapplication-TileImage" content="/content/icons/mstile-144x144.png"> *@
+    
+    @* Windows 8.1 IE11 *@
+    @* msapplication-config - The location of the browser configuration file. If you have an RSS feed, go to
+       http://www.buildmypinnedsite.com and regenerate the browserconfig.xml file. You will then have a cool live tile! *@
     <meta name="msapplication-config" content="/content/icons/browserconfig.xml" />
 
 
