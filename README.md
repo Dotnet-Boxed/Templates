@@ -73,7 +73,7 @@
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
 <ol>
-  <li>Get the Visual Studio 2013 extension <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a>.</li>
+  <li>Get the Visual Studio 2013 extension <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a> and in Visual Studio go to File -> New Project -> Web.</li>
   <li>
   Clone the git repository
   <blockquote>git clone https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate</blockquote>
