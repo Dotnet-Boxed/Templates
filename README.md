@@ -73,6 +73,7 @@
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
 <ol>
+  <li>Get the Visual Studio 2013 extension <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a>.</li>
   <li>Copy the templates from <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/tree/master/Project%20Templates">here</a> into your Visual Studio project templates directory below and create a new project from it:
   <blockquote>C:\Users\[Your User Name]\Documents\Visual Studio 2013\Templates\ProjectTemplates\Visual C#</blockquote>
   </li>
