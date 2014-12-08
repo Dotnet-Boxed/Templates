@@ -44,7 +44,7 @@
 
 <p>The default ASP.NET MVC template takes no consideration of Search Engine Optimization at all. ASP.NET MVC Boilerplate adds a robots.txt file to tell search engines which pages they can index. It also adds a sitemap.xml file where you can add links to all your pages programmatically.</p>
 
-<p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default. This project turns them on by default, which is terrible for SEO.</p>
+<p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default, which is terrible for SEO. This project turns them on by default.</p>
 
 <h2>Browser Compatibility</h2>
 
@@ -73,9 +73,7 @@
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
 <ol>
-  <li>Copy the templates from <a alt="" href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/tree/master/Project%20Templates">here</a> into your Visual Studio project templates directory below and create a new project from it:
-  <blockquote>C:\Users\[Your User Name]\Documents\Visual Studio 2013\Templates\ProjectTemplates\Visual C#</blockquote>
-  </li>
+  <li>Get the Visual Studio 2013 extension <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a> and in Visual Studio go to File -> New Project -> Web.</li>
   <li>
   Clone the git repository
   <blockquote>git clone https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate</blockquote>
