@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MvcBoilerplate</RootNamespace>
-    <AssemblyName>MvcBoilerplate</AssemblyName>
+    <RootNamespace>$projectname$</RootNamespace>
+    <AssemblyName>$projectname$</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -193,7 +193,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.html" />
     <Content Include="Content\bootstrap\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
@@ -375,6 +374,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <None Include="ReadMe.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

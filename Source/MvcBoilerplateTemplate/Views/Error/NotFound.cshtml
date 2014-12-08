@@ -1,0 +1,14 @@
+﻿@model ErrorModel
+
+@{
+    ViewBag.Title = "Page not found";
+    ViewBag.Description = "Sorry, but the page you were looking for can’t be found.";
+}
+
+<div class="jumbotron text-center">
+    <header>
+        <h1><i class="fa fa-exclamation-circle text-danger"></i> @ViewBag.Title</h1>
+    </header>
+    <p>@ViewBag.Description</p>
+    <a class="btn btn-primary btn-lg" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)"><span class="fa fa-home"></span> Take me home</a>
+</div>

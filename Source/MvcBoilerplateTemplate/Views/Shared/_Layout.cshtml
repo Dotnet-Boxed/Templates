@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+@* lang - The language of the page. *@
+@* no-js - The no JavaScript class is removed by modernizr if JavaScript is available. *@
+<html class="no-js" lang="en">
+<head>
+    @* The order of the tags in the head is important for best performance and comaptability. *@
+    @* charset - The character encoding of the document. *@
+    <meta charset="utf-8" />
+    @* viewport - Set the scale on mobile devices (For more info see https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag). *@
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @* title - The title of the page. Appears in the browser window title. The site name appears at the end for better SEO. *@
+    <title>@ViewBag.Title - @Application.Name</title>
+
+
+    @* Icons & Platform Specific Settings - Favicon generator used to generate the icons below http://realfavicongenerator.net/ *@
+    @* shortcut icon - This file contains the following sizes 16x16, 32x32 and 48x48. *@
+    <link rel="shortcut icon" href="/content/icons/favicon.ico" />
+    @* favicon-192x192.png - For Android Chrome M36+. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-192x192.png" sizes="192x192" />
+    @* favicon-160x160.png - For Opera Speed Dial (up to Opera 12; this icon is deprecated starting from Opera 15), although the optimal icon is not square but rather 256x160. If Opera is a major platform for you, you should create this icon yourself. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-160x160.png" sizes="160x160" />
+    @* favicon-96x96.png - For Google TV. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-96x96.png" sizes="96x96" />
+    @* favicon-16x16.png - The classic favicon, displayed in the tabs. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-16x16.png" sizes="16x16" />
+    @* favicon-32x32.png - For Safari on Mac OS. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-32x32.png" sizes="32x32" />
+
+    @* Android *@
+    @* mobile-web-app-capable - Run Android in standalone mode, hiding the browser chrome. *@
+    @* <meta name="mobile-web-app-capable" content="yes"> *@
+
+    @* Apple Icons - You can move all these icons to the root of the site and remove these link elements, if you don't mind the clutter.
+        https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
+    @* apple-touch-icon-57x57.png - Android Stock Browser and non-Retina iPhone and iPod Touch *@
+    <link rel="apple-touch-icon" sizes="57x57" href="/content/icons/apple-touch-icon-57x57.png" />
+    @* apple-touch-icon-114x114.png - iPhone (with 2× display) iOS ≤ 6 *@
+    <link rel="apple-touch-icon" sizes="114x114" href="/content/icons/apple-touch-icon-114x114.png" />
+    @* apple-touch-icon-72x72.png - iPad mini and the first- and second-generation iPad (1× display) on iOS ≤ 6 *@
+    <link rel="apple-touch-icon" sizes="72x72" href="/content/icons/apple-touch-icon-72x72.png" />
+    @* apple-touch-icon-144x144.png - iPad (with 2× display) iOS ≤ 6 *@
+    <link rel="apple-touch-icon" sizes="144x144" href="/content/icons/apple-touch-icon-144x144.png" />
+    @* apple-touch-icon-60x60.png - Same as apple-touch-icon-57x57.png, for non-retina iPhone with iOS7. *@
+    <link rel="apple-touch-icon" sizes="60x60" href="/content/icons/apple-touch-icon-60x60.png" />
+    @* apple-touch-icon-120x120.png - iPhone (with 2× and 3 display) iOS ≥ 7 *@
+    <link rel="apple-touch-icon" sizes="120x120" href="/content/icons/apple-touch-icon-120x120.png" />
+    @* apple-touch-icon-76x76.png - iPad mini and the first- and second-generation iPad (1× display) on iOS ≥ 7 *@
+    <link rel="apple-touch-icon" sizes="76x76" href="/content/icons/apple-touch-icon-76x76.png" />
+    @* apple-touch-icon-152x152.png - iPad 3+ (with 2× display) iOS ≥ 7 *@
+    <link rel="apple-touch-icon" sizes="152x152" href="/content/icons/apple-touch-icon-152x152.png" />
+    @* apple-touch-icon-180x180.png - iPad and iPad mini (with 2× display) iOS ≥ 8 *@
+    <link rel="apple-touch-icon" sizes="180x180" href="/content/icons/apple-touch-icon-180x180.png" />
+
+    @* apple-mobile-web-app-title - The name of the application if pinned to the IOS start screen. *@
+    @* <meta name="apple-mobile-web-app-title" content=""> *@
+    @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'standalone' mode. Any links to other pages that are clicked whilst your app is in standalone mode will launch the full Safari browser. *@
+    @* <meta name="apple-mobile-web-app-capable" content="yes"> *@
+    @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
+    @* <meta name="apple-mobile-web-app-status-bar-style" content="black"> *@
+    
+    @* Apple Startup Images - These splash screen images are only shown if apple-mobile-web-app-capable is set to true. https://gist.github.com/tfausak/2222823 *@
+    @* apple-touch-startup-image-1536x2008.png - iOS 6 & 7 iPad (retina, portrait) *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"> *@
+    @* apple-touch-startup-image-1496x2048.png - iOS 6 & 7 iPad (retina, landscape) *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-1496x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"> *@
+    @* apple-touch-startup-image-768x1004.png - iOS 6 iPad (portrait) *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-768x1004.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)"> *@
+    @* apple-touch-startup-image-748x1024.png - iOS 6 iPad (landscape) *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-748x1024.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)"> *@
+    @* apple-touch-startup-image-640x1096.png - iOS 6 & 7 iPhone 5 *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> *@
+    @* apple-touch-startup-image-640x920.png - iOS 6 & 7 iPhone (retina) *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-640x920.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"> *@
+    @* apple-touch-startup-image-320x460.png - iOS 6 iPhone *@
+    @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-320x460.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"> *@
+
+    @* Windows 7 Taskbar - This depends on your site, so no code here. See http://www.buildmypinnedsite.com/windows7 *@
+
+    @* Windows 8 IE10 *@
+    @* application-name - The name of the application if pinned to the start screen. *@
+    @* <meta name="application-name" content="" /> *@
+    @* msapplication-TileColor - The tile colour which shows around your tile image (msapplication-TileImage). *@
+    @* <meta name="msapplication-TileColor" content="#5cb95c"> *@
+    @* msapplication-TileImage - The tile image. *@
+    @* <meta name="msapplication-TileImage" content="/content/icons/mstile-144x144.png"> *@
+    
+    @* Windows 8.1 IE11 *@
+    @* msapplication-config - The location of the browser configuration file. If you have an RSS feed, go to
+       http://www.buildmypinnedsite.com and regenerate the browserconfig.xml file. You will then have a cool live tile! *@
+    <meta name="msapplication-config" content="/content/icons/browserconfig.xml" />
+
+
+    @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode https://github.com/typekit/webfontloader. *@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+    @* Description - Aim for more than 160 characters. *@
+    <meta name="description" content="@ViewBag.Description" />
+    @* Author - The author of the page. *@
+    @if (ViewBag.Author != null)
+    {
+        <meta name="author" content="@ViewBag.Author" />
+    }
+    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
+    @* <link rel="canonical" href=""> *@
+
+
+    @*
+        TODO: Social Media Meta Tags
+        Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
+        Twitter Cards - https://dev.twitter.com/cards/getting-started
+        http://moz.com/blog/meta-data-templates-123
+    *@
+    @*
+        TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
+        schema.org - Schema database
+        http://schema.org
+        Schema Creator - Create HTML schemas
+        http://schema-creator.org/
+        Structured Data Testing Tool - Test HTML schemas
+        http://www.google.com/webmasters/tools/richsnippets
+    *@
+</head>
+<body>
+    @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
+    @* Accessibility - Also, don't forget to add ARIA landmark roles to your page content http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/ *@
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    @* nav - The main navigation for the site. *@
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">@Application.Name</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span class="fa fa-users"></span> About</a></li>
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span class="fa fa-phone"></span> Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @* div id="main" - The main container for the page. Change this to the HTML5 main tag when it gains more browser support. *@
+    <div id="main" class="container body-content" role="main">
+        <!--[if lt IE 8]>
+            <div class="alert alert-warning" role="alert">
+                <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+        <![endif]-->
+        @RenderBody()
+        <hr />
+        <footer role="contentinfo">
+            <p>&copy; @DateTime.Now.Year - @Application.Name</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalunobtrusive")
+    @Scripts.Render("~/bundles/bootstrap")
+    @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy.
+        If you trust the CDN to be available 100% of the time and you prefer better performance
+        you can omit this line and the one for 'failoverrespond' below. *@
+    @Scripts.Render("~/bundles/failovercore")
+    @* Only load respond if we are running IE8 or less. *@
+    <!--[if lt IE 9]>
+      @Scripts.Render("~/bundles/respond")
+      @Scripts.Render("~/bundles/failoverrespond")
+    <![endif]-->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
