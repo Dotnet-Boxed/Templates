@@ -44,7 +44,7 @@
 
 <p>The default ASP.NET MVC template takes no consideration of Search Engine Optimization at all. ASP.NET MVC Boilerplate adds a robots.txt file to tell search engines which pages they can index. It also adds a sitemap.xml file where you can add links to all your pages programmatically.</p>
 
-<p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default. This project turns them on by default, which is terrible for SEO.</p>
+<p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default, which is terrible for SEO. This project turns them on by default.</p>
 
 <h2>Browser Compatibility</h2>
 
