@@ -24,6 +24,9 @@
         /// </summary>
         private static void AddSecurityFilters(GlobalFilterCollection filters)
         {
+            // Require HTTPS to be used accross the whole site.
+            // filters.Add(new RequireHttpsAttribute());
+
             // Cache-Control: no-cache, no-store, must-revalidate
             // Expires: -1
             // Pragma: no-cache
