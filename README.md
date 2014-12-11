@@ -1,6 +1,6 @@
 <h1><a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">ASP.NET MVC Boilerplate</a></h1>
 
-<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft.</p>
+<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at <a href="http://rehansaeed.co.uk/asp-net-mvc-boilerplate">RehanSaeed.co.uk</a> or the <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">Visual Studio Gallery</a>.</p>
 
 <img alt="ASP.NET-MVC-Boilerplate Logo"
      border="5"
