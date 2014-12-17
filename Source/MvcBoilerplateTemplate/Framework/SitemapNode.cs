@@ -7,8 +7,6 @@
     /// </summary>
     public sealed class SitemapNode
     {
-        private readonly string priority;
-
         #region Constructors
 
         /// <summary>
@@ -65,11 +63,7 @@
         /// <value>
         /// The priority.
         /// </value>
-        public double? Priority 
-        { 
-            get; 
-            set; 
-        }
+        public double? Priority { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the page. This URL must begin with the protocol (such as http) and end with a trailing slash, 

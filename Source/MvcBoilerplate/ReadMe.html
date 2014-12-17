@@ -55,7 +55,8 @@
                     <li>
                         If you are using SSL, open the FilterConfig.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use SSL accross the whole
                         site. Then open the Global.asax.cs file and uncomment the line 'AntiForgeryConfig.RequireSsl = true;'. This ensures that the
-                        Anti-Forgery tokens require SSL to work, which gives a little added security.
+                        Anti-Forgery tokens require SSL to work, which gives a little added security. Also, open the web.config file and change the requireSSL setting in the
+                        httpCookies section to true, to enable cookies to be sent using SSL only by default.
                     </li>
                 </ul>
             </article>
@@ -97,6 +98,11 @@
                     <li>
                         If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open
                         the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
+                    </li>
+                    <li>
+                        If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding prefetch or prerender
+                        link tags to the head of the page. See <a href="http://www.stevesouders.com/blog/2013/11/07/prebrowsing/">here</a> and
+                        <a href="http://blogs.msdn.com/b/ie/archive/2013/12/04/getting-to-the-content-you-want-faster-in-ie11.aspx?Redirected=true">here</a> for more details. Also consider implementing IE11 <a href="msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx">flip ahead</a>, if you have next and previous buttons.
                     </li>
                 </ul>
             </article>
