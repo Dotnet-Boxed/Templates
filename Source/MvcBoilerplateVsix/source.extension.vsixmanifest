@@ -9,7 +9,7 @@
     <GettingStartedGuide>http://rehansaeed.co.uk/asp-net-mvc-boilerplate</GettingStartedGuide>
     <Icon>Small Icon.png</Icon>
     <PreviewImage>Small Preview Image.png</PreviewImage>
-    <Tags>ASP.NET;MVC;Boilerplate;Template;HTML5;LESS;Bootstrap;Elmah;Autofac;jQuery;Glimpse;Modernizr;NWebSec</Tags>
+    <Tags>ASP.NET;MVC;Boilerplate;Template;C#;.NET;Bootstrap;Elmah;Autofac;Glimpse;Modernizr;NWebSec;HTML5</Tags>
   </Metadata>
   <Installation AllUsers="true">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,]" />
