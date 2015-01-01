@@ -1,0 +1,11 @@
+﻿Version 1.0.7
+- Updated Visual Studio Gallery icons and New Project dialogue icons for template.
+
+Version 1.0.6
+- jQuery.Validation NuGet package updated to 1.13.0.
+- Twitter.Bootstrap.Less NuGet package updated to 3.3.1.
+- Link to RehanSaeed.co.uk containing details of this project added to Home.cshtml.
+- Newtonsoft.Json NuGet package updated to 6.0.7
+
+Version 1.0.0 
+Initial Release
