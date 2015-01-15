@@ -5,7 +5,7 @@
         public static class Google
         {
             public const string Domain = "ajax.googleapis.com";
-            public const string JQueryUrl = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js";
+            public const string JQueryUrl = "//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js";
         }
 
         public static class Microsoft

@@ -1,4 +1,9 @@
-﻿Version 1.0.7
+﻿Version 1.0.8
+- jQuery NuGet package updated to 2.1.3.
+- Google CDN jQuery URL updated to 2.1.3.
+- Newtonsoft.Json NuGet package updated to 6.0.8.
+
+Version 1.0.7
 - Updated Visual Studio Gallery icons and New Project dialogue icons for template.
 
 Version 1.0.6

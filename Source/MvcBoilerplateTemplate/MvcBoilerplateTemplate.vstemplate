@@ -215,10 +215,10 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">_references.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.min.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.1.intellisense.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.1.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.1.min.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.1.min.map</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.3-vsdoc.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.3.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.3.min.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery-2.1.3.min.map</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate-vsdoc.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.min.js</ProjectItem>

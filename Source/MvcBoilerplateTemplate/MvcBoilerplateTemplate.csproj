@@ -84,11 +84,15 @@
     </Content>
     <Content Include="Models\ErrorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.1.3.js" />
+    <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Services\Logging\ILoggingService.cs" />
     <Content Include="Services\Logging\LoggingService.cs" />
     <Content Include="Services\Sitemap\ISitemapService.cs" />
     <Content Include="Services\Sitemap\SitemapService.cs" />
     <Content Include="Startup.cs" />
+    <Content Include="Scripts\jquery-2.1.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AssemblyInfo.cs" />
@@ -194,7 +198,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="packages.config" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -263,9 +266,6 @@
     <Content Include="Scripts\Failover\jqueryvalunobtrusive.js" />
     <Content Include="Scripts\Failover\modernizr.js" />
     <Content Include="Scripts\Failover\respond.js" />
-    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
