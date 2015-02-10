@@ -193,6 +193,7 @@
     <Content Include="Content\fonts\fontawesome\FontAwesome.otf" />
     <Content Include="Content\Site.css.map" />
     <Content Include="Content\Site.less" />
+    <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="MvcBoilerplateTemplate.ico" />
     <Content Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>

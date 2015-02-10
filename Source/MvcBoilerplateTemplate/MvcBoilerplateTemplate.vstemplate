@@ -141,6 +141,7 @@
             <ProjectItem ReplaceParameters="true" OpenInEditor="false">glyphicons-halflings-regular.svg</ProjectItem>
             <ProjectItem ReplaceParameters="true" OpenInEditor="false">glyphicons-halflings-regular.ttf</ProjectItem>
             <ProjectItem ReplaceParameters="true" OpenInEditor="false">glyphicons-halflings-regular.woff</ProjectItem>
+            <ProjectItem ReplaceParameters="true" OpenInEditor="false">glyphicons-halflings-regular.woff2</ProjectItem>
           </Folder>
           <Folder Name="fontawesome">
             <ProjectItem ReplaceParameters="true" OpenInEditor="false">fontawesome-webfont.eot</ProjectItem>
