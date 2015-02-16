@@ -1,4 +1,7 @@
-﻿Version 1.0.10
+﻿Version 1.0.11
+- Fixed Issue #1 - Intellisense broken in cshtml
+
+Version 1.0.10
 - Microsoft.AspNet.Cors package updated to 5.2.3.
 - Microsoft.AspNet.Mvc package updated to 5.2.3.
 - Microsoft.AspNet.Razor package updated to 3.2.3.
