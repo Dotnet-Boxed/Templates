@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <sectionGroup name="nwebsec">
+      <!-- For information on how to configure NWebsec please visit: https://github.com/NWebsec/NWebsec/wiki -->
+      <section name="httpHeaderSecurityModule" type="NWebsec.Modules.Configuration.HttpHeaderSecurityConfigurationSection, NWebsec, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1" requirePermission="false"/>
+    </sectionGroup>
+  </configSections>
+  <system.web>
+    <httpRuntime enableVersionHeader="false"/>
+  </system.web>
+  <system.webServer>
+    <modules>
+      <add name="NWebsecHttpHeaderSecurityModule" type="NWebsec.Modules.HttpHeaderSecurityModule, NWebsec, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1"/>
+    </modules>
+    <httpProtocol>
+      <customHeaders>
+        <clear />
+      </customHeaders>
+    </httpProtocol>
+    <security>
+      <requestFiltering>
+        <hiddenSegments>
+          <add segment="NWebsecConfig" />
+        </hiddenSegments>
+      </requestFiltering>
+    </security>
+  </system.webServer>
+  <nwebsec>
+    <httpHeaderSecurityModule xmlns="http://nwebsec.com/HttpHeaderSecurityModuleConfig.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="NWebsecConfig/HttpHeaderSecurityModuleConfig.xsd">
+
+    </httpHeaderSecurityModule>
+  </nwebsec>
+</configuration>

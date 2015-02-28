@@ -1,4 +1,16 @@
-﻿Version 1.0.11
+﻿Version 1.0.12
+- Microsoft.Owin package updated to 3.0.1.
+- Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
+- NWebSec updated to 4.0.0. 
+	- Web.config changes to point to new DLL.
+	- HttpHeaderSecurityModuleConfig.xsd updated.
+	- FilterConfig changed to fix NWebSec breaking changes. Enabled/Disabled enum changed to bool and namespace removed.
+	- Index.cshtml updated with new GitHub home page for NWebSec.
+- NWebSec package updated to 4.0.0.
+- NWebSec.Mvc package updated to 4.0.0.
+- NWebSec.Core package updated to 1.3.0.
+
+Version 1.0.11
 - Fixed Issue #1 - Intellisense broken in cshtml
 
 Version 1.0.10

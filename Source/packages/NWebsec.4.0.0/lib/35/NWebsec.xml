@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NWebsec</name>
+    </assembly>
+    <members>
+        <member name="T:NWebsec.Csp.CspViolationReport">
+            <summary>
+            Represents a Content Security Policy violation report.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReport.Details">
+            <summary>
+            Gets the detailed Content Security Policy violation report. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReport.UserAgent">
+            <summary>
+            Gets the User Agent that reported the Content Security Policy violation. The default is the empty string.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Csp.CspReportDetails">
+            <summary>
+            Represents the detailed Content Security Policy violation report. The default is the empty string.
+            </summary>
+            <remarks>Browser implementations differ, it might vary which fields are set in the violation report.</remarks>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.BlockedUri">
+            <summary>
+            Gets the URI of the resource that was prevented from loading due to the policy violation. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.DocumentUri">
+            <summary>
+            Gets the address of the protected resource where the policy was violated. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.EffectiveDirective">
+            <summary>
+            Gets the CSP directive that was violated. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.OriginalPolicy">
+            <summary>
+            Gets the original policy as received by the user-agent. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.Referrer">
+            <summary>
+            Gets the referrer attribute of the protected resource. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.StatusCode">
+            <summary>
+            Gets the status code of the HTTP response that contained the protected resource. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.ViolatedDirective">
+            <summary>
+            Gets the policy directive that was violated, as it appears in the policy. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.SourceFile">
+            <summary>
+            Gets the URI of the resource where the violation occurred, stripped for reporting.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.LineNumber">
+            <summary>
+            Gets the line number in the source file on which the violation occurred. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.ColumnNumber">
+            <summary>
+            Gets the column number in the source file on which the violation occurred. The default is the empty string.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspReportDetails.ScriptSample">
+            <summary>
+            Gets the sample of the offending script. This is a non standard field sent by Firefox. The default is the empty string.
+            </summary>
+        </member>
+        <member name="T:NWebsec.Csp.CspViolationReportEventArgs">
+            <summary>
+            Represents the event data for a Content Security Policy violation.
+            </summary>
+        </member>
+        <member name="P:NWebsec.Csp.CspViolationReportEventArgs.ViolationReport">
+            <summary>
+            Gets the Content Security Policy violation report. Treat the data as unvalidated input.
+            </summary>
+        </member>
+    </members>
+</doc>

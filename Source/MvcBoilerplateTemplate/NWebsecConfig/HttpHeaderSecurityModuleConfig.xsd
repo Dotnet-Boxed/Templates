@@ -189,7 +189,7 @@
                   </xs:attribute>
                   <xs:attribute name="httpsOnly" type="simple_boolean" use="optional">
                     <xs:annotation>
-                      <xs:documentation>Optional. Specifies that the HSTS header should be set for HTTPS requests only. The default is false.</xs:documentation>
+                      <xs:documentation>Optional. Specifies that the HSTS header should be set for HTTPS requests only. The default is true.</xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
                 </xs:complexType>
@@ -246,16 +246,6 @@
                       <xs:documentation>This attribute is required.</xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
-                  <xs:attribute name="x-Content-Security-Policy-Header" type="simple_boolean" use="optional">
-                    <xs:annotation>
-                      <xs:documentation>Optional. Specifies whether to also emit the X-Content-Security-Policy header. The default is false.</xs:documentation>
-                    </xs:annotation>
-                  </xs:attribute>
-                  <xs:attribute name="x-WebKit-CSP-Header" type="simple_boolean" use="optional">
-                    <xs:annotation>
-                      <xs:documentation>Optional. Specifies whether to also emit the X-WebKit-CSP header. The default is false.</xs:documentation>
-                    </xs:annotation>
-                  </xs:attribute>
                 </xs:complexType>
               </xs:element>
               <xs:element name="content-Security-Policy-Report-Only" minOccurs="0" maxOccurs="1">
@@ -267,16 +257,6 @@
                   <xs:attribute name="enabled" type="simple_boolean" use="required">
                     <xs:annotation>
                       <xs:documentation>This attribute is required.</xs:documentation>
-                    </xs:annotation>
-                  </xs:attribute>
-                  <xs:attribute name="x-Content-Security-Policy-Header" type="simple_boolean" use="optional">
-                    <xs:annotation>
-                      <xs:documentation>Optional. Specifies whether to also emit the X-Content-Security-Policy-Report-Only header. The default is false.</xs:documentation>
-                    </xs:annotation>
-                  </xs:attribute>
-                  <xs:attribute name="x-WebKit-CSP-Header" type="simple_boolean" use="optional">
-                    <xs:annotation>
-                      <xs:documentation>Optional. Specifies whether to also emit the X-WebKit-CSP-Report-Only header. The default is false.</xs:documentation>
                     </xs:annotation>
                   </xs:attribute>
                 </xs:complexType>
@@ -312,7 +292,7 @@
   <xs:complexType name="cspReportUri">
     <xs:attribute name="report-uri" type="xs:string" use="required">
       <xs:annotation>
-        <xs:documentation>This attribute is required. Specifies a report Uri. Report Uri's must be relative.</xs:documentation>
+        <xs:documentation>This attribute is required. Specifies a report Uri.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
@@ -350,53 +330,105 @@
     <xs:all>
       <xs:element name="default-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the default-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the default-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="script-src" minOccurs="0" maxOccurs="1" type="UnsafeInlineUnsafeEvalCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the script-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the script-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="style-src" minOccurs="0" maxOccurs="1" type="UnsafeInlineCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the style-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the style-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="object-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the object-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the object-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="img-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the img-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the img-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="media-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the media-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the media-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="frame-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the frame-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the frame-src CSP directive (CSP 1.0). This directive has been deprecated in CSP 2, consider using child-src instead.</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="font-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the font-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the font-src CSP directive (CSP 1.0).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="connect-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the connect-src CSP directive.</xs:documentation>
+          <xs:documentation>Configures the connect-src CSP directive (CSP 1.0).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="base-uri" minOccurs="0" maxOccurs="1" type="BaseCspElement">
+        <xs:annotation>
+          <xs:documentation>Configures the base-uri CSP directive (CSP 2).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="child-src" minOccurs="0" maxOccurs="1" type="BaseCspElement">
+        <xs:annotation>
+          <xs:documentation>Configures the child-src CSP directive (CSP 2).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="form-action" minOccurs="0" maxOccurs="1" type="BaseCspElement">
+        <xs:annotation>
+          <xs:documentation>Configures the form-action CSP directive (CSP 2).</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element name="frame-ancestors" minOccurs="0" maxOccurs="1" type="BaseCspElement">
         <xs:annotation>
-          <xs:documentation>Configures the frame-ancestors CSP directive.</xs:documentation>
+          <xs:documentation>Configures the frame-ancestors CSP directive (CSP 2).</xs:documentation>
         </xs:annotation>
+      </xs:element>
+      <xs:element name="sandbox" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Configures the sandbox CSP directive (CSP 2).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:attribute name="allow-forms" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-forms source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="allow-pointer-lock" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-pointer-lock source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="allow-popups" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-popups source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="allow-same-origin" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-same-origin source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="allow-scripts" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-scripts source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="allow-top-navigation" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to include the allow-top-navigation source. The default is false.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
       </xs:element>
       <xs:element name="report-uri" minOccurs="0" maxOccurs="1">
         <xs:annotation>
