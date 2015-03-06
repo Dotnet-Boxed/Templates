@@ -85,4 +85,4 @@ That's easy, just choose one of the following options:
 </ol>
 
 <h2>Release Notes</h2>
-You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">here</a>
+You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">here</a>.
