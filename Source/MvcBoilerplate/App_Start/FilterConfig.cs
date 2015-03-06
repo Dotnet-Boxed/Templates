@@ -11,7 +11,7 @@
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             AddSecurityFilters(filters);
-            AddContentSecurityPolicyFilters(filters);
+            //AddContentSecurityPolicyFilters(filters);
         }
 
         /// <summary>
@@ -64,6 +64,7 @@
         /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
         /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> and 
         /// <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives"/> for more information).
+        /// Note: CSP 2.0 has drafted a recommendation by the W3C (See <see cref="http://www.w3.org/TR/CSP2/"/> for more information).
         /// Note: Not all browsers support this yet but most now do (See http://caniuse.com/#search=CSP for a list).
         /// Note: If you are using the 'Browser Link' feature of the Webs Essentials Visual Studio extension, it will not work
         /// if you enable CSP (See <see cref="http://webessentials.uservoice.com/forums/140520-general/suggestions/6665824-browser-link-support-for-content-security-policy"/>).
@@ -100,7 +101,26 @@
                 });
 
 
-            // connect-src - The connect-src directive restricts which URIs the protected resource can load using script interfaces 
+            // base-uri - This directive restricts the document base URL (http://www.w3.org/TR/html5/infrastructure.html#document-base-url).
+            filters.Add(
+                new CspBaseUriAttribute()
+                {
+                    // Allow base URL's from example.com.
+                    // CustomSources = "example.com",
+                    // Allow base URL's from the same domain.
+                    Self = false
+                });
+            // child-src - This directive restricts from where the protected resource can load web workers or embed frames.
+            //             This was introduced in CSP 2.0 to replace frame-src. frame-src should still be used for older browsers.
+            filters.Add(
+                new CspChildSrcAttribute()
+                {
+                    // Allow web workers or embed frames from example.com.
+                    // CustomSources = "example.com",
+                    // Allow web workers or embed frames from the same domain.
+                    Self = false
+                });
+            // connect-src - This directive restricts which URIs the protected resource can load using script interfaces 
             //               (Ajax Calls and Web Sockets).
             filters.Add(
                 new CspConnectSrcAttribute()
@@ -110,32 +130,54 @@
                     // Allow all AJAX and Web Sockets calls from the same domain.
                     Self = true
                 });
-            // font-src - The font-src directive restricts from where the protected resource can load fonts.
+            // font-src - This directive restricts from where the protected resource can load fonts.
             filters.Add(
                 new CspFontSrcAttribute()
                 {
+                    // Allow fonts from example.com.
+                    // CustomSources = "example.com",
                     // Allow all fonts from the same domain.
                     Self = true
                 });
-            // frame-src - The frame-src directive restricts from where the protected resource can embed frames.
+            // form-action - This directive restricts which URLs can be used as the action of HTML form elements.
+            filters.Add(
+                new CspFormActionAttribute()
+                {
+                    // Allow forms to post back to example.com.
+                    // CustomSources = "example.com",
+                    // Allow forms to post back to the same domain.
+                    Self = true
+                });
+            // frame-src - This directive restricts from where the protected resource can embed frames.
+            //             This is now deprecated in favour of child-src but should still be used for older browsers.
             filters.Add(
                 new CspFrameSrcAttribute()
                 {
                     // Allow iFrames from example.com.
-                    // CustomSources = "example.com"
+                    // CustomSources = "example.com",
                     // Allow iFrames from the same domain.
                     Self = false
                 });
-            // img-src - The img-src directive restricts from where the protected resource can load images.
+            // frame-ancestors - This directive restricts from where the protected resource can embed frame, iframe, object, embed or applet's.
+            filters.Add(
+                new CspFrameAncestorsAttribute()
+                {
+                    // Allow frame, iframe, object, embed or applet's from example.com.
+                    // CustomSources = "example.com",
+                    // Allow frame, iframe, object, embed or applet's from the same domain.
+                    Self = false
+                });
+            // img-src - This directive restricts from where the protected resource can load images.
             filters.Add(
                 new CspImgSrcAttribute()
                 {
                     // Allow images from example.com.
-                    // CustomSources = "example.com"
+                    // CustomSources = "example.com",
                     // Allow images from the same domain.
                     Self = true,
                 });
-            // script-src - The script-src directive restricts which scripts the protected resource can execute. The directive also controls other resources, such as XSLT style sheets, which can cause the user agent to execute script.
+            // script-src - This directive restricts which scripts the protected resource can execute. 
+            //              The directive also controls other resources, such as XSLT style sheets, which can cause the user agent to execute script.
             filters.Add(
                 new CspScriptSrcAttribute()
                 {
@@ -148,7 +190,7 @@
                     // Allow inline JavaScript, this is unsafe and can open your site up to XSS vulnerabilities.
                     // UnsafeInline = true
                 });
-            // media-src - The media-src directive restricts from where the protected resource can load video and audio.
+            // media-src - This directive restricts from where the protected resource can load video and audio.
             filters.Add(
                 new CspMediaSrcAttribute()
                 {
@@ -157,21 +199,23 @@
                     // Allow audio and video from the same domain.
                     Self = false
                 });
-            // object-src - The object-src directive restricts from where the protected resource can load plugins.
+            // object-src - This directive restricts from where the protected resource can load plugins.
             filters.Add(
                 new CspObjectSrcAttribute()
                 {
                     // Allow plugins from example.com.
-                    // CustomSources = "example.com"
+                    // CustomSources = "example.com",
                     // Allow plugins from the same domain.
                     Self = false
                 });
-            // style-src - The style-src directive restricts which styles the user applies to the protected resource.
+            // plugin-types - This directive restricts the set of plugins that can be invoked by the protected resource.
+            //                This directive is not currently supported by NWebSec (See https://github.com/NWebsec/NWebsec/issues/53).
+            // style-src - This directive restricts which styles the user applies to the protected resource.
             filters.Add(
                 new CspStyleSrcAttribute()
                 {
                     // Allow CSS from example.com
-                    // CustomSources = "example.com"
+                    // CustomSources = "example.com",
                     // Allow CSS from the same domain.
                     Self = true,
                     // Allow inline CSS, this is unsafe and can open your site up to XSS vulnerabilities.

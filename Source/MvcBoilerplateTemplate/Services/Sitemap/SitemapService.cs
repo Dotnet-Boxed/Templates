@@ -78,7 +78,7 @@
         /// Gets a collection of sitemap nodes for the current site.
         /// 
         /// TODO: Add code here to create nodes to all your important sitemap URL's.
-        ///  You may want to do this from a database or in code.
+        /// You may want to do this from a database or in code.
         /// </summary>
         /// <returns>A collection of sitemap nodes for the current site.</returns>
         private IReadOnlyCollection<SitemapNode> GetSitemapNodes()

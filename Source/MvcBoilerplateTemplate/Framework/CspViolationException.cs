@@ -43,7 +43,7 @@
         {
             cspViolationReport.ToString();
             return string.Format(
-                "Content Security Policy (CSP) was violated. Either adjust your policy to allow the use of the specified resource or stop using the resource.\r\nUserAgent:<{0}>\r\nBlockedUri:<{1}>\r\nColumnNumber:<{2}>\r\nDocumentUri:<{3}>\r\nEffectiveDirective:<{4}>\r\nLineNumber:<{5}>\r\nOriginalPolicy:<{6}>\r\nReferrer:<{7}>\r\nScriptSample:<{8}>\r\nSourceFile:<{9}>\r\nStatusCode:<{10}>\r\nViolatedDirective:<{11}>",
+                "Content Security Policy (CSP) was violated. Either adjust your policy to allow the use of the specified resource or stop using the resource. You can also consider setting CSP to report-only mode in which errors are logged but nothing is blocked by the browser.\r\nUserAgent:<{0}>\r\nBlockedUri:<{1}>\r\nColumnNumber:<{2}>\r\nDocumentUri:<{3}>\r\nEffectiveDirective:<{4}>\r\nLineNumber:<{5}>\r\nOriginalPolicy:<{6}>\r\nReferrer:<{7}>\r\nScriptSample:<{8}>\r\nSourceFile:<{9}>\r\nStatusCode:<{10}>\r\nViolatedDirective:<{11}>",
                 cspViolationReport.UserAgent,
                 cspViolationReport.Details.BlockedUri,
                 cspViolationReport.Details.ColumnNumber,

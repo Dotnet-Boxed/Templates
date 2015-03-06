@@ -8,7 +8,9 @@
     {
         public void Log(Exception exception)
         {
+            // Log to Tracing.
             Trace.TraceError(exception.ToString());
+            // Log to Elmah.
             ErrorSignal.FromCurrentContext().Raise(exception);
         }
     }

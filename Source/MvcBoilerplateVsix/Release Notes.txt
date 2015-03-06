@@ -1,4 +1,15 @@
-﻿Version 1.0.12
+﻿Version 1.0.13
+- Added NWebSec CSP 2.0 filters to FilterConfig.cs for default settings and comments.
+- Turn off tracing in Release mode, just in case it is turned on.
+- Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found, 
+  rather than a 500 Internal Server Error for added security and performance.
+- Added Web.config comments encouraging encryption of connection strings.
+- Added ReadMe.html comments encouraging encryption of connection strings.
+- Added ReadMe.html comments encouraging users to scan their site for security vulnerabilities at asafaweb.com.
+- Added message to CspViolationException explaining that CSP can be set to report-only mode.
+- Added comments to LoggingService explaining where we are logging.
+
+Version 1.0.12
 - Microsoft.Owin package updated to 3.0.1.
 - Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
 - NWebSec updated to 4.0.0. 
