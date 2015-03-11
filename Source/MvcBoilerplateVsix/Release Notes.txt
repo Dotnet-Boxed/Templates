@@ -1,4 +1,8 @@
-﻿Version 1.0.13
+﻿Version 1.0.14
+- Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024. 
+  (For more information see http://www.iis.net/learn/extensions/using-iis-express/running-iis-express-without-administrative-privileges).
+
+Version 1.0.13
 - Added NWebSec CSP 2.0 filters to FilterConfig.cs for default settings and comments.
 - Turn off tracing in Release mode, just in case it is turned on.
 - Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found, 
