@@ -26,11 +26,13 @@
             // Require HTTPS to be used accross the whole site.
             // filters.Add(new RequireHttpsAttribute());
 
-            // Cache-Control: no-cache, no-store, must-revalidate
-            // Expires: -1
+            // Cache-Control: no-cache, no-store, must-revalidate 
+            // Expires: -1 
             // Pragma: no-cache
-            // Specifies whether appropriate headers to prevent browser caching should be set in the HTTP response.
-            // Do not apply this attribute here globally, use it sparingly to disable caching.
+            //      Specifies whether appropriate headers to prevent browser caching should be set in the HTTP response.
+            //      Do not apply this attribute here globally, use it sparingly to disable caching. A good place to 
+            //      use this would be on a page where you want to post back credit card information because caching 
+            //      credit card information could be a security risk.
             // filters.Add(new SetNoCacheHttpHeadersAttribute());   
 
             // X-Robots-Tag - Adds the X-Robots-Tag HTTP header. Disable robots from any action or controller this attribute is applied to.
@@ -51,10 +53,6 @@
                 {
                     Policy = XFrameOptionsPolicy.Deny
                 });
-
-            // X-XSS-Protection - Adds the X-XSS-Protection HTTP header. By default IE and Chrome try to detect XSS attacks. This will block the page if a XSS attack is detected.
-            //      Note: There is a vulnerability in IE8 if this header is set which enables XSS to happen. See https://github.com/evilpacket/helmet#xss-filter-xssfilter and http://www.w3.org/TR/CSP.
-            // filters.Add(new XXssProtectionAttribute() { BlockMode = true });
         }
 
         /// <summary>

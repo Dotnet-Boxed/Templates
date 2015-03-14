@@ -1,4 +1,11 @@
-﻿Version 1.0.14
+﻿Version 1.0.15
+- Strict-Transport-Security HTTP header configured for use using the NWebSec.Owin NuGet package in Startup.cs.
+  Commented out by default. ReadMe.html also updated with this information.
+- NWebSec.Owin package added.
+- Added comments for the NWebSec SetNoCacheHttpHeadersAttribute attribute.
+- Removed the commented out NWebSec XXssProtectionAttribute.
+
+Version 1.0.14
 - Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024. 
   (For more information see http://www.iis.net/learn/extensions/using-iis-express/running-iis-express-without-administrative-privileges).
 

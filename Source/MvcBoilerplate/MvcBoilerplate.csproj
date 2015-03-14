@@ -105,6 +105,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NWebsec.Mvc.4.0.0\lib\45\NWebsec.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="NWebsec.Owin">
+      <HintPath>..\packages\NWebsec.Owin.2.0.0\lib\45\NWebsec.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
