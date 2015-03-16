@@ -152,6 +152,12 @@
           </Folder>
         </Folder>
         <Folder Name="icons">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-144x144.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-192x192.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-36x36.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-48x48.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-72x72.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">android-chrome-96x96.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-icon-114x114.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-icon-120x120.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-icon-144x144.png</ProjectItem>
@@ -171,12 +177,12 @@
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-startup-image-748x1024.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-startup-image-768x1004.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">browserconfig.xml</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-160x160.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-16x16.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-192x192.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-32x32.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-96x96.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon.ico</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">manifest.json</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">mstile-144x144.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">mstile-150x150.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">mstile-310x150.png</ProjectItem>

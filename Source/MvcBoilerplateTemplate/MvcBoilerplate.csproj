@@ -273,6 +273,13 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\icons\android-chrome-144x144.png" />
+    <Content Include="Content\icons\android-chrome-192x192.png" />
+    <Content Include="Content\icons\android-chrome-36x36.png" />
+    <Content Include="Content\icons\android-chrome-48x48.png" />
+    <Content Include="Content\icons\android-chrome-72x72.png" />
+    <Content Include="Content\icons\android-chrome-96x96.png" />
+    <Content Include="Content\icons\manifest.json" />
     <None Include="ReadMe.html" />
     <Content Include="Content\bootstrap\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -307,7 +314,6 @@
     <Content Include="Content\icons\apple-touch-startup-image-748x1024.png" />
     <Content Include="Content\icons\apple-touch-startup-image-768x1004.png" />
     <Content Include="Content\icons\browserconfig.xml" />
-    <Content Include="Content\icons\favicon-160x160.png" />
     <Content Include="Content\icons\favicon-16x16.png" />
     <Content Include="Content\icons\favicon-192x192.png" />
     <Content Include="Content\icons\favicon-32x32.png" />

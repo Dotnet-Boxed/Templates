@@ -63,6 +63,12 @@
     <Content Include="App_Start\FilterConfig.cs" />
     <Content Include="App_Start\RouteConfig.cs" />
     <Content Include="App_Start\Startup.Container.cs" />
+    <Content Include="Content\icons\android-chrome-144x144.png" />
+    <Content Include="Content\icons\android-chrome-192x192.png" />
+    <Content Include="Content\icons\android-chrome-36x36.png" />
+    <Content Include="Content\icons\android-chrome-48x48.png" />
+    <Content Include="Content\icons\android-chrome-72x72.png" />
+    <Content Include="Content\icons\android-chrome-96x96.png" />
     <Content Include="ReadMe.html" />
     <Content Include="Constants\Application.cs" />
     <Content Include="Constants\CacheProfileName.cs" />
@@ -194,6 +200,7 @@
     <Content Include="Content\Site.css.map" />
     <Content Include="Content\Site.less" />
     <Content Include="Content\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\icons\manifest.json" />
     <None Include="MvcBoilerplateTemplate.ico" />
     <Content Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>

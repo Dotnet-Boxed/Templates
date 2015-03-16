@@ -1,4 +1,18 @@
-﻿Version 1.0.15
+﻿Version 1.0.16
+- Added Android/Chrome version M39+ favicon/theming support. Layout.cshtml updated. Files added include:
+	\Content\icons\android-chrome-144x144.png
+    \Content\icons\android-chrome-192x192.png
+    \Content\icons\android-chrome-36x36.png
+    \Content\icons\android-chrome-48x48.png
+    \Content\icons\android-chrome-72x72.png
+    \Content\icons\android-chrome-96x96.png
+    \Content\icons\manifest.json
+- \Content\icons\favicon-160x160.png removed - Opera can use other icon sizes to fill the gap.
+- Compressed PNG images further using the excellent and free PNG Gauntlet.
+- Use HTML5 self closing tags http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5 
+  and http://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br.
+
+Version 1.0.15
 - Strict-Transport-Security HTTP header configured for use using the NWebSec.Owin NuGet package in Startup.cs.
   Commented out by default. ReadMe.html also updated with this information.
 - NWebSec.Owin package added.
