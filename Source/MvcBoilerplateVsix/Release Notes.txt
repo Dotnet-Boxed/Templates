@@ -1,4 +1,17 @@
-﻿Version 1.0.16
+﻿Version 1.0.18
+- Updated Startup.cs to add Preload directive to Strict-Transport-Security. See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security.
+- SSL/TLS section in ReadMe.html split up and expanded with more information and links.
+- ReadMe.html split up into sub-sections.
+
+Version 1.0.17
+- Stop IIS returning a 403.12 Forbidden response when navigating to a folder e.g. /Content
+  by rewriting to 404 not found using Web.config. Also set defaultDocument enabled=false to achieve the same thing.
+  See http://www.troyhunt.com/2014/09/solving-tyranny-of-http-403-responses.html.
+- Add a note to ReadMe.html to save images for the web and use Visual Studio Image Optimizer in conjunction 
+  with PNG Gauntlet to losslessly compress your images.
+- Add a note to ReadMe.html saying that default document handling has been disabled and detailing how you can turn it on if you need to.
+
+Version 1.0.16
 - Added Android/Chrome version M39+ favicon/theming support. Layout.cshtml updated. Files added include:
 	\Content\icons\android-chrome-144x144.png
     \Content\icons\android-chrome-192x192.png

@@ -59,7 +59,7 @@
             ActionResult result;
             if (this.Request.IsAjaxRequest())
             {
-                // This allows us to show not found errors even in partial views.
+                // This allows us to show errors even in partial views.
                 result = this.PartialView(viewName, error);
             }
             else
