@@ -1,4 +1,14 @@
-﻿Version 1.0.18
+﻿Version 1.0.20
+- Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have imlemented SSL/TLS over HTTPS correctly.
+
+Version 1.0.19
+- Microsoft CDN jQuery Validation URL updated to 1.13.1.
+- Microsoft CDN jQuery Validation Unobtrusive URL updated to 5.2.3.
+- Microsoft CDN Modernizr URL updated to 2.8.3.
+- Microsoft CDN Bootstrap URL updated to 3.3.2.
+- Microsoft CDN Respond URL updated to 1.4.2.
+
+Version 1.0.18
 - Updated Startup.cs to add Preload directive to Strict-Transport-Security. See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security.
 - SSL/TLS section in ReadMe.html split up and expanded with more information and links.
 - ReadMe.html split up into sub-sections.
