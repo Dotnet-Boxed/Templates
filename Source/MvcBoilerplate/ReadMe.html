@@ -74,7 +74,7 @@
                 <h4>Other Security</h4>
                 <ul>
                     <li>
-                        If you are storing connection strings in your Web.config file, don't forget to encrypt them. See <a href="https://msdn.microsoft.com/en-us/library/dtkwfdky.aspx">this</a> link for more information.
+                        If you are storing connection strings or a machine key in your Web.config file, don't forget to encrypt them. See <a href="https://msdn.microsoft.com/en-us/library/dtkwfdky.aspx">this</a> link for more information.
                     </li>
                     <li>
                         Scan your site for security vulnerabilities at <a href="https://asafaweb.com/">ASafaWeb.com</a>.
@@ -177,6 +177,24 @@
                         the line in RouteConfig.cs which ignores the humans.txt route). Be careful what you put into this file, you could give away clues about
                         potential attack vectors on your site. Even giving contact details can be an attack vector (Most hackers manipulate people to get access).
                     </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Keeping Your Site Up To Date</h3>
+                <ul>
+                    <li>
+                        Most updates can be easily carried out by simply updating <a href="https://www.nuget.org/">NuGet</a> packages. See <a href="https://docs.nuget.org/consume/package-manager-dialog">this</a> link for more information. However, there are a few things to watch out for before updating a package:
+                        <ol>
+                            <li>It's worth reading the NuGet package release notes to see what has changed and base the urgency of upgrading on this information. Blindly updating, can sometimes cause things to break. Sometimes packages are incompatible with other packages or there are special upgrade steps that need to be carried out.</li>
+                            <li>Check the <a href="https://msdn.microsoft.com/en-us/library/twy1dw1e%28v=vs.110%29.aspx">assemblyBinding</a> section in the web.config file to see if the version of a .dll file needs to be changed to the version you are updating to. This section of the web.config file ensures that interdependent .dll's continue to work with each other, even if a package is expecting an older version of another .dll.</li>
+                            <li>When updating JavaScript or CSS framework NuGet Packages, be careful that the particular version you are updating to is also available on the <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. Some CDN's update more often than others. This project template uses the popular Google and Microsoft CDN's as it is likely that their scripts are already preloaded in a browsers cache. However, their CDN service also does not update too often. Take a look at the BundleConfig.cs to see which CDN's are being used.</li>
+                            <li>You need to ensure that you update your JavaScript and CSS framework NuGet packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degredation.</li>
+                            <li>Updating JavaScript or CSS framework NuGet packages causes the new files to be dumped in one folder. To ensure cleanliness of the project, these are then moved to their respective sub-folders.</li>
+                            <li>Updating the MVC NuGet packages will cause your site to break entirely and will require changes to your site which are detailed on the <a href="http://www.asp.net/">ASP.NET site</a>.</li>
+                        </ol>
+                    </li>
+                    <li>The ASP.NET MVC Boilerplate project template is constantly improving. Keep an eye on the <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">release notes</a> and <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/commits/master">commits</a> to the project and update your site accordingly.</li>
                 </ul>
             </article>
 

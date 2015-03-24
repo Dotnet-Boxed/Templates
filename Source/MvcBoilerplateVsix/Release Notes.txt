@@ -1,4 +1,12 @@
-﻿Version 1.0.20
+﻿Version 1.0.21
+- WOFF MIME type changed to application/font-woff as per specification. See http://stackoverflow.com/questions/3594823/mime-type-for-woff-fonts.
+- Added a note to encrypt the machine key in web.config and ReadMe.html.
+- Added notes on how to update NuGet packages and files from this template to ReadMe.html.
+- Changes courtesy of @surfsflo on GitHub
+	- Add mimeMap to fix "404 not found" error when serving "ghyphicon-halflings-regular.woff2".
+	- Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
+
+Version 1.0.20
 - Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have imlemented SSL/TLS over HTTPS correctly.
 
 Version 1.0.19
