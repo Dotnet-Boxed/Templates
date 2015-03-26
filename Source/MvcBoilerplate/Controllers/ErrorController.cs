@@ -15,6 +15,28 @@
         #region Public Methods
 
         /// <summary>
+        /// Returns a HTTP 400 Bad Request error view. Returns a partial view if the request is an AJAX call.
+        /// </summary>
+        /// <returns>The partial or full bad request view.</returns>
+        [OutputCache(CacheProfile = CacheProfileName.BadRequest)]
+        [Route("badrequest", Name = ErrorControllerRoute.GetBadRequest)]
+        public ActionResult BadRequest()
+        {
+            return this.GetErrorView(HttpStatusCode.BadRequest, ErrorControllerAction.BadRequest);
+        }
+
+        /// <summary>
+        /// Returns a HTTP 500 Internal Server Error error view. Returns a partial view if the request is an AJAX call.
+        /// </summary>
+        /// <returns>The partial or full internal server error view.</returns>
+        [OutputCache(CacheProfile = CacheProfileName.InternalServerError)]
+        [Route("", Name = ErrorControllerRoute.GetInternalServerError)]
+        public ActionResult InternalServerError()
+        {
+            return this.GetErrorView(HttpStatusCode.InternalServerError, ErrorControllerAction.InternalServerError);
+        }
+
+        /// <summary>
         /// Returns a HTTP 404 Not Found error view. Returns a partial view if the request is an AJAX call.
         /// </summary>
         /// <returns>The partial or full not found view.</returns>
@@ -42,7 +64,7 @@
 
         private ActionResult GetErrorView(HttpStatusCode statusCode, string viewName)
         {
-            this.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            this.Response.StatusCode = (int)statusCode;
 
             // Don't show IIS custom errors.
             this.Response.TrySkipIisCustomErrors = true;

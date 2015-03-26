@@ -249,6 +249,8 @@
       </Folder>
       <Folder Name="Views">
         <Folder Name="Error">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">BadRequest.cshtml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">InternalServerError.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">NotFound.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">Unauthorized.cshtml</ProjectItem>
         </Folder>
@@ -259,7 +261,6 @@
         </Folder>
         <Folder Name="Shared">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">_Layout.cshtml</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">Error.cshtml</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">_ViewStart.cshtml</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">Web.config</ProjectItem>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Web;
     using Elmah;
 
     public sealed class LoggingService : ILoggingService
@@ -11,7 +12,7 @@
             // Log to Tracing.
             Trace.TraceError(exception.ToString());
             // Log to Elmah.
-            ErrorSignal.FromCurrentContext().Raise(exception);
+            ErrorSignal.FromCurrentContext().Raise(exception, HttpContext.Current);
         }
     }
 }

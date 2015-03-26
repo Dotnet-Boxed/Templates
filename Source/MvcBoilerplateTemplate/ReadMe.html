@@ -79,6 +79,16 @@
                     <li>
                         Scan your site for security vulnerabilities at <a href="https://asafaweb.com/">ASafaWeb.com</a>.
                     </li>
+                    <li>
+                        Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
+                        <ul>
+                            <li>32-bit - %windir%\Microsoft.NET\Framework\[.NET Version]\config\machine.config</li>
+                            <li>64-bit - %windir%\Microsoft.NET\Framework64\[.NET Version]\config\machine.config</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
+                    </li>
                 </ul>
             </article>
 

@@ -1,4 +1,11 @@
-﻿Version 1.0.21
+﻿Version 1.0.22
+- Added 400 Bad Request to ErrorController, Views, Cache config and http.
+- Added 500 Internal Server Error to ErrorController, Views, Cache config and http.
+- Added HttpContext.Current to Elmah logging in the LoggingService. Custom logging should log extra information about the current request if available.
+- Added a security note to ReadMe.html explaining the need to keep NuGet packages up to date.
+- Added a security note to ReadMe.html about enabling retail mode.
+
+Version 1.0.21
 - WOFF MIME type changed to application/font-woff as per specification. See http://stackoverflow.com/questions/3594823/mime-type-for-woff-fonts.
 - Added a note to encrypt the machine key in web.config and ReadMe.html.
 - Added notes on how to update NuGet packages and files from this template to ReadMe.html.
