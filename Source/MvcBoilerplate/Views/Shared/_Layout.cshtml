@@ -146,6 +146,20 @@
                         <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span class="fa fa-users"></span> About</a></li>
                         <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span class="fa fa-phone"></span> Contact</a></li>
                     </ul>
+                    @if (HttpContext.Current.IsDebuggingEnabled)
+                    {
+                        // if <compilation debug="true"> is set in Web.config.
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span class="fa fa-cogs"></span> Debug <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]"><span class="fa fa-life-ring"></span> Elmah</a></li>
+                                    <li><a href="/glimpse"><span class="fa fa-line-chart"></span> Glimpse</a></li>
+                                    <li><a href="/trace.axd"><span class="fa fa-heart"></span> Tracing</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>

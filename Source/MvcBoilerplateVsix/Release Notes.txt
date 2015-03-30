@@ -1,4 +1,8 @@
-﻿Version 1.0.22
+﻿Version 1.0.23
+- Enable tracing by default (Only in Debug mode).
+- Added debug menu item showing Elmah, Glimpse and Tracing links (Only visible in Debug mode).
+
+Version 1.0.22
 - Added 400 Bad Request to ErrorController, Views, Cache config and http.
 - Added 500 Internal Server Error to ErrorController, Views, Cache config and http.
 - Added HttpContext.Current to Elmah logging in the LoggingService. Custom logging should log extra information about the current request if available.
