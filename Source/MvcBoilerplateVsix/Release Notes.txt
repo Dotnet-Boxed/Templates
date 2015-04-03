@@ -1,4 +1,13 @@
-﻿Version 1.0.23
+﻿Version 1.0.24
+- Added accessibility section to ReadMe.html.
+- aria-hidden="true" added to all font awesome icons for screen readers and better accessibility.
+- Use 'span' instead of 'i' for all font awesome icons.
+- Added aside and section HTML5 elements to Contact view to show an example of using an aside.
+- Added aria role="article" to all HTML5 article elements.
+- Added aria role="complementary" to all HTML5 aside elements.
+- Added aria role="region" to all HTML5 section elements.
+
+Version 1.0.23
 - Enable tracing by default (Only in Debug mode).
 - Added debug menu item showing Elmah, Glimpse and Tracing links (Only visible in Debug mode).
 
