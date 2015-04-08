@@ -107,24 +107,28 @@
         <meta name="author" content="@ViewBag.Author">
     }
     @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
-        @* <link rel="canonical" href=""> *@
+    @* <link rel="canonical" href=""> *@
 
 
-        @*
-            TODO: Social Media Meta Tags
-            Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
-            Twitter Cards - https://dev.twitter.com/cards/getting-started
-            http://moz.com/blog/meta-data-templates-123
-        *@
-        @*
-            TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
-            schema.org - Schema database
-            http://schema.org
-            Schema Creator - Create HTML schemas
-            http://schema-creator.org/
-            Structured Data Testing Tool - Test HTML schemas
-            http://www.google.com/webmasters/tools/richsnippets
-        *@
+    @* OpenSearch (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
+    <link href="@Url.RouteUrl(HomeControllerRoute.OpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+
+
+    @*
+        TODO: Social Media Meta Tags
+        Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
+        Twitter Cards - https://dev.twitter.com/cards/getting-started
+        http://moz.com/blog/meta-data-templates-123
+    *@
+    @*
+        TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
+        schema.org - Schema database
+        http://schema.org
+        Schema Creator - Create HTML schemas
+        http://schema-creator.org/
+        Structured Data Testing Tool - Test HTML schemas
+        http://www.google.com/webmasters/tools/richsnippets
+    *@
     </head>
     <body>
         @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
@@ -145,11 +149,9 @@
                     <ul class="nav navbar-nav">
                         <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
                         <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
-                    </ul>
-                    @if (HttpContext.Current.IsDebuggingEnabled)
-                    {
-                        // if <compilation debug="true"> is set in Web.config.
-                        <ul class="nav navbar-nav navbar-right">
+                        @if (HttpContext.Current.IsDebuggingEnabled)
+                        {
+                            // if <compilation debug="true"> is set in Web.config.
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -158,8 +160,16 @@
                                     <li><a href="/trace.axd"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
                                 </ul>
                             </li>
-                        </ul>
-                    }
+                        }
+                    </ul>
+                    <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
+                        <div class="input-group">
+                            <input class="form-control" name="query" placeholder="Search" type="text">
+                            <div class="input-group-btn">
+                                <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </nav>

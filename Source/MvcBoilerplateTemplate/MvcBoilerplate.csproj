@@ -189,6 +189,7 @@
     <Compile Include="Framework\CspViolationException.cs" />
     <Compile Include="Framework\SitemapFrequency.cs" />
     <Compile Include="Framework\SitemapNode.cs" />
+    <Compile Include="Framework\StringWriterWithEncoding.cs" />
     <Compile Include="Framework\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

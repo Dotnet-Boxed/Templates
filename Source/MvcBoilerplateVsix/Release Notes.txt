@@ -1,4 +1,14 @@
-﻿Version 1.0.24
+﻿Version 1.0.25
+- Added a search action to HomeController that redirects to Google and with instructions on how to setup your own search.
+- Added opensearch.xml file to site (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org for more information.
+	- HomeController.cs modified.
+	- _Layout.cshtml modified.
+	- Caching settings added to Web.config.
+	- MVC routing settings added to Web.config.
+- Added a note about adding search to your site and the Open Search protocol to ReadMe.html.
+- Fixed sitemap.xml to return XML containing the version and correct encoding of UTF-8.
+
+Version 1.0.24
 - Added accessibility section to ReadMe.html.
 - aria-hidden="true" added to all font awesome icons for screen readers and better accessibility.
 - Use 'span' instead of 'i' for all font awesome icons.

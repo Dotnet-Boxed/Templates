@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Web.Mvc;
     using System.Xml.Linq;
     using $safeprojectname$.Constants;
@@ -67,7 +69,14 @@
                         sitemapNode.Priority == null ? null : new XElement(xmlns + "priority", sitemapNode.Priority.Value.ToString("F1", CultureInfo.InvariantCulture))));
             }
 
-            return root.ToString();
+            XDocument document = new XDocument(root);
+            StringBuilder stringBuilder = new StringBuilder();
+            using (StringWriter stringWriter = new StringWriterWithEncoding(stringBuilder, Encoding.UTF8))
+            {
+                document.Save(stringWriter);
+            }
+
+            return stringBuilder.ToString();
         }
 
         #endregion

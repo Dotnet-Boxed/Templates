@@ -7,5 +7,7 @@
         public const string Contact = "Contact";
 
         public const string Index = "Index";
+        
+        public const string Search = "Search";
     }
 }

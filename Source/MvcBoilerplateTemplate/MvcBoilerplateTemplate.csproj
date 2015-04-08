@@ -89,6 +89,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Content>
     <Content Include="Models\ErrorModel.cs" />
+    <Content Include="Framework\StringWriterWithEncoding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
