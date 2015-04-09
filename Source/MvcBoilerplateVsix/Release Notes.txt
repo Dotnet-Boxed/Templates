@@ -1,4 +1,12 @@
-﻿Version 1.0.25
+﻿Version 1.0.27
+- Microsoft CDN Bootstrap URL updated to 3.3.4.
+- Twitter.Bootstrap.Less package updated to 3.3.4.
+
+Version 1.0.26
+- Fixed skip to main content link for screen readers in _Layout.cshtml.
+- Added aria-label and maxlength to search text box in _Layout.cshtml.
+
+Version 1.0.25
 - Added a search action to HomeController that redirects to Google and with instructions on how to setup your own search.
 - Added opensearch.xml file to site (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org for more information.
 	- HomeController.cs modified.

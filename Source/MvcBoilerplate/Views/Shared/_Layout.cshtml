@@ -133,7 +133,7 @@
     <body>
         @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
         @* Accessibility - Also, don't forget to add ARIA landmark roles to your page content http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/ *@
-        <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+        <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
         @* nav - The main navigation for the site. *@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container">
@@ -164,7 +164,7 @@
                     </ul>
                     <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
                         <div class="input-group">
-                            <input class="form-control" name="query" placeholder="Search" type="text">
+                            <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">
                             <div class="input-group-btn">
                                 <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
                             </div>
