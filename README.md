@@ -68,7 +68,7 @@
 
 <p>ASP.NET MVC Boilerplate uses popular Content Delivery Networks (CDN) from Google and Microsoft but what happens in the unlikely event that these go down? Well, ASP.NET MVC Boilerplate provides backups for these.</p>
 
-<p>Not only that but standard error pages such as 500 Internal Server error, 404 Not found and many others are built in to the template. ASP.NET MVC Boilerplate even includes IIS configuration to protect you from <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial-of-Service</a> (DoS) attacks.</p>
+<p>Not only that but standard error pages such as 500 Internal Server Error, 404 Not Found and many others are built in to the template. ASP.NET MVC Boilerplate even includes IIS configuration to protect you from <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial-of-Service</a> (DoS) attacks.</p>
 
 <h2>Easier Debugging and Performance Testing Tools</h2>
 
