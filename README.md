@@ -67,6 +67,8 @@
 
 <p>ASP.NET MVC Boilerplate uses popular Content Delivery Networks (CDN) from Google and Microsoft but what happens in the unlikely event that these go down? Well, ASP.NET MVC Boilerplate provides backups for these.</p>
 
+<p>Not only that but standard error pages such as 500 Internal Server error, 404 Not found and many others are built in to the template. ASP.NET MVC Boilerplate even includes IIS configuration to protect you from <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial-of-Service</a> (DoS) attacks.</p>
+
 <h2>Easier Debugging and Performance Testing Tools</h2>
 
 <p>ASP.NET MVC Boilerplate makes use of <a href="http://getglimpse.com/">Glimpse</a> (As advertised by Scott Hansleman <a href="http://www.hanselman.com/blog/IfYoureNotUsingGlimpseWithASPNETForDebuggingAndProfilingYoureMissingOut.aspx">here</a>). It's a great tool to use as you are developing, to find performance problems and bugs. Of course, Glimpse is all preconfigured, so you don't need to lift a finger to install it.</p>
