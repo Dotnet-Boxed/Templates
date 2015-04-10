@@ -53,7 +53,7 @@
 
 <h2>Accessibility</h2>
 
-<p>4% of the world population is estimated to be visually impaired, while 0.55% are blind. Get more statistics <a href="http://www.sitepoint.com/how-many-users-need-accessible-websites">here</a>. ASP.NET MVC Boilerplate ensures that your site is accessible by adding aria attributest to your HTML markup and special shortcuts for people using screen readers.</p>
+<p>4% of the world population is estimated to be visually impaired, while 0.55% are blind. Get more statistics <a href="http://www.sitepoint.com/how-many-users-need-accessible-websites">here</a>. ASP.NET MVC Boilerplate ensures that your site is accessible by adding aria attributes to your HTML mark-up and special shortcuts for people using screen readers.</p>
 
 <h2>Browser Compatibility</h2>
 
