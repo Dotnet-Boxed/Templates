@@ -18,6 +18,7 @@
      <li>Security</li>
      <li>Performance</li>
      <li>Search Engine Optimization (SEO)</li>
+     <li>Accessibility</li>
      <li>Browser Compatibility</li>
      <li>Resilience and Error Handling</li>
      <li>Easier Debugging and Performance Testing Tools</li>
@@ -36,6 +37,8 @@
 
 <p>It also makes use of the new <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> HTTP Header using the <a href="https://nwebsec.codeplex.com/">NWebSec</a> NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.</p>
 
+<p>Setting up <a href="http://en.wikipedia.org/wiki/SSL">SSL</a>/<a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>, so that your site runs over HTTPS is made easy with easy step by step instructions and links.</p>
+
 <h2>Fast By Default</h2>
 
 <p>The default MVC template does a pretty poor job in the performance department. Probably because they don't make any assumptions about which web server you are using. Most of the world and dog that are writing ASP.NET MVC sites use IIS and there are settings in the web.config file under the system.webServer section which can make a big difference when it comes to performance.</p>
@@ -48,7 +51,9 @@
 
 <p>The default ASP.NET MVC template takes no consideration of Search Engine Optimization at all. ASP.NET MVC Boilerplate adds a robots.txt file to tell search engines which pages they can index. It also adds a sitemap.xml file where you can add links to all your pages programmatically.</p>
 
-<p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default, which is terrible for SEO. This project turns them on by default.</p>
+<h2>Accessibility</h2>
+
+<p>4% of the world population is estimated to be visually impaired, while 0.55% are blind. Get more statistics <a href="http://www.sitepoint.com/how-many-users-need-accessible-websites">here</a>. ASP.NET MVC Boilerplate ensures that your site is accessible by adding aria attributest to your HTML markup and special shortcuts for people using screen readers.</p>
 
 <h2>Browser Compatibility</h2>
 
