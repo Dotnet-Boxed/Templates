@@ -23,6 +23,7 @@
      <li>Resilience and Error Handling</li>
      <li>Easier Debugging and Performance Testing Tools</li>
      <li>Patterns and Practices</li>
+    <li>Search</li>
 </ul>
 
 <img alt="ASP.NET-MVC-Boilerplate Logo"
@@ -80,6 +81,10 @@
 <p>ASP.NET MVC Boilerplate also makes use of the popular <a href="http://lesscss.org/">Less</a> files for making life easier with CSS. For an example, it can make overriding colours and fonts in the default Bootstrap CSS a cinch.</p>
 
 <p>ASP.NET MVC is a complicated beast. You can end up with lots of <a href="http://en.wikipedia.org/wiki/Magic_string">magic strings</a> which can be a nightmare when renaming something. There are many ways of eliminating these magic strings but most trade maintainability for slower performance. ASP.NET MVC Boilerplate makes extensive use of constants which are a trade-off between maintainability and performance, giving you the best of both worlds.</p>
+
+<h2>Search</h2>
+
+There is a lot more to implementing search in your application than it sounds. ASP.NET MVC Boilerplate includes a search feature by default but leaves it open for you to choose how you want to implement it. It also implements <a href="http://www.opensearch.org">Open Search</a> XML right out of the box. Read Scott Hanselman talk about this feature <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">here</a>.
 
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
