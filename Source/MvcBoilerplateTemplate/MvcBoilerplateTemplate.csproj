@@ -69,6 +69,9 @@
     <Content Include="Content\icons\android-chrome-48x48.png" />
     <Content Include="Content\icons\android-chrome-72x72.png" />
     <Content Include="Content\icons\android-chrome-96x96.png" />
+    <Content Include="Error\Forbidden.html" />
+    <Content Include="Error\GatewayTimeout.html" />
+    <Content Include="Error\ServiceUnavailable.html" />
     <Content Include="ReadMe.html" />
     <Content Include="Constants\Application.cs" />
     <Content Include="Constants\CacheProfileName.cs" />

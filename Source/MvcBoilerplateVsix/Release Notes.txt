@@ -1,4 +1,13 @@
-﻿Version 1.0.27
+﻿Version 1.0.28
+- Add new HTTP error codes to httpErrors in web.config and new static error pages under the Error folder:
+	- 403.502 Forbidden errors using a static HTML file. This occurs due to a Denial of Service (Dos) attack.
+	- 500.13 Internal Server Error errors using a static HTML file. This occurs because the server is too busy.
+	- 503 Service Unavailable errors using a static HTML file.
+	- 504 Gateway Timeout errors using a static HTML file.
+- Add new ignore routes to RouteConfig.cs to ignore the new static HTML files.
+- Added new note in Readme.html to update the static HTML error files.
+
+Version 1.0.27
 - Microsoft CDN Bootstrap URL updated to 3.3.4.
 - Twitter.Bootstrap.Less package updated to 3.3.4.
 

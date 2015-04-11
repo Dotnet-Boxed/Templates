@@ -18,6 +18,12 @@
             routes.IgnoreRoute("Content/{*pathInfo}");
             // Ignore everything in the Scripts folder.
             routes.IgnoreRoute("Scripts/{*pathInfo}");
+            // Ignore the Forbidden.html file.
+            routes.IgnoreRoute("Error/Forbidden.html");
+            // Ignore the GatewayTimeout.html file.
+            routes.IgnoreRoute("Error/GatewayTimeout.html");
+            // Ignore the ServiceUnavailable.html file.
+            routes.IgnoreRoute("Error/ServiceUnavailable.html");
             // Ignore the humans.txt file.
             routes.IgnoreRoute("humans.txt");
             // Ignore the elmah route.

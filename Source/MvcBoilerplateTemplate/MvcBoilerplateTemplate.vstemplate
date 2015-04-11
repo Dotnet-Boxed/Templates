@@ -198,6 +198,11 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ErrorController.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">HomeController.cs</ProjectItem>
       </Folder>
+      <Folder Name="Error">
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">Forbidden.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">GatewayTimeout.html</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">ServiceUnavailable.html</ProjectItem>
+      </Folder>
       <Folder Name="Framework">
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">CspViolationException.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapFrequency.cs</ProjectItem>

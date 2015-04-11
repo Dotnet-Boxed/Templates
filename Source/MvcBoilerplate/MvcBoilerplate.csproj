@@ -331,6 +331,9 @@
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Error\Forbidden.html" />
+    <Content Include="Error\GatewayTimeout.html" />
+    <Content Include="Error\ServiceUnavailable.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>

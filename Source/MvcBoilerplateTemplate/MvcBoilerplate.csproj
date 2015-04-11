@@ -191,6 +191,9 @@
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
     <Compile Include="Framework\UrlHelperExtensions.cs" />
+    <Content Include="Error\Forbidden.html" />
+    <Content Include="Error\GatewayTimeout.html" />
+    <Content Include="Error\ServiceUnavailable.html" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
