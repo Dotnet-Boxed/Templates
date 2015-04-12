@@ -1,4 +1,7 @@
-﻿Version 1.0.29
+﻿Version 1.0.30
+- Added link to my blog post about CSP at http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/.
+
+Version 1.0.29
 - Enabled Dynamic IP Security in log only mode in the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.
 - Added a note to the ReadMe.txt file to adjust the Dynamic IP Security settings.
 
