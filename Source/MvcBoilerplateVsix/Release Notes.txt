@@ -1,5 +1,5 @@
 ﻿Version 1.0.29
-- Enabled Dynamic IP Security to the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.
+- Enabled Dynamic IP Security in log only mode in the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.
 - Added a note to the ReadMe.txt file to adjust the Dynamic IP Security settings.
 
 Version 1.0.28
