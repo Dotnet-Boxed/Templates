@@ -163,10 +163,13 @@
                         Update the static error pages under the Error folder with the name of your application. These particular error pages cannot be dynamically generated because your site is overloaded with requests or is under a denial of service attack. Keep these pages simple and do not make use of any dynamic content which may not be working if these error pages are showing.
                     </li>
                     <li>
-                        Update the <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> limits in the dynamicIpSecurity section of the web.config file. This feature of IIS prevents <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks from taking down your site.
-                    </li>
-                    <li>
-                        Beware of pages on your site that cause a large number of requests to be made your site. These may trigger the Dynamic IP Security limits to be triggered and the page loading will be treated like a Denial of Service (DoS) attack.
+                        Update the <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> limits in the dynamicIpSecurity section of the web.config file. This feature of IIS prevents <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks from taking down your site. Dynamic IP Security is currently set to logging only mode, where IIS will log requests from the client that would be rejected without actually rejecting them.. You should run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
+                        <ul>
+                            <li>Google and Bing often make large numbers of requests that can look like a DoS attack and you do not want to block them by accident.</li>
+                            <li>Some organizations put themselves behind a proxy and their requests can look like they are from a single IP address.</li>
+                            <li>Pages on your site that cause a large number of requests to be made your site may trigger the Dynamic IP Security limits to be triggered and the page loading will be treated like a Denial of Service (DoS) attack.</li>
+                        </ul>
+                        You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
                     </li>
                 </ul>
             </article>
