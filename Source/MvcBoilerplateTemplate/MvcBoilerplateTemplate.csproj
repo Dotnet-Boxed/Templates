@@ -59,6 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\OpenSearch\IOpenSearchService.cs" />
+    <Content Include="Services\OpenSearch\OpenSearchService.cs" />
+    <Content Include="Services\Robots\IRobotsService.cs" />
+    <Content Include="Services\Robots\RobotsService.cs" />
     <Content Include="App_Start\BundleConfig.cs" />
     <Content Include="App_Start\FilterConfig.cs" />
     <Content Include="App_Start\RouteConfig.cs" />
@@ -223,6 +227,7 @@
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
     <Content Include="Web.Release.config" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="MvcBoilerplateTemplate.vstemplate">

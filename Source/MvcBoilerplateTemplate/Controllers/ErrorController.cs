@@ -24,13 +24,24 @@
         {
             return this.GetErrorView(HttpStatusCode.BadRequest, ErrorControllerAction.BadRequest);
         }
+        
+        /// <summary>
+        /// Returns a HTTP 403 Forbidden error view. Returns a partial view if the request is an AJAX call.
+        /// </summary>
+        /// <returns>The partial or full forbidden view.</returns>
+        [OutputCache(CacheProfile = CacheProfileName.Forbidden)]
+        [Route("forbidden", Name = ErrorControllerRoute.GetForbidden)]
+        public ActionResult Forbidden()
+        {
+            return this.GetErrorView(HttpStatusCode.Forbidden, ErrorControllerAction.Forbidden);
+        }
 
         /// <summary>
         /// Returns a HTTP 500 Internal Server Error error view. Returns a partial view if the request is an AJAX call.
         /// </summary>
         /// <returns>The partial or full internal server error view.</returns>
         [OutputCache(CacheProfile = CacheProfileName.InternalServerError)]
-        [Route("", Name = ErrorControllerRoute.GetInternalServerError)]
+        [Route("internalservererror", Name = ErrorControllerRoute.GetInternalServerError)]
         public ActionResult InternalServerError()
         {
             return this.GetErrorView(HttpStatusCode.InternalServerError, ErrorControllerAction.InternalServerError);

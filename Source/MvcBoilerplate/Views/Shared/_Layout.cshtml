@@ -12,7 +12,7 @@
     <title>@ViewBag.Title - @Application.Name</title>
 
 
-    @* Icons & Platform Specific Settings - Favicon generator used to generate the icons below http://realfavicongenerator.net *@
+    @* Icons & Platform Specific Settings (See http://rehansaeed.co.uk/internet-favicon-madness for detailed information) *@
     @* shortcut icon - This file contains the following sizes 16x16, 32x32 and 48x48. *@
     <link rel="shortcut icon" href="/content/icons/favicon.ico">
     @* favicon-96x96.png - For Google TV https://developer.android.com/training/tv/index.html#favicons. *@
@@ -107,28 +107,28 @@
         <meta name="author" content="@ViewBag.Author">
     }
     @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
-    @* <link rel="canonical" href=""> *@
+        @* <link rel="canonical" href=""> *@
 
 
-    @* OpenSearch (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
-    <link href="@Url.RouteUrl(HomeControllerRoute.OpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+        @* OpenSearch (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
+        <link href="@Url.RouteUrl(HomeControllerRoute.OpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
 
 
-    @*
-        TODO: Social Media Meta Tags
-        Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
-        Twitter Cards - https://dev.twitter.com/cards/getting-started
-        http://moz.com/blog/meta-data-templates-123
-    *@
-    @*
-        TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
-        schema.org - Schema database
-        http://schema.org
-        Schema Creator - Create HTML schemas
-        http://schema-creator.org/
-        Structured Data Testing Tool - Test HTML schemas
-        http://www.google.com/webmasters/tools/richsnippets
-    *@
+        @*
+            TODO: Social Media Meta Tags
+            Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
+            Twitter Cards - https://dev.twitter.com/cards/getting-started
+            http://moz.com/blog/meta-data-templates-123
+        *@
+        @*
+            TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
+            schema.org - Schema database
+            http://schema.org
+            Schema Creator - Create HTML schemas
+            http://schema-creator.org/
+            Structured Data Testing Tool - Test HTML schemas
+            http://www.google.com/webmasters/tools/richsnippets
+        *@
     </head>
     <body>
         @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@

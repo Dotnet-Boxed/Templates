@@ -248,6 +248,14 @@
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">ILoggingService.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">LoggingService.cs</ProjectItem>
         </Folder>
+        <Folder Name="OpenSearch">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">IOpenSearchService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">OpenSearchService.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Robots">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">IRobotsService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">RobotsService.cs</ProjectItem>
+        </Folder>
         <Folder Name="Sitemap">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">ISitemapService.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapService.cs</ProjectItem>
@@ -256,6 +264,7 @@
       <Folder Name="Views">
         <Folder Name="Error">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">BadRequest.cshtml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">Forbidden.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">InternalServerError.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">NotFound.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">Unauthorized.cshtml</ProjectItem>

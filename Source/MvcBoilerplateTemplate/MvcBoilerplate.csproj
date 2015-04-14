@@ -201,6 +201,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Logging\ILoggingService.cs" />
     <Compile Include="Services\Logging\LoggingService.cs" />
+    <Compile Include="Services\OpenSearch\IOpenSearchService.cs" />
+    <Compile Include="Services\OpenSearch\OpenSearchService.cs" />
+    <Compile Include="Services\Robots\IRobotsService.cs" />
+    <Compile Include="Services\Robots\RobotsService.cs" />
     <Compile Include="Services\Sitemap\ISitemapService.cs" />
     <Compile Include="Services\Sitemap\SitemapService.cs" />
     <Compile Include="Startup.cs" />
@@ -411,6 +415,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\InternalServerError.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
@@ -441,7 +446,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>44060</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:8080/</IISUrl>
+          <IISUrl></IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

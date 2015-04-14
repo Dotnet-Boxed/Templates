@@ -198,6 +198,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Logging\ILoggingService.cs" />
     <Compile Include="Services\Logging\LoggingService.cs" />
+    <Compile Include="Services\OpenSearch\IOpenSearchService.cs" />
+    <Compile Include="Services\OpenSearch\OpenSearchService.cs" />
+    <Compile Include="Services\Robots\IRobotsService.cs" />
+    <Compile Include="Services\Robots\RobotsService.cs" />
     <Compile Include="Services\Sitemap\ISitemapService.cs" />
     <Compile Include="Services\Sitemap\SitemapService.cs" />
     <Compile Include="Startup.cs" />
@@ -416,6 +420,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

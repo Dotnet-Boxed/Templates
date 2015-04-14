@@ -16,7 +16,8 @@
 
         /// <summary>
         /// Several NWebsec Security Filters are added here. 
-        /// (See <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
+        /// (See <see cref="http://rehansaeed.co.uk/nwebsec-asp-net-mvc-security-through-http-headers/"/>, 
+        /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
         /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> for more information).
         /// Note: All of these filters can be applied to individual controllers and actions and indeed
         /// some of them only make sense when applied to a controller or action instead of globally here.
@@ -65,7 +66,7 @@
         /// if you enable CSP (See <see cref="http://webessentials.uservoice.com/forums/140520-general/suggestions/6665824-browser-link-support-for-content-security-policy"/>).
         /// Note: All of these filters can be applied to individual controllers and actions e.g. If an action requires
         /// access to content from YouTube.com, then you can add the following attribute to the action:
-        /// [CspFrameSrc(CustomSources = "youtube.com")].
+        /// [CspFrameSrc(CustomSources = "*.youtube.com")].
         /// </summary>
         private static void AddContentSecurityPolicyFilters(GlobalFilterCollection filters)
         {

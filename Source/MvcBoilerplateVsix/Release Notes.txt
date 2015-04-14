@@ -1,5 +1,21 @@
-﻿Version 1.0.30
-- Added link to my blog post about CSP at http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/.
+﻿Version 1.0.31
+- Created IOpenSearchService.cs and OpenSearchService.cs and moved code in HomeController.cs there.
+- Created IRobotsTextService.cs and RobotsTextService.cs and moved code in HomeController.cs there.
+- Added .TrimEnd('/') to site map URL in robots.txt. See RobotsTextService.cs.
+- Registered the new services above in Startup.Container.cs and injected them into HomeController.cs.
+- Updated the comments for the ISitemapService.cs, SitemapService.cs and HomeController actions.
+- Added Pre-requisites section to ReadMe.html telling you to update Visual Studio, NuGet extension and install the Web Essentials extension.
+- Added Forbidden error page to ErrorController and Forbidden.cshtml view. Cache settings added to web.config.
+- Added 403 Forbidden error setting to httpErrors section in web.config.
+- Added commented out information about Crawl-delay to RobotsService.cs.
+- Modified the .csproj file so that the IISUrl element is empty. This allows a random port to be chosen each time a project is generated from the template.
+
+Version 1.0.30
+- Set elmah.mvc.disableHandleErrorFilter app setting in web.config to true.
+- 500 errors now route to error/internalservererror because there is now a error folder which conflicts with the /error route.
+- Added link to my blog post about CSP at http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/ to ReadMe.html and FilterConfig.cs.
+- Added link to my blog post about HTTP Headers at http://rehansaeed.co.uk/nwebsec-asp-net-mvc-security-through-http-headers/ to FilterConfig.cs.
+- Added link to my blog post about internet favicons at http://rehansaeed.co.uk/internet-favicon-madness to _Layout.cshtml.
 
 Version 1.0.29
 - Enabled Dynamic IP Security in log only mode in the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.

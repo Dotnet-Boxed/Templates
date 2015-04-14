@@ -22,15 +22,20 @@
             <p>This is a check-list of tasks you must perform to get your site up and running faster.</p>
 
             <article>
+                <h3>Pre-Requisites</h3>
+                <ul>
+                    <li>Update your version of Visual Studio with all patches and updates.</li>
+                    <li>Update the NuGet Visual Studio extenison from the Tools -> Extensions and Updates menu.</li>
+                    <li>Install the <a href="http://vswebessentials.com/download">Web Essentials</a> Visual Studio extension. This is required to compile <a href="http://lesscss.org/">LESS</a> code to <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> as well as giving you an awesome web development experience.</li>
+                </ul>
+            </article>
+
+            <article>
                 <h3>Security</h3>
                 <h4>Content Security Policy (CSP)</h4>
                 <ul>
                     <li>
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
-                        HTTP headers are sent to the web browser from this site. CSP acts as a whitelist of resources that the
-                        browser is allowed to access. If the browser tries to access a resource, not allowed by your CSP policy it is blocked. Configure your
-                        CSP policy globally in FilterConfig.cs or on your individual MVC controllers and actions if they have special access requirements.
-                        See FilterConfig.cs for more information.
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a great new HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in FilterConfig.cs or on your individual MVC controllers and actions if they have special access requirements.
                     </li>
                     <li>
                         Modernizr does not currently support
