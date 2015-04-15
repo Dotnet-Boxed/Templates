@@ -99,6 +99,16 @@
                 {
                     Priority = 1
                 });
+            nodes.Add(
+               new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetAbout))
+               {
+                   Priority = 2
+               });
+            nodes.Add(
+               new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetContact))
+               {
+                   Priority = 2
+               });
 
             return nodes;
         }

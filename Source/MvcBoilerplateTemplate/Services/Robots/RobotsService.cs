@@ -19,6 +19,8 @@
         /// The reason for dynamically generating this code is to enable generation of the full absolute sitemap URL
         /// and also to give you added flexibility in case you want to disallow search engines from certain paths.
         /// See <see cref="http://en.wikipedia.org/wiki/Robots_exclusion_standard"/> for more information.
+        /// Note: Disallowing crawling of Javascript or CSS files in your site’s robots.txt directly harms how well 
+        /// Google's algorithms render and index your content and can result in suboptimal rankings.
         /// </summary>
         /// <returns>The robots text for the current site.</returns>
         public string GetRobotsText()
@@ -33,6 +35,9 @@
 
             // Tell all robots not to index everything under the following directory.
             // stringBuilder.AppendLine("disallow: /SomeRelativePath");
+            
+            // Tell all robots to to index any of the error pages.
+            stringBuilder.AppendLine("disallow: /error/");
 
             // Tell all robots they can visit everything under the following sub-directory, even if the parent directory is disallowed.
             // stringBuilder.AppendLine("allow: /SomeRelativePath/SomeSubDirectory");
@@ -40,7 +45,7 @@
             // Tell all robots the number of seconds to wait between successive requests to the same server. This can be useful if 
             // your site cannot handle large loads placed on it by robots. Note that this is a non-standard extension and not all 
             // robots respect it.
-            // stringBuilder.AppendLine("Crawl-delay: 10"); // Delay by 1- seconds.
+            // stringBuilder.AppendLine("crawl-delay: 10"); // Delay by 1- seconds.
 
             // SECURITY ALERT - BE CAREFUL WHAT YOU ADD HERE
             // The line below stops all robots from indexing the following secret folder.

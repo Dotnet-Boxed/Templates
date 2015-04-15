@@ -27,6 +27,7 @@
 
         /// <summary>
         /// Returns a HTTP 403 Forbidden error view. Returns a partial view if the request is an AJAX call.
+        /// Unlike a 401 Unauthorized response, authenticating will make no difference.
         /// </summary>
         /// <returns>The partial or full forbidden view.</returns>
         [OutputCache(CacheProfile = CacheProfileName.Forbidden)]

@@ -1,4 +1,10 @@
-﻿Version 1.0.31
+﻿Version 1.0.32
+- Added a comment in RobotsService.cs not to disallow scripts or images.
+- Added a disallow in RobotsService.cs so that the robots.txt stops robots from indexing the error pages.
+- Added About and Contact pages to sitemap.xml in SitemapService.cs
+- Added a note to the Forbidden action in ErrorController.cs that "Unlike a 401 Unauthorized response, authenticating will make no difference.".
+
+Version 1.0.31
 - Created IOpenSearchService.cs and OpenSearchService.cs and moved code in HomeController.cs there.
 - Created IRobotsTextService.cs and RobotsTextService.cs and moved code in HomeController.cs there.
 - Added .TrimEnd('/') to site map URL in robots.txt. See RobotsTextService.cs.
