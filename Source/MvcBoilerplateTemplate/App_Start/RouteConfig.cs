@@ -8,6 +8,7 @@
         public static void RegisterRoutes(RouteCollection routes)
         {
             // Imprive SEO by stopping duplicate URL's due to case or trailing slashes.
+            // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
             routes.AppendTrailingSlash = true;
             routes.LowercaseUrls = true;
 

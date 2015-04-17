@@ -97,6 +97,9 @@
     </Content>
     <Content Include="Models\ErrorModel.cs" />
     <Content Include="Framework\StringWriterWithEncoding.cs" />
+    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
+    <Content Include="Framework\NoTrailingSlashAttribute.cs" />
+    <Content Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
@@ -228,6 +231,7 @@
     <Content Include="Web.Debug.config" />
     <Content Include="Web.Release.config" />
     <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\MethodNotAllowed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="MvcBoilerplateTemplate.vstemplate">

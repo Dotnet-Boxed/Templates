@@ -205,6 +205,9 @@
       </Folder>
       <Folder Name="Framework">
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">CspViolationException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">NoTrailingSlashAttribute.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">RedirectToCanonicalUrlAttribute.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">RedirectToHttpsAttribute.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapFrequency.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapNode.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">StringWriterWithEncoding.cs</ProjectItem>
@@ -266,6 +269,7 @@
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">BadRequest.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">Forbidden.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">InternalServerError.cshtml</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">MethodNotAllowed.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">NotFound.cshtml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">Unauthorized.cshtml</ProjectItem>
         </Folder>

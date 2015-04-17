@@ -56,7 +56,7 @@
 
             // Add a link to the sitemap. Unfortunately this must be an absolute URL. 
             stringBuilder.Append("sitemap: ");
-            stringBuilder.AppendLine(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.SitemapXml).TrimEnd('/'));
+            stringBuilder.AppendLine(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/'));
 
             return stringBuilder.ToString();
         }

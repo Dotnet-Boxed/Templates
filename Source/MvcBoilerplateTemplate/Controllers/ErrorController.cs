@@ -47,6 +47,17 @@
         {
             return this.GetErrorView(HttpStatusCode.InternalServerError, ErrorControllerAction.InternalServerError);
         }
+        
+        /// <summary>
+        /// Returns a HTTP 405 Method Not Allowed error view. Returns a partial view if the request is an AJAX call.
+        /// </summary>
+        /// <returns>The partial or full method not allowed view.</returns>
+        [OutputCache(CacheProfile = CacheProfileName.MethodNotAllowed)]
+        [Route("methodnotallowed", Name = ErrorControllerRoute.GetMethodNotAllowed)]
+        public ActionResult MethodNotAllowed()
+        {
+            return this.GetErrorView(HttpStatusCode.MethodNotAllowed, ErrorControllerAction.MethodNotAllowed);
+        }
 
         /// <summary>
         /// Returns a HTTP 404 Not Found error view. Returns a partial view if the request is an AJAX call.

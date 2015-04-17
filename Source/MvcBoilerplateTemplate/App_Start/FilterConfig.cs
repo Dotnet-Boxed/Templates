@@ -1,8 +1,9 @@
 ﻿namespace $safeprojectname$
 {
     using System.Web.Mvc;
+    using System.Web.Routing;
     using $safeprojectname$.Constants;
-    using NWebsec.Csp;
+    using $safeprojectname$.Framework;
     using NWebsec.Mvc.HttpHeaders;
     using NWebsec.Mvc.HttpHeaders.Csp;
 
@@ -10,8 +11,17 @@
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            AddSearchEngineOptimizationFilters(filters);
             AddSecurityFilters(filters);
             AddContentSecurityPolicyFilters(filters);
+        }
+
+        /// <summary>
+        /// Adds filters which help improve search engine optimization (SEO).
+        /// </summary>
+        private static void AddSearchEngineOptimizationFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new RedirectToCanonicalUrlAttribute(RouteTable.Routes.AppendTrailingSlash, RouteTable.Routes.LowercaseUrls));
         }
 
         /// <summary>
@@ -24,11 +34,14 @@
         /// </summary>
         private static void AddSecurityFilters(GlobalFilterCollection filters)
         {
-            // Require HTTPS to be used accross the whole site.
-            // filters.Add(new RequireHttpsAttribute());
+            // Require HTTPS to be used accross the whole site. System.Web.Mvc.RequireHttpsAttribute performs a 302 Temporary redirect 
+            // from a HTTP URL to a HTTPS URL. This filter gives you the option to perform a 301 Permanent redirect or a 302 temporary redirect.
+            // You should perform a 301 permanent redirect if the page can only ever be accessed by HTTPS and a 302 temporary redirect if
+            // the page can be accessed over HTTP or HTTPS.
+            // filters.Add(new RedirectToHttpsAttribute(true));
 
-            // Cache-Control: no-cache, no-store, must-revalidate 
-            // Expires: -1 
+            // Cache-Control: no-cache, no-store, must-revalidate
+            // Expires: -1
             // Pragma: no-cache
             //      Specifies whether appropriate headers to prevent browser caching should be set in the HTTP response.
             //      Do not apply this attribute here globally, use it sparingly to disable caching. A good place to 

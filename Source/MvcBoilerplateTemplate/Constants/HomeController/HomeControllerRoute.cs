@@ -6,8 +6,8 @@
         public const string GetContact = ControllerName.Home + "GetContact";
         public const string GetIndex = ControllerName.Home + "GetIndex";
         public const string GetSearch = ControllerName.Home + "GetSearch";
-        public const string OpenSearchXml = ControllerName.Home + "OpenSearchXml";
-        public const string RobotsText = ControllerName.Home + "RobotsText";
-        public const string SitemapXml = ControllerName.Home + "SitemapXml";
+        public const string GetOpenSearchXml = ControllerName.Home + "GetOpenSearchXml";
+        public const string GetRobotsText = ControllerName.Home + "GetRobotsText";
+        public const string GetSitemapXml = ControllerName.Home + "GetSitemapXml";
     }
 }

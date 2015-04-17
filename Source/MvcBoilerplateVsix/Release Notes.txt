@@ -1,4 +1,20 @@
-﻿Version 1.0.32
+﻿Version 1.0.33
+- Added RequirePermanentHttpsAttribute filter which is different from System.Web.Mvc.RequireHttpsAttribute because it does a 301 Permament redirect instead of a 302 temporary redirect.
+- Changed commented out code in FilterConfig.cs to use RequirePermanentHttpsAttribute instead of RequireHttpsAttribute.
+- Added RedirectToCanonicalUrlAttribute filter which redirects requests without lowercase characters or trailing slashes to a valid one for better SEO.
+- Added NoTrailingSlashAttribute to disable the RedirectToCanonicalUrlAttribute for routes like /robots.txt.
+- Added RedirectToCanonicalUrlAttribute to the global filters in FilterConfig.cs.
+- Added NoTrailingSlashAttribute to the opensearch.xml, robots.txt and sitemap.xml actions in HomeController.cs.
+- Added a note to ReadMe.html to edit the RobotsService.cs file to modify the dynamically generated robots.txt file.
+- Added a note to ReadMe.html to use a domain names 301 redirect service to redirect multiple domain names to a single one for better SEO.
+- Added a note in ReadMe.html to use Microsoft the SEO Toolkit to test your site.
+- Added RedirectToHttpsAttribute to enable 301 Permanent redirect to HTTPS pages rather than 302 temporary redirects that the System.Web.MVC.RequireHttpsAttribute attribute does.
+- Replaced the commented out RequireHttpsAttribute with RedirectToHttpsAttribute(true) in FilterConfig.cs.
+- Expanded the comment in _Layout.cshtml about the canonical URL.
+- Expanded the comment in RouteConfig.cs about trailing slashes and how Google treats them.
+- Added new 405 Method Not Allowed error page, used by RequireHttpsAttribute.
+
+Version 1.0.32
 - Added a comment in RobotsService.cs not to disallow scripts or images.
 - Added a disallow in RobotsService.cs so that the robots.txt stops robots from indexing the error pages.
 - Added About and Contact pages to sitemap.xml in SitemapService.cs

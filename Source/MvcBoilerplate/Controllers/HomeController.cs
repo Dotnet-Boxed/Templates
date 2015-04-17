@@ -68,9 +68,10 @@
         /// and <see cref="http://www.opensearch.org"/> for more information.
         /// </summary>
         /// <returns>The Open Search XML for the current site.</returns>
+        [NoTrailingSlash]
         [OutputCache(CacheProfile = CacheProfileName.OpenSearchXml)]
-        [Route("opensearch.xml", Name = HomeControllerRoute.OpenSearchXml)]
-        public ActionResult OpenSearchXml()
+        [Route("opensearch.xml", Name = HomeControllerRoute.GetOpenSearchXml)]
+        public ContentResult OpenSearchXml()
         {
             Trace.WriteLine(string.Format("opensearch.xml requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
             string content = this.openSearchService.GetOpenSearchXml();
@@ -84,10 +85,11 @@
         /// The sitemap is cached for one day, adjust this time to whatever you require.
         /// See <see cref="http://en.wikipedia.org/wiki/Robots_exclusion_standard"/> for more information.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The robots text for the current site.</returns>
+        [NoTrailingSlash]
         [OutputCache(CacheProfile = CacheProfileName.RobotsText)]
-        [Route("robots.txt", Name = HomeControllerRoute.RobotsText)]
-        public ActionResult RobotsText()
+        [Route("robots.txt", Name = HomeControllerRoute.GetRobotsText)]
+        public ContentResult RobotsText()
         {
             Trace.WriteLine(string.Format("robots.txt requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
             string content = this.robotsService.GetRobotsText();
@@ -101,9 +103,10 @@
         /// See <see cref="http://www.sitemaps.org/protocol.html"/> for more information.
         /// </summary>
         /// <returns>The sitemap XML for the current site.</returns>
+        [NoTrailingSlash]
         [OutputCache(CacheProfile = CacheProfileName.SitemapXml)]
-        [Route("sitemap.xml", Name = HomeControllerRoute.SitemapXml)]
-        public ActionResult SitemapXml()
+        [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml)]
+        public ContentResult SitemapXml()
         {
             Trace.WriteLine(string.Format("sitemap.xml requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
             string content = this.sitemapService.GetSitemapXml();

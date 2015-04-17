@@ -187,6 +187,9 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Framework\CspViolationException.cs" />
+    <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
+    <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
+    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Compile Include="Framework\SitemapFrequency.cs" />
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
@@ -421,6 +424,7 @@
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Unauthorized.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\MethodNotAllowed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

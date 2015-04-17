@@ -106,12 +106,14 @@
     {
         <meta name="author" content="@ViewBag.Author">
     }
-    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS. *@
-    @* <link rel="canonical" href=""> *@
+    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines.
+                   The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS or you have multiple URL's
+                   to the same resource which you should avoid (See http://googlewebmastercentral.blogspot.co.uk/2009/02/specify-your-canonical.html). *@
+    @*<link rel="canonical" href="">*@
 
 
     @* OpenSearch (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
-    <link href="@Url.RouteUrl(HomeControllerRoute.OpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+    <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
 
 
     @*
@@ -129,77 +131,77 @@
         Structured Data Testing Tool - Test HTML schemas
         http://www.google.com/webmasters/tools/richsnippets
     *@
-    </head>
-    <body>
-        @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
-        @* Accessibility - Also, don't forget to add ARIA landmark roles to your page content http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/ *@
-        <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
-        @* nav - The main navigation for the site. *@
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span aria-hidden="true" class="icon-bar"></span>
-                        <span aria-hidden="true" class="icon-bar"></span>
-                        <span aria-hidden="true" class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">@Application.Name</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
-                        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
-                        @if (HttpContext.Current.IsDebuggingEnabled)
-                        {
-                            // if <compilation debug="true"> is set in Web.config.
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>
-                                    <li><a href="/glimpse"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>
-                                    <li><a href="/trace.axd"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
-                                </ul>
-                            </li>
-                        }
-                    </ul>
-                    <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
-                        <div class="input-group">
-                            <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">
-                            <div class="input-group-btn">
-                                <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+</head>
+<body>
+    @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
+    @* Accessibility - Also, don't forget to add ARIA landmark roles to your page content http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/ *@
+    <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
+    @* nav - The main navigation for the site. *@
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span aria-hidden="true" class="icon-bar"></span>
+                    <span aria-hidden="true" class="icon-bar"></span>
+                    <span aria-hidden="true" class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">@Application.Name</a>
             </div>
-        </nav>
-        @* div id="main" - The main container for the page. Change this to the HTML5 main tag when it gains more browser support. *@
-        <div id="main" class="container body-content" role="main">
-            <!--[if lt IE 8]>
-                <div class="alert alert-warning" role="alert">
-                    <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-                </div>
-            <![endif]-->
-            @RenderBody()
-            <hr>
-            <footer role="contentinfo">
-                <p>&copy; @DateTime.Now.Year - @Application.Name</p>
-            </footer>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
+                    @if (HttpContext.Current.IsDebuggingEnabled)
+                    {
+                        // if <compilation debug="true"> is set in Web.config.
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>
+                                <li><a href="/glimpse"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>
+                                <li><a href="/trace.axd"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
+                            </ul>
+                        </li>
+                    }
+                </ul>
+                <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
+                    <div class="input-group">
+                        <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">
+                        <div class="input-group-btn">
+                            <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryval")
-        @Scripts.Render("~/bundles/jqueryvalunobtrusive")
-        @Scripts.Render("~/bundles/bootstrap")
-        @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy.
-            If you trust the CDN to be available 100% of the time and you prefer better performance
-            you can omit this line and the one for 'failoverrespond' below. *@
-        @Scripts.Render("~/bundles/failovercore")
-        @* Only load respond if we are running IE8 or less. *@
-        <!--[if lt IE 9]>
-          @Scripts.Render("~/bundles/respond")
-          @Scripts.Render("~/bundles/failoverrespond")
+    </nav>
+    @* div id="main" - The main container for the page. Change this to the HTML5 main tag when it gains more browser support. *@
+    <div id="main" class="container body-content" role="main">
+        <!--[if lt IE 8]>
+            <div class="alert alert-warning" role="alert">
+                <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
         <![endif]-->
-        @RenderSection("scripts", required: false)
-    </body>
+        @RenderBody()
+        <hr>
+        <footer role="contentinfo">
+            <p>&copy; @DateTime.Now.Year - @Application.Name</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryvalunobtrusive")
+    @Scripts.Render("~/bundles/bootstrap")
+    @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy.
+        If you trust the CDN to be available 100% of the time and you prefer better performance
+        you can omit this line and the one for 'failoverrespond' below. *@
+    @Scripts.Render("~/bundles/failovercore")
+    @* Only load respond if we are running IE8 or less. *@
+    <!--[if lt IE 9]>
+      @Scripts.Render("~/bundles/respond")
+      @Scripts.Render("~/bundles/failoverrespond")
+    <![endif]-->
+    @RenderSection("scripts", required: false)
+</body>
 </html>
