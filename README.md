@@ -50,7 +50,9 @@
 
 <h2>Search Engine Optimization (SEO)</h2>
 
-<p>The default ASP.NET MVC template takes no consideration of Search Engine Optimization at all. ASP.NET MVC Boilerplate adds a robots.txt file to tell search engines which pages they can index. It also adds a sitemap.xml file where you can add links to all your pages programmatically.</p>
+<p>The default ASP.NET MVC template takes no consideration of Search Engine Optimization at all. ASP.NET MVC Boilerplate adds a dynamically generated robots.txt file to tell search engines which pages they can index. It also adds a dynamically generated sitemap.xml file where you can help search engines even further by giving them links to all your pages.</p>
+
+<p>It also includes an MVC filter which helps to redirect non-canonical URL's (URL's without a trailing slash or mixed case characters which are considered different URL's by search engines) to their canonical equivelant.</p>
 
 <h2>Accessibility</h2>
 
