@@ -9,20 +9,23 @@
 
     public class HomeController : Controller
     {
+        private readonly IFeedService feedService;
         private readonly IOpenSearchService openSearchService;
-        private readonly ISitemapService sitemapService;
         private readonly IRobotsService robotsService;
+        private readonly ISitemapService sitemapService;
 
         #region Constructors
 
         public HomeController(
+            IFeedService feedService,
             IOpenSearchService openSearchService,
-            ISitemapService sitemapService,
-            IRobotsService robotsService)
+            IRobotsService robotsService,
+            ISitemapService sitemapService)
         {
+            this.feedService = feedService;
             this.openSearchService = openSearchService;
-            this.sitemapService = sitemapService;
             this.robotsService = robotsService;
+            this.sitemapService = sitemapService;
         }
 
         #endregion
@@ -43,6 +46,19 @@
         public ActionResult Contact()
         {
             return this.View(HomeControllerAction.Contact);
+        }
+
+        /// <summary>
+        /// Gets the Atom 1.0 feed for the current site. Note that Atom 1.0 is used over RSS 2.0
+        /// because Atom 1.0 is a newer and more well defined format. Atom 1.0 is a standard and RSS is not. 
+        /// (See http://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared).
+        /// </summary>
+        /// <returns>The Atom 1.0 feed for the current site.</returns>
+        [OutputCache(CacheProfile = CacheProfileName.Feed)]
+        [Route("feed", Name = HomeControllerRoute.GetFeed)]
+        public ActionResult Feed()
+        {
+            return new AtomActionResult(this.feedService.GetFeed());
         }
 
         [Route("search", Name = HomeControllerRoute.GetSearch)]
@@ -111,6 +127,6 @@
             Trace.WriteLine(string.Format("sitemap.xml requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
             string content = this.sitemapService.GetSitemapXml();
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
-        }
+        }  
     }
 }

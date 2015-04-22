@@ -1,4 +1,21 @@
-﻿Version 1.0.33
+﻿Version 1.0.34
+- Added a AbsoluteContent extension method to UrlHelperExtensions.cs. This gives us an absolute URL to static content.
+- Used AbsoluteContent in OpenSearchService.cs to link to icons.
+- ReadMe.html now has check boxes next to each step which remembers if it was checked or not.
+- Added lots of new information into ReadMe.html from http://webdevchecklist.com/.
+- Added Atom 1.0 feed.
+	- IFeedService.cs added.
+	- FeedService.cs added.
+	- AtomActionResult.cs added to return Atom feeds.
+	- SyndicationFeedExtensions added to add icon element to System.ServiceModel.SyndicationFeed.
+	- FeedService registered with Autofac in Startup.Container.cs.
+	- Feed action added to HomeController.cs.
+	- Feed action is cached. Cache settings added to web.config and CacheProfileName.cs.
+	- Atom feed link tag added to _Layout.cshtml.
+	- RSS/Atom section added to ReadMe.html
+- Atom, Png, and Jpg ContentType's added to ContentType.cs.
+
+Version 1.0.33
 - Added RequirePermanentHttpsAttribute filter which is different from System.Web.Mvc.RequireHttpsAttribute because it does a 301 Permament redirect instead of a 302 temporary redirect.
 - Changed commented out code in FilterConfig.cs to use RequirePermanentHttpsAttribute instead of RequireHttpsAttribute.
 - Added RedirectToCanonicalUrlAttribute filter which redirects requests without lowercase characters or trailing slashes to a valid one for better SEO.

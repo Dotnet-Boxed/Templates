@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\Feed\FeedService.cs" />
+    <Content Include="Services\Feed\IFeedService.cs" />
     <Content Include="Services\OpenSearch\IOpenSearchService.cs" />
     <Content Include="Services\OpenSearch\OpenSearchService.cs" />
     <Content Include="Services\Robots\IRobotsService.cs" />
@@ -100,6 +102,8 @@
     <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Content Include="Framework\NoTrailingSlashAttribute.cs" />
     <Content Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
+    <Content Include="Framework\AtomActionResult.cs" />
+    <Content Include="Framework\SyndicationFeedExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

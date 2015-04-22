@@ -204,6 +204,7 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ServiceUnavailable.html</ProjectItem>
       </Folder>
       <Folder Name="Framework">
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">AtomActionResult.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">CspViolationException.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">NoTrailingSlashAttribute.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">RedirectToCanonicalUrlAttribute.cs</ProjectItem>
@@ -211,6 +212,7 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapFrequency.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapNode.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">StringWriterWithEncoding.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">SyndicationFeedExtensions.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">UrlHelperExtensions.cs</ProjectItem>
       </Folder>
       <Folder Name="Models">
@@ -247,6 +249,10 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.min.js</ProjectItem>
       </Folder>
       <Folder Name="Services">
+        <Folder Name="Feed">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">FeedService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">IFeedService.cs</ProjectItem>
+        </Folder>
         <Folder Name="Logging">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">ILoggingService.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">LoggingService.cs</ProjectItem>

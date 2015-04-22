@@ -112,6 +112,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
@@ -186,6 +187,7 @@
     <Compile Include="Constants\HomeController\HomeControllerRoute.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Framework\AtomActionResult.cs" />
     <Compile Include="Framework\CspViolationException.cs" />
     <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
@@ -193,6 +195,7 @@
     <Compile Include="Framework\SitemapFrequency.cs" />
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
+    <Compile Include="Framework\SyndicationFeedExtensions.cs" />
     <Compile Include="Framework\UrlHelperExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,6 +210,8 @@
     <Compile Include="Services\Robots\RobotsService.cs" />
     <Compile Include="Services\Sitemap\ISitemapService.cs" />
     <Compile Include="Services\Sitemap\SitemapService.cs" />
+    <Compile Include="Services\Feed\IFeedService.cs" />
+    <Compile Include="Services\Feed\FeedService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

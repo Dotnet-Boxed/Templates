@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate.Framework
 {
+    using System;
     using System.Web.Mvc;
 
     /// <summary>
@@ -24,6 +25,20 @@
         {
             string scheme = url.RequestContext.HttpContext.Request.Url.Scheme;
             return url.Action(actionName, controllerName, routeValues, scheme);
+        }
+
+        /// <summary>
+        /// Generates a fully qualified URL to the specified content by using
+        /// the specified content path. Converts a virtual (relative) path to an application absolute path.
+        /// </summary>
+        /// <param name="url">The URL helper.</param>
+        /// <param name="contentPath">The content path.</param>
+        /// <returns>The absolute URL.</returns>
+        public static string AbsoluteContent(
+            this UrlHelper url,
+            string contentPath)
+        {
+            return new Uri(url.RequestContext.HttpContext.Request.Url, url.Content(contentPath)).ToString();
         }
 
         /// <summary>

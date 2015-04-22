@@ -32,11 +32,11 @@
             // The link to the page with the search form on it. The home page has the search form on it.
             string searchFormUrl = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex);
             // The link to the favicon.ico file for the site.
-            string favicon16Url = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex) + "content/icons/favicon.ico";
+            string favicon16Url = this.urlHelper.AbsoluteContent("~/content/icons/favicon.ico");
             // The link to the favicon.png file for the site.
-            string favicon32Url = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex) + "content/icons/favicon-32x32.png";
+            string favicon32Url = this.urlHelper.AbsoluteContent("~/content/icons/favicon-32x32.png");
             // The link to the favicon.png file for the site.
-            string favicon96Url = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex) + "content/icons/favicon-96x96.png";
+            string favicon96Url = this.urlHelper.AbsoluteContent("~/content/icons/favicon-96x96.png");
 
             XNamespace ns = "http://a9.com/-/spec/opensearch/1.1";
             XDocument document = new XDocument(

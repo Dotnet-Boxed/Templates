@@ -5,6 +5,8 @@
         public const string About = "About";
 
         public const string Contact = "Contact";
+        
+        public const string Feed = "Feed";
 
         public const string Index = "Index";
         

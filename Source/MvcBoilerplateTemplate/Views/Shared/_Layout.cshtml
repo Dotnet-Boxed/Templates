@@ -101,36 +101,27 @@
 
     @* Description - Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description">
+    
+    
     @* Author - The author of the page. *@
     @if (ViewBag.Author != null)
     {
         <meta name="author" content="@ViewBag.Author">
     }
+    
+    
     @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines.
                    The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS or you have multiple URL's
                    to the same resource which you should avoid (See http://googlewebmastercentral.blogspot.co.uk/2009/02/specify-your-canonical.html). *@
     @*<link rel="canonical" href="">*@
 
+    
+    @* Atom 1.0 Feed - Link to the. This enables the 'Subscribe to this page' button in FireFox. *@
+    <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml" />
+        
 
-    @* OpenSearch (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
+    @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
     <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
-
-
-    @*
-        TODO: Social Media Meta Tags
-        Facebook OpenGraph - https://developers.facebook.com/docs/opengraph
-        Twitter Cards - https://dev.twitter.com/cards/getting-started
-        http://moz.com/blog/meta-data-templates-123
-    *@
-    @*
-        TODO: Structured Data - Metadata for HTML e.g. Book, Location etc.
-        schema.org - Schema database
-        http://schema.org
-        Schema Creator - Create HTML schemas
-        http://schema-creator.org/
-        Structured Data Testing Tool - Test HTML schemas
-        http://www.google.com/webmasters/tools/richsnippets
-    *@
 </head>
 <body>
     @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
@@ -151,6 +142,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
+                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetFeed)"><span aria-hidden="true" class="fa fa-rss"></span> RSS</a></li>
                     @if (HttpContext.Current.IsDebuggingEnabled)
                     {
                         // if <compilation debug="true"> is set in Web.config.

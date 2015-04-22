@@ -38,6 +38,7 @@
 
         private static void RegisterServices(ContainerBuilder builder)
         {
+            builder.RegisterType<FeedService>().As<IFeedService>().InstancePerRequest();
             builder.RegisterType<LoggingService>().As<ILoggingService>().SingleInstance();
             builder.RegisterType<OpenSearchService>().As<IOpenSearchService>().InstancePerRequest();
             builder.RegisterType<RobotsService>().As<IRobotsService>().InstancePerRequest();
