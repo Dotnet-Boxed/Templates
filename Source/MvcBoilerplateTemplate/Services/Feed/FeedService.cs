@@ -164,7 +164,7 @@
                 item.Copyright = new TextSyndicationContent(string.Format("© {0} - {0}", DateTime.Now.Year, Application.Name));
 
                 // link - Add additional links to related images, audio or video like so.
-                item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(new Uri(this.urlHelper.Content("~/content/icons/favicon-192x192.png"), UriKind.Relative), ContentType.Png, 0));
+                // item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(new Uri(this.urlHelper.Content("~/content/icons/favicon-192x192.png"), UriKind.Relative), ContentType.Png, 0));
 
                 items.Add(item);
             }
