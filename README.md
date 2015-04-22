@@ -54,7 +54,7 @@
 
 <p>ASP.NET MVC has some very useful settings for appending trailing slashes to URL's and making all URL's lower case. Unfortunately, both of these are turned off by default, which is terrible for SEO. This project turns them on by default.</p>
 
-<p>It also includes an MVC filter which helps to redirect non-canonical URL's (URL's without a trailing slash or mixed case characters which are considered different URL's by search engines) to their canonical equivelant.</p>
+<p>It also includes an MVC filter which helps to redirect non-canonical URL's (URL's without a trailing slash or mixed case characters which are considered different URL's by search engines) to their canonical equivalent.</p>
 
 <h2>Accessibility</h2>
 
