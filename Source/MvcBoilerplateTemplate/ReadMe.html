@@ -18,7 +18,7 @@
 
         <section>
             <h2>Task Check List</h2>
-            <p>This is a check-list of tasks you must perform to get your site up and running faster.</p>
+            <p>This is a check-list of tasks you must perform to get your site up and running faster. Open this file in the browser of your choice and it will remember what you have checked, just don't clear your cache.</p>
 
             <article>
                 <h3>Pre-Requisites</h3>
@@ -362,6 +362,20 @@
                     <li class="list-group-item">
                         <input name="Search-ConfigureOpenSearchXml" type="checkbox"> <strong>Configure OpenSearch.xml</strong> -
                         If you are implementing search, then ASP.NET MVC Boilerplate implements the <a href="http://www.opensearch.org">Open Search</a> protocol. See <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Scott Hanselman</a>'s blog post for more information about what Open Search is. The opensearch.xml file is dynamically generated in OpenSearchService.cs and needs configuring.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>RSS/Atom Feed</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="RSSAtomFeed-ImplementAtomFeed" type="checkbox"> <strong>Implement Atom Feed</strong> -
+                        Implement the Atom feed for the site. See FeedService.cs.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="RSSAtomFeed-ValidateAtomFeed" type="checkbox"> <strong>Validate Atom Feed</strong> -
+                        Use <a href="http://feedvalidator.org/">Feed Validator</a> to validate your Atom feed.
                     </li>
                 </ul>
             </article>
