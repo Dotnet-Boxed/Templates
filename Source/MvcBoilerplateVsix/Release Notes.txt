@@ -1,4 +1,12 @@
-﻿Version 1.0.34
+﻿Version 1.0.35
+- Atom feed now uses absolute URL's instead of the BaseUri. This is because Firefox has a bug and cannot handle relative URL's!!! Updated FeedService.cs.
+- Moved some code around in FeedService.cs to make it easier to read. Uncommented the media enclosure link.
+- Added self URL link to Atom feed in FeedService.cs.
+- Added Yahoo Media Atom/RSS extensions to SyndicationFeedExtensions.cs.
+- Added Yahoo Media thumbnails to Atom feed entries in FeedService.cs.
+- Added a few content types to ContentType.cs and added some comments.
+
+Version 1.0.34
 - Added a AbsoluteContent extension method to UrlHelperExtensions.cs. This gives us an absolute URL to static content.
 - Used AbsoluteContent in OpenSearchService.cs to link to icons.
 - ReadMe.html now has check boxes next to each step which remembers if it was checked or not.

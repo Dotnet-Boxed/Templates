@@ -9,6 +9,7 @@
     /// (See http://atomenabled.org/developers/syndication/ for more information about Atom 1.0).
     /// (See https://tools.ietf.org/html/rfc4287 for the official Atom Syndication Format specifications).
     /// (See http://feedvalidator.org/ to validate your feed).
+    /// (See http://stackoverflow.com/questions/1301392/pagination-in-feeds-like-atom-and-rss to see how you can add paging to your feed).
     /// </summary>
     public interface IFeedService
     {

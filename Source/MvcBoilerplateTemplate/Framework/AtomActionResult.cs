@@ -33,6 +33,10 @@
             Atom10FeedFormatter feedFormatter = new Atom10FeedFormatter(this.syndicationFeed);
             XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
             xmlWriterSettings.Encoding = Encoding.UTF8;
+#if DEBUG
+            // Indent the XML for easier viewing but only in Debug mode. In Release mode, everything is output on one line for best performance.
+            xmlWriterSettings.Indent = true;
+#endif
             using (XmlWriter xmlWriter = XmlWriter.Create(context.HttpContext.Response.Output, xmlWriterSettings))
             {
                 feedFormatter.WriteTo(xmlWriter);
