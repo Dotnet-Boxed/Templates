@@ -1,4 +1,7 @@
-﻿Version 1.0.36
+﻿Version 1.0.37
+- Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
+
+Version 1.0.36
 - Fixed the RedirectToHttpsAttribute class not being recognized in the project, thanks to @dls314159 for highlighting this issue.
 - Added two more IgnoreRoute statements to support Elmah, copied from Elmah.MVC (This should be part of Elmah.MVC already, have submitted a pull request to Elmah.MVC. If they accept it, we can remove this code altogether).
 - Added SitemapPingerService.cs and ISitemapPingerService.cs which sends the URL for the sitemap.xml file to Google, Microsoft and Yahoo.
