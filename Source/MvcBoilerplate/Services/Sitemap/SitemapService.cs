@@ -16,11 +16,15 @@
     /// </summary>
     public sealed class SitemapService : ISitemapService
     {
+        #region Fields
+
         private const string SitemapsNamespace = "http://www.sitemaps.org/schemas/sitemap/0.9";
         private const int MaximumSitemapNodeCount = 50000;
 
         private readonly ILoggingService loggingService;
         private readonly UrlHelper urlHelper;
+
+        #endregion
 
         #region Constructors
 
@@ -35,7 +39,7 @@
         {
             this.loggingService = loggingService;
             this.urlHelper = urlHelper;
-        } 
+        }
 
         #endregion
 
@@ -109,6 +113,16 @@
                {
                    Priority = 2
                });
+
+            // An example of how to add many pages into your sitemap.
+            // foreach (Product product in myProductRepository.GetProducts())
+            // {
+            //     nodes.Add(
+            //        new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProductControllerRoute.GetProduct, new { id = product.ProductId }))
+            //        {
+            //            Priority = 2
+            //        });
+            // }
 
             return nodes;
         }

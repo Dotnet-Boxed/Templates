@@ -29,6 +29,8 @@
             routes.IgnoreRoute("humans.txt");
             // Ignore the elmah route.
             routes.IgnoreRoute("elmah");
+            routes.IgnoreRoute("elmah/{*pathinfo}");
+            routes.IgnoreRoute("{*elmahinsubfolder}", new { elmahinsubfolder = @".*/elmah(/.*)?" });
             // Ignore the glimpse route.
             routes.IgnoreRoute("glimpse");
 

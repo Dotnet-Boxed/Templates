@@ -269,6 +269,10 @@
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">ISitemapService.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapService.cs</ProjectItem>
         </Folder>
+        <Folder Name="SitemapPinger">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">ISitemapPingerService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">SitemapPingerService.cs</ProjectItem>
+        </Folder>
       </Folder>
       <Folder Name="Views">
         <Folder Name="Error">

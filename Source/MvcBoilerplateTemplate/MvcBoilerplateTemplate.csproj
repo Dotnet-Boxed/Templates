@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\SitemapPinger\ISitemapPingerService.cs" />
+    <Content Include="Services\SitemapPinger\SitemapPingerService.cs" />
     <Content Include="Services\Feed\FeedService.cs" />
     <Content Include="Services\Feed\IFeedService.cs" />
     <Content Include="Services\OpenSearch\IOpenSearchService.cs" />

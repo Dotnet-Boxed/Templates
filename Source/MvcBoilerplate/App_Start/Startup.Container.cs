@@ -43,6 +43,7 @@
             builder.RegisterType<OpenSearchService>().As<IOpenSearchService>().InstancePerRequest();
             builder.RegisterType<RobotsService>().As<IRobotsService>().InstancePerRequest();
             builder.RegisterType<SitemapService>().As<ISitemapService>().InstancePerRequest();
+            builder.RegisterType<SitemapPingerService>().As<ISitemapPingerService>().InstancePerRequest();
         }
 
         private static void RegisterMvc(ContainerBuilder builder, Assembly assembly)

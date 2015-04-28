@@ -191,7 +191,6 @@
     <Compile Include="Framework\CspViolationException.cs" />
     <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
-    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Compile Include="Framework\SitemapFrequency.cs" />
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
@@ -208,6 +207,8 @@
     <Compile Include="Services\OpenSearch\OpenSearchService.cs" />
     <Compile Include="Services\Robots\IRobotsService.cs" />
     <Compile Include="Services\Robots\RobotsService.cs" />
+    <Compile Include="Services\SitemapPinger\ISitemapPingerService.cs" />
+    <Compile Include="Services\SitemapPinger\SitemapPingerService.cs" />
     <Compile Include="Services\Sitemap\ISitemapService.cs" />
     <Compile Include="Services\Sitemap\SitemapService.cs" />
     <Compile Include="Services\Feed\IFeedService.cs" />
@@ -346,6 +347,7 @@
     <Content Include="Error\Forbidden.html" />
     <Content Include="Error\GatewayTimeout.html" />
     <Content Include="Error\ServiceUnavailable.html" />
+    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
