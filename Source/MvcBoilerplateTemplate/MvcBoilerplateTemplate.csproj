@@ -101,7 +101,6 @@
     </Content>
     <Content Include="Models\ErrorModel.cs" />
     <Content Include="Framework\StringWriterWithEncoding.cs" />
-    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Content Include="Framework\NoTrailingSlashAttribute.cs" />
     <Content Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Content Include="Framework\AtomActionResult.cs" />

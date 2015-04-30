@@ -347,7 +347,6 @@
     <Content Include="Error\Forbidden.html" />
     <Content Include="Error\GatewayTimeout.html" />
     <Content Include="Error\ServiceUnavailable.html" />
-    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
