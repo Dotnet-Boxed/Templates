@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\icons\atom-icon-48x48.png" />
+    <Content Include="Content\icons\atom-logo-96x48.png" />
     <Content Include="Services\SitemapPinger\ISitemapPingerService.cs" />
     <Content Include="Services\SitemapPinger\SitemapPingerService.cs" />
     <Content Include="Services\Feed\FeedService.cs" />

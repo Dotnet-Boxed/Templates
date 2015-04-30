@@ -1,4 +1,15 @@
-﻿Version 1.0.37
+﻿Version 1.0.38
+- Added /content/icons/atom-icon-48x48.png and /content/icons/atom-icon-96x48.png for Atom 1.0 feed images.
+- Changed the images referred to in FeedService.cs to point to the above images.
+- Added in a default MapRoute in RouteConfig to work around a Elmah/Elmah.MVC bug.
+- enablePrefetchOptimization set to true in Web.config for better startup performance of the site.
+- Note added to ReadMe.html about enabling the prefetcher in Windows Server for the enablePrefetchOptimization setting to work.
+- Added comments in Web.config for the <compilation/> element.
+- Added <requestLimits maxAllowedContentLength="1048576" maxQueryString="2048" maxUrl="4096" /> to the Web.config as well as comments.
+- Added similar settings to the <httpRuntime element in the Web.config with comments.
+- Added a note to ReadMe.html to edit the requestLimits and httpRuntime settings for better security.
+
+Version 1.0.37
 - Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
 - Ignore the Elmah pages in RedirectToCanonicalUrlAttribute.
 

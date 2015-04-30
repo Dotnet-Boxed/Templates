@@ -59,7 +59,7 @@
                 // updated (Optional) - Indicates the last time the feed was modified in a significant way.
                 LastUpdatedTime = DateTimeOffset.Now,
                 // logo (Optional) - Identifies a larger image which provides visual identification for the feed. Images should be twice as wide as they are tall.
-                ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/content/icons/mstile-310x150.png")),
+                ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-logo-96x48.png")),
                 // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the feed.
                 Copyright = new TextSyndicationContent(string.Format("© {0} - {0}", DateTime.Now.Year, Application.Name)),
                 // lang (Optional) - The language of the feed.
@@ -86,7 +86,7 @@
             feed.Contributors.Add(this.GetPerson());
 
             // icon (Optional) - Identifies a small image which provides iconic visual identification for the feed. Icons should be square.
-            feed.SetIcon(this.urlHelper.AbsoluteContent("~/content/icons/favicon-192x192.png"));
+            feed.SetIcon(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"));
 
             // Add the Yahoo Media namespace (xmlns:media="http://search.yahoo.com/mrss/") to the Atom feed. 
             // This gives us extra abilities, like the ability to give thumbnail images to entries. See http://www.rssboard.org/media-rss for more information.
@@ -156,10 +156,10 @@
                 item.Categories.Add(new SyndicationCategory("CategoryName"));
 
                 // link - Add additional links to related images, audio or video like so.
-                item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(new Uri(this.urlHelper.AbsoluteContent("~/content/icons/favicon-192x192.png")), ContentType.Png, 0));
+                item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png")), ContentType.Png, 0));
 
                 // media:thumbnail - Add a Yahoo Media thumbnail for the entry. See http://www.rssboard.org/media-rss for more information.
-                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/content/icons/favicon-192x192.png"), 192, 192);
+                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"), 192, 192);
 
                 items.Add(item);
             }

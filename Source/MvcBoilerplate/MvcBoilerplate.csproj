@@ -197,6 +197,7 @@
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
     <Compile Include="Framework\SyndicationFeedExtensions.cs" />
     <Compile Include="Framework\UrlHelperExtensions.cs" />
+    <Compile Include="Framework\ValidateReferrerAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,6 +295,8 @@
     <Content Include="Content\icons\android-chrome-48x48.png" />
     <Content Include="Content\icons\android-chrome-72x72.png" />
     <Content Include="Content\icons\android-chrome-96x96.png" />
+    <Content Include="Content\icons\atom-icon-48x48.png" />
+    <Content Include="Content\icons\atom-logo-96x48.png" />
     <Content Include="Content\icons\manifest.json" />
     <None Include="ReadMe.html" />
     <Content Include="Content\bootstrap\site.css">

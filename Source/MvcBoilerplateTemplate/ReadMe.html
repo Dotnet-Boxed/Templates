@@ -96,6 +96,10 @@
                         If you are storing connection strings or a machine key in your Web.config file, don't forget to encrypt them. See <a href="https://msdn.microsoft.com/en-us/library/dtkwfdky.aspx">this</a> link for more information.
                     </li>
                     <li class="list-group-item">
+                        <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
+                        There are settings in the Web.config file under the httpRuntime and requestLimits elements that limit maximum size of the requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
+                    </li>
+                    <li class="list-group-item">
                         <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable Retail Mode</strong> -
                         Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
                         <ul>
@@ -185,6 +189,10 @@
                         If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding prefetch or prerender
                         link tags to the head of the page. See <a href="http://www.stevesouders.com/blog/2013/11/07/prebrowsing/">here</a> and
                         <a href="http://blogs.msdn.com/b/ie/archive/2013/12/04/getting-to-the-content-you-want-faster-in-ie11.aspx?Redirected=true">here</a> for more details. Also consider implementing IE11 <a href="msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx">flip ahead</a>, if you have next and previous buttons.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Prefetcher</strong> -
+                        This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">prefetcher</a> to get a performance and reduce the disk-read cost of application startup. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
                     </li>
                 </ul>
             </article>

@@ -176,6 +176,8 @@
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-startup-image-640x920.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-startup-image-748x1024.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">apple-touch-startup-image-768x1004.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">atom-icon-48x48.png</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">atom-logo-96x48.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">browserconfig.xml</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-16x16.png</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">favicon-192x192.png</ProjectItem>
