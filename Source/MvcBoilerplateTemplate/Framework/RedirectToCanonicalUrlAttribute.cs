@@ -67,6 +67,12 @@
             {
                 throw new ArgumentNullException("filterContext");
             }
+            
+            // Ignore the Elmah pages.
+            if (string.Equals(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, "Elmah", StringComparison.Ordinal))
+            {
+                return;
+            }
 
             string canonicalUrl;
             if (!TryGetCanonicalUrl(filterContext, out canonicalUrl))

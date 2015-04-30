@@ -1,5 +1,6 @@
 ﻿Version 1.0.37
 - Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
+- Ignore the Elmah pages in RedirectToCanonicalUrlAttribute.
 
 Version 1.0.36
 - Fixed the RedirectToHttpsAttribute class not being recognized in the project, thanks to @dls314159 for highlighting this issue.
