@@ -1,4 +1,8 @@
-﻿Version 1.0.38
+﻿Version 1.0.39
+- Fixed the 'Learn More' link to ASP.NET MVC Boilerplate in Index.cshtml.
+- Added a note about session state in Web.config file.
+
+Version 1.0.38
 - Added /content/icons/atom-icon-48x48.png and /content/icons/atom-icon-96x48.png for Atom 1.0 feed images.
 - Changed the images referred to in FeedService.cs to point to the above images.
 - Added in a default MapRoute in RouteConfig to work around a Elmah/Elmah.MVC bug.
