@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate.Framework
 {
+    // EXPERIMENTAL FEATURE
     using System.Globalization;
     using System.Text;
     using System.Web;
