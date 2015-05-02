@@ -1,4 +1,7 @@
-﻿Version 1.0.39
+﻿Version 1.0.40
+- Corrected thumbnail size in FeedService.cs.
+
+Version 1.0.39
 - Fixed the 'Learn More' link to ASP.NET MVC Boilerplate in Index.cshtml.
 - Added a note about session state in Web.config file.
 

@@ -159,7 +159,7 @@
                 item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png")), ContentType.Png, 0));
 
                 // media:thumbnail - Add a Yahoo Media thumbnail for the entry. See http://www.rssboard.org/media-rss for more information.
-                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"), 192, 192);
+                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"), 48, 48);
 
                 items.Add(item);
             }
