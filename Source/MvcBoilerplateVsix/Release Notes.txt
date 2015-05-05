@@ -1,4 +1,9 @@
-﻿Version 1.0.41
+﻿Version 1.0.42
+- Added the FriendlyUrlHelper to help create SEO and human friendly URL's.
+- Added a note to ReadMe.html to use the FriendlyUrlHelper to create SEO and human friendly URL's.
+- Removed IgnoreRoute statements for Elmah and Glimpse. It turns out you don't need these.
+
+Version 1.0.41
 - RedirectToHttpsAttribute set to Compile, rather than Content.
 
 Version 1.0.40

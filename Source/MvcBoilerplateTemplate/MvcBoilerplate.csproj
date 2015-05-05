@@ -189,6 +189,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Framework\AtomActionResult.cs" />
     <Compile Include="Framework\CspViolationException.cs" />
+    <Compile Include="Framework\FriendlyUrlHelper.cs" />
     <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
     <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Framework\RedirectToHttpsAttribute.cs" />

@@ -208,6 +208,7 @@
       <Folder Name="Framework">
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">AtomActionResult.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">CspViolationException.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">FriendlyUrlHelper.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">NoTrailingSlashAttribute.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">RedirectToCanonicalUrlAttribute.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">RedirectToHttpsAttribute.cs</ProjectItem>

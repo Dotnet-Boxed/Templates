@@ -108,6 +108,7 @@
     <Content Include="Framework\AtomActionResult.cs" />
     <Content Include="Framework\SyndicationFeedExtensions.cs" />
     <Content Include="Framework\RedirectToHttpsAttribute.cs" />
+    <Content Include="Framework\FriendlyUrlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

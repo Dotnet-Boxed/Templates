@@ -1,13 +1,54 @@
 ﻿namespace MvcBoilerplate.Framework
 {
-    // EXPERIMENTAL FEATURE
-    using System.Globalization;
     using System.Text;
-    using System.Web;
 
     public static class FriendlyUrlHelper
     {
-        public static string ToFriendlyUrl(string title, bool utf8 = true, int maxlength = 80)
+        #region Public Methods
+
+        /// <summary>
+        /// URL encode's the specified title and converts it so that it is more human and search engine readable
+        /// e.g. http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title. Note that the ID of the product is still included in the 
+        /// URL, to avoid having to deal with two titles with the same name. Search Engine Optimization (SEO) friendly URL's gives your site a boost in 
+        /// search rankings by including keywords in your URL's. They are also easier to read by users and can give them an indication of what they are 
+        /// clicking on when they look at a URL. Refer to the code example below to see how this helper can be used.
+        /// To learn more about friendly URL's see http://moz.com/blog/11-best-practices-for-urls.
+        /// To learn more about how this was implemented see http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486#25486.
+        /// </summary>
+        /// <param name="title">The title of the URL.</param>
+        /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII equivelant 'e'. All modern browsers
+        /// except Internet Explorer display the 'è' correctly. Older browsers and Internet Explorer percent encode these international characters so they 
+        /// are displayed as'%C3%A8'. What you set this to depends on whether your target users are english speakers or not.</param>
+        /// <param name="maxlength">The maximum allowed length of the title.</param>
+        /// <returns>The SEO and human friendly title.</returns>
+        /// <code>
+        /// [Route("details/{id}/{title}", Name = "GetDetails")]
+        /// public ActionResult Details(int id, string title)
+        /// {
+        ///     // Get the product as indicated by the ID from a database or some repository.
+        ///     Product product = ProductRepository.Fetch(id);
+        ///     
+        ///     // If a product with the specified ID was not found, return a 404 Not Found response.
+        ///     if (product == null)
+        ///     {
+        ///         return this.HttpNotFound();
+        ///     }
+        /// 
+        ///     // Get the actual friendly version of the title.
+        ///     string friendlyTitle = FriendlyUrlHelper.GetFriendlyTitle(product.Title);
+        ///     
+        ///     // Compare the title with the friendly title.
+        ///     if (!string.Equals(friendlyTitle, title, StringComparison.Ordinal))
+        ///     {
+        ///         // If the title is null, empty or does not match the friendly title, return a 301 Permanent Redirect to the correct friendly URL.
+        ///         return new RedirectResult(this.Url.RouteUrl("GetDetails", new { id = id, title = friendlyTitle }), true);
+        ///     }
+        ///     
+        ///     // The URL the client has browsed to is correct, show them the view containing the product.
+        ///     return View(product);
+        /// }
+        /// </code>
+        public static string GetFriendlyTitle(string title, bool remapToAscii = false, int maxlength = 80)
         {
             if (title == null)
             {
@@ -45,15 +86,13 @@
                 {
                     int previousLength = stringBuilder.Length;
 
-                    if (utf8)
+                    if (remapToAscii)
                     {
-                        //stringBuilder.Append(HttpUtility.UrlEncode(c.ToString(CultureInfo.InvariantCulture), Encoding.UTF8));
-                        stringBuilder.Append(c);
+                        stringBuilder.Append(RemapInternationalCharToAscii(c));
                     }
                     else
                     {
-                        //http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696
-                        stringBuilder.Append(RemapInternationalCharToAscii(c));
+                        stringBuilder.Append(c);
                     }
 
                     if (previousLength != stringBuilder.Length)
@@ -76,13 +115,18 @@
             {
                 return stringBuilder.ToString();
             }
-        }
+        } 
+
+        #endregion
+
+        #region Private Methods
 
         /// <summary>
-        /// Remaps the international character  to ASCII.
+        /// Remaps the international character to their equivelant ASCII characters.
+        /// (See http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696).
         /// </summary>
-        /// <param name="character">The character.</param>
-        /// <returns></returns>
+        /// <param name="character">The character to remap to its ASCII equivelant.</param>
+        /// <returns>The remapped character</returns>
         private static string RemapInternationalCharToAscii(char character)
         {
             string s = character.ToString().ToLowerInvariant();
@@ -162,6 +206,8 @@
             {
                 return string.Empty;
             }
-        }
+        } 
+
+        #endregion
     }
 }

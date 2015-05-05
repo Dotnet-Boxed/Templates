@@ -27,12 +27,6 @@
             routes.IgnoreRoute("Error/ServiceUnavailable.html");
             // Ignore the humans.txt file.
             routes.IgnoreRoute("humans.txt");
-            // Ignore the elmah route.
-            routes.IgnoreRoute("elmah");
-            routes.IgnoreRoute("elmah/{*pathinfo}");
-            routes.IgnoreRoute("{*elmahinsubfolder}", new { elmahinsubfolder = @".*/elmah(/.*)?" });
-            // Ignore the glimpse route.
-            routes.IgnoreRoute("glimpse");
 
             // Enable attribute routing.
             routes.MapMvcAttributeRoutes();
