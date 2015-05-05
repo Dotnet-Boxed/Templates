@@ -191,7 +191,7 @@
     <Compile Include="Framework\CspViolationException.cs" />
     <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
     <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
-    <Content Include="Framework\RedirectToHttpsAttribute.cs" />
+    <Compile Include="Framework\RedirectToHttpsAttribute.cs" />
     <Compile Include="Framework\SitemapFrequency.cs" />
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />

@@ -1,4 +1,7 @@
-﻿Version 1.0.40
+﻿Version 1.0.41
+- RedirectToHttpsAttribute set to Compile, rather than Content.
+
+Version 1.0.40
 - Corrected thumbnail size in FeedService.cs.
 
 Version 1.0.39
