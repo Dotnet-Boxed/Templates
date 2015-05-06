@@ -1,4 +1,7 @@
-﻿Version 1.0.42
+﻿Version 1.0.43
+- Glimpse path moved back to /glimpse.axd as the path was no longer working due to a Elmah bug workaround.
+
+Version 1.0.42
 - Added the FriendlyUrlHelper to help create SEO and human friendly URL's.
 - Added a note to ReadMe.html to use the FriendlyUrlHelper to create SEO and human friendly URL's.
 - Removed IgnoreRoute statements for Elmah and Glimpse. It turns out you don't need these.
