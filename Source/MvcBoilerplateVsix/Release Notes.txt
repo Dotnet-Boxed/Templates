@@ -1,4 +1,21 @@
-﻿Version 1.0.43
+﻿Version 1.0.44
+- Elmah.Mvc NuGet package updated from 2.1.1 to 2.1.2.
+- Autofac.Mvc5 NuGet package updated from 3.3.3 to 3.3.4.
+- New Elmah.Mvc app setting added to Web.config file called elmah.mvc.UserAuthCaseSensitive.
+- New CacheService.cs and ICacheService.cs added, which is a wrapper around the System.Runtime.Caching.MemoryCache.
+- ICacheService registered with Autofac in Startup.Container.cs.
+- SitemapService now supports sitemap index files, which are used when you have a large number of nodes in your sitemap. See SitemapService.cs for more details.
+	- ISitemapService.cs updated with new index parameter and comments.
+	- SitemapService.cs totally updated and improved to support sitemap indexes.
+	- SitemapService now uses ICacheService to cache sitemap nodes internally rather than relying on OutputCache.
+	- HomeController updated with new index parameter which it passes to the SiteMapService. New comments and removed OutputCache.
+	- Removed sitemap caching settings from Web.config.
+	- Removed sitemap caching profile name from CacheProfileName.cs
+- Added XDocumentExtensions.cs to convert XDocument to String but with the ability to specify any Encoding.
+- Refactored OpenSearchService and SitemapService to use XDocumentExtensions instead of containing duplicated code.
+- SitemapPingerService updated to remove async keyword in Debug mode, to get around a compiler warning about using the async keyword without awaiting anything.
+
+Version 1.0.43
 - Glimpse path moved back to /glimpse.axd as the path was no longer working due to a Elmah bug workaround.
 
 Version 1.0.42

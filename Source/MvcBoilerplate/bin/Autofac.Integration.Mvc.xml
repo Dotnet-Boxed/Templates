@@ -28,7 +28,7 @@
             Initializes a new instance of the <see cref="T:Autofac.Integration.Mvc.AutofacDependencyResolver"/> class.
             </summary>
             <param name="container">The container that nested lifetime scopes will be create from.</param>
-            <param name="lifetimeScopeProvider">A <see cref="T:Autofac.Integration.Mvc.ILifetimeScopeProvider"/> implementation for 
+            <param name="lifetimeScopeProvider">A <see cref="T:Autofac.Integration.Mvc.ILifetimeScopeProvider"/> implementation for
             creating new lifetime scopes.</param>
         </member>
         <member name="M:Autofac.Integration.Mvc.AutofacDependencyResolver.#ctor(Autofac.ILifetimeScope,Autofac.Integration.Mvc.ILifetimeScopeProvider,System.Action{Autofac.ContainerBuilder})">
@@ -36,7 +36,7 @@
             Initializes a new instance of the <see cref="T:Autofac.Integration.Mvc.AutofacDependencyResolver"/> class.
             </summary>
             <param name="container">The container that nested lifetime scopes will be create from.</param>
-            <param name="lifetimeScopeProvider">A <see cref="T:Autofac.Integration.Mvc.ILifetimeScopeProvider"/> implementation for 
+            <param name="lifetimeScopeProvider">A <see cref="T:Autofac.Integration.Mvc.ILifetimeScopeProvider"/> implementation for
             creating new lifetime scopes.</param>
             <param name="configurationAction">Action on a <see cref="T:Autofac.ContainerBuilder"/>
             that adds component registations visible only in nested lifetime scopes.</param>
@@ -88,7 +88,7 @@
         </member>
         <member name="P:Autofac.Integration.Mvc.AutofacDependencyResolverResources.AutofacDependencyResolverNotFound">
             <summary>
-              Looks up a localized string similar to The dependency resolver is not of type &apos;{0}&apos; and does not appear to be wrapped using DynamicProxy from the Castle Project. This issue could be the result of a change in the DynamicProxy implementation or the use of a different proxy library to wrap the dependency resolver..
+              Looks up a localized string similar to The dependency resolver is of type &apos;{0}&apos; but was expected to be of type &apos;{1}&apos;. It also does not appear to be wrapped using DynamicProxy from the Castle Project. This issue could be the result of a change in the DynamicProxy implementation or the use of a different proxy library to wrap the dependency resolver..
             </summary>
         </member>
         <member name="T:Autofac.Integration.Mvc.AutofacFilterProvider">

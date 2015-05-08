@@ -10,7 +10,6 @@
         public const string NotFound = "NotFound";
         public const string OpenSearchXml = "OpenSearchXml";
         public const string RobotsText = "RobotsText";
-        public const string SitemapXml = "SitemapXml";
         public const string Unauthorized = "Unauthorized";
     }
 }

@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Services\Cache\CacheService.cs" />
+    <Content Include="Services\Cache\ICacheService.cs" />
     <Content Include="Content\icons\atom-icon-48x48.png" />
     <Content Include="Content\icons\atom-logo-96x48.png" />
     <Content Include="Services\SitemapPinger\ISitemapPingerService.cs" />
@@ -109,6 +111,8 @@
     <Content Include="Framework\SyndicationFeedExtensions.cs" />
     <Content Include="Framework\RedirectToHttpsAttribute.cs" />
     <Content Include="Framework\FriendlyUrlHelper.cs" />
+    <Content Include="Framework\XDocumentExtensions.cs" />
+    <Content Include="Constants\CacheSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Scripts\jquery-2.1.3-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

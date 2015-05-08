@@ -118,14 +118,15 @@
         /// The sitemap is cached for one day, adjust this time to whatever you require.
         /// See <see cref="http://www.sitemaps.org/protocol.html"/> for more information.
         /// </summary>
+        /// <param name="index">The index of the sitemap to retrieve. <c>null</c> if you want to retrieve the root 
+        /// sitemap file, which may be a sitemap index file.</param>
         /// <returns>The sitemap XML for the current site.</returns>
         [NoTrailingSlash]
-        [OutputCache(CacheProfile = CacheProfileName.SitemapXml)]
         [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml)]
-        public ContentResult SitemapXml()
+        public ContentResult SitemapXml(int? index = null)
         {
             Trace.WriteLine(string.Format("sitemap.xml requested. User Agent:<{0}>.", this.Request.Headers.Get("User-Agent")));
-            string content = this.sitemapService.GetSitemapXml();
+            string content = this.sitemapService.GetSitemapXml(index);
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }  
     }

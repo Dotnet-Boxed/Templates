@@ -1,6 +1,5 @@
 ﻿namespace $safeprojectname$.Services
 {
-    using System.IO;
     using System.Text;
     using System.Web.Mvc;
     using System.Xml.Linq;
@@ -74,13 +73,7 @@
                     new XElement(ns + "InputEncoding", "UTF-8"),
                     new XElement(ns + "SearchForm", searchFormUrl)));
 
-            StringBuilder stringBuilder = new StringBuilder();
-            using (StringWriter stringWriter = new StringWriterWithEncoding(stringBuilder, Encoding.UTF8))
-            {
-                document.Save(stringWriter);
-            }
-
-            return stringBuilder.ToString();
+            return document.ToString(Encoding.UTF8);
         }
     }
 }

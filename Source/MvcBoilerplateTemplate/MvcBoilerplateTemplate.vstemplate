@@ -32,6 +32,7 @@
         </Folder>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">Application.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">CacheProfileName.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">CacheSetting.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ContentDeliveryNetwork.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ContentType.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ControllerName.cs</ProjectItem>
@@ -217,6 +218,7 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">StringWriterWithEncoding.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">SyndicationFeedExtensions.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">UrlHelperExtensions.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">XDocumentExtensions.cs</ProjectItem>
       </Folder>
       <Folder Name="Models">
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ErrorModel.cs</ProjectItem>
@@ -252,6 +254,10 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.min.js</ProjectItem>
       </Folder>
       <Folder Name="Services">
+        <Folder Name="Cache">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">CacheService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">ICacheService.cs</ProjectItem>
+        </Folder>
         <Folder Name="Feed">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">FeedService.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">IFeedService.cs</ProjectItem>

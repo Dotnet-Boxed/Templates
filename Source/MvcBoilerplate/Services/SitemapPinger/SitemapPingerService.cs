@@ -58,9 +58,10 @@
         /// Bing - http://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4.
         /// Yahoo - https://developer.yahoo.com/search/siteexplorer/V1/ping.html
         /// </summary>
+#if Release
         public async Task PingSearchEngines()
         {
-#if Release
+
             foreach (string sitemapPingLocation in SitemapPingLocations)
             {
                 string url = sitemapPingLocation + this.urlHelper.Encode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml));
@@ -76,8 +77,13 @@
                     this.loggingService.Log(exception);
                 }
             }
-#endif
         }
+#else
+        public Task PingSearchEngines()
+        {
+            return Task.FromResult<object>(null);
+        }
+#endif
 
         #endregion
     }
