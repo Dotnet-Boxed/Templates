@@ -115,7 +115,7 @@
                 new CspBaseUriAttribute()
                 {
                     // Allow base URL's from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow base URL's from the same domain.
                     Self = false
                 });
@@ -125,7 +125,7 @@
                 new CspChildSrcAttribute()
                 {
                     // Allow web workers or embed frames from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow web workers or embed frames from the same domain.
                     Self = false
                 });
@@ -135,7 +135,7 @@
                 new CspConnectSrcAttribute()
                 {
                     // Allow AJAX and Web Sockets to example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow all AJAX and Web Sockets calls from the same domain.
                     Self = true
                 });
@@ -144,7 +144,7 @@
                 new CspFontSrcAttribute()
                 {
                     // Allow fonts from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow all fonts from the same domain.
                     Self = true
                 });
@@ -153,7 +153,7 @@
                 new CspFormActionAttribute()
                 {
                     // Allow forms to post back to example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow forms to post back to the same domain.
                     Self = true
                 });
@@ -163,7 +163,7 @@
                 new CspFrameSrcAttribute()
                 {
                     // Allow iFrames from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow iFrames from the same domain.
                     Self = false
                 });
@@ -172,7 +172,7 @@
                 new CspFrameAncestorsAttribute()
                 {
                     // Allow frame, iframe, object, embed or applet's from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow frame, iframe, object, embed or applet's from the same domain.
                     Self = false
                 });
@@ -181,7 +181,7 @@
                 new CspImgSrcAttribute()
                 {
                     // Allow images from example.com.
-                    // CustomSources = "example.com",
+                    // CustomSources = "*.example.com",
                     // Allow images from the same domain.
                     Self = true,
                 });
@@ -191,7 +191,7 @@
                 new CspScriptSrcAttribute()
                 {
                     // Allow scripts from the CDN's.
-                    CustomSources = string.Format("{0} {1}", ContentDeliveryNetwork.Google.Domain, ContentDeliveryNetwork.Microsoft.Domain),
+                    CustomSources = string.Join(" ", ContentDeliveryNetwork.Google.Domain, ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.
                     Self = true,
                     // Allow the use of the eval() method to create code from strings. This is unsafe and can open your site up to XSS vulnerabilities.
