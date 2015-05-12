@@ -32,7 +32,6 @@
         {
         }
 
-
         public StringWriterWithEncoding(Encoding encoding)
         {
             this.encoding = encoding;

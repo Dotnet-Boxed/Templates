@@ -3,8 +3,8 @@
 namespace $safeprojectname$
 {
     using System.Web.Mvc;
-    using Owin;
     using NWebsec.Owin;
+    using Owin;
 
     public partial class Startup
     {

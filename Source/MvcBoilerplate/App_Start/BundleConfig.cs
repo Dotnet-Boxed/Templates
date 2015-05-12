@@ -6,9 +6,8 @@
     public static class BundleConfig
     {
         /// <summary>
-        /// For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        /// For more information on bundling, visit <see cref="http://go.microsoft.com/fwlink/?LinkId=301862"/>.
         /// </summary>
-        /// <param name="bundles"></param>
         public static void RegisterBundles(BundleCollection bundles)
         {
             // Enable Optimizations
@@ -75,11 +74,9 @@
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             // Note: The current version of Modernizr does not support Content Security Policy (CSP) (See FilterConfig).
-            // In addition the CDN version is old. So we are using a local copy which skips some CSP violating checks 
-            // and returns true for them. This is REALLY bad and needs to be fixed soon. See here for details:
-            // https://github.com/Modernizr/Modernizr/pull/1263 and http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
-            Bundle modernizrBundle = new ScriptBundle("~/bundles/modernizr") // , ContentDeliveryNetwork.Microsoft.ModernizrUrl
-                //.Include("~/Scripts/modernizr-*");
+            // See here for details: https://github.com/Modernizr/Modernizr/pull/1263 and 
+            // http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
+            Bundle modernizrBundle = new ScriptBundle("~/bundles/modernizr", ContentDeliveryNetwork.Microsoft.ModernizrUrl)
                 .Include("~/Scripts/modernizr-*");
             bundles.Add(modernizrBundle);
 
@@ -93,8 +90,6 @@
             Bundle respondBundle = new ScriptBundle("~/bundles/respond", ContentDeliveryNetwork.Microsoft.RespondUrl)
                 .Include("~/Scripts/respond.js");
             bundles.Add(respondBundle);
-
-
 
             // Failover Core - If the CDN's fail then these scripts load local copies of the same scripts.
             Bundle failoverCoreBundle = new ScriptBundle("~/bundles/failovercore")

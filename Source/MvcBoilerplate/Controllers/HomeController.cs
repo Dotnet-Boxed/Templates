@@ -113,7 +113,7 @@
         }
 
         /// <summary>
-        /// Gets the sitemal XML for the current site. You can customize the contents of 
+        /// Gets the sitemap XML for the current site. You can customize the contents of 
         /// this XML from the <see cref="SitemapService"/>. 
         /// The sitemap is cached for one day, adjust this time to whatever you require.
         /// See <see cref="http://www.sitemaps.org/protocol.html"/> for more information.

@@ -16,7 +16,7 @@ namespace $safeprojectname$.Framework
         /// To learn more about how this was implemented see http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486#25486.
         /// </summary>
         /// <param name="title">The title of the URL.</param>
-        /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII equivelant 'e'. All modern browsers
+        /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII equivalent 'e'. All modern browsers
         /// except Internet Explorer display the 'è' correctly. Older browsers and Internet Explorer percent encode these international characters so they 
         /// are displayed as'%C3%A8'. What you set this to depends on whether your target users are english speakers or not.</param>
         /// <param name="maxlength">The maximum allowed length of the title.</param>
@@ -122,10 +122,10 @@ namespace $safeprojectname$.Framework
         #region Private Methods
 
         /// <summary>
-        /// Remaps the international character to their equivelant ASCII characters.
+        /// Remaps the international character to their equivalent ASCII characters.
         /// (See http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696).
         /// </summary>
-        /// <param name="character">The character to remap to its ASCII equivelant.</param>
+        /// <param name="character">The character to remap to its ASCII equivalent.</param>
         /// <returns>The remapped character</returns>
         private static string RemapInternationalCharToAscii(char character)
         {

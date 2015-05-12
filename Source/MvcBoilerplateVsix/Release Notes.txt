@@ -1,4 +1,10 @@
-﻿Version 1.0.44
+﻿Version 1.0.45
+- Added Elmah Controller Name to ControllerName.cs
+- Ignore requestrs for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
+- Updated Modernizr bundle to use CDN in BundleConfig.cs and updated comments.
+- Lots of files changed for StyleCop compliance, mostly fixing spelling mistakes and comments.
+
+Version 1.0.44
 - Elmah.Mvc NuGet package updated from 2.1.1 to 2.1.2.
 - Autofac.Mvc5 NuGet package updated from 3.3.3 to 3.3.4.
 - New Elmah.Mvc app setting added to Web.config file called elmah.mvc.UserAuthCaseSensitive.

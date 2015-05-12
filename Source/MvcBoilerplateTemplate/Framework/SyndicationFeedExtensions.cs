@@ -66,7 +66,8 @@
         {
             XNamespace ns = YahooMediaNamespace;
             item.ElementExtensions.Add(new SyndicationElementExtension(
-                new XElement(ns + "thumbnail",
+                new XElement(
+                    ns + "thumbnail",
                     new XAttribute("url", url),
                     width.HasValue ? new XAttribute("width", width) : null,
                     height.HasValue ? new XAttribute("height", height) : null)));

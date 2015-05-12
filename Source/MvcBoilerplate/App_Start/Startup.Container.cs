@@ -59,7 +59,6 @@
             builder.RegisterControllers(assembly);
         }
 
-
         /// <summary>
         /// Sets the ASP.NET MVC dependency resolver.
         /// </summary>

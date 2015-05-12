@@ -19,7 +19,7 @@
     public sealed class FeedService : IFeedService
     {
         /// <summary>
-        /// The feed universally unique identifier. Do not use the URL of your feed as some reccomend as this can change.
+        /// The feed universally unique identifier. Do not use the URL of your feed as some recommend as this can change.
         /// A much better ID is to use a GUID which you can generate from Tools->Create GUID in Visual Studio.
         /// </summary>
         private const string FeedId = "[INSERT GUID HERE]";

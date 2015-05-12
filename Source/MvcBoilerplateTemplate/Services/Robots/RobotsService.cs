@@ -19,7 +19,7 @@
         /// The reason for dynamically generating this code is to enable generation of the full absolute sitemap URL
         /// and also to give you added flexibility in case you want to disallow search engines from certain paths.
         /// See <see cref="http://en.wikipedia.org/wiki/Robots_exclusion_standard"/> for more information.
-        /// Note: Disallowing crawling of Javascript or CSS files in your site’s robots.txt directly harms how well 
+        /// Note: Disallowing crawling of JavaScript or CSS files in your site’s robots.txt directly harms how well 
         /// Google's algorithms render and index your content and can result in suboptimal rankings.
         /// </summary>
         /// <returns>The robots text for the current site.</returns>

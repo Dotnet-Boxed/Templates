@@ -23,7 +23,7 @@
         /// Called when authorization is required.
         /// </summary>
         /// <param name="filterContext">The filter context.</param>
-        /// <exception cref="System.ArgumentNullException">filterContext</exception>
+        /// <exception cref="System.ArgumentNullException">filterContext is null.</exception>
         public void OnAuthorization(AuthorizationContext filterContext)
         {
             if (filterContext == null)

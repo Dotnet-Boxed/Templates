@@ -30,7 +30,7 @@
         }
 
         /// <summary>
-        /// Gets a value that indicates whether the redirection should be permanent.
+        /// Gets a value indicating whether the redirection should be permanent.
         /// </summary>
         /// <value>
         /// <c>true</c> if the redirection should be permanent; otherwise, <c>false</c>.

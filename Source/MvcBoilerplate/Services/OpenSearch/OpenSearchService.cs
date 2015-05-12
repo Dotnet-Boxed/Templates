@@ -39,10 +39,12 @@
 
             XNamespace ns = "http://a9.com/-/spec/opensearch/1.1";
             XDocument document = new XDocument(
-                new XElement(ns + "OpenSearchDescription",
+                new XElement(
+                    ns + "OpenSearchDescription",
                     new XElement(ns + "ShortName", shortName),
                     new XElement(ns + "Description", description),
-                    new XElement(ns + "Url",
+                    new XElement(
+                        ns + "Url",
                         new XAttribute("type", "text/html"),
                         new XAttribute("method", "get"),
                         new XAttribute("template", searchUrl)),
@@ -58,15 +60,21 @@
                     //     new XAttribute("indexOffset", "0"),
                     //     new XAttribute("rel", "suggestions"),
                     //     new XAttribute("template", "http://example.com/suggest?q={searchTerms}")),
-                    new XElement(ns + "Image", favicon16Url,
+                    new XElement(
+                        ns + "Image", 
+                        favicon16Url,
                         new XAttribute("height", "16"),
                         new XAttribute("width", "16"),
                         new XAttribute("type", "image/x-icon")),
-                    new XElement(ns + "Image", favicon32Url,
+                    new XElement(
+                        ns + "Image", 
+                        favicon32Url,
                         new XAttribute("height", "32"),
                         new XAttribute("width", "32"),
                         new XAttribute("type", "image/png")),
-                    new XElement(ns + "Image", favicon96Url,
+                    new XElement(
+                        ns + "Image", 
+                        favicon96Url,
                         new XAttribute("height", "96"),
                         new XAttribute("width", "96"),
                         new XAttribute("type", "image/png")),
