@@ -1,4 +1,7 @@
-﻿Version 1.0.45
+﻿Version 1.0.46
+- Comment about Anti-Forgery Tokens and the name of the corresponding form input.
+
+Version 1.0.45
 - Added Elmah Controller Name to ControllerName.cs
 - Ignore requestrs for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
 - Updated Modernizr bundle to use CDN in BundleConfig.cs and updated comments.
