@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +38,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <!-- Build the .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
+         We do this only in release mode because this stops edit and refresh from working. -->
+    <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AntiXssLibrary">
@@ -194,6 +198,19 @@
     <Compile Include="Framework\AtomActionResult.cs" />
     <Compile Include="Framework\CspViolationException.cs" />
     <Compile Include="Framework\FriendlyUrlHelper.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Enums\Gender.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Helper.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Media\Media.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Media\SizedMedia.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\OpenGraphMetadata.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Media\Audio.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Enums\Determiner.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Media\Video.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Media\Image.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\OpenGraphProfile.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\OpenGraphBook.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\Enums\OpenGraphType.cs" />
+    <Compile Include="Framework\Experimental\OpenGraph\OpenGraphWebsite.cs" />
     <Compile Include="Framework\RedirectToCanonicalUrlAttribute.cs" />
     <Compile Include="Framework\NoTrailingSlashAttribute.cs" />
     <Compile Include="Framework\RedirectToHttpsAttribute.cs" />
@@ -201,8 +218,11 @@
     <Compile Include="Framework\SitemapNode.cs" />
     <Compile Include="Framework\StringWriterWithEncoding.cs" />
     <Compile Include="Framework\SyndicationFeedExtensions.cs" />
+    <Compile Include="Framework\Experimental\TwitterCard\TwitterCard.cs" />
     <Compile Include="Framework\UrlHelperExtensions.cs" />
-    <Compile Include="Framework\ValidateReferrerAttribute.cs" />
+    <Compile Include="Framework\Experimental\ValidateReferrerAttribute.cs" />
+    <Compile Include="Framework\Experimental\ViewModel\ViewModel.cs" />
+    <Compile Include="Framework\Experimental\ViewModel\ViewModelT.cs" />
     <Compile Include="Framework\XDocumentExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBoilerplate", "MvcBoilerplate\MvcBoilerplate.csproj", "{E107BBBD-CAB3-4B09-9A48-8437775786A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBoilerplateTemplate", "MvcBoilerplateTemplate\MvcBoilerplateTemplate.csproj", "{B4471578-CD28-47D0-A9E9-C82506D2F784}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBoilerplateVsix", "MvcBoilerplateVsix\MvcBoilerplateVsix.csproj", "{E6EEA438-E2EE-481A-BB85-3793C74483C5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC6", "MVC6", "{E97C7A33-28AC-4AD6-8DC7-46886058969F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +34,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E107BBBD-CAB3-4B09-9A48-8437775786A8} = {C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}
+		{B4471578-CD28-47D0-A9E9-C82506D2F784} = {C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}
 	EndGlobalSection
 EndGlobal

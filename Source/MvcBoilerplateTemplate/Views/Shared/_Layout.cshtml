@@ -101,8 +101,6 @@
 
     @* Description - Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description">
-    
-    
     @* Author - The author of the page. *@
     @if (ViewBag.Author != null)
     {
@@ -117,11 +115,15 @@
 
     
     @* Atom 1.0 Feed - Link to the. This enables the 'Subscribe to this page' button in FireFox. *@
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml" />
+    <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
         
 
     @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
     <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+
+
+    @* You can use the head section to render additional meta tags like Facebooks Open Graph, Twitter Cards and other meta data. *@
+    @RenderSection("head", required: false)
 </head>
 <body>
     @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@

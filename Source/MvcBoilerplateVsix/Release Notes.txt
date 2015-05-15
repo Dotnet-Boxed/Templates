@@ -1,5 +1,9 @@
 ﻿Version 1.0.46
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
+- Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the 
+  .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
+  We do this only in release mode because this stops edit and refresh from working.
+- Added new render section to _Layout.cshtml for meta tags in the head of the HTML.
 
 Version 1.0.45
 - Added Elmah Controller Name to ControllerName.cs
