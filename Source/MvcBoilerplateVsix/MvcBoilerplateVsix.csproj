@@ -69,7 +69,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MvcBoilerplateTemplate\MvcBoilerplateTemplate.csproj">
+    <ProjectReference Include="..\MVC5\Mvc5BoilerplateTemplate\MvcBoilerplateTemplate.csproj">
       <Project>{B4471578-CD28-47D0-A9E9-C82506D2F784}</Project>
       <Name>MvcBoilerplateTemplate</Name>
       <VSIXSubPath>ProjectTemplates</VSIXSubPath>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Web.Mvc;
+    using $safeprojectname$.Constants;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource.

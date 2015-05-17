@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
   <TemplateData>
-    <Name>ASP.NET MVC Boilerplate</Name>
+    <Name>ASP.NET MVC 5 Boilerplate</Name>
     <Description>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.co.uk</Description>
     <Icon>MvcBoilerplateTemplate.ico</Icon>
     <ProjectType>CSharp</ProjectType>
