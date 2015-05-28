@@ -1,0 +1,309 @@
+﻿Version 1.1.0
+- Comment about Anti-Forgery Tokens and the name of the corresponding form input.
+- Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the 
+  .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
+  We do this only in release mode because this stops edit and refresh from working.
+- Added new render section to _Layout.cshtml for meta tags in the head of the HTML.
+- Removed all classes under the Framework namespace and moved them to a seperate NuGet package called Boilerplate.Web.Mvc5
+  this should make it easy for people to upgrade their projects to the latest framework and we can include bug fixes and new
+  features easily. Tp achieve this a few changes had to be made:
+	- RedirectToCanonicalUrlAttribute now has an extra constructor paramter, set in FilterConfig.cs which tells it which controller actions to ignore.
+	- ContentType constant also moved to Framework.
+	- SitemapService now inherits from SitemapGenerator which exists in the Framework. SitemapService is now much more simplified.
+	- Boilerplate.Web.Mvc5 NuGet package added.
+- jQuery NuGet package updated to 2.1.4.
+- jQuery Google CDN URL updated to 2.1.4.
+- Open Graph and Facebook meta tag helpers added to the Framework (Now exists in the Boilerplate.Web.Mvc5 NuGet package).
+	- Open Graph meta tags added to _Layout.cshtml file allowing us to add them using the ViewBag.
+	- Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
+	- open-graph-1200x630.png file added to be used in the Open Graph meta tags and displayed when someone shares the site on Facebook.
+
+Version 1.0.45
+- Added Elmah Controller Name to ControllerName.cs
+- Ignore requestrs for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
+- Updated Modernizr bundle to use CDN in BundleConfig.cs and updated comments.
+- Lots of files changed for StyleCop compliance, mostly fixing spelling mistakes and comments.
+
+Version 1.0.44
+- Elmah.Mvc NuGet package updated from 2.1.1 to 2.1.2.
+- Autofac.Mvc5 NuGet package updated from 3.3.3 to 3.3.4.
+- New Elmah.Mvc app setting added to Web.config file called elmah.mvc.UserAuthCaseSensitive.
+- New CacheService.cs and ICacheService.cs added, which is a wrapper around the System.Runtime.Caching.MemoryCache.
+- ICacheService registered with Autofac in Startup.Container.cs.
+- SitemapService now supports sitemap index files, which are used when you have a large number of nodes in your sitemap. See SitemapService.cs for more details.
+	- ISitemapService.cs updated with new index parameter and comments.
+	- SitemapService.cs totally updated and improved to support sitemap indexes.
+	- SitemapService now uses ICacheService to cache sitemap nodes internally rather than relying on OutputCache.
+	- HomeController updated with new index parameter which it passes to the SiteMapService. New comments and removed OutputCache.
+	- Removed sitemap caching settings from Web.config.
+	- Removed sitemap caching profile name from CacheProfileName.cs
+- Added XDocumentExtensions.cs to convert XDocument to String but with the ability to specify any Encoding.
+- Refactored OpenSearchService and SitemapService to use XDocumentExtensions instead of containing duplicated code.
+- SitemapPingerService updated to remove async keyword in Debug mode, to get around a compiler warning about using the async keyword without awaiting anything.
+- FilterConfig.cs changes courtesy of Omid:
+	- Changed example.com to *.example.com.
+	- Used a string.Join rather than string.Format to create the custom sources for CDN's.
+
+Version 1.0.43
+- Glimpse path moved back to /glimpse.axd as the path was no longer working due to a Elmah bug workaround.
+
+Version 1.0.42
+- Added the FriendlyUrlHelper to help create SEO and human friendly URL's.
+- Added a note to ReadMe.html to use the FriendlyUrlHelper to create SEO and human friendly URL's.
+- Removed IgnoreRoute statements for Elmah and Glimpse. It turns out you don't need these.
+
+Version 1.0.41
+- RedirectToHttpsAttribute set to Compile, rather than Content.
+
+Version 1.0.40
+- Corrected thumbnail size in FeedService.cs.
+
+Version 1.0.39
+- Fixed the 'Learn More' link to ASP.NET MVC Boilerplate in Index.cshtml.
+- Added a note about session state in Web.config file.
+
+Version 1.0.38
+- Added /content/icons/atom-icon-48x48.png and /content/icons/atom-icon-96x48.png for Atom 1.0 feed images.
+- Changed the images referred to in FeedService.cs to point to the above images.
+- Added in a default MapRoute in RouteConfig to work around a Elmah/Elmah.MVC bug.
+- enablePrefetchOptimization set to true in Web.config for better startup performance of the site.
+- Note added to ReadMe.html about enabling the prefetcher in Windows Server for the enablePrefetchOptimization setting to work.
+- Added comments in Web.config for the <compilation/> element.
+- Added <requestLimits maxAllowedContentLength="1048576" maxQueryString="2048" maxUrl="4096" /> to the Web.config as well as comments.
+- Added similar settings to the <httpRuntime element in the Web.config with comments.
+- Added a note to ReadMe.html to edit the requestLimits and httpRuntime settings for better security.
+
+Version 1.0.37
+- Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
+- Ignore the Elmah pages in RedirectToCanonicalUrlAttribute.
+
+Version 1.0.36
+- Fixed the RedirectToHttpsAttribute class not being recognized in the project, thanks to @dls314159 for highlighting this issue.
+- Added two more IgnoreRoute statements to support Elmah, copied from Elmah.MVC (This should be part of Elmah.MVC already, have submitted a pull request to Elmah.MVC. If they accept it, we can remove this code altogether).
+- Added SitemapPingerService.cs and ISitemapPingerService.cs which sends the URL for the sitemap.xml file to Google, Microsoft and Yahoo.
+- Registered the ISitemapPingerService with Autofac in Startup.Container.cs.
+- Added a note in ReadMe.html to call the SitemapPingerService's PingSearchEngines method when your sitemap changes.
+
+Version 1.0.35
+- Atom feed now uses absolute URL's instead of the BaseUri. This is because Firefox has a bug and cannot handle relative URL's!!! Updated FeedService.cs.
+- Moved some code around in FeedService.cs to make it easier to read. Uncommented the media enclosure link.
+- Added self URL link to Atom feed in FeedService.cs.
+- Added Yahoo Media Atom/RSS extensions to SyndicationFeedExtensions.cs.
+- Added Yahoo Media thumbnails to Atom feed entries in FeedService.cs.
+- Added a few content types to ContentType.cs and added some comments.
+
+Version 1.0.34
+- Added a AbsoluteContent extension method to UrlHelperExtensions.cs. This gives us an absolute URL to static content.
+- Used AbsoluteContent in OpenSearchService.cs to link to icons.
+- ReadMe.html now has check boxes next to each step which remembers if it was checked or not.
+- Added lots of new information into ReadMe.html from http://webdevchecklist.com/.
+- Added Atom 1.0 feed.
+	- IFeedService.cs added.
+	- FeedService.cs added.
+	- AtomActionResult.cs added to return Atom feeds.
+	- SyndicationFeedExtensions added to add icon element to System.ServiceModel.SyndicationFeed.
+	- FeedService registered with Autofac in Startup.Container.cs.
+	- Feed action added to HomeController.cs.
+	- Feed action is cached. Cache settings added to web.config and CacheProfileName.cs.
+	- Atom feed link tag added to _Layout.cshtml.
+	- RSS/Atom section added to ReadMe.html
+- Atom, Png, and Jpg ContentType's added to ContentType.cs.
+
+Version 1.0.33
+- Added RequirePermanentHttpsAttribute filter which is different from System.Web.Mvc.RequireHttpsAttribute because it does a 301 Permament redirect instead of a 302 temporary redirect.
+- Changed commented out code in FilterConfig.cs to use RequirePermanentHttpsAttribute instead of RequireHttpsAttribute.
+- Added RedirectToCanonicalUrlAttribute filter which redirects requests without lowercase characters or trailing slashes to a valid one for better SEO.
+- Added NoTrailingSlashAttribute to disable the RedirectToCanonicalUrlAttribute for routes like /robots.txt.
+- Added RedirectToCanonicalUrlAttribute to the global filters in FilterConfig.cs.
+- Added NoTrailingSlashAttribute to the opensearch.xml, robots.txt and sitemap.xml actions in HomeController.cs.
+- Added a note to ReadMe.html to edit the RobotsService.cs file to modify the dynamically generated robots.txt file.
+- Added a note to ReadMe.html to use a domain names 301 redirect service to redirect multiple domain names to a single one for better SEO.
+- Added a note in ReadMe.html to use Microsoft the SEO Toolkit to test your site.
+- Added RedirectToHttpsAttribute to enable 301 Permanent redirect to HTTPS pages rather than 302 temporary redirects that the System.Web.MVC.RequireHttpsAttribute attribute does.
+- Replaced the commented out RequireHttpsAttribute with RedirectToHttpsAttribute(true) in FilterConfig.cs.
+- Expanded the comment in _Layout.cshtml about the canonical URL.
+- Expanded the comment in RouteConfig.cs about trailing slashes and how Google treats them.
+- Added new 405 Method Not Allowed error page, used by RequireHttpsAttribute.
+
+Version 1.0.32
+- Added a comment in RobotsService.cs not to disallow scripts or images.
+- Added a disallow in RobotsService.cs so that the robots.txt stops robots from indexing the error pages.
+- Added About and Contact pages to sitemap.xml in SitemapService.cs
+- Added a note to the Forbidden action in ErrorController.cs that "Unlike a 401 Unauthorized response, authenticating will make no difference.".
+
+Version 1.0.31
+- Created IOpenSearchService.cs and OpenSearchService.cs and moved code in HomeController.cs there.
+- Created IRobotsTextService.cs and RobotsTextService.cs and moved code in HomeController.cs there.
+- Added .TrimEnd('/') to site map URL in robots.txt. See RobotsTextService.cs.
+- Registered the new services above in Startup.Container.cs and injected them into HomeController.cs.
+- Updated the comments for the ISitemapService.cs, SitemapService.cs and HomeController actions.
+- Added Pre-requisites section to ReadMe.html telling you to update Visual Studio, NuGet extension and install the Web Essentials extension.
+- Added Forbidden error page to ErrorController and Forbidden.cshtml view. Cache settings added to web.config.
+- Added 403 Forbidden error setting to httpErrors section in web.config.
+- Added commented out information about Crawl-delay to RobotsService.cs.
+- Modified the .csproj file so that the IISUrl element is empty. This allows a random port to be chosen each time a project is generated from the template.
+
+Version 1.0.30
+- Set elmah.mvc.disableHandleErrorFilter app setting in web.config to true.
+- 500 errors now route to error/internalservererror because there is now a error folder which conflicts with the /error route.
+- Added link to my blog post about CSP at http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/ to ReadMe.html and FilterConfig.cs.
+- Added link to my blog post about HTTP Headers at http://rehansaeed.co.uk/nwebsec-asp-net-mvc-security-through-http-headers/ to FilterConfig.cs.
+- Added link to my blog post about internet favicons at http://rehansaeed.co.uk/internet-favicon-madness to _Layout.cshtml.
+
+Version 1.0.29
+- Enabled Dynamic IP Security in log only mode in the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.
+- Added a note to the ReadMe.txt file to adjust the Dynamic IP Security settings.
+
+Version 1.0.28
+- Add new HTTP error codes to httpErrors in web.config and new static error pages under the Error folder:
+	- 403.502 Forbidden errors using a static HTML file. This occurs due to a Denial of Service (Dos) attack.
+	- 500.13 Internal Server Error errors using a static HTML file. This occurs because the server is too busy.
+	- 503 Service Unavailable errors using a static HTML file.
+	- 504 Gateway Timeout errors using a static HTML file.
+- Add new ignore routes to RouteConfig.cs to ignore the new static HTML files.
+- Added new note in Readme.html to update the static HTML error files.
+
+Version 1.0.27
+- Microsoft CDN Bootstrap URL updated to 3.3.4.
+- Twitter.Bootstrap.Less package updated to 3.3.4.
+
+Version 1.0.26
+- Fixed skip to main content link for screen readers in _Layout.cshtml.
+- Added aria-label and maxlength to search text box in _Layout.cshtml.
+
+Version 1.0.25
+- Added a search action to HomeController that redirects to Google and with instructions on how to setup your own search.
+- Added opensearch.xml file to site (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org for more information.
+	- HomeController.cs modified.
+	- _Layout.cshtml modified.
+	- Caching settings added to Web.config.
+	- MVC routing settings added to Web.config.
+- Added a note about adding search to your site and the Open Search protocol to ReadMe.html.
+- Fixed sitemap.xml to return XML containing the version and correct encoding of UTF-8.
+
+Version 1.0.24
+- Added accessibility section to ReadMe.html.
+- aria-hidden="true" added to all font awesome icons for screen readers and better accessibility.
+- Use 'span' instead of 'i' for all font awesome icons.
+- Added aside and section HTML5 elements to Contact view to show an example of using an aside.
+- Added aria role="article" to all HTML5 article elements.
+- Added aria role="complementary" to all HTML5 aside elements.
+- Added aria role="region" to all HTML5 section elements.
+
+Version 1.0.23
+- Enable tracing by default (Only in Debug mode).
+- Added debug menu item showing Elmah, Glimpse and Tracing links (Only visible in Debug mode).
+
+Version 1.0.22
+- Added 400 Bad Request to ErrorController, Views, Cache config and http.
+- Added 500 Internal Server Error to ErrorController, Views, Cache config and http.
+- Added HttpContext.Current to Elmah logging in the LoggingService. Custom logging should log extra information about the current request if available.
+- Added a security note to ReadMe.html explaining the need to keep NuGet packages up to date.
+- Added a security note to ReadMe.html about enabling retail mode.
+
+Version 1.0.21
+- WOFF MIME type changed to application/font-woff as per specification. See http://stackoverflow.com/questions/3594823/mime-type-for-woff-fonts.
+- Added a note to encrypt the machine key in web.config and ReadMe.html.
+- Added notes on how to update NuGet packages and files from this template to ReadMe.html.
+- Changes courtesy of @surfsflo on GitHub
+	- Add mimeMap to fix "404 not found" error when serving "ghyphicon-halflings-regular.woff2".
+	- Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
+
+Version 1.0.20
+- Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have imlemented SSL/TLS over HTTPS correctly.
+
+Version 1.0.19
+- Microsoft CDN jQuery Validation URL updated to 1.13.1.
+- Microsoft CDN jQuery Validation Unobtrusive URL updated to 5.2.3.
+- Microsoft CDN Modernizr URL updated to 2.8.3.
+- Microsoft CDN Bootstrap URL updated to 3.3.2.
+- Microsoft CDN Respond URL updated to 1.4.2.
+
+Version 1.0.18
+- Updated Startup.cs to add Preload directive to Strict-Transport-Security. See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security.
+- SSL/TLS section in ReadMe.html split up and expanded with more information and links.
+- ReadMe.html split up into sub-sections.
+
+Version 1.0.17
+- Stop IIS returning a 403.12 Forbidden response when navigating to a folder e.g. /Content
+  by rewriting to 404 not found using Web.config. Also set defaultDocument enabled=false to achieve the same thing.
+  See http://www.troyhunt.com/2014/09/solving-tyranny-of-http-403-responses.html.
+- Add a note to ReadMe.html to save images for the web and use Visual Studio Image Optimizer in conjunction 
+  with PNG Gauntlet to losslessly compress your images.
+- Add a note to ReadMe.html saying that default document handling has been disabled and detailing how you can turn it on if you need to.
+
+Version 1.0.16
+- Added Android/Chrome version M39+ favicon/theming support. Layout.cshtml updated. Files added include:
+	\Content\icons\android-chrome-144x144.png
+    \Content\icons\android-chrome-192x192.png
+    \Content\icons\android-chrome-36x36.png
+    \Content\icons\android-chrome-48x48.png
+    \Content\icons\android-chrome-72x72.png
+    \Content\icons\android-chrome-96x96.png
+    \Content\icons\manifest.json
+- \Content\icons\favicon-160x160.png removed - Opera can use other icon sizes to fill the gap.
+- Compressed PNG images further using the excellent and free PNG Gauntlet.
+- Use HTML5 self closing tags http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5 
+  and http://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br.
+
+Version 1.0.15
+- Strict-Transport-Security HTTP header configured for use using the NWebSec.Owin NuGet package in Startup.cs.
+  Commented out by default. ReadMe.html also updated with this information.
+- NWebSec.Owin package added.
+- Added comments for the NWebSec SetNoCacheHttpHeadersAttribute attribute.
+- Removed the commented out NWebSec XXssProtectionAttribute.
+
+Version 1.0.14
+- Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024. 
+  (For more information see http://www.iis.net/learn/extensions/using-iis-express/running-iis-express-without-administrative-privileges).
+
+Version 1.0.13
+- Added NWebSec CSP 2.0 filters to FilterConfig.cs for default settings and comments.
+- Turn off tracing in Release mode, just in case it is turned on.
+- Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found, 
+  rather than a 500 Internal Server Error for added security and performance.
+- Added Web.config comments encouraging encryption of connection strings.
+- Added ReadMe.html comments encouraging encryption of connection strings.
+- Added ReadMe.html comments encouraging users to scan their site for security vulnerabilities at asafaweb.com.
+- Added message to CspViolationException explaining that CSP can be set to report-only mode.
+- Added comments to LoggingService explaining where we are logging.
+
+Version 1.0.12
+- Microsoft.Owin package updated to 3.0.1.
+- Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
+- NWebSec updated to 4.0.0. 
+	- Web.config changes to point to new DLL.
+	- HttpHeaderSecurityModuleConfig.xsd updated.
+	- FilterConfig changed to fix NWebSec breaking changes. Enabled/Disabled enum changed to bool and namespace removed.
+	- Index.cshtml updated with new GitHub home page for NWebSec.
+- NWebSec package updated to 4.0.0.
+- NWebSec.Mvc package updated to 4.0.0.
+- NWebSec.Core package updated to 1.3.0.
+
+Version 1.0.11
+- Fixed Issue #1 - Intellisense broken in cshtml
+
+Version 1.0.10
+- Microsoft.AspNet.Cors package updated to 5.2.3.
+- Microsoft.AspNet.Mvc package updated to 5.2.3.
+- Microsoft.AspNet.Razor package updated to 3.2.3.
+- Microsoft.AspNet.WebPages package updated to 3.2.3.
+- Microsoft.jQuery.Unobtrusive.Validation package updated to 3.2.3.
+- Twitter.Bootstrap.Less package updated to 3.3.2 (Microsoft CDN URL remains on 3.3.1 as 3.3.2 is not available. Changes are minor).
+
+Version 1.0.8
+- jQuery NuGet package updated to 2.1.3.
+- Google CDN jQuery URL updated to 2.1.3.
+- Newtonsoft.Json NuGet package updated to 6.0.8.
+
+Version 1.0.7
+- Updated Visual Studio Gallery icons and New Project dialogue icons for template.
+
+Version 1.0.6
+- jQuery.Validation NuGet package updated to 1.13.0.
+- Twitter.Bootstrap.Less NuGet package updated to 3.3.1.
+- Link to RehanSaeed.co.uk containing details of this project added to Home.cshtml.
+- Newtonsoft.Json NuGet package updated to 6.0.7
+
+Version 1.0.0 
+Initial Release

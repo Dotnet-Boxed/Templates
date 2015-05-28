@@ -1,0 +1,280 @@
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:updated_time	DateTime	The time when the object was last updated
+
+
+product.item
+This object type represents a product item.
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# product: http://ogp.me/ns/product#">
+  <meta property="fb:app_id"                      content="302184056577324" /> 
+  <meta property="og:type"                        content="product.item" /> 
+  <meta property="og:url"                         content="Put your own URL to the object here" /> 
+  <meta property="og:title"                       content="Sample Item" /> 
+  <meta property="og:image"                       content="https://fbstatic-a.akamaihd.net/images/devsite/attachment_blank.png" /> 
+  <meta property="product:retailer_item_id"       content="Sample Retailer Product Item ID" /> 
+  <meta property="product:price:amount"           content="Sample Price: " /> 
+  <meta property="product:price:currency"         content="Sample Price: " /> 
+  <meta property="product:shipping_cost:amount"   content="Sample Shipping Cost: " /> 
+  <meta property="product:shipping_cost:currency" content="Sample Shipping Cost: " /> 
+  <meta property="product:shipping_weight:value"  content="Sample Shipping Weight: Value" /> 
+  <meta property="product:shipping_weight:units"  content="Sample Shipping Weight: Units" /> 
+  <meta property="product:sale_price:amount"      content="Sample Sale Price: " /> 
+  <meta property="product:sale_price:currency"    content="Sample Sale Price: " /> 
+  <meta property="product:sale_price_dates:start" content="Sample Sale Price Dates: Start" /> 
+  <meta property="product:sale_price_dates:end"   content="Sample Sale Price Dates: End" /> 
+  <meta property="product:availability"           content="Sample Availability" /> 
+  <meta property="product:condition"              content="Sample Condition" /> 
+  Properties
+Name	Type	Description
+FIELDS
+product:age_group	EnumClass	The target age group of the item, one of 'kids' or 'adult'
+product:availability	EnumClass	The availability of the item, one of 'preorder', 'in stock', 'available for order', or 'out of stock'
+product:brand	String	The brand of the product or its original manufacturer
+product:category	String	A category for the item
+product:color	String	The color of the item
+product:condition	EnumClass	The condition of the item, one of 'new', 'refurbished', or 'used'
+product:expiration_time	DateTime	The time when the item will expire
+product:group_ref	Reference	A reference to the product group object for this item
+product:gtin	ProductID	A Global Trade Item Number, which encompasses UPC, EAN, JAN, and ISBN
+product:material	String	The material used to make the item
+product:mfr_part_no	String	A manufacturer's part number for the item
+product:pattern	String	The pattern used on the item
+product:price	Array<Currency>	The price of the item
+product:retailer_category	String	The retailer's category for the item
+product:retailer_group_id	String	The retailer product group ID for this item
+product:retailer_item_id	String	The retailer's ID for the item
+product:sale_price	Currency	The sale price of the item
+product:sale_price_dates	DateTimeRange	The date range for which the sale price is valid
+product:shipping_cost	Array<Currency>	The shipping cost of the item
+product:shipping_weight	Quantity	The weight of the item
+product:size	String	The size of the item (such as 'S', 'M', 'L')
+product:target_gender	EnumClass	The target gender of the item, one of 'female', 'male', or 'unisex'
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+fb:admins	Array<Facebook ID>	An array of the Facebook IDs of the app's administrators
+fb:app_id	Facebook ID	A Facebook app ID
+fb:profile_id	Profile	The Facebook ID of a user that can be followed
+og:audio	Array<Audio>	
+og:description	String	A short description of the object
+og:determiner	Enum	The word that appears before the object's title in a sentence. This is an list of words from 'a', 'an', 'the', ' "" ', or 'auto'. If 'auto' is chosen, the consumer of the object will chose between 'a' or 'an'. The default is the blank, "".
+og:image	Array<Image>	
+og:locale	Locale	The locale that the object's tags are marked up in, in the format language_TERRITORY. The default is en_US
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:site_name	String	The name of the web site upon which the object resides
+og:title	String	The title of the object as it should appear in the graph
+og:type	String	The type of the object, such as 'article'
+og:updated_time	DateTime	The time when the object was last updated
+og:url	URL	The canonical URL of the object, used as its ID in the graph
+og:video	Array<Video>	
+
+
+
+
+restaurant.menu
+This object type represents a restaurant's menu. A restaurant can have multiple menus, and each menu has multiple sections.
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# restaurant: http://ogp.me/ns/restaurant#">
+  <meta property="fb:app_id"             content="302184056577324" /> 
+  <meta property="og:type"               content="restaurant.menu" /> 
+  <meta property="og:url"                content="Put your own URL to the object here" /> 
+  <meta property="og:title"              content="Sample Menu" /> 
+  <meta property="og:image"              content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" /> 
+  <meta property="restaurant:restaurant" content="Sample Restaurant" /> 
+  Properties
+Name	Type	Description
+FIELDS
+restaurant:restaurant	Reference	A reference to the object representing the restaurant that uses this menu
+restaurant:section	Array<Reference>	An array of references to the objects representing the sections within the menu
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+fb:admins	Array<Facebook ID>	An array of the Facebook IDs of the app's administrators
+fb:app_id	Facebook ID	A Facebook app ID
+fb:profile_id	Profile	The Facebook ID of a user that can be followed
+og:audio	Array<Audio>	
+og:description	String	A short description of the object
+og:determiner	Enum	The word that appears before the object's title in a sentence. This is an list of words from 'a', 'an', 'the', ' "" ', or 'auto'. If 'auto' is chosen, the consumer of the object will chose between 'a' or 'an'. The default is the blank, "".
+og:image	Array<Image>	
+og:locale	Locale	The locale that the object's tags are marked up in, in the format language_TERRITORY. The default is en_US
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:site_name	String	The name of the web site upon which the object resides
+og:title	String	The title of the object as it should appear in the graph
+og:type	String	The type of the object, such as 'article'
+og:updated_time	DateTime	The time when the object was last updated
+og:url	URL	The canonical URL of the object, used as its ID in the graph
+og:video	Array<Video>	
+
+
+restaurant.menu_item
+This object type represents a single item on a restaurant's menu. Every item belongs within a menu section.
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# restaurant: http://ogp.me/ns/restaurant#">
+  <meta property="fb:app_id"                           content="302184056577324" /> 
+  <meta property="og:type"                             content="restaurant.menu_item" /> 
+  <meta property="og:url"                              content="Put your own URL to the object here" /> 
+  <meta property="og:title"                            content="Sample Menu Item" /> 
+  <meta property="og:image"                            content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" /> 
+  <meta property="restaurant:section"                  content="Sample Section" /> 
+  <meta property="restaurant:variation:price:amount"   content="Sample Variation: Price: " /> 
+  <meta property="restaurant:variation:price:currency" content="Sample Variation: Price: " /> 
+  Properties
+Name	Type	Description
+FIELDS
+restaurant:section	Reference	A reference to the object representing the section of the menu containing this item
+restaurant:variation	Array<Struct>	A variation of this menu item
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+fb:admins	Array<Facebook ID>	An array of the Facebook IDs of the app's administrators
+fb:app_id	Facebook ID	A Facebook app ID
+fb:profile_id	Profile	The Facebook ID of a user that can be followed
+og:audio	Array<Audio>	
+og:description	String	A short description of the object
+og:determiner	Enum	The word that appears before the object's title in a sentence. This is an list of words from 'a', 'an', 'the', ' "" ', or 'auto'. If 'auto' is chosen, the consumer of the object will chose between 'a' or 'an'. The default is the blank, "".
+og:image	Array<Image>	
+og:locale	Locale	The locale that the object's tags are marked up in, in the format language_TERRITORY. The default is en_US
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:site_name	String	The name of the web site upon which the object resides
+og:title	String	The title of the object as it should appear in the graph
+og:type	String	The type of the object, such as 'article'
+og:updated_time	DateTime	The time when the object was last updated
+og:url	URL	The canonical URL of the object, used as its ID in the graph
+og:video	Array<Video>	
+
+
+restaurant.menu_section
+This object type represents a section in a restaurant's menu. A section contains multiple menu items.
+ <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# restaurant: http://ogp.me/ns/restaurant#">
+  <meta property="fb:app_id"       content="302184056577324" /> 
+  <meta property="og:type"         content="restaurant.menu_section" /> 
+  <meta property="og:url"          content="Put your own URL to the object here" /> 
+  <meta property="og:title"        content="Sample Menu Section" /> 
+  <meta property="og:image"        content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" /> 
+  <meta property="restaurant:menu" content="Sample Menu" /> 
+  Properties
+Name	Type	Description
+FIELDS
+restaurant:item	Array<Reference>	An array of references to the objects representing the items within this section of the menu
+restaurant:menu	Reference	A reference to the object representing the menu containing this section
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+fb:admins	Array<Facebook ID>	An array of the Facebook IDs of the app's administrators
+fb:app_id	Facebook ID	A Facebook app ID
+fb:profile_id	Profile	The Facebook ID of a user that can be followed
+og:audio	Array<Audio>	
+og:description	String	A short description of the object
+og:determiner	Enum	The word that appears before the object's title in a sentence. This is an list of words from 'a', 'an', 'the', ' "" ', or 'auto'. If 'auto' is chosen, the consumer of the object will chose between 'a' or 'an'. The default is the blank, "".
+og:image	Array<Image>	
+og:locale	Locale	The locale that the object's tags are marked up in, in the format language_TERRITORY. The default is en_US
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:site_name	String	The name of the web site upon which the object resides
+og:title	String	The title of the object as it should appear in the graph
+og:type	String	The type of the object, such as 'article'
+og:updated_time	DateTime	The time when the object was last updated
+og:url	URL	The canonical URL of the object, used as its ID in the graph
+og:video	Array<Video>	
+
+    Overview
+    Markup
+    Properties
+    Create
+    Read
+    Update
+    Delete
+    
+    
+    restaurant.restaurant
+    This object type represents a restaurant at a specific location.
+     <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# restaurant: http://ogp.me/ns/restaurant#">
+  <meta property="fb:app_id"                              content="302184056577324" /> 
+  <meta property="og:type"                                content="restaurant.restaurant" /> 
+  <meta property="og:url"                                 content="Put your own URL to the object here" /> 
+  <meta property="og:title"                               content="Sample Restaurant" /> 
+  <meta property="og:image"                               content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" /> 
+  <meta property="og:description"                         content="This place rocks" /> 
+  <meta property="restaurant:contact_info:street_address" content="1601 Willow Rd." /> 
+  <meta property="restaurant:contact_info:locality"       content="Menlo Park" /> 
+  <meta property="restaurant:contact_info:region"         content="California" /> 
+  <meta property="restaurant:contact_info:postal_code"    content="94025" /> 
+  <meta property="restaurant:contact_info:country_name"   content="United States" /> 
+  <meta property="restaurant:contact_info:email"          content="brian&#064;example.com" /> 
+  <meta property="restaurant:contact_info:phone_number"   content="212-555-1234" /> 
+  <meta property="restaurant:contact_info:website"        content="http://www.facebook.com" /> 
+  <meta property="place:location:latitude"                content="37.484828" /> 
+  <meta property="place:location:longitude"               content="-122.148283" /> 
+  Properties
+Name	Type	Description
+FIELDS
+restaurant:category	Array<String>	An array of categories describing this restaurant's food
+restaurant:contact_info	ContactInfo	Contact info for the restaurant
+restaurant:menu	Array<Reference>	An array of references to objects representing the restaurant's menus
+restaurant:price_rating	Integer	Price rating for this restaurant (from 1 to 4)
+INHERITED FIELDS
+al:android	Array<Struct>	
+al:ios	Array<IosApplink>	
+al:ipad	Array<IosApplink>	
+al:iphone	Array<IosApplink>	
+al:web	Struct	
+al:windows	Array<Struct>	
+al:windows_phone	Array<Struct>	
+al:windows_universal	Array<Struct>	
+fb:admins	Array<Facebook ID>	An array of the Facebook IDs of the app's administrators
+fb:app_id	Facebook ID	A Facebook app ID
+fb:profile_id	Profile	The Facebook ID of a user that can be followed
+og:audio	Array<Audio>	
+og:description	String	A short description of the object
+og:determiner	Enum	The word that appears before the object's title in a sentence. This is an list of words from 'a', 'an', 'the', ' "" ', or 'auto'. If 'auto' is chosen, the consumer of the object will chose between 'a' or 'an'. The default is the blank, "".
+og:image	Array<Image>	
+og:locale	Locale	The locale that the object's tags are marked up in, in the format language_TERRITORY. The default is en_US
+og:restrictions	Restrictions	
+og:rich_attachment	Boolean	
+og:see_also	Array<URL>	An array of URLs of related resources
+og:site_name	String	The name of the web site upon which the object resides
+og:title	String	The title of the object as it should appear in the graph
+og:type	String	The type of the object, such as 'article'
+og:updated_time	DateTime	The time when the object was last updated
+og:url	URL	The canonical URL of the object, used as its ID in the graph
+og:video	Array<Video>	
+place:location	GeoPoint

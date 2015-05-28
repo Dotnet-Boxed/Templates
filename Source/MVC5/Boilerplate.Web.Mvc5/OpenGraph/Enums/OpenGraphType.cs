@@ -1,0 +1,32 @@
+﻿namespace Boilerplate.Web.Mvc.OpenGraph
+{
+    public enum OpenGraphType
+    {
+        Article,
+        Book,
+        BooksAuthor,
+        BooksBook,
+        BooksGenre,
+        Business,
+        FitnessCourse,
+        GameAchievement,
+        MusicAlbum,
+        MusicPlaylist,
+        MusicRadioStation,
+        MusicSong,
+        Place,
+        Product,
+        ProductGroup,
+        ProductItem,
+        Profile,
+        Restaurant,
+        RestaurantMenu,
+        RestaurantMenuItem,
+        RestaurantMenuSection,
+        VideoEpisode,
+        VideoMovie,
+        VideoTvShow,
+        VideoOther,
+        Website
+    }
+}
