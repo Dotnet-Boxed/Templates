@@ -51,7 +51,7 @@
 
         /// <summary>
         /// Gets or sets the priority of this URL relative to other URLs on your site. Valid values range from 0.0 to 1.0. 
-        /// This field is optional, if it is <see cref="null"/> the default priority of a page is 0.5.
+        /// This field is optional, if it is <c>null</c> the default priority of a page is 0.5.
         /// This value does not affect how your pages are compared to pages on other sites—it only lets the search engines 
         /// know which pages you deem most important for the crawlers. 
         /// Please note that the priority you assign to a page is not likely to influence the position of your URLs in a 

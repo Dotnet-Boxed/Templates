@@ -60,9 +60,9 @@
         #endregion
 
         #region Public Methods
-        
+
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder"/> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public abstract void ToString(StringBuilder stringBuilder); 

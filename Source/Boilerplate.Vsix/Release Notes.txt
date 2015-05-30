@@ -13,9 +13,9 @@
 	- Boilerplate.Web.Mvc5 NuGet package added.
 - jQuery NuGet package updated to 2.1.4.
 - jQuery Google CDN URL updated to 2.1.4.
-- Open Graph and Facebook meta tag helpers added to the Framework (Now exists in the Boilerplate.Web.Mvc5 NuGet package).
-	- Open Graph meta tags added to _Layout.cshtml file allowing us to add them using the ViewBag.
-	- Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
+- Twitter Card and Open Graph and Facebook meta tag helpers added to the Framework (Now exists in the Boilerplate.Web.Mvc5 NuGet package).
+	- Twitter card and Open Graph meta tags added to _Layout.cshtml file allowing us to add them using the ViewBag.
+	- Twitter card and Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
 	- open-graph-1200x630.png file added to be used in the Open Graph meta tags and displayed when someone shares the site on Facebook.
 
 Version 1.0.45

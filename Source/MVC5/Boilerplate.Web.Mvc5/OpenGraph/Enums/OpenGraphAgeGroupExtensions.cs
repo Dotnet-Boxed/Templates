@@ -6,10 +6,12 @@
     internal static class OpenGraphAgeGroupExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string"/> representation of the <see cref="OpenGraphAgeGroup"/>.
+        /// Returns the lowercase <see cref="string" /> representation of the <see cref="OpenGraphAgeGroup" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The lowercase <see cref="string"/> representation of the <see cref="OpenGraphAgeGroup"/>.</returns>
+        /// <param name="openGraphAgeGroup">The open graph age group.</param>
+        /// <returns>
+        /// The lowercase <see cref="string" /> representation of the <see cref="OpenGraphAgeGroup" />.
+        /// </returns>
         public static string ToLowercaseString(this OpenGraphAgeGroup openGraphAgeGroup)
         {
             switch (openGraphAgeGroup)

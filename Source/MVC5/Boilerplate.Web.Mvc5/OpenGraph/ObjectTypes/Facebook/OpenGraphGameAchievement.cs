@@ -11,34 +11,22 @@
     /// almost no distribution. Apps should aim for between 50-100 achievements consisting of a mix of 50 (difficult), 25 (medium), and 10 (easy) point 
     /// value achievements Read more on how to use achievements in this guide. This object type is not part of the Open Graph standard but is used by 
     /// Facebook.
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
     /// </summary>
     public class OpenGraphGameAchievement : OpenGraphMetadata
     {
         private readonly int points;
 
         #region Constructors
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphGameAchievement" /> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        /// <param name="points">The relative importance and scarcity of the achievement.</param>
-        public OpenGraphGameAchievement(string title, OpenGraphImage image, int points)
-            : base(title, image)
-        {
-            this.points = points;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphGameAchievement" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        /// <param name="location">The location of the business.</param>
         /// <param name="points">The relative importance and scarcity of the achievement.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphGameAchievement(string title, OpenGraphImage image, int points, string url)
+        public OpenGraphGameAchievement(string title, OpenGraphImage image, int points, string url = null)
             : base(title, image, url)
         {
             this.points = points;
@@ -73,15 +61,15 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMeta("game:points", this.Points);
-            stringBuilder.AppendMetaIfNotNull("game:secret", this.IsSecret);
+            stringBuilder.AppendMetaPropertyContent("game:points", this.Points);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("game:secret", this.IsSecret);
         }
 
         #endregion

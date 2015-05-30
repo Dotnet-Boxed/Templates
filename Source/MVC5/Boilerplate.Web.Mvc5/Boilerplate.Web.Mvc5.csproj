@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Boilerplate.Web.Mvc5.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -80,7 +81,19 @@
     <Compile Include="Experimental\ObjectPool\SharedPoolExtensions.cs" />
     <Compile Include="Experimental\ObjectPool\SharedPools.cs" />
     <Compile Include="Experimental\ObjectPool\StringBuilderPool.cs" />
-    <Compile Include="Experimental\Twitter\TwitterCard.cs" />
+    <Compile Include="Twitter\Cards\AppTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\GalleryTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\PhotoTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\PlayerTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\ProductTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\SummaryLargeImageTwitterCard.cs" />
+    <Compile Include="Twitter\Cards\SummaryTwitterCard.cs" />
+    <Compile Include="Twitter\HtmlHelperExtensions.cs" />
+    <Compile Include="Twitter\TwitterCard.cs" />
+    <Compile Include="Twitter\Enums\TwitterCardType.cs" />
+    <Compile Include="Twitter\Enums\TwitterCardTypeExtensions.cs" />
+    <Compile Include="Twitter\Structs\TwitterPlayer.cs" />
+    <Compile Include="Twitter\Structs\TwitterImage.cs" />
     <Compile Include="Experimental\ViewModel\ViewModel.cs" />
     <Compile Include="Experimental\ViewModel\ViewModelT.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphCondition.cs" />
@@ -91,8 +104,13 @@
     <Compile Include="OpenGraph\Enums\OpenGraphAgeGroupExtensions.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphTargetGender.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphGenderTargetExtensions.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResteraunt.cs" />
     <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProduct.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProductItem.cs" />
     <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProductGroup.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenu.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenuItem.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenuSection.cs" />
     <Compile Include="OpenGraph\ObjectTypes\OpenGraphMetadata.cs" />
     <Compile Include="OpenGraph\Enums\DayOfWeekExtensions.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphDeterminer.cs" />
@@ -131,7 +149,10 @@
     <Compile Include="OpenGraph\ObjectTypes\Standard\OpenGraphWebsite.cs" />
     <Compile Include="OpenGraph\Structs\OpenGraphCurrency.cs" />
     <Compile Include="OpenGraph\Structs\OpenGraphDateTimeRange.cs" />
+    <Compile Include="OpenGraph\Structs\OpenGraphFitnessActivityDataPoint.cs" />
+    <Compile Include="OpenGraph\Structs\OpenGraphMenuItemVariation.cs" />
     <Compile Include="OpenGraph\Structs\OpenGraphQuantity.cs" />
+    <Compile Include="OpenGraph\Structs\OpenGraphSplit.cs" />
     <Compile Include="Sitemap\SitemapException.cs" />
     <Compile Include="StringBuilderExtensions.cs" />
     <Compile Include="OpenGraph\Structs\OpenGraphActor.cs" />
@@ -154,9 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="OpenGraph\ObjectTypes\TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

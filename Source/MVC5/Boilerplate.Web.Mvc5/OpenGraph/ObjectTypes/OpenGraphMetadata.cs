@@ -27,19 +27,9 @@
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        public OpenGraphMetadata(string title, OpenGraphImage image)
-            : this(title, image, HttpContext.Current.Request.Url.ToString())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphMetadata" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
         /// <exception cref="System.ArgumentNullException">title or image or url is <c>null</c>.</exception>
-        public OpenGraphMetadata(string title, OpenGraphImage image, string url)
+        public OpenGraphMetadata(string title, OpenGraphImage image, string url = null)
         {
             if (title == null)
             {
@@ -53,7 +43,7 @@
 
             if (url == null)
             {
-                throw new ArgumentNullException("url");
+                url = HttpContext.Current.Request.Url.ToString();
             }
 
             this.title = title;
@@ -126,6 +116,12 @@
         public abstract string Namespace { get; }
 
         /// <summary>
+        /// Gets or sets the list of URL's used to supply an additional link that shows related content to the object. This property is not part of the 
+        /// Open Graph standard but is used by Facebook.
+        /// </summary>
+        public IEnumerable<string> SeeAlso { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the site. if your object is part of a larger web site, the name which should be displayed 
         /// for the overall site. e.g. "IMDb".
         /// </summary>
@@ -178,19 +174,19 @@
         }
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder"/> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
             // Three required tags.
-            stringBuilder.AppendMeta("og:title", this.Title);
+            stringBuilder.AppendMetaPropertyContent("og:title", this.Title);
             if (this.Type != OpenGraphType.Website)
             {
                 // The type property is also required but if absent the page will be treated as type website.
-                stringBuilder.AppendMeta("og:type", this.Type.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("og:type", this.Type.ToLowercaseString());
             }
-            stringBuilder.AppendMeta("og:url", this.Url);
+            stringBuilder.AppendMetaPropertyContent("og:url", this.Url);
 
             // Add image, video and audio tags.
             foreach (OpenGraphMedia media in this.media)
@@ -198,24 +194,32 @@
                 media.ToString(stringBuilder);
             }
 
-            stringBuilder.AppendMetaIfNotNull("og:description", this.Description);
-            stringBuilder.AppendMetaIfNotNull("og:site_name", this.SiteName);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:description", this.Description);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:site_name", this.SiteName);
 
             if (this.Determiner != OpenGraphDeterminer.Blank)
             {
-                stringBuilder.AppendMeta("og:determiner", this.Determiner.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("og:determiner", this.Determiner.ToLowercaseString());
             }
 
             if (this.Locale != null)
             {
-                stringBuilder.AppendMeta("og:locale", this.Locale);
+                stringBuilder.AppendMetaPropertyContent("og:locale", this.Locale);
 
                 if (this.AlternateLocales != null)
                 {
                     foreach (string locale in this.AlternateLocales)
                     {
-                        stringBuilder.AppendMeta("og:locale:alternate", locale);
+                        stringBuilder.AppendMetaPropertyContent("og:locale:alternate", locale);
                     }
+                }
+            }
+
+            if (this.SeeAlso != null)
+            {
+                foreach (string seeAlso in this.SeeAlso)
+                {
+                    stringBuilder.AppendMetaPropertyContent("og:see_also", seeAlso);
                 }
             }
 
@@ -223,12 +227,12 @@
             {
                 foreach (string facebookAdministrator in this.FacebookAdministrators)
                 {
-                    stringBuilder.AppendMetaIfNotNull("fb:admins", facebookAdministrator);
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("fb:admins", facebookAdministrator);
                 }
             }
 
-            stringBuilder.AppendMetaIfNotNull("fb:app_id", this.FacebookApplicationId);
-            stringBuilder.AppendMetaIfNotNull("fb:profile_id", this.FacebookProfileId);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("fb:app_id", this.FacebookApplicationId);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("fb:profile_id", this.FacebookProfileId);
         }
 
         #endregion

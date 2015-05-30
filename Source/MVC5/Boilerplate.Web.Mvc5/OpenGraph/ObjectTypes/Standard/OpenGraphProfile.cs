@@ -5,28 +5,20 @@
     /// <summary>
     /// This object type represents a person. While appropriate for celebrities, artists, or musicians, this object type can be used for the profile of 
     /// any individual. This object type is part of the Open Graph standard.
+    /// See http://ogp.me/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
     /// </summary>
     public class OpenGraphProfile : OpenGraphMetadata
     {
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphProfile"/> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        public OpenGraphProfile(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphProfile"/> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphProfile(string title, OpenGraphImage image, string url)
+        public OpenGraphProfile(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -70,20 +62,20 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaIfNotNull("profile:first_name", this.FirstName);
-            stringBuilder.AppendMetaIfNotNull("profile:last_name", this.LastName);
-            stringBuilder.AppendMetaIfNotNull("profile:username", this.Username);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("profile:first_name", this.FirstName);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("profile:last_name", this.LastName);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("profile:username", this.Username);
 
             if (this.Gender.HasValue)
             {
-                stringBuilder.AppendMeta("profile:gender", this.Gender.Value.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("profile:gender", this.Gender.Value.ToLowercaseString());
             }
         } 
 

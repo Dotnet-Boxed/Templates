@@ -24,14 +24,14 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            stringBuilder.AppendMeta("music:preview_url:url", this.Url);
-            stringBuilder.AppendMetaIfNotNull("music:preview_url:secure_url", this.UrlSecure);
-            stringBuilder.AppendMetaIfNotNull("music:preview_url:type", this.Type);
+            stringBuilder.AppendMetaPropertyContent("music:preview_url:url", this.Url);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("music:preview_url:secure_url", this.UrlSecure);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("music:preview_url:type", this.Type);
         }
 
         #endregion

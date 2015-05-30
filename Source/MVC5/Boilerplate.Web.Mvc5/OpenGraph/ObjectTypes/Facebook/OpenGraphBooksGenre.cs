@@ -5,33 +5,22 @@
 
     /// <summary>
     /// This object type represents the genre of a book or publication. This object type is not part of the Open Graph standard but is used by Facebook.
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.genre/
     /// </summary>
     public class OpenGraphBooksGenre : OpenGraphMetadata
     {
         private readonly string canonicalName;
 
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphBooksGenre" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        /// <param name="canonicalName">THe genres canonical name. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction & Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.</param>
-        public OpenGraphBooksGenre(string title, OpenGraphImage image, string canonicalName)
-            : base(title, image)
-        {
-            this.canonicalName = canonicalName;
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphBooksGenre"/> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        /// <param name="canonicalName">THe genres canonical name. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction & Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.</param>
+        /// <param name="canonicalName">THe genres canonical name. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction &amp; Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphBooksGenre(string title, OpenGraphImage image, string canonicalName, string url)
+        public OpenGraphBooksGenre(string title, OpenGraphImage image, string canonicalName, string url = null)
             : base(title, image, url)
         {
             this.canonicalName = canonicalName;
@@ -52,7 +41,7 @@
         public IEnumerable<string> BookUrls { get; set; }
 
         /// <summary>
-        /// Gets or sets the canonical name of the genre. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction & Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.
+        /// Gets or sets the canonical name of the genre. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction &amp; Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.
         /// </summary>
         public string CanonicalName { get; set; }
 
@@ -71,16 +60,16 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaIfNotNull("books:author", this.AuthorUrls);
-            stringBuilder.AppendMetaIfNotNull("books:book", this.BookUrls);
-            stringBuilder.AppendMetaIfNotNull("books:canonical_name", this.CanonicalName);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("books:author", this.AuthorUrls);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("books:book", this.BookUrls);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("books:canonical_name", this.CanonicalName);
         }
 
         #endregion

@@ -5,7 +5,7 @@
     /// </summary>
     public class OpenGraphLocation
     {
-        private readonly double altitude;
+        private readonly double? altitude;
         private readonly double latitude;
         private readonly double longitude;
 
@@ -41,7 +41,7 @@
         /// <summary>
         /// Gets the altitude of the location.
         /// </summary>
-        public double Altitude { get { return this.altitude; } }
+        public double? Altitude { get { return this.altitude; } }
 
         /// <summary>
         /// Gets the latitude of the location.

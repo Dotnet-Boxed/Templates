@@ -1,32 +1,24 @@
 ﻿namespace Boilerplate.Web.Mvc.OpenGraph
 {
+    using System.Collections.Generic;
     using System.Text;
 
     /// <summary>
     /// This object type represents the user's activity contributing to a particular run, walk, or bike course. This object type is not part of the 
     /// Open Graph standard but is used by Facebook.
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/fitness.course/
     /// </summary>
-    public class OpenGraphFitnessCourse : OpenGraphMetadata
+    internal class OpenGraphFitnessCourse : OpenGraphMetadata
     {
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphFitnessCourse" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        public OpenGraphFitnessCourse(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphFitnessCourse" /> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphFitnessCourse(string title, OpenGraphImage image, string url)
+        public OpenGraphFitnessCourse(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -41,9 +33,49 @@
         public int? Calories { get; set; }
 
         /// <summary>
+        /// Gets or sets the energy used during the course.
+        /// </summary>
+        public OpenGraphQuantity CustomUnitEnergy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the distance of the course.
+        /// </summary>
+        public OpenGraphQuantity Distance { get; set; }
+
+        /// <summary>
+        /// Gets or sets the duration taken on the course.
+        /// </summary>
+        public OpenGraphQuantity Duration { get; set; }
+
+        /// <summary>
+        /// Gets or sets a string value displayed in stories if the associated action's end_time has not passed, such as an encouragement to friends to cheer the user on. The value is not rendered once the course has been completed.
+        /// </summary>
+        public string LiveText { get; set; }
+
+        /// <summary>
+        /// Gets or sets the metrics about the course.
+        /// </summary>
+        public IEnumerable<OpenGraphFitnessActivityDataPoint> Metrics { get; set; }
+
+        /// <summary>
         /// Gets the namespace of this open graph type.
         /// </summary>
         public override string Namespace { get { return "fitness: http://ogp.me/ns/fitness#"; } }
+
+        /// <summary>
+        /// Gets or sets the pace achieved on the course.
+        /// </summary>
+        public OpenGraphQuantity Pace { get; set; }
+
+        /// <summary>
+        /// Gets or sets the split times during the course.
+        /// </summary>
+        public IEnumerable<OpenGraphSplit> Splits { get; set; }
+
+        /// <summary>
+        /// Gets or sets the speed achieved on the course.
+        /// </summary>
+        public OpenGraphQuantity Speed { get; set; }
 
         /// <summary>
         /// Gets the type of your object. Depending on the type you specify, other properties may also be required.
@@ -55,54 +87,102 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMeta("fitness:calories", this.Calories);
+            stringBuilder.AppendMetaPropertyContent("fitness:calories", this.Calories);
 
-            // TODO - All subvalues are required except altitude
-            //fitness:custom_unit_energy	CustomUnitQuantity	The energy used during the course
-            //fitness:custom_unit_energy:value	Float	A quantity representing the energy used during the course, measured in a custom unit
-            //fitness:custom_unit_energy:units	Reference	A custom unit of the energy used during the course
-            //fitness:distance	Quantity	The distance of the course
-            //fitness:distance:value	Float	A quantity representing the distance covered during the course
-            //fitness:distance:units	Enum	The unit of the value representing the distance covered during the course
-            //fitness:duration	Quantity	The duration taken on the course
-            //fitness:duration:value	Float	A quantity representing the duration of the course
-            //fitness:duration:units	Enum	The unit of the duration of the course
-            //fitness:live_text	String	A string value displayed in stories if the associated action's end_time has not passed, such as an encouragement to friends to cheer the user on. The value is not rendered once the course has been completed.
-            //fitness:metrics	Array<FitnessActivityDataPoint>	A struct of various metrics about the course
-            //fitness:metrics:calories	Integer	An array of integers representing the number of calories used during distinct parts of the course
-            //fitness:metrics:custom_unit_energy	CustomUnitQuantity	
-            //fitness:metrics:distance	Quantity	
-            //fitness:metrics:distance:value	Float	An array of quantities representing the distance covered during distinct parts of the course
-            //fitness:metrics:distance:units	Enum	An array of the units of the values representing the distance covered during distinct parts of the course
-            //fitness:metrics:location	GeoPoint	
-            //fitness:metrics:location:latitude	Float	An array of the latitudes of the locations of distinct parts of the course
-            //fitness:metrics:location:longitude	Float	An array of the longitudes of the locations of distinct parts of the course
-            //fitness:metrics:location:altitude	Float	An array of the altitudes (in meters above sea level) of the locations of distinct parts of the course
-            //fitness:metrics:steps	Integer	An array of integers representing the number of steps taken during distinct parts of the course
-            //fitness:metrics:speed	Quantity	
-            //fitness:metrics:speed:value	Float	An array of quantities representing the speed achieved during distinct parts of the course
-            //fitness:metrics:speed:units	Enum	An array of the units of the values representing the speed achieved during distinct parts of the course
-            //fitness:metrics:timestamp	DateTime	An array of the times of distinct parts of the course
-            //fitness:metrics:pace	Quantity	
-            //fitness:metrics:pace:value	Float	An array of quantities representing the pace achieved during distinct parts of the course
-            //fitness:metrics:pace:units	Enum	An array of the units of the values representing the pace achieved during distinct parts of the course
-            //fitness:pace	Quantity	The pace achieved on the course
-            //fitness:pace:value	Float	A quantity representing the pace achieved during the course
-            //fitness:pace:units	Enum	The unit of the value representing the pace achieved during the course
-            //fitness:speed	Quantity	The speed achieved on the course
-            //fitness:speed:value	Float	A quantity representing the speed achieved during the course
-            //fitness:speed:units	Enum	The unit of the value representing the speed achieved during the course
-            //fitness:splits	FitnessSplits	A struct of split times during the course
-            //fitness:splits:unit	Enum	An array of the units used for splits during the course, either 'mi' or 'km'
-            //fitness:splits:values	Array<Quantity>	
-            //fitness:steps	Integer	No longer used
+            if (this.CustomUnitEnergy != null)
+            {
+                stringBuilder.AppendMetaPropertyContent("fitness:custom_unit_energy:value", this.CustomUnitEnergy.Value);
+                stringBuilder.AppendMetaPropertyContent("fitness:custom_unit_energy:units", this.CustomUnitEnergy.Units);
+            }
+
+            if (this.Distance != null)
+            {
+                stringBuilder.AppendMetaPropertyContent("fitness:distance:value", this.Distance.Value);
+                stringBuilder.AppendMetaPropertyContent("fitness:distance:units", this.Distance.Units);
+            }
+
+            if (this.Duration != null)
+            {
+                stringBuilder.AppendMetaPropertyContent("fitness:duration:value", this.Duration.Value);
+                stringBuilder.AppendMetaPropertyContent("fitness:duration:units", this.Duration.Units);
+            }
+
+            stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:live_text", this.LiveText);
+
+            if (this.Metrics != null)
+            {
+                foreach (OpenGraphFitnessActivityDataPoint metric in this.Metrics)
+                {
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:calories", metric.Calories);
+
+                    if (metric.CustomUnitEnergy != null)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:custom_unit_energy:value", metric.CustomUnitEnergy.Value);
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:custom_unit_energy:units", metric.CustomUnitEnergy.Units);
+                    }
+
+                    if (metric.Distance != null)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:distance:value", metric.Distance.Value);
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:distance:units", metric.Distance.Units);
+                    }
+
+                    if (metric.Location != null)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:location:latitude", metric.Location.Latitude);
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:location:longitude", metric.Location.Longitude);
+                        stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:location:altitude", metric.Location.Altitude);
+                    }
+
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:steps", metric.Steps);
+
+                    if (metric.Speed != null)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:speed:value", metric.Speed.Value);
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:speed:units", metric.Speed.Units);
+                    }
+
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("fitness:metrics:timestamp", metric.Timestamp);
+
+                    if (metric.Pace != null)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:pace:value", metric.Pace.Value);
+                        stringBuilder.AppendMetaPropertyContent("fitness:metrics:pace:units", metric.Pace.Units);
+                    }
+                }
+            }
+
+            if (this.Pace != null)
+            {
+                stringBuilder.AppendMetaPropertyContent("fitness:pace:value", this.Pace.Value);
+                stringBuilder.AppendMetaPropertyContent("fitness:pace:units", this.Pace.Units);
+            }
+
+            if (this.Speed != null)
+            {
+                stringBuilder.AppendMetaPropertyContent("fitness:speed:value", this.Speed.Value);
+                stringBuilder.AppendMetaPropertyContent("fitness:speed:units", this.Speed.Units);
+            }
+
+            if (this.Splits != null)
+            {
+                foreach (OpenGraphSplit split in this.Splits)
+                {
+                    stringBuilder.AppendMetaPropertyContent("fitness:splits:unit", split.IsMiles ? "mi" : "km");
+                    foreach (OpenGraphQuantity value in split.Values)
+                    {
+                        stringBuilder.AppendMetaPropertyContent("fitness:splits:values:value", value.Value);
+                        stringBuilder.AppendMetaPropertyContent("fitness:splits:values:units", value.Units);
+                    }
+                }
+            }
         }
 
         #endregion

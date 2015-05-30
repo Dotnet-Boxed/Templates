@@ -7,28 +7,19 @@
     /// <summary>
     /// This object type represents a product. This includes both virtual and physical products, but it typically represents items that are available in 
     /// an online store. This object type is not part of the Open Graph standard but is used by Facebook.
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/
     /// </summary>
     public class OpenGraphProduct : OpenGraphMetadata
     {
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphProduct" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        public OpenGraphProduct(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphProduct" /> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphProduct(string title, OpenGraphImage image, string url)
+        public OpenGraphProduct(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -207,7 +198,7 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
@@ -216,107 +207,107 @@
 
             if (this.AgeGroup.HasValue)
             {
-                stringBuilder.AppendMeta("product:age_group", this.AgeGroup.Value.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("product:age_group", this.AgeGroup.Value.ToLowercaseString());
             }
 
             if (this.Availability.HasValue)
             {
-                stringBuilder.AppendMeta("product:availability", this.Availability.Value.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("product:availability", this.Availability.Value.ToLowercaseString());
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:brand", this.Brand);
-            stringBuilder.AppendMetaIfNotNull("product:category", this.Category);
-            stringBuilder.AppendMetaIfNotNull("product:color", this.Colour);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:brand", this.Brand);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:category", this.Category);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:color", this.Colour);
 
             if (this.Condition.HasValue)
             {
-                stringBuilder.AppendMeta("product:condition", this.Condition.Value.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("product:condition", this.Condition.Value.ToLowercaseString());
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:ean", this.EAN);
-            stringBuilder.AppendMetaIfNotNull("product:expiration_time", this.ExpirationTime);
-            stringBuilder.AppendMetaIfNotNull("product:is_product_shareable", this.IsShareable);
-            stringBuilder.AppendMetaIfNotNull("product:isbn", this.ISBN);
-            stringBuilder.AppendMetaIfNotNull("product:material", this.Material);
-            stringBuilder.AppendMetaIfNotNull("product:mfr_part_no", this.ManufacturerPartNumber);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:ean", this.EAN);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:expiration_time", this.ExpirationTime);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:is_product_shareable", this.IsShareable);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:isbn", this.ISBN);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:material", this.Material);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:mfr_part_no", this.ManufacturerPartNumber);
 
             if (this.OriginalPrices != null)
             {
                 foreach (OpenGraphCurrency originalPrice in this.OriginalPrices)
                 {
-                    stringBuilder.AppendMeta("product:original_price:amount", originalPrice.Amount);
-                    stringBuilder.AppendMeta("product:original_price:currency", originalPrice.Currency);
+                    stringBuilder.AppendMetaPropertyContent("product:original_price:amount", originalPrice.Amount);
+                    stringBuilder.AppendMetaPropertyContent("product:original_price:currency", originalPrice.Currency);
                 }
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:pattern", this.Pattern);
-            stringBuilder.AppendMetaIfNotNull("product:plural_title", this.PluralTitle);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:pattern", this.Pattern);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:plural_title", this.PluralTitle);
 
             if (this.PretaxPrices != null)
             {
                 foreach (OpenGraphCurrency pretaxPrice in this.PretaxPrices)
                 {
-                    stringBuilder.AppendMeta("product:pretax_price:amount", pretaxPrice.Amount);
-                    stringBuilder.AppendMeta("product:pretax_price:currency", pretaxPrice.Currency);
+                    stringBuilder.AppendMetaPropertyContent("product:pretax_price:amount", pretaxPrice.Amount);
+                    stringBuilder.AppendMetaPropertyContent("product:pretax_price:currency", pretaxPrice.Currency);
                 }
             }
 
-            if (this.PretaxPrices != null)
+            if (this.Prices != null)
             {
                 foreach (OpenGraphCurrency price in this.Prices)
                 {
-                    stringBuilder.AppendMeta("product:price:amount", price.Amount);
-                    stringBuilder.AppendMeta("product:price:currency", price.Currency);
+                    stringBuilder.AppendMetaPropertyContent("product:price:amount", price.Amount);
+                    stringBuilder.AppendMetaPropertyContent("product:price:currency", price.Currency);
                 }
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:product_link", this.ProductLinkUrl);
-            stringBuilder.AppendMetaIfNotNull("product:purchase_limit", this.PurchaseLimit);
-            stringBuilder.AppendMetaIfNotNull("product:retailer", this.RetailerUrl);
-            stringBuilder.AppendMetaIfNotNull("product:retailer_category", this.RetailerCategory);
-            stringBuilder.AppendMetaIfNotNull("product:retailer_part_no", this.RetailerPartNumber);
-            stringBuilder.AppendMetaIfNotNull("product:retailer_title", this.RetailerTitle);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:product_link", this.ProductLinkUrl);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:purchase_limit", this.PurchaseLimit);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer", this.RetailerUrl);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_category", this.RetailerCategory);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_part_no", this.RetailerPartNumber);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:retailer_title", this.RetailerTitle);
 
             if (this.SalePrice != null)
             {
-                stringBuilder.AppendMeta("product:sale_price:amount", this.SalePrice.Amount);
-                stringBuilder.AppendMeta("product:sale_price:currency", this.SalePrice.Currency);
+                stringBuilder.AppendMetaPropertyContent("product:sale_price:amount", this.SalePrice.Amount);
+                stringBuilder.AppendMetaPropertyContent("product:sale_price:currency", this.SalePrice.Currency);
             }
 
             if (this.SalePriceDates != null)
             {
-                stringBuilder.AppendMeta("product:sale_price_dates:start", this.SalePriceDates.Start);
-                stringBuilder.AppendMeta("product:sale_price_dates:end", this.SalePriceDates.End);
+                stringBuilder.AppendMetaPropertyContent("product:sale_price_dates:start", this.SalePriceDates.Start);
+                stringBuilder.AppendMetaPropertyContent("product:sale_price_dates:end", this.SalePriceDates.End);
             }
 
             if (this.ShippingCost != null)
             {
                 foreach (OpenGraphCurrency shippingCost in this.ShippingCost)
                 {
-                    stringBuilder.AppendMeta("product:shipping_cost:amount", shippingCost.Amount);
-                    stringBuilder.AppendMeta("product:shipping_cost:currency", shippingCost.Currency);
+                    stringBuilder.AppendMetaPropertyContent("product:shipping_cost:amount", shippingCost.Amount);
+                    stringBuilder.AppendMetaPropertyContent("product:shipping_cost:currency", shippingCost.Currency);
                 }
             }
 
             if (this.ShippingWeight != null)
             {
-                stringBuilder.AppendMeta("product:shipping_weight:value", this.ShippingWeight.Value);
-                stringBuilder.AppendMeta("product:shipping_weight:units", this.ShippingWeight.Units);
+                stringBuilder.AppendMetaPropertyContent("product:shipping_weight:value", this.ShippingWeight.Value);
+                stringBuilder.AppendMetaPropertyContent("product:shipping_weight:units", this.ShippingWeight.Units);
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:size", this.Size);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:size", this.Size);
 
             if (this.TargetGender.HasValue)
             {
-                stringBuilder.AppendMeta("product:target_gender", this.TargetGender.Value.ToLowercaseString());
+                stringBuilder.AppendMetaPropertyContent("product:target_gender", this.TargetGender.Value.ToLowercaseString());
             }
 
-            stringBuilder.AppendMetaIfNotNull("product:upc", this.UPC);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("product:upc", this.UPC);
 
             if (this.Weight != null)
             {
-                stringBuilder.AppendMeta("product:weight:value", this.Weight.Value);
-                stringBuilder.AppendMeta("product:weight:units", this.Weight.Units);
+                stringBuilder.AppendMetaPropertyContent("product:weight:value", this.Weight.Value);
+                stringBuilder.AppendMetaPropertyContent("product:weight:units", this.Weight.Units);
             }
         }
 

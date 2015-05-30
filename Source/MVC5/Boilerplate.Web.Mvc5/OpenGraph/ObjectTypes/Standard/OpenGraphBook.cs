@@ -7,17 +7,19 @@
     /// <summary>
     /// This object represents a physical book or e-book. This object type is part of the Open Graph standard but
     /// Facebook uses the books.book object type instead which requires an ISBN number.
+    /// See http://ogp.me/
     /// </summary>
     public class OpenGraphBook : OpenGraphMetadata
     {
         #region Constructors
-
-        public OpenGraphBook(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
-        public OpenGraphBook(string title, OpenGraphImage image, string url)
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGraphBook"/> class.
+        /// </summary>
+        /// <param name="title">The title of the object as it should appear in the graph.</param>
+        /// <param name="image">The default image.</param>
+        /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
+        public OpenGraphBook(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -61,17 +63,17 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaIfNotNull("book:author", this.AuthorUrl);
-            stringBuilder.AppendMetaIfNotNull("book:isbn", this.ISBN);
-            stringBuilder.AppendMetaIfNotNull("book:release_date", this.ReleaseDate);
-            stringBuilder.AppendMetaIfNotNull("book:tag", this.Tags);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("book:author", this.AuthorUrl);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("book:isbn", this.ISBN);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("book:release_date", this.ReleaseDate);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("book:tag", this.Tags);
         }
 
         #endregion

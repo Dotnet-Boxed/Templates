@@ -8,10 +8,12 @@
     internal static class DayOfWeekExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string"/> representation of the <see cref="DayOfWeek"/>.
+        /// Returns the lowercase <see cref="string" /> representation of the <see cref="DayOfWeek" />.
         /// </summary>
-        /// <param name="type">The type.</param>
-        /// <returns>The lowercase <see cref="string"/> representation of the <see cref="DayOfWeek"/>.</returns>
+        /// <param name="dayOfWeek">The day of week.</param>
+        /// <returns>
+        /// The lowercase <see cref="string" /> representation of the <see cref="DayOfWeek" />.
+        /// </returns>
         public static string ToLowercaseString(this DayOfWeek dayOfWeek)
         {
             switch (dayOfWeek)

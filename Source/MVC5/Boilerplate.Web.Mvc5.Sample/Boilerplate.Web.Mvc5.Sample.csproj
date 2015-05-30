@@ -64,7 +64,7 @@
       <HintPath>..\..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.4\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
+      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.8\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">

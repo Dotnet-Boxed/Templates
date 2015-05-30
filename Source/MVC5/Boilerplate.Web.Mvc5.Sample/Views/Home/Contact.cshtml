@@ -1,6 +1,14 @@
 ﻿@{
     ViewBag.Title = "Contact";
     ViewBag.Description = "The ASP.NET MVC Boilerplate contact page.";
+
+    // Add Twitter Card and Open Graph social meta tags so we can customize what happens when our page is shared
+    // on these social networks. Note that other social networks like Google+, Pintrest and others also use these.
+    // There are dozens of different Twitter Card or Open Graph object types we could add, a different one is added 
+    // on each page as an example.
+    // These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and 
+    // hand code them yourself instead of using these helpers.
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
     ViewBag.OpenGraph = new OpenGraphProfile(
         ViewBag.Title,
         new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })

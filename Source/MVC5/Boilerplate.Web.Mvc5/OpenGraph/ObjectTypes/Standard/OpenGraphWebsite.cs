@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// An object representing a website. This object type is part of the Open Graph standard.
+    /// See http://ogp.me/
     /// </summary>
     public class OpenGraphWebsite : OpenGraphMetadata
     {
@@ -12,18 +13,8 @@
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        public OpenGraphWebsite(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphWebsite"/> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphWebsite(string title, OpenGraphImage image, string url)
+        public OpenGraphWebsite(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }

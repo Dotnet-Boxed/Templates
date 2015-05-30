@@ -25,16 +25,16 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
-            stringBuilder.AppendMeta("og:image", this.Url);
-            stringBuilder.AppendMetaIfNotNull("og:image:secure_url", this.UrlSecure);
-            stringBuilder.AppendMetaIfNotNull("og:image:type", this.Type);
-            stringBuilder.AppendMetaIfNotNull("og:image:width", this.Width);
-            stringBuilder.AppendMetaIfNotNull("og:image:height", this.Height);
+            stringBuilder.AppendMetaPropertyContent("og:image", this.Url);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:secure_url", this.UrlSecure);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:type", this.Type);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:width", this.Width);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("og:image:height", this.Height);
         }
 
         #endregion

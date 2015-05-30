@@ -415,15 +415,23 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
-                        If you want to integrate Facebook into the meta data of your page, follow <a href="http://ogp.me/">these</a> steps or <a href="https://developers.facebook.com/docs/opengraph">Facebooks documentation</a>.
+                        Open Graph meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.OpenGraph.OpenGraphMetadata type.
+                        You need to add these to all of the other pages yourself. Read the documentation on OpenGraphMetadata for more information on how to use it.
                     </li>
                     <li class="list-group-item">
                         <input name="Social-ImplementTwitterCards" type="checkbox"> <strong>Implement Twitter Cards</strong> -
-                        If you want to integrate Twitter into the meta data of your page, follow <a href="https://dev.twitter.com/cards/overview">Twitter's steps</a> to setup Twitter Cards.
+                        Twitter card meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.Twitter.TwitterCard type.
+                        You need to add these to all of the other pages yourself. Read the documentation on TwitterCard for more information on how to use it.
                     </li>
                     <li class="list-group-item">
-                        <input name="Social-OtherSocial" type="checkbox"> <strong>Other Social Media Meta Tags</strong> -
-                        You can follow the steps <a href="http://moz.com/blog/meta-data-templates-123">here</a> to setup most other popular social links.
+                        <input name="Social-TestSocial" type="checkbox"> <strong>Test Social Media Meta Tags</strong> -
+                        Test your social media meta tags using the specified testing tools:
+                        <ul>
+                            <li><a href="https://dev.twitter.com/docs/cards/validation/validator">Twitter Validation Tool</a></li>
+                            <li><a href="https://developers.facebook.com/tools/debug">Facebook Debugger</a></li>
+                            <li><a href="http://www.google.com/webmasters/tools/richsnippets">Google Structured Data Testing Tool</a></li>
+                            <li><a href="http://developers.pinterest.com/rich_pins/validator">Pinterest Rich Pins Validator</a></li>
+                        </ul>
                     </li>
                 </ul>
             </article>

@@ -7,28 +7,20 @@
     /// <summary>
     /// This object represents an article on a website. It is the preferred type for blog posts and news stories.
     /// This object type is part of the Open Graph standard.
+    /// See http://ogp.me/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/
     /// </summary>
     public class OpenGraphArticle : OpenGraphMetadata
     {
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphArticle"/> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        public OpenGraphArticle(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphArticle"/> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphArticle(string title, OpenGraphImage image, string url)
+        public OpenGraphArticle(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -88,20 +80,20 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
         {
             base.ToString(stringBuilder);
 
-            stringBuilder.AppendMetaIfNotNull("article:author", this.AuthorUrls);
-            stringBuilder.AppendMetaIfNotNull("article:expiration_time", this.ExpirationTime);
-            stringBuilder.AppendMetaIfNotNull("article:modified_time", this.ModifiedTime);
-            stringBuilder.AppendMetaIfNotNull("article:published_time", this.PublishedTime);
-            stringBuilder.AppendMetaIfNotNull("article:publisher", this.PublisherUrl);
-            stringBuilder.AppendMetaIfNotNull("article:section", this.Section);
-            stringBuilder.AppendMetaIfNotNull("article:tag", this.Tags);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:author", this.AuthorUrls);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:expiration_time", this.ExpirationTime);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:modified_time", this.ModifiedTime);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:published_time", this.PublishedTime);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:publisher", this.PublisherUrl);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:section", this.Section);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("article:tag", this.Tags);
         }
 
         #endregion

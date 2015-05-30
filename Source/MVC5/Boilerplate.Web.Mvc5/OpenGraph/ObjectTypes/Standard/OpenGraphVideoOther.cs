@@ -8,28 +8,20 @@
     /// This object type represents a generic video, and contains references to the actors and other professionals involved in its production. For 
     /// specific types of video content, use the video.movie or video.tv_show object types. This type is for any other type of video content not 
     /// represented elsewhere (eg. trailers, music videos, clips, news segments etc.). This object type is part of the Open Graph standard.
+    /// See http://ogp.me/
+    /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.other/
     /// </summary>
     public class OpenGraphVideoOther : OpenGraphMetadata
     {
         #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphVideoOther"/> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="image">The default image.</param>
-        public OpenGraphVideoOther(string title, OpenGraphImage image)
-            : base(title, image)
-        {
-        }
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphVideoOther"/> class.
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        public OpenGraphVideoOther(string title, OpenGraphImage image, string url)
+        public OpenGraphVideoOther(string title, OpenGraphImage image, string url = null)
             : base(title, image, url)
         {
         }
@@ -83,7 +75,7 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <see cref="stringBuilder" /> containing the Open Graph meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)
@@ -94,16 +86,16 @@
             {
                 foreach (OpenGraphActor actor in this.Actors)
                 {
-                    stringBuilder.AppendMetaIfNotNull("video:actor", actor.ActorUrl);
-                    stringBuilder.AppendMetaIfNotNull("video:actor:role", actor.Role);
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("video:actor", actor.ActorUrl);
+                    stringBuilder.AppendMetaPropertyContentIfNotNull("video:actor:role", actor.Role);
                 }
             }
 
-            stringBuilder.AppendMetaIfNotNull("video:director", this.DirectorUrls);
-            stringBuilder.AppendMetaIfNotNull("video:writer", this.WriterUrls);
-            stringBuilder.AppendMetaIfNotNull("video:duration", this.Duration);
-            stringBuilder.AppendMetaIfNotNull("video:release_date", this.ReleaseDate);
-            stringBuilder.AppendMetaIfNotNull("video:tag", this.Tags);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("video:director", this.DirectorUrls);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("video:writer", this.WriterUrls);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("video:duration", this.Duration);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("video:release_date", this.ReleaseDate);
+            stringBuilder.AppendMetaPropertyContentIfNotNull("video:tag", this.Tags);
         }
 
         #endregion
