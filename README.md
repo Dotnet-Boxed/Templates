@@ -4,7 +4,7 @@
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/New%20Project.png"/>
      
-<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at <a href="http://rehansaeed.co.uk/asp-net-mvc-boilerplate">RehanSaeed.co.uk</a>, the <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">Visual Studio Gallery</a> or at <a href="https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project">The Open Web Security Project (OWASP)</a>.</p>
+<p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at <a href="http://rehansaeed.co.uk/asp-net-mvc-boilerplate">RehanSaeed.co.uk</a>, the <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">Visual Studio Gallery</a> or at <a href="https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project">The Open Web Security Project (OWASP)</a>. You can also follow me on Twitter at <a href="https://twitter.com/rehansaeeduk">@RehanSaeedUK</a>.</p>
 
 <img alt="ASP.NET-MVC-Boilerplate Logo"
      border="5"
@@ -89,6 +89,10 @@
 <h2>Search</h2>
 
 There is a lot more to implementing search in your application than it sounds. ASP.NET MVC Boilerplate includes a search feature by default but leaves it open for you to choose how you want to implement it. It also implements <a href="http://www.opensearch.org">Open Search</a> XML right out of the box. Read Scott Hanselman talk about this feature <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">here</a>.
+
+<h2>Social</h2>
+
+<a href="http://ogp.me/">Open Graph</a> meta tags and <a href="https://dev.twitter.com/cards/overview">Twitter Card</a> meta tags are included by default. Not only that but ASP.NET MVC Boilerplate includes fully documented HTML helpers that allow you to easily generate Open Graph object or Twitter Card met tags easily and correctly.
 
 <h2>How can I get it?</h2>
 That's easy, just choose one of the following options:
