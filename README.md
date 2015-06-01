@@ -106,5 +106,5 @@ That's easy, just choose one of the following options:
   </li>
 </ol>
 
-<h2>Release Notes</h2>
-You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">here</a>.
+<h2>Release Notes and TODO List</h2>
+You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">here</a> and a TODO list of new features and enhancements coming soon <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md">here</a>.
