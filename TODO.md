@@ -4,6 +4,7 @@
 <h2>General Improvements</h2>
 <p>Improvements that can be made to all project templates.</p>
 <ul>
+  <li>Make use of Object Pooling code. Add note about using Object Pooling in ReadMe.html.</li>
   <li>Add <a href="https://developers.google.com/structured-data/">Google Structured Data</a>.</li>
   <li>Keep eye on <a href="http://stackoverflow.com/questions/27860618/which-http-status-codes-to-cover-for-mvc-error-handling/29282406#29282406">HTTP Status Codes</a> for codes I am not covering correctly.</li>
   <li>Update to Font Awesome 4.3.0 when they fix the .less files.</li>
