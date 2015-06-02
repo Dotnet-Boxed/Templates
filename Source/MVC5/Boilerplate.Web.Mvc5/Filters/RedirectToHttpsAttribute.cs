@@ -66,7 +66,7 @@
         protected virtual void HandleNonHttpsRequest(AuthorizationContext filterContext)
         {
             // Only redirect for GET requests, otherwise the browser might not propagate the verb and request body correctly.
-            if (!string.Equals(filterContext.HttpContext.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(filterContext.HttpContext.Request.HttpMethod, WebRequestMethods.Http.Get, StringComparison.OrdinalIgnoreCase))
             {
                 // The RequireHttpsAttribute throws an InvalidOperationException. Some bots and spiders make HEAD requests (to reduce bandwidth) 
                 // and we don’t want them to see a 500-Internal Server Error. A 405 Method Not Allowed would be more appropriate.

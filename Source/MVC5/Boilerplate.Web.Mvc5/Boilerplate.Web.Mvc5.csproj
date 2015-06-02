@@ -81,6 +81,7 @@
     <Compile Include="Experimental\ObjectPool\SharedPoolExtensions.cs" />
     <Compile Include="Experimental\ObjectPool\SharedPools.cs" />
     <Compile Include="Experimental\ObjectPool\StringBuilderPool.cs" />
+    <Compile Include="Filters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
     <Compile Include="Twitter\Cards\AppTwitterCard.cs" />
     <Compile Include="Twitter\Cards\GalleryTwitterCard.cs" />
     <Compile Include="Twitter\Cards\PhotoTwitterCard.cs" />

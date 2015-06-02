@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     @* viewport - Set the scale on mobile devices (For more info see https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag). *@
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @* title - The title of the page. Appears in the browser window title. The site name appears at the end for better SEO. *@
+    @* title - The title of the page which appears in the browser window title. Aim for the title to be less than 70 characters. The site name appears at the end for better SEO. *@
     <title>@ViewBag.Title - @Application.Name</title>
 
 
@@ -99,9 +99,9 @@
     @Scripts.Render("~/bundles/modernizr")
 
 
-    @* Description - Aim for more than 160 characters. *@
+    @* Description - Used by search engines. Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description">
-    @* Author - The author of the page. *@
+    @* Author - (Optional) Used by search engines. The author of the page. *@
     @if (ViewBag.Author != null)
     {
         <meta name="author" content="@ViewBag.Author">

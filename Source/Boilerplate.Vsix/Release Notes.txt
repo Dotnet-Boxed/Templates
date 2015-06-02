@@ -1,4 +1,16 @@
-﻿Version 1.1.0
+﻿Version 1.1.1
+- Updated ReadMe.html
+	- New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
+	- New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
+	- New step to update the browserconfig.xml file with the URL to the sites RSS feed.
+- Updated _Layout.cshtml with comment, telling you to keep title's less than 70 characters.
+- Updated Index.cshtml with comments about Title, Description and Author.
+- Updated browserconfig.xml with details about the site RSS feed.
+- Updated Boilerplate.Web.Mvc NuGet package to 1.0.9.
+	- Added ValidateHeaderAntiForgeryTokenAttribute which can validate anti-forgery tokens for Ajax posts by checking the HTTP headers instead of the form inputs.
+	- Updated comment in RedirectToCanonicalUrlAttribute with link from Bing, explaining why 301 redirects are better than canonical URL's.
+
+Version 1.1.0
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
 - Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the 
   .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
