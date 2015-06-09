@@ -5,9 +5,11 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
     using System.Text;
 
     /// <summary>
+    /// <see cref="ObjectPool{T}"/> extension methods.
+    /// 
     /// Copied from Microsoft Roslyn code at http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.Workspaces/Utilities/ObjectPools/Extensions.cs,25c7c7b4d65ca62c
     /// </summary>
-    internal static class SharedPoolExtensions
+    internal static class ObjectPoolExtensions
     {
         private const int Threshold = 512;
 
@@ -46,51 +48,75 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
             return new PooledObject<T>(pool, p => p.Allocate(), (p, o) => p.Free(o));
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="StringBuilder"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="StringBuilder"/>.</returns>
         public static StringBuilder AllocateAndClear(this ObjectPool<StringBuilder> pool)
         {
             var sb = pool.Allocate();
             sb.Clear();
-
             return sb;
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="Stack{T}"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="Stack{T}"/>.</returns>
         public static Stack<T> AllocateAndClear<T>(this ObjectPool<Stack<T>> pool)
         {
             var set = pool.Allocate();
             set.Clear();
-
             return set;
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="Queue{T}"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="Queue{T}"/>.</returns>
         public static Queue<T> AllocateAndClear<T>(this ObjectPool<Queue<T>> pool)
         {
             var set = pool.Allocate();
             set.Clear();
-
             return set;
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="HashSet{T}"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="HashSet{T}"/>.</returns>
         public static HashSet<T> AllocateAndClear<T>(this ObjectPool<HashSet<T>> pool)
         {
             var set = pool.Allocate();
             set.Clear();
-
             return set;
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="Dictionary{TKey, TValue}"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="Dictionary{TKey, TValue}"/>.</returns>
         public static Dictionary<TKey, TValue> AllocateAndClear<TKey, TValue>(this ObjectPool<Dictionary<TKey, TValue>> pool)
         {
             var map = pool.Allocate();
             map.Clear();
-
             return map;
         }
 
+        /// <summary>
+        /// Allocates an empty <see cref="List{T}"/> from the object pool.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <returns>The allocated and cleared <see cref="List{T}"/>.</returns>
         public static List<T> AllocateAndClear<T>(this ObjectPool<List<T>> pool)
         {
             var list = pool.Allocate();
             list.Clear();
-
             return list;
         }
 

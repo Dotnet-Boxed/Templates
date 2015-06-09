@@ -207,9 +207,6 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">GatewayTimeout.html</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">ServiceUnavailable.html</ProjectItem>
       </Folder>
-      <Folder Name="Models">
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">ErrorModel.cs</ProjectItem>
-      </Folder>
       <Folder Name="NWebsecConfig">
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">HttpHeaderSecurityModuleConfig.xsd</ProjectItem>
       </Folder>

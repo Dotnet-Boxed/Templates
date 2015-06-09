@@ -16,9 +16,9 @@
         }
 
         /// <summary>
-        /// Gets the Open Search XML for the current site. You can customize the contents of this XML here.
-        /// See <see cref="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart" />
-        /// and <see cref="http://www.opensearch.org" /> for more information.
+        /// Gets the Open Search XML for the current site. You can customize the contents of this XML here. See
+        /// http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart
+        /// http://www.opensearch.org
         /// </summary>
         /// <returns>The Open Search XML for the current site.</returns>
         public string GetOpenSearchXml()
@@ -26,8 +26,11 @@
             // Short name must be less than or equal to 16 characters.
             string shortName = "Search";
             string description = "Search the ASP.NET MVC Boilerplate Site";
-            // The link to the search page with the query string set to 'searchTerms' which gets replaced with a user defined query.
-            string searchUrl = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSearch, new { query = "{searchTerms}" });
+            // The link to the search page with the query string set to 'searchTerms' which gets replaced with a user 
+            // defined query.
+            string searchUrl = this.urlHelper.AbsoluteRouteUrl(
+                HomeControllerRoute.GetSearch, 
+                new { query = "{searchTerms}" });
             // The link to the page with the search form on it. The home page has the search form on it.
             string searchFormUrl = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex);
             // The link to the favicon.ico file for the site.

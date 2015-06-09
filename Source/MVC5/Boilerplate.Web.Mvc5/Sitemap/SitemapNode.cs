@@ -51,23 +51,22 @@
 
         /// <summary>
         /// Gets or sets the priority of this URL relative to other URLs on your site. Valid values range from 0.0 to 1.0. 
-        /// This field is optional, if it is <c>null</c> the default priority of a page is 0.5.
-        /// This value does not affect how your pages are compared to pages on other sites—it only lets the search engines 
-        /// know which pages you deem most important for the crawlers. 
-        /// Please note that the priority you assign to a page is not likely to influence the position of your URLs in a 
-        /// search engine's result pages. Search engines may use this information when selecting between URLs on the same site, 
-        /// so you can use this tag to increase the likelihood that your most important pages are present in a search index.
+        /// This field is optional, if it is <c>null</c> the default priority of a page is 0.5. This value does not 
+        /// affect how your pages are compared to pages on other sites, it only lets the search engines know which 
+        /// pages you deem most important for the crawlers. 
+        /// Please note that the priority you assign to a page is not likely to influence the position of your URLs in 
+        /// a search engine's result pages. Search engines may use this information when selecting between URLs on the 
+        /// same site, so you can use this tag to increase the likelihood that your most important pages are present 
+        /// in a search index.
         /// Also, please note that assigning a high priority to all of the URLs on your site is not likely to help you. 
         /// Since the priority is relative, it is only used to select between URLs on your site.
         /// </summary>
-        /// <value>
-        /// The priority.
-        /// </value>
+        /// <value>The priority.</value>
         public double? Priority { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL of the page. This URL must begin with the protocol (such as http) and end with a trailing slash, 
-        /// if your web server requires it. This value must be less than 2,048 characters.
+        /// Gets or sets the URL of the page. This URL must begin with the protocol (such as http) and end with a 
+        /// trailing slash, if your web server requires it. This value must be less than 2,048 characters.
         /// </summary>
         /// <value>
         /// The URL of the page.

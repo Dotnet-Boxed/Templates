@@ -22,7 +22,9 @@
         /// <param name="xmlNamespace">The XML namespace.</param>
         public static void AddNamespace(this SyndicationFeed feed, string namespacePrefix, string xmlNamespace)
         {
-            feed.AttributeExtensions.Add(new XmlQualifiedName(namespacePrefix, XNamespace.Xmlns.ToString()), xmlNamespace);
+            feed.AttributeExtensions.Add(
+                new XmlQualifiedName(namespacePrefix, XNamespace.Xmlns.ToString()), 
+                xmlNamespace);
         }
 
         /// <summary>
@@ -41,7 +43,8 @@
         /// <returns>The icon URL.</returns>
         public static string GetIcon(this SyndicationFeed feed)
         {
-            SyndicationElementExtension iconExtension = feed.ElementExtensions.FirstOrDefault(x => string.Equals(x.OuterName, "icon", StringComparison.OrdinalIgnoreCase));
+            SyndicationElementExtension iconExtension = feed.ElementExtensions.FirstOrDefault(
+                x => string.Equals(x.OuterName, "icon", StringComparison.OrdinalIgnoreCase));
             return iconExtension.GetObject<string>();
         }
 

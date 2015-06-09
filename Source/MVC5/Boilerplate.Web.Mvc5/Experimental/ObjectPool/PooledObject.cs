@@ -6,39 +6,59 @@
 
     /// <summary>
     /// Copied from Microsoft Roslyn code at http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.Workspaces/Utilities/ObjectPools/PooledObject.cs,b2e28c15ee358f81
-    /// this is RAII object to automatically release pooled object when its owning pool
+    /// This is resource acquisition is initialization (RAII) object to automatically release pooled object when its owning pool.
     /// </summary>
-    internal struct PooledObject<T> : IDisposable where T : class
+    public struct PooledObject<T> : IDisposable where T : class
     {
-        private readonly Action<ObjectPool<T>, T> _releaser;
-        private readonly ObjectPool<T> _pool;
-        private T _pooledObject;
+        private readonly Action<ObjectPool<T>, T> releaser;
+        private readonly ObjectPool<T> pool;
+        private T pooledObject;
 
-        public PooledObject(ObjectPool<T> pool, Func<ObjectPool<T>, T> allocator, Action<ObjectPool<T>, T> releaser) : this()
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PooledObject{T}"/> struct.
+        /// </summary>
+        /// <param name="pool">The object pool.</param>
+        /// <param name="allocator">The allocator function that allocates a new instance of <typeparamref name="T"/>.</param>
+        /// <param name="releaser">The releaser function that de-allocates an instance of <typeparamref name="T"/>.</param>
+        public PooledObject(
+            ObjectPool<T> pool, 
+            Func<ObjectPool<T>, T> allocator, 
+            Action<ObjectPool<T>, T> releaser) 
+            : this()
         {
-            _pool = pool;
-            _pooledObject = allocator(pool);
-            _releaser = releaser;
+            this.pool = pool;
+            this.pooledObject = allocator(pool);
+            this.releaser = releaser;
         }
 
+        #endregion
+
+        /// <summary>
+        /// Gets the pooled object.
+        /// </summary>
+        /// <value>
+        /// The pooled object.
+        /// </value>
         public T Object
         {
-            get
-            {
-                return _pooledObject;
-            }
+            get { return this.pooledObject; }
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
-            if (_pooledObject != null)
+            if (this.pooledObject != null)
             {
-                _releaser(_pool, _pooledObject);
-                _pooledObject = null;
+                this.releaser(this.pool, this.pooledObject);
+                this.pooledObject = null;
             }
         }
 
-        #region factory
+        #region Public Static Methods
 
         public static PooledObject<StringBuilder> Create(ObjectPool<StringBuilder> pool)
         {
@@ -69,17 +89,19 @@
         {
             return new PooledObject<List<TItem>>(pool, Allocator, Releaser);
         }
+
         #endregion
 
-        #region allocators and releasers
+        #region Private Static Methods
+
         private static StringBuilder Allocator(ObjectPool<StringBuilder> pool)
         {
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser(ObjectPool<StringBuilder> pool, StringBuilder sb)
+        private static void Releaser(ObjectPool<StringBuilder> pool, StringBuilder stringBuilder)
         {
-            pool.ClearAndFree(sb);
+            pool.ClearAndFree(stringBuilder);
         }
 
         private static Stack<TItem> Allocator<TItem>(ObjectPool<Stack<TItem>> pool)
@@ -87,9 +109,9 @@
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser<TItem>(ObjectPool<Stack<TItem>> pool, Stack<TItem> obj)
+        private static void Releaser<TItem>(ObjectPool<Stack<TItem>> pool, Stack<TItem> stack)
         {
-            pool.ClearAndFree(obj);
+            pool.ClearAndFree(stack);
         }
 
         private static Queue<TItem> Allocator<TItem>(ObjectPool<Queue<TItem>> pool)
@@ -97,9 +119,9 @@
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser<TItem>(ObjectPool<Queue<TItem>> pool, Queue<TItem> obj)
+        private static void Releaser<TItem>(ObjectPool<Queue<TItem>> pool, Queue<TItem> queue)
         {
-            pool.ClearAndFree(obj);
+            pool.ClearAndFree(queue);
         }
 
         private static HashSet<TItem> Allocator<TItem>(ObjectPool<HashSet<TItem>> pool)
@@ -107,9 +129,9 @@
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser<TItem>(ObjectPool<HashSet<TItem>> pool, HashSet<TItem> obj)
+        private static void Releaser<TItem>(ObjectPool<HashSet<TItem>> pool, HashSet<TItem> hashSet)
         {
-            pool.ClearAndFree(obj);
+            pool.ClearAndFree(hashSet);
         }
 
         private static Dictionary<TKey, TValue> Allocator<TKey, TValue>(ObjectPool<Dictionary<TKey, TValue>> pool)
@@ -117,9 +139,9 @@
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser<TKey, TValue>(ObjectPool<Dictionary<TKey, TValue>> pool, Dictionary<TKey, TValue> obj)
+        private static void Releaser<TKey, TValue>(ObjectPool<Dictionary<TKey, TValue>> pool, Dictionary<TKey, TValue> dictionary)
         {
-            pool.ClearAndFree(obj);
+            pool.ClearAndFree(dictionary);
         }
 
         private static List<TItem> Allocator<TItem>(ObjectPool<List<TItem>> pool)
@@ -127,9 +149,9 @@
             return pool.AllocateAndClear();
         }
 
-        private static void Releaser<TItem>(ObjectPool<List<TItem>> pool, List<TItem> obj)
+        private static void Releaser<TItem>(ObjectPool<List<TItem>> pool, List<TItem> list)
         {
-            pool.ClearAndFree(obj);
+            pool.ClearAndFree(list);
         }
 
         #endregion

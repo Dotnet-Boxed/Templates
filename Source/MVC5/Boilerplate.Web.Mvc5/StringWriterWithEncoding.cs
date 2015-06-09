@@ -5,9 +5,9 @@
     using System.Text;
 
     /// <summary>
-    /// The <see cref="StringWriter" /> class always outputs UTF-16 encoded strings.
-    /// To use a different encoding, we must inherit from <see cref="StringWriter" />.
-    /// See http://stackoverflow.com/questions/9459184/why-is-the-xmlwriter-always-outputing-utf-16-encoding.
+    /// The <see cref="StringWriter" /> class always outputs UTF-16 encoded strings. To use a different encoding, we 
+    /// must inherit from <see cref="StringWriter" />. See 
+    /// http://stackoverflow.com/questions/9459184/why-is-the-xmlwriter-always-outputing-utf-16-encoding.
     /// </summary>
     public class StringWriterWithEncoding : StringWriter
     {

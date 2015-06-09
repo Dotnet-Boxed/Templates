@@ -1,8 +1,9 @@
 ﻿namespace Boilerplate.Web.Mvc
 {
     /// <summary>
-    /// A list of internet media types, which are a standard identifier used on the Internet to indicate the type of data that a file contains. 
-    /// Web browsers use them to determine how to display, output or handle files and search engines use them to classify data files on the web.
+    /// A list of internet media types, which are a standard identifier used on the Internet to indicate the type of 
+    /// data that a file contains. Web browsers use them to determine how to display, output or handle files and search 
+    /// engines use them to classify data files on the web.
     /// </summary>
     public static class ContentType
     {

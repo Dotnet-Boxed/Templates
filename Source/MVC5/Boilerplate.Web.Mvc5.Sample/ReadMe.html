@@ -29,7 +29,7 @@
                     </li>
                     <li class="list-group-item">
                         <input name="PreRequisites-UpdateNuGetPackages" type="checkbox"> <strong>Update NuGet Packages</strong> -
-                        Update the NuGet Visual Studio extenison from the Tools -> Extensions and Updates menu.
+                        Update the NuGet Visual Studio extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <li class="list-group-item">
                         <input name="PreRequisites-InstallWebEssentials" type="checkbox"> <strong>Install Web Essentials</strong> -
@@ -50,7 +50,7 @@
                         <input name="ContentSecurityPolicy-CheckModernizrCSPSupport" type="checkbox"> <strong>Check Modernizr CSP Support</strong> -
                         Modernizr does not currently support
                         <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
-                        because it uses inline CSS styles rather than seperate files. To get around this problem, Inline Styles have been set to allowed in
+                        because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been set to allowed in
                         the CSP policy (See FilterConfig.cs). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
                         <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
                         post and
@@ -77,15 +77,15 @@
                 <h4>TLS over HTTPS</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Sitewide HTTPS</strong> -
-                        Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superceded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it accross your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at <a href="https://www.startssl.com/">StartSSL.com</a>. You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
+                        <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Site-wide HTTPS</strong> -
+                        Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at <a href="https://www.startssl.com/">StartSSL.com</a>. You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
                         <ol>
-                            <li>Open the FilterConfig.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use TLS accross the whole site.</li>
+                            <li>Open the FilterConfig.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use TLS across the whole site.</li>
                             <li>Open the Global.asax.cs file and uncomment the line 'AntiForgeryConfig.RequireSsl = true;'. This ensures that the Anti-Forgery tokens require TLS to work, which gives a little added security.</li>
                             <li>Open the web.config file and change the requireSSL setting in the httpCookies section to true, to enable cookies to be sent using TLS only by default.</li>
                             <li>Open the Startup.cs file and uncomment the app.UseHsts(options => options.MaxAge(days: 30).IncludeSubdomains().Preload()); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict-Transport-Security</a>.</li>
                             <li>If using Strict-Transport-Security above, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>
-                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have imlemented TLS over HTTPS correctly.</li>
+                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
                         </ol>
                     </li>
                 </ul>
@@ -141,7 +141,7 @@
                     </li>
                     <li class="list-group-item">
                         <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
-                        Use the <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">OutputCache</a> attribute in conjunction with the caching section in the Web.config file to cache pages that don't change often and do not contain sensative information.
+                        Use the <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">OutputCache</a> attribute in conjunction with the caching section in the Web.config file to cache pages that don't change often and do not contain sensitive information.
                     </li>
                 </ul>
                 <h4>Content Delivery Networks (CDN)</h4>
@@ -185,14 +185,14 @@
                         If running IIS 7.5 or below, disable ETags. Open the web.config file and search for 'setEtag' for further instructions.
                     </li>
                     <li class="list-group-item">
-                        <input name="OtherPerformance-PrefetchPrerenderPages" type="checkbox"> <strong>Prefetch/Prerender Pages</strong> -
-                        If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding prefetch or prerender
+                        <input name="OtherPerformance-PrefetchPrerenderPages" type="checkbox"> <strong>Pre-fetch/Pre-render Pages</strong> -
+                        If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding pre-fetch or pre-render
                         link tags to the head of the page. See <a href="http://www.stevesouders.com/blog/2013/11/07/prebrowsing/">here</a> and
                         <a href="http://blogs.msdn.com/b/ie/archive/2013/12/04/getting-to-the-content-you-want-faster-in-ie11.aspx?Redirected=true">here</a> for more details. Also consider implementing IE11 <a href="msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx">flip ahead</a>, if you have next and previous buttons.
                     </li>
                     <li class="list-group-item">
-                        <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Prefetcher</strong> -
-                        This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">prefetcher</a> to get a performance and reduce the disk-read cost of application startup. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
+                        <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Pre-fetcher</strong> -
+                        This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">pre-fetcher</a> to get a performance and reduce the disk-read cost of application start-up. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
                     </li>
                 </ul>
             </article>
@@ -232,51 +232,51 @@
             </article>
 
             <article>
-                <h3>Compatability</h3>
+                <h3>Compatibility</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="Compatability-AmIUsingWebForms" type="checkbox"> <strong>Am I Using Web Forms?</strong> -
+                        <input name="Compatibility-AmIUsingWebForms" type="checkbox"> <strong>Am I Using Web Forms?</strong> -
                         If you are planning on using ASP.NET Web Forms, open the Global.asax.cs file and remove the two lines of code where we are removing the
                         ASP.NET Web Forms view engine. We do this for added performance but if you are using Web Forms, add it back in.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-IsSiteDeployedToServerCluster" type="checkbox"> <strong>Is Site Deployed To Server Cluster?</strong> -
+                        <input name="Compatibility-IsSiteDeployedToServerCluster" type="checkbox"> <strong>Is Site Deployed To Server Cluster?</strong> -
                         If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open
                         the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-UpdateWindowsBrowserConfig" type="checkbox"> <strong>Update Windows Browser Config</strong> -
+                        <input name="Compatibility-UpdateWindowsBrowserConfig" type="checkbox"> <strong>Update Windows Browser Config</strong> -
                         If supporting Windows 8 and above, update the /Content/icons/browserconfig.xml file with the URL of your sites RSS feed. This is used to display items from your RSS feed in the Windows live tile. Pretty cool!
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-UpdateAndroidChromeManifest" type="checkbox"> <strong>Update Android/Chrome Manifest</strong> -
+                        <input name="Compatibility-UpdateAndroidChromeManifest" type="checkbox"> <strong>Update Android/Chrome Manifest</strong> -
                         If supporting Android/Chrome M39+, update the /Content/icons/manifest.json file with the name of your site.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-DoIUseDefaultDocumentBrowsing" type="checkbox"> <strong>Do I Use Default Document Browsing?</strong> -
+                        <input name="Compatibility-DoIUseDefaultDocumentBrowsing" type="checkbox"> <strong>Do I Use Default Document Browsing?</strong> -
                         Default document browsing has been turned off by default for security reasons e.g. Navigating to /Folder/ which contains the physical file index.html,
                         will not return /Folder/index.html. This should not be a problem as we are using ASP.NET MVC controllers and actions. If you do want to
                         use physical files in folders, you may want to turn this feature back on. The security implications of doing this are small.
                         In the Web.config file set &lt;defaultDocument enabled="true"/&gt;.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatability</strong> -
-                        Test the compatability of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.
+                        <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
+                        Test the compatibility of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-WriteFormsProperly" type="checkbox"> <strong>Write Forms Properly</strong> -
+                        <input name="Compatibility-WriteFormsProperly" type="checkbox"> <strong>Write Forms Properly</strong> -
                         Forms are hard to write, ensure you read <a href="http://diveintohtml5.info/forms.html">this</a> tutorial on how to do them properly and don't forget to set the <a href="http://html5tutorial.info/html5-contact.php">input types</a>.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-TestSiteOnMobile" type="checkbox"> <strong>Test Site On Mobile</strong> -
+                        <input name="Compatibility-TestSiteOnMobile" type="checkbox"> <strong>Test Site On Mobile</strong> -
                         Test your site on real mobile devices <a href="http://opendevicelab.com/">here</a>. Ensure that the site is still fully functional. <a href="http://getbootstrap.com">Bootstrap</a> helps a lot in this regard.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-RunModernIEScan" type="checkbox"> <strong>Run Modern.IE Scan</strong> -
+                        <input name="Compatibility-RunModernIEScan" type="checkbox"> <strong>Run Modern.IE Scan</strong> -
                         Scan your site for issues with at <a href="https://www.modern.ie">Modern.IE</a>.
                     </li>
                     <li class="list-group-item">
-                        <input name="Compatability-PrinterFriendly" type="checkbox"> <strong>Printer Friendly (Save Some Trees)</strong> -
+                        <input name="Compatibility-PrinterFriendly" type="checkbox"> <strong>Printer Friendly (Save Some Trees)</strong> -
                         Ensure that you use the <a href="http://getbootstrap.com/css/#responsive-utilities-print">Bootstrap Print Classes</a> to hide content from printers. Use the print preview (Please don't actually print) feature to optimize your site for printing.
                     </li>
                 </ul>
@@ -286,8 +286,8 @@
                 <h3>Authentication</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="Authentication-UserVoice" type="checkbox"> <strong>Upvote UserVoice Post</strong> -
-                        Visual Studio provides the '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialog but does not allow third party developers access to this. Please upvote <a href="https://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/8187813-allow-3rd-party-developers-access-to-asp-net-web-p">this</a> UserVoice post, asking Microsoft to open up this capability to third party developers so <strong>you</strong> can use it and make the step below easier.
+                        <input name="Authentication-UserVoice" type="checkbox"> <strong>Up-vote UserVoice Post</strong> -
+                        Visual Studio provides the '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue but does not allow third party developers access to this. Please up-vote <a href="https://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/8187813-allow-3rd-party-developers-access-to-asp-net-web-p">this</a> UserVoice post, asking Microsoft to open up this capability to third party developers so <strong>you</strong> can use it and make the step below easier.
                     </li>
                     <li class="list-group-item">
                         <input name="Authentication-Provider" type="checkbox"> <strong>Choose Authentication Provider</strong> -
@@ -412,6 +412,10 @@
                         Implement the Atom feed for the site. See FeedService.cs.
                     </li>
                     <li class="list-group-item">
+                        <input name="RSSAtomFeed-PublishUpdates" type="checkbox"> <strong>Publish Atom Feed Updates</strong> -
+                        Call the PublishUpdate method on FeedService.cs when the feed changes. This publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol. See FeedService.cs for more information.
+                    </li>
+                    <li class="list-group-item">
                         <input name="RSSAtomFeed-ValidateAtomFeed" type="checkbox"> <strong>Validate Atom Feed</strong> -
                         Use <a href="http://feedvalidator.org/">Feed Validator</a> to validate your Atom feed.
                     </li>
@@ -484,7 +488,7 @@
                             <li>It's worth reading the NuGet package release notes to see what has changed and base the urgency of upgrading on this information. Blindly updating, can sometimes cause things to break. Sometimes packages are incompatible with other packages or there are special upgrade steps that need to be carried out.</li>
                             <li>Check the <a href="https://msdn.microsoft.com/en-us/library/twy1dw1e%28v=vs.110%29.aspx">assemblyBinding</a> section in the web.config file to see if the version of a .dll file needs to be changed to the version you are updating to. This section of the web.config file ensures that interdependent .dll's continue to work with each other, even if a package is expecting an older version of another .dll.</li>
                             <li>When updating JavaScript or CSS framework NuGet Packages, be careful that the particular version you are updating to is also available on the <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. Some CDN's update more often than others. This project template uses the popular Google and Microsoft CDN's as it is likely that their scripts are already preloaded in a browsers cache. However, their CDN service also does not update too often. Take a look at the BundleConfig.cs to see which CDN's are being used.</li>
-                            <li>You need to ensure that you update your JavaScript and CSS framework NuGet packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degredation.</li>
+                            <li>You need to ensure that you update your JavaScript and CSS framework NuGet packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degradation.</li>
                             <li>Updating JavaScript or CSS framework NuGet packages causes the new files to be dumped in one folder. To ensure cleanliness of the project, these are then moved to their respective sub-folders.</li>
                             <li>Updating the MVC NuGet packages will cause your site to break entirely and will require changes to your site which are detailed on the <a href="http://www.asp.net/">ASP.NET site</a>.</li>
                         </ol>

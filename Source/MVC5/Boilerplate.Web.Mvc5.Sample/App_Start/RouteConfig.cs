@@ -31,10 +31,11 @@
             // Enable attribute routing.
             routes.MapMvcAttributeRoutes();
 
-            // Normal routes are not required because we are using attribute routing. So we don't need this MapRoute statement.
-            // Unfortunately, Elmah.MVC has a bug in which some 404 and 500 errors are not logged without this route in place.
-            // So we include this but look out on this page for a fix https://github.com/alexbeletsky/elmah-mvc/issues/60
-            // and https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/8
+            // Normal routes are not required because we are using attribute routing. So we don't need this MapRoute 
+            // statement. Unfortunately, Elmah.MVC has a bug in which some 404 and 500 errors are not logged without 
+            // this route in place. So we include this but look out on these pages for a fix:
+            // https://github.com/alexbeletsky/elmah-mvc/issues/60
+            // https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/8
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -72,15 +72,16 @@
     <Compile Include="AtomActionResult.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="CspViolationException.cs" />
-    <Compile Include="Experimental\ObjectPool\ListPool.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\ListPool.cs" />
     <Compile Include="Experimental\ObjectPool\ObjectPool.cs" />
-    <Compile Include="Experimental\ObjectPool\PooledDictionary.cs" />
-    <Compile Include="Experimental\ObjectPool\PooledHashSet.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\PooledDictionary.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\PooledHashSet.cs" />
     <Compile Include="Experimental\ObjectPool\PooledObject.cs" />
-    <Compile Include="Experimental\ObjectPool\PooledStream.cs" />
-    <Compile Include="Experimental\ObjectPool\SharedPoolExtensions.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\PooledStream.cs" />
+    <Compile Include="Experimental\ObjectPool\ObjectPoolExtensions.cs" />
     <Compile Include="Experimental\ObjectPool\SharedPools.cs" />
-    <Compile Include="Experimental\ObjectPool\StringBuilderPool.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\StringBuilderPool.cs" />
+    <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Filters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
     <Compile Include="Twitter\Cards\AppTwitterCard.cs" />
     <Compile Include="Twitter\Cards\GalleryTwitterCard.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="XDocumentExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Experimental\ObjectPool\ObjectPool.dgml" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,8 +9,8 @@
     public static class UrlHelperExtensions
     {
         /// <summary>
-        /// Generates a fully qualified URL to an action method by using
-        /// the specified action name, controller name and route values.
+        /// Generates a fully qualified URL to an action method by using the specified action name, controller name and 
+        /// route values.
         /// </summary>
         /// <param name="url">The URL helper.</param>
         /// <param name="actionName">The name of the action method.</param>
@@ -28,8 +28,8 @@
         }
 
         /// <summary>
-        /// Generates a fully qualified URL to the specified content by using
-        /// the specified content path. Converts a virtual (relative) path to an application absolute path.
+        /// Generates a fully qualified URL to the specified content by using the specified content path. Converts a 
+        /// virtual (relative) path to an application absolute path.
         /// </summary>
         /// <param name="url">The URL helper.</param>
         /// <param name="contentPath">The content path.</param>
@@ -42,8 +42,7 @@
         }
 
         /// <summary>
-        /// Generates a fully qualified URL to the specified route by using
-        /// the route name and route values.
+        /// Generates a fully qualified URL to the specified route by using the route name and route values.
         /// </summary>
         /// <param name="url">The URL helper.</param>
         /// <param name="routeName">Name of the route.</param>

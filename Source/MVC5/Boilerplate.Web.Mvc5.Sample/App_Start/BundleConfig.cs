@@ -18,8 +18,9 @@
 
             // Enable CDN usage. 
             // Note: that you can choose to remove the CDN if you are developing an intranet application.
-            // Note: We are using Google's CDN where possible and then Microsoft if not available for better performance (Google is more likely to have been cached by the users browser).
-            // Note: that protocol (http:) is ommited from the CDN URL on purpose to allow the browser to choose the protocol.
+            // Note: We are using Google's CDN where possible and then Microsoft if not available for better 
+            //       performance (Google is more likely to have been cached by the users browser).
+            // Note: that protocol (http:) is omitted from the CDN URL on purpose to allow the browser to choose the protocol.
             bundles.UseCdn = true;
 
             AddCss(bundles);
@@ -30,9 +31,10 @@
         {
             // Bootstrap - Twitter Bootstrap CSS (http://getbootstrap.com/).
             // Font Awesome - Icons using font (http://fortawesome.github.io/Font-Awesome/).
-            // Site - Your custom site css.
+            // Site - Your custom site CSS.
             // Note: No CDN support has been added here. Most likely you will want to customize your copy of bootstrap.
-            // Note: If you host any of your CSS on a seperate domain (Like a CDN), then be sure to fix an issue with respond.js which stops working for IE8.
+            // Note: If you host any of your CSS on a separate domain (Like a CDN), then be sure to fix an issue with 
+            //       respond.js which stops working for IE8.
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap/site.css",
                 "~/Content/fontawesome/site.css",
@@ -40,17 +42,17 @@
         }
 
         /// <summary>
-        /// Creates and adds JavaScript bundles to the bundle collection. 
-        /// Content Delivery Network's (CDN) are used where available. 
+        /// Creates and adds JavaScript bundles to the bundle collection. Content Delivery Network's (CDN) are used 
+        /// where available. 
         /// 
-        /// Note: MVC's built in
-        /// <see cref="System.Web.Optimization.Bundle.CdnFallbackExpression"/> is not used as using inline
-        /// scripts is not permitted under Content Security Policy (CSP) (See FilterConfig for more details).
+        /// Note: MVC's built in <see cref="System.Web.Optimization.Bundle.CdnFallbackExpression"/> is not used as 
+        /// using in-line scripts is not permitted under Content Security Policy (CSP) (See <see cref="FilterConfig"/> 
+        /// for more details).
         /// 
-        /// Instead, we create our own failover bundles. If a CDN is not reachable, the failover script
-        /// loads the local bundles instead. The failover script is only a few lines of code and should have
-        /// a minimal impact, although it does add an extra request (Two if the browser is IE8 or less).
-        /// If you feel confident in the CDN availability and prefer better performance, you can delete these lines.
+        /// Instead, we create our own failover bundles. If a CDN is not reachable, the failover script loads the local 
+        /// bundles instead. The failover script is only a few lines of code and should have a minimal impact, although 
+        /// it does add an extra request (Two if the browser is IE8 or less). If you feel confident in the CDN 
+        /// availability and prefer better performance, you can delete these lines.
         /// </summary>
         /// <param name="bundles">The bundles.</param>
         private static void AddJavaScript(BundleCollection bundles)
@@ -61,12 +63,17 @@
             bundles.Add(jqueryBundle);
 
             // jQuery Validate - Client side JavaScript form validation (http://jqueryvalidation.org/).
-            Bundle jqueryValidateBundle = new ScriptBundle("~/bundles/jqueryval", ContentDeliveryNetwork.Microsoft.JQueryValidateUrl)
+            Bundle jqueryValidateBundle = new ScriptBundle(
+                "~/bundles/jqueryval", 
+                ContentDeliveryNetwork.Microsoft.JQueryValidateUrl)
                 .Include("~/Scripts/jquery.validate*");
             bundles.Add(jqueryValidateBundle);
 
-            // Microsoft jQuery Validate Unobtrusive - Validation using HTML data- attributes (http://stackoverflow.com/questions/11534910/what-is-jquery-unobtrusive-validation)
-            Bundle jqueryValidateUnobtrusiveBundle = new ScriptBundle("~/bundles/jqueryvalunobtrusive", ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl)
+            // Microsoft jQuery Validate Unobtrusive - Validation using HTML data- attributes 
+            // http://stackoverflow.com/questions/11534910/what-is-jquery-unobtrusive-validation
+            Bundle jqueryValidateUnobtrusiveBundle = new ScriptBundle(
+                "~/bundles/jqueryvalunobtrusive", 
+                ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl)
                 .Include("~/Scripts/jquery.validate*");
             bundles.Add(jqueryValidateUnobtrusiveBundle);
 
@@ -76,16 +83,21 @@
             // Note: The current version of Modernizr does not support Content Security Policy (CSP) (See FilterConfig).
             // See here for details: https://github.com/Modernizr/Modernizr/pull/1263 and 
             // http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
-            Bundle modernizrBundle = new ScriptBundle("~/bundles/modernizr", ContentDeliveryNetwork.Microsoft.ModernizrUrl)
+            Bundle modernizrBundle = new ScriptBundle(
+                "~/bundles/modernizr", 
+                ContentDeliveryNetwork.Microsoft.ModernizrUrl)
                 .Include("~/Scripts/modernizr-*");
             bundles.Add(modernizrBundle);
 
             // Bootstrap - Twitter Bootstrap JavaScript (http://getbootstrap.com/).
-            Bundle bootstrapBundle = new ScriptBundle("~/bundles/bootstrap", ContentDeliveryNetwork.Microsoft.BootstrapUrl)
+            Bundle bootstrapBundle = new ScriptBundle(
+                "~/bundles/bootstrap", 
+                ContentDeliveryNetwork.Microsoft.BootstrapUrl)
                 .Include("~/Scripts/bootstrap.js");
             bundles.Add(bootstrapBundle);
 
-            // Respond.js - A fast & lightweight polyfill for min/max-width CSS3 Media Queries (https://github.com/scottjehl/Respond). 
+            // Respond.js - A fast & lightweight polyfill for min/max-width CSS3 Media Queries 
+            // https://github.com/scottjehl/Respond. 
             // Note: that the CDN version is a little behind the latest 1.4.2.
             Bundle respondBundle = new ScriptBundle("~/bundles/respond", ContentDeliveryNetwork.Microsoft.RespondUrl)
                 .Include("~/Scripts/respond.js");

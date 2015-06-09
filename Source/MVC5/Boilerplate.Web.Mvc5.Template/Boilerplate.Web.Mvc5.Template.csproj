@@ -104,7 +104,6 @@
     <Content Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Content>
-    <Content Include="Models\ErrorModel.cs" />
     <Content Include="Constants\CacheSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Services\Logging\ILoggingService.cs" />

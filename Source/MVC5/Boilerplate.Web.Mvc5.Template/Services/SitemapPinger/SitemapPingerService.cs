@@ -49,10 +49,11 @@
         #region Public Methods
 
         /// <summary>
-        /// Send (or 'ping') the URL of this sites sitemap.xml file to search engines like Google, Bing and Yahoo.
-        /// This method should be called each time the sitemap changes. Note that this function will do nothing 
-        /// when the solution configuration is set to Debug mode, so that search engines are not spammed.
-        /// The way we 'ping' our sitemap to search engines is actually an open standard (See http://www.sitemaps.org/protocol.html#submit_ping).
+        /// Send (or 'ping') the URL of this sites sitemap.xml file to search engines like Google, Bing and Yahoo, 
+        /// This method should be called each time the sitemap changes. Google says that 'We recommend that you 
+        /// resubmit a Sitemap no more than once per hour.' The way we 'ping' our sitemap to search engines is 
+        /// actually an open standard See 
+        /// http://www.sitemaps.org/protocol.html#submit_ping
         /// You can read the sitemap ping documentation for the top search engines below:
         /// Google - http://googlewebmastercentral.blogspot.co.uk/2014/10/best-practices-for-xml-sitemaps-rssatom.html
         /// Bing - http://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4.
@@ -64,7 +65,8 @@
 
             foreach (string sitemapPingLocation in SitemapPingLocations)
             {
-                string url = sitemapPingLocation + this.urlHelper.Encode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml));
+                string url = sitemapPingLocation + 
+                    this.urlHelper.Encode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml));
                 HttpResponseMessage response = await this.httpClient.GetAsync(url);
                 if (!response.IsSuccessStatusCode)
                 {

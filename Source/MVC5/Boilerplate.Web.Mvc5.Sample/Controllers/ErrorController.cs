@@ -4,7 +4,6 @@
     using System.Web.Mvc;
     using System.Web.UI;
     using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Models;
 
     /// <summary>
     /// Provides methods that respond to HTTP requests with HTTP errors.
@@ -92,24 +91,15 @@
             // Don't show IIS custom errors.
             this.Response.TrySkipIisCustomErrors = true;
 
-            ErrorModel error = new ErrorModel()
-            {
-                RequestedUrl = this.Request.Url.ToString(),
-                ReferrerUrl =
-                    (this.Request.UrlReferrer == null) ?
-                    null :
-                    this.Request.UrlReferrer.ToString()
-            };
-
             ActionResult result;
             if (this.Request.IsAjaxRequest())
             {
                 // This allows us to show errors even in partial views.
-                result = this.PartialView(viewName, error);
+                result = this.PartialView(viewName);
             }
             else
             {
-                result = this.View(viewName, error);
+                result = this.View(viewName);
             }
 
             return result;

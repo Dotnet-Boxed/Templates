@@ -4,7 +4,6 @@
     using System.Web.Mvc;
     using System.Web.UI;
     using $safeprojectname$.Constants;
-    using $safeprojectname$.Models;
 
     /// <summary>
     /// Provides methods that respond to HTTP requests with HTTP errors.
@@ -24,7 +23,7 @@
         {
             return this.GetErrorView(HttpStatusCode.BadRequest, ErrorControllerAction.BadRequest);
         }
-        
+
         /// <summary>
         /// Returns a HTTP 403 Forbidden error view. Returns a partial view if the request is an AJAX call.
         /// Unlike a 401 Unauthorized response, authenticating will make no difference.
@@ -47,7 +46,7 @@
         {
             return this.GetErrorView(HttpStatusCode.InternalServerError, ErrorControllerAction.InternalServerError);
         }
-        
+
         /// <summary>
         /// Returns a HTTP 405 Method Not Allowed error view. Returns a partial view if the request is an AJAX call.
         /// </summary>
@@ -79,7 +78,7 @@
         public ActionResult Unauthorized()
         {
             return this.GetErrorView(HttpStatusCode.Unauthorized, ErrorControllerAction.Unauthorized);
-        } 
+        }
 
         #endregion
 
@@ -92,24 +91,15 @@
             // Don't show IIS custom errors.
             this.Response.TrySkipIisCustomErrors = true;
 
-            ErrorModel error = new ErrorModel()
-            {
-                RequestedUrl = this.Request.Url.ToString(),
-                ReferrerUrl =
-                    (this.Request.UrlReferrer == null) ?
-                    null :
-                    this.Request.UrlReferrer.ToString()
-            };
-
             ActionResult result;
             if (this.Request.IsAjaxRequest())
             {
                 // This allows us to show errors even in partial views.
-                result = this.PartialView(viewName, error);
+                result = this.PartialView(viewName);
             }
             else
             {
-                result = this.View(viewName, error);
+                result = this.View(viewName);
             }
 
             return result;

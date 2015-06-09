@@ -13,18 +13,28 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
     /// For example, if you want to create a million of small objects within a second, 
     /// use the ObjectPool directly. it should have much less overhead than using this.
     /// </summary>
-    internal static class SharedPools
+    public static class SharedPools
     {
+        /// pooled memory : 4K * 512 = 4MB
+        public const int ByteBufferSize = 4 * 1024;
+        private const int ByteBufferCount = 512;
+
+        #region Public Static Methods
+
         /// <summary>
-        /// pool that uses default constructor with 100 elements pooled
+        /// Pool that uses default constructor with 100 elements pooled.
         /// </summary>
         public static ObjectPool<T> BigDefault<T>() where T : class, new()
         {
+            List<object> list = SharedPools.Default<List<object>>().AllocateAndClear();
+
+            SharedPools.Default<List<object>>().Free(list);
+
             return DefaultBigPool<T>.Instance;
         }
 
         /// <summary>
-        /// pool that uses default constructor with 20 elements pooled
+        /// Pool that uses default constructor with 20 elements pooled.
         /// </summary>
         public static ObjectPool<T> Default<T>() where T : class, new()
         {
@@ -32,7 +42,7 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
         }
 
         /// <summary>
-        /// pool that uses string as key with StringComparer.OrdinalIgnoreCase as key comparer
+        /// Pool that uses string as key with StringComparer.OrdinalIgnoreCase as key comparer with 20 elements pooled.
         /// </summary>
         public static ObjectPool<Dictionary<string, T>> StringIgnoreCaseDictionary<T>()
         {
@@ -40,41 +50,68 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
         }
 
         /// <summary>
-        /// pool that uses string as element with StringComparer.OrdinalIgnoreCase as element comparer
+        /// Pool that uses string as element with StringComparer.OrdinalIgnoreCase as element comparer.
         /// </summary>
-        public static readonly ObjectPool<HashSet<string>> StringIgnoreCaseHashSet =
-            new ObjectPool<HashSet<string>>(() => new HashSet<string>(StringComparer.OrdinalIgnoreCase), 20);
+        public static readonly ObjectPool<HashSet<string>> StringIgnoreCaseHashSet = new ObjectPool<HashSet<string>>(
+            () => new HashSet<string>(StringComparer.OrdinalIgnoreCase), 
+            20);
 
         /// <summary>
-        /// pool that uses string as element with StringComparer.Ordinal as element comparer
+        /// Pool that uses string as element with StringComparer.Ordinal as element comparer.
         /// </summary>
-        public static readonly ObjectPool<HashSet<string>> StringHashSet =
-            new ObjectPool<HashSet<string>>(() => new HashSet<string>(StringComparer.Ordinal), 20);
+        public static readonly ObjectPool<HashSet<string>> StringHashSet = new ObjectPool<HashSet<string>>(
+            () => new HashSet<string>(StringComparer.Ordinal), 
+            20);
 
         /// <summary>
-        /// Used to reduce the # of temporary byte[]s created to satisfy serialization and
-        /// other I/O requests
+        /// Used to reduce the # of temporary byte[]s created to satisfy serialization and other I/O requests.
         /// </summary>
-        public static readonly ObjectPool<byte[]> ByteArray = new ObjectPool<byte[]>(() => new byte[ByteBufferSize], ByteBufferCount);
+        public static readonly ObjectPool<byte[]> ByteArray = new ObjectPool<byte[]>(
+            () => new byte[ByteBufferSize], 
+            ByteBufferCount); 
 
-        /// pooled memory : 4K * 512 = 4MB
-        public const int ByteBufferSize = 4 * 1024;
-        private const int ByteBufferCount = 512;
+        #endregion
 
+        #region Private Static Classes
+
+        /// <summary>
+        /// A pool of objects of type <typeparamref name="T"/>, up to a maximum of 100 instances.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to pool.</typeparam>
         private static class DefaultBigPool<T> where T : class, new()
         {
+            /// <summary>
+            /// The pool of objects of type <typeparamref name="T"/>, up to a maximum of 100 instances.
+            /// </summary>
             public static readonly ObjectPool<T> Instance = new ObjectPool<T>(() => new T(), 100);
         }
 
+        /// <summary>
+        /// A pool of objects of type <typeparamref name="T"/>, up to a maximum of 20 instances.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to pool.</typeparam>
         private static class DefaultNormalPool<T> where T : class, new()
         {
+            /// <summary>
+            /// The pool of objects of type <typeparamref name="T"/>, up to a maximum of 20 instances.
+            /// </summary>
             public static readonly ObjectPool<T> Instance = new ObjectPool<T>(() => new T(), 20);
         }
 
+        /// <summary>
+        /// A pool of dictionaries of type <see cref="Dictionary{string, T}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
+        /// </summary>
+        /// <typeparam name="T">The type of the values in the dictionary.</typeparam>
         private static class StringIgnoreCaseDictionaryNormalPool<T>
         {
-            public static readonly ObjectPool<Dictionary<string, T>> Instance =
-                new ObjectPool<Dictionary<string, T>>(() => new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase), 20);
-        }
+            /// <summary>
+            /// The pool of dictionaries of type <see cref="Dictionary{string, T}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
+            /// </summary>
+            public static readonly ObjectPool<Dictionary<string, T>> Instance = new ObjectPool<Dictionary<string, T>>(
+                () => new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase), 
+                20);
+        } 
+
+        #endregion
     }
 }

@@ -1,4 +1,11 @@
-﻿Version 1.1.1
+﻿Version 1.1.2
+- Implemented PubSubHubbub protocol to publish changes in the Atom feed to subscribers. See IFeedServices.cs and FeedService.cs.
+- Added a note to ReadMe.html to call IFeedServices.PublishUpdate to publish PubSubHubbub updates to subscribers.
+- ErrorModel.cs deleted. Although it was being passed to the error views, we did not use it.
+- Lines now wrap at 120 characters.
+- Ran spell-check and fixed spelling errors in several files.
+
+Version 1.1.1
 - Updated ReadMe.html
 	- New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
 	- New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
@@ -16,10 +23,10 @@ Version 1.1.0
   .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
   We do this only in release mode because this stops edit and refresh from working.
 - Added new render section to _Layout.cshtml for meta tags in the head of the HTML.
-- Removed all classes under the Framework namespace and moved them to a seperate NuGet package called Boilerplate.Web.Mvc5
+- Removed all classes under the Framework namespace and moved them to a separate NuGet package called Boilerplate.Web.Mvc5
   this should make it easy for people to upgrade their projects to the latest framework and we can include bug fixes and new
   features easily. Tp achieve this a few changes had to be made:
-	- RedirectToCanonicalUrlAttribute now has an extra constructor paramter, set in FilterConfig.cs which tells it which controller actions to ignore.
+	- RedirectToCanonicalUrlAttribute now has an extra constructor parameter, set in FilterConfig.cs which tells it which controller actions to ignore.
 	- ContentType constant also moved to Framework.
 	- SitemapService now inherits from SitemapGenerator which exists in the Framework. SitemapService is now much more simplified.
 	- Boilerplate.Web.Mvc5 NuGet package added.
@@ -32,7 +39,7 @@ Version 1.1.0
 
 Version 1.0.45
 - Added Elmah Controller Name to ControllerName.cs
-- Ignore requestrs for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
+- Ignore requests for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
 - Updated Modernizr bundle to use CDN in BundleConfig.cs and updated comments.
 - Lots of files changed for StyleCop compliance, mostly fixing spelling mistakes and comments.
 
@@ -222,7 +229,7 @@ Version 1.0.21
 	- Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
 
 Version 1.0.20
-- Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have imlemented SSL/TLS over HTTPS correctly.
+- Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have implemented SSL/TLS over HTTPS correctly.
 
 Version 1.0.19
 - Microsoft CDN jQuery Validation URL updated to 1.13.1.

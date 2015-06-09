@@ -3,25 +3,30 @@
     using System.Text;
 
     /// <summary>
-    /// Helps convert <see cref="string"/> title text to URL friendly <see cref="string"/>'s that can safely be displayed in a URL.
+    /// Helps convert <see cref="string"/> title text to URL friendly <see cref="string"/>'s that can safely be 
+    /// displayed in a URL.
     /// </summary>
     public static class FriendlyUrlHelper
     {
         #region Public Methods
 
         /// <summary>
-        /// Converts the specified title so that it is more human and search engine readable
-        /// e.g. http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title. Note that the ID of the product is still included in the 
-        /// URL, to avoid having to deal with two titles with the same name. Search Engine Optimization (SEO) friendly URL's gives your site a boost in 
-        /// search rankings by including keywords in your URL's. They are also easier to read by users and can give them an indication of what they are 
-        /// clicking on when they look at a URL. Refer to the code example below to see how this helper can be used. Go to definition on this method to see a code example.
-        /// To learn more about friendly URL's see http://moz.com/blog/11-best-practices-for-urls.
-        /// To learn more about how this was implemented see http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486#25486.
+        /// Converts the specified title so that it is more human and search engine readable e.g. 
+        /// http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title. Note that the ID of the 
+        /// product is still included in the URL, to avoid having to deal with two titles with the same name. Search 
+        /// Engine Optimization (SEO) friendly URL's gives your site a boost in search rankings by including keywords 
+        /// in your URL's. They are also easier to read by users and can give them an indication of what they are 
+        /// clicking on when they look at a URL. Refer to the code example below to see how this helper can be used. 
+        /// Go to definition on this method to see a code example. To learn more about friendly URL's see 
+        /// http://moz.com/blog/11-best-practices-for-urls.
+        /// To learn more about how this was implemented see 
+        /// http://stackoverflow.com/questions/25259/how-does-stack-overflow-generate-its-seo-friendly-urls/25486#25486
         /// </summary>
         /// <param name="title">The title of the URL.</param>
-        /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII equivalent 'e'. All modern browsers
-        /// except Internet Explorer display the 'è' correctly. Older browsers and Internet Explorer percent encode these international characters so they 
-        /// are displayed as'%C3%A8'. What you set this to depends on whether your target users are english speakers or not.</param>
+        /// <param name="remapToAscii">if set to <c>true</c>, remaps special UTF8 characters like 'è' to their ASCII 
+        /// equivalent 'e'. All modern browsers except Internet Explorer display the 'è' correctly. Older browsers and 
+        /// Internet Explorer percent encode these international characters so they are displayed as'%C3%A8'. What you 
+        /// set this to depends on whether your target users are English speakers or not.</param>
         /// <param name="maxlength">The maximum allowed length of the title.</param>
         /// <returns>The SEO and human friendly title.</returns>
         /// <code>
@@ -43,7 +48,8 @@
         ///     // Compare the title with the friendly title.
         ///     if (!string.Equals(friendlyTitle, title, StringComparison.Ordinal))
         ///     {
-        ///         // If the title is null, empty or does not match the friendly title, return a 301 Permanent Redirect to the correct friendly URL.
+        ///         // If the title is null, empty or does not match the friendly title, return a 301 Permanent 
+        ///         // Redirect to the correct friendly URL.
         ///         return new RedirectResult(this.Url.RouteUrl("GetDetails", new { id = id, title = friendlyTitle }), true);
         ///     }
         ///     
@@ -77,7 +83,8 @@
                     stringBuilder.Append((char)(c | 32));
                     prevdash = false;
                 }
-                else if ((c == ' ') || (c == ',') || (c == '.') || (c == '/') || (c == '\\') || (c == '-') || (c == '_') || (c == '='))
+                else if ((c == ' ') || (c == ',') || (c == '.') || (c == '/') || 
+                    (c == '\\') || (c == '-') || (c == '_') || (c == '='))
                 {
                     if (!prevdash && (stringBuilder.Length > 0))
                     {
@@ -125,8 +132,8 @@
         #region Private Methods
 
         /// <summary>
-        /// Remaps the international character to their equivalent ASCII characters.
-        /// (See http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696).
+        /// Remaps the international character to their equivalent ASCII characters. See 
+        /// http://meta.stackexchange.com/questions/7435/non-us-ascii-characters-dropped-from-full-profile-url/7696#7696
         /// </summary>
         /// <param name="character">The character to remap to its ASCII equivalent.</param>
         /// <returns>The remapped character</returns>

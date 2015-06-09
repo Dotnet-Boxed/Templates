@@ -5,8 +5,9 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
 
     /// <summary>
     /// Copied from Microsoft Roslyn code at http://source.roslyn.codeplex.com/#Microsoft.CodeAnalysis.Workspaces/Formatting/ListPool.cs,1086fa28bcfcb8ca
+    /// A pool of <see cref="List{T}"/> objects.
     /// </summary>
-    internal static class ListPool<T>
+    public static class ListPool<T>
     {
         public static List<T> Allocate()
         {
