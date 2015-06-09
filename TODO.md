@@ -9,7 +9,6 @@
   <li>Keep eye on <a href="http://stackoverflow.com/questions/27860618/which-http-status-codes-to-cover-for-mvc-error-handling/29282406#29282406">HTTP Status Codes</a> for codes I am not covering correctly.</li>
   <li>Update to Font Awesome 4.3.0 when they fix the .less files.</li>
   <li>Use a CDN to get Font Awesome css and fonts.</li>
-  <li>Add <a href="https://pubsubhubbub.googlecode.com/git/pubsubhubbub-core-0.4.html">pubsubhubbub</a> support. See <a href="https://code.google.com/p/pubsubhubbub/">here</a> also.</li>
 </ul>
 
 <h2>ASP.NET MVC 6</h2>
@@ -20,6 +19,13 @@
   <li>Decide whether to use LESS or SASS for the CSS?</li>
   <li>Finish bundling and minification using NPM, Bower and Gulp.</li>
   <li>...get this far, then think about the rest.</li>
+</ul>
+<p><strong>WOW, so much is missing from MVC 6 its amazing.</strong></p>
+<ul>
+  <li>No support for filters (FilterAttribute in MVC 5).</li>
+  <li>No caching (OutputCacheAttribute in MVC 5). See <a href="http://stackoverflow.com/questions/27304210/how-do-i-apply-the-outputcache-attribute-on-a-method-in-a-vnext-project">StackOverflow</a></li>
+  <li>No Atom feed without System.ServiceModel.SyndicationFeed</li>
+  <li>How to get current request URL?</li>
 </ul>
 
 <h2>ASP.NET Identity</h2>
