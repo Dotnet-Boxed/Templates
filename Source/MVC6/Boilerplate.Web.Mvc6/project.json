@@ -1,23 +1,25 @@
-﻿{
-  "version": "1.0.0-*",
-  "description": "",
-  "authors": [ "" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+{
+    "version": "1.0.0-*",
+    "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
+    "authors": [ "Muhammad Rehan Saeed" ],
+    "tags": [ "" ],
+    "projectUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate",
+    "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
 
-  "dependencies": {
-  },
+    "dependencies": {
+        "Microsoft.AspNet.Mvc.Core": "6.0.0-beta4",
+        "Microsoft.AspNet.Http": "1.0.0-beta4",
+    },
 
-  "frameworks" : {
-    "dnx451": { },
-    "dnxcore50" : {
-      "dependencies": {
-        "System.Collections": "4.0.10-beta-22816",
-        "System.Linq": "4.0.0-beta-22816",
-        "System.Threading": "4.0.10-beta-22816",
-        "Microsoft.CSharp": "4.0.0-beta-22816"
-      }
+    "frameworks": {
+        "dnx451": { },
+        "dnxcore50": {
+          "dependencies": {
+            "System.Collections": "4.0.10-beta-22816",
+            "System.Linq": "4.0.0-beta-22816",
+            "System.Threading": "4.0.10-beta-22816",
+            "Microsoft.CSharp": "4.0.0-beta-22816"
+          }
+        }
     }
-  }
 }
