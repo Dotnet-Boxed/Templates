@@ -88,6 +88,10 @@
 
 <p>ASP.NET MVC is a complicated beast. You can end up with lots of <a href="http://en.wikipedia.org/wiki/Magic_string">magic strings</a> which can be a nightmare when renaming something. There are many ways of eliminating these magic strings but most trade maintainability for slower performance. ASP.NET MVC Boilerplate makes extensive use of constants which are a trade-off between maintainability and performance, giving you the best of both worlds.</p>
 
+<h2>Atom Feed</h2>
+
+An <a href="http://atomenabled.org/developers/syndication/">Atom 1.0</a> has been included by default. Atom was chosen over RSS because it is the <a href="http://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared">better and newer</a> specification. <a href="https://github.com/pubsubhubbub">PubSubHubbub</a> 0.4 support has also been built in, allowing you to push feed updates to subscribers.
+
 <h2>Search</h2>
 
 There is a lot more to implementing search in your application than it sounds. ASP.NET MVC Boilerplate includes a search feature by default but leaves it open for you to choose how you want to implement it. It also implements <a href="http://www.opensearch.org">Open Search</a> XML right out of the box. Read Scott Hanselman talk about this feature <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">here</a>.
@@ -107,4 +111,4 @@ That's easy, just choose one of the following options:
 </ol>
 
 <h2>Release Notes and TODO List</h2>
-You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">here</a> and a TODO list of new features and enhancements coming soon <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md">here</a>.
+You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt">here</a> and a TODO list of new features and enhancements coming soon <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md">here</a>.

@@ -9,6 +9,8 @@
   <li>Keep eye on <a href="http://stackoverflow.com/questions/27860618/which-http-status-codes-to-cover-for-mvc-error-handling/29282406#29282406">HTTP Status Codes</a> for codes I am not covering correctly.</li>
   <li>Update to Font Awesome 4.3.0 when they fix the .less files.</li>
   <li>Use a CDN to get Font Awesome css and fonts.</li>
+  <li>Add referrer meta tag. See <a href="https://github.com/NWebsec/NWebsec/issues/62">this</a>.</li>
+  <li>Add <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">HPKG</a> using <a href="https://github.com/NWebsec/NWebsec/issues/49">NWebSec</a>.</li>
 </ul>
 
 <h2>ASP.NET MVC 6</h2>
@@ -24,8 +26,8 @@
 <ul>
   <li>No support for filters (FilterAttribute in MVC 5).</li>
   <li>No caching (OutputCacheAttribute in MVC 5). See <a href="http://stackoverflow.com/questions/27304210/how-do-i-apply-the-outputcache-attribute-on-a-method-in-a-vnext-project">StackOverflow</a></li>
-  <li>No Atom feed without System.ServiceModel.SyndicationFeed</li>
-  <li>How to get current request URL?</li>
+  <li>No Atom feed without System.ServiceModel.SyndicationFeed. See <a href="https://github.com/dotnet/wcf/issues/76#issuecomment-111420491">GitHub</a></li>
+  <li>No AppendTrailingSlash option for SEO. See <a href="http://stackoverflow.com/questions/27997814/lower-case-urls-and-trailing-slash/30799844#30799844">StackOverflow</a> and <a href="https://github.com/aspnet/Mvc/issues/2691">GitHub</a></li>
 </ul>
 
 <h2>ASP.NET Identity</h2>
