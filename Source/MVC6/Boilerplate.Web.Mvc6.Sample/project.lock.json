@@ -6,6 +6,7 @@
       "Microsoft.AspNet.Diagnostics >= 1.0.0-beta4",
       "Microsoft.AspNet.Mvc >= 6.0.0-beta4",
       "Microsoft.AspNet.Mvc.TagHelpers >= 6.0.0-beta4",
+      "Microsoft.AspNet.Mvc.Xml >= 6.0.0-beta4",
       "Microsoft.AspNet.Server.IIS >= 1.0.0-beta4",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta4",
       "Microsoft.AspNet.StaticFiles >= 1.0.0-beta4",
@@ -14,7 +15,9 @@
       "Microsoft.Framework.CodeGenerators.Mvc >= 1.0.0-beta4",
       "Microsoft.Framework.Logging >= 1.0.0-beta4",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta4",
-      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4"
+      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta4",
+      "Boilerplate.Web.Mvc6 >= 1.0.0-*",
+      "System.Runtime >= 4.0.20-beta-22816"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []
@@ -1868,6 +1871,54 @@
         "lib/dnx451/Microsoft.AspNet.Mvc.TagHelpers.xml",
         "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.dll",
         "lib/dnxcore50/Microsoft.AspNet.Mvc.TagHelpers.xml"
+      ]
+    },
+    "Microsoft.AspNet.Mvc.Xml/6.0.0-beta4": {
+      "serviceable": true,
+      "sha": "bSJiB1OqXWZQMOW1E4XviRBo0cjSaXK5UFXGjcvPU5ZbPCSHgyS7/q1MSjPlA88UEcdfntwmcW0zomvULWOGfQ==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "Microsoft.AspNet.Mvc.Core": "6.0.0-beta4"
+          },
+          "frameworkAssemblies": [
+            "System.Xml",
+            "System.Runtime.Serialization",
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/dnx451/Microsoft.AspNet.Mvc.Xml.dll"
+          ],
+          "compileAssemblies": [
+            "lib/dnx451/Microsoft.AspNet.Mvc.Xml.dll"
+          ]
+        },
+        "DNXCore,Version=v5.0": {
+          "dependencies": {
+            "Microsoft.AspNet.Mvc.Core": "6.0.0-beta4",
+            "System.Runtime.Serialization.Xml": "4.0.10-beta-22816",
+            "System.Xml.XmlSerializer": "4.0.10-beta-22816"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/dnxcore50/Microsoft.AspNet.Mvc.Xml.dll"
+          ],
+          "compileAssemblies": [
+            "lib/dnxcore50/Microsoft.AspNet.Mvc.Xml.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.AspNet.Mvc.Xml.6.0.0-beta4.nupkg",
+        "Microsoft.AspNet.Mvc.Xml.6.0.0-beta4.nupkg.sha512",
+        "Microsoft.AspNet.Mvc.Xml.nuspec",
+        "lib/dnx451/Microsoft.AspNet.Mvc.Xml.dll",
+        "lib/dnx451/Microsoft.AspNet.Mvc.Xml.xml",
+        "lib/dnxcore50/Microsoft.AspNet.Mvc.Xml.dll",
+        "lib/dnxcore50/Microsoft.AspNet.Mvc.Xml.xml"
       ]
     },
     "Microsoft.AspNet.PageExecutionInstrumentation.Interfaces/1.0.0-beta4": {
@@ -6226,6 +6277,57 @@
         "lib/contract/System.Runtime.Serialization.Primitives.dll",
         "lib/net45/System.Runtime.Serialization.Primitives.dll",
         "lib/portable-wpa81+wp80+win80+net45+aspnetcore50/System.Runtime.Serialization.Primitives.dll"
+      ]
+    },
+    "System.Runtime.Serialization.Xml/4.0.10-beta-22816": {
+      "serviceable": false,
+      "sha": "P4SaQv1wi7jWaUeucxzmVNzSlG6sO93O4jNcLbwjRjejWqBawD8z6rer7Nn1cgLn3w/4bwADub7ODbbeyQv60w==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "System.IO": "4.0.10-beta-22816",
+            "System.Runtime": "4.0.20-beta-22816",
+            "System.Runtime.Serialization.Primitives": "4.0.10-beta-22816",
+            "System.Text.Encoding": "4.0.10-beta-22816",
+            "System.Xml.ReaderWriter": "4.0.10-beta-22816"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System.Runtime.Serialization"
+          ],
+          "runtimeAssemblies": [
+            "lib/net45/System.Runtime.Serialization.Xml.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/System.Runtime.Serialization.Xml.dll"
+          ]
+        },
+        "DNXCore,Version=v5.0": {
+          "dependencies": {
+            "System.IO": "4.0.10-beta-22816",
+            "System.Runtime": "4.0.20-beta-22816",
+            "System.Runtime.Serialization.Primitives": "4.0.10-beta-22816",
+            "System.Text.Encoding": "4.0.10-beta-22816",
+            "System.Xml.ReaderWriter": "4.0.10-beta-22816"
+          },
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/aspnetcore50/System.Runtime.Serialization.Xml.dll"
+          ],
+          "compileAssemblies": [
+            "lib/contract/System.Runtime.Serialization.Xml.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "System.Runtime.Serialization.Xml.4.0.10-beta-22816.nupkg",
+        "System.Runtime.Serialization.Xml.4.0.10-beta-22816.nupkg.sha512",
+        "System.Runtime.Serialization.Xml.nuspec",
+        "lib/aspnetcore50/System.Runtime.Serialization.Xml.dll",
+        "lib/contract/System.Runtime.Serialization.Xml.dll",
+        "lib/net45/System.Runtime.Serialization.Xml.dll",
+        "lib/portable-wpa81+wp80+win80+net45+aspnetcore50/System.Runtime.Serialization.Xml.dll"
       ]
     },
     "System.Security.Claims/4.0.0-beta-22816": {

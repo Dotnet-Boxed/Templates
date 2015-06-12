@@ -72,7 +72,7 @@
                 //                   Images should be twice as wide as they are tall.
                 ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-logo-96x48.png")),
                 // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the feed.
-                Copyright = new TextSyndicationContent(
+                Copyright = SyndicationContent.CreatePlaintextContent(
                     string.Format("© {0} - {0}", DateTime.Now.Year, Application.Name)),
                 // lang (Optional) - The language of the feed.
                 Language = "en-GB",

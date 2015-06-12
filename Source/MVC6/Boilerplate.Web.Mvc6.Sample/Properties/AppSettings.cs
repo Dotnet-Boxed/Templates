@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Boilerplate.Web.Mvc6.Sample
+﻿namespace MvcBoilerplate
 {
     public class AppSettings
     {

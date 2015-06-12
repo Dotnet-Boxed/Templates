@@ -72,6 +72,7 @@
     <Compile Include="AtomActionResult.cs" />
     <Compile Include="ContentType.cs" />
     <Compile Include="CspViolationException.cs" />
+    <Compile Include="Experimental\ObjectPool\Pools\ArrayBuilder.cs" />
     <Compile Include="Experimental\ObjectPool\Pools\ListPool.cs" />
     <Compile Include="Experimental\ObjectPool\ObjectPool.cs" />
     <Compile Include="Experimental\ObjectPool\Pools\PooledDictionary.cs" />

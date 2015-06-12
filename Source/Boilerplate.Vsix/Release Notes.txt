@@ -1,4 +1,31 @@
-﻿Version 1.1.2
+﻿Version 1.1.3
+MVC 5
+- FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new TextSyndicationContent.
+- Added comments and links to anti-forgery token configuration in Global.asax.cs.
+- Fixed spelling mistakes in Web.config.
+MVC 6
+- Boilerplate.Web.Mvc6 NuGet package updated
+	- Filters ported from MVC 5. RedirectToHttpsAttribute not required anymore. Nothing tested yet.
+	- HttpRequestExtensions added for the IsAjaxRequest extension method.
+	- UrlHelperExtensions ported.
+- Razor pre-compilation turned on in RazorPreCompilation.cs. Need to find a way to turn it off during development.
+- Constants ported from MVC 5.
+- EnvironmentName constants added for Development, Staging and Production environments in MVC 6.
+- ErrorController added. Broken still.
+- HomeController modified to use attribute routing.
+- Namespaces added to _GlobalImports.cshtml.
+- SiteTitle set in config.json.
+- Microsoft.AspNet.Mvc.Xml and System.Runtime Nuget packages added. Boilerplate.Web.Mvc6 added as a project reference until the NuGet package is published.
+- Comments added to gulpfile.cs.
+- Startup configured
+	- Anti-forgery tokens configured.
+	- All commented.
+	- Configure MVC
+	- Configure View Engines
+	- Configure Routing and lower-case URL's.
+	- Add UseRuntimeInfoPage.
+
+Version 1.1.2
 - Implemented PubSubHubbub protocol to publish changes in the Atom feed to subscribers. See IFeedServices.cs and FeedService.cs.
 - Added a note to ReadMe.html to call IFeedServices.PublishUpdate to publish PubSubHubbub updates to subscribers.
 - ErrorModel.cs deleted. Although it was being passed to the error views, we did not use it.

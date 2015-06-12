@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Mvc;
+    using Microsoft.AspNet.Mvc;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource. Case 
@@ -14,7 +14,7 @@
     /// and Bing's at http://blogs.bing.com/webmaster/2012/01/26/moving-content-think-301-not-relcanonical).
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class RedirectToCanonicalUrlAttribute : FilterAttribute, IAuthorizationFilter
+    public class RedirectToCanonicalUrlAttribute : AuthorizationFilterAttribute
     {
         private readonly bool appendTrailingSlash;
         private readonly bool lowercaseUrls;
@@ -74,20 +74,21 @@
         /// Determines whether the HTTP request contains a non-canonical URL using <see cref="TryGetCanonicalUrl"/>, 
         /// if it doesn't calls the <see cref="HandleNonCanonicalRequest"/> method.
         /// </summary>
-        /// <param name="filterContext">An object that encapsulates information that is required in order to use the 
+        /// <param name="context">An object that encapsulates information that is required in order to use the 
         /// <see cref="RedirectToCanonicalUrlAttribute"/> attribute.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="filterContext"/> parameter is <c>null</c>.</exception>
-        public virtual void OnAuthorization(AuthorizationContext filterContext)
+        /// <exception cref="ArgumentNullException">The <paramref name="context"/> parameter is <c>null</c>.</exception>
+        public override void OnAuthorization(AuthorizationContext context)
         {
-            if (filterContext == null)
+            if (context == null)
             {
-                throw new ArgumentNullException("filterContext");
+                throw new ArgumentNullException("context");
             }
 
             if (this.ignoreControllers != null)
             {
                 // Ignore the given controllers.
-                string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
+                // TODO: string controllerName = context.ActionDescriptor.ControllerDescriptor.ControllerName;
+                string controllerName = "";
                 foreach (string ignoreController in this.ignoreControllers)
                 {
                     if (string.Equals(controllerName, ignoreController, StringComparison.Ordinal))
@@ -98,9 +99,9 @@
             }
 
             string canonicalUrl;
-            if (!this.TryGetCanonicalUrl(filterContext, out canonicalUrl))
+            if (!this.TryGetCanonicalUrl(context, out canonicalUrl))
             {
-                this.HandleNonCanonicalRequest(filterContext, canonicalUrl);
+                this.HandleNonCanonicalRequest(context, canonicalUrl);
             }
         }
 
@@ -111,20 +112,20 @@
         /// <summary>
         /// Determines whether the specified URl is canonical and if it is not, outputs the canonical URL.
         /// </summary>
-        /// <param name="filterContext">An object that encapsulates information that is required in order to use the 
+        /// <param name="context">An object that encapsulates information that is required in order to use the 
         /// <see cref="RedirectToCanonicalUrlAttribute" /> attribute.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
-        protected virtual bool TryGetCanonicalUrl(AuthorizationContext filterContext, out string canonicalUrl)
+        protected virtual bool TryGetCanonicalUrl(AuthorizationContext context, out string canonicalUrl)
         {
             bool isCanonical = true;
 
-            canonicalUrl = filterContext.HttpContext.Request.Url.ToString();
+            canonicalUrl = context.HttpContext.Request.Path.ToString();
 
             bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == '/';
             if (this.appendTrailingSlash)
             {
-                if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
                 {
                     canonicalUrl += '/';
                     isCanonical = false;
@@ -143,7 +144,7 @@
             {
                 foreach (char character in canonicalUrl)
                 {
-                    if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(filterContext))
+                    if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(context))
                     {
                         canonicalUrl = canonicalUrl.ToLower();
                         isCanonical = false;
@@ -158,12 +159,12 @@
         /// <summary>
         /// Handles HTTP requests for URL's that are not canonical. Performs a 301 Permanent Redirect to the canonical URL.
         /// </summary>
-        /// <param name="filterContext">An object that encapsulates information that is required in order to use the 
+        /// <param name="context">An object that encapsulates information that is required in order to use the 
         /// <see cref="RedirectToCanonicalUrlAttribute" /> attribute.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
-        protected virtual void HandleNonCanonicalRequest(AuthorizationContext filterContext, string canonicalUrl)
+        protected virtual void HandleNonCanonicalRequest(AuthorizationContext context, string canonicalUrl)
         {
-            filterContext.Result = new RedirectResult(canonicalUrl, true);
+            context.Result = new RedirectResult(canonicalUrl, true);
         }
 
         #endregion
@@ -179,8 +180,9 @@
         /// <c>false</c>.</returns>
         private bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
         {
-            return filterContext.ActionDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false) ||
-                filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false);
+            return false;
+            // TODO: return filterContext.ActionDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false) ||
+            //    filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false);
         }
 
         #endregion

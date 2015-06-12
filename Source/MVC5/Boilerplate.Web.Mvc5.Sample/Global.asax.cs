@@ -61,7 +61,8 @@
         }
 
         /// <summary>
-        /// Configures the anti-forgery tokens.
+        /// Configures the anti-forgery tokens. See 
+        /// http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages
         /// </summary>
         private static void ConfigureAntiForgeryTokens()
         {
@@ -73,7 +74,7 @@
             AntiForgeryConfig.CookieName = "f";
 
             // If you have enabled SSL. Uncomment this line to ensure that the Anti-Forgery 
-            // cookie requires SSL to be sent accross the wire. 
+            // cookie requires SSL to be sent across the wire. 
             // AntiForgeryConfig.RequireSsl = true;
         }
     }
