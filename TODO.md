@@ -24,8 +24,8 @@
 <ul>
   <li>No support for filters (FilterAttribute in MVC 5).</li>
   <li>No caching (OutputCacheAttribute in MVC 5). See <a href="http://stackoverflow.com/questions/27304210/how-do-i-apply-the-outputcache-attribute-on-a-method-in-a-vnext-project">StackOverflow</a></li>
-  <li>No Atom feed without System.ServiceModel.SyndicationFeed</li>
-  <li>How to get current request URL?</li>
+  <li>No Atom feed without System.ServiceModel.SyndicationFeed. See <a href="https://github.com/dotnet/wcf/issues/76#issuecomment-111420491">GitHub</a></li>
+  <li>No AppendTrailingSlash option for SEO. See <a href="http://stackoverflow.com/questions/27997814/lower-case-urls-and-trailing-slash/30799844#30799844">StackOverflow</a> and <a href="https://github.com/aspnet/Mvc/issues/2691">GitHub</a></li>
 </ul>
 
 <h2>ASP.NET Identity</h2>
