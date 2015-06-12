@@ -10,6 +10,7 @@
   <li>Update to Font Awesome 4.3.0 when they fix the .less files.</li>
   <li>Use a CDN to get Font Awesome css and fonts.</li>
   <li>Add referrer meta tag. See <a href="https://github.com/NWebsec/NWebsec/issues/62">this</a>.</li>
+  <li>Add <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">HPKG</a> using <a href="https://github.com/NWebsec/NWebsec/issues/49">NWebSec</a>.</li>
 </ul>
 
 <h2>ASP.NET MVC 6</h2>
