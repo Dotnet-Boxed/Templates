@@ -33,7 +33,7 @@
 
         /// <summary>
         /// Several NWebsec Security Filters are added here. 
-        /// (See <see cref="http://rehansaeed.co.uk/nwebsec-asp-net-mvc-security-through-http-headers/"/>, 
+        /// (See <see cref="http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/"/>, 
         /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
         /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> for more information).
         /// Note: All of these filters can be applied to individual controllers and actions and indeed
@@ -87,7 +87,7 @@
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This 
         /// creates a white-list from where various content in a web page can be loaded from. (See
-        /// <see cref="http://rehansaeed.co.uk/content-security-policy-for-asp-net-mvc/"/> and
+        /// <see cref="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/"/> and
         /// <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives"/> 
         /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> and for more information).
         /// Note: If you are using the 'Browser Link' feature of the Webs Essentials Visual Studio extension, it will 

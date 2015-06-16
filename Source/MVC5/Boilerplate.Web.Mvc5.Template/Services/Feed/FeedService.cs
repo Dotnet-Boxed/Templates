@@ -160,7 +160,7 @@
                 // name (Required) - conveys a human-readable name for the person.
                 Name = "Rehan Saeed",
                 // uri (Optional) - contains a home page for the person.
-                Uri = "http://rehansaeed.co.uk",
+                Uri = "http://rehansaeed.com",
                 // email (Optional) - contains an email address for the person.
                 Email = "example@email.com"
             };
