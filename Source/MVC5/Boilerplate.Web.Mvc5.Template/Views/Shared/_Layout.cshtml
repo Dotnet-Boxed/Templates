@@ -12,9 +12,11 @@
     <title>@ViewBag.Title - @Application.Name</title>
 
 
-    @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed information) *@
+    @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed information). The order of these icons is very important. FireFox has a bug in it which can cause problems if the order is changed. *@
     @* shortcut icon - This file contains the following sizes 16x16, 32x32 and 48x48. *@
     <link rel="shortcut icon" href="/content/icons/favicon.ico">
+    @* favicon-192x192.png - For Android Chrome M36 to M38 this icon is used. M39+ uses the manifest.json file specified below. *@
+    <link rel="icon" type="image/png" href="/content/icons/favicon-192x192.png" sizes="192x192">
     @* favicon-96x96.png - For Google TV https://developer.android.com/training/tv/index.html#favicons. *@
     <link rel="icon" type="image/png" href="/content/icons/favicon-96x96.png" sizes="96x96">
     @* favicon-32x32.png - For Safari on Mac OS. *@
@@ -29,8 +31,6 @@
     @* theme-color - The colour of the toolbar in Chrome M39+
         http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
     <meta name="theme-color" content="#1E1E1E">
-    @* favicon-192x192.png - For Android Chrome M36 to M38 this HTML is used. M39+ uses the manifest.json file. *@
-    <link rel="icon" type="image/png" href="/content/icons/favicon-192x192.png" sizes="192x192">
     @* mobile-web-app-capable - Run Android/Chrome version M31 to M38 in standalone mode, hiding the browser chrome. *@
     @* <meta name="mobile-web-app-capable" content="yes"> *@
 
