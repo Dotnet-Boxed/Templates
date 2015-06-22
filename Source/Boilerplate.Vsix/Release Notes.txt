@@ -1,4 +1,7 @@
-﻿Version 1.1.5
+﻿Version 1.1.6
+- Minor formatting, line length and spelling fixes to _Layout.cshtml.
+
+Version 1.1.5
 - Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due to a FireFox bug.
 
 Version 1.1.4

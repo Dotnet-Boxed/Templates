@@ -3,16 +3,19 @@
 @* no-js - The no JavaScript class is removed by modernizr if JavaScript is available. *@
 <html class="no-js" lang="en">
 <head @(ViewBag.OpenGraph == null ? null : Html.OpenGraphNamespace((OpenGraphMetadata)ViewBag.OpenGraph))>
-    @* The order of the tags in the head is important for best performance and comaptability. *@
+    @* The order of the tags in the head is important for best performance and compatibility. *@
     @* charset - The character encoding of the document. *@
     <meta charset="utf-8">
     @* viewport - Set the scale on mobile devices (For more info see https://developer.mozilla.org/en/docs/Mozilla/Mobile/Viewport_meta_tag). *@
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @* title - The title of the page which appears in the browser window title. Aim for the title to be less than 70 characters. The site name appears at the end for better SEO. *@
+    @* title - The title of the page which appears in the browser window title. Aim for the title to be less than 70
+        characters. The site name appears at the end for better SEO. *@
     <title>@ViewBag.Title - @Application.Name</title>
 
 
-    @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed information). The order of these icons is very important. FireFox has a bug in it which can cause problems if the order is changed. *@
+    @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed
+        information). The order of these icons is very important. FireFox has a bug in it which can cause problems if
+        the order is changed. *@
     @* shortcut icon - This file contains the following sizes 16x16, 32x32 and 48x48. *@
     <link rel="shortcut icon" href="/content/icons/favicon.ico">
     @* favicon-192x192.png - For Android Chrome M36 to M38 this icon is used. M39+ uses the manifest.json file specified below. *@
@@ -25,17 +28,19 @@
     <link rel="icon" type="image/png" href="/content/icons/favicon-16x16.png" sizes="16x16">
 
     @* Android/Chrome *@
-    @* manifest-json - The location of the browser configuration file. It contains locations of icon files, name of the application and default device screen orientation. Note that the name field is mandatory.
-        https://developer.chrome.com/multidevice/android/installtohomescreen. *@
+    @* manifest-json - The location of the browser configuration file. It contains locations of icon files, name of the
+        application and default device screen orientation. Note that the name field is mandatory.
+        See https://developer.chrome.com/multidevice/android/installtohomescreen. *@
     <link rel="manifest" href="/content/icons/manifest.json">
     @* theme-color - The colour of the toolbar in Chrome M39+
-        http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
+        See http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
     <meta name="theme-color" content="#1E1E1E">
-    @* mobile-web-app-capable - Run Android/Chrome version M31 to M38 in standalone mode, hiding the browser chrome. *@
+    @* mobile-web-app-capable - Run Android/Chrome version M31 to M38 in stand-alone mode, hiding the browser chrome. *@
     @* <meta name="mobile-web-app-capable" content="yes"> *@
 
-    @* Apple Icons - You can move all these icons to the root of the site and remove these link elements, if you don't mind the clutter.
-        https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
+    @* Apple Icons - You can move these icons to the root of the site and remove these link elements, if you don't mind
+        the clutter in your project.
+        See https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
     @* apple-touch-icon-57x57.png - Android Stock Browser and non-Retina iPhone and iPod Touch *@
     <link rel="apple-touch-icon" sizes="57x57" href="/content/icons/apple-touch-icon-57x57.png">
     @* apple-touch-icon-114x114.png - iPhone (with 2× display) iOS ≤ 6 *@
@@ -57,12 +62,16 @@
 
     @* apple-mobile-web-app-title - The name of the application if pinned to the IOS start screen. *@
     @* <meta name="apple-mobile-web-app-title" content=""> *@
-    @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'standalone' mode. Any links to other pages that are clicked whilst your app is in standalone mode will launch the full Safari browser. *@
+    @* apple-mobile-web-app-capable - Hide the browsers user interface on IOS, when the app is run in 'stand-alone'
+        mode. Any links to other pages that are clicked whilst your app is in stand-alone mode will launch the full
+        Safari browser. *@
     @* <meta name="apple-mobile-web-app-capable" content="yes"> *@
-    @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
+    @* apple-mobile-web-app-status-bar-style - default/black/black-translucent Styles the IOS status bar. Using
+        black-translucent makes it transparent and overlays it on top of your site, so make sure you have enough margin. *@
     @* <meta name="apple-mobile-web-app-status-bar-style" content="black"> *@
 
-    @* Apple Startup Images - These splash screen images are only shown if apple-mobile-web-app-capable is set to true. https://gist.github.com/tfausak/2222823 *@
+    @* Apple Startup Images - These splash screen images are only shown if apple-mobile-web-app-capable is set to true.
+        See https://gist.github.com/tfausak/2222823 *@
     @* apple-touch-startup-image-1536x2008.png - iOS 6 & 7 iPad (retina, portrait) *@
     @* <link rel="apple-touch-startup-image" href="/content/icons/apple-touch-startup-image-1536x2008.png" media="(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"> *@
     @* apple-touch-startup-image-1496x2048.png - iOS 6 & 7 iPad (retina, landscape) *@
@@ -94,7 +103,8 @@
     <meta name="msapplication-config" content="/content/icons/browserconfig.xml">
 
 
-    @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode https://github.com/typekit/webfontloader. *@
+    @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode.
+        See https://github.com/typekit/webfontloader. *@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -106,21 +116,20 @@
     {
         <meta name="author" content="@ViewBag.Author">
     }
-    @* Render Twitter Card meta tags. *@
-    @if (ViewBag.TwitterCard != null)
+    @* Render Twitter Card meta tags. *@@if (ViewBag.TwitterCard != null)
     {
         @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
     }
-    @* Render Facebook Open Graph meta tags. *@
-    @if (ViewBag.OpenGraph != null)
+    @* Render Facebook Open Graph meta tags. *@@if (ViewBag.OpenGraph != null)
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
     }
 
 
-    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's by search engines.
-        The settings in this project should make this redundant, unless you are mixing HTTP and HTTPS or you have multiple URL's
-        to the same resource which you should avoid (See http://googlewebmastercentral.blogspot.co.uk/2009/02/specify-your-canonical.html). *@
+    @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's
+        by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and
+        HTTPS or you have multiple URL's to the same resource which you should avoid.
+        (See http://googlewebmastercentral.blogspot.co.uk/2009/02/specify-your-canonical.html). *@
     @*<link rel="canonical" href="">*@
 
 
@@ -136,8 +145,8 @@
     @RenderSection("head", required: false)
 </head>
 <body>
-    @* Skip to main content link for people who use screen readers (Find out more at http://a11yproject.com/posts/skip-nav-links/). *@
-    @* Accessibility - Also, don't forget to add ARIA landmark roles to your page content http://www.paciellogroup.com/blog/2013/02/using-wai-aria-landmarks-2013/ *@
+    @* Skip to main content link for people who use screen readers. sr-only makes this only visible to screen readers.
+        See http://a11yproject.com/posts/skip-nav-links/. *@
     <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
     @* nav - The main navigation for the site. *@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -197,9 +206,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryvalunobtrusive")
     @Scripts.Render("~/bundles/bootstrap")
-    @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy.
-        If you trust the CDN to be available 100% of the time and you prefer better performance
-        you can omit this line and the one for 'failoverrespond' below. *@
+    @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy. If you trust the CDN to
+        be available 100% of the time and you prefer better performance you can omit this line and the one for
+        'failoverrespond' below. *@
     @Scripts.Render("~/bundles/failovercore")
     @* Only load respond if we are running IE8 or less. *@
     <!--[if lt IE 9]>
