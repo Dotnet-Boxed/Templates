@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Boilerplate.Web.Mvc5.XML</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>BoilerplateMVC.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -177,6 +183,7 @@
     <Compile Include="XDocumentExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BoilerplateMVC.snk" />
     <None Include="Experimental\ObjectPool\ObjectPool.dgml" />
     <None Include="packages.config" />
   </ItemGroup>
