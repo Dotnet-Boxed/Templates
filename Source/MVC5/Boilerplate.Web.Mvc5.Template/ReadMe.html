@@ -83,7 +83,8 @@
                             <li>Open the FilterConfig.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use TLS across the whole site.</li>
                             <li>Open the Global.asax.cs file and uncomment the line 'AntiForgeryConfig.RequireSsl = true;'. This ensures that the Anti-Forgery tokens require TLS to work, which gives a little added security.</li>
                             <li>Open the web.config file and change the requireSSL setting in the httpCookies section to true, to enable cookies to be sent using TLS only by default.</li>
-                            <li>Open the Startup.cs file and uncomment the app.UseHsts(options => options.MaxAge(days: 30).IncludeSubdomains().Preload()); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict-Transport-Security</a>.</li>
+                            <li>Open the Startup.cs file and uncomment the app.UseHsts(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict-Transport-Security</a>.</li>
+                            <li>Open the Startup.cs file and uncomment the app.UseHpkp(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning</a>.</li>
                             <li>If using Strict-Transport-Security above, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>
                             <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
                         </ol>

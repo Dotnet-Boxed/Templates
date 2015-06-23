@@ -63,8 +63,8 @@
     <Reference Include="Autofac.Integration.Owin">
       <HintPath>..\..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.9\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
+    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fc5550082a9c642c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.10\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
@@ -99,24 +99,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NWebsec, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NWebsec.4.0.0\lib\45\NWebsec.dll</HintPath>
+    <Reference Include="NWebsec, Version=4.1.1.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NWebsec.4.1.1\lib\45\NWebsec.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NWebsec.Core, Version=1.3.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NWebsec.Core.1.3.0\lib\45\NWebsec.Core.dll</HintPath>
+    <Reference Include="NWebsec.Core, Version=1.4.1.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NWebsec.Core.1.4.1\lib\45\NWebsec.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NWebsec.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NWebsec.Mvc.4.0.0\lib\45\NWebsec.Mvc.dll</HintPath>
+    <Reference Include="NWebsec.Mvc, Version=4.1.1.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NWebsec.Mvc.4.1.1\lib\45\NWebsec.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NWebsec.Owin">
-      <HintPath>..\..\packages\NWebsec.Owin.2.0.0\lib\45\NWebsec.Owin.dll</HintPath>
+    <Reference Include="NWebsec.Owin, Version=2.1.1.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NWebsec.Owin.2.1.1\lib\45\NWebsec.Owin.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>

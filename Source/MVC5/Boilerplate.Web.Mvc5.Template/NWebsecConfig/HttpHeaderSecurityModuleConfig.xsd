@@ -7,6 +7,59 @@
       <xs:enumeration value="true" />
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="HpkpStoreLocationEnum">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="CurrentUser">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store used by the current user.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LocalMachine">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store assigned to the local machine.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="HpkpStoreNameEnum">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="AddressBook ">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for other users.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AuthRoot">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for third-party certificate authorities (CAs).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CertificateAuthority">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for intermediate certificate authorities (CAs).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="My">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for personal certificates.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Root">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for trusted root certificate authorities (CAs).</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TrustedPeople">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for directly trusted people and resources.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TrustedPublisher">
+        <xs:annotation>
+          <xs:documentation>The X.509 certificate store for directly trusted publishers.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="XFrameOptionsEnumType">
     <xs:restriction base="xs:normalizedString">
       <xs:enumeration value="Deny">
@@ -235,6 +288,16 @@
                   </xs:attribute>
                 </xs:complexType>
               </xs:element>
+              <xs:element name="public-Key-Pins" minOccurs="0" maxOccurs="1" type="hpkpConfigElement">
+                <xs:annotation>
+                  <xs:documentation>Specifies whether the Public-Key-Pins (HPKP) security header should be set in the HTTP responses.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="public-Key-Pins-Report-Only" minOccurs="0" maxOccurs="1" type="hpkpConfigElement">
+                <xs:annotation>
+                  <xs:documentation>Specifies whether the Public-Key-Pins-Report-Only (HPKP-RO) security header should be set in the HTTP responses.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
               <xs:element name="content-Security-Policy" minOccurs="0" maxOccurs="1">
                 <xs:annotation>
                   <xs:documentation>Configures the Content-Security-Policy header.</xs:documentation>
@@ -267,6 +330,78 @@
       </xs:all>
     </xs:complexType>
   </xs:element>
+    <xs:complexType name="hpkpConfigElement">
+      <xs:all>
+        <xs:element name="certificates" minOccurs="0" maxOccurs="1" type="hpkpCertsElement">
+          <xs:annotation>
+            <xs:documentation>Specifies one or more certs that should be pinned.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="pins" minOccurs="0" maxOccurs="1" type="hpkpPinsElement">
+          <xs:annotation>
+            <xs:documentation>Specifies one or more pins.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:all>
+      <xs:attribute name="max-age" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>This attribute is required. Specifies for how long the browser should enforce HPKP. Expects a TimeSpan string.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="includeSubdomains" type="simple_boolean" use="optional">
+        <xs:annotation>
+          <xs:documentation>Optional. Specifies whether HPKP also applies to subdomains. The default is false.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="httpsOnly" type="simple_boolean" use="optional">
+        <xs:annotation>
+          <xs:documentation>Optional. Specifies that the HPKP header should be set for HTTPS requests only. The default is true.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="report-uri" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation>This attribute is optional. Specifies a report URI where pin validation failures should be reported.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  <xs:complexType name="hpkpCertsElement">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="add" type="hpkpCert" />
+      <xs:element name="remove" type="hpkpCert" />
+      <xs:element name="clear"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="hpkpCert">
+    <xs:attribute name="thumbprint" type="xs:hexBinary" use="required">
+      <xs:annotation>
+        <xs:documentation>This attribute is required. Specifies the thumbprint for the certificate to pin.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="storeLocation" type="HpkpStoreLocationEnum" use="optional">
+      <xs:annotation>
+        <xs:documentation>This attribute is optional. Specifies the location of the X.509 certificate store. The default is LocalMachine.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="storeName" type="HpkpStoreNameEnum" use="optional">
+      <xs:annotation>
+        <xs:documentation>This attribute is optional. Specifies the name of the X.509 certificate store to open. The default is My.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="hpkpPinsElement">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="add" type="hpkpPin" />
+      <xs:element name="remove" type="hpkpPin" />
+      <xs:element name="clear"/>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="hpkpPin">
+    <xs:attribute name="pin" type="xs:base64Binary" use="required">
+      <xs:annotation>
+        <xs:documentation>This attribute is required. Specifies a certificate pin as the Base64 encoded SHA-256 hash of a certficate's SPKI.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
   <xs:complexType name="RedirectUri">
     <xs:attribute name="allowedDestination" type="xs:string" use="required">
       <xs:annotation>
@@ -293,6 +428,13 @@
     <xs:attribute name="report-uri" type="xs:string" use="required">
       <xs:annotation>
         <xs:documentation>This attribute is required. Specifies a report Uri.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="cspMediaType">
+    <xs:attribute name="media-type" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>This attribute is required. Specifies a media type.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
@@ -393,11 +535,33 @@
           <xs:documentation>Configures the frame-ancestors CSP directive (CSP 2).</xs:documentation>
         </xs:annotation>
       </xs:element>
+      <xs:element name="plugin-types" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Configures the plugin-types CSP directive (CSP 2).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="add" type="cspMediaType" />
+            <xs:element name="remove" type="cspMediaType" />
+            <xs:element name="clear"/>
+          </xs:choice>
+          <xs:attribute name="enabled" type="simple_boolean" use="optional">
+            <xs:annotation>
+              <xs:documentation>Optional. Specifies whether to enable the source directive. The default is true.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="sandbox" minOccurs="0" maxOccurs="1">
         <xs:annotation>
           <xs:documentation>Configures the sandbox CSP directive (CSP 2).</xs:documentation>
         </xs:annotation>
         <xs:complexType>
+          <xs:attribute name="enabled" type="simple_boolean" use="required">
+            <xs:annotation>
+              <xs:documentation>This attribute is required. Specifies whether to include the sandbox CSP directive (CSP 1.0).</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
           <xs:attribute name="allow-forms" type="simple_boolean" use="optional">
             <xs:annotation>
               <xs:documentation>Optional. Specifies whether to include the allow-forms source. The default is false.</xs:documentation>

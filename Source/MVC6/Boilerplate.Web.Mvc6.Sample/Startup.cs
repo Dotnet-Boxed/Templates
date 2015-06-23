@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
@@ -28,18 +27,33 @@
         /// Staging or Production by default.</param>
         public Startup(IHostingEnvironment environment)
         {
+            // Configuration replaces the old appSettings and connectionStrings in the web.config file from MVC 5. See:
+            // http://docs.asp.net/en/latest/fundamentals/configuration.html?highlight=configuration
+            // http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
             this.Configuration = new Configuration()
-                .AddJsonFile("config.json") // Add configuration from the config.json file.
-                .AddEnvironmentVariables(); // Add configuration specific to the default Development, Staging or Production environments.
-        } 
+                // Add configuration from the config.json file.
+                .AddJsonFile("config.json")
+                // Add configuration from an optional config.development.json, config.staging.json or 
+                // config.production.json file, depending on on the environment. These settings override the ones in 
+                // the config.json file.
+                .AddJsonFile($"config.{environment.EnvironmentName}.json", optional: true)
+                // Add configuration specific to the Development, Staging or Production environments. This config can 
+                // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings 
+                // override the ones in all of the above config files. To set environment variables for debugging:
+                // Navigate to Project Properties -> Debug Tab -> Environment Variables
+                // Note: Environment variables use a colon separator e.g. You can override the site title by creating a 
+                // variable named AppSettings:SiteTitle.
+                .AddEnvironmentVariables();
+        }
 
         #endregion
 
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the configuration, where key value pair settings can be stored. See 
+        /// Gets or sets the configuration, where key value pair settings can be stored. See:
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html?highlight=configuration
+        /// http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
         /// </summary>
         public IConfiguration Configuration { get; set; }
 
@@ -49,14 +63,13 @@
 
         /// <summary>
         /// Configures the services to add to the ASP.NET MVC 6 Injection of Control (IoC) container. This method gets 
-        /// called by the ASP.NET runtime. See
+        /// called by the ASP.NET runtime. See:
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add IOptions<AppSettings> to the services container. Use it to check what environment the application is
-            // running under. Development, Staging or Production by default.
+            // Add IOptions<AppSettings> to the services container.
             services.Configure<AppSettings>(this.Configuration.GetSubKey("AppSettings"));
 
             // Add many MVC services to the services container.
@@ -76,6 +89,7 @@
 
             services.ConfigureRouting(routeOptions =>
             {
+                // TODO: AppendTrailingSlash does not yet exist but will be added in the next version of MVC.
                 // routeOptions.AppendTrailingSlash = true;
                 routeOptions.LowercaseUrls = true;
             });
@@ -122,6 +136,12 @@
                 // When an error occurs, displays a detailed error page with full diagnostic information. It is unsafe
                 // to use this in production. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
                 application.UseErrorPage(ErrorPageOptions.ShowAll);
+
+                // Browse to /throw to force an exception to be thrown. Useful for testing your error pages.
+                application.Map("/throw", throwApp =>
+                {
+                    throwApp.Run(context => { throw new Exception("Deliberate exception thrown to test error handling."); });
+                });
             }
             else // Staging or Production environments.
             {
@@ -139,11 +159,6 @@
 
             // Add MVC to the request pipeline.
             application.UseMvc();
-
-            application.Map("/throw", throwApp =>
-            {
-                throwApp.Run(context => { throw new Exception("Application Exception"); });
-            });
         }
 
         #endregion
@@ -151,7 +166,7 @@
         #region Private Methods
 
         /// <summary>
-        /// Configures the anti-forgery tokens. See 
+        /// Configures the anti-forgery tokens for better security. See:
         /// http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages
         /// </summary>
         /// <param name="antiForgeryOptions">The anti-forgery token options.</param>
@@ -165,14 +180,26 @@
             // <input name="__RequestVerificationToken" type="hidden" value="..." />
             antiForgeryOptions.FormFieldName = "f";
 
-            // If you have enabled SSL. Uncomment this line to ensure that the Anti-Forgery 
-            // cookie requires SSL to be sent across the wire. 
-            antiForgeryOptions.RequireSSL = true;
+            // If you have enabled SSL. Uncomment this line to ensure that the Anti-Forgery cookie requires SSL to be 
+            // sent across the wire. 
+            // antiForgeryOptions.RequireSSL = true;
         }
 
+        /// <summary>
+        /// Configures the view engines. By default, Asp.Net MVC includes the Web Forms (WebFormsViewEngine) and 
+        /// Razor (RazorViewEngine) view engines. You can remove view engines you are not using here for better
+        /// performance.
+        /// </summary>
+        /// <param name="viewEngines">The engines used to render the MVC 6 views.</param>
         private void ConfigureViewEngines(IList<ViewEngineDescriptor> viewEngines)
         {
-            // TODO: Remove Web Forms view engine.
+            // TODO: Remove Web Forms view engine when it is added by Microsoft in a later version of MVC 6.
+            //ViewEngineDescriptor webFormsViewEngine = viewEngines
+            //    .FirstOrDefault(x => x.OptionType == typeof(WebFormsViewEngine));
+            //if (webFormsViewEngine != null)
+            //{
+            //    viewEngines.Remove(webFormsViewEngine);
+            //}
         }
 
         #endregion

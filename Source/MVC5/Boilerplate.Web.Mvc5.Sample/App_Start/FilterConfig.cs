@@ -112,7 +112,7 @@
             // Enables logging of CSP violations. See the NWebsecHttpHeaderSecurityModule_CspViolationReported method 
             // in Global.asax.cs to see where they are logged.
             filters.Add(new CspReportUriAttribute() { EnableBuiltinHandler = true });
-
+            
 
             // default-src - Sets a default source list for a number of directives. If the other directives below are 
             //               not used then this is the default setting.
@@ -236,13 +236,20 @@
             filters.Add(
                 new CspObjectSrcAttribute()
                 {
-                    // Allow plugins from example.com.
+                    // Allow plug-ins from example.com.
                     // CustomSources = "example.com",
-                    // Allow plugins from the same domain.
+                    // Allow plug-ins from the same domain.
                     Self = false
                 });
             // plugin-types - This directive restricts the set of plug-ins that can be invoked by the protected resource.
-            //                This directive is not currently supported by NWebSec (See https://github.com/NWebsec/NWebsec/issues/53).
+            //                You can also use the @Html.CspMediaType("application/pdf") HTML helper instead of this
+            //                attribute. The HTML helper will add the media type to the CSP header.
+            // filters.Add(
+            //     new CspPluginTypesAttribute()
+            //     {
+            //         // Allow Adobe Flash and Microsoft Silverlight plug-ins
+            //         MediaTypes = "application/x-shockwave-flash application/xaml+xml"
+            //     });
             // style-src - This directive restricts which styles the user applies to the protected resource.
             filters.Add(
                 new CspStyleSrcAttribute()

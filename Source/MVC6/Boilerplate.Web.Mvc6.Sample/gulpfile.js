@@ -1,6 +1,11 @@
 ﻿/// <binding Clean='clean' />
 
 var gulp = require("gulp"),
+  minifycss = require("gulp-minify-css"),
+  concat = require("gulp-concat"),
+  less = require("gulp-less"),
+  uglify = require('gulp-uglify'),
+  watch = require('gulp-watch'),
   rimraf = require("rimraf"),
   fs = require("fs");
 

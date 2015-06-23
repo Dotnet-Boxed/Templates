@@ -1,4 +1,18 @@
-﻿Version 1.1.6
+﻿Version 1.1.7
+MVC 5
+- Updated NuGet packages:
+	- Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
+	- Newtonsoft.Json updated to 7.0.1
+	- NWebsec updated to 4.1.1
+	- NWebsec.Core updated to 1.4.1
+	- NWebsec.Mvc updated to 4.1.1 - Web.config updated with new assembly version number.
+	- NWebsec.Owin updated to 2.1.1
+- Added comment about the NWebSec CspPluginTypesAttribute in FilterConfig.cs.
+- Added comment about implementing HPKP (Public Key Pinning) to Startup.cs and ReadMe.html.
+MVC 6
+- Various Updates
+
+Version 1.1.6
 - Minor formatting, line length and spelling fixes to _Layout.cshtml.
 
 Version 1.1.5
