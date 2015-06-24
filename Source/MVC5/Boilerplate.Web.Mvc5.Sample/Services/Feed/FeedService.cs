@@ -73,7 +73,7 @@
                 ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-logo-96x48.png")),
                 // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the feed.
                 Copyright = SyndicationContent.CreatePlaintextContent(
-                    string.Format("© {0} - {0}", DateTime.Now.Year, Application.Name)),
+                    string.Format("© {0} - {1}", DateTime.Now.Year, Application.Name)),
                 // lang (Optional) - The language of the feed.
                 Language = "en-GB",
                 // generator (Optional) - Identifies the software used to generate the feed, for debugging and other 
@@ -195,7 +195,7 @@
                     PublishDate = DateTimeOffset.Now,
                     // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the entry.
                     Copyright = new TextSyndicationContent(
-                        string.Format("© {0} - {0}", DateTime.Now.Year, Application.Name)),
+                        string.Format("© {0} - {1}", DateTime.Now.Year, Application.Name)),
                 };
 
                 // link (Recommended) - Identifies a related Web page. An entry must contain an alternate link if there 

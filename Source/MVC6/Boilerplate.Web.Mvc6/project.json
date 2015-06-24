@@ -1,14 +1,18 @@
 {
   "version": "1.0.0-*",
+  "title": "ASP.NET MVC Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
+  "releaseNotes": "Initial Release",
   "authors": [ "Muhammad Rehan Saeed" ],
+  "copyright": "© Muhammad Rehan Saeed. All rights Reserved",
   "tags": [ "ASP.NET MVC MVC6 Boilerplate Muhammad Rehan Saeed Framework" ],
+  "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
   "projectUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate",
   "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
-
+  
   "dependencies": {
     "Microsoft.AspNet.Mvc.Core": "6.0.0-beta4",
-    "Microsoft.AspNet.Http": "1.0.0-beta4",
+    "Microsoft.AspNet.Http": "1.0.0-beta4"
   },
 
   "frameworks": {

@@ -116,13 +116,20 @@
     {
         <meta name="author" content="@ViewBag.Author">
     }
-    @* Render Twitter Card meta tags. *@@if (ViewBag.TwitterCard != null)
+    @* Render Twitter Card meta tags. *@
+    @if (ViewBag.TwitterCard != null)
     {
         @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
     }
-    @* Render Facebook Open Graph meta tags. *@@if (ViewBag.OpenGraph != null)
+    @* Render Facebook Open Graph meta tags. *@
+    @if (ViewBag.OpenGraph != null)
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
+    }
+    @* Render the Referrer meta tag for increased privacy. *@
+    @if (ViewBag.ReferrerMode != null)
+    {
+        @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
     }
 
 

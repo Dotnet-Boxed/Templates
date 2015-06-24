@@ -1,6 +1,5 @@
 ﻿IHttpContextAccessor to get HttpContext
-IOptions<AppSettings>
-IApplicationEnvironment appEnvironment
+
 
 In development use
 app.UseErrorPage();

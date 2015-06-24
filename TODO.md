@@ -9,7 +9,6 @@
   <li>Keep eye on <a href="http://stackoverflow.com/questions/27860618/which-http-status-codes-to-cover-for-mvc-error-handling/29282406#29282406">HTTP Status Codes</a> for codes I am not covering correctly.</li>
   <li>Update to Font Awesome 4.3.0 when they fix the .less files.</li>
   <li>Use a CDN to get Font Awesome css and fonts.</li>
-  <li>Add referrer meta tag. See <a href="https://github.com/NWebsec/NWebsec/issues/62">this</a>.</li>
 </ul>
 
 <h2>ASP.NET MVC 6</h2>

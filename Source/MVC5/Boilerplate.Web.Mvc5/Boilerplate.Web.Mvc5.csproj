@@ -90,6 +90,9 @@
     <Compile Include="Experimental\ObjectPool\Pools\StringBuilderPool.cs" />
     <Compile Include="Filters\NoCacheAttribute.cs" />
     <Compile Include="Filters\ValidateHeaderAntiForgeryTokenAttribute.cs" />
+    <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="Referrer\ReferrerMode.cs" />
+    <Compile Include="Referrer\ReferrerModeExtensions.cs" />
     <Compile Include="Twitter\Cards\AppTwitterCard.cs" />
     <Compile Include="Twitter\Cards\GalleryTwitterCard.cs" />
     <Compile Include="Twitter\Cards\PhotoTwitterCard.cs" />

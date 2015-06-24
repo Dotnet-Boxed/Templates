@@ -1,4 +1,15 @@
-﻿Version 1.1.7
+﻿Version 1.1.8
+MVC 5
+- Updated NuGet packages:
+	- Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.
+- Added referrer meta tag to _Layout.cshtml to control privacy and security of the HTTP referrer header.
+- Set the referrer mode and author in Index.cshtml, About.cshtml and Contact.cshtml.
+- Added further comments and links about HPKP in Startup.cs to help set it up.
+- HPKP no longer includes subdomains by default in Startup.cs.
+- HSTS no longer includes subdomains by default in Startup.cs.
+- Sample Copyright text fixed in FeedService.cs.
+
+Version 1.1.7
 MVC 5
 - Updated NuGet packages:
 	- Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
