@@ -3,20 +3,25 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Mvc.OptionDescriptors;
+    using Microsoft.AspNet.Routing;
     using Microsoft.Framework.ConfigurationModel;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
+    using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    using MvcBoilerplate.Services;
+    using Newtonsoft.Json.Serialization;
 
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
-    public class Startup
+    public partial class Startup
     {
         #region Constructors
         
@@ -75,24 +80,26 @@
             // Add many MVC services to the services container.
             services.AddMvc();
 
+            RouteOptions routeOptions = null;
+            services.ConfigureRouting(x => { routeOptions = x; ConfigureRouting(routeOptions); });
+
             services.ConfigureMvc(mvcOptions =>
             {
                 ConfigureAntiforgeryTokens(mvcOptions.AntiForgeryOptions);
+                ConfigureCacheProfiles(mvcOptions.CacheProfiles);
+                ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
+                ConfigureSecurityFilters(mvcOptions.Filters);
+                ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
+                ConfigureFormatters(mvcOptions);
                 ConfigureViewEngines(mvcOptions.ViewEngines);
-                
-                // TODO: Decide whether to keep this. Also remove Microsoft.AspNet.Mvc.Xml.
-                // Add the XML formatter, so that you can input and output types to XML. This is useful if you are 
-                // building an API and want to have the choice. See
-                // http://www.strathweb.com/2015/04/asp-net-mvc-6-formatters-xml-browser-requests/
-                // mvcOptions.AddXmlDataContractSerializerFormatter();
             });
 
-            services.ConfigureRouting(routeOptions =>
-            {
-                // TODO: AppendTrailingSlash does not yet exist but will be added in the next version of MVC.
-                // routeOptions.AppendTrailingSlash = true;
-                routeOptions.LowercaseUrls = true;
-            });
+            services.AddScoped<IFeedService, FeedService>();
+            services.AddSingleton<ILoggingService, LoggingService>();
+            services.AddScoped<IOpenSearchService, OpenSearchService>();
+            services.AddScoped<IRobotsService, RobotsService>();
+            services.AddScoped<ISitemapService, SitemapService>();
+            services.AddScoped<ISitemapPingerService, SitemapPingerService>();
 
             // Add your own custom services here e.g.
 
@@ -105,7 +112,7 @@
             // Transient - A new instance is created and returned each time.
             // services.AddTransient<IDatabaseService, DatabaseService>();
         }
-        
+
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is 
         /// called by the ASP.NET runtime.
@@ -150,7 +157,7 @@
                 application.UseErrorHandler("/error/internalservererror");
             }
 
-            // Give the ASP.NET MVC Boilerplate Url Helper access to the HttpContext, so it can generate absolute URL's.
+            // Give the ASP.NET MVC Boilerplate URL Helper access to the HttpContext, so it can generate absolute URL's.
             Boilerplate.Web.Mvc.UrlHelperExtensions.Configure(
                 application.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
             
@@ -159,47 +166,6 @@
 
             // Add MVC to the request pipeline.
             application.UseMvc();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        /// <summary>
-        /// Configures the anti-forgery tokens for better security. See:
-        /// http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages
-        /// </summary>
-        /// <param name="antiForgeryOptions">The anti-forgery token options.</param>
-        private void ConfigureAntiforgeryTokens(AntiForgeryOptions antiForgeryOptions)
-        {
-            // Rename the Anti-Forgery cookie from "__RequestVerificationToken" to "f". This adds a little security 
-            // through obscurity and also saves sending a few characters over the wire. 
-            antiForgeryOptions.CookieName = "f";
-
-            // Rename the form input name from "__RequestVerificationToken" to "f" for the same reason above e.g.
-            // <input name="__RequestVerificationToken" type="hidden" value="..." />
-            antiForgeryOptions.FormFieldName = "f";
-
-            // If you have enabled SSL. Uncomment this line to ensure that the Anti-Forgery cookie requires SSL to be 
-            // sent across the wire. 
-            // antiForgeryOptions.RequireSSL = true;
-        }
-
-        /// <summary>
-        /// Configures the view engines. By default, Asp.Net MVC includes the Web Forms (WebFormsViewEngine) and 
-        /// Razor (RazorViewEngine) view engines. You can remove view engines you are not using here for better
-        /// performance.
-        /// </summary>
-        /// <param name="viewEngines">The engines used to render the MVC 6 views.</param>
-        private void ConfigureViewEngines(IList<ViewEngineDescriptor> viewEngines)
-        {
-            // TODO: Remove Web Forms view engine when it is added by Microsoft in a later version of MVC 6.
-            //ViewEngineDescriptor webFormsViewEngine = viewEngines
-            //    .FirstOrDefault(x => x.OptionType == typeof(WebFormsViewEngine));
-            //if (webFormsViewEngine != null)
-            //{
-            //    viewEngines.Remove(webFormsViewEngine);
-            //}
         }
 
         #endregion

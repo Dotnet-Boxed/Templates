@@ -30,7 +30,7 @@
     /// On the server side, you simply need to add the <see cref="ValidateHeaderAntiForgeryTokenAttribute"/> attribute 
     /// to the controller or action the same way you would use <see cref="ValidateAntiForgeryTokenAttribute"/>.
     /// </example>
-    public sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IFilter
+    internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IFilter
     {
         #region Fields
         

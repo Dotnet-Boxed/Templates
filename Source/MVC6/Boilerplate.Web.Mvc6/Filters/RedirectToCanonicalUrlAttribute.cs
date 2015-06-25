@@ -87,13 +87,16 @@
             if (this.ignoreControllers != null)
             {
                 // Ignore the given controllers.
-                // TODO: string controllerName = context.ActionDescriptor.ControllerDescriptor.ControllerName;
-                string controllerName = "";
-                foreach (string ignoreController in this.ignoreControllers)
+                ControllerActionDescriptor controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+                if (controllerActionDescriptor != null)
                 {
-                    if (string.Equals(controllerName, ignoreController, StringComparison.Ordinal))
+                    string controllerName = controllerActionDescriptor.ControllerName;
+                    foreach (string ignoreController in this.ignoreControllers)
                     {
-                        return;
+                        if (string.Equals(controllerName, ignoreController, StringComparison.Ordinal))
+                        {
+                            return;
+                        }
                     }
                 }
             }
@@ -180,9 +183,15 @@
         /// <c>false</c>.</returns>
         private bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
         {
+            foreach (IFilter filter in filterContext.Filters)
+            {
+                if (filter is NoTrailingSlashAttribute)
+                {
+                    return true;
+                }
+            }
+
             return false;
-            // TODO: return filterContext.ActionDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false) ||
-            //    filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false);
         }
 
         #endregion
