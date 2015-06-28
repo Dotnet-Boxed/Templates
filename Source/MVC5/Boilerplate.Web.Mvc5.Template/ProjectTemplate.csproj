@@ -386,7 +386,6 @@
     <Content Include="Scripts\Failover\jqueryval.js" />
     <Content Include="Scripts\Failover\jqueryvalunobtrusive.js" />
     <Content Include="Scripts\Failover\modernizr.js" />
-    <Content Include="Scripts\Failover\respond.js" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.eot" />
