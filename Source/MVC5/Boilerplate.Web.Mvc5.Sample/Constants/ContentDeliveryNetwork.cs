@@ -8,6 +8,12 @@
             public const string JQueryUrl = "//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js";
         }
 
+        public static class MaxCdn
+        {
+            public const string Domain = "maxcdn.bootstrapcdn.com";
+            public const string FontAwesome = "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
+        }
+
         public static class Microsoft
         {
             public const string Domain = "ajax.aspnetcdn.com";
@@ -15,7 +21,6 @@
             public const string JQueryValidateUnobtrusiveUrl = "//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js";
             public const string ModernizrUrl = "//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js";
             public const string BootstrapUrl = "//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js";
-            public const string RespondUrl = "//ajax.aspnetcdn.com/ajax/respond/1.4.2/respond.js";
         }
     }
 }

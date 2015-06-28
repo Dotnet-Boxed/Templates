@@ -213,11 +213,11 @@
       <Folder Name="Scripts">
         <Folder Name="Failover">
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">fontawesome.js</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.js</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">jqueryval.js</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">jqueryvalunobtrusive.js</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">modernizr.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.js</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">_references.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>
@@ -232,10 +232,6 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.unobtrusive.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.unobtrusive.min.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">modernizr-2.8.3.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.matchmedia.addListener.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.matchmedia.addListener.min.js</ProjectItem>
-        <ProjectItem ReplaceParameters="true" OpenInEditor="false">respond.min.js</ProjectItem>
       </Folder>
       <Folder Name="Services">
         <Folder Name="Cache">

@@ -106,6 +106,7 @@
     @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode.
         See https://github.com/typekit/webfontloader. *@
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/fa")
     @Scripts.Render("~/bundles/modernizr")
 
 
@@ -213,15 +214,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryvalunobtrusive")
     @Scripts.Render("~/bundles/bootstrap")
-    @* Render failover scripts. If a Content Delivery Network (CDN) fails, load a local copy. If you trust the CDN to
-        be available 100% of the time and you prefer better performance you can omit this line and the one for
-        'failoverrespond' below. *@
-    @Scripts.Render("~/bundles/failovercore")
-    @* Only load respond if we are running IE8 or less. *@
-    <!--[if lt IE 9]>
-      @Scripts.Render("~/bundles/respond")
-      @Scripts.Render("~/bundles/failoverrespond")
-    <![endif]-->
+    @* Render fail-over scripts. If a Content Delivery Network (CDN) fails, load a local copy. If you trust the CDN to
+        be available 100% of the time and you prefer better performance you can omit this line. *@
+    @Scripts.Render("~/bundles/failover")
     @RenderSection("scripts", required: false)
 </body>
 </html>

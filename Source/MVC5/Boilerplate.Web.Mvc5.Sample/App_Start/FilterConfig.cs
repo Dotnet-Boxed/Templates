@@ -213,7 +213,8 @@
                     // Allow scripts from the CDN's.
                     CustomSources = string.Join(
                         " ", 
-                        ContentDeliveryNetwork.Google.Domain, 
+                        ContentDeliveryNetwork.Google.Domain,
+                        ContentDeliveryNetwork.MaxCdn.Domain,
                         ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.
                     Self = true,

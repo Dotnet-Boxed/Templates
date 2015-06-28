@@ -1,4 +1,13 @@
-﻿Version 1.1.8
+﻿Version 1.1.9
+- Dropped support for IE 8 by removing the Respond.js library. IE 8 is used by 2.19% of global users, mostly in less
+  developed countries and governments/businesses too lazy to upgrade from Windows XP.
+	- Removed Respond.js NuGet package.
+	- Removed Respond.js script bundle.
+	- Removed Respond.js failover script.
+	- Removed Respond.js from _Layout.cshtml.
+- Added Font Awesome CDN from maxcdn.
+
+Version 1.1.8
 MVC 5
 - Updated NuGet packages:
 	- Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.

@@ -30,15 +30,18 @@
         private static void AddCss(BundleCollection bundles)
         {
             // Bootstrap - Twitter Bootstrap CSS (http://getbootstrap.com/).
-            // Font Awesome - Icons using font (http://fortawesome.github.io/Font-Awesome/).
             // Site - Your custom site CSS.
             // Note: No CDN support has been added here. Most likely you will want to customize your copy of bootstrap.
-            // Note: If you host any of your CSS on a separate domain (Like a CDN), then be sure to fix an issue with 
-            //       respond.js which stops working for IE8.
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap/site.css",
-                "~/Content/fontawesome/site.css",
-                "~/Content/site.css"));
+            bundles.Add(new StyleBundle(
+                "~/Content/css")
+                .Include("~/Content/bootstrap/site.css")
+                .Include("~/Content/site.css"));
+
+            // Font Awesome - Icons using font (http://fortawesome.github.io/Font-Awesome/).
+            bundles.Add(new StyleBundle(
+                "~/Content/fa",
+                ContentDeliveryNetwork.MaxCdn.FontAwesome)
+                .Include("~/Content/fontawesome/site.css"));
         }
 
         /// <summary>
@@ -49,9 +52,9 @@
         /// using in-line scripts is not permitted under Content Security Policy (CSP) (See <see cref="FilterConfig"/> 
         /// for more details).
         /// 
-        /// Instead, we create our own failover bundles. If a CDN is not reachable, the failover script loads the local 
-        /// bundles instead. The failover script is only a few lines of code and should have a minimal impact, although 
-        /// it does add an extra request (Two if the browser is IE8 or less). If you feel confident in the CDN 
+        /// Instead, we create our own fail-over bundles. If a CDN is not reachable, the fail-over script loads the 
+        /// local bundles instead. The fail-over script is only a few lines of code and should have a minimal impact, 
+        /// although it does add an extra request (Two if the browser is IE8 or less). If you feel confident in the CDN 
         /// availability and prefer better performance, you can delete these lines.
         /// </summary>
         /// <param name="bundles">The bundles.</param>
@@ -96,26 +99,14 @@
                 .Include("~/Scripts/bootstrap.js");
             bundles.Add(bootstrapBundle);
 
-            // Respond.js - A fast & lightweight polyfill for min/max-width CSS3 Media Queries 
-            // https://github.com/scottjehl/Respond. 
-            // Note: that the CDN version is a little behind the latest 1.4.2.
-            Bundle respondBundle = new ScriptBundle("~/bundles/respond", ContentDeliveryNetwork.Microsoft.RespondUrl)
-                .Include("~/Scripts/respond.js");
-            bundles.Add(respondBundle);
-
-            // Failover Core - If the CDN's fail then these scripts load local copies of the same scripts.
-            Bundle failoverCoreBundle = new ScriptBundle("~/bundles/failovercore")
+            // Failover - If the CDN's fail then these scripts load local copies of the same scripts.
+            Bundle failoverCoreBundle = new ScriptBundle("~/bundles/failover")
                 .Include("~/Scripts/Failover/jquery.js")
                 .Include("~/Scripts/Failover/jqueryval.js")
                 .Include("~/Scripts/Failover/jqueryvalunobtrusive.js")
-                .Include("~/Scripts/Failover/bootstrap.js");
+                .Include("~/Scripts/Failover/bootstrap.js")
+                .Include("~/Scripts/Failover/fontawesome.js");
             bundles.Add(failoverCoreBundle);
-
-            // Failover Respond - If the Respond.js CDN fails then this script loads a local copy. 
-            // Note: This script is only used if the browser is running IE8 or less.
-            Bundle failoverRespondBundle = new ScriptBundle("~/bundles/failoverrespond")
-                .Include("~/Scripts/Failover/respond.js");
-            bundles.Add(failoverRespondBundle);
         }
     }
 }
