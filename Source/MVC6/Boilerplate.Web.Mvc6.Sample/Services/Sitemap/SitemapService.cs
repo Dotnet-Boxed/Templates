@@ -51,7 +51,7 @@
         /// </summary>
         /// <param name="index">The index of the sitemap to retrieve. <c>null</c> if you want to retrieve the root 
         /// sitemap or sitemap index document, depending on the number of sitemap nodes.</param>
-        /// <returns>The sitemap XML for the current site.</returns>
+        /// <returns>The sitemap XML for the current site or <c>null</c> if the sitemap index is out of range.</returns>
         public string GetSitemapXml(int? index = null)
         {
             // Here we are caching the entire set of sitemap documents. We cannot use OutputCacheAttribute because 
@@ -67,8 +67,7 @@
             
             if (index.HasValue && ((index < 1) || (index.Value >= sitemapDocuments.Count)))
             {
-                // TODO: Find out what the equivalent of HttpException is http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception
-                // throw new HttpException((int)HttpStatusCode.BadRequest, "Sitemap index is out of range.");
+                return null;
             }
 
             return sitemapDocuments[index.HasValue ? index.Value : 0];

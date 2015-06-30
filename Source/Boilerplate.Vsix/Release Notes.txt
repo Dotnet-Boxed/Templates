@@ -3,9 +3,17 @@ MVC 5
 - Renamed ContentDeliveryNetwork.MaxCdn.FontAwesome to add Url at the end.
 - Removed 'Learn More' buttons from Index.cshtml.
 - Added 'This App Contains' section to Index.cshtml.
+- HSTS maxage changed to 18 weeks and subdomains included to fulfil preload criteria.
+- HKPG maxage changed to match HSTS.
+- Changed SitemapService to return null if the index is out of range instead of throwing an exception.
+- Changed HomeController to return a BadRequest response if the sitemap XML is null.
+- Update Boilerplate.Web.Mvc5 to 1.0.14 which is just a name change to the NuGet package to 'MVC 5' instead of just 'MVC'.
 MVC 6
 - Gulp, Bower packages and build.
 - About, Contact, Index, _Layout and _GlobalImports modified.
+- FeedService added but only if you use full .NET and not DotNetCore.
+- Changed SitemapService to return null if the index is out of range instead of throwing an exception.
+- Changed HomeController to return a BadRequest response if the sitemap XML is null.
 - Lots more...
 
 Version 1.1.9

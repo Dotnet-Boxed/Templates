@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Net;
-    using System.Web;
     using System.Web.Mvc;
     using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Sitemap;
@@ -41,9 +39,9 @@
         }
 
         #endregion
-
+        
         #region Public Methods
-
+        
         /// <summary>
         /// Gets the sitemap XML for the current site. If an index of null is passed and there are more than 25,000 
         /// sitemap nodes, a sitemap index file is returned (A sitemap index file contains links to other sitemap files 
@@ -52,7 +50,7 @@
         /// </summary>
         /// <param name="index">The index of the sitemap to retrieve. <c>null</c> if you want to retrieve the root 
         /// sitemap or sitemap index document, depending on the number of sitemap nodes.</param>
-        /// <returns>The sitemap XML for the current site.</returns>
+        /// <returns>The sitemap XML for the current site or <c>null</c> if the sitemap index is out of range.</returns>
         public string GetSitemapXml(int? index = null)
         {
             // Here we are caching the entire set of sitemap documents. We cannot use OutputCacheAttribute because 
@@ -68,7 +66,7 @@
 
             if (index.HasValue && ((index < 1) || (index.Value >= sitemapDocuments.Count)))
             {
-                throw new HttpException((int)HttpStatusCode.BadRequest, "Sitemap index is out of range.");
+                return null;
             }
 
             return sitemapDocuments[index.HasValue ? index.Value : 0];

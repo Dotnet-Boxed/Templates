@@ -3,7 +3,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "1.0.0-*",
+    "Boilerplate.Web.Mvc6": "1.0.1",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta4",
     "Microsoft.AspNet.Mvc": "6.0.0-beta4",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta4",
@@ -29,7 +29,8 @@
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
-        "System.Net.Http": "4.0.0.0"
+        "System.Net.Http": "4.0.0.0",
+        "System.ServiceModel": "4.0.0.0"
       }
     },
     "dnxcore50": {

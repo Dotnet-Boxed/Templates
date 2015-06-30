@@ -1,6 +1,7 @@
 ﻿namespace MvcBoilerplate.Controllers
 {
     using System.Diagnostics;
+    using System.Net;
     using System.Text;
     using System.Web.Mvc;
     using Boilerplate.Web.Mvc;
@@ -127,9 +128,15 @@
         /// <returns>The sitemap XML for the current site.</returns>
         [NoTrailingSlash]
         [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml)]
-        public ContentResult SitemapXml(int? index = null)
+        public ActionResult SitemapXml(int? index = null)
         {
             string content = this.sitemapService.GetSitemapXml(index);
+
+            if (content == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Sitemap index is out of range.");
+            }
+
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }  
     }

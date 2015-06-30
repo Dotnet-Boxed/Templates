@@ -1,20 +1,21 @@
-﻿@{
+﻿@inject IOptions<AppSettings> AppSettings
+@{
     ViewBag.Title = "Contact";
     ViewBag.Description = "The ASP.NET MVC Boilerplate contact page.";
     ViewBag.Author = "Muhammad Rehan Saeed";
     ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    //ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
-    //ViewBag.OpenGraph = new OpenGraphProfile(
-    //    ViewBag.Title,
-    //    new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
-    //{
-    //    Determiner = OpenGraphDeterminer.Blank,
-    //    FirstName = "Muhammad Rehan",
-    //    Gender = OpenGraphGender.Male,
-    //    LastName = "Saeed",
-    //    SiteName = Application.Name,
-    //    Username = "Muhammad Rehan Saeed"
-    //};
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
+    ViewBag.OpenGraph = new OpenGraphProfile(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        FirstName = "Muhammad Rehan",
+        Gender = OpenGraphGender.Male,
+        LastName = "Saeed",
+        SiteName = AppSettings.Options.SiteTitle,
+        Username = "Muhammad Rehan Saeed"
+    };
 }
 
 <header class="page-header">

@@ -14,9 +14,12 @@ namespace $safeprojectname$
             //      This HTTP header is only relevant if you are using TLS. It ensures that content is loaded over 
             //      HTTPS and refuses to connect in case of certificate errors and warnings. NWebSec currently does 
             //      not support an MVC filter that can be applied globally. Instead we can use Owin (Using the 
-            //      added NWebSec.Owin NuGet package) to apply it. See 
+            //      added NWebSec.Owin NuGet package) to apply it.
+            //      Note: Including subdomains and a minimum maxage of 18 weeks is required for preloading.
+            //      Note: You can view preloaded HSTS domains in Chrome here: chrome://net-internals/#hsts
             //      https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
-            // app.UseHsts(options => options.MaxAge(days: 30).IncludeSubdomains().Preload());
+            //      http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
+            // app.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
 
             // Public-Key-Pins - Adds the Public-Key-Pins HTTP header to responses.
             //      This HTTP header is only relevant if you are using TLS. It stops man-in-the-middle attacks by 
@@ -37,7 +40,8 @@ namespace $safeprojectname$
             //     .Sha256Pins(
             //         "Base64 encoded SHA-256 hash of your first certificate e.g. cUPcTAZWKaASuYWhhneDttWpY3oBAkE3h2+soZS7sWs=",
             //         "Base64 encoded SHA-256 hash of your second backup certificate e.g. M8HztCzM3elUxkcjR2S5P4hhyBNf6lHkmjAHKhpGPWE=")
-            //     .MaxAge(days: 30));
+            //     .MaxAge(days: 18 * 7))
+            //     .IncludeSubdomains();
 
             ConfigureContainer(app);
 

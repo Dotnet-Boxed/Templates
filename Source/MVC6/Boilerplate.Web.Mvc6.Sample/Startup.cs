@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
@@ -94,7 +95,9 @@
                 ConfigureViewEngines(mvcOptions.ViewEngines);
             });
 
+#if DNX451
             services.AddScoped<IFeedService, FeedService>();
+#endif
             services.AddSingleton<ILoggingService, LoggingService>();
             services.AddScoped<IOpenSearchService, OpenSearchService>();
             services.AddScoped<IRobotsService, RobotsService>();

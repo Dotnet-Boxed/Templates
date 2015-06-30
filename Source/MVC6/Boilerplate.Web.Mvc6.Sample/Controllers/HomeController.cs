@@ -10,7 +10,9 @@
 
     public class HomeController : Controller
     {
+#if DNX451
         private readonly IFeedService feedService;
+#endif
         private readonly IOpenSearchService openSearchService;
         private readonly IRobotsService robotsService;
         private readonly ISitemapService sitemapService;
@@ -18,12 +20,16 @@
         #region Constructors
 
         public HomeController(
+#if DNX451
             IFeedService feedService,
+#endif
             IOpenSearchService openSearchService,
             IRobotsService robotsService,
             ISitemapService sitemapService)
         {
+#if DNX451
             this.feedService = feedService;
+#endif
             this.openSearchService = openSearchService;
             this.robotsService = robotsService;
             this.sitemapService = sitemapService;
@@ -49,6 +55,7 @@
             return this.View(HomeControllerAction.Contact);
         }
 
+#if DNX451
         /// <summary>
         /// Gets the Atom 1.0 feed for the current site. Note that Atom 1.0 is used over RSS 2.0 because Atom 1.0 is a 
         /// newer and more well defined format. Atom 1.0 is a standard and RSS is not. See
@@ -59,9 +66,9 @@
         [Route("feed", Name = HomeControllerRoute.GetFeed)]
         public IActionResult Feed()
         {
-            return this.Content("Not Implemented Yet"); // TODO
-            // return new AtomActionResult(this.feedService.GetFeed());
+            return new AtomActionResult(this.feedService.GetFeed());
         }
+#endif
 
         [Route("search", Name = HomeControllerRoute.GetSearch)]
         public IActionResult Search(string query)
@@ -131,6 +138,12 @@
         public IActionResult SitemapXml(int? index = null)
         {
             string content = this.sitemapService.GetSitemapXml(index);
+
+            if (content == null)
+            {
+                return this.HttpBadRequest("Sitemap index is out of range.");
+            }
+
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
     }

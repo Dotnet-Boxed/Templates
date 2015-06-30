@@ -1,6 +1,7 @@
-﻿namespace MvcBoilerplate.Services
+﻿#if DNX451
+namespace MvcBoilerplate.Services
 {
-//    using System.ServiceModel.Syndication;
+    using System.ServiceModel.Syndication;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -20,7 +21,7 @@
         /// Gets the feed containing meta data about the feed and the feed entries.
         /// </summary>
         /// <returns>A <see cref="SyndicationFeed"/>.</returns>
-//        SyndicationFeed GetFeed();
+        SyndicationFeed GetFeed();
 
         /// <summary>
         /// Publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol.
@@ -36,3 +37,4 @@
         Task PublishUpdate();
     }
 }
+#endif
