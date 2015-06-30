@@ -157,10 +157,10 @@
                 application.UseErrorHandler("/error/internalservererror");
             }
 
-            // Give the ASP.NET MVC Boilerplate URL Helper access to the HttpContext, so it can generate absolute URL's.
-            Boilerplate.Web.Mvc.UrlHelperExtensions.Configure(
-                application.ApplicationServices.GetRequiredService<IHttpContextAccessor>());
-            
+            // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
+            // absolute URL's and get the current request path.
+            application.UseAspNetMvcBoilerplate();
+
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();
 

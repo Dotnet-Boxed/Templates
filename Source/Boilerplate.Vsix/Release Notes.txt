@@ -1,4 +1,14 @@
-﻿Version 1.1.9
+﻿Version 1.2.0
+MVC 5
+- Renamed ContentDeliveryNetwork.MaxCdn.FontAwesome to add Url at the end.
+- Removed 'Learn More' buttons from Index.cshtml.
+- Added 'This App Contains' section to Index.cshtml.
+MVC 6
+- Gulp, Bower packages and build.
+- About, Contact, Index, _Layout and _GlobalImports modified.
+- Lots more...
+
+Version 1.1.9
 MVC 5
 - Dropped support for IE 8 by removing the Respond.js library. IE 8 is used by 2.19% of global users, mostly in less
   developed countries and governments/businesses too lazy to upgrade from Windows XP.

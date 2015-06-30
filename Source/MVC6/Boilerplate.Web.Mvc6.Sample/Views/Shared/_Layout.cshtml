@@ -7,20 +7,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>@ViewBag.Title - @AppSettings.Options.SiteTitle</title>
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <environment names="@EnvironmentName.Development">
+            <link rel="stylesheet" href="~/css/font-awesome.css" />
         </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css"
+        <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+            <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"
+                  asp-fallback-href="~/css/font-awesome.css"
+                  asp-fallback-test-class="fa" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        </environment>
+
+            @*<link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css"
                   asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
                   asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
                   asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
-                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-            <link rel="stylesheet" href="~/css/site.css" />
-        </environment>
+                  asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />*@
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -62,31 +65,40 @@
             </footer>
         </div>
 
-        <environment names="Development">
-            <script src="~/lib/jquery/jquery.js"></script>
-            <script src="~/lib/bootstrap/js/bootstrap.js"></script>
-            <script src="~/lib/hammer.js/hammer.js"></script>
-            <script src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"></script>
+        <environment names="@EnvironmentName.Development">
+            <script src="~/js/jquery.js"></script>
+            <script src="~/js/jquery-validate.js"></script>
+            <script src="~/js/jquery-validate-unobtrusive.js"></script>
+            <script src="~/js/bootstrap.js"></script>
+            <script src="~/js/hammer.js"></script>
+            <script src="~/js/bootstrap-touch-carousel.js"></script>
         </environment>
-        <environment names="Staging,Production">
-            <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
-                    asp-fallback-src="~/lib/jquery/jquery.min.js"
+        <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+            <script src="@ContentDeliveryNetwork.Google.JQueryUrl"
+                    asp-fallback-src="~/js/jquery.js"
                     asp-fallback-test="window.jQuery">
             </script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/js/bootstrap.min.js"
+            <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"
+                    asp-fallback-src="~/js/jquery-validate.js"
+                    asp-fallback-test="window.validator">
+            </script>
+            <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"
+                    asp-fallback-src="~/js/jquery-validate-unobtrusive.js"
+                    asp-fallback-test="window.validator.unobtrusive">
+            </script>
+            <script src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"
+                    asp-fallback-src="~/js/bootstrap.js"
                     asp-fallback-test="window.jQuery">
             </script>
-            <script src="//ajax.aspnetcdn.com/ajax/hammer.js/2.0.4/hammer.min.js"
-                    asp-fallback-src="~/lib/hammer.js/hammer.js"
+            <script src="@ContentDeliveryNetwork.Microsoft.HammerUrl"
+                    asp-fallback-src="~/js/hammer.js"
                     asp-fallback-test="window.Hammer">
             </script>
-            <script src="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js"
-                    asp-fallback-src="~/lib/bootstrap-touch-carousel/js/bootstrap-touch-carousel.js"
+            <script src="@ContentDeliveryNetwork.Microsoft.BootstrapTouchCarouselJsUrl"
+                    asp-fallback-src="~/js/bootstrap-touch-carousel.js"
                     asp-fallback-test="window.Zepto">
             </script>
         </environment>
-
         @RenderSection("scripts", required: false)
     </body>
 </html>

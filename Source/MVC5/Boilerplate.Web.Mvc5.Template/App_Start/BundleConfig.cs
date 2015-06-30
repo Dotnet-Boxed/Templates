@@ -40,7 +40,7 @@
             // Font Awesome - Icons using font (http://fortawesome.github.io/Font-Awesome/).
             bundles.Add(new StyleBundle(
                 "~/Content/fa",
-                ContentDeliveryNetwork.MaxCdn.FontAwesome)
+                ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl)
                 .Include("~/Content/fontawesome/site.css"));
         }
 

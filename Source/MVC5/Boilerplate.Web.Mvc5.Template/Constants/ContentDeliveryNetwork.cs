@@ -11,7 +11,7 @@
         public static class MaxCdn
         {
             public const string Domain = "maxcdn.bootstrapcdn.com";
-            public const string FontAwesome = "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
+            public const string FontAwesomeUrl = "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css";
         }
 
         public static class Microsoft
