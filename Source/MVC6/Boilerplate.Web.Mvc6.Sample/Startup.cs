@@ -1,55 +1,38 @@
 ﻿namespace MvcBoilerplate
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Boilerplate.Web.Mvc;
-    using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.OptionDescriptors;
     using Microsoft.AspNet.Routing;
     using Microsoft.Framework.ConfigurationModel;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Framework.Runtime;
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.Services;
-    using Newtonsoft.Json.Serialization;
 
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
     public partial class Startup
     {
+        // TODO: Localization: https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs
+
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="environment">The environment the application is running under. This can be Development, 
+        /// <param name="applicationEnvironment">The location the application is running in</param>
+        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
-        public Startup(IHostingEnvironment environment)
+        public Startup(
+            IApplicationEnvironment applicationEnvironment,
+            IHostingEnvironment hostingEnvironment)
         {
-            // Configuration replaces the old appSettings and connectionStrings in the web.config file from MVC 5. See:
-            // http://docs.asp.net/en/latest/fundamentals/configuration.html?highlight=configuration
-            // http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
-            this.Configuration = new Configuration()
-                // Add configuration from the config.json file.
-                .AddJsonFile("config.json")
-                // Add configuration from an optional config.development.json, config.staging.json or 
-                // config.production.json file, depending on on the environment. These settings override the ones in 
-                // the config.json file.
-                .AddJsonFile($"config.{environment.EnvironmentName}.json", optional: true)
-                // Add configuration specific to the Development, Staging or Production environments. This config can 
-                // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings 
-                // override the ones in all of the above config files. To set environment variables for debugging:
-                // Navigate to Project Properties -> Debug Tab -> Environment Variables
-                // Note: Environment variables use a colon separator e.g. You can override the site title by creating a 
-                // variable named AppSettings:SiteTitle.
-                .AddEnvironmentVariables();
+            this.Configuration = ConfigureConfiguration(applicationEnvironment, hostingEnvironment);
         }
 
         #endregion
@@ -57,8 +40,8 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the configuration, where key value pair settings can be stored. See:
-        /// http://docs.asp.net/en/latest/fundamentals/configuration.html?highlight=configuration
+        /// Gets or sets the application configuration, where key value pair settings are stored. See
+        /// http://docs.asp.net/en/latest/fundamentals/configuration.html
         /// http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
         /// </summary>
         public IConfiguration Configuration { get; set; }
@@ -92,7 +75,6 @@
                 ConfigureSecurityFilters(mvcOptions.Filters);
                 ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
                 ConfigureFormatters(mvcOptions);
-                ConfigureViewEngines(mvcOptions.ViewEngines);
             });
 
 #if DNX451
@@ -125,8 +107,8 @@
         /// Staging or Production by default.</param>
         /// <param name="loggerfactory">The logger factory.</param>
         public void Configure(
-            IApplicationBuilder application, 
-            IHostingEnvironment environment, 
+            IApplicationBuilder application,
+            IHostingEnvironment environment,
             ILoggerFactory loggerfactory)
         {
             // Add the following to the request pipeline only in development environment.

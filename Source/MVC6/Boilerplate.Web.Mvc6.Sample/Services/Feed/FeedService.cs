@@ -14,13 +14,7 @@ namespace MvcBoilerplate.Services
     /// <summary>
     /// Builds <see cref="SyndicationFeed"/>'s containing meta data about the feed and the feed entries.
     /// Note: We are targeting Atom 1.0 over RSS 2.0 because Atom 1.0 is a newer and more well defined format. Atom 1.0
-    /// is a standard and RSS is not. 
-    /// (See http://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared).
-    /// (See http://atomenabled.org/developers/syndication/ for more information about Atom 1.0).
-    /// (See https://tools.ietf.org/html/rfc4287 for the official Atom Syndication Format specifications).
-    /// (See http://feedvalidator.org/ to validate your feed).
-    /// (See http://stackoverflow.com/questions/1301392/pagination-in-feeds-like-atom-and-rss to see how you can add 
-    /// paging to your feed).
+    /// is a standard and RSS is not. See http://rehansaeed.com/building-rssatom-feeds-for-asp-net-mvc/.
     /// </summary>
     public sealed class FeedService : IFeedService
     {
@@ -106,6 +100,17 @@ namespace MvcBoilerplate.Services
             //                          instead of making them poll the feed. See feed updated method below.
             feed.Links.Add(new SyndicationLink(new Uri(PubSubHubbubHubUrl), "hub", null, null, 0));
         
+            // first, last, next previous (Optional) - Atom 1.0 supports paging of your feed. This is good if your feed
+            //                                         becomes very large and needs splitting up into pages. To add
+            //                                         paging, you must add links to the first, last, next and previous
+            //                                         feed pages.
+            // feed.Links.Add(new SyndicationLink(new Uri("http://example.com/feed"), "first", null, null, 0));
+            // feed.Links.Add(new SyndicationLink(new Uri("http://example.com/feed?page=10"), "last", null, null, 0));
+            // if ([HAS_PREVIOUS_PAGE])
+            //     feed.Links.Add(new SyndicationLink(new Uri("http://example.com/feed?page=1")), "previous", null, null, 0));
+            // if ([HAS_NEXT_PAGE])
+            //     feed.Links.Add(new SyndicationLink(new Uri("http://example.com/feed?page=3"), "next", null, null, 0));
+
             // author (Recommended) - Names one author of the feed. A feed may have multiple author elements. A feed 
             //                        must contain at least one author element unless all of the entry elements contain 
             //                        at least one author element.

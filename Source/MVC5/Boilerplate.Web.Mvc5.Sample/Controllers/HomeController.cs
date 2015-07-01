@@ -53,7 +53,7 @@
         /// <summary>
         /// Gets the Atom 1.0 feed for the current site. Note that Atom 1.0 is used over RSS 2.0 because Atom 1.0 is a 
         /// newer and more well defined format. Atom 1.0 is a standard and RSS is not. See
-        /// http://www.intertwingly.net/wiki/pie/Rss20AndAtom10Compared
+        /// http://rehansaeed.com/building-rssatom-feeds-for-asp-net-mvc/
         /// </summary>
         /// <returns>The Atom 1.0 feed for the current site.</returns>
         [OutputCache(CacheProfile = CacheProfileName.Feed)]

@@ -8,6 +8,8 @@ MVC 5
 - Changed SitemapService to return null if the index is out of range instead of throwing an exception.
 - Changed HomeController to return a BadRequest response if the sitemap XML is null.
 - Update Boilerplate.Web.Mvc5 to 1.0.14 which is just a name change to the NuGet package to 'MVC 5' instead of just 'MVC'.
+- Changed Atom Feed links in FeedService.cs and HomeController.cs to rehansaeed.com.
+- Updated FeedService with commented out code explaining how to add Atom feed paging.
 MVC 6
 - Gulp, Bower packages and build.
 - About, Contact, Index, _Layout and _GlobalImports modified.
