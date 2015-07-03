@@ -11,7 +11,8 @@
     "gulp-size": "1.2.2",
     "gulp-sourcemaps": "1.5.2",
     "gulp-uglify": "1.2.0",
-    "gulp-watch": "4.2.4",
+    "gulp-util": "3.0.6",
+    "merge-stream": "0.1.8",
     "rimraf": "2.2.8"
   }
 }
