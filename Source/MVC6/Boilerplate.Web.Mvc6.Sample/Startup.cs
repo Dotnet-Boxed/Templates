@@ -6,7 +6,7 @@
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Routing;
-    using Microsoft.Framework.ConfigurationModel;
+    using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.Runtime;
@@ -59,7 +59,7 @@
         public void ConfigureServices(IServiceCollection services)
         {
             // Add IOptions<AppSettings> to the services container.
-            services.Configure<AppSettings>(this.Configuration.GetSubKey("AppSettings"));
+            services.Configure<AppSettings>(this.Configuration.GetConfigurationSection("AppSettings"));
 
             // Add many MVC services to the services container.
             services.AddMvc();
@@ -123,7 +123,7 @@
 
                 // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh 
                 // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-                application.UseBrowserLink();
+                //application.UseBrowserLink();
 
                 // When an error occurs, displays a detailed error page with full diagnostic information. It is unsafe
                 // to use this in production. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html

@@ -1,0 +1,3 @@
+﻿        // TODO
+    // "releaseNotes": "Initial Release",
+    // Require license acceptance

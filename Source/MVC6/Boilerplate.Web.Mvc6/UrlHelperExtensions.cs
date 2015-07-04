@@ -1,6 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc
 {
     using System;
+    using Microsoft.AspNet.Http;
     using Microsoft.AspNet.Mvc;
 
     /// <summary>
@@ -38,7 +39,8 @@
             this IUrlHelper url,
             string contentPath)
         {
-            return new Uri(new Uri(Context.HttpContext.Request.Path.Value), url.Content(contentPath)).ToString();
+            HttpRequest request = Context.HttpContext.Request;
+            return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), url.Content(contentPath)).ToString();
         }
 
         /// <summary>

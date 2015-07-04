@@ -14,7 +14,7 @@
     public class SitemapService : SitemapGenerator, ISitemapService
     {
         #region Fields
-        
+
         private readonly ILoggingService loggingService;
         private readonly IMemoryCache memoryCache;
         private readonly IUrlHelper urlHelper;
@@ -56,15 +56,20 @@
         {
             // Here we are caching the entire set of sitemap documents. We cannot use OutputCacheAttribute because 
             // cache expiry could get out of sync if the number of sitemaps changes.
-            List<string> sitemapDocuments = this.memoryCache.GetOrSet(
-                CacheSetting.SitemapNodes.Key,
-                context =>
-                {
-                    context.SetSlidingExpiration(CacheSetting.SitemapNodes.SlidingExpiration);
-                    IReadOnlyCollection<SitemapNode> sitemapNodes = this.GetSitemapNodes();
-                    return this.GetSitemapDocuments(sitemapNodes);
-                });
-            
+            List<string> sitemapDocuments;
+            if (!this.memoryCache.TryGetValue(CacheSetting.SitemapNodes.Key, out sitemapDocuments))
+            {
+                IReadOnlyCollection<SitemapNode> sitemapNodes = this.GetSitemapNodes();
+                sitemapDocuments = this.GetSitemapDocuments(sitemapNodes);
+                this.memoryCache.Set(
+                    CacheSetting.SitemapNodes.Key, 
+                    sitemapDocuments, 
+                    new MemoryCacheEntryOptions()
+                    {
+                        SlidingExpiration = CacheSetting.SitemapNodes.SlidingExpiration
+                    });
+            }
+
             if (index.HasValue && ((index < 1) || (index.Value >= sitemapDocuments.Count)))
             {
                 return null;

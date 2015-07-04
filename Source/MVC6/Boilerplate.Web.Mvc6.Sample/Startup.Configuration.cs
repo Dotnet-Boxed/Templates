@@ -1,7 +1,7 @@
 ﻿namespace MvcBoilerplate
 {
     using Microsoft.AspNet.Hosting;
-    using Microsoft.Framework.ConfigurationModel;
+    using Microsoft.Framework.Configuration;
     using Microsoft.Framework.Runtime;
     using MvcBoilerplate.Constants;
 
@@ -20,19 +20,16 @@
             IApplicationEnvironment applicationEnvironment,
             IHostingEnvironment hostingEnvironment)
         {
-            // Beta 5 update
-            //ConfigurationBuilder configurationBuilder = new ConfigurationBuilder(
-            //  applicationEnvironment.ApplicationBasePath);
-            
-            Configuration configuration = new Configuration();
+            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder(
+              applicationEnvironment.ApplicationBasePath);
 
             // Add configuration from the config.json file.
-            configuration.AddJsonFile("config.json");
+            configurationBuilder.AddJsonFile("config.json");
 
             // Add configuration from an optional config.development.json, config.staging.json or 
             // config.production.json file, depending on on the environment. These settings override the ones in 
             // the config.json file.
-            configuration.AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true);
+            configurationBuilder.AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true);
 
             if (hostingEnvironment.IsEnvironment(EnvironmentName.Development))
             {
@@ -40,7 +37,7 @@
                 // and other sensitive settings on your development environment, so you don't have to check them into
                 // your source control provider. See http://go.microsoft.com/fwlink/?LinkID=532709 and
                 // http://docs.asp.net/en/latest/security/app-secrets.html
-                configuration.AddUserSecrets();
+                configurationBuilder.AddUserSecrets();
             }
 
             // Add configuration specific to the Development, Staging or Production environments. This config can 
@@ -55,10 +52,9 @@
             // Note: Environment variables use a colon separator e.g. You can override the site title by creating a 
             // variable named AppSettings:SiteTitle. See 
             // http://docs.asp.net/en/latest/security/app-secrets.html
-            configuration.AddEnvironmentVariables();
+            configurationBuilder.AddEnvironmentVariables();
 
-            // return configurationBuilder.Build();
-            return configuration;
+            return configurationBuilder.Build();
         }
     }
 }

@@ -13,7 +13,7 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="referrerMode">The type of referrer allowed to be sent.</param>
         /// <returns>The referrer meta tag.</returns>
-        public static HtmlString ReferrerMeta(this HtmlHelper htmlHelper, ReferrerMode referrerMode)
+        public static HtmlString ReferrerMeta(this IHtmlHelper htmlHelper, ReferrerMode referrerMode)
         {
             if (referrerMode == ReferrerMode.NoneWhenDowngrade)
             {

@@ -1,48 +1,67 @@
-﻿IHttpContextAccessor to get HttpContext
-
-
-In development use
-app.UseErrorPage();
-otherwise
+﻿Status Code Error Pages:
 https://github.com/aspnet/Diagnostics/blob/dev/samples/StatusCodePagesSample/Startup.cs
-Configure the error handler to show an error page.
-app.UseErrorHandler(errorApp =>
+Web API does not need full error pages:
+public class Startup
 {
-    // Normally you'd use MVC or similar to render a nice page.
-    errorApp.Run(async context =>
-    {
-        context.Response.StatusCode = 500;
-        context.Response.ContentType = "text/html";
-        await context.Response.WriteAsync("<html><body>\r\n");
-        await context.Response.WriteAsync("We're sorry, we encountered an un-expected issue with your application.<br>\r\n");
+	public void Configure(IApplicationBuilder app)
+	{
+		app.Map("/api", ConfigureApi);
 
-        var error = context.GetFeature<IErrorHandlerFeature>();
-        if (error != null)
-        {
-            // This error would not normally be exposed to the client
-            await context.Response.WriteAsync("<br>Error: " + HtmlEncoder.Default.HtmlEncode(error.Error.Message) + "<br>\r\n");
-        }
-        await context.Response.WriteAsync("<br><a href=\"/\">Home</a><br>\r\n");
-        await context.Response.WriteAsync("</body></html>\r\n");
-        await context.Response.WriteAsync(new string(' ', 512)); // Padding for IE
-    });
+		app.Run(async (context) =>
+		{
+			await context.Response.WriteAsync("Hello World!");
+		});
+	}
+
+	private void ConfigureApi(IApplicationBuilder app)
+	{
+		app.Run(async (context) =>
+		{
+			await context.Response.WriteAsync("Hello World from API!");
+		});
+	}
+}
+
+Session
+"Microsoft.AspNet.Session": "1.0.0-beta5"
+app.UseSession();
+this.Context.Session.GetInt("UserID");
+this.Context.Session.GetString("UserName");
+Extension Methods
+public static DateTime? GetDateTime(this ISessionCollection collection, string key)  
+{
+    var data = collection.Get(key);
+    if(data == null)
+    {
+        return null;
+    }
+
+    long dateInt = BitConverter.ToInt64(data, 0);
+    return new DateTime(dateInt);
+}
+public static void SetDateTime(this ISessionCollection collection, string key, DateTime value)  
+{
+collection.Set(key, BitConverter.GetBytes(value.Ticks));
+}
+
+
+
+AntiForgery changed in beta 6
+Microsoft.AspNet.Antiforgery
+services.AddAntiforgery();
+services.ConfigureAntiforgery(options =>
+{
+    options.CookieName = "My-Cookie";
 });
 
 
 
-
-
-
-http://stackoverflow.com/questions/30800733/setting-iis-settings-in-web-config-using-asp-net-mvc-6/30806430?noredirect=1#comment49661293_30806430
-http://stackoverflow.com/questions/28719467/how-does-asp-net-vnext-handle-caching-compression-mimemap-in-config-json/28729705#28729705
+Configure MIME Type mappings in Startup.
 https://github.com/aspnet/StaticFiles/blob/d16a73cc05d842390768f78134c1eeb794215fae/src/Microsoft.AspNet.StaticFiles/FileExtensionContentTypeProvider.cs
-As "agua from mars" states in the comments, if you're using IIS you can use IIS's static file handling, in which case you can use the <system.webServer> section in a web.config file and that will work as it always did.
-If you're using ASP.NET 5's StaticFileMiddleware then it has its own MIME mappings that come as part of the FileExtensionContentTypeProvider implementation. The StaticFileMiddleware has a StaticFileOptions that you can use to configure it when you initialize it in Startup.cs. In that options class you can set the content type provider. You can instantiate the default content type provider and then just tweak the mappings dictionary, or you can write an entire mapping from scratch (not recommended).
 
 
 
-
-
+Exception Filter
 public class AppExceptionFilterAttribute : ExceptionFilterAttribute
 {
 	private readonly ILogger _logger;

@@ -16,7 +16,7 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The meta tags.</returns>
-        public static HtmlString OpenGraph(this HtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
+        public static HtmlString OpenGraph(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
         {
             return new HtmlString(openGraphMetadata.ToString());
         }
@@ -27,7 +27,7 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="openGraphMetadata">The open graph metadata.</param>
         /// <returns>The Open Graph namespaces.</returns>
-        public static HtmlString OpenGraphNamespace(this HtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
+        public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
         {
             string prefix;
             if ((openGraphMetadata.FacebookAdministrators == null) && 

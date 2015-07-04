@@ -13,7 +13,7 @@
         /// <param name="htmlHelper">The HTML helper.</param>
         /// <param name="twitterCard">The Twitter card metadata.</param>
         /// <returns>The meta tags.</returns>
-        public static HtmlString TwitterCard(this HtmlHelper htmlHelper, TwitterCard twitterCard)
+        public static HtmlString TwitterCard(this IHtmlHelper htmlHelper, TwitterCard twitterCard)
         {
             return new HtmlString(twitterCard.ToString());
         }

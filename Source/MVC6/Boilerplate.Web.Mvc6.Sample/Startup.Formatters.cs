@@ -15,7 +15,6 @@
         private static void ConfigureFormatters(MvcOptions mvcOptions)
         {
             JsonOutputFormatter jsonOutputFormatter = mvcOptions.OutputFormatters
-                .Select(x => x.Instance)
                 .OfType<JsonOutputFormatter>()
                 .First();
             jsonOutputFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

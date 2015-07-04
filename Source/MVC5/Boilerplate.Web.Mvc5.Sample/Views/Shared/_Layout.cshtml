@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="/content/icons/favicon.ico">
     @* favicon-192x192.png - For Android Chrome M36 to M38 this icon is used. M39+ uses the manifest.json file specified below. *@
     <link rel="icon" type="image/png" href="/content/icons/favicon-192x192.png" sizes="192x192">
-    @* favicon-96x96.png - For Google TV https://developer.android.com/training/tv/index.html#favicons. *@
+    @* favicon-96x96.png - For Google TV. *@
     <link rel="icon" type="image/png" href="/content/icons/favicon-96x96.png" sizes="96x96">
     @* favicon-32x32.png - For Safari on Mac OS. *@
     <link rel="icon" type="image/png" href="/content/icons/favicon-32x32.png" sizes="32x32">
@@ -145,7 +145,7 @@
     <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
 
 
-    @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org) *@
+    @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d and http://www.opensearch.org) *@
     <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
 
 
