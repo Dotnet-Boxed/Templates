@@ -1,0 +1,5 @@
+## Ignore dynamically generated files, to stop them being check-in.
+
+css/
+fonts/
+js/
