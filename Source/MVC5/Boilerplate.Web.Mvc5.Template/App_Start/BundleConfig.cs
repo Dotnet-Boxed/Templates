@@ -99,13 +99,12 @@
                 .Include("~/Scripts/bootstrap.js");
             bundles.Add(bootstrapBundle);
 
-            // Failover - If the CDN's fail then these scripts load local copies of the same scripts.
-            Bundle failoverCoreBundle = new ScriptBundle("~/bundles/failover")
-                .Include("~/Scripts/Failover/jquery.js")
-                .Include("~/Scripts/Failover/jqueryval.js")
-                .Include("~/Scripts/Failover/jqueryvalunobtrusive.js")
-                .Include("~/Scripts/Failover/bootstrap.js")
-                .Include("~/Scripts/Failover/fontawesome.js");
+            // Script bundle for the site. The fall-back scripts are for when a CDN fails, in this case we load a local
+            // copy of the script instead.
+            Bundle failoverCoreBundle = new ScriptBundle("~/bundles/site")
+                .Include("~/Scripts/Fallback/font-awesome.js")
+                .Include("~/Scripts/Fallback/scripts.js")
+                .Include("~/Scripts/site.js");
             bundles.Add(failoverCoreBundle);
         }
     }

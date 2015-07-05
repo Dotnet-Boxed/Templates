@@ -214,7 +214,6 @@
                     CustomSources = string.Join(
                         " ", 
                         ContentDeliveryNetwork.Google.Domain,
-                        ContentDeliveryNetwork.MaxCdn.Domain,
                         ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.
                     Self = true,
@@ -255,8 +254,10 @@
             filters.Add(
                 new CspStyleSrcAttribute()
                 {
-                    // Allow CSS from example.com
-                    // CustomSources = "example.com",
+                    // Allow CSS from maxcdn.bootstrapcdn.com
+                    CustomSources = string.Join(
+                        " ",
+                        ContentDeliveryNetwork.MaxCdn.Domain),
                     // Allow CSS from the same domain.
                     Self = true,
                     // Allow in-line CSS, this is unsafe and can open your site up to XSS vulnerabilities.

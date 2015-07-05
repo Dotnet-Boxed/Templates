@@ -211,13 +211,9 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">HttpHeaderSecurityModuleConfig.xsd</ProjectItem>
       </Folder>
       <Folder Name="Scripts">
-        <Folder Name="Failover">
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">fontawesome.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">jqueryval.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">jqueryvalunobtrusive.js</ProjectItem>
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">modernizr.js</ProjectItem>
+        <Folder Name="Fallback">
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">font-awesome.js</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">scripts.js</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">_references.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>
@@ -232,6 +228,7 @@
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.unobtrusive.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">jquery.validate.unobtrusive.min.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">modernizr-2.8.3.js</ProjectItem>
+        <ProjectItem ReplaceParameters="true" OpenInEditor="false">site.js</ProjectItem>
       </Folder>
       <Folder Name="Services">
         <Folder Name="Cache">

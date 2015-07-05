@@ -61,10 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\icons\open-graph-1200x630.png" />
-    <Content Include="Scripts\Failover\fontawesome.js" />
+    <Content Include="Scripts\Fallback\font-awesome.js" />
+    <Content Include="Scripts\Fallback\scripts.js" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Services\Cache\CacheService.cs" />
     <Content Include="Services\Cache\ICacheService.cs" />
     <Content Include="Content\icons\atom-icon-48x48.png" />
@@ -285,11 +287,6 @@
     <Content Include="ProjectTemplate.csproj" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Failover\bootstrap.js" />
-    <Content Include="Scripts\Failover\jquery.js" />
-    <Content Include="Scripts\Failover\jqueryval.js" />
-    <Content Include="Scripts\Failover\jqueryvalunobtrusive.js" />
-    <Content Include="Scripts\Failover\modernizr.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

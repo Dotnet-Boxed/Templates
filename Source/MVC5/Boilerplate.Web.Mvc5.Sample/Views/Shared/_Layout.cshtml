@@ -215,9 +215,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryvalunobtrusive")
     @Scripts.Render("~/bundles/bootstrap")
-    @* Render fail-over scripts. If a Content Delivery Network (CDN) fails, load a local copy. If you trust the CDN to
-        be available 100% of the time and you prefer better performance you can omit this line. *@
-    @Scripts.Render("~/bundles/failover")
+    @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,13 @@
-﻿Version 1.2.0
+﻿Version 1.2.1
+MVC 5
+- Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle failover much better.
+- Added a blank site.js script.
+- Changed the 'failover' bundle in BundleConfig.cs to 'site' and included the new fallback scripts and the new site.js script.
+- Changed FilterConfig.cs because using MaxCDN was causing a CSP error. MaxCDN needed to be added to the styles directive instead of the scripts directive.
+- Updated _Layout.cshtml with the new site bundle and with a new meta tag to help with the font awesome fallback.
+- Updated _Layout.cshtml with a new site title icon in the toolbar.
+
+Version 1.2.0
 MVC 5
 - Renamed ContentDeliveryNetwork.MaxCdn.FontAwesome to add Url at the end.
 - Removed 'Learn More' buttons from Index.cshtml.

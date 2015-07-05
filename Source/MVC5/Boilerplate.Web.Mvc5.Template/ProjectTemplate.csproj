@@ -380,12 +380,9 @@
     <Content Include="humans.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Failover\bootstrap.js" />
-    <Content Include="Scripts\Failover\fontawesome.js" />
-    <Content Include="Scripts\Failover\jquery.js" />
-    <Content Include="Scripts\Failover\jqueryval.js" />
-    <Content Include="Scripts\Failover\jqueryvalunobtrusive.js" />
-    <Content Include="Scripts\Failover\modernizr.js" />
+    <Content Include="Scripts\site.js" />
+    <Content Include="Scripts\Fallback\font-awesome.js" />
+    <Content Include="Scripts\Fallback\scripts.js" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.eot" />
