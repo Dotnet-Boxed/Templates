@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "bootstrap-less": "3.3.4",
-    "font-awesome": "4.3.0",
     "font-awesome-less": "0.1.0",
     "jquery": "2.1.4",
     "jquery-validation": "1.13.1",

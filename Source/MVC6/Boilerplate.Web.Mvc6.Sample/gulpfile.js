@@ -85,7 +85,7 @@ gulp.task("build-css", function () {
         {
             name: "site.css",
             paths: [
-                paths.content + "bootstrap.less",
+                paths.bower + "bootstrap-less/less/bootstrap.less",
                 paths.bower + "bootstrap-touch-carousel/src/less/carousel.less",
                 paths.content + "site.less"
             ]
@@ -101,11 +101,13 @@ gulp.task("build-css", function () {
                 .pipe(size({                    // Write the size of the file to the console before minification.
                     title: "Before: " + source.name
                 }))
-                .pipe(minifyCss())              // Minifies the CSS.
+                .pipe(minifyCss({               // Minifies the CSS.
+                    keepSpecialComments: 0      // Remove all comments.
+                }))
                 .pipe(size({                    // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(sourcemaps.write("/"))        // Generates source .map files for the CSS.
+            .pipe(sourcemaps.write("."))        // Generates source .map files for the CSS.
             .pipe(gulp.dest(paths.css))         // Saves the CSS file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
@@ -137,8 +139,7 @@ gulp.task("build-fonts", function () {
             .pipe(rename(function (path) {      // Rename the path to remove an unnecessary directory.
                 path.dirname = "";
             }))
-            .pipe(gulp.dest(                    // Saves the font files to the specified destination path.
-                paths.fonts + source.name))
+            .pipe(gulp.dest(paths.fonts))       // Saves the font files to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
 
@@ -207,7 +208,7 @@ gulp.task("build-js", function () {
                 .pipe(size({                    // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(sourcemaps.write("/"))        // Generates source .map files for the JavaScript.
+            .pipe(sourcemaps.write("."))        // Generates source .map files for the JavaScript.
             .pipe(gulp.dest(paths.js))          // Saves the JavaScript file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
