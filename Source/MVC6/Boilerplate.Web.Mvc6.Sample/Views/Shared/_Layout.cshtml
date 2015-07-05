@@ -109,14 +109,10 @@
     <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
     <environment names="@EnvironmentName.Development">
         <link asp-file-version="true" rel="stylesheet" href="~/css/font-awesome.css"/>
-    </environment>
-    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
-        <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"/>
-    </environment>
-    <environment names="@EnvironmentName.Development">
         <script asp-file-version="true" src="~/js/modernizr.js"></script>
     </environment>
     <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+        <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"/>
         <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
     </environment>
     

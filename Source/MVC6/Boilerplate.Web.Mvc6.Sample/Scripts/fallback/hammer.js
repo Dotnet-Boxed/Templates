@@ -1,1 +1,1 @@
-﻿(window.Hammer || document.write('<script src="/js/hammer.js"><\/script>'));
+﻿((window.Hammer && window.Hammer.VERSION) || document.write('<script src="/js/hammer.js"><\/script>'));

@@ -200,7 +200,17 @@ gulp.task("build-js", function () {
         },
         {
             name: "site.js",
-            paths: paths.scripts + "**/*.js"
+            paths: [
+                paths.scripts + "fallback/font-awesome.js",
+                paths.scripts + "fallback/modernizr.js",
+                paths.scripts + "fallback/jquery.js",
+                paths.scripts + "fallback/jquery-validate.js",
+                paths.scripts + "fallback/jquery-validate-unobtrusive.js",
+                paths.scripts + "fallback/bootstrap.js",
+                paths.scripts + "fallback/hammer.js",
+                paths.scripts + "fallback/bootstrap-touch-carousel.js",
+                paths.scripts + "site.js"
+            ]
         }
     ];
 
