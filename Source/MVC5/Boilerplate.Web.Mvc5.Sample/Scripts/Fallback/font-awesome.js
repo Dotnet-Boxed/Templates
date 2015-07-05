@@ -7,7 +7,7 @@
         var meta = metas[i];
         if (meta.getAttribute("name") == "x-font-awesome-stylesheet-fallback-test") {
             if (meta.style.fontFamily !== "FontAwesome") {
-                document.write('<link rel="stylesheet" href="/Content/fa"/>');
+                document.write('<link href="/Content/fa" rel="stylesheet"/>');
             }
             break;
         }

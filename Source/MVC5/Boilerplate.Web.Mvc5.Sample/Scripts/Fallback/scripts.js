@@ -21,9 +21,9 @@
     check(fallbacks, 0);
 
 })([
-    { test: function () { return window.Modernizr; }, path: "bundles/modernizr" },
-    { test: function () { return window.jQuery; }, path: "bundles/jquery" },
-    { test: function () { return $.validator; }, path: "bundles/jqueryval" },
-    { test: function () { return $.validator.unobtrusive; }, path: "bundles/jqueryvalunobtrusive" },
-    { test: function () { return $.fn.modal; }, path: "bundles/bootstrap" }
+    { test: function () { return window.Modernizr; }, path: "/bundles/modernizr" },
+    { test: function () { return window.jQuery; }, path: "/bundles/jquery" },
+    { test: function () { return $.validator; }, path: "/bundles/jqueryval" },
+    { test: function () { return $.validator.unobtrusive; }, path: "/bundles/jqueryvalunobtrusive" },
+    { test: function () { return $.fn.modal; }, path: "/bundles/bootstrap" }
 ]);
