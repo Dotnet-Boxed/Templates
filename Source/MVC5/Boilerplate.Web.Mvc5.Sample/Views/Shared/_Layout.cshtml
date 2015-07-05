@@ -106,6 +106,7 @@
     @* Custom Fonts - If you are using custom fonts. Consider using the Google Web Fonts Loader in async mode.
         See https://github.com/typekit/webfontloader. *@
     @Styles.Render("~/Content/css")
+    <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
     @Styles.Render("~/Content/fa")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -165,7 +166,7 @@
                     <span aria-hidden="true" class="icon-bar"></span>
                     <span aria-hidden="true" class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">@Application.Name</a>
+                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)"><span class="fa fa-star"></span> @Application.Name</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">

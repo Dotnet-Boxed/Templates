@@ -104,23 +104,22 @@
         http://www.buildmypinnedsite.com and regenerate the browserconfig.xml file. You will then have a cool live tile! *@
     <meta name="msapplication-config" content="/img/icons/browserconfig.xml">
 
-
+    @* Move site.css to a content delivery network (CDN) for better performance. *@
     <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
     <environment names="@EnvironmentName.Development">
-        <link rel="stylesheet" href="~/css/font-awesome.css" />
+        <link asp-file-version="true" rel="stylesheet" href="~/css/font-awesome.css"/>
     </environment>
     <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
-        <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"
-              asp-fallback-href="~/css/font-awesome.css"
-              asp-fallback-test-class="fa" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
+        <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"/>
     </environment>
-    @*<link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.3.4/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
-              asp-fallback-test-class="hidden" asp-fallback-test-property="visibility" asp-fallback-test-value="hidden" />
-        <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
-              asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
-              asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />*@
-
+    <environment names="@EnvironmentName.Development">
+        <script asp-file-version="true" src="~/js/modernizr.js"></script>
+    </environment>
+    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+        <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
+    </environment>
+    
 
     @* Description - Used by search engines. Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description">
@@ -175,7 +174,7 @@
                     <span aria-hidden="true" class="icon-bar"></span>
                     <span aria-hidden="true" class="icon-bar"></span>
                 </button>
-                <a asp-Route="@HomeControllerRoute.GetIndex" class="navbar-brand" role="banner">@AppSettings.Options.SiteTitle</a>
+                <a asp-route="@HomeControllerRoute.GetIndex" class="navbar-brand" role="banner"><span class="fa fa-star"></span> @AppSettings.Options.SiteTitle</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -222,38 +221,23 @@
 
 
     <environment names="@EnvironmentName.Development">
-        <script src="~/js/jquery.js"></script>
-        <script src="~/js/jquery-validate.js"></script>
-        <script src="~/js/jquery-validate-unobtrusive.js"></script>
-        <script src="~/js/bootstrap.js"></script>
-        <script src="~/js/hammer.js"></script>
-        <script src="~/js/bootstrap-touch-carousel.js"></script>
+        <script asp-file-version="true" src="~/js/jquery.js"></script>
+        <script asp-file-version="true" src="~/js/jquery-validate.js"></script>
+        <script asp-file-version="true" src="~/js/jquery-validate-unobtrusive.js"></script>
+        <script asp-file-version="true" src="~/js/bootstrap.js"></script>
+        <script asp-file-version="true" src="~/js/hammer.js"></script>
+        <script asp-file-version="true" src="~/js/bootstrap-touch-carousel.js"></script>
+        <script asp-file-version="true" src="~/js/site.js"></script>
     </environment>
     <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
-        <script src="@ContentDeliveryNetwork.Google.JQueryUrl"
-                asp-fallback-src="~/js/jquery.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"
-                asp-fallback-src="~/js/jquery-validate.js"
-                asp-fallback-test="window.validator">
-        </script>
-        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"
-                asp-fallback-src="~/js/jquery-validate-unobtrusive.js"
-                asp-fallback-test="window.validator.unobtrusive">
-        </script>
-        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"
-                asp-fallback-src="~/js/bootstrap.js"
-                asp-fallback-test="window.jQuery">
-        </script>
-        <script src="@ContentDeliveryNetwork.Microsoft.HammerUrl"
-                asp-fallback-src="~/js/hammer.js"
-                asp-fallback-test="window.Hammer">
-        </script>
-        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapTouchCarouselJsUrl"
-                asp-fallback-src="~/js/bootstrap-touch-carousel.js"
-                asp-fallback-test="window.Zepto">
-        </script>
+        <script src="@ContentDeliveryNetwork.Google.JQueryUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.HammerUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapTouchCarouselJsUrl"></script>
+        @* Move site.js to a content delivery network (CDN) for better performance. *@
+        <script src="~/js/site.js"></script>
     </environment>
     @RenderSection("scripts", required: false)
 </body>

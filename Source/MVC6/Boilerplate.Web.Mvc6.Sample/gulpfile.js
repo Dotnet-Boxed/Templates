@@ -193,6 +193,14 @@ gulp.task("build-js", function () {
         {
             name: "jquery-validate-unobtrusive.js",
             paths: paths.bower + "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+        },
+        {
+            name: "modernizr.js",
+            paths: paths.bower + "modernizr/modernizr.js"
+        },
+        {
+            name: "site.js",
+            paths: paths.scripts + "**/*.js"
         }
     ];
 
@@ -219,7 +227,7 @@ gulp.task("build-js", function () {
 /*
  * Cleans and builds the CSS, Font and JavaScript files for the site.
  */
-gulp.task("build", ["clean", "build-css", "build-fonts", "build-js"]);
+gulp.task("build", ["clean", "build-css", "build-fonts", "build-js", "watch"]);
 
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.

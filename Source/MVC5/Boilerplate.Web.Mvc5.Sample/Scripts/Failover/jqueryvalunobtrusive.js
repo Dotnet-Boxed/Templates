@@ -1,1 +1,1 @@
-﻿($.validator.unobtrusive) || document.write('<script src="/bundles/jqueryvalunobtrusive"><\/script>');
+﻿($.validator.unobtrusive || document.write('<script src="/bundles/jqueryvalunobtrusive"><\/script>'));

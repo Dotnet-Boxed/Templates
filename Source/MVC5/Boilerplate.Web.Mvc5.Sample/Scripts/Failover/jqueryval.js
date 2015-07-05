@@ -1,1 +1,1 @@
-﻿($.validator) || document.write('<script src="/bundles/jqueryval"><\/script>');
+﻿($.validator || document.write('<script src="/bundles/jqueryval"><\/script>'));

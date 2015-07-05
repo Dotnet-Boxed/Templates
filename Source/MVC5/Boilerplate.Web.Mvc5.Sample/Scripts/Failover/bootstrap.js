@@ -1,1 +1,1 @@
-﻿($.fn.modal) || document.write('<script src="/bundles/bootstrap"><\/script>');
+﻿($.fn.modal || document.write('<script src="/bundles/bootstrap"><\/script>'));

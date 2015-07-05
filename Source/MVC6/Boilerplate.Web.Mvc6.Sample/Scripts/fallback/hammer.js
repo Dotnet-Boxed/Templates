@@ -1,0 +1,1 @@
+﻿(window.Hammer || document.write('<script src="/js/hammer.js"><\/script>'));

@@ -1,1 +1,1 @@
-﻿(window.jQuery) || document.write('<script src="/bundles/jquery"><\/script>');
+﻿(window.jQuery || document.write('<script src="/bundles/jquery"><\/script>'));
