@@ -17,6 +17,11 @@ var gulp = require("gulp"),
 
 // Read the project.json file into the project variable.
 eval("var project = " + fs.readFileSync("./project.json"));
+// The environment is hard coded for now. We can use the node environment (process.env.NODE_ENV) or ASP.NET hosting
+// environment but there is no way to do that yet. See https://github.com/aspnet/Home/issues/724.
+var environment = "Development";
+// The names of the different environments.
+var environmentName = { development: "Development", staging: "Staging", production: "Production" };
 
 // Initialize directory paths.
 var paths = {
@@ -95,19 +100,25 @@ gulp.task("build-css", function () {
     var tasks = sources.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
-            .pipe(sourcemaps.init())            // Set up the generation of .map source files for the CSS.
+            .pipe(environment === environmentName.development ? // If running in the development environment.
+                sourcemaps.init() :             // Set up the generation of .map source files for the CSS.
+                gutil.noop())                   // Else, do nothing.
                 .pipe(less())                   // Compile the specified LESS files to CSS.
                 .pipe(concat(source.name))      // Concatenate CSS files into a single CSS file with the specified name.
                 .pipe(size({                    // Write the size of the file to the console before minification.
                     title: "Before: " + source.name
                 }))
-                .pipe(minifyCss({               // Minifies the CSS.
-                    keepSpecialComments: 0      // Remove all comments.
-                }))
+                .pipe(environment !== environmentName.development ? // If running in the staging or production environment.
+                    minifyCss({                 // Minifies the CSS.
+                        keepSpecialComments: 0  // Remove all comments.
+                    }) : 
+                    gutil.noop())               // Else, do nothing.
                 .pipe(size({                    // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(sourcemaps.write("."))        // Generates source .map files for the CSS.
+            .pipe(environment === environmentName.development ? // If running in the development environment.
+                sourcemaps.write(".") :         // Generates source .map files for the CSS.
+                gutil.noop())                   // Else, do nothing.
             .pipe(gulp.dest(paths.css))         // Saves the CSS file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
@@ -201,7 +212,7 @@ gulp.task("build-js", function () {
         {
             name: "site.js",
             paths: [
-                paths.scripts + "fallback/font-awesome.js",
+                paths.scripts + "fallback/styles.js",
                 paths.scripts + "fallback/scripts.js",
                 paths.scripts + "site.js"
             ]
@@ -211,16 +222,22 @@ gulp.task("build-js", function () {
     var tasks = sources.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
-            .pipe(sourcemaps.init())            // Set up the generation of .map source files for the JavaScript.
+            .pipe(environment === environmentName.development ? // If running in the development environment.
+                sourcemaps.init() :             // Set up the generation of .map source files for the JavaScript.
+                gutil.noop())                   // Else, do nothing.
                 .pipe(concat(source.name))      // Concatenate JavaScript files into a single file with the specified name.
                 .pipe(size({                    // Write the size of the file to the console before minification.
                     title: "Before: " + source.name
                 }))
-                .pipe(uglify())                 // Minifies the JavaScript.
+                .pipe(environment !== environmentName.development ? // If running in the staging or production environment.
+                    uglify() :                  // Minifies the JavaScript.
+                    gutil.noop())               // Else, do nothing.
                 .pipe(size({                    // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(sourcemaps.write("."))        // Generates source .map files for the JavaScript.
+            .pipe(environment === environmentName.development ? // If running in the development environment.
+                sourcemaps.write(".") :         // Generates source .map files for the JavaScript.
+                gutil.noop())                   // Else, do nothing.
             .pipe(gulp.dest(paths.js))          // Saves the JavaScript file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
@@ -263,12 +280,10 @@ gulp.task("compress-images", [], function () {
  * Watch the content and scripts folders for changes. Build the CSS or JavaScript if something changes.
  */
 gulp.task("watch", function () {
-    gulp.watch(paths.content, ["build-css"])    // Watch the content folder and execute the build-css task if something changes.
+    return gulp
+        .watch(paths.content, ["build-css"])    // Watch the content folder and execute the build-css task if something changes.
+        .watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
-        });
-    gulp.watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
-        .on("change", function (event) {        // Log the change to the console.
-            gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-js task started."));
         });
 });

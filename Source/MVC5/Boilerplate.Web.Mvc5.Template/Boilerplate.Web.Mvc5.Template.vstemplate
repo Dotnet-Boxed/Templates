@@ -212,8 +212,8 @@
       </Folder>
       <Folder Name="Scripts">
         <Folder Name="Fallback">
-          <ProjectItem ReplaceParameters="true" OpenInEditor="false">font-awesome.js</ProjectItem>
           <ProjectItem ReplaceParameters="true" OpenInEditor="false">scripts.js</ProjectItem>
+          <ProjectItem ReplaceParameters="true" OpenInEditor="false">styles.js</ProjectItem>
         </Folder>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">_references.js</ProjectItem>
         <ProjectItem ReplaceParameters="true" OpenInEditor="false">bootstrap.js</ProjectItem>

@@ -382,7 +382,7 @@
     <Content Include="humans.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\Fallback\font-awesome.js" />
+    <Content Include="Scripts\Fallback\styles.js" />
     <Content Include="Scripts\Fallback\scripts.js" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome\fontawesome-webfont.ttf" />

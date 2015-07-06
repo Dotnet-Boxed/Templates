@@ -19,6 +19,7 @@
     public partial class Startup
     {
         // TODO: Localization: https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs
+        // TODO: Missing MIME Types: https://github.com/aspnet/StaticFiles/issues/28
 
         #region Constructors
 
@@ -139,7 +140,7 @@
             {
                 // Add Error handling middleware which catches all application specific errors and send the request to 
                 // the following path or controller action.
-                application.UseErrorHandler("/error/internalservererror");
+                application.UseErrorHandler("/error");
             }
 
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 

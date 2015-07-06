@@ -161,8 +161,10 @@
             filters.Add(
                 new CspFontSrcAttribute()
                 {
-                    // Allow fonts from example.com.
-                    // CustomSources = "*.example.com",
+                    // Allow fonts from maxcdn.bootstrapcdn.com.
+                    CustomSources = string.Join(
+                        " ",
+                        ContentDeliveryNetwork.MaxCdn.Domain),
                     // Allow all fonts from the same domain.
                     Self = true
                 });

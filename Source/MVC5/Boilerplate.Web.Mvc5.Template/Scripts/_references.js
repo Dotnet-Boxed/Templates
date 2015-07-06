@@ -4,6 +4,6 @@
 /// <reference path="jquery.validate.unobtrusive.min.js" />
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="bootstrap.min.js" />
-/// <reference path="fallback/font-awesome.js" />
 /// <reference path="fallback/scripts.js" />
+/// <reference path="fallback/styles.js" />
 /// <reference path="site.js" />

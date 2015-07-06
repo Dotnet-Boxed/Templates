@@ -102,7 +102,7 @@
             // Script bundle for the site. The fall-back scripts are for when a CDN fails, in this case we load a local
             // copy of the script instead.
             Bundle failoverCoreBundle = new ScriptBundle("~/bundles/site")
-                .Include("~/Scripts/Fallback/font-awesome.js")
+                .Include("~/Scripts/Fallback/styles.js")
                 .Include("~/Scripts/Fallback/scripts.js")
                 .Include("~/Scripts/site.js");
             bundles.Add(failoverCoreBundle);
