@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--  
+        This file was added by the SideWaffle NuGet Package http://nuget.org/packages/SideWaffle.
+        You can specify SideWaffle settings in this file.
+        
+        After editing this file you may need to restart Visual Studio for the changes take effect.
+  -->
+
+  <!-- 
+    You can override TemplateBuilder properties here.
+   -->
+  <PropertyGroup>
+    <!-- This is the subfolder name where the templates will show up in Visual Studio. -->
+    <ls-TemplateSubFolder>My Custom Templates</ls-TemplateSubFolder>
+
+    <!---
+    You can set the following property to false to disable creating the template report
+    -->
+    <!--<ls-GenerateTemplateReport>false</ls-GenerateTemplateReport>-->
+  </PropertyGroup>
+</Project>
