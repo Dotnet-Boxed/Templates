@@ -115,9 +115,9 @@
     <TemplateReference Include="Boilerplate.Web.Mvc5.Sample.csproj">
       <PathToProject>../MVC5/Boilerplate.Web.Mvc5.Sample/Boilerplate.Web.Mvc5.Sample.csproj</PathToProject>
     </TemplateReference>
-    <!--<TemplateReference Include="Boilerplate.Web.Mvc6.Sample.xproj">
+    <TemplateReference Include="Boilerplate.Web.Mvc6.Sample.xproj">
       <PathToProject>../MVC6/Boilerplate.Web.Mvc6.Sample/Boilerplate.Web.Mvc6.Sample.xproj</PathToProject>
-    </TemplateReference>-->
+    </TemplateReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="TemplateBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
