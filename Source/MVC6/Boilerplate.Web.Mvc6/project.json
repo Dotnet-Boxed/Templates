@@ -11,7 +11,7 @@
   "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
   
   "compilationOptions": {
-    "keyFile": "..\..\Key.snk",
+    "keyFile": "Key.snk",
     "strongName": true
   },
 

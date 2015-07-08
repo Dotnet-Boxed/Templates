@@ -17,9 +17,8 @@ var gulp = require("gulp"),
 
 // Read the project.json file into the project variable.
 eval("var project = " + fs.readFileSync("./project.json"));
-// The environment is hard coded for now. We can use the node environment (process.env.NODE_ENV) or ASP.NET hosting
-// environment but there is no way to do that yet. See https://github.com/aspnet/Home/issues/724.
-var environment = "Development";
+// Gets the current hosting environment the application is running under. This comes from the environment variables.
+var environment = process.env.ASPNET_ENV || "Development";
 // The names of the different environments.
 var environmentName = { development: "Development", staging: "Staging", production: "Production" };
 
@@ -277,13 +276,28 @@ gulp.task("compress-images", [], function () {
 });
 
 /*
- * Watch the styles and scripts folders for changes. Build the CSS or JavaScript if something changes.
+ * Watch the styles folder for changes. Build the CSS if something changes.
  */
-gulp.task("watch", function () {
+gulp.task("watch-css", function () {
     return gulp
         .watch(paths.styles, ["build-css"])    // Watch the styles folder and execute the build-css task if something changes.
-        .watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
         });
 });
+
+/*
+ * Watch the scripts folder for changes. Build the JavaScript if something changes.
+ */
+gulp.task("watch-js", function () {
+    return gulp
+        .watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
+        .on("change", function (event) {        // Log the change to the console.
+            gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-js task started."));
+        });
+});
+
+/*
+ * Watch the styles and scripts folder for changes. Build the CSS and JavaScript if something changes.
+ */
+gulp.task("watch", ["watch-css", "watch-js"]);
