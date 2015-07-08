@@ -14,6 +14,7 @@
 <h2>ASP.NET MVC 6</h2>
 <p>A new project template in addition to the existing ASP.NET MVC 5 template, targeting ASP.NET MVC 6.</p>
 <ul>
+    <li>Ensure RazorPreCompilation only runs on Staging and Production builds.</li>
     <li>
         Set-up error handling and error pages. See <a href="https://github.com/aspnet/Diagnostics/blob/dev/samples/StatusCodePagesSample/Startup.cs">Status Code Error Pages</a>.
         <pre>
@@ -116,6 +117,7 @@
         }
         </pre>
     </li>
+    <li>Update the ReadMe.html for MVC 6.</li>
 </ul>
 <p>Wait for Microsoft to finish MVC 6 before adding:</p>
 <ul>
