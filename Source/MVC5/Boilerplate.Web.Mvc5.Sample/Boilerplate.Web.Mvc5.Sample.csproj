@@ -358,7 +358,7 @@
     <Content Include="Content\icons\favicon-192x192.png" />
     <Content Include="Content\icons\favicon-32x32.png" />
     <Content Include="Content\icons\favicon-96x96.png" />
-    <Content Include="Content\icons\favicon.ico" />
+    <Content Include="favicon.ico" />
     <Content Include="Content\icons\mstile-144x144.png" />
     <Content Include="Content\icons\mstile-150x150.png" />
     <Content Include="Content\icons\mstile-310x150.png" />

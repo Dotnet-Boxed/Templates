@@ -1,4 +1,17 @@
-﻿Version 1.2.2
+﻿Version 1.2.3
+MVC 5
+- favicon.ico moved to root of site.
+- Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com and favicon.ico meta tag removed.
+- Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
+MVC 6
+- favicon.ico moved to root of site.
+- browserconfig.xml moved to root of site.
+- Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com. favicon.ico and browserconfig.xml meta tags 
+  removed.
+- Updated Site.less with basic styles for the site.
+- Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
+
+Version 1.2.2
 MVC 5
 - maxcdn.bootstrapcdn.com added to font-src CSP policy directive to enable font awesome to work.
 - fallback/font-awesome.js made generic so it can handle multiple fallback stylesheets.
@@ -13,10 +26,13 @@ MVC 6
 
 Version 1.2.1
 MVC 5
-- Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle failover much better.
+- Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle 
+  failover much better.
 - Added a blank site.js script.
-- Changed the 'failover' bundle in BundleConfig.cs to 'site' and included the new fallback scripts and the new site.js script.
-- Changed FilterConfig.cs because using MaxCDN was causing a CSP error. MaxCDN needed to be added to the styles directive instead of the scripts directive.
+- Changed the 'failover' bundle in BundleConfig.cs to 'site' and included the new fallback scripts and the new site.js 
+  script.
+- Changed FilterConfig.cs because using MaxCDN was causing a CSP error. MaxCDN needed to be added to the styles 
+  directive instead of the scripts directive.
 - Updated _Layout.cshtml with the new site bundle and with a new meta tag to help with the font awesome fallback.
 - Updated _Layout.cshtml with a new site title icon in the toolbar.
 
@@ -79,14 +95,16 @@ Version 1.1.6
 - Minor formatting, line length and spelling fixes to _Layout.cshtml.
 
 Version 1.1.5
-- Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due to a FireFox bug.
+- Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due 
+  to a FireFox bug.
 
 Version 1.1.4
 - RehanSaeed.co.uk moved to RehanSaeed.com. All comments and links updated to reflect this.
 
 Version 1.1.3
 MVC 5
-- FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new TextSyndicationContent.
+- FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new 
+  TextSyndicationContent.
 - Added comments and links to anti-forgery token configuration in Global.asax.cs.
 - Fixed spelling mistakes in Web.config.
 MVC 6
@@ -101,7 +119,8 @@ MVC 6
 - HomeController modified to use attribute routing.
 - Namespaces added to _GlobalImports.cshtml.
 - SiteTitle set in config.json.
-- Microsoft.AspNet.Mvc.Xml and System.Runtime Nuget packages added. Boilerplate.Web.Mvc6 added as a project reference until the NuGet package is published.
+- Microsoft.AspNet.Mvc.Xml and System.Runtime Nuget packages added. Boilerplate.Web.Mvc6 added as a project reference 
+  until the NuGet package is published.
 - Comments added to gulpfile.cs.
 - Startup configured
 	- Anti-forgery tokens configured.

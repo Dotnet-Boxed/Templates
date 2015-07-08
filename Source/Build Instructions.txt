@@ -1,5 +1,0 @@
-To build this project you will require:
-
-Visual Studio 2015
-Visual Studio 2015 SDK
-SideWaffle Visual Studio Extension

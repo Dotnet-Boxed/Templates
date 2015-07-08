@@ -27,8 +27,8 @@
             configurationBuilder.AddJsonFile("config.json");
 
             // Add configuration from an optional config.development.json, config.staging.json or 
-            // config.production.json file, depending on on the environment. These settings override the ones in 
-            // the config.json file.
+            // config.production.json file, depending on the environment. These settings override the ones in the 
+            // config.json file.
             configurationBuilder.AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true);
 
             if (hostingEnvironment.IsEnvironment(EnvironmentName.Development))

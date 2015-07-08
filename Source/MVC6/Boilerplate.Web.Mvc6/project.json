@@ -9,6 +9,11 @@
   "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
   "projectUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate",
   "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
+  
+  "compilationOptions": {
+    "keyFile": "..\..\Key.snk",
+    "strongName": true
+  },
 
   "dependencies": {
     "Microsoft.AspNet.Mvc.Core": "6.0.0-beta5"

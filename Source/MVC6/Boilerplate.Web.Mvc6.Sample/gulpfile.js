@@ -27,8 +27,8 @@ var environmentName = { development: "Development", staging: "Staging", producti
 var paths = {
     // Source Folder Paths
     bower: "./bower_components/",
-    content: "Content/",
     scripts: "Scripts/",
+    styles: "Styles/",
 
     // Destination Folder Paths
     wwwroot: "./" + project.webroot,
@@ -92,7 +92,7 @@ gulp.task("build-css", function () {
             paths: [
                 paths.bower + "bootstrap-less/less/bootstrap.less",
                 paths.bower + "bootstrap-touch-carousel/src/less/carousel.less",
-                paths.content + "site.less"
+                paths.styles + "site.less"
             ]
         }
     ];
@@ -277,11 +277,11 @@ gulp.task("compress-images", [], function () {
 });
 
 /*
- * Watch the content and scripts folders for changes. Build the CSS or JavaScript if something changes.
+ * Watch the styles and scripts folders for changes. Build the CSS or JavaScript if something changes.
  */
 gulp.task("watch", function () {
     return gulp
-        .watch(paths.content, ["build-css"])    // Watch the content folder and execute the build-css task if something changes.
+        .watch(paths.styles, ["build-css"])    // Watch the styles folder and execute the build-css task if something changes.
         .watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));

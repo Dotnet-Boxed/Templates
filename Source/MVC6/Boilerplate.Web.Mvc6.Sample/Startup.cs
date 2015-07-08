@@ -18,9 +18,6 @@
     /// </summary>
     public partial class Startup
     {
-        // TODO: Localization: https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs
-        // TODO: Missing MIME Types: https://github.com/aspnet/StaticFiles/issues/28
-
         #region Constructors
 
         /// <summary>

@@ -22,8 +22,11 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6", "MVC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F316174B-045B-4DC0-9097-8CE746A8BBB0}"
 	ProjectSection(SolutionItems) = preProject
-		Build Instructions.txt = Build Instructions.txt
+		..\.gitignore = ..\.gitignore
+		Build Instructions.md = Build Instructions.md
 		global.json = global.json
+		..\README.md = ..\README.md
+		..\TODO.md = ..\TODO.md
 	EndProjectSection
 EndProject
 Global

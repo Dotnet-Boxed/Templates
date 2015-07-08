@@ -7,7 +7,7 @@
     public partial class Startup
     {
         /// <summary>
-        ///  Configures the input and output formatters.
+        /// Configures the input and output formatters.
         /// </summary>
         /// <param name="outputFormatters">A collection of output formatters.</param>
         private static void ConfigureFormatters(MvcOptions mvcOptions)

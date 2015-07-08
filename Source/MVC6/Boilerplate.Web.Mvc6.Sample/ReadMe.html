@@ -1,0 +1,650 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ASP.NET MVC Boilerplate</title>
+    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="main" class="container body-content" role="main">
+
+        <header class="jumbotron">
+            <h1>ASP.NET MVC Boilerplate</h1>
+            <p class="lead">A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft.</p>
+            <p><a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </header>
+
+        <img src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/raw/master/Images/Technology%20Map.png"
+             style="max-width:100%;" />
+
+        <section>
+            <h2>Task Check List</h2>
+            <p>This is a check-list of tasks you must perform to get your site up and running faster. Open this file in the browser of your choice and it will remember what you have checked, just don't clear your cache.</p>
+
+            <article>
+                <h3>Pre-Requisites</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="PreRequisites-UpdateVisualStudio" type="checkbox"> <strong>Update Visual Studio</strong> -
+                        Update your version of Visual Studio with all patches and updates.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="PreRequisites-UpdateNuGetPackages" type="checkbox"> <strong>Update NuGet Packages</strong> -
+                        Update the NuGet Visual Studio extension from the Tools -> Extensions and Updates menu.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="PreRequisites-InstallWebEssentials" type="checkbox"> <strong>Install Web Essentials</strong> -
+                        Install the <a href="http://vswebessentials.com/download">Web Essentials</a> Visual Studio extension. This is required to compile <a href="http://lesscss.org/">LESS</a> code to <a href="http://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> as well as giving you an awesome web development experience.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Security</h3>
+                <h4>Content Security Policy (CSP)</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="ContentSecurityPolicy-ConfigureContentSecurityPolicy" type="checkbox"> <strong>Configure Content Security Policy</strong> -
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a great new HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in FilterConfig.cs or on your individual MVC controllers and actions if they have special access requirements.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ContentSecurityPolicy-CheckModernizrCSPSupport" type="checkbox"> <strong>Check Modernizr CSP Support</strong> -
+                        Modernizr does not currently support
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
+                        because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been set to allowed in
+                        the CSP policy (See FilterConfig.cs). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
+                        <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
+                        post and
+                        <a href="https://github.com/Modernizr/Modernizr/pull/1263">this</a> issue raised on the Modernizr development site for when Modernizr
+                        finally adds support for CSP.
+                    </li>
+                </ul>
+                <h4>Elmah</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Elmah-SecureElmah" type="checkbox"> <strong>Secure Elmah</strong> -
+                        Secure the <a href="https://code.google.com/p/elmah/">Elmah</a> error log page, so that anonymous users cannot access it. Open the web.config
+                        file and look in 'appSettings' for the 'elmah.mvc.allowedRoles' or 'elmah.mvc.allowedUsers' setting. You can set this value to restrict the
+                        Elmah page to a role or individual user. Most likely you will have an 'Administrator' role and you can add this to the 'elmah.mvc.allowedRoles'
+                        setting.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Elmah-MoveElmah" type="checkbox"> <strong>Move Elmah</strong> -
+                        Modify the URL used to access the Elmah error log page. This adds security through obscurity. Open the web.config file and you can set the
+                        page URL in 'appSettings'. The setting is called 'elmah.mvc.route'. The Elmah error log page is 'http://[YOUR DOMAIN].com/elmah' by default. You can
+                        change the value to anything you want. Also, change the elmah route in RouteConfig.cs.
+                    </li>
+                </ul>
+                <h4>TLS over HTTPS</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Site-wide HTTPS</strong> -
+                        Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at <a href="https://www.startssl.com/">StartSSL.com</a>. You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
+                        <ol>
+                            <li>Open the FilterConfig.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use TLS across the whole site.</li>
+                            <li>Open the Global.asax.cs file and uncomment the line 'AntiForgeryConfig.RequireSsl = true;'. This ensures that the Anti-Forgery tokens require TLS to work, which gives a little added security.</li>
+                            <li>Open the web.config file and change the requireSSL setting in the httpCookies section to true, to enable cookies to be sent using TLS only by default.</li>
+                            <li>Open the Startup.cs file and uncomment the app.UseHsts(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict-Transport-Security</a>.</li>
+                            <li>Open the Startup.cs file and uncomment the app.UseHpkp(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning</a>.</li>
+                            <li>If using Strict-Transport-Security above, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>
+                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <h4>Other Security</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-EncryptWebConfig" type="checkbox"> <strong>Encrypt Web.config</strong> -
+                        If you are storing connection strings or a machine key in your Web.config file, don't forget to encrypt them. See <a href="https://msdn.microsoft.com/en-us/library/dtkwfdky.aspx">this</a> link for more information.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
+                        There are settings in the Web.config file under the httpRuntime and requestLimits elements that limit maximum size of the requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable Retail Mode</strong> -
+                        Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
+                        <ul>
+                            <li>32-bit - %windir%\Microsoft.NET\Framework\[.NET Version]\config\machine.config</li>
+                            <li>64-bit - %windir%\Microsoft.NET\Framework64\[.NET Version]\config\machine.config</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Up To Date</strong> -
+                        Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-UnderstandOWASPTopTen" type="checkbox"> <strong>Understand OWASP Top 10</strong> -
+                        Understand the top ten security vulnerabilities and how you can protect yourself from them at <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">OWASP Top 10</a>. Also take a look at the <a href="https://www.owasp.org/index.php/Cheat_Sheets">OWASP Top Ten Cheat Sheet</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-UnderstandCrossSiteScripting" type="checkbox"> <strong>Understand Cross Site Scripting (XSS)</strong> -
+                        Understand Cross Site Scripting (XSS) security vulnerabilities and how you can protect yourself from them using the <a href="https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet">OWASP XSS Cheat Sheet</a> and <a href="https://www.owasp.org/index.php/DOM_based_XSS_Prevention_Cheat_Sheet">OWASP DOM Based XSS Cheat Sheet</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-UnderstandCrossSiteRequestForgery" type="checkbox"> <strong>Understand Cross Site Request Forgery (CSRF)</strong> -
+                        Understand Cross Site Request Forgery security vulnerabilities and how you can protect yourself from them using the <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet">OWASP CSRF Cheat Sheet</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-CheckSiteOnASafaWebCom" type="checkbox"> <strong>Check Site On ASafaWeb.com</strong> -
+                        Scan your site for security vulnerabilities at <a href="https://asafaweb.com/">ASafaWeb.com</a>.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Performance</h3>
+                <h4>Caching</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
+                        The sitemap.xml, robots.txt, not found error page and unauthorized error page are generated programatically and then cached for a day.
+                        If these files won't change much on your site, change the length of time they are cached. Open the web.config file and take a look at the caching section.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
+                        Use the <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">OutputCache</a> attribute in conjunction with the caching section in the Web.config file to cache pages that don't change often and do not contain sensitive information.
+                    </li>
+                </ul>
+                <h4>Content Delivery Networks (CDN)</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="ContentDeliveryNetworks-UploadStaticFilesToCDN" type="checkbox"> <strong>Upload Static Files to CDN</strong> -
+                        Upload the static files to a <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> for vastly better performance.
+                        examples of static content include your images, minified CSS bundle content, minified JavaScript bundle content, etc. examples on
+                        how to do this are shown
+                        <a href="http://azure.microsoft.com/en-us/documentation/articles/cdn-serve-content-from-cdn-in-your-web-application/">here</a>.
+                    </li>
+                </ul>
+                <h4>Images</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Images-SaveImagesForWeb" type="checkbox"> <strong>Save Images For Web</strong> -
+                        Reduce the size of your images by saving them so that they are as small as possible while still looking good. The quality of JPG's can be reduced for example. Some image applications like PhotoShop have a save for the web feature.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Images-CompressImages" type="checkbox"> <strong>Compress Images</strong> -
+                        Then use the <a href="https://visualstudiogallery.msdn.microsoft.com/a56eddd3-d79b-48ac-8c8f-2db06ade77c3/">Image Optimizer</a> Visual Studio extension to compress your images
+                        without losing any quality. If you want further better compression, use <a href="http://pnggauntlet.com/">PNG Gauntlet</a> to compress PNG images only.
+                        PNG Gauntlet seems to compress PNG images better than other software.
+                    </li>
+                </ul>
+                <h4>Benchmarking</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-RunGooglePageSpeed" type="checkbox"> <strong>Run Google Page Speed</strong> -
+                        Use <a href="https://developers.google.com/speed/pagespeed/">Google Page Speed</a> to benchmark your sites performance and to get suggestions on how to further improve performance. Note that this template is already very quick to begin with.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-RunYahooYSlow" type="checkbox"> <strong>Run Yahoo's YSlow</strong> -
+                        Use <a href="http://yslow.org/">Yahoo's YSlow</a> to benchmark your sites performance and to get suggestions on how to further improve performance.
+                    </li>
+                </ul>
+                <h4>Other Performance</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-DisableETags" type="checkbox"> <strong>Disable ETags</strong> -
+                        If running IIS 7.5 or below, disable ETags. Open the web.config file and search for 'setEtag' for further instructions.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-PrefetchPrerenderPages" type="checkbox"> <strong>Pre-fetch/Pre-render Pages</strong> -
+                        If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding pre-fetch or pre-render
+                        link tags to the head of the page. See <a href="http://www.stevesouders.com/blog/2013/11/07/prebrowsing/">here</a> and
+                        <a href="http://blogs.msdn.com/b/ie/archive/2013/12/04/getting-to-the-content-you-want-faster-in-ie11.aspx?Redirected=true">here</a> for more details. Also consider implementing IE11 <a href="msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx">flip ahead</a>, if you have next and previous buttons.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Pre-fetcher</strong> -
+                        This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">pre-fetcher</a> to get a performance and reduce the disk-read cost of application start-up. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Code Quality</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="CodeQuality-HTMLValidation" type="checkbox"> <strong>HTML Validation</strong> -
+                        Validate your HTML using the W3C's <a href="http://validator.w3.org/">HTML Validator</a> and/or using <a href="http://watson.addy.com/">Dr. Watson</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-CSSValidation" type="checkbox"> <strong>CSS Validation</strong> -
+                        Validate your CSS using the W3C's <a href="http://jigsaw.w3.org/css-validator/">CSS Validator</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-RunJSHint" type="checkbox"> <strong>Run CSSLint</strong> -
+                        Paste your sites CSS into the <a href="http://csslint.net/">CSS Lint</a> page to give you pointers in how you can improve your CSS.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-RunJSHint" type="checkbox"> <strong>Run JSHint</strong> -
+                        If you have <a href="http://vswebessentials.com">Web Essentials</a> installed, right click your JavaScript files and in the Web Essentials context menu, click on JSHint.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-InternationalizationValidation" type="checkbox"> <strong>Internationalization Validation</strong> -
+                        If you are supporting multiple languages, validate your CSS using the W3C's <a href="http://validator.w3.org/i18n-checker/">Internationalization Validator</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-FixBrokenLinks" type="checkbox"> <strong>Fix Broken Links</strong> -
+                        Use the W3C's <a href="http://validator.w3.org/checklink">Link Checker</a> or <a href="http://iwebtool.com/broken_link_checker">IWebTool.com's Link Checker</a> to fix any broken links in your site.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="CodeQuality-RunSpellCheck" type="checkbox"> <strong>Run Spell Check</strong> -
+                        Check the spelling on your site for any spelling errors using an <a href="http://www.internetmarketingninjas.com/online-spell-checker.php">Online Spell-Checker</a>.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Compatibility</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Compatibility-AmIUsingWebForms" type="checkbox"> <strong>Am I Using Web Forms?</strong> -
+                        If you are planning on using ASP.NET Web Forms, open the Global.asax.cs file and remove the two lines of code where we are removing the
+                        ASP.NET Web Forms view engine. We do this for added performance but if you are using Web Forms, add it back in.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-IsSiteDeployedToServerCluster" type="checkbox"> <strong>Is Site Deployed To Server Cluster?</strong> -
+                        If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open
+                        the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-UpdateWindowsBrowserConfig" type="checkbox"> <strong>Update Windows Browser Config</strong> -
+                        If supporting Windows 8 and above, update the /Content/icons/browserconfig.xml file with the URL of your sites RSS feed. This is used to display items from your RSS feed in the Windows live tile. Pretty cool!
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-UpdateAndroidChromeManifest" type="checkbox"> <strong>Update Android/Chrome Manifest</strong> -
+                        If supporting Android/Chrome M39+, update the /Content/icons/manifest.json file with the name of your site.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-DoIUseDefaultDocumentBrowsing" type="checkbox"> <strong>Do I Use Default Document Browsing?</strong> -
+                        Default document browsing has been turned off by default for security reasons e.g. Navigating to /Folder/ which contains the physical file index.html,
+                        will not return /Folder/index.html. This should not be a problem as we are using ASP.NET MVC controllers and actions. If you do want to
+                        use physical files in folders, you may want to turn this feature back on. The security implications of doing this are small.
+                        In the Web.config file set &lt;defaultDocument enabled="true"/&gt;.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
+                        Test the compatibility of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-WriteFormsProperly" type="checkbox"> <strong>Write Forms Properly</strong> -
+                        Forms are hard to write, ensure you read <a href="http://diveintohtml5.info/forms.html">this</a> tutorial on how to do them properly and don't forget to set the <a href="http://html5tutorial.info/html5-contact.php">input types</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-TestSiteOnMobile" type="checkbox"> <strong>Test Site On Mobile</strong> -
+                        Test your site on real mobile devices <a href="http://opendevicelab.com/">here</a>. Ensure that the site is still fully functional. <a href="http://getbootstrap.com">Bootstrap</a> helps a lot in this regard.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-RunModernIEScan" type="checkbox"> <strong>Run Modern.IE Scan</strong> -
+                        Scan your site for issues with at <a href="https://www.modern.ie">Modern.IE</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Compatibility-PrinterFriendly" type="checkbox"> <strong>Printer Friendly (Save Some Trees)</strong> -
+                        Ensure that you use the <a href="http://getbootstrap.com/css/#responsive-utilities-print">Bootstrap Print Classes</a> to hide content from printers. Use the print preview (Please don't actually print) feature to optimize your site for printing.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Authentication</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Authentication-UserVoice" type="checkbox"> <strong>Up-vote UserVoice Post</strong> -
+                        Visual Studio provides the '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue but does not allow third party developers access to this. Please up-vote <a href="https://visualstudio.uservoice.com/forums/121579-visual-studio/suggestions/8187813-allow-3rd-party-developers-access-to-asp-net-web-p">this</a> UserVoice post, asking Microsoft to open up this capability to third party developers so <strong>you</strong> can use it and make the step below easier.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Authentication-Provider" type="checkbox"> <strong>Choose Authentication Provider</strong> -
+                        If you want no authentication, then you don't need to do anything. <strong>Do not</strong> build your own authentication provider unless you are a security expert, it is much harder than it looks and even professionals get it wrong. Choose from one of the options below:
+                        <ol>
+                            <li>ASP.NET Identity - This is basically forms authentication with Open Auth. it is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial.</li>
+                            <li>Windows Authentication - Follow <a href="http://www.asp.net/aspnet/overview/owin-and-katana/enabling-windows-authentication-in-katana">this</a> tutorial.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Resilience and Error Handling</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="ResilienceAndErrorHandling-DoIUseDefaultDocumentBrowsing" type="checkbox"> <strong>Update Static Error Pages</strong> -
+                        Update the static error pages under the Error folder with the name of your application. These particular error pages cannot be dynamically generated because your site is overloaded with requests or is under a denial of service attack. Keep these pages simple and do not make use of any dynamic content which may not be working if these error pages are showing.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ResilienceAndErrorHandling-ConfigureDynamicIPSecurity" type="checkbox"> <strong>Configure Dynamic IP Security</strong> -
+                        Update the <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> limits in the dynamicIpSecurity section of the web.config file. This feature of IIS prevents <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks from taking down your site. Dynamic IP Security is currently set to logging only mode, where IIS will log requests from the client that would be rejected without actually rejecting them.. You should run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
+                        <ul>
+                            <li>Google and Bing often make large numbers of requests that can look like a DoS attack and you do not want to block them by accident.</li>
+                            <li>Some organizations put themselves behind a proxy and their requests can look like they are from a single IP address.</li>
+                            <li>Pages on your site that cause a large number of requests to be made your site may trigger the Dynamic IP Security limits to be triggered and the page loading will be treated like a Denial of Service (DoS) attack.</li>
+                        </ul>
+                        You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ResilienceAndErrorHandling-UptimeMonitoring" type="checkbox"> <strong>Uptime Monitoring</strong> -
+                        Monitor your site and know about it when it goes down. Use <a href="http://azure.microsoft.com/en-gb/documentation/articles/app-insights-get-started/">Application Insights</a> if you are using <a href="http://azure.microsoft.com">Azure</a> to host your site as this can give additional information about the internals of your site. Alternatively, you can use <a href="http://uptimerobot.com/">UptimeRobot.com</a> or <a href="http://www.gotsitemonitor.com/">GotSiteMonitor.com</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ResilienceAndErrorHandling-TrafficAnalysis" type="checkbox"> <strong>Traffic Analysis</strong> -
+                        Know who is visiting your site, what pages they are visiting, where they are being referred from and when they are visiting it. Use <a href="http://azure.microsoft.com/en-gb/documentation/articles/app-insights-get-started/">Application Insights</a> if you are using <a href="http://azure.microsoft.com">Azure</a> to host your site. Alternatively, you can use <a href="http://www.google.com/analytics/">Google Analytics</a>, <a href="http://statcounter.com/">StatCounter.com</a> or <a href="http://clicky.com/">Clicky.com</a>.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Search Engine Optimisation (SEO)</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-ConfigureSitemapCml" type="checkbox"> <strong>Configure Sitemap.xml</strong> -
+                        Add links to the sitemap.xml file to improve search engine visibility of your site.
+                        Open SitemapService.cs and edit the GetSitemapNodes method. You can decide where or how your links are generated.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-ConfigureRobotsTxt" type="checkbox"> <strong>Configure Robots.txt</strong> -
+                        Add directories or links to the robots.txt file to stop search engines indexing things like error or login pages.
+                        Open RobotsService.cs and edit the directives.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-FriendlyUrls" type="checkbox"> <strong>SEO and Human Friendly URL's</strong> -
+                        Use the FriendlyUrlHelper to create SEO and human friendly URL's like http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-ConfigureDomainNames" type="checkbox"> <strong>Configure Domain Names</strong> -
+                        If you have bought multiple domain names for your site e.g. www.example.com, example.com, example.net, example.org then choose a main domain name and make all of the others perform a 301 Permanent redirect to the main one. Usually the domain name providers provide this service for free. Read <a href="http://googlewebmastercentral.blogspot.co.uk/2009/12/handling-legitimate-cross-domain.html">this</a> from Google for more information.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-AddMicrodata" type="checkbox"> <strong>Add Microdata</strong> -
+                        Add <a href="http://schema.org/docs/gs.html">microdata</a> to your HTML markup to add semantic meaning to your site and give search engines the information they need to better display your pages in search results. Use <a href="http://schema-creator.org/">Schema Creator</a> to help generate markup. Use the <a href="https://developers.google.com/structured-data/testing-tool/">Google structured data testing tool</a> to test that your microdata is correctly formed.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-CheckSiteWithSEOToolkit" type="checkbox"> <strong>Check Site With SEO Toolkit</strong> -
+                        Use the free <a href="http://www.microsoft.com/web/seo/">SEO Toolkit</a> application provided by Microsoft to test your site once its deployed for any SEO errors.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="SearchEngineOptimisation-PingSitemap" type="checkbox"> <strong>Ping Sitemap to Search Engines</strong> -
+                        Use the ISitemapPingerService's PingSearchEngines method to tell search engines like Google, Bing and Yahoo that your sitemap has changed and that they should download it and index the new pages.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Accessibility</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Accessibility-CheckSiteWithSEOToolkit" type="checkbox"> <strong>Understand Accessibility Problems</strong> -
+                        4% of the world population is estimated to be visually impaired, while 0.55% are blind. Get more statistics <a href="http://www.sitepoint.com/how-many-users-need-accessible-websites">here</a>. Read a list of common accessibility problems <a href="http://accessibility.oit.ncsu.edu/accessibleu/problems.html">here</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Accessibility-AddARIAMarkup" type="checkbox"> <strong>Add ARIA Markup</strong> -
+                        Ensure that your site is accessible by adding aria attributes to your HTML markup. Read a practical guide from the W3C <a href="http://w3c.github.io/aria-in-html/">here</a> and documentation about ARIA from Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">here</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Accessibility-CheckSiteWithAccessibilityInspector" type="checkbox"> <strong>Check Site With Accessibility Inspector</strong> -
+                        Use the <a href="https://addons.mozilla.org/en-US/firefox/addon/ainspector-sidebar/">Accessibility Inspector</a> Firefox extension or the <a href="http://achecker.ca/checker/index.php">Web Accessibility Checker</a> to test the accessibility of your site.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Accessibility-CheckSiteColourContrast" type="checkbox"> <strong>Check Site Colour Contrast</strong> -
+                        Use <a href="http://www.checkmycolours.com/">CheckMyColours.com</a> to check your site for problems with colour contrast. This will help the colour blind.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Accessibility-CheckSiteWithScreenReader" type="checkbox"> <strong>Check Site With Screen Reader</strong> -
+                        Try the free <a href="http://www.nvaccess.org/">NVDA Screen Reader</a> to test the accessibility of your site.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Search</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Search-ImplementSearch" type="checkbox"> <strong>Implement Search</strong> -
+                        Consider implementing search in your site. For more information, see the Search action in the HomeController.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Search-ConfigureOpenSearchXml" type="checkbox"> <strong>Configure OpenSearch.xml</strong> -
+                        If you are implementing search, then ASP.NET MVC Boilerplate implements the <a href="http://www.opensearch.org">Open Search</a> protocol. See <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Scott Hanselman</a>'s blog post for more information about what Open Search is. The opensearch.xml file is dynamically generated in OpenSearchService.cs and needs configuring.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>RSS/Atom Feed</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="RSSAtomFeed-ImplementAtomFeed" type="checkbox"> <strong>Implement Atom Feed</strong> -
+                        Implement the Atom feed for the site. See FeedService.cs.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="RSSAtomFeed-PublishUpdates" type="checkbox"> <strong>Publish Atom Feed Updates</strong> -
+                        Call the PublishUpdate method on FeedService.cs when the feed changes. This publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol. See FeedService.cs for more information.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="RSSAtomFeed-ValidateAtomFeed" type="checkbox"> <strong>Validate Atom Feed</strong> -
+                        Use <a href="http://feedvalidator.org/">Feed Validator</a> to validate your Atom feed.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Debugging</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Debugging-LearnGlimpse" type="checkbox"> <strong>Learn Glimpse</strong> -
+                        Navigate to {your site}/glimpse and also learn how to use Glimpse <a href="http://getglimpse.com/">here</a>.
+                        Install Glimpse extensions e.g. Glimpse.EF6 allows you to see the SQL being executed by Entity Framework.
+                        Extensions are as easy as installing NuGet packages listed at <a href="http://getglimpse.com/Extensions">here</a>.
+                        Glimpse can also be used to performance tune your application. It records the length of time taken to perform
+                        various actions.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Social</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
+                        Open Graph meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.OpenGraph.OpenGraphMetadata type.
+                        You need to add these to all of the other pages yourself. Read the documentation on OpenGraphMetadata for more information on how to use it.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Social-ImplementTwitterCards" type="checkbox"> <strong>Implement Twitter Cards</strong> -
+                        Twitter card meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.Twitter.TwitterCard type.
+                        You need to add these to all of the other pages yourself. Read the documentation on TwitterCard for more information on how to use it.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Social-TestSocial" type="checkbox"> <strong>Test Social Media Meta Tags</strong> -
+                        Test your social media meta tags using the specified testing tools:
+                        <ul>
+                            <li><a href="https://dev.twitter.com/docs/cards/validation/validator">Twitter Validation Tool</a></li>
+                            <li><a href="https://developers.facebook.com/tools/debug">Facebook Debugger</a></li>
+                            <li><a href="http://www.google.com/webmasters/tools/richsnippets">Google Structured Data Testing Tool</a></li>
+                            <li><a href="http://developers.pinterest.com/rich_pins/validator">Pinterest Rich Pins Validator</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Thank Developers</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="ThankDevelopers-ConfigureHumansTxt" type="checkbox"> <strong>Configure Humans.txt</strong> -
+                        Edit the humans.txt file at the root of the site. This is totally optional, you can delete this file if you want (If you delete it, remove
+                        the line in RouteConfig.cs which ignores the humans.txt route). Be careful what you put into this file, you could give away clues about
+                        potential attack vectors on your site. Even giving contact details can be an attack vector (Most hackers manipulate people to get access).
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ThankDevelopers-ReviewBoilerplate" type="checkbox"> <strong>Review ASP.NET MVC Boilerplate</strong> -
+                        A lot of work was put into this project template. Show your appreciation by reviewing the project <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a>.
+                    </li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>Keeping Your Site Up To Date</h3>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="KeepingYourSiteUpToDate-KeepNuGetPackagesUpToDate" type="checkbox"> <strong>Keep NuGet Packages Up To Date</strong> -
+                        Most updates can be easily carried out by simply updating <a href="https://www.nuget.org/">NuGet</a> packages. See <a href="https://docs.nuget.org/consume/package-manager-dialog">this</a> link for more information. However, there are a few things to watch out for before updating a package:
+                        <ol>
+                            <li>It's worth reading the NuGet package release notes to see what has changed and base the urgency of upgrading on this information. Blindly updating, can sometimes cause things to break. Sometimes packages are incompatible with other packages or there are special upgrade steps that need to be carried out.</li>
+                            <li>Check the <a href="https://msdn.microsoft.com/en-us/library/twy1dw1e%28v=vs.110%29.aspx">assemblyBinding</a> section in the web.config file to see if the version of a .dll file needs to be changed to the version you are updating to. This section of the web.config file ensures that interdependent .dll's continue to work with each other, even if a package is expecting an older version of another .dll.</li>
+                            <li>When updating JavaScript or CSS framework NuGet Packages, be careful that the particular version you are updating to is also available on the <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. Some CDN's update more often than others. This project template uses the popular Google and Microsoft CDN's as it is likely that their scripts are already preloaded in a browsers cache. However, their CDN service also does not update too often. Take a look at the BundleConfig.cs to see which CDN's are being used.</li>
+                            <li>You need to ensure that you update your JavaScript and CSS framework NuGet packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degradation.</li>
+                            <li>Updating JavaScript or CSS framework NuGet packages causes the new files to be dumped in one folder. To ensure cleanliness of the project, these are then moved to their respective sub-folders.</li>
+                            <li>Updating the MVC NuGet packages will cause your site to break entirely and will require changes to your site which are detailed on the <a href="http://www.asp.net/">ASP.NET site</a>.</li>
+                        </ol>
+                    </li>
+                    <li class="list-group-item">
+                        <input name="KeepingYourSiteUpToDate-KeepTemplateUpToDate" type="checkbox"> <strong>Keep Template Up To Date</strong> -
+                        The ASP.NET MVC Boilerplate project template is constantly improving. Keep an eye on the <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/MvcBoilerplateVsix/Release%20Notes.txt">release notes</a> and <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/commits/master">commits</a> to the project and update your site accordingly.
+                    </li>
+                </ul>
+            </article>
+
+        </section>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/bootstrap.min.js"></script>
+    <script>
+        // https://github.com/jeremydurham/persist-js
+        (function () {
+            if (window.google && google.gears) { return; }
+            var F = null; if (typeof GearsFactory != 'undefined') { F = new GearsFactory(); } else { try { F = new ActiveXObject('Gears.Factory'); if (F.getBuildInfo().indexOf('ie_mobile') != -1) { F.privateSetGlobalObject(this); } } catch (e) { if ((typeof navigator.mimeTypes != 'undefined') && navigator.mimeTypes["application/x-googlegears"]) { F = document.createElement("object"); F.style.display = "none"; F.width = 0; F.height = 0; F.type = "application/x-googlegears"; document.documentElement.appendChild(F); } } }
+            if (!F) { return; }
+            if (!window.google) { google = {}; }
+            if (!google.gears) { google.gears = { factory: F }; }
+        })(); Persist = (function () {
+            var VERSION = '0.3.1', P, B, esc, init, empty, ec; ec = (function () {
+                var EPOCH = 'Thu, 01-Jan-1970 00:00:01 GMT', RATIO = 1000 * 60 * 60 * 24, KEYS = ['expires', 'path', 'domain'], esc = escape, un = unescape, doc = document, me; var get_now = function () { var r = new Date(); r.setTime(r.getTime()); return r; }; var cookify = function (c_key, c_val) {
+                    var i, key, val, r = [], opt = (arguments.length > 2) ? arguments[2] : {}; r.push(esc(c_key) + '=' + esc(c_val)); for (var idx = 0; idx < KEYS.length; idx++) { key = KEYS[idx]; val = opt[key]; if (val) { r.push(key + '=' + val); } }
+                    if (opt.secure) { r.push('secure'); }
+                    return r.join('; ');
+                }; var alive = function () { var k = '__EC_TEST__', v = new Date(); v = v.toGMTString(); this.set(k, v); this.enabled = (this.remove(k) == v); return this.enabled; }; me = {
+                    set: function (key, val) {
+                        var opt = (arguments.length > 2) ? arguments[2] : {}, now = get_now(), expire_at, cfg = {}; if (opt.expires) {
+                            if (opt.expires == -1) { cfg.expires = -1 }
+                            else { var expires = opt.expires * RATIO; cfg.expires = new Date(now.getTime() + expires); cfg.expires = cfg.expires.toGMTString(); }
+                        }
+                        var keys = ['path', 'domain', 'secure']; for (var i = 0; i < keys.length; i++) { if (opt[keys[i]]) { cfg[keys[i]] = opt[keys[i]]; } }
+                        var r = cookify(key, val, cfg); doc.cookie = r; return val;
+                    }, has: function (key) { key = esc(key); var c = doc.cookie, ofs = c.indexOf(key + '='), len = ofs + key.length + 1, sub = c.substring(0, key.length); return ((!ofs && key != sub) || ofs < 0) ? false : true; }, get: function (key) {
+                        key = esc(key); var c = doc.cookie, ofs = c.indexOf(key + '='), len = ofs + key.length + 1, sub = c.substring(0, key.length), end; if ((!ofs && key != sub) || ofs < 0) { return null; }
+                        end = c.indexOf(';', len); if (end < 0) { end = c.length; }
+                        return un(c.substring(len, end));
+                    }, remove: function (k) { var r = me.get(k), opt = { expires: EPOCH }; doc.cookie = cookify(k, '', opt); return r; }, keys: function () {
+                        var c = doc.cookie, ps = c.split('; '), i, p, r = []; for (var idx = 0; idx < ps.length; idx++) { p = ps[idx].split('='); r.push(un(p[0])); }
+                        return r;
+                    }, all: function () {
+                        var c = doc.cookie, ps = c.split('; '), i, p, r = []; for (var idx = 0; idx < ps.length; idx++) { p = ps[idx].split('='); r.push([un(p[0]), un(p[1])]); }
+                        return r;
+                    }, version: '0.2.1', enabled: false
+                }; me.enabled = alive.call(me); return me;
+            }()); var index_of = (function () {
+                if (Array.prototype.indexOf) { return function (ary, val) { return Array.prototype.indexOf.call(ary, val); }; } else {
+                    return function (ary, val) {
+                        var i, l; for (var idx = 0, len = ary.length; idx < len; idx++) { if (ary[idx] == val) { return idx; } }
+                        return -1;
+                    };
+                }
+            })(); empty = function () { }; esc = function (str) { return 'PS' + str.replace(/_/g, '__').replace(/ /g, '_s'); }; var C = { search_order: ['localstorage', 'globalstorage', 'gears', 'cookie', 'ie', 'flash'], name_re: /^[a-z][a-z0-9_ \-]+$/i, methods: ['init', 'get', 'set', 'remove', 'load', 'save', 'iterate'], sql: { version: '1', create: "CREATE TABLE IF NOT EXISTS persist_data (k TEXT UNIQUE NOT NULL PRIMARY KEY, v TEXT NOT NULL)", get: "SELECT v FROM persist_data WHERE k = ?", set: "INSERT INTO persist_data(k, v) VALUES (?, ?)", remove: "DELETE FROM persist_data WHERE k = ?", keys: "SELECT * FROM persist_data" }, flash: { div_id: '_persist_flash_wrap', id: '_persist_flash', path: 'persist.swf', size: { w: 1, h: 1 }, params: { autostart: true } } }; B = {
+                gears: {
+                    size: -1, test: function () { return (window.google && window.google.gears) ? true : false; }, methods: {
+                        init: function () { var db; db = this.db = google.gears.factory.create('beta.database'); db.open(esc(this.name)); db.execute(C.sql.create).close(); }, get: function (key) { var r, sql = C.sql.get; var db = this.db; var ret; db.execute('BEGIN').close(); r = db.execute(sql, [key]); ret = r.isValidRow() ? r.field(0) : null; r.close(); db.execute('COMMIT').close(); return ret; }, set: function (key, val) { var rm_sql = C.sql.remove, sql = C.sql.set, r; var db = this.db; var ret; db.execute('BEGIN').close(); db.execute(rm_sql, [key]).close(); db.execute(sql, [key, val]).close(); db.execute('COMMIT').close(); return val; }, remove: function (key) { var get_sql = C.sql.get, sql = C.sql.remove, r, val = null, is_valid = false; var db = this.db; db.execute('BEGIN').close(); db.execute(sql, [key]).close(); db.execute('COMMIT').close(); return true; }, iterate: function (fn, scope) {
+                            var key_sql = C.sql.keys; var r; var db = this.db; r = db.execute(key_sql); while (r.isValidRow()) { fn.call(scope || this, r.field(0), r.field(1)); r.next(); }
+                            r.close();
+                        }
+                    }
+                }, globalstorage: {
+                    size: 5 * 1024 * 1024, test: function () {
+                        if (window.globalStorage) {
+                            var domain = '127.0.0.1'; if (this.o && this.o.domain) { domain = this.o.domain; }
+                            try { var dontcare = globalStorage[domain]; return true; } catch (e) {
+                                if (window.console && window.console.warn) { console.warn("globalStorage exists, but couldn't use it because your browser is running on domain:", domain); }
+                                return false;
+                            }
+                        } else { return false; }
+                    }, methods: { key: function (key) { return esc(this.name) + esc(key); }, init: function () { this.store = globalStorage[this.o.domain]; }, get: function (key) { key = this.key(key); return this.store.getItem(key); }, set: function (key, val) { key = this.key(key); this.store.setItem(key, val); return val; }, remove: function (key) { var val; key = this.key(key); val = this.store.getItem[key]; this.store.removeItem(key); return val; } }
+                }, localstorage: {
+                    size: -1, test: function () {
+                        try {
+                            if (window.localStorage && window.localStorage.setItem("test", null) == undefined) {
+                                if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
+                                    var ffVersion = RegExp.$1; if (ffVersion >= 9) { return true; }
+                                    if (window.location.protocol == 'file:') { return false; }
+                                } else { return true; }
+                            } else { return false; }
+                            return window.localStorage ? true : false;
+                        } catch (e) { return false; }
+                    }, methods: { key: function (key) { return this.name + '>' + key; }, init: function () { this.store = localStorage; }, get: function (key) { key = this.key(key); return this.store.getItem(key); }, set: function (key, val) { key = this.key(key); this.store.setItem(key, val); return val; }, remove: function (key) { var val; key = this.key(key); val = this.store.getItem(key); this.store.removeItem(key); return val; }, iterate: function (fn, scope) { var l = this.store, key, keys; for (var i = 0; i < l.length; i++) { key = l.key(i); keys = key.split('>'); if ((keys.length == 2) && (keys[0] == this.name)) { fn.call(scope || this, keys[1], l.getItem(key)); } } } }
+                }, ie: {
+                    prefix: '_persist_data-', size: 64 * 1024, test: function () { return window.ActiveXObject ? true : false; }, make_userdata: function (id) { var el = document.createElement('div'); el.id = id; el.style.display = 'none'; el.addBehavior('#default#userdata'); document.body.appendChild(el); return el; }, methods: {
+                        init: function () { var id = B.ie.prefix + esc(this.name); this.el = B.ie.make_userdata(id); if (this.o.defer) { this.load(); } }, get: function (key) {
+                            var val; key = esc(key); if (!this.o.defer) { this.load(); }
+                            val = this.el.getAttribute(key); return val;
+                        }, set: function (key, val) {
+                            key = esc(key); this.el.setAttribute(key, val); if (!this.o.defer) { this.save(); }
+                            return val;
+                        }, remove: function (key) {
+                            var val; key = esc(key); if (!this.o.defer) { this.load(); }
+                            val = this.el.getAttribute(key); this.el.removeAttribute(key); if (!this.o.defer) { this.save(); }
+                            return val;
+                        }, load: function () { this.el.load(esc(this.name)); }, save: function () { this.el.save(esc(this.name)); }
+                    }
+                }, cookie: { delim: ':', size: 4000, test: function () { return P.Cookie.enabled ? true : false; }, methods: { key: function (key) { return this.name + B.cookie.delim + key; }, get: function (key, fn) { var val; key = this.key(key); val = ec.get(key); return val; }, set: function (key, val, fn) { key = this.key(key); ec.set(key, val, this.o); return val; }, remove: function (key, val) { var val; key = this.key(key); val = ec.remove(key); return val; } } }, flash: {
+                    test: function () {
+                        try { if (!swfobject) { return false; } } catch (e) { return false; }
+                        var major = swfobject.getFlashPlayerVersion().major; return (major >= 8) ? true : false;
+                    }, methods: {
+                        init: function () {
+                            if (!B.flash.el) { var key, el, fel, cfg = C.flash; el = document.createElement('div'); el.id = cfg.div_id; fel = document.createElement('div'); fel.id = cfg.id; el.appendChild(fel); document.body.appendChild(el); B.flash.el = swfobject.createSWF({ id: cfg.id, data: this.o.swf_path || cfg.path, width: cfg.size.w, height: cfg.size.h }, cfg.params, cfg.id); }
+                            this.el = B.flash.el;
+                        }, get: function (key) { var val; key = esc(key); val = this.el.get(this.name, key); return val; }, set: function (key, val) { var old_val; key = esc(key); old_val = this.el.set(this.name, key, val); return old_val; }, remove: function (key) { var val; key = esc(key); val = this.el.remove(this.name, key); return val; }
+                    }
+                }
+            }; init = function () {
+                var i, l, b, key, fns = C.methods, keys = C.search_order; for (var idx = 0, len = fns.length; idx < len; idx++) { P.Store.prototype[fns[idx]] = empty; }
+                P.type = null; P.size = -1; for (var idx2 = 0, len2 = keys.length; !P.type && idx2 < len2; idx2++) { b = B[keys[idx2]]; if (b.test()) { P.type = keys[idx2]; P.size = b.size; for (key in b.methods) { P.Store.prototype[key] = b.methods[key]; } } }
+                P._init = true;
+            }; P = {
+                VERSION: VERSION, type: null, size: 0, add: function (o) { B[o.id] = o; C.search_order = [o.id].concat(C.search_order); init(); }, remove: function (id) {
+                    var ofs = index_of(C.search_order, id); if (ofs < 0) { return; }
+                    C.search_order.splice(ofs, 1); delete B[id]; init();
+                }, Cookie: ec, Store: function (name, o) {
+                    if (!C.name_re.exec(name)) { throw new Error("Invalid name"); }
+                    if (!P.type) { throw new Error("No suitable storage found"); }
+                    o = o || {}; this.name = name; o.domain = o.domain || location.hostname || 'localhost'; o.domain = o.domain.replace(/:\d+$/, ''); o.domain = (o.domain == 'localhost') ? '' : o.domain; this.o = o; o.expires = o.expires || 365 * 2; o.path = o.path || '/'; if (this.o.search_order) { C.search_order = this.o.search_order; init(); }
+                    this.init();
+                }
+            }; init(); return P;
+        })();
+    </script>
+    <script>
+        $(function () {
+            var store = new Persist.Store('ASP NET MVC Boilerplate ReadMe');
+
+            $(':checkbox').click(function () {
+                var name = this.name;
+                var value = this.value;
+
+                if ($(this).is(':checked')) {
+                    store.set(this.name, 'checked');
+                    $(this).parent().addClass('list-group-item-success');
+                } else {
+                    store.remove(this.name);
+                    $(this).parent().removeClass('list-group-item-success');
+                }
+            });
+
+            $(':checkbox').each(function () {
+                var isChecked = store.get(this.name) == 'checked';
+                $(this).prop('checked', isChecked);
+                if (isChecked) {
+                    $(this).parent().addClass('list-group-item-success');
+                }
+            });
+        })
+    </script>
+</body>
+</html>
