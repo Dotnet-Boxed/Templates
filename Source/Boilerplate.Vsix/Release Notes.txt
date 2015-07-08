@@ -3,6 +3,7 @@ MVC 5
 - favicon.ico moved to root of site.
 - Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com and favicon.ico meta tag removed.
 - Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
+- Added manifest.json and browserconfig.xml links to Home.cshtml.
 MVC 6
 - favicon.ico moved to root of site.
 - browserconfig.xml moved to root of site.
@@ -10,6 +11,7 @@ MVC 6
   removed.
 - Updated Site.less with basic styles for the site.
 - Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
+- Added manifest.json and browserconfig.xml links to Home.cshtml.
 
 Version 1.2.2
 MVC 5
