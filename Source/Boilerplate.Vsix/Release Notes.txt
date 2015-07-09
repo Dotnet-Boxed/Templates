@@ -1,4 +1,8 @@
-﻿Version 1.2.3
+﻿Version 1.2.5
+Version 1.2.4
+No changes. The release messed up somehow.
+
+Version 1.2.3
 MVC 5
 - favicon.ico moved to root of site.
 - Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com and favicon.ico meta tag removed.

@@ -317,10 +317,12 @@
     <Content Include="Content\fontawesome\spinning.less" />
     <Content Include="Content\fontawesome\stacked.less" />
     <Content Include="Content\fontawesome\variables.less" />
-    <Content Include="sw-file-icon.png" />
-    <Content Include="_Definitions\_project.vstemplate.xml" />
-    <Content Include="_preprocess.xml" />
     <None Include="ReadMe.html" />
+    <Content Include="sw-file-icon.png" />
+    <Content Include="_Definitions\_project.vstemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="_preprocess.xml" />
     <Content Include="Content\bootstrap\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
