@@ -1,7 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc.Filters
 {
     using System;
-    using System.Web.Mvc;
+    using Microsoft.AspNet.Mvc;
 
     /// <summary>
     /// Represents an attribute that is used to mark an action method whose output will not be cached.

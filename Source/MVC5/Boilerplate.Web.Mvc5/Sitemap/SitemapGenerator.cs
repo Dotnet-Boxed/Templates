@@ -175,6 +175,7 @@
             if (sitemapXml.Length >= MaximumSitemapSizeInBytes)
             {
                 this.LogWarning(new SitemapException(string.Format(
+                    CultureInfo.CurrentCulture,
                     "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{1}>", 
                     sitemapXml.Length)));
             }
@@ -189,6 +190,7 @@
             if (sitemapCount > MaximumSitemapCount)
             {
                 this.LogWarning(new SitemapException(string.Format(
+                    CultureInfo.CurrentCulture,
                     "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{1}>", 
                     sitemapCount)));
             }

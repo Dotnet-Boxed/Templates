@@ -117,7 +117,7 @@
                 if (this.appendTrailingSlash)
                 {
                     // Append a trailing slash to the end of the URL.
-                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
                     {
                         canonicalUrl += SlashCharacter;
                         isCanonical = false;
@@ -140,7 +140,7 @@
                 if (this.appendTrailingSlash)
                 {
                     // Append a trailing slash to the end of the URL but before the query string.
-                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
                     {
                         canonicalUrl = canonicalUrl.Insert(queryIndex, SlashCharacter.ToString());
                         isCanonical = false;
