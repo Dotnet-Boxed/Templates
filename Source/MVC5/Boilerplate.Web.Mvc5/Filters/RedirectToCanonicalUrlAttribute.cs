@@ -1,7 +1,6 @@
 ﻿namespace Boilerplate.Web.Mvc.Filters
 {
     using System;
-    using System.Collections.Generic;
     using System.Web.Mvc;
 
     /// <summary>
@@ -16,9 +15,15 @@
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class RedirectToCanonicalUrlAttribute : FilterAttribute, IAuthorizationFilter
     {
+        #region Fields
+
+        private const char QueryCharacter = '?';
+        private const char SlashCharacter = '/';
+
         private readonly bool appendTrailingSlash;
         private readonly bool lowercaseUrls;
-        private readonly IEnumerable<string> ignoreControllers;
+
+        #endregion
 
         #region Constructors
 
@@ -28,15 +33,11 @@
         /// <param name="appendTrailingSlash">If set to <c>true</c> append trailing slashes, otherwise strip trailing 
         /// slashes.</param>
         /// <param name="lowercaseUrls">If set to <c>true</c> lower-case all URL's.</param>
-        /// <param name="ignoreControllers">The collection of controller names (Without the word 'Controller' on the 
-        /// end) to ignore.</param>
         public RedirectToCanonicalUrlAttribute(
             bool appendTrailingSlash, 
-            bool lowercaseUrls, 
-            IEnumerable<string> ignoreControllers)
+            bool lowercaseUrls)
         {
             this.appendTrailingSlash = appendTrailingSlash;
-            this.ignoreControllers = ignoreControllers;
             this.lowercaseUrls = lowercaseUrls;
         } 
 
@@ -84,19 +85,6 @@
                 throw new ArgumentNullException("filterContext");
             }
 
-            if (this.ignoreControllers != null)
-            {
-                // Ignore the given controllers.
-                string controllerName = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-                foreach (string ignoreController in this.ignoreControllers)
-                {
-                    if (string.Equals(controllerName, ignoreController, StringComparison.Ordinal))
-                    {
-                        return;
-                    }
-                }
-            }
-
             string canonicalUrl;
             if (!this.TryGetCanonicalUrl(filterContext, out canonicalUrl))
             {
@@ -120,22 +108,52 @@
             bool isCanonical = true;
 
             canonicalUrl = filterContext.HttpContext.Request.Url.ToString();
+            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
 
-            bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == '/';
-            if (this.appendTrailingSlash)
+            if (queryIndex == -1)
             {
-                if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter;
+                
+                if (this.appendTrailingSlash)
                 {
-                    canonicalUrl += '/';
-                    isCanonical = false;
+                    // Append a trailing slash to the end of the URL.
+                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    {
+                        canonicalUrl += SlashCharacter;
+                        isCanonical = false;
+                    }
+                }
+                else
+                {
+                    // Trim a trailing slash from the end of the URL.
+                    if (hasTrailingSlash)
+                    {
+                        canonicalUrl = canonicalUrl.TrimEnd(SlashCharacter);
+                        isCanonical = false;
+                    }
                 }
             }
             else
             {
-                if (hasTrailingSlash)
+                bool hasTrailingSlash = canonicalUrl[queryIndex - 1] == SlashCharacter;
+
+                if (this.appendTrailingSlash)
                 {
-                    canonicalUrl = canonicalUrl.TrimEnd('/');
-                    isCanonical = false;
+                    // Append a trailing slash to the end of the URL but before the query string.
+                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    {
+                        canonicalUrl = canonicalUrl.Insert(queryIndex, SlashCharacter.ToString());
+                        isCanonical = false;
+                    }
+                }
+                else
+                {
+                    // Trim a trailing slash to the end of the URL but before the query string.
+                    if (hasTrailingSlash)
+                    {
+                        canonicalUrl = canonicalUrl.Remove(queryIndex - 1, 1);
+                        isCanonical = false;
+                    }
                 }
             }
 
@@ -166,10 +184,6 @@
             filterContext.Result = new RedirectResult(canonicalUrl, true);
         }
 
-        #endregion
-
-        #region Private Methods
-
         /// <summary>
         /// Determines whether the specified action or its controller has the <see cref="NoTrailingSlashAttribute"/> 
         /// attribute specified.
@@ -177,7 +191,7 @@
         /// <param name="filterContext">The filter context.</param>
         /// <returns><c>true</c> if a <see cref="NoTrailingSlashAttribute"/> attribute is specified, otherwise 
         /// <c>false</c>.</returns>
-        private bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
+        protected virtual bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
         {
             return filterContext.ActionDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false) ||
                 filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false);

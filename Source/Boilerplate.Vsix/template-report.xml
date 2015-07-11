@@ -3,6 +3,7 @@
   <ItemTemplates />
   <ProjectTemplates>
     <ProjectTemplate Path="..\MVC5\Boilerplate.Web.Mvc5.Sample\_Definitions\_project.vstemplate.xml" Name="ASP.NET MVC 5 Boilerplate" Description="A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com" ProjectType="CSharp" ProjectSubType="" />
+    <ProjectTemplate Path="..\MVC6\Boilerplate.Web.Mvc6.Sample\_Definitions\_project.vstemplate.xml" Name="ASP.NET MVC 6 Boilerplate" Description="A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com" ProjectType="ProjectK" ProjectSubType="" />
   </ProjectTemplates>
   <Snippets />
 </TemplateReport>

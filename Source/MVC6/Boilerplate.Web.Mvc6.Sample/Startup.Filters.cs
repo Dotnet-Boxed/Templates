@@ -15,12 +15,7 @@
         {
             filters.Add(new RedirectToCanonicalUrlAttribute(
                  appendTrailingSlash: true, // TODO: Add routeOptions.AppendTrailingSlash when it is added.
-                 lowercaseUrls: routeOptions.LowercaseUrls,
-                 ignoreControllers: new string[]
-                 {
-                    ControllerName.Elmah,
-                    ControllerName.Error
-                 }));
+                 lowercaseUrls: routeOptions.LowercaseUrls));
         }
 
         /// <summary>

@@ -1,6 +1,27 @@
-﻿Version 1.2.5
+﻿Version 1.2.6
+MVC 5
+- Added trailing slashes to the URL's under httpErrors.
+- RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter
+  due to the fix above and this one it is no longer needed.
+- Ignored controllers for the above fix removed from RedirectToCanonicalUrlAttribute in FilterConfig.cs.
+- Upgraded the Boilerplate.Web.Mvc5 NuGet package to 1.0.15 which includes the above changes.
+- Elmah constant removed from ControllerName.cs as it was no longer needed.
+- ReadMe.html updated with a comment about Web.config settings not existing when using older versions of IIS 7.5 and 8.
+MVC 6
+- Turn off Razor View Pre-Compilation when compiling using the DEBUG solution configuration.
+- NoCacheAttribute added to Boilerplate.Web.Mvc6 NuGet package.
+- RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter
+  because it is not needed.
+- Ignored controllers for the above fix removed from RedirectToCanonicalUrlAttribute in FilterConfig.cs.
+- Upgraded the Boilerplate.Web.Mvc6 NuGet package to 1.0.15 which includes the above changes.
+- Elmah constant removed from ControllerName.cs as it was no longer needed.
+- ReadMe.html updated with a comment about Web.config settings not existing when using older versions of IIS 7.5 and 8.
+
+Version 1.2.5
+- No changes. The release messed up somehow.
+
 Version 1.2.4
-No changes. The release messed up somehow.
+- No changes. The release messed up somehow.
 
 Version 1.2.3
 MVC 5

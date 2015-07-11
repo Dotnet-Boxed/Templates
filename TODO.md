@@ -14,7 +14,6 @@
 <h2>ASP.NET MVC 6</h2>
 <p>A new project template in addition to the existing ASP.NET MVC 5 template, targeting ASP.NET MVC 6.</p>
 <ul>
-    <li>Ensure RazorPreCompilation only runs on Staging and Production builds.</li>
     <li>
         Set-up error handling and error pages. See <a href="https://github.com/aspnet/Diagnostics/blob/dev/samples/StatusCodePagesSample/Startup.cs">Status Code Error Pages</a>.
         <pre>
@@ -42,7 +41,7 @@
         </pre>
     </li>
     <li>Set-up configurationBuilder.AddUserSecrets(); and userSecretsId in project.json correctly.</li>
-    <li>Port remaining code from Boilerplate.Web.Mvc5 to Boilerplate.Web.Mvc6.</li>
+    <li>Create new tag helper versions of Open Graph and Twitter code.</li>
     <li>Look into <a href="https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs">localization</a>.</li>
     <li>Compile LESS or SASS to CSS based on file extension in Gulpfile.js.</li>
     <li>

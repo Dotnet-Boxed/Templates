@@ -23,12 +23,7 @@
         {
             filters.Add(new RedirectToCanonicalUrlAttribute(
                 RouteTable.Routes.AppendTrailingSlash, 
-                RouteTable.Routes.LowercaseUrls,
-                new string[]
-                {
-                    ControllerName.Elmah,
-                    ControllerName.Error
-                }));
+                RouteTable.Routes.LowercaseUrls));
         }
 
         /// <summary>

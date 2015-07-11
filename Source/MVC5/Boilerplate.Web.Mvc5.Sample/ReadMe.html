@@ -236,6 +236,10 @@
                 <h3>Compatibility</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
+                        <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
+                        Some Web.config settings do not exist in older versions of IIS (7.5 and 8) so you must edit the Web.config file and remove the setEtag="false" attribute, as well as the dynamicIpSecurity settings.
+                    </li>
+                    <li class="list-group-item">
                         <input name="Compatibility-AmIUsingWebForms" type="checkbox"> <strong>Am I Using Web Forms?</strong> -
                         If you are planning on using ASP.NET Web Forms, open the Global.asax.cs file and remove the two lines of code where we are removing the
                         ASP.NET Web Forms view engine. We do this for added performance but if you are using Web Forms, add it back in.

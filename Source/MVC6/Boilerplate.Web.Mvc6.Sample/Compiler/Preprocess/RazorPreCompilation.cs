@@ -1,4 +1,5 @@
-﻿namespace MvcBoilerplate.Compiler.Preprocess
+﻿#if !DEBUG
+namespace MvcBoilerplate.Compiler.Preprocess
 {
     using System;
     using Microsoft.AspNet.Mvc;
@@ -11,19 +12,10 @@
     /// </summary>
     public class RazorPreCompilation : RazorPreCompileModule
     {
-        //public RazorPreCompilation(IServiceProvider provider) : base(provider)
-        //{
-        //    this.GenerateSymbols = true;
-        //}
-
-        public RazorPreCompilation(IServiceProvider provider, IHostingEnvironment he) : base(provider)
+        public RazorPreCompilation(IServiceProvider provider) : base(provider)
         {
-            IHostingEnvironment hostingEnvironment = (IHostingEnvironment)provider.GetService(typeof(IHostingEnvironment));
-            // Add the following to the request pipeline only in development environment.
-            if (!environment.IsEnvironment(EnvironmentName.Development))
-            {
-                this.GenerateSymbols = true;
-            }
+            this.GenerateSymbols = true;
         }
     }
 }
+#endif
