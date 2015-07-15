@@ -25,7 +25,9 @@
      <li>Resilience and Error Handling</li>
      <li>Easier Debugging and Performance Testing Tools</li>
      <li>Patterns and Practices</li>
-    <li>Search</li>
+     <li>Atom Feed</li>
+     <li>Search</li>
+     <li>Social Media Support</li>
 </ul>
 
 <img alt="ASP.NET-MVC-Boilerplate Logo"
@@ -96,7 +98,7 @@ An <a href="http://atomenabled.org/developers/syndication/">Atom 1.0</a> has bee
 
 There is a lot more to implementing search in your application than it sounds. ASP.NET MVC Boilerplate includes a search feature by default but leaves it open for you to choose how you want to implement it. It also implements <a href="http://www.opensearch.org">Open Search</a> XML right out of the box. Read Scott Hanselman talk about this feature <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">here</a>.
 
-<h2>Social</h2>
+<h2>Social Media Support</h2>
 
 <a href="http://ogp.me/">Open Graph</a> meta tags and <a href="https://dev.twitter.com/cards/overview">Twitter Card</a> meta tags are included by default. Not only that but ASP.NET MVC Boilerplate includes fully documented HTML helpers that allow you to easily generate Open Graph object or Twitter Card met tags easily and correctly.
 
@@ -112,3 +114,7 @@ That's easy, just choose one of the following options:
 
 <h2>Release Notes and TODO List</h2>
 You can find release notes for each version <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt">here</a> and a TODO list of new features and enhancements coming soon <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md">here</a>.
+
+<h2>Bugs and Issues</h2>
+
+Please report any bugs or issues on the GitHub issues page <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues">here</a>.
