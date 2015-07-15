@@ -12,6 +12,9 @@
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class NoTrailingSlashAttribute : AuthorizationFilterAttribute
     {
+        private const char QueryCharacter = '?';
+        private const char SlashCharacter = '/';
+
         /// <summary>
         /// Determines whether a request contains a trailing slash and, if it does, calls the 
         /// <see cref="HandleTrailingSlashRequest"/> method.
