@@ -135,6 +135,13 @@
     <li>Glimpse</li>
 </ul>
 
+<h2>ASP.NET MVC 6 Web API</h2>
+<p>A Web API Controller for ASP.NET MVC 6.</p>
+<ul>
+  <li>Add support for application/json-patch+json using the built-in <a href="https://github.com/aspnet/Mvc/issues/1976">stuff</a>.</li>
+  <li>Use <a href="https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md">HAL</a> or <a href="https://github.com/kevinswiber/siren">SIREN</a>. See also <a href="http://phlyrestfully.readthedocs.org/en/latest/halprimer.html">this</a> and <a href="https://msdn.microsoft.com/en-us/magazine/jj883957.aspx">this</a> and <a href="https://github.com/JakeGinnivan/WebApi.Hal">this</a>.</li>
+</ul>
+
 <h2>ASP.NET Identity</h2>
 <p>A new project template including the ASP.NET Identity package out of the box.</p>
 <ul>

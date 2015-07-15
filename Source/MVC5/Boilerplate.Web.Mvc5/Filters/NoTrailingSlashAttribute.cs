@@ -12,8 +12,11 @@
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class NoTrailingSlashAttribute : FilterAttribute, IAuthorizationFilter
     {
+        private const char QueryCharacter = '?';
+        private const char SlashCharacter = '/';
+
         /// <summary>
-        /// Determines whether a request contains a trailing slash and, if it does, calls the 
+        /// Determines whether a request contains a trailing slash and if it does, calls the 
         /// <see cref="HandleTrailingSlashRequest"/> method.
         /// </summary>
         /// <param name="filterContext">An object that encapsulates information that is required in order to use the 
@@ -26,10 +29,22 @@
                 throw new ArgumentNullException("filterContext");
             }
 
-            string url = filterContext.HttpContext.Request.Url.ToString();
-            if (url[url.Length - 1] == '/')
+            string canonicalUrl = filterContext.HttpContext.Request.Url.ToString();
+            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
+
+            if (queryIndex == -1)
             {
-                this.HandleTrailingSlashRequest(filterContext);
+                if (canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter)
+                {
+                    this.HandleTrailingSlashRequest(filterContext);
+                }
+            }
+            else
+            {
+                if (canonicalUrl[queryIndex - 1] == SlashCharacter)
+                {
+                    this.HandleTrailingSlashRequest(filterContext);
+                }
             }
         }
 

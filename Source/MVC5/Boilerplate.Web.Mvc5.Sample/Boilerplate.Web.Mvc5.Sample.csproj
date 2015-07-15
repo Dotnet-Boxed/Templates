@@ -63,10 +63,7 @@
     <Reference Include="Autofac.Integration.Owin">
       <HintPath>..\..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fc5550082a9c642c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.16\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fc5550082a9c642c, processorArchitecture=MSIL" />
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -318,11 +315,6 @@
     <Content Include="Content\fontawesome\stacked.less" />
     <Content Include="Content\fontawesome\variables.less" />
     <None Include="ReadMe.html" />
-    <Content Include="sw-file-icon.png" />
-    <Content Include="_Definitions\_project.vstemplate.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="_preprocess.xml" />
     <Content Include="Content\bootstrap\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>

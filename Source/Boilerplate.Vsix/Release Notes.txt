@@ -1,4 +1,14 @@
-﻿Version 1.2.6
+﻿Version 1.2.7
+MVC 5
+- NoTrailingSlashAttribute updated to handle URL's with query strings.
+- Boilerplate.Web.Mvc5 NuGet package updated to 1.0.17 containing the above change.
+MVC 6
+- NoTrailingSlashAttribute updated to handle URL's with query strings.
+- Boilerplate.Web.Mvc6 NuGet package updated to 1.0.4 containing the above change.
+- project.json keyFile path fixed.
+- SideWaffle template settings updated in _project.cstemplate.xml.
+
+Version 1.2.6
 MVC 5
 - Added trailing slashes to the URL's under httpErrors.
 - RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter

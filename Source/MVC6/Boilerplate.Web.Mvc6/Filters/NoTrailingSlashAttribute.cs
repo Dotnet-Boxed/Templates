@@ -25,10 +25,22 @@
                 throw new ArgumentNullException("context");
             }
 
-            string url = context.HttpContext.Request.Path.ToString();
-            if (url[url.Length - 1] == '/')
+            string canonicalUrl = context.HttpContext.Request.Path.ToString();
+            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
+
+            if (queryIndex == -1)
             {
-                this.HandleTrailingSlashRequest(context);
+                if (canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter)
+                {
+                    this.HandleTrailingSlashRequest(context);
+                }
+            }
+            else
+            {
+                if (canonicalUrl[queryIndex - 1] == SlashCharacter)
+                {
+                    this.HandleTrailingSlashRequest(context);
+                }
             }
         }
 
