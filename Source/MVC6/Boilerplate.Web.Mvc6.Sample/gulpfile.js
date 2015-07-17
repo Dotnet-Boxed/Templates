@@ -4,6 +4,7 @@
 var gulp = require("gulp"),
     fs = require("fs"),                         // NPM file system API (https://nodejs.org/api/fs.html)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat)
+    gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin)
     less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less)
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css)
@@ -13,14 +14,26 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify)
     gutil = require("gulp-util"),               // Gulp utilities (https://www.npmjs.com/package/gulp-util)
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream)
-    rimraf = require("rimraf");                 // Deletes files and folders (https://www.npmjs.com/package/rimraf)
+    rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf)
+    typescript = require('gulp-tsc');           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc)
 
 // Read the project.json file into the project variable.
 eval("var project = " + fs.readFileSync("./project.json"));
-// Gets the current hosting environment the application is running under. This comes from the environment variables.
-var environment = process.env.ASPNET_ENV || "Development";
-// The names of the different environments.
-var environmentName = { development: "Development", staging: "Staging", production: "Production" };
+// Holds information about the hosting environment.
+var environment = {
+    // The names of the different environments.
+    development: "Development",
+    staging: "Staging",
+    production: "Production",
+    // Gets the current hosting environment the application is running under. This comes from the environment variables.
+    current: function () { return process.env.ASPNET_ENV || this.development },
+    // Are we running under the development environment.
+    isDevelopment: function () { return this.current() === this.development; },
+    // Are we running under the staging environment.
+    isStaging: function () { return this.current() === this.staging; },
+    // Are we running under the production environment.
+    isProduction: function () { return this.current() === this.production; }
+};
 
 // Initialize directory paths.
 var paths = {
@@ -80,8 +93,8 @@ gulp.task("build-css", function () {
         {
             // name - The name of the final CSS file to build.
             name: "font-awesome.css",
-            // paths - An array of paths to LESS files which will be compiled to CSS, concatenated and minified to 
-            //         create a file with the above file name.
+            // paths - An array of paths to CSS or LESS files which will be compiled to CSS, concatenated and minified 
+            // to create a file with the above file name.
             paths: [
                 paths.bower + "font-awesome-less/less/font-awesome.less"
             ]
@@ -99,25 +112,25 @@ gulp.task("build-css", function () {
     var tasks = sources.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
-            .pipe(environment === environmentName.development ? // If running in the development environment.
-                sourcemaps.init() :             // Set up the generation of .map source files for the CSS.
-                gutil.noop())                   // Else, do nothing.
-                .pipe(less())                   // Compile the specified LESS files to CSS.
-                .pipe(concat(source.name))      // Concatenate CSS files into a single CSS file with the specified name.
-                .pipe(size({                    // Write the size of the file to the console before minification.
-                    title: "Before: " + source.name
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.init()))             // Set up the generation of .map source files for the CSS.
+            .pipe(gulpif("**/*.less", less()))  // If the file is a LESS (.less) file, compile it to CSS (.css).
+            .pipe(concat(source.name))          // Concatenate CSS files into a single CSS file with the specified name.
+            .pipe(size({                        // Write the size of the file to the console before minification.
+                    title: "Before: " + source.name 
                 }))
-                .pipe(environment !== environmentName.development ? // If running in the staging or production environment.
-                    minifyCss({                 // Minifies the CSS.
-                        keepSpecialComments: 0  // Remove all comments.
-                    }) : 
-                    gutil.noop())               // Else, do nothing.
-                .pipe(size({                    // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),   // If running in the staging or production environment.
+                minifyCss({                     // Minifies the CSS.
+                    keepSpecialComments: 0      // Remove all comments.
+                })))
+            .pipe(size({                        // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(environment === environmentName.development ? // If running in the development environment.
-                sourcemaps.write(".") :         // Generates source .map files for the CSS.
-                gutil.noop())                   // Else, do nothing.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.write(".")))         // Generates source .map files for the CSS.
             .pipe(gulp.dest(paths.css))         // Saves the CSS file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });
@@ -166,8 +179,8 @@ gulp.task("build-js", function () {
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
-            // paths - An array of paths to JavaScript files which will be concatenated and minified to create a file 
-            //         with the above file name.
+            // paths - An array of paths to JavaScript or TypeScript files which will be concatenated and minified to 
+            // create a file with the above file name.
             paths: [
                 // Feel free to remove any parts of Bootstrap you don't use.
                 paths.bower + "bootstrap-less/js/transition.js",
@@ -221,22 +234,23 @@ gulp.task("build-js", function () {
     var tasks = sources.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
-            .pipe(environment === environmentName.development ? // If running in the development environment.
-                sourcemaps.init() :             // Set up the generation of .map source files for the JavaScript.
-                gutil.noop())                   // Else, do nothing.
-                .pipe(concat(source.name))      // Concatenate JavaScript files into a single file with the specified name.
-                .pipe(size({                    // Write the size of the file to the console before minification.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+            .pipe(gulpif("**/*.ts", typescript()))  // If the file is a TypeScript (.ts) file, compile it to JavaScript (.js).
+            .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
+            .pipe(size({                        // Write the size of the file to the console before minification.
                     title: "Before: " + source.name
                 }))
-                .pipe(environment !== environmentName.development ? // If running in the staging or production environment.
-                    uglify() :                  // Minifies the JavaScript.
-                    gutil.noop())               // Else, do nothing.
-                .pipe(size({                    // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),   // If running in the staging or production environment.
+                uglify()))                      // Minifies the JavaScript.
+            .pipe(size({                        // Write the size of the file to the console after minification.
                     title: "After:  " + source.name
                 }))
-            .pipe(environment === environmentName.development ? // If running in the development environment.
-                sourcemaps.write(".") :         // Generates source .map files for the JavaScript.
-                gutil.noop())                   // Else, do nothing.
+            .pipe(gulpif(
+                environment.isDevelopment(),    // If running in the development environment.
+                sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
             .pipe(gulp.dest(paths.js))          // Saves the JavaScript file to the specified destination path.
             .on("error", handleError);          // Handle any errors.
     });

@@ -16,7 +16,7 @@
         /// <see cref="IHostingEnvironment"/>.
         /// </summary>
         /// <param name="application">The application.</param>
-        public static void UseAspNetMvcBoilerplate(this IApplicationBuilder application)
+        public static void UseBoilerplate(this IApplicationBuilder application)
         {
             IHostingEnvironment hostingEnvironment = 
                 application.ApplicationServices.GetRequiredService<IHostingEnvironment>();

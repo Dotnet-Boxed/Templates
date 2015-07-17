@@ -14,7 +14,7 @@
     <TemplateID>02bfed6c-6c85-4135-8719-fc23440bd9db</TemplateID>
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <RequiredFrameworkVersion>4.5.1</RequiredFrameworkVersion>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="Boilerplate.Web.Mvc6.Sample.xproj" File="Boilerplate.Web.Mvc6.Sample.xproj" ReplaceParameters="true">

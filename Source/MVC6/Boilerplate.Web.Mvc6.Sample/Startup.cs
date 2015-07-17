@@ -142,7 +142,7 @@
 
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
             // absolute URL's and get the current request path.
-            application.UseAspNetMvcBoilerplate();
+            application.UseBoilerplate();
 
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();

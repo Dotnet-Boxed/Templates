@@ -1,4 +1,18 @@
-﻿Version 1.2.7
+﻿Version 1.2.8
+MVC 5
+- SideWaffle fix: New GUID now generated for each project.
+MVC 6
+- SideWaffle fix: New GUID now generated for each project.
+- SideWaffle fix: Target VSIX project template at .NET 4.5.1.
+- gulp-tsc (TypeScript) and gulp-if added to package.json.
+- userSecretsId set in project.json.
+- SideWaffle _preprocess.xml updated so a new userSecretsId GUID is generated for each project.
+- gulpfile.js updated so that you can now start with CSS (.css) or LESS (.less) and compile to CSS.
+- gulpfile.js updated so that you can now start with TypeScript (.ts) or JavaScript (.js) and compile to JavaScript.
+- AddUserSecrets for all environments in Startup.Configuration.cs.
+- UseAspNetMvcBoilerplate in ApplicationBuilderExtensions.cs renamed to UseBoilerplate.
+
+Version 1.2.7
 MVC 5
 - NoTrailingSlashAttribute updated to handle URL's with query strings.
 - Boilerplate.Web.Mvc5 NuGet package updated to 1.0.17 containing the above change.

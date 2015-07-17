@@ -31,14 +31,11 @@
             // config.json file.
             configurationBuilder.AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true);
 
-            if (hostingEnvironment.IsEnvironment(EnvironmentName.Development))
-            {
-                // This reads the configuration keys from the secret store. This allows you to store connection strings
-                // and other sensitive settings on your development environment, so you don't have to check them into
-                // your source control provider. See http://go.microsoft.com/fwlink/?LinkID=532709 and
-                // http://docs.asp.net/en/latest/security/app-secrets.html
-                configurationBuilder.AddUserSecrets();
-            }
+            // This reads the configuration keys from the secret store. This allows you to store connection strings
+            // and other sensitive settings, so you don't have to check them into your source control provider. See 
+            // http://go.microsoft.com/fwlink/?LinkID=532709 and
+            // http://docs.asp.net/en/latest/security/app-secrets.html
+            configurationBuilder.AddUserSecrets();
 
             // Add configuration specific to the Development, Staging or Production environments. This config can 
             // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings 

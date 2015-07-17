@@ -1,6 +1,6 @@
 {
   "webroot": "wwwroot",
-  "userSecretsId": "TODO",
+  "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
   "version": "1.0.0-*",
 
   "dependencies": {
