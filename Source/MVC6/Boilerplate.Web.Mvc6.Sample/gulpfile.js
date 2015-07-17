@@ -290,22 +290,22 @@ gulp.task("compress-images", [], function () {
 });
 
 /*
- * Watch the styles folder for changes. Build the CSS if something changes.
+ * Watch the styles folder for changes to .css or .less files. Build the CSS if something changes.
  */
 gulp.task("watch-css", function () {
     return gulp
-        .watch(paths.styles, ["build-css"])    // Watch the styles folder and execute the build-css task if something changes.
+        .watch(paths.styles + "**/*.{css,less}", ["build-css"])    // Watch the styles folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
         });
 });
 
 /*
- * Watch the scripts folder for changes. Build the JavaScript if something changes.
+ * Watch the scripts folder for changes to .js or .ts files. Build the JavaScript if something changes.
  */
 gulp.task("watch-js", function () {
     return gulp
-        .watch(paths.scripts, ["build-js"])     // Watch the scripts folder and execute the build-js task if something changes.
+        .watch(paths.scripts + "**/*.{js,ts}", ["build-js"])     // Watch the scripts folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-js task started."));
         });
