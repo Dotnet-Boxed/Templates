@@ -9,8 +9,8 @@
     /// </summary>
     internal static class Context
     {
-        private static IHostingEnvironment Environment;
-        private static IHttpContextAccessor HttpContextAccessor;
+        private static IHostingEnvironment environment;
+        private static IHttpContextAccessor httpContextAccessor;
 
         /// <summary>
         /// Configures the <see cref="Context"/>.
@@ -22,8 +22,16 @@
             IHostingEnvironment environment,
             IHttpContextAccessor httpContextAccessor)
         {
-            Environment = environment;
-            HttpContextAccessor = httpContextAccessor;
+            environment = environment;
+            httpContextAccessor = httpContextAccessor;
+        }
+
+        /// <summary>
+        /// Gets the current <see cref="IHostingEnvironment"/>.
+        /// </summary>
+        public static IHostingEnvironment Environment
+        {
+            get { return environment; }
         }
 
         /// <summary>
@@ -31,17 +39,7 @@
         /// </summary>
         public static HttpContext HttpContext
         {
-            get { return HttpContextAccessor.HttpContext; }
-        }
-
-        /// <summary>
-        /// Compares the current hosting environment name against the specified value.
-        /// </summary>
-        /// <param name="environmentName">Environment name to validate against.</param>
-        /// <returns><c>true</c> if the specified name is same as the current environment.</returns>
-        public static bool IsEnvironment(string environmentName)
-        {
-            return Environment.IsEnvironment(environmentName);
+            get { return httpContextAccessor.HttpContext; }
         }
     }
 }

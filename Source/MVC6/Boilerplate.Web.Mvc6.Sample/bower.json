@@ -1,5 +1,5 @@
 {
-  "name": "ASP.NET",
+  "name": "asp.net-mvc-boilerplate",
   "private": true,
   "dependencies": {
     "bootstrap-less": "3.3.4",

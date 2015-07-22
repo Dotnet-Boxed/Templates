@@ -1,16 +1,13 @@
 ﻿namespace MvcBoilerplate
 {
-    using System;
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Routing;
     using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.Runtime;
-    using MvcBoilerplate.Constants;
     using MvcBoilerplate.Services;
 
     /// <summary>
@@ -65,17 +62,23 @@
             ConfigureCaching(services);
 
             RouteOptions routeOptions = null;
-            services.ConfigureRouting(x => { routeOptions = x; ConfigureRouting(routeOptions); });
+            services.ConfigureRouting(
+                x => 
+                {
+                    routeOptions = x;
+                    ConfigureRouting(routeOptions);
+                });
 
-            services.ConfigureMvc(mvcOptions =>
-            {
-                ConfigureAntiforgeryTokens(mvcOptions.AntiForgeryOptions);
-                ConfigureCacheProfiles(mvcOptions.CacheProfiles);
-                ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
-                ConfigureSecurityFilters(mvcOptions.Filters);
-                ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
-                ConfigureFormatters(mvcOptions);
-            });
+            services.ConfigureMvc(
+                mvcOptions =>
+                {
+                    ConfigureAntiforgeryTokens(mvcOptions.AntiForgeryOptions);
+                    ConfigureCacheProfiles(mvcOptions.CacheProfiles);
+                    ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
+                    ConfigureSecurityFilters(mvcOptions.Filters);
+                    ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
+                    ConfigureFormatters(mvcOptions);
+                });
 
 #if DNX451
             services.AddScoped<IFeedService, FeedService>();
@@ -111,40 +114,8 @@
             IHostingEnvironment environment,
             ILoggerFactory loggerfactory)
         {
-            // Add the following to the request pipeline only in development environment.
-            if (environment.IsEnvironment(EnvironmentName.Development))
-            {
-                // Add the console logger, which logs events to the Console, including errors and trace information.
-                loggerfactory.AddConsole();
-
-                // Browse to /runtimeinfo to see information about the runtime that is being used and the packages that 
-                // are included in the application. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-                application.UseRuntimeInfoPage();
-
-                // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh 
-                // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-                //application.UseBrowserLink();
-
-                // When an error occurs, displays a detailed error page with full diagnostic information. It is unsafe
-                // to use this in production. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-                application.UseErrorPage(ErrorPageOptions.ShowAll);
-
-                // Browse to /throw to force an exception to be thrown. Useful for testing your error pages.
-                application.Map("/throw/", throwApp =>
-                {
-                    throwApp.Run(context => { throw new Exception("Deliberate exception thrown to test error handling."); });
-                });
-            }
-            else // Staging or Production environments.
-            {
-                // Add Error handling middleware which catches all application specific errors and send the request to 
-                // the following path or controller action.
-                // application.UseErrorHandler("/error/internalservererror/");
-
-                // Add error handling middleware which handles all HTTP status codes from 400 to 599 by re-executing
-                // the request pipeline for the following URL. '{0}' is the name of the HTTP status code e.g. notfound.
-                application.UseStatusNamePagesWithReExecute("/error/{0}/");
-            }
+            ConfigureDebugging(application, environment, loggerfactory);
+            ConfigureErrorPages(application, environment);
 
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
             // absolute URL's and get the current request path.

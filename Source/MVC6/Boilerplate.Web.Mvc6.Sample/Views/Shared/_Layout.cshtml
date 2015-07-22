@@ -179,7 +179,7 @@
                     <li><a asp-route="@HomeControllerRoute.GetAbout"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
                     <li><a asp-route="@HomeControllerRoute.GetContact"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
                     <li><a asp-route="@HomeControllerRoute.GetFeed"><span aria-hidden="true" class="fa fa-rss"></span> RSS</a></li>
-                    @if (HostingEnvironment.IsEnvironment(EnvironmentName.Development))
+                    @if (HostingEnvironment.IsDevelopment())
                     {
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
@@ -187,7 +187,6 @@
                                 @*<li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>*@
                                 @*<li><a href="/glimpse.axd"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>*@
                                 <li><a href="/runtimeinfo"><span aria-hidden="true" class="fa fa-info"></span> Runtime Information</a></li>
-                                <li><a href="/throw"><span aria-hidden="true" class="fa fa-exclamation"></span> Throw 500 Internal Server Error</a></li>
                             </ul>
                         </li>
                     }

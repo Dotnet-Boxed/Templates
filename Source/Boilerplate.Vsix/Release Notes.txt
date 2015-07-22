@@ -2,6 +2,7 @@
 MVC 5
 - SideWaffle fix: New GUID now generated for each project.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
+- Added a link to webaim.org to check accessibility in ReadMe.html.
 MVC 6
 - SideWaffle fix: New GUID now generated for each project.
 - SideWaffle fix: Target VSIX project template at .NET 4.5.1.
@@ -10,11 +11,23 @@ MVC 6
 - SideWaffle _preprocess.xml updated so a new userSecretsId GUID is generated for each project.
 - gulpfile.js updated so that you can now start with CSS (.css) or LESS (.less) and compile to CSS.
 - gulpfile.js updated so that you can now start with TypeScript (.ts) or JavaScript (.js) and compile to JavaScript.
+- gulpfile.js updated with CSS, LESS, JavaScript and TypeScript linting tasks.
+- gulpfile.js updated with a Google Page Speed performance test tasks.
 - AddUserSecrets for all environments in Startup.Configuration.cs.
 - UseAspNetMvcBoilerplate in ApplicationBuilderExtensions.cs renamed to UseBoilerplate.
-- Added NotNullAttribute's to all IoC injected types.
 - Added Startup.Caching.cs to configure IDistributedCache and IMemoryCache.
+- Added Startup.Debugging.cs to configure browser link, console logging and other debugging tools.
+- Added Startup.ErrorPages.cs to configure error pages.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
+- Added a link to webaim.org to check accessibility in ReadMe.html.
+- Added UseErrorPageTests to Boilerplate.Web.Mvc6 NuGet package to help test error pages.
+- Added ASP.NET 5, npm, Gulp and Bower links in Index.cshtml.
+- web.config added to wwwroot folder.
+- IHostingEnvironment.IsDevelopment and IsProduction extension methods used where available.
+- bower.html added to comment bower.json file. Comments are not allowed in the JSON file.
+- package.html added to comment package.json file. Comments are not allowed in the JSON file.
+- gen command removed from project.json.
+- web command updated in project.json and split out into hosting.ini file.
 
 Version 1.2.7
 MVC 5

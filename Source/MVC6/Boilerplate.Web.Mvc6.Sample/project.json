@@ -4,7 +4,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "1.0.5",
+    "Boilerplate.Web.Mvc6": "1.0.7",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
     "Microsoft.AspNet.Http": "1.0.0-beta5",
     "Microsoft.AspNet.Mvc": "6.0.0-beta5",
@@ -15,6 +15,7 @@
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta5",
     "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta5",
+    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta5",
     "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta5",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
     "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta5",
@@ -26,8 +27,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000",
-    "gen": "Microsoft.Framework.CodeGeneration"
+    "web": "Microsoft.AspNet.Hosting --config hosting.ini"
   },
 
   "frameworks": {
@@ -57,7 +57,6 @@
     "**.vspscc"
   ],
   "scripts": {
-    "postrestore": [ "npm install", "bower install" ],
-    "prepare": [ "gulp build" ]
+    "prepublish": [ "npm install", "bower install", "gulp build" ]
   }
 }

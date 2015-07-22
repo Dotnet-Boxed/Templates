@@ -80,7 +80,7 @@
             <div class="container">
                 <div class="carousel-caption">
                     <p>
-                        Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
+                        Bring in libraries from NuGet, Bower, and npm, and automate tasks using Gulp.
                         <a class="btn btn-default btn-default" href="http://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
                             Learn More
                         </a>
@@ -105,7 +105,7 @@
 </div>
 
 <div class="row">
-    <article class="col-md-4">
+    <article class="col-md-12" role="article">
         <h2><span aria-hidden="true" class="fa fa-file-o"></span> This App Contains</h2>
         <ul>
             <li><a href="@Url.RouteUrl(HomeControllerRoute.GetIndex)"><strong>@Url.RouteUrl(HomeControllerRoute.GetIndex)</strong></a> - This index page.</li>
@@ -119,7 +119,7 @@
             <li><a href="/elmah"><strong>/elmah</strong></a> - <a href="https://code.google.com/p/elmah/">Elmah</a> error logs.</li>
             <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
             <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>
-            <li><a href="/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
+            <li><a href="/runtimeinfo/"><strong>/runtimeinfo/</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetBadRequest)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetBadRequest)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">400</a> error.</li>
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetForbidden)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetForbidden)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">403</a> error.</li>
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error">500</a> error.</li>
@@ -129,7 +129,22 @@
             <li><a href="~/content/icons/manifest.json"><strong>/content/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
         </ul>
     </article>
-    <article class="col-md-4">
+</div>
+
+<div class="row">
+    <article class="col-md-4" role="article">
+        <h2><span aria-hidden="true" class="fa fa-newspaper-o"></span> New Concepts</h2>
+        <ul>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518016">What's new in ASP.NET 5</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518008">The 'wwwroot' explained</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518012">Configuration in ASP.NET 5</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518013">Dependency Injection</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518014">Razor TagHelpers</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517849">Manage client tasks using Gulp</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkID=517850">Develop on different platforms</a></li>
+        </ul>
+    </article>
+    <article class="col-md-4" role="article">
         <h2><span aria-hidden="true" class="fa fa-cogs"></span> Customize App</h2>
         <ul>
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=398600">Add Controllers and Views</a></li>
@@ -142,14 +157,36 @@
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=517850">Develop on different platforms</a></li>
         </ul>
     </article>
-    <article class="col-md-4">
+    <article class="col-md-4" role="article">
         <h2><span aria-hidden="true" class="fa fa-play"></span> Run & Deploy</h2>
         <ul>
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=517851">Run your app locally</a></li>
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=517852">Run your app on ASP.NET Core 5</a></li>
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=517853">Run commands defined in your project.json</a></li>
             <li><a href="http://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Sites</a></li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518019">Publish to the file system</a></li>
         </ul>
+    </article>
+</div>
+
+<div class="row">
+    <article class="col-md-4" role="article">
+        <header>
+            <h2><span aria-hidden="true" class="fa fa-archive"></span> npm</h2>
+        </header>
+        <p><a href="https://www.npmjs.com/">npm</a> is a package manager and is used to get Gulp and also Gulp tasks among other things.</p>
+    </article>
+    <article class="col-md-4" role="article">
+        <header>
+            <h2><span aria-hidden="true" class="fa fa-twitter"></span> Bower</h2>
+        </header>
+        <p><a href="http://bower.io/">Bower</a> is a package manager for styles (CSS, LESS, SCSS, etc.) and scripts (JavaScript, TypeScript, etc.).</p>
+    </article>
+    <article class="col-md-4" role="article">
+        <header>
+            <h2><span aria-hidden="true" class="fa fa-beer"></span> Gulp</h2>
+        </header>
+        <p><a href="http://gulpjs.com/">Gulp</a> is a task runner that can execute various build tasks and can be used for bundling and minifying your scripts among other things.</p>
     </article>
 </div>
 

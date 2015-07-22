@@ -2,10 +2,11 @@
 
 // Set up imported packages.
 var gulp = require("gulp"),
-    fs = require("fs"),                         // NPM file system API (https://nodejs.org/api/fs.html)
+    fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat)
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin)
+    jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
     less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less)
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename)
@@ -14,8 +15,11 @@ var gulp = require("gulp"),
     uglify = require("gulp-uglify"),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify)
     gutil = require("gulp-util"),               // Gulp utilities (https://www.npmjs.com/package/gulp-util)
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream)
+    psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi)
+    recess = require("gulp-recess"),            // CSS and LESS linter (https://www.npmjs.com/package/gulp-recess/)
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf)
-    typescript = require('gulp-tsc');           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc)
+    tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint)
+    typescript = require("gulp-tsc");           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc)
 
 // Read the project.json file into the project variable.
 eval("var project = " + fs.readFileSync("./project.json"));
@@ -34,6 +38,8 @@ var environment = {
     // Are we running under the production environment.
     isProduction: function () { return this.current() === this.production; }
 };
+// The URL to your deployed site e.g. "http://example.com". This is used by the Google PageSpeed tasks.
+var siteUrl = undefined;
 
 // Initialize directory paths.
 var paths = {
@@ -266,7 +272,7 @@ gulp.task("build", ["clean", "build-css", "build-fonts", "build-js", "watch"]);
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
  */
-gulp.task("compress-images", [], function () {
+gulp.task("optimize-images", [], function () {
 
     // An array of paths to images.
     var sources = [
@@ -315,3 +321,66 @@ gulp.task("watch-js", function () {
  * Watch the styles and scripts folder for changes. Build the CSS and JavaScript if something changes.
  */
 gulp.task("watch", ["watch-css", "watch-js"]);
+
+/*
+ * Report warnings and errors in your CSS and LESS files (lint them) under the Styles folder.
+ */
+gulp.task("lint-css", function () {
+    return gulp.src(paths.styles + "**/*.{css,less}")
+        .pipe(recess())
+        .pipe(recess.reporter());
+});
+
+/*
+ * Report warnings and errors in your JavaScript and TypeScript files (lint them) under the Scripts folder.
+ */
+gulp.task("lint-js", function () {
+    var jsTask = gulp.src(paths.scripts + "**/*.js")
+        .pipe(jshint())
+        .pipe(jshint.reporter("default"));
+    var tsTask = gulp.src(paths.scripts + "**/*.ts")
+       .pipe(tslint())
+       .pipe(tslint.report("verbose"));
+    return merge([jsTask, tsTask]);
+});
+
+/*
+ * Report warnings and errors in your styles and scripts (lint them).
+ */
+gulp.task("lint", ["lint-css", "lint-js"]);
+
+function pageSpeed(strategy, cb) {
+    if (siteUrl === undefined) {
+        return cb("siteUrl is undefined. Google PageSpeed requires a URL to your deployed site.");
+    }
+
+    return psi(
+        siteUrl,
+        {
+            // Use the "nokey" option to try out Google PageSpeed Insights as part of your build process. For more 
+            // frequent use, register for your own API key. See  
+            // https://developers.google.com/speed/docs/insights/v1/getting_started
+
+            // key: "[Your Google PageSpeed API Key Here]"
+            nokey: "true",
+            strategy: strategy,
+        },
+        function (err, data) {
+            console.log(data.score);
+            console.log(data.pageStats);
+        });
+}
+
+/*
+ * Measure the performance of your site for mobiles using Google PageSpeed. Prefer using this test to the desktop test.
+ */
+gulp.task("pagespeed-mobile", function (cb) {
+    return pageSpeed("mobile", cb);
+});
+
+/*
+ * Measure the performance of your site for desktops using Google PageSpeed.
+ */
+gulp.task("pagespeed-desktop", function (cb) {
+    return pageSpeed("desktop", cb);
+});
