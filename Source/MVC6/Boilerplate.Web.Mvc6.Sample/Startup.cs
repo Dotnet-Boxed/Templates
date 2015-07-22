@@ -62,6 +62,8 @@
             // Add many MVC services to the services container.
             services.AddMvc();
 
+            ConfigureCaching(services);
+
             RouteOptions routeOptions = null;
             services.ConfigureRouting(x => { routeOptions = x; ConfigureRouting(routeOptions); });
 
@@ -128,7 +130,7 @@
                 application.UseErrorPage(ErrorPageOptions.ShowAll);
 
                 // Browse to /throw to force an exception to be thrown. Useful for testing your error pages.
-                application.Map("/throw", throwApp =>
+                application.Map("/throw/", throwApp =>
                 {
                     throwApp.Run(context => { throw new Exception("Deliberate exception thrown to test error handling."); });
                 });
@@ -137,7 +139,11 @@
             {
                 // Add Error handling middleware which catches all application specific errors and send the request to 
                 // the following path or controller action.
-                application.UseErrorHandler("/error");
+                // application.UseErrorHandler("/error/internalservererror/");
+
+                // Add error handling middleware which handles all HTTP status codes from 400 to 599 by re-executing
+                // the request pipeline for the following URL. '{0}' is the name of the HTTP status code e.g. notfound.
+                application.UseStatusNamePagesWithReExecute("/error/{0}/");
             }
 
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 

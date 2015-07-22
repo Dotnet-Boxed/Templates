@@ -78,7 +78,28 @@
         public ActionResult Unauthorized()
         {
             return this.GetErrorView(HttpStatusCode.Unauthorized, ErrorControllerAction.Unauthorized);
-        } 
+        }
+
+        // [OutputCache(CacheProfile = CacheProfileName.Error)]
+        [HttpGet("{status}", Name = ErrorControllerRoute.GetError)]
+        public ActionResult Error(string status)
+        {
+            // Check if I need this?
+            //this.Response.StatusCode = (int)statusCode;
+
+            ActionResult result;
+            if (this.Request.IsAjaxRequest())
+            {
+                // This allows us to show errors even in partial views.
+                result = this.PartialView(ErrorControllerAction.Error);
+            }
+            else
+            {
+                result = this.View(ErrorControllerAction.Error);
+            }
+
+            return result;
+        }
 
         #endregion
 

@@ -1,6 +1,7 @@
 ﻿Version 1.2.8
 MVC 5
 - SideWaffle fix: New GUID now generated for each project.
+- Added a note to upgrade to .NET 4.6 in ReadMe.html.
 MVC 6
 - SideWaffle fix: New GUID now generated for each project.
 - SideWaffle fix: Target VSIX project template at .NET 4.5.1.
@@ -11,6 +12,9 @@ MVC 6
 - gulpfile.js updated so that you can now start with TypeScript (.ts) or JavaScript (.js) and compile to JavaScript.
 - AddUserSecrets for all environments in Startup.Configuration.cs.
 - UseAspNetMvcBoilerplate in ApplicationBuilderExtensions.cs renamed to UseBoilerplate.
+- Added NotNullAttribute's to all IoC injected types.
+- Added Startup.Caching.cs to configure IDistributedCache and IMemoryCache.
+- Added a note to upgrade to .NET 4.6 in ReadMe.html.
 
 Version 1.2.7
 MVC 5

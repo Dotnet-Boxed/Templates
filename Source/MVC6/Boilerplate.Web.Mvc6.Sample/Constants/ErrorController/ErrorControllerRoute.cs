@@ -8,5 +8,7 @@
         public const string GetMethodNotAllowed = ControllerName.Error + "GetMethodNotAllowed";
         public const string GetNotFound = ControllerName.Error + "GetNotFound";
         public const string GetUnauthorized = ControllerName.Error + "Unauthorized";
+
+        public const string GetError = ControllerName.Error + "Error";
     }
 }

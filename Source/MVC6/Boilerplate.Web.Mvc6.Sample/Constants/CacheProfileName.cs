@@ -3,6 +3,7 @@
     public static class CacheProfileName
     {
         //public const string BadRequest = "BadRequest";
+        // public const string Error = "Error";
         public const string Feed = "Feed";
         //public const string Forbidden = "Forbidden";
         //public const string InternalServerError = "InternalServerError";
