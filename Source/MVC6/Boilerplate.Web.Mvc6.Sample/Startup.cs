@@ -114,12 +114,12 @@
             IHostingEnvironment environment,
             ILoggerFactory loggerfactory)
         {
-            ConfigureDebugging(application, environment, loggerfactory);
-            ConfigureErrorPages(application, environment);
-
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
             // absolute URL's and get the current request path.
             application.UseBoilerplate();
+
+            ConfigureDebugging(application, environment, loggerfactory);
+            ConfigureErrorPages(application, environment);
 
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();

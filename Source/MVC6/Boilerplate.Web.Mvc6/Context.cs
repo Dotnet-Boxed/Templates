@@ -9,21 +9,21 @@
     /// </summary>
     internal static class Context
     {
-        private static IHostingEnvironment environment;
-        private static IHttpContextAccessor httpContextAccessor;
+        private static IHostingEnvironment HostingEnvironment;
+        private static IHttpContextAccessor HttpContextAccessor;
 
         /// <summary>
         /// Configures the <see cref="Context"/>.
         /// </summary>
-        /// <param name="environment">The environment the application is running under. This can be Development, 
+        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
         /// <param name="httpContextAccessor">The HTTP context accessor.</param>
         public static void Configure(
-            IHostingEnvironment environment,
+            IHostingEnvironment hostingEnvironment,
             IHttpContextAccessor httpContextAccessor)
         {
-            environment = environment;
-            httpContextAccessor = httpContextAccessor;
+            HostingEnvironment = hostingEnvironment;
+            HttpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -31,7 +31,7 @@
         /// </summary>
         public static IHostingEnvironment Environment
         {
-            get { return environment; }
+            get { return HostingEnvironment; }
         }
 
         /// <summary>
@@ -39,7 +39,7 @@
         /// </summary>
         public static HttpContext HttpContext
         {
-            get { return httpContextAccessor.HttpContext; }
+            get { return HttpContextAccessor.HttpContext; }
         }
     }
 }
