@@ -48,11 +48,13 @@
             return application.UseStatusCodePages(
                 async context =>
                 {
-                    var statusCode = (HttpStatusCode)context.HttpContext.Response.StatusCode;
+                    int statusCode = context.HttpContext.Response.StatusCode;
+                    var status = (HttpStatusCode)context.HttpContext.Response.StatusCode;
                     var newPath = new PathString(string.Format(
                         CultureInfo.InvariantCulture,
                         pathFormat,
-                        statusCode.ToString()));
+                        statusCode,
+                        status.ToString()));
 
                     var originalPath = context.HttpContext.Request.Path;
                     // Store the original paths so the application can check it.

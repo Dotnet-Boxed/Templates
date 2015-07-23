@@ -120,7 +120,7 @@
             <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
             <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>
             <li><a href="/runtimeinfo/"><strong>/runtimeinfo/</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = string.Empty })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = string.Empty })</strong></a> - Error page.</li>
+            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = 500, statusCode = "internalservererror" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = 500, statusCode = "internalservererror" })</strong></a> - Error page.</li>
             <li><a href="~/browserconfig.xml"><strong>/browserconfig.xml</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
             <li><a href="~/content/icons/manifest.json"><strong>/content/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
         </ul>

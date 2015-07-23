@@ -13,11 +13,10 @@
         #region Public Methods
 
         // [OutputCache(CacheProfile = CacheProfileName.Error)]
-        [HttpGet("{status}", Name = ErrorControllerRoute.GetError)]
-        public ActionResult Error(string status)
+        [HttpGet("{statusCode}/{status}", Name = ErrorControllerRoute.GetError)]
+        public ActionResult Error(int statusCode, string status)
         {
-            // Check if I need this?
-            //this.Response.StatusCode = (int)statusCode;
+            this.Response.StatusCode = statusCode;
 
             ActionResult result;
             if (this.Request.IsAjaxRequest())
