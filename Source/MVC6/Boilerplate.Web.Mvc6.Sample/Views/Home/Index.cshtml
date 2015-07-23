@@ -120,11 +120,7 @@
             <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
             <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>
             <li><a href="/runtimeinfo/"><strong>/runtimeinfo/</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetBadRequest)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetBadRequest)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">400</a> error.</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetForbidden)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetForbidden)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">403</a> error.</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error">500</a> error.</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetNotFound)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetNotFound)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">404</a> error.</li>
-            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetUnauthorized)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetUnauthorized)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">401</a> error.</li>
+            <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = string.Empty })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = string.Empty })</strong></a> - Error page.</li>
             <li><a href="~/browserconfig.xml"><strong>/browserconfig.xml</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
             <li><a href="~/content/icons/manifest.json"><strong>/content/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
         </ul>

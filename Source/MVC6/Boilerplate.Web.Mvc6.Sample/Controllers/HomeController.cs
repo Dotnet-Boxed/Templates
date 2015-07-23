@@ -46,12 +46,14 @@
         [HttpGet("about", Name = HomeControllerRoute.GetAbout)]
         public IActionResult About()
         {
+            return HttpNotFound();
             return this.View(HomeControllerAction.About);
         }
 
         [HttpGet("contact", Name = HomeControllerRoute.GetContact)]
         public IActionResult Contact()
         {
+            return HttpUnauthorized();
             return this.View(HomeControllerAction.Contact);
         }
 

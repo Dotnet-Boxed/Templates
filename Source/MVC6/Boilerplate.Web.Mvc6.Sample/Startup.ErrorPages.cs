@@ -1,9 +1,9 @@
 ﻿namespace MvcBoilerplate
 {
+    using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
-    using Boilerplate.Web.Mvc;
 
     public partial class Startup
     {
@@ -30,19 +30,13 @@
             }
             else // Add the following to the request pipeline only in the staging or production environments.
             {
-                // Add the following to the request pipeline only in the staging environment.
-                if (!environment.IsProduction())
-                {
-                    application.UseErrorPageTests("/debug/{0}/");
-                }
-
                 // Add Error handling middle-ware which catches all application specific errors and send the request to 
                 // the following path or controller action.
                 // application.UseErrorHandler("/error/internalservererror/");
 
                 // Add error handling middle-ware which handles all HTTP status codes from 400 to 599 by re-executing
                 // the request pipeline for the following URL. '{0}' is the name of the HTTP status code e.g. notfound.
-                application.UseStatusNamePagesWithReExecute("/error/{0}/");
+                application.UseStatusNamePagesWithReExecute("/error/{0}");
             }
         }
     }

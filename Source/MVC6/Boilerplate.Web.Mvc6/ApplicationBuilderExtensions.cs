@@ -1,6 +1,5 @@
 ﻿namespace Boilerplate.Web.Mvc
 {
-    using System;
     using System.Globalization;
     using System.Net;
     using Microsoft.AspNet.Builder;
@@ -73,76 +72,6 @@
                         context.HttpContext.Request.Path = originalPath;
                         context.HttpContext.SetFeature<IStatusCodeReExecuteFeature>(null);
                     }
-                });
-        }
-
-        /// <summary>
-        /// Adds error page tests middle-ware to the pipeline. Specifies that visiting the following URL's responds 
-        /// with the corresponding HTTP error status codes e.g. if the <see cref="pathFormat"/> was "/debug/{0}/":
-        /// Throw exception                     - /debug/throw/
-        /// 400 Bad Request                     - /debug/BadRequest/
-        /// 401 Unauthorized                    - /debug/Unauthorized/
-        /// 402 Payment Required                - /debug/PaymentRequired/
-        /// 403 Forbidden                       - /debug/Forbidden/
-        /// 404 Not Found                       - /debug/NotFound/
-        /// 405 Method Not Allowed              - /debug/MethodNotAllowed/
-        /// 406 Not Acceptable                  - /debug/NotAcceptable/
-        /// 407 Proxy Authentication Required   - /debug/ProxyAuthenticationRequired/
-        /// 408 Request Timeout                 - /debug/RequestTimeout/
-        /// 409 Conflict                        - /debug/Conflict/
-        /// 410 Gone                            - /debug/Gone/
-        /// 411 Length Required                 - /debug/LengthRequired/
-        /// 412 Precondition Failed             - /debug/PreconditionFailed/
-        /// 413 Request Entity Too Large        - /debug/RequestEntityTooLarge/
-        /// 414 Request Uri Too Long            - /debug/RequestUriTooLong/
-        /// 415 Unsupported Media Type          - /debug/UnsupportedMediaType/
-        /// 416 Requested Range Not Satisfiable - /debug/RequestedRangeNotSatisfiable/
-        /// 417 Expectation Failed              - /debug/ExpectationFailed/
-        /// 426 Upgrade Required                - /debug/UpgradeRequired/
-        /// 500 Internal Server Error           - /debug/InternalServerError/
-        /// 501 Not Implemented                 - /debug/NotImplemented/
-        /// 502 Bad Gateway                     - /debug/BadGateway/
-        /// 503 Service Unavailable             - /debug/ServiceUnavailable/
-        /// 504 Gateway Timeout                 - /debug/GatewayTimeout/
-        /// 505 Http Version Not Supported      - /debug/HttpVersionNotSupported/
-        /// </summary>
-        /// <param name="application">The application.</param>
-        /// <param name="pathFormat">The string representing the path to the error page tests. This path must contain 
-        /// a '{0}' placeholder of the individual tests.</param>
-        /// <returns>The application.</returns>
-        /// <returns></returns>
-        public static IApplicationBuilder UseErrorPageTests(this IApplicationBuilder application, string pathFormat)
-        {
-            foreach (HttpStatusCode statusCode in Enum.GetValues(typeof(HttpStatusCode)))
-            {
-                int statusNumber = (int)statusCode;
-                if (statusNumber >= (int)HttpStatusCode.BadRequest)
-                {
-                    string name = Enum.GetName(typeof(HttpStatusCode), statusCode);
-
-                    application.Map(
-                        string.Format(pathFormat, name),
-                        app =>
-                        {
-                            app.Run(
-                                async context =>
-                                {
-                                    context.Response.StatusCode = statusNumber;
-                                    await context.Response.WriteAsync(name);
-                                });
-                        });
-                }
-            }
-
-            return application.Map(
-                string.Format(pathFormat, "throw"),
-                app =>
-                {
-                    app.Run(
-                        context => 
-                        {
-                            throw new Exception("Deliberate exception thrown to test error handling.");
-                        });
                 });
         }
     }

@@ -1,27 +1,32 @@
 ﻿@{
-    switch (Response.StatusCode)
+    switch (Context.Response.StatusCode)
     {
         case 400:
             ViewBag.Icon = "fa fa-ban text-danger";
             ViewBag.Title = "Bad Request";
             ViewBag.Description = "Your browser sent a request that this server could not understand.";
+            break;
         case 401:
             ViewBag.Icon = "fa fa-ban text-danger";
             ViewBag.Title = "Unauthorized";
             ViewBag.Description = "Sorry, but the page requires authentication.";
+            break;
         case 403:
             ViewBag.Icon = "fa fa-exclamation-circle text-danger";
             ViewBag.Title = "Forbidden";
             ViewBag.Description = "Sorry, but you don't have permission to access this page.";
+            break;
         case 404:
             ViewBag.Icon = "fa fa-exclamation-circle text-danger";
             ViewBag.Title = "Page Not Found";
             ViewBag.Description = "Sorry, but the page you were looking for can't be found.";
+            break;
         case 500:
         default:
             ViewBag.Icon = "fa fa-exclamation-circle text-danger";
             ViewBag.Title = "Unexpected Error";
             ViewBag.Description = "Well, this is embarrassing. An error occurred while processing your request. Rest assured, this problem has been logged and hamsters have been released to fix the problem.";
+            break;
     }
 }
 
