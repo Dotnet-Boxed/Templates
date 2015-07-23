@@ -14,60 +14,8 @@
 <h2>ASP.NET MVC 6</h2>
 <p>A new project template in addition to the existing ASP.NET MVC 5 template, targeting ASP.NET MVC 6.</p>
 <ul>
-    <li>
-        Set-up error handling and error pages. See <a href="https://github.com/aspnet/Diagnostics/blob/dev/samples/StatusCodePagesSample/Startup.cs">Status Code Error Pages</a>.
-        <pre>
-        // Web API does not need full error pages:
-        public class Startup
-        {
-	        public void Configure(IApplicationBuilder app)
-	        {
-		        app.Map("/api", ConfigureApi);
-
-		        app.Run(async (context) =>
-		        {
-			        await context.Response.WriteAsync("Hello World!");
-		        });
-	        }
-
-	        private void ConfigureApi(IApplicationBuilder app)
-	        {
-		        app.Run(async (context) =>
-		        {
-			        await context.Response.WriteAsync("Hello World from API!");
-		        });
-	        }
-        }
-        </pre>
-    </li>
-    <li>Set-up configurationBuilder.AddUserSecrets(); and userSecretsId in project.json correctly.</li>
     <li>Create new tag helper versions of Open Graph and Twitter code.</li>
     <li>Look into <a href="https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs">localization</a>.</li>
-    <li>Compile LESS or SASS to CSS based on file extension in Gulpfile.js.</li>
-    <li>
-        Consider adding "Microsoft.AspNet.Session": "1.0.0-beta5"
-        <pre>
-        app.UseSession();
-        this.Context.Session.GetInt("UserID");
-        this.Context.Session.GetString("UserName");
-        // Helper Extension Methods
-        public static DateTime? GetDateTime(this ISessionCollection collection, string key)
-        {
-            var data = collection.Get(key);
-            if(data == null)
-            {
-                return null;
-            }
-
-            long dateInt = BitConverter.ToInt64(data, 0);
-            return new DateTime(dateInt);
-        }
-        public static void SetDateTime(this ISessionCollection collection, string key, DateTime value)
-        {
-            collection.Set(key, BitConverter.GetBytes(value.Ticks));
-        }
-        </pre>
-    </li>
     <li>
         Consider adding an exception filter while there is no Elmah support.
         <pre>
@@ -105,17 +53,6 @@
         }
         </pre>
     </li>
-    <li>
-        Consider creating an example WebApiController.
-        <pre>
-        //  ? format = json
-        [FormatFilter]
-        public class WebApiController : Controller
-        {
-
-        }
-        </pre>
-    </li>
     <li>Update the ReadMe.html for MVC 6.</li>
 </ul>
 <p>Wait for Microsoft to finish MVC 6 before adding:</p>
@@ -139,6 +76,17 @@
 <p>A Web API Controller for ASP.NET MVC 6.</p>
 <ul>
     <li>
+        Consider creating an example WebApiController.
+        <pre>
+        //  ? format = json
+        [FormatFilter]
+        public class WebApiController : Controller
+        {
+
+        }
+        </pre>
+    </li>
+    <li>
         <pre>
         app.Map("/api", ConfigureApi);
         private void ConfigureApi(IApplicationBuilder app)
@@ -152,6 +100,31 @@
     </li>
     <li>Add support for application/json-patch+json using the built-in <a href="https://github.com/aspnet/Mvc/issues/1976">stuff</a>.</li>
     <li>Use <a href="https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md">HAL</a> or <a href="https://github.com/kevinswiber/siren">SIREN</a>. See also <a href="http://phlyrestfully.readthedocs.org/en/latest/halprimer.html">this</a> and <a href="https://msdn.microsoft.com/en-us/magazine/jj883957.aspx">this</a> and <a href="https://github.com/JakeGinnivan/WebApi.Hal">this</a>.</li>
+    <li>
+        Web API does not need full error pages.
+        <pre>
+        public class Startup
+        {
+	        public void Configure(IApplicationBuilder app)
+	        {
+		        app.Map("/api", ConfigureApi);
+
+		        app.Run(async (context) =>
+		        {
+			        await context.Response.WriteAsync("Hello World!");
+		        });
+	        }
+
+	        private void ConfigureApi(IApplicationBuilder app)
+	        {
+		        app.Run(async (context) =>
+		        {
+			        await context.Response.WriteAsync("Hello World from API!");
+		        });
+	        }
+        }
+        </pre>
+    </li>
 </ul>
 
 <h2>ASP.NET Identity</h2>

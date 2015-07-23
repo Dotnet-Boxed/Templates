@@ -1,4 +1,6 @@
 ﻿#if DNX451
+// The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
+// type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
 namespace MvcBoilerplate.Services
 {
     using System;
@@ -29,7 +31,7 @@ namespace MvcBoilerplate.Services
         private readonly HttpClient httpClient;
         private readonly IUrlHelper urlHelper;
 
-        #region Constructors
+#region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedService"/> class.
@@ -45,9 +47,9 @@ namespace MvcBoilerplate.Services
             this.httpClient = new HttpClient();
         }
 
-        #endregion
+#endregion
 
-        #region Public Methods
+#region Public Methods
 
         /// <summary>
         /// Gets the feed containing meta data about the feed and the feed entries.
@@ -161,9 +163,9 @@ namespace MvcBoilerplate.Services
                     }));
         }
 
-        #endregion
+#endregion
 
-        #region Private Methods
+#region Private Methods
 
         private SyndicationPerson GetPerson()
         {
@@ -250,7 +252,7 @@ namespace MvcBoilerplate.Services
             return items;
         }
 
-        #endregion
+#endregion
     }
 }
 #endif

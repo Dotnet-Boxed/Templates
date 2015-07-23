@@ -53,14 +53,13 @@
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add IOptions<AppSettings> to the services container.
-            services.Configure<AppSettings>(this.Configuration.GetConfigurationSection("AppSettings"));
+            ConfigureOptions(services);
+            ConfigureCaching(services);
 
             // Add many MVC services to the services container.
             services.AddMvc();
 
-            ConfigureCaching(services);
-
+            // Configure MVC routing. We store the route options for use by ConfigureSearchEngineOptimizationFilters.
             RouteOptions routeOptions = null;
             services.ConfigureRouting(
                 x => 
@@ -69,6 +68,7 @@
                     ConfigureRouting(routeOptions);
                 });
 
+            // Configure all other MVC settings.
             services.ConfigureMvc(
                 mvcOptions =>
                 {
@@ -80,25 +80,7 @@
                     ConfigureFormatters(mvcOptions);
                 });
 
-#if DNX451
-            services.AddScoped<IFeedService, FeedService>();
-#endif
-            services.AddSingleton<ILoggingService, LoggingService>();
-            services.AddScoped<IOpenSearchService, OpenSearchService>();
-            services.AddScoped<IRobotsService, RobotsService>();
-            services.AddScoped<ISitemapService, SitemapService>();
-            services.AddScoped<ISitemapPingerService, SitemapPingerService>();
-
-            // Add your own custom services here e.g.
-
-            // Singleton - Only one instance is ever created and returned.
-            // services.AddSingleton<IDatabaseService, DatabaseService>();
-
-            // Scoped - A new instance is created and returned for each request/response cycle.
-            // services.AddScoped<IDatabaseService, DatabaseService>();
-
-            // Transient - A new instance is created and returned each time.
-            // services.AddTransient<IDatabaseService, DatabaseService>();
+            ConfigureCustomServices(services);
         }
 
         /// <summary>

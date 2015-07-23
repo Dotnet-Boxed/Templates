@@ -11,6 +11,8 @@
     public class HomeController : Controller
     {
 #if DNX451
+        // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
+        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
         private readonly IFeedService feedService;
 #endif
         private readonly IOpenSearchService openSearchService;
@@ -21,6 +23,8 @@
 
         public HomeController(
 #if DNX451
+            // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
+        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             IFeedService feedService,
 #endif
             IOpenSearchService openSearchService,
@@ -28,6 +32,8 @@
             ISitemapService sitemapService)
         {
 #if DNX451
+            // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
+        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             this.feedService = feedService;
 #endif
             this.openSearchService = openSearchService;
@@ -58,6 +64,9 @@
         }
 
 #if DNX451
+        // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
+        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+
         /// <summary>
         /// Gets the Atom 1.0 feed for the current site. Note that Atom 1.0 is used over RSS 2.0 because Atom 1.0 is a 
         /// newer and more well defined format. Atom 1.0 is a standard and RSS is not. See

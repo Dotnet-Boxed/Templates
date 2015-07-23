@@ -12,9 +12,18 @@
     {
         #region Public Methods
 
-        // [OutputCache(CacheProfile = CacheProfileName.Error)]
+        /// <summary>
+        /// Gets the error view for the specified HTTP error status code. Returns a <see cref="PartialViewResult"/> if 
+        /// the request is an Ajax request, otherwise returns a full <see cref="ViewResult"/>.
+        /// </summary>
+        /// <param name="statusCode">The HTTP error status code.</param>
+        /// <param name="status">The name of the HTTP error status code e.g. 'notfound'. This is not used but is here 
+        /// for aesthetic purposes.</param>
+        /// <returns>A <see cref="PartialViewResult"/> if the request is an Ajax request, otherwise returns a full 
+        /// <see cref="ViewResult"/> containing the error view.</returns>
+        [ResponseCache(CacheProfile = CacheProfileName.Error)]
         [HttpGet("{statusCode}/{status}", Name = ErrorControllerRoute.GetError)]
-        public ActionResult Error(int statusCode, string status)
+        public IActionResult Error(int statusCode, string status)
         {
             this.Response.StatusCode = statusCode;
 
@@ -22,11 +31,11 @@
             if (this.Request.IsAjaxRequest())
             {
                 // This allows us to show errors even in partial views.
-                result = this.PartialView(ErrorControllerAction.Error);
+                result = this.PartialView(ErrorControllerAction.Error, statusCode);
             }
             else
             {
-                result = this.View(ErrorControllerAction.Error);
+                result = this.View(ErrorControllerAction.Error, statusCode);
             }
 
             return result;

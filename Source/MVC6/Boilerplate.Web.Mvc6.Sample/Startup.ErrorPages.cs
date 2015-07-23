@@ -30,13 +30,10 @@
             }
             else // Add the following to the request pipeline only in the staging or production environments.
             {
-                // Add Error handling middle-ware which catches all application specific errors and send the request to 
-                // the following path or controller action.
-                // application.UseErrorHandler("/error/internalservererror/");
-
                 // Add error handling middle-ware which handles all HTTP status codes from 400 to 599 by re-executing
-                // the request pipeline for the following URL. '{0}' is the name of the HTTP status code e.g. notfound.
-                application.UseStatusNamePagesWithReExecute("/error/{0}");
+                // the request pipeline for the following URL. '{0}' is the HTTP status code e.g. 404 and '{1}' is the 
+                // name of the HTTP status e.g. 'notfound'.
+                application.UseStatusNamePagesWithReExecute("/error/{0}/{1}");
             }
         }
     }
