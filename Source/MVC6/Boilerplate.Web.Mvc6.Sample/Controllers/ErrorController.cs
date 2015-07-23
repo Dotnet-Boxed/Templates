@@ -21,7 +21,7 @@
         /// for aesthetic purposes.</param>
         /// <returns>A <see cref="PartialViewResult"/> if the request is an Ajax request, otherwise returns a full 
         /// <see cref="ViewResult"/> containing the error view.</returns>
-        [ResponseCache(CacheProfile = CacheProfileName.Error)]
+        [ResponseCache(CacheProfileName = CacheProfileName.Error)]
         [HttpGet("{statusCode}/{status}", Name = ErrorControllerRoute.GetError)]
         public IActionResult Error(int statusCode, string status)
         {

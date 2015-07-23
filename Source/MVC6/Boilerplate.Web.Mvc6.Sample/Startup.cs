@@ -53,7 +53,7 @@
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureOptions(services);
+            ConfigureOptions(services, this.Configuration);
             ConfigureCaching(services);
 
             // Add many MVC services to the services container.

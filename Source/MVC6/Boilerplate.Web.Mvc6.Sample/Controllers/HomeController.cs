@@ -24,7 +24,7 @@
         public HomeController(
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
-        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+            // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             IFeedService feedService,
 #endif
             IOpenSearchService openSearchService,
@@ -33,7 +33,7 @@
         {
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
-        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+            // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             this.feedService = feedService;
 #endif
             this.openSearchService = openSearchService;
@@ -52,14 +52,12 @@
         [HttpGet("about", Name = HomeControllerRoute.GetAbout)]
         public IActionResult About()
         {
-            return HttpNotFound();
             return this.View(HomeControllerAction.About);
         }
 
         [HttpGet("contact", Name = HomeControllerRoute.GetContact)]
         public IActionResult Contact()
         {
-            return HttpUnauthorized();
             return this.View(HomeControllerAction.Contact);
         }
 

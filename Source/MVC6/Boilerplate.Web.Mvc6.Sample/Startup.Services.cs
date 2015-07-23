@@ -1,14 +1,15 @@
 ﻿namespace MvcBoilerplate
 {
+    using Microsoft.Framework.DependencyInjection;
     using MvcBoilerplate.Services;
 
-    public class Startup
+    public partial class Startup
     {
         /// <summary>
         /// Configures custom services to add to the ASP.NET MVC 6 Injection of Control (IoC) container.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        private static void ConfigureCustomServices()
+        private static void ConfigureCustomServices(IServiceCollection services)
         {
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
