@@ -78,7 +78,7 @@
                 // The RequireHttpsAttribute throws an InvalidOperationException. Some bots and spiders make HEAD 
                 // requests (to reduce bandwidth) and we don't want them to see a 500-Internal Server Error. A 405 
                 // Method Not Allowed would be more appropriate.
-                throw new HttpException((int)HttpStatusCode.MethodNotAllowed, "Method Not Allowed");
+                throw new HttpException((int)HttpStatusCode.Forbidden, "Forbidden");
             }
 
             string url = "https://" + filterContext.HttpContext.Request.Url.Host + filterContext.HttpContext.Request.RawUrl;
