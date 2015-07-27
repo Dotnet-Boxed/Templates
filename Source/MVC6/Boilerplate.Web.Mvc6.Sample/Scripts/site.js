@@ -13,6 +13,6 @@
     // The DOM ready handler (See https://learn.jquery.com/using-jquery-core/document-ready/).
     $(function () {
         // Add your code here if you want to access the DOM.
-    })
+    });
 
-})(jQuery, window, document, undefined)
+})(jQuery, window, document, undefined);

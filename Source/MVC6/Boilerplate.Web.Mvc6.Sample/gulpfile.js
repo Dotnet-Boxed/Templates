@@ -92,7 +92,7 @@ gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
 /*
  * Builds the CSS for the site.
  */
-gulp.task("build-css", function () {
+gulp.task("build-css", ["lint-css"], function () {
 
     // An array containing objects required to build a single CSS file.
     var sources = [
@@ -178,7 +178,7 @@ gulp.task("build-fonts", function () {
 /*
  * Builds the JavaScript files for the site.
  */
-gulp.task("build-js", function () {
+gulp.task("build-js", ["lint-js"], function () {
 
     // An array containing objects required to build a single JavaScript file.
     var sources = [
@@ -272,7 +272,7 @@ gulp.task("build", ["clean", "build-css", "build-fonts", "build-js", "watch"]);
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
  */
-gulp.task("optimize-images", [], function () {
+gulp.task("optimize-images", function () {
 
     // An array of paths to images.
     var sources = [

@@ -3,6 +3,8 @@ MVC 5
 - SideWaffle fix: New GUID now generated for each project.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
 - Added a link to webaim.org to check accessibility in ReadMe.html.
+- Fix Site.less linting errors. Fixed order.
+- Fix Site.js linting errors. Added missing semi-colons.
 MVC 6
 - SideWaffle fix: New GUID now generated for each project.
 - SideWaffle fix: Target VSIX project template at .NET 4.5.1.
@@ -13,6 +15,8 @@ MVC 6
 - gulpfile.js updated so that you can now start with TypeScript (.ts) or JavaScript (.js) and compile to JavaScript.
 - gulpfile.js updated with CSS, LESS, JavaScript and TypeScript linting tasks.
 - gulpfile.js updated with a Google Page Speed performance test tasks.
+- Fix Site.less linting errors. Fixed order.
+- Fix Site.js linting errors. Added missing semi-colons.
 - AddUserSecrets for all environments in Startup.Configuration.cs.
 - UseAspNetMvcBoilerplate in ApplicationBuilderExtensions.cs renamed to UseBoilerplate.
 - Added Startup.Caching.cs to configure IDistributedCache and IMemoryCache.

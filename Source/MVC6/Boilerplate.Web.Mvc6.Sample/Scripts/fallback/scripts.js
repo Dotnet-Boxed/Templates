@@ -23,7 +23,7 @@
                 document.getElementsByTagName("body")[0].appendChild(script);
             }
         }
-    }
+    };
     check(fallbacks, 0);
 
 })(document, [
