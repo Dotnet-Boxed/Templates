@@ -4,6 +4,7 @@
 namespace MvcBoilerplate.Services
 {
     using System.ServiceModel.Syndication;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -16,8 +17,9 @@ namespace MvcBoilerplate.Services
         /// <summary>
         /// Gets the feed containing meta data about the feed and the feed entries.
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying when the request is cancelled.</param>
         /// <returns>A <see cref="SyndicationFeed"/>.</returns>
-        SyndicationFeed GetFeed();
+        Task<SyndicationFeed> GetFeed(CancellationToken cancellationToken);
 
         /// <summary>
         /// Publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol.

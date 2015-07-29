@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.ServiceModel.Syndication;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Boilerplate.Web.Mvc;
@@ -45,8 +46,9 @@
         /// <summary>
         /// Gets the feed containing meta data about the feed and the feed entries.
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying if the request is cancelled.</param>
         /// <returns>A <see cref="SyndicationFeed"/>.</returns>
-        public SyndicationFeed GetFeed()
+        public async Task<SyndicationFeed> GetFeed(CancellationToken cancellationToken)
         {
             SyndicationFeed feed = new SyndicationFeed()
             {
@@ -56,7 +58,7 @@
                 //                    associated website. This value should not be blank.
                 Title = SyndicationContent.CreatePlaintextContent("ASP.NET MVC Boilerplate"),
                 // items (Required) - The items to add to the feed.
-                Items = this.GetItems(),
+                Items = await this.GetItems(cancellationToken),
                 // subtitle (Recommended) - Contains a human-readable description or subtitle for the feed.
                 Description = SyndicationContent.CreatePlaintextContent(
                     "This is the ASP.NET MVC Boilerplate feed description."),
@@ -174,8 +176,9 @@
         /// <summary>
         /// Gets the collection of <see cref="SyndicationItem"/>'s that represent the atom entries.
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying if the request is cancelled.</param>
         /// <returns>A collection of <see cref="SyndicationItem"/>'s.</returns>
-        private List<SyndicationItem> GetItems()
+        private async Task<List<SyndicationItem>> GetItems(CancellationToken cancellationToken)
         {
             List<SyndicationItem> items = new List<SyndicationItem>();
 

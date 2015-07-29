@@ -2,6 +2,8 @@
 {
     using System.Diagnostics;
     using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Mvc;
@@ -70,12 +72,14 @@
         /// newer and more well defined format. Atom 1.0 is a standard and RSS is not. See
         /// http://rehansaeed.com/building-rssatom-feeds-for-asp-net-mvc/
         /// </summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying if the request is cancelled.
+        /// See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx</param>
         /// <returns>The Atom 1.0 feed for the current site.</returns>
         [ResponseCache(CacheProfileName = CacheProfileName.Feed)]
         [Route("feed", Name = HomeControllerRoute.GetFeed)]
-        public IActionResult Feed()
+        public async Task<IActionResult> Feed(CancellationToken cancellationToken)
         {
-            return new AtomActionResult(this.feedService.GetFeed());
+            return new AtomActionResult(await this.feedService.GetFeed(cancellationToken));
         }
 #endif
 

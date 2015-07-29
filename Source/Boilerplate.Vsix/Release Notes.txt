@@ -5,6 +5,7 @@ MVC 5
 - Added a link to webaim.org to check accessibility in ReadMe.html.
 - Fix Site.less linting errors. Fixed order.
 - Fix Site.js linting errors. Added missing semi-colons.
+- Added CancellationToken to RSS Feed to allow cancellation of requests. See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
 MVC 6
 - SideWaffle fix: New GUID now generated for each project.
 - SideWaffle fix: Target VSIX project template at .NET 4.5.1.
@@ -32,6 +33,7 @@ MVC 6
 - package.html added to comment package.json file. Comments are not allowed in the JSON file.
 - gen command removed from project.json.
 - web command updated in project.json and split out into hosting.ini file.
+- Added CancellationToken to RSS Feed to allow cancellation of requests. See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
 
 Version 1.2.7
 MVC 5
