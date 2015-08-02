@@ -13,7 +13,7 @@
   "requireLicenseAcceptance": true,
 
   "compilationOptions": {
-    "keyFile": "../../Key.snk"
+    
   },
 
   "dependencies": {

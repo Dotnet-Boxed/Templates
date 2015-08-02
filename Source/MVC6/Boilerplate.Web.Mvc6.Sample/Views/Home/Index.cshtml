@@ -126,10 +126,10 @@
                     <li><a href="/elmah"><strong>/elmah</strong></a> - <a href="https://code.google.com/p/elmah/">Elmah</a> error logs.</li>
                     <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
                     <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>*@
-                    <li><a href="/runtimeinfo/"><strong>/runtimeinfo/</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
-                    <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = 404, statusCode = "notfound" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { status = 404, statusCode = "notfound" })</strong></a> - Error page.</li>
+                    <li><a href="/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
+                    <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })</strong></a> - Error page.</li>
                     <li><a href="~/browserconfig.xml"><strong>/browserconfig.xml</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
-                    <li><a href="~/content/icons/manifest.json"><strong>/content/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
+                    <li><a href="~/img/icons/manifest.json"><strong>/img/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
                 </ul>
             </div>
         </div>

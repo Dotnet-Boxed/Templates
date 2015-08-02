@@ -1,4 +1,5 @@
-﻿/// <binding Clean="clean" />
+﻿/// <binding Clean="clean" BeforeBuild="build" />
+// TODO: AfterBuild="watch"
 
 // Set up imported packages.
 var gulp = require("gulp"),
@@ -267,7 +268,7 @@ gulp.task("build-js", ["lint-js"], function () {
 /*
  * Cleans and builds the CSS, Font and JavaScript files for the site.
  */
-gulp.task("build", ["clean", "build-css", "build-fonts", "build-js", "watch"]);
+gulp.task("build", ["build-css", "build-fonts", "build-js"]);
 
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.

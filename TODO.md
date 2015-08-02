@@ -125,6 +125,7 @@
 </ul>
 <p>Wait for Microsoft to finish MVC 6 before adding:</p>
 <ul>
+    <li>Sign Boilerplate.Web.Mvc6 with "keyFile": "../../Key.snk"</li>
     <li>CacheProfile.VaryByParam in Startup.CacheProfiles.cs</li>
     <li>System.ServiceModel.SyndicationFeed. See <a href="https://github.com/dotnet/wcf/issues/76#issuecomment-111420491">GitHub</a></li>
     <li>Change Boilerplate.Web.Mvc5 to use an ASP.NET 5 class library project.</li>
