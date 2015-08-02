@@ -1,4 +1,9 @@
-﻿Version 1.2.8
+﻿Version 1.2.9
+MVC 5
+- Web.config Set <httpErrors existingResponse="PassThrough"> for the Debug version.
+- Web.config Set <httpErrors existingResponse="Replace"> for the Release version.
+
+Version 1.2.8
 MVC 5
 - SideWaffle fix: New GUID now generated for each project.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
