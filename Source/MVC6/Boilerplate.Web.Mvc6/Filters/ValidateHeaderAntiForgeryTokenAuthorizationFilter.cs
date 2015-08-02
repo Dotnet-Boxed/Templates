@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Microsoft.AspNet.Antiforgery;
     using Microsoft.AspNet.Http;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.OptionsModel;
@@ -30,7 +31,7 @@
     /// On the server side, you simply need to add the <see cref="ValidateHeaderAntiForgeryTokenAttribute"/> attribute 
     /// to the controller or action the same way you would use <see cref="ValidateAntiForgeryTokenAttribute"/>.
     /// </example>
-    internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IFilter
+    internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter
     {
         #region Fields
         
@@ -39,7 +40,7 @@
         /// </summary>
         public const string RequestVerificationTokenHttpHeaderName = "X-RequestVerificationToken";
 
-        private readonly AntiForgery antiForgery;
+        private readonly IAntiforgery antiforgery;
         private readonly string antiForgeryCookieName;
 
         #endregion
@@ -49,24 +50,24 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidateHeaderAntiForgeryTokenAuthorizationFilter" /> class.
         /// </summary>
-        /// <param name="antiForgery">The anti forgery system.</param>
-        /// <param name="mvcOptions">The MVC options.</param>
+        /// <param name="antiforgery">The anti-forgery system.</param>
+        /// <param name="antiforgeryOptions">The anti-forgery options.</param>
         public ValidateHeaderAntiForgeryTokenAuthorizationFilter(
-            AntiForgery antiForgery,
-            IOptions<MvcOptions> mvcOptions)
+            IAntiforgery antiforgery,
+            IOptions<AntiforgeryOptions> antiforgeryOptions)
         {
-            if (antiForgery == null)
+            if (antiforgery == null)
             {
                 throw new ArgumentNullException("antiForgery");
             }
 
-            if (mvcOptions == null)
+            if (antiforgeryOptions == null)
             {
                 throw new ArgumentNullException("mvcOptions");
             }
 
-            this.antiForgery = antiForgery;
-            this.antiForgeryCookieName = mvcOptions.Options.AntiForgeryOptions.CookieName;
+            this.antiforgery = antiforgery;
+            this.antiForgeryCookieName = antiforgeryOptions.Options.CookieName;
         }
 
         #endregion
@@ -95,12 +96,12 @@
             if (headerTokenValue != null)
             {
                 string antiForgeryCookieValue = request.Cookies[this.antiForgeryCookieName];
-                this.antiForgery.Validate(context.HttpContext, antiForgeryCookieValue, headerTokenValue);
+                this.antiforgery.ValidateTokens(context.HttpContext, new AntiforgeryTokenSet(headerTokenValue, antiForgeryCookieValue));
                 return Task.FromResult<object>(null);
             }
             else
             {
-                return this.antiForgery.ValidateAsync(context.HttpContext);
+                return this.antiforgery.ValidateRequestAsync(context.HttpContext);
             }
         } 
 

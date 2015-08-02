@@ -8,7 +8,6 @@
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.Runtime;
-    using MvcBoilerplate.Services;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -53,8 +52,8 @@
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureOptions(services, this.Configuration);
-            ConfigureCaching(services);
+            ConfigureOptionsServices(services, this.Configuration);
+            ConfigureCachingServices(services);
 
             // Add many MVC services to the services container.
             services.AddMvc();
@@ -72,7 +71,6 @@
             services.ConfigureMvc(
                 mvcOptions =>
                 {
-                    ConfigureAntiforgeryTokens(mvcOptions.AntiForgeryOptions);
                     ConfigureCacheProfiles(mvcOptions.CacheProfiles);
                     ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
                     ConfigureSecurityFilters(mvcOptions.Filters);
@@ -80,6 +78,7 @@
                     ConfigureFormatters(mvcOptions);
                 });
 
+            ConfigureAntiforgeryServices(services);
             ConfigureCustomServices(services);
         }
 
@@ -108,6 +107,9 @@
 
             // Add MVC to the request pipeline.
             application.UseMvc();
+
+            // Add a 404 Not Found error page for visiting /this-resource-does-not-exist.
+            Configure404NotFoundErrorPage(application, environment);
         }
 
         #endregion

@@ -6,6 +6,7 @@
     using Boilerplate.Web.Mvc.Sitemap;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.Caching.Memory;
+    using Microsoft.Framework.Logging;
     using MvcBoilerplate.Constants;
 
     /// <summary>
@@ -15,7 +16,7 @@
     {
         #region Fields
 
-        private readonly ILoggingService loggingService;
+        private readonly ILogger logger;
         private readonly IMemoryCache memoryCache;
         private readonly IUrlHelper urlHelper;
 
@@ -26,15 +27,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapService" /> class.
         /// </summary>
-        /// <param name="loggingService">The logging service.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="memoryCache">The memory cache for the application.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
-            ILoggingService loggingService,
+            ILoggerFactory loggerFactory,
             IMemoryCache memoryCache,
             IUrlHelper urlHelper)
         {
-            this.loggingService = loggingService;
+            this.logger = loggerFactory.CreateLogger<SitemapService>();
             this.memoryCache = memoryCache;
             this.urlHelper = urlHelper;
         }
@@ -130,7 +131,7 @@
 
         protected override void LogWarning(Exception exception)
         {
-            this.loggingService.Log(exception);
+            this.logger.LogWarning(exception.Message, exception);
         }
 
         #endregion

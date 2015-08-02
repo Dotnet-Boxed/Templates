@@ -1,6 +1,5 @@
 ﻿namespace MvcBoilerplate.Controllers
 {
-    using System.Diagnostics;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -111,9 +110,6 @@
         [Route("opensearch.xml", Name = HomeControllerRoute.GetOpenSearchXml)]
         public IActionResult OpenSearchXml()
         {
-            Trace.WriteLine(string.Format(
-                "opensearch.xml requested. User Agent:<{0}>.",
-                this.Request.Headers.Get("User-Agent")));
             string content = this.openSearchService.GetOpenSearchXml();
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
@@ -131,9 +127,6 @@
         [Route("robots.txt", Name = HomeControllerRoute.GetRobotsText)]
         public IActionResult RobotsText()
         {
-            Trace.WriteLine(string.Format(
-                "robots.txt requested. User Agent:<{0}>.",
-                this.Request.Headers.Get("User-Agent")));
             string content = this.robotsService.GetRobotsText();
             return this.Content(content, ContentType.Text, Encoding.UTF8);
         }

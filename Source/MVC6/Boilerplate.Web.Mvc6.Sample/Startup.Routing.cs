@@ -11,9 +11,8 @@
         /// <param name="routeOptions">The routing options.</param>
         private static void ConfigureRouting(RouteOptions routeOptions)
         {
-            // TODO: AppendTrailingSlash does not yet exist but will be added in the next version of MVC.
             // All generated URL's should append a trailing slash.
-            // routeOptions.AppendTrailingSlash = true;
+            routeOptions.AppendTrailingSlash = true;
 
             // All generated URL's should be lower-case.
             routeOptions.LowercaseUrls = true;

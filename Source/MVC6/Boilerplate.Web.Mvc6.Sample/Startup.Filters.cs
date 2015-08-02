@@ -11,10 +11,10 @@
         /// <summary>
         /// Adds filters which help improve search engine optimization (SEO).
         /// </summary>
-        private static void ConfigureSearchEngineOptimizationFilters(ICollection<IFilter> filters, RouteOptions routeOptions)
+        private static void ConfigureSearchEngineOptimizationFilters(ICollection<IFilterMetadata> filters, RouteOptions routeOptions)
         {
             filters.Add(new RedirectToCanonicalUrlAttribute(
-                 appendTrailingSlash: true, // TODO: Add routeOptions.AppendTrailingSlash when it is added.
+                 appendTrailingSlash: routeOptions.AppendTrailingSlash,
                  lowercaseUrls: routeOptions.LowercaseUrls));
         }
 
@@ -26,7 +26,7 @@
         /// Note: All of these filters can be applied to individual controllers and actions and indeed
         /// some of them only make sense when applied to a controller or action instead of globally here.
         /// </summary>
-        private static void ConfigureSecurityFilters(ICollection<IFilter> filters)
+        private static void ConfigureSecurityFilters(ICollection<IFilterMetadata> filters)
         {
             // Require HTTPS to be used across the whole site.
             // filters.Add(new RequireHttpsAttribute());
@@ -82,7 +82,7 @@
         /// access to content from YouTube.com, then you can add the following attribute to the action:
         /// [CspFrameSrc(CustomSources = "*.youtube.com")].
         /// </summary>
-        private static void ConfigureContentSecurityPolicyFilters(ICollection<IFilter> filters)
+        private static void ConfigureContentSecurityPolicyFilters(ICollection<IFilterMetadata> filters)
         {
             // TODO: NWebSec Does not support MVC 6 yet so all of this is commented out for now.
 

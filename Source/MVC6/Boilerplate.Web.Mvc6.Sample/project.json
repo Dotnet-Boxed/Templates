@@ -4,26 +4,27 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "1.0.8",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta5",
-    "Microsoft.AspNet.Http": "1.0.0-beta5",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta5",
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta5",
-    "Microsoft.AspNet.Mvc.Xml": "6.0.0-beta5",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta5",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta5",
-    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta5",
-    "Microsoft.Framework.CodeGenerators.Mvc": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
-    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta5",
-    "Microsoft.Framework.Logging": "1.0.0-beta5",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta5",
-    "Newtonsoft.Json": "6.0.6",
-    "System.Runtime": "4.0.20-beta-23019"
+    "Boilerplate.Web.Mvc6": "1.0.9",
+    "Microsoft.AspNet.Antiforgery": "1.0.0-beta6",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta6",
+    "Microsoft.AspNet.Http": "1.0.0-beta6",
+    "Microsoft.AspNet.Http.Abstractions": "1.0.0-beta6",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta6",
+    "Microsoft.AspNet.Mvc.Localization": "6.0.0-beta6",
+    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta6",
+    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta6",
+    "Microsoft.Framework.Logging": "1.0.0-beta6",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta6",
+    "Newtonsoft.Json": "7.0.1",
+    "System.Runtime": "4.0.20-beta-23109"
   },
 
   "commands": {
@@ -39,7 +40,7 @@
     },
     "dnxcore50": {
       "dependencies": {
-        "System.Net.Http": "4.0.0-beta-23019"
+        "System.Net.Http": "4.0.0-beta-23109"
       }
     }
   },

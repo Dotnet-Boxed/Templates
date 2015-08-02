@@ -14,8 +14,77 @@
 <h2>ASP.NET MVC 6</h2>
 <p>A new project template in addition to the existing ASP.NET MVC 5 template, targeting ASP.NET MVC 6.</p>
 <ul>
+    <li>Upgrade to Beta 6.</li>
+    <li>Setup 404 Not Found error page when navigating to /this-resource-does-not-exist. See <a href="http://stackoverflow.com/questions/31606521/displaying-a-404-not-found-page-for-asp-net-5-mvc-6">this</a>.</li>
+    <li>Build a HttpException for MVC 6. See <a href="http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception">here</a>.</li>
     <li>Create new tag helper versions of Open Graph and Twitter code.</li>
-    <li>Look into <a href="https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs">localization</a>.</li>
+    <li>
+        <pre>
+            // TODO: Write comments about localization.
+            // services.AddMvcLocalization();
+
+
+            // TODO
+            //application.UseCultureReplacer();
+            // application.UseRequestLocalization();
+        </pre>
+    </li>
+    <li>
+        <pre>
+            // TODO: Write a comment about CORS.
+            //services.ConfigureCors(
+            //    corsOptions =>
+            //    {
+            //        // TODO
+            //    });
+        </pre>
+    </li>
+    <li>
+        <pre>
+
+            // Add Web API to the request pipeline.
+            ConfigureApi(application);
+
+    using Microsoft.AspNet.Builder;
+    using Microsoft.AspNet.Hosting;
+
+    public partial class Startup
+    {
+        private const string ApiPath = "/api";
+
+        /// <summary>
+        /// Adds Web API to the request pipeline.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        private static void ConfigureApi(IApplicationBuilder application)
+        {
+            // A Web API does not need all of the features of MVC like custom error pages, CSP, Canonical URL, etc.
+            // The Map method allows us to create a new clean application under the ApiPath without all of the above
+            // features. Anyone navigating to /api will skip the MVC request pipeline and come straight here.
+            application.Map(
+                ApiPath, 
+                app =>
+                {
+                    app.UseMvc();
+                });
+        }
+    }
+
+            // TODO: The Microsoft.AspNet.Mvc.Formatters.Xml package has gone missing. Add this back in when it comes back.
+            // Add the XML input and output formatters. 
+            // See: http://www.strathweb.com/2015/04/asp-net-mvc-6-formatters-xml-browser-requests/.
+            // mvcOptions.AddXmlDataContractSerializerFormatter();
+
+            // TODO: Add the BSON input and output formatters.
+
+            // Force 204 No Content response, when returning null values.
+            // mvcOptions.OutputFormatters.Insert(0, new HttpNoContentOutputFormatter());
+
+            // Force 406 Not Acceptable responses if the media type is not supported, instead of returning the default.
+            // mvcOptions.OutputFormatters.Insert(0, new HttpNotAcceptableOutputFormatter());
+        </pre>
+    </li>
+    <li>Look into <a href="https://github.com/aspnet/Localization/blob/1.0.0-beta5/samples/LocalizationSample/Startup.cs">localization</a>. See <a href="http://stackoverflow.com/questions/31721395/mvc-6-how-to-use-resx-files/31722153?noredirect=1#comment51385769_31722153">here</a>.</li>
     <li>
         Consider adding an exception filter while there is no Elmah support.
         <pre>
@@ -29,7 +98,6 @@
             public override void OnException(ExceptionContext context)
             {
                 logger.WriteError(2, "Error Occurred", context.Exception);
-
                 context.Result = new JsonResult(
                     new
                     {
@@ -57,12 +125,8 @@
 </ul>
 <p>Wait for Microsoft to finish MVC 6 before adding:</p>
 <ul>
-    <li>Add "releaseNotes": "Initial Release", and 'Require License Acceptance' to project.json in Boilerplate.Web.Mvc6.</li>
     <li>CacheProfile.VaryByParam in Startup.CacheProfiles.cs</li>
     <li>System.ServiceModel.SyndicationFeed. See <a href="https://github.com/dotnet/wcf/issues/76#issuecomment-111420491">GitHub</a></li>
-    <li>RouteOptions.AppendTrailingSlash in Startup.Routing.cs. See <a href="http://stackoverflow.com/questions/27997814/lower-case-urls-and-trailing-slash/30799844#30799844">StackOverflow</a> and <a href="https://github.com/aspnet/Mvc/issues/2691">GitHub</a></li>
-    <li>Support for signing Core CLR assemblies. See <a href="http://stackoverflow.com/questions/31001880/signing-asp-net-5-class-library-assemblies/31259763#31259763">StackOverflow</a>.</li>
-    <li>Add <a href="https://github.com/aspnet/StaticFiles/issues/28">missing MIME types</a> if Microsoft does not add them.</li>
     <li>Change Boilerplate.Web.Mvc5 to use an ASP.NET 5 class library project.</li>
 </ul>
 <p>Wait for third party libraries to support MVC 6:</p>
@@ -70,6 +134,11 @@
     <li>NWebSec</li>
     <li>Elmah</li>
     <li>Glimpse</li>
+</ul>
+<p>Contributions to ASP.NET 5 MVC 6 I am making to make it better.</p>
+<ul>
+    <li><a href="http://stackoverflow.com/questions/31458950/is-there-any-guidance-for-caching-patterns-in-asp-net-5/31513464#31513464">CacheExtensions</a> and <a href="https://github.com/aspnet/Caching/issues/79">GitHub</a></li>
+    <li><a href="https://github.com/aspnet/Diagnostics/issues/144#issuecomment-125980689">UseStatusCodePagesWithReExecute</a></li>
 </ul>
 
 <h2>ASP.NET MVC 6 Web API</h2>

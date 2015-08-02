@@ -1,7 +1,8 @@
 {
-  "version": "1.0.8-*",
+  "version": "1.0.9-*",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
+  "releaseNotes": "Updated to ASP.NET 5 Beta 6",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",
@@ -9,15 +10,15 @@
   "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
   "projectUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate",
   "licenseUrl": "https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/LICENSE",
-  
+  "requireLicenseAcceptance": true,
+
   "compilationOptions": {
-    "keyFile": "../../Key.snk",
-    "strongName": true
+    "keyFile": "../../Key.snk"
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta5",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta5"
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta6",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6"
   },
 
   "frameworks": {

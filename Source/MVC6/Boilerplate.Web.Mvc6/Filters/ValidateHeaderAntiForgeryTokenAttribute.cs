@@ -1,6 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc.Filters
 {
     using System;
+    using Microsoft.AspNet.Antiforgery;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.OptionsModel;
@@ -31,15 +32,15 @@
     /// to the controller or action the same way you would use <see cref="ValidateAntiForgeryTokenAttribute"/>.
     /// </example>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class ValidateHeaderAntiForgeryTokenAttribute : Attribute, IFilterFactory, IFilter, IOrderedFilter
+    public class ValidateHeaderAntiForgeryTokenAttribute : Attribute, IFilterFactory, IOrderedFilter
     {
         public int Order { get; set; }
 
-        public IFilter CreateInstance(IServiceProvider serviceProvider)
+        public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
             return new ValidateHeaderAntiForgeryTokenAuthorizationFilter(
-                ServiceProviderExtensions.GetRequiredService<AntiForgery>(serviceProvider),
-                ServiceProviderExtensions.GetRequiredService<IOptions<MvcOptions>>(serviceProvider));
+                ServiceProviderExtensions.GetRequiredService<IAntiforgery>(serviceProvider),
+                ServiceProviderExtensions.GetRequiredService<IOptions<AntiforgeryOptions>>(serviceProvider));
         }
     }
 }

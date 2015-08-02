@@ -16,7 +16,6 @@
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             services.AddScoped<IFeedService, FeedService>();
 #endif
-            services.AddSingleton<ILoggingService, LoggingService>();
             services.AddScoped<IOpenSearchService, OpenSearchService>();
             services.AddScoped<IRobotsService, RobotsService>();
             services.AddScoped<ISitemapService, SitemapService>();

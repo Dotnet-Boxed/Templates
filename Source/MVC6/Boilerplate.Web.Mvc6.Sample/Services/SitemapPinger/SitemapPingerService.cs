@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.Framework.Logging;
     using MvcBoilerplate.Constants;
 
     public class SitemapPingerService : ISitemapPingerService
@@ -23,7 +24,7 @@
         };
 
         private readonly HttpClient httpClient;
-        private readonly ILoggingService loggingService;
+        private readonly ILogger logger;
         private readonly IUrlHelper urlHelper;
 
         #endregion
@@ -33,13 +34,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapPingerService"/> class.
         /// </summary>
-        /// <param name="loggingService">The logging service.</param>
+        /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapPingerService(
-            ILoggingService loggingService,
+            ILoggerFactory loggerFactory,
             IUrlHelper urlHelper)
         {
-            this.loggingService = loggingService;
+            this.logger = loggerFactory.CreateLogger<SitemapPingerService>();
             this.urlHelper = urlHelper;
             this.httpClient = new HttpClient();
         }
@@ -62,7 +63,6 @@
 #if Release
         public async Task PingSearchEngines()
         {
-
             foreach (string sitemapPingLocation in SitemapPingLocations)
             {
                 string url = sitemapPingLocation + 
@@ -76,7 +76,7 @@
                         url,
                         (int)response.StatusCode,
                         response.ReasonPhrase));
-                    this.loggingService.Log(exception);
+                    this.logger.LogError("Error while pinging site-map to search engines.", exception)
                 }
             }
         }

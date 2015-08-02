@@ -193,9 +193,9 @@
         /// <c>false</c>.</returns>
         protected virtual bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
         {
-            foreach (IFilter filter in filterContext.Filters)
+            foreach (IFilterMetadata filterMetadata in filterContext.Filters)
             {
-                if (filter is NoTrailingSlashAttribute)
+                if (filterMetadata is NoTrailingSlashAttribute)
                 {
                     return true;
                 }
