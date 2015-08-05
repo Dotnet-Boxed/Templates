@@ -1,7 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
     using System.Threading.Tasks;
-    using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Http;
@@ -32,9 +31,8 @@
             else // Add the following to the request pipeline only in the staging or production environments.
             {
                 // Add error handling middle-ware which handles all HTTP status codes from 400 to 599 by re-executing
-                // the request pipeline for the following URL. '{0}' is the HTTP status code e.g. 404 and '{1}' is the 
-                // name of the HTTP status e.g. 'notfound'.
-                application.UseStatusNamePagesWithReExecute("/error/{0}/{1}");
+                // the request pipeline for the following URL. '{0}' is the HTTP status code e.g. 404.
+                application.UseStatusCodePagesWithReExecute("/error/{0}");
             }
         }
 

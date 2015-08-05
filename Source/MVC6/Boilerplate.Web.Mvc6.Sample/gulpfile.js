@@ -1,5 +1,8 @@
-﻿/// <binding Clean="clean" BeforeBuild="build" />
-// TODO: AfterBuild="watch"
+﻿/// <binding Clean="clean" BeforeBuild="build" ProjectOpened="watch"/>
+// The above line of code enables Visual Studio to automatically start Gulp tasks at certain key moments. The 'clean'
+// task is run on solution clean, the 'build' task is run on solution build and the 'watch' task is run on opening the 
+// solution. You can also edit the above using the Task Runner Explorer window in Visual Studio (See 
+// http://docs.asp.net/en/latest/client-side/using-gulp.html)
 
 // Set up imported packages.
 var gulp = require("gulp"),
@@ -319,7 +322,7 @@ gulp.task("watch-js", function () {
 });
 
 /*
- * Watch the styles and scripts folder for changes. Build the CSS and JavaScript if something changes.
+ * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
 gulp.task("watch", ["watch-css", "watch-js"]);
 
@@ -385,3 +388,9 @@ gulp.task("pagespeed-mobile", function (cb) {
 gulp.task("pagespeed-desktop", function (cb) {
     return pageSpeed("desktop", cb);
 });
+
+/*
+ * The default gulp task. This is useful for scenarios where you are not using Visual Studio. Does a full clean and 
+ * build before watching for any file changes.
+ */
+gulp.task("default", ["clean", "build", "watch"]);
