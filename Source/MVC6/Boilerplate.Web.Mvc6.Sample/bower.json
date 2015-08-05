@@ -1,0 +1,15 @@
+{
+  "name": "asp.net-mvc-boilerplate",
+  "private": true,
+  "dependencies": {
+    "bootstrap-less": "3.3.4",
+    "font-awesome-less": "0.1.0",
+    "jquery": "2.1.4",
+    "jquery-validation": "1.13.1",
+    "jquery-validation-unobtrusive": "3.2.2",
+    "modernizr": "2.8.3",
+
+    "hammer.js": "2.0.4",
+    "bootstrap-touch-carousel": "0.8.0"
+  }
+}

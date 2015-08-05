@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    ViewBag.Description = "The ASP.NET MVC Boilerplate contact page.";
+    ViewBag.Author = "Muhammad Rehan Saeed";
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
+    ViewBag.OpenGraph = new OpenGraphProfile(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        FirstName = "Muhammad Rehan",
+        Gender = OpenGraphGender.Male,
+        LastName = "Saeed",
+        SiteName = Application.Name,
+        Username = "Muhammad Rehan Saeed"
+    };
+}
+
+<header class="page-header">
+    <h1><span aria-hidden="true" class="fa fa-phone"></span> @ViewBag.Title</h1>
+</header>
+
+<div class="row">
+    <section class="col-md-9" role="region">
+        <p>@ViewBag.Description</p>
+    </section>
+    <aside class="col-md-3" role="complementary">
+        <address>
+            One Microsoft Way<br>
+            Redmond, WA 98052-6399<br>
+            <abbr title="Phone">P:</abbr>
+            425.555.0100
+        </address>
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>
+    </aside>
+</div>

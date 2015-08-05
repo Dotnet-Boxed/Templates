@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="/content/icons/mstile-70x70.png"/>
+      <square150x150logo src="/content/icons/mstile-150x150.png"/>
+      <square310x310logo src="/content/icons/mstile-310x310.png"/>
+      <wide310x150logo src="/content/icons/mstile-310x150.png"/>
+      <TileColor>#1E1E1E</TileColor>
+    </tile>
+    <notification>
+      <!-- Replace http://example.com/feed with the URL to your sites RSS feed. -->
+      <polling-uri  src="http://notifications.buildmypinnedsite.com/?feed=http://example.com/feed&amp;id=1"/>
+      <polling-uri2 src="http://notifications.buildmypinnedsite.com/?feed=http://example.com/feed&amp;id=2"/>
+      <polling-uri3 src="http://notifications.buildmypinnedsite.com/?feed=http://example.com/feed&amp;id=3"/>
+      <polling-uri4 src="http://notifications.buildmypinnedsite.com/?feed=http://example.com/feed&amp;id=4"/>
+      <polling-uri5 src="http://notifications.buildmypinnedsite.com/?feed=http://example.com/feed&amp;id=5"/>
+      <frequency>30</frequency>
+      <cycle>1</cycle>
+    </notification>
+  </msapplication>
+</browserconfig>
