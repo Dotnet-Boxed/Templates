@@ -41,18 +41,20 @@
     </li>
     <li>
         <pre>
+          //  ? format = json
+          [FormatFilter]
 
-            // Add Web API to the request pipeline.
-            ConfigureApi(application);
+          // Add Web API to the request pipeline.
+          ConfigureApi(application);
 
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Hosting;
+          using Microsoft.AspNet.Builder;
+          using Microsoft.AspNet.Hosting;
 
-    public partial class Startup
-    {
-        private const string ApiPath = "/api";
+          public partial class Startup
+          {
+          private const string ApiPath = "/api";
 
-        /// <summary>
+          /// <summary>
         /// Adds Web API to the request pipeline.
         /// </summary>
         /// <param name="application">The application.</param>

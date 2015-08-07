@@ -119,7 +119,7 @@
         /// The reason for dynamically generating this code is to enable generation of the full absolute sitemap URL
         /// and also to give you added flexibility in case you want to disallow search engines from certain paths. The 
         /// sitemap is cached for one day, adjust this time to whatever you require. See
-        /// http://en.wikipedia.org/wiki/Robots_exclusion_standard
+        /// http://rehansaeed.com/dynamically-generating-robots-txt-using-asp-net-mvc/
         /// </summary>
         /// <returns>The robots text for the current site.</returns>
         [NoTrailingSlash]

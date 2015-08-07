@@ -2,6 +2,7 @@
 MVC 5
 - Web.config Set <httpErrors existingResponse="PassThrough"> for the Debug version.
 - Web.config Set <httpErrors existingResponse="Replace"> for the Release version.
+- Added link to http://rehansaeed.com/dynamically-generating-robots-txt-using-asp-net-mvc/
 
 Version 1.2.8
 MVC 5
