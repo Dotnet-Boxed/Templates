@@ -3,6 +3,7 @@ MVC 5 & 6
 - Template now has a Preview Image.
 - Default project name changed to WebApplication.
 MVC 6
+- Cache Profile settings are now stored in a CacheProfileSettings configuration section in config.json.
 - Released!!!
 
 Version 1.2.9

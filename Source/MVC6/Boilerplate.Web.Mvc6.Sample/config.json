@@ -1,5 +1,25 @@
 {
   "AppSettings": {
     "SiteTitle": "ASP.NET MVC Boilerplate"
+  },
+  "CacheProfileSettings": {
+    "CacheProfiles": {
+      "Error": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      "Feed": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      "OpenSearchXml": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      "RobotsText": {
+        "Duration": 86400,
+        "Location": "Any"
+      }
+    }
   }
 }

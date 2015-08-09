@@ -1,0 +1,20 @@
+﻿Comments are not allowed in the config.json file, so they are added here.
+
+The config.json file is responsible for holding application settings and options. It is the replacement for the 
+appSettings configuration section contained in the web.config file in ASP.NET 4.6.
+
+<ul>
+    <li>
+        AppSettings - Stores general settings for the application e.g. the sites name.
+    </li>
+    <li>
+        CacheProfileSettings - Stores the cache profile settings for all cached actions in the application. Note that
+        the VaryByParam = "none" does not exist in MVC 6 yet and will be added when it becomes available.
+        <ul>
+            <li>Error - Cache the error route (/error/404/notfound) by status code for a day.</li>
+            <li>Feed - Cache the Atom 1.0 feed route (/feed) for a day.</li>
+            <li>OpenSearchXml - Cache the open search route (/opensearch.xml) for a day.</li>
+            <li>RobotsText - Cache the robots.txt route for a day.</li>
+        </ul>
+    </li>
+</ul>

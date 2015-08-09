@@ -71,7 +71,7 @@
             services.ConfigureMvc(
                 mvcOptions =>
                 {
-                    ConfigureCacheProfiles(mvcOptions.CacheProfiles);
+                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.Configuration);
                     ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
                     ConfigureSecurityFilters(mvcOptions.Filters);
                     ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
