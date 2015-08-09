@@ -2,19 +2,24 @@
   <TemplateData>
     <Name>ASP.NET MVC 5 Boilerplate</Name>
     <Description>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com</Description>
-    <DefaultName>WebProject</DefaultName>
+    <DefaultName>WebApplication</DefaultName>
+    
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType></ProjectSubType>
+    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
+    <CreateInPlace>true</CreateInPlace>
+    <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+    
     <SortOrder>1000</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>    
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <Icon>sw-file-icon.png</Icon>
+    <PreviewImage>sw-file-icon.png</PreviewImage>
     <TemplateID>f2d50b53-cff3-41b4-8481-dac14c18ea48</TemplateID>
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
-    <RequiredFrameworkVersion>4.5</RequiredFrameworkVersion>
   </TemplateData>
   <TemplateContent>
     <Project TargetFileName="Boilerplate.Web.Mvc5.Sample.csproj" File="Boilerplate.Web.Mvc5.Sample.csproj" ReplaceParameters="true">

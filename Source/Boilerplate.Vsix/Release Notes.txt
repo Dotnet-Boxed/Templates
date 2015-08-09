@@ -1,4 +1,11 @@
-﻿Version 1.2.9
+﻿Version 2.0.0
+MVC 5 & 6
+- Template now has a Preview Image.
+- Default project name changed to WebApplication.
+MVC 6
+- Released!!!
+
+Version 1.2.9
 MVC 5
 - Web.config Set <httpErrors existingResponse="PassThrough"> for the Debug version.
 - Web.config Set <httpErrors existingResponse="Replace"> for the Release version.

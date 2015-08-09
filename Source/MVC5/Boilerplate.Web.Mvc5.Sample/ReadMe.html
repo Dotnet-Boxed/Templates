@@ -28,7 +28,7 @@
                         Update your version of Visual Studio with all patches and updates.
                     </li>
                     <li class="list-group-item">
-                        <input name="PreRequisites-UpdateNuGetPackages" type="checkbox"> <strong>Update NuGet Packages</strong> -
+                        <input name="PreRequisites-UpdateNuGet" type="checkbox"> <strong>Update NuGet</strong> -
                         Update the NuGet Visual Studio extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <li class="list-group-item">
@@ -142,7 +142,7 @@
                     <li class="list-group-item">
                         <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
                         The sitemap.xml, robots.txt, not found error page and unauthorized error page are generated programatically and then cached for a day.
-                        If these files won't change much on your site, change the length of time they are cached. Open the web.config file and take a look at the caching section.
+                        If these resources won't change much on your site, change the length of time they are cached. Open the web.config file and take a look at the caching section.
                     </li>
                     <li class="list-group-item">
                         <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
@@ -318,7 +318,7 @@
                     </li>
                     <li class="list-group-item">
                         <input name="ResilienceAndErrorHandling-ConfigureDynamicIPSecurity" type="checkbox"> <strong>Configure Dynamic IP Security</strong> -
-                        Update the <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> limits in the dynamicIpSecurity section of the web.config file. This feature of IIS prevents <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks from taking down your site. Dynamic IP Security is currently set to logging only mode, where IIS will log requests from the client that would be rejected without actually rejecting them.. You should run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
+                        Update the <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> limits in the dynamicIpSecurity section of the web.config file. This feature of IIS prevents <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks from taking down your site. Dynamic IP Security is currently set to logging only mode, where IIS will log requests from the client that would be rejected without actually rejecting them. You should run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
                         <ul>
                             <li>Google and Bing often make large numbers of requests that can look like a DoS attack and you do not want to block them by accident.</li>
                             <li>Some organizations put themselves behind a proxy and their requests can look like they are from a single IP address.</li>
@@ -499,7 +499,6 @@
                             <li>When updating JavaScript or CSS framework NuGet Packages, be careful that the particular version you are updating to is also available on the <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. Some CDN's update more often than others. This project template uses the popular Google and Microsoft CDN's as it is likely that their scripts are already preloaded in a browsers cache. However, their CDN service also does not update too often. Take a look at the BundleConfig.cs to see which CDN's are being used.</li>
                             <li>You need to ensure that you update your JavaScript and CSS framework NuGet packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degradation.</li>
                             <li>Updating JavaScript or CSS framework NuGet packages causes the new files to be dumped in one folder. To ensure cleanliness of the project, these are then moved to their respective sub-folders.</li>
-                            <li>Updating the MVC NuGet packages will cause your site to break entirely and will require changes to your site which are detailed on the <a href="http://www.asp.net/">ASP.NET site</a>.</li>
                         </ol>
                     </li>
                     <li class="list-group-item">
