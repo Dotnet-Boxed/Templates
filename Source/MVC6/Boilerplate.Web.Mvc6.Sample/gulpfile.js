@@ -12,7 +12,6 @@ var gulp = require("gulp"),
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
-    less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less/)
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
@@ -22,6 +21,8 @@ var gulp = require("gulp"),
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
     psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
+	sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
+	scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-tsc");           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc/)
 
@@ -103,16 +104,19 @@ gulp.task("build-css", ["lint-css"], function () {
         {
             // name - The name of the final CSS file to build.
             name: "font-awesome.css",
-            // paths - An array of paths to CSS or LESS files which will be compiled to CSS, concatenated and minified 
+            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified 
             // to create a file with the above file name.
             paths: [
-                paths.bower + "font-awesome-less/less/font-awesome.less"
+                paths.bower + "font-awesome/scss/font-awesome.scss"
             ]
         },
         {
             name: "site.css",
             paths: [
-                paths.styles + "site.less"
+                paths.styles + "site.scss",
+				// Unfortunately, bootstrap-touch-carousel does not provide a SASS version of their library. See 
+				// https://github.com/ixisio/bootstrap-touch-carousel/issues/51 for more information.
+				paths.bower + "bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css"
             ]
         }
     ];
@@ -123,7 +127,7 @@ gulp.task("build-css", ["lint-css"], function () {
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.init()))             // Set up the generation of .map source files for the CSS.
-            .pipe(gulpif("**/*.less", less()))  // If the file is a LESS (.less) file, compile it to CSS (.css).
+			.pipe(gulpif("**/*.{css,scss}", sass()))  // If the file is a SASS (.scss) file, compile it to CSS (.css).
             .pipe(concat(source.name))          // Concatenate CSS files into a single CSS file with the specified name.
             .pipe(size({                        // Write the size of the file to the console before minification.
                     title: "Before: " + source.name 
@@ -156,11 +160,11 @@ gulp.task("build-fonts", function () {
             // The name of the folder the fonts will be output to.
             name: "bootstrap",
             // The source directory to get the font files from. Note that we support all font file types.
-            path: paths.bower + "bootstrap-less/**/*.{ttf,svg,woff,woff2,otf,eot}"
+            path: paths.bower + "bootstrap-sass/**/*.{ttf,svg,woff,woff2,otf,eot}"
         },
         {
             name: "font-awesome",
-            path: paths.bower + "font-awesome-less/**/*.{ttf,svg,woff,woff2,otf,eot}"
+            path: paths.bower + "font-awesome/**/*.{ttf,svg,woff,woff2,otf,eot}"
         }
     ];
 
@@ -191,18 +195,18 @@ gulp.task("build-js", ["lint-js"], function () {
             // create a file with the above file name.
             paths: [
                 // Feel free to remove any parts of Bootstrap you don't use.
-                paths.bower + "bootstrap-less/js/transition.js",
-                paths.bower + "bootstrap-less/js/alert.js",
-                paths.bower + "bootstrap-less/js/button.js",
-                paths.bower + "bootstrap-less/js/carousel.js",
-                paths.bower + "bootstrap-less/js/collapse.js",
-                paths.bower + "bootstrap-less/js/dropdown.js",
-                paths.bower + "bootstrap-less/js/modal.js",
-                paths.bower + "bootstrap-less/js/tooltip.js",
-                paths.bower + "bootstrap-less/js/popover.js",
-                paths.bower + "bootstrap-less/js/scrollspy.js",
-                paths.bower + "bootstrap-less/js/tab.js",
-                paths.bower + "bootstrap-less/js/affix.js"
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/transition.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/alert.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/button.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/carousel.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/collapse.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/dropdown.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/modal.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/tooltip.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/popover.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/tab.js",
+                paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/affix.js"
             ]
         },
         {
@@ -298,11 +302,11 @@ gulp.task("optimize-images", function () {
 });
 
 /*
- * Watch the styles folder for changes to .css or .less files. Build the CSS if something changes.
+ * Watch the styles folder for changes to .css, or .scss files. Build the CSS if something changes.
  */
 gulp.task("watch-css", function () {
     return gulp
-        .watch(paths.styles + "**/*.{css,less}", ["build-css"])    // Watch the styles folder for file changes.
+        .watch(paths.styles + "**/*.{css,scss}", ["build-css"])    // Watch the styles folder for file changes.
         .on("change", function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
         });
@@ -325,12 +329,15 @@ gulp.task("watch-js", function () {
 gulp.task("watch", ["watch-css", "watch-js"]);
 
 /*
- * Report warnings and errors in your CSS and LESS files (lint them) under the Styles folder.
+ * Report warnings and errors in your CSS and SCSS files (lint them) under the Styles folder.
  */
 gulp.task("lint-css", function () {
-    return gulp.src(paths.styles + "**/*.{css}")
+    var cssTask = gulp.src(paths.styles + "**/*.{css}")
         .pipe(csslint())
 		.pipe(csslint.reporter());
+	var scssTask = gulp.src(paths.styles + "**/*.{scss}")
+        .pipe(scsslint());
+	return merge([cssTask, scssTask]);
 });
 
 /*
