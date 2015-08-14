@@ -13,7 +13,6 @@ var gulp = require("gulp"),
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
     less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less/)
-	lesshint = require('gulp-lesshint'),		// LESS linter (https://www.npmjs.com/package/gulp-lesshint/)
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
