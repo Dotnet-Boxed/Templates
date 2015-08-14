@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace MvcBoilerplate.Settings
 {
     using System.Collections.Generic;
     using Microsoft.AspNet.Mvc;

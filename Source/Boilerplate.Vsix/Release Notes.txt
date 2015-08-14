@@ -1,4 +1,15 @@
-﻿Version 2.0.0
+﻿Version 2.1.0
+MVC 5 & 6
+- browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can 
+  also customize it with your own tile XML. See BrowserConfigService, HomeController and constants for changes.
+- manifest.json is now generated dynamically, you no longer have to edit it and put in the site title. See 
+  ManifestService, HomeController and constants for changes.
+- Updated ReadMe.html to remove a step to edit the browserconfig.xml file.
+- Updated ReadMe.html to remove a step to edit the manifest.json file.
+MVC 6
+- Settings classes have been moved from Properties folder to Settings and placed under the Settings namespace.
+
+Version 2.0.0
 MVC 5 & 6
 - Template now has a Preview Image.
 - Default project name changed to WebApplication.

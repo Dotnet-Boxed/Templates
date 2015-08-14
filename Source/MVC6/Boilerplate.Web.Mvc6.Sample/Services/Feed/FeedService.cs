@@ -13,6 +13,7 @@ namespace MvcBoilerplate.Services
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    using MvcBoilerplate.Settings;
 
     /// <summary>
     /// Builds <see cref="SyndicationFeed"/>'s containing meta data about the feed and the feed entries.

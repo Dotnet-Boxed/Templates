@@ -16,7 +16,7 @@
     <LocationField>Enabled</LocationField>
     <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
     <Icon>sw-file-icon.png</Icon>
-    <PreviewImage>sw-file-icon.png</PreviewImage>
+    <PreviewImage>sw-file-previewimage.png</PreviewImage>
     <TemplateID>02bfed6c-6c85-4135-8719-fc23440bd9db</TemplateID>
     <!-- Indicates how many parent folders this item template should appear in -->
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>

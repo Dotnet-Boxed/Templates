@@ -11,11 +11,13 @@
         /// <param name="services">The services collection or IoC container.</param>
         private static void ConfigureCustomServices(IServiceCollection services)
         {
+            services.AddScoped<IBrowserConfigService, BrowserConfigService>();
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             services.AddScoped<IFeedService, FeedService>();
 #endif
+            services.AddScoped<IManifestService, ManifestService>();
             services.AddScoped<IOpenSearchService, OpenSearchService>();
             services.AddScoped<IRobotsService, RobotsService>();
             services.AddScoped<ISitemapService, SitemapService>();

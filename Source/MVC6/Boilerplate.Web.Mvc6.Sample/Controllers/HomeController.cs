@@ -11,32 +11,42 @@
 
     public class HomeController : Controller
     {
+        #region Fields
+
+        private readonly IBrowserConfigService browserConfigService;
 #if DNX451
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
         private readonly IFeedService feedService;
 #endif
+        private readonly IManifestService manifestService;
         private readonly IOpenSearchService openSearchService;
         private readonly IRobotsService robotsService;
-        private readonly ISitemapService sitemapService;
+        private readonly ISitemapService sitemapService; 
+
+        #endregion
 
         #region Constructors
 
         public HomeController(
+            IBrowserConfigService browserConfigService,
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             IFeedService feedService,
 #endif
+            IManifestService manifestService,
             IOpenSearchService openSearchService,
             IRobotsService robotsService,
             ISitemapService sitemapService)
         {
+            this.browserConfigService = browserConfigService;
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             this.feedService = feedService;
 #endif
+            this.manifestService = manifestService;
             this.openSearchService = openSearchService;
             this.robotsService = robotsService;
             this.sitemapService = sitemapService;
@@ -99,9 +109,41 @@
         }
 
         /// <summary>
+        /// Gets the browserconfig XML for the current site. This allows you to customize the tile, when a user pins 
+        /// the site to their Windows 8/10 start screen. See http://www.buildmypinnedsite.com and 
+        /// https://msdn.microsoft.com/en-us/library/dn320426%28v=vs.85%29.aspx
+        /// </summary>
+        /// <returns>The browserconfig XML for the current site.</returns>
+        [NoTrailingSlash]
+        [ResponseCache(CacheProfileName = CacheProfileName.BrowserConfigXml)]
+        [Route("browserconfig.xml", Name = HomeControllerRoute.GetBrowserConfigXml)]
+        public ContentResult BrowserConfigXml()
+        {
+            string content = this.browserConfigService.GetBrowserConfigXml();
+            return this.Content(content, ContentType.Xml, Encoding.UTF8);
+        }
+
+        /// <summary>
+        /// Gets the manifest JSON for the current site. This allows you to customize the icon and other browser 
+        /// settings for Chrome/Android and FireFox (FireFox support is coming). See https://w3c.github.io/manifest/
+        /// for the official W3C specification. See http://html5doctor.com/web-manifest-specification/ for more 
+        /// information. See https://developer.chrome.com/multidevice/android/installtohomescreen for Chrome's 
+        /// implementation.
+        /// </summary>
+        /// <returns>The manifest JSON for the current site.</returns>
+        [NoTrailingSlash]
+        [ResponseCache(CacheProfileName = CacheProfileName.ManifestJson)]
+        [Route("manifest.json", Name = HomeControllerRoute.GetManifestJson)]
+        public ContentResult ManifestJson()
+        {
+            string content = this.manifestService.GetManifestJson();
+            return this.Content(content, ContentType.Json, Encoding.UTF8);
+        }
+
+        /// <summary>
         /// Gets the Open Search XML for the current site. You can customize the contents of this XML here. The open 
         /// search action is cached for one day, adjust this time to whatever you require. See
-        /// http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart
+        /// http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d
         /// http://www.opensearch.org
         /// </summary>
         /// <returns>The Open Search XML for the current site.</returns>

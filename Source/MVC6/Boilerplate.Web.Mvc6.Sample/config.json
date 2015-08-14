@@ -1,14 +1,23 @@
 {
   "AppSettings": {
+    "SiteShortTitle":  "Boilerplate",
     "SiteTitle": "ASP.NET MVC Boilerplate"
   },
   "CacheProfileSettings": {
     "CacheProfiles": {
+      "BrowserConfigXml": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
       "Error": {
         "Duration": 86400,
         "Location": "Any"
       },
       "Feed": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      "ManifestJson": {
         "Duration": 86400,
         "Location": "Any"
       },

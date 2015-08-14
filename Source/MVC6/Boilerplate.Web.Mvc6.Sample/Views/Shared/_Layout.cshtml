@@ -79,7 +79,7 @@
     @* manifest-json - The location of the browser configuration file. It contains locations of icon files, name of the
         application and default device screen orientation. Note that the name field is mandatory.
         See https://developer.chrome.com/multidevice/android/installtohomescreen. *@
-    <link rel="manifest" href="/img/icons/manifest.json">
+    <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson)">
     @* theme-color - The colour of the toolbar in Chrome M39+
         See http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
     <meta name="theme-color" content="#1E1E1E">
@@ -99,7 +99,7 @@
     @* Windows 8.1/10 IE11/Edge - See http://www.buildmypinnedsite.com *@
     @* msapplication-config - The location of the browser configuration file. This is not required if the
         browserconfig.xml file is at the root of the site. *@
-    @* <meta name="msapplication-config" content="/browserconfig.xml"> *@
+    @* <meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml)"> *@
 
 
     @* Move site.css to a content delivery network (CDN) for better performance. *@

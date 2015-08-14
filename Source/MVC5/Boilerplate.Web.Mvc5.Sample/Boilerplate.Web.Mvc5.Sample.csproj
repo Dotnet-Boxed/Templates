@@ -203,10 +203,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BrowserConfig\BrowserConfigService.cs" />
+    <Compile Include="Services\BrowserConfig\IBrowserConfigService.cs" />
     <Compile Include="Services\Cache\CacheService.cs" />
     <Compile Include="Services\Cache\ICacheService.cs" />
     <Compile Include="Services\Logging\ILoggingService.cs" />
     <Compile Include="Services\Logging\LoggingService.cs" />
+    <Compile Include="Services\Manifest\IManifestService.cs" />
+    <Compile Include="Services\Manifest\ManifestService.cs" />
     <Compile Include="Services\OpenSearch\IOpenSearchService.cs" />
     <Compile Include="Services\OpenSearch\OpenSearchService.cs" />
     <Compile Include="Services\Robots\IRobotsService.cs" />
@@ -302,7 +306,6 @@
     <Content Include="Content\icons\atom-icon-48x48.png" />
     <Content Include="Content\icons\atom-logo-96x48.png" />
     <Content Include="Content\icons\open-graph-1200x630.png" />
-    <Content Include="Content\icons\manifest.json" />
     <Content Include="Content\fontawesome\bordered-pulled.less" />
     <Content Include="Content\fontawesome\core.less" />
     <Content Include="Content\fontawesome\extras.less" />
@@ -319,6 +322,7 @@
     <Content Include="Content\fontawesome\variables.less" />
     <None Include="ReadMe.html" />
     <Content Include="sw-file-icon.png" />
+    <Content Include="sw-file-previewimage.png" />
     <Content Include="_Definitions\_project.vstemplate.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -355,7 +359,6 @@
     <Content Include="Content\icons\apple-touch-startup-image-640x920.png" />
     <Content Include="Content\icons\apple-touch-startup-image-748x1024.png" />
     <Content Include="Content\icons\apple-touch-startup-image-768x1004.png" />
-    <Content Include="Content\icons\browserconfig.xml" />
     <Content Include="Content\icons\favicon-16x16.png" />
     <Content Include="Content\icons\favicon-192x192.png" />
     <Content Include="Content\icons\favicon-32x32.png" />

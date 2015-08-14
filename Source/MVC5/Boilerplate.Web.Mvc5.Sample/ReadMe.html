@@ -199,6 +199,10 @@
                         <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Pre-fetcher</strong> -
                         This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">pre-fetcher</a> to get a performance and reduce the disk-read cost of application start-up. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
                     </li>
+                    <li class="list-group-item">
+                        <input name="OtherPerformance-Roslyn" type="checkbox"> <strong>Enable Roslyn Compilation</strong> -
+                        If you are using Visual Studio 2015, then install the <a href="https://www.nuget.org/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform">Microsoft.CodeDom.Providers.DotNetCompilerPlatform</a> NuGet package to compile the project using the <a href="https://github.com/dotnet/roslyn">Roslyn</a> compiler. Roslyn compiles your code much quicker and allows you to use C# 6.0 syntax in your Razor views. See <a href="http://blogs.msdn.com/b/webdev/archive/2014/05/12/enabling-the-net-compiler-platform-roslyn-in-asp-net-applications.aspx">this</a> blog post for more information.
+                    </li>
                 </ul>
             </article>
 
@@ -252,14 +256,6 @@
                         <input name="Compatibility-IsSiteDeployedToServerCluster" type="checkbox"> <strong>Is Site Deployed To Server Cluster?</strong> -
                         If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open
                         the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-UpdateWindowsBrowserConfig" type="checkbox"> <strong>Update Windows Browser Config</strong> -
-                        If supporting Windows 8 and above, update the /Content/icons/browserconfig.xml file with the URL of your sites RSS feed. This is used to display items from your RSS feed in the Windows live tile. Pretty cool!
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-UpdateAndroidChromeManifest" type="checkbox"> <strong>Update Android/Chrome Manifest</strong> -
-                        If supporting Android/Chrome M39+, update the /Content/icons/manifest.json file with the name of your site.
                     </li>
                     <li class="list-group-item">
                         <input name="Compatibility-DoIUseDefaultDocumentBrowsing" type="checkbox"> <strong>Do I Use Default Document Browsing?</strong> -

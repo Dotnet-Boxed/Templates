@@ -146,8 +146,8 @@
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetInternalServerError)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_Error">500</a> error.</li>
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetNotFound)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetNotFound)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">404</a> error.</li>
             <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetUnauthorized)"><strong>@Url.RouteUrl(ErrorControllerRoute.GetUnauthorized)</strong></a> - <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_Error">401</a> error.</li>
-            <li><a href="~/content/icons/browserconfig.xml"><strong>/content/icons/browserconfig.xml</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
-            <li><a href="~/content/icons/manifest.json"><strong>/content/icons/manifest.json</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
+            <li><a href="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
+            <li><a href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
         </ul>
     </article>
 </div>

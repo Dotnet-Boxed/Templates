@@ -4,6 +4,7 @@
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
+    using MvcBoilerplate.Settings;
 
     public partial class Startup
     {
