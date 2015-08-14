@@ -8,6 +8,8 @@ MVC 5 & 6
 - Updated ReadMe.html to remove a step to edit the manifest.json file.
 MVC 6
 - Settings classes have been moved from Properties folder to Settings and placed under the Settings namespace.
+- Site.less now imports bootstrap and bootstrap-touch-carousel.
+- Removed gulp-recess as it does not support the latest version of LESS. Added gulp-csslint instead.
 
 Version 2.0.0
 MVC 5 & 6

@@ -7,23 +7,24 @@
 // Set up imported packages.
 var gulp = require("gulp"),
     fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
-    concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat)
-    gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if)
-    imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin)
+    concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
+	csslint = require("gulp-csslint"),			// CSS linter (https://www.npmjs.com/package/gulp-csslint/)
+    gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
+    imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
-    less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less)
-    minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css)
-    rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename)
-    size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size)
-    sourcemaps = require("gulp-sourcemaps"),    // Creates source map files (https://www.npmjs.com/package/gulp-sourcemaps)
-    uglify = require("gulp-uglify"),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify)
-    gutil = require("gulp-util"),               // Gulp utilities (https://www.npmjs.com/package/gulp-util)
-    merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream)
-    psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi)
-    recess = require("gulp-recess"),            // CSS and LESS linter (https://www.npmjs.com/package/gulp-recess/)
-    rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf)
-    tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint)
-    typescript = require("gulp-tsc");           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc)
+    less = require("gulp-less"),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less/)
+	lesshint = require('gulp-lesshint'),		// LESS linter (https://www.npmjs.com/package/gulp-lesshint/)
+    minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
+    rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
+    size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
+    sourcemaps = require("gulp-sourcemaps"),    // Creates source map files (https://www.npmjs.com/package/gulp-sourcemaps/)
+    uglify = require("gulp-uglify"),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify/)
+    gutil = require("gulp-util"),               // Gulp utilities (https://www.npmjs.com/package/gulp-util/)
+    merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
+    psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
+    rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
+    tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
+    typescript = require("gulp-tsc");           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc/)
 
 // Read the project.json file into the project variable.
 eval("var project = " + fs.readFileSync("./project.json"));
@@ -112,8 +113,6 @@ gulp.task("build-css", ["lint-css"], function () {
         {
             name: "site.css",
             paths: [
-                paths.bower + "bootstrap-less/less/bootstrap.less",
-                paths.bower + "bootstrap-touch-carousel/src/less/carousel.less",
                 paths.styles + "site.less"
             ]
         }
@@ -330,9 +329,9 @@ gulp.task("watch", ["watch-css", "watch-js"]);
  * Report warnings and errors in your CSS and LESS files (lint them) under the Styles folder.
  */
 gulp.task("lint-css", function () {
-    return gulp.src(paths.styles + "**/*.{css,less}")
-        .pipe(recess())
-        .pipe(recess.reporter());
+    return gulp.src(paths.styles + "**/*.{css}")
+        .pipe(csslint())
+		.pipe(csslint.reporter());
 });
 
 /*
