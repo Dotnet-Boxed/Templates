@@ -8,9 +8,9 @@
      
 <p>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at <a href="http://rehansaeed.com/asp-net-mvc-boilerplate/">RehanSaeed.com</a>, the <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">Visual Studio Gallery</a> or at <a href="https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project">The Open Web Security Project (OWASP)</a>. You can also follow me on Twitter at <a href="https://twitter.com/rehansaeeduk">@RehanSaeedUK</a>.</p>
 
-<img alt="ASP.NET-MVC-Boilerplate Logo"
+<img alt="ASP.NET-MVC-Boilerplate Preview Image"
      border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/Preview%20Image.png"/>
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Preview%20Image.png"/>
 
 <h2>Why Do I Need It?</h2>
 
@@ -30,9 +30,21 @@
      <li>Social Media Support</li>
 </ul>
 
-<img alt="ASP.NET-MVC-Boilerplate Logo"
+<h2>ASP.NET 4.6 MVC 5 and ASP.NET 5 MVC 6 Support</h2>
+
+<p>Two templates are provided. One for ASP.NET 4.6 MVC 5 and another ASP.NET 5 MVC 6 template which is currently under development and is missing some features due to ASP.NET 5 still being in Beta.</p>
+
+<h4>MVC 5 Technology Map</h4>
+
+<img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
      border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/Technology%20Map.png"/>
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Technology%20Map.png"/>
+
+<h4>MVC 6 Technology Map</h4>
+
+<img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png"/>
 
 <h2>Secure By Default</h2>
 
