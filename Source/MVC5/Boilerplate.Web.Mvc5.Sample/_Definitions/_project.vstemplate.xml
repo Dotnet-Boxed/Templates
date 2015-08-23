@@ -10,7 +10,7 @@
     <CreateInPlace>true</CreateInPlace>
     <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
     
-    <SortOrder>1000</SortOrder>
+    <SortOrder>500</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>    
     <ProvideDefaultName>true</ProvideDefaultName>
     <LocationField>Enabled</LocationField>
