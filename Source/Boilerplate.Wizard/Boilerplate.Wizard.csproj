@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Boilerplate.Wizard</RootNamespace>
+    <AssemblyName>Boilerplate.Wizard</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TemplateWizardInterface, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\Base\BinaryFeature.cs" />
+    <Compile Include="Features\Base\FeatureItem.cs" />
+    <Compile Include="Features\FrontEndFrameworkFeature.cs" />
+    <Compile Include="Features\HumansTextFeature.cs" />
+    <Compile Include="Features\Base\IBinaryFeature.cs" />
+    <Compile Include="Features\Base\IFeatureItem.cs" />
+    <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
+    <Compile Include="Features\Base\MultiChoiceFeature.cs" />
+    <Compile Include="FeatureWizard.cs" />
+    <Compile Include="Framework\UI\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\UI\Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\UI\Converters\InverseNullToVisibilityConverter.cs" />
+    <Compile Include="Framework\UI\Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="Framework\UI\Input\AsyncCommand.cs" />
+    <Compile Include="Framework\UI\Input\AsyncCommandT.cs" />
+    <Compile Include="Framework\UI\Input\AsyncDelegateCommand.cs" />
+    <Compile Include="Framework\UI\Input\AsyncDelegateCommandT.cs" />
+    <Compile Include="Framework\UI\Input\Command.cs" />
+    <Compile Include="Framework\UI\Input\CommandBase.cs" />
+    <Compile Include="Framework\UI\Input\CommandT.cs" />
+    <Compile Include="Framework\UI\Input\DelegateCommand.cs" />
+    <Compile Include="Framework\UI\Input\DelegateCommandT.cs" />
+    <Compile Include="Framework\ComponentModel\Disposable.cs" />
+    <Compile Include="Framework\ComponentModel\NotifyPropertyChanges.cs" />
+    <Compile Include="Features\Base\IFeature.cs" />
+    <Compile Include="Services\DeleteCommentMode.cs" />
+    <Compile Include="Services\IProjectService.cs" />
+    <Compile Include="Services\ProjectService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\IMainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\FeatureDataTemplateSelector.cs" />
+    <Compile Include="Views\IMainView.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Bootstrap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Zurb Foundation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Semantic UI.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

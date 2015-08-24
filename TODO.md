@@ -14,6 +14,8 @@
 <h2>ASP.NET MVC 6</h2>
 <p>A new project template in addition to the existing ASP.NET MVC 5 template, targeting ASP.NET MVC 6.</p>
 <ul>
+    <li>Add Mocha JavaScript unit testing.</li>
+    <li>Add <a href="https://github.com/postcss/autoprefixer">autoprefixer</a> support for CSS.</li>
     <li>Test 404 Not Found error page when navigating to /this-resource-does-not-exist. See <a href="http://stackoverflow.com/questions/31606521/displaying-a-404-not-found-page-for-asp-net-5-mvc-6">this</a>.</li>
     <li>Build a HttpException for MVC 6. See <a href="http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception">here</a>.</li>
     <li>Create new tag helper versions of Open Graph and Twitter code.</li>

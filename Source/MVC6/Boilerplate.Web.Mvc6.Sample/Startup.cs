@@ -99,11 +99,11 @@
             // absolute URL's and get the current request path.
             application.UseBoilerplate();
 
-            ConfigureDebugging(application, environment, loggerfactory);
-            ConfigureErrorPages(application, environment);
-
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();
+
+            ConfigureDebugging(application, environment, loggerfactory);
+            ConfigureErrorPages(application, environment);
 
             // Add MVC to the request pipeline.
             application.UseMvc();

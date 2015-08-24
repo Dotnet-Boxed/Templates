@@ -32,7 +32,6 @@
 
                 // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh 
                 // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-                // TODO: Browser Link does not work in ASP.NET 5 Beta 5. Add it back in the next version.
                 application.UseBrowserLink();
             }
         }

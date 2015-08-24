@@ -1,4 +1,11 @@
-﻿Version 2.1.0
+﻿Version 2.1.1
+MVC 6
+- Move UseStaticFiles in Startup.cs so it is the first thing to execute in the pipeline for better performance.
+- Startup.Options.cs Fixed comment.
+- Startup.Routing.cs Cleaned up IgnoreRoute comments.
+- First check-in of Feature Selection Wizard, not used yet but will allow you to select template features.
+
+Version 2.1.0
 MVC 5 & 6
 - browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can 
   also customize it with your own tile XML. See BrowserConfigService, HomeController and constants for changes.

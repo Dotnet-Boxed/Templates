@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Muhammad Rehan Saeed")]
 [assembly: AssemblyProduct("MvcBoilerplate")]
-[assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2014")]
+[assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

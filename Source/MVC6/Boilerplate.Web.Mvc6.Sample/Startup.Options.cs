@@ -20,7 +20,7 @@
             // Adds IOptions<AppSettings> to the services container.
             services.Configure<AppSettings>(configuration.GetConfigurationSection(nameof(AppSettings)));
 
-            // Adds IOptions<IDictionary<string, CacheProfile>> to the services container.
+            // Adds IOptions<CacheProfileSettings> to the services container.
             services.Configure<CacheProfileSettings>(configuration.GetConfigurationSection(nameof(CacheProfileSettings)));
         }
     }
