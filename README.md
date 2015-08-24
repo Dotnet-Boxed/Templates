@@ -32,7 +32,7 @@
 
 <h2>ASP.NET 4.6 MVC 5 and ASP.NET 5 MVC 6 Support</h2>
 
-<p>Two templates are provided. One for ASP.NET 4.6 MVC 5 and another ASP.NET 5 MVC 6 template which is currently under development and is missing some features due to ASP.NET 5 still being in Beta.</p>
+<p>Two templates are provided. One for ASP.NET 4.6 MVC 5 and another ASP.NET 5 MVC 6 template which is currently under development and is missing some features due to ASP.NET 5 still being in Beta. For more information about what's new in the MVC 6 template, see <a href="http://rehansaeed.com/whats-new-in-asp-net-5-mvc-6-boilerplate/">here</a>.</p>
 
 <h4>MVC 5 Technology Map</h4>
 
