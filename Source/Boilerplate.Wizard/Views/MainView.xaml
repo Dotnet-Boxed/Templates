@@ -14,19 +14,19 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="/Boilerplate.Wizard;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate x:Key="BinaryFeatureDataTemplate">
                 <CheckBox IsChecked="{Binding IsSelected}"
-                          Margin="10, 0, 10, 0">
+                          Margin="10, 5, 10, 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Margin="5, 5, 5, 0"
+                        <TextBlock Margin="5, -5, 5, 0"
                                    Style="{StaticResource HeadingTextBlockStyle}"
                                    Text="{Binding Title}"
                                    VerticalAlignment="Center"/>
@@ -132,7 +132,7 @@
                 </Grid.RowDefinitions>
                 <Image Grid.RowSpan="2" 
                        Height="64" 
-                       Source="/Assets/Icon.png"
+                       Source="/Boilerplate.Wizard;component/Assets/Icon.png"
                        Stretch="UniformToFill"
                        Width="64"/>
                 <TextBlock Grid.Column="1" 

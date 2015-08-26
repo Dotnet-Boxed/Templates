@@ -12,7 +12,7 @@
                           "Bootstrap",
                           "Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.",
                           1,
-                          "/Assets/Bootstrap.png")
+                          "/Boilerplate.Wizard;component/Assets/Bootstrap.png")
                       {
                           IsSelected = true
                       },
@@ -20,12 +20,12 @@
                           "Zurb Foundation", 
                           "The most advanced responsive front-end framework in the world.", 
                           2,
-                          "/Assets/Zurb Foundation.png"),
+                          "/Boilerplate.Wizard;component/Assets/Zurb Foundation.png"),
                       new FeatureItem(
                           "Semantic UI", 
                           "Semantic is a development framework that helps create beautiful, responsive layouts using human-friendly HTML.", 
                           3,
-                          "/Assets/Semantic UI.png")
+                          "/Boilerplate.Wizard;component/Assets/Semantic UI.png")
                   })
         {
         }

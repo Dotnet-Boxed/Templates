@@ -14,7 +14,6 @@
         public void ProjectFinishedGenerating(global::EnvDTE.Project project)
         {
             string projectFilePath = project.FileName;
-            string solutionFilePath = project.CodeModel.DTE.Solution.FileName;
             new Startup().Execute(projectFilePath);
         }
 
