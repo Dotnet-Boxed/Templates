@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Wizard", "Boilerplate.Wizard\Boilerplate.Wizard.csproj", "{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Wizard.Test", "Boilerplate.Wizard.Test\Boilerplate.Wizard.Test.csproj", "{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

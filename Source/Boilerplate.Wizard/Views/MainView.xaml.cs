@@ -1,6 +1,8 @@
 ﻿namespace Boilerplate.Wizard.Views
 {
+    using System.Diagnostics;
     using System.Windows;
+    using System.Windows.Documents;
     using Boilerplate.Wizard.ViewModels;
 
     public partial class MainView : Window, IMainView
@@ -16,10 +18,26 @@
             set { this.DataContext = value; }
         }
 
-        private void OnAddRemoveFeaturesClick(object sender, RoutedEventArgs e)
+        private async void OnOkClick(object sender, RoutedEventArgs e)
         {
-            this.ViewModel.AddOrRemoveFeaturesCommand.Execute();
-            this.Close();
+            if (this.ViewModel.Error == null)
+            {
+                await this.ViewModel.AddOrRemoveFeaturesCommand.Execute();
+                if (this.ViewModel.Error == null)
+                {
+                    this.Close();
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void OnHyperlinkClick(object sender, RoutedEventArgs e)
+        {
+            Hyperlink hyperlink = (Hyperlink)sender;
+            Process.Start(hyperlink.NavigateUri.ToString());
         }
     }
 }

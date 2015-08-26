@@ -1,4 +1,14 @@
-﻿Version 2.1.1
+﻿Version 2.1.2
+MVC 5 & 6
+- Updated site.js with better comments, fixed undefined bug, added a namespace and calculator example using the
+  revealing module pattern with full comments.
+- Fixed a missing var keyword in styles.js.
+- using window.jQuery rather than $ in scripts.js.
+Feature Selection Wizard (Coming Soon)
+- More major enhancements and bug fixes.
+- New unit test project with ProjectService tests.
+
+Version 2.1.1
 MVC 6
 - Move UseStaticFiles in Startup.cs so it is the first thing to execute in the pipeline for better performance.
 - Startup.Options.cs Fixed comment.

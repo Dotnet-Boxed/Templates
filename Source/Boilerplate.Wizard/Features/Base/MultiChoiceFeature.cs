@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Threading.Tasks;
     using System.Windows.Data;
     using Boilerplate.Wizard.Services;
 
@@ -43,6 +44,6 @@
             get { return this.projectService; }
         }
 
-        public abstract void AddOrRemoveFeature();
+        public abstract Task AddOrRemoveFeature();
     }
 }

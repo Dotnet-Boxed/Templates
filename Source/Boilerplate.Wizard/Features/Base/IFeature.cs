@@ -1,5 +1,7 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System.Threading.Tasks;
+
     public interface IFeature
     {
         string Title { get; }
@@ -10,6 +12,6 @@
 
         int Order { get; }
 
-        void AddOrRemoveFeature();
+        Task AddOrRemoveFeature();
     }
 }

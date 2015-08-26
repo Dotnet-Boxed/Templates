@@ -1,7 +1,8 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System.Threading.Tasks;
     using Framework.ComponentModel;
-    using Services;
+    using Boilerplate.Wizard.Services;
 
     public abstract class BinaryFeature : NotifyPropertyChanges, IBinaryFeature
     {
@@ -27,16 +28,14 @@
 
         public abstract string Title { get; }
 
-        public void AddOrRemoveFeature()
+        public Task AddOrRemoveFeature()
         {
             if (this.IsSelected)
             {
-                this.AddFeature();
+                return this.AddFeature();
             }
-            else
-            {
-                this.RemoveFeature();
-            }
+
+            return this.RemoveFeature();
         }
 
         protected IProjectService ProjectService
@@ -44,12 +43,14 @@
             get { return this.projectService; }
         }
 
-        protected virtual void AddFeature()
+        protected virtual Task AddFeature()
         {
+            return Task.FromResult<object>(null);
         }
 
-        protected virtual void RemoveFeature()
+        protected virtual Task RemoveFeature()
         {
+            return Task.FromResult<object>(null);
         }
     }
 }

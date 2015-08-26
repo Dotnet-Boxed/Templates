@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard
 {
+    using System;
     using System.Threading;
     using Autofac;
     using Boilerplate.Wizard.Features;
@@ -31,10 +32,10 @@
             ContainerBuilder builder = new ContainerBuilder();
 
             // Features
-            builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
-            builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+            RegisterFeatures(builder);
 
             // Services
+            builder.RegisterType<FileSystemService>().As<IFileSystemService>().SingleInstance();
             builder.RegisterType<ProjectService>()
                 .As<IProjectService>()
                 .WithParameter("projectFilePath", projectFilePath)
@@ -50,6 +51,20 @@
                 .SingleInstance();
 
             return builder.Build();
+        }
+
+        private static void RegisterFeatures(ContainerBuilder builder)
+        {
+            // CSS and JavaScript
+            builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+
+            // Formatters
+            builder.RegisterType<JsonFormatterFeature>().As<IFeature>().SingleInstance();
+            builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
+            // builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
+
+            // Other
+            builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
         }
     }
 }

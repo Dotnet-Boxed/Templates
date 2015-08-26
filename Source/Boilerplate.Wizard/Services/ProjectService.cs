@@ -3,52 +3,59 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading.Tasks;
 
     public class ProjectService : IProjectService
     {
+        private readonly IFileSystemService fileSystemService;
         private readonly string projectFilePath;
         private readonly string projectDirectoryPath;
 
-        public ProjectService(string projectFilePath)
+        #region Constructors
+
+        public ProjectService(IFileSystemService fileSystemService, string projectFilePath)
         {
+            this.fileSystemService = fileSystemService;
             this.projectFilePath = projectFilePath;
             this.projectDirectoryPath = Path.GetDirectoryName(this.projectFilePath);
-        }
+        } 
+
+        #endregion
 
         #region Public Methods
 
-        public void DeleteDirectory(string relativeDirectoryPath)
+        public async Task DeleteDirectory(string relativeDirectoryPath)
         {
             string directoryPath = Path.Combine(this.projectDirectoryPath, relativeDirectoryPath);
-            if (Directory.Exists(directoryPath))
+            if (this.fileSystemService.DirectoryExists(directoryPath))
             {
-                Directory.Delete(directoryPath, true);
+                await this.fileSystemService.DirectoryDelete(directoryPath);
             }
         }
 
-        public void DeleteFile(string relativeFilePath)
+        public async Task DeleteFile(string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
-            if (File.Exists(filePath))
+            if (this.fileSystemService.FileExists(filePath))
             {
-                File.Delete(filePath);
+                await this.fileSystemService.FileDelete(filePath);
             }
         }
 
-        public void DeleteComment(string commentName, DeleteCommentMode deleteCommentMode)
+        public async Task DeleteComment(string commentName, DeleteCommentMode mode)
         {
-            foreach (string filePath in Directory.GetFiles(this.projectDirectoryPath, "*", SearchOption.AllDirectories))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
             {
-                this.DeleteCommentInternal(commentName, filePath, deleteCommentMode);
+                await this.DeleteCommentInternal(commentName, filePath, mode);
             }
         }
 
-        public void DeleteComment(string commentName, DeleteCommentMode deleteCommentMode, string relativeFilePath)
+        public async Task DeleteComment(string commentName, DeleteCommentMode mode, string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
-            if (File.Exists(filePath))
+            if (this.fileSystemService.FileExists(filePath))
             {
-                this.DeleteCommentInternal(commentName, filePath, deleteCommentMode);
+                await this.DeleteCommentInternal(commentName, filePath, mode);
             }
         }
 
@@ -56,7 +63,7 @@
 
         #region Private Methods
 
-        private void DeleteCommentInternal(string commentName, string filePath, DeleteCommentMode deleteCommentMode)
+        private async Task DeleteCommentInternal(string commentName, string filePath, DeleteCommentMode mode)
         {
             string fileExtension = Path.GetExtension(filePath);
             Comment comment = Comment.GetComment(fileExtension);
@@ -69,7 +76,7 @@
 
             NamedComment namedComment = new NamedComment(commentName, comment);
 
-            string[] lines = File.ReadAllLines(filePath);
+            string[] lines = await this.fileSystemService.FileReadAllLines(filePath);
             List<string> newLines = new List<string>(lines.Length);
 
             bool isUncommenting = false;
@@ -81,25 +88,25 @@
                     {
                         isUncommenting = false;
                     }
-                    else if (deleteCommentMode != DeleteCommentMode.StartEndCommentAndCode)
+                    else if (mode != DeleteCommentMode.StartEndCommentAndCode)
                     {
                         string newLine = line;
 
-                        if (deleteCommentMode == DeleteCommentMode.StartEndCommentAndUncommentCode)
+                        if (mode == DeleteCommentMode.StartEndCommentAndUncommentCode)
                         {
-                            if (line.Trim().StartsWith(comment.Start))
+                            if (newLine.TrimStart().StartsWith(comment.Start))
                             {
-                                int commentIndex = line.IndexOf(comment.Start);
-                                newLine = line.Substring(0, commentIndex) +
+                                int commentIndex = newLine.IndexOf(comment.Start);
+                                newLine = newLine.Substring(0, commentIndex) +
                                     new string(' ', comment.Start.Length) +
-                                    line.Substring(commentIndex + comment.Start.Length);
+                                    newLine.Substring(commentIndex + comment.Start.Length);
                             }
 
-                            if (comment.HasEnd && line.Trim().EndsWith(comment.End))
+                            if (comment.HasEnd && newLine.TrimEnd().EndsWith(comment.End))
                             {
-                                int commentIndex = line.LastIndexOf(comment.End);
-                                newLine = line.Substring(0, commentIndex) +
-                                    line.Substring(commentIndex + comment.End.Length);
+                                int commentIndex = newLine.LastIndexOf(comment.End);
+                                newLine = newLine.Substring(0, commentIndex) +
+                                    newLine.Substring(commentIndex + comment.End.Length);
                             }
                         }
 
@@ -116,7 +123,7 @@
                 }
             }
 
-            File.WriteAllLines(filePath, newLines);
+            await this.fileSystemService.FileWriteAllLines(filePath, newLines);
         }
 
         #endregion
@@ -129,7 +136,7 @@
             {
                 string commentEndWithSpace = string.IsNullOrEmpty(comment.End) ? string.Empty : " " + comment.End;
                 this.Start = $"{comment.Start} $Start-{commentName}${commentEndWithSpace}";
-                this.End = $"{comment} $End-{commentName}${commentEndWithSpace}";
+                this.End = $"{comment.Start} $End-{commentName}${commentEndWithSpace}";
             }
 
             public string Start { get; set; }

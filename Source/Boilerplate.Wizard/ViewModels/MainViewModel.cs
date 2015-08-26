@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
@@ -11,9 +12,16 @@
 
     public class MainViewModel : NotifyPropertyChanges, IMainViewModel
     {
+        #region Fields
+
         private readonly ObservableCollection<IFeature> features;
         private readonly ICollectionView featuresView;
-        private readonly DelegateCommand addOrRemoveFeaturesCommand;
+        private readonly AsyncDelegateCommand addOrRemoveFeaturesCommand;
+
+        private string error;
+        private bool isLoaded = true;
+
+        #endregion
 
         #region Constructors
 
@@ -23,16 +31,22 @@
             this.featuresView = CollectionViewSource.GetDefaultView(this.features);
             this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.GroupName)));
             this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Order), ListSortDirection.Ascending));
-            this.addOrRemoveFeaturesCommand = new DelegateCommand(this.AddOrRemoveFeatures);
+            this.addOrRemoveFeaturesCommand = new AsyncDelegateCommand(this.AddOrRemoveFeatures);
         } 
 
         #endregion
 
         #region Public Properties
 
-        public DelegateCommand AddOrRemoveFeaturesCommand
+        public AsyncDelegateCommand AddOrRemoveFeaturesCommand
         {
             get { return this.addOrRemoveFeaturesCommand; }
+        }
+
+        public string Error
+        {
+            get { return this.error; }
+            private set { this.SetProperty(ref this.error, value); }
         }
 
         public ObservableCollection<IFeature> Features
@@ -43,17 +57,46 @@
         public ICollectionView FeaturesView
         {
             get { return this.featuresView; }
-        } 
+        }
+
+        public bool IsLoaded
+        {
+            get { return this.isLoaded; }
+            private set { this.SetProperty(ref this.isLoaded, value); }
+        }
 
         #endregion
 
         #region Private Methods
 
-        private void AddOrRemoveFeatures()
+        private async Task AddOrRemoveFeatures()
         {
-            foreach (IFeature feature in this.features)
+            try
             {
-                feature.AddOrRemoveFeature();
+                this.IsLoaded = false;
+
+                List<Exception> exceptions = new List<Exception>();
+
+                foreach (IFeature feature in this.features)
+                {
+                    try
+                    {
+                        await feature.AddOrRemoveFeature();
+                    }
+                    catch (Exception exception)
+                    {
+                        exceptions.Add(exception);
+                    }
+                }
+
+                if (exceptions.Count > 0)
+                {
+                    this.Error = new AggregateException(exceptions).ToString();
+                }
+            }
+            finally
+            {
+                this.IsLoaded = true;
             }
         }
 

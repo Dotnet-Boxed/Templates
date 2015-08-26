@@ -32,7 +32,7 @@
     // src - The URL to the fallback script.
     { test: function () { return window.Modernizr; }, src: "/bundles/modernizr" },
     { test: function () { return window.jQuery; }, src: "/bundles/jquery" },
-    { test: function () { return $.validator; }, src: "/bundles/jqueryval" },
-    { test: function () { return $.validator.unobtrusive; }, src: "/bundles/jqueryvalunobtrusive" },
-    { test: function () { return $.fn.modal; }, src: "/bundles/bootstrap" }
+    { test: function () { return window.jQuery.validator; }, src: "/bundles/jqueryval" },
+    { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/bundles/jqueryvalunobtrusive" },
+    { test: function () { return window.jQuery.fn.modal; }, src: "/bundles/bootstrap" }
 ]);

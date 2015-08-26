@@ -1,12 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:Converters="clr-namespace:Framework.UI.Converters">
+                    xmlns:Controls="clr-namespace:Framework.UI.Controls"
+                    xmlns:Converters="clr-namespace:Framework.UI.Converters"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib">
     
     <SolidColorBrush x:Key="BackgroundBrush" Color="#181818"/>
     <SolidColorBrush x:Key="ForegroundBrush" Color="White"/>
     <SolidColorBrush x:Key="AccentBrush" Color="#D05D2C"/>
+    <SolidColorBrush x:Key="TransparentBrush" Color="Transparent"/>
 
     <Converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <Converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
     <Converters:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
     <Converters:InverseNullToVisibilityConverter x:Key="InverseNullToVisibilityConverter"/>
     <Converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
@@ -36,6 +40,14 @@
         <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
     </Style>
     <Style TargetType="Hyperlink">
+        <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="TitleHyperlinkStyle" TargetType="Hyperlink">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
         <Style.Triggers>
@@ -79,5 +91,124 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+    <Style TargetType="ProgressBar">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type Controls:LoadingContent}">
+        <Setter Property="Background" Value="{StaticResource TransparentBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ContentOpacity" Value="0.2"/>
+        <Setter Property="Fill" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Foreground" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Controls:LoadingContent}">
+                    <Grid>
+
+                        <ContentPresenter x:Name="ContentElement" 
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          HorizontalAlignment="Stretch"
+                                          IsHitTestVisible="{TemplateBinding IsContentLoaded}"
+                                          Opacity="{TemplateBinding ContentOpacity}"
+                                          VerticalAlignment="Stretch"/>
+
+                        <Border x:Name="LoadingElement" 
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <ProgressBar x:Name="ProgressBar" 
+                                             Grid.Row="1"
+                                             Foreground="{TemplateBinding Fill}"
+                                             Height="10"/>
+
+                                <TextBlock Grid.Row="2"  
+                                           Foreground="{TemplateBinding Foreground}" 
+                                           HorizontalAlignment="Center"
+                                           Style="{StaticResource HeadingTextBlockStyle}"
+                                           Text="{TemplateBinding Header}"/>
+
+                            </Grid>
+                        </Border>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Loaded">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentElement"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         BeginTime="00:00:00"
+                                                         Duration="00:00:00.5"
+                                                         To="1"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingElement"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ProgressBar"
+                                                                       Storyboard.TargetProperty="IsIndeterminate">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <System:Boolean>false</System:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unloaded">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ContentElement"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         BeginTime="00:00:00"
+                                                         Duration="00:00:00.5"
+                                                         From="1"/>
+                                        <DoubleAnimation Storyboard.TargetName="LoadingElement"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         BeginTime="00:00:00"
+                                                         Duration="00:00:00.5"
+                                                         From="0"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LoadingElement"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ProgressBar"
+                                                                       Storyboard.TargetProperty="IsIndeterminate">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <System:Boolean>true</System:Boolean>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

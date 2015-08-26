@@ -8,8 +8,10 @@
 
         string Icon { get; }
 
-        int Order { get; }
+        bool IsContributionWanted { get; }
 
         bool IsSelected { get; set; }
+
+        int Order { get; }
     }
 }

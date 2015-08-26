@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
     public class FrontEndFrameworkFeature : MultiChoiceFeature
@@ -17,15 +18,17 @@
                           IsSelected = true
                       },
                       new FeatureItem(
-                          "Zurb Foundation", 
-                          "The most advanced responsive front-end framework in the world.", 
+                          "Zurb Foundation",
+                          "The most advanced responsive front-end framework in the world.",
                           2,
-                          "/Boilerplate.Wizard;component/Assets/Zurb Foundation.png"),
+                          "/Boilerplate.Wizard;component/Assets/Zurb Foundation.png",
+                          true),
                       new FeatureItem(
                           "Semantic UI", 
                           "Semantic is a development framework that helps create beautiful, responsive layouts using human-friendly HTML.", 
                           3,
-                          "/Boilerplate.Wizard;component/Assets/Semantic UI.png")
+                          "/Boilerplate.Wizard;component/Assets/Semantic UI.png",
+                          true)
                   })
         {
         }
@@ -42,7 +45,7 @@
 
         public override int Order
         {
-            get { return 2; }
+            get { return 1; }
         }
 
         public override string Title
@@ -50,9 +53,9 @@
             get { return "Front End Framework"; }
         }
 
-        public override void AddOrRemoveFeature()
+        public override Task AddOrRemoveFeature()
         {
-            this.ProjectService.DeleteComment("FrontEndFramework", DeleteCommentMode.StartEndComment);
+            return this.ProjectService.DeleteComment("FrontEndFramework", DeleteCommentMode.StartEndComment);
         }
     }
 }

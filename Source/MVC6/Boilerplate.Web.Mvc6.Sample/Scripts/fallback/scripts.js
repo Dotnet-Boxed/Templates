@@ -32,9 +32,9 @@
     // src - The URL to the fallback script.
     { test: function () { return window.Modernizr; }, src: "/js/modernizr.js" },
     { test: function () { return window.jQuery; }, src: "/js/jquery.js" },
-    { test: function () { return $.validator; }, src: "/js/jquery-validate.js" },
-    { test: function () { return $.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
-    { test: function () { return $.fn.modal; }, src: "/js/bootstrap.js" },
+    { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
+    { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
+    { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" },
     { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" },
     { test: function () { return window.Zepto; }, src: "/js/bootstrap-touch-carousel.js" }
 ]);

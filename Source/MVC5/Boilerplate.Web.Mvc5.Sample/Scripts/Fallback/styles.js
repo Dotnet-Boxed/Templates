@@ -7,7 +7,7 @@
     for (var i = 0; i < fallbacks.length; ++i) {
         var fallback = fallbacks[i];
 
-        for (j = 0; j < metas.length; ++j) {
+        for (var j = 0; j < metas.length; ++j) {
             var meta = metas[j];
             if (meta.getAttribute("name") == fallback.metaName) {
                 if (!fallback.test(meta)) {

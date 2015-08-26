@@ -7,10 +7,14 @@
 
     public interface IMainViewModel
     {
-        DelegateCommand AddOrRemoveFeaturesCommand { get; }
+        AsyncDelegateCommand AddOrRemoveFeaturesCommand { get; }
+
+        string Error { get; }
 
         ObservableCollection<IFeature> Features { get; }
 
         ICollectionView FeaturesView { get; }
+
+        bool IsLoaded { get; }
     }
 }

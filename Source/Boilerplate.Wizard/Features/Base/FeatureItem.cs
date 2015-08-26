@@ -6,17 +6,19 @@
     {
         private readonly string description;
         private readonly string icon;
+        private readonly bool isContributionWanted;
         private readonly int order;
         private readonly string title;
 
         private bool isSelected;
 
-        public FeatureItem(string title, string description, int order, string icon = null)
+        public FeatureItem(string title, string description, int order, string icon = null, bool isContributionWanted = false)
         {
             this.title = title;
             this.description = description;
             this.icon = icon;
             this.order = order;
+            this.isContributionWanted = isContributionWanted;
         }
 
         public string Description
@@ -27,6 +29,11 @@
         public string Icon
         {
             get { return this.icon; }
+        }
+
+        public bool IsContributionWanted
+        {
+            get { return this.isContributionWanted; }
         }
 
         public bool IsSelected

@@ -24,17 +24,17 @@
 
         public override string GroupName
         {
-            get { return "General"; }
+            get { return "Other"; }
         }
 
         public override int Order
         {
-            get { return 1; }
+            get { return 4; }
         }
 
-        protected override void RemoveFeature()
+        protected override Task RemoveFeature()
         {
-            this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
+            return this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
         }
     }
 }

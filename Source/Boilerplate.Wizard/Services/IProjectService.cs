@@ -1,13 +1,15 @@
 ﻿namespace Boilerplate.Wizard.Services
 {
+    using System.Threading.Tasks;
+
     public interface IProjectService
     {
-        void DeleteDirectory(string relativeDirectoryPath);
+        Task DeleteDirectory(string relativeDirectoryPath);
 
-        void DeleteFile(string relativeFilePath);
+        Task DeleteFile(string relativeFilePath);
 
-        void DeleteComment(string commentName, DeleteCommentMode deleteCommentMode);
+        Task DeleteComment(string commentName, DeleteCommentMode deleteCommentMode);
 
-        void DeleteComment(string commentName, DeleteCommentMode deleteCommentMode, string relativeFilePath);
+        Task DeleteComment(string commentName, DeleteCommentMode deleteCommentMode, string relativeFilePath);
     }
 }

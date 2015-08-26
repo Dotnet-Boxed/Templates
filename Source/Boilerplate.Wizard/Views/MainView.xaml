@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:Framework.UI.Controls"
         xmlns:Features="clr-namespace:Boilerplate.Wizard.Features"
         xmlns:Views="clr-namespace:Boilerplate.Wizard.Views"
         mc:Ignorable="d"
@@ -48,13 +49,13 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Margin="5, 5, 5, 0"
+                    <TextBlock Margin="27, 5, 5, 0"
                                Style="{StaticResource HeadingTextBlockStyle}"
                                Text="{Binding Title}"
                                VerticalAlignment="Center"/>
 
                     <TextBlock Grid.Row="1" 
-                               Margin="5, 0, 5, 5"
+                               Margin="27, 0, 5, 5"
                                Style="{StaticResource NormalTextBlockStyle}"
                                Text="{Binding Description}"
                                VerticalAlignment="Center"/>
@@ -66,35 +67,46 @@
                             <DataTemplate>
                                 <RadioButton GroupName="{Binding Path=DataContext.Title, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                              IsChecked="{Binding IsSelected}"
+                                             IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
                                              Margin="0, 0, 5, 0"
                                              ToolTip="{Binding Description}">
 
                                     <Grid>
-                                        <TextBlock Margin="5" 
-                                                   Style="{StaticResource NormalTextBlockStyle}"
-                                                   Text="{Binding Title}"
-                                                   VerticalAlignment="Center"
-                                                   Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
-                                        <Border BorderThickness="1"
-                                                Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
-                                            <Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="Opacity" Value="0.5"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                                                            <Setter Property="Opacity" Value="1"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                            <Image Height="100" 
-                                                   Margin="5" 
-                                                   Source="{Binding Icon}"
-                                                   Stretch="UniformToFill"
-                                                   Width="200"/>
-                                        </Border>
+                                        <Grid>
+                                            <TextBlock Margin="5" 
+                                                       Style="{StaticResource NormalTextBlockStyle}"
+                                                       Text="{Binding Title}"
+                                                       VerticalAlignment="Center"
+                                                       Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
+                                            <Border BorderThickness="1"
+                                                    Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Opacity" Value="0.5"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+                                                                <Setter Property="Opacity" Value="1"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Image Height="100" 
+                                                       Margin="5" 
+                                                       Source="{Binding Icon}"
+                                                       Stretch="UniformToFill"
+                                                       Width="200"/>
+                                            </Border>
+                                        </Grid>
+                                        <TextBlock Margin="10" 
+                                                   Foreground="{StaticResource AccentBrush}"
+                                                   Style="{StaticResource HeadingTextBlockStyle}"
+                                                   Text="Contributions Wanted"
+                                                   TextAlignment="Center"
+                                                   VerticalAlignment="Bottom"
+                                                   Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsContributionWanted}"/>
                                     </Grid>
+
                                 </RadioButton>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
@@ -117,7 +129,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Border Background="{StaticResource BackgroundBrush}">
@@ -139,7 +150,9 @@
                            Margin="5, 5, 5, -3"
                            Style="{StaticResource TitleTextBlockStyle}"
                            VerticalAlignment="Center">
-                    <Hyperlink NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">
+                    <Hyperlink Click="OnHyperlinkClick" 
+                               NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate"
+                               Style="{StaticResource TitleHyperlinkStyle}">
                         ASP.NET MVC Boilerplate
                     </Hyperlink>
                 </TextBlock>
@@ -153,35 +166,72 @@
             </Grid>
         </Border>
 
-        <ScrollViewer Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding FeaturesView}"
-                          ItemTemplateSelector="{StaticResource FeatureDataTemplateSelector}"
-                          Margin="5">
-                <ItemsControl.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.ContainerStyle>
-                            <Style TargetType="GroupItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="GroupItem">
-                                            <GroupBox Header="{Binding Path=Name}">
-                                                <ItemsPresenter/>
-                                            </GroupBox>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </GroupStyle.ContainerStyle>
-                    </GroupStyle>
-                </ItemsControl.GroupStyle>
-            </ItemsControl>
-        </ScrollViewer>
+        <Controls:LoadingContent Grid.Row="1"
+                                 IsContentLoaded="{Binding IsLoaded}">
 
-        <Button Grid.Row="2" 
-                Click="OnAddRemoveFeaturesClick"
-                Content="OK"
-                Margin="5, 0, 5, 5"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Error}">
+                    <ItemsControl ItemsSource="{Binding FeaturesView}"
+                                  ItemTemplateSelector="{StaticResource FeatureDataTemplateSelector}"
+                                  Margin="5">
+                        <ItemsControl.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="GroupItem">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="GroupItem">
+                                                    <GroupBox Header="{Binding Path=Name}">
+                                                        <ItemsPresenter/>
+                                                    </GroupBox>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </ItemsControl.GroupStyle>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <Grid Margin="5"
+                      Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Error}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource NormalTextBlockStyle}">
+                        <Run>
+                            Oops! One or more of your requested feature changes caused an error. The feature selection wizard made as many changes as it could but you may find that the project has errors. Please raise an 
+                        </Run>
+                        <Hyperlink Click="OnHyperlinkClick" 
+                                   NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues">issue</Hyperlink>
+                        <Run>
+                            on the ASP.NET MVC Boilerplate GitHub page and copy the error below. We'll usually get it fixed pretty quickly.
+                        </Run>
+                    </TextBlock>
+                    
+                    <TextBox Grid.Row="1" 
+                             Margin="0, 5, 0, 0"
+                             Text="{Binding Error}"/>
+                    
+                </Grid>
+
+                <Button Grid.Row="1" 
+                        Click="OnOkClick"
+                        Content="OK"
+                        Margin="5, 0, 5, 5"/>
+                
+            </Grid>
+            
+        </Controls:LoadingContent>
 
     </Grid>
 </Window>

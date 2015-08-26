@@ -62,14 +62,19 @@
   <ItemGroup>
     <Compile Include="Features\Base\BinaryFeature.cs" />
     <Compile Include="Features\Base\FeatureItem.cs" />
+    <Compile Include="Features\Formatters\BsonFormatterFeature.cs" />
+    <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\FrontEndFrameworkFeature.cs" />
     <Compile Include="Features\HumansTextFeature.cs" />
     <Compile Include="Features\Base\IBinaryFeature.cs" />
     <Compile Include="Features\Base\IFeatureItem.cs" />
     <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
+    <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
     <Compile Include="FeatureWizard.cs" />
+    <Compile Include="Framework\UI\Controls\LoadingContent.cs" />
     <Compile Include="Framework\UI\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Framework\UI\Converters\InverseBoolConverter.cs" />
     <Compile Include="Framework\UI\Converters\InverseBoolToVisibilityConverter.cs" />
     <Compile Include="Framework\UI\Converters\InverseNullToVisibilityConverter.cs" />
     <Compile Include="Framework\UI\Converters\NullToVisibilityConverter.cs" />
@@ -86,6 +91,8 @@
     <Compile Include="Framework\ComponentModel\NotifyPropertyChanges.cs" />
     <Compile Include="Features\Base\IFeature.cs" />
     <Compile Include="Services\DeleteCommentMode.cs" />
+    <Compile Include="Services\FileSystemService.cs" />
+    <Compile Include="Services\IFileSystemService.cs" />
     <Compile Include="Services\IProjectService.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Startup.cs" />
