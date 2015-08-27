@@ -41,11 +41,6 @@
     <li>
         Implement formatters.
 
-        // TODO: The Microsoft.AspNet.Mvc.Formatters.Xml package has gone missing. Add this back in when it comes back.
-        // Add the XML input and output formatters. 
-        // See: http://www.strathweb.com/2015/04/asp-net-mvc-6-formatters-xml-browser-requests/.
-        // mvcOptions.AddXmlDataContractSerializerFormatter();
-
         // TODO: Add the BSON input and output formatters.
     </li>
     <li>
