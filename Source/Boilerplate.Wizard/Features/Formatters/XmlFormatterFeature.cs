@@ -1,15 +1,51 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
-    using System;
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
+    using Constants;
 
-    public class XmlFormatterFeature : BinaryFeature
+    public class XmlFormatterFeature : MultiChoiceFeature
     {
-        public XmlFormatterFeature(IProjectService projectService)
-            : base(projectService)
+        public XmlFormatterFeature(IProjectService projectService, FeatureSet featureSet)
+            : base(projectService,
+                  new IFeatureItem[]
+                  {
+                      new FeatureItem(
+                          "None",
+                          "Removes the XML formatter.",
+                          featureSet == FeatureSet.Mvc6 ? 1 : 3)
+                      {
+                          IsSelected = featureSet == FeatureSet.Mvc6
+                      },
+                      new FeatureItem(
+                          "DataContractSerializer",
+                          "Include an XML input and output formatter using the DataContractSerializer.",
+                          featureSet == FeatureSet.Mvc6 ? 2 : 1)
+                      {
+                          IsSelected = featureSet == FeatureSet.Mvc6Api
+                      },
+                      new FeatureItem(
+                          "XmlSerializer",
+                          "Include an XML input and output formatter using the XmlSerializer.",
+                          featureSet == FeatureSet.Mvc6 ? 3 : 2),
+                      
+                  })
         {
-            this.IsSelected = true;
+        }
+
+        public override string Description
+        {
+            get { return "Choose whether to use an XML input/output formatter and whether to use the DataContract or XmlSerialiser."; }
+        }
+
+        public override string GroupName
+        {
+            get { return FeatureGroupName.Formatters; }
+        }
+
+        public override int Order
+        {
+            get { return 4; }
         }
 
         public override string Title
@@ -17,33 +53,44 @@
             get { return "XML Formatter"; }
         }
 
-        public override string Description
+        public override async Task AddOrRemoveFeature()
         {
-            get { return "Choose whether to use an XML formatter to input and output XML."; }
-        }
-
-        public override string GroupName
-        {
-            get { return "Formatters"; }
-        }
-
-        public override int Order
-        {
-            get { return 3; }
-        }
-
-        protected override Task RemoveFeature()
-        {
-            if (this.IsSelected)
+            if (this.Items[0].IsSelected)
             {
-                return this.ProjectService.DeleteComment(
-                    "XmlFormatter",
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-CamelCase",
                     DeleteCommentMode.StartEndComment);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-TitleCase",
+                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-None",
+                    DeleteCommentMode.StartEndCommentAndCode);
             }
-
-            return this.ProjectService.DeleteComment(
-                "XmlFormatter",
-                DeleteCommentMode.StartEndCommentAndCode);
+            else if (this.Items[1].IsSelected)
+            {
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-CamelCase",
+                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-TitleCase",
+                    DeleteCommentMode.StartEndCommentAndUncommentCode);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-None",
+                    DeleteCommentMode.StartEndCommentAndCode);
+            }
+            else
+            {
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-CamelCase",
+                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-TitleCase",
+                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.DeleteComment(
+                    "JsonFormatter-None",
+                    DeleteCommentMode.StartEndCommentAndUncommentCode);
+            }
         }
     }
 }

@@ -51,5 +51,10 @@
         {
             get { return this.title; }
         }
+
+        public override string ToString()
+        {
+            return string.Format($"{this.Title} - {this.IsSelected}");
+        }
     }
 }

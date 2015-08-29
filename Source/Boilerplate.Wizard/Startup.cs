@@ -1,7 +1,5 @@
 ﻿namespace Boilerplate.Wizard
 {
-    using System;
-    using System.Threading;
     using Autofac;
     using Boilerplate.Wizard.Features;
     using Boilerplate.Wizard.Services;
@@ -12,27 +10,28 @@
     {
         //static void Main()
         //{
-        //    Thread thread = new Thread(x =>
+        //    var thread = new System.Threading.Thread(x =>
         //    {
-        //        new Startup().Execute(@"C:\Temp\New folder\1");
+        //        new Startup().Execute(@"C:\Temp\New folder\1", FeatureSet.Mvc6);
         //    });
-        //    thread.SetApartmentState(ApartmentState.STA);
+        //    thread.SetApartmentState(System.Threading.ApartmentState.STA);
         //    thread.Start();
         //}
 
-        public void Execute(string projectFilePath)
+        public void Execute(string projectFilePath, FeatureSet featureSet)
         {
-            IContainer container = CreateContainer(projectFilePath);
+            IContainer container = CreateContainer(projectFilePath, featureSet);
             IMainView mainView = container.Resolve<IMainView>();
             mainView.ShowDialog();
         }
 
-        private static IContainer CreateContainer(string projectFilePath)
+        private static IContainer CreateContainer(string projectFilePath, FeatureSet featureSet)
         {
             ContainerBuilder builder = new ContainerBuilder();
 
             // Features
-            RegisterFeatures(builder);
+            builder.Register(x => featureSet);
+            RegisterFeatures(builder, featureSet);
 
             // Services
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().SingleInstance();
@@ -53,18 +52,24 @@
             return builder.Build();
         }
 
-        private static void RegisterFeatures(ContainerBuilder builder)
+        private static void RegisterFeatures(ContainerBuilder builder, FeatureSet featureSet)
         {
-            // CSS and JavaScript
-            builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+            if (featureSet == FeatureSet.Mvc6)
+            {
+                // CSS and JavaScript
+                builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+            }
 
             // Formatters
             builder.RegisterType<JsonFormatterFeature>().As<IFeature>().SingleInstance();
+            builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
             builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
-            // builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
 
-            // Other
-            builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
+            if (featureSet == FeatureSet.Mvc6)
+            {
+                // Other
+                builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
+            }
         }
     }
 }

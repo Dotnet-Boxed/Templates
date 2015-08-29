@@ -8,9 +8,10 @@
         xmlns:Views="clr-namespace:Boilerplate.Wizard.Views"
         mc:Ignorable="d"
         Height="600" 
-        ShowInTaskbar="False"
+        ResizeMode="CanResizeWithGrip"
+        ShowInTaskbar="False" 
         Width="800" 
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterOwner"
         WindowStyle="None">
     <Window.Resources>
         <ResourceDictionary>
@@ -20,14 +21,14 @@
 
             <DataTemplate x:Key="BinaryFeatureDataTemplate">
                 <CheckBox IsChecked="{Binding IsSelected}"
-                          Margin="10, 5, 10, 0">
+                          Margin="10, 24, 10, 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Margin="5, -5, 5, 0"
+                        <TextBlock Margin="5, -19, 5, 0"
                                    Style="{StaticResource HeadingTextBlockStyle}"
                                    Text="{Binding Title}"
                                    VerticalAlignment="Center"/>
@@ -49,13 +50,13 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Margin="27, 5, 5, 0"
+                    <TextBlock Margin="26, 5, 5, 0"
                                Style="{StaticResource HeadingTextBlockStyle}"
                                Text="{Binding Title}"
                                VerticalAlignment="Center"/>
 
                     <TextBlock Grid.Row="1" 
-                               Margin="27, 0, 5, 5"
+                               Margin="26, 0, 5, 1"
                                Style="{StaticResource NormalTextBlockStyle}"
                                Text="{Binding Description}"
                                VerticalAlignment="Center"/>
@@ -68,17 +69,19 @@
                                 <RadioButton GroupName="{Binding Path=DataContext.Title, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                              IsChecked="{Binding IsSelected}"
                                              IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
-                                             Margin="0, 0, 5, 0"
+                                             Margin="0, 2, 10, 0"
                                              ToolTip="{Binding Description}">
 
                                     <Grid>
                                         <Grid>
-                                            <TextBlock Margin="5" 
+                                            <TextBlock Margin="5, -2, 5, 0" 
                                                        Style="{StaticResource NormalTextBlockStyle}"
                                                        Text="{Binding Title}"
                                                        VerticalAlignment="Center"
                                                        Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
                                             <Border BorderThickness="1"
+                                                    Margin="5, -2, 5, 5"
+                                                    Padding="1"
                                                     Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
                                                 <Border.Style>
                                                     <Style TargetType="Border">
@@ -92,7 +95,7 @@
                                                     </Style>
                                                 </Border.Style>
                                                 <Image Height="100" 
-                                                       Margin="5" 
+                                                        
                                                        Source="{Binding Icon}"
                                                        Stretch="UniformToFill"
                                                        Width="200"/>
@@ -131,11 +134,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Background="{StaticResource BackgroundBrush}">
+        <Border Background="{StaticResource BackgroundBrush}"
+                MouseLeftButtonDown="OnTitleMouseLeftButtonDown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -163,6 +168,17 @@
                            Style="{StaticResource SubTitleTextBlockStyle}"
                            Text="Feature Selection Wizard"
                            VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" 
+                           Grid.Row="1"
+                           Margin="5, -3, 15, 5"
+                           TextAlignment="Right"
+                           VerticalAlignment="Center">
+                    <Hyperlink Click="OnHyperlinkClick"
+                               NavigateUri="http://rehansaeed.com"
+                               Style="{StaticResource SubTitleHyperlinkStyle}">
+                        <TextBlock>By Muhammad Rehan Saeed</TextBlock>
+                    </Hyperlink>
+                </TextBlock>
             </Grid>
         </Border>
 
@@ -226,8 +242,18 @@
 
                 <Button Grid.Row="1" 
                         Click="OnOkClick"
-                        Content="OK"
-                        Margin="5, 0, 5, 5"/>
+                        Margin="5, 0, 5, 5">
+                    <Button.Style>
+                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                            <Setter Property="Content" Value="OK"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Features.IsDefaultsSelected}" Value="True">
+                                    <Setter Property="Content" Value="Give me the carefully chosen defaults"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 
             </Grid>
             

@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Data;
     using Features;
@@ -14,7 +14,7 @@
     {
         #region Fields
 
-        private readonly ObservableCollection<IFeature> features;
+        private readonly FeatureCollection features;
         private readonly ICollectionView featuresView;
         private readonly AsyncDelegateCommand addOrRemoveFeaturesCommand;
 
@@ -27,7 +27,7 @@
 
         public MainViewModel(IEnumerable<IFeature> features)
         {
-            this.features = new ObservableCollection<IFeature>(features);
+            this.features = new FeatureCollection(features);
             this.featuresView = CollectionViewSource.GetDefaultView(this.features);
             this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.GroupName)));
             this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Order), ListSortDirection.Ascending));
@@ -49,7 +49,7 @@
             private set { this.SetProperty(ref this.error, value); }
         }
 
-        public ObservableCollection<IFeature> Features
+        public FeatureCollection Features
         {
             get { return this.features; }
         }
@@ -91,13 +91,28 @@
 
                 if (exceptions.Count > 0)
                 {
-                    this.Error = new AggregateException(exceptions).ToString();
+                    this.SetError(exceptions);
                 }
             }
             finally
             {
                 this.IsLoaded = true;
             }
+        }
+
+        private void SetError(IEnumerable<Exception> exceptions)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine("Features");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(this.Features.ToString());
+
+            stringBuilder.AppendLine("Exceptions");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine(new AggregateException(exceptions).ToString());
+
+            this.Error = stringBuilder.ToString();
         }
 
         #endregion

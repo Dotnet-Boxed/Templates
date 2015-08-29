@@ -60,18 +60,25 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\FeatureGroupName.cs" />
+    <Compile Include="FeatureSet.cs" />
     <Compile Include="Features\Base\BinaryFeature.cs" />
+    <Compile Include="Features\Base\FeatureCollection.cs" />
     <Compile Include="Features\Base\FeatureItem.cs" />
+    <Compile Include="Features\Base\FeatureItemCollection.cs" />
     <Compile Include="Features\Formatters\BsonFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
-    <Compile Include="Features\FrontEndFrameworkFeature.cs" />
-    <Compile Include="Features\HumansTextFeature.cs" />
+    <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
+    <Compile Include="Features\Other\HumansTextFeature.cs" />
     <Compile Include="Features\Base\IBinaryFeature.cs" />
     <Compile Include="Features\Base\IFeatureItem.cs" />
     <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
-    <Compile Include="FeatureWizard.cs" />
+    <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
+    <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
+    <Compile Include="Wizards\Mvc6ApiFeatureWizard.cs" />
+    <Compile Include="Wizards\Mvc6FeatureWizard.cs" />
     <Compile Include="Framework\UI\Controls\LoadingContent.cs" />
     <Compile Include="Framework\UI\Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Framework\UI\Converters\InverseBoolConverter.cs" />

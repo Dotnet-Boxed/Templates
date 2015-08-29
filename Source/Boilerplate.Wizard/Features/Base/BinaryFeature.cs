@@ -6,20 +6,28 @@
 
     public abstract class BinaryFeature : NotifyPropertyChanges, IBinaryFeature
     {
+        private readonly bool defaultIsSelected;
         private readonly IProjectService projectService;
         private bool isSelected;
 
-        public BinaryFeature(IProjectService projectService)
+        public BinaryFeature(IProjectService projectService, bool defaultIsSelected = true)
         {
             this.projectService = projectService;
+            this.defaultIsSelected = defaultIsSelected;
+            this.isSelected = defaultIsSelected;
         }
 
         public abstract string Description { get; }
 
+        public bool IsDefaultSelected
+        {
+            get { return this.IsSelected == this.defaultIsSelected; }
+        }
+
         public bool IsSelected
         {
             get { return this.isSelected; }
-            set { this.SetProperty(ref this.isSelected, value); }
+            set { this.SetProperty(ref this.isSelected, value, nameof(IsSelected), nameof(IsDefaultSelected)); }
         }
 
         public abstract string GroupName { get; }
@@ -36,6 +44,11 @@
             }
 
             return this.RemoveFeature();
+        }
+
+        public override string ToString()
+        {
+            return string.Format($"{this.Title} - {this.IsSelected}");
         }
 
         protected IProjectService ProjectService

@@ -1,8 +1,7 @@
 ﻿namespace Boilerplate.Wizard.ViewModels
 {
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using Features;
+    using Boilerplate.Wizard.Features;
     using Framework.UI.Input;
 
     public interface IMainViewModel
@@ -11,7 +10,7 @@
 
         string Error { get; }
 
-        ObservableCollection<IFeature> Features { get; }
+        FeatureCollection Features { get; }
 
         ICollectionView FeaturesView { get; }
 

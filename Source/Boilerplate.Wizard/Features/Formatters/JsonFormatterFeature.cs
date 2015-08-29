@@ -1,6 +1,7 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
+    using Constants;
     using Boilerplate.Wizard.Services;
 
     public class JsonFormatterFeature : MultiChoiceFeature
@@ -30,12 +31,12 @@
 
         public override string Description
         {
-            get { return "Choose whether to use a JSON formatter to input and output JSON and whether it should use camel or title casing."; }
+            get { return "Choose whether to use the JSON input/output formatter and whether it should use camel or title casing."; }
         }
 
         public override string GroupName
         {
-            get { return "Formatters"; }
+            get { return FeatureGroupName.Formatters; }
         }
 
         public override int Order

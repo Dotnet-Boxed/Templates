@@ -12,6 +12,8 @@
 
         int Order { get; }
 
+        bool IsDefaultSelected { get; }
+
         Task AddOrRemoveFeature();
     }
 }

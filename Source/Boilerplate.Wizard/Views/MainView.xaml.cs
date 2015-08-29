@@ -39,5 +39,10 @@
             Hyperlink hyperlink = (Hyperlink)sender;
             Process.Start(hyperlink.NavigateUri.ToString());
         }
+
+        private void OnTitleMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

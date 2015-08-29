@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Microsoft.VisualStudio.TemplateWizard;
 
-    public class FeatureWizard : IWizard
+    public class Mvc6FeatureWizard : IWizard
     {
         #region Public Methods
 
@@ -14,7 +14,7 @@
         public void ProjectFinishedGenerating(global::EnvDTE.Project project)
         {
             string projectFilePath = project.FileName;
-            new Startup().Execute(projectFilePath);
+            new Startup().Execute(projectFilePath, FeatureSet.Mvc6);
         }
 
         public void ProjectItemFinishedGenerating(global::EnvDTE.ProjectItem projectItem)
