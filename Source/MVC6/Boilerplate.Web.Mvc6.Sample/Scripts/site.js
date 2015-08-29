@@ -49,7 +49,7 @@
         // This private function is not exposed to those who want to use the calculator.
         function checkDivideByZero(x) {
             if (x === 0) {
-                throw "Divide by Zero. Value:<" + x + ">.";
+                throw new Error("Divide by Zero. Value:<" + x + ">.");
             }
         }
 
