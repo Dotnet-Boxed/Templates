@@ -16,8 +16,11 @@
         /// <summary>GIF image; Defined in RFC 2045 and RFC 2046.</summary>
         public const string Gif = "image/gif";
 
-        /// <summary>JPEG JFIF image; Defined in RFC 2045 and RFC 2046/</summary>
+        /// <summary>JPEG JFIF image; Defined in RFC 2045 and RFC 2046.</summary>
         public const string Jpg = "image/jpeg";
+
+        /// <summary>Binary JavaScript Object Notation BSON.</summary>
+        public const string Bson = "application/bson";
 
         /// <summary>JavaScript Object Notation JSON; Defined in RFC 4627.</summary>
         public const string Json = "application/json";
