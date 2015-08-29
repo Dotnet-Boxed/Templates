@@ -1,0 +1,45 @@
+﻿{
+  "webroot": "wwwroot",
+  "userSecretsId": "MvcBoilerplate-296cba98-b2a8-4dcc-bbb4-0bdbcc6139c7",
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Boilerplate.Web.Mvc6": "1.0.11",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta6",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta6",
+    "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-beta6",
+    "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta6",
+    "Microsoft.Framework.Logging": "1.0.0-beta6",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
+    "Newtonsoft.Json": "7.0.1",
+    "Swashbuckle": "6.0.0-beta6",
+    "System.Runtime": "4.0.20-beta-23109"
+  },
+
+  "commands": {
+    "web": "Microsoft.AspNet.Hosting --config hosting.ini"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": { }
+  },
+
+  "exclude": [
+    "wwwroot",
+    "node_modules",
+    "bower_components"
+  ],
+  "publishExclude": [
+    "node_modules",
+    "bower_components",
+    "**.xproj",
+    "**.user",
+    "**.vspscc"
+  ]
+}
