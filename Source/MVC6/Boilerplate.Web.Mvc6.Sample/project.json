@@ -4,9 +4,9 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Boilerplate.Web.Mvc6": "1.1.0",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta6",
     "Microsoft.AspNet.Mvc": "6.0.0-beta6",
-    "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-beta6",
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
@@ -19,8 +19,7 @@
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta6",
     "Newtonsoft.Json": "7.0.1",
-    "System.Runtime": "4.0.20-beta-23109",
-    "Boilerplate.Web.Mvc6": "1.0.11"
+    "System.Runtime": "4.0.20-beta-23109"
   },
 
   "commands": {

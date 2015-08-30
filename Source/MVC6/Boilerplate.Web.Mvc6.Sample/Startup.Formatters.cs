@@ -18,9 +18,6 @@
                 .OfType<JsonOutputFormatter>()
                 .First();
             jsonOutputFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-
-            // Adds the XML input and output formatter.
-            mvcOptions.AddXmlDataContractSerializerFormatter();
         }
     }
 }

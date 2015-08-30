@@ -1,6 +1,6 @@
 {
   "AppSettings": {
-    "SiteShortTitle":  "Boilerplate",
+    "SiteShortTitle": "Boilerplate",
     "SiteTitle": "ASP.NET MVC Boilerplate"
   },
   "CacheProfileSettings": {
@@ -28,6 +28,9 @@
       "RobotsText": {
         "Duration": 86400,
         "Location": "Any"
+      },
+      "SitemapNodes": {
+        "Duration": 86400
       }
     }
   }

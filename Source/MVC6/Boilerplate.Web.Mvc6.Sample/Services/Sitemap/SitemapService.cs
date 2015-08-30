@@ -7,7 +7,9 @@
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.Caching.Memory;
     using Microsoft.Framework.Logging;
+    using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    using Settings;
 
     /// <summary>
     /// Generates sitemap XML for the current site.
@@ -20,6 +22,8 @@
         private readonly IMemoryCache memoryCache;
         private readonly IUrlHelper urlHelper;
 
+        private readonly TimeSpan cacheSlidingExpiration;
+
         #endregion
 
         #region Constructors
@@ -27,14 +31,18 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapService" /> class.
         /// </summary>
+        /// <param name="cacheProfileSettings">The cache profile settings.</param>
         /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="memoryCache">The memory cache for the application.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
+            IOptions<CacheProfileSettings> cacheProfileSettings,
             ILoggerFactory loggerFactory,
             IMemoryCache memoryCache,
             IUrlHelper urlHelper)
         {
+            CacheProfile cacheProfile = cacheProfileSettings.Options.CacheProfiles[CacheProfileName.SitemapNodes];
+            this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
             this.logger = loggerFactory.CreateLogger<SitemapService>();
             this.memoryCache = memoryCache;
             this.urlHelper = urlHelper;
@@ -55,19 +63,19 @@
         /// <returns>The sitemap XML for the current site or <c>null</c> if the sitemap index is out of range.</returns>
         public string GetSitemapXml(int? index = null)
         {
-            // Here we are caching the entire set of sitemap documents. We cannot use OutputCacheAttribute because 
+            // Here we are caching the entire set of sitemap documents. We cannot use the caching attribute because 
             // cache expiry could get out of sync if the number of sitemaps changes.
             List<string> sitemapDocuments;
-            if (!this.memoryCache.TryGetValue(CacheSetting.SitemapNodes.Key, out sitemapDocuments))
+            if (!this.memoryCache.TryGetValue(CacheProfileName.SitemapNodes, out sitemapDocuments))
             {
                 IReadOnlyCollection<SitemapNode> sitemapNodes = this.GetSitemapNodes();
                 sitemapDocuments = this.GetSitemapDocuments(sitemapNodes);
                 this.memoryCache.Set(
-                    CacheSetting.SitemapNodes.Key, 
+                    CacheProfileName.SitemapNodes, 
                     sitemapDocuments, 
                     new MemoryCacheEntryOptions()
                     {
-                        SlidingExpiration = CacheSetting.SitemapNodes.SlidingExpiration
+                        SlidingExpiration = cacheSlidingExpiration
                     });
             }
 

@@ -119,6 +119,9 @@
     <TemplateReference Include="Boilerplate.Web.Mvc6.Sample.xproj">
       <PathToProject>../MVC6/Boilerplate.Web.Mvc6.Sample/Boilerplate.Web.Mvc6.Sample.xproj</PathToProject>
     </TemplateReference>
+    <!--<TemplateReference Include="Boilerplate.Web.Mvc6Api.Sample.xproj">
+      <PathToProject>../MVC6/Boilerplate.Web.Mvc6Api.Sample/Boilerplate.Web.Mvc6Api.Sample.xproj</PathToProject>
+    </TemplateReference>-->
   </ItemGroup>
   <ItemGroup>
     <Reference Include="TemplateBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

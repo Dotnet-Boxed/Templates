@@ -8,5 +8,6 @@
         public const string ManifestJson = "ManifestJson";
         public const string OpenSearchXml = "OpenSearchXml";
         public const string RobotsText = "RobotsText";
+        public const string SitemapNodes = "SitemapNodes";
     }
 }

@@ -28,6 +28,6 @@
   </TemplateContent>
   <!--<WizardExtension>
     <Assembly>Boilerplate.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
-    <FullClassName>Boilerplate.Wizard.FeatureWizard</FullClassName>
+    <FullClassName>Boilerplate.Wizard.Mvc6FeatureWizard</FullClassName>
   </WizardExtension>-->
 </VSTemplate>
