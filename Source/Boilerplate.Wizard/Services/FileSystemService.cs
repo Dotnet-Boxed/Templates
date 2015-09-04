@@ -44,6 +44,14 @@
             return lines.ToArray();
         }
 
+        public async Task<string> FileReadAllText(string filePath)
+        {
+            using (StreamReader streamReader = File.OpenText(filePath))
+            {
+                return await streamReader.ReadToEndAsync();
+            }
+        }
+
         public async Task FileWriteAllLines(string filePath, IEnumerable<string> lines)
         {
             using (FileStream fileStream = File.OpenWrite(filePath))
@@ -54,6 +62,17 @@
                     {
                         await streamWriter.WriteLineAsync(line);
                     }
+                }
+            }
+        }
+
+        public async Task FileWriteAllText(string filePath, string text)
+        {
+            using (FileStream fileStream = File.OpenWrite(filePath))
+            {
+                using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                {
+                    await streamWriter.WriteAsync(text);
                 }
             }
         }

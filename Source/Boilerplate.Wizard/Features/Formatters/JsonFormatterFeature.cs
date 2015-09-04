@@ -1,32 +1,42 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
-    using Constants;
     using Boilerplate.Wizard.Services;
 
     public class JsonFormatterFeature : MultiChoiceFeature
     {
+        private const string StartupFormattersCs = "Startup.Formatters.cs";
+
+        private readonly IFeatureItem camelCase;
+        private readonly IFeatureItem none;
+        private readonly IFeatureItem titleCase;
+
         public JsonFormatterFeature(IProjectService projectService)
-            : base(projectService,
-                  new IFeatureItem[]
-                  {
-                      new FeatureItem(
-                          "Camel-Case (e.g. camelCase)",
-                          "The first character of the variable starts with a lower-case. Each word in the variable name after that starts with an upper-case character.",
-                          1)
-                      {
-                          IsSelected = true
-                      },
-                      new FeatureItem(
-                          "Title Case (e.g. TitleCase)",
-                          "Each word in the variable name starts with an upper-case character.",
-                          2),
-                      new FeatureItem(
-                          "None",
-                          "Removes the JSON formatter.",
-                          3)
-                  })
+            : base(projectService)
         {
+            this.camelCase = new FeatureItem(
+                "CamelCase",
+                "Camel-Case (e.g. camelCase)",
+                "The first character of the variable starts with a lower-case. Each word in the variable name after that starts with an upper-case character.",
+                1)
+            {
+                IsSelected = true
+            };
+            this.Items.Add(this.camelCase);
+
+            this.titleCase = new FeatureItem(
+                "TitleCase",
+                "Title Case (e.g. TitleCase)",
+                "Each word in the variable name starts with an upper-case character.",
+                2);
+            this.Items.Add(this.titleCase);
+
+            this.none = new FeatureItem(
+                "None",
+                "None",
+                "Removes the JSON formatter.",
+                3);
+            this.Items.Add(none);
         }
 
         public override string Description
@@ -34,14 +44,19 @@
             get { return "Choose whether to use the JSON input/output formatter and whether it should use camel or title casing."; }
         }
 
-        public override string GroupName
+        public override IFeatureGroup Group
         {
-            get { return FeatureGroupName.Formatters; }
+            get { return FeatureGroups.Formatters; }
+        }
+
+        public override string Id
+        {
+            get { return "JsonFormatter"; }
         }
 
         public override int Order
         {
-            get { return 2; }
+            get { return 1; }
         }
 
         public override string Title
@@ -51,41 +66,50 @@
 
         public override async Task AddOrRemoveFeature()
         {
-            if (this.Items[0].IsSelected)
+            if (this.camelCase.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndComment);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.EditComment(
+                    this.camelCase.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.titleCase.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
-            else if (this.Items[1].IsSelected)
+            else if (this.titleCase.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndUncommentCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.EditComment(
+                    this.camelCase.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.titleCase.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
-            else
+            else if (this.none.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndUncommentCode);
+                await this.ProjectService.EditComment(
+                    this.camelCase.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.titleCase.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
         }
     }

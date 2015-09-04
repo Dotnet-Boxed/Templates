@@ -1,33 +1,42 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Linq;
     using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Data;
     using Boilerplate.Wizard.Services;
     using Framework.ComponentModel;
 
-    public abstract class MultiChoiceFeature : NotifyPropertyChanges, IMultiChoiceFeature
+    public abstract class MultiChoiceFeature : Feature, IMultiChoiceFeature
     {
-        private readonly IProjectService projectService;
         private readonly FeatureItemCollection items;
         private readonly ICollectionView itemsView;
 
-        public MultiChoiceFeature(IProjectService projectService, IEnumerable<IFeatureItem> items)
+        #region Constructors
+
+        public MultiChoiceFeature(IProjectService projectService)
+            : base(projectService)
         {
-            this.projectService = projectService;
             this.items = new FeatureItemCollection(items);
+            this.items.CollectionChanged += this.OnCollectionChanged;
             this.items.ItemChanged += this.OnItemChanged;
             this.itemsView = CollectionViewSource.GetDefaultView(this.items);
             this.itemsView.SortDescriptions.Add(new SortDescription(nameof(IFeatureItem.Order), ListSortDirection.Ascending));
         }
 
-        public abstract string Description { get; }
+        public MultiChoiceFeature(IProjectService projectService, IEnumerable<IFeatureItem> items)
+            : this(projectService)
+        {
+            this.Items.AddRange(items);
+        }
 
-        public abstract string GroupName { get; }
+        #endregion
 
-        public bool IsDefaultSelected
+        #region Public Properties
+
+        public override bool IsDefaultSelected
         {
             get { return this.Items.IsDefaultSelected; }
         }
@@ -42,16 +51,9 @@
             get { return this.itemsView; }
         }
 
-        public abstract int Order { get; }
+        #endregion
 
-        public abstract string Title { get; }
-
-        protected IProjectService ProjectService
-        {
-            get { return this.projectService; }
-        }
-
-        public abstract Task AddOrRemoveFeature();
+        #region Public Methods
 
         public override string ToString()
         {
@@ -64,11 +66,37 @@
             }
 
             return stringBuilder.ToString();
+        } 
+
+        #endregion
+
+        #region Protected Methods
+
+        protected virtual void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (FeatureItem featureItem in e.NewItems.OfType<FeatureItem>())
+                {
+                    featureItem.Feature = this;
+                }
+            }
+
+            if (e.OldItems != null)
+            {
+                foreach (FeatureItem featureItem in e.NewItems.OfType<FeatureItem>())
+                {
+                    featureItem.Feature = null;
+                }
+            }
         }
 
-        private void OnItemChanged(object sender, ItemChangedEventArgs<IFeatureItem> e)
+
+        protected virtual void OnItemChanged(object sender, ItemChangedEventArgs<IFeatureItem> e)
         {
             this.OnPropertyChanged(nameof(IsDefaultSelected));
-        }
+        } 
+
+        #endregion
     }
 }

@@ -17,6 +17,10 @@
 
         Task<string[]> FileReadAllLines(string filePath);
 
+        Task<string> FileReadAllText(string filePath);
+
         Task FileWriteAllLines(string filePath, IEnumerable<string> lines);
+
+        Task FileWriteAllText(string filePath, string text);
     }
 }

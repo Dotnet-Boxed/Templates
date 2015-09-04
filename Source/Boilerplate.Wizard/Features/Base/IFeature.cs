@@ -4,11 +4,13 @@
 
     public interface IFeature
     {
+        string Id { get; }
+
         string Title { get; }
 
         string Description { get; }
 
-        string GroupName { get; }
+        IFeatureGroup Group { get; }
 
         int Order { get; }
 

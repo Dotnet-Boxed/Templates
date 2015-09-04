@@ -29,7 +29,8 @@
         {
             this.features = new FeatureCollection(features);
             this.featuresView = CollectionViewSource.GetDefaultView(this.features);
-            this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.GroupName)));
+            this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.Group) + "." + nameof(IFeatureGroup.Name)));
+            this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Group) + "." + nameof(IFeatureGroup.Order), ListSortDirection.Ascending));
             this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Order), ListSortDirection.Ascending));
             this.addOrRemoveFeaturesCommand = new AsyncDelegateCommand(this.AddOrRemoveFeatures);
         } 

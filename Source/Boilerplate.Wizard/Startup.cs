@@ -58,6 +58,7 @@
             {
                 // CSS and JavaScript
                 builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+                builder.RegisterType<JavaScriptTestFrameworkFeature>().As<IFeature>().SingleInstance();
             }
 
             // Formatters

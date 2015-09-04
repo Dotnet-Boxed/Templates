@@ -8,8 +8,16 @@
 
         Task DeleteFile(string relativeFilePath);
 
-        Task DeleteComment(string commentName, DeleteCommentMode deleteCommentMode);
+        Task EditComment(string commentName, EditCommentMode mode);
 
-        Task DeleteComment(string commentName, DeleteCommentMode deleteCommentMode, string relativeFilePath);
+        Task EditComment(string commentName, EditCommentMode mode, string relativeFilePath);
+
+        Task Replace(string oldValue, string newValue);
+
+        Task Replace(string oldValue, string newValue, string relativeFilePath);
+
+        Task RegexReplace(string pattern, string replacement);
+
+        Task RegexReplace(string pattern, string replacement, string relativeFilePath);
     }
 }

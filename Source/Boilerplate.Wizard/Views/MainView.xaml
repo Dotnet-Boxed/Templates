@@ -70,7 +70,8 @@
                                              IsChecked="{Binding IsSelected}"
                                              IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
                                              Margin="0, 2, 10, 0"
-                                             ToolTip="{Binding Description}">
+                                             ToolTip="{Binding Description}"
+                                             VerticalAlignment="Center">
 
                                     <Grid>
                                         <Grid>
@@ -187,15 +188,25 @@
 
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
+
+                <TextBlock Margin="5" 
+                           Style="{StaticResource NormalTextBlockStyle}"
+                           VerticalAlignment="Center">
+                    <Run>New features are bing worked on and added all the time. Have an idea for a feature you would like? </Run>
+                    <Hyperlink Click="OnHyperlinkClick" 
+                               NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">Why not contribute?</Hyperlink>
+                </TextBlock>
                 
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                <ScrollViewer Grid.Row="1" 
+                              VerticalScrollBarVisibility="Auto"
                               Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Error}">
                     <ItemsControl ItemsSource="{Binding FeaturesView}"
                                   ItemTemplateSelector="{StaticResource FeatureDataTemplateSelector}"
-                                  Margin="5">
+                                  Margin="5, 0, 5, 5">
                         <ItemsControl.GroupStyle>
                             <GroupStyle>
                                 <GroupStyle.ContainerStyle>
@@ -216,7 +227,8 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <Grid Margin="5"
+                <Grid Grid.Row="1" 
+                      Margin="5, 0, 5, 5"
                       Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Error}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -240,7 +252,7 @@
                     
                 </Grid>
 
-                <Button Grid.Row="1" 
+                <Button Grid.Row="2" 
                         Click="OnOkClick"
                         Margin="5, 0, 5, 5">
                     <Button.Style>

@@ -1,25 +1,21 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
-    using Framework.ComponentModel;
     using Boilerplate.Wizard.Services;
 
-    public abstract class BinaryFeature : NotifyPropertyChanges, IBinaryFeature
+    public abstract class BinaryFeature : Feature, IBinaryFeature
     {
         private readonly bool defaultIsSelected;
-        private readonly IProjectService projectService;
         private bool isSelected;
 
         public BinaryFeature(IProjectService projectService, bool defaultIsSelected = true)
+            : base(projectService)
         {
-            this.projectService = projectService;
             this.defaultIsSelected = defaultIsSelected;
             this.isSelected = defaultIsSelected;
         }
 
-        public abstract string Description { get; }
-
-        public bool IsDefaultSelected
+        public override bool IsDefaultSelected
         {
             get { return this.IsSelected == this.defaultIsSelected; }
         }
@@ -30,13 +26,7 @@
             set { this.SetProperty(ref this.isSelected, value, nameof(IsSelected), nameof(IsDefaultSelected)); }
         }
 
-        public abstract string GroupName { get; }
-
-        public abstract int Order { get; }
-
-        public abstract string Title { get; }
-
-        public Task AddOrRemoveFeature()
+        public override Task AddOrRemoveFeature()
         {
             if (this.IsSelected)
             {
@@ -49,11 +39,6 @@
         public override string ToString()
         {
             return string.Format($"{this.Title} - {this.IsSelected}");
-        }
-
-        protected IProjectService ProjectService
-        {
-            get { return this.projectService; }
         }
 
         protected virtual Task AddFeature()

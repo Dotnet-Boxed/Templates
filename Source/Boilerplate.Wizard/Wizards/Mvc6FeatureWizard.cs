@@ -1,6 +1,7 @@
 ﻿namespace Boilerplate.Wizard
 {
     using System.Collections.Generic;
+    using Boilerplate.Wizard.Features;
     using Microsoft.VisualStudio.TemplateWizard;
 
     public class Mvc6FeatureWizard : IWizard

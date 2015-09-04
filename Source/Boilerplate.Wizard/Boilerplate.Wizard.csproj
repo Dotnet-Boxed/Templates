@@ -61,11 +61,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\FeatureGroupName.cs" />
-    <Compile Include="FeatureSet.cs" />
+    <Compile Include="Features\FeatureSet.cs" />
     <Compile Include="Features\Base\BinaryFeature.cs" />
+    <Compile Include="Features\Base\Feature.cs" />
     <Compile Include="Features\Base\FeatureCollection.cs" />
+    <Compile Include="Features\Base\FeatureGroup.cs" />
     <Compile Include="Features\Base\FeatureItem.cs" />
     <Compile Include="Features\Base\FeatureItemCollection.cs" />
+    <Compile Include="Features\Base\IFeatureGroup.cs" />
+    <Compile Include="Features\CssAndJavaScript\JavaScriptTestFrameworkFeature.cs" />
+    <Compile Include="Features\FeatureGroups.cs" />
     <Compile Include="Features\Formatters\BsonFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
@@ -97,7 +102,7 @@
     <Compile Include="Framework\ComponentModel\Disposable.cs" />
     <Compile Include="Framework\ComponentModel\NotifyPropertyChanges.cs" />
     <Compile Include="Features\Base\IFeature.cs" />
-    <Compile Include="Services\DeleteCommentMode.cs" />
+    <Compile Include="Services\EditCommentMode.cs" />
     <Compile Include="Services\FileSystemService.cs" />
     <Compile Include="Services\IFileSystemService.cs" />
     <Compile Include="Services\IProjectService.cs" />
@@ -131,9 +136,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Assets\Icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Bootstrap.png" />
@@ -143,6 +146,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Semantic UI.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Mocha.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Jasmine.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

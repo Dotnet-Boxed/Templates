@@ -9,21 +9,21 @@
 
     public class ProjectServiceTest
     {
-        [Theory(DisplayName = "ProjectService.DeleteComment")]
-        [InlineData(DeleteCommentMode.StartEndComment, ".txt", "#", null)]
-        [InlineData(DeleteCommentMode.StartEndCommentAndCode, ".txt", "#", null)]
-        [InlineData(DeleteCommentMode.StartEndCommentAndUncommentCode, ".txt", "#", null)]
-        [InlineData(DeleteCommentMode.StartEndComment, ".cs", "//", null)]
-        [InlineData(DeleteCommentMode.StartEndCommentAndCode, ".cs", "//", null)]
-        [InlineData(DeleteCommentMode.StartEndCommentAndUncommentCode, ".cs", "//", null)]
-        [InlineData(DeleteCommentMode.StartEndComment, ".cshtml", "@*", "*@")]
-        [InlineData(DeleteCommentMode.StartEndCommentAndCode, ".cshtml", "@*", "*@")]
-        [InlineData(DeleteCommentMode.StartEndCommentAndUncommentCode, ".cshtml", "@*", "*@")]
-        [InlineData(DeleteCommentMode.StartEndComment, ".xml", "<!--", "-->")]
-        [InlineData(DeleteCommentMode.StartEndCommentAndCode, ".xml", "<!--", "-->")]
-        [InlineData(DeleteCommentMode.StartEndCommentAndUncommentCode, ".xml", "<!--", "-->")]
-        public async Task DeleteCommentTest(
-            DeleteCommentMode mode,
+        [Theory(DisplayName = "ProjectService.EditComment")]
+        [InlineData(EditCommentMode.LeaveCodeUnchanged, ".txt", "#", null)]
+        [InlineData(EditCommentMode.DeleteCode, ".txt", "#", null)]
+        [InlineData(EditCommentMode.UncommentCode, ".txt", "#", null)]
+        [InlineData(EditCommentMode.LeaveCodeUnchanged, ".cs", "//", null)]
+        [InlineData(EditCommentMode.DeleteCode, ".cs", "//", null)]
+        [InlineData(EditCommentMode.UncommentCode, ".cs", "//", null)]
+        [InlineData(EditCommentMode.LeaveCodeUnchanged, ".cshtml", "@*", "*@")]
+        [InlineData(EditCommentMode.DeleteCode, ".cshtml", "@*", "*@")]
+        [InlineData(EditCommentMode.UncommentCode, ".cshtml", "@*", "*@")]
+        [InlineData(EditCommentMode.LeaveCodeUnchanged, ".xml", "<!--", "-->")]
+        [InlineData(EditCommentMode.DeleteCode, ".xml", "<!--", "-->")]
+        [InlineData(EditCommentMode.UncommentCode, ".xml", "<!--", "-->")]
+        public async Task EditCommentTest(
+            EditCommentMode mode,
             string fileExtension,
             string commentStart,
             string commentEnd = null)
@@ -46,20 +46,20 @@
             IProjectService projectService = new ProjectService(fileSystemServiceMock.Object, @"C:\Project\Project.xproj");
 
             // Act
-            await projectService.DeleteComment(commentName, mode, "File" + fileExtension);
+            await projectService.EditComment(commentName, mode, "File" + fileExtension);
 
             // Assert
             fileSystemServiceMock.VerifyAll();
         }
 
-        private static IEnumerable<string> GetOutputLines(DeleteCommentMode deleteCommentMode, string commentStart, string commentEnd = null)
+        private static IEnumerable<string> GetOutputLines(EditCommentMode mode, string commentStart, string commentEnd = null)
         {
             if (commentEnd != null)
             {
                 commentEnd = " " + commentEnd;
             }
 
-            if (deleteCommentMode == DeleteCommentMode.StartEndComment)
+            if (mode == EditCommentMode.LeaveCodeUnchanged)
             {
                 return new string[]
                 {
@@ -68,7 +68,7 @@
                     $"   {commentStart} Blah Blah Blah{commentEnd}    "
                 };
             }
-            else if (deleteCommentMode == DeleteCommentMode.StartEndCommentAndCode)
+            else if (mode == EditCommentMode.DeleteCode)
             {
                 return new string[]
                 {

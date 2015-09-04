@@ -1,36 +1,46 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
+    using Boilerplate.Wizard.Constants;
     using Boilerplate.Wizard.Services;
-    using Constants;
 
     public class XmlFormatterFeature : MultiChoiceFeature
     {
+        private const string StartupFormattersCs = "Startup.Formatters.cs";
+
+        private readonly IFeatureItem dataContractSerializer;
+        private readonly IFeatureItem none;
+        private readonly IFeatureItem xmlSerializer;
+
         public XmlFormatterFeature(IProjectService projectService, FeatureSet featureSet)
-            : base(projectService,
-                  new IFeatureItem[]
-                  {
-                      new FeatureItem(
-                          "None",
-                          "Removes the XML formatter.",
-                          featureSet == FeatureSet.Mvc6 ? 1 : 3)
-                      {
-                          IsSelected = featureSet == FeatureSet.Mvc6
-                      },
-                      new FeatureItem(
-                          "DataContractSerializer",
-                          "Include an XML input and output formatter using the DataContractSerializer.",
-                          featureSet == FeatureSet.Mvc6 ? 2 : 1)
-                      {
-                          IsSelected = featureSet == FeatureSet.Mvc6Api
-                      },
-                      new FeatureItem(
-                          "XmlSerializer",
-                          "Include an XML input and output formatter using the XmlSerializer.",
-                          featureSet == FeatureSet.Mvc6 ? 3 : 2),
-                      
-                  })
+            : base(projectService)
         {
+            this.none = new FeatureItem(
+                "None",
+                "None",
+                "Removes the XML formatter.",
+                featureSet == FeatureSet.Mvc6 ? 1 : 3)
+            {
+                IsSelected = featureSet == FeatureSet.Mvc6
+            };
+            this.Items.Add(none);
+
+            this.dataContractSerializer = new FeatureItem(
+                "DataContractSerializer",
+                "DataContractSerializer",
+                "Include an XML input and output formatter using the DataContractSerializer.",
+                featureSet == FeatureSet.Mvc6 ? 2 : 1)
+            {
+                IsSelected = featureSet == FeatureSet.Mvc6Api
+            };
+            this.Items.Add(dataContractSerializer);
+
+            this.xmlSerializer = new FeatureItem(
+                "XmlSerializer",
+                "XmlSerializer",
+                "Include an XML input and output formatter using the XmlSerializer.",
+                featureSet == FeatureSet.Mvc6 ? 3 : 2);
+            this.Items.Add(xmlSerializer);
         }
 
         public override string Description
@@ -38,14 +48,19 @@
             get { return "Choose whether to use an XML input/output formatter and whether to use the DataContract or XmlSerialiser."; }
         }
 
-        public override string GroupName
+        public override IFeatureGroup Group
         {
-            get { return FeatureGroupName.Formatters; }
+            get { return FeatureGroups.Formatters; }
+        }
+
+        public override string Id
+        {
+            get { return "XmlFormatter"; }
         }
 
         public override int Order
         {
-            get { return 4; }
+            get { return 3; }
         }
 
         public override string Title
@@ -55,41 +70,50 @@
 
         public override async Task AddOrRemoveFeature()
         {
-            if (this.Items[0].IsSelected)
+            if (this.none.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndComment);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.dataContractSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.xmlSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
-            else if (this.Items[1].IsSelected)
+            else if (this.dataContractSerializer.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndUncommentCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndCode);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.dataContractSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.xmlSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
-            else
+            else if (this.xmlSerializer.IsSelected)
             {
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-CamelCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-TitleCase",
-                    DeleteCommentMode.StartEndCommentAndCode);
-                await this.ProjectService.DeleteComment(
-                    "JsonFormatter-None",
-                    DeleteCommentMode.StartEndCommentAndUncommentCode);
+                await this.ProjectService.EditComment(
+                    this.none.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.dataContractSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
+                await this.ProjectService.EditComment(
+                    this.xmlSerializer.CommentName,
+                    EditCommentMode.DeleteCode,
+                    StartupFormattersCs);
             }
         }
     }

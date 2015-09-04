@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
     public class ProjectService : IProjectService
@@ -42,20 +43,58 @@
             }
         }
 
-        public async Task DeleteComment(string commentName, DeleteCommentMode mode)
+        public async Task EditComment(string commentName, EditCommentMode mode)
         {
             foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
             {
-                await this.DeleteCommentInternal(commentName, filePath, mode);
+                await this.EditCommentInternal(commentName, mode, filePath);
             }
         }
 
-        public async Task DeleteComment(string commentName, DeleteCommentMode mode, string relativeFilePath)
+        public async Task EditComment(string commentName, EditCommentMode mode, string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
-                await this.DeleteCommentInternal(commentName, filePath, mode);
+                await this.EditCommentInternal(commentName, mode, filePath);
+            }
+        }
+
+        public async Task Replace(string oldValue, string newValue)
+        {
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
+            {
+                await this.Replace(oldValue, newValue, filePath);
+            }
+        }
+
+        public async Task Replace(string oldValue, string newValue, string relativeFilePath)
+        {
+            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            if (this.fileSystemService.FileExists(filePath))
+            {
+                string text = await this.fileSystemService.FileReadAllText(filePath);
+                text = text.Replace(oldValue, newValue);
+                await this.fileSystemService.FileWriteAllText(filePath, text);
+            }
+        }
+
+        public async Task RegexReplace(string pattern, string replacement)
+        {
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
+            {
+                await this.RegexReplace(pattern, replacement, filePath);
+            }
+        }
+
+        public async Task RegexReplace(string pattern, string replacement, string relativeFilePath)
+        {
+            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            if (this.fileSystemService.FileExists(filePath))
+            {
+                string text = await this.fileSystemService.FileReadAllText(filePath);
+                text = Regex.Replace(text, pattern, replacement);
+                await this.fileSystemService.FileWriteAllText(filePath, text);
             }
         }
 
@@ -63,7 +102,7 @@
 
         #region Private Methods
 
-        private async Task DeleteCommentInternal(string commentName, string filePath, DeleteCommentMode mode)
+        private async Task EditCommentInternal(string commentName, EditCommentMode mode, string filePath)
         {
             string fileExtension = Path.GetExtension(filePath);
             Comment comment = Comment.GetComment(fileExtension);
@@ -88,11 +127,11 @@
                     {
                         isUncommenting = false;
                     }
-                    else if (mode != DeleteCommentMode.StartEndCommentAndCode)
+                    else if (mode != EditCommentMode.DeleteCode)
                     {
                         string newLine = line;
 
-                        if (mode == DeleteCommentMode.StartEndCommentAndUncommentCode)
+                        if (mode == EditCommentMode.UncommentCode)
                         {
                             if (newLine.TrimStart().StartsWith(comment.Start))
                             {
