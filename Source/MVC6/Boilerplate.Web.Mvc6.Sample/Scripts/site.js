@@ -25,9 +25,18 @@
         // Add your code here if you want to access the DOM.
     });
 
-    // This is an example of creating a calculator object under the framework namespace. The calculator is using the 
-    // Revealing Module Pattern (See http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript)
-    framework.calculator = (function () {
+    // This is an example of creating a Calculator object under the framework namespace. The Calculator is using the 
+    // Revealing Prototype Pattern. You can use the Calculator using the 'new' keyword e.g. var c = new Calculator();
+    // (See http://weblogs.asp.net/dwahlin/techniques-strategies-and-patterns-for-structuring-javascript-code-revealing-prototype-pattern)
+    framework.Calculator = function (throwOnDivideByZero) {
+        // Calculator constructor. You can pass parameters to the Calculator and/or create private variables like here.
+        this.throwOnDivideByZero = throwOnDivideByZero === undefined ? true : throwOnDivideByZero;
+    };
+    framework.Calculator.prototype = (function () {
+
+        // The 'self' variable ensures that the 'this' keyword references the Calculator and not the calling function.
+        // (See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+        var self = this;
 
         function add(a, b) {
             return a + b;
@@ -46,10 +55,10 @@
             return a / b;
         }
 
-        // This private function is not exposed to those who want to use the calculator.
+        // This private function is not exposed to those who want to use the Calculator.
         function checkDivideByZero(x) {
-            if (x === 0) {
-                throw new Error("Divide by Zero. Value:<" + x + ">.");
+            if ((x === 0) && self.throwOnDivideByZero) {
+                throw new Error("Divide by Zero.");
             }
         }
 

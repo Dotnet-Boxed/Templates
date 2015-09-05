@@ -1,9 +1,8 @@
 ﻿namespace MvcBoilerplate
 {
     using Microsoft.AspNet.Hosting;
+    using Microsoft.Dnx.Runtime;
     using Microsoft.Framework.Configuration;
-    using Microsoft.Framework.Runtime;
-    using MvcBoilerplate.Constants;
 
     public partial class Startup
     {
@@ -21,7 +20,7 @@
             IHostingEnvironment hostingEnvironment)
         {
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder(
-              applicationEnvironment.ApplicationBasePath);
+                applicationEnvironment.ApplicationBasePath);
 
             // Add configuration from the config.json file.
             configurationBuilder.AddJsonFile("config.json");

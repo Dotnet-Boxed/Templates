@@ -103,13 +103,13 @@
 
 
     @* Move site.css to a content delivery network (CDN) for better performance. *@
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
     <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
-    <environment names="@EnvironmentName.Development">
-        <link asp-file-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
-        <script asp-file-version="true" src="~/js/modernizr.js"></script>
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+        <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
+        <script asp-append-version="true" src="~/js/modernizr.js"></script>
     </environment>
-    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
         <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl" />
         <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
     </environment>
@@ -215,16 +215,16 @@
     </div>
 
 
-    <environment names="@EnvironmentName.Development">
-        <script asp-file-version="true" src="~/js/jquery.js"></script>
-        <script asp-file-version="true" src="~/js/jquery-validate.js"></script>
-        <script asp-file-version="true" src="~/js/jquery-validate-unobtrusive.js"></script>
-        <script asp-file-version="true" src="~/js/bootstrap.js"></script>
-        <script asp-file-version="true" src="~/js/hammer.js"></script>
-        <script asp-file-version="true" src="~/js/bootstrap-touch-carousel.js"></script>
-        <script asp-file-version="true" src="~/js/site.js"></script>
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+        <script asp-append-version="true" src="~/js/jquery.js"></script>
+        <script asp-append-version="true" src="~/js/jquery-validate.js"></script>
+        <script asp-append-version="true" src="~/js/jquery-validate-unobtrusive.js"></script>
+        <script asp-append-version="true" src="~/js/bootstrap.js"></script>
+        <script asp-append-version="true" src="~/js/hammer.js"></script>
+        <script asp-append-version="true" src="~/js/bootstrap-touch-carousel.js"></script>
+        <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
-    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
         <script src="@ContentDeliveryNetwork.Google.JQueryUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
@@ -232,7 +232,7 @@
         <script src="@ContentDeliveryNetwork.Microsoft.HammerUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.BootstrapTouchCarouselJsUrl"></script>
         @* Move site.js to a content delivery network (CDN) for better performance. *@
-        <script src="~/js/site.js"></script>
+        <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
     @RenderSection("scripts", required: false)
 </body>

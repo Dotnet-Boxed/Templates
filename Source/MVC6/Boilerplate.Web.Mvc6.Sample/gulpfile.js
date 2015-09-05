@@ -24,10 +24,9 @@ var gulp = require("gulp"),
 	sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
 	scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
-    typescript = require("gulp-tsc");           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc/)
+    typescript = require("gulp-tsc"),           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc/)
+    project = require("./project.json");        // Read the project.json file into the project variable.
 
-// Read the project.json file into the project variable.
-eval("var project = " + fs.readFileSync("./project.json"));
 // Holds information about the hosting environment.
 var environment = {
     // The names of the different environments.
@@ -54,7 +53,7 @@ var paths = {
     styles: "Styles/",
 
     // Destination Folder Paths
-    wwwroot: "./" + project.webroot,
+    wwwroot: "./" + project.webroot + "/",
     css: "./" + project.webroot + "/css/",
     fonts: "./" + project.webroot + "/fonts/",
     img: "./" + project.webroot + "/img/",

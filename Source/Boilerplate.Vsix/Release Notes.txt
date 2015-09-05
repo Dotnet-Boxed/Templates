@@ -1,4 +1,28 @@
-﻿Version 2.1.3
+﻿Version 2.1.4
+MVC 5 & 6
+- site.js updated to use the revealing prototype pattern instead of the revealing module pattern.
+- site.js updated with comments about this vs self.
+- Updated the jQuery Validation NuGet/Bower package to 1.14.0.
+- Updated the jQuery Validation CDN link in ContentDeliveryNetwork.cs to 1.14.0.
+- Updated the Bootstrap NuGet/Bower package to 3.3.5.
+- Updated the Bootstrap CDN link in ContentDeliveryNetwork.cs to 3.3.5.
+MVC 5
+- Added the CSharpRazorViewEngine to Boilerplate.Web.Mvc5 NuGet package.
+- Used the CSharpRazorViewEngine in Global.asax.cs instead of RazorViewEngine.
+MVC 6
+- Upgraded Boilerplate.Web.Mvc6 to Beta 7 with version 1.2.0.
+- upgraded project template to Beta 7 and Boilerplate.Web.Mvc6 1.2.0.
+- Updated ReadMe.html with information about how to upgrade to Beta 7.
+- Added the Microsoft.Framework.Logging.Debug package and loggerFactory.AddDebug(); in the Development environment.
+- Updated gulpfile.js to require project.json instead of using eval.
+MVC 6 API (Coming Soon)
+- Upgraded Boilerplate.Web.Mvc6 to Beta 7 with version 1.2.0.
+- Upgraded project template to Beta 7 and Boilerplate.Web.Mvc6 1.2.0.
+- Added BSON formatter.
+Feature Selection Wizard (Coming Soon)
+- More improvements
+
+Version 2.1.3
 MVC 5 & 6
 - The calculator in site.js now throws Error instead of a string.
 MVC 6

@@ -18,10 +18,10 @@
         private static void ConfigureOptionsServices(IServiceCollection services, IConfiguration configuration)
         {
             // Adds IOptions<AppSettings> to the services container.
-            services.Configure<AppSettings>(configuration.GetConfigurationSection(nameof(AppSettings)));
+            services.Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)));
 
             // Adds IOptions<CacheProfileSettings> to the services container.
-            services.Configure<CacheProfileSettings>(configuration.GetConfigurationSection(nameof(CacheProfileSettings)));
+            services.Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
         }
     }
 }

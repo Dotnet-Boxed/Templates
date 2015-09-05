@@ -4,10 +4,10 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Routing;
+    using Microsoft.Dnx.Runtime;
     using Microsoft.Framework.Configuration;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.Logging;
-    using Microsoft.Framework.Runtime;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -56,7 +56,15 @@
             ConfigureCachingServices(services);
 
             // Add many MVC services to the services container.
-            services.AddMvc();
+            IMvcBuilder mvcBuilder = services.AddMvc(
+                mvcOptions =>
+                {
+                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.Configuration);
+                    ConfigureSecurityFilters(mvcOptions.Filters);
+                    ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
+                    ConfigureFormatters(mvcOptions);
+                });
+            ConfigureFormatters(mvcBuilder);
 
             ConfigureSwagger(services, this.Configuration);
 
@@ -68,17 +76,7 @@
                     routeOptions = x;
                     ConfigureRouting(routeOptions);
                 });
-
-            // Configure all other MVC settings.
-            services.ConfigureMvc(
-                mvcOptions =>
-                {
-                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.Configuration);
-                    ConfigureSecurityFilters(mvcOptions.Filters);
-                    ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
-                    ConfigureFormatters(mvcOptions);
-                });
-
+            
             ConfigureAntiforgeryServices(services);
             ConfigureCustomServices(services);
         }

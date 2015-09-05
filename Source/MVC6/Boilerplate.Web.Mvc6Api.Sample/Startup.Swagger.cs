@@ -16,8 +16,9 @@
         /// stored.</param>
         private static void ConfigureSwagger(IServiceCollection services, IConfiguration configuration)
         {
-            var configurationSection = configuration.GetConfigurationSection(nameof(AppSettings));
-            var appSettings = ConfigurationBinder.Bind<AppSettings>(configurationSection);
+            var configurationSection = configuration.GetSection(nameof(AppSettings));
+            AppSettings appSettings = new AppSettings();
+            ConfigurationBinder.Bind(configurationSection, appSettings);
 
             services.AddSwagger(
                 x =>
