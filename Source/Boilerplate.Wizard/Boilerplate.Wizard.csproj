@@ -80,6 +80,7 @@
     <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
+    <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
     <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
     <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
     <Compile Include="Wizards\Mvc6ApiFeatureWizard.cs" />
