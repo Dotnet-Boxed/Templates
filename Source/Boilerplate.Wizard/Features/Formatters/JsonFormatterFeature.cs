@@ -25,7 +25,7 @@
 
             this.titleCase = new FeatureItem(
                 "TitleCase",
-                "Title Case (e.g. TitleCase)",
+                "Title-Case (e.g. TitleCase)",
                 "Each word in the variable name starts with an upper-case character.",
                 2);
             this.Items.Add(this.titleCase);
