@@ -3,13 +3,17 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "3.3.5",
+    "bootstrap-touch-carousel": "0.8.0",
     "font-awesome": "4.4.0",
+    "hammer.js": "2.0.4",
     "jquery": "2.1.4",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.2",
-    "modernizr": "2.8.3",
-
-    "hammer.js": "2.0.4",
-    "bootstrap-touch-carousel": "0.8.0"
+    // $Start-JavaScriptTestFramework-Mocha$
+    "mocha": "2.3.0",
+    "chai": "3.2.0",
+    "sinon": "1.16.1",
+    // $End-JavaScriptTestFramework-Mocha$
+    "modernizr": "2.8.3"
   }
 }

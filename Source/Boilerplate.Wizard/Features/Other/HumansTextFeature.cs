@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
-    public class HumansTextFeature : BinaryFeature
+    public class HumansTextFeature : BinaryChoiceFeature
     {
         public HumansTextFeature(IProjectService projectService)
             : base(projectService)
@@ -13,6 +13,16 @@
         public override string Id
         {
             get { return "HumansTxt"; }
+        }
+
+        public override bool IsDefaultSelected
+        {
+            get { return true; }
+        }
+
+        public override bool IsVisible
+        {
+            get { return true; }
         }
 
         public override string Title

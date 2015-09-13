@@ -18,7 +18,12 @@
 
         public Task<string[]> DirectoryGetAllFiles(string directoryPath)
         {
-            return Task.Run(() => Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories));
+            return DirectoryGetAllFiles(directoryPath, "*");
+        }
+
+        public Task<string[]> DirectoryGetAllFiles(string directoryPath, string searchPattern)
+        {
+            return Task.Run(() => Directory.GetFiles(directoryPath, searchPattern, SearchOption.AllDirectories));
         }
 
         public Task FileDelete(string filePath)
@@ -37,8 +42,11 @@
 
             using (StreamReader streamReader = File.OpenText(filePath))
             {
-                string line = await streamReader.ReadLineAsync();
-                lines.Add(line);
+                while (!streamReader.EndOfStream)
+                {
+                    string line = await streamReader.ReadLineAsync();
+                    lines.Add(line);
+                }
             }
 
             return lines.ToArray();
@@ -54,7 +62,7 @@
 
         public async Task FileWriteAllLines(string filePath, IEnumerable<string> lines)
         {
-            using (FileStream fileStream = File.OpenWrite(filePath))
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter streamWriter = new StreamWriter(fileStream))
                 {
@@ -68,7 +76,7 @@
 
         public async Task FileWriteAllText(string filePath, string text)
         {
-            using (FileStream fileStream = File.OpenWrite(filePath))
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
                 using (StreamWriter streamWriter = new StreamWriter(fileStream))
                 {

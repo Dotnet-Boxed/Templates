@@ -24,7 +24,9 @@
 
                     // If you have enabled SSL/TLS. Uncomment this line to ensure that the Anti-Forgery cookie requires 
                     // SSL /TLS to be sent across the wire. 
+                    // $Start-HttpsEverywhere$
                     // antiForgeryOptions.RequireSSL = true;
+                    // $End-HttpsEverywhere$
                 });
         }
     }

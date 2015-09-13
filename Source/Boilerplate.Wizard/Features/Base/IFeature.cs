@@ -6,6 +6,10 @@
     {
         string Id { get; }
 
+        bool IsDefaultSelected { get; }
+
+        bool IsVisible { get; }
+
         string Title { get; }
 
         string Description { get; }
@@ -13,8 +17,6 @@
         IFeatureGroup Group { get; }
 
         int Order { get; }
-
-        bool IsDefaultSelected { get; }
 
         Task AddOrRemoveFeature();
     }

@@ -70,7 +70,7 @@
                 {
                     ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.Configuration);
                     ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
-                    ConfigureSecurityFilters(mvcOptions.Filters);
+                    ConfigureSecurityFilters(services.BuildServiceProvider().GetService<IHostingEnvironment>(), mvcOptions.Filters);
                     ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
                 });
             ConfigureFormatters(mvcBuilder);

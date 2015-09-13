@@ -19,7 +19,9 @@
         private static void ConfigureSecurityFilters(ICollection<IFilterMetadata> filters)
         {
             // Require HTTPS to be used across the whole site.
+            // $Start-HttpsEverywhere$
             // filters.Add(new RequireHttpsAttribute());
+            // $End-HttpsEverywhere$
 
             // TODO: NWebSec Does not support MVC 6 yet so all of this is commented out for now.
 

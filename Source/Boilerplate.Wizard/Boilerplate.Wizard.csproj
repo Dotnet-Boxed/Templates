@@ -60,9 +60,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\FeatureGroupName.cs" />
     <Compile Include="Features\FeatureSet.cs" />
-    <Compile Include="Features\Base\BinaryFeature.cs" />
+    <Compile Include="Features\Base\BinaryChoiceFeature.cs" />
     <Compile Include="Features\Base\Feature.cs" />
     <Compile Include="Features\Base\FeatureCollection.cs" />
     <Compile Include="Features\Base\FeatureGroup.cs" />
@@ -72,17 +71,23 @@
     <Compile Include="Features\CssAndJavaScript\JavaScriptTestFrameworkFeature.cs" />
     <Compile Include="Features\FeatureGroups.cs" />
     <Compile Include="Features\Formatters\BsonFormatterFeature.cs" />
+    <Compile Include="Features\Formatters\NotAcceptableFormatterFeature.cs" />
+    <Compile Include="Features\Formatters\NoContentFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
+    <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
     <Compile Include="Features\Other\HumansTextFeature.cs" />
-    <Compile Include="Features\Base\IBinaryFeature.cs" />
+    <Compile Include="Features\Base\IBinaryChoiceFeature.cs" />
     <Compile Include="Features\Base\IFeatureItem.cs" />
     <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
+    <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
     <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
     <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
+    <Compile Include="Services\IPortService.cs" />
+    <Compile Include="Services\PortService.cs" />
     <Compile Include="Wizards\Mvc6ApiFeatureWizard.cs" />
     <Compile Include="Wizards\Mvc6FeatureWizard.cs" />
     <Compile Include="Framework\UI\Controls\LoadingContent.cs" />
@@ -153,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Jasmine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Swagger.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

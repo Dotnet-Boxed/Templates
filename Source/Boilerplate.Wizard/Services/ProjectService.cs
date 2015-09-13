@@ -51,10 +51,18 @@
             }
         }
 
-        public async Task EditComment(string commentName, EditCommentMode mode, string relativeFilePath)
+        public async Task EditCommentInFile(string commentName, EditCommentMode mode, string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
+            {
+                await this.EditCommentInternal(commentName, mode, filePath);
+            }
+        }
+
+        public async Task EditCommentByPattern(string commentName, EditCommentMode mode, string searchPattern)
+        {
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
             {
                 await this.EditCommentInternal(commentName, mode, filePath);
             }
@@ -64,11 +72,11 @@
         {
             foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
             {
-                await this.Replace(oldValue, newValue, filePath);
+                await this.ReplaceInFile(oldValue, newValue, filePath);
             }
         }
 
-        public async Task Replace(string oldValue, string newValue, string relativeFilePath)
+        public async Task ReplaceInFile(string oldValue, string newValue, string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
@@ -79,15 +87,23 @@
             }
         }
 
+        public async Task ReplaceByPattern(string oldValue, string newValue, string searchPattern)
+        {
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
+            {
+                await this.ReplaceInFile(oldValue, newValue, filePath);
+            }
+        }
+
         public async Task RegexReplace(string pattern, string replacement)
         {
             foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
             {
-                await this.RegexReplace(pattern, replacement, filePath);
+                await this.RegexReplaceInFile(pattern, replacement, filePath);
             }
         }
 
-        public async Task RegexReplace(string pattern, string replacement, string relativeFilePath)
+        public async Task RegexReplaceInFile(string pattern, string replacement, string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
@@ -95,6 +111,14 @@
                 string text = await this.fileSystemService.FileReadAllText(filePath);
                 text = Regex.Replace(text, pattern, replacement);
                 await this.fileSystemService.FileWriteAllText(filePath, text);
+            }
+        }
+
+        public async Task RegexReplaceByPattern(string pattern, string replacement, string searchPattern)
+        {
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
+            {
+                await this.RegexReplaceInFile(pattern, replacement, filePath);
             }
         }
 
@@ -137,8 +161,9 @@
                             {
                                 int commentIndex = newLine.IndexOf(comment.Start);
                                 newLine = newLine.Substring(0, commentIndex) +
-                                    new string(' ', comment.Start.Length) +
-                                    newLine.Substring(commentIndex + comment.Start.Length);
+                                    (newLine[commentIndex + comment.Start.Length] == ' ' ?
+                                    newLine.Substring(commentIndex + comment.Start.Length + 1) :
+                                    newLine.Substring(commentIndex + comment.Start.Length));
                             }
 
                             if (comment.HasEnd && newLine.TrimEnd().EndsWith(comment.End))

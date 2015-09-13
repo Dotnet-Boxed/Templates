@@ -3,15 +3,14 @@
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
-    public class JsonFormatterFeature : MultiChoiceFeature
+    public class JsonSerializerSettingsFeature : MultiChoiceFeature
     {
         private const string StartupFormattersCs = "Startup.Formatters.cs";
 
         private readonly IFeatureItem camelCase;
-        private readonly IFeatureItem none;
         private readonly IFeatureItem titleCase;
 
-        public JsonFormatterFeature(IProjectService projectService)
+        public JsonSerializerSettingsFeature(IProjectService projectService)
             : base(projectService)
         {
             this.camelCase = new FeatureItem(
@@ -30,18 +29,11 @@
                 "Each word in the variable name starts with an upper-case character.",
                 2);
             this.Items.Add(this.titleCase);
-
-            this.none = new FeatureItem(
-                "None",
-                "None",
-                "Removes the JSON formatter.",
-                3);
-            this.Items.Add(none);
         }
 
         public override string Description
         {
-            get { return "Choose whether to use the JSON input/output formatter and whether it should use camel or title casing."; }
+            get { return "Choose whether the JSON serializer uses camel or title casing."; }
         }
 
         public override IFeatureGroup Group
@@ -51,7 +43,12 @@
 
         public override string Id
         {
-            get { return "JsonFormatter"; }
+            get { return "JsonSerializerSettings"; }
+        }
+
+        public override bool IsVisible
+        {
+            get { return true; }
         }
 
         public override int Order
@@ -61,53 +58,22 @@
 
         public override string Title
         {
-            get { return "JSON Formatter"; }
+            get { return "JSON Serializer Settings"; }
         }
 
         public override async Task AddOrRemoveFeature()
         {
             if (this.camelCase.IsSelected)
             {
-                await this.ProjectService.EditComment(
-                    this.camelCase.CommentName,
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
                     EditCommentMode.LeaveCodeUnchanged,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.titleCase.CommentName,
-                    EditCommentMode.DeleteCode,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.none.CommentName,
-                    EditCommentMode.DeleteCode,
                     StartupFormattersCs);
             }
             else if (this.titleCase.IsSelected)
             {
-                await this.ProjectService.EditComment(
-                    this.camelCase.CommentName,
-                    EditCommentMode.LeaveCodeUnchanged,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.titleCase.CommentName,
-                    EditCommentMode.DeleteCode,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.none.CommentName,
-                    EditCommentMode.DeleteCode,
-                    StartupFormattersCs);
-            }
-            else if (this.none.IsSelected)
-            {
-                await this.ProjectService.EditComment(
-                    this.camelCase.CommentName,
-                    EditCommentMode.LeaveCodeUnchanged,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.titleCase.CommentName,
-                    EditCommentMode.DeleteCode,
-                    StartupFormattersCs);
-                await this.ProjectService.EditComment(
-                    this.none.CommentName,
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
                     EditCommentMode.DeleteCode,
                     StartupFormattersCs);
             }

@@ -65,8 +65,10 @@
                     ConfigureFormatters(mvcOptions);
                 });
             ConfigureFormatters(mvcBuilder);
+            // $Start-Swagger$
 
             ConfigureSwagger(services, this.Configuration);
+            // $End-Swagger$
 
             // Configure MVC routing. We store the route options for use by ConfigureSearchEngineOptimizationFilters.
             RouteOptions routeOptions = null;

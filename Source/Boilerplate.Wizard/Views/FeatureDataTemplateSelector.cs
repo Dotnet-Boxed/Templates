@@ -6,16 +6,16 @@
 
     public class FeatureDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate BinaryFeatureDataTemplate { get; set; }
+        public DataTemplate BinaryChoiceFeatureDataTemplate { get; set; }
 
         public DataTemplate MultiChoiceFeatureDataTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            IBinaryFeature binaryFeature = item as IBinaryFeature;
-            if (binaryFeature != null)
+            IBinaryChoiceFeature binaryChoiceFeature = item as IBinaryChoiceFeature;
+            if (binaryChoiceFeature != null)
             {
-                return this.BinaryFeatureDataTemplate;
+                return this.BinaryChoiceFeatureDataTemplate;
             }
 
             IMultiChoiceFeature multiChoiceFeature = item as IMultiChoiceFeature;

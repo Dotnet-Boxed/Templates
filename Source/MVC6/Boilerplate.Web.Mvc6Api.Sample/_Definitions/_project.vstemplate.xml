@@ -26,8 +26,8 @@
       <ProjectItem ReplaceParameters="true" TargetFileName="ReadMe.html" OpenInWebBrowser="true">ReadMe.html</ProjectItem>
     </Project>
   </TemplateContent>
-  <!--<WizardExtension>
+  <WizardExtension>
     <Assembly>Boilerplate.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
     <FullClassName>Boilerplate.Wizard.Mvc6ApiFeatureWizard</FullClassName>
-  </WizardExtension>-->
+  </WizardExtension>
 </VSTemplate>

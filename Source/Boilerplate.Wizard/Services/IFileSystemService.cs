@@ -11,6 +11,8 @@
 
         Task<string[]> DirectoryGetAllFiles(string directoryPath);
 
+        Task<string[]> DirectoryGetAllFiles(string directoryPath, string searchPattern);
+
         Task FileDelete(string filePath);
 
         bool FileExists(string filePath);

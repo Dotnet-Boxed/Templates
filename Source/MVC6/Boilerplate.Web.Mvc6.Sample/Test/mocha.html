@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mocha JavaScript Tests</title>
+    <meta name="description" content="Mocha (https://mochajs.org/) is a JavaScript testing framework that you can use 
+          to write tests for your JavaScript code. This file is the main HTML page for the tests. Opening this file in 
+          a browser runs the tests. Alternatively, you can run the 'test-js' Gulp task in the Task Runner Explorer to 
+          run the tests in the PhantomJS web browser (http://phantomjs.org/) which is a headless web browser (It has 
+          no user interface) based on Chrome. In this case the test results are output to the command line.">
+
+    <!-- Mocha CSS Stylesheet - Used to nicely display the test results if you open this file in a browser. -->
+    <link rel="stylesheet" href="../bower_components/mocha/mocha.css"/>
+</head>
+<body>
+    <!-- Display the Mocha test results here. -->
+    <div id="mocha"></div>
+
+    <!-- Mocha - The Mocha test runner script. -->
+    <script src="../bower_components/mocha/mocha.js"></script>
+    <!-- Chai - An assertion library (http://chaijs.com/) used to make should/expect/assert statements. -->
+    <script src="../bower_components/chai/chai.js"></script>
+    <!-- Sinon - A stub/spy/mocking library (http://sinonjs.org/). -->
+    <script src="../bower_components/sinon/lib/sinon.js"></script>
+
+    <!-- Dependencies - The dependencies of your system under test (SUT). -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- System Under Test (SUT) - The code we want to test. -->
+    <script src="../Scripts/site.js"></script>
+
+    <script>
+        // Setup Mocha - Determine how tests will run.
+        mocha.setup({
+            ui: "bdd",               // User-interface can be 'bdd', 'tdd' or 'exports'.
+            globals: ["framework"],  // Array of acceptable global objects added to the window object during tests.
+            ignoreLeaks: false,      // Ignore global objects added to the window object.
+            timeout: 2000,           // Timeout tests taking longer than 2 seconds.
+            slow: 75,                // Mark tests slower than 75 milliseconds as slow.
+            bail: false              // Stop on first test failure.
+        });
+
+        // Setup Chai - Choose the style of assertions to use.
+        var assert = chai.assert;    // assert style (See http://chaijs.com/api/assert/).
+        // var expect = chai.expect; // expect style (See http://chaijs.com/api/bdd/).
+        // var should = chai.should; // should style (See http://chaijs.com/api/bdd/).
+    </script>
+
+    <!-- Test Scripts - Your actual test scripts. -->
+    <script src="site-test.js"></script>
+
+    <script>
+        if (window.mochaPhantomJS) {    // If using the PhantomJS browser to run Mocha, use that instead.
+            mochaPhantomJS.run();
+        }
+        else {                          // Run Mocha
+            mocha.run();
+        }
+    </script>
+</body>
+</html>

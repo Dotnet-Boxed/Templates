@@ -13,7 +13,11 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
+    <!-- $Start-RemoveDevelopmentServerPort$ -->
     <DevelopmentServerPort>12323</DevelopmentServerPort>
+    <!-- $End-RemoveDevelopmentServerPort$ -->
+    <!-- $Start-HttpsEverywhere$ -->
+    <!-- $End-HttpsEverywhere$ -->
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

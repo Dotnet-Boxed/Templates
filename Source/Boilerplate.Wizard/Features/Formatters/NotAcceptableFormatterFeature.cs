@@ -3,21 +3,16 @@
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
-    public class BsonFormatterFeature : BinaryChoiceFeature
+    public class NotAcceptableFormatterFeature : BinaryChoiceFeature
     {
-        private const string StartupFormattersCs = "Startup.Formatters.cs";
-
-        private readonly FeatureSet featureSet;
-
-        public BsonFormatterFeature(IProjectService projectService, FeatureSet featureSet)
+        public NotAcceptableFormatterFeature(IProjectService projectService)
             : base(projectService)
         {
-            this.featureSet = featureSet;
         }
 
         public override string Description
         {
-            get { return "Choose whether to use the BSON input/output formatter."; }
+            get { return "Force HTTP 406 Not Acceptable responses if the media type is not supported, instead of returning the default."; }
         }
 
         public override IFeatureGroup Group
@@ -27,12 +22,12 @@
 
         public override string Id
         {
-            get { return "BsonFormatter"; }
+            get { return "NotAcceptableFormatter"; }
         }
 
         public override bool IsDefaultSelected
         {
-            get { return this.featureSet == FeatureSet.Mvc6Api; }
+            get { return true; }
         }
 
         public override bool IsVisible
@@ -42,22 +37,22 @@
 
         public override int Order
         {
-            get { return 2; }
+            get { return 5; }
         }
 
         public override string Title
         {
-            get { return "BSON Formatter"; }
+            get { return "HTTP Not Acceptable Formatter"; }
         }
 
         protected override Task AddFeature()
         {
-            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, StartupFormattersCs);
+            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Formatters.cs");
         }
 
         protected override Task RemoveFeature()
         {
-            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, StartupFormattersCs);
+            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.Formatters.cs");
         }
     }
 }

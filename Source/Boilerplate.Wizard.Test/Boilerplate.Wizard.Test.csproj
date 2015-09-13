@@ -60,7 +60,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectServiceTest.cs" />
+    <Compile Include="Services\PortServiceTest.cs" />
+    <Compile Include="Services\ProjectServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,9 @@
     "Boilerplate.Web.Mvc6": "1.2.0",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
+    // $Start-XmlFormatter$
+    "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-beta7",
+    // $End-XmlFormatter$
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",

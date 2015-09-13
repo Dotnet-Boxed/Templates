@@ -10,6 +10,9 @@
         public MainView()
         {
             InitializeComponent();
+#if DEBUG
+            this.Topmost = false;
+#endif
         }
 
         public IMainViewModel ViewModel

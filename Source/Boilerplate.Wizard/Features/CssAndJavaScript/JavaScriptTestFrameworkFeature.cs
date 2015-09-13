@@ -5,11 +5,6 @@
 
     public class JavaScriptTestFrameworkFeature : MultiChoiceFeature
     {
-        private const string BowerJson = "bower.json";
-        private const string GulpfileJs = "gulpfile.js";
-        private const string PackageJson = "package.json";
-        private const string TestDirectory = "Test";
-
         private readonly IFeatureItem jasmine;
         private readonly IFeatureItem mocha;
         private readonly IFeatureItem none;
@@ -34,10 +29,7 @@
                 "Mocha is a feature-rich JavaScript test framework running on Node.js and the browser, making asynchronous testing simple and fun. The Sinon stub/mocking library is also included.",
                 2,
                 "/Boilerplate.Wizard;component/Assets/Jasmine.png",
-                true)
-            {
-                IsSelected = true
-            };
+                true);
             this.Items.Add(this.jasmine);
 
             this.none = new FeatureItem(
@@ -63,6 +55,11 @@
             get { return "JavaScriptTestFramework"; }
         }
 
+        public override bool IsVisible
+        {
+            get { return true; }
+        }
+
         public override int Order
         {
             get { return 2; }
@@ -73,40 +70,38 @@
             get { return "JavaScript Test Framework"; }
         }
 
-        public override Task AddOrRemoveFeature()
+        public override async Task AddOrRemoveFeature()
         {
             if (this.mocha.IsSelected)
             {
-                Task t1 = this.ProjectService.EditComment(
-                   this.Id,
-                   EditCommentMode.UncommentCode,
-                   BowerJson);
-                Task t2 = this.ProjectService.EditComment(
-                    this.Id,
-                    EditCommentMode.UncommentCode,
-                    GulpfileJs);
-                Task t3 = this.ProjectService.EditComment(
-                    this.Id,
-                    EditCommentMode.UncommentCode,
-                    PackageJson);
-                return Task.WhenAll(t1, t2, t3);
+                await this.ProjectService.EditCommentInFile(
+                   this.mocha.CommentName,
+                   EditCommentMode.LeaveCodeUnchanged,
+                   "bower.json");
+                //await this.ProjectService.EditCommentInFile(
+                //    this.Id,
+                //    EditCommentMode.LeaveCodeUnchanged,
+                //    "gulpfile.js");
+                //await this.ProjectService.EditCommentInFile(
+                //    this.Id,
+                //    EditCommentMode.LeaveCodeUnchanged,
+                //    "package.json");
             }
             else
             {
-                Task t1 = this.ProjectService.DeleteDirectory(TestDirectory);
-                Task t2 = this.ProjectService.EditComment(
-                    this.Id,
-                    EditCommentMode.DeleteCode,
-                    BowerJson);
-                Task t3 = this.ProjectService.EditComment(
-                    this.Id,
-                    EditCommentMode.DeleteCode,
-                    GulpfileJs);
-                Task t4 = this.ProjectService.EditComment(
-                    this.Id,
-                    EditCommentMode.DeleteCode,
-                    PackageJson);
-                return Task.WhenAll(t1, t2, t3, t4);
+                await this.ProjectService.DeleteDirectory("Test");
+                await this.ProjectService.EditCommentInFile(
+                   this.mocha.CommentName,
+                   EditCommentMode.DeleteCode,
+                   "bower.json");
+                //await this.ProjectService.EditCommentInFile(
+                //    this.Id,
+                //    EditCommentMode.DeleteCode,
+                //    "gulpfile.js");
+                //await this.ProjectService.EditCommentInFile(
+                //    this.Id,
+                //    EditCommentMode.DeleteCode,
+                //    "package.json");
             }
         }
     }

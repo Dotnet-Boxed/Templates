@@ -1,9 +1,8 @@
-﻿namespace Boilerplate.Wizard
+﻿namespace Boilerplate.Wizard.Services
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Boilerplate.Wizard.Services;
     using Moq;
     using Xunit;
 
@@ -46,7 +45,7 @@
             IProjectService projectService = new ProjectService(fileSystemServiceMock.Object, @"C:\Project\Project.xproj");
 
             // Act
-            await projectService.EditComment(commentName, mode, "File" + fileExtension);
+            await projectService.EditCommentInFile(commentName, mode, "File" + fileExtension);
 
             // Assert
             fileSystemServiceMock.VerifyAll();
@@ -78,12 +77,11 @@
             }
             else // if (deleteCommentMode == DeleteCommentMode.StartEndCommentAndUncommentCode)
             {
-                string startSpacer = new string(' ', commentStart.Length);
                 string endSpacer = new string(' ', commentEnd == null ? 0 : 1);
                 return new string[]
                 {
                     $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                    startSpacer + $"    Blah Blah Blah    " + endSpacer,
+                    $"    Blah Blah Blah    " + endSpacer,
                     $"   {commentStart} Blah Blah Blah{commentEnd}    "
                 };
             }

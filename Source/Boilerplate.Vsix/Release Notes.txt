@@ -1,4 +1,17 @@
-﻿Version 2.1.4
+﻿Version 2.2.0
+MVC 6
+- Added the Feature Selection Wizard.
+- Added Mocha JavaScript tests.
+MVC 6 API
+- Added the Feature Selection Wizard.
+Feature Selection Wizard
+- Added HTTPS Everywhere feature.
+- Added Remove Development Server Port feature.
+- Modified Formatter features.
+- Features can now be invisible to the UI.
+- Lots more improvements.
+
+Version 2.1.4
 MVC 5 & 6
 - site.js updated to use the revealing prototype pattern instead of the revealing module pattern.
 - site.js updated with comments about this vs self.

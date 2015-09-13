@@ -19,6 +19,8 @@
 
         public abstract bool IsDefaultSelected { get; }
 
+        public abstract bool IsVisible { get; }
+
         public abstract IFeatureGroup Group { get; }
 
         public abstract int Order { get; }

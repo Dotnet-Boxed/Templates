@@ -35,6 +35,7 @@
 
             // Services
             builder.RegisterType<FileSystemService>().As<IFileSystemService>().SingleInstance();
+            builder.RegisterType<PortService>().As<IPortService>().SingleInstance();
             builder.RegisterType<ProjectService>()
                 .As<IProjectService>()
                 .WithParameter("projectFilePath", projectFilePath)
@@ -54,6 +55,9 @@
 
         private static void RegisterFeatures(ContainerBuilder builder, FeatureSet featureSet)
         {
+            // Hidden
+            builder.RegisterType<SetRandomPortsFeature>().As<IFeature>().SingleInstance();
+
             if (featureSet == FeatureSet.Mvc6)
             {
                 // CSS and JavaScript
@@ -61,10 +65,24 @@
                 builder.RegisterType<JavaScriptTestFrameworkFeature>().As<IFeature>().SingleInstance();
             }
 
+            if (featureSet == FeatureSet.Mvc6Api)
+            {
+                // Rest
+                builder.RegisterType<SwaggerFeature>().As<IFeature>().SingleInstance();
+            }
+
             // Formatters
-            builder.RegisterType<JsonFormatterFeature>().As<IFeature>().SingleInstance();
+            builder.RegisterType<JsonSerializerSettingsFeature>().As<IFeature>().SingleInstance();
             builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
             builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
+            if (featureSet == FeatureSet.Mvc6Api)
+            {
+                builder.RegisterType<NoContentFormatterFeature>().As<IFeature>().SingleInstance();
+                builder.RegisterType<NotAcceptableFormatterFeature>().As<IFeature>().SingleInstance();
+            }
+
+            // Security
+            builder.RegisterType<HttpsEverywhereFeature>().As<IFeature>().SingleInstance();
 
             if (featureSet == FeatureSet.Mvc6)
             {

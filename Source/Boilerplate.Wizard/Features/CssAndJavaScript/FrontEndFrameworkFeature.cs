@@ -57,6 +57,11 @@
             get { return "FrontEndFramework"; }
         }
 
+        public override bool IsVisible
+        {
+            get { return true; }
+        }
+
         public override int Order
         {
             get { return 1; }
