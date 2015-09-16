@@ -28,7 +28,11 @@
             // If the URL starts with https.
             if (mediaUrl[4] == 's')
             {
-                this.mediaUrl = new UriBuilder(mediaUrl) { Scheme = "http" }.ToString();
+                this.mediaUrl = new UriBuilder(mediaUrl)
+                {
+                    Port = -1,
+                    Scheme = "https"
+                }.ToString();
                 this.mediaUrlSecure = mediaUrl;
             }
             else

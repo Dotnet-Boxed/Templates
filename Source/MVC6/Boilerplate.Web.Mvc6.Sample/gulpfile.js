@@ -7,12 +7,15 @@
 // Set up imported packages.
 var gulp = require("gulp"),
     fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
+    autoprefixer = require("gulp-autoprefixer") // Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
 	csslint = require("gulp-csslint"),			// CSS linter (https://www.npmjs.com/package/gulp-csslint/)
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
+    jscs = require("gulp-jscs"),                // JavaScript style linter (https://www.npmjs.com/package/gulp-jscs)
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
+    plumber = require("gulp-plumber"),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
     sourcemaps = require("gulp-sourcemaps"),    // Creates source map files (https://www.npmjs.com/package/gulp-sourcemaps/)
@@ -42,64 +45,34 @@ var environment = {
     // Are we running under the production environment.
     isProduction: function () { return this.current() === this.production; }
 };
+
 // The URL to your deployed site e.g. "http://example.com". This is used by the Google PageSpeed tasks.
 var siteUrl = undefined;
 
 // Initialize directory paths.
 var paths = {
-    // Source Folder Paths
-    bower: "./bower_components/",
-    scripts: "Scripts/",
-    styles: "Styles/",
+    // Source Directory Paths
+    bower: "/bower_components/",
+    scripts: "/Scripts/",
+    styles: "/Styles/",
+    views: "/Views/",
 
-    // Destination Folder Paths
-    wwwroot: "./" + project.webroot + "/",
-    css: "./" + project.webroot + "/css/",
-    fonts: "./" + project.webroot + "/fonts/",
-    img: "./" + project.webroot + "/img/",
-    js: "./" + project.webroot + "/js/"
+    // Destination Directory Paths
+    wwwroot: "/" + project.webroot + "/",
+    css: "/" + project.webroot + "/css/",
+    fonts: "/" + project.webroot + "/fonts/",
+    img: "/" + project.webroot + "/img/",
+    js: "/" + project.webroot + "/js/",
+    
+    // MVC Directory Paths
+    cssLink: "~/css/",
+    jsScript: "~/js/"
 };
 
-/*
- * Handles errors by logging them to the task runner explorer console.
- */
-var handleError = function (error) {
-    gutil.log(gutil.colors.red(error));
-}
-
-/*
- * Deletes all files and folders within the css directory.
- */
-gulp.task("clean-css", function (cb) {
-    return rimraf(paths.css, cb);           // Deletes the files and folders under the path.
-});
-
-/*
- * Deletes all files and folders within the fonts directory.
- */
-gulp.task("clean-fonts", function (cb) {
-    return rimraf(paths.fonts, cb);         // Deletes the files and folders under the path.
-});
-
-/*
- * Deletes all files and folders within the js directory.
- */
-gulp.task("clean-js", function (cb) {
-    return rimraf(paths.js, cb);            // Deletes the files and folders under the path.
-});
-
-/*
- * Deletes all files and folders within the css, fonts and js directories.
- */
-gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
-
-/*
- * Builds the CSS for the site.
- */
-gulp.task("build-css", ["lint-css"], function () {
-
+// Initialize the mappings between the source and output files.
+var sources = {
     // An array containing objects required to build a single CSS file.
-    var sources = [
+    css: [
         {
             // name - The name of the final CSS file to build.
             name: "font-awesome.css",
@@ -118,43 +91,9 @@ gulp.task("build-css", ["lint-css"], function () {
 				paths.bower + "bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css"
             ]
         }
-    ];
-
-    var tasks = sources.map(function (source) { // For each set of source files in the sources.
-        return gulp                             // Return the stream.
-            .src(source.paths)                  // Start with the source paths.
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.init()))             // Set up the generation of .map source files for the CSS.
-			.pipe(gulpif("**/*.{css,scss}", sass()))  // If the file is a SASS (.scss) file, compile it to CSS (.css).
-            .pipe(concat(source.name))          // Concatenate CSS files into a single CSS file with the specified name.
-            .pipe(size({                        // Write the size of the file to the console before minification.
-                    title: "Before: " + source.name 
-                }))
-            .pipe(gulpif(
-                !environment.isDevelopment(),   // If running in the staging or production environment.
-                minifyCss({                     // Minifies the CSS.
-                    keepSpecialComments: 0      // Remove all comments.
-                })))
-            .pipe(size({                        // Write the size of the file to the console after minification.
-                    title: "After:  " + source.name
-                }))
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.write(".")))         // Generates source .map files for the CSS.
-            .pipe(gulp.dest(paths.css))         // Saves the CSS file to the specified destination path.
-            .on("error", handleError);          // Handle any errors.
-    });
-
-    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
-});
-
-/*
- * Builds the font files for the site.
- */
-gulp.task("build-fonts", function () {
-
-    var sources = [
+    ],
+    // An array containing objects required to copy font files.
+    fonts: [
         {
             // The name of the folder the fonts will be output to.
             name: "bootstrap",
@@ -165,33 +104,18 @@ gulp.task("build-fonts", function () {
             name: "font-awesome",
             path: paths.bower + "font-awesome/**/*.{ttf,svg,woff,woff2,otf,eot}"
         }
-    ];
-
-    var tasks = sources.map(function (source) { // For each set of source files in the sources.
-        return gulp                             // Return the stream.
-            .src(source.path)                   // Start with the source paths.
-            .pipe(rename(function (path) {      // Rename the path to remove an unnecessary directory.
-                path.dirname = "";
-            }))
-            .pipe(gulp.dest(paths.fonts))       // Saves the font files to the specified destination path.
-            .on("error", handleError);          // Handle any errors.
-    });
-
-    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
-});
-
-/*
- * Builds the JavaScript files for the site.
- */
-gulp.task("build-js", ["lint-js"], function () {
-
+    ],
+    // An array of paths to images to be optimized.
+    img: [
+        paths.img + "**/*.{png,jpg,jpeg,gif,svg}"
+    ],
     // An array containing objects required to build a single JavaScript file.
-    var sources = [
+    js: [
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
-            // paths - An array of paths to JavaScript or TypeScript files which will be concatenated and minified to 
-            // create a file with the above file name.
+            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+            // minified to create a file with the above file name.
             paths: [
                 // Feel free to remove any parts of Bootstrap you don't use.
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/transition.js",
@@ -240,32 +164,155 @@ gulp.task("build-js", ["lint-js"], function () {
                 paths.scripts + "site.js"
             ]
         }
-    ];
+    ]
+};
 
-    var tasks = sources.map(function (source) { // For each set of source files in the sources.
+// Calls and returns the result from the gulp-size plugin to print the size of the stream. Makes it more readable.
+function sizeBefore(title) {
+    return size({ title: "Before: " + title });
+}
+function sizeAfter(title) {
+    return size({ title: "After: " + title });
+}
+
+/*
+ * Deletes all files and folders within the css directory.
+ */
+gulp.task("clean-css", function (cb) {
+    return rimraf(paths.css, cb);
+});
+
+/*
+ * Deletes all files and folders within the fonts directory.
+ */
+gulp.task("clean-fonts", function (cb) {
+    return rimraf(paths.fonts, cb);
+});
+
+/*
+ * Deletes all files and folders within the js directory.
+ */
+gulp.task("clean-js", function (cb) {
+    return rimraf(paths.js, cb);
+});
+
+/*
+ * Deletes all files and folders within the css, fonts and js directories.
+ */
+gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
+
+/*
+ * Report warnings and errors in your CSS and SCSS files (lint them) under the Styles folder.
+ */
+gulp.task("lint-css", function () {
+    var cssTask = gulp
+        .src(paths.styles + "**/*.{css}")       // Start with the source .css files.
+        .pipe(plumber())                        // Handle any errors.
+        .pipe(csslint())                        // Get any CSS linting errors.
+		.pipe(csslint.reporter());              // Report any CSS linting errors to the console.
+    var scssTask = gulp
+        .src(paths.styles + "**/*.{scss}")      // Start with the source .scss files.
+        .pipe(plumber())                        // Handle any errors.
+        .pipe(scsslint());                      // Get and report any SCSS linting errors to the console.
+    return merge([cssTask, scssTask]);          // Combine multiple streams to one and return it so the task can be chained.
+});
+
+/*
+ * Report warnings and errors in your JavaScript and TypeScript files (lint them) under the Scripts folder.
+ */
+gulp.task("lint-js", function () {
+    var jsTask = gulp
+        .src(paths.scripts + "**/*.js")                         // Start with the source .js files.
+        .pipe(plumber())                                        // Handle any errors.
+        .pipe(jshint())                                         // Get any JavaScript linting errors.
+        .pipe(jshint.reporter("default", { verbose: true }));   // Report any JavaScript linting errors to the console.
+    var tsTask = gulp
+        .src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
+        .pipe(plumber())                                        // Handle any errors.
+        .pipe(tslint())                                         // Get any TypeScript linting errors.
+        .pipe(tslint.report("verbose"));                        // Report any TypeScript linting errors to the console.
+    var jscsTask = gulp
+        .src(paths.scripts + "**/*.js")                         // Start with the source .js files.
+        .pipe(plumber())                                        // Handle any errors.
+        .pipe(jscs());                                          // Get and report any JavaScript style linting errors to the console.
+    return merge([jsTask, tsTask, jscsTask]);                   // Combine multiple streams to one and return it so the task can be chained.
+});
+
+/*
+ * Report warnings and errors in your styles and scripts (lint them).
+ */
+gulp.task("lint", ["lint-css", "lint-js"]);
+
+/*
+ * Builds the CSS for the site.
+ */
+gulp.task("build-css", ["clean-css", "lint-css"], function () {
+    var tasks = sources.css.map(function (source) { // For each set of source files in the sources.
+        return gulp                                 // Return the stream.
+            .src(source.paths)                      // Start with the source paths.
+            .pipe(plumber())                        // Handle any errors.
+            .pipe(gulpif(
+                environment.isDevelopment(),        // If running in the development environment.
+                sourcemaps.init()))                 // Set up the generation of .map source files for the CSS.
+            .pipe(autoprefixer({                    // Auto-prefix CSS with vendor specific prefixes.
+                browsers: ["> 1%, last 2 versions"] // Support browsers with more than 1% market share or the last two versions.
+            }))
+			.pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
+            .pipe(concat(source.name))              // Concatenate CSS files into a single CSS file with the specified name.
+            .pipe(sizeBefore(source.name))          // Write the size of the file to the console before minification.
+            .pipe(gulpif(
+                !environment.isDevelopment(),       // If running in the staging or production environment.
+                minifyCss({                         // Minifies the CSS.
+                    keepSpecialComments: 0          // Remove all comments.
+                })))
+            .pipe(sizeAfter(source.name))           // Write the size of the file to the console after minification.
+            .pipe(gulpif(
+                environment.isDevelopment(),        // If running in the development environment.
+                sourcemaps.write(".")))             // Generates source .map files for the CSS.
+            .pipe(gulp.dest(paths.css));            // Saves the CSS file to the specified destination path.
+    });
+    return merge(tasks);                            // Combine multiple streams to one and return it so the task can be chained.
+});
+
+/*
+ * Builds the font files for the site.
+ */
+gulp.task("build-fonts", ["clean-fonts"], function () {
+    var tasks = sources.fonts.map(function (source) { // For each set of source files in the sources.
+        return gulp                             // Return the stream.
+            .src(source.path)                   // Start with the source paths.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(rename(function (path) {      // Rename the path to remove an unnecessary directory.
+                path.dirname = "";
+            }))
+            .pipe(gulp.dest(paths.fonts));      // Saves the font files to the specified destination path.
+    });
+    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
+});
+
+/*
+ * Builds the JavaScript files for the site.
+ */
+gulp.task("build-js", ["clean-js", "lint-js"], function () {
+    var tasks = sources.js.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
+            .pipe(plumber())                    // Handle any errors.
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
             .pipe(gulpif("**/*.ts", typescript()))  // If the file is a TypeScript (.ts) file, compile it to JavaScript (.js).
             .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
-            .pipe(size({                        // Write the size of the file to the console before minification.
-                    title: "Before: " + source.name
-                }))
+            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
             .pipe(gulpif(
                 !environment.isDevelopment(),   // If running in the staging or production environment.
                 uglify()))                      // Minifies the JavaScript.
-            .pipe(size({                        // Write the size of the file to the console after minification.
-                    title: "After:  " + source.name
-                }))
+            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.write(".")))         // Generates source .map files for the JavaScript.
-            .pipe(gulp.dest(paths.js))          // Saves the JavaScript file to the specified destination path.
-            .on("error", handleError);          // Handle any errors.
+            .pipe(gulp.dest(paths.js));         // Saves the JavaScript file to the specified destination path.
     });
-
     return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
 });
 
@@ -278,26 +325,16 @@ gulp.task("build", ["build-css", "build-fonts", "build-js"]);
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
  */
 gulp.task("optimize-images", function () {
-
-    // An array of paths to images.
-    var sources = [
-        paths.img + "**/*.{png,jpg,jpeg,gif,svg}"
-    ];
-
     return gulp
-        .src(sources)                       // Start with the source paths.
-        .pipe(size({                        // Write the size of the file to the console before minification.
-            title: "Before: "
-        }))
+        .src(sources.img)                   // Start with the source paths.
+        .pipe(plumber())                    // Handle any errors.
+        .pipe(sizeBefore())                 // Write the size of the file to the console before minification.
         .pipe(imagemin({                    // Optimize the images.
             multipass: true,                // Optimize svg multiple times until it's fully optimized.
             optimizationLevel: 7            // The level of optimization (0 to 7) to make, the higher the slower it is.
         }))
         .pipe(gulp.dest(paths.img))         // Saves the image files to the specified destination path.
-        .pipe(size({                        // Write the size of the file to the console after minification.
-            title: "After:  "
-        }))
-        .on("error", handleError);          // Handle any errors.
+        .pipe(sizeAfter());                 // Write the size of the file to the console after minification.
 });
 
 /*
@@ -327,36 +364,6 @@ gulp.task("watch-js", function () {
  */
 gulp.task("watch", ["watch-css", "watch-js"]);
 
-/*
- * Report warnings and errors in your CSS and SCSS files (lint them) under the Styles folder.
- */
-gulp.task("lint-css", function () {
-    var cssTask = gulp.src(paths.styles + "**/*.{css}")
-        .pipe(csslint())
-		.pipe(csslint.reporter());
-	var scssTask = gulp.src(paths.styles + "**/*.{scss}")
-        .pipe(scsslint());
-	return merge([cssTask, scssTask]);
-});
-
-/*
- * Report warnings and errors in your JavaScript and TypeScript files (lint them) under the Scripts folder.
- */
-gulp.task("lint-js", function () {
-    var jsTask = gulp.src(paths.scripts + "**/*.js")
-        .pipe(jshint())
-        .pipe(jshint.reporter("default"));
-    var tsTask = gulp.src(paths.scripts + "**/*.ts")
-       .pipe(tslint())
-       .pipe(tslint.report("verbose"));
-    return merge([jsTask, tsTask]);
-});
-
-/*
- * Report warnings and errors in your styles and scripts (lint them).
- */
-gulp.task("lint", ["lint-css", "lint-js"]);
-
 function pageSpeed(strategy, cb) {
     if (siteUrl === undefined) {
         return cb("siteUrl is undefined. Google PageSpeed requires a URL to your deployed site.");
@@ -368,7 +375,6 @@ function pageSpeed(strategy, cb) {
             // Use the "nokey" option to try out Google PageSpeed Insights as part of your build process. For more 
             // frequent use, register for your own API key. See  
             // https://developers.google.com/speed/docs/insights/v1/getting_started
-
             // key: "[Your Google PageSpeed API Key Here]"
             nokey: "true",
             strategy: strategy,
@@ -397,4 +403,4 @@ gulp.task("pagespeed-desktop", function (cb) {
  * The default gulp task. This is useful for scenarios where you are not using Visual Studio. Does a full clean and 
  * build before watching for any file changes.
  */
-gulp.task("default", ["clean", "build", "watch"]);
+gulp.task("default", ["build", "watch"]);

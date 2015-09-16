@@ -7,6 +7,9 @@
     /// </summary>
     public sealed class SitemapNode
     {
+        private readonly string url;
+        private double? priority;
+        
         #region Constructors
 
         /// <summary>
@@ -15,10 +18,12 @@
         /// <param name="url">The URL of the page.</param>
         public SitemapNode(string url)
         {
-            this.Url = url;
-            this.Priority = null;
-            this.Frequency = null;
-            this.LastModified = null;
+            if (url == null)
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+
+            this.url = url;
         }
 
         #endregion
@@ -62,7 +67,28 @@
         /// Since the priority is relative, it is only used to select between URLs on your site.
         /// </summary>
         /// <value>The priority.</value>
-        public double? Priority { get; set; }
+        public double? Priority
+        {
+            get
+            {
+                return this.priority;
+            }
+
+            set
+            {
+                if (value.HasValue)
+                {
+                    if ((value.Value < 0D) || (value.Value > 1D))
+                    {
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            $"Priority must be a value between 0 and 1. Value:<{value.Value}>.");
+                    }
+                }
+
+                this.priority = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the URL of the page. This URL must begin with the protocol (such as http) and end with a 
@@ -71,7 +97,10 @@
         /// <value>
         /// The URL of the page.
         /// </value>
-        public string Url { get; set; }
+        public string Url
+        {
+            get { return this.url; }
+        }
 
         #endregion
     }

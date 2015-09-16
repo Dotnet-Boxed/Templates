@@ -14,31 +14,43 @@
     /// </summary>
     public partial class Startup
     {
-        #region Constructors
+        #region Fields
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// The location the application is running in.
         /// </summary>
-        /// <param name="applicationEnvironment">The location the application is running in</param>
-        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
-        /// Staging or Production by default.</param>
-        public Startup(
-            IApplicationEnvironment applicationEnvironment,
-            IHostingEnvironment hostingEnvironment)
-        {
-            this.Configuration = ConfigureConfiguration(applicationEnvironment, hostingEnvironment);
-        }
-
-        #endregion
-
-        #region Public Properties
+        private readonly IApplicationEnvironment applicationEnvironment;
 
         /// <summary>
         /// Gets or sets the application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html
         /// http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
         /// </summary>
-        public IConfiguration Configuration { get; set; }
+        private readonly IConfiguration configuration;
+
+        /// <summary>
+        /// The environment the application is running under. This can be Development, Staging or Production by default.
+        /// </summary>
+        private readonly IHostingEnvironment hostingEnvironment; 
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="applicationEnvironment">The location the application is running in.</param>
+        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
+        /// Staging or Production by default.</param>
+        public Startup(
+            IApplicationEnvironment applicationEnvironment,
+            IHostingEnvironment hostingEnvironment)
+        {
+            this.applicationEnvironment = applicationEnvironment;
+            this.hostingEnvironment = hostingEnvironment;
+            this.configuration = ConfigureConfiguration(applicationEnvironment, hostingEnvironment);
+        }
 
         #endregion
 
@@ -52,7 +64,7 @@
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureOptionsServices(services, this.Configuration);
+            ConfigureOptionsServices(services, this.configuration);
             ConfigureCachingServices(services);
 
             // Configure MVC routing. We store the route options for use by ConfigureSearchEngineOptimizationFilters.
@@ -68,9 +80,9 @@
             IMvcBuilder mvcBuilder = services.AddMvc(
                 mvcOptions =>
                 {
-                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.Configuration);
+                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.configuration);
                     ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
-                    ConfigureSecurityFilters(services.BuildServiceProvider().GetService<IHostingEnvironment>(), mvcOptions.Filters);
+                    ConfigureSecurityFilters(this.hostingEnvironment, mvcOptions.Filters);
                     ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
                 });
             ConfigureFormatters(mvcBuilder);
@@ -84,13 +96,8 @@
         /// called by the ASP.NET runtime.
         /// </summary>
         /// <param name="application">The application.</param>
-        /// <param name="environment">The environment the application is running under. This can be Development, 
-        /// Staging or Production by default.</param>
         /// <param name="loggerfactory">The logger factory.</param>
-        public void Configure(
-            IApplicationBuilder application,
-            IHostingEnvironment environment,
-            ILoggerFactory loggerfactory)
+        public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
         {
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
             // absolute URL's and get the current request path.
@@ -99,14 +106,14 @@
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();
 
-            ConfigureDebugging(application, environment, loggerfactory);
-            ConfigureErrorPages(application, environment);
+            ConfigureDebugging(application, this.hostingEnvironment, loggerfactory);
+            ConfigureErrorPages(application, this.hostingEnvironment);
 
             // Add MVC to the request pipeline.
             application.UseMvc();
 
             // Add a 404 Not Found error page for visiting /this-resource-does-not-exist.
-            Configure404NotFoundErrorPage(application, environment);
+            Configure404NotFoundErrorPage(application, this.hostingEnvironment);
         }
 
         #endregion

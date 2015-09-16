@@ -107,52 +107,58 @@
         {
             bool isCanonical = true;
 
-            canonicalUrl = filterContext.HttpContext.Request.Url.ToString();
-            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
+            Uri url = filterContext.HttpContext.Request.Url;
+            canonicalUrl = url.ToString();
 
-            if (queryIndex == -1)
+            // If we are not dealing with the home page. Note, the home page is a special case and it doesn't matter
+            // if there is a trailing slash or not. Both will be treated as the same by search engines.
+            if (url.AbsolutePath.Length > 1)
             {
-                bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter;
-                
-                if (this.appendTrailingSlash)
+                int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
+                if (queryIndex == -1)
                 {
-                    // Append a trailing slash to the end of the URL.
-                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter;
+
+                    if (this.appendTrailingSlash)
                     {
-                        canonicalUrl += SlashCharacter;
-                        isCanonical = false;
+                        // Append a trailing slash to the end of the URL.
+                        if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                        {
+                            canonicalUrl += SlashCharacter;
+                            isCanonical = false;
+                        }
+                    }
+                    else
+                    {
+                        // Trim a trailing slash from the end of the URL.
+                        if (hasTrailingSlash)
+                        {
+                            canonicalUrl = canonicalUrl.TrimEnd(SlashCharacter);
+                            isCanonical = false;
+                        }
                     }
                 }
                 else
                 {
-                    // Trim a trailing slash from the end of the URL.
-                    if (hasTrailingSlash)
-                    {
-                        canonicalUrl = canonicalUrl.TrimEnd(SlashCharacter);
-                        isCanonical = false;
-                    }
-                }
-            }
-            else
-            {
-                bool hasTrailingSlash = canonicalUrl[queryIndex - 1] == SlashCharacter;
+                    bool hasTrailingSlash = canonicalUrl[queryIndex - 1] == SlashCharacter;
 
-                if (this.appendTrailingSlash)
-                {
-                    // Append a trailing slash to the end of the URL but before the query string.
-                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                    if (this.appendTrailingSlash)
                     {
-                        canonicalUrl = canonicalUrl.Insert(queryIndex, SlashCharacter.ToString());
-                        isCanonical = false;
+                        // Append a trailing slash to the end of the URL but before the query string.
+                        if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(filterContext))
+                        {
+                            canonicalUrl = canonicalUrl.Insert(queryIndex, SlashCharacter.ToString());
+                            isCanonical = false;
+                        }
                     }
-                }
-                else
-                {
-                    // Trim a trailing slash to the end of the URL but before the query string.
-                    if (hasTrailingSlash)
+                    else
                     {
-                        canonicalUrl = canonicalUrl.Remove(queryIndex - 1, 1);
-                        isCanonical = false;
+                        // Trim a trailing slash to the end of the URL but before the query string.
+                        if (hasTrailingSlash)
+                        {
+                            canonicalUrl = canonicalUrl.Remove(queryIndex - 1, 1);
+                            isCanonical = false;
+                        }
                     }
                 }
             }

@@ -1,8 +1,8 @@
 {
-  "version": "1.2.0-*",
+  "version": "1.2.1-*",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
-  "releaseNotes": "Added BSON Input, Output formatters and BsonResult.",
+  "releaseNotes": "OpenGraphMedia fixed to support HTTP schemes. It was using the HTTP port for the HTTPS URL.",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",

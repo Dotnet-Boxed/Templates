@@ -1,4 +1,18 @@
-﻿Version 2.2.0
+﻿Version 2.2.1
+MVC 5 & 6
+- Fixed a bug with the OpenGraphMedia type which was not handling HTTPS schemes correctly.
+- Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
+- Updated SitemapNode to check for null URL's and priorities out of range.
+- SitemapService updated to enter the correct priorities for the sitemap nodes.
+- Updated to use the latest version of the ASP.NET MVC Boilerplate Framework NuGet package with the above changes.
+MVC 6
+- Added gulp-autoprefixer, gulp-jscs and gulp-plumber NPM packages.
+- Implemented CSS autoprefixing in Gulpfile.js.
+- Used gulp-plumber to handle errors in Gulpfile.js.
+- Implemented JavaScript Code Style linting (JSCS) in Gulpfile.js.
+- Added JSHint, TSHint and JSCS settings files.
+
+Version 2.2.0
 MVC 6
 - Added the Feature Selection Wizard.
 - Added Mocha JavaScript tests.

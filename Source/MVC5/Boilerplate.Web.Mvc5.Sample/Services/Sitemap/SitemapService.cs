@@ -94,23 +94,23 @@
             nodes.Add(
                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetAbout))
                {
-                   Priority = 2
+                   Priority = 0.9
                });
             nodes.Add(
                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetContact))
                {
-                   Priority = 2
+                   Priority = 0.9
                });
 
             // An example of how to add many pages into your sitemap.
-            // foreach (Product product in myProductRepository.GetProducts())
+            // foreach (int productId in myProductRepository.GetProductIds())
             // {
             //     nodes.Add(
-            //        new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProductControllerRoute.GetProduct, new { id = product.ProductId }))
+            //        new SitemapNode(this.urlHelper.AbsoluteRouteUrl(ProductControllerRoute.GetProduct, new { id = productId }))
             //        {
             //            Frequency = SitemapFrequency.Weekly,
             //            LastModified = DateTime.Now,
-            //            Priority = 2
+            //            Priority = 0.8
             //        });
             // }
 
