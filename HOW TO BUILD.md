@@ -1,11 +1,13 @@
+# How To Build
+
 To build this project you will require:
 
 1. Visual Studio 2015
 2. Visual Studio 2015 SDK
-3. SideWaffle Visual Studio Extension
-4. Latest TypeScript Visual Studio Extension
+3. [SideWaffle](https://visualstudiogallery.msdn.microsoft.com/a16c2d07-b2e1-4a25-87d9-194f04e7a698) Visual Studio Extension
+4. TypeScript Visual Studio Extension (Already installed, just update it from Tools -> Extensions).
 
-To debug this project:
+# How To Debug
 
 1. Set Boilerplate.Vsix as the start-up project.
 2. Open Boilerplate.Vsix Project Properties -> Debug Tab
