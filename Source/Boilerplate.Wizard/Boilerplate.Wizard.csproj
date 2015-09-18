@@ -60,6 +60,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
     <Compile Include="Features\FeatureSet.cs" />
     <Compile Include="Features\Base\BinaryChoiceFeature.cs" />
     <Compile Include="Features\Base\Feature.cs" />
@@ -161,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Swagger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\TypeScript.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

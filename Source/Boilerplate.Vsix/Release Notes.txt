@@ -11,6 +11,8 @@ MVC 6
 - Used gulp-plumber to handle errors in Gulpfile.js.
 - Implemented JavaScript Code Style linting (JSCS) in Gulpfile.js.
 - Added JSHint, TSHint and JSCS settings files.
+- Switched from gulp-tsc to gulp-typescript.
+- Added a TypeScript feature.
 
 Version 2.2.0
 MVC 6

@@ -1,0 +1,14 @@
+// TypeScript Configuration File (See https://github.com/Microsoft/TypeScript/wiki/tsconfig.json)
+
+// This file is where you can determine the TypeScript compilation options.
+
+{
+  "compilerOptions": {
+    "noImplicitAny": true,    // Do not allow implicit any variables. Force them to be explicitly declared.
+    "noEmitOnError": true,    // Stop processing on error.
+    "removeComments": false,  // Do not remove comments.
+    "sourceMap": false,       // Do not create source map files (Leave this to the gulp plugin).
+    "module": "system",       // Use the ECMAScript 6 module syntax.
+    "target": "es5"           // Compile to ECMAScript 5.
+  }
+}

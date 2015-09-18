@@ -17,8 +17,10 @@
     "gulp-scss-lint": "0.3.0",
     "gulp-size": "2.0.0",
     "gulp-sourcemaps": "1.5.2",
-    "gulp-tsc": "1.1.1",
+    // $Start-TypeScript$
+    "gulp-typescript": "2.8.3",
     "gulp-tslint": "3.2.0",
+    // $End-TypeScript$
     "gulp-uglify": "1.4.1",
     "gulp-util": "3.0.6",
     "merge-stream": "1.0.0",

@@ -26,8 +26,10 @@ var gulp = require("gulp"),
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
 	sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
 	scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
+    // $Start-TypeScript$
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
-    typescript = require("gulp-tsc"),           // TypeScript compiler (https://www.npmjs.com/package/gulp-tsc/)
+    typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
+    // $End-TypeScript$
     project = require("./project.json");        // Read the project.json file into the project variable.
 
 // Holds information about the hosting environment.
@@ -52,23 +54,23 @@ var siteUrl = undefined;
 // Initialize directory paths.
 var paths = {
     // Source Directory Paths
-    bower: "/bower_components/",
-    scripts: "/Scripts/",
-    styles: "/Styles/",
-    views: "/Views/",
+    bower: "./bower_components/",
+    scripts: "Scripts/",
+    styles: "Styles/",
 
     // Destination Directory Paths
-    wwwroot: "/" + project.webroot + "/",
-    css: "/" + project.webroot + "/css/",
-    fonts: "/" + project.webroot + "/fonts/",
-    img: "/" + project.webroot + "/img/",
-    js: "/" + project.webroot + "/js/",
-    
-    // MVC Directory Paths
-    cssLink: "~/css/",
-    jsScript: "~/js/"
+    wwwroot: "./" + project.webroot + "/",
+    css: "./" + project.webroot + "/css/",
+    fonts: "./" + project.webroot + "/fonts/",
+    img: "./" + project.webroot + "/img/",
+    js: "./" + project.webroot + "/js/"
 };
 
+// $Start-TypeScript$
+// Use the tsconfig.json file to specify how TypeScript (.ts) files should be compiled to JavaScript (.js).
+var typeScriptProject = typescript.createProject("tsconfig.json");
+
+// $End-TypeScript$
 // Initialize the mappings between the source and output files.
 var sources = {
     // An array containing objects required to build a single CSS file.
@@ -205,37 +207,36 @@ gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
  * Report warnings and errors in your CSS and SCSS files (lint them) under the Styles folder.
  */
 gulp.task("lint-css", function () {
-    var cssTask = gulp
-        .src(paths.styles + "**/*.{css}")       // Start with the source .css files.
-        .pipe(plumber())                        // Handle any errors.
-        .pipe(csslint())                        // Get any CSS linting errors.
-		.pipe(csslint.reporter());              // Report any CSS linting errors to the console.
-    var scssTask = gulp
-        .src(paths.styles + "**/*.{scss}")      // Start with the source .scss files.
-        .pipe(plumber())                        // Handle any errors.
-        .pipe(scsslint());                      // Get and report any SCSS linting errors to the console.
-    return merge([cssTask, scssTask]);          // Combine multiple streams to one and return it so the task can be chained.
+    return merge([                              // Combine multiple streams to one and return it so the task can be chained.
+        gulp.src(paths.styles + "**/*.{css}")   // Start with the source .css files.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(csslint())                    // Get any CSS linting errors.
+		    .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
+        gulp.src(paths.styles + "**/*.{scss}")  // Start with the source .scss files.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(scsslint())                   // Get and report any SCSS linting errors to the console.
+    ]);
 });
 
 /*
- * Report warnings and errors in your JavaScript and TypeScript files (lint them) under the Scripts folder.
+ * Report warnings and errors in your JavaScript files (lint them) under the Scripts folder.
  */
 gulp.task("lint-js", function () {
-    var jsTask = gulp
-        .src(paths.scripts + "**/*.js")                         // Start with the source .js files.
-        .pipe(plumber())                                        // Handle any errors.
-        .pipe(jshint())                                         // Get any JavaScript linting errors.
-        .pipe(jshint.reporter("default", { verbose: true }));   // Report any JavaScript linting errors to the console.
-    var tsTask = gulp
-        .src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
-        .pipe(plumber())                                        // Handle any errors.
-        .pipe(tslint())                                         // Get any TypeScript linting errors.
-        .pipe(tslint.report("verbose"));                        // Report any TypeScript linting errors to the console.
-    var jscsTask = gulp
-        .src(paths.scripts + "**/*.js")                         // Start with the source .js files.
-        .pipe(plumber())                                        // Handle any errors.
-        .pipe(jscs());                                          // Get and report any JavaScript style linting errors to the console.
-    return merge([jsTask, tsTask, jscsTask]);                   // Combine multiple streams to one and return it so the task can be chained.
+    return merge([                                                  // Combine multiple streams to one and return it so the task can be chained.
+        gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
+            .pipe(plumber())                                        // Handle any errors.
+            .pipe(jshint())                                         // Get any JavaScript linting errors.
+            .pipe(jshint.reporter("default", { verbose: true })),   // Report any JavaScript linting errors to the console.
+        // $Start-TypeScript$
+        gulp.src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
+            .pipe(plumber())                                        // Handle any errors.
+            .pipe(tslint())                                         // Get any TypeScript linting errors.
+            .pipe(tslint.report("verbose")),                        // Report any TypeScript linting errors to the console.
+        // $End-TypeScript$
+        gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
+            .pipe(plumber())                                        // Handle any errors.
+            .pipe(jscs())                                           // Get and report any JavaScript style linting errors to the console.
+    ]);
 });
 
 /*
@@ -301,7 +302,11 @@ gulp.task("build-js", ["clean-js", "lint-js"], function () {
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
-            .pipe(gulpif("**/*.ts", typescript()))  // If the file is a TypeScript (.ts) file, compile it to JavaScript (.js).
+            // $Start-TypeScript$
+            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
+                "**/*.ts",
+                typescript(typeScriptProject))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+            // $End-TypeScript$
             .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
             .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
             .pipe(gulpif(
