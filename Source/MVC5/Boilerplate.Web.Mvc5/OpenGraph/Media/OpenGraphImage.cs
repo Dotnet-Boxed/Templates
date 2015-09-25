@@ -12,6 +12,8 @@
     /// </summary>
     public class OpenGraphImage : OpenGraphSizedMedia
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.
         /// </summary>
@@ -21,6 +23,48 @@
             : base(imageUrl)
         {
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.
+        /// </summary>
+        /// <param name="imageUrl">The media URL.</param>
+        /// <param name="type">The MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with 
+        /// a file extension, otherwise it is recommended.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(string imageUrl, string type) : this(imageUrl)
+        {
+            this.Type = type;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.
+        /// </summary>
+        /// <param name="imageUrl">The media URL.</param>
+        /// <param name="width">The width of the media in pixels. This is optional.</param>
+        /// <param name="height">The height of the media in pixels. This is optional.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(string imageUrl, int width, int height) : this(imageUrl)
+        {
+            this.Height = height;
+            this.Width = width;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGraphImage"/> class.
+        /// </summary>
+        /// <param name="imageUrl">The media URL.</param>
+        /// <param name="type">The MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with 
+        /// a file extension, otherwise it is recommended.</param>
+        /// <param name="width">The width of the media in pixels. This is optional.</param>
+        /// <param name="height">The height of the media in pixels. This is optional.</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="imageUrl"/> is <c>null</c>.</exception>
+        public OpenGraphImage(string imageUrl, string type, int width, int height) : this(imageUrl, type)
+        {
+            this.Height = height;
+            this.Width = width;
+        }
+
+        #endregion
 
         #region Public Methods
 

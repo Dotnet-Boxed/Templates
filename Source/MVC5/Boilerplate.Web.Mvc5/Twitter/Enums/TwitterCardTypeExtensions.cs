@@ -3,7 +3,7 @@
     /// <summary>
     /// <see cref="TwitterCardType"/> extension methods.
     /// </summary>
-    public static class TwitterCardTypeExtensions
+    internal static class TwitterCardTypeExtensions
     {
         /// <summary>
         /// Returns the Twitter specific <see cref="string" /> representation of the <see cref="TwitterCardType" />.

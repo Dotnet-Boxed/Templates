@@ -77,9 +77,9 @@
         public string Colour { get; set; }
 
         /// <summary>
-        /// Gets or sets the condition of the item, one of 'new', 'refurbished', or 'used'.
+        /// Gets the condition of the item, one of 'new', 'refurbished', or 'used'.
         /// </summary>
-        public OpenGraphCondition Condition { get; set; }
+        public OpenGraphCondition Condition { get { return this.condition; } }
 
         /// <summary>
         /// Gets or sets a time representing when the item expired (or will expire).

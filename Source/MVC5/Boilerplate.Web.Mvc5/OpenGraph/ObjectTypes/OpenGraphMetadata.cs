@@ -28,7 +28,7 @@
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
-        /// <exception cref="System.ArgumentNullException">title or image or url is <c>null</c>.</exception>
+        /// <exception cref="System.ArgumentNullException">title or image is <c>null</c>.</exception>
         public OpenGraphMetadata(string title, OpenGraphImage image, string url = null)
         {
             if (title == null)

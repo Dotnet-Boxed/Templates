@@ -117,13 +117,13 @@
     <Compile Include="OpenGraph\Enums\OpenGraphAgeGroupExtensions.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphTargetGender.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphGenderTargetExtensions.cs" />
-    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResteraunt.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphRestaurant.cs" />
     <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProduct.cs" />
     <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProductItem.cs" />
     <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphProductGroup.cs" />
-    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenu.cs" />
-    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenuItem.cs" />
-    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphResterauntMenuSection.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphRestaurantMenu.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphRestaurantMenuItem.cs" />
+    <Compile Include="OpenGraph\ObjectTypes\Facebook\OpenGraphRestaurantMenuSection.cs" />
     <Compile Include="OpenGraph\ObjectTypes\OpenGraphMetadata.cs" />
     <Compile Include="OpenGraph\Enums\DayOfWeekExtensions.cs" />
     <Compile Include="OpenGraph\Enums\OpenGraphDeterminer.cs" />

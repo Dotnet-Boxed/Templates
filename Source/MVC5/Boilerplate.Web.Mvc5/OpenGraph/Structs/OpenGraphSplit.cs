@@ -14,7 +14,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphSplit"/> class.
         /// </summary>
-        /// <param name="isMiles">if set to <c>true</c> distance is measured in miles, otherwise kilometers.</param>
+        /// <param name="isMiles">if set to <c>true</c> distance is measured in miles, otherwise kilometres.</param>
         /// <param name="values">The values.</param>
         /// <exception cref="System.ArgumentNullException">values</exception>
         public OpenGraphSplit(bool isMiles, IEnumerable<OpenGraphQuantity> values)
@@ -31,9 +31,9 @@
         public bool IsMiles { get { return this.isMiles; } }
 
         /// <summary>
-        /// Gets a value indicating whether distance is measured in kilometers.
+        /// Gets a value indicating whether distance is measured in kilometres.
         /// </summary>
-        public bool IsKilometers { get { return this.isMiles; } }
+        public bool IsKilometers { get { return !this.isMiles; } }
 
         /// <summary>
         /// Gets the split values.

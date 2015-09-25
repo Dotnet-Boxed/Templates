@@ -42,9 +42,9 @@
         public bool? IsSecret { get; set; }
 
         /// <summary>
-        /// Gets or sets the relative importance and scarcity of the achievement.
+        /// Gets the relative importance and scarcity of the achievement.
         /// </summary>
-        public int Points { get; set; }
+        public int Points { get { return this.points; } }
 
         /// <summary>
         /// Gets the namespace of this open graph type.

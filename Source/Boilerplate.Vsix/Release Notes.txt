@@ -5,6 +5,7 @@ MVC 5 & 6
 - Updated SitemapNode to check for null URL's and priorities out of range.
 - SitemapService updated to enter the correct priorities for the sitemap nodes.
 - Updated to use the latest version of the ASP.NET MVC Boilerplate Framework NuGet package with the above changes.
+- Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
 MVC 6
 - Added gulp-autoprefixer, gulp-jscs and gulp-plumber NPM packages.
 - Implemented CSS autoprefixing in Gulpfile.js.
@@ -13,6 +14,8 @@ MVC 6
 - Added JSHint, TSHint and JSCS settings files.
 - Switched from gulp-tsc to gulp-typescript.
 - Added a TypeScript feature.
+- The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
+- The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 
 Version 2.2.0
 MVC 6

@@ -58,12 +58,12 @@
         {
             if (antiforgery == null)
             {
-                throw new ArgumentNullException("antiForgery");
+                throw new ArgumentNullException(nameof(antiforgery));
             }
 
             if (antiforgeryOptions == null)
             {
-                throw new ArgumentNullException("mvcOptions");
+                throw new ArgumentNullException(nameof(antiforgeryOptions));
             }
 
             this.antiforgery = antiforgery;
@@ -84,7 +84,7 @@
         {
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             HttpRequest request = context.HttpContext.Request;
