@@ -17,7 +17,7 @@
     // on each page as an example.
     // These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
     // hand code them yourself instead of using these helpers.
-    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@RehanSaeedUK");
+    ViewBag.TwitterCard = new TwitterCardSummaryLargeImage("@RehanSaeedUK");
     ViewBag.OpenGraph = new OpenGraphWebsite(
         ViewBag.Title,
         new OpenGraphImage(Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
