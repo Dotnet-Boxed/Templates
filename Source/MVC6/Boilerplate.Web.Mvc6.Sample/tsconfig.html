@@ -1,0 +1,23 @@
+﻿Comments are not allowed in the tsconfig.json file (See http://blog.getify.com/json-comments/ for why this is silly),
+so they are added here.
+
+The <a href="https://github.com/Microsoft/TypeScript/wiki/tsconfig.json">tsconfig.json</a> file is responsible for
+configuring TypeScript compilation.
+
+<ul>
+    <li>
+        compilerOptions - TypeScript to JavaScript compilation options.
+        <ul>
+            <li>"noImplicitAny": true - Do not allow implicit any variables. Force them to be explicitly declared.</li>
+            <li>"noEmitOnError": true - Stop processing on error.</li>
+            <li>"removeComments": false - Do not remove comments.</li>
+            <li>"sourceMap": false - Do not create source map files (Leave this to the gulp plugin).</li>
+            <li>"module": "commonjs" - Use the Common JS modules.</li>
+            <li>"target": "es5" - Compile to ECMAScript 5.</li>
+        </ul>
+    </li>
+    <li>
+        exclude - Exclude the bower_components, node_modules and wwwroot folders from being scanned for TypeScript
+        (.ts) or TypeScript definition (.d.ts) files.
+    </li>
+</ul>

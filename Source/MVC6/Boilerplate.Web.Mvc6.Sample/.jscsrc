@@ -1,8 +1,5 @@
 // JavaScript Code Style (JSCS) (See http://jscs.info)
 
-// IMPORTANT: This file must be saved with as UTF8 without the byte order mark (BOM or sometimes called Signature). You
-// can do this in Visual Studio by doing a 'Save As' -> 'Save with Encoding'.
-
 // This file contains a list of all rules determining how your JavaScript should be styled. The 'lint-js' Gulp task can
 // be run to apply these rules and you can see any errors output to the 'Task Runner Explorer' console.
 

@@ -6,6 +6,7 @@ MVC 5 & 6
 - SitemapService updated to enter the correct priorities for the sitemap nodes.
 - Updated to use the latest version of the ASP.NET MVC Boilerplate Framework NuGet package with the above changes.
 - Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
+- strict mode added to Fallback scripts.js and styles.js as well as other jshint fixes.
 MVC 6
 - Added gulp-autoprefixer, gulp-jscs and gulp-plumber NPM packages.
 - Implemented CSS autoprefixing in Gulpfile.js.
