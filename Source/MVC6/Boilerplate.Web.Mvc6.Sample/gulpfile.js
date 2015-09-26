@@ -67,8 +67,26 @@ var paths = {
 };
 
 // $Start-TypeScript$
-// Use the tsconfig.json file to specify how TypeScript (.ts) files should be compiled to JavaScript (.js).
-var typeScriptProject = typescript.createProject("tsconfig.json");
+// A TypeScript project is used to enable faster incremental compilation, rather than recompiling everything from 
+// scratch each time. Each resulting compiled file has it's own project which is stored in the typeScriptProjects array.
+var typeScriptProjects = [];
+function getTypeScriptProject(name) {
+    var item;
+    for (var i = 0; i < typeScriptProjects.length; ++i) {
+        if (typeScriptProjects[i].name === name) {
+            item = typeScriptProjects[i];
+        }
+    }
+
+    if (item === undefined) {
+        // Use the tsconfig.json file to specify how TypeScript (.ts) files should be compiled to JavaScript (.js).
+        var project = ts.createProject("tsconfig.json");
+        item = { name: name, project: project };
+        typeScriptProjects.push(item);
+    }
+
+    return item.project;
+}
 
 // $End-TypeScript$
 // Initialize the mappings between the source and output files.
@@ -307,7 +325,7 @@ gulp.task("build-js", ["clean-js", "lint-js"], function () {
             // $Start-TypeScript$
             .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
                 "**/*.ts",
-                typescript(typeScriptProject))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
             // $End-TypeScript$
             .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
             .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
