@@ -17,6 +17,7 @@ MVC 6
 - Added a TypeScript feature.
 - The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
+- RedirectToCanonicalUrlAttribute and NoTrailingSlashAttribute updated to use the new ASP.NET 5 API's.
 
 Version 2.2.0
 MVC 6

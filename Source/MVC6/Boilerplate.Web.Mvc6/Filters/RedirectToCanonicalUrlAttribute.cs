@@ -1,6 +1,8 @@
 ﻿namespace Boilerplate.Web.Mvc.Filters
 {
     using System;
+    using Microsoft.AspNet.Http;
+    using Microsoft.AspNet.Http.Extensions;
     using Microsoft.AspNet.Mvc;
 
     /// <summary>
@@ -16,8 +18,7 @@
     public class RedirectToCanonicalUrlAttribute : AuthorizationFilterAttribute
     {
         #region Fields
-
-        private const char QueryCharacter = '?';
+        
         private const char SlashCharacter = '/';
 
         private readonly bool appendTrailingSlash;
@@ -107,73 +108,67 @@
         {
             bool isCanonical = true;
 
-            var path = context.HttpContext.Request.Path;
-            canonicalUrl = path.ToString();
+            var request = context.HttpContext.Request;
 
             // If we are not dealing with the home page. Note, the home page is a special case and it doesn't matter
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
-            if (path.HasValue)
+            if (request.Path.HasValue && (request.Path.Value.Length > 1))
             {
-                int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
-                if (queryIndex == -1)
-                {
-                    bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter;
+                bool hasTrailingSlash = request.Path.Value[request.Path.Value.Length - 1] == SlashCharacter;
 
-                    if (this.appendTrailingSlash)
+                if (this.appendTrailingSlash)
+                {
+                    // Append a trailing slash to the end of the URL.
+                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
                     {
-                        // Append a trailing slash to the end of the URL.
-                        if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
-                        {
-                            canonicalUrl += SlashCharacter;
-                            isCanonical = false;
-                        }
-                    }
-                    else
-                    {
-                        // Trim a trailing slash from the end of the URL.
-                        if (hasTrailingSlash)
-                        {
-                            canonicalUrl = canonicalUrl.TrimEnd(SlashCharacter);
-                            isCanonical = false;
-                        }
+                        request.Path = new PathString(request.Path.Value + SlashCharacter);
+                        isCanonical = false;
                     }
                 }
                 else
                 {
-                    bool hasTrailingSlash = canonicalUrl[queryIndex - 1] == SlashCharacter;
-
-                    if (this.appendTrailingSlash)
+                    // Trim a trailing slash from the end of the URL.
+                    if (hasTrailingSlash)
                     {
-                        // Append a trailing slash to the end of the URL but before the query string.
-                        if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
+                        request.Path = new PathString(request.Path.Value.TrimEnd(SlashCharacter));
+                        isCanonical = false;
+                    }
+                }
+
+                if (this.lowercaseUrls && !this.HasNoTrailingSlashAttribute(context))
+                {
+                    foreach (char character in request.Path.Value)
+                    {
+                        if (char.IsUpper(character))
                         {
-                            canonicalUrl = canonicalUrl.Insert(queryIndex, SlashCharacter.ToString());
+                            request.Path = new PathString(request.Path.Value.ToLower());
                             isCanonical = false;
+                            break;
                         }
                     }
-                    else
+
+                    if (request.QueryString.HasValue)
                     {
-                        // Trim a trailing slash to the end of the URL but before the query string.
-                        if (hasTrailingSlash)
+                        foreach (char character in request.QueryString.Value)
                         {
-                            canonicalUrl = canonicalUrl.Remove(queryIndex - 1, 1);
-                            isCanonical = false;
+                            if (char.IsUpper(character))
+                            {
+                                request.QueryString = new QueryString(request.QueryString.Value.ToLower());
+                                isCanonical = false;
+                                break;
+                            }
                         }
                     }
                 }
             }
 
-            if (this.lowercaseUrls)
+            if (isCanonical)
             {
-                foreach (char character in canonicalUrl)
-                {
-                    if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(context))
-                    {
-                        canonicalUrl = canonicalUrl.ToLower();
-                        isCanonical = false;
-                        break;
-                    }
-                }
+                canonicalUrl = null;
+            }
+            else
+            {
+                canonicalUrl = UriHelper.GetEncodedUrl(request);
             }
 
             return isCanonical;

@@ -12,7 +12,6 @@
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class NoTrailingSlashAttribute : AuthorizationFilterAttribute
     {
-        private const char QueryCharacter = '?';
         private const char SlashCharacter = '/';
 
         /// <summary>
@@ -28,19 +27,10 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            string canonicalUrl = context.HttpContext.Request.Path.ToString();
-            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
-
-            if (queryIndex == -1)
+            var path = context.HttpContext.Request.Path;
+            if (path.HasValue)
             {
-                if (canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter)
-                {
-                    this.HandleTrailingSlashRequest(context);
-                }
-            }
-            else
-            {
-                if (canonicalUrl[queryIndex - 1] == SlashCharacter)
+                if (path.Value[path.Value.Length - 1] == SlashCharacter)
                 {
                     this.HandleTrailingSlashRequest(context);
                 }
