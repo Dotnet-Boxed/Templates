@@ -256,7 +256,9 @@ gulp.task("build-css", ["clean-css", "lint-css"], function () {
                 environment.isDevelopment(),        // If running in the development environment.
                 sourcemaps.init()))                 // Set up the generation of .map source files for the CSS.
             .pipe(autoprefixer({                    // Auto-prefix CSS with vendor specific prefixes.
-                browsers: ["> 1%, last 2 versions"] // Support browsers with more than 1% market share or the last two versions.
+                browsers: [
+                    "> 1%",                         // Support browsers with more than 1% market share.
+                    "last 2 versions"]              // Support the last two versions of browsers.
             }))
 			.pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
             .pipe(concat(source.name))              // Concatenate CSS files into a single CSS file with the specified name.

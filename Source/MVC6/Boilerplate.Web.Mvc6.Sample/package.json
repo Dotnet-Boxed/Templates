@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "gulp": "3.9.0",
-    "gulp-autoprefixer": "3.0.2",
+    "gulp-autoprefixer": "2.3.1",
     "gulp-concat": "2.6.0",
     "gulp-csslint": "0.2.0",
     "gulp-if": "1.2.5",
