@@ -10,7 +10,7 @@
     /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.menu_item/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SectionUrl), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphRestaurantMenuItem), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SectionUrl), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurantMenuItem : OpenGraphMetadata
     {
         #region Constructors

@@ -9,7 +9,7 @@
     /// This object type represents a product item. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.item/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Availability) + "," + nameof(Condition) + "," + nameof(Prices) + "," + nameof(RetailerItemId), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphProductItem), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Availability) + "," + nameof(Condition) + "," + nameof(Prices) + "," + nameof(RetailerItemId), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProductItem : OpenGraphMetadata
     {
         #region Constructors

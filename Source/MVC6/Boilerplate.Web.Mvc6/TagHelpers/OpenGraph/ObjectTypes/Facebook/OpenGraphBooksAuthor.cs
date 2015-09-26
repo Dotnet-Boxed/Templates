@@ -8,7 +8,7 @@
     /// This object represents a single author of a book. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.author/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphBooksAuthor), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksAuthor : OpenGraphMetadata
     {
         #region Constructors

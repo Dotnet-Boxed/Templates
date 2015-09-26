@@ -11,7 +11,7 @@
     /// card. You can also provide attribution to the photographer of the  gallery by specifying the value of the creator tag. 
     /// See https://dev.twitter.com/cards/types/gallery.
     /// </summary>
-    [TargetElement(Attributes = nameof(Username) + "," + nameof(Image0) + "," + nameof(Image1) + "," + nameof(Image2) + "," + nameof(Image3), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(TwitterCardGallery), Attributes = nameof(Username) + "," + nameof(Image0) + "," + nameof(Image1) + "," + nameof(Image2) + "," + nameof(Image3), TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardGallery : TwitterCard
     {
         #region Constructors

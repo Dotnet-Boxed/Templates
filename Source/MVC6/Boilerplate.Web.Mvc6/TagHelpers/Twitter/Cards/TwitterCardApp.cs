@@ -9,7 +9,7 @@
     /// and the price. This Card type is currently available on the twitter.com website, as well as iOS and Android 
     /// mobile clients. It is not yet available on mobile web. See https://dev.twitter.com/cards/types/app.
     /// </summary>
-    [TargetElement(Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(TwitterCardApp), Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardApp : TwitterCard
     {
         #region Constructors

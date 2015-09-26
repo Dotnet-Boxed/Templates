@@ -12,7 +12,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.other/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphVideoOther), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoOther : OpenGraphMetadata
     {
         #region Constructors

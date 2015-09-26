@@ -9,7 +9,7 @@
     /// This object type represents a restaurant at a specific location. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphRestaurant), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurant : OpenGraphMetadata
     {
         #region Constructors

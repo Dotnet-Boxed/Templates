@@ -10,7 +10,7 @@
     /// Twitter must approve the use of the player card, find out more below.
     /// See https://dev.twitter.com/cards/types/player
     /// </summary>
-    [TargetElement(Attributes = nameof(Username) + "," + nameof(Image) + "," + nameof(Player), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(TwitterCardPlayer), Attributes = nameof(Username) + "," + nameof(Image) + "," + nameof(Player), TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPlayer : TwitterCard
     {
         #region Constructors

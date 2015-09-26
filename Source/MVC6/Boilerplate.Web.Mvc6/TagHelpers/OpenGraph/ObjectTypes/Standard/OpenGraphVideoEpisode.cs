@@ -12,7 +12,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.episode/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphVideoEpisode), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoEpisode : OpenGraphMetadata
     {
         #region Constructors

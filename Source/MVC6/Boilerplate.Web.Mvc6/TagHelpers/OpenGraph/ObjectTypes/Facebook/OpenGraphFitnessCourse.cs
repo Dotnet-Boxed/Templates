@@ -9,7 +9,7 @@
     /// Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/fitness.course/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphFitnessCourse), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     internal class OpenGraphFitnessCourse : OpenGraphMetadata
     {
         #region Constructors

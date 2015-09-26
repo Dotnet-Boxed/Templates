@@ -10,7 +10,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.radio_station/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphMusicRadioStation), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicRadioStation : OpenGraphMetadata
     {
         #region Constructors

@@ -10,7 +10,7 @@
     /// Facebook uses the books.book object type instead which requires an ISBN number.
     /// See http://ogp.me/
     /// </summary>
-    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(nameof(OpenGraphBook), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBook : OpenGraphMetadata
     {
         #region Constructors
