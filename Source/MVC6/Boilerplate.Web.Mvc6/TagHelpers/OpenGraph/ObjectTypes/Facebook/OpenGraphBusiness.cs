@@ -10,7 +10,7 @@
     /// the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBusiness), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(ContactData) + "," + nameof(Location))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(ContactData) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBusiness : OpenGraphMetadata
     {
         private const string TimeOfDayFormat = "hh:mm";

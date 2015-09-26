@@ -14,7 +14,7 @@
     /// Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
     /// </summary>
-    [TargetElement(nameof(OpenGraphGameAchievement), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Points))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Points), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphGameAchievement : OpenGraphMetadata
     {
         #region Constructors

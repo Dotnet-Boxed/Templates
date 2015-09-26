@@ -11,7 +11,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/
     /// </summary>
-    [TargetElement(nameof(OpenGraphArticle), Attributes = nameof(Title) + "," + nameof(MainImage))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphArticle : OpenGraphMetadata
     {
         #region Constructors

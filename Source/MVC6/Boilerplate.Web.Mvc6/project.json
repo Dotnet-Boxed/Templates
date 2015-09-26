@@ -1,8 +1,8 @@
 {
-  "version": "1.2.2-*",
+  "version": "1.2.4-*",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
-  "releaseNotes": "RedirectToCanonicalUrlAttribute  and NoTrailingSlashAttribute updated to use the new ASP.NET 5 API's.",
+  "releaseNotes": "Tag helpers now use TagStructure = TagStructure.WithoutEndTag.",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",

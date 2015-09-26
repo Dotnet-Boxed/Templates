@@ -9,7 +9,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
     /// </summary>
-    [TargetElement(nameof(OpenGraphProfile), Attributes = nameof(Title) + "," + nameof(MainImage))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProfile : OpenGraphMetadata
     {
         #region Constructors

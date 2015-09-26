@@ -12,7 +12,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.tv_show/
     /// </summary>
-    [TargetElement(nameof(OpenGraphVideoTvShow), Attributes = nameof(Title) + "," + nameof(MainImage))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoTvShow : OpenGraphMetadata
     {
         #region Constructors

@@ -8,7 +8,7 @@
     /// products and restaurants. It is designed to give the reader a preview of the content before clicking 
     /// through to your website. See https://dev.twitter.com/cards/types/summary.
     /// </summary>
-    [TargetElement(nameof(TwitterCardSummary), Attributes = nameof(Username))]
+    [TargetElement(Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummary : TwitterCard
     {
         #region Constructors

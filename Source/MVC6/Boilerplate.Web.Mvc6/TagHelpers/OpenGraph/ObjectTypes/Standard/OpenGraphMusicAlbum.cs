@@ -11,7 +11,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.album/
     /// </summary>
-    [TargetElement(nameof(OpenGraphMusicAlbum), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SongUrls) + "," + nameof(SongDisc) + "," + nameof(SongTrack))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SongUrls) + "," + nameof(SongDisc) + "," + nameof(SongTrack), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicAlbum : OpenGraphMetadata
     {
         #region Constructors

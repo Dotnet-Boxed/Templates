@@ -9,7 +9,7 @@
     /// user to your website. On twitter.com and the mobile clients, the image appears below the tweet text.
     /// See https://dev.twitter.com/cards/types/summary-large-image.
     /// </summary>
-    [TargetElement(nameof(TwitterCardSummaryLargeImage), Attributes = nameof(Username))]
+    [TargetElement(Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummaryLargeImage : TwitterCard
     {
         #region Constructors

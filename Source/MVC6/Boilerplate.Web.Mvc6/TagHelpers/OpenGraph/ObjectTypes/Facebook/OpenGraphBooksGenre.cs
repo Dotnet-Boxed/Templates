@@ -8,7 +8,7 @@
     /// This object type represents the genre of a book or publication. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.genre/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBooksGenre), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(CanonicalName))]
+    [TargetElement(Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(CanonicalName), TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksGenre : OpenGraphMetadata
     {
         #region Constructors
