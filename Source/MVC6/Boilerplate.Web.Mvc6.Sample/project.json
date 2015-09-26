@@ -4,7 +4,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "1.2.0",
+    "Boilerplate.Web.Mvc6": "1.2.1",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     // $Start-XmlFormatter$

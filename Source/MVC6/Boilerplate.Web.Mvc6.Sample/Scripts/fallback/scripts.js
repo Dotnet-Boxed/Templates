@@ -6,7 +6,21 @@
 //       <script>window.jQuery || document.write('<script src="/js/jquery.js"><\/script>');</script>
 //       The downside to this is that Bootstrap depends on jQuery and even if the above fallback script is added, 
 //       the Bootstrap script will error because the Bootstrap script will run before the jQuery fallback has loaded.
-(function (document, fallbacks) {
+(function (document) {
+    "use strict";
+
+    var fallbacks = [
+        // test - Tests whether the script loaded successfully or not. Returns true if the script loaded successfully or 
+        //        false if the script failed to load and the fallback is required.
+        // src - The URL to the fallback script.
+        { test: function () { return window.Modernizr; }, src: "/js/modernizr.js" },
+        { test: function () { return window.jQuery; }, src: "/js/jquery.js" },
+        { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
+        { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
+        { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" },
+        { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" },
+        { test: function () { return window.Zepto; }, src: "/js/bootstrap-touch-carousel.js" }
+    ];
 
     var check = function (fallbacks, i) {
         if (i < fallbacks.length) {
@@ -26,15 +40,4 @@
     };
     check(fallbacks, 0);
 
-})(document, [
-    // test - Tests whether the script loaded successfully or not. Returns true if the script loaded successfully or 
-    //        false if the script failed to load and the fallback is required.
-    // src - The URL to the fallback script.
-    { test: function () { return window.Modernizr; }, src: "/js/modernizr.js" },
-    { test: function () { return window.jQuery; }, src: "/js/jquery.js" },
-    { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
-    { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
-    { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" },
-    { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" },
-    { test: function () { return window.Zepto; }, src: "/js/bootstrap-touch-carousel.js" }
-]);
+})(document);
