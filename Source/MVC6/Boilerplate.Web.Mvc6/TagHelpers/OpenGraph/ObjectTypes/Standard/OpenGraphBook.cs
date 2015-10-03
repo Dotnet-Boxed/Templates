@@ -10,9 +10,21 @@
     /// Facebook uses the books.book object type instead which requires an ISBN number.
     /// See http://ogp.me/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBook), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-book", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBook : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string AuthorUrlAttributeName = "author-url";
+        private const string ISBNAttributeName = "isbn";
+        private const string ReleaseDateAttributeName = "release-date";
+        private const string TagsAttributeName = "tags";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -40,11 +52,13 @@
         /// <summary>
         /// Gets or sets the URL to the page about the author who wrote the book. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(AuthorUrlAttributeName)]
         public string AuthorUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the books unique ISBN number.
         /// </summary>
+        [HtmlAttributeName(ISBNAttributeName)]
         public string ISBN { get; set; }
 
         /// <summary>
@@ -55,11 +69,13 @@
         /// <summary>
         /// Gets or sets the release date of the book.
         /// </summary>
+        [HtmlAttributeName(ReleaseDateAttributeName)]
         public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the tag words associated with the book.
         /// </summary>
+        [HtmlAttributeName(TagsAttributeName)]
         public IEnumerable<string> Tags { get; set; }
 
         /// <summary>

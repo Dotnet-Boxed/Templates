@@ -4,7 +4,12 @@
 @* lang - The language of the page. *@
 @* no-js - The no JavaScript class is removed by modernizr if JavaScript is available. *@
 <html class="no-js" lang="en">
+<!-- $Start-OpenGraph-On$ -->
 <head @(ViewBag.OpenGraph == null ? null : Html.OpenGraphNamespace((OpenGraphMetadata)ViewBag.OpenGraph))>
+<!-- $End-OpenGraph-On$ -->
+<!-- $Start-OpenGraph-Off$ -->
+<!--<head>-->
+<!-- $End-OpenGraph-Off$ -->
     @* The order of the tags in the head is important for best performance and compatibility. *@
     @* charset - The character encoding of the document. *@
     <meta charset="utf-8">
@@ -122,16 +127,20 @@
     {
         <meta name="author" content="@ViewBag.Author">
     }
+    <!-- $Start-TwitterCard$ -->
     @* Render Twitter Card meta tags. *@
     @if (ViewBag.TwitterCard != null)
     {
         @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
     }
+    <!-- $End-TwitterCard$ -->
+    <!-- $Start-OpenGraph-On$ -->
     @* Render Facebook Open Graph meta tags. *@
     @if (ViewBag.OpenGraph != null)
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
     }
+    <!-- $End-OpenGraph-On$ -->
     @* Render the Referrer meta tag for increased privacy. *@
     @if (ViewBag.ReferrerMode != null)
     {

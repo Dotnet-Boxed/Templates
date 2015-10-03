@@ -10,9 +10,18 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.radio_station/
     /// </summary>
-    [TargetElement(nameof(OpenGraphMusicRadioStation), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-music-radio-station", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicRadioStation : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string CreatorUrlAttributeName = "creator-url";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -40,6 +49,7 @@
         /// <summary>
         /// Gets or sets the URL to the page about the creator of the radio station. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(CreatorUrlAttributeName)]
         public string CreatorUrl { get; set; }
 
         /// <summary>

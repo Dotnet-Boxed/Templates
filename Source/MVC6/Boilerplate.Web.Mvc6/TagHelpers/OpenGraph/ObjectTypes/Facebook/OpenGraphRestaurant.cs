@@ -9,9 +9,22 @@
     /// This object type represents a restaurant at a specific location. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/
     /// </summary>
-    [TargetElement(nameof(OpenGraphRestaurant), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-restaurant", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurant : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string CategoriesAttributeName = "categories";
+        private const string ContactInfoAttributeName = "contact-info";
+        private const string LocationAttributeName = "location";
+        private const string MenuUrlsAttributeName = "menu-urls";
+        private const string PriceRatingAttributeName = "price-rating";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -47,21 +60,25 @@
         /// <summary>
         /// Gets or sets a collection of categories describing this restaurant's food.
         /// </summary>
+        [HtmlAttributeName(CategoriesAttributeName)]
         public IEnumerable<string> Categories { get; set; }
 
         /// <summary>
         /// Gets or sets the contact information for the restaurant.
         /// </summary>
+        [HtmlAttributeName(ContactInfoAttributeName)]
         public OpenGraphContactData ContactInfo { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the place.
         /// </summary>
+        [HtmlAttributeName(LocationAttributeName)]
         public OpenGraphLocation Location { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the menus. This URL must contain restaurant.menu meta tags <see cref="OpenGraphResterauntMenu"/>.
         /// </summary>
+        [HtmlAttributeName(MenuUrlsAttributeName)]
         public IEnumerable<string> MenuUrls { get; set; }
 
         /// <summary>
@@ -72,6 +89,7 @@
         /// <summary>
         /// Gets or sets the price rating for this restaurant (from 1 to 4).
         /// </summary>
+        [HtmlAttributeName(PriceRatingAttributeName)]
         public int? PriceRating { get; set; }
 
         /// <summary>

@@ -147,8 +147,13 @@
             filters.Add(
                 new CspConnectSrcAttribute()
                 {
+#if DEBUG
+                    // Allow Browser Link to work in debug mode only.
+                    CustomSources = "localhost:*",
+#else
                     // Allow AJAX and Web Sockets to example.com.
                     // CustomSources = "*.example.com",
+#endif
                     // Allow all AJAX and Web Sockets calls from the same domain.
                     Self = true
                 });
@@ -196,8 +201,13 @@
             filters.Add(
                 new CspImgSrcAttribute()
                 {
+#if DEBUG
+                    // Allow Browser Link to work in debug mode only.
+                    CustomSources = "data:",
+#else
                     // Allow images from example.com.
                     // CustomSources = "*.example.com",
+#endif
                     // Allow images from the same domain.
                     Self = true,
                 });
@@ -209,7 +219,11 @@
                 {
                     // Allow scripts from the CDN's.
                     CustomSources = string.Join(
-                        " ", 
+                        " ",
+#if DEBUG
+                        // Allow Browser Link to work in debug mode only.
+                        "localhost:*",
+#endif
                         ContentDeliveryNetwork.Google.Domain,
                         ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.

@@ -2,7 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>ASP.NET MVC Boilerplate</title>
-    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <style>
+        .alert-close-checkbox {
+            display:none
+        }
+    </style>
 </head>
 <body>
     <div id="main" class="container body-content" role="main">
@@ -14,11 +20,46 @@
         </header>
 
         <!-- $Start-HttpsEverywhere$ -->
-        <!--<div class="alert alert-info">
-            <h2>HTTPS Everywhere</h2>
+        <div class="alert alert-info">
+            <label for="Alert-HttpsEverywhere" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+            <input id="Alert-HttpsEverywhere" name="Alert-HttpsEverywhere" class="alert-close-checkbox" type="checkbox"/>
+
+            <h2><span aria-hidden="true" class="fa fa-lock"></span> HTTPS Everywhere</h2>
             <p>HTTPS is enabled but some features like redirecting from HTTP to HTTPS are disabled when running this site in the Development environment. This is to help make debugging easier.</p>
-        </div>-->
+        </div>
         <!-- $End-HttpsEverywhere$ -->
+
+        <div class="alert alert-info">
+            <label for="Alert-GulpProblem" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+            <input id="Alert-GulpProblem" name="Alert-GulpProblem" class="alert-close-checkbox" type="checkbox" />
+
+            <h2><span aria-hidden="true" class="fa fa-beer"></span> Fixing Common Gulp Problem</h2>
+            <p>The gulpfile.js sometimes does not load in the Visual Studio 'Task Runner Explorer' window with the error 'Failed to load, see the output window for more information'. If you see this error, unload and then reload the project or close and re-open the solution.</p>
+        </div>
+
+        <div class="alert alert-info">
+            <label for="Alert-NpmProblem" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+            <input id="Alert-NpmProblem" name="Alert-NpmProblem" class="alert-close-checkbox" type="checkbox"/>
+
+            <h2><span aria-hidden="true" class="fa fa-archive"></span> Fixing Common NPM Problem</h2>
+            <p>
+                NPM sometimes seems to corrupt the packages it downloads into it's package cache. If this happens:
+                <ol>
+                    <li>Close the solution.</li>
+                    <li>Delete the node_modules and bower_components folder.</li>
+                    <li>
+                        Use the command below in power shell to clear the cached NPM packages:
+                        <pre>npm cache clear</pre> 
+                    </li>
+                </ol>
+            </p>
+        </div>
 
         <img src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/raw/master/Images/MVC%206%20Technology%20Map.png"
              style="max-width:100%;" />
@@ -28,7 +69,7 @@
             <p>This is a check-list of tasks you must perform to get your site up and running faster. Open this file in the browser of your choice and it will remember what you have checked, just don't clear your cache.</p>
 
             <article>
-                <h3>Pre-Requisites</h3>
+                <h3><span aria-hidden="true" class="fa fa-list"></span> Pre-Requisites</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="PreRequisites-UpdateVisualStudio" type="checkbox"> <strong>Update Visual Studio</strong> -
@@ -48,11 +89,21 @@
                         Update the TypeScript extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <!-- $End-TypeScript$ -->
+                    <li class="list-group-item">
+                        <input name="PreRequisites-AddPackageSource" type="checkbox"> <strong>Update NuGet Package Source</strong> -
+                        <ol>
+                            <li>Go to Visual Studio -> Tools -> Options -> NuGet Package Manager -> Package Sources</li>
+                            <li>
+                                Enter a new package source named 'ASP.NET 5 Master' and source as the following (Without quotes):
+                                <pre>https://www.myget.org/F/aspnetmaster/api/v2</pre>
+                            </li>
+                        </ol>
+                    </li>
                 </ul>
             </article>
 
             <article>
-                <h3>Security</h3>
+                <h3><span aria-hidden="true" class="fa fa-lock"></span> Security</h3>
                 <!-- NWebSec not available. No CSP yet. -->
                 <!--<h4>Content Security Policy (CSP)</h4>
                 <ul class="list-group">
@@ -151,7 +202,7 @@
             </article>
 
             <article>
-                <h3>Performance</h3>
+                <h3><span aria-hidden="true" class="fa fa-tachometer"></span> Performance</h3>
                 <h4>Caching</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -216,7 +267,7 @@
             </article>
 
             <article>
-                <h3>Code Quality</h3>
+                <h3><span aria-hidden="true" class="fa fa-certificate"></span> Code Quality</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="CodeQuality-HTMLValidation" type="checkbox"> <strong>HTML Validation</strong> -
@@ -250,7 +301,7 @@
             </article>
 
             <article>
-                <h3>Compatibility</h3>
+                <h3><span aria-hidden="true" class="fa fa-puzzle-piece"></span> Compatibility</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
@@ -286,7 +337,7 @@
             </article>
 
             <article>
-                <h3>Authentication</h3>
+                <h3><span aria-hidden="true" class="fa fa-user"></span> Authentication</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Authentication-UserVoice" type="checkbox"> <strong>Up-vote UserVoice Post</strong> -
@@ -304,7 +355,7 @@
             </article>
 
             <article>
-                <h3>Resilience and Error Handling</h3>
+                <h3><span aria-hidden="true" class="fa fa-exclamation-triangle"></span> Resilience and Error Handling</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ResilienceAndErrorHandling-ConfigureDynamicIPSecurity" type="checkbox"> <strong>Configure Dynamic IP Security</strong> -
@@ -328,7 +379,7 @@
             </article>
 
             <article>
-                <h3>Search Engine Optimisation (SEO)</h3>
+                <h3><span aria-hidden="true" class="fa fa-search-plus"></span> Search Engine Optimisation (SEO)</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-ConfigureSitemapCml" type="checkbox"> <strong>Configure Sitemap.xml</strong> -
@@ -364,7 +415,7 @@
             </article>
 
             <article>
-                <h3>Accessibility</h3>
+                <h3><span aria-hidden="true" class="fa fa-wheelchair"></span> Accessibility</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Accessibility-CheckSiteWithSEOToolkit" type="checkbox"> <strong>Understand Accessibility Problems</strong> -
@@ -390,7 +441,7 @@
             </article>
 
             <article>
-                <h3>Search</h3>
+                <h3><span aria-hidden="true" class="fa fa-search"></span> Search</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Search-ImplementSearch" type="checkbox"> <strong>Implement Search</strong> -
@@ -404,7 +455,7 @@
             </article>
 
             <article>
-                <h3>RSS/Atom Feed</h3>
+                <h3><span aria-hidden="true" class="fa fa-rss-square"></span> RSS/Atom Feed</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="RSSAtomFeed-ImplementAtomFeed" type="checkbox"> <strong>Implement Atom Feed</strong> -
@@ -423,7 +474,7 @@
 
             <!-- Glimpse not available -->
             <!--<article>
-                <h3>Debugging</h3>
+                <h3><span aria-hidden="true" class="fa fa-code"></span> Debugging</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Debugging-LearnGlimpse" type="checkbox"> <strong>Learn Glimpse</strong> -
@@ -437,7 +488,7 @@
             </article>-->
 
             <article>
-                <h3>Social</h3>
+                <h3><span aria-hidden="true" class="fa fa-share"></span> Social</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
@@ -463,7 +514,7 @@
             </article>
 
             <article>
-                <h3>Thank Developers</h3>
+                <h3><span aria-hidden="true" class="fa fa-users"></span> Thank Developers</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ThankDevelopers-ConfigureHumansTxt" type="checkbox"> <strong>Configure Humans.txt</strong> -
@@ -479,7 +530,7 @@
             </article>
 
             <article>
-                <h3>Keeping Your Site Up To Date</h3>
+                <h3><span aria-hidden="true" class="fa fa-refresh"></span> Keeping Your Site Up To Date</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="KeepingYourSiteUpToDate-KeepNuGetPackagesUpToDate" type="checkbox"> <strong>Keep NuGet Packages Up To Date</strong> -
@@ -621,16 +672,34 @@
         $(function () {
             var store = new Persist.Store('ASP NET MVC Boilerplate ReadMe');
 
+            function turnOn($checkbox) {
+                if ($checkbox.hasClass('alert-close-checkbox')) {
+                    $checkbox.parent().hide();
+                }
+                else {
+                    $checkbox.parent().addClass('list-group-item-success');
+                }
+            }
+
+            function turnOff($checkbox) {
+                if ($checkbox.hasClass('alert-close-checkbox')) {
+                    $checkbox.parent().show();
+                }
+                else {
+                    $checkbox.parent().removeClass('list-group-item-success');
+                }
+            }
+
             $(':checkbox').click(function () {
                 var name = this.name;
                 var value = this.value;
 
                 if ($(this).is(':checked')) {
                     store.set(this.name, 'checked');
-                    $(this).parent().addClass('list-group-item-success');
+                    turnOn($(this));
                 } else {
                     store.remove(this.name);
-                    $(this).parent().removeClass('list-group-item-success');
+                    turnOff($(this));
                 }
             });
 
@@ -638,7 +707,10 @@
                 var isChecked = store.get(this.name) == 'checked';
                 $(this).prop('checked', isChecked);
                 if (isChecked) {
-                    $(this).parent().addClass('list-group-item-success');
+                    turnOn($(this));
+                }
+                else {
+                    turnOff($(this));
                 }
             });
         })

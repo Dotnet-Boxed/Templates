@@ -12,9 +12,24 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.episode/
     /// </summary>
-    [TargetElement(nameof(OpenGraphVideoEpisode), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-video-episode", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoEpisode : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string ActorsAttributeName = "actors";
+        private const string DirectorUrlsAttributeName = "director-urls";
+        private const string DurationAttributeName = "duration";
+        private const string ReleaseDateAttributeName = "release-date";
+        private const string SeriesUrlAttributeName = "series-url";
+        private const string TagsAttributeName = "tags";
+        private const string WriterUrlsAttributeName = "writer-urls";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -42,16 +57,19 @@
         /// <summary>
         /// Gets or sets the actors in the episode.
         /// </summary>
+        [HtmlAttributeName(ActorsAttributeName)]
         public IEnumerable<OpenGraphActor> Actors { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the directors. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(DirectorUrlsAttributeName)]
         public IEnumerable<string> DirectorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the episode in seconds.
         /// </summary>
+        [HtmlAttributeName(DurationAttributeName)]
         public int? Duration { get; set; }
 
         /// <summary>
@@ -62,16 +80,19 @@
         /// <summary>
         /// Gets or sets the release date of the episode.
         /// </summary>
+        [HtmlAttributeName(ReleaseDateAttributeName)]
         public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to the page about the television series. This URL's must contain television show meta tags <see cref="OpenGraphVideoTvShow"/>.
         /// </summary>
+        [HtmlAttributeName(SeriesUrlAttributeName)]
         public string SeriesUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the tag words associated with the episode.
         /// </summary>
+        [HtmlAttributeName(TagsAttributeName)]
         public IEnumerable<string> Tags { get; set; }
 
         /// <summary>
@@ -82,6 +103,7 @@
         /// <summary>
         /// Gets or sets the URL's to the pages about the writers. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(WriterUrlsAttributeName)]
         public IEnumerable<string> WriterUrls { get; set; }
 
         #endregion

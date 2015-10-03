@@ -7,9 +7,6 @@
     /// </summary>
     public static class HtmlHelperExtensions
     {
-        private const string OgNamespace = "og: http://ogp.me/ns# ";
-        private const string FacebookNamespace = "fb: http://ogp.me/ns/fb# ";
-
         /// <summary>
         /// Creates a string containing the Open Graph meta tags (Also used by Facebook). <see cref="OpenGraphMetadata"/> for more information.
         /// </summary>
@@ -29,19 +26,7 @@
         /// <returns>The Open Graph namespaces.</returns>
         public static HtmlString OpenGraphNamespace(this IHtmlHelper htmlHelper, OpenGraphMetadata openGraphMetadata)
         {
-            string prefix;
-            if ((openGraphMetadata.FacebookAdministrators == null) && 
-                (openGraphMetadata.FacebookApplicationId == null) &&
-                (openGraphMetadata.FacebookProfileId == null))
-            {
-                prefix = "prefix=\"" + OgNamespace + openGraphMetadata.Namespace + "\"";
-            }
-            else
-            {
-                prefix = "prefix=\"" + OgNamespace + FacebookNamespace + openGraphMetadata.Namespace + "\"";
-            }
-            
-            return new HtmlString(prefix);
+            return new HtmlString("prefix=\"" + openGraphMetadata.GetNamespaces() + "\"");
         }
     }
 }

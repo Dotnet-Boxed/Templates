@@ -10,9 +10,19 @@
     /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.menu_item/
     /// </summary>
-    [TargetElement(nameof(OpenGraphRestaurantMenuItem), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SectionUrl), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-restaurant-menu-item", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SectionUrlAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurantMenuItem : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string SectionUrlAttributeName = "section-url";
+        private const string VariationsAttributeName = "variations";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -50,6 +60,7 @@
         /// <summary>
         /// Gets or sets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenuSection"/>.
         /// </summary>
+        [HtmlAttributeName(SectionUrlAttributeName)]
         public string SectionUrl { get; set; }
 
         /// <summary>
@@ -60,6 +71,7 @@
         /// <summary>
         /// Gets or sets the variations of this menu item.
         /// </summary>
+        [HtmlAttributeName(VariationsAttributeName)]
         public IEnumerable<OpenGraphMenuItemVariation> Variations { get; set; }
 
         #endregion

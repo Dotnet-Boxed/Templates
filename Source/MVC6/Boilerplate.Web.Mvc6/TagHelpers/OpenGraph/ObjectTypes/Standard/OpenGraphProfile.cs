@@ -9,9 +9,21 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
     /// </summary>
-    [TargetElement(nameof(OpenGraphProfile), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-profile", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProfile : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string FirstNameAttributeName = "first-name";
+        private const string GenderAttributeName = "gender";
+        private const string LastNameAttributeName = "last-name";
+        private const string UsernameAttributeName = "username";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -39,16 +51,19 @@
         /// <summary>
         /// Gets or sets the name normally given to an individual by a parent or self-chosen.
         /// </summary>
+        [HtmlAttributeName(FirstNameAttributeName)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Gets or sets the gender.
         /// </summary>
+        [HtmlAttributeName(GenderAttributeName)]
         public OpenGraphGender? Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the name inherited from a family or marriage and by which the individual is commonly known.
         /// </summary>
+        [HtmlAttributeName(LastNameAttributeName)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -64,6 +79,7 @@
         /// <summary>
         /// Gets or sets the short unique string to identify them.
         /// </summary>
+        [HtmlAttributeName(UsernameAttributeName)]
         public string Username { get; set; }
 
         #endregion

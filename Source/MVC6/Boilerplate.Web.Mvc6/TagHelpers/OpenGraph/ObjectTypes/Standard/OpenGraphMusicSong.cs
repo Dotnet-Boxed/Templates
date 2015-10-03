@@ -10,9 +10,25 @@
     /// See http://ogp.me/
     /// https://developers.facebook.com/docs/reference/opengraph/object-type/music.song/
     /// </summary>
-    [TargetElement(nameof(OpenGraphMusicSong), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(AlbumUrls) + "," + nameof(AlbumDisc) + "," + nameof(AlbumTrack), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-music-song", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AlbumUrlsAttributeName + "," + AlbumDiscAttributeName + "," + AlbumTrackAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicSong : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string AlbumDiscAttributeName = "album-disc";
+        private const string AlbumTrackAttributeName = "album-track";
+        private const string AlbumUrlsAttributeName = "album-urls";
+        private const string DurationAttributeName = "duration";
+        private const string ISRCAttributeName = "isrc";
+        private const string MusicianUrlsAttributeName = "musician-urls";
+        private const string ReleaseDateAttributeName = "release-date";
+        private const string ReleaseTypeAttributeName = "release-type";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -49,27 +65,32 @@
         /// <summary>
         /// Gets or sets which disc in the album the song is from.
         /// </summary>
+        [HtmlAttributeName(AlbumDiscAttributeName)]
         public int AlbumDisc { get; set; }
 
         /// <summary>
         /// Gets or sets which track in the album the song is from.
         /// </summary>
+        [HtmlAttributeName(AlbumTrackAttributeName)]
         public int AlbumTrack { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the album the song comes from. This URL's must contain profile meta tags <see cref="OpenGraphMusicAlbum"/>.
         /// </summary>
+        [HtmlAttributeName(AlbumUrlsAttributeName)]
         public IEnumerable<string> AlbumUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the song in seconds.
         /// </summary>
+        [HtmlAttributeName(DurationAttributeName)]
         public int? Duration { get; set; }
 
         /// <summary>
         /// Gets or sets the International Standard Recording Code (ISRC) for the song. This is a Facebook specific property and is not specified in the 
         /// Open Graph standard.
         /// </summary>
+        [HtmlAttributeName(ISRCAttributeName)]
         public string ISRC { get; set; }
 
         /// <summary>
@@ -80,16 +101,19 @@
         /// <summary>
         /// Gets or sets the URL's to the pages about the musicians who wrote the song. This URL's must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(MusicianUrlsAttributeName)]
         public IEnumerable<string> MusicianUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the release date of the song. This is a Facebook specific property and is not specified in the Open Graph standard.
         /// </summary>
+        [HtmlAttributeName(ReleaseDateAttributeName)]
         public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the type of the release of the song. This is a Facebook specific property and not specified by the Open Graph standard.
         /// </summary>
+        [HtmlAttributeName(ReleaseTypeAttributeName)]
         public OpenGraphMusicReleaseType? ReleaseType { get; set; }
 
         /// <summary>

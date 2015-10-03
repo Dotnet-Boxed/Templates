@@ -10,9 +10,21 @@
     /// Twitter must approve the use of the player card, find out more below.
     /// See https://dev.twitter.com/cards/types/player
     /// </summary>
-    [TargetElement(nameof(TwitterCardPlayer), Attributes = nameof(Username) + "," + nameof(Image) + "," + nameof(Player), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "twitter-card-player", 
+        Attributes = UsernameAttributeName + "," + ImageAttributeName + "," + PlayerAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPlayer : TwitterCard
     {
+        #region Constants
+
+        private const string DescriptionAttributeName = "description";
+        private const string ImageAttributeName = "image";
+        private const string PlayerAttributeName = "player";
+        private const string TitleAttributeName = "title";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -52,6 +64,7 @@
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
@@ -60,18 +73,21 @@
         /// 68,600 pixels (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render. 
         /// Image must be less than 1MB in size.
         /// </summary>
+        [HtmlAttributeName(ImageAttributeName)]
         public TwitterImage Image { get; set; }
 
         /// <summary>
         /// Gets or sets the video player. If the iframe is wider than 435px, the iframe player will be resized to fit 
         /// a max width of 435px, maintaining the original aspect ratio.
         /// </summary>
+        [HtmlAttributeName(PlayerAttributeName)]
         public TwitterPlayer Player { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the summary. Title should be concise and will be truncated at 70 characters.
         /// If you are using Facebook's Open Graph og:title, do not use this unless you want a different title.
         /// </summary>
+        [HtmlAttributeName(TitleAttributeName)]
         public string Title { get; set; }
 
         /// <summary>

@@ -11,9 +11,26 @@
     /// card. You can also provide attribution to the photographer of the  gallery by specifying the value of the creator tag. 
     /// See https://dev.twitter.com/cards/types/gallery.
     /// </summary>
-    [TargetElement(nameof(TwitterCardGallery), Attributes = nameof(Username) + "," + nameof(Image0) + "," + nameof(Image1) + "," + nameof(Image2) + "," + nameof(Image3), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "twitter-card-gallery", 
+        Attributes = 
+            UsernameAttributeName + "," + Image0AttributeName + "," + Image1AttributeName + "," + 
+            Image2AttributeName + "," + Image3AttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardGallery : TwitterCard
     {
+        #region Constants
+
+        private const string CreatorUsernameAttributeName = "creator-username";
+        private const string DescriptionAttributeName = "description";
+        private const string Image0AttributeName = "image0";
+        private const string Image1AttributeName = "image1";
+        private const string Image2AttributeName = "image2";
+        private const string Image3AttributeName = "image3";
+        private const string TitleAttributeName = "title";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -54,6 +71,7 @@
         /// Gets or sets the Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an 
         /// optional property.
         /// </summary>
+        [HtmlAttributeName(CreatorUsernameAttributeName)]
         public string CreatorUsername { get; set; }
 
         /// <summary>
@@ -63,6 +81,7 @@
         /// the word to 200 characters. This is an optional property. If you are using Facebook's Open Graph 
         /// og:description, do not use this unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
@@ -70,6 +89,7 @@
         /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
+        [HtmlAttributeName(Image0AttributeName)]
         public TwitterImage Image0 { get; set; }
 
         /// <summary>
@@ -77,6 +97,7 @@
         /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
+        [HtmlAttributeName(Image1AttributeName)]
         public TwitterImage Image1 { get; set; }
 
         /// <summary>
@@ -84,6 +105,7 @@
         /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
+        [HtmlAttributeName(Image2AttributeName)]
         public TwitterImage Image2 { get; set; }
 
         /// <summary>
@@ -91,12 +113,14 @@
         /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
+        [HtmlAttributeName(Image3AttributeName)]
         public TwitterImage Image3 { get; set; }
 
         /// <summary>
         /// Gets or sets the title of your content as it should appear in the card. You may specify an empty 
         /// string if you wish no title to render.
         /// </summary>
+        [HtmlAttributeName(TitleAttributeName)]
         public string Title { get; set; }
 
         /// <summary>

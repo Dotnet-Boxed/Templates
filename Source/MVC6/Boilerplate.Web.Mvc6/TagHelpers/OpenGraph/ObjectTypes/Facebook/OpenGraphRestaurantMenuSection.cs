@@ -10,9 +10,19 @@
     /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.menu_section/
     /// </summary>
-    [TargetElement(nameof(OpenGraphRestaurantMenuSection), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(MenuUrl), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-restaurant-menu-section", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + MenuUrlAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurantMenuSection : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string ItemUrlsAttributeName = "item-urls";
+        private const string MenuUrlAttributeName = "menu-url";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -45,11 +55,13 @@
         /// <summary>
         /// Gets or sets the URL's to the pages about the menu items. This URL must contain restaurant.menuitem meta tags <see cref="OpenGraphResterauntMenuItem"/>.
         /// </summary>
+        [HtmlAttributeName(ItemUrlsAttributeName)]
         public IEnumerable<string> ItemUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenu"/>.
         /// </summary>
+        [HtmlAttributeName(MenuUrlAttributeName)]
         public string MenuUrl { get; set; }
 
         /// <summary>

@@ -61,6 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
+    <Compile Include="Features\Favicons\AndroidChromeM36ToM38FaviconFeature.cs" />
+    <Compile Include="Features\Favicons\AppleMacSafariFaviconFeature.cs" />
+    <Compile Include="Features\Favicons\AppleIOSFaviconsFeature.cs" />
     <Compile Include="Features\FeatureSet.cs" />
     <Compile Include="Features\Base\BinaryChoiceFeature.cs" />
     <Compile Include="Features\Base\Feature.cs" />
@@ -85,6 +88,8 @@
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
     <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
+    <Compile Include="Features\Social\OpenGraphFeature.cs" />
+    <Compile Include="Features\Social\TwitterCardFeature.cs" />
     <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
     <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
     <Compile Include="Services\IPortService.cs" />
@@ -166,6 +171,11 @@
   <ItemGroup>
     <Resource Include="Assets\TypeScript.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Open Graph.png" />
+    <Resource Include="Assets\Twitter.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

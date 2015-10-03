@@ -9,9 +9,26 @@
     /// Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/fitness.course/
     /// </summary>
-    [TargetElement(nameof(OpenGraphFitnessCourse), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
-    internal class OpenGraphFitnessCourse : OpenGraphMetadata
+    [TargetElement(
+        "open-graph-fitness-course", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
+    public class OpenGraphFitnessCourse : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string CaloriesAttributeName = "calories";
+        private const string CustomUnitEnergyAttributeName = "custom-unit-energy";
+        private const string DistanceAttributeName = "distance";
+        private const string DurationAttributeName = "duration";
+        private const string LiveTextAttributeName = "live-text";
+        private const string MetricsAttributeName = "metrics";
+        private const string PaceAttributeName = "pace";
+        private const string SplitsAttributeName = "splits";
+        private const string SpeedAttributeName = "speed";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -39,31 +56,37 @@
         /// <summary>
         /// Gets or sets an integer representing the number of calories used during the course.
         /// </summary>
+        [HtmlAttributeName(CaloriesAttributeName)]
         public int? Calories { get; set; }
 
         /// <summary>
         /// Gets or sets the energy used during the course.
         /// </summary>
+        [HtmlAttributeName(CustomUnitEnergyAttributeName)]
         public OpenGraphQuantity CustomUnitEnergy { get; set; }
 
         /// <summary>
         /// Gets or sets the distance of the course.
         /// </summary>
+        [HtmlAttributeName(DistanceAttributeName)]
         public OpenGraphQuantity Distance { get; set; }
 
         /// <summary>
         /// Gets or sets the duration taken on the course.
         /// </summary>
+        [HtmlAttributeName(DurationAttributeName)]
         public OpenGraphQuantity Duration { get; set; }
 
         /// <summary>
         /// Gets or sets a string value displayed in stories if the associated action's end_time has not passed, such as an encouragement to friends to cheer the user on. The value is not rendered once the course has been completed.
         /// </summary>
+        [HtmlAttributeName(LiveTextAttributeName)]
         public string LiveText { get; set; }
 
         /// <summary>
         /// Gets or sets the metrics about the course.
         /// </summary>
+        [HtmlAttributeName(MetricsAttributeName)]
         public IEnumerable<OpenGraphFitnessActivityDataPoint> Metrics { get; set; }
 
         /// <summary>
@@ -74,16 +97,19 @@
         /// <summary>
         /// Gets or sets the pace achieved on the course.
         /// </summary>
+        [HtmlAttributeName(PaceAttributeName)]
         public OpenGraphQuantity Pace { get; set; }
 
         /// <summary>
         /// Gets or sets the split times during the course.
         /// </summary>
+        [HtmlAttributeName(SplitsAttributeName)]
         public IEnumerable<OpenGraphSplit> Splits { get; set; }
 
         /// <summary>
         /// Gets or sets the speed achieved on the course.
         /// </summary>
+        [HtmlAttributeName(SpeedAttributeName)]
         public OpenGraphQuantity Speed { get; set; }
 
         /// <summary>

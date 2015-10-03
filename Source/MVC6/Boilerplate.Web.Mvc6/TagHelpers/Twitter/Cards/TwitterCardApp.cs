@@ -9,9 +9,22 @@
     /// and the price. This Card type is currently available on the twitter.com website, as well as iOS and Android 
     /// mobile clients. It is not yet available on mobile web. See https://dev.twitter.com/cards/types/app.
     /// </summary>
-    [TargetElement(nameof(TwitterCardApp), Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement("twitter-card-app", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardApp : TwitterCard
     {
+        #region Constants
+
+        private const string CountryAttributeName = "country";
+        private const string DescriptionAttributeName = "description";
+        private const string GooglePlayAttributeName = "google-play";
+        private const string GooglePlayCustomUrlSchemeAttributeName = "google-play-custom-url-scheme";
+        private const string IPadAttributeName = "ipad";
+        private const string IPadCustomUrlSchemeAttributeName = "iphone-custom-url-scheme";
+        private const string IPhoneAttributeName = "ipad";
+        private const string IPhoneCustomUrlSchemeAttributeName = "iphone-custom-url-scheme"; 
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -40,42 +53,50 @@
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
         /// Gets or sets the country. If your application is not available in the US App Store, you must set this 
         /// value to the two-letter country code for the App Store that contains your application.
         /// </summary>
+        [HtmlAttributeName(CountryAttributeName)]
         public string Country { get; set; }
 
         /// <summary>
         /// Gets or sets the numeric representation of your app ID in Google Play (.i.e. “com.android.app”).
         /// </summary>
+        [HtmlAttributeName(GooglePlayAttributeName)]
         public string GooglePlay { get; set; }
 
         /// <summary>
         /// Gets or sets your google play app’s custom URL scheme (you must include “://” after your scheme name).
         /// </summary>
+        [HtmlAttributeName(GooglePlayCustomUrlSchemeAttributeName)]
         public string GooglePlayCustomUrlScheme { get; set; }
 
         /// <summary>
         /// Gets or sets numeric representation of your iPad app ID in the App Store (.i.e. “307234931”).
         /// </summary>
+        [HtmlAttributeName(IPadAttributeName)]
         public string IPad { get; set; }
 
         /// <summary>
         /// Gets or sets your iPad app’s custom URL scheme (you must include “://” after your scheme name).
         /// </summary>
+        [HtmlAttributeName(IPadCustomUrlSchemeAttributeName)]
         public string IPadCustomUrlScheme { get; set; }
 
         /// <summary>
         /// Gets or sets numeric representation of your iPhone app ID in the App Store (.i.e. “307234931”).
         /// </summary>
+        [HtmlAttributeName(IPhoneAttributeName)]
         public string IPhone { get; set; }
 
         /// <summary>
         /// Gets or sets your iPhone app’s custom URL scheme (you must include “://” after your scheme name).
         /// </summary>
+        [HtmlAttributeName(IPhoneCustomUrlSchemeAttributeName)]
         public string IPhoneCustomUrlScheme { get; set; }
 
         /// <summary>

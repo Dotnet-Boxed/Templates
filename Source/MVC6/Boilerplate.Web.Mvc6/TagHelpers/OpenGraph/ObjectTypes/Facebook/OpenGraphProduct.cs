@@ -10,9 +10,47 @@
     /// an online store. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/
     /// </summary>
-    [TargetElement(nameof(OpenGraphProduct), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-product", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProduct : OpenGraphMetadata
     {
+        #region Constructors
+
+        private const string AgeGroupAttributeName = "age-group";
+        private const string AvailabilityAttributeName = "availability";
+        private const string BrandAttributeName = "brand";
+        private const string CategoryAttributeName = "category";
+        private const string ColourAttributeName = "colour";
+        private const string ConditionAttributeName = "condition";
+        private const string EANAttributeName = "ean";
+        private const string ExpirationTimeAttributeName = "expiration-time";
+        private const string IsShareableAttributeName = "shareable";
+        private const string ISBNAttributeName = "isbn";
+        private const string ManufacturerPartNumberAttributeName = "manufacturer-part-number";
+        private const string MaterialAttributeName = "material";
+        private const string OriginalPricesAttributeName = "original-prices";
+        private const string PatternAttributeName = "pattern";
+        private const string PluralTitleAttributeName = "plural-title";
+        private const string PretaxPricesAttributeName = "pretax-prices";
+        private const string PricesAttributeName = "prices";
+        private const string ProductLinkUrlAttributeName = "product-link-url";
+        private const string PurchaseLimitAttributeName = "purchase-limit";
+        private const string RetailerUrlAttributeName = "retailer-url";
+        private const string RetailerCategoryAttributeName = "retailer-category";
+        private const string RetailerPartNumberAttributeName = "retailer-part-number";
+        private const string RetailerTitleAttributeName = "retailer-title";
+        private const string SalePriceAttributeName = "sale-price";
+        private const string SalePriceDatesAttributeName = "sale-price-dates";
+        private const string ShippingCostAttributeName = "shipping-cost";
+        private const string ShippingWeightAttributeName = "shipping-weight";
+        private const string SizeAttributeName = "size";
+        private const string TargetGenderAttributeName = "target-gender";
+        private const string WeightAttributeName = "weight";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -40,61 +78,73 @@
         /// <summary>
         /// Gets or sets the target age group of the product, one of 'kids' or 'adult'.
         /// </summary>
+        [HtmlAttributeName(AgeGroupAttributeName)]
         public OpenGraphAgeGroup? AgeGroup { get; set; }
 
         /// <summary>
         /// Gets or sets the availability of the product, one of 'instock', 'oos', or 'pending'.
         /// </summary>
+        [HtmlAttributeName(AvailabilityAttributeName)]
         public OpenGraphAvailability? Availability { get; set; }
 
         /// <summary>
         /// Gets or sets the brand of the product or its original manufacturer.
         /// </summary>
+        [HtmlAttributeName(BrandAttributeName)]
         public string Brand { get; set; }
 
         /// <summary>
         /// Gets or sets the category for the product.
         /// </summary>
+        [HtmlAttributeName(CategoryAttributeName)]
         public string Category { get; set; }
 
         /// <summary>
         /// Gets or sets the colour of the product.
         /// </summary>
+        [HtmlAttributeName(ColourAttributeName)]
         public string Colour { get; set; }
 
         /// <summary>
         /// Gets or sets the condition of the item, one of 'new', 'refurbished', or 'used'.
         /// </summary>
+        [HtmlAttributeName(ConditionAttributeName)]
         public OpenGraphCondition? Condition { get; set; }
 
         /// <summary>
         /// Gets or sets an International Article Number, or European Article Number (EAN), for the product.
         /// </summary>
+        [HtmlAttributeName(EANAttributeName)]
         public string EAN { get; set; }
 
         /// <summary>
         /// Gets or sets a time representing when the product expired (or will expire).
         /// </summary>
+        [HtmlAttributeName(ExpirationTimeAttributeName)]
         public DateTime? ExpirationTime { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the associated story has a share button on it.
         /// </summary>
+        [HtmlAttributeName(IsShareableAttributeName)]
         public bool? IsShareable { get; set; }
 
         /// <summary>
         /// Gets or sets a International Standard Book Number (ISBN) for the product, intended for when it is a book.
         /// </summary>
+        [HtmlAttributeName(ISBNAttributeName)]
         public string ISBN { get; set; }
 
         /// <summary>
         /// Gets or sets the manufacturers part number for the product.
         /// </summary>
+        [HtmlAttributeName(ManufacturerPartNumberAttributeName)]
         public string ManufacturerPartNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the material used to make the product.
         /// </summary>
+        [HtmlAttributeName(MaterialAttributeName)]
         public string Material { get; set; }
 
         /// <summary>
@@ -105,86 +155,103 @@
         /// <summary>
         /// Gets or sets the original prices of the product.
         /// </summary>
+        [HtmlAttributeName(OriginalPricesAttributeName)]
         public IEnumerable<OpenGraphCurrency> OriginalPrices { get; set; }
 
         /// <summary>
         /// Gets or sets a description of the pattern used on the product.
         /// </summary>
+        [HtmlAttributeName(PatternAttributeName)]
         public string Pattern { get; set; }
 
         /// <summary>
         /// Gets or sets a title to be used to describe multiple items of this product.
         /// </summary>
+        [HtmlAttributeName(PluralTitleAttributeName)]
         public string PluralTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the pre-tax prices of the product.
         /// </summary>
+        [HtmlAttributeName(PretaxPricesAttributeName)]
         public IEnumerable<OpenGraphCurrency> PretaxPrices { get; set; }
 
         /// <summary>
         /// Gets or sets the prices of the product.
         /// </summary>
+        [HtmlAttributeName(PricesAttributeName)]
         public IEnumerable<OpenGraphCurrency> Prices { get; set; }
 
         /// <summary>
         /// Gets or sets a URL link to find out more about the product
         /// </summary>
+        [HtmlAttributeName(ProductLinkUrlAttributeName)]
         public string ProductLinkUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the maximum number of times a person can purchase the product.
         /// </summary>
+        [HtmlAttributeName(PurchaseLimitAttributeName)]
         public int PurchaseLimit { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to the page about the retailer of the product. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(RetailerUrlAttributeName)]
         public string RetailerUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's category for the product.
         /// </summary>
+        [HtmlAttributeName(RetailerCategoryAttributeName)]
         public string RetailerCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the retailer's part number for the product.
         /// </summary>
+        [HtmlAttributeName(RetailerPartNumberAttributeName)]
         public string RetailerPartNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the retailer of the product.
         /// </summary>
+        [HtmlAttributeName(RetailerTitleAttributeName)]
         public string RetailerTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the sale price of the product.
         /// </summary>
+        [HtmlAttributeName(SalePriceAttributeName)]
         public OpenGraphCurrency SalePrice { get; set; }
 
         /// <summary>
         /// Gets or sets the date range for which the sale price is valid.
         /// </summary>
+        [HtmlAttributeName(SalePriceDatesAttributeName)]
         public OpenGraphDateTimeRange SalePriceDates { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping cost of the product.
         /// </summary>
+        [HtmlAttributeName(ShippingCostAttributeName)]
         public IEnumerable<OpenGraphCurrency> ShippingCost { get; set; }
 
         /// <summary>
         /// Gets or sets the shipping weight of the product.
         /// </summary>
+        [HtmlAttributeName(ShippingWeightAttributeName)]
         public OpenGraphQuantity ShippingWeight { get; set; }
 
         /// <summary>
         /// Gets or sets a size describing the product(such as 'S', 'M', 'L').
         /// </summary>
+        [HtmlAttributeName(SizeAttributeName)]
         public string Size { get; set; }
 
         /// <summary>
         /// Gets or sets the target gender for the product.
         /// </summary>
+        [HtmlAttributeName(TargetGenderAttributeName)]
         public OpenGraphTargetGender? TargetGender { get; set; }
 
         /// <summary>
@@ -195,11 +262,13 @@
         /// <summary>
         /// Gets or sets a Universal Product Code(UPC) for the product.
         /// </summary>
+        [HtmlAttributeName(TargetGenderAttributeName)]
         public string UPC { get; set; }
 
         /// <summary>
         /// Gets or sets the weight of the product.
         /// </summary>
+        [HtmlAttributeName(WeightAttributeName)]
         public OpenGraphQuantity Weight { get; set; }
 
         #endregion

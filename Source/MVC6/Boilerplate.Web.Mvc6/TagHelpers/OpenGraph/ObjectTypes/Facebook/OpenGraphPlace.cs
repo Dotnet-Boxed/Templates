@@ -9,9 +9,18 @@
     /// latitude. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/place/
     /// </summary>
-    [TargetElement(nameof(OpenGraphPlace), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-place", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphPlace : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string LocationAttributeName = "location";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -44,6 +53,7 @@
         /// <summary>
         /// Gets or sets the location of the place.
         /// </summary>
+        [HtmlAttributeName(LocationAttributeName)]
         public OpenGraphLocation Location { get; set; }
 
         /// <summary>

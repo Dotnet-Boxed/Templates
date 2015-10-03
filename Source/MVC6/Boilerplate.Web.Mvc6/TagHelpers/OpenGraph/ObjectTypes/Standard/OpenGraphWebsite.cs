@@ -6,7 +6,10 @@
     /// An object representing a website. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// </summary>
-    [TargetElement(nameof(OpenGraphWebsite), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-website", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphWebsite : OpenGraphMetadata
     {
         #region Constructors

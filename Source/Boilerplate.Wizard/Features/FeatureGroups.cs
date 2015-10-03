@@ -10,7 +10,11 @@
         public static readonly IFeatureGroup Security = new FeatureGroup("Security", 3);
 
         public static readonly IFeatureGroup Formatters = new FeatureGroup("Formatters", 4);
-        
-        public static readonly IFeatureGroup Other = new FeatureGroup("Other", 5);
+
+        public static readonly IFeatureGroup Social = new FeatureGroup("Social", 5);
+
+        public static readonly IFeatureGroup Favicons = new FeatureGroup("Favicons", 6);
+
+        public static readonly IFeatureGroup Other = new FeatureGroup("Other", 7);
     }
 }

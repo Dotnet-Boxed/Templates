@@ -14,9 +14,19 @@
     /// Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
     /// </summary>
-    [TargetElement(nameof(OpenGraphGameAchievement), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(Points), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-game-achievement", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + PointsAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphGameAchievement : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string IsSecretAttributeName = "secret";
+        private const string PointsAttributeName = "points";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -46,11 +56,13 @@
         /// <summary>
         /// Gets or sets a value indicating whether this achievement is secret and should be hidden from display on Facebook.
         /// </summary>
+        [HtmlAttributeName(IsSecretAttributeName)]
         public bool? IsSecret { get; set; }
 
         /// <summary>
         /// Gets or sets the relative importance and scarcity of the achievement.
         /// </summary>
+        [HtmlAttributeName(PointsAttributeName)]
         public int Points { get; set; }
 
         /// <summary>

@@ -12,9 +12,21 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.playlist/
     /// </summary>
-    [TargetElement(nameof(OpenGraphMusicPlaylist), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(SongUrls) + "," + nameof(SongDisc) + "," + nameof(SongTrack), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-music-playlist", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SongUrlsAttributeName + "," + SongDiscAttributeName + "," + SongTrackAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicPlaylist : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string CreatorUrlAttributeName = "creator-url";
+        private const string SongDiscAttributeName = "song-disc";
+        private const string SongTrackAttributeName = "song-track";
+        private const string SongUrlsAttributeName = "song-urls";
+
+        #endregion
+
         #region Constructors
 
         public OpenGraphMusicPlaylist() : base()
@@ -48,6 +60,7 @@
         /// <summary>
         /// Gets or sets the URL to the page about the creator of the playlist. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
+        [HtmlAttributeName(CreatorUrlAttributeName)]
         public string CreatorUrl { get; set; }
 
         /// <summary>
@@ -58,16 +71,19 @@
         /// <summary>
         /// Gets or sets which disc in the album the song is from.
         /// </summary>
+        [HtmlAttributeName(SongDiscAttributeName)]
         public int SongDisc { get; set; }
 
         /// <summary>
         /// Gets or sets which track in the album the song is from.
         /// </summary>
+        [HtmlAttributeName(SongTrackAttributeName)]
         public int SongTrack { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the songs on this playlist. This URL must contain profile meta tags <see cref="OpenGraphMusicSong"/>.
         /// </summary>
+        [HtmlAttributeName(SongUrlsAttributeName)]
         public IEnumerable<string> SongUrls { get; set; }
 
         /// <summary>

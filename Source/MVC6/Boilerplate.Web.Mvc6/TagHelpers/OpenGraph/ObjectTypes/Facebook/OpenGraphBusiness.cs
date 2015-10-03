@@ -10,10 +10,21 @@
     /// the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBusiness), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(ContactData) + "," + nameof(Location), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-business", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ContactDataAttributeName + "," + LocationAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBusiness : OpenGraphMetadata
     {
-        private const string TimeOfDayFormat = "hh:mm";
+        #region Constants
+
+        private const string ContactDataAttributeName = "contact-data";
+        private const string LocationAttributeName = "location";
+        private const string OpeningHoursAttributeName = "opening-hours";
+
+        private const string TimeOfDayFormat = "hh:mm"; 
+
+        #endregion
 
         #region Constructors
 
@@ -57,11 +68,13 @@
         /// <summary>
         /// Gets or sets the contact data for the business.
         /// </summary>
+        [HtmlAttributeName(ContactDataAttributeName)]
         public OpenGraphContactData ContactData { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the business.
         /// </summary>
+        [HtmlAttributeName(LocationAttributeName)]
         public OpenGraphLocation Location { get; set; }
 
         /// <summary>
@@ -72,6 +85,7 @@
         /// <summary>
         /// Gets or sets the opening hours of the business.
         /// </summary>
+        [HtmlAttributeName(OpeningHoursAttributeName)]
         public IEnumerable<OpenGraphHours> OpeningHours { get; set; }
 
         /// <summary>

@@ -8,9 +8,17 @@
     /// products and restaurants. It is designed to give the reader a preview of the content before clicking 
     /// through to your website. See https://dev.twitter.com/cards/types/summary.
     /// </summary>
-    [TargetElement(nameof(TwitterCardSummary), Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement("twitter-card-summary", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummary : TwitterCard
     {
+        #region Constants
+
+        private const string DescriptionAttributeName = "description";
+        private const string ImageAttributeName = "image";
+        private const string TitleAttributeName = "title";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -40,6 +48,7 @@
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
@@ -52,12 +61,14 @@
         /// this unless you want a different image but it is recommended to get supply a smaller image that fits
         /// Twitters needs.
         /// </summary>
+        [HtmlAttributeName(ImageAttributeName)]
         public TwitterImage Image { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the summary. Title should be concise and will be truncated at 70 characters.
         /// If you are using Facebook's Open Graph og:title, do not use this unless you want a different title.
         /// </summary>
+        [HtmlAttributeName(TitleAttributeName)]
         public string Title { get; set; }
 
         /// <summary>

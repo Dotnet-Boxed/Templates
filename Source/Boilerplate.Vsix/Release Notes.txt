@@ -1,4 +1,4 @@
-﻿Version 2.2.1
+﻿Version 2.3.0
 MVC 5 & 6
 - Fixed a bug with the OpenGraphMedia type which was not handling HTTPS schemes correctly.
 - Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
@@ -7,6 +7,10 @@ MVC 5 & 6
 - Updated to use the latest version of the ASP.NET MVC Boilerplate Framework NuGet package with the above changes.
 - Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
 - strict mode added to Fallback scripts.js and styles.js as well as other jshint fixes.
+- Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
+- ReadMe.html improved with icons and dismiss-able alerts.
+MVC 5
+- CSP Filters changed in FilterConfig.cs so that Browser Link now works in debug mode and is not blocked by CSP.
 MVC 6
 - Added gulp-autoprefixer, gulp-jscs and gulp-plumber NPM packages.
 - Implemented CSS autoprefixing in Gulpfile.js.
@@ -18,6 +22,8 @@ MVC 6
 - The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 - RedirectToCanonicalUrlAttribute and NoTrailingSlashAttribute updated to use the new ASP.NET 5 API's.
+- The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
+- The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 
 Version 2.2.0
 MVC 6

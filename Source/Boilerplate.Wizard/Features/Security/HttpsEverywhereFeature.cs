@@ -51,7 +51,7 @@
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.UncommentCode, "Startup.Antiforgery.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.UncommentCode, "Startup.Filters.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.UncommentCode, "ReadMe.html");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
         }
 
         protected override async Task RemoveFeature()

@@ -9,9 +9,20 @@
     /// richer, detailed view. On twitter.com and mobile clients, the image appears below the tweet text.
     /// See https://dev.twitter.com/cards/types/photo
     /// </summary>
-    [TargetElement(nameof(TwitterCardPhoto), Attributes = nameof(Username) + "," + nameof(Image), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "twitter-card-photo", 
+        Attributes = UsernameAttributeName + "," + ImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPhoto : TwitterCard
     {
+        #region Constants
+
+        private const string CreatorUsernameAttributeName = "creator-username";
+        private const string ImageAttributeName = "image";
+        private const string TitleAttributeName = "title";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -41,6 +52,7 @@
         /// <summary>
         /// Gets or sets the Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an optional property.
         /// </summary>
+        [HtmlAttributeName(CreatorUsernameAttributeName)]
         public string CreatorUsername { get; set; }
 
         /// <summary>
@@ -57,12 +69,14 @@
         /// Photo Cards are the only type of card which support a blank title, even if you are not using Open Graph.
         /// Animated gifs are currently supported in Twitter Cards via the Player Card.
         /// </summary>
+        [HtmlAttributeName(ImageAttributeName)]
         public TwitterImage Image { get; set; }
 
         /// <summary>
         /// Gets or sets the title of your content as it should appear in the card. You may specify an empty 
         /// string if you wish no title to render.
         /// </summary>
+        [HtmlAttributeName(TitleAttributeName)]
         public string Title { get; set; }
 
         /// <summary>

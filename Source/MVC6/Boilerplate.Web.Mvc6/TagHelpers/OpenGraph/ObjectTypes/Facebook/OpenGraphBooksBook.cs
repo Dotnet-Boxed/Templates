@@ -10,9 +10,26 @@
     /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.book/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBooksBook), Attributes = nameof(Title) + "," + nameof(MainImage) + "," + nameof(ISBN), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-books-book", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ISBNAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksBook : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string AuthorUrlsAttributeName = "author-urls";
+        private const string GenreUrlsAttributeName = "genre-urls";
+        private const string InitialReleaseDateAttributeName = "initial-release-date";
+        private const string ISBNAttributeName = "isbn";
+        private const string LanguageAttributeName = "language";
+        private const string PageCountAttributeName = "page-count";
+        private const string RatingAttributeName = "rating";
+        private const string ReleaseDateAttributeName = "release-date";
+        private const string SampleUrlAttributeName = "sample-url";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -44,26 +61,31 @@
         /// <summary>
         /// Gets or sets the URL's to the pages about the authors of the book. This URL must contain books.author meta tags <see cref="OpenGraphBooksAuthor"/>.
         /// </summary>
+        [HtmlAttributeName(AuthorUrlsAttributeName)]
         public IEnumerable<string> AuthorUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the genres of the book. This URL must contain books.genre meta tags <see cref="OpenGraphBooksGenre"/>.
         /// </summary>
+        [HtmlAttributeName(GenreUrlsAttributeName)]
         public IEnumerable<string> GenreUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the initial release date of the book.
         /// </summary>
+        [HtmlAttributeName(InitialReleaseDateAttributeName)]
         public DateTime? InitialReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the books unique ISBN number.
         /// </summary>
+        [HtmlAttributeName(ISBNAttributeName)]
         public string ISBN { get; set; }
 
         /// <summary>
         /// Gets or sets the language of the book in the format language_TERRITORY.
         /// </summary>
+        [HtmlAttributeName(LanguageAttributeName)]
         public string Language { get; set; }
 
         /// <summary>
@@ -74,21 +96,25 @@
         /// <summary>
         /// Gets or sets the number of pages in the book.
         /// </summary>
+        [HtmlAttributeName(PageCountAttributeName)]
         public int? PageCount { get; set; }
 
         /// <summary>
         /// Gets or sets the rating of the book.
         /// </summary>
+        [HtmlAttributeName(RatingAttributeName)]
         public OpenGraphRating Rating { get; set; }
 
         /// <summary>
         /// Gets or sets the release date of the book.
         /// </summary>
+        [HtmlAttributeName(ReleaseDateAttributeName)]
         public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the URL to a sample of the book.
         /// </summary>
+        [HtmlAttributeName(SampleUrlAttributeName)]
         public string SampleUrl { get; set; }
 
         /// <summary>

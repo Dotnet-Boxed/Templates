@@ -9,9 +9,18 @@
     /// user to your website. On twitter.com and the mobile clients, the image appears below the tweet text.
     /// See https://dev.twitter.com/cards/types/summary-large-image.
     /// </summary>
-    [TargetElement(nameof(TwitterCardSummaryLargeImage), Attributes = nameof(Username), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement("twitter-card-summary-large-image", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardSummaryLargeImage : TwitterCard
     {
+        #region Constants
+
+        private const string CreatorUsernameAttributeName = "creator-username";
+        private const string DescriptionAttributeName = "description";
+        private const string ImageAttributeName = "image";
+        private const string TitleAttributeName = "title";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -37,6 +46,7 @@
         /// <summary>
         /// Gets or sets the Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an optional property.
         /// </summary>
+        [HtmlAttributeName(CreatorUsernameAttributeName)]
         public string CreatorUsername { get; set; }
 
         /// <summary>
@@ -46,6 +56,7 @@
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
@@ -56,12 +67,14 @@
         /// this unless you want a different image but it is recommended to get supply a smaller image that fits
         /// Twitters needs.
         /// </summary>
+        [HtmlAttributeName(ImageAttributeName)]
         public TwitterImage Image { get; set; }
 
         /// <summary>
         /// Gets or sets the title of the summary. Title should be concise and will be truncated at 70 characters.
         /// If you are using Facebook's Open Graph og:title, do not use this unless you want a different description.
         /// </summary>
+        [HtmlAttributeName(TitleAttributeName)]
         public string Title { get; set; }
 
         /// <summary>

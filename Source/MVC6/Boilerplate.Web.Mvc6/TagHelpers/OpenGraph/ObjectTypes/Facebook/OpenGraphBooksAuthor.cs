@@ -8,9 +8,21 @@
     /// This object represents a single author of a book. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.author/
     /// </summary>
-    [TargetElement(nameof(OpenGraphBooksAuthor), Attributes = nameof(Title) + "," + nameof(MainImage), TagStructure = TagStructure.WithoutEndTag)]
+    [TargetElement(
+        "open-graph-books-author", 
+        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksAuthor : OpenGraphMetadata
     {
+        #region Constants
+
+        private const string BookUrlsAttributeName = "book-urls";
+        private const string GenderAttributeName = "gender";
+        private const string GenreUrlsAttributeName = "gender-urls";
+        private const string OfficialSiteUrlAttributeName = "official-site-url";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -38,16 +50,19 @@
         /// <summary>
         /// Gets or sets the URL's to the pages about the books written by the author. This URL must contain books.book meta tags <see cref="OpenGraphBooksBook"/>.
         /// </summary>
+        [HtmlAttributeName(BookUrlsAttributeName)]
         public IEnumerable<string> BookUrls { get; set; }
 
         /// <summary>
         /// Gets or sets the authors gender.
         /// </summary>
+        [HtmlAttributeName(GenderAttributeName)]
         public OpenGraphGender? Gender { get; set; }
 
         /// <summary>
         /// Gets or sets the URL's to the pages about the genres of books the author typically writes. This URL must contain books.genre meta tags <see cref="OpenGraphBooksGenre"/>.
         /// </summary>
+        [HtmlAttributeName(GenreUrlsAttributeName)]
         public IEnumerable<string> GenreUrls { get; set; }
 
         /// <summary>
@@ -58,6 +73,7 @@
         /// <summary>
         /// Gets or sets the official site URL of the author.
         /// </summary>
+        [HtmlAttributeName(OfficialSiteUrlAttributeName)]
         public string OfficialSiteUrl { get; set; }
 
         /// <summary>

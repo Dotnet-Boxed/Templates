@@ -15,6 +15,12 @@
     /// </summary>
     public abstract class TwitterCard : TagHelper
     {
+        #region Constants
+
+        protected const string UsernameAttributeName = "username";
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -48,6 +54,7 @@
         /// <summary>
         /// Gets or sets the Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.
         /// </summary>
+        [HtmlAttributeName(UsernameAttributeName)]
         public string Username { get; set; }
 
         #endregion
