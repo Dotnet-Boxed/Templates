@@ -70,6 +70,7 @@
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.Content.SetContent(this.ToString());
+            output.TagName = null;
         }
 
         /// <summary>

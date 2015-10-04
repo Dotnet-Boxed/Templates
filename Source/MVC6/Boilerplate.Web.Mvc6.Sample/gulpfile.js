@@ -80,7 +80,7 @@ function getTypeScriptProject(name) {
 
     if (item === undefined) {
         // Use the tsconfig.json file to specify how TypeScript (.ts) files should be compiled to JavaScript (.js).
-        var project = ts.createProject("tsconfig.json");
+        var project = typescript.createProject("tsconfig.json");
         item = { name: name, project: project };
         typeScriptProjects.push(item);
     }

@@ -224,6 +224,7 @@
         {
             context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
             output.Content.SetContent(this.ToString());
+            output.TagName = null;
         }
 
         /// <summary>
