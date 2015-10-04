@@ -88,8 +88,8 @@
             if (featureSet == FeatureSet.Mvc6)
             {
                 // Social
-                builder.RegisterType<OpenGraphFeature>().As<IFeature>().SingleInstance();
-                builder.RegisterType<TwitterCardFeature>().As<IFeature>().SingleInstance();
+                // builder.RegisterType<OpenGraphFeature>().As<IFeature>().SingleInstance();
+                // builder.RegisterType<TwitterCardFeature>().As<IFeature>().SingleInstance();
             }
 
             if (featureSet == FeatureSet.Mvc6)

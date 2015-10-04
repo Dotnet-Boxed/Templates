@@ -52,8 +52,8 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile("wwwroot/img/icons/favicon-32x32.png");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Views/Shared/_Layout.cshtml");
+            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\favicon-32x32.png");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Shared\_Layout.cshtml");
         }
     }
 }

@@ -10,14 +10,11 @@
     // Referrer - (Optional) Controls what is sent in the HTTP referrer header when a client navigates from your page
     //            to an external site for increased user privacy and security. See ReferrerMode for more information.
     ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    // $Start-TwitterCard$
     // Add Twitter Card social meta tags so we can customize what happens when our page is shared on Twitter. There are
     // several different Twitter Card types we could add, a different one is added on each page as an example.
     // These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
     // hand-code them yourself instead of using these helpers.
     ViewBag.TwitterCard = new TwitterCardSummaryLargeImage("@RehanSaeedUK");
-    // $End-TwitterCard$
-    // $Start-OpenGraph$
     // Add Open Graph social meta tags so we can customize what happens when our page is shared on Facebook, Google+, 
     // Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on 
     // each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what 
@@ -29,7 +26,6 @@
         Determiner = OpenGraphDeterminer.Blank,
         SiteName = AppSettings.Options.SiteTitle
     };
-    // $End-OpenGraph$
 }
 
 <div id="main-carousel" class="carousel slide" data-ride="carousel" data-interval="6000">
