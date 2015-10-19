@@ -1,21 +1,36 @@
 ﻿@inject IOptions<AppSettings> AppSettings
 @{
+    // See Index.cshtml for full comments.
     ViewBag.Title = "Contact";
     ViewBag.Description = "The ASP.NET MVC Boilerplate contact page.";
-    ViewBag.Author = "Muhammad Rehan Saeed";
-    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    ViewBag.TwitterCard = new TwitterCardSummaryLargeImage("@RehanSaeedUK");
-    ViewBag.OpenGraph = new OpenGraphProfile(
-        ViewBag.Title,
-        new OpenGraphImage(Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
-    {
-        Determiner = OpenGraphDeterminer.Blank,
-        FirstName = "Muhammad Rehan",
-        Gender = OpenGraphGender.Male,
-        LastName = "Saeed",
-        SiteName = AppSettings.Options.SiteTitle,
-        Username = "Muhammad Rehan Saeed"
-    };
+}
+
+@section head
+{
+    @* See Index.cshtml for full comments. *@
+    @* $Start-AuthorMetaTag$ *@
+    <meta name="author" content="Muhammad Rehan Saeed">
+    @* $End-AuthorMetaTag$ *@
+    @* $Start-TwitterCard$ *@
+    <twitter-card-summary-large-image username="@@RehanSaeedUK">
+    @* $End-TwitterCard$ *@
+    @* $Start-OpenGraph$ *@
+    <open-graph-profile site-name="AppSettings.Options.SiteTitle" 
+                        title="ViewBag.Title"
+                        main-image="@(new OpenGraphImage(
+                            Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"),
+                            ContentType.Png,
+                            1200,
+                            630))"
+                        first-name="Muhammad Rehan"
+                        gender="OpenGraphGender.Male"
+                        last-name="Saeed"
+                        username="Muhammad Rehan Saeed"
+                        determiner="OpenGraphDeterminer.Blank">
+    @* $End-OpenGraph$ *@
+    @* $Start-ReferrerMetaTag$ *@
+    <meta asp-referrer="ReferrerMode.OriginWhenCrossOrigin">
+    @* $End-ReferrerMetaTag$ *@
 }
 
 <header class="page-header">

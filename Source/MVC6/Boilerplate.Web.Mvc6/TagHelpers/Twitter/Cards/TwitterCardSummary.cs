@@ -19,26 +19,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardSummary"/> class.
-        /// </summary>
-        public TwitterCardSummary() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardSummary"/> class.
-        /// </summary>
-        /// <param name="username">The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</param>
-        /// <exception cref="System.ArgumentNullException">username is <c>null</c>.</exception>
-        public TwitterCardSummary(string username) : base(username)
-        {
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>

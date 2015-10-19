@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.Web.Mvc.TagHelpers
 {
     using Microsoft.AspNet.Mvc.Rendering;
 

@@ -23,36 +23,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphRestaurantMenu" /> class.
-        /// </summary>
-        public OpenGraphRestaurantMenu() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphRestaurantMenu" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="restaurantUrl">The URL to the page about the restaurant who wrote the menu. This URL must contain profile meta tags <see cref="OpenGraphResteraunt"/>.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        /// <exception cref="System.ArgumentNullException">location is <c>null</c>.</exception>
-        public OpenGraphRestaurantMenu(string title, OpenGraphImage mainImage, string restaurantUrl, string url = null)
-            : base(title, mainImage, url)
-        {
-            if (restaurantUrl == null)
-            {
-                throw new ArgumentNullException(nameof(restaurantUrl));
-            }
-
-            this.RestaurantUrl = restaurantUrl;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -98,6 +68,20 @@
                     stringBuilder.AppendMetaPropertyContent("restaurant:section", sectionUrl);
                 }
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.RestaurantUrl == null) { throw new ArgumentNullException(nameof(this.RestaurantUrl)); }
         }
 
         #endregion

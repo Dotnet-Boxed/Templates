@@ -30,41 +30,7 @@
         private const string TitleAttributeName = "title";
 
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardGallery" /> class.
-        /// </summary>
-        public TwitterCardGallery() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardGallery" /> class.
-        /// </summary>
-        /// <param name="username">The Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an optional property.</param>
-        /// <param name="image0">The image0.</param>
-        /// <param name="image1">The image1.</param>
-        /// <param name="image2">The image2.</param>
-        /// <param name="image3">The image3.</param>
-        /// <exception cref="System.ArgumentNullException">username or image0 or image1 or image2 or image3 is <c>null</c>.</exception>
-        public TwitterCardGallery(string username, TwitterImage image0, TwitterImage image1, TwitterImage image2, TwitterImage image3)
-            : base(username)
-        {
-            if (image0 == null) { throw new ArgumentNullException(nameof(image0)); }
-            if (image1 == null) { throw new ArgumentNullException(nameof(image1)); }
-            if (image2 == null) { throw new ArgumentNullException(nameof(image2)); }
-            if (image3 == null) { throw new ArgumentNullException(nameof(image3)); }
-
-            this.Image0 = image0;
-            this.Image1 = image1;
-            this.Image2 = image2;
-            this.Image3 = image3;
-        }
-
-        #endregion
-
+        
         #region Public Properties
 
         /// <summary>
@@ -170,6 +136,23 @@
                 stringBuilder.AppendMetaNameContentIfNotNull("twitter:image3:height", this.Image3.Height);
                 stringBuilder.AppendMetaNameContentIfNotNull("twitter:image3:width", this.Image3.Width);
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.Image0 == null) { throw new ArgumentNullException(nameof(this.Image0)); }
+            if (this.Image1 == null) { throw new ArgumentNullException(nameof(this.Image1)); }
+            if (this.Image2 == null) { throw new ArgumentNullException(nameof(this.Image2)); }
+            if (this.Image3 == null) { throw new ArgumentNullException(nameof(this.Image3)); }
         }
 
         #endregion

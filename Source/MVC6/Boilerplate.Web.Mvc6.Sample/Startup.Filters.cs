@@ -9,6 +9,7 @@
 
     public partial class Startup
     {
+        // $Start-RedirectToCanonicalUrl$
         /// <summary>
         /// Adds filters which help improve search engine optimization (SEO).
         /// </summary>
@@ -19,6 +20,7 @@
                  lowercaseUrls: routeOptions.LowercaseUrls));
         }
 
+        // $End-RedirectToCanonicalUrl$
         /// <summary>
         /// Several NWebsec Security Filters are added here. 
         /// (See <see cref="http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/"/>, 

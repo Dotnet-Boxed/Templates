@@ -55,47 +55,64 @@
 
         private static void RegisterFeatures(ContainerBuilder builder, FeatureSet featureSet)
         {
-            // Hidden
-            builder.RegisterType<SetRandomPortsFeature>().As<IFeature>().SingleInstance();
-
-            if (featureSet == FeatureSet.Mvc6)
+            switch (featureSet)
             {
-                // CSS and JavaScript
-                builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
-                builder.RegisterType<TypeScriptFeature>().As<IFeature>().SingleInstance();
-                builder.RegisterType<JavaScriptTestFrameworkFeature>().As<IFeature>().SingleInstance();
-            }
-
-            if (featureSet == FeatureSet.Mvc6Api)
-            {
-                // Rest
-                builder.RegisterType<SwaggerFeature>().As<IFeature>().SingleInstance();
-            }
-
-            // Formatters
-            builder.RegisterType<JsonSerializerSettingsFeature>().As<IFeature>().SingleInstance();
-            builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
-            builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
-            if (featureSet == FeatureSet.Mvc6Api)
-            {
-                builder.RegisterType<NoContentFormatterFeature>().As<IFeature>().SingleInstance();
-                builder.RegisterType<NotAcceptableFormatterFeature>().As<IFeature>().SingleInstance();
-            }
-
-            // Security
-            builder.RegisterType<HttpsEverywhereFeature>().As<IFeature>().SingleInstance();
-
-            if (featureSet == FeatureSet.Mvc6)
-            {
-                // Social
-                // builder.RegisterType<OpenGraphFeature>().As<IFeature>().SingleInstance();
-                // builder.RegisterType<TwitterCardFeature>().As<IFeature>().SingleInstance();
-            }
-
-            if (featureSet == FeatureSet.Mvc6)
-            {
-                // Other
-                builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
+                case FeatureSet.Mvc6:
+                    // Hidden
+                    builder.RegisterType<SetRandomPortsFeature>().As<IFeature>().SingleInstance();
+                    // CSS and JavaScript
+                    builder.RegisterType<FrontEndFrameworkFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<TypeScriptFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<JavaScriptCodeStyleFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<JavaScriptTestFrameworkFeature>().As<IFeature>().SingleInstance();
+                    // Formatters
+                    builder.RegisterType<JsonSerializerSettingsFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
+                    // Performance
+                    builder.RegisterType<CstmlMinificationFeature>().As<IFeature>().SingleInstance();
+                    // Security
+                    builder.RegisterType<HttpsEverywhereFeature>().As<IFeature>().SingleInstance();
+                    // SEO
+                    builder.RegisterType<RobotsTextFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<SitemapFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<RedirectToCanonicalUrlFeature>().As<IFeature>().SingleInstance();
+                    // Pages
+                    builder.RegisterType<AboutPageFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<ContactPageFeature>().As<IFeature>().SingleInstance();
+                    // Social
+                    builder.RegisterType<AuthorMetaTagFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<OpenGraphFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<TwitterCardFeature>().As<IFeature>().SingleInstance();
+                    // Favicons
+                    builder.RegisterType<AppleIOSFaviconsFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<AppleMacSafariFaviconFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<AndroidChromeM36ToM38FaviconFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<AndroidChromeM39FaviconsFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<GoogleTvFaviconFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<Windows8IE10FaviconFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<Windows81IE11EdgeFaviconFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<WebAppCapableFeature>().As<IFeature>().SingleInstance();
+                    // Other
+                    builder.RegisterType<FeedFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<SearchFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<HumansTextFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<ReferrerMetaTagFeature>().As<IFeature>().SingleInstance();
+                    break;
+                case FeatureSet.Mvc6Api:
+                    // Hidden
+                    builder.RegisterType<SetRandomPortsFeature>().As<IFeature>().SingleInstance();
+                    // Rest
+                    builder.RegisterType<SwaggerFeature>().As<IFeature>().SingleInstance();
+                    // Formatters
+                    builder.RegisterType<JsonSerializerSettingsFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<BsonFormatterFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<XmlFormatterFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<NoContentFormatterFeature>().As<IFeature>().SingleInstance();
+                    builder.RegisterType<NotAcceptableFormatterFeature>().As<IFeature>().SingleInstance();
+                    // Security
+                    builder.RegisterType<HttpsEverywhereFeature>().As<IFeature>().SingleInstance();
+                    break;
             }
         }
     }

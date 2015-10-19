@@ -18,6 +18,7 @@
 
   "dependencies": {
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
+    "Microsoft.AspNet.Mvc.Razor": "6.0.0-beta7",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta7",
     "Microsoft.AspNet.Razor.Runtime": "4.0.0-beta7"
   },

@@ -24,7 +24,7 @@
         };
 
         private readonly HttpClient httpClient;
-        private readonly ILogger logger;
+        private readonly ILogger<SitemapPingerService> logger;
         private readonly IUrlHelper urlHelper;
 
         #endregion
@@ -34,13 +34,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapPingerService"/> class.
         /// </summary>
-        /// <param name="loggerFactory">The logger factory.</param>
+        /// <param name="logger">The <see cref="SitemapPingerService"/> logger.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapPingerService(
-            ILoggerFactory loggerFactory,
+            ILogger<SitemapPingerService> logger,
             IUrlHelper urlHelper)
         {
-            this.logger = loggerFactory.CreateLogger<SitemapPingerService>();
+            this.logger = logger;
             this.urlHelper = urlHelper;
             this.httpClient = new HttpClient();
         }

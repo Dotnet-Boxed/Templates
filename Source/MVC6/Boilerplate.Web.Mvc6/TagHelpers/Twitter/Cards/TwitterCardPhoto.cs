@@ -22,31 +22,7 @@
         private const string TitleAttributeName = "title";
 
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardPhoto"/> class.
-        /// </summary>
-        public TwitterCardPhoto() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardPhoto"/> class.
-        /// </summary>
-        /// <param name="username">The username.</param>
-        /// <param name="image">The image to use.</param>
-        /// <exception cref="System.ArgumentNullException">username or image is <c>null</c>.</exception>
-        public TwitterCardPhoto(string username, TwitterImage image) : base(username)
-        {
-            if (image == null) { throw new ArgumentNullException(nameof(image)); }
-
-            this.Image = image;
-        }
-
-        #endregion
-
+        
         #region Public Properties
 
         /// <summary>
@@ -103,6 +79,20 @@
                 stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:height", this.Image.Height);
                 stringBuilder.AppendMetaNameContentIfNotNull("twitter:image:width", this.Image.Width);
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.Image == null) { throw new ArgumentNullException(nameof(this.Image)); }
         }
 
         #endregion

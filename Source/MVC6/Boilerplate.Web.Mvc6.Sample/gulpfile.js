@@ -9,11 +9,17 @@ var gulp = require("gulp"),
     fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
     autoprefixer = require("gulp-autoprefixer") // Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
-	csslint = require("gulp-csslint"),			// CSS linter (https://www.npmjs.com/package/gulp-csslint/)
+    csslint = require("gulp-csslint"),			// CSS linter (https://www.npmjs.com/package/gulp-csslint/)
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
+    // $Start-JavaScriptCodeStyle$
     jscs = require("gulp-jscs"),                // JavaScript style linter (https://www.npmjs.com/package/gulp-jscs)
+    // $End-JavaScriptCodeStyle$
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
+    // $Start-CshtmlMinification$
+    minifyHtml = require("gulp-minify-html"),   // Minifies HTML (https://www.npmjs.com/package/gulp-minify-html)
+    minifyCshtml = require("gulp-minify-cshtml"), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
+    // $End-CshtmlMinification$
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
     plumber = require("gulp-plumber"),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
@@ -24,8 +30,8 @@ var gulp = require("gulp"),
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
     psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
-	sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
-	scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
+    sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
+    scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
     // $Start-TypeScript$
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
@@ -57,6 +63,9 @@ var paths = {
     bower: "./bower_components/",
     scripts: "Scripts/",
     styles: "Styles/",
+    // $Start-CshtmlMinification$
+    views: "Views/",
+    // $End-CshtmlMinification$
 
     // Destination Directory Paths
     wwwroot: "./" + project.webroot + "/",
@@ -106,9 +115,9 @@ var sources = {
             name: "site.css",
             paths: [
                 paths.styles + "site.scss",
-				// Unfortunately, bootstrap-touch-carousel does not provide a SASS version of their library. See 
-				// https://github.com/ixisio/bootstrap-touch-carousel/issues/51 for more information.
-				paths.bower + "bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css"
+                // Unfortunately, bootstrap-touch-carousel does not provide a SASS version of their library. See 
+                // https://github.com/ixisio/bootstrap-touch-carousel/issues/51 for more information.
+                paths.bower + "bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css"
             ]
         }
     ],
@@ -215,6 +224,15 @@ gulp.task("clean-fonts", function (cb) {
 gulp.task("clean-js", function (cb) {
     return rimraf(paths.js, cb);
 });
+// $Start-CshtmlMinification$
+
+/*
+ * Deletes all minified files and folders within the Views directory.
+ */
+gulp.task("clean-html", function(cb) {
+    return rimraf(paths.views + "**/*.min.cshtml", cb);
+});
+// $End-CshtmlMinification$
 
 /*
  * Deletes all files and folders within the css, fonts and js directories.
@@ -229,7 +247,7 @@ gulp.task("lint-css", function () {
         gulp.src(paths.styles + "**/*.{css}")   // Start with the source .css files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(csslint())                    // Get any CSS linting errors.
-		    .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
+            .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
         gulp.src(paths.styles + "**/*.{scss}")  // Start with the source .scss files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(scsslint())                   // Get and report any SCSS linting errors to the console.
@@ -251,9 +269,11 @@ gulp.task("lint-js", function () {
             .pipe(tslint())                                         // Get any TypeScript linting errors.
             .pipe(tslint.report("verbose")),                        // Report any TypeScript linting errors to the console.
         // $End-TypeScript$
+        // $Start-JavaScriptCodeStyle$
         gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
             .pipe(plumber())                                        // Handle any errors.
             .pipe(jscs())                                           // Get and report any JavaScript style linting errors to the console.
+        // $End-JavaScriptCodeStyle$
     ]);
 });
 
@@ -278,7 +298,7 @@ gulp.task("build-css", ["clean-css", "lint-css"], function () {
                     "> 1%",                         // Support browsers with more than 1% market share.
                     "last 2 versions"]              // Support the last two versions of browsers.
             }))
-			.pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
+            .pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
             .pipe(concat(source.name))              // Concatenate CSS files into a single CSS file with the specified name.
             .pipe(sizeBefore(source.name))          // Write the size of the file to the console before minification.
             .pipe(gulpif(
@@ -340,6 +360,19 @@ gulp.task("build-js", ["clean-js", "lint-js"], function () {
     });
     return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
 });
+// $Start-CshtmlMinification$
+
+/*
+ * Builds the C# HTML files (.cshtml) for the site.
+ */
+gulp.task("build-html", ["clean-html"], function () {
+    return gulp
+        .src(paths.views + "**/(!(*.cshtml)|*.min.cshtml)") // Start with the .cshtml Razor files and not .min.cshtml files.
+        // .pipe(minifyHtml())                              // Minify the HTML (This could cause problems with Razor).
+        .pipe(minifyCshtml())                               // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
+        .dest(paths.views + "**/*.min.cshtml");             // Saves the minified Razor views to the destination path.
+});
+// $End-CshtmlMinification$
 
 /*
  * Cleans and builds the CSS, Font and JavaScript files for the site.

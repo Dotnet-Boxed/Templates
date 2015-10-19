@@ -6,50 +6,91 @@
     using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.Services;
+    using MvcBoilerplate.Settings;
 
     public class HomeController : Controller
     {
         #region Fields
 
+        private readonly IOptions<AppSettings> appSettings;
+        // $Start-Windows81IE11EdgeFavicon$
         private readonly IBrowserConfigService browserConfigService;
+        // $End-Windows81IE11EdgeFavicon$
+        // $Start-Feed$
 #if DNX451
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
         private readonly IFeedService feedService;
 #endif
+        // $End-Feed$
+        // $Start-AndroidChromeM39Favicons$
         private readonly IManifestService manifestService;
+        // $End-AndroidChromeM39Favicons$
+        // $Start-Search$
         private readonly IOpenSearchService openSearchService;
+        // $End-Search$
+        // $Start-RobotsText$
         private readonly IRobotsService robotsService;
-        private readonly ISitemapService sitemapService; 
+        // $End-RobotsText$
+        // $Start-Sitemap$
+        private readonly ISitemapService sitemapService;
+        // $End-Sitemap$
 
         #endregion
 
         #region Constructors
 
         public HomeController(
+            // $Start-Windows81IE11EdgeFavicon$
             IBrowserConfigService browserConfigService,
+            // $End-Windows81IE11EdgeFavicon$
+            // $Start-Feed$
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             IFeedService feedService,
 #endif
+            // $End-Feed$
+            // $Start-AndroidChromeM39Favicons$
             IManifestService manifestService,
+            // $End-AndroidChromeM39Favicons$
+            // $Start-Search$
             IOpenSearchService openSearchService,
+            // $End-Search$
+            // $Start-RobotsText$
             IRobotsService robotsService,
-            ISitemapService sitemapService)
+            // $End-RobotsText$
+            // $Start-Sitemap$
+            ISitemapService sitemapService,
+            // $End-Sitemap$
+            IOptions<AppSettings> appSettings)
         {
+            this.appSettings = appSettings;
+            // $Start-Windows81IE11EdgeFavicon$
             this.browserConfigService = browserConfigService;
+            // $End-Windows81IE11EdgeFavicon$
+            // $Start-Feed$
 #if DNX451
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             this.feedService = feedService;
 #endif
+            // $End-Feed$
+            // $Start-AndroidChromeM39Favicons$
             this.manifestService = manifestService;
+            // $End-AndroidChromeM39Favicons$
+            // $Start-Search$
             this.openSearchService = openSearchService;
+            // $End-Search$
+            // $Start-RobotsText$
             this.robotsService = robotsService;
+            // $End-RobotsText$
+            // $Start-Sitemap$
             this.sitemapService = sitemapService;
+            // $End-Sitemap$
         }
 
         #endregion
@@ -59,18 +100,23 @@
         {
             return this.View(HomeControllerAction.Index);
         }
+        // $Start-AboutPage$
 
         [HttpGet("about", Name = HomeControllerRoute.GetAbout)]
         public IActionResult About()
         {
             return this.View(HomeControllerAction.About);
         }
+        // $End-AboutPage$
+        // $Start-ContactPage$
 
         [HttpGet("contact", Name = HomeControllerRoute.GetContact)]
         public IActionResult Contact()
         {
             return this.View(HomeControllerAction.Contact);
         }
+        // $End-ContactPage$
+        // $Start-Feed$
 
 #if DNX451
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed 
@@ -91,6 +137,8 @@
             return new AtomActionResult(await this.feedService.GetFeed(cancellationToken));
         }
 #endif
+        // $End-Feed$
+        // $Start-Search$
 
         [Route("search", Name = HomeControllerRoute.GetSearch)]
         public IActionResult Search(string query)
@@ -107,6 +155,8 @@
                 this.Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex),
                 query));
         }
+        // $End-Search$
+        // $Start-Windows81IE11EdgeFavicon$
 
         /// <summary>
         /// Gets the browserconfig XML for the current site. This allows you to customize the tile, when a user pins 
@@ -122,6 +172,8 @@
             string content = this.browserConfigService.GetBrowserConfigXml();
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
+        // $End-Windows81IE11EdgeFavicon$
+        // $Start-AndroidChromeM39Favicons$
 
         /// <summary>
         /// Gets the manifest JSON for the current site. This allows you to customize the icon and other browser 
@@ -139,6 +191,8 @@
             string content = this.manifestService.GetManifestJson();
             return this.Content(content, ContentType.Json, Encoding.UTF8);
         }
+        // $End-AndroidChromeM39Favicons$
+        // $Start-Search$
 
         /// <summary>
         /// Gets the Open Search XML for the current site. You can customize the contents of this XML here. The open 
@@ -155,6 +209,8 @@
             string content = this.openSearchService.GetOpenSearchXml();
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
+        // $End-Search$
+        // $Start-RobotsText$
 
         /// <summary>
         /// Tells search engines (or robots) how to index your site. 
@@ -172,6 +228,8 @@
             string content = this.robotsService.GetRobotsText();
             return this.Content(content, ContentType.Text, Encoding.UTF8);
         }
+        // $End-RobotsText$
+        // $Start-Sitemap$
 
         /// <summary>
         /// Gets the sitemap XML for the current site. You can customize the contents of this XML from the 
@@ -194,5 +252,6 @@
 
             return this.Content(content, ContentType.Xml, Encoding.UTF8);
         }
+        // $End-Sitemap$
     }
 }

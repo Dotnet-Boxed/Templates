@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:Framework.UI.Controls"
         xmlns:Features="clr-namespace:Boilerplate.Wizard.Features"
+        xmlns:ViewModels="clr-namespace:Boilerplate.Wizard.ViewModels"
         xmlns:Views="clr-namespace:Boilerplate.Wizard.Views"
+        d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type ViewModels:DesignMainViewModel}}"
         mc:Ignorable="d"
         Height="600"
         ResizeMode="CanResizeWithGrip"
@@ -21,126 +23,118 @@
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate x:Key="BinaryChoiceFeatureDataTemplate">
-                <Grid>
-                    <CheckBox IsChecked="{Binding IsSelected}"
-                              Margin="5, 24, 10, 0"
-                              Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <TextBlock Margin="5, -19, 5, 2"
-                                       Style="{StaticResource HeadingTextBlockStyle}"
-                                       Text="{Binding Title}"
-                                       VerticalAlignment="Center"/>
-                            <TextBlock Grid.Row="1"
-                                       Margin="5, 0, 5, 5"
-                                       Style="{StaticResource NormalTextBlockStyle}"
-                                       Text="{Binding Description}"
-                                       VerticalAlignment="Center"/>
-
-                        </Grid>
-                    </CheckBox>
-                    <CheckBox IsChecked="{Binding IsSelected}"
-                              Margin="5, 5, 10, 5"
-                              Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
-                        <Grid>
+                <StackPanel Margin="5, 0, 5, 5">
+                    <CheckBox IsChecked="{Binding IsSelected}">
+                        <Grid Margin="5, 0, 0, 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Image Height="100" 
-                                   HorizontalAlignment="Left"
-                                   Margin="5, 0, 5, 0"
+                                   Margin="0, 0, 5, 0"
                                    Source="{Binding Icon}"
+                                   SnapsToDevicePixels="True"
                                    Stretch="UniformToFill"
-                                   Width="200"/>
+                                   VerticalAlignment="Top"
+                                   Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}"
+                                   Width="200">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="Opacity" Value="1"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
 
-                            <TextBlock Grid.Column="1"
-                                       Margin="5, 0, 5, 5"
-                                       Style="{StaticResource NormalTextBlockStyle}"
-                                       Text="{Binding Description}"
-                                       VerticalAlignment="Center"/>
+                            <Grid Grid.Column="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Style="{StaticResource HeadingTextBlockStyle}"
+                                           Text="{Binding Title}"/>
+
+                                <TextBlock Grid.Row="1"
+                                           Style="{StaticResource NormalTextBlockStyle}"
+                                           Text="{Binding Description}"/>
+                                
+                            </Grid>
 
                         </Grid>
                     </CheckBox>
-                </Grid>
+                </StackPanel>
             </DataTemplate>
+
+            <DataTemplate x:Key="FeatureItemDataTemplate">
+                <RadioButton GroupName="{Binding Path=DataContext.Title, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                             HorizontalContentAlignment="Center"
+                             IsChecked="{Binding IsSelected}"
+                             IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
+                             Margin="5, 0, 5, 0"
+                             ToolTip="{Binding Description}"
+                             VerticalAlignment="Center">
+                    <Grid Margin="5, 0, 5, 0">
+                        <TextBlock Style="{StaticResource NormalTextBlockStyle}"
+                                   Text="{Binding Title}"
+                                   VerticalAlignment="Center"
+                                   Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
+                        <Grid Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
+                            <Image Height="100" 
+                                   Source="{Binding Icon}"
+                                   SnapsToDevicePixels="True"
+                                   Stretch="UniformToFill"
+                                   Width="200">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="Opacity" Value="1"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <TextBlock Margin="5" 
+                                       Foreground="{StaticResource AccentBrush}"
+                                       Style="{StaticResource HeadingTextBlockStyle}"
+                                       Text="Contributions Wanted"
+                                       TextAlignment="Center"
+                                       VerticalAlignment="Bottom"
+                                       Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsContributionWanted}"/>
+                        </Grid>
+                    </Grid>
+                </RadioButton>
+            </DataTemplate>
+
             <DataTemplate x:Key="MultiChoiceFeatureDataTemplate">
-                <Grid Margin="0, 0, 5, 0">
+                <Grid Margin="0, 0, 0, 5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Margin="26, 5, 5, 2"
+                    <TextBlock Margin="25, 0, 5, 0"
                                Style="{StaticResource HeadingTextBlockStyle}"
                                Text="{Binding Title}"
                                VerticalAlignment="Center"/>
 
                     <TextBlock Grid.Row="1" 
-                               Margin="26, 0, 5, 4"
+                               Margin="25, 0, 5, 5"
                                Style="{StaticResource NormalTextBlockStyle}"
                                Text="{Binding Description}"
                                VerticalAlignment="Center"/>
 
                     <ItemsControl Grid.Row="2" 
                                   ItemsSource="{Binding ItemsView}"
-                                  Margin="5, 0, 5, 5">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <RadioButton GroupName="{Binding Path=DataContext.Title, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                             HorizontalContentAlignment="Center"
-                                             IsChecked="{Binding IsSelected}"
-                                             IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
-                                             Margin="0, 2, 10, 0"
-                                             ToolTip="{Binding Description}"
-                                             VerticalAlignment="Center">
-
-                                    <Grid>
-                                        <Grid>
-                                            <TextBlock Margin="2, -2, 5, 0" 
-                                                       Style="{StaticResource NormalTextBlockStyle}"
-                                                       Text="{Binding Title}"
-                                                       VerticalAlignment="Center"
-                                                       Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
-                                            <Border BorderThickness="1"
-                                                    Margin="5, -2, 5, 5"
-                                                    Padding="1"
-                                                    Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
-                                                <Border.Style>
-                                                    <Style TargetType="Border">
-                                                        <Setter Property="Opacity" Value="0.5"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                                <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                                                                <Setter Property="Opacity" Value="1"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                                <Image Height="100" 
-                                                       Source="{Binding Icon}"
-                                                       Stretch="UniformToFill"
-                                                       Width="200"/>
-                                            </Border>
-                                        </Grid>
-                                        <TextBlock Margin="10" 
-                                                   Foreground="{StaticResource AccentBrush}"
-                                                   Style="{StaticResource HeadingTextBlockStyle}"
-                                                   Text="Contributions Wanted"
-                                                   TextAlignment="Center"
-                                                   VerticalAlignment="Bottom"
-                                                   Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsContributionWanted}"/>
-                                    </Grid>
-
-                                </RadioButton>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
+                                  ItemTemplate="{StaticResource FeatureItemDataTemplate}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal"/>
@@ -150,6 +144,7 @@
 
                 </Grid>
             </DataTemplate>
+            
             <Views:FeatureDataTemplateSelector x:Key="FeatureDataTemplateSelector"
                                                BinaryChoiceFeatureDataTemplate="{StaticResource BinaryChoiceFeatureDataTemplate}"
                                                MultiChoiceFeatureDataTemplate="{StaticResource MultiChoiceFeatureDataTemplate}"/>
@@ -162,6 +157,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Title -->
         <Border Background="{StaticResource BackgroundBrush}"
                 MouseLeftButtonDown="OnTitleMouseLeftButtonDown">
             <Grid>
@@ -210,6 +206,7 @@
             </Grid>
         </Border>
 
+        <!-- Content -->
         <Controls:LoadingContent Grid.Row="1"
                                  IsContentLoaded="{Binding IsLoaded}">
 
@@ -233,7 +230,7 @@
                               Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Error}">
                     <ItemsControl ItemsSource="{Binding FeaturesView}"
                                   ItemTemplateSelector="{StaticResource FeatureDataTemplateSelector}"
-                                  Margin="5, 0, 5, 5">
+                                  Margin="0, 5, 0, 5">
                         <ItemsControl.GroupStyle>
                             <GroupStyle>
                                 <GroupStyle.ContainerStyle>
@@ -254,6 +251,7 @@
                     </ItemsControl>
                 </ScrollViewer>
 
+                <!-- Error -->
                 <Grid Grid.Row="1" 
                       Margin="5, 0, 5, 5"
                       Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Error}">
@@ -275,7 +273,7 @@
 
                     <TextBox Grid.Row="1" 
                              Margin="0, 5, 0, 0"
-                             Text="{Binding Error}"/>
+                             Text="{Binding Mode=OneWay, Path=Error}"/>
 
                 </Grid>
 

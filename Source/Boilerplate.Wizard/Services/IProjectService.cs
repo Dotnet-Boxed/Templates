@@ -2,10 +2,23 @@
 {
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Edit or delete files or directories in a project.
+    /// </summary>
     public interface IProjectService
     {
+        /// <summary>
+        /// Deletes the specified directory in the project.
+        /// </summary>
+        /// <param name="relativeDirectoryPath">The path to the directory to delete, relative to the project.</param>
+        /// <returns>A task representing the function.</returns>
         Task DeleteDirectory(string relativeDirectoryPath);
 
+        /// <summary>
+        /// Deletes the specified file in the project.
+        /// </summary>
+        /// <param name="relativeFilePath">The path to the file to delete, relative to the project.</param>
+        /// <returns>A task representing the function.</returns>
         Task DeleteFile(string relativeFilePath);
 
         Task EditComment(string commentName, EditCommentMode mode);

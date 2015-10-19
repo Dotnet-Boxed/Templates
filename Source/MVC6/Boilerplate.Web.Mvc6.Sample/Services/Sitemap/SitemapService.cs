@@ -18,7 +18,7 @@
     {
         #region Fields
 
-        private readonly ILogger logger;
+        private readonly ILogger<SitemapService> logger;
         private readonly IMemoryCache memoryCache;
         private readonly IUrlHelper urlHelper;
 
@@ -32,18 +32,18 @@
         /// Initializes a new instance of the <see cref="SitemapService" /> class.
         /// </summary>
         /// <param name="cacheProfileSettings">The cache profile settings.</param>
-        /// <param name="loggerFactory">The logger factory.</param>
+        /// <param name="logger">The <see cref="SitemapService"/> logger.</param>
         /// <param name="memoryCache">The memory cache for the application.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
             IOptions<CacheProfileSettings> cacheProfileSettings,
-            ILoggerFactory loggerFactory,
+            ILogger<SitemapService> logger,
             IMemoryCache memoryCache,
             IUrlHelper urlHelper)
         {
             CacheProfile cacheProfile = cacheProfileSettings.Options.CacheProfiles[CacheProfileName.SitemapNodes];
             this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
-            this.logger = loggerFactory.CreateLogger<SitemapService>();
+            this.logger = logger;
             this.memoryCache = memoryCache;
             this.urlHelper = urlHelper;
         }
@@ -106,16 +106,20 @@
                 {
                     Priority = 1
                 });
+            // $Start-AboutPage$
             nodes.Add(
                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetAbout))
                {
                    Priority = 0.9
                });
+            // $End-AboutPage$
+            // $Start-ContactPage$
             nodes.Add(
                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetContact))
                {
                    Priority = 0.9
                });
+            // $End-ContactPage$
 
             // An example of how to add many pages into your sitemap.
             // foreach (int productId in myProductRepository.GetProductIds())

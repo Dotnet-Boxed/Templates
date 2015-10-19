@@ -23,33 +23,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphRestaurantMenuItem" /> class.
-        /// </summary>
-        public OpenGraphRestaurantMenuItem() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphRestaurantMenuItem" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="sectionUrl">The URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenuSection"/>.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        /// <exception cref="System.ArgumentNullException">location is <c>null</c>.</exception>
-        public OpenGraphRestaurantMenuItem(string title, OpenGraphImage mainImage, string sectionUrl, string url = null)
-            : base(title, mainImage, url)
-        {
-            if (sectionUrl == null) { throw new ArgumentNullException(nameof(sectionUrl)); }
-
-            this.SectionUrl = sectionUrl;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -97,6 +70,20 @@
                     stringBuilder.AppendMetaPropertyContent("restaurant:variation:price:currency", variation.Price.Currency);
                 }
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.SectionUrl == null) { throw new ArgumentNullException(nameof(this.SectionUrl)); }
         }
 
         #endregion

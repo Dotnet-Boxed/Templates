@@ -4,14 +4,20 @@
     using System.Xml.Linq;
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    using MvcBoilerplate.Settings;
 
     public sealed class OpenSearchService : IOpenSearchService
     {
+        private readonly IOptions<AppSettings> appSettings;
         private readonly IUrlHelper urlHelper;
 
-        public OpenSearchService(IUrlHelper urlHelper)
+        public OpenSearchService(
+            IOptions<AppSettings> appSettings,
+            IUrlHelper urlHelper)
         {
+            this.appSettings = appSettings;
             this.urlHelper = urlHelper;
         }
 
@@ -25,7 +31,7 @@
         {
             // Short name must be less than or equal to 16 characters.
             string shortName = "Search";
-            string description = "Search the ASP.NET MVC Boilerplate Site";
+            string description = $"Search the {this.appSettings.Options.SiteTitle} Site";
             // The link to the search page with the query string set to 'searchTerms' which gets replaced with a user 
             // defined query.
             string searchUrl = this.urlHelper.AbsoluteRouteUrl(

@@ -21,29 +21,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCard"/> class.
-        /// </summary>
-        public TwitterCard()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCard"/> class.
-        /// </summary>
-        /// <param name="username">The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</param>
-        /// <exception cref="System.ArgumentNullException">username is <c>null</c>.</exception>
-        public TwitterCard(string username)
-        {
-            if (username == null) { throw new ArgumentNullException(nameof(username)); }
-
-            this.Username = username;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -92,12 +69,26 @@
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
+            this.Validate();
+
             if (this.Type != TwitterCardType.Summary)
             {
                 stringBuilder.AppendMetaNameContent("twitter:card", this.Type.ToTwitterString());
             }
 
             stringBuilder.AppendMetaNameContent("twitter:site", this.Username);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected virtual void Validate()
+        {
+            if (this.Username == null) { throw new ArgumentNullException(nameof(this.Username)); }
         }
 
         #endregion

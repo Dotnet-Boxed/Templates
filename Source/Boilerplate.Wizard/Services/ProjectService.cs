@@ -6,6 +6,9 @@
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Edit or delete files or directories in a project.
+    /// </summary>
     public class ProjectService : IProjectService
     {
         private readonly IFileSystemService fileSystemService;
@@ -19,12 +22,17 @@
             this.fileSystemService = fileSystemService;
             this.projectFilePath = projectFilePath;
             this.projectDirectoryPath = Path.GetDirectoryName(this.projectFilePath);
-        } 
+        }
 
         #endregion
 
         #region Public Methods
 
+        /// <summary>
+        /// Deletes the specified directory in the project.
+        /// </summary>
+        /// <param name="relativeDirectoryPath">The path to the directory to delete, relative to the project.</param>
+        /// <returns>A task representing the function.</returns>
         public async Task DeleteDirectory(string relativeDirectoryPath)
         {
             string directoryPath = Path.Combine(this.projectDirectoryPath, relativeDirectoryPath);
@@ -34,6 +42,11 @@
             }
         }
 
+        /// <summary>
+        /// Deletes the specified file in the project.
+        /// </summary>
+        /// <param name="relativeFilePath">The path to the file to delete, relative to the project.</param>
+        /// <returns>A task representing the function.</returns>
         public async Task DeleteFile(string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
@@ -129,19 +142,26 @@
         private async Task EditCommentInternal(string commentName, EditCommentMode mode, string filePath)
         {
             string fileExtension = Path.GetExtension(filePath);
-            Comment comment = Comment.GetComment(fileExtension);
+            Comment[] comments = Comment.GetComments(fileExtension);
 
-            if (comment == null)
+            if (comments.Length > 0)
             {
-                // We don't support this file extension.
-                return;
+                string[] lines = await this.fileSystemService.FileReadAllLines(filePath);
+
+                foreach (Comment comment in comments)
+                {
+                    NamedComment namedComment = new NamedComment(commentName, comment);
+                    lines = EditCommentInternal(lines, namedComment, mode);
+                }
+
+                await this.fileSystemService.FileWriteAllLines(filePath, lines);
             }
+        }
 
-            NamedComment namedComment = new NamedComment(commentName, comment);
-
-            string[] lines = await this.fileSystemService.FileReadAllLines(filePath);
+        private string[] EditCommentInternal(string[] lines, NamedComment namedComment, EditCommentMode mode)
+        {
             List<string> newLines = new List<string>(lines.Length);
-
+            
             bool isUncommenting = false;
             foreach (string line in lines)
             {
@@ -157,20 +177,20 @@
 
                         if (mode == EditCommentMode.UncommentCode)
                         {
-                            if (newLine.TrimStart().StartsWith(comment.Start))
+                            if (newLine.TrimStart().StartsWith(namedComment.Comment.Start))
                             {
-                                int commentIndex = newLine.IndexOf(comment.Start);
+                                int commentIndex = newLine.IndexOf(namedComment.Comment.Start);
                                 newLine = newLine.Substring(0, commentIndex) +
-                                    (newLine[commentIndex + comment.Start.Length] == ' ' ?
-                                    newLine.Substring(commentIndex + comment.Start.Length + 1) :
-                                    newLine.Substring(commentIndex + comment.Start.Length));
+                                    (newLine[commentIndex + namedComment.Comment.Start.Length] == ' ' ?
+                                    newLine.Substring(commentIndex + namedComment.Comment.Start.Length + 1) :
+                                    newLine.Substring(commentIndex + namedComment.Comment.Start.Length));
                             }
 
-                            if (comment.HasEnd && newLine.TrimEnd().EndsWith(comment.End))
+                            if (namedComment.Comment.HasEnd && newLine.TrimEnd().EndsWith(namedComment.Comment.End))
                             {
-                                int commentIndex = newLine.LastIndexOf(comment.End);
+                                int commentIndex = newLine.LastIndexOf(namedComment.Comment.End);
                                 newLine = newLine.Substring(0, commentIndex) +
-                                    newLine.Substring(commentIndex + comment.End.Length);
+                                    newLine.Substring(commentIndex + namedComment.Comment.End.Length);
                             }
                         }
 
@@ -187,81 +207,96 @@
                 }
             }
 
-            await this.fileSystemService.FileWriteAllLines(filePath, newLines);
+            return newLines.ToArray();
         }
 
         #endregion
 
         #region Private Classes
 
+        /// <summary>
+        /// Represents the start and end comment in the format [Comment-Start] $[Start|End]-[CommentName]$ [Comment-End].
+        /// </summary>
         private class NamedComment
         {
             public NamedComment(string commentName, Comment comment)
             {
                 string commentEndWithSpace = string.IsNullOrEmpty(comment.End) ? string.Empty : " " + comment.End;
+                this.Comment = comment;
                 this.Start = $"{comment.Start} $Start-{commentName}${commentEndWithSpace}";
                 this.End = $"{comment.Start} $End-{commentName}${commentEndWithSpace}";
             }
 
-            public string Start { get; set; }
+            public Comment Comment { get; private set; }
 
-            public string End { get; set; }
+            public string End { get; private set; }
+
+            public string Start { get; private set; }
         }
 
+        /// <summary>
+        /// Represents the start and also optionally (depending on the language) the end of a comment e.g. '//' or '@* *@'.
+        /// </summary>
         private class Comment
         {
-            public static readonly Comment Razor = new Comment("@*", "*@");
-            public static readonly Comment Slash = new Comment("//");
-            public static readonly Comment Text = new Comment("#");
-            public static readonly Comment Xml = new Comment("<!--", "-->");
+            private static readonly Comment Razor = new Comment("@*", "*@");
+            private static readonly Comment Slash = new Comment("//");
+            private static readonly Comment Text = new Comment("#");
+            private static readonly Comment Xml = new Comment("<!--", "-->");
 
-            public Comment(string startComment)
+            private Comment(string start)
             {
-                Start = startComment;
-            }
-
-            public Comment(string start, string end)
-            {
-                this.End = end;
-                this.HasEnd = true;
                 this.Start = start;
             }
 
-            public bool HasEnd { get; set; }
+            private Comment(string start, string end)
+            {
+                this.End = end;
+                this.Start = start;
+            }
 
-            public string Start { get; set; }
+            public string End { get; private set; }
 
-            public string End { get; set; }
+            public bool HasEnd { get { return this.End != null; } }
 
-            public static Comment GetComment(string fileExtension)
+            public string Start { get; private set; }
+
+            /// <summary>
+            /// Gets a collection of Comment's allowed in files with the specified file extension.
+            /// </summary>
+            /// <param name="fileExtension">The file extension of the file.</param>
+            /// <returns>A collection of comments allowed in the file.</returns>
+            public static Comment[] GetComments(string fileExtension)
             {
                 if (string.Equals(fileExtension, ".cs", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".js", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".ts", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".json", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".css", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(fileExtension, ".scss", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(fileExtension, ".scss", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExtension, ".jscsrc", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExtension, ".jshintrc", StringComparison.OrdinalIgnoreCase))
                 {
-                    return Slash;
+                    return new Comment[] { Slash };
                 }
                 else if (string.Equals(fileExtension, ".html", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".config", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".xproj", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".xml", StringComparison.OrdinalIgnoreCase))
                 {
-                    return Xml;
+                    return new Comment[] { Xml };
                 }
                 else if (string.Equals(fileExtension, ".cshtml", StringComparison.OrdinalIgnoreCase))
                 {
-                    return Razor;
+                    return new Comment[] { Slash, Xml, Razor };
                 }
                 else if (string.Equals(fileExtension, ".ini", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".txt", StringComparison.OrdinalIgnoreCase))
                 {
-                    return Text;
+                    return new Comment[] { Text };
                 }
 
-                return null;
+                return new Comment[0];
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Wizard.Features.Favicons
+﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
@@ -47,12 +47,11 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Views/Shared/_Layout.cshtml");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Views\Shared\_Layout.cshtml");
         }
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\favicon-32x32.png");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Shared\_Layout.cshtml");
         }
     }

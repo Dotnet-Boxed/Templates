@@ -1,24 +1,39 @@
 ﻿@inject IOptions<AppSettings> AppSettings
 @{
+    // See Index.cshtml for full comments.
     ViewBag.Title = "About";
     ViewBag.Description = "The ASP.NET MVC Boilerplate about page.";
-    ViewBag.Author = "Muhammad Rehan Saeed";
-    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    ViewBag.TwitterCard = new TwitterCardSummaryLargeImage("@RehanSaeedUK");
-    ViewBag.OpenGraph = new OpenGraphBusiness(
-        ViewBag.Title,
-        new OpenGraphImage(Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
-        new OpenGraphContactData("1 Street Name", "City", "SW1 1SW", "United Kingdom")
-        {
-            Email = "email@example.com",
-            Phone = "111-222-333-444",
-            Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
-        },
-        new OpenGraphLocation(51.5286417, -0.1015987))
-    {
-        Determiner = OpenGraphDeterminer.Blank,
-        SiteName = AppSettings.Options.SiteTitle
-    };
+}
+
+@section head
+{
+    @* See Index.cshtml for full comments. *@
+    @* $Start-AuthorMetaTag$ *@
+    <meta name="author" content="Muhammad Rehan Saeed">
+    @* $End-AuthorMetaTag$ *@
+    @* $Start-TwitterCard$ *@
+    <twitter-card-summary-large-image username="@@RehanSaeedUK">
+    @* $End-TwitterCard$ *@
+    @* $Start-OpenGraph$ *@
+    <open-graph-business site-name="AppSettings.Options.SiteTitle" 
+                         title="ViewBag.Title"
+                         main-image="@(new OpenGraphImage(
+                             Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"),
+                             ContentType.Png,
+                             1200,
+                             630))"
+                         contact-data="@(new OpenGraphContactData("1 Street Name", "City", "SW1 1SW", "United Kingdom")
+                             {
+                                 Email = "email@example.com",
+                                 Phone = "111-222-333-444",
+                                 Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
+                             })"
+                         location="@(new OpenGraphLocation(51.5286417, -0.1015987))"
+                         determiner="OpenGraphDeterminer.Blank">
+    @* $End-OpenGraph$ *@
+    @* $Start-ReferrerMetaTag$ *@
+    <meta asp-referrer="ReferrerMode.OriginWhenCrossOrigin">
+    @* $End-ReferrerMetaTag$ *@
 }
 
 <header class="page-header">

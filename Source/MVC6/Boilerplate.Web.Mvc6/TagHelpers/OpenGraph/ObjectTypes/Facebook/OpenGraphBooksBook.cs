@@ -30,32 +30,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphBooksBook" /> class.
-        /// </summary>
-        public OpenGraphBooksBook() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphBooksBook" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="isbn">The books unique ISBN number.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        public OpenGraphBooksBook(string title, OpenGraphImage mainImage, string isbn, string url = null)
-            : base(title, mainImage, url)
-        {
-            if (isbn == null) { throw new ArgumentNullException(nameof(isbn)); }
-
-            this.ISBN = isbn;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -149,6 +123,20 @@
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:release_date", this.ReleaseDate);
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:sample", this.SampleUrl);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.ISBN == null) { throw new ArgumentNullException(nameof(this.ISBN)); }
         }
 
         #endregion

@@ -27,30 +27,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphGameAchievement" /> class.
-        /// </summary>
-        public OpenGraphGameAchievement() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphGameAchievement" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="points">The relative importance and scarcity of the achievement.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        public OpenGraphGameAchievement(string title, OpenGraphImage mainImage, int points, string url = null)
-            : base(title, mainImage, url)
-        {
-            this.Points = points;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>

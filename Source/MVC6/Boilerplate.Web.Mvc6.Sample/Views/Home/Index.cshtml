@@ -5,27 +5,39 @@
     ViewBag.Title = "ASP.NET MVC Boilerplate";
     // Description - Used by search engines. Aim for more than 160 characters.
     ViewBag.Description = "A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft.";
-    // Author - (Optional) Used by search engines. The author of the page.
-    ViewBag.Author = "Muhammad Rehan Saeed";
-    // Referrer - (Optional) Controls what is sent in the HTTP referrer header when a client navigates from your page
-    //            to an external site for increased user privacy and security. See ReferrerMode for more information.
-    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
-    // Add Twitter Card social meta tags so we can customize what happens when our page is shared on Twitter. There are
-    // several different Twitter Card types we could add, a different one is added on each page as an example.
-    // These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
-    // hand-code them yourself instead of using these helpers.
-    ViewBag.TwitterCard = new TwitterCardSummaryLargeImage("@RehanSaeedUK");
-    // Add Open Graph social meta tags so we can customize what happens when our page is shared on Facebook, Google+, 
-    // Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on 
-    // each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what 
-    // tags are generated and hand-code them yourself instead of using these helpers.
-    ViewBag.OpenGraph = new OpenGraphWebsite(
-        ViewBag.Title,
-        new OpenGraphImage(Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
-    {
-        Determiner = OpenGraphDeterminer.Blank,
-        SiteName = AppSettings.Options.SiteTitle
-    };
+}
+
+@section head
+{
+    @* $Start-AuthorMetaTag$ *@
+    @* Author - (Optional) Used by search engines. The author of the page. *@
+    <meta name="author" content="Muhammad Rehan Saeed">
+    @* $End-AuthorMetaTag$ *@
+    @* $Start-TwitterCard$ *@
+    @* Add Twitter Card social meta tags so we can customize what happens when our page is shared on Twitter. There are
+       several different Twitter Card types we could add, a different one is added on each page as an example.
+       These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
+       hand-code them yourself instead of using these helpers. *@
+    <twitter-card-summary-large-image username="@@RehanSaeedUK">
+    @* $End-TwitterCard$ *@
+    @* $Start-OpenGraph$ *@
+    @* Add Open Graph social meta tags so we can customize what happens when our page is shared on Facebook, Google+,
+       Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on
+       each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what
+       tags are generated and hand-code them yourself instead of using these helpers. *@
+    <open-graph-website site-name="AppSettings.Options.SiteTitle"
+                        title="ViewBag.Title"
+                        main-image="@(new OpenGraphImage(
+                            Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"), 
+                            ContentType.Png, 
+                            1200, 
+                            630))"
+                        determiner="OpenGraphDeterminer.Blank">
+    @* $End-OpenGraph$ *@
+    @* $Start-ReferrerMetaTag$ *@
+    @* referrer - Controls what is sent in the HTTP referrer header when a client navigates to an external site. *@
+    <meta asp-referrer="ReferrerMode.OriginWhenCrossOrigin">
+    @* $End-ReferrerMetaTag$ *@
 }
 
 <div id="main-carousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -112,13 +124,27 @@
             <div class="col-md-6">
                 <ul>
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetIndex)"><strong>@Url.RouteUrl(HomeControllerRoute.GetIndex)</strong></a> - This index page.</li>
+                    @* $Start-AboutPage$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)"><strong>@Url.RouteUrl(HomeControllerRoute.GetAbout)</strong></a> - An about us page.</li>
+                    @* $End-AboutPage$ *@
+                    @* $Start-ContactPage$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)"><strong>@Url.RouteUrl(HomeControllerRoute.GetContact)</strong></a> - A contact us page.</li>
+                    @* $End-ContactPage$ *@
+                    @* $Start-Feed$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetFeed)"><strong>@Url.RouteUrl(HomeControllerRoute.GetFeed)</strong></a> - An <a href="https://en.wikipedia.org/wiki/Atom_%28standard%29">Atom 1.0</a> feed.</li>
+                    @* $End-Feed$ *@
+                    @* $Start-RobotsText$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetRobotsText).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetRobotsText).TrimEnd('/')</strong></a> - <a href="http://en.wikipedia.org/wiki/Robots_exclusion_standard">Robots text</a>.</li>
+                    @* $End-RobotsText$ *@
+                    @* $Start-HumansText$ *@
                     <li><a href="~/humans.txt"><strong>/humans.txt</strong></a> - <a href="http://humanstxt.org">Humans text</a>.</li>
+                    @* $End-HumansText$ *@
+                    @* $Start-Sitemap$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/')</strong></a> - <a href="http://www.sitemaps.org/protocol.html">Site-map XML</a>.</li>
+                    @* $End-Sitemap$ *@
+                    @* $Start-Search$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')</strong></a> - <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Open search XML</a>.</li>
+                    @* $End-Search$ *@
                 </ul>
             </div>
             <div class="col-md-6">
@@ -129,8 +155,12 @@
                     <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>*@
                     <li><a href="/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
                     <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })</strong></a> - Error page.</li>
+                    @* $Start-Windows81IE11EdgeFavicon$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
+                    @* $End-Windows81IE11EdgeFavicon$ *@
+                    @* $Start-AndroidChromeM39Favicons$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')</strong></a> - <a href="https://developer.chrome.com/multidevice/android/installtohomescreen">Android/Chrome Icons</a>.</li>
+                    @* $End-AndroidChromeM39Favicons$ *@
                 </ul>
             </div>
         </div>

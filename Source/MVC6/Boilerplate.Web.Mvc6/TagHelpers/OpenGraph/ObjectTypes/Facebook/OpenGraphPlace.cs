@@ -20,34 +20,7 @@
         private const string LocationAttributeName = "location";
 
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphPlace" /> class.
-        /// </summary>
-        public OpenGraphPlace() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphPlace" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="location">The location of the business.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        /// <exception cref="System.ArgumentNullException">location is <c>null</c>.</exception>
-        public OpenGraphPlace(string title, OpenGraphImage mainImage, OpenGraphLocation location, string url = null)
-            : base(title, mainImage, url)
-        {
-            if (location == null) { throw new ArgumentNullException(nameof(location)); }
-
-            this.Location = location;
-        }
-
-        #endregion
-
+        
         #region Public Properties
 
         /// <summary>
@@ -81,6 +54,20 @@
             stringBuilder.AppendMetaPropertyContent("place:location:latitude", this.Location.Latitude);
             stringBuilder.AppendMetaPropertyContent("place:location:longitude", this.Location.Longitude);
             stringBuilder.AppendMetaPropertyContentIfNotNull("place:location:altitude", this.Location.Altitude);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.Location == null) { throw new ArgumentNullException(nameof(this.Location)); }
         }
 
         #endregion

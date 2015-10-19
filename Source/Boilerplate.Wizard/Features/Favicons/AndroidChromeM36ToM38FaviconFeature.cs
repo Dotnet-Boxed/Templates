@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Wizard.Features.Favicons
+﻿namespace Boilerplate.Wizard.Features
 {
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;

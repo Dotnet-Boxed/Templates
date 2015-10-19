@@ -53,10 +53,12 @@
             // your Elmah error logs. Very useful to any hacker. You should be securing these pages using some form of 
             // authentication but hiding where these things are can help through a bit of security through obscurity.
             // stringBuilder.AppendLine("disallow: /MySecretStuff");
+            // $Start-Sitemap$
 
             // Add a link to the sitemap. Unfortunately this must be an absolute URL. 
             stringBuilder.Append("sitemap: ");
             stringBuilder.AppendLine(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/'));
+            // $End-Sitemap$
 
             return stringBuilder.ToString();
         }

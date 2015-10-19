@@ -1,4 +1,20 @@
-﻿Version 2.3.0
+﻿Version 2.4.0
+MVC 5
+- Added a more prominent comment about removing settings from Web.config when using older versions of IIS.
+MVC 6
+- HTML Helper constructors removed, so that they can be used as TagHelper's too.
+- Added a JavaScript Code Style (JSCS) feature to turn add/remove JSCS.
+- Added Several features to add/remove favicons, manifest.json, browserconfig.xml and web app capability.
+- Added a feature to add/remove search.
+- Added a feature to add/remove Atom feed.
+- Added a feature to add/remove Sitemap.
+- Added a feature to add/remove Robots.txt.
+- Fixed feature to add/remove Humans.txt which was not removing markup from Index.cshtml.
+- The OpenSearchService now uses the AppSettings.SiteTitle for the description.
+- SitemapService and SitemapPingerService changed to use ILogger<T>, rather than ILoggerFactory.
+- Startup.Debugging.cs modified to only add the console logger if running in the console using the WebListener server.
+
+Version 2.3.0
 MVC 5 & 6
 - Fixed a bug with the OpenGraphMedia type which was not handling HTTPS schemes correctly.
 - Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
@@ -215,9 +231,9 @@ Version 1.2.2
 MVC 5
 - maxcdn.bootstrapcdn.com added to font-src CSP policy directive to enable font awesome to work.
 - fallback/font-awesome.js made generic so it can handle multiple fallback stylesheets.
-	- font-awesome.js renamed to styles.js
-	- BundleConfig.cs updated to reflect the above change.
-	- styles.js can now handle multiple fallbacks but only contains font-awesome for now.
+    - font-awesome.js renamed to styles.js
+    - BundleConfig.cs updated to reflect the above change.
+    - styles.js can now handle multiple fallbacks but only contains font-awesome for now.
 - Added comments to fallback/scripts.js and renamed a few variables. Nothing major.
 MVC 6
 - Fallback stuff copied here also.
@@ -260,16 +276,16 @@ Version 1.1.9
 MVC 5
 - Dropped support for IE 8 by removing the Respond.js library. IE 8 is used by 2.19% of global users, mostly in less
   developed countries and governments/businesses too lazy to upgrade from Windows XP.
-	- Removed Respond.js NuGet package.
-	- Removed Respond.js script bundle.
-	- Removed Respond.js fail-over script.
-	- Removed Respond.js from _Layout.cshtml.
+    - Removed Respond.js NuGet package.
+    - Removed Respond.js script bundle.
+    - Removed Respond.js fail-over script.
+    - Removed Respond.js from _Layout.cshtml.
 - Added Font Awesome CDN from MaxCDN.com.
 
 Version 1.1.8
 MVC 5
 - Updated NuGet packages:
-	- Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.
+    - Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.
 - Added referrer meta tag to _Layout.cshtml to control privacy and security of the HTTP referrer header.
 - Set the referrer mode and author in Index.cshtml, About.cshtml and Contact.cshtml.
 - Added further comments and links about HPKP in Startup.cs to help set it up.
@@ -280,12 +296,12 @@ MVC 5
 Version 1.1.7
 MVC 5
 - Updated NuGet packages:
-	- Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
-	- Newtonsoft.Json updated to 7.0.1
-	- NWebsec updated to 4.1.1
-	- NWebsec.Core updated to 1.4.1
-	- NWebsec.Mvc updated to 4.1.1 - Web.config updated with new assembly version number.
-	- NWebsec.Owin updated to 2.1.1
+    - Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
+    - Newtonsoft.Json updated to 7.0.1
+    - NWebsec updated to 4.1.1
+    - NWebsec.Core updated to 1.4.1
+    - NWebsec.Mvc updated to 4.1.1 - Web.config updated with new assembly version number.
+    - NWebsec.Owin updated to 2.1.1
 - Added comment about the NWebSec CspPluginTypesAttribute in FilterConfig.cs.
 - Added comment about implementing HPKP (Public Key Pinning) to Startup.cs and ReadMe.html.
 MVC 6
@@ -309,9 +325,9 @@ MVC 5
 - Fixed spelling mistakes in Web.config.
 MVC 6
 - Boilerplate.Web.Mvc6 NuGet package updated
-	- Filters ported from MVC 5. RedirectToHttpsAttribute not required anymore. Nothing tested yet.
-	- HttpRequestExtensions added for the IsAjaxRequest extension method.
-	- UrlHelperExtensions ported.
+    - Filters ported from MVC 5. RedirectToHttpsAttribute not required anymore. Nothing tested yet.
+    - HttpRequestExtensions added for the IsAjaxRequest extension method.
+    - UrlHelperExtensions ported.
 - Razor pre-compilation turned on in RazorPreCompilation.cs. Need to find a way to turn it off during development.
 - Constants ported from MVC 5.
 - EnvironmentName constants added for Development, Staging and Production environments in MVC 6.
@@ -323,12 +339,12 @@ MVC 6
   until the NuGet package is published.
 - Comments added to gulpfile.cs.
 - Startup configured
-	- Anti-forgery tokens configured.
-	- All commented.
-	- Configure MVC
-	- Configure View Engines
-	- Configure Routing and lower-case URL's.
-	- Add UseRuntimeInfoPage.
+    - Anti-forgery tokens configured.
+    - All commented.
+    - Configure MVC
+    - Configure View Engines
+    - Configure Routing and lower-case URL's.
+    - Add UseRuntimeInfoPage.
 
 Version 1.1.2
 - Implemented PubSubHubbub protocol to publish changes in the Atom feed to subscribers. See IFeedServices.cs and FeedService.cs.
@@ -339,15 +355,15 @@ Version 1.1.2
 
 Version 1.1.1
 - Updated ReadMe.html
-	- New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
-	- New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
-	- New step to update the browserconfig.xml file with the URL to the sites RSS feed.
+    - New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
+    - New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
+    - New step to update the browserconfig.xml file with the URL to the sites RSS feed.
 - Updated _Layout.cshtml with comment, telling you to keep title's less than 70 characters.
 - Updated Index.cshtml with comments about Title, Description and Author.
 - Updated browserconfig.xml with details about the site RSS feed.
 - Updated Boilerplate.Web.Mvc NuGet package to 1.0.9.
-	- Added ValidateHeaderAntiForgeryTokenAttribute which can validate anti-forgery tokens for Ajax posts by checking the HTTP headers instead of the form inputs.
-	- Updated comment in RedirectToCanonicalUrlAttribute with link from Bing, explaining why 301 redirects are better than canonical URL's.
+    - Added ValidateHeaderAntiForgeryTokenAttribute which can validate anti-forgery tokens for Ajax posts by checking the HTTP headers instead of the form inputs.
+    - Updated comment in RedirectToCanonicalUrlAttribute with link from Bing, explaining why 301 redirects are better than canonical URL's.
 
 Version 1.1.0
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
@@ -358,16 +374,16 @@ Version 1.1.0
 - Removed all classes under the Framework namespace and moved them to a separate NuGet package called Boilerplate.Web.Mvc5
   this should make it easy for people to upgrade their projects to the latest framework and we can include bug fixes and new
   features easily. Tp achieve this a few changes had to be made:
-	- RedirectToCanonicalUrlAttribute now has an extra constructor parameter, set in FilterConfig.cs which tells it which controller actions to ignore.
-	- ContentType constant also moved to Framework.
-	- SitemapService now inherits from SitemapGenerator which exists in the Framework. SitemapService is now much more simplified.
-	- Boilerplate.Web.Mvc5 NuGet package added.
+    - RedirectToCanonicalUrlAttribute now has an extra constructor parameter, set in FilterConfig.cs which tells it which controller actions to ignore.
+    - ContentType constant also moved to Framework.
+    - SitemapService now inherits from SitemapGenerator which exists in the Framework. SitemapService is now much more simplified.
+    - Boilerplate.Web.Mvc5 NuGet package added.
 - jQuery NuGet package updated to 2.1.4.
 - jQuery Google CDN URL updated to 2.1.4.
 - Twitter Card and Open Graph and Facebook meta tag helpers added to the Framework (Now exists in the Boilerplate.Web.Mvc5 NuGet package).
-	- Twitter card and Open Graph meta tags added to _Layout.cshtml file allowing us to add them using the ViewBag.
-	- Twitter card and Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
-	- open-graph-1200x630.png file added to be used in the Open Graph meta tags and displayed when someone shares the site on Facebook.
+    - Twitter card and Open Graph meta tags added to _Layout.cshtml file allowing us to add them using the ViewBag.
+    - Twitter card and Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
+    - open-graph-1200x630.png file added to be used in the Open Graph meta tags and displayed when someone shares the site on Facebook.
 
 Version 1.0.45
 - Added Elmah Controller Name to ControllerName.cs
@@ -382,18 +398,18 @@ Version 1.0.44
 - New CacheService.cs and ICacheService.cs added, which is a wrapper around the System.Runtime.Caching.MemoryCache.
 - ICacheService registered with Autofac in Startup.Container.cs.
 - SitemapService now supports sitemap index files, which are used when you have a large number of nodes in your sitemap. See SitemapService.cs for more details.
-	- ISitemapService.cs updated with new index parameter and comments.
-	- SitemapService.cs totally updated and improved to support sitemap indexes.
-	- SitemapService now uses ICacheService to cache sitemap nodes internally rather than relying on OutputCache.
-	- HomeController updated with new index parameter which it passes to the SiteMapService. New comments and removed OutputCache.
-	- Removed sitemap caching settings from Web.config.
-	- Removed sitemap caching profile name from CacheProfileName.cs
+    - ISitemapService.cs updated with new index parameter and comments.
+    - SitemapService.cs totally updated and improved to support sitemap indexes.
+    - SitemapService now uses ICacheService to cache sitemap nodes internally rather than relying on OutputCache.
+    - HomeController updated with new index parameter which it passes to the SiteMapService. New comments and removed OutputCache.
+    - Removed sitemap caching settings from Web.config.
+    - Removed sitemap caching profile name from CacheProfileName.cs
 - Added XDocumentExtensions.cs to convert XDocument to String but with the ability to specify any Encoding.
 - Refactored OpenSearchService and SitemapService to use XDocumentExtensions instead of containing duplicated code.
 - SitemapPingerService updated to remove async keyword in Debug mode, to get around a compiler warning about using the async keyword without awaiting anything.
 - FilterConfig.cs changes courtesy of Omid:
-	- Changed example.com to *.example.com.
-	- Used a string.Join rather than string.Format to create the custom sources for CDN's.
+    - Changed example.com to *.example.com.
+    - Used a string.Join rather than string.Format to create the custom sources for CDN's.
 
 Version 1.0.43
 - Glimpse path moved back to /glimpse.axd as the path was no longer working due to a Elmah bug workaround.
@@ -449,15 +465,15 @@ Version 1.0.34
 - ReadMe.html now has check boxes next to each step which remembers if it was checked or not.
 - Added lots of new information into ReadMe.html from http://webdevchecklist.com/.
 - Added Atom 1.0 feed.
-	- IFeedService.cs added.
-	- FeedService.cs added.
-	- AtomActionResult.cs added to return Atom feeds.
-	- SyndicationFeedExtensions added to add icon element to System.ServiceModel.SyndicationFeed.
-	- FeedService registered with Autofac in Startup.Container.cs.
-	- Feed action added to HomeController.cs.
-	- Feed action is cached. Cache settings added to web.config and CacheProfileName.cs.
-	- Atom feed link tag added to _Layout.cshtml.
-	- RSS/Atom section added to ReadMe.html
+    - IFeedService.cs added.
+    - FeedService.cs added.
+    - AtomActionResult.cs added to return Atom feeds.
+    - SyndicationFeedExtensions added to add icon element to System.ServiceModel.SyndicationFeed.
+    - FeedService registered with Autofac in Startup.Container.cs.
+    - Feed action added to HomeController.cs.
+    - Feed action is cached. Cache settings added to web.config and CacheProfileName.cs.
+    - Atom feed link tag added to _Layout.cshtml.
+    - RSS/Atom section added to ReadMe.html
 - Atom, Png, and Jpg ContentType's added to ContentType.cs.
 
 Version 1.0.33
@@ -507,10 +523,10 @@ Version 1.0.29
 
 Version 1.0.28
 - Add new HTTP error codes to httpErrors in web.config and new static error pages under the Error folder:
-	- 403.502 Forbidden errors using a static HTML file. This occurs due to a Denial of Service (Dos) attack.
-	- 500.13 Internal Server Error errors using a static HTML file. This occurs because the server is too busy.
-	- 503 Service Unavailable errors using a static HTML file.
-	- 504 Gateway Timeout errors using a static HTML file.
+    - 403.502 Forbidden errors using a static HTML file. This occurs due to a Denial of Service (Dos) attack.
+    - 500.13 Internal Server Error errors using a static HTML file. This occurs because the server is too busy.
+    - 503 Service Unavailable errors using a static HTML file.
+    - 504 Gateway Timeout errors using a static HTML file.
 - Add new ignore routes to RouteConfig.cs to ignore the new static HTML files.
 - Added new note in Readme.html to update the static HTML error files.
 
@@ -525,10 +541,10 @@ Version 1.0.26
 Version 1.0.25
 - Added a search action to HomeController that redirects to Google and with instructions on how to setup your own search.
 - Added opensearch.xml file to site (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org for more information.
-	- HomeController.cs modified.
-	- _Layout.cshtml modified.
-	- Caching settings added to Web.config.
-	- MVC routing settings added to Web.config.
+    - HomeController.cs modified.
+    - _Layout.cshtml modified.
+    - Caching settings added to Web.config.
+    - MVC routing settings added to Web.config.
 - Added a note about adding search to your site and the Open Search protocol to ReadMe.html.
 - Fixed sitemap.xml to return XML containing the version and correct encoding of UTF-8.
 
@@ -557,8 +573,8 @@ Version 1.0.21
 - Added a note to encrypt the machine key in web.config and ReadMe.html.
 - Added notes on how to update NuGet packages and files from this template to ReadMe.html.
 - Changes courtesy of @surfsflo on GitHub
-	- Add mimeMap to fix "404 not found" error when serving "ghyphicon-halflings-regular.woff2".
-	- Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
+    - Add mimeMap to fix "404 not found" error when serving "ghyphicon-halflings-regular.woff2".
+    - Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
 
 Version 1.0.20
 - Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have implemented SSL/TLS over HTTPS correctly.
@@ -585,7 +601,7 @@ Version 1.0.17
 
 Version 1.0.16
 - Added Android/Chrome version M39+ favicon/theming support. Layout.cshtml updated. Files added include:
-	\Content\icons\android-chrome-144x144.png
+    \Content\icons\android-chrome-144x144.png
     \Content\icons\android-chrome-192x192.png
     \Content\icons\android-chrome-36x36.png
     \Content\icons\android-chrome-48x48.png
@@ -623,10 +639,10 @@ Version 1.0.12
 - Microsoft.Owin package updated to 3.0.1.
 - Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
 - NWebSec updated to 4.0.0. 
-	- Web.config changes to point to new DLL.
-	- HttpHeaderSecurityModuleConfig.xsd updated.
-	- FilterConfig changed to fix NWebSec breaking changes. Enabled/Disabled enum changed to bool and namespace removed.
-	- Index.cshtml updated with new GitHub home page for NWebSec.
+    - Web.config changes to point to new DLL.
+    - HttpHeaderSecurityModuleConfig.xsd updated.
+    - FilterConfig changed to fix NWebSec breaking changes. Enabled/Disabled enum changed to bool and namespace removed.
+    - Index.cshtml updated with new GitHub home page for NWebSec.
 - NWebSec package updated to 4.0.0.
 - NWebSec.Mvc package updated to 4.0.0.
 - NWebSec.Core package updated to 1.3.0.

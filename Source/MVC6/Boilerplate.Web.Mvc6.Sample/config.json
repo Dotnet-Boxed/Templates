@@ -5,33 +5,45 @@
   },
   "CacheProfileSettings": {
     "CacheProfiles": {
+      // $Start-Windows81IE11EdgeFavicon$
       "BrowserConfigXml": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $End-Windows81IE11EdgeFavicon$
       "Error": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $Start-Feed$
       "Feed": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $End-Feed$
+      // $Start-AndroidChromeM39Favicons$
       "ManifestJson": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $End-AndroidChromeM39Favicons$
+      // $Start-Search$
       "OpenSearchXml": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $End-Search$
+      // $Start-RobotsText$
       "RobotsText": {
         "Duration": 86400,
         "Location": "Any"
       },
+      // $End-RobotsText$
+      // $Start-Sitemap$
       "SitemapNodes": {
         "Duration": 86400
       }
+      // $End-Sitemap$
     }
   }
 }

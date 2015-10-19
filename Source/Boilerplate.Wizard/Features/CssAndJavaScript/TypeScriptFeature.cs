@@ -12,7 +12,7 @@
 
         public override string Description
         {
-            get { return "TypeScript lets you write JavaScript the way you really want to. TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Note that this feature enables the transpiling of TypeScript (.ts) files to JavaScript (.js) in Gulpfile.js but does not add TypeScript files instead of JavaScript files yet. That is coming in the future."; }
+            get { return "TypeScript is a typed superset of JavaScript that compiles to plain JavaScript. Note that this feature enables the transpiling of TypeScript (.ts) files to JavaScript (.js) in Gulpfile.js but does not add TypeScript files instead of JavaScript files yet. That is coming in the future."; }
         }
 
         public override IFeatureGroup Group
@@ -59,11 +59,13 @@
 
         protected override async Task RemoveFeature()
         {
+            await this.ProjectService.DeleteFile("tsconfig.html");
+            await this.ProjectService.DeleteFile("tsconfig.json");
+            await this.ProjectService.DeleteFile("tslint.json");
+
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "package.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");
-            await this.ProjectService.DeleteFile("tsconfig.json");
-            await this.ProjectService.DeleteFile("tslint.json");
         }
     }
 }

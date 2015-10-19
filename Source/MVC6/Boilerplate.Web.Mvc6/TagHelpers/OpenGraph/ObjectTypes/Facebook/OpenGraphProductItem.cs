@@ -42,47 +42,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphProductItem" /> class.
-        /// </summary>
-        public OpenGraphProductItem() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphProductItem" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="availability">The availability of the item, one of 'instock', 'oos', or 'pending'.</param>
-        /// <param name="condition">The condition of the item, one of 'new', 'refurbished', or 'used'.</param>
-        /// <param name="prices">The prices of the item.</param>
-        /// <param name="retailerItemId">The retailer's ID for the item.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        /// <exception cref="System.ArgumentNullException">prices or retailerItemId is <c>null</c>.</exception>
-        public OpenGraphProductItem(
-            string title,
-            OpenGraphImage mainImage,
-            OpenGraphAvailability availability,
-            OpenGraphCondition condition,
-            IEnumerable<OpenGraphCurrency> prices,
-            string retailerItemId,
-            string url = null)
-            : base(title, mainImage, url)
-        {
-            if (prices == null) { throw new ArgumentNullException(nameof(prices)); }
-            if (retailerItemId == null) { throw new ArgumentNullException(nameof(retailerItemId)); }
-
-            this.Availability = availability;
-            this.Condition = condition;
-            this.Prices = prices;
-            this.RetailerItemId = retailerItemId;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -299,6 +258,21 @@
             {
                 stringBuilder.AppendMetaPropertyContent("product:target_gender", this.TargetGender.Value.ToLowercaseString());
             }
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.Prices == null) { throw new ArgumentNullException(nameof(this.Prices)); }
+            if (this.RetailerItemId == null) { throw new ArgumentNullException(nameof(this.RetailerItemId)); }
         }
 
         #endregion

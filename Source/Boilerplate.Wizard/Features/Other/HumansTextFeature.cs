@@ -12,7 +12,7 @@
 
         public override string Id
         {
-            get { return "HumansTxt"; }
+            get { return "HumansText"; }
         }
 
         public override bool IsDefaultSelected
@@ -42,12 +42,19 @@
 
         public override int Order
         {
-            get { return 1; }
+            get { return 5; }
         }
 
-        protected override Task RemoveFeature()
+        protected override async Task AddFeature()
         {
-            return this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Views\Home\Index.cshtml");
+        }
+
+        protected override async Task RemoveFeature()
+        {
+            await this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
+
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\Index.cshtml");
         }
     }
 }

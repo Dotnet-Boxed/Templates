@@ -25,25 +25,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardApp"/> class.
-        /// </summary>
-        public TwitterCardApp() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardApp"/> class.
-        /// </summary>
-        /// <param name="username">The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</param>
-        public TwitterCardApp(string username) : base(username)
-        {
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>

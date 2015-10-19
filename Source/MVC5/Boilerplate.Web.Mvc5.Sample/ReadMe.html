@@ -3,7 +3,12 @@
 <head>
     <title>ASP.NET MVC Boilerplate</title>
     <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .alert-close-checkbox {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div id="main" class="container body-content" role="main">
@@ -16,6 +21,16 @@
 
         <img src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/raw/master/Images/Technology%20Map.png"
              style="max-width:100%;" />
+
+        <div class="alert alert-info">
+            <label for="Alert-OldIISProblem" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </label>
+            <input id="Alert-OldIISProblem" name="Alert-GulpProblem" class="alert-close-checkbox" type="checkbox" />
+
+            <h2><span aria-hidden="true" class="fa fa-server"></span> Fixing Common IIS 7/7.5 Problem</h2>
+            <p>Some Web.config settings do not exist in older versions of IIS (7 and 7.5) so you must edit the Web.config file and remove the setEtag="false" attribute, as well as the dynamicIpSecurity settings.</p>
+        </div>
 
         <section>
             <h2>Task Check List</h2>
@@ -245,8 +260,8 @@
                 <h3><span aria-hidden="true" class="fa fa-puzzle-piece"></span> Compatibility</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
-                        Some Web.config settings do not exist in older versions of IIS (7.5 and 8) so you must edit the Web.config file and remove the setEtag="false" attribute, as well as the dynamicIpSecurity settings.
+                        <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7/7.5</strong> -
+                        Some Web.config settings do not exist in older versions of IIS (7 and 7.5) so you must edit the Web.config file and remove the setEtag="false" attribute, as well as the dynamicIpSecurity settings.
                     </li>
                     <li class="list-group-item">
                         <input name="Compatibility-AmIUsingWebForms" type="checkbox"> <strong>Am I Using Web Forms?</strong> -

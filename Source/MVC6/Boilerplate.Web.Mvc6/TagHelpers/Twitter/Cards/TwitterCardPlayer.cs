@@ -25,36 +25,6 @@
 
         #endregion
 
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardPlayer" /> class.
-        /// </summary>
-        public TwitterCardPlayer() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TwitterCardPlayer" /> class.
-        /// </summary>
-        /// <param name="username">The Twitter username associated with the page e.g. @RehanSaeedUK. This is a required property.</param>
-        /// <param name="image">The image to be displayed in place of the player on platforms that don’t support iframes or inline players. 
-        /// You should make this image the same dimensions as your player. Images with fewer than 68,600 pixels 
-        /// (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render. 
-        /// Image must be less than 1MB in size.</param>
-        /// <param name="player">The video player.</param>
-        /// <exception cref="System.ArgumentNullException">username is <c>null</c>.</exception>
-        public TwitterCardPlayer(string username, TwitterImage image, TwitterPlayer player) : base(username)
-        {
-            if (image == null) { throw new ArgumentNullException(nameof(image)); }
-            if (player == null) { throw new ArgumentNullException(nameof(player)); }
-
-            this.Image = image;
-            this.Player = player;
-        }
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -116,6 +86,21 @@
             stringBuilder.AppendMetaNameContent("twitter:player:width", this.Player.Width);
             stringBuilder.AppendMetaNameContent("twitter:player:height", this.Player.Height);
             stringBuilder.AppendMetaNameContentIfNotNull("twitter:player:stream", this.Player.StreamUrl);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.Image == null) { throw new ArgumentNullException(nameof(this.Image)); }
+            if (this.Player == null) { throw new ArgumentNullException(nameof(this.Player)); }
         }
 
         #endregion

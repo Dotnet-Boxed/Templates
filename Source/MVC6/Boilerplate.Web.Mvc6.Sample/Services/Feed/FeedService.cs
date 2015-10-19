@@ -66,7 +66,7 @@ namespace MvcBoilerplate.Services
                 Id = FeedId,
                 // title (Required) - Contains a human readable title for the feed. Often the same as the title of the 
                 //                    associated website. This value should not be blank.
-                Title = SyndicationContent.CreatePlaintextContent("ASP.NET MVC Boilerplate"),
+                Title = SyndicationContent.CreatePlaintextContent(this.appSettings.Options.SiteTitle),
                 // items (Required) - The items to add to the feed.
                 Items = await this.GetItems(cancellationToken),
                 // subtitle (Recommended) - Contains a human-readable description or subtitle for the feed.

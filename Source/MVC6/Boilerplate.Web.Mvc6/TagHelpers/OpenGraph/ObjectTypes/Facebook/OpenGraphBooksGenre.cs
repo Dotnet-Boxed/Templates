@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
 {
+    using System;
     using System.Collections.Generic;
     using System.Text;
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
@@ -19,30 +20,6 @@
         private const string AuthorUrlsAttributeName = "author-urls";
         private const string BookUrlsAttributeName = "book-urls";
         private const string CanonicalNameAttributeName = "canonical-name";
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphBooksGenre"/> class.
-        /// </summary>
-        public OpenGraphBooksGenre() : base()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphBooksGenre"/> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="canonicalName">THe genres canonical name. Only one of the following names is allowed Adventure, Children's Fiction, Drama, Erotica, Essays, Fantasy, Gay &amp; Lesbian, Graphic Novels, Historical Fiction, Horror, Fiction &amp; Literature, Mystery, Mythology &amp; Folklore, Poetry, Religious &amp; Inspiratonal, Rhetoric &amp; Critcism, Romance, Satire &amp; Humor, Science Fiction, Thrillers &amp; Suspense, Westerns, Women&#039;s Fiction, Young Adult Fiction, Biography &amp; Memoir, Current Affairs &amp; Politics, Genealogy, Geography, History, History of the Ancient World, History of Africa, History of Asia, History of Europe, History of North America, History of South America, Travel, Bibliographies, Children&#039;s Non-fiction, Computer Science, Encyclopedias, General Collections, Gift Books, Information Sciences, Journalism &amp; Publishing, Magazines &amp; Journals, Manuscripts &amp; Rare Books, Epistemology, Ethics, Logic, Metaphysics, Philosophy, Parapsychology &amp; Occultism, Psychology, Self-help, Bible, Comparative Religions, Natural Theory, Theology, Business, Customs &amp; Etiquette, Economics, Education, Finance, Gay &amp; Lesbian Non-Fiction, Gender Studies, Law, Political Science, Social Sciences, Social Services, Statistics, True Crime, English &amp; Old English, French, German, Greek, Italian, Language, Latin, Linguistics, Other Languages, Portugese, Spanish, Astronomy, Chemistry, Earth Sciences, Life Sciences, Mathematics, Paleontology &amp; Paleozoology, Physics, Plants Sciences, Zoology, Agriculture, Chemical Engineering, Engineering &amp; Opera?ons, Management, Manufacturing, Medical Sciences, Technology, Cooking &amp; Cookbooks, Gardening, Home Decorating, Home Economics, Parenting, Pets, Architecture, Design, Drawing, Fine Art, Gardening, Graphic Art, Music, Painting, Performing Arts, Photography, Sculpture, Games, Fitness, Health and Sports.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        public OpenGraphBooksGenre(string title, OpenGraphImage mainImage, string canonicalName, string url = null)
-            : base(title, mainImage, url)
-        {
-            this.CanonicalName = canonicalName;
-        }
 
         #endregion
 
@@ -91,6 +68,20 @@
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:author", this.AuthorUrls);
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:book", this.BookUrls);
             stringBuilder.AppendMetaPropertyContentIfNotNull("books:canonical_name", this.CanonicalName);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected override void Validate()
+        {
+            base.Validate();
+
+            if (this.CanonicalName == null) { throw new ArgumentNullException(nameof(this.CanonicalName)); }
         }
 
         #endregion

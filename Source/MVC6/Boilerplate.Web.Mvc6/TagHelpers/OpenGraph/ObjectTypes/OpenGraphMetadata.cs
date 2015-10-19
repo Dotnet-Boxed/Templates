@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
     /// <summary>
@@ -36,35 +37,7 @@
         protected const string UrlAttributeName = "url";
 
         #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphMetadata" /> class.
-        /// </summary>
-        public OpenGraphMetadata()
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="OpenGraphMetadata" /> class.
-        /// </summary>
-        /// <param name="title">The title of the object as it should appear in the graph.</param>
-        /// <param name="mainImage">The main image which should represent your object within the graph. This is a required property.</param>
-        /// <param name="url">The canonical URL of the object, used as its ID in the graph. Leave as <c>null</c> to get the URL of the current page.</param>
-        /// <exception cref="System.ArgumentNullException">title or image is <c>null</c>.</exception>
-        public OpenGraphMetadata(string title, OpenGraphImage mainImage, string url = null)
-        {
-            if (title == null) { throw new ArgumentNullException(nameof(title)); }
-            if (mainImage == null) { throw new ArgumentNullException(nameof(mainImage)); }
-            
-            this.MainImage = mainImage;
-            this.Title = title;
-            this.Url = url;
-        }
-
-        #endregion
-
+        
         #region Public Properties
 
         /// <summary>
@@ -186,6 +159,12 @@
             get { return this.Media == null ? null : this.Media.OfType<OpenGraphVideo>(); }
         }
 
+        // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
+        // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
+        [HtmlAttributeNotBound]
+        [ViewContext]
+        public ViewContext ViewContext { get; set; }
+
         #endregion
 
         #region Public Methods
@@ -222,7 +201,12 @@
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
+            // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
+            // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
+            this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)] = this.GetNamespaces();
+            
+            // context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
+
             output.Content.SetContent(this.ToString());
             output.TagName = null;
         }
@@ -246,6 +230,8 @@
         /// <param name="stringBuilder">The string builder.</param>
         public virtual void ToString(StringBuilder stringBuilder)
         {
+            this.Validate();
+
             // Three required tags.
             stringBuilder.AppendMetaPropertyContent("og:title", this.Title);
             if (this.Type != OpenGraphType.Website)
@@ -310,6 +296,19 @@
 
             stringBuilder.AppendMetaPropertyContentIfNotNull("fb:app_id", this.FacebookApplicationId);
             stringBuilder.AppendMetaPropertyContentIfNotNull("fb:profile_id", this.FacebookProfileId);
+        }
+
+        #endregion
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Checks that this instance is valid and throws exceptions if not valid.
+        /// </summary>
+        protected virtual void Validate()
+        {
+            if (this.Title == null) { throw new ArgumentNullException(nameof(this.Title)); }
+            if (this.MainImage == null) { throw new ArgumentNullException(nameof(this.MainImage)); }
         }
 
         #endregion

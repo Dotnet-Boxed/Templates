@@ -42,7 +42,7 @@
 
         public override int Order
         {
-            get { return 1; }
+            get { return 2; }
         }
 
         public override string Title
@@ -61,6 +61,8 @@
 
         protected override async Task RemoveFeature()
         {
+            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\open-graph-1200x630.png");
+
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\About.cshtml");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\Contact.cshtml");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\Index.cshtml");

@@ -1,6 +1,5 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
-    using System;
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
