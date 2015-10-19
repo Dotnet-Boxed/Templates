@@ -16,5 +16,8 @@
     <DevelopmentServerPort>1025</DevelopmentServerPort>
     <SSLPort>44300</SSLPort>
   </PropertyGroup>
+  <ItemGroup>
+    <DnxInvisibleFolder Include="bower_components\" />
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.targets" Condition="'$(VSToolsPath)' != ''" />
 </Project>

@@ -378,7 +378,14 @@ gulp.task("build-html", ["clean-html"], function () {
 /*
  * Cleans and builds the CSS, Font and JavaScript files for the site.
  */
-gulp.task("build", ["build-css", "build-fonts", "build-js"]);
+gulp.task("build", [
+    "build-css",
+    "build-fonts",
+    // $Start-CshtmlMinification$
+    "build-html",
+    // $End-CshtmlMinification$
+    "build-js"
+]);
 
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
