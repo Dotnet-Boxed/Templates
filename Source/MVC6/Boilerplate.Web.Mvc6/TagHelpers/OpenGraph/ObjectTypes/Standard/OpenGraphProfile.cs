@@ -9,7 +9,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-profile", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

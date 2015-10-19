@@ -9,7 +9,7 @@
     /// This object type represents a restaurant at a specific location. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-restaurant", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

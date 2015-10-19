@@ -9,7 +9,7 @@
     /// This object type represents the genre of a book or publication. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.genre/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-books-genre", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + CanonicalNameAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

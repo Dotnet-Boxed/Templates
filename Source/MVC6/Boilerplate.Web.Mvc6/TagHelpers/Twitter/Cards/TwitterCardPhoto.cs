@@ -9,7 +9,7 @@
     /// richer, detailed view. On twitter.com and mobile clients, the image appears below the tweet text.
     /// See https://dev.twitter.com/cards/types/photo
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "twitter-card-photo", 
         Attributes = UsernameAttributeName + "," + ImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

@@ -46,7 +46,7 @@
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.SetContent(this.ToString());
+            output.Content.SetContentEncoded(this.ToString());
             output.TagName = null;
         }
 

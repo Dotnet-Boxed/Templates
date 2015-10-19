@@ -14,7 +14,6 @@
     "gulp-jshint": "1.11.2",
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",
-    "gulp-minify-html": "1.0.4",
     // $End-CshtmlMinification$
     "gulp-minify-css": "1.2.1",
     "gulp-plumber": "1.0.1",

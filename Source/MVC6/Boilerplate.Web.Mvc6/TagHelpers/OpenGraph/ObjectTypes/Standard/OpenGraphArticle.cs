@@ -11,7 +11,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-article", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

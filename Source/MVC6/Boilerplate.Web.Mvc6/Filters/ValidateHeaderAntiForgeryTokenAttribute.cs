@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.AspNet.Antiforgery;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Filters;
     using Microsoft.Framework.DependencyInjection;
     using Microsoft.Framework.OptionsModel;
 

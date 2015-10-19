@@ -3,6 +3,7 @@
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNet.Mvc.Razor;
     using Microsoft.AspNet.Routing;
     using Microsoft.Dnx.Runtime;
     using Microsoft.Framework.Configuration;
@@ -92,14 +93,7 @@
                     ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
                 });
             // $Start-CshtmlMinification$
-            mvcBuilder.AddViewOptions(
-                mvcViewOptions =>
-                {
-                    // Remove the standard RazorViewEngine.
-                    mvcViewOptions.ViewEngines.Clear();
-                    // Add the view engine which looks for .min.cshtml files, instead of .cshtml files.
-                    mvcViewOptions.ViewEngines.Add(new MinifiedRazorViewEngine());
-                });
+            services.AddTransient<IRazorViewEngine, MinifiedRazorViewEngine>();
             // $End-CshtmlMinification$
             ConfigureFormatters(mvcBuilder);
 
@@ -118,6 +112,9 @@
             // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
             // absolute URL's and get the current request path.
             application.UseBoilerplate();
+
+            // Add the IIS platform handler to the request pipeline.
+            application.UseIISPlatformHandler();
 
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();

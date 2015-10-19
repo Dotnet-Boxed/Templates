@@ -6,7 +6,7 @@
     /// Meta tag <see cref="TagHelper"/> which controls what is sent in the HTTP referrer header when a client 
     /// navigates from your page to an external site.
     /// </summary>
-    [TargetElement("meta", Attributes = ReferrerAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("meta", Attributes = ReferrerAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class ReferrerModeTagHelper : TagHelper
     {
         private const string ContentAttributeName = "content";

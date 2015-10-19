@@ -6,7 +6,7 @@
     /// An object representing a website. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-website", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

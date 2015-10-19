@@ -10,7 +10,7 @@
     /// an online store. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-product", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

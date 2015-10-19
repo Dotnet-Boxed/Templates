@@ -12,7 +12,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.playlist/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-music-playlist", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SongUrlsAttributeName + "," + SongDiscAttributeName + "," + SongTrackAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

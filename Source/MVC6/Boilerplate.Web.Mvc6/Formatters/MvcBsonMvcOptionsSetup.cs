@@ -9,14 +9,14 @@
     public class MvcBsonMvcOptionsSetup : ConfigureOptions<MvcOptions>
     {
         public MvcBsonMvcOptionsSetup(IOptions<MvcJsonOptions> jsonOptions)
-            : base((_) => ConfigureMvc(_, jsonOptions.Options.SerializerSettings))
+            : base((_) => ConfigureMvc(_, jsonOptions.Value.SerializerSettings))
         {
         }
 
         public static void ConfigureMvc(MvcOptions options, JsonSerializerSettings serializerSettings)
         {
-            options.OutputFormatters.Add(new JsonOutputFormatter(serializerSettings));
-            options.InputFormatters.Add(new JsonInputFormatter(serializerSettings));
+            options.OutputFormatters.Add(new BsonOutputFormatter(serializerSettings));
+            options.InputFormatters.Add(new BsonInputFormatter(serializerSettings));
 
             options.FormatterMappings.SetMediaTypeMappingForFormat("bson", MediaTypeHeaderValue.Parse("application/bson"));
 

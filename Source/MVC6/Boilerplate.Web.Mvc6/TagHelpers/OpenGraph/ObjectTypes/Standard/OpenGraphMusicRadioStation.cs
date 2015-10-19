@@ -10,7 +10,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.radio_station/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-music-radio-station", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

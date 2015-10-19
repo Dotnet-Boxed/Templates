@@ -12,7 +12,7 @@
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.tv_show/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-video-tv-show", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

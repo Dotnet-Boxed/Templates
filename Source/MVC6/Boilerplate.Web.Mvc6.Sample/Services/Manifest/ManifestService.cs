@@ -32,8 +32,8 @@
         public string GetManifestJson()
         {
             JObject document = new JObject(
-                new JProperty("short_name", this.appSettings.Options.SiteShortTitle),
-                new JProperty("name", this.appSettings.Options.SiteTitle),
+                new JProperty("short_name", this.appSettings.Value.SiteShortTitle),
+                new JProperty("name", this.appSettings.Value.SiteTitle),
                 new JProperty("icons",
                     new JArray(
                         GetIconJObject("~/img/icons/android-chrome-36x36.png", "36x36", "image/png", "0.75"),

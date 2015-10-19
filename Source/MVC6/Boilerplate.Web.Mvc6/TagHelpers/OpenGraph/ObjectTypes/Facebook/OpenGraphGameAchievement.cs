@@ -14,7 +14,7 @@
     /// Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-game-achievement", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + PointsAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

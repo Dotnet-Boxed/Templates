@@ -15,8 +15,8 @@
     <twitter-card-summary-large-image username="@@RehanSaeedUK">
     @* $End-TwitterCard$ *@
     @* $Start-OpenGraph$ *@
-    <open-graph-business site-name="AppSettings.Options.SiteTitle" 
-                         title="ViewBag.Title"
+    <open-graph-business site-name="@AppSettings.Value.SiteTitle" 
+                         title="@ViewBag.Title"
                          main-image="@(new OpenGraphImage(
                              Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"),
                              ContentType.Png,

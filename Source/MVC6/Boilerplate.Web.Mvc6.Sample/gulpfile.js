@@ -17,7 +17,6 @@ var gulp = require("gulp"),
     // $End-JavaScriptCodeStyle$
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
     // $Start-CshtmlMinification$
-    minifyHtml = require("gulp-minify-html"),   // Minifies HTML (https://www.npmjs.com/package/gulp-minify-html)
     minifyCshtml = require("gulp-minify-cshtml"), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
     // $End-CshtmlMinification$
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
@@ -367,10 +366,12 @@ gulp.task("build-js", ["clean-js", "lint-js"], function () {
  */
 gulp.task("build-html", ["clean-html"], function () {
     return gulp
-        .src(paths.views + "**/(!(*.cshtml)|*.min.cshtml)") // Start with the .cshtml Razor files and not .min.cshtml files.
-        // .pipe(minifyHtml())                              // Minify the HTML (This could cause problems with Razor).
-        .pipe(minifyCshtml())                               // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
-        .dest(paths.views + "**/*.min.cshtml");             // Saves the minified Razor views to the destination path.
+        .src(paths.views + "**/*.cshtml")       // Start with the .cshtml Razor files and not .min.cshtml files.
+        .pipe(minifyCshtml())                   // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
+        .pipe(rename(function (path) {          // Rename the files from .cshtml to .min.cshtml.
+            path.extname = ".min.cshtml";
+        }))
+        .pipe(gulp.dest(paths.views));          // Saves the minified Razor views to the destination path.
 });
 // $End-CshtmlMinification$
 

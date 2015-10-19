@@ -2,6 +2,7 @@
 {
     using System;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Filters;
 
     /// <summary>
     /// Requires that a HTTP request does not contain a trailing slash. If it does, return a 404 Not Found. This is 

@@ -11,7 +11,7 @@
     /// card. You can also provide attribution to the photographer of the  gallery by specifying the value of the creator tag. 
     /// See https://dev.twitter.com/cards/types/gallery.
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "twitter-card-gallery", 
         Attributes = 
             UsernameAttributeName + "," + Image0AttributeName + "," + Image1AttributeName + "," + 

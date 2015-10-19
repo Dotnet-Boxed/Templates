@@ -19,8 +19,8 @@
             IApplicationEnvironment applicationEnvironment,
             IHostingEnvironment hostingEnvironment)
         {
-            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder(
-                applicationEnvironment.ApplicationBasePath);
+            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
+                .SetBasePath(applicationEnvironment.ApplicationBasePath);
 
             // Add configuration from the config.json file.
             configurationBuilder.AddJsonFile("config.json");

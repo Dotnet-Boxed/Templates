@@ -2,6 +2,7 @@
 MVC 5
 - Added a more prominent comment about removing settings from Web.config when using older versions of IIS.
 MVC 6
+- Updated to Beta 8.
 - HTML Helper constructors removed, so that they can be used as TagHelper's too.
 - Added a JavaScript Code Style (JSCS) feature to turn add/remove JSCS.
 - Added Several features to add/remove favicons, manifest.json, browserconfig.xml and web app capability.

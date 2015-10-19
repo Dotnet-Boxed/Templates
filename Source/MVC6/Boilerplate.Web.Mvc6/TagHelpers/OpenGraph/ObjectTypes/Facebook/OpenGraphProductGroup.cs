@@ -7,7 +7,7 @@
     /// This object type represents a group of product items. This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.group/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-product-group", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

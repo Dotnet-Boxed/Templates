@@ -64,7 +64,7 @@ namespace Boilerplate.Web.Mvc.Formatters
                     .HttpContext
                     .RequestServices
                     .GetRequiredService<IOptions<MvcJsonOptions>>()
-                    .Options
+                    .Value
                     .SerializerSettings;
             }
 

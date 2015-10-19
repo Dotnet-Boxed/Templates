@@ -4,7 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Rendering;
+    using Microsoft.AspNet.Mvc.ViewFeatures;
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
     /// <summary>
@@ -207,7 +208,7 @@
             
             // context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
 
-            output.Content.SetContent(this.ToString());
+            output.Content.SetContentEncoded(this.ToString());
             output.TagName = null;
         }
 

@@ -10,7 +10,7 @@
     /// the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-business", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ContactDataAttributeName + "," + LocationAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

@@ -10,7 +10,7 @@
     /// See http://ogp.me/
     /// https://developers.facebook.com/docs/reference/opengraph/object-type/music.song/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-music-song", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AlbumUrlsAttributeName + "," + AlbumDiscAttributeName + "," + AlbumTrackAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

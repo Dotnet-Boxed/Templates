@@ -10,7 +10,7 @@
     /// Twitter must approve the use of the player card, find out more below.
     /// See https://dev.twitter.com/cards/types/player
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "twitter-card-player", 
         Attributes = UsernameAttributeName + "," + ImageAttributeName + "," + PlayerAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

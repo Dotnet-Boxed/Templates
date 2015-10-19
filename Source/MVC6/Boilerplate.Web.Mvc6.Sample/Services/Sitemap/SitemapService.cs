@@ -41,7 +41,7 @@
             IMemoryCache memoryCache,
             IUrlHelper urlHelper)
         {
-            CacheProfile cacheProfile = cacheProfileSettings.Options.CacheProfiles[CacheProfileName.SitemapNodes];
+            CacheProfile cacheProfile = cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
             this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
             this.logger = logger;
             this.memoryCache = memoryCache;

@@ -10,7 +10,7 @@
     /// Facebook uses the books.book object type instead which requires an ISBN number.
     /// See http://ogp.me/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-book", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

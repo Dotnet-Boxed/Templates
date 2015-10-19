@@ -3,7 +3,7 @@ namespace Boilerplate.Web.Mvc.Formatters
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Formatters;
     using Microsoft.AspNet.Mvc.Internal;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Bson;
@@ -43,42 +43,72 @@ namespace Boilerplate.Web.Mvc.Formatters
         }
 
         /// <inheritdoc />
-        public override Task<object> ReadRequestBodyAsync(InputFormatterContext context)
+        public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
         {
-            var type = context.ModelType;
-            var request = context.HttpContext.Request;
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
 
+            var request = context.HttpContext.Request;
             using (var bsonReader = CreateBsonReader(context, request.Body))
             {
                 bsonReader.CloseInput = false;
 
-                var jsonSerializer = CreateJsonSerializer();
-
-                EventHandler<Newtonsoft.Json.Serialization.ErrorEventArgs> errorHandler = null;
-                errorHandler = (sender, e) =>
+                var successful = true;
+                EventHandler<Newtonsoft.Json.Serialization.ErrorEventArgs> errorHandler = (sender, eventArgs) =>
                 {
-                    var exception = e.ErrorContext.Error;
-                    context.ModelState.TryAddModelError(e.ErrorContext.Path, e.ErrorContext.Error);
+                    successful = false;
+
+                    var exception = eventArgs.ErrorContext.Error;
+
+                    // Handle path combinations such as "" + "Property", "Parent" + "Property", or "Parent" + "[12]".
+                    var key = eventArgs.ErrorContext.Path;
+                    if (!string.IsNullOrEmpty(context.ModelName))
+                    {
+                        if (string.IsNullOrEmpty(eventArgs.ErrorContext.Path))
+                        {
+                            key = context.ModelName;
+                        }
+                        else if (eventArgs.ErrorContext.Path[0] == '[')
+                        {
+                            key = context.ModelName + eventArgs.ErrorContext.Path;
+                        }
+                        else
+                        {
+                            key = context.ModelName + "." + eventArgs.ErrorContext.Path;
+                        }
+                    }
+
+                    context.ModelState.TryAddModelError(key, eventArgs.ErrorContext.Error);
 
                     // Error must always be marked as handled
                     // Failure to do so can cause the exception to be rethrown at every recursive level and
                     // overflow the stack for x64 CLR processes
-                    e.ErrorContext.Handled = true;
+                    eventArgs.ErrorContext.Handled = true;
                 };
+
+                var type = context.ModelType;
+                var jsonSerializer = CreateJsonSerializer();
                 jsonSerializer.Error += errorHandler;
 
+                object model;
                 try
                 {
-                    return Task.FromResult(jsonSerializer.Deserialize(bsonReader, type));
+                    model = jsonSerializer.Deserialize(bsonReader, type);
                 }
                 finally
                 {
                     // Clean up the error handler in case CreateJsonSerializer() reuses a serializer
-                    if (errorHandler != null)
-                    {
-                        jsonSerializer.Error -= errorHandler;
-                    }
+                    jsonSerializer.Error -= errorHandler;
                 }
+
+                if (successful)
+                {
+                    return InputFormatterResult.SuccessAsync(model);
+                }
+
+                return InputFormatterResult.FailureAsync();
             }
         }
 

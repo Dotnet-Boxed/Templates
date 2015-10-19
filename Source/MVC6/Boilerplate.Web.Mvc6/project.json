@@ -1,5 +1,5 @@
 {
-  "version": "1.2.7-*",
+  "version": "2.0.0-beta8",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "releaseNotes": "Tag helpers now set the tag name.",
@@ -17,10 +17,12 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta7",
-    "Microsoft.AspNet.Mvc.Razor": "6.0.0-beta7",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta7",
-    "Microsoft.AspNet.Razor.Runtime": "4.0.0-beta7"
+    "Microsoft.AspNet.Diagnostics": "1.0.0-beta8",
+    "Microsoft.AspNet.Mvc.Abstractions": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.Razor": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta8",
+    "Microsoft.AspNet.Razor.Runtime": "4.0.0-beta8"
   },
 
   "frameworks": {

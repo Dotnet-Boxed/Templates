@@ -10,7 +10,7 @@
     /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.menu_section/
     /// </summary>
-    [TargetElement(
+    [HtmlTargetElement(
         "open-graph-restaurant-menu-section", 
         Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + MenuUrlAttributeName, 
         TagStructure = TagStructure.WithoutEndTag)]

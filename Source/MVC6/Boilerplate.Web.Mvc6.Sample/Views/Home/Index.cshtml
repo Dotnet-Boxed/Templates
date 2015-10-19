@@ -25,8 +25,8 @@
        Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on
        each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what
        tags are generated and hand-code them yourself instead of using these helpers. *@
-    <open-graph-website site-name="AppSettings.Options.SiteTitle"
-                        title="ViewBag.Title"
+    <open-graph-website site-name="@AppSettings.Value.SiteTitle"
+                        title="@ViewBag.Title"
                         main-image="@(new OpenGraphImage(
                             Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"), 
                             ContentType.Png, 

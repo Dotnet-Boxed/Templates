@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Filters;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Routing;
     using MvcBoilerplate.Constants;

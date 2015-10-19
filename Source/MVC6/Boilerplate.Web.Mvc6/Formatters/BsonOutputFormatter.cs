@@ -3,7 +3,7 @@ namespace Boilerplate.Web.Mvc.Formatters
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Formatters;
     using Microsoft.AspNet.Mvc.Internal;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Bson;

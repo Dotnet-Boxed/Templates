@@ -51,14 +51,8 @@
                 // Add the debug logger.
                 loggerFactory.AddDebug();
 
-                // Add the console logger, only if we are using the WebListener server, which runs in the console.
-                // if (application.ServerFeatures.Any(feature => feature.Key == typeof(WebListener)))
-                // {
+                // Add the console logger.
                 loggerFactory.AddConsole();
-                // }
-
-                // Log request information.
-                // application.UseRequestLogger();
             }
             else
             {

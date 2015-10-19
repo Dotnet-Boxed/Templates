@@ -22,7 +22,7 @@
             {
                 // When an error occurs, displays a detailed error page with full diagnostic information. It is unsafe
                 // to use this in production. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-                application.UseErrorPage();
+                application.UseDeveloperExceptionPage();
 
                 // When a database error occurs, displays a detailed error page with full diagnostic information. It is 
                 // unsafe to use this in production. Uncomment this if using a database.

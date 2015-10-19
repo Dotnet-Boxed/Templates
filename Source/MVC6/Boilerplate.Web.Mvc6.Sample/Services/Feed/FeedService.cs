@@ -66,7 +66,7 @@ namespace MvcBoilerplate.Services
                 Id = FeedId,
                 // title (Required) - Contains a human readable title for the feed. Often the same as the title of the 
                 //                    associated website. This value should not be blank.
-                Title = SyndicationContent.CreatePlaintextContent(this.appSettings.Options.SiteTitle),
+                Title = SyndicationContent.CreatePlaintextContent(this.appSettings.Value.SiteTitle),
                 // items (Required) - The items to add to the feed.
                 Items = await this.GetItems(cancellationToken),
                 // subtitle (Recommended) - Contains a human-readable description or subtitle for the feed.
@@ -76,10 +76,10 @@ namespace MvcBoilerplate.Services
                 LastUpdatedTime = DateTimeOffset.Now,
                 // logo (Optional) - Identifies a larger image which provides visual identification for the feed. 
                 //                   Images should be twice as wide as they are tall.
-                ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-logo-96x48.png")),
+                ImageUrl = new Uri(this.urlHelper.AbsoluteContent("~/img/icons/atom-logo-96x48.png")),
                 // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the feed.
                 Copyright = SyndicationContent.CreatePlaintextContent(
-                    string.Format("© {0} - {1}", DateTime.Now.Year, this.appSettings.Options.SiteTitle)),
+                    string.Format("© {0} - {1}", DateTime.Now.Year, this.appSettings.Value.SiteTitle)),
                 // lang (Optional) - The language of the feed.
                 Language = "en-GB",
                 // generator (Optional) - Identifies the software used to generate the feed, for debugging and other 
@@ -131,7 +131,7 @@ namespace MvcBoilerplate.Services
         
             // icon (Optional) - Identifies a small image which provides iconic visual identification for the feed. 
             //                   Icons should be square.
-            feed.SetIcon(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"));
+            feed.SetIcon(this.urlHelper.AbsoluteContent("~/img/icons/atom-icon-48x48.png"));
         
             // Add the Yahoo Media namespace (xmlns:media="http://search.yahoo.com/mrss/") to the Atom feed. 
             // This gives us extra abilities, like the ability to give thumbnail images to entries. 
@@ -213,7 +213,7 @@ namespace MvcBoilerplate.Services
                     PublishDate = DateTimeOffset.Now,
                     // rights (Optional) - Conveys information about rights, e.g. copyrights, held in and over the entry.
                     Copyright = new TextSyndicationContent(
-                        string.Format("© {0} - {1}", DateTime.Now.Year, this.appSettings.Options.SiteTitle)),
+                        string.Format("© {0} - {1}", DateTime.Now.Year, this.appSettings.Value.SiteTitle)),
                 };
         
                 // link (Recommended) - Identifies a related Web page. An entry must contain an alternate link if there 
@@ -242,13 +242,13 @@ namespace MvcBoilerplate.Services
         
                 // link - Add additional links to related images, audio or video like so.
                 item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(
-                    new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png")), 
+                    new Uri(this.urlHelper.AbsoluteContent("~/img/icons/atom-icon-48x48.png")), 
                     ContentType.Png, 
                     0));
         
                 // media:thumbnail - Add a Yahoo Media thumbnail for the entry. See http://www.rssboard.org/media-rss 
                 //                   for more information.
-                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png"), 48, 48);
+                item.SetThumbnail(this.urlHelper.AbsoluteContent("~/img/icons/atom-icon-48x48.png"), 48, 48);
         
                 items.Add(item);
             }

@@ -1,10 +1,11 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Rendering;
+    using Microsoft.AspNet.Mvc.ViewFeatures;
     using Microsoft.AspNet.Razor.Runtime.TagHelpers;
 
-    [TargetElement("head", Attributes = EnabledAttributeName)]
+    [HtmlTargetElement("head", Attributes = EnabledAttributeName)]
     public class OpenGraphPrefixTagHelper : TagHelper
     {
         private const string PrefixAttributeName = "prefix";

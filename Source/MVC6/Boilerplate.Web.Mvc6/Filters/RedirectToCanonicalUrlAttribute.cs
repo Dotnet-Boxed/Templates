@@ -4,6 +4,7 @@
     using Microsoft.AspNet.Http;
     using Microsoft.AspNet.Http.Extensions;
     using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Filters;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource. Case 

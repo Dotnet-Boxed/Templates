@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNet.Antiforgery;
     using Microsoft.AspNet.Http;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Filters;
     using Microsoft.Framework.OptionsModel;
 
     /// <summary>
@@ -67,7 +67,7 @@
             }
 
             this.antiforgery = antiforgery;
-            this.antiForgeryCookieName = antiforgeryOptions.Options.CookieName;
+            this.antiForgeryCookieName = antiforgeryOptions.Value.CookieName;
         }
 
         #endregion

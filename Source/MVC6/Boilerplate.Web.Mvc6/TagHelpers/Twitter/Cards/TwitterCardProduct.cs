@@ -8,7 +8,7 @@
     /// image, a description, and allow you to highlight two other key details about your product.
     /// See https://dev.twitter.com/cards/types/product
     /// </summary>
-    [TargetElement("twitter-card-product", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+    [HtmlTargetElement("twitter-card-product", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardProduct : TwitterCard
     {
         #region Constants
