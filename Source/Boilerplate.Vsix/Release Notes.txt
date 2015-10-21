@@ -14,6 +14,7 @@ MVC 6
 - The OpenSearchService now uses the AppSettings.SiteTitle for the description.
 - SitemapService and SitemapPingerService changed to use ILogger<T>, rather than ILoggerFactory.
 - Startup.Debugging.cs modified to only add the console logger if running in the console using the WebListener server.
+- Razor pre-compilation updated for Beta 8 in RazorPreCompilation.cs and Startup.cs.
 
 Version 2.3.0
 MVC 5 & 6
