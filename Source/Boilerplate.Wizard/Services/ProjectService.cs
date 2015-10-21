@@ -207,6 +207,11 @@
                 }
             }
 
+            if (isUncommenting)
+            {
+                throw new InvalidOperationException($"No end comment was found. End:<{namedComment.End}>.");
+            }
+
             return newLines.ToArray();
         }
 

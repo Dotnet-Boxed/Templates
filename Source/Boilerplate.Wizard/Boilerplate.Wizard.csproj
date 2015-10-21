@@ -85,6 +85,7 @@
     <Compile Include="Features\Formatters\NoContentFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
+    <Compile Include="Features\Hidden\ServicesFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
     <Compile Include="Features\Other\FeedFeature.cs" />
     <Compile Include="Features\Other\HumansTextFeature.cs" />

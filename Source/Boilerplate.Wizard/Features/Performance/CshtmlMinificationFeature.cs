@@ -12,7 +12,7 @@
 
         public override string Description
         {
-            get { return "Minifies .cshtml files into .min.cshtml files which are then served using a special Razor view engine looking for these files. Note that you must run the build-html Gulp task manually for this to work."; }
+            get { return "Minifies .cshtml files into .min.cshtml files which are then served using a special Razor view engine looking for these files. This is an experimental feature that uses the gulp-minify-cshtml Gulp plugin created by Muhammad Rehan Saeed as a proof of concept."; }
         }
 
         public override IFeatureGroup Group

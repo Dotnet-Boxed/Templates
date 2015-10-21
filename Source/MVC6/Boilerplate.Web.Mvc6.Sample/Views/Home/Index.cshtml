@@ -7,6 +7,8 @@
     ViewBag.Description = "A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft.";
 }
 
+@* Code in the head section below gets added at the bottom of the HTML head element. This section can be used to enter
+    custom meta tags specific to this page. *@
 @section head
 {
     @* $Start-AuthorMetaTag$ *@
@@ -15,29 +17,29 @@
     @* $End-AuthorMetaTag$ *@
     @* $Start-TwitterCard$ *@
     @* Add Twitter Card social meta tags so we can customize what happens when our page is shared on Twitter. There are
-       several different Twitter Card types we could add, a different one is added on each page as an example.
-       These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
-       hand-code them yourself instead of using these helpers. *@
+        several different Twitter Card types we could add, a different one is added on each page as an example.
+        These helpers make it very easy to add the meta tags. For best performance, see what tags are generated and
+        hand-code them yourself instead of using these helpers. *@
     <twitter-card-summary-large-image username="@@RehanSaeedUK">
-    @* $End-TwitterCard$ *@
-    @* $Start-OpenGraph$ *@
-    @* Add Open Graph social meta tags so we can customize what happens when our page is shared on Facebook, Google+,
-       Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on
-       each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what
-       tags are generated and hand-code them yourself instead of using these helpers. *@
-    <open-graph-website site-name="@AppSettings.Value.SiteTitle"
-                        title="@ViewBag.Title"
-                        main-image="@(new OpenGraphImage(
-                            Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"), 
-                            ContentType.Png, 
-                            1200, 
+        @* $End-TwitterCard$ *@
+        @* $Start-OpenGraph$ *@
+        @* Add Open Graph social meta tags so we can customize what happens when our page is shared on Facebook, Google+,
+            Pintrest and other social media websites. There are dozens of Open Graph types, a different one is added on
+            each page as an example. These helpers make it very easy to add the meta tags. For best performance, see what
+            tags are generated and hand-code them yourself instead of using these helpers. *@
+        <open-graph-website site-name="@AppSettings.Value.SiteTitle"
+                            title="@ViewBag.Title"
+                            main-image="@(new OpenGraphImage(
+                            Url.AbsoluteContent("~/img/icons/open-graph-1200x630.png"),
+                            ContentType.Png,
+                            1200,
                             630))"
-                        determiner="OpenGraphDeterminer.Blank">
-    @* $End-OpenGraph$ *@
-    @* $Start-ReferrerMetaTag$ *@
-    @* referrer - Controls what is sent in the HTTP referrer header when a client navigates to an external site. *@
-    <meta asp-referrer="ReferrerMode.OriginWhenCrossOrigin">
-    @* $End-ReferrerMetaTag$ *@
+                            determiner="OpenGraphDeterminer.Blank">
+            @* $End-OpenGraph$ *@
+            @* $Start-ReferrerMetaTag$ *@
+            @* referrer - Controls what is sent in the HTTP referrer header when a client navigates to an external site. *@
+            <meta asp-referrer="ReferrerMode.OriginWhenCrossOrigin">
+            @* $End-ReferrerMetaTag$ *@
 }
 
 <div id="main-carousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -150,9 +152,9 @@
             <div class="col-md-6">
                 <ul>
                     @* Elmah, Glimpse, Trace does not yet exist for ASP.NET 5.
-                    <li><a href="/elmah"><strong>/elmah</strong></a> - <a href="https://code.google.com/p/elmah/">Elmah</a> error logs.</li>
-                    <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
-                    <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>*@
+                        <li><a href="/elmah"><strong>/elmah</strong></a> - <a href="https://code.google.com/p/elmah/">Elmah</a> error logs.</li>
+                        <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
+                        <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>*@
                     <li><a href="/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
                     <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })</strong></a> - Error page.</li>
                     @* $Start-Windows81IE11EdgeFavicon$ *@
@@ -277,12 +279,6 @@
 <div class="row">
     <article class="col-md-4" role="article">
         <header>
-            <h2><span aria-hidden="true" class="fa fa-link"></span> Autofac</h2>
-        </header>
-        <p><a href="http://autofac.org/">Autofac</a> is an addictive <a href="http://martinfowler.com/articles/injection.html">inversion of control</a> container. The idea behind inversion of control is that, rather than tie the classes in your application together and let classes "new up" their dependencies, you switch it around so dependencies are instead passed in during class construction.</p>
-    </article>
-    <article class="col-md-4" role="article">
-        <header>
             <h2><span aria-hidden="true" class="fa fa-wifi"></span> jQuery</h2>
         </header>
         <p><a href="http://jquery.com/">jQuery</a> is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.</p>
@@ -294,3 +290,9 @@
         <p><a href="http://en.wikipedia.org/wiki/HTML5">HTML5</a> is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web.</p>
     </article>
 </div>
+
+@* Code in the scripts section below gets added at the bottom of the HTML body element, below other scripts. This
+    section can be used to enter custom scripts specific to this page. *@
+@section scripts
+{
+}

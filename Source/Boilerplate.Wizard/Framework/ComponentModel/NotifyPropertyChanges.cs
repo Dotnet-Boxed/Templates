@@ -11,25 +11,12 @@
     /// </summary>
     public abstract class NotifyPropertyChanges : Disposable, INotifyPropertyChanged
     {
-        #region Public Events
-
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { this.propertyChanged += value; }
-            remove { this.propertyChanged -= value; }
-        }
-
-        #endregion
-
         #region Private Events
 
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        private event PropertyChangedEventHandler propertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
@@ -46,7 +33,7 @@
                 (this.GetType().GetRuntimeProperty(propertyName) != null),
                 "Check that the property name exists for this instance.");
 
-            PropertyChangedEventHandler eventHandler = this.propertyChanged;
+            PropertyChangedEventHandler eventHandler = this.PropertyChanged;
 
             if (eventHandler != null)
             {

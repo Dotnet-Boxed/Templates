@@ -32,10 +32,13 @@
   "frameworks": {
     "dnx451": {
       "frameworkAssemblies": {
+        // $Start-Feed-On$
         "System.Net.Http": "4.0.0.0",
-        // $Start-Feed$
         "System.ServiceModel": "4.0.0.0"
-        // $End-Feed$
+        // $End-Feed-On$
+        // $Start-Feed-Off$
+        // "System.Net.Http": "4.0.0.0"
+        // $End-Feed-Off$
       }
     },
     "dnxcore50": {

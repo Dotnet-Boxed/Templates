@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.Reflection;
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
@@ -92,6 +93,10 @@
                     ConfigureSecurityFilters(this.hostingEnvironment, mvcOptions.Filters);
                     ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
                 });
+#if !DEBUG
+            // Use pre-compiled views in release mode for quicker application start-up.
+            mvcBuilder.AddPrecompiledRazorViews(GetType().GetTypeInfo().Assembly);
+#endif
             // $Start-CshtmlMinification$
             services.AddTransient<IRazorViewEngine, MinifiedRazorViewEngine>();
             // $End-CshtmlMinification$

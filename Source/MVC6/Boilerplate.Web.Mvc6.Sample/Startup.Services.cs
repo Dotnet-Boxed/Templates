@@ -1,7 +1,9 @@
 ﻿namespace MvcBoilerplate
 {
     using Microsoft.Framework.DependencyInjection;
+    // $Start-Services$
     using MvcBoilerplate.Services;
+    // $End-Services$
 
     public partial class Startup
     {
@@ -23,13 +25,13 @@
             // $End-Feed$
             // $Start-AndroidChromeM39Favicons$
             services.AddScoped<IManifestService, ManifestService>();
-            // $Start-AndroidChromeM39Favicons$
+            // $End-AndroidChromeM39Favicons$
             // $Start-Search$
             services.AddScoped<IOpenSearchService, OpenSearchService>();
             // $End-Search$
             // $Start-RobotsText$
             services.AddScoped<IRobotsService, RobotsService>();
-            // $End - RobotsText$
+            // $End-RobotsText$
             // $Start-Sitemap$
             services.AddScoped<ISitemapService, SitemapService>();
             services.AddScoped<ISitemapPingerService, SitemapPingerService>();

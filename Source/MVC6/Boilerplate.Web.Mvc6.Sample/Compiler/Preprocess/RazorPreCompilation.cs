@@ -12,10 +12,6 @@ namespace MvcBoilerplate.Compiler.Preprocess
     /// </summary>
     public class RazorPreCompilation : RazorPreCompileModule
     {
-        public RazorPreCompilation(IServiceProvider provider) : base(provider)
-        {
-            this.GenerateSymbols = true;
-        }
     }
 }
 #endif

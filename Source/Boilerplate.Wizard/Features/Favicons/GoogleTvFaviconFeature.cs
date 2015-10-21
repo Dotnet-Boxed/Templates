@@ -27,7 +27,7 @@
 
         public override bool IsDefaultSelected
         {
-            get { return true; }
+            get { return false; }
         }
 
         public override bool IsVisible

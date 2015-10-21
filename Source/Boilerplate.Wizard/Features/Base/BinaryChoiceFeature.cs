@@ -15,7 +15,7 @@
 
         public virtual string Icon { get { return null; } }
 
-        public bool IsSelected
+        public virtual bool IsSelected
         {
             get { return this.isSelected; }
             set { this.SetProperty(ref this.isSelected, value, nameof(IsSelected), nameof(IsDefaultSelected)); }

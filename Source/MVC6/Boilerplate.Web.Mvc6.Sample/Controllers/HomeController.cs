@@ -8,7 +8,9 @@
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    // $Start-Services$
     using MvcBoilerplate.Services;
+    // $End-Services$
     using MvcBoilerplate.Settings;
 
     public class HomeController : Controller
