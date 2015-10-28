@@ -4,6 +4,7 @@ MVC 5
 MVC 6
 - Added a note to ReadMe.html to install the HttpPlatformHandler.
 - Added a note for NPM file paths too long.
+- Added UseCookiePolicy middleware to set better more secure cookie defaults.
 
 Version 2.4.0
 MVC 5

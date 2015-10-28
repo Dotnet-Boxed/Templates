@@ -124,6 +124,7 @@
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();
 
+            ConfigureCookies(application, this.hostingEnvironment);
             ConfigureDebugging(application, this.hostingEnvironment);
             ConfigureLogging(application, this.hostingEnvironment, loggerfactory);
             ConfigureErrorPages(application, this.hostingEnvironment);
