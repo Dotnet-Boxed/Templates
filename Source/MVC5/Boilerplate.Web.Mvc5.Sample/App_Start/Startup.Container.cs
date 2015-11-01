@@ -42,7 +42,7 @@
         private static void RegisterServices(ContainerBuilder builder)
         {
             builder.RegisterType<BrowserConfigService>().As<IBrowserConfigService>().InstancePerRequest();
-            builder.RegisterType<CacheService>().As<ICacheService>().InstancePerRequest();
+            builder.RegisterType<CacheService>().As<ICacheService>().SingleInstance();
             builder.RegisterType<FeedService>().As<IFeedService>().InstancePerRequest();
             builder.RegisterType<LoggingService>().As<ILoggingService>().SingleInstance();
             builder.RegisterType<ManifestService>().As<IManifestService>().InstancePerRequest();
