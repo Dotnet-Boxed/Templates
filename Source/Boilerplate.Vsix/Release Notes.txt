@@ -1,4 +1,8 @@
-﻿Version 2.5.0
+﻿Version 2.5.1
+MVC 5
+- Updated NWebSec NuGet packages.
+
+Version 2.5.0
 MVC 5
 - CacheService is now SingleInstance.
 - Fixed missing image in Readme.html.
