@@ -3,6 +3,9 @@
     using Microsoft.AspNet.Hosting;
     using Microsoft.Dnx.Runtime;
     using Microsoft.Framework.Configuration;
+    // $Start-ApplicationInsights$
+    using Microsoft.Framework.DependencyInjection;
+    // $End-ApplicationInsights$
 
     public partial class Startup
     {
@@ -50,6 +53,12 @@
             // http://docs.asp.net/en/latest/security/app-secrets.html
             configurationBuilder.AddEnvironmentVariables();
 
+            // $Start-ApplicationInsights$
+            // Push telemetry data through the Azure Application Insights pipeline faster in the development and 
+            // staging environments, allowing you to view results immediately.
+            configurationBuilder.AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction());
+
+            // $End-ApplicationInsights$
             return configurationBuilder.Build();
         }
     }

@@ -12,16 +12,18 @@
 
         public static readonly IFeatureGroup Security = new FeatureGroup("Security", 4);
 
-        public static readonly IFeatureGroup SearchEngineOptimization = new FeatureGroup("Search Engine Optimization (SEO)", 5);
+        public static readonly IFeatureGroup Monitoring = new FeatureGroup("Monitoring", 5);
 
-        public static readonly IFeatureGroup Pages = new FeatureGroup("Pages", 6);
+        public static readonly IFeatureGroup SearchEngineOptimization = new FeatureGroup("Search Engine Optimization (SEO)", 6);
 
-        public static readonly IFeatureGroup Formatters = new FeatureGroup("Formatters", 7);
+        public static readonly IFeatureGroup Pages = new FeatureGroup("Pages", 7);
 
-        public static readonly IFeatureGroup Social = new FeatureGroup("Social", 8);
+        public static readonly IFeatureGroup Formatters = new FeatureGroup("Formatters", 8);
 
-        public static readonly IFeatureGroup Favicons = new FeatureGroup("Favicons", 9);
+        public static readonly IFeatureGroup Social = new FeatureGroup("Social", 9);
 
-        public static readonly IFeatureGroup Other = new FeatureGroup("Other", 10);
+        public static readonly IFeatureGroup Favicons = new FeatureGroup("Favicons", 10);
+
+        public static readonly IFeatureGroup Other = new FeatureGroup("Other", 11);
     }
 }

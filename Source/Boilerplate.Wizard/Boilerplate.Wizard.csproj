@@ -89,6 +89,7 @@
     <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
     <Compile Include="Features\Hidden\ServicesFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
+    <Compile Include="Features\Monitoring\ApplicationInsightsFeature.cs" />
     <Compile Include="Features\Other\FeedFeature.cs" />
     <Compile Include="Features\Other\HumansTextFeature.cs" />
     <Compile Include="Features\Base\IBinaryChoiceFeature.cs" />
@@ -200,6 +201,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\JSHint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\GoogleAnalytics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\ApplicationInsights.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Android Chrome.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

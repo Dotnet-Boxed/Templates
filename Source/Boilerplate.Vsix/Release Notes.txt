@@ -1,4 +1,8 @@
-﻿Version 2.5.1
+﻿Version 2.7.0
+MVC 6
+- Added Application Insights Feature.
+
+Version 2.6.0
 MVC 5
 - Added a commented out line for adding the Content-Security-Policy:upgrade-insecure-requests directive in Startup.cs.
 - CSP Policy changed to add wss://localhost:* to the allowed connect-src list in debug mode to fix browser link.

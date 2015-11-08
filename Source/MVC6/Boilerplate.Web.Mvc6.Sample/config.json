@@ -3,6 +3,11 @@
     "SiteShortTitle": "Boilerplate",
     "SiteTitle": "ASP.NET MVC Boilerplate"
   },
+  // $Start-ApplicationInsights$
+  "ApplicationInsights": {
+    "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE"
+  },
+  // $End-ApplicationInsights$
   "CacheProfileSettings": {
     "CacheProfiles": {
       // $Start-Windows81IE11EdgeFavicon$

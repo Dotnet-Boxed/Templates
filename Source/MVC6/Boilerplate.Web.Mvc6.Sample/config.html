@@ -12,6 +12,14 @@ appSettings configuration section contained in the web.config file in ASP.NET 4.
             <li>SiteShortTitle - The short name of the site.</li>
         </ul>
     </li>
+    <!-- $Start-ApplicationInsights$ -->
+    <li>
+        ApplicationInsights - Settings for application insights.
+        <ul>
+            <li>InstrumentationKey - The instrumentation key for Application Insights retrieved from Azure.</li>
+        </ul>
+    </li>
+    <!-- $End-ApplicationInsights$ -->
     <li>
         CacheProfileSettings - Stores the cache profile settings for all cached actions in the application. Note that
         the VaryByParam = "none" does not exist in MVC 6 yet and will be added when it becomes available.

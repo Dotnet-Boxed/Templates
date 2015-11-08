@@ -5,6 +5,9 @@
 
   "dependencies": {
     "Boilerplate.Web.Mvc6": "2.0.0-beta8-1",
+    // $Start-ApplicationInsights$
+    "Microsoft.ApplicationInsights.AspNet": "1.0.0-beta8",
+    // $End-ApplicationInsights$
     "Microsoft.AspNet.CookiePolicy": "1.0.0-beta8",
     "Microsoft.AspNet.Diagnostics": "1.0.0-beta8",
     "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",

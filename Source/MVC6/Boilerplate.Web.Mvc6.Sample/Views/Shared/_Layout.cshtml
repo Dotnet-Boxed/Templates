@@ -1,5 +1,8 @@
 ﻿@inject IOptions<AppSettings> AppSettings
 @inject IHostingEnvironment HostingEnvironment
+@* $Start-ApplicationInsights$ *@
+@inject TelemetryConfiguration TelemetryConfiguration
+@* $End-ApplicationInsights$ *@
 <!DOCTYPE html>
 @* lang - The language of the page. *@
 @* no-js - The no JavaScript class is removed by modernizr if JavaScript is available. *@
@@ -129,10 +132,18 @@
     <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
         <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
-        <script asp-append-version="true" src="~/js/modernizr.js"></script>
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
         <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl" />
+    </environment>
+    @* $Start-ApplicationInsights$ *@
+    @* Add Azure Application Insights JavaScript script tag. *@
+    @Html.Application3InsightsJavaScript(TelemetryConfiguration)
+    @* $End-ApplicationInsights$ *@
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+        <script asp-append-version="true" src="~/js/modernizr.js"></script>
+    </environment>
+    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
         <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
     </environment>
 
