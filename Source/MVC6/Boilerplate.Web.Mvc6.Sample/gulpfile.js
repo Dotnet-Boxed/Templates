@@ -344,7 +344,13 @@ gulp.task("build-fonts", ["clean-fonts"], function () {
 /*
  * Builds the JavaScript files for the site.
  */
-gulp.task("build-js", ["clean-js", "lint-js"], function () {
+gulp.task("build-js", [
+    "clean-js",
+    // $Start-JavaScriptLint$
+    "lint-js"
+    // $End-JavaScriptLint$
+],
+function () {
     var tasks = sources.js.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.paths)                  // Start with the source paths.
