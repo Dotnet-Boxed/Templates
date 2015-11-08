@@ -60,6 +60,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\CssAndJavaScript\JavaScriptHintFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\JavaScriptCodeStyleFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
     <Compile Include="Features\Favicons\AndroidChromeM36ToM38FaviconFeature.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Features\Formatters\NoContentFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
+    <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
     <Compile Include="Features\Hidden\ServicesFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
     <Compile Include="Features\Other\FeedFeature.cs" />
@@ -195,6 +197,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\JSCS.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\JSHint.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,14 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Boilerplate.Web.Mvc;
+    using Boilerplate.Web.Mvc.Caching;
     using Boilerplate.Web.Mvc.Sitemap;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.Caching.Memory;
+    using Microsoft.Framework.Caching.Distributed;
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
-    using Settings;
+    using MvcBoilerplate.Settings;
 
     /// <summary>
     /// Generates sitemap XML for the current site.
@@ -18,8 +20,8 @@
     {
         #region Fields
 
+        private readonly IDistributedCache distributedCache;
         private readonly ILogger<SitemapService> logger;
-        private readonly IMemoryCache memoryCache;
         private readonly IUrlHelper urlHelper;
 
         private readonly TimeSpan cacheSlidingExpiration;
@@ -32,19 +34,19 @@
         /// Initializes a new instance of the <see cref="SitemapService" /> class.
         /// </summary>
         /// <param name="cacheProfileSettings">The cache profile settings.</param>
+        /// <param name="distributedCache">The distributed cache for the application.</param>
         /// <param name="logger">The <see cref="SitemapService"/> logger.</param>
-        /// <param name="memoryCache">The memory cache for the application.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
             IOptions<CacheProfileSettings> cacheProfileSettings,
+            IDistributedCache distributedCache,
             ILogger<SitemapService> logger,
-            IMemoryCache memoryCache,
             IUrlHelper urlHelper)
         {
             CacheProfile cacheProfile = cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
             this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
+            this.distributedCache = distributedCache;
             this.logger = logger;
-            this.memoryCache = memoryCache;
             this.urlHelper = urlHelper;
         }
 
@@ -61,19 +63,24 @@
         /// <param name="index">The index of the sitemap to retrieve. <c>null</c> if you want to retrieve the root 
         /// sitemap or sitemap index document, depending on the number of sitemap nodes.</param>
         /// <returns>The sitemap XML for the current site or <c>null</c> if the sitemap index is out of range.</returns>
-        public string GetSitemapXml(int? index = null)
+        public async Task<string> GetSitemapXml(int? index = null)
         {
             // Here we are caching the entire set of sitemap documents. We cannot use the caching attribute because 
             // cache expiry could get out of sync if the number of sitemaps changes.
             List<string> sitemapDocuments;
-            if (!this.memoryCache.TryGetValue(CacheProfileName.SitemapNodes, out sitemapDocuments))
+            var tuple = await this.distributedCache.TryGetAsJsonAsync<List<string>>(CacheProfileName.SitemapNodes);
+            if (tuple.Item1)
+            {
+                sitemapDocuments = tuple.Item2;
+            }
+            else
             {
                 IReadOnlyCollection<SitemapNode> sitemapNodes = this.GetSitemapNodes();
                 sitemapDocuments = this.GetSitemapDocuments(sitemapNodes);
-                this.memoryCache.Set(
-                    CacheProfileName.SitemapNodes, 
-                    sitemapDocuments, 
-                    new MemoryCacheEntryOptions()
+                await this.distributedCache.SetAsJsonAsync(
+                    CacheProfileName.SitemapNodes,
+                    sitemapDocuments,
+                    new DistributedCacheEntryOptions()
                     {
                         SlidingExpiration = cacheSlidingExpiration
                     });

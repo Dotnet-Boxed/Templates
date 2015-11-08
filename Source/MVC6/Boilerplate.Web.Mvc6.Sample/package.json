@@ -7,27 +7,29 @@
     "gulp-concat": "2.6.0",
     "gulp-csslint": "0.2.0",
     "gulp-if": "2.0.0",
-    "gulp-imagemin": "2.3.0",
+    "gulp-imagemin": "2.4.0",
     // $Start-JavaScriptCodeStyle$
-    "gulp-jscs": "3.0.1",
+    "gulp-jscs": "3.0.2",
     // $End-JavaScriptCodeStyle$
-    "gulp-jshint": "1.11.2",
+    // $Start-JavaScriptHint$
+    "gulp-jshint": "1.12.0",
+    // $End-JavaScriptHint$
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",
     // $End-CshtmlMinification$
     "gulp-minify-css": "1.2.1",
     "gulp-plumber": "1.0.1",
     "gulp-rename": "1.2.2",
-    "gulp-sass": "2.0.4",
-    "gulp-scss-lint": "0.3.5",
+    "gulp-sass": "2.1.0",
+    "gulp-scss-lint": "0.3.7",
     "gulp-size": "2.0.0",
     "gulp-sourcemaps": "1.6.0",
     // $Start-TypeScript$
     "gulp-typescript": "2.9.2",
-    "gulp-tslint": "3.3.0",
+    "gulp-tslint": "3.5.0",
     // $End-TypeScript$
-    "gulp-uglify": "1.4.1",
-    "gulp-util": "3.0.6",
+    "gulp-uglify": "1.4.2",
+    "gulp-util": "3.0.7",
     "merge-stream": "1.0.0",
     "psi": "1.0.6",
     "rimraf": "2.4.3"

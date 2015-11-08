@@ -243,9 +243,9 @@
         /// <returns>The sitemap XML for the current site.</returns>
         [NoTrailingSlash]
         [Route("sitemap.xml", Name = HomeControllerRoute.GetSitemapXml)]
-        public IActionResult SitemapXml(int? index = null)
+        public async Task<IActionResult> SitemapXml(int? index = null)
         {
-            string content = this.sitemapService.GetSitemapXml(index);
+            string content = await this.sitemapService.GetSitemapXml(index);
 
             if (content == null)
             {

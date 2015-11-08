@@ -1,5 +1,7 @@
 ﻿namespace MvcBoilerplate.Services
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Generates sitemap XML for the current site.
     /// </summary>
@@ -14,6 +16,6 @@
         /// <param name="index">The index of the sitemap to retrieve. <c>null</c> if you want to retrieve the root 
         /// sitemap or sitemap index document, depending on the number of sitemap nodes.</param>
         /// <returns>The sitemap XML for the current site.</returns>
-        string GetSitemapXml(int? index = null);
+        Task<string> GetSitemapXml(int? index = null);
     }
 }

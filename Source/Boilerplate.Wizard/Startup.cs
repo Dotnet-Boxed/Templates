@@ -59,12 +59,14 @@
             {
                 case FeatureSet.Mvc6:
                     // Hidden
+                    builder.RegisterType<JavaScriptLintFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<ServicesFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript
                     builder.RegisterType<FrontEndFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<TypeScriptFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<JavaScriptCodeStyleFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<JavaScriptHintFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<JavaScriptTestFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Formatters
                     builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();

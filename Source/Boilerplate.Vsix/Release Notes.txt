@@ -1,6 +1,13 @@
 ﻿Version 2.5.1
 MVC 5
-- Updated NWebSec NuGet packages.
+- Added a commented out line for adding the Content-Security-Policy:upgrade-insecure-requests directive in Startup.cs.
+- CSP Policy changed to add wss://localhost:* to the allowed connect-src list in debug mode to fix browser link.
+MVC 6
+- NPM packages updated to latest versions.
+- JS-Hint feature added, making JS-Hint optional.
+- NuGet package updated to add IDistributedCache extension methods.
+- SitemapService changed to use the IDistributedCache instead of IMemoryCache.
+- Added the RouteConvention to the NuGet package to enable global route prefixes. See http://www.strathweb.com/2015/10/global-route-prefixes-with-attribute-routing-in-asp-net-5-and-mvc-6/.
 
 Version 2.5.0
 MVC 5

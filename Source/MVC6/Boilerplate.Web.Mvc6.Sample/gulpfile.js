@@ -15,7 +15,9 @@ var gulp = require("gulp"),
     // $Start-JavaScriptCodeStyle$
     jscs = require("gulp-jscs"),                // JavaScript style linter (https://www.npmjs.com/package/gulp-jscs)
     // $End-JavaScriptCodeStyle$
+    // $Start-JavaScriptHint$
     jshint = require("gulp-jshint"),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
+    // $End-JavaScriptHint$
     // $Start-CshtmlMinification$
     minifyCshtml = require("gulp-minify-cshtml"), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
     // $End-CshtmlMinification$
@@ -253,15 +255,18 @@ gulp.task("lint-css", function () {
     ]);
 });
 
+// $Start-JavaScriptLint$
 /*
  * Report warnings and errors in your JavaScript files (lint them) under the Scripts folder.
  */
 gulp.task("lint-js", function () {
     return merge([                                                  // Combine multiple streams to one and return it so the task can be chained.
+        // $Start-JavaScriptHint$
         gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
             .pipe(plumber())                                        // Handle any errors.
             .pipe(jshint())                                         // Get any JavaScript linting errors.
             .pipe(jshint.reporter("default", { verbose: true })),   // Report any JavaScript linting errors to the console.
+        // $End-JavaScriptHint$
         // $Start-TypeScript$
         gulp.src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
             .pipe(plumber())                                        // Handle any errors.
@@ -276,10 +281,16 @@ gulp.task("lint-js", function () {
     ]);
 });
 
+// $End-JavaScriptLint$
 /*
  * Report warnings and errors in your styles and scripts (lint them).
  */
-gulp.task("lint", ["lint-css", "lint-js"]);
+gulp.task("lint", [
+    "lint-css",
+    // $Start-JavaScriptLint$
+    "lint-js"
+    // $End-JavaScriptLint$
+]);
 
 /*
  * Builds the CSS for the site.

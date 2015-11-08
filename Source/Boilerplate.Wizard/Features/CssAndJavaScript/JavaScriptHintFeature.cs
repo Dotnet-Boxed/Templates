@@ -3,16 +3,16 @@
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
-    public class JavaScriptCodeStyleFeature : BinaryChoiceFeature
+    public class JavaScriptHintFeature : BinaryChoiceFeature
     {
-        public JavaScriptCodeStyleFeature(IProjectService projectService)
+        public JavaScriptHintFeature(IProjectService projectService)
             : base(projectService)
         {
         }
 
         public override string Description
         {
-            get { return "Adds JavaScript Code Style (JSCS) linting to the JavaScript build pipe-line. This checks that the structure (not functionality) of the JavaScript is consistent. The default code style is to use Douglas Crockford's recommended rule set found in the .jscsrc file."; }
+            get { return "Adds JavaScript Hint (JS-Hint) linting to the JavaScript build pipe-line. This checks for common JavaScript errors and code smells. The default rules can be changed in the .jshintrc file."; }
         }
 
         public override IFeatureGroup Group
@@ -22,12 +22,12 @@
 
         public override string Icon
         {
-            get { return "/Boilerplate.Wizard;component/Assets/JSCS.png"; }
+            get { return "/Boilerplate.Wizard;component/Assets/JSHint.png"; }
         }
 
         public override string Id
         {
-            get { return "JavaScriptCodeStyle"; }
+            get { return "JavaScriptHint"; }
         }
 
         public override bool IsDefaultSelected
@@ -42,12 +42,12 @@
 
         public override int Order
         {
-            get { return 4; }
+            get { return 3; }
         }
 
         public override string Title
         {
-            get { return "JavaScript Code Style (JSCS)"; }
+            get { return "JavaScript Hint (JS-Hint)"; }
         }
 
         protected override async Task AddFeature()
@@ -58,7 +58,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(".jscsrc");
+            await this.ProjectService.DeleteFile(".jshintrc");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "package.json");
