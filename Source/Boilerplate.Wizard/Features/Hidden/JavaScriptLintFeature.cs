@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
@@ -41,7 +42,7 @@
             get { return "JavaScriptLint"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return false; }
         }
@@ -75,7 +76,7 @@
         {
             if (string.Equals(e.PropertyName, nameof(this.IsSelected)))
             {
-                this.OnPropertyChanged(nameof(this.IsSelected));
+                this.OnPropertyChanged(nameof(this.IsSelected), nameof(this.IsDefaultSelected));
             }
         }
 

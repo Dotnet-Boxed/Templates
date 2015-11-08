@@ -25,7 +25,7 @@
             get { return "AndroidChromeM36ToM38Favicon"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return true; }
         }

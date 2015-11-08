@@ -25,7 +25,7 @@
             get { return "AndroidChromeM39Favicons"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return true; }
         }

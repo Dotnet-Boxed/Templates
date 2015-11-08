@@ -25,7 +25,7 @@
             get { return "Windows8IE10Favicon"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return false; }
         }

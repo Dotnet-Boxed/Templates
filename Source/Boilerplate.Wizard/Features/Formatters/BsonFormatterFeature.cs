@@ -30,7 +30,7 @@
             get { return "BsonFormatter"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return this.featureSet == FeatureSet.Mvc6Api; }
         }

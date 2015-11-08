@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
@@ -53,11 +54,6 @@
             get { return "Services"; }
         }
 
-        public override bool IsDefaultSelected
-        {
-            get { return false; }
-        }
-
         public override bool IsSelected
         {
             get
@@ -71,6 +67,11 @@
             }
 
             set { }
+        }
+
+        public override bool IsSelectedDefault
+        {
+            get { return false; }
         }
 
         public override bool IsVisible
@@ -92,7 +93,7 @@
         {
             if (string.Equals(e.PropertyName, nameof(this.IsSelected)))
             {
-                this.OnPropertyChanged(nameof(this.IsSelected));
+                this.OnPropertyChanged(nameof(this.IsSelected), nameof(this.IsDefaultSelected));
             }
         }
 

@@ -25,7 +25,7 @@
             get { return "GoogleTvFavicon"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return false; }
         }

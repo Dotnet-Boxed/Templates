@@ -25,7 +25,7 @@
             get { return "Windows81IE11EdgeFavicon"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return true; }
         }

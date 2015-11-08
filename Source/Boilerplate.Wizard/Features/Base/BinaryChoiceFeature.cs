@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.Wizard.Features
 {
+    using System;
     using System.Threading.Tasks;
     using Boilerplate.Wizard.Services;
 
@@ -10,10 +11,17 @@
         public BinaryChoiceFeature(IProjectService projectService)
             : base(projectService)
         {
-            this.isSelected = this.IsDefaultSelected;
+            this.isSelected = this.IsSelectedDefault;
         }
 
+        public abstract bool IsSelectedDefault { get; }
+
         public virtual string Icon { get { return null; } }
+
+        public override bool IsDefaultSelected
+        {
+            get { return this.IsSelected == this.IsSelectedDefault; }
+        }
 
         public virtual bool IsSelected
         {
@@ -33,7 +41,7 @@
 
         public override string ToString()
         {
-            return string.Format($"{this.Title} - {this.IsSelected}");
+            return string.Format($"{this.Title} Selected:<{this.IsSelected}> DefaultIsSelected:<{this.IsDefaultSelected}>");
         }
 
         protected virtual Task AddFeature()

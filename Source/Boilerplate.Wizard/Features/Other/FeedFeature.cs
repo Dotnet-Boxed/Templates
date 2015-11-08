@@ -25,7 +25,7 @@
             get { return "Feed"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return true; }
         }

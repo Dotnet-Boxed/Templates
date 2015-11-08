@@ -25,7 +25,7 @@
             get { return "ContactPage"; }
         }
 
-        public override bool IsDefaultSelected
+        public override bool IsSelectedDefault
         {
             get { return true; }
         }
