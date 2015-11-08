@@ -43,6 +43,13 @@ namespace MvcBoilerplate
             //     .MaxAge(days: 18 * 7))
             //     .IncludeSubdomains();
 
+            // Content-Security-Policy:upgrade-insecure-requests - Adds the 'upgrade-insecure-requests' directive to
+            //      the Content-Security-Policy HTTP header. This is only relevant if you are using HTTPS. Any objects
+            //      on the page using HTTP is automatically upgraded to HTTPS.
+            //      See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/
+            //      and http://www.w3.org/TR/upgrade-insecure-requests/
+            // app.UseCsp(x => x.UpgradeInsecureRequests());
+
             ConfigureContainer(app);
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
