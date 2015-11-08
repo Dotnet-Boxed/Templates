@@ -149,7 +149,7 @@
                 {
 #if DEBUG
                     // Allow Browser Link to work in debug mode only.
-                    CustomSources = "localhost:*",
+                    CustomSources = string.Join(" ", "localhost:*", "ws://localhost:*"),
 #else
                     // Allow AJAX and Web Sockets to example.com.
                     // CustomSources = "*.example.com",
