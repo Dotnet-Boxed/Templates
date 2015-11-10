@@ -6,6 +6,9 @@
     using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Caching;
     using Boilerplate.Web.Mvc.Sitemap;
+    // $Start-ApplicationInsights$
+    using Microsoft.ApplicationInsights;
+    // $End-ApplicationInsights$
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.Caching.Distributed;
     using Microsoft.Framework.Logging;
@@ -22,6 +25,9 @@
 
         private readonly IDistributedCache distributedCache;
         private readonly ILogger<SitemapService> logger;
+        // $Start-ApplicationInsights$
+        private readonly TelemetryClient telemetryClient;
+        // $End-ApplicationInsights$
         private readonly IUrlHelper urlHelper;
 
         private readonly TimeSpan cacheSlidingExpiration;
@@ -36,17 +42,26 @@
         /// <param name="cacheProfileSettings">The cache profile settings.</param>
         /// <param name="distributedCache">The distributed cache for the application.</param>
         /// <param name="logger">The <see cref="SitemapService"/> logger.</param>
+        // $Start-ApplicationInsights$
+        /// <param name="telemetryClient">The Azure Application Insights telemetry client.</param>
+        // $End-ApplicationInsights$
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
             IOptions<CacheProfileSettings> cacheProfileSettings,
             IDistributedCache distributedCache,
             ILogger<SitemapService> logger,
+            // $Start-ApplicationInsights$
+            TelemetryClient telemetryClient,
+            // $End-ApplicationInsights$
             IUrlHelper urlHelper)
         {
             CacheProfile cacheProfile = cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
             this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
             this.distributedCache = distributedCache;
             this.logger = logger;
+            // $Start-ApplicationInsights$
+            this.telemetryClient = telemetryClient;
+            // $End-ApplicationInsights$
             this.urlHelper = urlHelper;
         }
 
@@ -150,6 +165,9 @@
 
         protected override void LogWarning(Exception exception)
         {
+            // $Start-ApplicationInsights$
+            this.telemetryClient.TrackException(exception);
+            // $End-ApplicationInsights$
             this.logger.LogWarning(exception.Message, exception);
         }
 

@@ -7,6 +7,14 @@
   "ApplicationInsights": {
     "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
   },
+  // $Start-Sitemap$
+  "SitemapSettings": {
+    "SitemapPingLocations": [
+      "https://www.google.com/ping?sitemap=",
+      "http://www.bing.com/ping?sitemap="
+    ]
+  },
+  // $End-Sitemap$
   // $End-ApplicationInsights$
   "CacheProfileSettings": {
     "CacheProfiles": {
