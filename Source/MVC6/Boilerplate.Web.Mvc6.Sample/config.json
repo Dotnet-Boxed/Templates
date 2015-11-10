@@ -5,7 +5,7 @@
   },
   // $Start-ApplicationInsights$
   "ApplicationInsights": {
-    "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE"
+    "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
   },
   // $End-ApplicationInsights$
   "CacheProfileSettings": {

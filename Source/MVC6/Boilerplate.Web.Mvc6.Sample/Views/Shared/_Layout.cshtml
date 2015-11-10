@@ -138,7 +138,7 @@
     </environment>
     @* $Start-ApplicationInsights$ *@
     @* Add Azure Application Insights JavaScript script tag. *@
-    @Html.Application3InsightsJavaScript(TelemetryConfiguration)
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
     @* $End-ApplicationInsights$ *@
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
         <script asp-append-version="true" src="~/js/modernizr.js"></script>
