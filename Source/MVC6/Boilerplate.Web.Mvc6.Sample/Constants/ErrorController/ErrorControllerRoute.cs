@@ -2,6 +2,6 @@
 {
     public static class ErrorControllerRoute
     {
-        public const string GetError = ControllerName.Error + "Error";
+        public const string GetError = ControllerName.Error + "GetError";
     }
 }
