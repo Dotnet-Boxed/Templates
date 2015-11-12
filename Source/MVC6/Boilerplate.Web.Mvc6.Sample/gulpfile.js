@@ -37,7 +37,8 @@ var gulp = require("gulp"),
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
     // $End-TypeScript$
-    project = require("./project.json");        // Read the project.json file into the project variable.
+    project = require("./project.json"),        // Read the project.json file into the project variable.
+    config = require("./config.json");          // Read the config.json file into the config variable.
 
 // Holds information about the hosting environment.
 var environment = {
