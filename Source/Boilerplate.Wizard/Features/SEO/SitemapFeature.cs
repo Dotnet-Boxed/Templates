@@ -56,6 +56,7 @@
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"config.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"config.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"ReadMe.html");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.Options.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.Services.cs");
         }
 
@@ -63,6 +64,7 @@
         {
             await this.ProjectService.DeleteDirectory(@"Services\Sitemap");
             await this.ProjectService.DeleteDirectory(@"Services\SitemapPinger");
+            await this.ProjectService.DeleteFile(@"Settings\SitemapSettings.cs");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerAction.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");
@@ -73,6 +75,7 @@
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"ReadMe.html");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.Options.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.Services.cs");
         }
     }

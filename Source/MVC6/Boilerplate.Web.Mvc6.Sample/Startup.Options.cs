@@ -22,6 +22,11 @@
 
             // Adds IOptions<CacheProfileSettings> to the services container.
             services.Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
+            // $Start-Sitemap$
+
+            // Adds IOptions<SitemapSettings> to the services container.
+            services.Configure<SitemapSettings>(configuration.GetSection(nameof(SitemapSettings)));
+            // $End-Sitemap$
         }
     }
 }

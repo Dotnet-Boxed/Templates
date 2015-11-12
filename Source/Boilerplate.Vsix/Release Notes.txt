@@ -3,6 +3,9 @@ MVC 5
 - Added a note to ReadMe.html to enable the CSP upgrade-insecure-requests directive in Startup.cs.
 MVC 6
 - Added Application Insights Feature.
+- SitemapService and SitemapPingerService track custom Application Insights events.
+- SitemapPingerService now stores it's pinging locations in config.json using the SitemapSettings.
+- SitemapPingerService now uses the hosting environment and only works in the production environment.
 
 Version 2.6.0
 MVC 5

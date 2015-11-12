@@ -1,30 +1,30 @@
 ﻿namespace MvcBoilerplate.Services
 {
     using System.Globalization;
+    using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Boilerplate.Web.Mvc;
+    // $Start-ApplicationInsights$
+    using Microsoft.ApplicationInsights;
+    // $End-ApplicationInsights$
+    using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Framework.Logging;
+    using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
 
     public class SitemapPingerService : ISitemapPingerService
     {
         #region Fields
 
-        /// <summary>
-        /// The URL's provided by search engines where we can send the location of our sitemap.
-        /// </summary>
-        private static readonly string[] SitemapPingLocations = new string[]
-        {
-            // Google
-            "https://www.google.com/ping?sitemap=",
-            // Bing and Yahoo share the same sitemap ping URL.
-            "http://www.bing.com/ping?sitemap="
-        };
-
         private readonly HttpClient httpClient;
+        private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger<SitemapPingerService> logger;
+        private readonly IOptions<SitemapSettings> sitemapSettings;
+        // $Start-ApplicationInsights$
+        private readonly TelemetryClient telemetryClient;
+        // $End-ApplicationInsights$
         private readonly IUrlHelper urlHelper;
 
         #endregion
@@ -34,14 +34,31 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapPingerService"/> class.
         /// </summary>
+        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
+        /// Staging or Production by default.</param>
         /// <param name="logger">The <see cref="SitemapPingerService"/> logger.</param>
+        /// <param name="sitemapSettings">The sitemap settings.</param>
+        // $Start-ApplicationInsights$
+        /// <param name="telemetryClient">The Azure Application Insights telemetry client.</param>
+        // $End-ApplicationInsights$
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapPingerService(
+            IHostingEnvironment hostingEnvironment,
             ILogger<SitemapPingerService> logger,
+            IOptions<SitemapSettings> sitemapSettings,
+            // $Start-ApplicationInsights$
+            TelemetryClient telemetryClient,
+            // $End-ApplicationInsights$
             IUrlHelper urlHelper)
         {
+            this.hostingEnvironment = hostingEnvironment;
             this.logger = logger;
+            this.sitemapSettings = sitemapSettings;
+            // $Start-ApplicationInsights$
+            this.telemetryClient = telemetryClient;
+            // $End-ApplicationInsights$
             this.urlHelper = urlHelper;
+
             this.httpClient = new HttpClient();
         }
 
@@ -60,32 +77,35 @@
         /// Bing - http://www.bing.com/webmaster/help/how-to-submit-sitemaps-82a15bd4.
         /// Yahoo - https://developer.yahoo.com/search/siteexplorer/V1/ping.html
         /// </summary>
-#if Release
         public async Task PingSearchEngines()
         {
-            foreach (string sitemapPingLocation in SitemapPingLocations)
+            // $Start-ApplicationInsights$
+            this.telemetryClient.TrackEvent("PingSitemapToSearchEngines");
+            // $End-ApplicationInsights$
+
+            if (this.hostingEnvironment.IsProduction())
             {
-                string url = sitemapPingLocation + 
-                    this.urlHelper.Encode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml));
-                HttpResponseMessage response = await this.httpClient.GetAsync(url);
-                if (!response.IsSuccessStatusCode)
+                foreach (string sitemapPingLocation in this.sitemapSettings.Value.SitemapPingLocations)
                 {
-                    HttpRequestException exception = new HttpRequestException(string.Format(
-                        CultureInfo.InvariantCulture,
-                        "Pinging search engine {0}. Response status code does not indicate success: {1} ({2}).",
-                        url,
-                        (int)response.StatusCode,
-                        response.ReasonPhrase));
-                    this.logger.LogError("Error while pinging site-map to search engines.", exception)
+                    string sitemapUrl = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetSitemapXml).TrimEnd('/');
+                    string url = sitemapPingLocation + WebUtility.UrlEncode(sitemapUrl);
+                    HttpResponseMessage response = await this.httpClient.GetAsync(url);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        HttpRequestException exception = new HttpRequestException(string.Format(
+                            CultureInfo.InvariantCulture,
+                            "Pinging search engine {0}. Response status code does not indicate success: {1} ({2}).",
+                            url,
+                            (int)response.StatusCode,
+                            response.ReasonPhrase));
+                        // $Start-ApplicationInsights$
+                        this.telemetryClient.TrackException(exception);
+                        // $End-ApplicationInsights$
+                        this.logger.LogError("Error while pinging site-map to search engines.", exception);
+                    }
                 }
             }
         }
-#else
-        public Task PingSearchEngines()
-        {
-            return Task.FromResult<object>(null);
-        }
-#endif
 
         #endregion
     }
