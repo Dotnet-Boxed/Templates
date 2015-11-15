@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate.Services
 {
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Net;
     using System.Net.Http;
@@ -13,6 +14,9 @@
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
+    // $Start-ApplicationInsights$
+    using MvcBoilerplate.Settings;
+    // $End-ApplicationInsights$
 
     public class SitemapPingerService : ISitemapPingerService
     {
@@ -99,7 +103,7 @@
                             (int)response.StatusCode,
                             response.ReasonPhrase));
                         // $Start-ApplicationInsights$
-                        this.telemetryClient.TrackException(exception);
+                        this.telemetryClient.TrackException(exception, new Dictionary<string, string>() { { "Url", url } });
                         // $End-ApplicationInsights$
                         this.logger.LogError("Error while pinging site-map to search engines.", exception);
                     }

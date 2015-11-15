@@ -141,15 +141,15 @@
 
             // Add MVC to the request pipeline.
             application.UseMvc();
-
-            // Add a 404 Not Found error page for visiting /this-resource-does-not-exist.
-            Configure404NotFoundErrorPage(application, this.hostingEnvironment);
             // $Start-ApplicationInsights$
 
             // Track data about exceptions from the application. Should be configured after all error handling 
             // middleware in the request pipeline.
             application.UseApplicationInsightsExceptionTelemetry();
             // $End-ApplicationInsights$
+
+            // Add a 404 Not Found error page for visiting /this-resource-does-not-exist.
+            Configure404NotFoundErrorPage(application, this.hostingEnvironment);
         }
 
         #endregion

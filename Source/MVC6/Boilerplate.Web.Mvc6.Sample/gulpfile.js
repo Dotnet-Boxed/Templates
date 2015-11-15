@@ -24,6 +24,9 @@ var gulp = require("gulp"),
     minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
     plumber = require("gulp-plumber"),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
+    // $Start-ApplicationInsights$
+    replace = require("gulp-replace"),          // String replace (https://www.npmjs.com/package/gulp-replace/)
+    // $End-ApplicationInsights$
     size = require("gulp-size"),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
     sourcemaps = require("gulp-sourcemaps"),    // Creates source map files (https://www.npmjs.com/package/gulp-sourcemaps/)
     uglify = require("gulp-uglify"),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify/)
@@ -142,6 +145,21 @@ var sources = {
     ],
     // An array containing objects required to build a single JavaScript file.
     js: [
+        // $Start-ApplicationInsights$
+        {
+            name: "application-insights.js",
+            paths: [
+                paths.scripts + "application-insights.js"
+            ],
+            // replacements - Replacement to be made in the files above.
+            replacement: {
+                // find - The string or regular expression to find.
+                find: "[ApplicationInsightsInstrumentationKey]",
+                // replace - The string or function used to make the replacement.
+                replace: config.ApplicationInsights.InstrumentationKey
+            }
+        },
+        // $End-ApplicationInsights$
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
@@ -359,6 +377,13 @@ function () {
             .pipe(gulpif(
                 environment.isDevelopment(),    // If running in the development environment.
                 sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+            // $Start-ApplicationInsights$
+            .pipe(gulpif(
+                source.replacement,             // If the source has a replacement to be made.
+                replace(                        // Carry out the specified find and replace.
+                    source.replacement ? source.replacement.find : '',
+                    source.replacement ? source.replacement.replace : '')))
+            // $End-ApplicationInsights$
             // $Start-TypeScript$
             .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
                 "**/*.ts",

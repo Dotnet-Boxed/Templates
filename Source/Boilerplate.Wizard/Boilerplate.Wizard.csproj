@@ -206,7 +206,7 @@
     <Resource Include="Assets\GoogleAnalytics.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\ApplicationInsights.png" />
+    <Resource Include="Assets\Application Insights.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Android Chrome.png" />

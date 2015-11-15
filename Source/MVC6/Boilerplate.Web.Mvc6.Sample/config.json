@@ -7,6 +7,7 @@
   "ApplicationInsights": {
     "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
   },
+  // $End-ApplicationInsights$
   // $Start-Sitemap$
   "SitemapSettings": {
     "SitemapPingLocations": [
@@ -15,7 +16,6 @@
     ]
   },
   // $End-Sitemap$
-  // $End-ApplicationInsights$
   "CacheProfileSettings": {
     "CacheProfiles": {
       // $Start-Windows81IE11EdgeFavicon$
