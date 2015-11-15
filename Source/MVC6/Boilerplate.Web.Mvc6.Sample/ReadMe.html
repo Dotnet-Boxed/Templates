@@ -385,14 +385,12 @@
                         </ul>
                         You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
                     </li>
+                    <!-- $Start-ApplicationInsights$ -->
                     <li class="list-group-item">
-                        <input name="ResilienceAndErrorHandling-UptimeMonitoring" type="checkbox"> <strong>Uptime Monitoring</strong> -
-                        Monitor your site and know about it when it goes down. Use <a href="http://azure.microsoft.com/en-gb/documentation/articles/app-insights-get-started/">Application Insights</a> if you are using <a href="http://azure.microsoft.com">Azure</a> to host your site as this can give additional information about the internals of your site. Alternatively, you can use <a href="http://uptimerobot.com/">UptimeRobot.com</a> or <a href="http://www.gotsitemonitor.com/">GotSiteMonitor.com</a>.
+                        <input name="ResilienceAndErrorHandling-ApplicationInsights" type="checkbox"> <strong>Application Insights</strong> -
+                        Application Insights helps monitor your site and know about it when it goes down. Login to <a href="http://azure.microsoft.com">Azure</a>, create a new Application Insights instance, retrieve the Instrumentation Key and add it to your config.json file. For more information see the <a href="http://azure.microsoft.com/en-gb/documentation/articles/app-insights-get-started/">Getting Started</a> guide.
                     </li>
-                    <li class="list-group-item">
-                        <input name="ResilienceAndErrorHandling-TrafficAnalysis" type="checkbox"> <strong>Traffic Analysis</strong> -
-                        Know who is visiting your site, what pages they are visiting, where they are being referred from and when they are visiting it. Use <a href="http://azure.microsoft.com/en-gb/documentation/articles/app-insights-get-started/">Application Insights</a> if you are using <a href="http://azure.microsoft.com">Azure</a> to host your site. Alternatively, you can use <a href="http://www.google.com/analytics/">Google Analytics</a>, <a href="http://statcounter.com/">StatCounter.com</a> or <a href="http://clicky.com/">Clicky.com</a>.
-                    </li>
+                    <!-- $End-ApplicationInsights$ -->
                 </ul>
             </article>
 

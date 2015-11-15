@@ -14,9 +14,7 @@
     using Microsoft.Framework.Logging;
     using Microsoft.Framework.OptionsModel;
     using MvcBoilerplate.Constants;
-    // $Start-ApplicationInsights$
     using MvcBoilerplate.Settings;
-    // $End-ApplicationInsights$
 
     public class SitemapPingerService : ISitemapPingerService
     {
