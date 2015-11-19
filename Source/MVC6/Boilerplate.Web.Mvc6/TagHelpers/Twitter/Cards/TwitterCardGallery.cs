@@ -2,7 +2,7 @@
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// The Gallery Card allows you to represent collections of photos within a Tweet. This Card type is 

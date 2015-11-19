@@ -2,7 +2,7 @@
 {
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.OptionsModel;
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.Settings;
     using Newtonsoft.Json;

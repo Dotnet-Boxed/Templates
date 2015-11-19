@@ -1,7 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
 {
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// The App Card is a great way to represent mobile applications on Twitter and to drive installs. The app card 

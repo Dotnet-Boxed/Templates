@@ -2,7 +2,7 @@
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// This object represents a 'radio' station of a stream of audio. The audio properties should be used to identify the location of the stream itself. 

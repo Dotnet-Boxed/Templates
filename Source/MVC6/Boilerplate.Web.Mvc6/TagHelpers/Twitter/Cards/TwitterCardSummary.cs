@@ -1,7 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
 {
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// The Summary Card can be used for many kinds of web content, from blog posts and news articles, to 

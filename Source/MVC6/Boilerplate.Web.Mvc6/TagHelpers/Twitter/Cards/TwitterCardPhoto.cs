@@ -2,7 +2,7 @@
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// The Photo Card puts the image front and center in the Tweet. Clicking on the photo expands it to a 

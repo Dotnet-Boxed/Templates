@@ -1,6 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
-    using Microsoft.Framework.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection;
     // $Start-Services$
     using MvcBoilerplate.Services;
     // $End-Services$

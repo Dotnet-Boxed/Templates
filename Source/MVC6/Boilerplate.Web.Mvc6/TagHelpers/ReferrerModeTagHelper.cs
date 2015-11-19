@@ -1,6 +1,6 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers
 {
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// Meta tag <see cref="TagHelper"/> which controls what is sent in the HTTP referrer header when a client 

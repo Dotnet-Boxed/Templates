@@ -10,9 +10,9 @@
     using Microsoft.ApplicationInsights;
     // $End-ApplicationInsights$
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.Caching.Distributed;
-    using Microsoft.Framework.Logging;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.OptionsModel;
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.Settings;
 

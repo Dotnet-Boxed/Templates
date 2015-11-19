@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Microsoft.AspNet.Mvc.Razor;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.OptionsModel;
 
     /// <summary>
     /// Inherits from <see cref="RazorViewEngine"/> but looks for minified .min.cshtml files, instead of .cshtml files.
