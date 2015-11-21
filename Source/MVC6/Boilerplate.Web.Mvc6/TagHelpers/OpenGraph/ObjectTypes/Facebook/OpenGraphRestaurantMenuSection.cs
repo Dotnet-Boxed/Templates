@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// This object type represents a restaurant's menu. A restaurant can have multiple menus, and each menu has multiple sections.

@@ -6,7 +6,7 @@ namespace Boilerplate.Web.Mvc.Caching
     using System.Runtime.Serialization.Formatters.Binary;
 #endif
     using System.Threading.Tasks;
-    using Microsoft.Framework.Caching.Distributed;
+    using Microsoft.Extensions.Caching.Distributed;
     using Newtonsoft.Json;
 
     /// <summary>

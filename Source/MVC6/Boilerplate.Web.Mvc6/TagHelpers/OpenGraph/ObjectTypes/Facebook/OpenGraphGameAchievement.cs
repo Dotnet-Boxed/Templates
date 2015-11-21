@@ -1,7 +1,7 @@
 ﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
 {
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// This object type represents a specific achievement in a game. An app must be in the 'Games' category in App Dashboard to be able to use this 

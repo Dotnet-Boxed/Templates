@@ -11,7 +11,7 @@ namespace MvcBoilerplate.Services
     using System.Threading.Tasks;
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.OptionsModel;
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.Settings;
 

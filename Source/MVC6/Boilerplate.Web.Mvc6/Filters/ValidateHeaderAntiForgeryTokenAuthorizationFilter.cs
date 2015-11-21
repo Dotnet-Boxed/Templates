@@ -5,7 +5,7 @@
     using Microsoft.AspNet.Antiforgery;
     using Microsoft.AspNet.Http;
     using Microsoft.AspNet.Mvc.Filters;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.OptionsModel;
 
     /// <summary>
     /// Represents a filter that is used to prevent forgery of a request. This instance checks the HTTP Headers instead 

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your website. 
@@ -46,7 +46,7 @@
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.SetContentEncoded(this.ToString());
+            output.Content.SetHtmlContent(this.ToString());
             output.TagName = null;
         }
 

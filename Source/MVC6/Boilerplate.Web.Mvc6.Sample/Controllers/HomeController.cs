@@ -6,7 +6,7 @@
     using Boilerplate.Web.Mvc;
     using Boilerplate.Web.Mvc.Filters;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.OptionsModel;
+    using Microsoft.Extensions.OptionsModel;
     using MvcBoilerplate.Constants;
     // $Start-Services$
     using MvcBoilerplate.Services;

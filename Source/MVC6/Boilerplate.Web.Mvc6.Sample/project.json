@@ -4,28 +4,28 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "2.0.0-beta8-1",
+    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-1",
     // $Start-ApplicationInsights$
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-beta8",
+    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
     // $End-ApplicationInsights$
-    "Microsoft.AspNet.CookiePolicy": "1.0.0-beta8",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-beta8",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta8",
+    "Microsoft.AspNet.CookiePolicy": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
     // $Start-XmlFormatter$
-    "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-rc1-final",
     // $End-XmlFormatter$
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta8",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta8",
-    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
-    "Microsoft.Framework.Logging": "1.0.0-beta8",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
-    "Microsoft.Framework.Logging.Debug": "1.0.0-beta8",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta8",
+    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     "Newtonsoft.Json": "7.0.1"
   },
 
@@ -47,7 +47,7 @@
     },
     "dnxcore50": {
       "dependencies": {
-        "System.Net.Http": "4.0.1-beta-23409"
+        "System.Net.Http": "4.0.1-beta-23516"
       }
     }
   },

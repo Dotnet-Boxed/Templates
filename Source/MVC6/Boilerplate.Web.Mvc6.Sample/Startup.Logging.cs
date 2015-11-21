@@ -3,7 +3,7 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
-    using Microsoft.Framework.Logging;
+    using Microsoft.Extensions.Logging;
 
     public partial class Startup
     {

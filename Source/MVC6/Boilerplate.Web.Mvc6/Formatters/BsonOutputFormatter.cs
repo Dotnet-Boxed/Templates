@@ -1,5 +1,6 @@
 namespace Boilerplate.Web.Mvc.Formatters
 {
+    using System;
     using System.IO;
     using System.Text;
     using System.Threading.Tasks;
@@ -77,7 +78,7 @@ namespace Boilerplate.Web.Mvc.Formatters
             return JsonSerializer.Create(SerializerSettings);
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterContext context)
+        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
         {
             WriteObject(context.HttpContext.Response.Body, context.Object);
 

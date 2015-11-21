@@ -5,6 +5,7 @@ namespace Boilerplate.Web.Mvc.Formatters
     using System.Threading.Tasks;
     using Microsoft.AspNet.Mvc.Formatters;
     using Microsoft.AspNet.Mvc.Internal;
+    using Microsoft.AspNet.Mvc.ModelBinding;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Bson;
 
@@ -19,6 +20,11 @@ namespace Boilerplate.Web.Mvc.Formatters
 
         public BsonInputFormatter(JsonSerializerSettings serializerSettings)
         {
+            if (serializerSettings == null)
+            {
+                throw new ArgumentNullException(nameof(serializerSettings));
+            }
+
             _serializerSettings = serializerSettings;
 
             SupportedEncodings.Add(UTF8EncodingWithoutBOM);
@@ -38,6 +44,11 @@ namespace Boilerplate.Web.Mvc.Formatters
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
                 _serializerSettings = value;
             }
         }
@@ -80,7 +91,8 @@ namespace Boilerplate.Web.Mvc.Formatters
                         }
                     }
 
-                    context.ModelState.TryAddModelError(key, eventArgs.ErrorContext.Error);
+                    var metadata = GetPathMetadata(context.Metadata, eventArgs.ErrorContext.Path);
+                    context.ModelState.TryAddModelError(key, eventArgs.ErrorContext.Error, metadata);
 
                     // Error must always be marked as handled
                     // Failure to do so can cause the exception to be rethrown at every recursive level and
@@ -122,6 +134,16 @@ namespace Boilerplate.Web.Mvc.Formatters
             InputFormatterContext context,
             Stream readStream)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (readStream == null)
+            {
+                throw new ArgumentNullException(nameof(readStream));
+            }
+
             return new BsonReader(readStream);
         }
 
@@ -132,6 +154,52 @@ namespace Boilerplate.Web.Mvc.Formatters
         protected virtual JsonSerializer CreateJsonSerializer()
         {
             return JsonSerializer.Create(SerializerSettings);
+        }
+
+        private ModelMetadata GetPathMetadata(ModelMetadata metadata, string path)
+        {
+            var index = 0;
+            while (index >= 0 && index < path.Length)
+            {
+                if (path[index] == '[')
+                {
+                    // At start of "[0]".
+                    if (metadata.ElementMetadata == null)
+                    {
+                        // Odd case but don't throw just because ErrorContext had an odd-looking path.
+                        break;
+                    }
+
+                    metadata = metadata.ElementMetadata;
+                    index = path.IndexOf(']', index);
+                }
+                else if (path[index] == '.' || path[index] == ']')
+                {
+                    // Skip '.' in "prefix.property" or "[0].property" or ']' in "[0]".
+                    index++;
+                }
+                else
+                {
+                    // At start of "property", "property." or "property[0]".
+                    var endIndex = path.IndexOfAny(new[] { '.', '[' }, index);
+                    if (endIndex == -1)
+                    {
+                        endIndex = path.Length;
+                    }
+
+                    var propertyName = path.Substring(index, endIndex - index);
+                    if (metadata.Properties[propertyName] == null)
+                    {
+                        // Odd case but don't throw just because ErrorContext had an odd-looking path.
+                        break;
+                    }
+
+                    metadata = metadata.Properties[propertyName];
+                    index = endIndex;
+                }
+            }
+
+            return metadata;
         }
     }
 }

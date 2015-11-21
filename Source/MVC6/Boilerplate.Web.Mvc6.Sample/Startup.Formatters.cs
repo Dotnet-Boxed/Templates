@@ -2,7 +2,7 @@
 {
     using Boilerplate.Web.Mvc.Formatters;
     using Microsoft.AspNet.Mvc;
-    using Microsoft.Framework.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection;
     using Newtonsoft.Json.Serialization;
 
     public partial class Startup

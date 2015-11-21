@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Text;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// This object type represents the user's activity contributing to a particular run, walk, or bike course. This object type is not part of the 

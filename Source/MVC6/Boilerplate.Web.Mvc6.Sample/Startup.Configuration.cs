@@ -1,11 +1,11 @@
 ﻿namespace MvcBoilerplate
 {
     using Microsoft.AspNet.Hosting;
-    using Microsoft.Dnx.Runtime;
-    using Microsoft.Framework.Configuration;
+    using Microsoft.Extensions.Configuration;
     // $Start-ApplicationInsights$
-    using Microsoft.Framework.DependencyInjection;
+    using Microsoft.Extensions.DependencyInjection;
     // $End-ApplicationInsights$
+    using Microsoft.Extensions.PlatformAbstractions;
 
     public partial class Startup
     {

@@ -6,7 +6,7 @@
     using System.Text;
     using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Mvc.ViewFeatures;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
     /// The Open Graph protocol enables any web page to become a rich object in a social graph. 
@@ -208,7 +208,7 @@
             
             // context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
 
-            output.Content.SetContentEncoded(this.ToString());
+            output.Content.SetHtmlContent(this.ToString());
             output.TagName = null;
         }
 

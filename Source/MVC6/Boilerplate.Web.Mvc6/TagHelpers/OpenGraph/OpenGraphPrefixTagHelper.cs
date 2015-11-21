@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Mvc.ViewFeatures;
-    using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+    using Microsoft.AspNet.Razor.TagHelpers;
 
     [HtmlTargetElement("head", Attributes = EnabledAttributeName)]
     public class OpenGraphPrefixTagHelper : TagHelper
@@ -24,7 +24,7 @@
         {
             if (this.Enabled)
             {
-                await context.GetChildContentAsync();
+                await output.GetChildContentAsync();
 
                 // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
                 // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
