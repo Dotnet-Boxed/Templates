@@ -6,7 +6,9 @@
   "dependencies": {
     "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-2",
     "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-2",
+    // $Start-CshtmlMinification$
     "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-2",
+    // $End-CshtmlMinification$
     // $Start-ApplicationInsights$
     "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
     // $End-ApplicationInsights$
