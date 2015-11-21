@@ -22,8 +22,6 @@
             public const string JQueryValidateUnobtrusiveUrl = "//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js";
             public const string ModernizrUrl = "//ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js";
             public const string BootstrapUrl = "//ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js";
-            public const string BootstrapTouchCarouselCssUrl = "//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css";
-            public const string BootstrapTouchCarouselJsUrl = "//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/js/bootstrap-touch-carousel.js";
         }
     }
 }

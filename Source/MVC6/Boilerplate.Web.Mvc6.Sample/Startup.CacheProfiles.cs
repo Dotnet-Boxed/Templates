@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Microsoft.AspNet.Mvc;
     using Microsoft.Extensions.Configuration;
-    using Settings;
+    using MvcBoilerplate.Settings;
 
     public partial class Startup
     {

@@ -8,6 +8,14 @@
     "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
   },
   // $End-ApplicationInsights$
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Verbose",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
   // $Start-Sitemap$
   "SitemapSettings": {
     "SitemapPingLocations": [

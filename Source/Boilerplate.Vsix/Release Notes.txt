@@ -1,4 +1,17 @@
-﻿Version 2.7.0
+﻿Version 2.8.0
+MVC 6
+- Upgraded to ASP.NET 5 RC1.
+- NuGet packages split into three, Boilerplate.Web.Mvc6, Boilerplate.Web.Mvc6.TagHelpers, Boilerplate.Web.Mvc6.Razor.
+- _ViewImports.cshtml updated to pick up the Tag Helpers from the new location.
+- Boilerplate.Web.Mvc6.dll is now signed.
+- NPM and Gulp packages updated in package.json.
+- Logging configuration added to config.json and Startup.Logging.cs.
+- Added "use strict"; in gulpfile.js.
+- Added main method to Startup.cs with a setting in project.json to use it.
+- Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js, ContentDeliveryNetwork.cs, bower.json. 
+- Updated Readme.html with links to RC1 instead of Beta 8.
+
+Version 2.7.0
 MVC 5
 - Added a note to ReadMe.html to enable the CSP upgrade-insecure-requests directive in Startup.cs.
 MVC 6

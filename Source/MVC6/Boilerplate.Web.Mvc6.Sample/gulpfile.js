@@ -3,6 +3,7 @@
 // task is run on solution clean, the 'build' task is run on solution build and the 'watch' task is run on opening the 
 // solution. You can also edit the above using the Task Runner Explorer window in Visual Studio (See 
 // http://docs.asp.net/en/latest/client-side/using-gulp.html)
+"use strict";   // Enable strict mode for JavaScript (See https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode).
 
 // Set up imported packages.
 var gulp = require("gulp"),
@@ -119,10 +120,7 @@ var sources = {
         {
             name: "site.css",
             paths: [
-                paths.styles + "site.scss",
-                // Unfortunately, bootstrap-touch-carousel does not provide a SASS version of their library. See 
-                // https://github.com/ixisio/bootstrap-touch-carousel/issues/51 for more information.
-                paths.bower + "bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css"
+                paths.styles + "site.scss"
             ]
         }
     ],
@@ -180,10 +178,6 @@ var sources = {
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/tab.js",
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/affix.js"
             ]
-        },
-        {
-            name: "bootstrap-touch-carousel.js",
-            paths: paths.bower + "bootstrap-touch-carousel/dist/js/bootstrap-touch-carousel.js"
         },
         {
             name: "hammer.js",

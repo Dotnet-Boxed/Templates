@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "3.3.5",
-    "bootstrap-touch-carousel": "0.8.0",
     "font-awesome": "4.4.0",
     "hammer.js": "2.0.4",
     "jquery": "2.1.4",

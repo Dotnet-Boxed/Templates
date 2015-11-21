@@ -18,8 +18,7 @@
         { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
         { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
         { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" },
-        { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" },
-        { test: function () { return window.Zepto; }, src: "/js/bootstrap-touch-carousel.js" }
+        { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" }
     ];
 
     var check = function (fallbacks, i) {

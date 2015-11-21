@@ -5,6 +5,8 @@
 
   "dependencies": {
     "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-1",
+    "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-1",
+    "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-1",
     // $Start-ApplicationInsights$
     "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
     // $End-ApplicationInsights$
@@ -31,6 +33,10 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel"
+  },
+
+  "compilationOptions": {
+    "emitEntryPoint": true
   },
 
   "frameworks": {

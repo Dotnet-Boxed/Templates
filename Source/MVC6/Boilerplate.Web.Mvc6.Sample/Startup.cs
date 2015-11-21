@@ -2,6 +2,9 @@
 {
     using System.Reflection;
     using Boilerplate.Web.Mvc;
+    // $Start-CshtmlMinification$
+    using Boilerplate.Web.Mvc.Razor;
+    // $End-CshtmlMinification$
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Mvc.Razor;
@@ -56,6 +59,11 @@
 
         #endregion
 
+        /// <summary>
+        /// Entry point for the application.
+        /// </summary>
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+
         #region Public Methods
 
         /// <summary>
@@ -103,6 +111,11 @@
             mvcBuilder.AddPrecompiledRazorViews(GetType().GetTypeInfo().Assembly);
 #endif
             // $Start-CshtmlMinification$
+            services.Configure<RazorViewEngineOptions>(
+                options =>
+                {
+                    options.ViewLocationExpanders.Add(new MinifiedViewLocationExpander());
+                });
             services.AddTransient<IRazorViewEngine, MinifiedRazorViewEngine>();
             // $End-CshtmlMinification$
             ConfigureFormatters(mvcBuilder);
@@ -136,7 +149,7 @@
 
             ConfigureCookies(application, this.hostingEnvironment);
             ConfigureDebugging(application, this.hostingEnvironment);
-            ConfigureLogging(application, this.hostingEnvironment, loggerfactory);
+            ConfigureLogging(application, this.hostingEnvironment, loggerfactory, this.configuration);
             ConfigureErrorPages(application, this.hostingEnvironment);
 
             // Add MVC to the request pipeline.

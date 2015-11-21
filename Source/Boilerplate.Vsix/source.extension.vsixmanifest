@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="MvcBoilerplateVsix.Microsoft.dafd466d-39dc-487e-846b-7cf0e569821c" Version="2.7.0" Language="en-US" Publisher="Muhammad Rehan Saeed" />
+    <Identity Id="MvcBoilerplateVsix.Microsoft.dafd466d-39dc-487e-846b-7cf0e569821c" Version="2.8.0" Language="en-US" Publisher="Muhammad Rehan Saeed" />
     <DisplayName>ASP.NET MVC Boilerplate</DisplayName>
     <Description xml:space="preserve">A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com.</Description>
     <MoreInfo>https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate</MoreInfo>

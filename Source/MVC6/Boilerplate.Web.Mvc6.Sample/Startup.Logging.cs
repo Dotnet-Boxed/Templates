@@ -3,10 +3,13 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
     public partial class Startup
     {
+        private const string LoggingConfigurationSectionName = "Logging";
+
         /// <summary>
         /// Configure tools used to help with logging internal application events.
         /// See http://docs.asp.net/en/latest/fundamentals/logging.html
@@ -15,10 +18,13 @@
         /// <param name="environment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
         /// <param name="loggerFactory">The logger factory.</param>
+        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are 
+        /// stored.</param>
         private static void ConfigureLogging(
             IApplicationBuilder application,
             IHostingEnvironment environment,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IConfiguration configuration)
         {
             // Add the following to the request pipeline only in development environment.
             if (environment.IsDevelopment())
@@ -48,11 +54,11 @@
                 //     or catastrophic failure that requires immediate attention.
                 //     Examples: 'data loss scenarios', 'stack overflows', 'out of disk space'.
 
+                // Add the console logger.
+                loggerFactory.AddConsole(configuration.GetSection(LoggingConfigurationSectionName));
+
                 // Add the debug logger.
                 loggerFactory.AddDebug();
-
-                // Add the console logger.
-                loggerFactory.AddConsole();
             }
             else
             {
