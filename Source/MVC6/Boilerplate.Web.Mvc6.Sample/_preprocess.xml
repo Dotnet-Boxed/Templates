@@ -5,7 +5,7 @@
   Add New Project / Add New Item dialog by setting the value below
   -->
   <TemplateInfo Path="CSharp\Web"/>
-  <Replacements Include="*.*" Exclude="ReadMe.html;*.vstemplate;*.csproj;*.fsproj;*.vbproj;*.jpg;*.png;*.ico;_preprocess.xml;_project.vstemplate.xml">
+  <Replacements Include="*.*" Exclude="ReadMe.html;*.vstemplate;*.csproj;*.fsproj;*.vbproj;*.jpg;*.png;*.ico;_preprocess.xml;_project.vstemplate.xml;*.lock.json">
     <!-- Find and replace the root namespace with the generated one. -->
     <add key="MvcBoilerplate" value="$safeprojectname$"/>
     <!-- Replace the ProjectGuid (Unique ID for the project) with a generated GUID. -->

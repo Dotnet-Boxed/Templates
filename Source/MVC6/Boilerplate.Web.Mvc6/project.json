@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0-rc1-final-1",
+  "version": "2.0.0-rc1-final-2",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "releaseNotes": "Upgraded to RC1. Added a minified view location expander. Moved tag helpers to own NuGet package. Added AssemblyInfo.cs file.",
@@ -27,7 +27,7 @@
   },
 
   "frameworks": {
-    "net451": {
+    "dnx451": {
       "frameworkAssemblies": {
         "System.ServiceModel": "4.0.0.0"
       }
