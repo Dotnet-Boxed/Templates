@@ -1,4 +1,4 @@
-﻿#if DNX451
+﻿#if NET451
 namespace Boilerplate.Web.Mvc
 {
     using System.ServiceModel.Syndication;

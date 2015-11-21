@@ -1,14 +1,14 @@
 ﻿namespace Boilerplate.Web.Mvc
 {
     using System;
-#if DNX451
+#if NET451
     using System.Runtime.Serialization;
 #endif
 
     /// <summary>
     /// Represents a Content Security Policy (CSP) violation.
     /// </summary>
-#if DNX451
+#if NET451
     [Serializable]
 #endif
     public class CspViolationException : Exception
@@ -36,7 +36,7 @@
         {
         }
 
-#if DNX451
+#if NET451
         /// <summary>
         /// Initializes a new instance of the <see cref="CspViolationException"/> class.
         /// </summary>

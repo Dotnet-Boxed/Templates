@@ -2,7 +2,7 @@ namespace Boilerplate.Web.Mvc.Caching
 {
     using System;
     using System.IO;
-#if DNX451
+#if NET451
     using System.Runtime.Serialization.Formatters.Binary;
 #endif
     using System.Threading.Tasks;
@@ -444,7 +444,7 @@ namespace Boilerplate.Web.Mvc.Caching
         #endregion
 
         #region BinaryFormatter
-#if DNX451
+#if NET451
         public static async Task<T> GetAsync<T>(this IDistributedCache cache, string key)
         {
             var bytes = await cache.GetAsync(key);

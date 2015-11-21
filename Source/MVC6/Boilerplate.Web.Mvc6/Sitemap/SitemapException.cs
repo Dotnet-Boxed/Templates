@@ -1,14 +1,14 @@
 ﻿namespace Boilerplate.Web.Mvc.Sitemap
 {
     using System;
-#if DNX451
+#if NET451
     using System.Runtime.Serialization;
 #endif
 
     /// <summary>
     /// Represents errors that occur during sitemap creation.
     /// </summary>
-#if DNX451
+#if NET451
     [Serializable]
 #endif
     public class SitemapException : Exception
@@ -34,7 +34,7 @@
         {
         }
 
-#if DNX451
+#if NET451
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapException"/> class.
         /// </summary>
