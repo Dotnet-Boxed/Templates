@@ -11,6 +11,7 @@ MVC 6
 - Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js, ContentDeliveryNetwork.cs, bower.json. 
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
+- gulpfile.js JSLint Fixes
 
 Version 2.7.0
 MVC 5

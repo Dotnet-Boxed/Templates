@@ -1,16 +1,16 @@
 ﻿/// <binding Clean="clean" BeforeBuild="build" ProjectOpened="watch"/>
 // The above line of code enables Visual Studio to automatically start Gulp tasks at certain key moments. The 'clean'
-// task is run on solution clean, the 'build' task is run on solution build and the 'watch' task is run on opening the 
-// solution. You can also edit the above using the Task Runner Explorer window in Visual Studio (See 
-// http://docs.asp.net/en/latest/client-side/using-gulp.html)
+// task is run on solution clean, the 'build' task is run on solution build and the 'watch' task is run on opening the
+// solution. You can also edit the above using the Task Runner Explorer window in Visual Studio
+// (See http://docs.asp.net/en/latest/client-side/using-gulp.html)
 "use strict";   // Enable strict mode for JavaScript (See https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Strict_mode).
 
 // Set up imported packages.
 var gulp = require("gulp"),
     fs = require("fs"),                         // npm file system API (https://nodejs.org/api/fs.html)
-    autoprefixer = require("gulp-autoprefixer") // Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
+    autoprefixer = require("gulp-autoprefixer"),// Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
-    csslint = require("gulp-csslint"),			// CSS linter (https://www.npmjs.com/package/gulp-csslint/)
+    csslint = require("gulp-csslint"),          // CSS linter (https://www.npmjs.com/package/gulp-csslint/)
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
     // $Start-JavaScriptCodeStyle$
@@ -35,8 +35,8 @@ var gulp = require("gulp"),
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
     psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
-    sass = require('gulp-sass'),				// Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
-    scsslint = require('gulp-scss-lint'),		// SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
+    sass = require('gulp-sass'),                // Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
+    scsslint = require('gulp-scss-lint'),       // SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
     // $Start-TypeScript$
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
@@ -51,13 +51,21 @@ var environment = {
     staging: "Staging",
     production: "Production",
     // Gets the current hosting environment the application is running under. This comes from the environment variables.
-    current: function () { return process.env.ASPNET_ENV || this.development },
+    current: function () {
+        return process.env.ASPNET_ENV || this.development;
+    },
     // Are we running under the development environment.
-    isDevelopment: function () { return this.current() === this.development; },
+    isDevelopment: function () {
+        return this.current() === this.development;
+    },
     // Are we running under the staging environment.
-    isStaging: function () { return this.current() === this.staging; },
+    isStaging: function () {
+        return this.current() === this.staging;
+    },
     // Are we running under the production environment.
-    isProduction: function () { return this.current() === this.production; }
+    isProduction: function () {
+        return this.current() === this.production;
+    }
 };
 
 // The URL to your deployed site e.g. "http://example.com". This is used by the Google PageSpeed tasks.
@@ -82,21 +90,24 @@ var paths = {
 };
 
 // $Start-TypeScript$
-// A TypeScript project is used to enable faster incremental compilation, rather than recompiling everything from 
+// A TypeScript project is used to enable faster incremental compilation, rather than recompiling everything from
 // scratch each time. Each resulting compiled file has it's own project which is stored in the typeScriptProjects array.
 var typeScriptProjects = [];
 function getTypeScriptProject(name) {
     var item;
-    for (var i = 0; i < typeScriptProjects.length; ++i) {
-        if (typeScriptProjects[i].name === name) {
-            item = typeScriptProjects[i];
+    typeScriptProjects.forEach(function (typeScriptProject) {
+        if (typeScriptProject.name === name) {
+            item = typeScriptProject;
         }
-    }
+    });
 
     if (item === undefined) {
         // Use the tsconfig.json file to specify how TypeScript (.ts) files should be compiled to JavaScript (.js).
-        var project = typescript.createProject("tsconfig.json");
-        item = { name: name, project: project };
+        var typeScriptProject = typescript.createProject("tsconfig.json");
+        item = {
+            name: name,
+            project: typeScriptProject
+        };
         typeScriptProjects.push(item);
     }
 
@@ -111,7 +122,7 @@ var sources = {
         {
             // name - The name of the final CSS file to build.
             name: "font-awesome.css",
-            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified 
+            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified
             // to create a file with the above file name.
             paths: [
                 paths.bower + "font-awesome/scss/font-awesome.scss"
@@ -161,7 +172,7 @@ var sources = {
         {
             // name - The name of the final JavaScript file to build.
             name: "bootstrap.js",
-            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and 
+            // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and
             // minified to create a file with the above file name.
             paths: [
                 // Feel free to remove any parts of Bootstrap you don't use.
@@ -212,10 +223,14 @@ var sources = {
 
 // Calls and returns the result from the gulp-size plugin to print the size of the stream. Makes it more readable.
 function sizeBefore(title) {
-    return size({ title: "Before: " + title });
+    return size({
+        title: "Before: " + title
+    });
 }
 function sizeAfter(title) {
-    return size({ title: "After: " + title });
+    return size({
+        title: "After: " + title
+    });
 }
 
 /*
@@ -243,7 +258,7 @@ gulp.task("clean-js", function (cb) {
 /*
  * Deletes all minified files and folders within the Views directory.
  */
-gulp.task("clean-html", function(cb) {
+gulp.task("clean-html", function (cb) {
     return rimraf(paths.views + "**/*.min.cshtml", cb);
 });
 // $End-CshtmlMinification$
@@ -278,7 +293,9 @@ gulp.task("lint-js", function () {
         gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
             .pipe(plumber())                                        // Handle any errors.
             .pipe(jshint())                                         // Get any JavaScript linting errors.
-            .pipe(jshint.reporter("default", { verbose: true })),   // Report any JavaScript linting errors to the console.
+            .pipe(jshint.reporter("default", {                      // Report any JavaScript linting errors to the console.
+                verbose: true
+            })),
         // $End-JavaScriptHint$
         // $Start-TypeScript$
         gulp.src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
@@ -319,7 +336,8 @@ gulp.task("build-css", ["clean-css", "lint-css"], function () {
             .pipe(autoprefixer({                    // Auto-prefix CSS with vendor specific prefixes.
                 browsers: [
                     "> 1%",                         // Support browsers with more than 1% market share.
-                    "last 2 versions"]              // Support the last two versions of browsers.
+                    "last 2 versions"               // Support the last two versions of browsers.
+                ]
             }))
             .pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
             .pipe(concat(source.name))              // Concatenate CSS files into a single CSS file with the specified name.
@@ -475,12 +493,12 @@ function pageSpeed(strategy, cb) {
     return psi(
         siteUrl,
         {
-            // Use the "nokey" option to try out Google PageSpeed Insights as part of your build process. For more 
-            // frequent use, register for your own API key. See  
+            // Use the "nokey" option to try out Google PageSpeed Insights as part of your build process. For more
+            // frequent use, register for your own API key. See
             // https://developers.google.com/speed/docs/insights/v1/getting_started
             // key: "[Your Google PageSpeed API Key Here]"
             nokey: "true",
-            strategy: strategy,
+            strategy: strategy
         },
         function (err, data) {
             console.log(data.score);
@@ -503,7 +521,7 @@ gulp.task("pagespeed-desktop", function (cb) {
 });
 
 /*
- * The default gulp task. This is useful for scenarios where you are not using Visual Studio. Does a full clean and 
+ * The default gulp task. This is useful for scenarios where you are not using Visual Studio. Does a full clean and
  * build before watching for any file changes.
  */
 gulp.task("default", ["build", "watch"]);
