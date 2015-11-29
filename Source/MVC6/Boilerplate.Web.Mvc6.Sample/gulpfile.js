@@ -52,7 +52,7 @@ var environment = {
     production: "Production",
     // Gets the current hosting environment the application is running under. This comes from the environment variables.
     current: function () {
-        return process.env["Hosting:Environment"] || this.development;
+        return process.env["Hosting:Environment"] || process.env.Hosting_Environment || this.development;
     },
     // Are we running under the development environment.
     isDevelopment: function () {

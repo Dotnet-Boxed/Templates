@@ -9,11 +9,13 @@ MVC 6
 - Logging configuration added to config.json and Startup.Logging.cs.
 - Added "use strict"; in gulpfile.js.
 - Added main method to Startup.cs with a setting in project.json to use it.
-- Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js, ContentDeliveryNetwork.cs, bower.json. 
+- Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js, 
+  ContentDeliveryNetwork.cs, bower.json. 
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
 - gulpfile.js JSLint Fixes
-- gulpfile.js updated because the 'ASPNET_ENV' environment variable was renamed to 'Hosting:Environment'.
+- gulpfile.js updated because the 'ASPNET_ENV' environment variable was renamed to 'Hosting:Environment' or 
+  'Hosting_Environment' depending on the OS.
 
 Version 2.7.0
 MVC 5
