@@ -9,7 +9,7 @@
   },
   // $End-ApplicationInsights$
   "Logging": {
-    "IncludeScopes": false,
+    "IncludeScopes": true,
     "LogLevel": {
       "Default": "Verbose",
       "System": "Information",
