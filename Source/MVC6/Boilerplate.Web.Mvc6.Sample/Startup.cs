@@ -79,6 +79,9 @@
             services.AddApplicationInsightsTelemetry(this.configuration);
 
             // $End-ApplicationInsights$
+            // $Start-Glimpse$
+            ConfigureDebuggingServices(services, this.hostingEnvironment);
+            // $End-Glimpse$
             ConfigureOptionsServices(services, this.configuration);
             ConfigureCachingServices(services);
 

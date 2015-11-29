@@ -78,6 +78,8 @@
                     builder.RegisterType<HttpsEverywhereFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Monitoring
                     builder.RegisterType<ApplicationInsightsFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    // Debugging
+                    builder.RegisterType<GlimpseFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // SEO
                     builder.RegisterType<RobotsTextFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SitemapFeature>().AsSelf().As<IFeature>().SingleInstance();

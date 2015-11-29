@@ -1,6 +1,7 @@
 ﻿Version 2.8.0
 MVC 6
 - Upgraded to ASP.NET 5 RC1.
+- Added Glimpse feature, enabled by default.
 - NuGet packages split into three, Boilerplate.Web.Mvc6, Boilerplate.Web.Mvc6.TagHelpers, Boilerplate.Web.Mvc6.Razor.
 - _ViewImports.cshtml updated to pick up the Tag Helpers from the new location.
 - Boilerplate.Web.Mvc6.dll is now signed.

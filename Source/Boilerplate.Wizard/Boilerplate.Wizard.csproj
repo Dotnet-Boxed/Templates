@@ -63,6 +63,7 @@
     <Compile Include="Features\CssAndJavaScript\JavaScriptHintFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\JavaScriptCodeStyleFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
+    <Compile Include="Features\Debugging\GlimpseFeature.cs" />
     <Compile Include="Features\Favicons\AndroidChromeM36ToM38FaviconFeature.cs" />
     <Compile Include="Features\Favicons\AndroidChromeM39FaviconsFeature.cs" />
     <Compile Include="Features\Favicons\WebAppCapableFeature.cs" />
@@ -210,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Android Chrome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Glimpse.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
