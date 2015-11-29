@@ -39,7 +39,7 @@
         /// 1. On your server, right click 'Computer' or 'My Computer' and click on 'Properties'.
         /// 2. Go to 'Advanced System Settings'.
         /// 3. Click on 'Environment Variables' in the Advanced tab.
-        /// 4. Add a new System Variable with the name 'Hosting:Environment' and a value of Production, Staging or 
+        /// 4. Add a new System Variable with the name 'ASPNET_ENV' and a value of Production, Staging or 
         /// whatever you want.
         /// See http://docs.asp.net/en/latest/fundamentals/environments.html
         /// </summary>
