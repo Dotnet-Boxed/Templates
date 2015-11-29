@@ -13,6 +13,7 @@ MVC 6
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
 - gulpfile.js JSLint Fixes
+- gulpfile.js updated because the 'ASPNET_ENV' environment variable was renamed to 'Hosting:Environment'.
 
 Version 2.7.0
 MVC 5
