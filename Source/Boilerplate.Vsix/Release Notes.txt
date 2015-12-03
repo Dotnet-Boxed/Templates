@@ -1,4 +1,6 @@
 ﻿Version 2.8.0
+MVC 5 & 6
+- Added a note to ReadMe.html to turn on Azure SQL Database Threat Detection.
 MVC 6
 - Upgraded to ASP.NET 5 RC1.
 - Added Glimpse feature, enabled by default.
