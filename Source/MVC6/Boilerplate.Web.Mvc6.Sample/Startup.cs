@@ -61,7 +61,7 @@
         {
             this.applicationEnvironment = applicationEnvironment;
             this.hostingEnvironment = hostingEnvironment;
-            this.configuration = ConfigureConfiguration(applicationEnvironment, hostingEnvironment);
+            this.configuration = ConfigureConfiguration(hostingEnvironment);
         }
 
         #endregion

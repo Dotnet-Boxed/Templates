@@ -5,7 +5,6 @@
     // $Start-ApplicationInsights$
     using Microsoft.Extensions.DependencyInjection;
     // $End-ApplicationInsights$
-    using Microsoft.Extensions.PlatformAbstractions;
 
     public partial class Startup
     {
@@ -14,16 +13,12 @@
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html
         /// http://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
         /// </summary>
-        /// <param name="applicationEnvironment">The location the application is running in</param>
         /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
         /// <returns>A collection of key value pair settings.</returns>
-        private static IConfiguration ConfigureConfiguration(
-            IApplicationEnvironment applicationEnvironment,
-            IHostingEnvironment hostingEnvironment)
+        private static IConfiguration ConfigureConfiguration(IHostingEnvironment hostingEnvironment)
         {
-            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
-                .SetBasePath(applicationEnvironment.ApplicationBasePath);
+            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
 
             // Add configuration from the config.json file.
             configurationBuilder.AddJsonFile("config.json");
