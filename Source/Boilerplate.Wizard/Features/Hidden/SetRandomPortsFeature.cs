@@ -52,8 +52,8 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.ReplaceInFile("1025", portService.GetRandomFreePort().ToString(), "launchSettings.json");
-            await this.ProjectService.ReplaceInFile("44300", portService.GetRandomFreePort(true).ToString(), "launchSettings.json");
+            await this.ProjectService.ReplaceInFile("1025", portService.GetRandomFreePort().ToString(), @"Properties\launchSettings.json");
+            await this.ProjectService.ReplaceInFile("44300", portService.GetRandomFreePort(true).ToString(), @"Properties\launchSettings.json");
         }
     }
 }
