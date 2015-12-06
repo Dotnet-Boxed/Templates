@@ -4,7 +4,7 @@
 
 <img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
      border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Preview%20Image.png" />
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Preview%20Image.png" />
 
 ## Technology Map
 
