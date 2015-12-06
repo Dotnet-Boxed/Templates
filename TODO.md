@@ -48,7 +48,7 @@
         <pre>
             public class AppExceptionFilterAttribute : ExceptionFilterAttribute
             {
-	            private readonly ILogger _logger;
+                private readonly ILogger _logger;
                 public AppExceptionFilterAttribute(ILoggerFactory loggerfactory)
                 {
                    _logger = loggerFactory.CreateLogger<AppExceptionFilterAttribute>();

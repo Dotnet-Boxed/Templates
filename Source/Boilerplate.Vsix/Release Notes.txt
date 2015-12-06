@@ -17,6 +17,7 @@ MVC 6
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
 - gulpfile.js JSLint Fixes
+- webroot setting removed from project.json (https://github.com/aspnet/Announcements/issues/94).
 
 Version 2.7.0
 MVC 5
