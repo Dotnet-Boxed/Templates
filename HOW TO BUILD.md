@@ -2,10 +2,11 @@
 
 To build this project you will require:
 
-1. Visual Studio 2015
+1. Visual Studio 2015 Update 1
 2. Visual Studio 2015 SDK
-3. [SideWaffle](https://visualstudiogallery.msdn.microsoft.com/a16c2d07-b2e1-4a25-87d9-194f04e7a698) Visual Studio Extension
-4. TypeScript Visual Studio Extension (Already installed, just update it from Tools -> Extensions).
+3. Latest version of ASP.NET 5
+4. [SideWaffle](https://visualstudiogallery.msdn.microsoft.com/a16c2d07-b2e1-4a25-87d9-194f04e7a698) Visual Studio Extension
+5. TypeScript Visual Studio Extension (Already installed, just update it from Tools -> Extensions).
 
 # How To Debug
 
