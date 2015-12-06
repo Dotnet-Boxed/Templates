@@ -8,7 +8,7 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 
 <img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
      border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Technology%20Map.png" />
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png" />
 
 ## Feature Selection Wizard
 
@@ -17,7 +17,7 @@ or off with the click of a button for a truly personalized project.
 
 <img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
      border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png" />
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png" />
 
 ## Why Do I Need It?
 
