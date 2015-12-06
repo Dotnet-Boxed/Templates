@@ -19,6 +19,7 @@ MVC 6
 - gulpfile.js JSLint Fixes
 - webroot setting removed from project.json (https://github.com/aspnet/Announcements/issues/94).
 - ApplicationBasePath no longer needs to be set in Startup.Configuration.cs (https://github.com/aspnet/Announcements/issues/88).
+- Move Autoprefixer before sass in gulpfile.js (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/44).
 
 Version 2.7.0
 MVC 5
