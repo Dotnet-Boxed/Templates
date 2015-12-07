@@ -17,7 +17,7 @@
 
         public override string Description
         {
-            get { return "Set random development server and SSL ports in .xproj."; }
+            get { return "Set random development server and SSL ports in launchsettings.json."; }
         }
 
         public override IFeatureGroup Group
@@ -52,8 +52,8 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.ReplaceByPattern("1025", portService.GetRandomFreePort().ToString(), "*.xproj");
-            await this.ProjectService.ReplaceByPattern("44300", portService.GetRandomFreePort(true).ToString(), "*.xproj");
+            await this.ProjectService.ReplaceInFile("1025", portService.GetRandomFreePort().ToString(), @"Properties\launchSettings.json");
+            await this.ProjectService.ReplaceInFile("44300", portService.GetRandomFreePort(true).ToString(), @"Properties\launchSettings.json");
         }
     }
 }

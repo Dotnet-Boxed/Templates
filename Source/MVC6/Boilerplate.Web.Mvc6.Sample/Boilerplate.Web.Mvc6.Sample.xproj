@@ -13,8 +13,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <DevelopmentServerPort>1025</DevelopmentServerPort>
-    <SSLPort>44300</SSLPort>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleFolder Include="bower_components\" />

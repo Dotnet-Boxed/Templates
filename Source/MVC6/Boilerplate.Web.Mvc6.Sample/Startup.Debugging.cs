@@ -6,6 +6,7 @@
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Diagnostics;
     using Microsoft.AspNet.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
 
     public partial class Startup
     {

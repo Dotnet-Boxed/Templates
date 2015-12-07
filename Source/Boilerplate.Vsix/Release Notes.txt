@@ -7,7 +7,7 @@ MVC 5 & 6
 - Added a note to ReadMe.html to turn on Azure SQL Database Threat Detection.
 - Updated notes in ReadMe.html about where to get free SSL certificates.
 MVC 6
-- Upgraded to ASP.NET 5 RC1.
+- Upgraded to ASP.NET 5 RC1 Update1.
 - Added Glimpse feature, enabled by default.
 - NuGet packages split into three, Boilerplate.Web.Mvc6, Boilerplate.Web.Mvc6.TagHelpers, Boilerplate.Web.Mvc6.Razor.
 - _ViewImports.cshtml updated to pick up the Tag Helpers from the new location.
@@ -21,6 +21,9 @@ MVC 6
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
 - gulpfile.js JSLint Fixes
+- webroot setting removed from project.json (https://github.com/aspnet/Announcements/issues/94).
+- ApplicationBasePath no longer needs to be set in Startup.Configuration.cs (https://github.com/aspnet/Announcements/issues/88).
+- Move Autoprefixer before sass in gulpfile.js (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/44).
 
 Version 2.7.0
 MVC 5
