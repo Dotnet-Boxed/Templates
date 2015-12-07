@@ -19,9 +19,17 @@ The ASP.NET 5 MVC 6 project template contains the following features:
 The ASP.NET 5 MVC 6 project template comes with a feature selection wizard where literally everything can be turned on 
 or off with the click of a button for a truly personalized project.
 
-<img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png" />
+     
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%202.png" />
+     
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%203.png" />
 
 ## Why Do I Need It?
 
