@@ -120,7 +120,7 @@
     @* Windows 8.1/10 IE11/Edge - See http://www.buildmypinnedsite.com *@
     @* msapplication-config - The location of the browser configuration file. This is not required if the
         browserconfig.xml file is at the root of the site (Which it is). *@
-    @* <meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml)"> *@
+    @* <meta name="msapplication-config" content="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')"> *@
     @* $End-Windows81IE11EdgeFavicon$ *@
 
 
