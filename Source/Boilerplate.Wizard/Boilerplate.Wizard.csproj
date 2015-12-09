@@ -99,6 +99,7 @@
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
     <Compile Include="Features\Performance\CshtmlMinificationFeature.cs" />
+    <Compile Include="Features\Security\NWebSecFeature.cs" />
     <Compile Include="Features\SEO\RedirectToCanonicalUrlFeature.cs" />
     <Compile Include="Features\SEO\RobotsTextFeature.cs" />
     <Compile Include="Features\Other\SearchFeature.cs" />
@@ -214,6 +215,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Glimpse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\NWebSec.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

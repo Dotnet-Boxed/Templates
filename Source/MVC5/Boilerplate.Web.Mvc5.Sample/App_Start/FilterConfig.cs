@@ -4,8 +4,10 @@
     using System.Web.Routing;
     using Boilerplate.Web.Mvc.Filters;
     using MvcBoilerplate.Constants;
+    // $Start-NWebSec$
     using NWebsec.Mvc.HttpHeaders;
     using NWebsec.Mvc.HttpHeaders.Csp;
+    // $End-NWebSec$
 
     public static class FilterConfig
     {
@@ -27,12 +29,7 @@
         }
 
         /// <summary>
-        /// Several NWebsec Security Filters are added here. 
-        /// (See <see cref="http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/"/>, 
-        /// <see cref="http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html"/> and 
-        /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> for more information).
-        /// Note: All of these filters can be applied to individual controllers and actions and indeed
-        /// some of them only make sense when applied to a controller or action instead of globally here.
+        /// Add filters to improve security.
         /// </summary>
         private static void AddSecurityFilters(GlobalFilterCollection filters)
         {
@@ -42,6 +39,14 @@
             // page can only ever be accessed by HTTPS and a 302 temporary redirect if the page can be accessed over 
             // HTTP or HTTPS.
             // filters.Add(new RedirectToHttpsAttribute(true));
+            // $Start-NWebSec$
+
+            // Several NWebsec Security Filters are added here. See 
+            // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/ and
+            // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and 
+            // https://github.com/NWebsec/NWebsec/wiki for more information.
+            // Note: All of these filters can be applied to individual controllers and actions and indeed
+            // some of them only make sense when applied to a controller or action instead of globally here.
 
             // Cache-Control: no-cache, no-store, must-revalidate
             // Expires: -1
@@ -77,7 +82,9 @@
                 {
                     Policy = XFrameOptionsPolicy.Deny
                 });
+            // $End-NWebSec$
         }
+        // $Start-NWebSec$
 
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This 
@@ -280,5 +287,6 @@
                     UnsafeInline = true
                 });
         }
+        // $End-NWebSec$
     }
 }

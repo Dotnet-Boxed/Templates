@@ -1,4 +1,8 @@
-﻿@import '../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+﻿// Fix the Bootstrap font path so it points to wwwroot/fonts instead of wwwroot/fonts/bootstrap.
+$icon-font-path: "../fonts/";
+
+// Import the bootstrap SASS style-sheet so that it can be customized and variables overridden here.
+@import '../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 
 body {
     padding-top: 50px;

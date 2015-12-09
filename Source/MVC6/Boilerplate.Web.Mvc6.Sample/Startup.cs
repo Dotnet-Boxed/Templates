@@ -114,7 +114,9 @@
                     ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
                     // $End-RedirectToCanonicalUrl$
                     ConfigureSecurityFilters(this.hostingEnvironment, mvcOptions.Filters);
-                    ConfigureContentSecurityPolicyFilters(mvcOptions.Filters);
+                    // $Start-NWebSec$
+                    ConfigureContentSecurityPolicyFilters(this.hostingEnvironment, mvcOptions.Filters);
+                    // $End-NWebSec$
                 });
 #if !DEBUG
             // Use pre-compiled views in release mode for quicker application start-up.
