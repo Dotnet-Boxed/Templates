@@ -41,8 +41,9 @@ var gulp = require("gulp"),
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
     // $End-TypeScript$
-    project = require("./project.json"),        // Read the project.json file into the project variable.
-    config = require("./config.json");          // Read the config.json file into the config variable.
+    config = require("./config.json"),          // Read the config.json file into the config variable.
+    hosting = require("./hosting.json"),        // Read the hosting.json file into the hosting variable.
+    project = require("./project.json");        // Read the project.json file into the project variable.
 
 // Holds information about the hosting environment.
 var environment = {
@@ -82,11 +83,11 @@ var paths = {
     // $End-CshtmlMinification$
 
     // Destination Directory Paths
-    wwwroot: "./" + project.webroot + "/",
-    css: "./" + project.webroot + "/css/",
-    fonts: "./" + project.webroot + "/fonts/",
-    img: "./" + project.webroot + "/img/",
-    js: "./" + project.webroot + "/js/"
+    wwwroot: "./" + hosting.webroot + "/",
+    css: "./" + hosting.webroot + "/css/",
+    fonts: "./" + hosting.webroot + "/fonts/",
+    img: "./" + hosting.webroot + "/img/",
+    js: "./" + hosting.webroot + "/js/"
 };
 
 // $Start-TypeScript$

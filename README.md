@@ -28,7 +28,13 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 Both ASP.NET 4.6 MVC 5 and ASP.NET 5 MVC 6 are supported with their own project templates.
 
-### [ASP.NET 5 MVC 6 (RC1 Update 1)]()
+### [ASP.NET 5 MVC 6 (RC1 Update 1)](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
+
+#### Preview Image
+
+<img alt="ASP.NET-MVC-6-Boilerplate Preview Image"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Preview%20Image.png" />
 
 #### Technology Map
 
@@ -37,12 +43,6 @@ The ASP.NET 5 MVC 6 project template contains the following features:
 <img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png" />
-
-#### Preview Image
-
-<img alt="ASP.NET-MVC-6-Boilerplate Preview Image"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Preview%20Image.png" />
 
 #### Feature Selection Wizard
 
@@ -53,7 +53,13 @@ or off with the click of a button for a truly personalized project.
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard 1.png" />
 
-### [ASP.NET 4.6 MVC 5]()
+### [ASP.NET 4.6 MVC 5](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%205.md)
+
+#### Preview Image
+
+<img alt="ASP.NET-MVC-6-Boilerplate Preview Image"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Preview%20Image.png" />
 
 #### Technology Map
 
@@ -62,12 +68,6 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 <img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Technology%20Map.png" />
-
-#### Preview Image
-
-<img alt="ASP.NET-MVC-6-Boilerplate Preview Image"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Preview%20Image.png" />
 
 ## How can I get it?
 That's easy, just choose one of the following options:
