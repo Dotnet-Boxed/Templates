@@ -38,7 +38,7 @@
 
         public override bool IsVisible
         {
-            get { return false; }
+            get { return true; }
         }
 
         public override int Order
@@ -48,7 +48,7 @@
 
         public override string Title
         {
-            get { return "NWebSec"; }
+            get { return "NWebSec (Experimental)"; }
         }
 
         protected override async Task AddFeature()

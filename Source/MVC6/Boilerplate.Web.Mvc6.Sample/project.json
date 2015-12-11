@@ -33,7 +33,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
     // $Start-NWebSec$
-    "NWebsec.Mvc": "5.0.0-gamma-37",
+    "NWebsec.Mvc": "5.0.0-gamma-39",
     // $End-NWebSec$
     "Newtonsoft.Json": "7.0.1"
   },

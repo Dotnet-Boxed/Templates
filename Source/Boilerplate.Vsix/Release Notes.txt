@@ -1,7 +1,12 @@
-﻿Version 2.8.2
+﻿Version 2.8.3
+MVC 6
+- Upgraded NWebSec to latest version and made feature visible but experimental.
+- Fixed the manifest.json link having a trailing slash in _Layout.cshtml.
+
+Version 2.8.2
 MVC 6
 - Added NWebSec security through HTTP Headers to Startup.Filters and project.json. Turned off and hidden for now.
-- Fixed the browserconfig.xml file having a trailing slash in _Layout.cshtml.
+- Fixed the browserconfig.xml link having a trailing slash in _Layout.cshtml.
 - Fixed the Bootstrap CSS not pointing to the correct folder for the fonts in site.scss.
 
 Version 2.8.1
