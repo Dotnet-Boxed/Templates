@@ -3,10 +3,10 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-3",
-    "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-3",
+    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-4",
+    "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-4",
     // $Start-CshtmlMinification$
-    "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-3",
+    "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-4",
     // $End-CshtmlMinification$
     // $Start-Glimpse$
     "Glimpse": "2.0.0-beta1",
@@ -35,7 +35,8 @@
     // $Start-NWebSec$
     "NWebsec.Mvc": "5.0.0-gamma-39",
     // $End-NWebSec$
-    "Newtonsoft.Json": "7.0.1"
+    "Newtonsoft.Json": "7.0.1",
+    "System.Resources.ResourceManager": "4.0.1-beta-*"
   },
 
   "commands": {
@@ -61,9 +62,9 @@
     "dnxcore50": {
       "dependencies": {
         // $Start-Glimpse$
-        "System.IO.Compression": "4.1.0-beta-23516",
+        "System.IO.Compression": "4.1.0-beta-*",
         // $End-Glimpse$
-        "System.Net.Http": "4.0.1-beta-23516"
+        "System.Net.Http": "4.0.1-beta-*"
       }
     }
   },

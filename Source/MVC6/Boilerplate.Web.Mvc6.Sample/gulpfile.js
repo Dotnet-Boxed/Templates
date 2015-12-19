@@ -35,8 +35,13 @@ var gulp = require("gulp"),
     merge = require("merge-stream"),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
     psi = require("psi"),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
     rimraf = require("rimraf"),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
+    // $Start-Less$
+    less = require('gulp-less'),                // Compile LESS to CSS (https://www.npmjs.com/package/gulp-less/)
+    // $Start-Less$
+    // $End-Sass$
     sass = require('gulp-sass'),                // Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
     scsslint = require('gulp-scss-lint'),       // SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
+    // $End-Sass$
     // $Start-TypeScript$
     tslint = require("gulp-tslint"),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require("gulp-typescript"),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
@@ -123,16 +128,32 @@ var sources = {
         {
             // name - The name of the final CSS file to build.
             name: "font-awesome.css",
+            // $Start-Less$
+            // paths - An array of paths to CSS or LESS files which will be compiled to CSS, concatenated and minified
+            // $End-Less$
+            // $Start-Sass$
+            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified
+            // $End-Sass$
             // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified
             // to create a file with the above file name.
             paths: [
+                // $Start-Less$
+                paths.bower + "font-awesome/scss/font-awesome.less"
+                // $End-Less$
+                // $Start-Sass$
                 paths.bower + "font-awesome/scss/font-awesome.scss"
+                // $End-Sass$
             ]
         },
         {
             name: "site.css",
             paths: [
+                // $Start-Less$
+                paths.styles + "site.less"
+                // End-Less$
+                // $Start-Sass$
                 paths.styles + "site.scss"
+                // $End-Sass$
             ]
         }
     ],
@@ -142,7 +163,12 @@ var sources = {
             // The name of the folder the fonts will be output to.
             name: "bootstrap",
             // The source directory to get the font files from. Note that we support all font file types.
+            // $Start-Less$
+            path: paths.bower + "bootstrap-less/**/*.{ttf,svg,woff,woff2,otf,eot}"
+            // End-Less$
+            // $Start-Sass$
             path: paths.bower + "bootstrap-sass/**/*.{ttf,svg,woff,woff2,otf,eot}"
+            // $End-Sass$
         },
         {
             name: "font-awesome",
@@ -177,6 +203,21 @@ var sources = {
             // minified to create a file with the above file name.
             paths: [
                 // Feel free to remove any parts of Bootstrap you don't use.
+                // $Start-Less$
+                paths.bower + "bootstrap-less/js/transition.js",
+                paths.bower + "bootstrap-less/js/alert.js",
+                paths.bower + "bootstrap-less/js/button.js",
+                paths.bower + "bootstrap-less/js/carousel.js",
+                paths.bower + "bootstrap-less/js/collapse.js",
+                paths.bower + "bootstrap-less/js/dropdown.js",
+                paths.bower + "bootstrap-less/js/modal.js",
+                paths.bower + "bootstrap-less/js/tooltip.js",
+                paths.bower + "bootstrap-less/js/popover.js",
+                paths.bower + "bootstrap-less/js/scrollspy.js",
+                paths.bower + "bootstrap-less/js/tab.js",
+                paths.bower + "bootstrap-less/js/affix.js"
+                // End-Less$
+                // $Start-Sass$
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/transition.js",
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/alert.js",
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/button.js",
@@ -189,6 +230,7 @@ var sources = {
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js",
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/tab.js",
                 paths.bower + "bootstrap-sass/assets/javascripts/bootstrap/affix.js"
+                // $End-Sass$
             ]
         },
         {
@@ -254,8 +296,8 @@ gulp.task("clean-fonts", function (cb) {
 gulp.task("clean-js", function (cb) {
     return rimraf(paths.js, cb);
 });
-// $Start-CshtmlMinification$
 
+// $Start-CshtmlMinification$
 /*
  * Deletes all minified files and folders within the Views directory.
  */
@@ -269,18 +311,27 @@ gulp.task("clean-html", function (cb) {
  */
 gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
 
+// $Start-Less$
+/*
+ * Report warnings and errors in your CSS files (lint them) under the Styles folder.
+ */
+// End-Less$
+// $Start-Sass$
 /*
  * Report warnings and errors in your CSS and SCSS files (lint them) under the Styles folder.
  */
+// $End-Sass$
 gulp.task("lint-css", function () {
     return merge([                              // Combine multiple streams to one and return it so the task can be chained.
         gulp.src(paths.styles + "**/*.{css}")   // Start with the source .css files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(csslint())                    // Get any CSS linting errors.
-            .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
-        gulp.src(paths.styles + "**/*.{scss}")  // Start with the source .scss files.
+            .pipe(csslint.reporter())           // Report any CSS linting errors to the console.
+            // $Start-Sass$
+           ,gulp.src(paths.styles + "**/*.{scss}")  // Start with the source .scss files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(scsslint())                   // Get and report any SCSS linting errors to the console.
+            // $End-Sass$
     ]);
 });
 
@@ -334,7 +385,12 @@ gulp.task("build-css", ["clean-css", "lint-css"], function () {
             .pipe(gulpif(
                 environment.isDevelopment(),        // If running in the development environment.
                 sourcemaps.init()))                 // Set up the generation of .map source files for the CSS.
+            // $Start-Less$
+            .pipe(gulpif("**/*.less", less()))      // If the file is a LESS (.less) file, compile it to CSS (.css).
+            // End-Less$
+            // $Start-Sass$
             .pipe(gulpif("**/*.scss", sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
+            // $End-Sass$
             .pipe(autoprefixer({                    // Auto-prefix CSS with vendor specific prefixes.
                 browsers: [
                     "> 1%",                         // Support browsers with more than 1% market share.
@@ -459,6 +515,19 @@ gulp.task("optimize-images", function () {
         .pipe(sizeAfter());                 // Write the size of the file to the console after minification.
 });
 
+// $Start-Less$
+/*
+ * Watch the styles folder for changes to .css, or .less files. Build the CSS if something changes.
+ */
+gulp.task("watch-css", function () {
+    return gulp
+        .watch(paths.styles + "**/*.{css,less}", ["build-css"])    // Watch the styles folder for file changes.
+        .on("change", function (event) {        // Log the change to the console.
+            gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
+        });
+});
+// End-Less$
+// $Start-Sass$
 /*
  * Watch the styles folder for changes to .css, or .scss files. Build the CSS if something changes.
  */
@@ -469,6 +538,7 @@ gulp.task("watch-css", function () {
             gutil.log(gutil.colors.blue("File " + event.path + " was " + event.type + ", build-css task started."));
         });
 });
+// $End-Sass$
 
 /*
  * Watch the scripts folder for changes to .js or .ts files. Build the JavaScript if something changes.

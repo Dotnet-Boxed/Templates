@@ -2,7 +2,12 @@
   "name": "asp.net-mvc-boilerplate",
   "private": true,
   "dependencies": {
+    // $Start-Sass$
     "bootstrap-sass": "3.3.5",
+    // $End-Sass$
+    // $Start-Less$
+    "bootstrap-less": "3.3.4",
+    // $End-Less$
     "font-awesome": "4.4.0",
     "hammer.js": "2.0.4",
     "jquery": "2.1.4",
