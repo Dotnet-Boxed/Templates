@@ -21,6 +21,7 @@
                 new TypeScriptFeature(this.projectService),
                 new JavaScriptCodeStyleFeature(this.projectService),
                 new JavaScriptTestFrameworkFeature(this.projectService),
+                new StylesheetFeature(this.projectService),
 
                 new JsonSerializerSettingsFeature(this.projectService),
                 new BsonFormatterFeature(this.projectService, FeatureSet.Mvc6),
