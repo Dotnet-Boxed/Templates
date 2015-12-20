@@ -36,7 +36,7 @@ The default MVC template is not as secure as it could be. There are various sett
 
 ASP.NET MVC Boilerplate makes everything secure by default but goes further and uses various HTTP headers which are sent to the browser to restrict things further.
 
-It also makes use of the new [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://nwebsec.codeplex.com/) NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.
+It also makes use of the new [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://github.com/NWebsec/NWebsec) NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.
 
 Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy with easy step by step instructions and links.
 
@@ -62,7 +62,7 @@ It also includes an MVC filter which helps to redirect non-canonical URL's (URL'
 
 ### Browser Compatibility
 
-Websites need to reach as many people as possible and look good on a range of different devices. ASP.NET MVC Boilerplate supports browsers as old as IE8 (IE8 still has around 4% market share and is mostly used by corporations too lazy to port their old websites to newer browsers).
+Websites need to reach as many people as possible and look good on a range of different devices. ASP.NET MVC Boilerplate supports browsers as old as IE9 (IE9 still has around 2% market share and is mostly used by corporations too lazy to port their old websites to newer browsers).
 
 ASP.NET MVC Boilerplate also supports devices other than desktop browsers as much as possible. It has default icons and splash screens for Windows 8, Android, Apple Devices and a few other device specific settings included by default.
 
