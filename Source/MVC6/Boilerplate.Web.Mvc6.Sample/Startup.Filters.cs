@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Boilerplate.Web.Mvc.Filters;
+    using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Mvc.Filters;
     using Microsoft.AspNet.Hosting;
@@ -33,15 +34,15 @@
         /// Staging or Production by default.</param>
         private static void ConfigureSecurityFilters(IHostingEnvironment environment, ICollection<IFilterMetadata> filters)
         {
-            // Require HTTPS to be used across the whole site.
             // $Start-HttpsEverywhere$
-            // if (!environment.IsDevelopment())
-            // {
-            //     // In the Development environment, different ports are being used for HTTP and HTTPS. The 
-            //     // RequireHttpsAttribute expects to use the default ports 80 for HTTP and port 443 for HTTPS and simply
-            //     // adds an 's' onto 'http'. Therefore, we don't add this attribute under the Development environment.
-            //     filters.Add(new RequireHttpsAttribute());
-            // }
+            // Require HTTPS to be used across the whole site.
+            if (!environment.IsDevelopment())
+            {
+                // In the Development environment, different ports are being used for HTTP and HTTPS. The 
+                // RequireHttpsAttribute expects to use the default ports 80 for HTTP and port 443 for HTTPS and simply
+                // adds an 's' onto 'http'. Therefore, we don't add this attribute under the Development environment.
+                filters.Add(new RequireHttpsAttribute());
+            }
             // $End-HttpsEverywhere$
             // $Start-NWebSec$
 
@@ -88,207 +89,57 @@
                 });
             // $End-NWebSec$
         }
-        // $Start-NWebSec$
-
+        // $Start-HttpsEverywhere$
+        
         /// <summary>
-        /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This 
-        /// creates a white-list from where various content in a web page can be loaded from. (See
-        /// <see cref="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/"/> and
-        /// <see cref="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives"/> 
-        /// <see cref="https://github.com/NWebsec/NWebsec/wiki"/> and for more information).
-        /// Note: If you are using the 'Browser Link' feature of the Webs Essentials Visual Studio extension, it will 
-        /// not work if you enable CSP (See 
-        /// <see cref="http://webessentials.uservoice.com/forums/140520-general/suggestions/6665824-browser-link-support-for-content-security-policy"/>).
-        /// Note: All of these filters can be applied to individual controllers and actions e.g. If an action requires
-        /// access to content from YouTube.com, then you can add the following attribute to the action:
-        /// [CspFrameSrc(CustomSources = "*.youtube.com")].
+        /// Configures the security for the application.
         /// </summary>
+        /// <param name="application">The application.</param>
         /// <param name="environment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
-        private static void ConfigureContentSecurityPolicyFilters(
-            IHostingEnvironment environment,
-            ICollection<IFilterMetadata> filters)
+        private static void ConfigureSecurity(IApplicationBuilder application, IHostingEnvironment environment)
         {
-            // Content-Security-Policy - Add the Content-Security-Policy HTTP header to enable Content-Security-Policy.
-            filters.Add(new CspAttribute());
-            // OR
-            // Content-Security-Policy-Report-Only - Add the Content-Security-Policy-Report-Only HTTP header to enable 
-            //      logging of violations without blocking them. This is good for testing CSP without enabling it. To 
-            //      make use of this attribute, rename all the attributes below to their ReportOnlyAttribute versions 
-            //      e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
-            // filters.Add(new CspReportOnlyAttribute());
-
-
-            // Enables logging of CSP violations. See the NWebsecHttpHeaderSecurityModule_CspViolationReported method 
-            // in Global.asax.cs to see where they are logged.
-            filters.Add(new CspReportUriAttribute());
-
-
-            // default-src - Sets a default source list for a number of directives. If the other directives below are 
-            //               not used then this is the default setting.
-            filters.Add(
-                new CspDefaultSrcAttribute()
-                {
-                    // Disallow everything from the same domain by default.
-                    None = true,
-                    // Allow everything from the same domain by default.
-                    // Self = true
-                });
-
-
-            // base-uri - This directive restricts the document base URL 
-            //            (See http://www.w3.org/TR/html5/infrastructure.html#document-base-url).
-            filters.Add(
-                new CspBaseUriAttribute()
-                {
-                    // Allow base URL's from example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow base URL's from the same domain.
-                    Self = false
-                });
-            // child-src - This directive restricts from where the protected resource can load web workers or embed 
-            //             frames. This was introduced in CSP 2.0 to replace frame-src. frame-src should still be used 
-            //             for older browsers.
-            filters.Add(
-                new CspChildSrcAttribute()
-                {
-                    // Allow web workers or embed frames from example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow web workers or embed frames from the same domain.
-                    Self = false
-                });
-            // connect-src - This directive restricts which URIs the protected resource can load using script interfaces 
-            //               (Ajax Calls and Web Sockets).
-            filters.Add(
-                new CspConnectSrcAttribute()
-                {
-                    // Allow AJAX and Web Sockets to example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow all AJAX and Web Sockets calls from the same domain.
-                    Self = true
-                });
-            // font-src - This directive restricts from where the protected resource can load fonts.
-            filters.Add(
-                new CspFontSrcAttribute()
-                {
-                    // Allow fonts from maxcdn.bootstrapcdn.com.
-                    CustomSources = string.Join(
-                        " ",
-                        ContentDeliveryNetwork.MaxCdn.Domain),
-                    // Allow all fonts from the same domain.
-                    Self = true
-                });
-            // form-action - This directive restricts which URLs can be used as the action of HTML form elements.
-            filters.Add(
-                new CspFormActionAttribute()
-                {
-                    // Allow forms to post back to example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow forms to post back to the same domain.
-                    Self = true
-                });
-            // frame-src - This directive restricts from where the protected resource can embed frames.
-            //             This is now deprecated in favour of child-src but should still be used for older browsers.
-            filters.Add(
-                new CspFrameSrcAttribute()
-                {
-                    // Allow iFrames from example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow iFrames from the same domain.
-                    Self = false
-                });
-            // frame-ancestors - This directive restricts from where the protected resource can embed frame, iframe, 
-            //                   object, embed or applet's.
-            filters.Add(
-                new CspFrameAncestorsAttribute()
-                {
-                    // Allow frame, iframe, object, embed or applet's from example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow frame, iframe, object, embed or applet's from the same domain.
-                    Self = false
-                });
-            // img-src - This directive restricts from where the protected resource can load images.
-            filters.Add(
-                new CspImgSrcAttribute()
-                {
-                    // Allow images from example.com.
-                    // CustomSources = "*.example.com",
-                    // Allow images from the same domain.
-                    Self = true,
-                });
-            // script-src - This directive restricts which scripts the protected resource can execute. 
-            //              The directive also controls other resources, such as XSLT style sheets, which can cause the 
-            //              user agent to execute script.
-            filters.Add(
-                new CspScriptSrcAttribute()
-                {
-                    // Allow scripts from the CDN's.
-                    CustomSources = string.Join(
-                        " ",
-                        ContentDeliveryNetwork.Google.Domain,
-                        ContentDeliveryNetwork.Microsoft.Domain),
-                    // Allow scripts from the same domain.
-                    Self = true,
-                    // Allow the use of the eval() method to create code from strings. This is unsafe and can open your 
-                    // site up to XSS vulnerabilities.
-                    // UnsafeEval = true,
-                    // Allow in-line JavaScript, this is unsafe and can open your site up to XSS vulnerabilities.
-                    // UnsafeInline = true
-                });
-            // media-src - This directive restricts from where the protected resource can load video and audio.
-            filters.Add(
-                new CspMediaSrcAttribute()
-                {
-                    // Allow audio and video from example.com.
-                    // CustomSources = "example.com",
-                    // Allow audio and video from the same domain.
-                    Self = false
-                });
-            // object-src - This directive restricts from where the protected resource can load plug-ins.
-            filters.Add(
-                new CspObjectSrcAttribute()
-                {
-                    // Allow plug-ins from example.com.
-                    // CustomSources = "example.com",
-                    // Allow plug-ins from the same domain.
-                    Self = false
-                });
-            // plugin-types - This directive restricts the set of plug-ins that can be invoked by the protected resource.
-            //                You can also use the @Html.CspMediaType("application/pdf") HTML helper instead of this
-            //                attribute. The HTML helper will add the media type to the CSP header.
-            // filters.Add(
-            //     new CspPluginTypesAttribute()
-            //     {
-            //         // Allow Adobe Flash and Microsoft Silverlight plug-ins
-            //         MediaTypes = "application/x-shockwave-flash application/xaml+xml"
-            //     });
-            // style-src - This directive restricts which styles the user applies to the protected resource.
-            filters.Add(
-                new CspStyleSrcAttribute()
-                {
-                    // Allow CSS from maxcdn.bootstrapcdn.com
-                    CustomSources = string.Join(
-                        " ",
-                        ContentDeliveryNetwork.MaxCdn.Domain),
-                    // Allow CSS from the same domain.
-                    Self = true,
-                    // Allow in-line CSS, this is unsafe and can open your site up to XSS vulnerabilities.
-                    // Note: This is currently enable because Modernizr does not support CSP and includes in-line styles
-                    // in its JavaScript files. This is a security hold. If you don't want to use Modernizr, be sure to 
-                    // disable unsafe in-line styles. For more information See:
-                    // http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
-                    // https://github.com/Modernizr/Modernizr/pull/1263
-                    UnsafeInline = true
-                });
-
-            if (environment.IsDevelopment())
+            // Require HTTPS to be used across the whole site.
+            if (!environment.IsDevelopment())
             {
-                // Allow Browser Link to work in development only.
-                filters.Add(new CspConnectSrcAttribute() { CustomSources = string.Join(" ", "localhost:*", "ws://localhost:*") });
-                filters.Add(new CspImgSrcAttribute() { CustomSources = "data:" });
-                filters.Add(new CspScriptSrcAttribute() { CustomSources = "localhost:*" });
+                // In the Development environment, different ports are being used for HTTP and HTTPS. The 
+                // RequireHttpsAttribute expects to use the default ports 80 for HTTP and port 443 for HTTPS and simply
+                // adds an 's' onto 'http'. Therefore, we don't add this attribute under the Development environment.
+        
+                // Strict-Transport-Security - Adds the Strict-Transport-Security HTTP header to responses.
+                //      This HTTP header is only relevant if you are using TLS. It ensures that content is loaded over 
+                //      HTTPS and refuses to connect in case of certificate errors and warnings. NWebSec currently does 
+                //      not support an MVC filter that can be applied globally. Instead we can use Owin (Using the 
+                //      added NWebSec.Owin NuGet package) to apply it.
+                //      Note: Including subdomains and a minimum maxage of 18 weeks is required for preloading.
+                //      Note: You can view preloaded HSTS domains in Chrome here: chrome://net-internals/#hsts
+                //      https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security
+                //      http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
+                application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
+        
+                // Public-Key-Pins - Adds the Public-Key-Pins HTTP header to responses.
+                //      This HTTP header is only relevant if you are using TLS. It stops man-in-the-middle attacks by 
+                //      telling browsers exactly which TLS certificate you expect.
+                //      Note: The current specification requires including a second pin for a backup key which isn't yet 
+                //      used in production. This allows for changing the server's public key without breaking accessibility 
+                //      for clients that have already noted the pins. This is important for example when the former key 
+                //      gets compromised. 
+                //      Note: You can use the ReportUri option to provide browsers a URL to post JSON violations of the 
+                //      HPKP policy. Note that the report URI must not be this site as a violation would mean that the site
+                //      is blocked. You must use a separate domain using HTTPS to report to. Consider using this service:
+                //      https://report-uri.io/ for this purpose.
+                //      Note: You can change UseHpkp to UseHpkpReportOnly to stop browsers blocking anything but continue
+                //      reporting any violations.
+                //      See https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning
+                //      and https://scotthelme.co.uk/hpkp-http-public-key-pinning/
+                // application.UseHpkp(options => options
+                //     .Sha256Pins(
+                //         "Base64 encoded SHA-256 hash of your first certificate e.g. cUPcTAZWKaASuYWhhneDttWpY3oBAkE3h2+soZS7sWs=",
+                //         "Base64 encoded SHA-256 hash of your second backup certificate e.g. M8HztCzM3elUxkcjR2S5P4hhyBNf6lHkmjAHKhpGPWE=")
+                //     .MaxAge(days: 18 * 7)
+                //     .IncludeSubdomains());
             }
         }
-        // $End-NWebSec$
+        // $End-HttpsEverywhere$
     }
 }

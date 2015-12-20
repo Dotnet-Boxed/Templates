@@ -118,8 +118,30 @@
 
             <article>
                 <h3><span aria-hidden="true" class="fa fa-lock"></span> Security</h3>
-                <!-- NWebSec not available. No CSP yet. -->
-                <!--<h4>Content Security Policy (CSP)</h4>
+                <!-- $Start-HttpsEverywhere$ -->
+                <h4>TLS over HTTPS</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Site-Wide HTTPS</strong> -
+                        Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at:
+                        <ul>
+                            <li><a href="https://letsencrypt.org/">LetsEncrypt.org</a></li>
+                            <li><a href="https://www.startssl.com/">StartSSL.com</a></li>
+                            <li><a href="https://www.digicert.com/friends/mvp.php">Digicert</a> (Digicert is only for Microsoft employees or MVP's)</li>
+                        </ul>
+                        You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
+                        <ol>
+                            <!-- $Start-NWebSec$ -->
+                            <li>Open the Startup.cs file and uncomment the application.UseHpkp(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning</a>.</li>
+                            <li>If using Strict-Transport-Security, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>
+                            <!-- $End-NWebSec$ -->
+                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
+                        </ol>
+                    </li>
+                </ul>
+                <!-- $End-HttpsEverywhere$ -->
+                <!-- $Start-NWebSec$ -->
+                <h4>Content Security Policy (CSP)</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-ConfigureContentSecurityPolicy" type="checkbox"> <strong>Configure Content Security Policy</strong> -
@@ -130,17 +152,14 @@
                         Modernizr does not currently support
                         <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
                         because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been set to allowed in
-                        the CSP policy (See FilterConfig.cs). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
+                        the CSP policy (See Startup.Filters.cs). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
                         <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
                         post and
                         <a href="https://github.com/Modernizr/Modernizr/pull/1263">this</a> issue raised on the Modernizr development site for when Modernizr
                         finally adds support for CSP.
                     </li>
-                    <li class="list-group-item">
-                        <input name="ContentSecurityPolicy-UpgradeInsecureRequests" type="checkbox"> <strong>Enable Upgrade Insecure Requests</strong> -
-                        Enable the upgrade-insecure-requests CSP directive in Startup.cs. Find out more at <a href="https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/">ScottHemle.co.uk</a> or read the official specs <a href="http://www.w3.org/TR/upgrade-insecure-requests/">here</a>.
-                    </li>
-                </ul>-->
+                </ul>
+                <!-- $End-NWebSec$ -->
                 <!-- ELmah not available. -->
                 <!--<h4>Elmah</h4>
                 <ul class="list-group">
@@ -158,28 +177,6 @@
                         change the value to anything you want. Also, change the elmah route in RouteConfig.cs.
                     </li>
                 </ul>-->
-                <h4>TLS over HTTPS</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Site-wide HTTPS</strong> -
-                        Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at:
-                        <ul>
-                            <li><a href="https://letsencrypt.org/">LetsEncrypt.org</a></li>
-                            <li><a href="https://www.startssl.com/">StartSSL.com</a></li>
-                            <li><a href="https://www.digicert.com/friends/mvp.php">Digicert</a> (Digicert is only for Microsoft employees or MVP's)</li>
-                        </ul>
-                        You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
-                        <ol>
-                            <li>Open the Startup.Filters.cs file and uncomment the line 'filters.Add(new RequireHttpsAttribute());' to use TLS across the whole site.</li>
-                            <li>Open the Startup.Antiforgery.cs file and uncomment the line 'antiForgeryOptions.RequireSSL = true;'. This ensures that the Anti-Forgery tokens require TLS to work, which gives a little added security.</li>
-                            <!-- NWebSec not available. -->
-                            <!--<li>Open the Startup.cs file and uncomment the app.UseHsts(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">Strict-Transport-Security</a>.</li>
-                <li>Open the Startup.cs file and uncomment the app.UseHpkp(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning</a>.</li>
-                <li>If using Strict-Transport-Security above, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>-->
-                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
-                        </ol>
-                    </li>
-                </ul>
                 <h4>Other Security</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
