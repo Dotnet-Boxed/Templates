@@ -71,6 +71,9 @@ namespace Boilerplate.Wizard.Features
 
                 await this.ProjectService.EditCommentInFile(this.sass.CommentName, EditCommentMode.DeleteCode, "package.json");
                 await this.ProjectService.EditCommentInFile(this.sass.CommentName, EditCommentMode.DeleteCode, "gulpfile.js");
+
+                await this.ProjectService.EditCommentInFile(this.less.CommentName, EditCommentMode.LeaveCodeUnchanged, "package.json");
+                await this.ProjectService.EditCommentInFile(this.less.CommentName, EditCommentMode.LeaveCodeUnchanged, "gulpfile.js");
             }
             else
             {
@@ -78,6 +81,9 @@ namespace Boilerplate.Wizard.Features
 
                 await this.ProjectService.EditCommentInFile(this.less.CommentName, EditCommentMode.DeleteCode, "package.json");
                 await this.ProjectService.EditCommentInFile(this.less.CommentName, EditCommentMode.DeleteCode, "gulpfile.js");
+
+                await this.ProjectService.EditCommentInFile(this.sass.CommentName, EditCommentMode.LeaveCodeUnchanged, "package.json");
+                await this.ProjectService.EditCommentInFile(this.sass.CommentName, EditCommentMode.LeaveCodeUnchanged, "gulpfile.js");
             }
         }
     }
