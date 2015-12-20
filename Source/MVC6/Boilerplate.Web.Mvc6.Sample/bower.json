@@ -4,7 +4,6 @@
   "dependencies": {
     "bootstrap-sass": "3.3.5",
     "font-awesome": "4.4.0",
-    "hammer.js": "2.0.4",
     "jquery": "2.1.4",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.2",
