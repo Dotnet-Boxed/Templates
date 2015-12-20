@@ -78,19 +78,19 @@
                             new XElement("cycle", cycle)))));
             // $End-Feed-On$
             // $Start-Feed-Off$
-            XDocument document = new XDocument(
-                new XElement("browserconfig",
-                    new XElement("msapplication",
-                        new XElement("tile",
-                            new XElement("square70x70logo",
-                                new XAttribute("src", square70x70logoUrl)),
-                            new XElement("square150x150logo",
-                                new XAttribute("src", square150x150logoUrl)),
-                            new XElement("square310x310logo",
-                                new XAttribute("src", square310x310logoUrl)),
-                            new XElement("wide310x150logo",
-                                new XAttribute("src", wide310x150logoUrl)),
-                            new XElement("TileColor", tileColour)))));
+            // XDocument document = new XDocument(
+            //     new XElement("browserconfig",
+            //         new XElement("msapplication",
+            //             new XElement("tile",
+            //                 new XElement("square70x70logo",
+            //                     new XAttribute("src", square70x70logoUrl)),
+            //                 new XElement("square150x150logo",
+            //                     new XAttribute("src", square150x150logoUrl)),
+            //                 new XElement("square310x310logo",
+            //                     new XAttribute("src", square310x310logoUrl)),
+            //                 new XElement("wide310x150logo",
+            //                     new XAttribute("src", wide310x150logoUrl)),
+            //                 new XElement("TileColor", tileColour)))));
             // $End-Feed-Off$
 
             return document.ToString(Encoding.UTF8);

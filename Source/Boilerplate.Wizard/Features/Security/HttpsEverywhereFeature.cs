@@ -48,19 +48,23 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.UncommentCode, "Startup.Antiforgery.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Antiforgery.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.ContentSecurityPolicy.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, "Startup.Cookies.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, "Startup.Cookies.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.UncommentCode, "Startup.Filters.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Filters.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
         }
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Antiforgery.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.Antiforgery.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.ContentSecurityPolicy.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, "Startup.Cookies.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, "Startup.Cookies.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Filters.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.Filters.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");
         }
     }

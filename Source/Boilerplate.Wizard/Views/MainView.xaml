@@ -238,7 +238,11 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="GroupItem">
-                                                    <GroupBox Header="{Binding Path=Name}">
+                                                    <GroupBox>
+                                                        <GroupBox.Header>
+                                                            <TextBlock Padding="0, 0, 0, 10" 
+                                                                       Text="{Binding Path=Name}"/>
+                                                        </GroupBox.Header>
                                                         <ItemsPresenter/>
                                                     </GroupBox>
                                                 </ControlTemplate>

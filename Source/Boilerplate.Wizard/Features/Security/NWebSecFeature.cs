@@ -33,7 +33,7 @@
 
         public override bool IsSelectedDefault
         {
-            get { return false; }
+            get { return true; }
         }
 
         public override bool IsVisible
@@ -48,21 +48,25 @@
 
         public override string Title
         {
-            get { return "NWebSec (Experimental)"; }
+            get { return "NWebSec"; }
         }
 
         protected override async Task AddFeature()
         {
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "project.json");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Filters.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "project.json");
         }
 
         protected override async Task RemoveFeature()
         {
+            await this.ProjectService.DeleteFile("Startup.ContentSecurityPolicy.cs");
+
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.Filters.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
         }
     }
 }
