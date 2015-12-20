@@ -68,6 +68,7 @@
                     builder.RegisterType<JavaScriptCodeStyleFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<JavaScriptHintFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<JavaScriptTestFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<StylesheetFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Formatters
                     builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<BsonFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();

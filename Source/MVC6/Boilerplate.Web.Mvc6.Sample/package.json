@@ -23,8 +23,13 @@
     // $Start-ApplicationInsights$
     "gulp-replace": "0.5.4",
     // $End-ApplicationInsights$
+    // $Start-StylesheetLanguage-Sass$
     "gulp-sass": "2.1.0",
     "gulp-scss-lint": "0.3.8",
+    // $End-StylesheetLanguage-Sass$
+    // $Start-StylesheetLanguage-Less
+    "gulp-less": "3.0.5",
+    // $End-StylesheetLanguage-Less$
     "gulp-size": "2.0.0",
     "gulp-sourcemaps": "1.6.0",
     // $Start-TypeScript$
