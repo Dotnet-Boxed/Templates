@@ -298,6 +298,7 @@ gulp.task("clean-js", function (cb) {
 });
 
 // $Start-CshtmlMinification$
+
 /*
  * Deletes all minified files and folders within the Views directory.
  */
