@@ -1,4 +1,8 @@
-﻿Version 2.9.0
+﻿Version 2.9.1
+MVC 6
+- Removed Hammer.js.
+
+Version 2.9.0
 MVC 6
 - Upgraded NWebSec to latest version and made feature visible but experimental.
 - Fixed the manifest.json link having a trailing slash in _Layout.cshtml.
