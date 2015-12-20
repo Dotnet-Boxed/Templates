@@ -43,9 +43,9 @@
                 // adds an 's' onto 'http'. Therefore, we don't add this attribute under the Development environment.
                 filters.Add(new RequireHttpsAttribute());
             }
+
             // $End-HttpsEverywhere$
             // $Start-NWebSec$
-
             // Add several NWebSec filters here which add HTTP Headers to help improve security. See 
             // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/ and
             // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and 

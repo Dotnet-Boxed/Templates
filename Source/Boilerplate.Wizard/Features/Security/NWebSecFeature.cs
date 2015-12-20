@@ -33,7 +33,7 @@
 
         public override bool IsSelectedDefault
         {
-            get { return false; }
+            get { return true; }
         }
 
         public override bool IsVisible
@@ -48,7 +48,7 @@
 
         public override string Title
         {
-            get { return "NWebSec (Experimental)"; }
+            get { return "NWebSec"; }
         }
 
         protected override async Task AddFeature()
