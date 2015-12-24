@@ -49,19 +49,19 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 ### Secure By Default
 
-The default MVC template is not as secure as it could be. There are various settings (Mostly in the web.config file) which are insecure by default. For example, it leaks information about which version of IIS you are using and allows external scripts to access cookies by default!
+The default MVC template is not as secure as it could be. There are various settings which are insecure by default. For example, it leaks information about which version of IIS you are using and allows external scripts to access cookies by default!
 
 ASP.NET MVC Boilerplate makes everything secure by default but goes further and uses various HTTP headers which are sent to the browser to restrict things further.
 
-It also makes use of the new [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://nwebsec.codeplex.com/) NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.
+It also makes use of the new [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://github.com/NWebsec/NWebsec) NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.
 
-Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy with easy step by step instructions and links.
+Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy by turning on a single check box and easy step by step instructions and links.
 
 ### Fast By Default
 
 The default MVC template does a pretty poor job in the performance department. Probably because they don't make any assumptions about which web server you are using. Most of the world and dog that are writing ASP.NET MVC sites use IIS and there are settings in the web.config file under the system.webServer section which can make a big difference when it comes to performance.
 
-ASP.NET MVC Boilerplate makes no such assumptions. It turns on GZip compression for static and dynamic files being sent to the browsers making them smaller and quicker to download. It also uses Content Delivery Networks (CDN) by default to make common scripts like jQuery quicker to download (You can turn this off of course but the point is ASP.NET MVC Boilerplate is fast by default).
+ASP.NET MVC Boilerplate makes no such assumptions. It turns on GZip compression for static and dynamic files being sent to the browsers making them smaller and quicker to download. It also uses Content Delivery Networks (CDN) by default to make common scripts like jQuery quicker to download.
 
 That's not all! There are a bunch of other tweaks and examples of practices which can help improve the performance of the site. ASP.NET MVC Boilerplate achieves a score of **96/100** on [YSlow](http://yslow.org/) (Its not possible to get the full 100 as some of it's criteria contradict each other and site scripts need to be moved to a CDN which you need to do yourself).
 
@@ -79,13 +79,13 @@ It also includes an MVC filter which helps to redirect non-canonical URL's (URL'
 
 ### Browser Compatibility
 
-Websites need to reach as many people as possible and look good on a range of different devices. ASP.NET MVC Boilerplate supports browsers as old as IE8 (IE8 still has around 4% market share and is mostly used by corporations too lazy to port their old websites to newer browsers).
+Websites need to reach as many people as possible and look good on a range of different devices. ASP.NET MVC Boilerplate supports browsers as old as IE9 (IE9 still has around 2% market share and is mostly used by corporations too lazy to port their old websites to newer browsers).
 
 ASP.NET MVC Boilerplate also supports devices other than desktop browsers as much as possible. It has default icons and splash screens for Windows 8, Android, Apple Devices and a few other device specific settings included by default.
 
 ### Resilience and Error Handling
 
-At some point your site is probably going to throw an exception and you will need to handle and log that exception to be able to understand and fix it. ASP.NET MVC Boilerplate includes [Elmah](https://code.google.com/p/elmah/), the popular error logging add-in by default. It's all preconfigured and ready to use.
+At some point your site is probably going to throw an exception and you will need to handle and log that exception to be able to understand and fix it. ASP.NET MVC Boilerplate turns on and configures logging by default. It's all preconfigured and ready to use.
 
 ASP.NET MVC Boilerplate uses popular Content Delivery Networks (CDN) from Google and Microsoft but what happens in the unlikely event that these go down? Well, ASP.NET MVC Boilerplate provides backups for these.
 
@@ -97,9 +97,9 @@ ASP.NET MVC Boilerplate makes use of [Glimpse](http://getglimpse.com/) (As adver
 
 ### Patterns and Practices
 
-Doing things right does sometimes take a little extra time. Using the [Inversion of Control (IOC)](http://martinfowler.com/articles/injection.html) pattern for example should be a default. ASP.NET MVC Boilerplate uses the [Autofac](http://autofac.org/) IOC container by default. Some people get a bit tribal when talking about IOC containers but to be honest, they all work great. Autofac was picked because it has lots of helpers for ASP.NET MVC and Microsoft even uses it for Azure Mobile Services.
+Doing things right does sometimes take a little extra time. Using the [Inversion of Control (IOC)](http://martinfowler.com/articles/injection.html) pattern for example should be a default.
 
-ASP.NET MVC Boilerplate also makes use of the popular [Less](http://lesscss.org/) files for making life easier with CSS. For an example, it can make overriding colours and fonts in the default Bootstrap CSS a cinch.
+ASP.NET MVC Boilerplate also makes use of the popular [SASS](http://sass-lang.com/) files for making life easier with CSS. For an example, it can make overriding colours and fonts in the default Bootstrap CSS a cinch.
 
 ASP.NET MVC is a complicated beast. You can end up with lots of [magic strings](http://en.wikipedia.org/wiki/Magic_string) which can be a nightmare when renaming something. There are many ways of eliminating these magic strings but most trade maintainability for slower performance. ASP.NET MVC Boilerplate makes extensive use of constants which are a trade-off between maintainability and performance, giving you the best of both worlds.
 

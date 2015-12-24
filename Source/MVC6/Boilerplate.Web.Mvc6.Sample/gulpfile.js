@@ -192,10 +192,6 @@ var sources = {
             ]
         },
         {
-            name: "hammer.js",
-            paths: paths.bower + "hammer.js/hammer.js"
-        },
-        {
             name: "jquery.js",
             paths: paths.bower + "jquery/dist/jquery.js"
         },

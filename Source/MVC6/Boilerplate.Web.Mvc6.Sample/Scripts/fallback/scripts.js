@@ -17,8 +17,7 @@
         { test: function () { return window.jQuery; }, src: "/js/jquery.js" },
         { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
         { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },
-        { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" },
-        { test: function () { return window.Hammer && window.Hammer.VERSION; }, src: "/js/hammer.js" }
+        { test: function () { return window.jQuery.fn.modal; }, src: "/js/bootstrap.js" }
     ];
 
     var check = function (fallbacks, i) {

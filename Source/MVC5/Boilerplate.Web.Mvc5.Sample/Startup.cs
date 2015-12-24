@@ -40,8 +40,8 @@ namespace MvcBoilerplate
             //     .Sha256Pins(
             //         "Base64 encoded SHA-256 hash of your first certificate e.g. cUPcTAZWKaASuYWhhneDttWpY3oBAkE3h2+soZS7sWs=",
             //         "Base64 encoded SHA-256 hash of your second backup certificate e.g. M8HztCzM3elUxkcjR2S5P4hhyBNf6lHkmjAHKhpGPWE=")
-            //     .MaxAge(days: 18 * 7))
-            //     .IncludeSubdomains();
+            //     .MaxAge(days: 18 * 7)
+            //     .IncludeSubdomains());
 
             // Content-Security-Policy:upgrade-insecure-requests - Adds the 'upgrade-insecure-requests' directive to
             //      the Content-Security-Policy HTTP header. This is only relevant if you are using HTTPS. Any objects

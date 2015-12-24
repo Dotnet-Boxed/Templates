@@ -132,7 +132,7 @@
             // $End-CshtmlMinification$
             ConfigureFormatters(mvcBuilder);
 
-            ConfigureAntiforgeryServices(services);
+            ConfigureAntiforgeryServices(services, this.hostingEnvironment);
             ConfigureCustomServices(services);
         }
 
@@ -166,6 +166,10 @@
             ConfigureDebugging(application, this.hostingEnvironment);
             ConfigureLogging(application, this.hostingEnvironment, loggerfactory, this.configuration);
             ConfigureErrorPages(application, this.hostingEnvironment);
+            // $Start-HttpsEverywhere$
+            ConfigureContentSecurityPolicy(application, this.hostingEnvironment);
+            ConfigureSecurity(application, this.hostingEnvironment);
+            // $End-HttpsEverywhere$
 
             // Add MVC to the request pipeline.
             application.UseMvc();
