@@ -1,4 +1,8 @@
-﻿Version 2.8.3
+﻿Version 2.8.4
+MVC 6
+- Fix Application Insights not registering exceptions in Startup.cs.
+
+Version 2.8.3
 MVC 6
 - Upgraded NWebSec to latest version and made feature visible but experimental.
 - Fixed the manifest.json link having a trailing slash in _Layout.cshtml.
