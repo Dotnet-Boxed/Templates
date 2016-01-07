@@ -31,13 +31,13 @@
         public override string Namespace { get { return "restaurant: http://ogp.me/ns/restaurant#"; } }
 
         /// <summary>
-        /// Gets or sets the URL to the page about the restaurant who wrote the menu. This URL must contain profile meta tags <see cref="OpenGraphResteraunt"/>.
+        /// Gets or sets the URL to the page about the restaurant who wrote the menu. This URL must contain profile meta tags <see cref="OpenGraphRestaurant"/>.
         /// </summary>
         [HtmlAttributeName(RestaurantUrlAttributeName)]
         public string RestaurantUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL's to the pages about the menu sections. This URL must contain restaurant.section meta tags <see cref="OpenGraphResterauntMenuSection"/>.
+        /// Gets or sets the URL's to the pages about the menu sections. This URL must contain restaurant.section meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         [HtmlAttributeName(SectionUrlsAttributeName)]
         public IEnumerable<string> SectionUrls { get; set; }

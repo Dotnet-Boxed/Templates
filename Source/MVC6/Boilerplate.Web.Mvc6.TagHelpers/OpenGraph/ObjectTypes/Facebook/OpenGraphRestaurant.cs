@@ -46,7 +46,7 @@
         public OpenGraphLocation Location { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL's to the pages about the menus. This URL must contain restaurant.menu meta tags <see cref="OpenGraphResterauntMenu"/>.
+        /// Gets or sets the URL's to the pages about the menus. This URL must contain restaurant.menu meta tags <see cref="OpenGraphRestaurantMenu"/>.
         /// </summary>
         [HtmlAttributeName(MenuUrlsAttributeName)]
         public IEnumerable<string> MenuUrls { get; set; }

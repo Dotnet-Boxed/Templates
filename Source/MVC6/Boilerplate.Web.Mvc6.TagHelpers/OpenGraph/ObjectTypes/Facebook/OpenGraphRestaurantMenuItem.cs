@@ -31,7 +31,7 @@
         public override string Namespace { get { return "restaurant: http://ogp.me/ns/restaurant#"; } }
 
         /// <summary>
-        /// Gets or sets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenuSection"/>.
+        /// Gets or sets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         [HtmlAttributeName(SectionUrlAttributeName)]
         public string SectionUrl { get; set; }

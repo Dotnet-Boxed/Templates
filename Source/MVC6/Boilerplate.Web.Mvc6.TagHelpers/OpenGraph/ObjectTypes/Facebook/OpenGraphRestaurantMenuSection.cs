@@ -26,13 +26,13 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the URL's to the pages about the menu items. This URL must contain restaurant.menuitem meta tags <see cref="OpenGraphResterauntMenuItem"/>.
+        /// Gets or sets the URL's to the pages about the menu items. This URL must contain restaurant.menuitem meta tags <see cref="OpenGraphRestaurantMenuItem"/>.
         /// </summary>
         [HtmlAttributeName(ItemUrlsAttributeName)]
         public IEnumerable<string> ItemUrls { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenu"/>.
+        /// Gets or sets the URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenu"/>.
         /// </summary>
         [HtmlAttributeName(MenuUrlAttributeName)]
         public string MenuUrl { get; set; }
