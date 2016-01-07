@@ -2,7 +2,7 @@
 namespace MvcBoilerplate.Compiler.Preprocess
 {
     using System;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNet.Mvc.Razor.Precompilation;
 
     /// <summary>
     /// Enable pre-compilation of Razor views, so that errors in your .cshtml files are caught and displayed 

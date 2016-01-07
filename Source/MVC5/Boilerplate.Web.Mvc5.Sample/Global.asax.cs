@@ -12,6 +12,9 @@
     {
         protected void Application_Start()
         {
+            // Ensure that the X-AspNetMvc-Version HTTP header is not 
+            //MvcHandler.DisableMvcResponseHeader = true;
+
             ConfigureViewEngines();
             ConfigureAntiForgeryTokens();
             

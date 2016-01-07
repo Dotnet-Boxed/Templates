@@ -1,4 +1,15 @@
-﻿Version 2.9.1
+﻿Version 2.9.2
+MVC 5 & 6
+- Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when 
+using the RedirectToCanonicalUrlAttribute.
+- Only redirect to the canonical URL for GET requests when using the RedirectToCanonicalUrlAttribute.
+- Updated the Boilerplate NuGet packages to the latest versions.
+- Upgraded to Newtonsoft.Json 8.0.1.
+MVC 6
+- Added the Microsoft.AspNet.Razor.Runtime.Precompilation NuGet package for Razor pre-compilation. Added the using 
+statement to RazorPreCompilation.cs.
+
+Version 2.9.1
 MVC 6
 - Removed Hammer.js.
 - Fix Application Insights not registering exceptions in Startup.cs.

@@ -85,10 +85,13 @@
                 throw new ArgumentNullException("filterContext");
             }
 
-            string canonicalUrl;
-            if (!this.TryGetCanonicalUrl(filterContext, out canonicalUrl))
+            if (string.Equals(filterContext.HttpContext.Request.HttpMethod, "GET", StringComparison.Ordinal))
             {
-                this.HandleNonCanonicalRequest(filterContext, canonicalUrl);
+                string canonicalUrl;
+                if (!this.TryGetCanonicalUrl(filterContext, out canonicalUrl))
+                {
+                    this.HandleNonCanonicalRequest(filterContext, canonicalUrl);
+                }
             }
         }
 
@@ -109,12 +112,12 @@
 
             Uri url = filterContext.HttpContext.Request.Url;
             canonicalUrl = url.ToString();
+            int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
 
             // If we are not dealing with the home page. Note, the home page is a special case and it doesn't matter
             // if there is a trailing slash or not. Both will be treated as the same by search engines.
             if (url.AbsolutePath.Length > 1)
             {
-                int queryIndex = canonicalUrl.IndexOf(QueryCharacter);
                 if (queryIndex == -1)
                 {
                     bool hasTrailingSlash = canonicalUrl[canonicalUrl.Length - 1] == SlashCharacter;
@@ -167,11 +170,29 @@
             {
                 foreach (char character in canonicalUrl)
                 {
-                    if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(filterContext))
+                    if (this.HasNoLowercaseQueryStringAttribute(filterContext) && queryIndex != -1)
                     {
-                        canonicalUrl = canonicalUrl.ToLower();
-                        isCanonical = false;
-                        break;
+                        if (character == QueryCharacter)
+                        {
+                            break;
+                        }
+
+                        if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(filterContext))
+                        {
+                            canonicalUrl = canonicalUrl.Substring(0, queryIndex).ToLower() +
+                                canonicalUrl.Substring(queryIndex, canonicalUrl.Length - queryIndex);
+                            isCanonical = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (char.IsUpper(character) && !this.HasNoTrailingSlashAttribute(filterContext))
+                        {
+                            canonicalUrl = canonicalUrl.ToLower();
+                            isCanonical = false;
+                            break;
+                        }
                     }
                 }
             }
@@ -201,6 +222,19 @@
         {
             return filterContext.ActionDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false) ||
                 filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoTrailingSlashAttribute), false);
+        }
+
+        /// <summary>
+        /// Determines whether the specified action or its controller has the <see cref="NoLowercaseQueryStringAttribute"/> 
+        /// attribute specified.
+        /// </summary>
+        /// <param name="filterContext">The filter context.</param>
+        /// <returns><c>true</c> if a <see cref="NoLowercaseQueryStringAttribute"/> attribute is specified, otherwise 
+        /// <c>false</c>.</returns>
+        protected virtual bool HasNoLowercaseQueryStringAttribute(AuthorizationContext filterContext)
+        {
+            return filterContext.ActionDescriptor.IsDefined(typeof(NoLowercaseQueryStringAttribute), false) ||
+                filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(NoLowercaseQueryStringAttribute), false);
         }
 
         #endregion

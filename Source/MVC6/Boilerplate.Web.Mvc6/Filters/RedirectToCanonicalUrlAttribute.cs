@@ -87,10 +87,13 @@
                 throw new ArgumentNullException(nameof(context));
             }
 
-            string canonicalUrl;
-            if (!this.TryGetCanonicalUrl(context, out canonicalUrl))
+            if (string.Equals(context.HttpContext.Request.Method, "GET", StringComparison.Ordinal))
             {
-                this.HandleNonCanonicalRequest(context, canonicalUrl);
+                string canonicalUrl;
+                if (!this.TryGetCanonicalUrl(context, out canonicalUrl))
+                {
+                    this.HandleNonCanonicalRequest(context, canonicalUrl);
+                }
             }
         }
 
@@ -120,7 +123,7 @@
                 if (this.appendTrailingSlash)
                 {
                     // Append a trailing slash to the end of the URL.
-                    if (!hasTrailingSlash && !this.HasNoTrailingSlashAttribute(context))
+                    if (!hasTrailingSlash && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                     {
                         request.Path = new PathString(request.Path.Value + SlashCharacter);
                         isCanonical = false;
@@ -136,7 +139,7 @@
                     }
                 }
 
-                if (this.lowercaseUrls && !this.HasNoTrailingSlashAttribute(context))
+                if (this.lowercaseUrls && !this.HasAttribute<NoTrailingSlashAttribute>(context))
                 {
                     foreach (char character in request.Path.Value)
                     {
@@ -148,7 +151,7 @@
                         }
                     }
 
-                    if (request.QueryString.HasValue)
+                    if (request.QueryString.HasValue && !this.HasAttribute<NoLowercaseQueryStringAttribute>(context))
                     {
                         foreach (char character in request.QueryString.Value)
                         {
@@ -187,17 +190,16 @@
         }
 
         /// <summary>
-        /// Determines whether the specified action or its controller has the <see cref="NoTrailingSlashAttribute"/> 
-        /// attribute specified.
+        /// Determines whether the specified action or its controller has the attribute with the specified type 
+        /// <typeparam name="T"/>.
         /// </summary>
         /// <param name="filterContext">The filter context.</param>
-        /// <returns><c>true</c> if a <see cref="NoTrailingSlashAttribute"/> attribute is specified, otherwise 
-        /// <c>false</c>.</returns>
-        protected virtual bool HasNoTrailingSlashAttribute(AuthorizationContext filterContext)
+        /// <returns><c>true</c> if a <typeparam name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
+        protected virtual bool HasAttribute<T>(AuthorizationContext filterContext)
         {
             foreach (IFilterMetadata filterMetadata in filterContext.Filters)
             {
-                if (filterMetadata is NoTrailingSlashAttribute)
+                if (filterMetadata is T)
                 {
                     return true;
                 }

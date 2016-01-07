@@ -3,7 +3,7 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-3",
+    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-5",
     "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-3",
     // $Start-CshtmlMinification$
     "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-3",
@@ -22,6 +22,7 @@
     "Microsoft.AspNet.Mvc.Formatters.Xml": "6.0.0-rc1-final",
     // $End-XmlFormatter$
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Razor.Runtime.Precompilation": "4.0.0-rc1-final",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
     "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
@@ -35,7 +36,7 @@
     // $Start-NWebSec$
     "NWebsec.Mvc": "5.0.0-gamma-39",
     // $End-NWebSec$
-    "Newtonsoft.Json": "7.0.1"
+    "Newtonsoft.Json": "8.0.1"
   },
 
   "commands": {
