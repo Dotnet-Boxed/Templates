@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        /// <param name="menuUrl">The URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenu"/>.</param>
+        /// <param name="menuUrl">The URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenu"/>.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
         /// <exception cref="System.ArgumentNullException">location is <c>null</c>.</exception>
         public OpenGraphRestaurantMenuSection(string title, OpenGraphImage image, string menuUrl, string url = null)
@@ -36,12 +36,12 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the URL's to the pages about the menu items. This URL must contain restaurant.menuitem meta tags <see cref="OpenGraphResterauntMenuItem"/>.
+        /// Gets or sets the URL's to the pages about the menu items. This URL must contain restaurant.menuitem meta tags <see cref="OpenGraphRestaurantMenuItem"/>.
         /// </summary>
         public IEnumerable<string> ItemUrls { get; set; }
 
         /// <summary>
-        /// Gets the URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenu"/>.
+        /// Gets the URL to the page about the menu this section is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenu"/>.
         /// </summary>
         public string MenuUrl { get { return this.menuUrl; } }
 

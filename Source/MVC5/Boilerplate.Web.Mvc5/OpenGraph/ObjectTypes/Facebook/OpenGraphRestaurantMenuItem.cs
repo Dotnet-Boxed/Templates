@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="title">The title of the object as it should appear in the graph.</param>
         /// <param name="image">The default image.</param>
-        /// <param name="sectionUrl">The URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenuSection"/>.</param>
+        /// <param name="sectionUrl">The URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenuSection"/>.</param>
         /// <param name="url">The canonical URL of the object, used as its ID in the graph.</param>
         /// <exception cref="System.ArgumentNullException">location is <c>null</c>.</exception>
         public OpenGraphRestaurantMenuItem(string title, OpenGraphImage image, string sectionUrl, string url = null)
@@ -41,7 +41,7 @@
         public override string Namespace { get { return "restaurant: http://ogp.me/ns/restaurant#"; } }
 
         /// <summary>
-        /// Gets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphResterauntMenuSection"/>.
+        /// Gets the URL to the page about the section this menu item is from. This URL must contain profile meta tags <see cref="OpenGraphRestaurantMenuSection"/>.
         /// </summary>
         public string SectionUrl { get { return this.sectionUrl; } }
 

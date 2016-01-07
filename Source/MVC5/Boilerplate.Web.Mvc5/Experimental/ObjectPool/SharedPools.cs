@@ -99,13 +99,13 @@ namespace Boilerplate.Web.Mvc.Experimental.ObjectPool
         }
 
         /// <summary>
-        /// A pool of dictionaries of type <see cref="Dictionary{string, T}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
+        /// A pool of dictionaries of type <see cref="Dictionary{TKey, TValue}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
         /// </summary>
         /// <typeparam name="T">The type of the values in the dictionary.</typeparam>
         private static class StringIgnoreCaseDictionaryNormalPool<T>
         {
             /// <summary>
-            /// The pool of dictionaries of type <see cref="Dictionary{string, T}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
+            /// The pool of dictionaries of type <see cref="Dictionary{TKey, TValue}"/> with StringComparer.OrdinalIgnoreCase as key comparer, up to a maximum of 20 instances.
             /// </summary>
             public static readonly ObjectPool<Dictionary<string, T>> Instance = new ObjectPool<Dictionary<string, T>>(
                 () => new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase), 
