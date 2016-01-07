@@ -57,6 +57,8 @@ It also makes use of the new [Content Security Policy (CSP)](https://developer.m
 
 Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy by turning on a single check box and easy step by step instructions and links.
 
+Do you trust the people on the internet? Well, the default ASP.NET 5 template stores the contents of all NPM and Bower packages in the wwwroot folder. These contain executables, scripts and all kinds of potential nasties that your site is serving up. ASP.NET MVC Boilerplate moves these packages out and only adds things to the wwwroot folder that are required.
+
 ### Fast By Default
 
 The default MVC template does a pretty poor job in the performance department. Probably because they don't make any assumptions about which web server you are using. Most of the world and dog that are writing ASP.NET MVC sites use IIS and there are settings in the web.config file under the system.webServer section which can make a big difference when it comes to performance.
