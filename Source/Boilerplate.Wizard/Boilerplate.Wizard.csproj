@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Features\CssAndJavaScript\JavaScriptHintFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\JavaScriptCodeStyleFeature.cs" />
+    <Compile Include="Features\CssAndJavaScript\StylesheetFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
     <Compile Include="Features\Debugging\GlimpseFeature.cs" />
     <Compile Include="Features\Favicons\AndroidChromeM36ToM38FaviconFeature.cs" />
@@ -218,6 +219,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\NWebSec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\LESS_Logo.png" />
+    <Resource Include="Assets\sass_logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
