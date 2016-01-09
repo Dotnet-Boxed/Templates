@@ -69,16 +69,16 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%205%20Technology%20Map.png" />
 
-## How can I get it?
+## How Can I Get It?
 That's easy, just choose one of the following options:
 
 - Get the Visual Studio extension [here](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) and in Visual Studio go to File -> New Project -> Web.
 - Clone the git repository: `git clone https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate`
 
-## Release Notes and To-Do List
+## Release Notes & To-Do List
 You can find release notes for each version [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a TODO list of new features and enhancements coming soon [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md).
 
-## Bugs and Issues
+## Bugs & Issues
 
 Please report any bugs or issues on the GitHub issues page [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues).
 
