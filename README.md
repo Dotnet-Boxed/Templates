@@ -81,3 +81,12 @@ You can find release notes for each version [here](https://github.com/RehanSaeed
 ## Bugs and Issues
 
 Please report any bugs or issues on the GitHub issues page [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues).
+
+## Sites Built Using The Template
+
+Add your site here, just raise an issue!!!
+
+## Contributions and Thanks
+
+- [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET 5 LESS feature.
+- [mcliment](https://github.com/mcliment) - Updated template to ASP.NET 5 RC 1.
