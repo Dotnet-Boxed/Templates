@@ -503,40 +503,47 @@
             </article>
             <!-- $End-Feed$ -->
 
-            <!-- Glimpse not available -->
-            <!--<article>
+            <!-- $Start-Glimpse$ -->
+            <article>
                 <h3><span aria-hidden="true" class="fa fa-code"></span> Debugging</h3>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Debugging-LearnGlimpse" type="checkbox"> <strong>Learn Glimpse</strong> -
                         Navigate to {your site}/glimpse and also learn how to use Glimpse <a href="http://getglimpse.com/">here</a>.
-                        Install Glimpse extensions e.g. Glimpse.EF6 allows you to see the SQL being executed by Entity Framework.
-                        Extensions are as easy as installing NuGet packages listed at <a href="http://getglimpse.com/Extensions">here</a>.
                         Glimpse can also be used to performance tune your application. It records the length of time taken to perform
                         various actions.
                     </li>
                 </ul>
-            </article>-->
+            </article>
+            <!-- $End-Glimpse$ -->
 
             <article>
                 <h3><span aria-hidden="true" class="fa fa-share"></span> Social</h3>
                 <ul class="list-group">
+                    <!-- $Start-OpenGraph$ -->
                     <li class="list-group-item">
                         <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
                         Open Graph meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.OpenGraph.OpenGraphMetadata type.
                         You need to add these to all of the other pages yourself. Read the documentation on OpenGraphMetadata for more information on how to use it.
                     </li>
+                    <!-- $End-OpenGraph$ -->
+                    <!-- $Start-TwitterCard$ -->
                     <li class="list-group-item">
                         <input name="Social-ImplementTwitterCards" type="checkbox"> <strong>Implement Twitter Cards</strong> -
                         Twitter card meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.Twitter.TwitterCard type.
                         You need to add these to all of the other pages yourself. Read the documentation on TwitterCard for more information on how to use it.
                     </li>
+                    <!-- $End-TwitterCard$ -->
                     <li class="list-group-item">
                         <input name="Social-TestSocial" type="checkbox"> <strong>Test Social Media Meta Tags</strong> -
                         Test your social media meta tags using the specified testing tools:
                         <ul>
-                            <li><a href="https://dev.twitter.com/docs/cards/validation/validator">Twitter Validation Tool</a></li>
+                            <!-- $Start-OpenGraph$ -->
                             <li><a href="https://developers.facebook.com/tools/debug">Facebook Debugger</a></li>
+                            <!-- $End-OpenGraph$ -->
+                            <!-- $Start-TwitterCard$ -->
+                            <li><a href="https://dev.twitter.com/docs/cards/validation/validator">Twitter Validation Tool</a></li>
+                            <!-- $End-TwitterCard$ -->
                             <li><a href="http://www.google.com/webmasters/tools/richsnippets">Google Structured Data Testing Tool</a></li>
                             <li><a href="http://developers.pinterest.com/rich_pins/validator">Pinterest Rich Pins Validator</a></li>
                         </ul>
@@ -555,7 +562,11 @@
                     </li>
                     <li class="list-group-item">
                         <input name="ThankDevelopers-ReviewBoilerplate" type="checkbox"> <strong>Review ASP.NET MVC Boilerplate</strong> -
-                        A lot of work was put into this project template. Show your appreciation by reviewing the project <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a>.
+                        A lot of work was put into this project template. Show your appreciation by reviewing the project <a href="https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d">here</a> and also star the project on <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">GitHub</a>.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="ThankDevelopers-AdvertiseYourSite" type="checkbox"> <strong>Advertise Your Site</strong> -
+                        Raise an issue <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues">here</a> to advertise your site on the ASP.NET MVC Boilerplate 'built with' section.
                     </li>
                 </ul>
             </article>

@@ -1,4 +1,10 @@
-﻿Version 2.9.2
+﻿Version 2.9.3
+MVC 6
+- Added new feature selection icons.
+- Updated the MVC 6 Technology Map image.
+- Updated the ReadMe to uncomment the Glimpse TODO and make the social TODO's conditional.
+
+Version 2.9.2
 MVC 5 & 6
 - Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when 
 using the RedirectToCanonicalUrlAttribute. Added a note to use this attribute in the AccountController when using 

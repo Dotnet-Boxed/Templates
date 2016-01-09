@@ -20,6 +20,11 @@
             get { return FeatureGroups.Other; }
         }
 
+        public override string Icon
+        {
+            get { return "/Boilerplate.Wizard;component/Assets/Atom Feed.png"; }
+        }
+
         public override string Id
         {
             get { return "Feed"; }

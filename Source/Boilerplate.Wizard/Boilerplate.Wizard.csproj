@@ -205,7 +205,7 @@
     <Resource Include="Assets\JSHint.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\GoogleAnalytics.png" />
+    <Resource Include="Assets\Google Analytics.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Application Insights.png" />
@@ -218,6 +218,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\NWebSec.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Atom Feed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\iOS.png" />
+    <Resource Include="Assets\OS X.png" />
+    <Resource Include="Assets\Windows.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

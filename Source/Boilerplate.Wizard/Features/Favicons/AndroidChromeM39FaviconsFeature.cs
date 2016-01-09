@@ -20,6 +20,11 @@
             get { return FeatureGroups.Favicons; }
         }
 
+        public override string Icon
+        {
+            get { return "/Boilerplate.Wizard;component/Assets/Android Chrome.png"; }
+        }
+
         public override string Id
         {
             get { return "AndroidChromeM39Favicons"; }
