@@ -15,6 +15,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET 5 MVC 6
 
+- Add an option in Gulpfile.js to lint a file or not.
 - Automatically run Mocha JavaScript tests.
 - Build a HttpException for MVC 6. See [this](http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception) StackOverflow question.
 - Build a localization feature.
