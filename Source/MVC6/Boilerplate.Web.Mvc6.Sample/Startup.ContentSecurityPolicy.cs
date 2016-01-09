@@ -72,9 +72,13 @@
             // filters.Add(new CspReportOnlyAttribute());
 
 
-            // Enables logging of CSP violations. See the NWebsecHttpHeaderSecurityModule_CspViolationReported method 
-            // in Global.asax.cs to see where they are logged.
-            filters.Add(new CspReportUriAttribute());
+            // Enables logging of CSP violations. Register with the https://report-uri.io/ service to get a URL where
+            // you can send your CSP violation reports and view them.
+            // filters.Add(
+            //     new CspReportUriAttribute()
+            //     {
+            //         ReportUris = ""
+            //     });
 
 
             // default-src - Sets a default source list for a number of directives. If the other directives below are 

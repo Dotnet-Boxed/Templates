@@ -9,6 +9,7 @@ ASP.NET Identity.
 MVC 6
 - Added the Microsoft.AspNet.Razor.Runtime.Precompilation NuGet package for Razor pre-compilation. Added the using 
 statement to RazorPreCompilation.cs.
+- Added a note to use https://report-uri.io/ to report CSP violation reports.
 
 Version 2.9.1
 MVC 6
