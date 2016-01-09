@@ -30,6 +30,18 @@ or off with the click of a button for a truly personalized project.
 <img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%203.png" />
+     
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%204.png" />
+     
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%205.png" />
+     
+<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
+     border="5"
+     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%206.png" />
 
 ## Why Do I Need It?
 
