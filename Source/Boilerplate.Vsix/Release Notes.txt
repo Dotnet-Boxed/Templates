@@ -1,4 +1,8 @@
-﻿Version 2.9.3
+﻿Version 2.9.4
+MVC 6
+- Fix issue where removing application insights caused a compile error in Startup.ContentSecurityPolicy.cs.
+
+Version 2.9.3
 MVC 6
 - Added new feature selection icons.
 - Updated the MVC 6 Technology Map image.

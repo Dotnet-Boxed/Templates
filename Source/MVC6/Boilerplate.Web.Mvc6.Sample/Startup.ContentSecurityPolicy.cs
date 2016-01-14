@@ -120,13 +120,18 @@
                 new CspConnectSrcAttribute()
                 {
                     // Allow AJAX and Web Sockets to the following sources.
+                    // $Start-ApplicationInsights-On$
                     CustomSources = string.Join(
                         " ",
-                        // $Start-ApplicationInsights$
-                        "dc.services.visualstudio.com"          // Allow posting data back to Application Insights.
-                        // $End-ApplicationInsights$
-                        // CustomSources = "*.example.com",     // Allow AJAX and Web Sockets to example.com.
-                        ),
+                        // "*.example.com",                     // Allow AJAX and Web Sockets to example.com.
+                        "dc.services.visualstudio.com"),        // Allow posting data back to Application Insights.
+                    // $End-ApplicationInsights-On$
+                    // $Start-ApplicationInsights-Off$
+                    // CustomSources = string.Join(
+                    //     " ",
+                    //     // CustomSources = "*.example.com",     // Allow AJAX and Web Sockets to example.com.
+                    //     "dc.services.visualstudio.com"),        // Allow posting data back to Application Insights.
+                    // $End-ApplicationInsights-Off$
                     // Allow all AJAX and Web Sockets calls from the same domain.
                     Self = true
                 });
@@ -188,9 +193,9 @@
                     // Allow scripts from the CDN's.
                     CustomSources = string.Join(
                         " ",
-                        // $Start-ApplicationInsights$
-                        "az416426.vo.msecnd.net",   // Allow Application Insights to run scripts.
-                        // $End-ApplicationInsights$
+                        // $Start-ApplicationInsights-On$
+                        "az416426.vo.msecnd.net",               // Allow Application Insights to run scripts.
+                        // $End-ApplicationInsights-On$
                         ContentDeliveryNetwork.Google.Domain,
                         ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.
