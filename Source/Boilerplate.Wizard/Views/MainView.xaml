@@ -220,7 +220,7 @@
                 <TextBlock Margin="5" 
                            Style="{StaticResource NormalTextBlockStyle}"
                            VerticalAlignment="Center">
-                    <Run>New features are bing worked on and added all the time. Have an idea for a feature you would like? </Run>
+                    <Run>New features are being worked on and added all the time. Have an idea for a feature you would like? </Run>
                     <Hyperlink Click="OnHyperlinkClick" 
                                NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">Why not contribute?</Hyperlink>
                 </TextBlock>
