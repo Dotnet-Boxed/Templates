@@ -88,6 +88,7 @@ Add your site here, just raise an issue!!!
 
 ## Contributions and Thanks
 
+- [Shiney](https://github.com/Shiney) - Fixed typo.
 - [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET 5 LESS feature.
 - [mcliment](https://github.com/mcliment) - Updated template to ASP.NET 5 RC 1.
 - [surfsflo](https://github.com/surfsflo) - Added woff2 support for Font Awesome.
