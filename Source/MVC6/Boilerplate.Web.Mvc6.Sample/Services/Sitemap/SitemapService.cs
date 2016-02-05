@@ -30,7 +30,7 @@
         // $End-ApplicationInsights$
         private readonly IUrlHelper urlHelper;
 
-        private readonly TimeSpan cacheSlidingExpiration;
+        private readonly TimeSpan expirationDuration;
 
         #endregion
 
@@ -56,7 +56,7 @@
             IUrlHelper urlHelper)
         {
             CacheProfile cacheProfile = cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
-            this.cacheSlidingExpiration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
+            this.expirationDuration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
             this.distributedCache = distributedCache;
             this.logger = logger;
             // $Start-ApplicationInsights$
@@ -97,7 +97,7 @@
                     sitemapDocuments,
                     new DistributedCacheEntryOptions()
                     {
-                        SlidingExpiration = cacheSlidingExpiration
+                        AbsoluteExpirationRelativeToNow = expirationDuration
                     });
             }
 
