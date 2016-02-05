@@ -64,18 +64,18 @@
             {
                 // Set the minimum logging level to log information level log messages. See details above:
                 loggerFactory.MinimumLevel = LogLevel.Information;
-
-                // Log warning level messages and above to the Windows event log.
-                // var sourceSwitch = new SourceSwitch("EventLog");
-                // sourceSwitch.Level = SourceLevels.Warning;
-                // loggerFactory.AddTraceSource(sourceSwitch, new EventLogTraceListener("Application"));
-
-                // Log to NLog (See https://github.com/aspnet/Logging/tree/1.0.0-beta6/src/Microsoft.Framework.Logging.NLog).
-                // loggerFactory.AddNLog(new NLog.LogFactory());
-
-                // Log to Serilog (See https://github.com/serilog/serilog-framework-logging).
-                // loggerFactory.AddSerilog();
             }
+
+            // Log warning level messages and above to the Windows event log.
+            // var sourceSwitch = new SourceSwitch("EventLog");
+            // sourceSwitch.Level = SourceLevels.Information;
+            // loggerFactory.AddTraceSource(sourceSwitch, new EventLogTraceListener("Application"));
+
+            // Log to NLog (See https://github.com/aspnet/Logging/tree/1.0.0-beta6/src/Microsoft.Framework.Logging.NLog).
+            // loggerFactory.AddNLog(new NLog.LogFactory());
+
+            // Log to Serilog (See https://github.com/serilog/serilog-framework-logging).
+            // loggerFactory.AddSerilog();
         }
     }
 }
