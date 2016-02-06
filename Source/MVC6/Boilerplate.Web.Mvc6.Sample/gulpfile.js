@@ -11,6 +11,7 @@ var gulp = require("gulp"),
     autoprefixer = require("gulp-autoprefixer"),// Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
     concat = require("gulp-concat"),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
     csslint = require("gulp-csslint"),          // CSS linter (https://www.npmjs.com/package/gulp-csslint/)
+    cssnano = require("gulp-cssnano"),          // Minifies CSS (https://www.npmjs.com/package/gulp-cssnano/)
     gulpif = require("gulp-if"),                // If statement (https://www.npmjs.com/package/gulp-if/)
     imagemin = require("gulp-imagemin"),        // Optimizes images (https://www.npmjs.com/package/gulp-imagemin/)
     // $Start-JavaScriptCodeStyle$
@@ -22,7 +23,6 @@ var gulp = require("gulp"),
     // $Start-CshtmlMinification$
     minifyCshtml = require("gulp-minify-cshtml"), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
     // $End-CshtmlMinification$
-    minifyCss = require("gulp-minify-css"),     // Minifies CSS (https://www.npmjs.com/package/gulp-minify-css/)
     plumber = require("gulp-plumber"),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require("gulp-rename"),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     // $Start-ApplicationInsights$
@@ -341,9 +341,7 @@ gulp.task("build-css", ["clean-css", "lint-css"], function () {
             .pipe(sizeBefore(source.name))          // Write the size of the file to the console before minification.
             .pipe(gulpif(
                 !environment.isDevelopment(),       // If running in the staging or production environment.
-                minifyCss({                         // Minifies the CSS.
-                    keepSpecialComments: 0          // Remove all comments.
-                })))
+                cssnano()))                         // Minifies the CSS.
             .pipe(sizeAfter(source.name))           // Write the size of the file to the console after minification.
             .pipe(gulpif(
                 environment.isDevelopment(),        // If running in the development environment.
