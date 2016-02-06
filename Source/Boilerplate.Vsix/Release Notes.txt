@@ -1,4 +1,10 @@
 ﻿Version 2.9.5
+MVC 5 & 6
+- Updated Newtonsoft.Json to 8.0.2.
+- Updated jQuery to 2.2.0.
+- Updated Bootstrap 3.3.6.
+MVC 5
+- Switched from Twitter.Bootstrap.Less NuGet package to Bootstrap.Less.
 MVC 6
 - Use an absolute expiration instead of a sliding one for the sitemap, just in case people are dynamically generating 
 the sitemap.

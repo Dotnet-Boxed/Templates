@@ -2,9 +2,9 @@
   "name": "asp.net-mvc-boilerplate",
   "private": true,
   "dependencies": {
-    "bootstrap-sass": "3.3.5",
+    "bootstrap-sass": "3.3.6",
     "font-awesome": "4.4.0",
-    "jquery": "2.1.4",
+    "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.2",
     // $Start-JavaScriptTestFramework-Mocha$
