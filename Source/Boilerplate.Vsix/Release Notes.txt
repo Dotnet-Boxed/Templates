@@ -8,6 +8,9 @@ MVC 5
 MVC 6
 - Use an absolute expiration instead of a sliding one for the sitemap, just in case people are dynamically generating 
 the sitemap.
+- Updated Font Awesome to 4.5.0.
+- Updated JavaScript Mocha, Chai and Sinon.
+- Updated Gulp packages.
 
 Version 2.9.4
 MVC 6

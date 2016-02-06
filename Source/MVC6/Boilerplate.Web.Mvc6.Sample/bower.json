@@ -3,14 +3,14 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "3.3.6",
-    "font-awesome": "4.4.0",
+    "font-awesome": "4.5.0",
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.2",
+    "jquery-validation-unobtrusive": "3.2.5",
     // $Start-JavaScriptTestFramework-Mocha$
-    "mocha": "2.3.0",
-    "chai": "3.2.0",
-    "sinon": "1.16.1",
+    "mocha": "2.4.5",
+    "chai": "3.5.0",
+    "sinon": "1.17.3",
     // $End-JavaScriptTestFramework-Mocha$
     "modernizr": "2.8.3"
   }
