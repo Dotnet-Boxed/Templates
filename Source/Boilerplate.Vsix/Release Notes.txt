@@ -12,6 +12,7 @@ the sitemap.
 - Updated JavaScript Mocha, Chai and Sinon.
 - Updated Gulp packages.
 - Switched from deprecated gulp-minify-css to gulp-cssnano.
+- Add the new ASPNET_ENVIRONMENT variable in gulpfile.js. Leave the old ASPNET_ENV until RC2 upgrade.
 
 Version 2.9.4
 MVC 6
