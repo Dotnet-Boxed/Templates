@@ -22,7 +22,7 @@ Improvements that can be made to all project templates.
 - Build a HttpException for MVC 6. See [this](http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception) StackOverflow question.
 - Build a localization feature.
 - Add a CORS feature.
-- Add an option to use LESS or SASS depending in whether Bootstrap 4 supports LESS.
+- If Bootstrap 4 includes LESS support and add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls) if it does.
 
 ## ASP.NET 5 MVC 6 API
 
