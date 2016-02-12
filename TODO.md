@@ -13,18 +13,19 @@ Improvements that can be made to all project templates.
 
 - Change Boilerplate.Web.Mvc5 to use an ASP.NET 5 class library project to build the NuGet package.
 
-## ASP.NET 5 MVC 6
+## ASP.NET Core MVC 6
 
 - Add an option in Gulpfile.js to lint a file or not.
+- Fix the file path pointing to the artifacts folder in the .xproj file if it is incorrect. This can happen when someone creates a project that is not two folders away from the solution.
 - Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
 - Develop and add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/).
 - Automatically run Mocha JavaScript tests.
 - Build a HttpException for MVC 6. See [this](http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception) StackOverflow question.
 - Build a localization feature.
 - Add a CORS feature.
-- If Bootstrap 4 includes LESS support and add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls) if it does.
+- If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 
-## ASP.NET 5 MVC 6 API
+## ASP.NET Core MVC 6 API
 
 - Update project template and release it.
 - Use [HAL](https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md) or [SIREN](https://github.com/kevinswiber/siren). See also [this](http://phlyrestfully.readthedocs.org/en/latest/halprimer.html) and [this](https://msdn.microsoft.com/en-us/magazine/jj883957.aspx) and [this](https://github.com/JakeGinnivan/WebApi.Hal).
