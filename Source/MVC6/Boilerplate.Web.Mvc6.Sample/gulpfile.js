@@ -218,6 +218,23 @@ var sources = {
     ]
 };
 
+// Initialize the mappings between the source and output files.
+var lintSources = {
+    css: paths.styles + "**/*.{css}",
+    scss: paths.styles + "**/*.{scss}",
+    // $Start-JavaScriptLint$
+    js: [
+        // $Start-ApplicationInsights$
+        "!**/application-insights.js",
+        // $End-ApplicationInsights$
+        paths.scripts + "**/*.js"
+    ],
+    // $Start-TypeScript$
+    ts: paths.scripts + "**/*.ts"
+    // $End-TypeScript$
+    // $End-JavaScriptLint$
+};
+
 // Calls and returns the result from the gulp-size plugin to print the size of the stream. Makes it more readable.
 function sizeBefore(title) {
     return size({
@@ -270,11 +287,11 @@ gulp.task("clean", ["clean-css", "clean-fonts", "clean-js"]);
  */
 gulp.task("lint-css", function () {
     return merge([                              // Combine multiple streams to one and return it so the task can be chained.
-        gulp.src(paths.styles + "**/*.{css}")   // Start with the source .css files.
+        gulp.src(lintSources.css)               // Start with the source .css files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(csslint())                    // Get any CSS linting errors.
             .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
-        gulp.src(paths.styles + "**/*.{scss}")  // Start with the source .scss files.
+        gulp.src(lintSources.scss)              // Start with the source .scss files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(scsslint())                   // Get and report any SCSS linting errors to the console.
     ]);
@@ -285,25 +302,25 @@ gulp.task("lint-css", function () {
  * Report warnings and errors in your JavaScript files (lint them) under the Scripts folder.
  */
 gulp.task("lint-js", function () {
-    return merge([                                                  // Combine multiple streams to one and return it so the task can be chained.
+    return merge([                              // Combine multiple streams to one and return it so the task can be chained.
         // $Start-JavaScriptHint$
-        gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
-            .pipe(plumber())                                        // Handle any errors.
-            .pipe(jshint())                                         // Get any JavaScript linting errors.
-            .pipe(jshint.reporter("default", {                      // Report any JavaScript linting errors to the console.
+        gulp.src(lintSources.js)                // Start with the source .js files.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(jshint())                     // Get any JavaScript linting errors.
+            .pipe(jshint.reporter("default", {  // Report any JavaScript linting errors to the console.
                 verbose: true
             })),
         // $End-JavaScriptHint$
         // $Start-TypeScript$
-        gulp.src(paths.scripts + "**/*.ts")                         // Start with the source .ts files.
-            .pipe(plumber())                                        // Handle any errors.
-            .pipe(tslint())                                         // Get any TypeScript linting errors.
-            .pipe(tslint.report("verbose")),                        // Report any TypeScript linting errors to the console.
+        gulp.src(lintSources.ts)                // Start with the source .ts files.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(tslint())                     // Get any TypeScript linting errors.
+            .pipe(tslint.report("verbose")),    // Report any TypeScript linting errors to the console.
         // $End-TypeScript$
         // $Start-JavaScriptCodeStyle$
-        gulp.src(paths.scripts + "**/*.js")                         // Start with the source .js files.
-            .pipe(plumber())                                        // Handle any errors.
-            .pipe(jscs())                                           // Get and report any JavaScript style linting errors to the console.
+        gulp.src(lintSources.js)                // Start with the source .js files.
+            .pipe(plumber())                    // Handle any errors.
+            .pipe(jscs())                       // Get and report any JavaScript style linting errors to the console.
         // $End-JavaScriptCodeStyle$
     ]);
 });
