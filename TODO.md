@@ -15,7 +15,6 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
-- Add an option in Gulpfile.js to lint a file or not.
 - Create a VS Extensions IWizard to fix the file path pointing to the artifacts folder in the .xproj file if it is incorrect. This can happen when someone creates a project that is not two folders away from the solution.
 - Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
 - Develop and add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/).
