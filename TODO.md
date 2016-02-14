@@ -22,6 +22,7 @@ Improvements that can be made to all project templates.
 - Build a HttpException for MVC 6. See [this](http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception) StackOverflow question.
 - Build a localization feature.
 - Add a CORS feature.
+- Add an option to choose the web-server you are using IIS, Nginx etc.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 
 ## ASP.NET Core MVC 6 API
