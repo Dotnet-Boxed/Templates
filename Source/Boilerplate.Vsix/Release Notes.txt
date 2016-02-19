@@ -1,4 +1,9 @@
-﻿Version 2.9.5
+﻿Version 2.9.6
+MVC 5
+- Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it 
+themselves if they need it.
+
+Version 2.9.5
 MVC 5 & 6
 - Updated Newtonsoft.Json to 8.0.2.
 - Updated jQuery to 2.2.0.
