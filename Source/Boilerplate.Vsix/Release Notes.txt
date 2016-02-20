@@ -2,6 +2,11 @@
 MVC 5
 - Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it 
 themselves if they need it.
+MVC 6
+- Automatically run Mocha JavaScript tests using gulp-mocha-phantomjs.
+- Added gulp-mocha-phantomjs to package.json.
+- Added a test task to gulpfile.js.
+- Renamed Test folder to Tests.
 
 Version 2.9.5
 MVC 5 & 6

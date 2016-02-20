@@ -78,30 +78,30 @@
                    this.mocha.CommentName,
                    EditCommentMode.LeaveCodeUnchanged,
                    "bower.json");
-                //await this.ProjectService.EditCommentInFile(
-                //    this.Id,
-                //    EditCommentMode.LeaveCodeUnchanged,
-                //    "gulpfile.js");
-                //await this.ProjectService.EditCommentInFile(
-                //    this.Id,
-                //    EditCommentMode.LeaveCodeUnchanged,
-                //    "package.json");
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    "gulpfile.js");
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    "package.json");
             }
             else
             {
-                await this.ProjectService.DeleteDirectory("Test");
+                await this.ProjectService.DeleteDirectory("Tests");
                 await this.ProjectService.EditCommentInFile(
                    this.mocha.CommentName,
                    EditCommentMode.DeleteCode,
                    "bower.json");
-                //await this.ProjectService.EditCommentInFile(
-                //    this.Id,
-                //    EditCommentMode.DeleteCode,
-                //    "gulpfile.js");
-                //await this.ProjectService.EditCommentInFile(
-                //    this.Id,
-                //    EditCommentMode.DeleteCode,
-                //    "package.json");
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
+                    EditCommentMode.DeleteCode,
+                    "gulpfile.js");
+                await this.ProjectService.EditCommentInFile(
+                    this.Id,
+                    EditCommentMode.DeleteCode,
+                    "package.json");
             }
         }
     }
