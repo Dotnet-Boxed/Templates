@@ -86,7 +86,7 @@ var paths = {
     // $End-CshtmlMinification$
     // $Start-JavaScriptTestFramework$
     tests: 'Tests/',
-    // $Start-JavaScriptTestFramework$
+    // $End-JavaScriptTestFramework$
 
     // Destination Directory Paths
     wwwroot: './' + hosting.webroot + '/',
