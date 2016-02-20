@@ -463,7 +463,7 @@ gulp.task('build', [
 // $Start-JavaScriptTestFramework$
 gulp.task('test', function () {
     return gulp
-        .src(paths.tests)
+        .src(paths.tests + 'mocha.html')
         .pipe(mocha());
 });
 
