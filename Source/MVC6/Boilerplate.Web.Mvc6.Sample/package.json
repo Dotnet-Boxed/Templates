@@ -18,9 +18,9 @@
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework-Mocha$
+    // $Start-JavaScriptTestFramework$
     "gulp-mocha-phantomjs": "0.11.0",
-    // $End-JavaScriptTestFramework-Mocha$
+    // $End-JavaScriptTestFramework$
     "gulp-plumber": "1.0.1",
     "gulp-rename": "1.2.2",
     // $Start-ApplicationInsights$

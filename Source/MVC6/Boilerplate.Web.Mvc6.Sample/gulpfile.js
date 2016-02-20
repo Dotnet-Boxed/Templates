@@ -23,9 +23,9 @@ var gulp = require('gulp'),
     // $Start-CshtmlMinification$
     minifyCshtml = require('gulp-minify-cshtml'), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework-Mocha$
+    // $Start-JavaScriptTestFramework$
     mocha = require('gulp-mocha-phantomjs'),    // JavaScript test runner (https://www.npmjs.com/package/gulp-mocha-phantomjs/).
-    // $End-JavaScriptTestFramework-Mocha$
+    // $End-JavaScriptTestFramework$
     plumber = require('gulp-plumber'),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require('gulp-rename'),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     // $Start-ApplicationInsights$
@@ -84,9 +84,9 @@ var paths = {
     // $Start-CshtmlMinification$
     views: 'Views/',
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework-Mocha$
+    // $Start-JavaScriptTestFramework$
     tests: 'Tests/',
-    // $Start-JavaScriptTestFramework-Mocha$
+    // $Start-JavaScriptTestFramework$
 
     // Destination Directory Paths
     wwwroot: './' + hosting.webroot + '/',
@@ -460,14 +460,14 @@ gulp.task('build', [
     'build-js'
 ]);
 
-// $Start-JavaScriptTestFramework-Mocha$
+// $Start-JavaScriptTestFramework$
 gulp.task('test', function () {
     return gulp
         .src(paths.tests)
         .pipe(mocha());
 });
 
-// $End-JavaScriptTestFramework-Mocha$
+// $End-JavaScriptTestFramework$
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
  */
@@ -510,7 +510,7 @@ gulp.task('watch-js', function () {
         });
 });
 
-// $Start-JavaScriptTestFramework-Mocha$
+// $Start-JavaScriptTestFramework$
 /*
  * Watch the scripts and tests folder for changes to .js or .ts files. Run the JavaScript tests if something changes.
  */
@@ -526,7 +526,7 @@ gulp.task('watch-tests', function () {
         });
 });
 
-// $End-JavaScriptTestFramework-Mocha$
+// $End-JavaScriptTestFramework$
 /*
  * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
@@ -575,8 +575,8 @@ gulp.task(
     'default',
     [
         'build',
-        // $Start-JavaScriptTestFramework-Mocha$
+        // $Start-JavaScriptTestFramework$
         'test',
-        // $End-JavaScriptTestFramework-Mocha$
+        // $End-JavaScriptTestFramework$
         'watch'
     ]);
