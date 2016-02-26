@@ -1,4 +1,11 @@
-﻿Version 2.9.6
+﻿Version 2.9.7
+MVC 6
+- All NuGet packages updated.
+- Dropped TagHelpers NuGet package dependency on the base NuGet package.
+- Refactored AtomActionResult to use IHostingEnvironment. 
+- Subresource Integrity tag helper added.
+
+Version 2.9.6
 MVC 5
 - Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it 
 themselves if they need it.

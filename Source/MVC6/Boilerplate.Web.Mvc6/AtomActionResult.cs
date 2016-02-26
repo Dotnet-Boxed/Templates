@@ -6,6 +6,7 @@ namespace Boilerplate.Web.Mvc
     using System.Xml;
     using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Hosting;
+    using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
     /// Represents a class that is used to render an Atom 1.0 feed by using an <see cref="SyndicationFeed"/> instance 
@@ -36,10 +37,11 @@ namespace Boilerplate.Web.Mvc
             XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
             xmlWriterSettings.Encoding = Encoding.UTF8;
 
-            if (Context.Environment.IsDevelopment())
+            var hostingEnvironment = context.HttpContext.ApplicationServices.GetRequiredService<IHostingEnvironment>();
+            if (hostingEnvironment.IsDevelopment())
             {
-                // Indent the XML for easier viewing but only in Debug mode. In Release mode, everything is output on 
-                // one line for best performance.
+                // Indent the XML for easier viewing but only in the Development environment. In Staging or Production, 
+                // everything is output on one line for best performance.
                 xmlWriterSettings.Indent = true;
             }
 

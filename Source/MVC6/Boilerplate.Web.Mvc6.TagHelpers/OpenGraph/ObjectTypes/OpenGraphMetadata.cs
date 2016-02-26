@@ -4,9 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Mvc.ViewFeatures;
     using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
     /// The Open Graph protocol enables any web page to become a rich object in a social graph. 
@@ -213,10 +215,10 @@
         }
 
         /// <summary>
-        /// Returns a HTML-encoded <see cref="System.String" /> that represents this instance containing the Open Graph meta tags.
+        /// Returns a HTML-encoded <see cref="String" /> that represents this instance containing the Open Graph meta tags.
         /// </summary>
         /// <returns>
-        /// A HTML-encoded <see cref="System.String" /> that represents this instance containing the Open Graph meta tags.
+        /// A HTML-encoded <see cref="String" /> that represents this instance containing the Open Graph meta tags.
         /// </returns>
         public override string ToString()
         {
@@ -243,7 +245,7 @@
 
             if (this.Url == null)
             {
-                this.Url = Context.HttpContext.Request.Path.ToString();
+                this.Url = this.GetRequestUrl();
             }
 
             stringBuilder.AppendMetaPropertyContent("og:url", this.Url);
@@ -310,6 +312,17 @@
         {
             if (this.Title == null) { throw new ArgumentNullException(nameof(this.Title)); }
             if (this.MainImage == null) { throw new ArgumentNullException(nameof(this.MainImage)); }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private string GetRequestUrl()
+        {
+            var urlHelper = this.ViewContext.HttpContext.ApplicationServices.GetRequiredService<IUrlHelper>();
+            var request = this.ViewContext.HttpContext.Request;
+            return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), urlHelper.Content(request.Path.Value)).ToString();
         }
 
         #endregion
