@@ -71,6 +71,8 @@
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
+            output.Attributes.Remove(output.Attributes[SubresourceIntegrityAttributeName]);
+
             var url = output.Attributes[this.UrlAttributeName].Value.ToString();
 
             if (url.StartsWith("//"))
