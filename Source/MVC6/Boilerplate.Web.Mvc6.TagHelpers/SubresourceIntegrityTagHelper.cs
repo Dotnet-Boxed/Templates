@@ -7,6 +7,7 @@
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
@@ -90,7 +91,8 @@
                 }
 
                 output.Attributes[CrossOriginAttributeName] = "anonymous";
-                output.Attributes[IntegrityAttributeName] = sri;
+                output.Attributes[IntegrityAttributeName] = 
+                    new TagHelperAttribute(IntegrityAttributeName, new HtmlString(sri));
             }
         }
 
