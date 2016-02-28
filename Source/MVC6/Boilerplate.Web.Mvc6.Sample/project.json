@@ -3,8 +3,8 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-6",
-    "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-6",
+    "Boilerplate.Web.Mvc6": "2.0.0-rc1-final-7",
+    "Boilerplate.Web.Mvc6.TagHelpers": "2.0.0-rc1-final-7",
     // $Start-CshtmlMinification$
     "Boilerplate.Web.Mvc6.Razor": "2.0.0-rc1-final-3",
     // $End-CshtmlMinification$
