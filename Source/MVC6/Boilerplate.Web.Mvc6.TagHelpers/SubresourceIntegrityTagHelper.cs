@@ -23,7 +23,7 @@
     public abstract class SubresourceIntegrityTagHelper : TagHelper
     {
         protected const string SubresourceIntegrityAttributeName = "asp-subresource-integrity";
-        protected const string SubresourceIntegrityHashAlgorithmAttributeName = "asp-subresource-integrity-hash-algorithm";
+        protected const string SubresourceIntegrityHashAlgorithmsAttributeName = "asp-subresource-integrity-hash-algorithms";
         private const string CrossOriginAttributeName = "crossorigin";
         private const string IntegrityAttributeName = "integrity";
 
@@ -42,9 +42,9 @@
         }
 
         /// <summary>
-        /// Gets or sets the hashing algorithm. This is a required property.
+        /// Gets or sets the one or more hashing algorithms to be used. This is a required property.
         /// </summary>
-        [HtmlAttributeName(SubresourceIntegrityHashAlgorithmAttributeName)]
+        [HtmlAttributeName(SubresourceIntegrityHashAlgorithmsAttributeName)]
         public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; } 
             = SubresourceIntegrityHashAlgorithm.SHA512;
 
