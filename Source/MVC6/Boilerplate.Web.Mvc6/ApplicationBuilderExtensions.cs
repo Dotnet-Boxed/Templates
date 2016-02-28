@@ -9,6 +9,8 @@
     /// </summary>
     public static class ApplicationBuilderExtensions
     {
+        private const string ServerHttpHeaderName = "Server";
+
         /// <summary>
         /// Configures the <see cref="UrlHelperExtensions"/> with the <see cref="IHttpContextAccessor"/>, so that they
         /// have access to the current <see cref="HttpContext"/> and can get the current request path.
@@ -21,6 +23,21 @@
                 application.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
             Context.Configure(httpContextAccessor);
             return application;
+        }
+
+        /// <summary>
+        /// Removes the Server HTTP header from the HTTP response for marginally better security and performance.
+        /// </summary>
+        /// <param name="application">The application.</param>
+        /// <returns>The application.</returns>
+        public static IApplicationBuilder RemoveServerHttpHeader(this IApplicationBuilder application)
+        {
+            return application.Use(
+                (context, next) =>
+                {
+                    context.Response.Headers.Remove(ServerHttpHeaderName);
+                    return next();
+                });
         }
     }
 }

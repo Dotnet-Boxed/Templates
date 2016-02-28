@@ -148,6 +148,9 @@
             // absolute URL's and get the current request path.
             application.UseBoilerplate();
 
+            // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
+            application.RemoveServerHttpHeader();
+
             // Add the IIS platform handler to the request pipeline.
             application.UseIISPlatformHandler();
             // $Start-ApplicationInsights$
