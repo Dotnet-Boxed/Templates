@@ -6,6 +6,8 @@ MVC 6
 - Added RemoveServerHttpHeader extension method for IApplicationBuilder to the main NuGet package.
 - Used the RemoveServerHttpHeader method in the Configure method in Startup.cs.
 - Subresource Integrity tag helper added to TagHelpers NuGet package and _Layout.cshtml.
+- Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
+TemplateBuilder and the new Wizard I added to it.
 
 Version 2.9.6
 MVC 5

@@ -142,7 +142,7 @@
         <script asp-append-version="true" src="~/js/modernizr.js"></script>
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
-        <script asp-subresource-integrity src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
     </environment>
 
 
@@ -247,8 +247,8 @@
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
         <script asp-subresource-integrity src="@ContentDeliveryNetwork.Google.JQueryUrl"></script>
-        <script asp-subresource-integrity src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
-        <script asp-subresource-integrity src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
         <script asp-subresource-integrity src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"></script>
         @* Move site.js to a content delivery network (CDN) for better performance. *@
         <script asp-append-version="true" src="~/js/site.js"></script>
