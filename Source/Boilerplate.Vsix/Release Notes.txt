@@ -18,6 +18,7 @@ MVC 6
 error result.
 - Added UseInternalServerErrorOnException, which returns a 500 Internal Server Error response when an unhandled 
 exception occurs.
+- Renamed everything from ASP.NET 5 to ASP.NET Core.
 
 Version 2.9.6
 MVC 5
