@@ -26,9 +26,9 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 ## Project Templates
 
-Both ASP.NET 4.6 MVC 5 and ASP.NET 5 MVC 6 are supported with their own project templates.
+Both ASP.NET 4.6 MVC 5 and ASP.NET Core MVC 6 are supported with their own project templates.
 
-### [ASP.NET 5 MVC 6 (RC1 Update 1)](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
+### [ASP.NET Core MVC 6 (RC1 Update 1)](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
 
 #### Preview Image
 
@@ -38,7 +38,7 @@ Both ASP.NET 4.6 MVC 5 and ASP.NET 5 MVC 6 are supported with their own project 
 
 #### Technology Map
 
-The ASP.NET 5 MVC 6 project template contains the following features:
+The ASP.NET Core MVC 6 project template contains the following features:
 
 <img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
      border="5"
@@ -46,7 +46,7 @@ The ASP.NET 5 MVC 6 project template contains the following features:
 
 #### Feature Selection Wizard
 
-The ASP.NET 5 MVC 6 project template comes with a feature selection wizard where literally everything can be turned on 
+The ASP.NET Core MVC 6 project template comes with a feature selection wizard where literally everything can be turned on
 or off with the click of a button for a truly personalized project.
 
 <img alt="ASP.NET-MVC-6-Boilerplate Technology Map"
@@ -89,6 +89,6 @@ Add your site here, just raise an issue!!!
 ## Contributions and Thanks
 
 - [Shiney](https://github.com/Shiney) - Fixed typo.
-- [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET 5 LESS feature.
-- [mcliment](https://github.com/mcliment) - Updated template to ASP.NET 5 RC 1.
+- [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET Core LESS feature.
+- [mcliment](https://github.com/mcliment) - Updated template to ASP.NET Core RC 1.
 - [surfsflo](https://github.com/surfsflo) - Added woff2 support for Font Awesome.

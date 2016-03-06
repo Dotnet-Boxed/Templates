@@ -10,13 +10,13 @@
 
 The ASP.NET 5 MVC 6 project template contains the following features:
 
-<img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
+<img alt="ASP.NET-MVC-Core-Boilerplate Technology Map"
      border="5"
      src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png" />
 
 ## Feature Selection Wizard
 
-The ASP.NET 5 MVC 6 project template comes with a feature selection wizard where literally everything can be turned on 
+The ASP.NET Core MVC 6 project template comes with a feature selection wizard where literally everything can be turned on
 or off with the click of a button for a truly personalized project.
 
 <img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
@@ -69,7 +69,7 @@ It also makes use of the new [Content Security Policy (CSP)](https://developer.m
 
 Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy by turning on a single check box and easy step by step instructions and links.
 
-Do you trust the people on the internet? Well, the default ASP.NET 5 template stores the contents of all NPM and Bower packages in the wwwroot folder. These contain executables, scripts and all kinds of potential nasties that your site is serving up. ASP.NET MVC Boilerplate moves these packages out and only adds things to the wwwroot folder that are required.
+Do you trust the people on the internet? Well, the default ASP.NET Core template stores the contents of all NPM and Bower packages in the wwwroot folder. These contain executables, scripts and all kinds of potential nasties that your site is serving up. ASP.NET MVC Boilerplate moves these packages out and only adds things to the wwwroot folder that are required.
 
 ### Fast By Default
 

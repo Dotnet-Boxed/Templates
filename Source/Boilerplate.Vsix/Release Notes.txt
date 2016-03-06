@@ -1,4 +1,9 @@
-﻿Version 2.9.7
+﻿Version 2.9.8
+MVC 6
+- Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
+TemplateBuilder and the new Wizard I added to it.
+
+Version 2.9.7
 MVC 6
 - All NuGet packages updated.
 - Dropped TagHelpers NuGet package dependency on the base NuGet package.
@@ -7,8 +12,6 @@ MVC 6
 - Used the RemoveServerHttpHeader method in the Configure method in Startup.cs.
 - Subresource Integrity tag helper added to TagHelpers NuGet package and _Layout.cshtml.
 - URL's in ContentDeliveryNetwork updated to include the https: scheme to use with Subresource Integrity.
-- Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
-TemplateBuilder and the new Wizard I added to it.
 - Renamed ApplicationBuilderExtensions.UseBoilerplate to ApplicationBuilderExtensions.UseUrlHelperExtensions.
 - Renamed ApplicationBuilderExtensions.RemoveServerHttpHeader to ApplicationBuilderExtensions.RunNotFound.
 - Added UseHttpException, which allows the use of <see cref="HttpException"/> as an alternative method of returning an 
@@ -91,7 +94,7 @@ MVC 5 & 6
 - Added a note to ReadMe.html to turn on Azure SQL Database Threat Detection.
 - Updated notes in ReadMe.html about where to get free SSL certificates.
 MVC 6
-- Upgraded to ASP.NET 5 RC1 Update1.
+- Upgraded to ASP.NET Core RC1 Update1.
 - Added Glimpse feature, enabled by default.
 - NuGet packages split into three, Boilerplate.Web.Mvc6, Boilerplate.Web.Mvc6.TagHelpers, Boilerplate.Web.Mvc6.Razor.
 - _ViewImports.cshtml updated to pick up the Tag Helpers from the new location.
@@ -179,7 +182,7 @@ MVC 6
 - Added a TypeScript feature.
 - The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
-- RedirectToCanonicalUrlAttribute and NoTrailingSlashAttribute updated to use the new ASP.NET 5 API's.
+- RedirectToCanonicalUrlAttribute and NoTrailingSlashAttribute updated to use the new ASP.NET Core API's.
 - The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 
@@ -310,7 +313,7 @@ MVC 6
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
 - Added a link to webaim.org to check accessibility in ReadMe.html.
 - Added UseErrorPageTests to Boilerplate.Web.Mvc6 NuGet package to help test error pages.
-- Added ASP.NET 5, npm, Gulp and Bower links in Index.cshtml.
+- Added ASP.NET Core, npm, Gulp and Bower links in Index.cshtml.
 - web.config added to wwwroot folder.
 - IHostingEnvironment.IsDevelopment and IsProduction extension methods used where available.
 - bower.html added to comment bower.json file. Comments are not allowed in the JSON file.

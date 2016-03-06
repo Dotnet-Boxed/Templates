@@ -11,7 +11,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET 4.6 MVC 5
 
-- Change Boilerplate.Web.Mvc5 to use an ASP.NET 5 class library project to build the NuGet package.
+- Change Boilerplate.Web.Mvc5 to use an ASP.NET Core class library project to build the NuGet package.
 
 ## ASP.NET Core MVC 6
 
