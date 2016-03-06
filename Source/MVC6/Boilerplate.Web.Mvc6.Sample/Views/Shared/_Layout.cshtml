@@ -246,6 +246,8 @@
         <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
+        @* asp-subresource-integrity - Ensures the CDN resource has not been tampered with.
+           See http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core *@
         <script asp-subresource-integrity src="@ContentDeliveryNetwork.Google.JQueryUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
