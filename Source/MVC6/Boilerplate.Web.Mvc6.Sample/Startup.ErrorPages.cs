@@ -1,6 +1,7 @@
 ﻿namespace MvcBoilerplate
 {
     using System.Threading.Tasks;
+    using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.AspNet.Http;
