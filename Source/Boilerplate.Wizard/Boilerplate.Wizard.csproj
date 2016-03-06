@@ -98,6 +98,7 @@
     <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
     <Compile Include="Features\Base\MultiChoiceFeature.cs" />
     <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
+    <Compile Include="Features\Other\HttpExceptionFeature.cs" />
     <Compile Include="Features\Performance\CshtmlMinificationFeature.cs" />
     <Compile Include="Features\Security\NWebSecFeature.cs" />
     <Compile Include="Features\SEO\RedirectToCanonicalUrlFeature.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="Features\SEO\SitemapFeature.cs" />
     <Compile Include="Features\Pages\ContactPageFeature.cs" />
     <Compile Include="Features\Pages\AboutPageFeature.cs" />
-    <Compile Include="Features\Privacy\ReferrerMetaTagFeature.cs" />
+    <Compile Include="Features\Other\ReferrerMetaTagFeature.cs" />
     <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
     <Compile Include="Features\Social\OpenGraphFeature.cs" />

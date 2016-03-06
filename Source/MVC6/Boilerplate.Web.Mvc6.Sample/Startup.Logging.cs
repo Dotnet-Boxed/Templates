@@ -14,14 +14,12 @@
         /// Configure tools used to help with logging internal application events.
         /// See http://docs.asp.net/en/latest/fundamentals/logging.html
         /// </summary>
-        /// <param name="application">The application.</param>
         /// <param name="environment">The environment the application is running under. This can be Development, 
         /// Staging or Production by default.</param>
         /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are 
         /// stored.</param>
         private static void ConfigureLogging(
-            IApplicationBuilder application,
             IHostingEnvironment environment,
             ILoggerFactory loggerFactory,
             IConfiguration configuration)

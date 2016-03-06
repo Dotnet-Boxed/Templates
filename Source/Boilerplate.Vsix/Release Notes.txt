@@ -9,6 +9,12 @@ MVC 6
 - URL's in ContentDeliveryNetwork updated to include the https: scheme to use with Subresource Integrity.
 - Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
 TemplateBuilder and the new Wizard I added to it.
+- Renamed ApplicationBuilderExtensions.UseBoilerplate to ApplicationBuilderExtensions.UseUrlHelperExtensions.
+- Renamed ApplicationBuilderExtensions.RemoveServerHttpHeader to ApplicationBuilderExtensions.RunNotFound.
+- Added UseHttpException, which allows the use of <see cref="HttpException"/> as an alternative method of returning an 
+error result.
+- Added UseInternalServerErrorOnException, which returns a 500 Internal Server Error response when an unhandled 
+exception occurs.
 
 Version 2.9.6
 MVC 5

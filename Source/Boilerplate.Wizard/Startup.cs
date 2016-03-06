@@ -106,6 +106,7 @@
                     builder.RegisterType<SearchFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<HumansTextFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<ReferrerMetaTagFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<HttpExceptionFeature>().AsSelf().As<IFeature>().SingleInstance();
                     break;
                 case FeatureSet.Mvc6Api:
                     // Hidden

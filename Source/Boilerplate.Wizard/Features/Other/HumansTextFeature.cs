@@ -42,7 +42,7 @@
 
         public override int Order
         {
-            get { return 5; }
+            get { return 3; }
         }
 
         protected override async Task AddFeature()

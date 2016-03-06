@@ -33,6 +33,14 @@
                 // Add error handling middle-ware which handles all HTTP status codes from 400 to 599 by re-executing
                 // the request pipeline for the following URL. '{0}' is the HTTP status code e.g. 404.
                 application.UseStatusCodePagesWithReExecute("/error/{0}");
+
+                // Returns a 500 Internal Server Error response when an unhandled exception occurs.
+                application.UseInternalServerErrorOnException();
+                // $Start-HttpException$
+
+                // Allows the use of HttpException as an alternative method of returning an error result.
+                application.UseHttpException();
+                // $End-HttpException$
             }
         }
 
@@ -49,12 +57,7 @@
             // Add the following to the request pipeline only in the staging or production environments.
             if (!environment.IsDevelopment())
             {
-                application.Run(
-                    context =>
-                    {
-                        context.Response.StatusCode = StatusCodes.Status404NotFound;
-                        return Task.FromResult<object>(null);
-                    });
+                application.RunNotFound();
             }
         }
     }

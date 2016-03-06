@@ -144,12 +144,12 @@
         /// <param name="loggerfactory">The logger factory.</param>
         public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
         {
-            // Give the ASP.NET MVC Boilerplate NuGet package assembly access to the HttpContext, so it can generate 
-            // absolute URL's and get the current request path.
-            application.UseBoilerplate();
+            // Configures the UrlHelperExtensions with the IHttpContextAccessor, so that they
+            // have access to the current HttpContext and can get the current request path.
+            application.UseUrlHelperExtensions();
 
             // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
-            application.RemoveServerHttpHeader();
+            application.UseNoServerHttpHeader();
 
             // Add the IIS platform handler to the request pipeline.
             application.UseIISPlatformHandler();
@@ -167,7 +167,7 @@
 
             ConfigureCookies(application, this.hostingEnvironment);
             ConfigureDebugging(application, this.hostingEnvironment);
-            ConfigureLogging(application, this.hostingEnvironment, loggerfactory, this.configuration);
+            ConfigureLogging(this.hostingEnvironment, loggerfactory, this.configuration);
             ConfigureErrorPages(application, this.hostingEnvironment);
             // $Start-HttpsEverywhere$
             ConfigureContentSecurityPolicy(application, this.hostingEnvironment);
