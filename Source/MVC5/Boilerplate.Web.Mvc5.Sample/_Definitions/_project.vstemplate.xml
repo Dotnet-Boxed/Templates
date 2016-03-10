@@ -27,7 +27,7 @@
     </Project>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>TemplateBuilder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
+    <Assembly>TemplateBuilder, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
     <FullClassName>TemplateBuilder.FixNuGetPackageHintPathsWizard</FullClassName>
   </WizardExtension>
 </VSTemplate>

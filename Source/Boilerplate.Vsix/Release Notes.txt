@@ -1,4 +1,7 @@
 ﻿Version 2.9.8
+MVC 5
+- Upgraded to TemplateBuilder NuGet package version 1.1.4.9-beta to fix a bug where using a '.' 
+in the name of a project causes the NuGet package hint paths to break.
 MVC 6
 - Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
 TemplateBuilder and the new Wizard I added to it.
