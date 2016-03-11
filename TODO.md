@@ -15,10 +15,8 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
-- Create a VS Extensions IWizard to fix the file path pointing to the artifacts folder in the .xproj file if it is incorrect. This can happen when someone creates a project that is not two folders away from the solution.
 - Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
-- Build a HttpException for MVC 6. See [this](http://stackoverflow.com/questions/31054012/asp-net-5-mvc-6-equivalent-of-httpexception) StackOverflow question.
 - Build a localization feature.
 - Add a CORS feature.
 - Add an option to choose the web-server you are using IIS, Nginx etc.
