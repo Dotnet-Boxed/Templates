@@ -13,7 +13,7 @@ namespace Boilerplate.Web.Mvc.Formatters
     public static class MvcBsonMvcBuilderExtensions
     {
         /// <summary>
-        /// Adds <see cref="BsonInputFormatter"/> and <see cref="BsonOutputFormatter"/> to the input and output 
+        /// Adds <see cref="BsonInputFormatter"/> and <see cref="BsonOutputFormatter"/> to the input and output
         /// formatter collections respectively.
         /// </summary>
         /// <param name="builder">The MVC builder.</param>

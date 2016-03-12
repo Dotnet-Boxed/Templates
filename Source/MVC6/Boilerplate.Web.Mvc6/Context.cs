@@ -3,7 +3,7 @@
     using Microsoft.AspNet.Http;
 
     /// <summary>
-    /// Holds an instance of the <see cref="IHttpContextAccessor"/>, which contains information about the current 
+    /// Holds an instance of the <see cref="IHttpContextAccessor"/>, which contains information about the current
     /// context.
     /// </summary>
     internal static class Context

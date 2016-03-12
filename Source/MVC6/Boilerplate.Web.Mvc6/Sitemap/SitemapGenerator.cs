@@ -22,8 +22,8 @@
         private const int MaximumSitemapCount = 50000;
 
         /// <summary>
-        /// The maximum number of sitemap nodes allowed in a sitemap file. The absolute maximum allowed is 50,000 
-        /// according to the specification. See http://www.sitemaps.org/protocol.html but the file size must also be 
+        /// The maximum number of sitemap nodes allowed in a sitemap file. The absolute maximum allowed is 50,000
+        /// according to the specification. See http://www.sitemaps.org/protocol.html but the file size must also be
         /// less than 10MB. After some experimentation, a maximum of 25,000 nodes keeps the file size below 10MB.
         /// </summary>
         private const int MaximumSitemapNodeCount = 25000;
@@ -38,8 +38,8 @@
         #region Protected Methods
 
         /// <summary>
-        /// Gets the collection of XML sitemap documents for the current site. If there are less than 25,000 sitemap 
-        /// nodes, only one sitemap document will exist in the collection, otherwise a sitemap index document will be 
+        /// Gets the collection of XML sitemap documents for the current site. If there are less than 25,000 sitemap
+        /// nodes, only one sitemap document will exist in the collection, otherwise a sitemap index document will be
         /// the first entry in the collection and all other entries will be sitemap XML documents.
         /// </summary>
         /// <param name="sitemapNodes">The sitemap nodes for the current site.</param>
@@ -50,7 +50,7 @@
             this.CheckSitemapCount(sitemapCount);
             var sitemaps = Enumerable
                 .Range(0, sitemapCount)
-                .Select(x => 
+                .Select(x =>
                     {
                         return new KeyValuePair<int, IEnumerable<SitemapNode>>(
                             x + 1,
@@ -83,8 +83,8 @@
         protected abstract string GetSitemapUrl(int index);
 
         /// <summary>
-        /// Logs warnings when a sitemap exceeds the maximum size of 10MB or if the sitemap index file exceeds the 
-        /// maximum number of allowed sitemaps. No exceptions are thrown in this case as the sitemap file is still 
+        /// Logs warnings when a sitemap exceeds the maximum size of 10MB or if the sitemap index file exceeds the
+        /// maximum number of allowed sitemaps. No exceptions are thrown in this case as the sitemap file is still
         /// generated correctly and search engines may still read it.
         /// </summary>
         /// <param name="exception">The exception to log.</param>
@@ -114,14 +114,14 @@
                     .Where(x => x.HasValue)
                     .DefaultIfEmpty()
                     .Max();
-                
+
                 XElement sitemapElement = new XElement(
                     xmlns + "sitemap",
                     new XElement(xmlns + "loc", this.GetSitemapUrl(sitemap.Key)),
-                    lastModified.HasValue ? 
+                    lastModified.HasValue ?
                         new XElement(
-                            xmlns + "lastmod", 
-                            lastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")) : 
+                            xmlns + "lastmod",
+                            lastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")) :
                         null);
 
                 root.Add(sitemapElement);
@@ -149,13 +149,13 @@
                     xmlns + "url",
                     new XElement(xmlns + "loc", Uri.EscapeUriString(sitemapNode.Url)),
                     sitemapNode.LastModified == null ? null : new XElement(
-                        xmlns + "lastmod", 
+                        xmlns + "lastmod",
                         sitemapNode.LastModified.Value.ToLocalTime().ToString("yyyy-MM-ddTHH:mm:sszzz")),
                     sitemapNode.Frequency == null ? null : new XElement(
-                        xmlns + "changefreq", 
+                        xmlns + "changefreq",
                         sitemapNode.Frequency.Value.ToString().ToLowerInvariant()),
                     sitemapNode.Priority == null ? null : new XElement(
-                        xmlns + "priority", 
+                        xmlns + "priority",
                         sitemapNode.Priority.Value.ToString("F1", CultureInfo.InvariantCulture)));
                 root.Add(urlElement);
             }
@@ -176,7 +176,7 @@
             {
                 this.LogWarning(new SitemapException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{1}>", 
+                    "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{1}>",
                     sitemapXml.Length)));
             }
         }
@@ -191,7 +191,7 @@
             {
                 this.LogWarning(new SitemapException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{1}>", 
+                    "Sitemap index file exceeds the maximum number of allowed sitemaps of 50,000. Count:<{1}>",
                     sitemapCount)));
             }
         }

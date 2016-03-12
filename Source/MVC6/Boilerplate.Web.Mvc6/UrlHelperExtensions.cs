@@ -10,7 +10,7 @@
     public static class UrlHelperExtensions
     {
         /// <summary>
-        /// Generates a fully qualified URL to an action method by using the specified action name, controller name and 
+        /// Generates a fully qualified URL to an action method by using the specified action name, controller name and
         /// route values.
         /// </summary>
         /// <param name="url">The URL helper.</param>
@@ -20,8 +20,8 @@
         /// <returns>The absolute URL.</returns>
         public static string AbsoluteAction(
             this IUrlHelper url,
-            string actionName, 
-            string controllerName, 
+            string actionName,
+            string controllerName,
             object routeValues = null)
         {
             string scheme = Context.HttpContext.Request.Scheme;
@@ -29,7 +29,7 @@
         }
 
         /// <summary>
-        /// Generates a fully qualified URL to the specified content by using the specified content path. Converts a 
+        /// Generates a fully qualified URL to the specified content by using the specified content path. Converts a
         /// virtual (relative) path to an application absolute path.
         /// </summary>
         /// <param name="url">The URL helper.</param>

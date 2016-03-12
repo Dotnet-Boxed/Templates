@@ -9,7 +9,7 @@ namespace Boilerplate.Web.Mvc
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// Represents a class that is used to render an Atom 1.0 feed by using an <see cref="SyndicationFeed"/> instance 
+    /// Represents a class that is used to render an Atom 1.0 feed by using an <see cref="SyndicationFeed"/> instance
     /// representing the feed.
     /// </summary>
     public sealed class AtomActionResult : ActionResult
@@ -28,7 +28,7 @@ namespace Boilerplate.Web.Mvc
         /// <summary>
         /// Executes the call to the ActionResult method and returns the created feed to the output response.
         /// </summary>
-        /// <param name="context">The context in which the result is executed. The context information includes the 
+        /// <param name="context">The context in which the result is executed. The context information includes the
         /// controller, HTTP content, request context, and route data.</param>
         public override void ExecuteResult(ActionContext context)
         {
@@ -40,7 +40,7 @@ namespace Boilerplate.Web.Mvc
             var hostingEnvironment = context.HttpContext.ApplicationServices.GetRequiredService<IHostingEnvironment>();
             if (hostingEnvironment.IsDevelopment())
             {
-                // Indent the XML for easier viewing but only in the Development environment. In Staging or Production, 
+                // Indent the XML for easier viewing but only in the Development environment. In Staging or Production,
                 // everything is output on one line for best performance.
                 xmlWriterSettings.Indent = true;
             }

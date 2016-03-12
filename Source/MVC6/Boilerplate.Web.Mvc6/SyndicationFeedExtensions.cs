@@ -24,7 +24,7 @@ namespace Boilerplate.Web.Mvc
         public static void AddNamespace(this SyndicationFeed feed, string namespacePrefix, string xmlNamespace)
         {
             feed.AttributeExtensions.Add(
-                new XmlQualifiedName(namespacePrefix, XNamespace.Xmlns.ToString()), 
+                new XmlQualifiedName(namespacePrefix, XNamespace.Xmlns.ToString()),
                 xmlNamespace);
         }
 

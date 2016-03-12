@@ -8,16 +8,16 @@
     using Microsoft.Extensions.OptionsModel;
 
     /// <summary>
-    /// Represents a filter that is used to prevent forgery of a request. This instance checks the HTTP Headers instead 
-    /// of the form inputs for one of the tokens. The other token is expected to be in the cookie as normal. This is 
-    /// useful for performing Ajax requests. See 
+    /// Represents a filter that is used to prevent forgery of a request. This instance checks the HTTP Headers instead
+    /// of the form inputs for one of the tokens. The other token is expected to be in the cookie as normal. This is
+    /// useful for performing Ajax requests. See
     /// http://stackoverflow.com/questions/4074199/jquery-ajax-calls-and-the-html-antiforgerytoken.
     /// </summary>
     /// <example>
     /// On the client side, when doing an Ajax request from jQuery, the anti-forgery token HTTP header can be added like so:
     /// <code>
     /// $.ajax(
-    ///     "postlocation", 
+    ///     "postlocation",
     ///     {
     ///         type: "post",
     ///         contentType: "application/json",
@@ -28,13 +28,13 @@
     ///         }
     ///     });
     /// </code>
-    /// On the server side, you simply need to add the <see cref="ValidateHeaderAntiForgeryTokenAttribute"/> attribute 
+    /// On the server side, you simply need to add the <see cref="ValidateHeaderAntiForgeryTokenAttribute"/> attribute
     /// to the controller or action the same way you would use <see cref="ValidateAntiForgeryTokenAttribute"/>.
     /// </example>
     internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter
     {
         #region Fields
-        
+
         /// <summary>
         /// The name of the request verification token HTTP header i.e. X-RequestVerificationToken.
         /// </summary>
@@ -73,7 +73,7 @@
         #endregion
 
         #region Public Methods
-        
+
         /// <summary>
         /// Called when authorization is required.
         /// </summary>
@@ -103,7 +103,7 @@
             {
                 return this.antiforgery.ValidateRequestAsync(context.HttpContext);
             }
-        } 
+        }
 
         #endregion
     }
