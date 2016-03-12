@@ -5,13 +5,13 @@
     using Microsoft.AspNet.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
-    [HtmlTargetElement(Attributes = HrefAttributeName + "," + SubresourceIntegrityHrefAttributeName)]
-    public class HrefSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
+    [HtmlTargetElement(Attributes = SrcAttributeName + "," + SubresourceIntegritySrcAttributeName)]
+    public class SrcSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
     {
-        private const string HrefAttributeName = "href";
-        private const string SubresourceIntegrityHrefAttributeName = "asp-subresource-integrity-href";
+        private const string SrcAttributeName = "src";
+        private const string SubresourceIntegritySrcAttributeName = "asp-subresource-integrity-src";
 
-        public HrefSubresourceIntegrityTagHelper(
+        public SrcSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IHostingEnvironment hostingEnvironment,
             IUrlHelper urlHelper)
@@ -19,13 +19,13 @@
         {
         }
 
-        [HtmlAttributeName(SubresourceIntegrityHrefAttributeName)]
+        [HtmlAttributeName(SubresourceIntegritySrcAttributeName)]
         public override string Source
         {
             get { return base.Source; }
             set { base.Source = value; }
         }
 
-        protected override string UrlAttributeName { get { return HrefAttributeName; } }
+        protected override string UrlAttributeName { get { return SrcAttributeName; } }
     }
 }

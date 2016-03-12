@@ -6,13 +6,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a product. This includes both virtual and physical products, but it typically represents items that are available in 
-    /// an online store. This object type is not part of the Open Graph standard but is used by Facebook.
+    /// This object type represents a product. This includes both virtual and physical products, but it typically
+    /// represents items that are available in an online store. This object type is not part of the Open Graph standard
+    /// but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-product", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-product",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProduct : OpenGraphMetadata
     {

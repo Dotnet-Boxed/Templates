@@ -10,7 +10,7 @@
         private string imageUrl;
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TwitterImage"/> class.
         /// </summary>
@@ -26,9 +26,9 @@
         /// Initializes a new instance of the <see cref="TwitterImage"/> class.
         /// </summary>
         /// <param name="imageUrl">The image URL. The Image must be less than 1MB in size.</param>
-        /// <param name="width">The width of the image in pixels to help Twitter accurately preserve the aspect ratio 
+        /// <param name="width">The width of the image in pixels to help Twitter accurately preserve the aspect ratio
         /// of the image when resizing. This property is optional.</param>
-        /// <param name="height">The height of the image in pixels to help Twitter accurately preserve the aspect ratio 
+        /// <param name="height">The height of the image in pixels to help Twitter accurately preserve the aspect ratio
         /// of the image when resizing. This property is optional.</param>
         public TwitterImage(string imageUrl, int width, int height) : this(imageUrl)
         {
@@ -39,9 +39,9 @@
         #endregion
 
         #region Public Properties
-        
+
         /// <summary>
-        /// Gets or sets the height of the image in pixels to help Twitter accurately preserve the aspect ratio of 
+        /// Gets or sets the height of the image in pixels to help Twitter accurately preserve the aspect ratio of
         /// the image when resizing. This property is optional.
         /// </summary>
         public int? Height { get; set; }
@@ -52,10 +52,10 @@
         public string ImageUrl { get { return this.imageUrl; } }
 
         /// <summary>
-        /// Gets or sets the width of the image in pixels to help Twitter accurately preserve the aspect ratio of 
+        /// Gets or sets the width of the image in pixels to help Twitter accurately preserve the aspect ratio of
         /// the image when resizing. This property is optional.
         /// </summary>
-        public int? Width { get; set; } 
+        public int? Width { get; set; }
 
         #endregion
     }

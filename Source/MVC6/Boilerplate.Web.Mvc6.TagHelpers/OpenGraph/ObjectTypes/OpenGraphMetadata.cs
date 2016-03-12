@@ -11,12 +11,13 @@
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
-    /// The Open Graph protocol enables any web page to become a rich object in a social graph. 
-    /// For instance, this is used on Facebook to allow any web page to have the same functionality 
+    /// The Open Graph protocol enables any web page to become a rich object in a social graph.
+    /// For instance, this is used on Facebook to allow any web page to have the same functionality
     /// as any other object on Facebook.
     /// See http://ogp.me for the official Open Graph specification documentation.
     /// See https://developers.facebook.com/docs/sharing/opengraph for Facebook Open Graph documentation.
-    /// See https://www.facebook.com/login.php?next=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fdebug%2F for the Open Graph debugging tool to test and verify your Open Graph implementation.
+    /// See https://www.facebook.com/login.php?next=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fdebug%2F for the
+    /// Open Graph debugging tool to test and verify your Open Graph implementation.
     /// </summary>
     public abstract class OpenGraphMetadata : TagHelper
     {
@@ -40,7 +41,7 @@
         protected const string UrlAttributeName = "url";
 
         #endregion
-        
+
         #region Public Properties
 
         /// <summary>
@@ -64,21 +65,21 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the word that appears before this object's title in a sentence. An enum of (a, an, the, "", auto). 
+        /// Gets or sets the word that appears before this object's title in a sentence. An enum of (a, an, the, "", auto).
         /// If auto is chosen, the consumer of your data should chose between "a" or "an". Default is "" (blank).
         /// </summary>
         [HtmlAttributeName(DeterminerAttributeName)]
         public OpenGraphDeterminer Determiner { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of Facebook ID's of the administrators. 
+        /// Gets or sets the list of Facebook ID's of the administrators.
         /// Use this or <see cref="FacebookAdministrators"/>, not both. <see cref="FacebookAdministrators"/> is the preferred method.
         /// </summary>
         [HtmlAttributeName(FacebookAdministratorsAttributeName)]
         public IEnumerable<string> FacebookAdministrators { get; set; }
 
         /// <summary>
-        /// Gets or sets the Facebook application identifier that identifies your website to Facebook. 
+        /// Gets or sets the Facebook application identifier that identifies your website to Facebook.
         /// Use this or <see cref="FacebookAdministrators"/>, not both. Go to https://developers.facebook.com/ to
         /// create a developer account, go to the apps tab to create a new app, which will give you this ID.
         /// </summary>
@@ -123,14 +124,14 @@
         public abstract string Namespace { get; }
 
         /// <summary>
-        /// Gets or sets the list of URL's used to supply an additional link that shows related content to the object. This property is not part of the 
+        /// Gets or sets the list of URL's used to supply an additional link that shows related content to the object. This property is not part of the
         /// Open Graph standard but is used by Facebook.
         /// </summary>
         [HtmlAttributeName(SeeAlsoAttributeName)]
         public IEnumerable<string> SeeAlso { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the site. if your object is part of a larger web site, the name which should be displayed 
+        /// Gets or sets the name of the site. if your object is part of a larger web site, the name which should be displayed
         /// for the overall site. e.g. "IMDb".
         /// </summary>
         [HtmlAttributeName(SiteNameAttributeName)]
@@ -148,7 +149,7 @@
         public abstract OpenGraphType Type { get; }
 
         /// <summary>
-        /// Gets or sets the canonical URL of your object that will be used as its permanent ID in the graph, 
+        /// Gets or sets the canonical URL of your object that will be used as its permanent ID in the graph,
         /// e.g. "http://www.imdb.com/title/tt0117500/". Leave as <c>null</c> to get the URL of the current page.
         /// </summary>
         [HtmlAttributeName(UrlAttributeName)]
@@ -173,8 +174,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Gets the space delimited namespaces to be added to the prefix attribute of the head element in the HTML 
-        /// document. It contains the namespaces for the Open Graph object type used on the page, as well as the 
+        /// Gets the space delimited namespaces to be added to the prefix attribute of the head element in the HTML
+        /// document. It contains the namespaces for the Open Graph object type used on the page, as well as the
         /// Facebook namespaces if Facebook Administrators, Application ID's or Profile ID's are supplied.
         /// </summary>
         /// <returns>A <see cref="string"/> containing Open Graph namespaces.</returns>
@@ -207,7 +208,7 @@
             // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
             // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
             this.ViewContext.ViewData[nameof(OpenGraphPrefixTagHelper)] = this.GetNamespaces();
-            
+
             // context.Items[typeof(OpenGraphMetadata)] = this.GetNamespaces();
 
             output.Content.SetHtmlContent(this.ToString());

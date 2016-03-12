@@ -15,7 +15,7 @@
             // The JSON input and output formatters are added to MVC by default.
             // $Start-JsonSerializerSettings$
 
-            // Configures the JSON output formatter to use camel case property names like 'propertyName' instead of 
+            // Configures the JSON output formatter to use camel case property names like 'propertyName' instead of
             // pascal case 'PropertyName' as this is the more common JavaScript/JSON style.
             mvcBuilder.AddJsonOptions(
                 x => x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());

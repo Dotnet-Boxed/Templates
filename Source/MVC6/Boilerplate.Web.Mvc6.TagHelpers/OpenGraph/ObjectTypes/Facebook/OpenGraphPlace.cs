@@ -5,13 +5,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a place - such as a venue, a business, a landmark, or any other location which can be identified by longitude and 
-    /// latitude. This object type is not part of the Open Graph standard but is used by Facebook.
+    /// This object type represents a place - such as a venue, a business, a landmark, or any other location which can
+    /// be identified by longitude and latitude. This object type is not part of the Open Graph standard but is used
+    /// by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/place/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-place", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName, 
+        "open-graph-place",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphPlace : OpenGraphMetadata
     {
@@ -20,7 +21,7 @@
         private const string LocationAttributeName = "location";
 
         #endregion
-        
+
         #region Public Properties
 
         /// <summary>

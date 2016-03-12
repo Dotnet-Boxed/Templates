@@ -6,7 +6,7 @@
     public abstract class OpenGraphSizedMedia : OpenGraphMedia
     {
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphSizedMedia"/> class.
         /// </summary>
@@ -20,7 +20,7 @@
         #endregion
 
         #region Public Properties
-        
+
         /// <summary>
         /// Gets or sets the height of the media in pixels. This is optional.
         /// </summary>
@@ -29,7 +29,7 @@
         /// <summary>
         /// Gets or sets the width of the media in pixels. This is optional.
         /// </summary>
-        public int? Width { get; set; } 
+        public int? Width { get; set; }
 
         #endregion
     }

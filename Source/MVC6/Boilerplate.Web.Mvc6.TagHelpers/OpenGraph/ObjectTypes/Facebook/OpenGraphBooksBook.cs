@@ -6,13 +6,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object represents a single book or publication. This is an appropriate type for ebooks, as well as traditional paperback or hardback books.
-    /// This object type is not part of the Open Graph standard but is used by Facebook.
+    /// This object represents a single book or publication. This is an appropriate type for E-Books, as well as
+    /// traditional paperback or hardback books. This object type is not part of the Open Graph standard but is used by
+    /// Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.book/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-books-book", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ISBNAttributeName, 
+        "open-graph-books-book",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ISBNAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksBook : OpenGraphMetadata
     {

@@ -5,13 +5,13 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// The Photo Card puts the image front and center in the Tweet. Clicking on the photo expands it to a 
+    /// The Photo Card puts the image front and center in the Tweet. Clicking on the photo expands it to a
     /// richer, detailed view. On twitter.com and mobile clients, the image appears below the tweet text.
     /// See https://dev.twitter.com/cards/types/photo
     /// </summary>
     [HtmlTargetElement(
-        "twitter-card-photo", 
-        Attributes = UsernameAttributeName + "," + ImageAttributeName, 
+        "twitter-card-photo",
+        Attributes = UsernameAttributeName + "," + ImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPhoto : TwitterCard
     {
@@ -22,7 +22,7 @@
         private const string TitleAttributeName = "title";
 
         #endregion
-        
+
         #region Public Properties
 
         /// <summary>
@@ -37,10 +37,10 @@
         /// - Web: maximum height of 375px, maximum width of 435px
         /// - Mobile (non-retina displays): maximum height of 375px, maximum width of 280px
         /// - Mobile (retina displays): maximum height of 750px, maximum width of 560px
-        /// Twitter will not create a photo card unless the twitter:image is of a minimum size of 280px wide by 150px tall. 
-        /// Images will not be cropped unless they have an exceptional aspect ratio. 
+        /// Twitter will not create a photo card unless the twitter:image is of a minimum size of 280px wide by 150px tall.
+        /// Images will not be cropped unless they have an exceptional aspect ratio.
         /// Images will be fetched and proxied by Twitter to ensure a high quality of service and SSL security for users.
-        /// Specifying the width and height using twitter:image:width and twitter:image:height helps Twitter more accurately 
+        /// Specifying the width and height using twitter:image:width and twitter:image:height helps Twitter more accurately
         /// preserve the aspect ratio of the image when resizing.
         /// Photo Cards are the only type of card which support a blank title, even if you are not using Open Graph.
         /// Animated gifs are currently supported in Twitter Cards via the Player Card.
@@ -49,7 +49,7 @@
         public TwitterImage Image { get; set; }
 
         /// <summary>
-        /// Gets or sets the title of your content as it should appear in the card. You may specify an empty 
+        /// Gets or sets the title of your content as it should appear in the card. You may specify an empty
         /// string if you wish no title to render.
         /// </summary>
         [HtmlAttributeName(TitleAttributeName)]
@@ -65,7 +65,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

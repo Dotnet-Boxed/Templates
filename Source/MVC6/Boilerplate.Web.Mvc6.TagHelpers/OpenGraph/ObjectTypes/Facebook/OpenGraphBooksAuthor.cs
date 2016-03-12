@@ -5,12 +5,13 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object represents a single author of a book. This object type is not part of the Open Graph standard but is used by Facebook.
+    /// This object represents a single author of a book. This object type is not part of the Open Graph standard but
+    /// is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/books.author/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-books-author", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-books-author",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBooksAuthor : OpenGraphMetadata
     {

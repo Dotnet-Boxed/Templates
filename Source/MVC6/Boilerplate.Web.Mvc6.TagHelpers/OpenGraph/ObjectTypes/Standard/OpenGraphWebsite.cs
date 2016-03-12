@@ -7,8 +7,8 @@
     /// See http://ogp.me/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-website", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-website",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphWebsite : OpenGraphMetadata
     {

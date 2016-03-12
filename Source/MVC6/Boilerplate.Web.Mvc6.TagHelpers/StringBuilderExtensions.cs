@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        /// Appends a <see cref="string"/> representing a meta tag with the specified name and content attribute value, 
+        /// Appends a <see cref="string"/> representing a meta tag with the specified name and content attribute value,
         /// only if the <paramref name="content"/> is not <c>null</c>.
         /// </summary>
         /// <typeparam name="T">The type of the content.</typeparam>
@@ -58,8 +58,8 @@
         }
 
         /// <summary>
-        /// Appends a <see cref="string" /> representing a meta tag with the specified property and 
-        /// <see cref="DateTime"/> content value. The content is in the format yyyy-MM-dd if no time component is 
+        /// Appends a <see cref="string" /> representing a meta tag with the specified property and
+        /// <see cref="DateTime"/> content value. The content is in the format yyyy-MM-dd if no time component is
         /// specified, otherwise yyyy-MM-ddTHH:mm:ssZ.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
@@ -89,8 +89,8 @@
         /// <param name="property">The property name of the meta tag.</param>
         /// <param name="content">The collection of content values of the meta tag.</param>
         public static void AppendMetaPropertyContent<T>(
-            this StringBuilder stringBuilder, 
-            string property, 
+            this StringBuilder stringBuilder,
+            string property,
             IEnumerable<T> content)
         {
             foreach (T item in content)
@@ -100,7 +100,7 @@
         }
 
         /// <summary>
-        /// Appends a <see cref="string"/> representing a meta tag with the specified property and content attribute 
+        /// Appends a <see cref="string"/> representing a meta tag with the specified property and content attribute
         /// value, only if the <paramref name="content"/> is not <c>null</c>.
         /// </summary>
         /// <typeparam name="T">The type of the content.</typeparam>
@@ -108,8 +108,8 @@
         /// <param name="property">The property name of the meta tag.</param>
         /// <param name="content">The content value of the meta tag.</param>
         public static void AppendMetaPropertyContentIfNotNull<T>(
-            this StringBuilder stringBuilder, 
-            string property, 
+            this StringBuilder stringBuilder,
+            string property,
             T content)
         {
             if (content != null)
@@ -119,16 +119,16 @@
         }
 
         /// <summary>
-        /// Appends a <see cref="string" /> representing a meta tag with the specified property and 
-        /// <see cref="DateTime"/> content value, only if the <paramref name="content"/> is not <c>null</c>. The 
+        /// Appends a <see cref="string" /> representing a meta tag with the specified property and
+        /// <see cref="DateTime"/> content value, only if the <paramref name="content"/> is not <c>null</c>. The
         /// content is in the format yyyy-MM-dd if no time component is specified, otherwise yyyy-MM-ddTHH:mm:ssZ.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         /// <param name="property">The property name of the meta tag.</param>
         /// <param name="content">The content value of the meta tag.</param>
         public static void AppendMetaPropertyContentIfNotNull(
-            this StringBuilder stringBuilder, 
-            string property, 
+            this StringBuilder stringBuilder,
+            string property,
             DateTime? content)
         {
             if (content != null)
@@ -138,7 +138,7 @@
         }
 
         /// <summary>
-        /// Appends a <see cref="string" /> representing multiple meta tags with the specified property and content 
+        /// Appends a <see cref="string" /> representing multiple meta tags with the specified property and content
         /// values, only if the <paramref name="content"/> is not <c>null</c>.
         /// </summary>
         /// <typeparam name="T">The type of the content.</typeparam>
@@ -146,8 +146,8 @@
         /// <param name="property">The property name of the meta tag.</param>
         /// <param name="content">The collection of content values of the meta tag.</param>
         public static void AppendMetaPropertyContentIfNotNull<T>(
-            this StringBuilder stringBuilder, 
-            string property, 
+            this StringBuilder stringBuilder,
+            string property,
             IEnumerable<T> content)
         {
             if (content != null)

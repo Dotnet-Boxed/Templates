@@ -129,14 +129,15 @@ var sources = {
         {
             // name - The name of the final CSS file to build.
             name: 'font-awesome.css',
-            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified
-            // to create a file with the above file name.
-            paths: [
-                paths.bower + 'font-awesome/scss/font-awesome.scss'
-            ]
+            // copy - Just copy the file and don't run it through the minification pipeline.
+            copy: true,
+            // paths - The path to the file to copy.
+            paths: paths.bower + 'font-awesome/css/font-awesome.min.css'
         },
         {
             name: 'site.css',
+            // paths - An array of paths to CSS or SASS files which will be compiled to CSS, concatenated and minified
+            // to create a file with the above file name.
             paths: [
                 paths.styles + 'site.scss'
             ]
@@ -179,38 +180,30 @@ var sources = {
         {
             // name - The name of the final JavaScript file to build.
             name: 'bootstrap.js',
+            // copy - Just copy the file and don't run it through the minification pipeline.
+            copy: true,
             // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and
             // minified to create a file with the above file name.
-            paths: [
-                // Feel free to remove any parts of Bootstrap you don't use.
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/transition.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/alert.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/button.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/carousel.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/collapse.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/dropdown.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/modal.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/tooltip.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/popover.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/scrollspy.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/tab.js',
-                paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap/affix.js'
-            ]
+            paths: paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js'
         },
         {
             name: 'jquery.js',
-            paths: paths.bower + 'jquery/dist/jquery.js'
+            copy: true,
+            paths: paths.bower + 'jquery/dist/jquery.min.js'
         },
         {
             name: 'jquery-validate.js',
-            paths: paths.bower + 'jquery-validation/dist/jquery.validate.js'
+            copy: true,
+            paths: paths.bower + 'jquery-validation/dist/jquery.validate.min.js'
         },
         {
             name: 'jquery-validate-unobtrusive.js',
-            paths: paths.bower + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.js'
+            copy: true,
+            paths: paths.bower + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'
         },
         {
             name: 'modernizr.js',
+            copy: true,
             paths: paths.bower + 'modernizr/modernizr.js'
         },
         {
@@ -347,29 +340,40 @@ gulp.task('lint', [
  */
 gulp.task('build-css', ['clean-css', 'lint-css'], function () {
     var tasks = sources.css.map(function (source) { // For each set of source files in the sources.
-        return gulp                                 // Return the stream.
-            .src(source.paths)                      // Start with the source paths.
-            .pipe(plumber())                        // Handle any errors.
-            .pipe(gulpif(
-                environment.isDevelopment(),        // If running in the development environment.
-                sourcemaps.init()))                 // Set up the generation of .map source files for the CSS.
-            .pipe(gulpif('**/*.scss', sass()))      // If the file is a SASS (.scss) file, compile it to CSS (.css).
-            .pipe(autoprefixer({                    // Auto-prefix CSS with vendor specific prefixes.
-                browsers: [
-                    '> 1%',                         // Support browsers with more than 1% market share.
-                    'last 2 versions'               // Support the last two versions of browsers.
-                ]
-            }))
-            .pipe(concat(source.name))              // Concatenate CSS files into a single CSS file with the specified name.
-            .pipe(sizeBefore(source.name))          // Write the size of the file to the console before minification.
-            .pipe(gulpif(
-                !environment.isDevelopment(),       // If running in the staging or production environment.
-                cssnano()))                         // Minifies the CSS.
-            .pipe(sizeAfter(source.name))           // Write the size of the file to the console after minification.
-            .pipe(gulpif(
-                environment.isDevelopment(),        // If running in the development environment.
-                sourcemaps.write('.')))             // Generates source .map files for the CSS.
-            .pipe(gulp.dest(paths.css));            // Saves the CSS file to the specified destination path.
+        if (source.copy) {                          // If we are only copying files.
+            return gulp
+                .src(source.paths)                  // Start with the source paths.
+                .pipe(rename({                      // Rename the file to the source name.
+                    basename: source.name,
+                    extname: ''
+                }))
+                .pipe(gulp.dest(paths.css));        // Saves the CSS file to the specified destination path.
+        }
+        else {
+            return gulp                             // Return the stream.
+                .src(source.paths)                  // Start with the source paths.
+                .pipe(plumber())                    // Handle any errors.
+                .pipe(gulpif(
+                    environment.isDevelopment(),    // If running in the development environment.
+                    sourcemaps.init()))             // Set up the generation of .map source files for the CSS.
+                .pipe(gulpif('**/*.scss', sass()))  // If the file is a SASS (.scss) file, compile it to CSS (.css).
+                .pipe(autoprefixer({                // Auto-prefix CSS with vendor specific prefixes.
+                    browsers: [
+                        '> 1%',                     // Support browsers with more than 1% market share.
+                        'last 2 versions'           // Support the last two versions of browsers.
+                    ]
+                }))
+                .pipe(concat(source.name))          // Concatenate CSS files into a single CSS file with the specified name.
+                .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
+                .pipe(gulpif(
+                    !environment.isDevelopment(),   // If running in the staging or production environment.
+                    cssnano()))                     // Minifies the CSS.
+                .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
+                .pipe(gulpif(
+                    environment.isDevelopment(),    // If running in the development environment.
+                    sourcemaps.write('.')))         // Generates source .map files for the CSS.
+                .pipe(gulp.dest(paths.css));        // Saves the CSS file to the specified destination path.
+        }
     });
     return merge(tasks);                            // Combine multiple streams to one and return it so the task can be chained.
 });
@@ -400,37 +404,48 @@ gulp.task('build-js', [
     // $End-JavaScriptLint$
 ],
 function () {
-    var tasks = sources.js.map(function (source) { // For each set of source files in the sources.
-        return gulp                             // Return the stream.
-            .src(source.paths)                  // Start with the source paths.
-            .pipe(plumber())                    // Handle any errors.
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
-            // $Start-ApplicationInsights$
-            .pipe(gulpif(
-                source.replacement,             // If the source has a replacement to be made.
-                replace(                        // Carry out the specified find and replace.
-                    source.replacement ? source.replacement.find : '',
-                    source.replacement ? source.replacement.replace : '')))
-            // $End-ApplicationInsights$
-            // $Start-TypeScript$
-            .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
-                '**/*.ts',
-                typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
-            // $End-TypeScript$
-            .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
-            .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
-            .pipe(gulpif(
-                !environment.isDevelopment(),   // If running in the staging or production environment.
-                uglify()))                      // Minifies the JavaScript.
-            .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
-            .pipe(gulpif(
-                environment.isDevelopment(),    // If running in the development environment.
-                sourcemaps.write('.')))         // Generates source .map files for the JavaScript.
-            .pipe(gulp.dest(paths.js));         // Saves the JavaScript file to the specified destination path.
+    var tasks = sources.js.map(function (source) {  // For each set of source files in the sources.
+        if (source.copy) {                          // If we are only copying files.
+            return gulp
+                .src(source.paths)                  // Start with the source paths.
+                .pipe(rename({                      // Rename the file to the source name.
+                    basename: source.name,
+                    extname: ''
+                }))
+                .pipe(gulp.dest(paths.js));         // Saves the JavaScript file to the specified destination path.
+        }
+        else {
+            return gulp                             // Return the stream.
+                .src(source.paths)                  // Start with the source paths.
+                .pipe(plumber())                    // Handle any errors.
+                .pipe(gulpif(
+                    environment.isDevelopment(),    // If running in the development environment.
+                    sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
+                // $Start-ApplicationInsights$
+                .pipe(gulpif(
+                    source.replacement,             // If the source has a replacement to be made.
+                    replace(                        // Carry out the specified find and replace.
+                        source.replacement ? source.replacement.find : '',
+                        source.replacement ? source.replacement.replace : '')))
+                // $End-ApplicationInsights$
+                // $Start-TypeScript$
+                .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
+                    '**/*.ts',
+                    typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+                // $End-TypeScript$
+                .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
+                .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.
+                .pipe(gulpif(
+                    !environment.isDevelopment(),   // If running in the staging or production environment.
+                    uglify()))                      // Minifies the JavaScript.
+                .pipe(sizeAfter(source.name))       // Write the size of the file to the console after minification.
+                .pipe(gulpif(
+                    environment.isDevelopment(),    // If running in the development environment.
+                    sourcemaps.write('.')))         // Generates source .map files for the JavaScript.
+                .pipe(gulp.dest(paths.js));         // Saves the JavaScript file to the specified destination path.
+        }
     });
-    return merge(tasks);                        // Combine multiple streams to one and return it so the task can be chained.
+    return merge(tasks);                            // Combine multiple streams to one and return it so the task can be chained.
 });
 // $Start-CshtmlMinification$
 

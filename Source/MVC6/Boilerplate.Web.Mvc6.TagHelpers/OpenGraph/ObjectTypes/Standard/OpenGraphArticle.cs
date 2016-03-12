@@ -12,8 +12,8 @@
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/article/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-article", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-article",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphArticle : OpenGraphMetadata
     {

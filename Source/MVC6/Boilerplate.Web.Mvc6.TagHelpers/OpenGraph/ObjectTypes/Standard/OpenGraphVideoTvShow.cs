@@ -6,15 +6,15 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a TV show, and contains references to the actors and other professionals involved in its production. For individual 
-    /// episodes of a series, use the video.episode object type. A TV show is defined by us as a series or set of episodes that are produced under the 
+    /// This object type represents a TV show, and contains references to the actors and other professionals involved in its production. For individual
+    /// episodes of a series, use the video.episode object type. A TV show is defined by us as a series or set of episodes that are produced under the
     /// same title (eg. a television or online series). This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.tv_show/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-video-tv-show", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-video-tv-show",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoTvShow : OpenGraphMetadata
     {

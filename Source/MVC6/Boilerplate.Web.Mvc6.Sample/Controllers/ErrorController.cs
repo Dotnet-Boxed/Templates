@@ -13,13 +13,13 @@
         #region Public Methods
 
         /// <summary>
-        /// Gets the error view for the specified HTTP error status code. Returns a <see cref="PartialViewResult"/> if 
+        /// Gets the error view for the specified HTTP error status code. Returns a <see cref="PartialViewResult"/> if
         /// the request is an Ajax request, otherwise returns a full <see cref="ViewResult"/>.
         /// </summary>
         /// <param name="statusCode">The HTTP error status code.</param>
-        /// <param name="status">The name of the HTTP error status code e.g. 'notfound'. This is not used but is here 
+        /// <param name="status">The name of the HTTP error status code e.g. 'notfound'. This is not used but is here
         /// for aesthetic purposes.</param>
-        /// <returns>A <see cref="PartialViewResult"/> if the request is an Ajax request, otherwise returns a full 
+        /// <returns>A <see cref="PartialViewResult"/> if the request is an Ajax request, otherwise returns a full
         /// <see cref="ViewResult"/> containing the error view.</returns>
         [ResponseCache(CacheProfileName = CacheProfileName.Error)]
         [HttpGet("{statusCode}/{status?}", Name = ErrorControllerRoute.GetError)]

@@ -11,8 +11,8 @@
     /// See http://ogp.me/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-book", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-book",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBook : OpenGraphMetadata
     {

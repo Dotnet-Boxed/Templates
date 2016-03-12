@@ -10,8 +10,8 @@
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.item/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-product-item", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AvailabilityAttributeName + "," + ConditionAttributeName + "," + PricesAttributeName + "," + RetailerItemIdAttributeName, 
+        "open-graph-product-item",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AvailabilityAttributeName + "," + ConditionAttributeName + "," + PricesAttributeName + "," + RetailerItemIdAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProductItem : OpenGraphMetadata
     {

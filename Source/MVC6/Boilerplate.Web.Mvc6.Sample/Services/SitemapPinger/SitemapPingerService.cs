@@ -36,7 +36,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapPingerService"/> class.
         /// </summary>
-        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development, 
+        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
         /// <param name="logger">The <see cref="SitemapPingerService"/> logger.</param>
         /// <param name="sitemapSettings">The sitemap settings.</param>
@@ -69,10 +69,10 @@
         #region Public Methods
 
         /// <summary>
-        /// Send (or 'ping') the URL of this sites sitemap.xml file to search engines like Google, Bing and Yahoo, 
-        /// This method should be called each time the sitemap changes. Google says that 'We recommend that you 
-        /// resubmit a Sitemap no more than once per hour.' The way we 'ping' our sitemap to search engines is 
-        /// actually an open standard See 
+        /// Send (or 'ping') the URL of this sites sitemap.xml file to search engines like Google, Bing and Yahoo,
+        /// This method should be called each time the sitemap changes. Google says that 'We recommend that you
+        /// resubmit a Sitemap no more than once per hour.' The way we 'ping' our sitemap to search engines is
+        /// actually an open standard See
         /// http://www.sitemaps.org/protocol.html#submit_ping
         /// You can read the sitemap ping documentation for the top search engines below:
         /// Google - http://googlewebmastercentral.blogspot.co.uk/2014/10/best-practices-for-xml-sitemaps-rssatom.html

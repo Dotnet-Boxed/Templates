@@ -6,11 +6,11 @@
     internal static class OpenGraphDeterminerExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string" /> representation of the <see cref="OpenGraphDeterminer" />.
+        /// Returns the lower-case <see cref="string" /> representation of the <see cref="OpenGraphDeterminer" />.
         /// </summary>
         /// <param name="determiner">The determiner word to display before the title.</param>
         /// <returns>
-        /// The lowercase <see cref="string" /> representation of the <see cref="OpenGraphDeterminer" />.
+        /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphDeterminer" />.
         /// </returns>
         public static string ToLowercaseString(this OpenGraphDeterminer determiner)
         {

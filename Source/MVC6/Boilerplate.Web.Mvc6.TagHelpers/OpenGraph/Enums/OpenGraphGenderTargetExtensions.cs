@@ -6,11 +6,11 @@
     internal static class OpenGraphTargetGenderExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string" /> representation of the <see cref="OpenGraphTargetGender" />.
+        /// Returns the lower-case <see cref="string" /> representation of the <see cref="OpenGraphTargetGender" />.
         /// </summary>
         /// <param name="gender">The gender being targeted.</param>
         /// <returns>
-        /// The lowercase <see cref="string" /> representation of the <see cref="OpenGraphTargetGender" />.
+        /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphTargetGender" />.
         /// </returns>
         public static string ToLowercaseString(this OpenGraphTargetGender gender)
         {

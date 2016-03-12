@@ -11,8 +11,8 @@
     /// https://developers.facebook.com/docs/reference/opengraph/object-type/music.song/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-music-song", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AlbumUrlsAttributeName + "," + AlbumDiscAttributeName + "," + AlbumTrackAttributeName, 
+        "open-graph-music-song",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + AlbumUrlsAttributeName + "," + AlbumDiscAttributeName + "," + AlbumTrackAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicSong : OpenGraphMetadata
     {
@@ -56,7 +56,7 @@
         public int? Duration { get; set; }
 
         /// <summary>
-        /// Gets or sets the International Standard Recording Code (ISRC) for the song. This is a Facebook specific property and is not specified in the 
+        /// Gets or sets the International Standard Recording Code (ISRC) for the song. This is a Facebook specific property and is not specified in the
         /// Open Graph standard.
         /// </summary>
         [HtmlAttributeName(ISRCAttributeName)]

@@ -10,7 +10,7 @@
         private readonly string actorUrl;
 
         #region Constructors
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGraphActor"/> class.
         /// </summary>
@@ -37,7 +37,7 @@
         #endregion
 
         #region Public Properties
-        
+
         /// <summary>
         /// Gets the URL to the page about the actor. This URL must contain profile meta tags <see cref="OpenGraphProfile"/>.
         /// </summary>
@@ -46,7 +46,7 @@
         /// <summary>
         /// Gets or sets the role the actor played.
         /// </summary>
-        public string Role { get; set; } 
+        public string Role { get; set; }
 
         #endregion
     }

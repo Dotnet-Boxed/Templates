@@ -5,14 +5,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object represents a 'radio' station of a stream of audio. The audio properties should be used to identify the location of the stream itself. 
-    /// This object type is part of the Open Graph standard.
+    /// This object represents a 'radio' station of a stream of audio. The audio properties should be used to identify
+    /// the location of the stream itself. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.radio_station/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-music-radio-station", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-music-radio-station",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicRadioStation : OpenGraphMetadata
     {

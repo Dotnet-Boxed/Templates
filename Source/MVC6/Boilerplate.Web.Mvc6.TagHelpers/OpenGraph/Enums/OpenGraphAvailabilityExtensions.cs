@@ -6,11 +6,11 @@
     internal static class OpenGraphAvailabilityExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string" /> representation of the <see cref="OpenGraphAvailability" />.
+        /// Returns the lower-case <see cref="string" /> representation of the <see cref="OpenGraphAvailability" />.
         /// </summary>
         /// <param name="openGraphAvailability">The open graph availability.</param>
         /// <returns>
-        /// The lowercase <see cref="string" /> representation of the <see cref="OpenGraphAvailability" />.
+        /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphAvailability" />.
         /// </returns>
         public static string ToLowercaseString(this OpenGraphAvailability openGraphAvailability)
         {

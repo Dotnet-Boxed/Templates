@@ -23,7 +23,7 @@
     @* Icons & Platform Specific Settings (See http://rehansaeed.com/internet-favicon-madness/ for detailed
         information). The order of these icons is very important. *@
     @* $Start-AppleIOSFavicons$ *@
-    
+
     @* Apple Icons - See https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Introduction.html#//apple_ref/doc/uid/30001261-SW1 *@
     @* apple-touch-icon-57x57.png - Android Stock Browser and non-Retina iPhone and iPod Touch *@
     <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-touch-icon-57x57.png">
@@ -131,7 +131,8 @@
         <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
-        <link asp-subresource-integrity rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl" />
+        <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"
+              asp-subresource-integrity-href="~/css/font-awesome.css" />
     </environment>
     @* $Start-ApplicationInsights$ *@
     @* Add Azure Application Insights JavaScript script tag. *@
@@ -148,7 +149,7 @@
 
     @* Description - Used by search engines. Aim for more than 160 characters. *@
     <meta name="description" content="@ViewBag.Description">
-    
+
 
     @* Canonical - The URL of the current page. Stops case differences and http/https being treated as different URL's
         by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and
@@ -246,12 +247,14 @@
         <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
     <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
-        @* asp-subresource-integrity - Ensures the CDN resource has not been tampered with.
+        @* asp-subresource-integrity-src - Ensures the CDN resource has not been tampered with.
            See http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core *@
-        <script asp-subresource-integrity src="@ContentDeliveryNetwork.Google.JQueryUrl"></script>
+        <script src="@ContentDeliveryNetwork.Google.JQueryUrl"
+                asp-subresource-integrity-src="~/js/jquery.js"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
-        <script asp-subresource-integrity src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"></script>
+        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"
+                asp-subresource-integrity-src="~/js/bootstrap.js"></script>
         @* Move site.js to a content delivery network (CDN) for better performance. *@
         <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>

@@ -37,13 +37,13 @@
                 this.mediaUrl = mediaUrl;
             }
         }
-        
+
         #endregion
 
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with a file extension, 
+        /// Gets or sets the MIME type of the media e.g. media/jpeg. This is optional if your media URL ends with a file extension,
         /// otherwise it is recommended.
         /// </summary>
         public string Type { get; set; }
@@ -66,7 +66,7 @@
         /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Open Graph meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
-        public abstract void ToString(StringBuilder stringBuilder); 
+        public abstract void ToString(StringBuilder stringBuilder);
 
         #endregion
     }

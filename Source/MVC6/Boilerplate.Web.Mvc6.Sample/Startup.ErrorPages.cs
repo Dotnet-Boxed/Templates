@@ -12,7 +12,7 @@
         /// Configures the error pages for the application.
         /// </summary>
         /// <param name="application">The application.</param>
-        /// <param name="environment">The environment the application is running under. This can be Development, 
+        /// <param name="environment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
         private static void ConfigureErrorPages(
             IApplicationBuilder application,
@@ -25,7 +25,7 @@
                 // to use this in production. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
                 application.UseDeveloperExceptionPage();
 
-                // When a database error occurs, displays a detailed error page with full diagnostic information. It is 
+                // When a database error occurs, displays a detailed error page with full diagnostic information. It is
                 // unsafe to use this in production. Uncomment this if using a database.
                 // application.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
             }
@@ -49,7 +49,7 @@
         /// Configures the 404 Not Found error page for the application. Used when no other route matches.
         /// </summary>
         /// <param name="application">The application.</param>
-        /// <param name="environment">The environment the application is running under. This can be Development, 
+        /// <param name="environment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
         private static void Configure404NotFoundErrorPage(
             IApplicationBuilder application,

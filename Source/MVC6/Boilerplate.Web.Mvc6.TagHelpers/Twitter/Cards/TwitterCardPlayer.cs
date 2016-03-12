@@ -5,14 +5,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. By implementing a few HTML meta tags to 
-    /// your website and following the Twitter Rules of the Road, you can deliver your rich media to users across the globe.
-    /// Twitter must approve the use of the player card, find out more below.
+    /// Video clips and audio streams have a special place on the Twitter platform thanks to the Player Card. By
+    /// implementing a few HTML meta tags to your website and following the Twitter Rules of the Road, you can deliver
+    /// your rich media to users across the globe. Twitter must approve the use of the player card, find out more below.
     /// See https://dev.twitter.com/cards/types/player
     /// </summary>
     [HtmlTargetElement(
-        "twitter-card-player", 
-        Attributes = UsernameAttributeName + "," + ImageAttributeName + "," + PlayerAttributeName, 
+        "twitter-card-player",
+        Attributes = UsernameAttributeName + "," + ImageAttributeName + "," + PlayerAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardPlayer : TwitterCard
     {
@@ -28,9 +28,9 @@
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for 
-        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field 
-        /// to describe the general services provided by the website. Description text will be truncated at 
+        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for
+        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field
+        /// to describe the general services provided by the website. Description text will be truncated at
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
@@ -38,16 +38,16 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the image to be displayed in place of the player on platforms that don’t support iframes or 
-        /// inline players. You should make this image the same dimensions as your player. Images with fewer than 
-        /// 68,600 pixels (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render. 
+        /// Gets or sets the image to be displayed in place of the player on platforms that don’t support iframes or
+        /// inline players. You should make this image the same dimensions as your player. Images with fewer than
+        /// 68,600 pixels (a 262x262 square image, or a 350x196 16:9 image) will cause the player card not to render.
         /// Image must be less than 1MB in size.
         /// </summary>
         [HtmlAttributeName(ImageAttributeName)]
         public TwitterImage Image { get; set; }
 
         /// <summary>
-        /// Gets or sets the video player. If the iframe is wider than 435px, the iframe player will be resized to fit 
+        /// Gets or sets the video player. If the iframe is wider than 435px, the iframe player will be resized to fit
         /// a max width of 435px, maintaining the original aspect ratio.
         /// </summary>
         [HtmlAttributeName(PlayerAttributeName)]
@@ -70,7 +70,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

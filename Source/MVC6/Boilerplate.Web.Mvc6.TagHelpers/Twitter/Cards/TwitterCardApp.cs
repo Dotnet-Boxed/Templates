@@ -4,9 +4,9 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// The App Card is a great way to represent mobile applications on Twitter and to drive installs. The app card 
-    /// is designed to allow for a name, description and icon, and also to highlight attributes such as the rating 
-    /// and the price. This Card type is currently available on the twitter.com website, as well as iOS and Android 
+    /// The App Card is a great way to represent mobile applications on Twitter and to drive installs. The app card
+    /// is designed to allow for a name, description and icon, and also to highlight attributes such as the rating
+    /// and the price. This Card type is currently available on the twitter.com website, as well as iOS and Android
     /// mobile clients. It is not yet available on mobile web. See https://dev.twitter.com/cards/types/app.
     /// </summary>
     [HtmlTargetElement("twitter-card-app", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
@@ -21,16 +21,16 @@
         private const string IPadAttributeName = "ipad";
         private const string IPadCustomUrlSchemeAttributeName = "iphone-custom-url-scheme";
         private const string IPhoneAttributeName = "ipad";
-        private const string IPhoneCustomUrlSchemeAttributeName = "iphone-custom-url-scheme"; 
+        private const string IPhoneCustomUrlSchemeAttributeName = "iphone-custom-url-scheme";
 
         #endregion
 
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for 
-        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field 
-        /// to describe the general services provided by the website. Description text will be truncated at 
+        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for
+        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field
+        /// to describe the general services provided by the website. Description text will be truncated at
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
@@ -38,7 +38,7 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the country. If your application is not available in the US App Store, you must set this 
+        /// Gets or sets the country. If your application is not available in the US App Store, you must set this
         /// value to the two-letter country code for the App Store that contains your application.
         /// </summary>
         [HtmlAttributeName(CountryAttributeName)]
@@ -90,7 +90,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

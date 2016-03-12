@@ -1,6 +1,6 @@
 // JSHint Default Configuration File (See http://jshint.com/docs/).
 
-// This file contains the default settings for JSHint. If you are not going to change any rules, this file can be 
+// This file contains the default settings for JSHint. If you are not going to change any rules, this file can be
 // safely deleted. JSHint is used to lint your JavaScript code to highlight common errors and code smells.
 
 {

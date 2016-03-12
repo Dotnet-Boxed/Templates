@@ -6,10 +6,10 @@
     internal static class OpenGraphTypeExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string"/> representation of the <see cref="OpenGraphType"/>.
+        /// Returns the lower-case <see cref="string"/> representation of the <see cref="OpenGraphType"/>.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <returns>The lowercase <see cref="string"/> representation of the <see cref="OpenGraphType"/>.</returns>
+        /// <returns>The lower-case <see cref="string"/> representation of the <see cref="OpenGraphType"/>.</returns>
         public static string ToLowercaseString(this OpenGraphType type)
         {
             switch (type)

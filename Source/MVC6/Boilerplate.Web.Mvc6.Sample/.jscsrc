@@ -3,7 +3,7 @@
 // This file contains a list of all rules determining how your JavaScript should be styled. The 'lint-js' Gulp task can
 // be run to apply these rules and you can see any errors output to the 'Task Runner Explorer' console.
 
-// There are several popular rule sets available from Douglas Crockford, Google, jQuery etc. (See http://jscs.info). 
+// There are several popular rule sets available from Douglas Crockford, Google, jQuery etc. (See http://jscs.info).
 // This file contains the rule set by Douglas Crockford (The creator of JavaScript) which is a little less strict.
 // For a comparison of the different rule sets (See https://github.com/Seravo/js-winning-style).
 

@@ -5,17 +5,18 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// The Gallery Card allows you to represent collections of photos within a Tweet. This Card type is 
-    /// designed to let the user know that there’s more than just a single image at the URL shared, but 
-    /// rather a gallery of related images. You can specify up to 4 different images to show in the gallery 
-    /// card. You can also provide attribution to the photographer of the  gallery by specifying the value of the creator tag. 
+    /// The Gallery Card allows you to represent collections of photos within a Tweet. This Card type is
+    /// designed to let the user know that there’s more than just a single image at the URL shared, but
+    /// rather a gallery of related images. You can specify up to 4 different images to show in the gallery
+    /// card. You can also provide attribution to the photographer of the  gallery by specifying the value of the
+    /// creator tag.
     /// See https://dev.twitter.com/cards/types/gallery.
     /// </summary>
     [HtmlTargetElement(
-        "twitter-card-gallery", 
-        Attributes = 
-            UsernameAttributeName + "," + Image0AttributeName + "," + Image1AttributeName + "," + 
-            Image2AttributeName + "," + Image3AttributeName, 
+        "twitter-card-gallery",
+        Attributes =
+            UsernameAttributeName + "," + Image0AttributeName + "," + Image1AttributeName + "," +
+            Image2AttributeName + "," + Image3AttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class TwitterCardGallery : TwitterCard
     {
@@ -30,60 +31,60 @@
         private const string TitleAttributeName = "title";
 
         #endregion
-        
+
         #region Public Properties
 
         /// <summary>
-        /// Gets or sets the Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an 
+        /// Gets or sets the Twitter username of the creator of the content on the page e.g. @RehanSaeedUK. This is an
         /// optional property.
         /// </summary>
         [HtmlAttributeName(CreatorUsernameAttributeName)]
         public string CreatorUsername { get; set; }
 
         /// <summary>
-        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for 
-        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field 
-        /// to describe the general services provided by the website. Description text will be truncated at 
-        /// the word to 200 characters. This is an optional property. If you are using Facebook's Open Graph 
+        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for
+        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field
+        /// to describe the general services provided by the website. Description text will be truncated at
+        /// the word to 200 characters. This is an optional property. If you are using Facebook's Open Graph
         /// og:description, do not use this unless you want a different description.
         /// </summary>
         [HtmlAttributeName(DescriptionAttributeName)]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to the first image representing the content of the page.  Images must be less than 
-        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
+        /// Gets or sets the URL to the first image representing the content of the page.  Images must be less than
+        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
         [HtmlAttributeName(Image0AttributeName)]
         public TwitterImage Image0 { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to the second image representing the content of the page.  Images must be less than 
-        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
+        /// Gets or sets the URL to the second image representing the content of the page.  Images must be less than
+        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
         [HtmlAttributeName(Image1AttributeName)]
         public TwitterImage Image1 { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to the third image representing the content of the page.  Images must be less than 
-        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
+        /// Gets or sets the URL to the third image representing the content of the page.  Images must be less than
+        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
         [HtmlAttributeName(Image2AttributeName)]
         public TwitterImage Image2 { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to the fourth image representing the content of the page.  Images must be less than 
-        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want 
+        /// Gets or sets the URL to the fourth image representing the content of the page.  Images must be less than
+        /// 1MB in size. If you are using Facebook's Open Graph og:image, you do not have to use this unless you want
         /// a different image but it is recommended to supply a smaller image that fits Twitters needs.
         /// </summary>
         [HtmlAttributeName(Image3AttributeName)]
         public TwitterImage Image3 { get; set; }
 
         /// <summary>
-        /// Gets or sets the title of your content as it should appear in the card. You may specify an empty 
+        /// Gets or sets the title of your content as it should appear in the card. You may specify an empty
         /// string if you wish no title to render.
         /// </summary>
         [HtmlAttributeName(TitleAttributeName)]
@@ -99,7 +100,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

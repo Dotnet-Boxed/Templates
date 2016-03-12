@@ -8,8 +8,8 @@
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/product.group/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-product-group", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-product-group",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProductGroup : OpenGraphMetadata
     {

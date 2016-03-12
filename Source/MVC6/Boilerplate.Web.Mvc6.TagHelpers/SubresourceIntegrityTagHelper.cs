@@ -2,51 +2,57 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Net;
-    using System.Net.Http;
+    using System.IO;
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNet.Mvc;
     using Microsoft.AspNet.Mvc.Rendering;
     using Microsoft.AspNet.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
     /// <summary>
-    /// Adds Subresource Integrity (SRI) to a script tag. Subresource Integrity (SRI) is a security feature that 
-    /// enables browsers to verify that files they fetch (for example, from a CDN) are delivered without unexpected 
+    /// Adds Subresource Integrity (SRI) to a script tag. Subresource Integrity (SRI) is a security feature that
+    /// enables browsers to verify that files they fetch (for example, from a CDN) are delivered without unexpected
     /// manipulation. It works by allowing you to provide a cryptographic hash that a fetched file must match.
     /// See https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity and https://www.w3.org/TR/SRI/.
-    /// The tag helper works by taking the URL from the script tag and checking the <see cref="IDistributedCache"/> for 
-    /// a matching SRI value. If one is found, it is used otherwise a HTTP request is made to the URL, the SRI is
-    /// calculated and the SRI is stored in the <see cref="IDistributedCache"/>.
+    /// The tag helper works by taking the URL from the script tag and checking the <see cref="IDistributedCache"/> for
+    /// a matching SRI value. If one is found, it is used otherwise the file from the alternative source is read and
+    /// the SRI is calculated and stored in the <see cref="IDistributedCache"/>.
     /// </summary>
     public abstract class SubresourceIntegrityTagHelper : TagHelper
     {
-        protected const string SubresourceIntegrityAttributeName = "asp-subresource-integrity";
-        protected const string SubresourceIntegrityHashAlgorithmsAttributeName = "asp-subresource-integrity-hash-algorithms";
+        #region Fields
+
+        private const string SubresourceIntegrityHashAlgorithmsAttributeName = "asp-subresource-integrity-hash-algorithms";
         private const string CrossOriginAttributeName = "crossorigin";
         private const string IntegrityAttributeName = "integrity";
 
         private readonly IDistributedCache distributedCache;
-        private readonly HttpClient httpClient;
+        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IUrlHelper urlHelper;
 
-        public SubresourceIntegrityTagHelper(IDistributedCache distributedCache)
+        #endregion
+
+        public SubresourceIntegrityTagHelper(
+            IDistributedCache distributedCache,
+            IHostingEnvironment hostingEnvironment,
+            IUrlHelper urlHelper)
         {
             this.distributedCache = distributedCache;
-
-            var httpClientHandler = new HttpClientHandler()
-            {
-                AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip
-            };
-            this.httpClient = new HttpClient(httpClientHandler);
+            this.hostingEnvironment = hostingEnvironment;
+            this.urlHelper = urlHelper;
         }
 
         /// <summary>
         /// Gets or sets the one or more hashing algorithms to be used. This is a required property.
         /// </summary>
         [HtmlAttributeName(SubresourceIntegrityHashAlgorithmsAttributeName)]
-        public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; } 
+        public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; }
             = SubresourceIntegrityHashAlgorithm.SHA512;
+
+        public virtual string Source { get; set; }
 
         /// <summary>
         /// Gets the name of the attribute which contains the URL to the resource.
@@ -57,14 +63,6 @@
         protected abstract string UrlAttributeName { get; }
 
         /// <summary>
-        /// Releases managed resources.
-        /// </summary>
-        public void Dispose()
-        {
-            this.httpClient.Dispose();
-        }
-
-        /// <summary>
         /// Asynchronously executes the <see cref="TagHelper" /> with the given context and output.
         /// </summary>
         /// <param name="context">Contains information associated with the current HTML tag.</param>
@@ -72,8 +70,6 @@
         /// <returns>A task representing the operation.</returns>
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
-            output.Attributes.Remove(output.Attributes[SubresourceIntegrityAttributeName]);
-
             var url = output.Attributes[this.UrlAttributeName].Value.ToString();
 
             if (url.StartsWith("//"))
@@ -81,17 +77,17 @@
                 url = "https:" + url;
             }
 
-            if (!string.IsNullOrWhiteSpace(url))
+            if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
                 var sri = await this.GetCachedSri(url);
                 if (sri == null)
                 {
-                    sri = await this.GetSubresourceIntegrity(url, this.HashAlgorithms);
+                    sri = this.GetSubresourceIntegrityFromContentFile(this.Source, this.HashAlgorithms);
                     await this.SetCachedSri(url, sri);
                 }
 
                 output.Attributes[CrossOriginAttributeName] = "anonymous";
-                output.Attributes[IntegrityAttributeName] = 
+                output.Attributes[IntegrityAttributeName] =
                     new TagHelperAttribute(IntegrityAttributeName, new HtmlString(sri));
             }
         }
@@ -170,30 +166,8 @@
             }
         }
 
-        #endregion
-
-
-        #region Private Methods
-
-        private async Task<string> GetCachedSri(string url)
+        private static string GetSpaceDelimetedSri(byte[] bytes, SubresourceIntegrityHashAlgorithm hashAlgorithms)
         {
-            var key = GetSriKey(url);
-            var value = await this.distributedCache.GetAsync(key);
-            return value == null ? null : Encoding.UTF8.GetString(value);
-        }
-
-        private async Task SetCachedSri(string url, string value)
-        {
-            var key = GetSriKey(url);
-            await this.distributedCache.SetAsync(key, Encoding.UTF8.GetBytes(value));
-        }
-
-        private async Task<string> GetSubresourceIntegrity(
-            string url,
-            SubresourceIntegrityHashAlgorithm hashAlgorithms)
-        {
-            var bytes = await this.httpClient.GetByteArrayAsync(url);
-
             List<string> items = new List<string>(3);
             foreach (SubresourceIntegrityHashAlgorithm hashAlgorithm in GetFlags(hashAlgorithms))
             {
@@ -201,6 +175,34 @@
             }
 
             return string.Join(" ", items);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task<string> GetCachedSri(string url)
+        {
+            var key = this.GetSriKey(url);
+            var value = await this.distributedCache.GetAsync(key);
+            return value == null ? null : Encoding.UTF8.GetString(value);
+        }
+
+        private async Task SetCachedSri(string url, string value)
+        {
+            var key = this.GetSriKey(url);
+            await this.distributedCache.SetAsync(key, Encoding.UTF8.GetBytes(value));
+        }
+
+        private string GetSubresourceIntegrityFromContentFile(
+            string contentPath,
+            SubresourceIntegrityHashAlgorithm hashAlgorithms)
+        {
+            string filePath = Path.Combine(
+                this.hostingEnvironment.WebRootPath,
+                this.urlHelper.Content(contentPath).TrimStart('/'));
+            var bytes = File.ReadAllBytes(filePath);
+            return GetSpaceDelimetedSri(bytes, hashAlgorithms);
         }
 
         #endregion

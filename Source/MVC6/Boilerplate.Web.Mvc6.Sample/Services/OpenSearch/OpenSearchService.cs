@@ -32,10 +32,10 @@
             // Short name must be less than or equal to 16 characters.
             string shortName = "Search";
             string description = $"Search the {this.appSettings.Value.SiteTitle} Site";
-            // The link to the search page with the query string set to 'searchTerms' which gets replaced with a user 
+            // The link to the search page with the query string set to 'searchTerms' which gets replaced with a user
             // defined query.
             string searchUrl = this.urlHelper.AbsoluteRouteUrl(
-                HomeControllerRoute.GetSearch, 
+                HomeControllerRoute.GetSearch,
                 new { query = "{searchTerms}" });
             // The link to the page with the search form on it. The home page has the search form on it.
             string searchFormUrl = this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex);
@@ -70,19 +70,19 @@
                     //     new XAttribute("rel", "suggestions"),
                     //     new XAttribute("template", "http://example.com/suggest?q={searchTerms}")),
                     new XElement(
-                        ns + "Image", 
+                        ns + "Image",
                         favicon16Url,
                         new XAttribute("height", "16"),
                         new XAttribute("width", "16"),
                         new XAttribute("type", "image/x-icon")),
                     new XElement(
-                        ns + "Image", 
+                        ns + "Image",
                         favicon32Url,
                         new XAttribute("height", "32"),
                         new XAttribute("width", "32"),
                         new XAttribute("type", "image/png")),
                     new XElement(
-                        ns + "Image", 
+                        ns + "Image",
                         favicon96Url,
                         new XAttribute("height", "96"),
                         new XAttribute("width", "96"),

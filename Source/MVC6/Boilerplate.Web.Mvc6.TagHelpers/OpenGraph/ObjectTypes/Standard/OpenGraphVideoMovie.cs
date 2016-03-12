@@ -6,15 +6,15 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a movie, and contains references to the actors and other professionals involved in its production. A movie is 
-    /// defined by us as a full-length feature or short film. Do not use this type to represent movie trailers, movie clips, user-generated video 
+    /// This object type represents a movie, and contains references to the actors and other professionals involved in its production. A movie is
+    /// defined by us as a full-length feature or short film. Do not use this type to represent movie trailers, movie clips, user-generated video
     /// content, etc. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/video.movie/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-video-movie", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-video-movie",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphVideoMovie : OpenGraphMetadata
     {

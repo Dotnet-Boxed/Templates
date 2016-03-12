@@ -6,13 +6,13 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a place of business that has a location, operating hours and contact information. This object type is not part of 
-    /// the Open Graph standard but is used by Facebook.
+    /// This object type represents a place of business that has a location, operating hours and contact information.
+    /// This object type is not part of the Open Graph standard but is used by Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/business.business/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-business", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ContactDataAttributeName + "," + LocationAttributeName, 
+        "open-graph-business",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + ContactDataAttributeName + "," + LocationAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphBusiness : OpenGraphMetadata
     {
@@ -22,7 +22,7 @@
         private const string LocationAttributeName = "location";
         private const string OpeningHoursAttributeName = "opening-hours";
 
-        private const string TimeOfDayFormat = "hh:mm"; 
+        private const string TimeOfDayFormat = "hh:mm";
 
         #endregion
 

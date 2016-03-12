@@ -6,11 +6,11 @@
     internal static class OpenGraphConditionExtensions
     {
         /// <summary>
-        /// Returns the lowercase <see cref="string" /> representation of the <see cref="OpenGraphCondition" />.
+        /// Returns the lower-case <see cref="string" /> representation of the <see cref="OpenGraphCondition" />.
         /// </summary>
         /// <param name="openGraphCondition">The open graph condition of the item.</param>
         /// <returns>
-        /// The lowercase <see cref="string" /> representation of the <see cref="OpenGraphCondition" />.
+        /// The lower-case <see cref="string" /> representation of the <see cref="OpenGraphCondition" />.
         /// </returns>
         public static string ToLowercaseString(this OpenGraphCondition openGraphCondition)
         {

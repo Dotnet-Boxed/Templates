@@ -11,8 +11,8 @@
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.menu_item/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-restaurant-menu-item", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SectionUrlAttributeName, 
+        "open-graph-restaurant-menu-item",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SectionUrlAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurantMenuItem : OpenGraphMetadata
     {

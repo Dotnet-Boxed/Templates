@@ -1,7 +1,7 @@
 ﻿(function () {
     "use strict";
 
-    // The code below was taken from the application insights GitHub project and is already minified. It does produce 
+    // The code below was taken from the application insights GitHub project and is already minified. It does produce
     // some warnings in JSJint which can be ignored.
     var appInsights = window.appInsights || function (config) {
         function s(config) {

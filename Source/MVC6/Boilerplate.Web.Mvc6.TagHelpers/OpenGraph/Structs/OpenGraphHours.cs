@@ -43,7 +43,7 @@
         /// <summary>
         /// Gets the start time of the day. This can be a value from 00:00 to 24:00 hours.
         /// </summary>
-        public TimeSpan Start { get { return this.start; } } 
+        public TimeSpan Start { get { return this.start; } }
 
         #endregion
     }

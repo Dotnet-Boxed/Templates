@@ -7,14 +7,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object represents a music playlist, an ordered collection of songs from a collection of artists. This object type is part of the Open 
-    /// Graph standard.
+    /// This object represents a music playlist, an ordered collection of songs from a collection of artists. This
+    /// object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/music.playlist/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-music-playlist", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SongUrlsAttributeName + "," + SongDiscAttributeName + "," + SongTrackAttributeName, 
+        "open-graph-music-playlist",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + SongUrlsAttributeName + "," + SongDiscAttributeName + "," + SongTrackAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphMusicPlaylist : OpenGraphMetadata
     {

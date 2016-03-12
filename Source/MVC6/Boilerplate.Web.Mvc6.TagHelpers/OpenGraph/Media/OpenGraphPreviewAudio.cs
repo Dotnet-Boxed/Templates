@@ -23,7 +23,7 @@
         /// Initializes a new instance of the <see cref="OpenGraphPreviewAudio"/> class.
         /// </summary>
         /// <param name="mediaUrl">The media URL.</param>
-        /// <param name="type">The MIME type of the media e.g. media/ogg. This is optional if your media URL ends with 
+        /// <param name="type">The MIME type of the media e.g. media/ogg. This is optional if your media URL ends with
         /// a file extension, otherwise it is recommended.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if <paramref name="mediaUrl"/> is <c>null</c>.</exception>
         public OpenGraphPreviewAudio(string mediaUrl, string type) : this(mediaUrl)

@@ -1,8 +1,8 @@
 {
-  "version": "2.0.0-rc1-final-7",
+  "version": "2.0.0-rc1-final-8",
   "title": "ASP.NET MVC 6 Boilerplate Framework Tag Helpers",
   "description": "Provides boilerplate framework tag helper code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
-  "releaseNotes": "Added the subresource integrity tag helper.",
+  "releaseNotes": "Improved the subresource integrity tag helper.",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",

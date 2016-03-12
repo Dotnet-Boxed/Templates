@@ -4,8 +4,9 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// The Product Card is a great way to represent product and retail items on Twitter. This Card type is designed to showcase your products via an 
-    /// image, a description, and allow you to highlight two other key details about your product.
+    /// The Product Card is a great way to represent product and retail items on Twitter. This Card type is designed to
+    /// showcase your products via an image, a description, and allow you to highlight two other key details about your
+    /// product.
     /// See https://dev.twitter.com/cards/types/product
     /// </summary>
     [HtmlTargetElement("twitter-card-product", Attributes = UsernameAttributeName, TagStructure = TagStructure.WithoutEndTag)]
@@ -45,9 +46,9 @@
         public string Data2 { get; set; }
 
         /// <summary>
-        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for 
-        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field 
-        /// to describe the general services provided by the website. Description text will be truncated at 
+        /// Gets or sets the description that concisely summarizes the content of the page, as appropriate for
+        /// presentation within a Tweet. Do not re-use the title text as the description, or use this field
+        /// to describe the general services provided by the website. Description text will be truncated at
         /// the word to 200 characters. If you are using Facebook's Open Graph og:description, do not use this
         /// unless you want a different description.
         /// </summary>
@@ -55,10 +56,10 @@
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL to a unique image representing the content of the page. Do not use a generic 
-        /// image such as your website logo, author photo, or other image that spans multiple pages. The 
-        /// image must be a minimum size of 160px by 160px and must be less than 1MB in file size. It prefers a 
-        /// square image but we crop/resize oddly shaped images to fit as long as both dimensions are greater than 
+        /// Gets or sets the URL to a unique image representing the content of the page. Do not use a generic
+        /// image such as your website logo, author photo, or other image that spans multiple pages. The
+        /// image must be a minimum size of 160px by 160px and must be less than 1MB in file size. It prefers a
+        /// square image but we crop/resize oddly shaped images to fit as long as both dimensions are greater than
         /// or equal to 160 pixels. If you are using Facebook's Open Graph og:image, you do not have to use
         /// this unless you want a different image but it is recommended to get supply a smaller image that fits
         /// Twitters needs.
@@ -95,7 +96,8 @@
         #region Public Methods
 
         /// <summary>
-        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing the Twitter card meta tags.
+        /// Appends a HTML-encoded string representing this instance to the <paramref name="stringBuilder"/> containing
+        /// the Twitter card meta tags.
         /// </summary>
         /// <param name="stringBuilder">The string builder.</param>
         public override void ToString(StringBuilder stringBuilder)

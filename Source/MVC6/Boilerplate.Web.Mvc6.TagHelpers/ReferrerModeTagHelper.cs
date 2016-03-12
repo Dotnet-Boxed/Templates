@@ -3,7 +3,7 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// Meta tag <see cref="TagHelper"/> which controls what is sent in the HTTP referrer header when a client 
+    /// Meta tag <see cref="TagHelper"/> which controls what is sent in the HTTP referrer header when a client
     /// navigates from your page to an external site.
     /// </summary>
     [HtmlTargetElement("meta", Attributes = ReferrerAttributeName, TagStructure = TagStructure.WithoutEndTag)]
@@ -14,7 +14,7 @@
         private const string ReferrerAttributeName = "asp-referrer";
 
         /// <summary>
-        /// Gets or sets the referrer mode, which controls what is sent in the HTTP referrer header when a client 
+        /// Gets or sets the referrer mode, which controls what is sent in the HTTP referrer header when a client
         /// navigates from your page to an external site. This is a required property.
         /// </summary>
         [HtmlAttributeName(ReferrerAttributeName)]

@@ -11,12 +11,12 @@
         New,
 
         /// <summary>
-        /// The the item is refurbished.
+        /// The item is refurbished.
         /// </summary>
         Refurbished,
 
         /// <summary>
-        /// The the item is used.
+        /// The item is used.
         /// </summary>
         Used
     }

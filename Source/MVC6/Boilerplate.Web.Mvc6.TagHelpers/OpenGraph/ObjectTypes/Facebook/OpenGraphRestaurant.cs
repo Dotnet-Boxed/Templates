@@ -10,8 +10,8 @@
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/restaurant.restaurant/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-restaurant", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName, 
+        "open-graph-restaurant",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + LocationAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphRestaurant : OpenGraphMetadata
     {

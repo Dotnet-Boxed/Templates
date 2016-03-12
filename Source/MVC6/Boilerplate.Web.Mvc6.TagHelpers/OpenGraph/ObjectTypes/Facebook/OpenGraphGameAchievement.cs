@@ -4,19 +4,19 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a specific achievement in a game. An app must be in the 'Games' category in App Dashboard to be able to use this 
-    /// object type. Every achievement has a game:points value associate with it. This is not related to the points the user has scored in the game, but 
-    /// is a way for the app to indicate the relative importance and scarcity of different achievements: * Each game gets a total of 1,000 points to 
-    /// distribute across its achievements * Each game gets a maximum of 1,000 achievements * Achievements which are scarcer and have higher point 
-    /// values will receive more distribution in Facebook's social channels. For example, achievements which have point values of less than 10 will get 
-    /// almost no distribution. Apps should aim for between 50-100 achievements consisting of a mix of 50 (difficult), 25 (medium), and 10 (easy) point 
-    /// value achievements Read more on how to use achievements in this guide. This object type is not part of the Open Graph standard but is used by 
+    /// This object type represents a specific achievement in a game. An app must be in the 'Games' category in App Dashboard to be able to use this
+    /// object type. Every achievement has a game:points value associate with it. This is not related to the points the user has scored in the game, but
+    /// is a way for the app to indicate the relative importance and scarcity of different achievements: * Each game gets a total of 1,000 points to
+    /// distribute across its achievements * Each game gets a maximum of 1,000 achievements * Achievements which are scarcer and have higher point
+    /// values will receive more distribution in Facebook's social channels. For example, achievements which have point values of less than 10 will get
+    /// almost no distribution. Apps should aim for between 50-100 achievements consisting of a mix of 50 (difficult), 25 (medium), and 10 (easy) point
+    /// value achievements Read more on how to use achievements in this guide. This object type is not part of the Open Graph standard but is used by
     /// Facebook.
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/game.achievement/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-game-achievement", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + PointsAttributeName, 
+        "open-graph-game-achievement",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName + "," + PointsAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphGameAchievement : OpenGraphMetadata
     {

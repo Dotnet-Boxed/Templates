@@ -3,13 +3,13 @@
     <Name>ASP.NET MVC 6 (RC 1 Update 1) Boilerplate (Also RC 1)</Name>
     <Description>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com</Description>
     <DefaultName>WebApplication</DefaultName>
-    
+
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>Web</ProjectSubType>
     <RequiredFrameworkVersion>4.5.1</RequiredFrameworkVersion>
     <CreateInPlace>true</CreateInPlace>
     <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
-    
+
     <SortOrder>501</SortOrder>
     <CreateNewFolder>true</CreateNewFolder>
     <ProvideDefaultName>true</ProvideDefaultName>

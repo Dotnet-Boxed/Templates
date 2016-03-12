@@ -4,14 +4,14 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// This object type represents a person. While appropriate for celebrities, artists, or musicians, this object type can be used for the profile of 
-    /// any individual. This object type is part of the Open Graph standard.
+    /// This object type represents a person. While appropriate for celebrities, artists, or musicians, this object
+    /// type can be used for the profile of any individual. This object type is part of the Open Graph standard.
     /// See http://ogp.me/
     /// See https://developers.facebook.com/docs/reference/opengraph/object-type/profile/
     /// </summary>
     [HtmlTargetElement(
-        "open-graph-profile", 
-        Attributes = TitleAttributeName + "," + MainImageAttributeName, 
+        "open-graph-profile",
+        Attributes = TitleAttributeName + "," + MainImageAttributeName,
         TagStructure = TagStructure.WithoutEndTag)]
     public class OpenGraphProfile : OpenGraphMetadata
     {
@@ -80,7 +80,7 @@
             {
                 stringBuilder.AppendMetaPropertyContent("profile:gender", this.Gender.Value.ToLowercaseString());
             }
-        } 
+        }
 
         #endregion
     }

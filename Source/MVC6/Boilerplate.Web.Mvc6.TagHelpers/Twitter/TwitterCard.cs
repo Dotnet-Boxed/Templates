@@ -5,7 +5,7 @@
     using Microsoft.AspNet.Razor.TagHelpers;
 
     /// <summary>
-    /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your website. 
+    /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your website.
     /// Users who Tweet links to your content will have a "Card" added to the Tweet that's visible to all of their followers.
     /// See https://dev.twitter.com/cards/overview.
     /// Sign up for Twitter Card analytics to see who is sharing your site pages on Twitter.

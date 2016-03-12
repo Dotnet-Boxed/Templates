@@ -1,31 +1,38 @@
-﻿Version 2.9.8
+﻿Version 2.9.9
+MVC 6
+- Removed trailing white space.
+- Improved the Subresource Integrity tag helper (SRI) to generate the SRi from a local file.
+- Changed gulpfile.js to only copy third party files instead of running them through the pipeline.
+- Upgraded the tag helpers NuGet package.
+
+Version 2.9.8
 MVC 5
-- Upgraded to TemplateBuilder NuGet package version 1.1.4.9-beta to fix a bug where using a '.' 
+- Upgraded to TemplateBuilder NuGet package version 1.1.4.9-beta to fix a bug where using a '.'
 in the name of a project causes the NuGet package hint paths to break.
 MVC 6
-- Packages file path in the .xproj is now corrected automatically with the update to the latest version of 
+- Packages file path in the .xproj is now corrected automatically with the update to the latest version of
 TemplateBuilder and the new Wizard I added to it.
 
 Version 2.9.7
 MVC 6
 - All NuGet packages updated.
 - Dropped TagHelpers NuGet package dependency on the base NuGet package.
-- Refactored AtomActionResult to use IHostingEnvironment. 
+- Refactored AtomActionResult to use IHostingEnvironment.
 - Added RemoveServerHttpHeader extension method for IApplicationBuilder to the main NuGet package.
 - Used the RemoveServerHttpHeader method in the Configure method in Startup.cs.
 - Subresource Integrity tag helper added to TagHelpers NuGet package and _Layout.cshtml.
 - URL's in ContentDeliveryNetwork updated to include the https: scheme to use with Subresource Integrity.
 - Renamed ApplicationBuilderExtensions.UseBoilerplate to ApplicationBuilderExtensions.UseUrlHelperExtensions.
 - Renamed ApplicationBuilderExtensions.RemoveServerHttpHeader to ApplicationBuilderExtensions.RunNotFound.
-- Added UseHttpException, which allows the use of <see cref="HttpException"/> as an alternative method of returning an 
+- Added UseHttpException, which allows the use of <see cref="HttpException"/> as an alternative method of returning an
 error result.
-- Added UseInternalServerErrorOnException, which returns a 500 Internal Server Error response when an unhandled 
+- Added UseInternalServerErrorOnException, which returns a 500 Internal Server Error response when an unhandled
 exception occurs.
 - Renamed everything from ASP.NET 5 to ASP.NET Core.
 
 Version 2.9.6
 MVC 5
-- Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it 
+- Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it
 themselves if they need it.
 MVC 6
 - Automatically run Mocha JavaScript tests using gulp-mocha-phantomjs.
@@ -41,7 +48,7 @@ MVC 5 & 6
 MVC 5
 - Switched from Twitter.Bootstrap.Less NuGet package to Bootstrap.Less.
 MVC 6
-- Use an absolute expiration instead of a sliding one for the sitemap, just in case people are dynamically generating 
+- Use an absolute expiration instead of a sliding one for the sitemap, just in case people are dynamically generating
 the sitemap.
 - Updated Font Awesome to 4.5.0.
 - Updated JavaScript Mocha, Chai and Sinon.
@@ -62,14 +69,14 @@ MVC 6
 
 Version 2.9.2
 MVC 5 & 6
-- Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when 
-using the RedirectToCanonicalUrlAttribute. Added a note to use this attribute in the AccountController when using 
+- Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when
+using the RedirectToCanonicalUrlAttribute. Added a note to use this attribute in the AccountController when using
 ASP.NET Identity.
 - Only redirect to the canonical URL for GET requests when using the RedirectToCanonicalUrlAttribute.
 - Updated the Boilerplate NuGet packages to the latest versions.
 - Upgraded to Newtonsoft.Json 8.0.1.
 MVC 6
-- Added the Microsoft.AspNet.Razor.Runtime.Precompilation NuGet package for Razor pre-compilation. Added the using 
+- Added the Microsoft.AspNet.Razor.Runtime.Precompilation NuGet package for Razor pre-compilation. Added the using
 statement to RazorPreCompilation.cs.
 - Added a note to use https://report-uri.io/ to report CSP violation reports.
 
@@ -107,8 +114,8 @@ MVC 6
 - Logging configuration added to config.json and Startup.Logging.cs.
 - Added "use strict"; in gulpfile.js.
 - Added main method to Startup.cs with a setting in project.json to use it.
-- Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js, 
-  ContentDeliveryNetwork.cs, bower.json. 
+- Removed Bootstrap Touch Carousel from _Layout.cshtml, Index.cshtml, fallback\scripts.js, gulpfile.js,
+  ContentDeliveryNetwork.cs, bower.json.
 - Updated Readme.html with links to RC1 instead of Beta 8.
 - NuGet assemblies are now strong named like the Microsoft ones.
 - gulpfile.js JSLint Fixes
@@ -232,7 +239,7 @@ MVC 5 & 6
 - The calculator in site.js now throws Error instead of a string.
 MVC 6
 - Updated the Boilerplate.Web.Mvc6 NuGet package to add support for BSON formatters.
-- SitemapService cache settings moved to use the CacheProfileSettings and config.json. CacheSetting constant was 
+- SitemapService cache settings moved to use the CacheProfileSettings and config.json. CacheSetting constant was
   deleted and a new constant was added to CacheProfileName.
 Feature Selection Wizard (Coming Soon)
 - Support for MVC 6 API added by including a new wizard and feature sets.
@@ -264,9 +271,9 @@ MVC 6
 
 Version 2.1.0
 MVC 5 & 6
-- browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can 
+- browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can
   also customize it with your own tile XML. See BrowserConfigService, HomeController and constants for changes.
-- manifest.json is now generated dynamically, you no longer have to edit it and put in the site title. See 
+- manifest.json is now generated dynamically, you no longer have to edit it and put in the site title. See
   ManifestService, HomeController and constants for changes.
 - Updated ReadMe.html to remove a step to edit the browserconfig.xml file.
 - Updated ReadMe.html to remove a step to edit the manifest.json file.
@@ -370,7 +377,7 @@ MVC 5
 MVC 6
 - favicon.ico moved to root of site.
 - browserconfig.xml moved to root of site.
-- Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com. favicon.ico and browserconfig.xml meta tags 
+- Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com. favicon.ico and browserconfig.xml meta tags
   removed.
 - Updated Site.less with basic styles for the site.
 - Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
@@ -391,12 +398,12 @@ MVC 6
 
 Version 1.2.1
 MVC 5
-- Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle 
+- Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle
   failover much better.
 - Added a blank site.js script.
-- Changed the 'failover' bundle in BundleConfig.cs to 'site' and included the new fallback scripts and the new site.js 
+- Changed the 'failover' bundle in BundleConfig.cs to 'site' and included the new fallback scripts and the new site.js
   script.
-- Changed FilterConfig.cs because using MaxCDN was causing a CSP error. MaxCDN needed to be added to the styles 
+- Changed FilterConfig.cs because using MaxCDN was causing a CSP error. MaxCDN needed to be added to the styles
   directive instead of the scripts directive.
 - Updated _Layout.cshtml with the new site bundle and with a new meta tag to help with the font awesome fallback.
 - Updated _Layout.cshtml with a new site title icon in the toolbar.
@@ -460,7 +467,7 @@ Version 1.1.6
 - Minor formatting, line length and spelling fixes to _Layout.cshtml.
 
 Version 1.1.5
-- Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due 
+- Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due
   to a FireFox bug.
 
 Version 1.1.4
@@ -468,7 +475,7 @@ Version 1.1.4
 
 Version 1.1.3
 MVC 5
-- FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new 
+- FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new
   TextSyndicationContent.
 - Added comments and links to anti-forgery token configuration in Global.asax.cs.
 - Fixed spelling mistakes in Web.config.
@@ -484,7 +491,7 @@ MVC 6
 - HomeController modified to use attribute routing.
 - Namespaces added to _GlobalImports.cshtml.
 - SiteTitle set in config.json.
-- Microsoft.AspNet.Mvc.Xml and System.Runtime Nuget packages added. Boilerplate.Web.Mvc6 added as a project reference 
+- Microsoft.AspNet.Mvc.Xml and System.Runtime Nuget packages added. Boilerplate.Web.Mvc6 added as a project reference
   until the NuGet package is published.
 - Comments added to gulpfile.cs.
 - Startup configured
@@ -516,7 +523,7 @@ Version 1.1.1
 
 Version 1.1.0
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
-- Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the 
+- Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the
   .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
   We do this only in release mode because this stops edit and refresh from working.
 - Added new render section to _Layout.cshtml for meta tags in the head of the HTML.
@@ -744,7 +751,7 @@ Version 1.0.17
 - Stop IIS returning a 403.12 Forbidden response when navigating to a folder e.g. /Content
   by rewriting to 404 not found using Web.config. Also set defaultDocument enabled=false to achieve the same thing.
   See http://www.troyhunt.com/2014/09/solving-tyranny-of-http-403-responses.html.
-- Add a note to ReadMe.html to save images for the web and use Visual Studio Image Optimizer in conjunction 
+- Add a note to ReadMe.html to save images for the web and use Visual Studio Image Optimizer in conjunction
   with PNG Gauntlet to losslessly compress your images.
 - Add a note to ReadMe.html saying that default document handling has been disabled and detailing how you can turn it on if you need to.
 
@@ -759,7 +766,7 @@ Version 1.0.16
     \Content\icons\manifest.json
 - \Content\icons\favicon-160x160.png removed - Opera can use other icon sizes to fill the gap.
 - Compressed PNG images further using the excellent and free PNG Gauntlet.
-- Use HTML5 self closing tags http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5 
+- Use HTML5 self closing tags http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5
   and http://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br.
 
 Version 1.0.15
@@ -770,13 +777,13 @@ Version 1.0.15
 - Removed the commented out NWebSec XXssProtectionAttribute.
 
 Version 1.0.14
-- Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024. 
+- Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024.
   (For more information see http://www.iis.net/learn/extensions/using-iis-express/running-iis-express-without-administrative-privileges).
 
 Version 1.0.13
 - Added NWebSec CSP 2.0 filters to FilterConfig.cs for default settings and comments.
 - Turn off tracing in Release mode, just in case it is turned on.
-- Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found, 
+- Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found,
   rather than a 500 Internal Server Error for added security and performance.
 - Added Web.config comments encouraging encryption of connection strings.
 - Added ReadMe.html comments encouraging encryption of connection strings.
@@ -787,7 +794,7 @@ Version 1.0.13
 Version 1.0.12
 - Microsoft.Owin package updated to 3.0.1.
 - Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
-- NWebSec updated to 4.0.0. 
+- NWebSec updated to 4.0.0.
     - Web.config changes to point to new DLL.
     - HttpHeaderSecurityModuleConfig.xsd updated.
     - FilterConfig changed to fix NWebSec breaking changes. Enabled/Disabled enum changed to bool and namespace removed.
@@ -821,5 +828,5 @@ Version 1.0.6
 - Link to RehanSaeed.com containing details of this project added to Home.cshtml.
 - Newtonsoft.Json NuGet package updated to 6.0.7
 
-Version 1.0.0 
+Version 1.0.0
 Initial Release

@@ -19,7 +19,7 @@
             {
                 return null;
             }
-     
+
             return new HtmlString("<meta name=\"referrer\" content=\"" + referrerMode.ToLowercaseString() + "\">");
         }
     }

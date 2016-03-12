@@ -5,7 +5,7 @@
     using Boilerplate.Web.Mvc;
     using Microsoft.AspNet.Mvc;
     using MvcBoilerplate.Constants;
-    
+
     public class BrowserConfigService : IBrowserConfigService
     {
         private readonly IUrlHelper urlHelper;
@@ -16,8 +16,8 @@
         }
 
         /// <summary>
-        /// Gets the browserconfig XML for the current site. This allows you to customize the tile, when a user pins 
-        /// the site to their Windows 8/10 start screen. See http://www.buildmypinnedsite.com and 
+        /// Gets the browserconfig XML for the current site. This allows you to customize the tile, when a user pins
+        /// the site to their Windows 8/10 start screen. See http://www.buildmypinnedsite.com and
         /// https://msdn.microsoft.com/en-us/library/dn320426%28v=vs.85%29.aspx
         /// </summary>
         /// <returns>The browserconfig XML for the current site.</returns>
@@ -34,7 +34,7 @@
             // The colour of the tile. This colour only shows if part of your images above are transparent.
             string tileColour = "#1E1E1E";
             // $Start-Feed$
-            // Update the tile every 1440 minutes. Defines the frequency, in minutes, between poll requests. Must be 
+            // Update the tile every 1440 minutes. Defines the frequency, in minutes, between poll requests. Must be
             // one of the following values: 30 (1/2 Hour), 60 (1 Hour), 360 (6 Hours), 720 (12 Hours), 1440 (24 Hours).
             int frequency = 1440;
             // Control notification cycling. Must be one of the following values:
@@ -108,7 +108,7 @@
             // pass to it, along with the feed entry number) and returns tile XML using the Atom feed entry.
             // An alternative is to generate your own custom tile XML and return a URL to it here. You can take a look
             // at the tile template catalogue (https://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx) to
-            // see the types of tiles you can generate and use the NotificationsExtensions.Portable NuGet package 
+            // see the types of tiles you can generate and use the NotificationsExtensions.Portable NuGet package
             // (https://github.com/RehanSaeed/NotificationsExtensions.Portable) to generate the tile XML.
             return string.Format(
                 "http://notifications.buildmypinnedsite.com/?feed={0}&amp;id={1}",
