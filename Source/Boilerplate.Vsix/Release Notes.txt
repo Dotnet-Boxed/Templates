@@ -1,4 +1,8 @@
-﻿Version 2.9.9
+﻿Version 2.10.0
+MVC 5
+- Upgraded to .NET 4.5.2
+
+Version 2.9.9
 MVC 6
 - Removed trailing white space.
 - Improved the Subresource Integrity tag helper (SRI) to generate the SRi from a local file.
