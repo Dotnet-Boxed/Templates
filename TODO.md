@@ -19,6 +19,7 @@ Improvements that can be made to all project templates.
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
 - Build a localization feature.
 - Add a CORS feature.
+- Add an option to remove Font-Awesome.
 - Add an option to choose the web-server you are using IIS, Nginx etc.
 - Add an option to add a Docker file.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
