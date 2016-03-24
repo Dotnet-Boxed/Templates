@@ -1,4 +1,8 @@
-﻿Version 2.10.0
+﻿Version 2.11.0
+MVC 5
+- Target Framework now respects the selected version in the new project dialog.
+
+Version 2.10.0
 MVC 5
 - Upgraded to .NET 4.5.2
 
