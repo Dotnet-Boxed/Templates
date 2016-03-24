@@ -13,5 +13,10 @@
     <add key="..\..\packages\" value="..\packages\"/>
     <!-- Replace the ProjectGuid (Unique ID for the project) with a generated GUID. -->
     <add key="{E107BBBD-CAB3-4B09-9A48-8437775786A8}" value="$guid1$"/>
+    <!-- Replace targetFramework="4.5.2" with targetFramework="$targetframeworkversion$" -->
+    <add key="targetFramework=&quot;4.5.2&quot;" value="targetFramework=&quot;$targetframeworkversion$&quot;"/>
+    <!-- Replace <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion> with <TargetFrameworkVersion>v$targetframeworkversion$</TargetFrameworkVersion> -->
+    <add key="&lt;TargetFrameworkVersion&gt;v4.5.2&lt;/TargetFrameworkVersion&gt;"
+         value="&lt;TargetFrameworkVersion&gt;v$targetframeworkversion$&lt;/TargetFrameworkVersion&gt;"/>
   </Replacements>
 </Preprocess>
