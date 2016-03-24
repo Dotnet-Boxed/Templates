@@ -23,6 +23,8 @@ Improvements that can be made to all project templates.
 - Add an option to choose the web-server you are using IIS, Nginx etc.
 - Add an option to add a Docker file.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
+- Add an example form controller.
+- Use JIL for JSON serialization (See [issue](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/72)).
 
 ## ASP.NET Core MVC 6 API
 
