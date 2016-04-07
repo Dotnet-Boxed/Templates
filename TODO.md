@@ -17,7 +17,7 @@ Improvements that can be made to all project templates.
 
 - Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
-- Build a localization feature.
+- Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.
 - Add an option to remove Font-Awesome.
 - Add an option to choose the web-server you are using IIS, Nginx etc.
