@@ -1,4 +1,8 @@
-﻿Version 2.11.0
+﻿Version 2.12.0
+MVC 5
+- Add a note when debugging, always starts the site at the home page (See [this](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/84) issue).
+
+Version 2.11.0
 MVC 5
 - Target Framework now respects the selected version in the new project dialogue.
 
