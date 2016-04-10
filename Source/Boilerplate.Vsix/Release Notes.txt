@@ -1,4 +1,8 @@
-﻿Version 2.13.0
+﻿Version 2.14.0
+MVC 6
+- Change error controller route to start at 400 to 599.
+
+Version 2.13.0
 MVC 6
 - Merged [Fixed problem with broken error handling on ReExecute](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/85).
 - Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/87).
