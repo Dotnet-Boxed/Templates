@@ -90,6 +90,7 @@ Add your site here, just raise an issue.
 
 ## Contributions and Thanks
 
+- [Abuson](https://github.com/abuson) - Two MVC 6 fixes to do with error pages.
 - [Shiney](https://github.com/Shiney) - Fixed typo.
 - [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET Core LESS feature.
 - [mcliment](https://github.com/mcliment) - Updated template to ASP.NET Core RC 1.

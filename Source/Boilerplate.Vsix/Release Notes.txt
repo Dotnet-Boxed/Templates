@@ -1,4 +1,9 @@
-﻿Version 2.12.0
+﻿Version 2.13.0
+MVC 6
+- Merged [Fixed problem with broken error handling on ReExecute](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/85).
+- Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/87).
+
+Version 2.12.0
 MVC 5
 - Add a note when debugging, always starts the site at the home page (See [this](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/84) issue).
 
