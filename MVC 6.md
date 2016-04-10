@@ -63,13 +63,13 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 The default MVC template is not as secure as it could be. There are various settings which are insecure by default. For example, it leaks information about which version of IIS you are using and allows external scripts to access cookies by default!
 
-ASP.NET MVC Boilerplate makes everything secure by default but goes further and uses various HTTP headers which are sent to the browser to restrict things further.
-
-It also makes use of the new [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://github.com/NWebsec/NWebsec) NuGet packages. CSP revolutionizes web security and I highly recommend reading the above link.
-
 Setting up [SSL](http://en.wikipedia.org/wiki/SSL)/[TLS](http://en.wikipedia.org/wiki/Transport_Layer_Security), so that your site runs over HTTPS is made easy by turning on a single check box and easy step by step instructions and links.
 
+ASP.NET MVC Boilerplate makes everything secure by default but goes further and uses various HTTP headers which are sent to the browser to restrict things further. It makes use of the [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy) HTTP Header using the [NWebSec](https://github.com/NWebsec/NWebsec) NuGet packages. It also adds the [Strict Transport Security (HSTS)](https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security) HTTP header and also makes it very easy to use the [Public Key Pinning (HPKP)](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning) HTTP header. Finally, it also adds the [X-Content-Type-Options](http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/), [X-Download-Options](http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/) and [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options?redirectlocale=en-US&redirectslug=The_X-FRAME-OPTIONS_response_header) HTTP headers by default.
+
 Do you trust the people on the internet? Well, the default ASP.NET Core template stores the contents of all NPM and Bower packages in the wwwroot folder. These contain executables, scripts and all kinds of potential nasties that your site is serving up. ASP.NET MVC Boilerplate moves these packages out and only adds things to the wwwroot folder that are required.
+
+Finally, ASP.NET Boilerplate takes security to the bleeding edge with [Subresource Integrity (SRI)](http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core/) implemented by default. SRI ensures that third party resources from CDN's have not been compromised.
 
 ### Fast By Default
 
