@@ -32,6 +32,7 @@ Improvements that can be made to all project templates.
 - Update project template and release it.
 - Use [HAL](https://github.com/mikekelly/hal_specification/blob/master/hal_specification.md) or [SIREN](https://github.com/kevinswiber/siren). See also [this](http://phlyrestfully.readthedocs.org/en/latest/halprimer.html) and [this](https://msdn.microsoft.com/en-us/magazine/jj883957.aspx) and [this](https://github.com/JakeGinnivan/WebApi.Hal).
 - Add Produces attributes.
+- Create a version of [UseDeveloperExceptionPage](https://github.com/aspnet/Diagnostics/blob/0a444088c9a7c5c6b4073c92104b48af734ef523/src/Microsoft.AspNetCore.Diagnostics/DeveloperExceptionPage/DeveloperExceptionPageExtensions.cs)
 
 ## Awaiting Third Parties
 
