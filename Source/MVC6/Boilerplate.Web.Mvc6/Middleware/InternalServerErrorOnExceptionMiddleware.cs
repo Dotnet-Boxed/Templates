@@ -17,7 +17,7 @@
         {
             try
             {
-                await this.next.Invoke(context);
+                await this.next.Invoke(context).ConfigureAwait(false);
             }
             catch
             {

@@ -15,10 +15,10 @@
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public Task Invoke(HttpContext context)
         {
             context.Response.Headers.Remove(ServerHttpHeaderName);
-            await this.next.Invoke(context);
+            return this.next.Invoke(context);
         }
     }
 }
