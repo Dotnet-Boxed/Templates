@@ -4,6 +4,7 @@ MVC 6
 	- Performance improvements.
 	- Added ICommand and IAsyncCommand interfaces to help implement controller actions as separate classes.
 	- Refactored the DistributedCacheExtensions.
+	- Added ValidateModelStateAttribute to automatically validate ModelState.
 - Boilerplate.Web.Mvc6.TagHelpers Updated:
 	- Performance improvements.
 
