@@ -1,4 +1,13 @@
-﻿Version 2.14.0
+﻿Version 2.15.0
+MVC 6
+- Boilerplate.Web.Mvc6 Updated:
+	- Performance improvements.
+	- Added ICommand and IAsyncCommand interfaces to help implement controller actions as separate classes.
+	- Refactored the DistributedCacheExtensions.
+- Boilerplate.Web.Mvc6.TagHelpers Updated:
+	- Performance improvements.
+
+Version 2.14.0
 MVC 6
 - Change error controller route to start at 400 to 599.
 
