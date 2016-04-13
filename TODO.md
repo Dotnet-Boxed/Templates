@@ -17,7 +17,7 @@ Improvements that can be made to all project templates.
 
 - Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
-- Build a localization feature.
+- Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.
 - Add an option to remove Font-Awesome.
 - Add an option to choose the web-server you are using IIS, Nginx etc.
@@ -25,6 +25,7 @@ Improvements that can be made to all project templates.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 - Add an example form controller.
 - Use JIL for JSON serialization (See [issue](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/72)).
+- Improve social tag helpers to include child elments for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
 
 ## ASP.NET Core MVC 6 API
 
