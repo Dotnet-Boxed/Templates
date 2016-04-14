@@ -12,11 +12,32 @@ namespace Boilerplate.Web.Mvc.Caching
     /// </summary>
     public static class DistributedCacheExtensions
     {
-        #region BinaryReader & BinaryWriter
-
-        public static async Task<bool> GetBooleanAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="bool"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="bool"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<bool?> GetBooleanAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -24,9 +45,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<char> GetCharAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="char"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="char"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<char?> GetCharAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -34,9 +78,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<decimal> GetDecimalAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="decimal"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="decimal"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<decimal?> GetDecimalAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -44,9 +111,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<double> GetDoubleAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="double"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="double"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<double?> GetDoubleAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -54,9 +144,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<short> GetShortAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="short"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="short"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<short?> GetShortAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -64,9 +177,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<int> GetIntAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="int"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="int"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<int?> GetIntAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -74,9 +210,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<long> GetLongAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="long"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="long"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<long?> GetLongAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -84,9 +243,32 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static async Task<float> GetFloatAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="float"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <returns>The <see cref="float"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<float?> GetFloatAsync(this IDistributedCache cache, string key)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             using (MemoryStream memoryStream = new MemoryStream(bytes))
             {
                 var binaryReader = new BinaryReader(memoryStream);
@@ -94,24 +276,107 @@ namespace Boilerplate.Web.Mvc.Caching
             }
         }
 
-        public static Task<string> GetStringAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Gets the <see cref="string"/> value with the specified key from the cache asynchronously or returns
+        /// <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="encoding">The encoding of the <see cref="string"/> value or <c>null</c> to use UTF-8.</param>
+        /// <returns>The <see cref="string"/> value or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<string> GetStringAsync(this IDistributedCache cache, string key, Encoding encoding = null)
         {
-            return GetStringAsync(cache, key, Encoding.UTF8);
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static async Task<string> GetStringAsync(this IDistributedCache cache, string key, Encoding encoding)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (encoding == null)
+            {
+                encoding = Encoding.UTF8;
+            }
+
             var bytes = await cache.GetAsync(key).ConfigureAwait(false);
+            if (bytes == null)
+            {
+                return null;
+            }
+
             return encoding.GetString(bytes);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, bool value)
+        /// <summary>
+        /// Gets the value of type <typeparamref name="T"/> with the specified key from the cache asynchronously by
+        /// deserializing it from JSON format or returns <c>null</c> if the key was not found.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="encoding">The encoding of the JSON or <c>null</c> to use UTF-8.</param>
+        /// <returns>The value of type <typeparamref name="T"/> or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static async Task<T> GetAsJsonAsync<T>(this IDistributedCache cache, string key, Encoding encoding = null)
+            where T : class
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (encoding == null)
+            {
+                encoding = Encoding.UTF8;
+            }
+
+            var json = await GetStringAsync(cache, key, encoding).ConfigureAwait(false);
+            if (json == null)
+            {
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, bool value, DistributedCacheEntryOptions options)
+        /// <summary>
+        /// Sets the <see cref="bool"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            bool value,
+            DistributedCacheEntryOptions options = null)
         {
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -122,13 +387,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, char value)
+        /// <summary>
+        /// Sets the <see cref="char"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            char value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, char value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -139,13 +427,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, decimal value)
+        /// <summary>
+        /// Sets the <see cref="decimal"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            decimal value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, decimal value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -156,13 +467,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, double value)
+        /// <summary>
+        /// Sets the <see cref="double"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            double value,
+            DistributedCacheEntryOptions options)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, double value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -173,13 +507,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, short value)
+        /// <summary>
+        /// Sets the <see cref="short"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            short value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, short value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -190,13 +547,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, int value)
+        /// <summary>
+        /// Sets the <see cref="int"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            int value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, int value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -207,13 +587,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, long value)
+        /// <summary>
+        /// Sets the <see cref="long"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            long value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, long value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -224,13 +627,36 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, float value)
+        /// <summary>
+        /// Sets the <see cref="float"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            float value,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, float value, DistributedCacheEntryOptions options)
-        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes;
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -241,226 +667,88 @@ namespace Boilerplate.Web.Mvc.Caching
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, string value)
+        /// <summary>
+        /// Sets the <see cref="string"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="encoding">The <see cref="string"/> values encoding or <c>null</c> for UTF-8.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            string value,
+            Encoding encoding = null,
+            DistributedCacheEntryOptions options = null)
         {
-            return SetAsync(cache, key, value, Encoding.UTF8, new DistributedCacheEntryOptions());
-        }
+            if (cache == null)
+            {
+                throw new ArgumentNullException(nameof(cache));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, string value, Encoding encoding)
-        {
-            return SetAsync(cache, key, value, encoding, new DistributedCacheEntryOptions());
-        }
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, string value, DistributedCacheEntryOptions options)
-        {
-            return SetAsync(cache, key, value, Encoding.UTF8, options);
-        }
+            if (encoding == null)
+            {
+                encoding = Encoding.UTF8;
+            }
 
-        public static Task SetAsync(this IDistributedCache cache, string key, string value, Encoding encoding, DistributedCacheEntryOptions options)
-        {
+            if (options == null)
+            {
+                options = new DistributedCacheEntryOptions();
+            }
+
             byte[] bytes = encoding.GetBytes(value);
             return cache.SetAsync(key, bytes, options);
         }
 
-        public static async Task<Tuple<bool, bool>> TryGetBooleanAsync(this IDistributedCache cache, string key)
+        /// <summary>
+        /// Sets the value of type <typeparamref name="T"/> with the specified key in the cache asynchronously by
+        /// serializing it to JSON format.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="encoding">The encoding to use for the JSON or <c>null</c> to use UTF-8.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>The value of type <typeparamref name="T"/> or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsJsonAsync<T>(
+            this IDistributedCache cache,
+            string key,
+            T value,
+            Encoding encoding = null,
+            DistributedCacheEntryOptions options = null)
+            where T : class
         {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
+            if (cache == null)
             {
-                return new Tuple<bool, bool>(false, false);
+                throw new ArgumentNullException(nameof(cache));
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            if (key == null)
             {
-                var binaryReader = new BinaryReader(memoryStream);
-                bool value = binaryReader.ReadBoolean();
-                return new Tuple<bool, bool>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, char>> TryGetCharAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, char>(false, default(char));
+                throw new ArgumentNullException(nameof(key));
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            if (encoding == null)
             {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadChar();
-                return new Tuple<bool, char>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, decimal>> TryGetDecimalAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, decimal>(false, default(decimal));
+                encoding = Encoding.UTF8;
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
+            if (options == null)
             {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadDecimal();
-                return new Tuple<bool, decimal>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, double>> TryGetDoubleAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, double>(false, default(double));
+                options = new DistributedCacheEntryOptions();
             }
 
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
-            {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadDouble();
-                return new Tuple<bool, double>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, short>> TryGetShortAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, short>(false, default(short));
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
-            {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadInt16();
-                return new Tuple<bool, short>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, int>> TryGetIntAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, int>(false, default(int));
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
-            {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadInt32();
-                return new Tuple<bool, int>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, long>> TryGetLongAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, long>(false, default(long));
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
-            {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadInt64();
-                return new Tuple<bool, long>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, float>> TryGetFloatAsync(this IDistributedCache cache, string key)
-        {
-            var bytes = await cache.GetAsync(key);
-            if (bytes == null)
-            {
-                return new Tuple<bool, float>(false, default(long));
-            }
-
-            using (MemoryStream memoryStream = new MemoryStream(bytes))
-            {
-                var binaryReader = new BinaryReader(memoryStream);
-                var value = binaryReader.ReadSingle();
-                return new Tuple<bool, float>(true, value);
-            }
-        }
-
-        public static async Task<Tuple<bool, string>> TryGetStringAsync(this IDistributedCache cache, string key)
-        {
-            return await TryGetStringAsync(cache, key, Encoding.UTF8).ConfigureAwait(false);
-        }
-
-        public static async Task<Tuple<bool, string>> TryGetStringAsync(this IDistributedCache cache, string key, Encoding encoding)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, string>(false, default(string));
-            }
-
-            var value = encoding.GetString(bytes);
-            return new Tuple<bool, string>(true, value);
-        }
-
-        #endregion
-
-        #region JSON
-
-        public static Task<T> GetAsJsonAsync<T>(this IDistributedCache cache, string key)
-        {
-            return GetAsJsonAsync<T>(cache, key, Encoding.UTF8);
-        }
-
-        public static async Task<T> GetAsJsonAsync<T>(this IDistributedCache cache, string key, Encoding encoding)
-        {
-            var json = await GetStringAsync(cache, key, encoding).ConfigureAwait(false);
-            return JsonConvert.DeserializeObject<T>(json);
-        }
-
-        public static Task SetAsJsonAsync<T>(this IDistributedCache cache, string key, T value)
-        {
-            return SetAsJsonAsync(cache, key, value, Encoding.UTF8, new DistributedCacheEntryOptions());
-        }
-
-        public static Task SetAsJsonAsync<T>(this IDistributedCache cache, string key, T value, Encoding encoding)
-        {
-            return SetAsJsonAsync(cache, key, value, encoding, new DistributedCacheEntryOptions());
-        }
-
-        public static Task SetAsJsonAsync<T>(this IDistributedCache cache, string key, T value, DistributedCacheEntryOptions options)
-        {
-            return SetAsJsonAsync(cache, key, value, Encoding.UTF8, options);
-        }
-
-        public static Task SetAsJsonAsync<T>(this IDistributedCache cache, string key, T value, Encoding encoding, DistributedCacheEntryOptions options)
-        {
             var json = JsonConvert.SerializeObject(value, Formatting.None);
             return SetAsync(cache, key, json, encoding, options);
         }
-
-        public static Task<Tuple<bool, T>> TryGetAsJsonAsync<T>(this IDistributedCache cache, string key)
-        {
-            return TryGetAsJsonAsync<T>(cache, key, Encoding.UTF8);
-        }
-
-        public static async Task<Tuple<bool, T>> TryGetAsJsonAsync<T>(this IDistributedCache cache, string key, Encoding encoding)
-        {
-            var bytes = await cache.GetAsync(key).ConfigureAwait(false);
-            if (bytes == null)
-            {
-                return new Tuple<bool, T>(false, default(T));
-            }
-
-            var json = encoding.GetString(bytes);
-            var value = JsonConvert.DeserializeObject<T>(json);
-            return new Tuple<bool, T>(true, value);
-        }
-
-        #endregion
     }
 }
