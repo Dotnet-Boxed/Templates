@@ -13,6 +13,16 @@ MVC 6
 - Updated jQuery to 2.2.2.
 - Updated jQuery validate to 1.15.0.
 - Updated jQuery validate npm package to 3.2.5.
+- Updated gulp to 2.9.1.
+- Updated gulp-csslint to 0.3.0.
+- Updated gulp-cssnano to 2.1.1.
+- Updated gulp-plumber to 1.1.0.
+- Updated gulp-size to 2.1.0.
+- Updated gulp-typescript to 2.13.0.
+- Updated gulp-tslint to 4.3.5.
+- Updated gulp-uglify to 1.5.3.
+- Updated psi to 2.0.3.
+- Updated rimraf to 2.5.2.
 
 Version 2.14.0
 MVC 6

@@ -2,11 +2,11 @@
   "name": "asp.net-mvc-boilerplate",
   "version": "0.0.0",
   "devDependencies": {
-    "gulp": "3.9.0",
+    "gulp": "3.9.1",
     "gulp-autoprefixer": "2.3.1",
     "gulp-concat": "2.6.0",
-    "gulp-csslint": "0.2.0",
-    "gulp-cssnano": "2.1.0",
+    "gulp-csslint": "0.3.0",
+    "gulp-cssnano": "2.1.1",
     "gulp-if": "2.0.0",
     "gulp-imagemin": "2.4.0",
     // $Start-JavaScriptCodeStyle$
@@ -22,23 +22,23 @@
     // $Start-JavaScriptTestFramework$
     "gulp-mocha-phantomjs": "0.11.0",
     // $End-JavaScriptTestFramework$
-    "gulp-plumber": "1.0.1",
+    "gulp-plumber": "1.1.0",
     "gulp-rename": "1.2.2",
     // $Start-ApplicationInsights$
     "gulp-replace": "0.5.4",
     // $End-ApplicationInsights$
     "gulp-sass": "2.2.0",
     "gulp-scss-lint": "0.3.9",
-    "gulp-size": "2.0.0",
+    "gulp-size": "2.1.0",
     "gulp-sourcemaps": "1.6.0",
     // $Start-TypeScript$
-    "gulp-typescript": "2.10.0",
-    "gulp-tslint": "4.3.1",
+    "gulp-typescript": "2.13.0",
+    "gulp-tslint": "4.3.5",
     // $End-TypeScript$
-    "gulp-uglify": "1.5.1",
+    "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",
     "merge-stream": "1.0.0",
-    "psi": "2.0.2",
-    "rimraf": "2.5.1"
+    "psi": "2.0.3",
+    "rimraf": "2.5.2"
   }
 }
