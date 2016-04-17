@@ -79,11 +79,11 @@
 
             if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(this.Source))
             {
-                var sri = await this.GetCachedSri(url);
+                var sri = await this.GetCachedSri(url).ConfigureAwait(false);
                 if (sri == null)
                 {
                     sri = this.GetSubresourceIntegrityFromContentFile(this.Source, this.HashAlgorithms);
-                    await this.SetCachedSri(url, sri);
+                    await this.SetCachedSri(url, sri).ConfigureAwait(false);
                 }
 
                 output.Attributes[CrossOriginAttributeName] = "anonymous";
@@ -184,14 +184,14 @@
         private async Task<string> GetCachedSri(string url)
         {
             var key = this.GetSriKey(url);
-            var value = await this.distributedCache.GetAsync(key);
+            var value = await this.distributedCache.GetAsync(key).ConfigureAwait(false);
             return value == null ? null : Encoding.UTF8.GetString(value);
         }
 
-        private async Task SetCachedSri(string url, string value)
+        private Task SetCachedSri(string url, string value)
         {
             var key = this.GetSriKey(url);
-            await this.distributedCache.SetAsync(key, Encoding.UTF8.GetBytes(value));
+            return this.distributedCache.SetAsync(key, Encoding.UTF8.GetBytes(value));
         }
 
         private string GetSubresourceIntegrityFromContentFile(

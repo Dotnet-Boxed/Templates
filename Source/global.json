@@ -1,8 +1,8 @@
 ﻿{
-    "projects": [ "Source", "Tests" ],
-    "sdk": {
-        "version": "1.0.0-rc1-update1",
-        "runtime": "clr",
-        "architecture": "x86"
-    }
+  "projects": [ "Source", "Tests" ],
+  "sdk": {
+    "version": "1.0.0-rc1-update2",
+    "runtime": "clr",
+    "architecture": "x86"
+  }
 }
