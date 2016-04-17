@@ -14,6 +14,7 @@
     // $End-JavaScriptCodeStyle$
     // $Start-JavaScriptHint$
     "gulp-jshint": "2.0.0",
+    "jshint": "2.9.1",
     // $End-JavaScriptHint$
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",

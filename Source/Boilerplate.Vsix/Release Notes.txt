@@ -1,6 +1,7 @@
 ﻿Version 2.14.0
 MVC 6
 - Change error controller route to start at 400 to 599.
+- Fixed Missing jshint and jslint (See https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/89).
 
 Version 2.13.0
 MVC 6
