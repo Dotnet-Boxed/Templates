@@ -1,6 +1,6 @@
-<h1>
-    <img src="https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget Icon.png" alt="ASP.NET MVC Boilerplate Logo" width="30px" height="30px" /> <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">ASP.NET MVC Boilerplate</a>
-</h1>
+<a>
+    <img alt="ASP.NET MVC Boilerplate Banner" src="https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Banner.png"/>
+</a>
 
 <img alt="ASP.NET-MVC-Boilerplate in the Visual Studio 'New Project' dialogue"
      border="5"
