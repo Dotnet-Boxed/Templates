@@ -8,6 +8,11 @@ MVC 6
 - Boilerplate.Web.Mvc6.TagHelpers Updated:
 	- Performance improvements.
 - Fixed Missing jshint and jslint (See https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/89).
+- Updated JSON.NET reference.
+- Updated font-awesome to 4.6.1.
+- Updated jQuery to 2.2.2.
+- Updated jQuery validate to 1.15.0.
+- Updated jQuery validate npm package to 3.2.5.
 
 Version 2.14.0
 MVC 6

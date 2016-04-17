@@ -3,9 +3,9 @@
   "private": true,
   "dependencies": {
     "bootstrap-sass": "3.3.6",
-    "font-awesome": "4.5.0",
-    "jquery": "2.2.0",
-    "jquery-validation": "1.14.0",
+    "font-awesome": "4.6.1",
+    "jquery": "2.2.2",
+    "jquery-validation": "1.15.0",
     "jquery-validation-unobtrusive": "3.2.5",
     // $Start-JavaScriptTestFramework-Mocha$
     "mocha": "2.4.5",

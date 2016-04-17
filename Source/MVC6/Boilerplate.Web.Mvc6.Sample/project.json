@@ -36,7 +36,7 @@
     // $Start-NWebSec$
     "NWebsec.Mvc": "5.0.0-gamma-39",
     // $End-NWebSec$
-    "Newtonsoft.Json": "8.0.2"
+    "Newtonsoft.Json": "8.0.3"
   },
 
   "commands": {
