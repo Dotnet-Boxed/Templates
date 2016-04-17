@@ -673,6 +673,24 @@ namespace Boilerplate.Web.Mvc.Caching
         /// <param name="cache">The distributed cache.</param>
         /// <param name="key">The cache item key.</param>
         /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>A task representing this action.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsync(
+            this IDistributedCache cache,
+            string key,
+            string value,
+            DistributedCacheEntryOptions options = null)
+        {
+            return SetAsync(cache, key, value, null, options);
+        }
+
+        /// <summary>
+        /// Sets the <see cref="string"/> value with the specified key in the cache asynchronously.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
         /// <param name="encoding">The <see cref="string"/> values encoding or <c>null</c> for UTF-8.</param>
         /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
         /// <returns>A task representing this action.</returns>
@@ -706,6 +724,26 @@ namespace Boilerplate.Web.Mvc.Caching
 
             byte[] bytes = encoding.GetBytes(value);
             return cache.SetAsync(key, bytes, options);
+        }
+
+        /// <summary>
+        /// Sets the value of type <typeparamref name="T"/> with the specified key in the cache asynchronously by
+        /// serializing it to JSON format.
+        /// </summary>
+        /// <param name="cache">The distributed cache.</param>
+        /// <param name="key">The cache item key.</param>
+        /// <param name="value">The cache item value.</param>
+        /// <param name="options">The cache options or <c>null</c> to use the default cache options.</param>
+        /// <returns>The value of type <typeparamref name="T"/> or <c>null</c> if the key was not found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="cache"/> or <paramref name="key"/> is <c>null</c>.</exception>
+        public static Task SetAsJsonAsync<T>(
+            this IDistributedCache cache,
+            string key,
+            T value,
+            DistributedCacheEntryOptions options = null)
+            where T : class
+        {
+            return SetAsJsonAsync<T>(cache, key, value, null, options);
         }
 
         /// <summary>
