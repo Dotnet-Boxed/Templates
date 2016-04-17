@@ -59,7 +59,6 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile("tsconfig.html");
             await this.ProjectService.DeleteFile("tsconfig.json");
             await this.ProjectService.DeleteFile("tslint.json");
 

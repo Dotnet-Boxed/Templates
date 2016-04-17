@@ -23,6 +23,7 @@ MVC 6
 - Updated gulp-uglify to 1.5.3.
 - Updated psi to 2.0.3.
 - Updated rimraf to 2.5.2.
+- Deleted tsconfig.html and moved comments to tsconfig.json as it now supports comments.
 
 Version 2.14.0
 MVC 6
