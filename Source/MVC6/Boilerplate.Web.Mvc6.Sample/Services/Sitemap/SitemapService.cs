@@ -82,20 +82,15 @@
         {
             // Here we are caching the entire set of sitemap documents. We cannot use the caching attribute because
             // cache expiry could get out of sync if the number of sitemaps changes.
-            List<string> sitemapDocuments;
-            var tuple = await this.distributedCache.TryGetAsJsonAsync<List<string>>(CacheProfileName.SitemapNodes);
-            if (tuple.Item1)
-            {
-                sitemapDocuments = tuple.Item2;
-            }
-            else
+            var sitemapDocuments = await this.distributedCache.GetAsJsonAsync<List<string>>(CacheProfileName.SitemapNodes);
+            if (sitemapDocuments == null)
             {
                 IReadOnlyCollection<SitemapNode> sitemapNodes = this.GetSitemapNodes();
                 sitemapDocuments = this.GetSitemapDocuments(sitemapNodes);
                 await this.distributedCache.SetAsJsonAsync(
                     CacheProfileName.SitemapNodes,
                     sitemapDocuments,
-                    new DistributedCacheEntryOptions()
+                    options: new DistributedCacheEntryOptions()
                     {
                         AbsoluteExpirationRelativeToNow = expirationDuration
                     });
