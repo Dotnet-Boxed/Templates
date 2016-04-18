@@ -1,4 +1,8 @@
-﻿Version 2.15.0
+﻿Version 2.16.0
+MVC 6
+- Added HttpRequestExtensions IsLocalRequest extension method.
+
+Version 2.15.0
 MVC 6
 - Boilerplate.Web.Mvc6 Updated:
 	- Performance improvements.
