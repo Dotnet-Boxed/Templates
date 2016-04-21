@@ -1,6 +1,7 @@
 ﻿Version 2.16.0
 MVC 6
 - Added HttpRequestExtensions IsLocalRequest extension method.
+- Modified launchSettings.json so that the site starts on the same port when started from Kestrel or IIS Express.
 
 Version 2.15.0
 MVC 6

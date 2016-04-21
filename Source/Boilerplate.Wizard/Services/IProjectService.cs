@@ -22,7 +22,7 @@
         Task DeleteFile(string relativeFilePath);
 
         Task EditComment(string commentName, EditCommentMode mode);
-        
+
         Task EditCommentInFile(string commentName, EditCommentMode mode, string relativeFilePath);
 
         Task EditCommentByPattern(string commentName, EditCommentMode mode, string searchPattern);

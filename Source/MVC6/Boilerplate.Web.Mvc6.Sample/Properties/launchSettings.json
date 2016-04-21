@@ -17,6 +17,7 @@
     },
     "web": {
       "commandName": "web",
+      "commandLineArgs": "--server.urls http://*:1025",
       "environmentVariables": {
         "Hosting:Environment": "Development"
       }
