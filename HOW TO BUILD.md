@@ -2,7 +2,7 @@
 
 To build this project you will require:
 
-1. Visual Studio 2015 Update 1
+1. Visual Studio 2015 Update 2
 2. Visual Studio 2015 SDK
 3. Latest version of ASP.NET 5
 4. [SideWaffle](https://visualstudiogallery.msdn.microsoft.com/a16c2d07-b2e1-4a25-87d9-194f04e7a698) Visual Studio Extension
