@@ -1,4 +1,8 @@
-﻿Version 2.16.0
+﻿Version 2.17.0
+MVC 6
+- RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT.
+
+Version 2.16.0
 MVC 6
 - Added HttpRequestExtensions IsLocalRequest extension method.
 - Modified launchSettings.json so that the site starts on the same port when started from Kestrel or IIS Express.

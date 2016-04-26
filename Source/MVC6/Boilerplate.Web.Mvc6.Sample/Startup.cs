@@ -39,8 +39,8 @@
         /// 1. On your server, right click 'Computer' or 'My Computer' and click on 'Properties'.
         /// 2. Go to 'Advanced System Settings'.
         /// 3. Click on 'Environment Variables' in the Advanced tab.
-        /// 4. Add a new System Variable with the name 'ASPNET_ENV' and a value of Production, Staging or
-        /// whatever you want.
+        /// 4. Add a new System Variable with the name 'ASPNET_ENV' for RC1 or 'ASPNETCORE_ENVIRONMENT' for RC2 and a
+        /// value of Production, Staging or whatever you want.
         /// See http://docs.asp.net/en/latest/fundamentals/environments.html
         /// </summary>
         private readonly IHostingEnvironment hostingEnvironment;
@@ -157,7 +157,7 @@
 
             // Add Azure Application Insights to the request pipeline to track HTTP request telemetry data.
             application.UseApplicationInsightsRequestTelemetry();
-            // Track data about exceptions from the application. Should be configured after all error handling 
+            // Track data about exceptions from the application. Should be configured after all error handling
             // middleware in the request pipeline.
             application.UseApplicationInsightsExceptionTelemetry();
             // $End-ApplicationInsights$

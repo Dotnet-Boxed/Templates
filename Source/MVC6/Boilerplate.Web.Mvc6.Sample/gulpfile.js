@@ -56,7 +56,9 @@ var environment = {
     production: 'Production',
     // Gets the current hosting environment the application is running under. This comes from the environment variables.
     current: function () {
-        return process.env.ASPNET_ENVIRONMENT || process.env.ASPNET_ENV || this.development;
+        // ASP.NET Core RC2 uses ASPNETCORE_ENVIRONMENT.
+        // ASP.NET Core RC1 uses ASPNET_ENV.
+        return process.env.ASPNETCORE_ENVIRONMENT || process.env.ASPNET_ENV || this.development;
     },
     // Are we running under the development environment.
     isDevelopment: function () {
