@@ -15,7 +15,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
-- Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers.
+- Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers using [this](https://github.com/aspnet/Mvc/pull/4113).
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.
@@ -44,3 +44,5 @@ Wait for Microsoft to finish MVC 6 before adding these features.
 
 - CacheProfile.VaryByParam in Startup.CacheProfiles.cs
 - System.ServiceModel.SyndicationFeed does not exist on .NET Core. See [this](https://github.com/dotnet/wcf/issues/76#issuecomment-111420491) GitHub issue.
+- Use the [RequireHttps middle-ware](https://github.com/aspnet/BasicMiddleware/issues/31) instead of a filter.
+- Use the [HTTP Compression middle-ware](https://github.com/aspnet/BasicMiddleware/issues/34) instead of IIS compression.
