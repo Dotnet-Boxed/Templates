@@ -1,7 +1,9 @@
 ﻿Version 2.17.0
 - Extension now installs for a single user, rather than all users. This enables it to auto-update.
 MVC 6
-- RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT.
+- RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT in gulpfile.js and Startup.cs.
+- AddUserSecrets for configuration only done in Development for security in Startup.Configuration.cs.
+- Changed comments for how to add/remove environment variables in Startup.Configuration.cs.
 
 Version 2.16.0
 MVC 6

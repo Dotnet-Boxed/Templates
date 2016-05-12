@@ -28,11 +28,15 @@
             // config.json file.
             configurationBuilder.AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true);
 
-            // This reads the configuration keys from the secret store. This allows you to store connection strings
-            // and other sensitive settings, so you don't have to check them into your source control provider. See
-            // http://go.microsoft.com/fwlink/?LinkID=532709 and
-            // http://docs.asp.net/en/latest/security/app-secrets.html
-            configurationBuilder.AddUserSecrets();
+            if (hostingEnvironment.IsDevelopment())
+            {
+                // This reads the configuration keys from the secret store. This allows you to store connection strings
+                // and other sensitive settings, so you don't have to check them into your source control provider.
+                // Only use this in Development, it is not intended for Production use. See
+                // http://go.microsoft.com/fwlink/?LinkID=532709 and
+                // http://docs.asp.net/en/latest/security/app-secrets.html
+                configurationBuilder.AddUserSecrets();
+            }
 
             // Add configuration specific to the Development, Staging or Production environments. This config can
             // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -40,9 +44,9 @@
             // Note: To set environment variables for debugging navigate to:
             // Project Properties -> Debug Tab -> Environment Variables
             // Note: To get environment variables for the machine use the following command in PowerShell:
-            // $env:[VARIABLE_NAME]
+            // [System.Environment]::GetEnvironmentVariable("[VARIABLE_NAME]", [System.EnvironmentVariableTarget]::Machine)
             // Note: To set environment variables for the machine use the following command in PowerShell:
-            // $env:[VARIABLE_NAME]="[VARIABLE_VALUE]"
+            // [System.Environment]::SetEnvironmentVariable("[VARIABLE_NAME]", "[VARIABLE_VALUE]", [System.EnvironmentVariableTarget]::Machine)
             // Note: Environment variables use a colon separator e.g. You can override the site title by creating a
             // variable named AppSettings:SiteTitle. See
             // http://docs.asp.net/en/latest/security/app-secrets.html
