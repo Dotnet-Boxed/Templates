@@ -12,7 +12,7 @@
     <PreviewImage>Small Preview Image.png</PreviewImage>
     <Tags>ASP.NET;MVC;Boilerplate;Template;C#;.NET;Bootstrap;Elmah;Autofac;Glimpse;Modernizr;NWebSec;HTML5</Tags>
   </Metadata>
-  <Installation AllUsers="true">
+  <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,]" />
   </Installation>
   <Dependencies>
