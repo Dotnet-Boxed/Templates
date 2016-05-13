@@ -5,7 +5,7 @@
 
     public interface IFileSystemService
     {
-        Task DirectoryDelete(string directoryPath);
+        void DirectoryDelete(string directoryPath);
 
         bool DirectoryExists(string directoryPath);
 
@@ -13,7 +13,7 @@
 
         Task<string[]> DirectoryGetAllFiles(string directoryPath, string searchPattern);
 
-        Task FileDelete(string filePath);
+        void FileDelete(string filePath);
 
         bool FileExists(string filePath);
 
@@ -21,8 +21,10 @@
 
         Task<string> FileReadAllText(string filePath);
 
-        Task FileWriteAllLines(string filePath, IEnumerable<string> lines);
+        void FileWriteAllLines(string filePath, IEnumerable<string> lines);
 
-        Task FileWriteAllText(string filePath, string text);
+        void FileWriteAllText(string filePath, string text);
+
+        Task SaveAll();
     }
 }

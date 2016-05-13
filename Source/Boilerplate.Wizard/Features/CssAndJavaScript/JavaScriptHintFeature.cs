@@ -58,7 +58,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(".jshintrc");
+            this.ProjectService.DeleteFile(".jshintrc");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "package.json");

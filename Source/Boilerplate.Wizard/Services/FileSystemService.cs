@@ -1,18 +1,36 @@
 ﻿namespace Boilerplate.Wizard.Services
 {
+    using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Threading.Tasks;
 
     public class FileSystemService : IFileSystemService
     {
-        public Task DirectoryDelete(string directoryPath)
+        private ConcurrentDictionary<string, string> files;
+
+        public FileSystemService()
         {
-            return Task.Run(() => Directory.Delete(directoryPath, true));
+            this.files = new ConcurrentDictionary<string, string>();
+        }
+
+        public void DirectoryDelete(string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                this.files.AddOrUpdate(directoryPath, (string)null, (x, y) => y);
+            }
         }
 
         public bool DirectoryExists(string directoryPath)
         {
+            string text;
+            if (files.TryGetValue(directoryPath, out text))
+            {
+                return text != null;
+            }
+
             return Directory.Exists(directoryPath);
         }
 
@@ -26,25 +44,31 @@
             return Task.Run(() => Directory.GetFiles(directoryPath, searchPattern, SearchOption.AllDirectories));
         }
 
-        public Task FileDelete(string filePath)
+        public void FileDelete(string filePath)
         {
-            return Task.Run(() => File.Delete(filePath));
+            this.files.AddOrUpdate(filePath, (string)null, (x, y) => y);
         }
 
         public bool FileExists(string filePath)
         {
+            string text;
+            if (files.TryGetValue(filePath, out text))
+            {
+                return text != null;
+            }
+
             return File.Exists(filePath);
         }
 
         public async Task<string[]> FileReadAllLines(string filePath)
         {
-            List<string> lines = new List<string>();
-
-            using (StreamReader streamReader = File.OpenText(filePath))
+            var text = await this.FileReadAllText(filePath);
+            var lines = new List<string>();
+            using (var stringReader = new StringReader(text))
             {
-                while (!streamReader.EndOfStream)
+                string line;
+                while ((line = stringReader.ReadLine()) != null)
                 {
-                    string line = await streamReader.ReadLineAsync();
                     lines.Add(line);
                 }
             }
@@ -54,35 +78,62 @@
 
         public async Task<string> FileReadAllText(string filePath)
         {
-            using (StreamReader streamReader = File.OpenText(filePath))
+            string text;
+            if (!files.TryGetValue(filePath, out text))
             {
-                return await streamReader.ReadToEndAsync();
+                using (StreamReader streamReader = File.OpenText(filePath))
+                {
+                    text = await streamReader.ReadToEndAsync();
+                }
             }
+
+            return text;
         }
 
-        public async Task FileWriteAllLines(string filePath, IEnumerable<string> lines)
+        public void FileWriteAllLines(string filePath, IEnumerable<string> lines)
         {
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            this.FileWriteAllText(filePath, string.Join(Environment.NewLine, lines));
+        }
+
+        public void FileWriteAllText(string filePath, string text)
+        {
+            this.files.AddOrUpdate(filePath, text, (x, y) => y);
+        }
+
+        public async Task SaveAll()
+        {
+            foreach (var keyValuePair in this.files)
             {
-                using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                var filePath = keyValuePair.Key;
+                var text = keyValuePair.Value;
+
+                if (File.Exists(filePath))
                 {
-                    foreach (string line in lines)
+                    if (text == null)
                     {
-                        await streamWriter.WriteLineAsync(line);
+                        await Task.Run(() => File.Delete(filePath));
+                    }
+                    else
+                    {
+                        using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write))
+                        {
+                            using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                            {
+                                await streamWriter.WriteAsync(text);
+                            }
+                        }
+                    }
+                }
+                else if (Directory.Exists(filePath))
+                {
+                    if (text == null)
+                    {
+                        await Task.Run(() => Directory.Delete(filePath, true));
                     }
                 }
             }
-        }
 
-        public async Task FileWriteAllText(string filePath, string text)
-        {
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-            {
-                using (StreamWriter streamWriter = new StreamWriter(fileStream))
-                {
-                    await streamWriter.WriteAsync(text);
-                }
-            }
+            this.files.Clear();
         }
     }
 }

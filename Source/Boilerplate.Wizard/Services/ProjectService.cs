@@ -32,13 +32,12 @@
         /// Deletes the specified directory in the project.
         /// </summary>
         /// <param name="relativeDirectoryPath">The path to the directory to delete, relative to the project.</param>
-        /// <returns>A task representing the function.</returns>
-        public async Task DeleteDirectory(string relativeDirectoryPath)
+        public void DeleteDirectory(string relativeDirectoryPath)
         {
             string directoryPath = Path.Combine(this.projectDirectoryPath, relativeDirectoryPath);
             if (this.fileSystemService.DirectoryExists(directoryPath))
             {
-                await this.fileSystemService.DirectoryDelete(directoryPath);
+                this.fileSystemService.DirectoryDelete(directoryPath);
             }
         }
 
@@ -46,13 +45,12 @@
         /// Deletes the specified file in the project.
         /// </summary>
         /// <param name="relativeFilePath">The path to the file to delete, relative to the project.</param>
-        /// <returns>A task representing the function.</returns>
-        public async Task DeleteFile(string relativeFilePath)
+        public void DeleteFile(string relativeFilePath)
         {
             string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
-                await this.fileSystemService.FileDelete(filePath);
+                this.fileSystemService.FileDelete(filePath);
             }
         }
 
@@ -96,7 +94,7 @@
             {
                 string text = await this.fileSystemService.FileReadAllText(filePath);
                 text = text.Replace(oldValue, newValue);
-                await this.fileSystemService.FileWriteAllText(filePath, text);
+                this.fileSystemService.FileWriteAllText(filePath, text);
             }
         }
 
@@ -123,7 +121,7 @@
             {
                 string text = await this.fileSystemService.FileReadAllText(filePath);
                 text = Regex.Replace(text, pattern, replacement);
-                await this.fileSystemService.FileWriteAllText(filePath, text);
+                this.fileSystemService.FileWriteAllText(filePath, text);
             }
         }
 
@@ -154,14 +152,14 @@
                     lines = EditCommentInternal(lines, namedComment, mode);
                 }
 
-                await this.fileSystemService.FileWriteAllLines(filePath, lines);
+                this.fileSystemService.FileWriteAllLines(filePath, lines);
             }
         }
 
         private string[] EditCommentInternal(string[] lines, NamedComment namedComment, EditCommentMode mode)
         {
             List<string> newLines = new List<string>(lines.Length);
-            
+
             bool isUncommenting = false;
             foreach (string line in lines)
             {

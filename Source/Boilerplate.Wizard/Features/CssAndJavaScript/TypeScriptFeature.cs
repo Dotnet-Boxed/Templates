@@ -59,8 +59,8 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile("tsconfig.json");
-            await this.ProjectService.DeleteFile("tslint.json");
+            this.ProjectService.DeleteFile("tsconfig.json");
+            this.ProjectService.DeleteFile("tslint.json");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "package.json");

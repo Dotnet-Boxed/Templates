@@ -61,7 +61,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteDirectory(@"Services\Robots");
+            this.ProjectService.DeleteDirectory(@"Services\Robots");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerAction.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");

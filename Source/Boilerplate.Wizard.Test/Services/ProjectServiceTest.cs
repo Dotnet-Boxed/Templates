@@ -34,14 +34,15 @@
             fileSystemServiceMock
                 .Setup(x => x.FileExists(It.Is<string>(y => string.Equals(y, filePath))))
                 .Returns(true);
+            var inputLines = GetInputLines(commentName, commentStart, commentEnd);
+            var outputLines = GetOutputLines(mode, commentStart, commentEnd);
             fileSystemServiceMock
                 .Setup(x => x.FileReadAllLines(It.Is<string>(y => string.Equals(y, filePath))))
-                .Returns(Task.FromResult(GetInputLines(commentName, commentStart, commentEnd)));
+                .Returns(Task.FromResult(inputLines));
             fileSystemServiceMock
                 .Setup(x => x.FileWriteAllLines(
                     It.Is<string>(y => string.Equals(y, filePath)),
-                    It.Is<IEnumerable<string>>(y => Enumerable.SequenceEqual(y, GetOutputLines(mode, commentStart, commentEnd)))))
-                .Returns(Task.FromResult<object>(null));
+                    It.Is<IEnumerable<string>>(y => Enumerable.SequenceEqual(y, outputLines))));
             IProjectService projectService = new ProjectService(fileSystemServiceMock.Object, @"C:\Project\Project.xproj");
 
             // Act
@@ -53,6 +54,11 @@
 
         private static IEnumerable<string> GetOutputLines(EditCommentMode mode, string commentStart, string commentEnd = null)
         {
+            if (commentStart != null)
+            {
+                commentStart = commentStart + " ";
+            }
+
             if (commentEnd != null)
             {
                 commentEnd = " " + commentEnd;
@@ -62,17 +68,17 @@
             {
                 return new string[]
                 {
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    "
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    ",
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    ",
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    "
                 };
             }
             else if (mode == EditCommentMode.DeleteCode)
             {
                 return new string[]
                 {
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    "
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    ",
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    "
                 };
             }
             else // if (deleteCommentMode == DeleteCommentMode.StartEndCommentAndUncommentCode)
@@ -80,15 +86,20 @@
                 string endSpacer = new string(' ', commentEnd == null ? 0 : 1);
                 return new string[]
                 {
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    ",
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    ",
                     $"    Blah Blah Blah    " + endSpacer,
-                    $"   {commentStart} Blah Blah Blah{commentEnd}    "
+                    $"    {commentStart}Blah Blah Blah{commentEnd}    "
                 };
             }
         }
 
         private static string[] GetInputLines(string commentName, string commentStart, string commentEnd)
         {
+            if (commentStart != null)
+            {
+                commentStart = commentStart + " ";
+            }
+
             if (commentEnd != null)
             {
                 commentEnd = " " + commentEnd;
@@ -96,11 +107,11 @@
 
             return new string[]
             {
-                $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                $"   {commentStart} $Start-{commentName}${commentEnd}    ",
-                $"   {commentStart} Blah Blah Blah{commentEnd}    ",
-                $"   {commentStart} $End-{commentName}${commentEnd}    ",
-                $"   {commentStart} Blah Blah Blah{commentEnd}    "
+                $"    {commentStart}Blah Blah Blah{commentEnd}    ",
+                $"    {commentStart}$Start-{commentName}${commentEnd}    ",
+                $"    {commentStart}Blah Blah Blah{commentEnd}    ",
+                $"    {commentStart}$End-{commentName}${commentEnd}    ",
+                $"    {commentStart}Blah Blah Blah{commentEnd}    "
             };
         }
     }

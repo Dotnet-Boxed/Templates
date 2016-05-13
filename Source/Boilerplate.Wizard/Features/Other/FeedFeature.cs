@@ -71,10 +71,10 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteDirectory(@"Services\Feed");
+            this.ProjectService.DeleteDirectory(@"Services\Feed");
 
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\atom-icon-48x48.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\atom-logo-96x48.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\atom-icon-48x48.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\atom-logo-96x48.png");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerAction.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");

@@ -57,15 +57,15 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-57x57.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-60x60.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-72x72.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-76x76.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-114x114.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-120x120.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-144x144.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-152x152.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-180x180.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-57x57.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-60x60.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-72x72.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-76x76.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-114x114.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-120x120.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-144x144.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-152x152.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\apple-touch-icon-180x180.png");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Shared\_Layout.cshtml");
         }
     }

@@ -70,7 +70,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"Scripts\application-insights.js");
+            this.ProjectService.DeleteFile(@"Scripts\application-insights.js");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.json");

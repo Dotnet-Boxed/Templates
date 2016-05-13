@@ -62,9 +62,10 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteDirectory(@"Services\Sitemap");
-            await this.ProjectService.DeleteDirectory(@"Services\SitemapPinger");
-            await this.ProjectService.DeleteFile(@"Settings\SitemapSettings.cs");
+            this.ProjectService.DeleteDirectory(@"Services\Sitemap");
+            this.ProjectService.DeleteDirectory(@"Services\SitemapPinger");
+
+            this.ProjectService.DeleteFile(@"Settings\SitemapSettings.cs");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerAction.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");

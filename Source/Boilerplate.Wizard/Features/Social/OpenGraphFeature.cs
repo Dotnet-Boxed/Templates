@@ -62,7 +62,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\open-graph-1200x630.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\open-graph-1200x630.png");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\About.cshtml");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\Contact.cshtml");

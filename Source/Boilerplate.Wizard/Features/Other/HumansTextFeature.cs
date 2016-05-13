@@ -52,7 +52,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
+            this.ProjectService.DeleteFile(@"wwwroot\humans.txt");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Home\Index.cshtml");
         }

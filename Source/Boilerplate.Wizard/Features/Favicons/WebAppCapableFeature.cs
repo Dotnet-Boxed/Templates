@@ -52,13 +52,13 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-1536x2008.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-1496x2048.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-768x1004.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-748x1024.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-640x1096.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-640x920.png");
-            await this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-320x460.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-1536x2008.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-1496x2048.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-768x1004.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-748x1024.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-640x1096.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-640x920.png");
+            this.ProjectService.DeleteFile(@"\img\icons\apple-touch-startup-image-320x460.png");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Shared\_Layout.cshtml");
         }

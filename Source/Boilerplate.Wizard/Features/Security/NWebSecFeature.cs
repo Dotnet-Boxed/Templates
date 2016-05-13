@@ -61,7 +61,7 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteFile("Startup.ContentSecurityPolicy.cs");
+            this.ProjectService.DeleteFile("Startup.ContentSecurityPolicy.cs");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");

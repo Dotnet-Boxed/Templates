@@ -89,7 +89,7 @@
             }
             else
             {
-                await this.ProjectService.DeleteDirectory("Tests");
+                this.ProjectService.DeleteDirectory("Tests");
                 await this.ProjectService.EditCommentInFile(
                    this.mocha.CommentName,
                    EditCommentMode.DeleteCode,

@@ -64,12 +64,12 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteDirectory(@"Services\BrowserConfig");
+            this.ProjectService.DeleteDirectory(@"Services\BrowserConfig");
 
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-70x70.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-150x150.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-310x310.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-310x150.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-70x70.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-150x150.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-310x310.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\mstile-310x150.png");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\CacheProfileName.cs");

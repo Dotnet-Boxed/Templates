@@ -6,7 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Data;
-    using Features;
+    using Boilerplate.Wizard.Features;
+    using Boilerplate.Wizard.Services;
     using Framework.ComponentModel;
     using Framework.UI.Input;
 
@@ -16,6 +17,7 @@
 
         private readonly FeatureCollection features;
         private readonly ICollectionView featuresView;
+        private readonly IFileSystemService fileSystemService;
         private readonly AsyncDelegateCommand addOrRemoveFeaturesCommand;
 
         private string error;
@@ -25,16 +27,18 @@
 
         #region Constructors
 
-        public MainViewModel(IEnumerable<IFeature> features)
+        public MainViewModel(IEnumerable<IFeature> features, IFileSystemService fileSystemService)
         {
             this.features = new FeatureCollection(features);
+            this.fileSystemService = fileSystemService;
+
             this.featuresView = CollectionViewSource.GetDefaultView(this.features);
             this.featuresView.Filter = x => ((IFeature)x).IsVisible;
             this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.Group) + "." + nameof(IFeatureGroup.Name)));
             this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Group) + "." + nameof(IFeatureGroup.Order), ListSortDirection.Ascending));
             this.featuresView.SortDescriptions.Add(new SortDescription(nameof(IFeature.Order), ListSortDirection.Ascending));
             this.addOrRemoveFeaturesCommand = new AsyncDelegateCommand(this.AddOrRemoveFeatures);
-        } 
+        }
 
         #endregion
 
@@ -89,6 +93,15 @@
                     {
                         exceptions.Add(exception);
                     }
+                }
+
+                try
+                {
+                    await this.fileSystemService.SaveAll();
+                }
+                catch (Exception exception)
+                {
+                    exceptions.Add(exception);
                 }
 
                 if (exceptions.Count > 0)

@@ -64,14 +64,14 @@
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.DeleteDirectory(@"Services\Manifest");
+            this.ProjectService.DeleteDirectory(@"Services\Manifest");
 
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-36x36.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-48x48.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-72x72.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-96x96.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-144x144.png");
-            await this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-192x192.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-36x36.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-48x48.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-72x72.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-96x96.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-144x144.png");
+            this.ProjectService.DeleteFile(@"wwwroot\img\icons\android-chrome-192x192.png");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\HomeController\HomeControllerRoute.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Constants\CacheProfileName.cs");
