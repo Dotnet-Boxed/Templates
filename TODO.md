@@ -25,7 +25,7 @@ Improvements that can be made to all project templates.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 - Add an example form controller.
 - Use JIL for JSON serialization (See [issue](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/72)).
-- Improve social tag helpers to include child elments for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
+- Improve social tag helpers to include child elements for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
@@ -33,9 +33,8 @@ Wait for Microsoft to finish MVC 6 before adding these features:
 - Make Development mode use HTTPS using [this](https://github.com/aspnet/Mvc/pull/4113).
 - CacheProfile.VaryByParam in Startup.CacheProfiles.cs.
 - System.ServiceModel.SyndicationFeed does not exist on .NET Core. See [this](https://github.com/dotnet/wcf/issues/76#issuecomment-111420491) GitHub issue.
-- Use the [RequireHttps middle-ware](https://github.com/aspnet/BasicMiddleware/issues/31) instead of a filter.
 - Use the [HTTP Compression middle-ware](https://github.com/aspnet/BasicMiddleware/issues/34) instead of IIS compression.
-- Enable HTTPS in development environment by building a version of RequireHttpsAttribute which supports port numbers using [this](https://github.com/aspnet/Mvc/pull/4113).
+- Use the [RequireHttps middle-ware](https://github.com/aspnet/BasicMiddleware/issues/31) instead of a filter.
 
 ## ASP.NET Core MVC 6 API
 
