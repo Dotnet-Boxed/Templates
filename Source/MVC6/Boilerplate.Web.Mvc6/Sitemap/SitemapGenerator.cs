@@ -176,7 +176,7 @@
             {
                 this.LogWarning(new SitemapException(string.Format(
                     CultureInfo.CurrentCulture,
-                    "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{1}>",
+                    "Sitemap exceeds the maximum size of 10MB. This is because you have unusually long URL's. Consider reducing the MaximumSitemapNodeCount. Size:<{0}>.",
                     sitemapXml.Length)));
             }
         }

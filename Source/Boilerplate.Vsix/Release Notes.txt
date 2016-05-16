@@ -1,4 +1,19 @@
-﻿Version 2.17.0
+﻿Version 2.18.0
+- Fixed SitemapGenerator bug https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/96.
+- Boilerplate.Web.Mvc NuGet packages updated for the above change.
+MVC 5
+- jQuery updated NuGet package updated from 2.2.0 to 2.2.3. ContentDeliveryNetwork.cs and packages.config updated.
+- jQuery.validate NuGet package updated from 1.14.0 to 1.15.0. ContentDeliveryNetwork.cs and packages.config updated.
+- Newtonsoft.Json NuGet package updated from 8.0.2 to 8.0.3.
+- Font Awesome NuGet package updated from 4.2.0 to 4.5.0.
+MVC 6
+- jQuery updated NuGet Bower updated from 2.2.2 to 2.2.3. ContentDeliveryNetwork.cs and bower.json updated.
+- Font Awesome NuGet Bower updated from 4.6.1 to 4.6.3. ContentDeliveryNetwork.cs and bower.json updated.
+- jQuery.validate.unobtrusive Bower package updated from 3.2.5 to 3.2.6. ContentDeliveryNetwork.cs and bower.json updated.
+- sinon Bower package updated from 1.17.3 to 1.17.4. ContentDeliveryNetwork.cs and bower.json updated.
+- Updated several NPM packages in package.json.
+
+Version 2.17.0
 - Extension now installs for a single user, rather than all users. This enables it to auto-update.
 MVC 6
 - RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT in gulpfile.js and Startup.cs.

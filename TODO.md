@@ -15,6 +15,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
+- Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.

@@ -61,9 +61,8 @@
     <Reference Include="Autofac.Integration.Owin">
       <HintPath>..\..\packages\Autofac.Owin.3.1.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Boilerplate.Web.Mvc5, Version=1.0.0.0, Culture=neutral, PublicKeyToken=fc5550082a9c642c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.24\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Boilerplate.Web.Mvc5">
+      <HintPath>..\..\packages\Boilerplate.Web.Mvc5.1.0.25\lib\net45\Boilerplate.Web.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -95,8 +94,8 @@
       <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NWebsec, Version=4.2.0.0, Culture=neutral, PublicKeyToken=3613da5f958908a1, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NWebsec.4.2.0\lib\45\NWebsec.dll</HintPath>
@@ -231,20 +230,6 @@
     <Content Include="Content\icons\atom-icon-48x48.png" />
     <Content Include="Content\icons\atom-logo-96x48.png" />
     <Content Include="Content\icons\open-graph-1200x630.png" />
-    <Content Include="Content\fontawesome\bordered-pulled.less" />
-    <Content Include="Content\fontawesome\core.less" />
-    <Content Include="Content\fontawesome\extras.less" />
-    <Content Include="Content\fontawesome\fixed-width.less" />
-    <Content Include="Content\fontawesome\font-awesome.less" />
-    <Content Include="Content\fontawesome\icons.less" />
-    <Content Include="Content\fontawesome\larger.less" />
-    <Content Include="Content\fontawesome\list.less" />
-    <Content Include="Content\fontawesome\mixins.less" />
-    <Content Include="Content\fontawesome\path.less" />
-    <Content Include="Content\fontawesome\rotated-flipped.less" />
-    <Content Include="Content\fontawesome\spinning.less" />
-    <Content Include="Content\fontawesome\stacked.less" />
-    <Content Include="Content\fontawesome\variables.less" />
     <Content Include="Content\bootstrap\wells.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\utilities.less" />
@@ -316,10 +301,30 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\fontawesome\variables.less" />
+    <Content Include="Content\fontawesome\stacked.less" />
+    <Content Include="Content\fontawesome\rotated-flipped.less" />
+    <Content Include="Content\fontawesome\path.less" />
+    <Content Include="Content\fontawesome\mixins.less" />
+    <Content Include="Content\fontawesome\list.less" />
+    <Content Include="Content\fontawesome\larger.less" />
+    <Content Include="Content\fontawesome\icons.less" />
+    <Content Include="Content\fontawesome\font-awesome.less" />
+    <Content Include="Content\fontawesome\fixed-width.less" />
+    <Content Include="Content\fontawesome\core.less" />
+    <Content Include="Content\fontawesome\bordered-pulled.less" />
+    <Content Include="Content\fontawesome\animated.less" />
+    <Content Include="Content\fonts\fontawesome\fontawesome-webfont.woff2" />
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="ReadMe.html" />
+    <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.2.3.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="sw-file-icon.png" />
     <Content Include="sw-file-previewimage.png" />
     <Content Include="_Definitions\_project.vstemplate.xml">
@@ -402,13 +407,7 @@
     <Content Include="Content\fontawesome\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
-    <Content Include="Scripts\jquery-2.2.0.js" />
-    <Content Include="Scripts\jquery-2.2.0.min.js" />
-    <Content Include="Scripts\jquery-2.2.0.min.map" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery-2.2.3.min.map" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />

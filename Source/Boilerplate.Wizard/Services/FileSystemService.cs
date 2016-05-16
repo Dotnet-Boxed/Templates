@@ -19,7 +19,7 @@
         {
             if (Directory.Exists(directoryPath))
             {
-                this.files.AddOrUpdate(directoryPath, (string)null, (x, y) => y);
+                this.files.AddOrUpdate(directoryPath, (string)null, (x, y) => (string)null);
             }
         }
 
@@ -46,7 +46,7 @@
 
         public void FileDelete(string filePath)
         {
-            this.files.AddOrUpdate(filePath, (string)null, (x, y) => y);
+            this.files.AddOrUpdate(filePath, (string)null, (x, y) => (string)null);
         }
 
         public bool FileExists(string filePath)
@@ -85,6 +85,8 @@
                 {
                     text = await streamReader.ReadToEndAsync();
                 }
+
+                files.AddOrUpdate(filePath, text, (x, y) => text);
             }
 
             return text;
@@ -97,7 +99,7 @@
 
         public void FileWriteAllText(string filePath, string text)
         {
-            this.files.AddOrUpdate(filePath, text, (x, y) => y);
+            this.files.AddOrUpdate(filePath, text, (x, y) => text);
         }
 
         public async Task SaveAll()
@@ -115,7 +117,7 @@
                     }
                     else
                     {
-                        using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write))
+                        using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                         {
                             using (StreamWriter streamWriter = new StreamWriter(fileStream))
                             {

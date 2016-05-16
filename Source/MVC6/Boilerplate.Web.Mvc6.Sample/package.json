@@ -6,15 +6,15 @@
     "gulp-autoprefixer": "2.3.1",
     "gulp-concat": "2.6.0",
     "gulp-csslint": "0.3.0",
-    "gulp-cssnano": "2.1.1",
-    "gulp-if": "2.0.0",
+    "gulp-cssnano": "2.1.2",
+    "gulp-if": "2.0.1",
     "gulp-imagemin": "2.4.0",
     // $Start-JavaScriptCodeStyle$
     "gulp-jscs": "3.0.2",
     // $End-JavaScriptCodeStyle$
     // $Start-JavaScriptHint$
-    "gulp-jshint": "2.0.0",
-    "jshint": "2.9.1",
+    "gulp-jshint": "2.0.1",
+    "jshint": "2.9.2",
     // $End-JavaScriptHint$
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",
@@ -27,13 +27,13 @@
     // $Start-ApplicationInsights$
     "gulp-replace": "0.5.4",
     // $End-ApplicationInsights$
-    "gulp-sass": "2.2.0",
+    "gulp-sass": "2.3.1",
     "gulp-scss-lint": "0.3.9",
     "gulp-size": "2.1.0",
     "gulp-sourcemaps": "1.6.0",
     // $Start-TypeScript$
-    "gulp-typescript": "2.13.0",
-    "gulp-tslint": "4.3.5",
+    "gulp-typescript": "2.13.4",
+    "gulp-tslint": "5.0.0",
     // $End-TypeScript$
     "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",

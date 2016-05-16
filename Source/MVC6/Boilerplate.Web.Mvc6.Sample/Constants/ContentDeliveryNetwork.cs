@@ -5,13 +5,13 @@
         public static class Google
         {
             public const string Domain = "ajax.googleapis.com";
-            public const string JQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js";
+            public const string JQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js";
         }
 
         public static class MaxCdn
         {
             public const string Domain = "maxcdn.bootstrapcdn.com";
-            public const string FontAwesomeUrl = "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css";
+            public const string FontAwesomeUrl = "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
         }
 
         public static class Microsoft
