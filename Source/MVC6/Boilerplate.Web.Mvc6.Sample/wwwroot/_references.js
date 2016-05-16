@@ -6,7 +6,6 @@
 /// <reference path="../bower_components/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
 /// <reference path="../bower_components/mocha/mocha.js" />
 /// <reference path="../gulpfile.js" />
-/// <reference path="../scripts/application-insights.js" />
 /// <reference path="../scripts/fallback/scripts.js" />
 /// <reference path="../scripts/fallback/styles.js" />
 /// <reference path="../scripts/site.js" />

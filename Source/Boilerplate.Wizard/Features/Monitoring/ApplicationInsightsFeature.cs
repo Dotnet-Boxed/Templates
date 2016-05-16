@@ -52,6 +52,7 @@
 
         protected override async Task AddFeature()
         {
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"bower.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"config.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"config.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"gulpfile.js");
@@ -70,8 +71,7 @@
 
         protected override async Task RemoveFeature()
         {
-            this.ProjectService.DeleteFile(@"Scripts\application-insights.js");
-
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"bower.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"config.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"gulpfile.js");

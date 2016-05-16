@@ -167,13 +167,11 @@ var sources = {
         // $Start-ApplicationInsights$
         {
             name: 'application-insights.js',
-            paths: [
-                paths.scripts + 'application-insights.js'
-            ],
+            paths: paths.bower + 'ApplicationInsights-JS/JavaScript/JavaScriptSDK/snippet.js',
             // replacements - Replacement to be made in the files above.
             replacement: {
                 // find - The string or regular expression to find.
-                find: '[ApplicationInsightsInstrumentationKey]',
+                find: 'INSTRUMENTATION_KEY',
                 // replace - The string or function used to make the replacement.
                 replace: config.ApplicationInsights.InstrumentationKey
             }
@@ -224,12 +222,7 @@ var lintSources = {
     css: paths.styles + '**/*.{css}',
     scss: paths.styles + '**/*.{scss}',
     // $Start-JavaScriptLint$
-    js: [
-        // $Start-ApplicationInsights$
-        '!**/application-insights.js',
-        // $End-ApplicationInsights$
-        paths.scripts + '**/*.js'
-    ],
+    js: paths.scripts + '**/*.js',
     // $Start-TypeScript$
     ts: paths.scripts + '**/*.ts'
     // $End-TypeScript$
