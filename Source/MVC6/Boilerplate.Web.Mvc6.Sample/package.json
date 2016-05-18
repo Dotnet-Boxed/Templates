@@ -34,6 +34,7 @@
     // $Start-TypeScript$
     "gulp-typescript": "2.13.4",
     "gulp-tslint": "5.0.0",
+    "tslint": "3.10.2",
     // $End-TypeScript$
     "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",
