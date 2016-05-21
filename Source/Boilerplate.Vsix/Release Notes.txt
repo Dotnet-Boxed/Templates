@@ -1,4 +1,9 @@
-﻿Version 2.18.0
+﻿Version 2.18.1
+MVC 6
+- Removed some commented out code relating to Elmah and trace.axd which is not relevant in MVC 6.
+- Added a '~' at the beginning of all URL's to local resources.
+
+Version 2.18.0
 - Fixed SitemapGenerator bug https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/96.
 - Boilerplate.Web.Mvc NuGet packages updated for the above change.
 MVC 5

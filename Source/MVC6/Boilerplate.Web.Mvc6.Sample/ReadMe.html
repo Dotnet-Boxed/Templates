@@ -166,23 +166,6 @@
                     </li>
                 </ul>
                 <!-- $End-NWebSec$ -->
-                <!-- ELmah not available. -->
-                <!--<h4>Elmah</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="Elmah-SecureElmah" type="checkbox"> <strong>Secure Elmah</strong> -
-                        Secure the <a href="https://code.google.com/p/elmah/">Elmah</a> error log page, so that anonymous users cannot access it. Open the web.config
-                        file and look in 'appSettings' for the 'elmah.mvc.allowedRoles' or 'elmah.mvc.allowedUsers' setting. You can set this value to restrict the
-                        Elmah page to a role or individual user. Most likely you will have an 'Administrator' role and you can add this to the 'elmah.mvc.allowedRoles'
-                        setting.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Elmah-MoveElmah" type="checkbox"> <strong>Move Elmah</strong> -
-                        Modify the URL used to access the Elmah error log page. This adds security through obscurity. Open the web.config file and you can set the
-                        page URL in 'appSettings'. The setting is called 'elmah.mvc.route'. The Elmah error log page is 'http://[YOUR DOMAIN].com/elmah' by default. You can
-                        change the value to anything you want. Also, change the elmah route in RouteConfig.cs.
-                    </li>
-                </ul>-->
                 <h4>Other Security</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -338,12 +321,6 @@
                         <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
                         Some Web.config settings do not exist in older versions of IIS (7.5 and 8) so you must edit the Web.config file and remove the dynamicIpSecurity settings.
                     </li>
-                    <!-- TODO: Investigate -->
-                    <!--<li class="list-group-item">
-                        <input name="Compatibility-IsSiteDeployedToServerCluster" type="checkbox"> <strong>Is Site Deployed To Server Cluster?</strong> -
-                        If your this site is deployed to a server cluster and you use MVC anti-forgery tokens, generate a machine key from IIS. You can then open
-                        the web.config file and uncomment the machineKey element. Paste in your key generated from IIS here.
-                    </li>-->
                     <li class="list-group-item">
                         <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
                         Test the compatibility of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.

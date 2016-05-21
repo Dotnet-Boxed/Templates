@@ -149,11 +149,7 @@
             </div>
             <div class="col-md-6">
                 <ul>
-                    @* Elmah, Glimpse, Trace does not yet exist for ASP.NET Core.
-                        <li><a href="/elmah"><strong>/elmah</strong></a> - <a href="https://code.google.com/p/elmah/">Elmah</a> error logs.</li>
-                        <li><a href="/glimpse.axd"><strong>/glimpse.axd</strong></a> - <a href="http://getglimpse.com">Glimpse</a> settings (Development Only).</li>
-                        <li><a href="/trace.axd"><strong>/trace.axd</strong></a> - Site <a href="https://msdn.microsoft.com/en-us/library/bb386420%28v=vs.140%29.aspx">trace</a> (Development Only).</li>*@
-                    <li><a href="/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
+                    <li><a href="~/runtimeinfo"><strong>/runtimeinfo</strong></a> - <a href="http://docs.asp.net/en/latest/fundamentals/diagnostics.html">Runtime information</a> (Development Only).</li>
                     <li><a href="@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })"><strong>@Url.RouteUrl(ErrorControllerRoute.GetError, new { statusCode = 404, status = "notfound" })</strong></a> - Error page.</li>
                     @* $Start-Windows81IE11EdgeFavicon$ *@
                     <li><a href="@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')"><strong>@Url.RouteUrl(HomeControllerRoute.GetBrowserConfigXml).TrimEnd('/')</strong></a> - <a href="http://www.buildmypinnedsite.com">Windows 8.1/10 Icons</a>.</li>
