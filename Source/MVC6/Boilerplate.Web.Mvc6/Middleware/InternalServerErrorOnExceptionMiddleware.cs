@@ -1,8 +1,7 @@
-﻿namespace Boilerplate.Web.Mvc.Middleware
+﻿namespace Boilerplate.AspNetCore.Middleware
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Http;
+    using Microsoft.AspNetCore.Http;
 
     internal class InternalServerErrorOnExceptionMiddleware
     {

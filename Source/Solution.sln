@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Web.Mvc5", "MVC
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6.Sample", "MVC6\Boilerplate.Web.Mvc6.Sample\Boilerplate.Web.Mvc6.Sample.xproj", "{6E0EF33D-3C19-4EA2-8CA9-C7BF19BDD947}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6", "MVC6\Boilerplate.Web.Mvc6\Boilerplate.Web.Mvc6.xproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore", "MVC6\Boilerplate.Web.Mvc6\Boilerplate.AspNetCore.xproj", "{FFF80C4B-A5F0-410C-8F16-CBBE21F14DD5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F316174B-045B-4DC0-9097-8CE746A8BBB0}"
 	ProjectSection(SolutionItems) = preProject
@@ -37,9 +37,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Wizard.Test", "
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6Api.Sample", "MVC6\Boilerplate.Web.Mvc6Api.Sample\Boilerplate.Web.Mvc6Api.Sample.xproj", "{0F569D70-7766-40DF-9061-87438C8BB2FA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6.TagHelpers", "MVC6\Boilerplate.Web.Mvc6.TagHelpers\Boilerplate.Web.Mvc6.TagHelpers.xproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.TagHelpers", "MVC6\Boilerplate.Web.Mvc6.TagHelpers\Boilerplate.AspNetCore.TagHelpers.xproj", "{EE9EDF54-81FE-455B-BC4B-D435B08E25A8}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.Web.Mvc6.Razor", "MVC6\Boilerplate.Web.Mvc6.Razor\Boilerplate.Web.Mvc6.Razor.xproj", "{BFC4AFEE-457C-4E13-9B52-6E8AF66DA603}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Razor", "MVC6\Boilerplate.Web.Mvc6.Razor\Boilerplate.AspNetCore.Razor.xproj", "{BFC4AFEE-457C-4E13-9B52-6E8AF66DA603}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

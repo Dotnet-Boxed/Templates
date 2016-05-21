@@ -1,7 +1,7 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     using System.Text;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// The Product Card is a great way to represent product and retail items on Twitter. This Card type is designed to

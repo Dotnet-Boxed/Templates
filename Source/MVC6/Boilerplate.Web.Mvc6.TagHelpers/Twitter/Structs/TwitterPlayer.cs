@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     using System;
 

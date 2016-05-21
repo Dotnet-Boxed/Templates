@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// The Gallery Card allows you to represent collections of photos within a Tweet. This Card type is

@@ -1,4 +1,4 @@
-namespace Boilerplate.Web.Mvc.Caching
+namespace Boilerplate.AspNetCore.Caching
 {
     using System;
     using System.IO;

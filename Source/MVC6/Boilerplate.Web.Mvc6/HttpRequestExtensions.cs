@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     using System;
     using System.Net;
-    using Microsoft.AspNet.Http;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// <see cref="HttpRequest"/> extension methods.

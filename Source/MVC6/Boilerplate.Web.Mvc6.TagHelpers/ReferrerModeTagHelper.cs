@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// Meta tag <see cref="TagHelper"/> which controls what is sent in the HTTP referrer header when a client
@@ -27,8 +27,8 @@
         /// <param name="output">A stateful HTML element used to generate an HTML tag.</param>
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Attributes[NameAttributeName] = "referrer";
-            output.Attributes[ContentAttributeName] = this.Referrer.ToLowercaseString();
+            output.Attributes.SetAttribute(NameAttributeName, "referrer");
+            output.Attributes.SetAttribute(ContentAttributeName, this.Referrer.ToLowercaseString());
         }
     }
 }

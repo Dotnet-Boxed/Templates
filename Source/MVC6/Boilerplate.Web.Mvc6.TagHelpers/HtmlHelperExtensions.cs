@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
-    using Microsoft.AspNet.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     /// <summary>
     /// <see cref="HtmlHelper"/> extension methods.

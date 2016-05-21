@@ -1,9 +1,9 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     using System.Threading.Tasks;
-    using Boilerplate.Web.Mvc.Middleware;
-    using Microsoft.AspNet.Builder;
-    using Microsoft.AspNet.Http;
+    using Boilerplate.AspNetCore.Middleware;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

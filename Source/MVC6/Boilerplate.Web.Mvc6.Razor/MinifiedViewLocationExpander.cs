@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.Razor
+﻿namespace Boilerplate.AspNetCore.Razor
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.AspNet.Mvc.Razor;
+    using Microsoft.AspNetCore.Mvc.Razor;
 
     public class MinifiedViewLocationExpander : IViewLocationExpander
     {

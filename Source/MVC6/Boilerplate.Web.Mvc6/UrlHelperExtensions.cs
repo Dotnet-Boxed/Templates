@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     using System;
-    using Microsoft.AspNet.Http;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
     /// <see cref="UrlHelper"/> extension methods.

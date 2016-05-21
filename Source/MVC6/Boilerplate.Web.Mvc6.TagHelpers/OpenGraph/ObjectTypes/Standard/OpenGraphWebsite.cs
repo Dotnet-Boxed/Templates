@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
+﻿namespace Boilerplate.AspNetCore.TagHelpers.OpenGraph
 {
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// An object representing a website. This object type is part of the Open Graph standard.

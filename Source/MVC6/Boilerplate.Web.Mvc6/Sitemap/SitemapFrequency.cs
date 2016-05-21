@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.Sitemap
+﻿namespace Boilerplate.AspNetCore.Sitemap
 {
     /// <summary>
     /// How frequently the page or URL is likely to change.

@@ -1,7 +1,7 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.ApplicationModels;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
     /// <summary>
     /// Allows you to set an application wide route prefix.

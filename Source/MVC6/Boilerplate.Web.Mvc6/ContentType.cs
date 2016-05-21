@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     /// <summary>
     /// A list of internet media types, which are a standard identifier used on the Internet to indicate the type of

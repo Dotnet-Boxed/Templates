@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
+﻿namespace Boilerplate.AspNetCore.TagHelpers.OpenGraph
 {
     /// <summary>
     /// The stock availability of the item.

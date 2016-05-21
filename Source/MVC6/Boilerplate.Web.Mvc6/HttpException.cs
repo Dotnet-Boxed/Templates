@@ -1,16 +1,12 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     using System;
     using System.Net;
-    using System.Runtime.Serialization;
 
     /// <summary>
     /// Describes an exception that occurred during the processing of HTTP requests.
     /// </summary>
     /// <seealso cref="Exception" />
-#if NET451
-    [Serializable]
-#endif
     public class HttpException : Exception
     {
         private readonly int httpStatusCode;
@@ -74,20 +70,6 @@
         {
             this.httpStatusCode = (int)httpStatusCode;
         }
-
-#if NET451
-        /// <summary>
-        /// Initializes a new instance of the <see cref="HttpException"/> class.
-        /// </summary>
-        /// <param name="info">The information.</param>
-        /// <param name="context">The context.</param>
-        protected HttpException(
-          SerializationInfo info,
-          StreamingContext context) : base(info, context)
-        {
-            this.httpStatusCode = info.GetInt32(nameof(this.httpStatusCode));
-        }
-#endif
 
         public int StatusCode { get { return this.httpStatusCode; } }
     }

@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
+﻿namespace Boilerplate.AspNetCore.TagHelpers.OpenGraph
 {
-    using Microsoft.AspNet.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     /// <summary>
     /// Creates Open Graph meta tags. <see cref="OpenGraphMetadata"/> for more information.

@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
     using System;
 

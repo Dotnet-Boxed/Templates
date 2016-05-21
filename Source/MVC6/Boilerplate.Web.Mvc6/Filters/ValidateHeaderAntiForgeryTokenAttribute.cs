@@ -1,10 +1,10 @@
-﻿namespace Boilerplate.Web.Mvc.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
-    using Microsoft.AspNet.Antiforgery;
-    using Microsoft.AspNet.Mvc.Filters;
+    using Microsoft.AspNetCore.Antiforgery;
+    using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.OptionsModel;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// Represents an attribute that is used to prevent forgery of a request. Same as
@@ -34,8 +34,13 @@
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ValidateHeaderAntiForgeryTokenAttribute : Attribute, IFilterFactory, IOrderedFilter
     {
+        /// <inheritdoc />
+        public bool IsReusable => true;
+
+        /// <inheritdoc />
         public int Order { get; set; }
 
+        /// <inheritdoc />
         public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
         {
             return new ValidateHeaderAntiForgeryTokenAuthorizationFilter(

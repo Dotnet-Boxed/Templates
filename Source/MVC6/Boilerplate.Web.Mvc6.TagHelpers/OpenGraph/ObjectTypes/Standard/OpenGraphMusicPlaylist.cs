@@ -1,10 +1,10 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
+﻿namespace Boilerplate.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// This object represents a music playlist, an ordered collection of songs from a collection of artists. This

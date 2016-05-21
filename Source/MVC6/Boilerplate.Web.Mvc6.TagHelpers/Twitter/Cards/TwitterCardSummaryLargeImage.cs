@@ -1,7 +1,7 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     using System.Text;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// The Summary Card with Large Image features a large, full-width prominent image alongside a tweet.

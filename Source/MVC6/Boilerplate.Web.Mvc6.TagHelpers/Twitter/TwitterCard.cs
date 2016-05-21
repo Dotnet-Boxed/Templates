@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
     using System;
     using System.Text;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
 
     /// <summary>
     /// With Twitter Cards, you can attach rich photos, videos and media experience to Tweets that drive traffic to your website.

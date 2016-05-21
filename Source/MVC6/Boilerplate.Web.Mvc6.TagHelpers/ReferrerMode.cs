@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
     /// <summary>
     /// Controls what is sent in the HTTP referrer header when a client navigates from your page to an external site.

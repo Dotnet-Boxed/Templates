@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Filters;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
 
     /// <summary>
     /// Requires that a HTTP request does not contain a trailing slash. If it does, return a 404 Not Found. This is
@@ -11,23 +11,26 @@
     /// it is upper-case or lower-case in this instance.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class NoTrailingSlashAttribute : AuthorizationFilterAttribute
+    public class NoTrailingSlashAttribute : Attribute, IResourceFilter
     {
         private const char SlashCharacter = '/';
 
         /// <summary>
-        /// Determines whether a request contains a trailing slash and, if it does, calls the
-        /// <see cref="HandleTrailingSlashRequest"/> method.
+        /// Executes the resource filter. Called after execution of the remainder of the pipeline.
         /// </summary>
-        /// <param name="context">An object that encapsulates information that is required in order to use the
-        /// <see cref="RequireHttpsAttribute"/> attribute.</param>
-        public override void OnAuthorization(AuthorizationContext context)
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" />.</param>
+        public void OnResourceExecuted(ResourceExecutedContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
+        }
 
+        /// <summary>
+        /// Executes the resource filter. Called before execution of the remainder of the pipeline. Determines whether
+        /// a request contains a trailing slash and, if it does, calls the <see cref="HandleTrailingSlashRequest"/>
+        /// method.
+        /// </summary>
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        public void OnResourceExecuting(ResourceExecutingContext context)
+        {
             var path = context.HttpContext.Request.Path;
             if (path.HasValue)
             {
@@ -41,11 +44,10 @@
         /// <summary>
         /// Handles HTTP requests that have a trailing slash but are not meant to.
         /// </summary>
-        /// <param name="filterContext">An object that encapsulates information that is required in order to use the
-        /// <see cref="RequireHttpsAttribute"/> attribute.</param>
-        protected virtual void HandleTrailingSlashRequest(AuthorizationContext filterContext)
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        protected virtual void HandleTrailingSlashRequest(ResourceExecutingContext context)
         {
-            filterContext.Result = new HttpNotFoundResult();
+            context.Result = new NotFoundResult();
         }
     }
 }

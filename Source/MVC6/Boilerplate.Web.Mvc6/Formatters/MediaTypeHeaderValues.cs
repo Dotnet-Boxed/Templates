@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.Formatters
+﻿namespace Boilerplate.AspNetCore.Formatters
 {
     using Microsoft.Net.Http.Headers;
 

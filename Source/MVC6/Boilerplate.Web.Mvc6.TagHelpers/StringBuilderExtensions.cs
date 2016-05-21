@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
     using System;
     using System.Collections.Generic;

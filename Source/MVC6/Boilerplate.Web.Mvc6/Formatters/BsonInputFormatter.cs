@@ -1,11 +1,11 @@
-namespace Boilerplate.Web.Mvc.Formatters
+namespace Boilerplate.AspNetCore.Formatters
 {
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Mvc.Formatters;
-    using Microsoft.AspNet.Mvc.Internal;
-    using Microsoft.AspNet.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.AspNetCore.Mvc.Internal;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Bson;
 

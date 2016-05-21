@@ -1,9 +1,9 @@
-namespace Boilerplate.Web.Mvc.Formatters
+namespace Boilerplate.AspNetCore.Formatters
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Mvc;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.OptionsModel;
+    using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Bson;
 

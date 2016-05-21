@@ -1,10 +1,10 @@
-﻿namespace Boilerplate.Web.Mvc.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
-    using Microsoft.AspNet.Http;
-    using Microsoft.AspNet.Http.Extensions;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Filters;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http.Extensions;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource. Case
@@ -16,7 +16,7 @@
     /// and Bing's at http://blogs.bing.com/webmaster/2012/01/26/moving-content-think-301-not-relcanonical).
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
-    public class RedirectToCanonicalUrlAttribute : AuthorizationFilterAttribute
+    public class RedirectToCanonicalUrlAttribute : Attribute, IResourceFilter
     {
         #region Fields
 
@@ -74,19 +74,13 @@
         #region Public Methods
 
         /// <summary>
-        /// Determines whether the HTTP request contains a non-canonical URL using <see cref="TryGetCanonicalUrl"/>,
-        /// if it doesn't calls the <see cref="HandleNonCanonicalRequest"/> method.
+        /// Executes the resource filter. Called before execution of the remainder of the pipeline. Determines whether
+        /// the HTTP request contains a non-canonical URL using <see cref="TryGetCanonicalUrl"/>, if it doesn't calls
+        /// the <see cref="HandleNonCanonicalRequest"/> method.
         /// </summary>
-        /// <param name="context">An object that encapsulates information that is required in order to use the
-        /// <see cref="RedirectToCanonicalUrlAttribute"/> attribute.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="context"/> parameter is <c>null</c>.</exception>
-        public override void OnAuthorization(AuthorizationContext context)
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
+        public void OnResourceExecuting(ResourceExecutingContext context)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
             if (string.Equals(context.HttpContext.Request.Method, "GET", StringComparison.Ordinal))
             {
                 string canonicalUrl;
@@ -97,6 +91,14 @@
             }
         }
 
+        /// <summary>
+        /// Executes the resource filter. Called after execution of the remainder of the pipeline.
+        /// </summary>
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" />.</param>
+        public void OnResourceExecuted(ResourceExecutedContext context)
+        {
+        }
+
         #endregion
 
         #region Protected Methods
@@ -104,11 +106,10 @@
         /// <summary>
         /// Determines whether the specified URl is canonical and if it is not, outputs the canonical URL.
         /// </summary>
-        /// <param name="context">An object that encapsulates information that is required in order to use the
-        /// <see cref="RedirectToCanonicalUrlAttribute" /> attribute.</param>
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
         /// <returns><c>true</c> if the URL is canonical, otherwise <c>false</c>.</returns>
-        protected virtual bool TryGetCanonicalUrl(AuthorizationContext context, out string canonicalUrl)
+        protected virtual bool TryGetCanonicalUrl(ResourceExecutingContext context, out string canonicalUrl)
         {
             bool isCanonical = true;
 
@@ -181,10 +182,9 @@
         /// <summary>
         /// Handles HTTP requests for URL's that are not canonical. Performs a 301 Permanent Redirect to the canonical URL.
         /// </summary>
-        /// <param name="context">An object that encapsulates information that is required in order to use the
-        /// <see cref="RedirectToCanonicalUrlAttribute" /> attribute.</param>
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
         /// <param name="canonicalUrl">The canonical URL.</param>
-        protected virtual void HandleNonCanonicalRequest(AuthorizationContext context, string canonicalUrl)
+        protected virtual void HandleNonCanonicalRequest(ResourceExecutingContext context, string canonicalUrl)
         {
             context.Result = new RedirectResult(canonicalUrl, true);
         }
@@ -193,11 +193,11 @@
         /// Determines whether the specified action or its controller has the attribute with the specified type
         /// <typeparam name="T"/>.
         /// </summary>
-        /// <param name="filterContext">The filter context.</param>
+        /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
         /// <returns><c>true</c> if a <typeparam name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
-        protected virtual bool HasAttribute<T>(AuthorizationContext filterContext)
+        protected virtual bool HasAttribute<T>(ResourceExecutingContext context)
         {
-            foreach (IFilterMetadata filterMetadata in filterContext.Filters)
+            foreach (IFilterMetadata filterMetadata in context.Filters)
             {
                 if (filterMetadata is T)
                 {

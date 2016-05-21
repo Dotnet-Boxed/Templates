@@ -1,11 +1,11 @@
 ﻿#if NET451
-namespace Boilerplate.Web.Mvc
+namespace Boilerplate.AspNetCore
 {
     using System.ServiceModel.Syndication;
     using System.Text;
     using System.Xml;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

@@ -1,7 +1,7 @@
-﻿namespace Boilerplate.Web.Mvc.Formatters
+﻿namespace Boilerplate.AspNetCore.Formatters
 {
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.Extensions.OptionsModel;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Options;
     using Microsoft.Net.Http.Headers;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;

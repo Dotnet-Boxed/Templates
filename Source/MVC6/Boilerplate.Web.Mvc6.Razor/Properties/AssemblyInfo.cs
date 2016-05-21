@@ -1,15 +1,14 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Boilerplate.Web.Mvc6.Razor")]
+[assembly: AssemblyTitle("Boilerplate.AspNetCore.Razor")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Boilerplate.Web.Mvc6.Razor")]
+[assembly: AssemblyProduct("Boilerplate.AspNetCore.Razor")]
 [assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

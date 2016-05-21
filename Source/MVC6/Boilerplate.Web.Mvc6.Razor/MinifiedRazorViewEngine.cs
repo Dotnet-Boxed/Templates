@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.Razor
+﻿namespace Boilerplate.AspNetCore.Razor
 {
     using System.Collections.Generic;
-    using Microsoft.AspNet.Mvc.Razor;
-    using Microsoft.Extensions.OptionsModel;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// Inherits from <see cref="RazorViewEngine"/> but looks for minified .min.cshtml files, instead of .cshtml files.

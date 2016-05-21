@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.Twitter
+﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
-    using Microsoft.AspNet.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     /// <summary>
     /// Creates Twitter card meta tags. <see cref="TwitterCard"/> for more information.

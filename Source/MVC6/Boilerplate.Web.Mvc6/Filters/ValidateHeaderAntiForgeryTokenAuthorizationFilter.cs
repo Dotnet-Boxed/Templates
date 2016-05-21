@@ -1,11 +1,11 @@
-﻿namespace Boilerplate.Web.Mvc.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Antiforgery;
-    using Microsoft.AspNet.Http;
-    using Microsoft.AspNet.Mvc.Filters;
-    using Microsoft.Extensions.OptionsModel;
+    using Microsoft.AspNetCore.Antiforgery;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// Represents a filter that is used to prevent forgery of a request. This instance checks the HTTP Headers instead
@@ -31,7 +31,7 @@
     /// On the server side, you simply need to add the <see cref="ValidateHeaderAntiForgeryTokenAttribute"/> attribute
     /// to the controller or action the same way you would use <see cref="ValidateAntiForgeryTokenAttribute"/>.
     /// </example>
-    internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter
+    internal sealed class ValidateHeaderAntiForgeryTokenAuthorizationFilter : IAsyncAuthorizationFilter, IAntiforgeryPolicy
     {
         #region Fields
 
@@ -80,7 +80,7 @@
         /// <param name="context">The filter context.</param>
         /// <returns>A task representing this function.</returns>
         /// <exception cref="System.ArgumentNullException">The <paramref name="context"/> parameter is <c>null</c>.</exception>
-        public Task OnAuthorizationAsync(AuthorizationContext context)
+        public Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             if (context == null)
             {

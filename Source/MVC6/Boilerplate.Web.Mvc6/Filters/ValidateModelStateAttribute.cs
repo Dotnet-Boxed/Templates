@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.Filters
+﻿namespace Boilerplate.AspNetCore.Filters
 {
     using System.Linq;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Filters;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Filters;
 
     /// <summary>
     /// Validates the action's arguments and model state. If any of the arguments are <c>null</c> or the model state is

@@ -1,5 +1,5 @@
 ﻿#if NET451
-namespace Boilerplate.Web.Mvc
+namespace Boilerplate.AspNetCore
 {
     using System;
     using System.Linq;

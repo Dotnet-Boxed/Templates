@@ -1,13 +1,14 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers.OpenGraph
+﻿namespace Boilerplate.AspNetCore.TagHelpers.OpenGraph
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Rendering;
-    using Microsoft.AspNet.Mvc.ViewFeatures;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Http.Features;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Mvc.ViewFeatures;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -321,8 +322,13 @@
 
         private string GetRequestUrl()
         {
-            var urlHelper = this.ViewContext.HttpContext.ApplicationServices.GetRequiredService<IUrlHelper>();
-            var request = this.ViewContext.HttpContext.Request;
+            var httpContext = this.ViewContext.HttpContext;
+            var urlHelper = httpContext
+                .Features
+                .Get<IServiceProvidersFeature>()
+                .RequestServices
+                .GetRequiredService<IUrlHelper>();
+            var request = httpContext.Request;
             return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), urlHelper.Content(request.Path.Value)).ToString();
         }
 

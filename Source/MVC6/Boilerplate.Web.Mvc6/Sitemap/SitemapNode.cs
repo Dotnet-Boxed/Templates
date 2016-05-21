@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.Sitemap
+﻿namespace Boilerplate.AspNetCore.Sitemap
 {
     using System;
 

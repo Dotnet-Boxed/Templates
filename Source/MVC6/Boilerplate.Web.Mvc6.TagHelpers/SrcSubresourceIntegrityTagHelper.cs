@@ -1,8 +1,8 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
-    using Microsoft.AspNet.Hosting;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
     [HtmlTargetElement(Attributes = SrcAttributeName + "," + SubresourceIntegritySrcAttributeName)]

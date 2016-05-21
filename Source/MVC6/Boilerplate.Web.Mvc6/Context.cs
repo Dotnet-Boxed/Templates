@@ -1,6 +1,6 @@
-﻿namespace Boilerplate.Web.Mvc
+﻿namespace Boilerplate.AspNetCore
 {
-    using Microsoft.AspNet.Http;
+    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// Holds an instance of the <see cref="IHttpContextAccessor"/>, which contains information about the current

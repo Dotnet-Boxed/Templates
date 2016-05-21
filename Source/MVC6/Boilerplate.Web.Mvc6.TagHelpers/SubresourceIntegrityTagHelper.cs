@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Web.Mvc.TagHelpers
+﻿namespace Boilerplate.AspNetCore.TagHelpers
 {
     using System;
     using System.Collections.Generic;
@@ -6,10 +6,10 @@
     using System.Security.Cryptography;
     using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Hosting;
-    using Microsoft.AspNet.Mvc;
-    using Microsoft.AspNet.Mvc.Rendering;
-    using Microsoft.AspNet.Razor.TagHelpers;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
     /// <summary>
@@ -86,9 +86,8 @@
                     await this.SetCachedSri(url, sri).ConfigureAwait(false);
                 }
 
-                output.Attributes[CrossOriginAttributeName] = "anonymous";
-                output.Attributes[IntegrityAttributeName] =
-                    new TagHelperAttribute(IntegrityAttributeName, new HtmlString(sri));
+                output.Attributes.SetAttribute(CrossOriginAttributeName, "anonymous");
+                output.Attributes.SetAttribute(IntegrityAttributeName, new HtmlString(sri));
             }
         }
 
