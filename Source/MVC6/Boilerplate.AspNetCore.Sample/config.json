@@ -1,0 +1,70 @@
+{
+  "AppSettings": {
+    "SiteShortTitle": "Boilerplate",
+    "SiteTitle": "ASP.NET MVC Boilerplate"
+  },
+  // $Start-ApplicationInsights$
+  "ApplicationInsights": {
+    "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
+  },
+  // $End-ApplicationInsights$
+  "Logging": {
+    "IncludeScopes": true,
+    "LogLevel": {
+      "Default": "Verbose",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  // $Start-Sitemap$
+  "SitemapSettings": {
+    "SitemapPingLocations": [
+      "https://www.google.com/ping?sitemap=",
+      "http://www.bing.com/ping?sitemap="
+    ]
+  },
+  // $End-Sitemap$
+  "CacheProfileSettings": {
+    "CacheProfiles": {
+      // $Start-Windows81IE11EdgeFavicon$
+      "BrowserConfigXml": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $End-Windows81IE11EdgeFavicon$
+      "Error": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $Start-Feed$
+      "Feed": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $End-Feed$
+      // $Start-AndroidChromeM39Favicons$
+      "ManifestJson": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $End-AndroidChromeM39Favicons$
+      // $Start-Search$
+      "OpenSearchXml": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $End-Search$
+      // $Start-RobotsText$
+      "RobotsText": {
+        "Duration": 86400,
+        "Location": "Any"
+      },
+      // $End-RobotsText$
+      // $Start-Sitemap$
+      "SitemapNodes": {
+        "Duration": 86400
+      }
+      // $End-Sitemap$
+    }
+  }
+}
