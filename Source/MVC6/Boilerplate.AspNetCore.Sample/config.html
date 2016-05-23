@@ -1,0 +1,62 @@
+﻿Comments are not allowed in the config.json file (See http://blog.getify.com/json-comments/ for why this is silly), so
+they are added here.
+
+The config.json file is responsible for holding application settings and options. It is the replacement for the
+appSettings configuration section contained in the web.config file in ASP.NET 4.6.
+
+<ul>
+    <li>
+        AppSettings - Stores general settings for the application e.g. the sites name.
+        <ul>
+            <li>SiteTitle - The name of the site.</li>
+            <li>SiteShortTitle - The short name of the site.</li>
+        </ul>
+    </li>
+    <!-- $Start-ApplicationInsights$ -->
+    <li>
+        ApplicationInsights - Settings for application insights.
+        <ul>
+            <li>InstrumentationKey - The instrumentation key for Application Insights retrieved from Azure.</li>
+        </ul>
+    </li>
+    <!-- $End-ApplicationInsights$ -->
+    <li>
+        Logging - Settings for logging.
+    </li>
+    <!-- $Start-Sitemap$ -->
+    <li>
+        SitemapSettings - Stores sitemap related settings.
+        <ul>
+            <li>
+                SitemapPingLocations - An array of URL's where the sitemap can be pinged to. Note that Yahoo uses the
+                same sitemap ping location as Bing.
+            </li>
+        </ul>
+    </li>
+    <!-- $End-Sitemap$ -->
+    <li>
+        CacheProfileSettings - Stores the cache profile settings for all cached actions in the application. Note that
+        the VaryByParam = "none" does not exist in MVC 6 yet and will be added when it becomes available.
+        <ul>
+            <!-- $Start-Windows81IE11EdgeFavicon$ -->
+            <li>BrowserConfigXml - Cache the browserconfig route (/browserconfig.xml) for a day.</li>
+            <!-- $End-Windows81IE11EdgeFavicon$ -->
+            <li>Error - Cache the error route (/error/404/notfound) by status code for a day.</li>
+            <!-- $Start-Feed$ -->
+            <li>Feed - Cache the Atom 1.0 feed route (/feed) for a day.</li>
+            <!-- $End-Feed$ -->
+            <!-- $Start-AndroidChromeM39Favicons$ -->
+            <li>ManifestJson - Cache the manifest route (/manifest.json) for a day.</li>
+            <!-- $End-AndroidChromeM39Favicons$ -->
+            <!-- $Start-Search$ -->
+            <li>OpenSearchXml - Cache the open search route (/opensearch.xml) for a day.</li>
+            <!-- $End-Search$ -->
+            <!-- $Start-RobotsText$ -->
+            <li>RobotsText - Cache the robots.txt route for a day.</li>
+            <!-- $End-RobotsText$ -->
+            <!-- $Start-Sitemap$ -->
+            <li>SitemapNodes - Cache the nodes in the sitemap for a day.</li>
+            <!-- $End-Sitemap$ -->
+        </ul>
+    </li>
+</ul>
