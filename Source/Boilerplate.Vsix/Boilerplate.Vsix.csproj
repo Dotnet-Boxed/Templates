@@ -125,8 +125,8 @@
     <TemplateReference Include="Boilerplate.Web.Mvc5.Sample.csproj">
       <PathToProject>../MVC5/Boilerplate.Web.Mvc5.Sample/Boilerplate.Web.Mvc5.Sample.csproj</PathToProject>
     </TemplateReference>
-    <TemplateReference Include="Boilerplate.Web.Mvc6.Sample.xproj">
-      <PathToProject>../MVC6/Boilerplate.Web.Mvc6.Sample/Boilerplate.Web.Mvc6.Sample.xproj</PathToProject>
+    <TemplateReference Include="Boilerplate.AspNetCore.Sample.xproj">
+      <PathToProject>../MVC6/Boilerplate.AspNetCore.Sample/Boilerplate.AspNetCore.Sample.xproj</PathToProject>
     </TemplateReference>
     <!--<TemplateReference Include="Boilerplate.Web.Mvc6Api.Sample.xproj">
       <PathToProject>../MVC6/Boilerplate.Web.Mvc6Api.Sample/Boilerplate.Web.Mvc6Api.Sample.xproj</PathToProject>
@@ -157,7 +157,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(TemplateBuilderTargets)" Condition="Exists('$(TemplateBuilderTargets)')" Label="TemplateBuilder" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
