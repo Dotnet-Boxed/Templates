@@ -8,7 +8,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>bfc4afee-457c-4e13-9b52-6e8af66da603</ProjectGuid>
     <RootNamespace>Boilerplate.AspNetCore.Razor</RootNamespace>
-    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">..\..\artifacts\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
