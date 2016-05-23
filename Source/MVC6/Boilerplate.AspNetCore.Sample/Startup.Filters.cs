@@ -9,8 +9,8 @@
     using Microsoft.AspNetCore.Routing;
     using MvcBoilerplate.Constants;
     // $Start-NWebSec$
-    using NWebsec.Mvc.HttpHeaders;
-    using NWebsec.Mvc.HttpHeaders.Csp;
+    using NWebsec.AspNetCore.Mvc.HttpHeaders;
+    using NWebsec.AspNetCore.Mvc.HttpHeaders.Csp;
     // $End-NWebSec$
 
     public partial class Startup

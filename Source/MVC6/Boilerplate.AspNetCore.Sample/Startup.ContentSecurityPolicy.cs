@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Filters;
     using MvcBoilerplate.Constants;
-    using NWebsec.Mvc.HttpHeaders.Csp;
+    using NWebsec.AspNetCore.Mvc.HttpHeaders.Csp;
 
     public partial class Startup
     {
