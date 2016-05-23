@@ -6,7 +6,7 @@
     "Boilerplate.AspNetCore": "1.0.0-rc2-final-0001",
     "Boilerplate.AspNetCore.TagHelpers": "1.0.0-rc2-final-0001",
     // $Start-CshtmlMinification$
-    "Boilerplate.AspNetCore.Razor": "2.0.0-rc1-final-3",
+    "Boilerplate.AspNetCore.Razor": "1.0.0-rc2-final-0001",
     // $End-CshtmlMinification$
     // $Start-Glimpse$
     "Glimpse": "2.0.0-beta1",
@@ -14,28 +14,28 @@
     // $Start-ApplicationInsights$
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0-rc2-final",
     // $End-ApplicationInsights$
-    "Microsoft.AspNetCore.CookiePolicy": "1.0.0-rc1-final",
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc1-final",
-    "Microsoft.AspNetCore.Mvc": "6.0.0-rc1-final",
+    "Microsoft.AspNetCore.CookiePolicy": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
     // $Start-XmlFormatter$
-    "Microsoft.AspNetCore.Mvc.Formatters.Xml": "6.0.0-rc1-final",
+    "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.0.0-rc2-final",
     // $End-XmlFormatter$
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview1-final",
       "type": "build"
     },
-    "Microsoft.AspNetCore.Razor.Runtime.Precompilation": "4.0.0-rc1-final",
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc1-final",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc1-final",
-    "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.AspNetCore.Tooling.Razor": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Binder": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc2-final",
     // $Start-NWebSec$
     "NWebsec.AspNetCore.Mvc": "1.0.0-gamma-5",
     // $End-NWebSec$
