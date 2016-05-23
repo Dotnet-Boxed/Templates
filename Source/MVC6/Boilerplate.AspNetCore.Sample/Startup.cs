@@ -1,18 +1,15 @@
 ﻿namespace MvcBoilerplate
 {
-    using System.Reflection;
     using Boilerplate.AspNetCore;
     // $Start-CshtmlMinification$
     using Boilerplate.AspNetCore.Razor;
     // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Microsoft.Extensions.PlatformAbstractions;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -56,11 +53,6 @@
         }
 
         #endregion
-
-        /// <summary>
-        /// Entry point for the application.
-        /// </summary>
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
 
         #region Public Methods
 
@@ -109,10 +101,7 @@
                     ConfigureContentSecurityPolicyFilters(this.hostingEnvironment, mvcOptions.Filters);
                     // $End-NWebSec$
                 });
-#if !DEBUG
-            // Use pre-compiled views in release mode for quicker application start-up.
-            mvcBuilder.AddPrecompiledRazorViews(GetType().GetTypeInfo().Assembly);
-#endif
+
             // $Start-CshtmlMinification$
             services.Configure<RazorViewEngineOptions>(
                 options =>
