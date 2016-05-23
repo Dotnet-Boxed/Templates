@@ -1,4 +1,5 @@
-﻿namespace Boilerplate.AspNetCore
+﻿#if NET461
+namespace Boilerplate.AspNetCore
 {
     using System.ServiceModel.Syndication;
     using System.Text;
@@ -57,3 +58,4 @@
         }
     }
 }
+#endif

@@ -1,4 +1,4 @@
-﻿#if DNX451
+﻿#if NET461
 // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
 // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
 namespace MvcBoilerplate.Services

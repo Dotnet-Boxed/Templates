@@ -17,7 +17,7 @@
             services.AddScoped<IBrowserConfigService, BrowserConfigService>();
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
-#if DNX451
+#if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             services.AddScoped<IFeedService, FeedService>();

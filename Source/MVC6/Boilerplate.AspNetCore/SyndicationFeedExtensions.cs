@@ -1,4 +1,5 @@
-﻿namespace Boilerplate.AspNetCore
+﻿#if NET461
+namespace Boilerplate.AspNetCore
 {
     using System;
     using System.Linq;
@@ -77,3 +78,4 @@
         }
     }
 }
+#endif

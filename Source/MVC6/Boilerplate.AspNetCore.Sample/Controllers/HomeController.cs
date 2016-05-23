@@ -22,7 +22,7 @@
         private readonly IBrowserConfigService browserConfigService;
         // $End-Windows81IE11EdgeFavicon$
         // $Start-Feed$
-#if DNX451
+#if NET461
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
         private readonly IFeedService feedService;
@@ -50,7 +50,7 @@
             IBrowserConfigService browserConfigService,
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
-#if DNX451
+#if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             IFeedService feedService,
@@ -75,7 +75,7 @@
             this.browserConfigService = browserConfigService;
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
-#if DNX451
+#if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
             this.feedService = feedService;
@@ -120,7 +120,7 @@
         // $End-ContactPage$
         // $Start-Feed$
 
-#if DNX451
+#if NET461
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
 
