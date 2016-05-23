@@ -3,10 +3,6 @@
   "version": "1.0.0-*",
 
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.0-rc2-3002702",
-      "type": "platform"
-    },
     "Boilerplate.AspNetCore": "1.0.0-rc2-final-0001",
     "Boilerplate.AspNetCore.TagHelpers": "1.0.0-rc2-final-0001",
     // $Start-CshtmlMinification$
@@ -48,6 +44,12 @@
 
   "frameworks": {
     "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.0.0-rc2-3002702",
+          "type": "platform"
+        }
+      },
       "imports": [
         "dotnet5.6",
         "dnxcore50",
