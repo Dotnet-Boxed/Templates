@@ -2,11 +2,6 @@
   "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
   "version": "1.0.0-*",
 
-  "buildOptions": {
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true
-  },
-
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0-rc2-3002702",
@@ -21,7 +16,7 @@
     "Glimpse": "2.0.0-beta1",
     // $End-Glimpse$
     // $Start-ApplicationInsights$
-    "Microsoft.ApplicationInsights.AspNet": "1.0.0-rc1",
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0-rc2-final",
     // $End-ApplicationInsights$
     "Microsoft.AspNetCore.CookiePolicy": "1.0.0-rc1-final",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc1-final",
@@ -72,6 +67,11 @@
       "version": "1.0.0-preview1-final",
       "imports": "portable-net45+win8+dnxcore50"
     }
+  },
+
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
   },
 
   "runtimeOptions": {
