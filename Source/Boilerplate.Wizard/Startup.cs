@@ -62,6 +62,7 @@
                     builder.RegisterType<JavaScriptLintFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<ServicesFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<AssemblyCopyrightFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript
                     builder.RegisterType<FrontEndFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<TypeScriptFeature>().AsSelf().As<IFeature>().SingleInstance();

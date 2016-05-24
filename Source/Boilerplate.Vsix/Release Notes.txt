@@ -1,4 +1,10 @@
-﻿Version 2.18.1
+﻿Version 3.0.0
+MVC 5
+- Took my name out of the AssemblyCopyright attribute in AssemblyInfo.cs and left it blank for users to fill in.
+MVC 6
+- The AssemblyCopyright attribute in AssemblyInfo.cs is now filled in automatically with the current user and year.
+
+Version 2.18.1
 MVC 6
 - Removed some commented out code relating to Elmah and trace.axd which is not relevant in MVC 6.
 - Added a '~' at the beginning of all URL's to local resources.

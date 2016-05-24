@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MvcBoilerplate")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Muhammad Rehan Saeed")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MvcBoilerplate")]
 [assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2015")]
 [assembly: AssemblyTrademark("")]

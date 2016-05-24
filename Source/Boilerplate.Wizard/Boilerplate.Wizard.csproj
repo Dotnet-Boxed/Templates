@@ -89,6 +89,7 @@
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
     <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
     <Compile Include="Features\Hidden\ServicesFeature.cs" />
+    <Compile Include="Features\Hidden\AssemblyCopyrightFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
     <Compile Include="Features\Monitoring\ApplicationInsightsFeature.cs" />
     <Compile Include="Features\Other\FeedFeature.cs" />
