@@ -37,6 +37,7 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc2-final",
     // $Start-NWebSec$
+    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma-5",
     "NWebsec.AspNetCore.Mvc": "1.0.0-gamma-5",
     // $End-NWebSec$
     "Newtonsoft.Json": "8.0.3"
