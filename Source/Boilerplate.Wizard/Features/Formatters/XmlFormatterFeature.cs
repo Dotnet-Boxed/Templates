@@ -19,9 +19,9 @@
             this.featureSet = featureSet;
 
             this.none = new FeatureItem(
-                "None", 
-                "None", 
-                "No Xml Formatter", 
+                "None",
+                "None",
+                "No Xml Formatter",
                 1)
             {
                 IsSelected = featureSet == FeatureSet.Mvc6
@@ -109,11 +109,11 @@
             {
                 await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "project.json");
             }
-            
+
             if (this.dataContractSerializer.IsSelected || this.both.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(
-                    this.dataContractSerializer.CommentName, 
+                    this.dataContractSerializer.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
                     "Startup.Formatters.cs");
             }
@@ -124,7 +124,7 @@
                     EditCommentMode.DeleteCode,
                     "Startup.Formatters.cs");
             }
-            
+
             if (this.xmlSerializer.IsSelected || this.both.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(

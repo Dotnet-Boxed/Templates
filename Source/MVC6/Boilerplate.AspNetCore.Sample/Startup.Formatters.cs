@@ -1,7 +1,5 @@
 ﻿namespace MvcBoilerplate
 {
-    using Boilerplate.AspNetCore.Formatters;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.DependencyInjection;
     using Newtonsoft.Json.Serialization;
 
@@ -20,11 +18,6 @@
             mvcBuilder.AddJsonOptions(
                 x => x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver());
             // $End-JsonSerializerSettings$
-            // $Start-BsonFormatter$
-
-            // Adds the BSON input and output formatters using the JSON.NET serializer.
-            mvcBuilder.AddBsonSerializerFormatters();
-            // $End-BsonFormatter$
             // $Start-XmlFormatter-DataContractSerializer$
 
             // Adds the XML input and output formatter using the DataContractSerializer.

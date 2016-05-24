@@ -71,7 +71,6 @@
                     builder.RegisterType<JavaScriptTestFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Formatters
                     builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<BsonFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<XmlFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Performance
                     builder.RegisterType<CstmlMinificationFeature>().AsSelf().As<IFeature>().SingleInstance();

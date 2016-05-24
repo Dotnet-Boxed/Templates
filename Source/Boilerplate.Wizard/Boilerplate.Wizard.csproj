@@ -82,7 +82,6 @@
     <Compile Include="Features\Base\IFeatureGroup.cs" />
     <Compile Include="Features\CssAndJavaScript\JavaScriptTestFrameworkFeature.cs" />
     <Compile Include="Features\FeatureGroups.cs" />
-    <Compile Include="Features\Formatters\BsonFormatterFeature.cs" />
     <Compile Include="Features\Formatters\NotAcceptableFormatterFeature.cs" />
     <Compile Include="Features\Formatters\NoContentFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
@@ -228,6 +227,9 @@
     <Resource Include="Assets\iOS.png" />
     <Resource Include="Assets\OS X.png" />
     <Resource Include="Assets\Windows.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\TargetFramework\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
