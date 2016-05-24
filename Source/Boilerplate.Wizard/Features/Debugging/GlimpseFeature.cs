@@ -32,12 +32,12 @@
 
         public override bool IsSelectedDefault
         {
-            get { return true; }
+            get { return false; }
         }
 
         public override bool IsVisible
         {
-            get { return true; }
+            get { return false; }
         }
 
         public override int Order
