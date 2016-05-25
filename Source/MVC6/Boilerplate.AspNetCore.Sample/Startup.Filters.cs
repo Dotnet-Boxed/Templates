@@ -7,10 +7,8 @@
     using Microsoft.AspNetCore.Mvc.Filters;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Routing;
-    using MvcBoilerplate.Constants;
     // $Start-NWebSec$
     using NWebsec.AspNetCore.Mvc.HttpHeaders;
-    using NWebsec.AspNetCore.Mvc.HttpHeaders.Csp;
     // $End-NWebSec$
 
     public partial class Startup

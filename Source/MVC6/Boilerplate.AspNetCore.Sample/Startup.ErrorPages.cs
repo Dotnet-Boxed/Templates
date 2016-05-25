@@ -1,10 +1,8 @@
 ﻿namespace MvcBoilerplate
 {
-    using System.Threading.Tasks;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
 
     public partial class Startup
     {
