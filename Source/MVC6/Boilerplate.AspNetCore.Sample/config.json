@@ -11,7 +11,7 @@
   "Logging": {
     "IncludeScopes": true,
     "LogLevel": {
-      "Default": "Verbose",
+      "Default": "Debug",
       "System": "Information",
       "Microsoft": "Information"
     }
