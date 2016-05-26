@@ -24,8 +24,7 @@
             string controllerName,
             object routeValues = null)
         {
-            string scheme = Context.HttpContext.Request.Scheme;
-            return url.Action(actionName, controllerName, routeValues, scheme);
+            return url.Action(actionName, controllerName, routeValues, url.ActionContext.HttpContext.Request.Scheme);
         }
 
         /// <summary>
@@ -39,7 +38,7 @@
             this IUrlHelper url,
             string contentPath)
         {
-            HttpRequest request = Context.HttpContext.Request;
+            HttpRequest request = url.ActionContext.HttpContext.Request;
             return new Uri(new Uri(request.Scheme + "://" + request.Host.Value), url.Content(contentPath)).ToString();
         }
 
@@ -55,9 +54,7 @@
             string routeName,
             object routeValues = null)
         {
-            // TODO: Use string Link(string routeName, object values);
-            string scheme = Context.HttpContext.Request.Scheme;
-            return url.RouteUrl(routeName, routeValues, scheme);
+            return url.Link(routeName, routeValues);
         }
     }
 }

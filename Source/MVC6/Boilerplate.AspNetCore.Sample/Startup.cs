@@ -124,10 +124,6 @@
         /// <param name="loggerfactory">The logger factory.</param>
         public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
         {
-            // Configures the UrlHelperExtensions with the IHttpContextAccessor, so that they
-            // have access to the current HttpContext and can get the current request path.
-            application.UseUrlHelperExtensions();
-
             // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
             application.UseNoServerHttpHeader();
 
