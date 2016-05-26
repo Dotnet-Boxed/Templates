@@ -1,6 +1,10 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using MvcBoilerplate.Settings;
 
     public partial class Startup
     {
@@ -36,6 +40,25 @@
             //         x.SchemaName = "dbo";
             //         x.TableName = "Sessions";
             //     });
+        }
+
+        /// <summary>
+        /// Controls how controller actions cache content in one central location.
+        /// </summary>
+        /// <param name="cacheProfiles">The settings for the <see cref="ResponseCacheAttribute"/>'s.</param>
+        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
+        /// stored.</param>
+        private static void ConfigureCacheProfiles(
+            IDictionary<string, CacheProfile> cacheProfiles,
+            IConfiguration configuration)
+        {
+            CacheProfileSettings cacheProfileSettings = new CacheProfileSettings();
+            configuration.GetSection(nameof(CacheProfileSettings)).Bind(cacheProfileSettings);
+
+            foreach (KeyValuePair<string, CacheProfile> keyValuePair in cacheProfileSettings.CacheProfiles)
+            {
+                cacheProfiles.Add(keyValuePair);
+            }
         }
     }
 }
