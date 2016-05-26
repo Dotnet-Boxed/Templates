@@ -120,10 +120,6 @@
         // $End-ContactPage$
         // $Start-Feed$
 
-#if NET461
-        // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
-        // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
-
         /// <summary>
         /// Gets the Atom 1.0 feed for the current site. Note that Atom 1.0 is used over RSS 2.0 because Atom 1.0 is a
         /// newer and more well defined format. Atom 1.0 is a standard and RSS is not. See
@@ -134,9 +130,15 @@
         /// <returns>The Atom 1.0 feed for the current site.</returns>
         [ResponseCache(CacheProfileName = CacheProfileName.Feed)]
         [Route("feed", Name = HomeControllerRoute.GetFeed)]
+#if NET461
         public async Task<IActionResult> Feed(CancellationToken cancellationToken)
         {
             return new AtomActionResult(await this.feedService.GetFeed(cancellationToken));
+        }
+#else
+        public IActionResult Feed(CancellationToken cancellationToken)
+        {
+            return this.Ok("The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed type does not yet exist. See https://github.com/dotnet/wcf/issues/76.");
         }
 #endif
         // $End-Feed$
