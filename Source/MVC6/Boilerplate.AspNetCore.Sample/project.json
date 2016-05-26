@@ -70,6 +70,10 @@
       "version": "1.0.0-preview1-final",
       "imports": "portable-net45+win8+dnxcore50"
     },
+    "Microsoft.DotNet.Watcher.Tools": {
+      "version": "1.0.0-*",
+      "imports": "portable-net451+win8"
+    },
     "Microsoft.Extensions.SecretManager.Tools": {
       "version": "1.0.0-preview1-final",
       "imports": "portable-net45+win8+dnxcore50"
@@ -83,10 +87,9 @@
 
   "runtimeOptions": {
     "configProperties": {
+      "System.GC.Concurrent": true,
       "System.GC.Server": true
-    },
-    "gcConcurrent": true,
-    "gcServer": true
+    }
   },
 
   "frameworks": {

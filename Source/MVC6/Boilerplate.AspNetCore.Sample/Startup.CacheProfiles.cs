@@ -15,9 +15,12 @@
         /// stored.</param>
         private static void ConfigureCacheProfiles(IDictionary<string, CacheProfile> cacheProfiles, IConfiguration configuration)
         {
-            var configurationSection = configuration.GetSection(nameof(CacheProfileSettings));
-            CacheProfileSettings cacheProfileSettings = new CacheProfileSettings();
-            ConfigurationBinder.Bind(configurationSection, cacheProfileSettings);
+            CacheProfileSettings cacheProfileSettings = configuration.GetValue<CacheProfileSettings>(nameof(CacheProfileSettings));
+            // Remove Binding package?
+
+            //var configurationSection = configuration.GetSection(nameof(CacheProfileSettings));
+            //CacheProfileSettings cacheProfileSettings = new CacheProfileSettings();
+            //ConfigurationBinder.Bind(configurationSection, cacheProfileSettings);
 
             foreach (KeyValuePair<string, CacheProfile> keyValuePair in cacheProfileSettings.CacheProfiles)
             {
