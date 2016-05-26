@@ -54,7 +54,7 @@
             string routeName,
             object routeValues = null)
         {
-            return url.Link(routeName, routeValues);
+            return url.RouteUrl(routeName, routeValues, url.ActionContext.HttpContext.Request.Scheme);
         }
     }
 }
