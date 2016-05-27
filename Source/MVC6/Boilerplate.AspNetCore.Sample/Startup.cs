@@ -6,6 +6,9 @@
     // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    // $Start-CshtmlMinification$
+    using Microsoft.AspNetCore.Mvc.Razor;
+    // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

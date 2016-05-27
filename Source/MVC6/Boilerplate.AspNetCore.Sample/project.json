@@ -9,7 +9,7 @@
     "Boilerplate.AspNetCore.Razor": "1.0.0-rc2-final-0001",
     // $End-CshtmlMinification$
     // $Start-Glimpse$
-    "Glimpse": "2.0.0-beta1",
+    // "Glimpse": "2.0.0-beta1",
     // $End-Glimpse$
     // $Start-ApplicationInsights$
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0-rc2-final",
@@ -90,28 +90,6 @@
     "configProperties": {
       "System.GC.Concurrent": true,
       "System.GC.Server": true
-    }
-  },
-
-  "frameworks": {
-    "dnx451": {
-      "frameworkAssemblies": {
-        // $Start-Feed-On$
-        "System.Net.Http": "4.0.0.0",
-        "System.ServiceModel": "4.0.0.0"
-        // $End-Feed-On$
-        // $Start-Feed-Off$
-        // "System.Net.Http": "4.0.0.0"
-        // $End-Feed-Off$
-      }
-    },
-    "dnxcore50": {
-      "dependencies": {
-        // $Start-Glimpse$
-        "System.IO.Compression": "4.1.0-beta-23516",
-        // $End-Glimpse$
-        "System.Net.Http": "4.0.1-beta-23516"
-      }
     }
   },
 

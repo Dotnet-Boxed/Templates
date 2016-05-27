@@ -1,7 +1,7 @@
 ﻿namespace MvcBoilerplate
 {
     // $Start-Glimpse$
-    using Glimpse;
+    // using Glimpse;
     // $End-Glimpse$
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -24,7 +24,7 @@
             if (environment.IsDevelopment())
             {
                 // Add Glimpse to help with debugging (See http://getglimpse.com/).
-                services.AddGlimpse();
+                // services.AddGlimpse();
             }
         }
 
@@ -52,7 +52,7 @@
                 // $Start-Glimpse$
 
                 // Add Glimpse to help with debugging (See http://getglimpse.com/).
-                application.UseGlimpse();
+                // application.UseGlimpse();
                 // $End-Glimpse$
             }
         }
