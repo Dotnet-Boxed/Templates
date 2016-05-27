@@ -13,13 +13,6 @@
 #if DEBUG
             this.Topmost = false;
 #endif
-
-            this.Loaded += MainView_Loaded;
-        }
-
-        private void MainView_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.OnOkClick(sender, e);
         }
 
         public IMainViewModel ViewModel
