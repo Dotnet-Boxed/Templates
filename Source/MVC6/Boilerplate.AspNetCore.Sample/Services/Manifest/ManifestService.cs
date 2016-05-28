@@ -1,9 +1,7 @@
 ﻿namespace MvcBoilerplate.Services
 {
-    using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
     using MvcBoilerplate.Settings;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
