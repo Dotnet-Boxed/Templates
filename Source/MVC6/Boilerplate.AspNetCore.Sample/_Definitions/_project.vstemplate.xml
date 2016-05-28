@@ -30,8 +30,4 @@
     <Assembly>Boilerplate.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
     <FullClassName>Boilerplate.Wizard.Mvc6FeatureWizard</FullClassName>
   </WizardExtension>
-  <WizardExtension>
-    <Assembly>TemplateBuilder, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null</Assembly>
-    <FullClassName>TemplateBuilder.FixArtifactsPathWizard</FullClassName>
-  </WizardExtension>
 </VSTemplate>
