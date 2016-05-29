@@ -23,13 +23,27 @@
                 new JavaScriptTestFrameworkFeature(this.projectService),
 
                 new JsonSerializerSettingsFeature(this.projectService),
-                new BsonFormatterFeature(this.projectService, FeatureSet.Mvc6),
                 new XmlFormatterFeature(this.projectService, FeatureSet.Mvc6),
 
+                new CstmlMinificationFeature(this.projectService),
+
                 new HttpsEverywhereFeature(this.projectService),
+                new NWebSecFeature(this.projectService),
+
+                new ApplicationInsightsFeature(this.projectService),
+
+                new GlimpseFeature(this.projectService),
+
+                new RobotsTextFeature(this.projectService),
+                new SitemapFeature(this.projectService),
+                new RedirectToCanonicalUrlFeature(this.projectService),
 
                 new AboutPageFeature(this.projectService),
                 new ContactPageFeature(this.projectService),
+
+                new AuthorMetaTagFeature(this.projectService),
+                new OpenGraphFeature(this.projectService),
+                new TwitterCardFeature(this.projectService),
 
                 new AppleIOSFaviconsFeature(this.projectService),
                 new AppleMacSafariFaviconFeature(this.projectService),

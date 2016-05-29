@@ -115,7 +115,6 @@
                     builder.RegisterType<SwaggerFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Formatters
                     builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<BsonFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<XmlFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<NoContentFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<NotAcceptableFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
