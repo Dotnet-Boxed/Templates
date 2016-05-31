@@ -97,11 +97,11 @@
                         ConfigureRouting(x);
                     })
                 // Add useful interface for accessing the ActionContext outside a controller.
-                .AddScoped<IActionContextAccessor, ActionContextAccessor>()
+                .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
-                .AddScoped<IHttpContextAccessor, HttpContextAccessor>()
+                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 // Add useful interface for accessing the IUrlHelper outside a controller.
-                .AddScoped<IUrlHelper>(x => x
+                .AddSingleton<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
                 // Add many MVC services to the services container.
