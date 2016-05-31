@@ -4,6 +4,7 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class FileSystemService : IFileSystemService
@@ -119,7 +120,7 @@
                     {
                         using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                         {
-                            using (StreamWriter streamWriter = new StreamWriter(fileStream))
+                            using (StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8))
                             {
                                 await streamWriter.WriteAsync(text);
                             }
