@@ -125,7 +125,6 @@
                 {
                     options.ViewLocationExpanders.Add(new MinifiedViewLocationExpander());
                 });
-            // services.AddTransient<IRazorViewEngine, MinifiedRazorViewEngine>();
 
             // $End-CshtmlMinification$
             ConfigureFormatters(mvcBuilder);
