@@ -6,9 +6,13 @@
     // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
     // $Start-CshtmlMinification$
     using Microsoft.AspNetCore.Mvc.Razor;
     // $End-CshtmlMinification$
+    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -72,50 +76,59 @@
             services.AddApplicationInsightsTelemetry(this.configuration);
 
             // $End-ApplicationInsights$
+            ConfigureAntiforgeryServices(services, this.hostingEnvironment);
             // $Start-Glimpse$
             ConfigureDebuggingServices(services, this.hostingEnvironment);
             // $End-Glimpse$
-            ConfigureOptionsServices(services, this.configuration);
             ConfigureCachingServices(services);
+            ConfigureOptionsServices(services, this.configuration);
 
             // $Start-RedirectToCanonicalUrl$
             // Configure MVC routing. We store the route options for use by ConfigureSearchEngineOptimizationFilters.
             RouteOptions routeOptions = null;
             // $End-RedirectToCanonicalUrl$
-            services.AddRouting(
-                x =>
-                {
-                    // $Start-RedirectToCanonicalUrl$
-                    routeOptions = x;
-                    // $End-RedirectToCanonicalUrl$
-                    ConfigureRouting(x);
-                });
-
-            // Add many MVC services to the services container.
-            IMvcBuilder mvcBuilder = services.AddMvc(
-                mvcOptions =>
-                {
-                    ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.configuration);
-                    // $Start-RedirectToCanonicalUrl$
-                    ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
-                    // $End-RedirectToCanonicalUrl$
-                    ConfigureSecurityFilters(this.hostingEnvironment, mvcOptions.Filters);
-                    // $Start-NWebSec$
-                    ConfigureContentSecurityPolicyFilters(this.hostingEnvironment, mvcOptions.Filters);
-                    // $End-NWebSec$
-                });
+            IMvcBuilder mvcBuilder = services
+                .AddRouting(
+                    x =>
+                    {
+                        // $Start-RedirectToCanonicalUrl$
+                        routeOptions = x;
+                        // $End-RedirectToCanonicalUrl$
+                        ConfigureRouting(x);
+                    })
+                // Add useful interface for accessing the ActionContext outside a controller.
+                .AddScoped<IActionContextAccessor, ActionContextAccessor>()
+                // Add useful interface for accessing the HttpContext outside a controller.
+                .AddScoped<IHttpContextAccessor, HttpContextAccessor>()
+                // Add useful interface for accessing the IUrlHelper outside a controller.
+                .AddScoped<IUrlHelper>(x => x
+                    .GetRequiredService<IUrlHelperFactory>()
+                    .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+                // Add many MVC services to the services container.
+                .AddMvc(
+                    mvcOptions =>
+                    {
+                        ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.configuration);
+                        // $Start-RedirectToCanonicalUrl$
+                        ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
+                        // $End-RedirectToCanonicalUrl$
+                        ConfigureSecurityFilters(this.hostingEnvironment, mvcOptions.Filters);
+                        // $Start-NWebSec$
+                        ConfigureContentSecurityPolicyFilters(this.hostingEnvironment, mvcOptions.Filters);
+                        // $End-NWebSec$
+                    });
 
             // $Start-CshtmlMinification$
+            // Adds a razor view location expander which looks for minified .min.cshtml files to execute if found.
             services.Configure<RazorViewEngineOptions>(
                 options =>
                 {
                     options.ViewLocationExpanders.Add(new MinifiedViewLocationExpander());
                 });
             // services.AddTransient<IRazorViewEngine, MinifiedRazorViewEngine>();
+
             // $End-CshtmlMinification$
             ConfigureFormatters(mvcBuilder);
-
-            ConfigureAntiforgeryServices(services, this.hostingEnvironment);
             ConfigureCustomServices(services);
         }
 
