@@ -333,7 +333,7 @@ gulp.task('lint', [
 /*
  * Builds the CSS for the site.
  */
-gulp.task('build-css', ['clean-css', 'lint-css'], function () {
+gulp.task('build-css', ['lint-css'], function () {
     var tasks = sources.css.map(function (source) { // For each set of source files in the sources.
         if (source.copy) {                          // If we are only copying files.
             return gulp
@@ -376,7 +376,7 @@ gulp.task('build-css', ['clean-css', 'lint-css'], function () {
 /*
  * Builds the font files for the site.
  */
-gulp.task('build-fonts', ['clean-fonts'], function () {
+gulp.task('build-fonts', function () {
     var tasks = sources.fonts.map(function (source) { // For each set of source files in the sources.
         return gulp                             // Return the stream.
             .src(source.path)                   // Start with the source paths.
@@ -393,7 +393,6 @@ gulp.task('build-fonts', ['clean-fonts'], function () {
  * Builds the JavaScript files for the site.
  */
 gulp.task('build-js', [
-    'clean-js',
     // $Start-JavaScriptLint$
     'lint-js'
     // $End-JavaScriptLint$
@@ -447,7 +446,7 @@ function () {
 /*
  * Builds the C# HTML files (.cshtml) for the site.
  */
-gulp.task('build-html', ['clean-html'], function () {
+gulp.task('build-html', function () {
     return gulp
         .src(paths.views + '**/*.cshtml')       // Start with the .cshtml Razor files and not .min.cshtml files.
         .pipe(minifyCshtml())                   // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
@@ -501,7 +500,7 @@ gulp.task('watch-css', function () {
     return gulp
         .watch(
             paths.styles + '**/*.{css,scss}',   // Watch the styles folder for file changes.
-            ['build-css'])                      // Run the build-css task if a file changes.
+            ['clean-css', 'build-css'])         // Run the build-css task if a file changes.
         .on('change', function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue('File ' + event.path + ' was ' + event.type + ', build-css task started.'));
         });
@@ -514,7 +513,7 @@ gulp.task('watch-js', function () {
     return gulp
         .watch(
             paths.scripts + '**/*.{js,ts}',     // Watch the scripts folder for file changes.
-            ['build-js'])                       // Run the build-js task if a file changes.
+            ['clean-js', 'build-js'])           // Run the build-js task if a file changes.
         .on('change', function (event) {        // Log the change to the console.
             gutil.log(gutil.colors.blue('File ' + event.path + ' was ' + event.type + ', build-js task started.'));
         });
@@ -584,6 +583,7 @@ gulp.task('pagespeed-desktop', function (cb) {
 gulp.task(
     'default',
     [
+        'clean',
         'build',
         // $Start-JavaScriptTestFramework$
         'test',
