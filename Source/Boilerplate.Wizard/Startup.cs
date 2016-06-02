@@ -40,6 +40,7 @@
                 .As<IProjectService>()
                 .WithParameter("projectFilePath", projectFilePath)
                 .SingleInstance();
+            builder.RegisterType<JsonFileFixerService>().As<IFileFixerService>().SingleInstance();
 
             // View Models
             builder.RegisterType<MainViewModel>().As<IMainViewModel>().SingleInstance();
@@ -63,6 +64,8 @@
                     builder.RegisterType<ServicesFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<AssemblyCopyrightFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    // Target Framework
+                    builder.RegisterType<TargetFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript
                     builder.RegisterType<FrontEndFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<TypeScriptFeature>().AsSelf().As<IFeature>().SingleInstance();

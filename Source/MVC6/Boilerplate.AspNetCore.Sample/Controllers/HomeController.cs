@@ -22,11 +22,15 @@
         private readonly IBrowserConfigService browserConfigService;
         // $End-Windows81IE11EdgeFavicon$
         // $Start-Feed$
+        // $Start-TargetFramework-NetFramework$
 #if NET461
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+        // $End-TargetFramework-NetFramework$
         private readonly IFeedService feedService;
+        // $Start-TargetFramework-NetFramework$
 #endif
+        // $End-TargetFramework-NetFramework$
         // $End-Feed$
         // $Start-AndroidChromeM39Favicons$
         private readonly IManifestService manifestService;
@@ -50,11 +54,15 @@
             IBrowserConfigService browserConfigService,
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
+            // $Start-TargetFramework-NetFramework$
 #if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+            // $End-TargetFramework-NetFramework$
             IFeedService feedService,
+            // $Start-TargetFramework-NetFramework$
 #endif
+            // $End-TargetFramework-NetFramework$
             // $End-Feed$
             // $Start-AndroidChromeM39Favicons$
             IManifestService manifestService,
@@ -75,11 +83,15 @@
             this.browserConfigService = browserConfigService;
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
+            // $Start-TargetFramework-NetFramework$
 #if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+            // $End-TargetFramework-NetFramework$
             this.feedService = feedService;
+            // $Start-TargetFramework-NetFramework$
 #endif
+            // $End-TargetFramework-NetFramework$
             // $End-Feed$
             // $Start-AndroidChromeM39Favicons$
             this.manifestService = manifestService;
@@ -130,17 +142,21 @@
         /// <returns>The Atom 1.0 feed for the current site.</returns>
         [ResponseCache(CacheProfileName = CacheProfileName.Feed)]
         [Route("feed", Name = HomeControllerRoute.GetFeed)]
+        // $Start-TargetFramework-NetFramework$
 #if NET461
+        // $End-TargetFramework-NetFramework$
         public async Task<IActionResult> Feed(CancellationToken cancellationToken)
         {
             return new AtomActionResult(await this.feedService.GetFeed(cancellationToken));
         }
+        // $Start-TargetFramework-NetFramework$
 #else
         public IActionResult Feed(CancellationToken cancellationToken)
         {
             return this.Ok("The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed type does not yet exist. See https://github.com/dotnet/wcf/issues/76.");
         }
 #endif
+        // $End-TargetFramework-NetFramework$
         // $End-Feed$
         // $Start-Search$
 

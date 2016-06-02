@@ -17,11 +17,15 @@
             services.AddScoped<IBrowserConfigService, BrowserConfigService>();
             // $End-Windows81IE11EdgeFavicon$
             // $Start-Feed$
+            // $Start-TargetFramework-NetFramework$
 #if NET461
             // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
             // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+            // $End-TargetFramework-NetFramework$
             services.AddScoped<IFeedService, FeedService>();
+            // $Start-TargetFramework-NetFramework$
 #endif
+            // $End-TargetFramework-NetFramework$
             // $End-Feed$
             // $Start-AndroidChromeM39Favicons$
             services.AddScoped<IManifestService, ManifestService>();

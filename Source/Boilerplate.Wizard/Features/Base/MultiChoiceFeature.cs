@@ -41,6 +41,8 @@
             get { return this.Items.IsDefaultSelected; }
         }
 
+        public virtual bool IsMultiSelect { get; } = false;
+
         public FeatureItemCollection Items
         {
             get { return this.items; }
@@ -66,7 +68,7 @@
             }
 
             return stringBuilder.ToString();
-        } 
+        }
 
         #endregion
 
@@ -95,7 +97,7 @@
         protected virtual void OnItemChanged(object sender, ItemChangedEventArgs<IFeatureItem> e)
         {
             this.OnPropertyChanged(nameof(IsDefaultSelected));
-        } 
+        }
 
         #endregion
     }

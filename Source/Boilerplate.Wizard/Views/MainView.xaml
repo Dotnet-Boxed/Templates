@@ -13,7 +13,7 @@
         ResizeMode="CanResizeWithGrip"
         ShowInTaskbar="False"
         Topmost="True"
-        Width="800" 
+        Width="800"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
     <Window.Resources>
@@ -31,7 +31,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Height="100" 
+                            <Image Height="100"
                                    Margin="0, 0, 5, 0"
                                    Source="{Binding Icon}"
                                    SnapsToDevicePixels="True"
@@ -56,14 +56,14 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                
+
                                 <TextBlock Style="{StaticResource HeadingTextBlockStyle}"
                                            Text="{Binding Title}"/>
 
                                 <TextBlock Grid.Row="1"
                                            Style="{StaticResource NormalTextBlockStyle}"
                                            Text="{Binding Description}"/>
-                                
+
                             </Grid>
 
                         </Grid>
@@ -72,6 +72,40 @@
             </DataTemplate>
 
             <DataTemplate x:Key="FeatureItemDataTemplate">
+                <Grid Margin="5, 0, 5, 0">
+                    <TextBlock Style="{StaticResource NormalTextBlockStyle}"
+                               Text="{Binding Title}"
+                               VerticalAlignment="Center"
+                               Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
+                    <Grid Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
+                        <Image Height="100"
+                               Source="{Binding Icon}"
+                               SnapsToDevicePixels="True"
+                               Stretch="UniformToFill"
+                               Width="200">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Opacity" Value="0.5"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                            <Setter Property="Opacity" Value="1"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <TextBlock Margin="5"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Style="{StaticResource HeadingTextBlockStyle}"
+                                   Text="Contributions Wanted"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Bottom"
+                                   Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsContributionWanted}"/>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="SingleSelectFeatureItemDataTemplate">
                 <RadioButton GroupName="{Binding Path=DataContext.Title, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                              HorizontalContentAlignment="Center"
                              IsChecked="{Binding IsSelected}"
@@ -79,38 +113,21 @@
                              Margin="5, 0, 5, 0"
                              ToolTip="{Binding Description}"
                              VerticalAlignment="Center">
-                    <Grid Margin="5, 0, 5, 0">
-                        <TextBlock Style="{StaticResource NormalTextBlockStyle}"
-                                   Text="{Binding Title}"
-                                   VerticalAlignment="Center"
-                                   Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Icon}"/>
-                        <Grid Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Icon}">
-                            <Image Height="100" 
-                                   Source="{Binding Icon}"
-                                   SnapsToDevicePixels="True"
-                                   Stretch="UniformToFill"
-                                   Width="200">
-                                <Image.Style>
-                                    <Style TargetType="Image">
-                                        <Setter Property="Opacity" Value="0.5"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                                                <Setter Property="Opacity" Value="1"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Image.Style>
-                            </Image>
-                            <TextBlock Margin="5" 
-                                       Foreground="{StaticResource AccentBrush}"
-                                       Style="{StaticResource HeadingTextBlockStyle}"
-                                       Text="Contributions Wanted"
-                                       TextAlignment="Center"
-                                       VerticalAlignment="Bottom"
-                                       Visibility="{Binding Converter={StaticResource BoolToVisibilityConverter}, Path=IsContributionWanted}"/>
-                        </Grid>
-                    </Grid>
+                    <ContentControl Content="{Binding}"
+                                    ContentTemplate="{StaticResource FeatureItemDataTemplate}"/>
                 </RadioButton>
+            </DataTemplate>
+
+            <DataTemplate x:Key="MultiSelectFeatureItemDataTemplate">
+                <CheckBox HorizontalContentAlignment="Center"
+                          IsChecked="{Binding IsSelected}"
+                          IsEnabled="{Binding Converter={StaticResource InverseBoolConverter}, Path=IsContributionWanted}"
+                          Margin="5, 0, 5, 0"
+                          ToolTip="{Binding Description}"
+                          VerticalAlignment="Center">
+                    <ContentControl Content="{Binding}"
+                                    ContentTemplate="{StaticResource FeatureItemDataTemplate}"/>
+                </CheckBox>
             </DataTemplate>
 
             <DataTemplate x:Key="MultiChoiceFeatureDataTemplate">
@@ -126,25 +143,34 @@
                                Text="{Binding Title}"
                                VerticalAlignment="Center"/>
 
-                    <TextBlock Grid.Row="1" 
+                    <TextBlock Grid.Row="1"
                                Margin="25, 0, 5, 5"
                                Style="{StaticResource NormalTextBlockStyle}"
                                Text="{Binding Description}"
                                VerticalAlignment="Center"/>
 
-                    <ItemsControl Grid.Row="2" 
-                                  ItemsSource="{Binding ItemsView}"
-                                  ItemTemplate="{StaticResource FeatureItemDataTemplate}">
+                    <ItemsControl Grid.Row="2"
+                                  ItemsSource="{Binding ItemsView}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel Orientation="Horizontal"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="ItemTemplate" Value="{StaticResource SingleSelectFeatureItemDataTemplate}"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMultiSelect}" Value="True">
+                                        <Setter Property="ItemTemplate" Value="{StaticResource MultiSelectFeatureItemDataTemplate}"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ItemsControl.Style>
                     </ItemsControl>
 
                 </Grid>
             </DataTemplate>
-            
+
             <Views:FeatureDataTemplateSelector x:Key="FeatureDataTemplateSelector"
                                                BinaryChoiceFeatureDataTemplate="{StaticResource BinaryChoiceFeatureDataTemplate}"
                                                MultiChoiceFeatureDataTemplate="{StaticResource MultiChoiceFeatureDataTemplate}"/>
@@ -170,29 +196,29 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Image Grid.RowSpan="2" 
-                       Height="64" 
+                <Image Grid.RowSpan="2"
+                       Height="64"
                        Source="/Boilerplate.Wizard;component/Assets/Icon.png"
                        Stretch="UniformToFill"
                        Width="64"/>
-                <TextBlock Grid.Column="1" 
+                <TextBlock Grid.Column="1"
                            Margin="5, 5, 5, -3"
                            Style="{StaticResource TitleTextBlockStyle}"
                            VerticalAlignment="Center">
-                    <Hyperlink Click="OnHyperlinkClick" 
+                    <Hyperlink Click="OnHyperlinkClick"
                                NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate"
                                Style="{StaticResource TitleHyperlinkStyle}">
                         ASP.NET MVC Boilerplate
                     </Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Column="1" 
+                <TextBlock Grid.Column="1"
                            Grid.Row="1"
                            Foreground="{StaticResource ForegroundBrush}"
                            Margin="5, -3, 5, 5"
                            Style="{StaticResource SubTitleTextBlockStyle}"
                            Text="Feature Selection Wizard"
                            VerticalAlignment="Center"/>
-                <TextBlock Grid.Column="2" 
+                <TextBlock Grid.Column="2"
                            Grid.Row="1"
                            Margin="5, -3, 15, 5"
                            TextAlignment="Right"
@@ -217,15 +243,15 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Margin="5" 
+                <TextBlock Margin="5"
                            Style="{StaticResource NormalTextBlockStyle}"
                            VerticalAlignment="Center">
                     <Run>New features are being worked on and added all the time. Have an idea for a feature you would like? </Run>
-                    <Hyperlink Click="OnHyperlinkClick" 
+                    <Hyperlink Click="OnHyperlinkClick"
                                NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">Why not contribute?</Hyperlink>
                 </TextBlock>
 
-                <ScrollViewer Grid.Row="1" 
+                <ScrollViewer Grid.Row="1"
                               VerticalScrollBarVisibility="Auto"
                               Visibility="{Binding Converter={StaticResource InverseNullToVisibilityConverter}, Path=Error}">
                     <ItemsControl ItemsSource="{Binding FeaturesView}"
@@ -240,7 +266,7 @@
                                                 <ControlTemplate TargetType="GroupItem">
                                                     <GroupBox>
                                                         <GroupBox.Header>
-                                                            <TextBlock Padding="0, 0, 0, 10" 
+                                                            <TextBlock Padding="0, 0, 0, 10"
                                                                        Text="{Binding Path=Name}"/>
                                                         </GroupBox.Header>
                                                         <ItemsPresenter/>
@@ -256,7 +282,7 @@
                 </ScrollViewer>
 
                 <!-- Error -->
-                <Grid Grid.Row="1" 
+                <Grid Grid.Row="1"
                       Margin="5, 0, 5, 5"
                       Visibility="{Binding Converter={StaticResource NullToVisibilityConverter}, Path=Error}">
                     <Grid.RowDefinitions>
@@ -266,22 +292,22 @@
 
                     <TextBlock Style="{StaticResource NormalTextBlockStyle}">
                         <Run>
-                            Oops! One or more of your requested feature changes caused an error. The feature selection wizard made as many changes as it could but you may find that the project has errors. Please raise an 
+                            Oops! One or more of your requested feature changes caused an error. The feature selection wizard made as many changes as it could but you may find that the project has errors. Please raise an
                         </Run>
-                        <Hyperlink Click="OnHyperlinkClick" 
+                        <Hyperlink Click="OnHyperlinkClick"
                                    NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues">issue</Hyperlink>
                         <Run>
                             on the ASP.NET MVC Boilerplate GitHub page and copy the error below. We'll usually get it fixed pretty quickly.
                         </Run>
                     </TextBlock>
 
-                    <TextBox Grid.Row="1" 
+                    <TextBox Grid.Row="1"
                              Margin="0, 5, 0, 0"
                              Text="{Binding Mode=OneWay, Path=Error}"/>
 
                 </Grid>
 
-                <Button Grid.Row="2" 
+                <Button Grid.Row="2"
                         Click="OnOkClick"
                         Margin="5, 0, 5, 5">
                     <Button.Style>

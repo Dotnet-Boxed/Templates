@@ -4,15 +4,18 @@
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     public class FileSystemService : IFileSystemService
     {
-        private ConcurrentDictionary<string, string> files;
+        private readonly IEnumerable<IFileFixerService> fileFixerServices;
+        private readonly ConcurrentDictionary<string, string> files;
 
-        public FileSystemService()
+        public FileSystemService(IEnumerable<IFileFixerService> fileFixerServices)
         {
+            this.fileFixerServices = fileFixerServices;
             this.files = new ConcurrentDictionary<string, string>();
         }
 
@@ -118,6 +121,13 @@
                     }
                     else
                     {
+                        var fileExtension = Path.GetExtension(filePath);
+                        foreach (IFileFixerService fileFixerService in this.fileFixerServices
+                            .Where(x => x.FileExtensions.Contains(fileExtension)))
+                        {
+                            text = fileFixerService.Fix(text);
+                        }
+
                         using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                         {
                             using (StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8))

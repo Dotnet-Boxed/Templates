@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\FileSystemServiceTest.cs" />
+    <Compile Include="Services\JsonFileFixerService.cs" />
     <Compile Include="Services\PortServiceTest.cs" />
     <Compile Include="Services\ProjectServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

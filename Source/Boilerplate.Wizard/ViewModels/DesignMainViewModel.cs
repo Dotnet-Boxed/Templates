@@ -14,9 +14,11 @@
 
         public DesignMainViewModel()
         {
-            this.projectService = new ProjectService(new FileSystemService(), @"C:\");
+            this.projectService = new ProjectService(new FileSystemService(new IFileFixerService[0]), @"C:\");
             this.features = new FeatureCollection()
             {
+                new TargetFrameworkFeature(this.projectService),
+
                 new FrontEndFrameworkFeature(this.projectService),
                 new TypeScriptFeature(this.projectService),
                 new JavaScriptCodeStyleFeature(this.projectService),

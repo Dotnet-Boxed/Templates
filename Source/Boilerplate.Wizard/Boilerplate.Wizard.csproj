@@ -113,9 +113,12 @@
     <Compile Include="Features\Social\OpenGraphFeature.cs" />
     <Compile Include="Features\Social\AuthorMetaTagFeature.cs" />
     <Compile Include="Features\Social\TwitterCardFeature.cs" />
+    <Compile Include="Features\TargetFramework\TargetFrameworkFeature.cs" />
     <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
     <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
+    <Compile Include="Services\IFileFixerService.cs" />
     <Compile Include="Services\IPortService.cs" />
+    <Compile Include="Services\JsonFileFixerService.cs" />
     <Compile Include="Services\PortService.cs" />
     <Compile Include="ViewModels\DesignMainViewModel.cs" />
     <Compile Include="Wizards\Mvc6ApiFeatureWizard.cs" />
@@ -229,7 +232,10 @@
     <Resource Include="Assets\Windows.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\TargetFramework\" />
+    <Resource Include="Assets\NetCore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\NetFramework.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
