@@ -39,7 +39,7 @@ var gulp = require('gulp'),
     psi = require('psi'),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
     rimraf = require('rimraf'),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
     sass = require('gulp-sass'),                // Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
-    scsslint = require('gulp-scss-lint'),       // SASS linter (https://www.npmjs.com/package/gulp-scss-lint/)
+    sasslint = require('gulp-sass-lint'),       // SASS linter (https://www.npmjs.com/package/gulp-sass-lint/)
     // $Start-TypeScript$
     tslint = require('gulp-tslint'),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require('gulp-typescript'),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
@@ -219,8 +219,8 @@ var sources = {
 
 // Initialize the mappings between the source and output files.
 var lintSources = {
-    css: paths.styles + '**/*.{css}',
-    scss: paths.styles + '**/*.{scss}',
+    css: paths.styles + '**/*.css',
+    scss: paths.styles + '**/*.scss',
     // $Start-JavaScriptLint$
     js: paths.scripts + '**/*.js',
     // $Start-TypeScript$
@@ -287,7 +287,9 @@ gulp.task('lint-css', function () {
             .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
         gulp.src(lintSources.scss)              // Start with the source .scss files.
             .pipe(plumber())                    // Handle any errors.
-            .pipe(scsslint())                   // Get and report any SCSS linting errors to the console.
+            .pipe(sasslint())                   // Run SCSS linting.
+            .pipe(sasslint.format())            // Report any SCSS linting errors to the console.
+            .pipe(sasslint.failOnError())       // Fail the task if an error is found.
     ]);
 });
 
