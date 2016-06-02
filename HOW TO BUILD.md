@@ -7,12 +7,6 @@ To build this project you will require:
 3. Latest version of ASP.NET Core
 4. [SideWaffle](https://visualstudiogallery.msdn.microsoft.com/a16c2d07-b2e1-4a25-87d9-194f04e7a698) Visual Studio Extension
 
-# How To Pack NuGet Packages
-
-To build the NuGet packages:
-
-1. Run the Pack.ps1 PowerShell script.
-
 # How To Debug
 
 1. Set Boilerplate.Vsix as the start-up project.

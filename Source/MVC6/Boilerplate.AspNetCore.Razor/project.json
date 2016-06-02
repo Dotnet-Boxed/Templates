@@ -35,5 +35,11 @@
     },
     "net461": {
     }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration Release"
+    ]
   }
 }

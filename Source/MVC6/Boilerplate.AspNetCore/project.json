@@ -46,5 +46,11 @@
         "System.Xml.Linq": ""
       }
     }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration Release"
+    ]
   }
 }
