@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     /// <summary>
-    /// <see cref="HtmlHelper"/> extension methods.
+    /// <see cref="IHtmlHelper"/> extension methods.
     /// </summary>
     public static class HtmlHelperExtensions
     {

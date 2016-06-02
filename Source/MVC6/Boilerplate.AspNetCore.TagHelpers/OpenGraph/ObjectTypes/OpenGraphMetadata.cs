@@ -27,18 +27,69 @@
         private const string OgNamespace = "og: http://ogp.me/ns# ";
         private const string FacebookNamespace = "fb: http://ogp.me/ns/fb# ";
 
+        /// <summary>
+        /// The alternate locales attribute name.
+        /// </summary>
         protected const string AlternateLocalesAttributeName = "alternate-locales";
+
+        /// <summary>
+        /// The description attribute name.
+        /// </summary>
         protected const string DescriptionAttributeName = "description";
+
+        /// <summary>
+        /// The determiner attribute name.
+        /// </summary>
         protected const string DeterminerAttributeName = "determiner";
+
+        /// <summary>
+        /// The Facebook administrators attribute name.
+        /// </summary>
         protected const string FacebookAdministratorsAttributeName = "facebook-administrators";
+
+        /// <summary>
+        /// The Facebook application identifier attribute name.
+        /// </summary>
         protected const string FacebookApplicationIdAttributeName = "facebook-application-id";
+
+        /// <summary>
+        /// The Facebook profile identifier attribute name.
+        /// </summary>
         protected const string FacebookProfileIdAttributeName = "facebook-profile-id";
+
+        /// <summary>
+        /// The locale attribute name.
+        /// </summary>
         protected const string LocaleAttributeName = "locale";
+
+        /// <summary>
+        /// The main image attribute name.
+        /// </summary>
         protected const string MainImageAttributeName = "main-image";
+
+        /// <summary>
+        /// The media attribute name.
+        /// </summary>
         protected const string MediaAttributeName = "media";
+
+        /// <summary>
+        /// The see also attribute name.
+        /// </summary>
         protected const string SeeAlsoAttributeName = "see-also";
+
+        /// <summary>
+        /// The site name attribute name.
+        /// </summary>
         protected const string SiteNameAttributeName = "site-name";
+
+        /// <summary>
+        /// The title attribute name.
+        /// </summary>
         protected const string TitleAttributeName = "title";
+
+        /// <summary>
+        /// The URL attribute name.
+        /// </summary>
         protected const string UrlAttributeName = "url";
 
         #endregion
@@ -164,8 +215,14 @@
             get { return this.Media == null ? null : this.Media.OfType<OpenGraphVideo>(); }
         }
 
-        // Workaround for context.Items not working across _Layout.cshtml and Index.cshtml using ViewContext.
-        // https://github.com/aspnet/Mvc/issues/3233 and https://github.com/aspnet/Razor/issues/564
+        /// <summary>
+        /// Gets or sets the view context. Workaround for context.Items not working across _Layout.cshtml and
+        /// Index.cshtml using ViewContext. See https://github.com/aspnet/Mvc/issues/3233 and
+        /// https://github.com/aspnet/Razor/issues/564.
+        /// </summary>
+        /// <value>
+        /// The view context.
+        /// </value>
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }

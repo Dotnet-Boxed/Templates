@@ -17,6 +17,9 @@
     {
         #region Constants
 
+        /// <summary>
+        /// The username attribute name.
+        /// </summary>
         protected const string UsernameAttributeName = "username";
 
         #endregion

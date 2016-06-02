@@ -4,6 +4,11 @@
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc.Razor;
 
+    /// <summary>
+    /// Specifies the contracts for a view location expander that is used by <see cref="RazorViewEngine"/> instances to
+    /// determine search paths for a view using the .min.cshtml file extension.
+    /// </summary>
+    /// <seealso cref="IViewLocationExpander" />
     public class MinifiedViewLocationExpander : IViewLocationExpander
     {
         private const string MinifiedViewExtension = ".min.cshtml";
@@ -14,6 +19,7 @@
             "/Views/Shared/{0}" + MinifiedViewExtension,
         };
 
+        /// <inheritdoc/>
         public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
         {
             if (context == null)
@@ -29,6 +35,7 @@
             return ViewLocationFormats;
         }
 
+        /// <inheritdoc/>
         public void PopulateValues(ViewLocationExpanderContext context)
         {
         }

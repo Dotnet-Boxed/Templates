@@ -35,6 +35,12 @@
 
         #endregion
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SubresourceIntegrityTagHelper"/> class.
+        /// </summary>
+        /// <param name="distributedCache">The distributed cache.</param>
+        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <param name="urlHelper">The URL helper.</param>
         public SubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IHostingEnvironment hostingEnvironment,
@@ -52,6 +58,12 @@
         public SubresourceIntegrityHashAlgorithm HashAlgorithms { get; set; }
             = SubresourceIntegrityHashAlgorithm.SHA512;
 
+        /// <summary>
+        /// Gets or sets the source file.
+        /// </summary>
+        /// <value>
+        /// The source file.
+        /// </value>
         public virtual string Source { get; set; }
 
         /// <summary>

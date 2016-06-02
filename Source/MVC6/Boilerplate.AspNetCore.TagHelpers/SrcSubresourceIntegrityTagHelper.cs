@@ -5,12 +5,19 @@
     using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Caching.Distributed;
 
+    /// <inheritdoc />
     [HtmlTargetElement(Attributes = SrcAttributeName + "," + SubresourceIntegritySrcAttributeName)]
     public class SrcSubresourceIntegrityTagHelper : SubresourceIntegrityTagHelper
     {
         private const string SrcAttributeName = "src";
         private const string SubresourceIntegritySrcAttributeName = "asp-subresource-integrity-src";
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SrcSubresourceIntegrityTagHelper"/> class.
+        /// </summary>
+        /// <param name="distributedCache">The distributed cache.</param>
+        /// <param name="hostingEnvironment">The hosting environment.</param>
+        /// <param name="urlHelper">The URL helper.</param>
         public SrcSubresourceIntegrityTagHelper(
             IDistributedCache distributedCache,
             IHostingEnvironment hostingEnvironment,
@@ -19,6 +26,7 @@
         {
         }
 
+        /// <inheritdoc />
         [HtmlAttributeName(SubresourceIntegritySrcAttributeName)]
         public override string Source
         {
@@ -26,6 +34,10 @@
             set { base.Source = value; }
         }
 
-        protected override string UrlAttributeName { get { return SrcAttributeName; } }
+        /// <inheritdoc />
+        protected override string UrlAttributeName
+        {
+            get { return SrcAttributeName; }
+        }
     }
 }

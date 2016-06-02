@@ -21,7 +21,8 @@
 
   "buildOptions": {
     "keyFile": "../../Key.snk",
-    "warningsAsErrors": true
+    "warningsAsErrors": true,
+    "xmlDoc": true
   },
 
   "dependencies": {
