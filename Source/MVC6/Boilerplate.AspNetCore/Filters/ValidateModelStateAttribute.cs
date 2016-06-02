@@ -8,7 +8,7 @@
     /// Validates the action's arguments and model state. If any of the arguments are <c>null</c> or the model state is
     /// invalid, returns a 400 Bad Request result.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNet.Mvc.Filters.ActionFilterAttribute" />
+    /// <seealso cref="ActionFilterAttribute" />
     public class ValidateModelStateAttribute : ActionFilterAttribute
     {
         /// <summary>

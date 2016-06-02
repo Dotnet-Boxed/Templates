@@ -5,7 +5,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
-    /// <see cref="UrlHelper"/> extension methods.
+    /// <see cref="IUrlHelper"/> extension methods.
     /// </summary>
     public static class UrlHelperExtensions
     {

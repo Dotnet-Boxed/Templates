@@ -194,7 +194,7 @@
         /// <typeparam name="T"/>.
         /// </summary>
         /// <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" />.</param>
-        /// <returns><c>true</c> if a <typeparam name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if a <typeparamref name="T"/> attribute is specified, otherwise <c>false</c>.</returns>
         protected virtual bool HasAttribute<T>(ResourceExecutingContext context)
         {
             foreach (IFilterMetadata filterMetadata in context.Filters)

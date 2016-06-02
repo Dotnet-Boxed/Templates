@@ -71,6 +71,12 @@
             this.httpStatusCode = (int)httpStatusCode;
         }
 
+        /// <summary>
+        /// Gets the HTTP status code.
+        /// </summary>
+        /// <value>
+        /// The HTTP status code.
+        /// </value>
         public int StatusCode { get { return this.httpStatusCode; } }
     }
 }
