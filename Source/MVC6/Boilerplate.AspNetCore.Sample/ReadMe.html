@@ -388,6 +388,10 @@
                         Application Insights helps monitor your site and know about it when it goes down. Login to <a href="http://azure.microsoft.com">Azure</a>, create a new Application Insights instance, retrieve the Instrumentation Key and add it to your <em>config.json</em> file. For more information see the <a href="http://docs.asp.net/en/latest/fundamentals/application-insights.html">Getting Started</a> guide.
                     </li>
                     <!-- $End-ApplicationInsights$ -->
+                    <li class="list-group-item">
+                        <input name="ResilienceAndErrorHandling-Logging" type="checkbox"> <strong>Add Logging</strong> -
+                        This template comes with basic logging enabled in development mode. Consider using <a href="http://serilog.net/">Serilog</a> or another logging framework in production. Logging can be configured in <em>Startup.Logging.cs</em>.
+                    </li>
                 </ul>
             </article>
 
