@@ -15,8 +15,9 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Boilerplate.AspNetCore.Sample": {
+    "MvcBoilerplate": {
       "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:1025",
       "launchBrowser": true,
       "launchUrl": "http://localhost:1025",
       "environmentVariables": {
