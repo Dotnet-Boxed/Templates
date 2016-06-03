@@ -398,35 +398,35 @@
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-ConfigureSitemapXml" type="checkbox"> <strong>Configure Sitemap.xml</strong> -
                         Add links to the sitemap.xml file to improve search engine visibility of your site.
-                        Open SitemapService.cs and edit the GetSitemapNodes method. You can decide where or how your links are generated.
+                        Open <em>SitemapService.cs</em> and edit the <code>GetSitemapNodes</code> method. You can decide where or how your links are generated.
                     </li>
                     <!-- $End-Sitemap$ -->
                     <!-- $Start-RobotsText$ -->
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-ConfigureRobotsTxt" type="checkbox"> <strong>Configure Robots.txt</strong> -
                         Add directories or links to the robots.txt file to stop search engines indexing things like error or login pages.
-                        Open RobotsService.cs and edit the directives.
+                        Open <em>RobotsService.cs</em> and edit the directives.
                     </li>
                     <!-- $End-RobotsText$ -->
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-FriendlyUrls" type="checkbox"> <strong>SEO and Human Friendly URL's</strong> -
-                        Use the FriendlyUrlHelper to create SEO and human friendly URL's like http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title.
+                        Use the <code>FriendlyUrlHelper</code> to create SEO and human friendly URL's like <code>http://example.com/product/123/this-is-the-seo-and-human-friendly-product-title</code>.
                     </li>
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-ConfigureDomainNames" type="checkbox"> <strong>Configure Domain Names</strong> -
-                        If you have bought multiple domain names for your site e.g. www.example.com, example.com, example.net, example.org then choose a main domain name and make all of the others perform a 301 Permanent redirect to the main one. Usually the domain name providers provide this service for free. Read <a href="http://googlewebmastercentral.blogspot.co.uk/2009/12/handling-legitimate-cross-domain.html">this</a> from Google for more information.
+                        If you have bought multiple domain names for your site e.g. www.example.com, example.com, example.net, example.org then choose a main domain name and make all of the others perform a 301 Permanent redirect to the main one. Usually the domain name providers, provide this service for free. Read <a href="http://googlewebmastercentral.blogspot.co.uk/2009/12/handling-legitimate-cross-domain.html">this</a> from Google for more information.
                     </li>
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-AddMicrodata" type="checkbox"> <strong>Add Microdata</strong> -
                         Add <a href="http://schema.org/docs/gs.html">microdata</a> to your HTML markup to add semantic meaning to your site and give search engines the information they need to better display your pages in search results. Use <a href="http://schema-creator.org/">Schema Creator</a> to help generate markup. Use the <a href="https://developers.google.com/structured-data/testing-tool/">Google structured data testing tool</a> to test that your microdata is correctly formed.
                     </li>
                     <li class="list-group-item">
-                        <input name="SearchEngineOptimisation-CheckSiteWithSEOToolkit" type="checkbox"> <strong>Check Site With SEO Toolkit</strong> -
+                        <input name="SearchEngineOptimisation-TestSiteWithSEOToolkit" type="checkbox"> <strong>Test Site With SEO Toolkit</strong> -
                         Use the free <a href="http://www.microsoft.com/web/seo/">SEO Toolkit</a> application provided by Microsoft to test your site once its deployed for any SEO errors.
                     </li>
                     <li class="list-group-item">
                         <input name="SearchEngineOptimisation-PingSitemap" type="checkbox"> <strong>Ping Sitemap to Search Engines</strong> -
-                        Use the ISitemapPingerService's PingSearchEngines method to tell search engines like Google, Bing and Yahoo that your sitemap has changed and that they should download it and index the new pages.
+                        Use the <code>ISitemapPingerService</code>'s <code>PingSearchEngines</code> method to tell search engines like Google, Bing and Yahoo that your sitemap has changed and that they should download it and index the new pages.
                     </li>
                 </ul>
             </article>
@@ -463,11 +463,11 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Search-ImplementSearch" type="checkbox"> <strong>Implement Search</strong> -
-                        Consider implementing search in your site. For more information, see the Search action in the HomeController.
+                        Implement search in your site by filling in the Search action in the <em>HomeController.cs</em> file.
                     </li>
                     <li class="list-group-item">
                         <input name="Search-ConfigureOpenSearchXml" type="checkbox"> <strong>Configure OpenSearch.xml</strong> -
-                        If you are implementing search, then ASP.NET MVC Boilerplate implements the <a href="http://www.opensearch.org">Open Search</a> protocol. See <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Scott Hanselman</a>'s blog post for more information about what Open Search is. The opensearch.xml file is dynamically generated in OpenSearchService.cs and needs configuring.
+                        If you are implementing search, then this site implements the <a href="http://www.opensearch.org">Open Search</a> protocol. See <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Scott Hanselman</a>'s blog post for more information about what Open Search is. The opensearch.xml file is dynamically generated in <em>OpenSearchService.cs</em> and needs configuring.
                     </li>
                 </ul>
             </article>
@@ -479,11 +479,11 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="RSSAtomFeed-ImplementAtomFeed" type="checkbox"> <strong>Implement Atom Feed</strong> -
-                        Implement the Atom feed for the site. See FeedService.cs.
+                        Implement the Atom feed for the site. See <em>FeedService.cs</em>.
                     </li>
                     <li class="list-group-item">
                         <input name="RSSAtomFeed-PublishUpdates" type="checkbox"> <strong>Publish Atom Feed Updates</strong> -
-                        Call the PublishUpdate method on FeedService.cs when the feed changes. This publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol. See FeedService.cs for more information.
+                        Call the <code>PublishUpdate</code> method on <em>FeedService.cs</em> when the feed changes. This publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol. See <em>FeedService.cs</em> for more information.
                     </li>
                     <li class="list-group-item">
                         <input name="RSSAtomFeed-ValidateAtomFeed" type="checkbox"> <strong>Validate Atom Feed</strong> -
@@ -513,15 +513,15 @@
                     <!-- $Start-OpenGraph$ -->
                     <li class="list-group-item">
                         <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
-                        Open Graph meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.OpenGraph.OpenGraphMetadata type.
-                        You need to add these to all of the other pages yourself. Read the documentation on OpenGraphMetadata for more information on how to use it.
+                        Open Graph meta tags have been included in all the default pages by default using ASP.NET Core tag helpers.
+                        Take a look at the header section of <em>Index.cshtml</em> for an example.
                     </li>
                     <!-- $End-OpenGraph$ -->
                     <!-- $Start-TwitterCard$ -->
                     <li class="list-group-item">
                         <input name="Social-ImplementTwitterCards" type="checkbox"> <strong>Implement Twitter Cards</strong> -
-                        Twitter card meta tags have been included in all the default pages by default using the Boilerplate.Web.Mvc.Twitter.TwitterCard type.
-                        You need to add these to all of the other pages yourself. Read the documentation on TwitterCard for more information on how to use it.
+                        Twitter card meta tags have been included in all the default pages by default using ASP.NET Core tag helpers.
+                        Take a look at the header section of <em>Index.cshtml</em> for an example.
                     </li>
                     <!-- $End-TwitterCard$ -->
                     <li class="list-group-item">
@@ -546,9 +546,9 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ThankDevelopers-ConfigureHumansTxt" type="checkbox"> <strong>Configure Humans.txt</strong> -
-                        Edit the humans.txt file at the root of the site. This is totally optional, you can delete this file if you want (If you delete it, remove
-                        the line in RouteConfig.cs which ignores the humans.txt route). Be careful what you put into this file, you could give away clues about
-                        potential attack vectors on your site. Even giving contact details can be an attack vector (Most hackers manipulate people to get access).
+                        Edit the <em>humans.txt</em> file at the root of the site. This is totally optional, you can delete this file if you want.
+                        Be careful what you put into this file, you could give away clues about potential attack vectors on your site.
+                        Even giving contact details can be an attack vector (Most hackers manipulate people to get access).
                     </li>
                     <li class="list-group-item">
                         <input name="ThankDevelopers-ReviewBoilerplate" type="checkbox"> <strong>Review ASP.NET MVC Boilerplate</strong> -
