@@ -80,6 +80,10 @@
                     this.net461.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
                     "project.json");
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    "ReadMe.html");
             }
             else
             {
@@ -87,6 +91,10 @@
                     this.net461.CommentName,
                     EditCommentMode.DeleteCode,
                     "project.json");
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.DeleteCode,
+                    "ReadMe.html");
             }
 
             if (this.netCore.IsSelected)

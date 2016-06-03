@@ -92,8 +92,8 @@
                         Update the NuGet Visual Studio extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <li class="list-group-item">
-                        <input name="PreRequisites-UpdateDNVM" type="checkbox"> <strong>Update Visual Studio ASP.NET Core Tools and DNVM</strong> -
-                        Update the Visual Studio ASP.NET Core tools and the DNVM to RC1 Update 2. Find out more <a href="http://blogs.msdn.com/b/webdev/archive/2015/11/18/announcing-asp-net-5-release-candidate-1.aspx">here</a>.
+                        <input name="PreRequisites-UpdateDNVM" type="checkbox"> <strong>Update Visual Studio ASP.NET Core Tools</strong> -
+                        Update the Visual Studio ASP.NET Core tools. Find out more at <a href="https://dot.net">dot.net</a>.
                     </li>
                     <!-- $Start-TypeScript$ -->
                     <li class="list-group-item">
@@ -101,16 +101,6 @@
                         Update the TypeScript extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <!-- $End-TypeScript$ -->
-                    <li class="list-group-item">
-                        <input name="PreRequisites-AddPackageSource" type="checkbox"> <strong>Update NuGet Package Source</strong> -
-                        <ol>
-                            <li>Go to Visual Studio -> Tools -> Options -> NuGet Package Manager -> Package Sources</li>
-                            <li>
-                                Enter a new package source named 'ASP.NET Core Master' and source as the following (Without quotes):
-                                <pre>https://www.myget.org/F/aspnetmaster/api/v2</pre>
-                            </li>
-                        </ol>
-                    </li>
                     <li class="list-group-item">
                         <input name="PreRequisites-IISHttpPlatformHandler" type="checkbox"> <strong>IIS HttpPlatformHandler</strong> -
                         If you are using IIS and configuring it yourself, install the HttpPlatformHandler from <a href="http://docs.asp.net/en/latest/hosting/http-platformhandler.html">here</a>.
@@ -128,17 +118,23 @@
                         Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at:
                         <ul>
                             <li><a href="https://letsencrypt.org/">LetsEncrypt.org</a></li>
-                            <li><a href="https://www.startssl.com/">StartSSL.com</a></li>
+                            <li><a href="https://www.startssl.com/">StartSSL.com</a> (You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.)</li>
                             <li><a href="https://www.digicert.com/friends/mvp.php">Digicert</a> (Digicert is only for Microsoft employees or MVP's)</li>
                         </ul>
-                        You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.
-                        <ol>
-                            <!-- $Start-NWebSec$ -->
-                            <li>Open the Startup.cs file and uncomment the application.UseHpkp(...); line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning</a>.</li>
-                            <li>If using Strict-Transport-Security, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.</li>
-                            <!-- $End-NWebSec$ -->
-                            <li>Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.</li>
-                        </ol>
+                    </li>
+                    <!-- $Start-NWebSec$ -->
+                    <li class="list-group-item">
+                        <input name="HTTPS-ConfigureHSTSPreload" type="checkbox"> <strong>Configure Strict Transport Security (HSTS) Preloading</strong> -
+                        If using Strict-Transport-Security, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="HTTPS-ConfigureHPKP" type="checkbox"> <strong>Configure Public Key Pinning (HPKP)</strong> -
+                        Open the <em>Startup.Filters.cs</em> file and uncomment the <code>application.UseHpkp(...);</code> line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning (HPKP)</a>. Please note that there is some risk to setting up Public Key Pinning (HPKP), if you get it wrong people who have visited your site will get an error in their browser upon visiting your site so be careful.
+                    </li>
+                    <!-- $End-NWebSec$ -->
+                    <li class="list-group-item">
+                        <input name="HTTPS-TestHttps" type="checkbox"> <strong>Test Your HTTPS Implementation</strong> -
+                        Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.
                     </li>
                 </ul>
                 <!-- $End-HttpsEverywhere$ -->
@@ -147,18 +143,18 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-ConfigureContentSecurityPolicy" type="checkbox"> <strong>Configure Content Security Policy</strong> -
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a great new HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in Startup.Filters.cs or on your individual MVC controllers and actions if they have special access requirements.
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in <em>Startup.ContentSecurityPolicy.cs</em> or on your individual MVC controllers and actions if they have special access requirements.
                     </li>
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-ReportUri" type="checkbox"> <strong>Configure Report URI</strong> -
-                        Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the CspReportUriAttribute in Startup.ContentSecurityPolicy.cs.
+                        Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the <code>CspReportUriAttribute</code> in <em>Startup.ContentSecurityPolicy.cs</em>.
                     </li>
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-CheckModernizrCSPSupport" type="checkbox"> <strong>Check Modernizr CSP Support</strong> -
                         Modernizr does not currently support
                         <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
-                        because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been set to allowed in
-                        the CSP policy (See Startup.Filters.cs). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
+                        because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been allowed in
+                        the CSP policy (See <em>Startup.ContentSecurityPolicy.cs</em>). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
                         <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
                         post and
                         <a href="https://github.com/Modernizr/Modernizr/pull/1263">this</a> issue raised on the Modernizr development site for when Modernizr
@@ -166,28 +162,8 @@
                     </li>
                 </ul>
                 <!-- $End-NWebSec$ -->
-                <h4>Other Security</h4>
+                <h4>Understand Web Security</h4>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="OtherSecurity-SecretStore" type="checkbox"> <strong>Use Secret Store</strong> -
-                        If you want to store connection strings or a machine key, use the secret store. See <a href="http://go.microsoft.com/fwlink/?LinkID=532709">this</a> and <a href="http://docs.asp.net/en/latest/security/app-secrets.html">this</a> for more information.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
-                        There are settings in the Web.config file under the requestLimits element that limit maximum size of the requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable Retail Mode</strong> -
-                        Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
-                        <ul>
-                            <li>32-bit - %windir%\Microsoft.NET\Framework\[.NET Version]\config\machine.config</li>
-                            <li>64-bit - %windir%\Microsoft.NET\Framework64\[.NET Version]\config\machine.config</li>
-                        </ul>
-                    </li>
-                    <li class="list-group-item">
-                        <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Up To Date</strong> -
-                        Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
-                    </li>
                     <li class="list-group-item">
                         <input name="OtherSecurity-UnderstandOWASPTopTen" type="checkbox"> <strong>Understand OWASP Top 10</strong> -
                         Understand the top ten security vulnerabilities and how you can protect yourself from them at <a href="https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project">OWASP Top 10</a>. Also take a look at the <a href="https://www.owasp.org/index.php/Cheat_Sheets">OWASP Top Ten Cheat Sheet</a>.
@@ -200,13 +176,38 @@
                         <input name="OtherSecurity-UnderstandCrossSiteRequestForgery" type="checkbox"> <strong>Understand Cross Site Request Forgery (CSRF)</strong> -
                         Understand Cross Site Request Forgery security vulnerabilities and how you can protect yourself from them using the <a href="https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet">OWASP CSRF Cheat Sheet</a>.
                     </li>
+                </ul>
+                <h4>Other Security</h4>
+                <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="OtherSecurity-CheckSiteOnASafaWebCom" type="checkbox"> <strong>Check Site On ASafaWeb.com</strong> -
-                        Scan your site for security vulnerabilities at <a href="https://asafaweb.com/">ASafaWeb.com</a>.
+                        <input name="OtherSecurity-SecretStore" type="checkbox"> <strong>Use Secret Store</strong> -
+                        If you want to use connection strings or other secrets without checking them in to your source control repository, use the secret store. See <a href="http://go.microsoft.com/fwlink/?LinkID=532709">this</a> and <a href="http://docs.asp.net/en/latest/security/app-secrets.html">this</a> for more information.
                     </li>
                     <li class="list-group-item">
-                        <input name="OtherSecurity-UpgradeDotNet" type="checkbox"> <strong>Upgrade to .NET 4.6</strong> -
-                        Upgrade to .NET 4.6 to enable <a href="https://msdn.microsoft.com/library/jj152924.aspx">randomized hashes</a>.
+                        <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
+                        There are settings in the <em>Web.config</em> file under the <code>requestLimits</code> element that limit maximum size of HTTP requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
+                    </li>
+                    <!-- $Start-TargetFramework-NetFramework$ -->
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable .NET Framework Retail Mode</strong> -
+                        Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
+                        <ul>
+                            <li>32-bit - %windir%\Microsoft.NET\Framework\[.NET Version]\config\machine.config</li>
+                            <li>64-bit - %windir%\Microsoft.NET\Framework64\[.NET Version]\config\machine.config</li>
+                        </ul>
+                    </li>
+                    <!--<li class="list-group-item">
+                        <input name="OtherSecurity-UpgradeDotNet" type="checkbox"> <strong>Enable Randomized Hashes</strong> -
+                        Randomized Hashes <a href="https://msdn.microsoft.com/library/jj152924.aspx">randomized hashes</a>.
+                    </li>-->
+                    <!-- $End-TargetFramework-NetFramework$ -->
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Up To Date</strong> -
+                        Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="OtherSecurity-TestSiteOnASafaWebCom" type="checkbox"> <strong>Test Site On ASafaWeb.com</strong> -
+                        Test your site for security vulnerabilities at <a href="https://asafaweb.com/">ASafaWeb.com</a>.
                     </li>
                     <li class="list-group-item">
                         <input name="OtherSecurity-AzureSQLThreatDetection" type="checkbox"> <strong>Turn on Azure SQL Database Threat Detection</strong> -
@@ -217,18 +218,6 @@
 
             <article>
                 <h3><span aria-hidden="true" class="fa fa-tachometer"></span> Performance</h3>
-                <h4>Caching</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
-                        The sitemap.xml, robots.txt and error pages are generated programatically and then cached for a day.
-                        If these resources won't change much on your site, change the length of time they are cached. Open the config.json file and take a look at the cache profiles section.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
-                        Use the <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">ResponseCache</a> attribute in conjunction with the cache profiles section in the config.json file to cache pages that don't change often and do not contain sensitive information.
-                    </li>
-                </ul>
                 <h4>Content Delivery Networks (CDN)</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -250,6 +239,19 @@
                         Run the 'optimize-images' <a href="http://gulpjs.com/">Gulp</a> task from the 'Task Runner Explorer' in Visual Studio. This will compress the images in the wwwroot/img folder.
                     </li>
                 </ul>
+                <h4>Caching</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
+                        Some resources are generated programmatically and then cached for a certain time period.
+                        If these resources won't change much on your site, change the length of time they are cached. Open the <em>config.json</em> file and take a look at the cache profiles section.
+                    </li>
+                    <li class="list-group-item">
+                        <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
+                        Use the <code>[ResponseCache]</code> attribute in conjunction with the cache profiles section in the config.json file to cache pages that don't change often and do not contain sensitive information. See
+                        <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">this</a> for more information.
+                    </li>
+                </ul>
                 <h4>Benchmarking</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -265,7 +267,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="OtherPerformance-DisableETags" type="checkbox"> <strong>Disable ETags</strong> -
-                        If running IIS 7.5 or below, disable ETags. Open the web.config file and search for 'setEtag' for further instructions.
+                        If running IIS 7.5 or below, disable ETags. Open the <em>web.config</em> file and search for 'setEtag' for further instructions.
                     </li>
                     <li class="list-group-item">
                         <input name="OtherPerformance-PrefetchPrerenderPages" type="checkbox"> <strong>Pre-fetch/Pre-render Pages</strong> -
@@ -319,7 +321,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
-                        Some Web.config settings do not exist in older versions of IIS (7.5 and 8) so you must edit the Web.config file and remove the dynamicIpSecurity settings.
+                        Some <em>web.config</em> settings do not exist in older versions of IIS (7.5 and 8). If you are using an older version, edit the <em>web.config</em> file and remove the <code>dynamicIpSecurity</code> settings.
                     </li>
                     <li class="list-group-item">
                         <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
