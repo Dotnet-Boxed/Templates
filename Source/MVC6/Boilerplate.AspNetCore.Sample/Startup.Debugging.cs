@@ -48,7 +48,8 @@
 
                 // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
                 // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-                application.UseBrowserLink();
+                // NOTE: Browser link has a bug in RC2 that causes rendering issues (See https://github.com/aspnet/Mvc/issues/4671).
+                // application.UseBrowserLink();
                 // $Start-Glimpse$
 
                 // Add Glimpse to help with debugging (See http://getglimpse.com/).
