@@ -15,7 +15,7 @@
             this.netCore = new FeatureItem(
                 "NetCore",
                 ".NET Core",
-                "Target the .NET Core framework. .NET Core can run cross platform and the .NET Core framework and runtime can be shipped with the application so it is fully stand-alone.",
+                "Target the .NET Core framework.",
                 1,
                 "/Boilerplate.Wizard;component/Assets/NetCore.png")
             {
@@ -26,7 +26,7 @@
             this.net461 = new FeatureItem(
                 "NetFramework",
                 ".NET Framework 4.6.1",
-                "Target the full .NET Framework 4.6.1. This gives you access to the full breadth of libraries available in the .NET Framework instead of the subset available in .NET Core.",
+                "Target the full .NET Framework 4.6.1.",
                 2,
                 "/Boilerplate.Wizard;component/Assets/NetFramework.png")
             {
@@ -37,7 +37,7 @@
 
         public override string Description
         {
-            get { return "Decide which version of the .NET Framework to target."; }
+            get { return "Decide which version of the .NET Framework to target. .NET Core can run cross platform (on Mac and Linux) and the .NET Core framework and runtime can be shipped with the application so it is fully stand-alone while the .NET Framework 4.6.1 gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core."; }
         }
 
         public override IFeatureGroup Group

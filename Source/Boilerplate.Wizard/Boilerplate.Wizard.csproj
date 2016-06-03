@@ -114,7 +114,7 @@
     <Compile Include="Features\Social\OpenGraphFeature.cs" />
     <Compile Include="Features\Social\AuthorMetaTagFeature.cs" />
     <Compile Include="Features\Social\TwitterCardFeature.cs" />
-    <Compile Include="Features\TargetFramework\TargetFrameworkFeature.cs" />
+    <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
     <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
     <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
     <Compile Include="Services\IFileFixerService.cs" />

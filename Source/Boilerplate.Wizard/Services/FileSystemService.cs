@@ -128,9 +128,12 @@
                             text = fileFixerService.Fix(text);
                         }
 
+                        var fileName = Path.GetFileName(filePath);
+                        var encoding = GetEncoding(fileName);
+
                         using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                         {
-                            using (StreamWriter streamWriter = new StreamWriter(fileStream, Encoding.UTF8))
+                            using (StreamWriter streamWriter = new StreamWriter(fileStream, encoding))
                             {
                                 await streamWriter.WriteAsync(text);
                             }
@@ -147,6 +150,18 @@
             }
 
             this.files.Clear();
+        }
+
+        private static Encoding GetEncoding(string fileName)
+        {
+            var encoding = Encoding.UTF8;
+
+            if (string.Equals(fileName, "bower.json", StringComparison.OrdinalIgnoreCase))
+            {
+                encoding = new UTF8Encoding(false);
+            }
+
+            return encoding;
         }
     }
 }
