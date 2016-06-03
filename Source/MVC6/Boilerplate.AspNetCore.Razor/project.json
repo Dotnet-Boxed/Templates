@@ -39,7 +39,7 @@
 
   "scripts": {
     "postcompile": [
-      "dotnet pack --no-build --configuration Release"
+      "dotnet pack --no-build --configuration %compile:Configuration%"
     ]
   }
 }
