@@ -7,6 +7,14 @@
     /// </summary>
     public interface IProjectService
     {
+        string ProjectDirectoryPath { get; }
+
+        string ProjectFileName { get; }
+
+        string ProjectFilePath { get; }
+
+        string ProjectName { get; }
+
         /// <summary>
         /// Deletes the specified directory in the project.
         /// </summary>

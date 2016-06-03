@@ -12,17 +12,29 @@
     public class ProjectService : IProjectService
     {
         private readonly IFileSystemService fileSystemService;
-        private readonly string projectFilePath;
-        private readonly string projectDirectoryPath;
 
         #region Constructors
 
         public ProjectService(IFileSystemService fileSystemService, string projectFilePath)
         {
             this.fileSystemService = fileSystemService;
-            this.projectFilePath = projectFilePath;
-            this.projectDirectoryPath = Path.GetDirectoryName(this.projectFilePath);
+            this.ProjectDirectoryPath = Path.GetDirectoryName(projectFilePath);
+            this.ProjectFileName = Path.GetFileName(projectFilePath);
+            this.ProjectFilePath = projectFilePath;
+            this.ProjectName = Path.GetFileNameWithoutExtension(projectFilePath);
         }
+
+        #endregion
+
+        #region Public Properties
+
+        public string ProjectDirectoryPath { get; }
+
+        public string ProjectFileName { get; }
+
+        public string ProjectFilePath { get; }
+
+        public string ProjectName { get; }
 
         #endregion
 
@@ -34,7 +46,7 @@
         /// <param name="relativeDirectoryPath">The path to the directory to delete, relative to the project.</param>
         public void DeleteDirectory(string relativeDirectoryPath)
         {
-            string directoryPath = Path.Combine(this.projectDirectoryPath, relativeDirectoryPath);
+            string directoryPath = Path.Combine(this.ProjectDirectoryPath, relativeDirectoryPath);
             if (this.fileSystemService.DirectoryExists(directoryPath))
             {
                 this.fileSystemService.DirectoryDelete(directoryPath);
@@ -47,7 +59,7 @@
         /// <param name="relativeFilePath">The path to the file to delete, relative to the project.</param>
         public void DeleteFile(string relativeFilePath)
         {
-            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            string filePath = Path.Combine(this.ProjectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
                 this.fileSystemService.FileDelete(filePath);
@@ -56,7 +68,7 @@
 
         public async Task EditComment(string commentName, EditCommentMode mode)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath))
             {
                 await this.EditCommentInternal(commentName, mode, filePath);
             }
@@ -64,7 +76,7 @@
 
         public async Task EditCommentInFile(string commentName, EditCommentMode mode, string relativeFilePath)
         {
-            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            string filePath = Path.Combine(this.ProjectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
                 await this.EditCommentInternal(commentName, mode, filePath);
@@ -73,7 +85,7 @@
 
         public async Task EditCommentByPattern(string commentName, EditCommentMode mode, string searchPattern)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath, searchPattern))
             {
                 await this.EditCommentInternal(commentName, mode, filePath);
             }
@@ -81,7 +93,7 @@
 
         public async Task Replace(string oldValue, string newValue)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath))
             {
                 await this.ReplaceInFile(oldValue, newValue, filePath);
             }
@@ -89,7 +101,7 @@
 
         public async Task ReplaceInFile(string oldValue, string newValue, string relativeFilePath)
         {
-            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            string filePath = Path.Combine(this.ProjectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
                 string text = await this.fileSystemService.FileReadAllText(filePath);
@@ -100,7 +112,7 @@
 
         public async Task ReplaceByPattern(string oldValue, string newValue, string searchPattern)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath, searchPattern))
             {
                 await this.ReplaceInFile(oldValue, newValue, filePath);
             }
@@ -108,7 +120,7 @@
 
         public async Task RegexReplace(string pattern, string replacement)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath))
             {
                 await this.RegexReplaceInFile(pattern, replacement, filePath);
             }
@@ -116,7 +128,7 @@
 
         public async Task RegexReplaceInFile(string pattern, string replacement, string relativeFilePath)
         {
-            string filePath = Path.Combine(this.projectDirectoryPath, relativeFilePath);
+            string filePath = Path.Combine(this.ProjectDirectoryPath, relativeFilePath);
             if (this.fileSystemService.FileExists(filePath))
             {
                 string text = await this.fileSystemService.FileReadAllText(filePath);
@@ -127,7 +139,7 @@
 
         public async Task RegexReplaceByPattern(string pattern, string replacement, string searchPattern)
         {
-            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.projectDirectoryPath, searchPattern))
+            foreach (string filePath in await this.fileSystemService.DirectoryGetAllFiles(this.ProjectDirectoryPath, searchPattern))
             {
                 await this.RegexReplaceInFile(pattern, replacement, filePath);
             }

@@ -87,6 +87,7 @@
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
     <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
+    <Compile Include="Features\Hidden\NpmPackageNameFeature.cs" />
     <Compile Include="Features\Hidden\ServicesFeature.cs" />
     <Compile Include="Features\Hidden\AssemblyCopyrightFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />

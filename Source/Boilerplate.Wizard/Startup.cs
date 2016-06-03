@@ -64,6 +64,7 @@
                     builder.RegisterType<ServicesFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<AssemblyCopyrightFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<NpmPackageNameFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Target Framework
                     builder.RegisterType<TargetFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript

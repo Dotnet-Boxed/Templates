@@ -11,6 +11,7 @@ MVC 6
 - Switched from gulp-scsss-lint to gulp-sass-lint because it does not require Ruby to be installed.
 - Added a Target Framework feature selector, so that you can choose from .NET Core, .NET Framework or both.
 - Build Gulp tasks no longer clean as a pre-requisite.
+- The name property in bower.json and package.json is now automatically populated based on the project name.
 - BSON formatter removed until Microsoft adds support.
 - The Glimpse feature has been hidden and turned off by default until it supports RC2.
 - Pre-compiled views have been removed because Microsoft removed support in RC2.
