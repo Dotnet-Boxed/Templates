@@ -7,7 +7,7 @@
 
 // Set up imported packages.
 var gulp = require('gulp'),
-    fs = require('fs'),                         // npm file system API (https://nodejs.org/api/fs.html)
+    fs = require('fs'),                         // NPM file system API (https://nodejs.org/api/fs.html)
     autoprefixer = require('gulp-autoprefixer'),// Auto-prefix CSS (https://www.npmjs.com/package/gulp-autoprefixer)
     concat = require('gulp-concat'),            // Concatenate files (https://www.npmjs.com/package/gulp-concat/)
     csslint = require('gulp-csslint'),          // CSS linter (https://www.npmjs.com/package/gulp-csslint/)
@@ -56,9 +56,7 @@ var environment = {
     production: 'Production',
     // Gets the current hosting environment the application is running under. This comes from the environment variables.
     current: function () {
-        // ASP.NET Core RC2 uses ASPNETCORE_ENVIRONMENT.
-        // ASP.NET Core RC1 uses ASPNET_ENV.
-        return process.env.ASPNETCORE_ENVIRONMENT || process.env.ASPNET_ENV || this.development;
+        return process.env.ASPNETCORE_ENVIRONMENT || this.development;
     },
     // Are we running under the development environment.
     isDevelopment: function () {
@@ -488,7 +486,7 @@ gulp.task('optimize-images', function () {
         .pipe(plumber())                    // Handle any errors.
         .pipe(sizeBefore())                 // Write the size of the file to the console before minification.
         .pipe(imagemin({                    // Optimize the images.
-            multipass: true,                // Optimize svg multiple times until it's fully optimized.
+            multipass: true,                // Optimize SVG multiple times until it's fully optimized.
             optimizationLevel: 7            // The level of optimization (0 to 7) to make, the higher the slower it is.
         }))
         .pipe(gulp.dest(paths.img))         // Saves the image files to the specified destination path.
