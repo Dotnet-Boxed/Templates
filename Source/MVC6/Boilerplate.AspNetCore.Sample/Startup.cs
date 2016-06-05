@@ -101,7 +101,7 @@
                 // Add useful interface for accessing the HttpContext outside a controller.
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 // Add useful interface for accessing the IUrlHelper outside a controller.
-                .AddSingleton<IUrlHelper>(x => x
+                .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
                 // Add many MVC services to the services container.
