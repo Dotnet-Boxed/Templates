@@ -28,7 +28,7 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 Both ASP.NET 4.6 MVC 5 and ASP.NET Core MVC 6 are supported with their own project templates.
 
-### [ASP.NET Core MVC 6 (RC1 Update 1)](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
+### [ASP.NET Core MVC 6 (RC2)](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
 
 #### Preview Image
 
