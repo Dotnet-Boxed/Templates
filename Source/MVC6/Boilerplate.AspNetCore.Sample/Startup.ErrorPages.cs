@@ -42,22 +42,5 @@
                 // $End-HttpException$
             }
         }
-
-        /// <summary>
-        /// Configures the 404 Not Found error page for the application. Used when no other route matches.
-        /// </summary>
-        /// <param name="application">The application.</param>
-        /// <param name="environment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default.</param>
-        private static void Configure404NotFoundErrorPage(
-            IApplicationBuilder application,
-            IHostingEnvironment environment)
-        {
-            // Add the following to the request pipeline only in the staging or production environments.
-            if (!environment.IsDevelopment())
-            {
-                application.RunNotFound();
-            }
-        }
     }
 }

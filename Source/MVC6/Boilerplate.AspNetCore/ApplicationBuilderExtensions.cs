@@ -1,9 +1,7 @@
 ﻿namespace Boilerplate.AspNetCore
 {
-    using System.Threading.Tasks;
     using Boilerplate.AspNetCore.Middleware;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Http;
 
     /// <summary>
     /// <see cref="IApplicationBuilder"/> extension methods.
@@ -38,20 +36,6 @@
         public static IApplicationBuilder UseNoServerHttpHeader(this IApplicationBuilder application)
         {
             return application.UseMiddleware<NoServerHttpHeaderMiddleware>();
-        }
-
-        /// <summary>
-        /// Runs a terminal middleware that returns a 404 Not Found response.
-        /// </summary>
-        /// <param name="application">The application.</param>
-        public static void RunNotFound(this IApplicationBuilder application)
-        {
-            application.Run(
-                context =>
-                {
-                    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                    return Task.FromResult<object>(null);
-                });
         }
     }
 }

@@ -164,9 +164,6 @@
 
             // Add MVC to the request pipeline.
             application.UseMvc();
-
-            // Add a 404 Not Found error page for visiting /this-resource-does-not-exist.
-            Configure404NotFoundErrorPage(application, this.hostingEnvironment);
         }
 
         #endregion
