@@ -1,4 +1,8 @@
-﻿Version 3.0.0
+﻿Version 3.1.0
+MVC 6
+- Enable UseRandomizedStringHashAlgorithm for .NET Framework 4.6.1 in web.config.
+
+Version 3.0.0
 MVC 5
 - Took my name out of the AssemblyCopyright attribute in AssemblyInfo.cs and left it blank for users to fill in.
 MVC 6

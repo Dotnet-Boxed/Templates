@@ -84,6 +84,10 @@
                     this.net461.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
                     "ReadMe.html");
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.LeaveCodeUnchanged,
+                    "web.config");
             }
             else
             {
@@ -95,6 +99,10 @@
                     this.net461.CommentName,
                     EditCommentMode.DeleteCode,
                     "ReadMe.html");
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.DeleteCode,
+                    "web.config");
             }
 
             if (this.netCore.IsSelected)
