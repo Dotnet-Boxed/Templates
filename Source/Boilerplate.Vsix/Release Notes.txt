@@ -1,4 +1,8 @@
-﻿Version 3.1.0
+﻿Version 3.1.1
+MVC 6
+- Fixed https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/104
+
+Version 3.1.0
 MVC 6
 - Enable UseRandomizedStringHashAlgorithm for .NET Framework 4.6.1 in web.config.
 - Dont need the 404 middleware in RC2, so it has been removed from the end of the pipeline in Startup.cs.
