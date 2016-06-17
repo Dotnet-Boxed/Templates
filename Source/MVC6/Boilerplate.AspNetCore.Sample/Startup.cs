@@ -154,7 +154,6 @@
 
             // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
             application.UseNoServerHttpHeader();
-
             // $Start-ApplicationInsights$
 
             // Add Azure Application Insights to the request pipeline to track HTTP request telemetry data.
@@ -168,11 +167,21 @@
             application.UseStaticFiles();
 
             UseCookiePolicy(application);
-            UseDebugging(application, this.hostingEnvironment);
-            UseErrorPages(application, this.hostingEnvironment);
+
+            if (this.hostingEnvironment.IsDevelopment())
+            {
+                UseDebugging(application);
+                UseDeveloperErrorPages(application);
+            }
+            else
+            {
+                UseErrorPages(application);
+            }
+
             // $Start-HttpsEverywhere$
-            UseContentSecurityPolicy(application);
-            UseSecurity(application);
+            UseCspUpgradeInsecureRequestsHttpHeader(application);
+            UseStrictTransportSecurityHttpHeader(application);
+            UsePublicKeyPinsHttpHeader(application);
             // $End-HttpsEverywhere$
 
             // Add MVC to the request pipeline.

@@ -10,22 +10,20 @@
     public partial class Startup
     {
         /// <summary>
-        /// Configures the content security policy for the application.
+        /// Adds the 'upgrade-insecure-requests' directive to the Content-Security-Policy HTTP header. This is only
+        /// relevant if you are using HTTPS. Any objects on the page using HTTP are automatically upgraded to HTTPS.
+        /// See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/ and
+        /// http://www.w3.org/TR/upgrade-insecure-requests/
         /// </summary>
         /// <param name="application">The application.</param>
-        private static void UseContentSecurityPolicy(IApplicationBuilder application)
+        private static void UseCspUpgradeInsecureRequestsHttpHeader(IApplicationBuilder application)
         {
-            // Content-Security-Policy:upgrade-insecure-requests - Adds the 'upgrade-insecure-requests' directive to
-            //      the Content-Security-Policy HTTP header. This is only relevant if you are using HTTPS. Any objects
-            //      on the page using HTTP is automatically upgraded to HTTPS.
-            //      See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/
-            //      and http://www.w3.org/TR/upgrade-insecure-requests/
             application.UseCsp(x => x.UpgradeInsecureRequests());
             // OR
-            // Content-Security-Policy-Report-Only - Add the Content-Security-Policy-Report-Only HTTP header to enable
-            //      logging of violations without blocking them. This is good for testing CSP without enabling it. To
-            //      make use of this attribute, rename all the attributes below to their ReportOnlyAttribute versions
-            //      e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
+            // use the Content-Security-Policy-Report-Only HTTP header to enable logging of violations without blocking
+            // them. This is good for testing CSP without enabling it. To make use of this attribute, rename all the
+            // attributes below to their ReportOnlyAttribute versions
+            // e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
             // application.UseCspReportOnly(x => x.UpgradeInsecureRequests());
         }
 
