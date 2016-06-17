@@ -21,10 +21,12 @@
                     // Rename the form input name from "__RequestVerificationToken" to "f" for the same reason above
                     // e.g. <input name="__RequestVerificationToken" type="hidden" value="..." />
                     antiforgeryOptions.FormFieldName = "f";
+                    // $Start-HttpsEverywhere$
 
                     // If you have enabled SSL/TLS. Uncomment this line to ensure that the Anti-Forgery cookie requires
                     // SSL /TLS to be sent across the wire.
                     antiforgeryOptions.RequireSsl = true;
+                    // $End-HttpsEverywhere$
                 });
         }
     }
