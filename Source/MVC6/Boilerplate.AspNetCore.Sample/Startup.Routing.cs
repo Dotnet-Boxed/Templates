@@ -16,16 +16,6 @@
 
             // All generated URL's should be lower-case.
             routeOptions.LowercaseUrls = true;
-
-            // TODO: IgnoreRoute does not yet exist in MVC 6.
-
-            // // IgnoreRoute - Tell the routing system to ignore certain routes for better performance.
-            // // Ignore .axd files.
-            // routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            // // Ignore everything in the Content folder.
-            // routes.IgnoreRoute("Content/{*pathInfo}");
-            // // Ignore the humans.txt file.
-            // routes.IgnoreRoute("humans.txt");
         }
     }
 }
