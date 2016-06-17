@@ -9,6 +9,7 @@
 
     public partial class Startup
     {
+        // $Start-HttpsEverywhere$
         /// <summary>
         /// Adds the 'upgrade-insecure-requests' directive to the Content-Security-Policy HTTP header. This is only
         /// relevant if you are using HTTPS. Any objects on the page using HTTP are automatically upgraded to HTTPS.
@@ -27,6 +28,7 @@
             // application.UseCspReportOnly(x => x.UpgradeInsecureRequests());
         }
 
+        // $End-HttpsEverywhere$
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This
         /// creates a white-list from where various content in a web page can be loaded from. (See
