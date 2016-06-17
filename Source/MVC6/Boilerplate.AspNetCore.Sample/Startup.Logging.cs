@@ -42,7 +42,7 @@
         /// <param name="loggerFactory">The logger factory.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
         /// stored.</param>
-        private static void ConfigureLogging(
+        private static void UseLogging(
             IHostingEnvironment environment,
             ILoggerFactory loggerFactory,
             IConfiguration configuration)

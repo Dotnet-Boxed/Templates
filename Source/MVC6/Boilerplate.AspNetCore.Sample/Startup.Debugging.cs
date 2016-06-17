@@ -35,7 +35,7 @@
         /// <param name="application">The application.</param>
         /// <param name="environment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
-        private static void ConfigureDebugging(
+        private static void UseDebugging(
             IApplicationBuilder application,
             IHostingEnvironment environment)
         {

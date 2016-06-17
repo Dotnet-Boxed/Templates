@@ -12,7 +12,7 @@
         /// <param name="application">The application.</param>
         /// <param name="environment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
-        private static void ConfigureErrorPages(
+        private static void UseErrorPages(
             IApplicationBuilder application,
             IHostingEnvironment environment)
         {

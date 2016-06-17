@@ -1,6 +1,5 @@
 ﻿namespace MvcBoilerplate
 {
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
 
     public partial class Startup
@@ -10,7 +9,7 @@
         /// http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        private static void ConfigureAntiforgeryServices(IServiceCollection services, IHostingEnvironment environment)
+        private static void ConfigureAntiforgeryServices(IServiceCollection services)
         {
             services.AddAntiforgery(
                 antiforgeryOptions =>
@@ -22,15 +21,10 @@
                     // Rename the form input name from "__RequestVerificationToken" to "f" for the same reason above
                     // e.g. <input name="__RequestVerificationToken" type="hidden" value="..." />
                     antiforgeryOptions.FormFieldName = "f";
-                    // $Start-HttpsEverywhere$
 
-                    if (!environment.IsDevelopment())
-                    {
-                        // If you have enabled SSL/TLS. Uncomment this line to ensure that the Anti-Forgery cookie requires
-                        // SSL /TLS to be sent across the wire.
-                        antiforgeryOptions.RequireSsl = true;
-                    }
-                    // $End-HttpsEverywhere$
+                    // If you have enabled SSL/TLS. Uncomment this line to ensure that the Anti-Forgery cookie requires
+                    // SSL /TLS to be sent across the wire.
+                    antiforgeryOptions.RequireSsl = true;
                 });
         }
     }

@@ -9,40 +9,26 @@
 
     public partial class Startup
     {
-        // $Start-HttpsEverywhere$
         /// <summary>
         /// Configures the content security policy for the application.
         /// </summary>
         /// <param name="application">The application.</param>
-        /// <param name="environment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default.</param>
-        private static void ConfigureContentSecurityPolicy(
-            IApplicationBuilder application,
-            IHostingEnvironment environment)
+        private static void UseContentSecurityPolicy(IApplicationBuilder application)
         {
-            // Require HTTPS to be used across the whole site.
-            if (!environment.IsDevelopment())
-            {
-                // In the Development environment, different ports are being used for HTTP and HTTPS. The
-                // RequireHttpsAttribute expects to use the default ports 80 for HTTP and port 443 for HTTPS and simply
-                // adds an 's' onto 'http'. Therefore, we don't add this attribute under the Development environment.
-
-                // Content-Security-Policy:upgrade-insecure-requests - Adds the 'upgrade-insecure-requests' directive to
-                //      the Content-Security-Policy HTTP header. This is only relevant if you are using HTTPS. Any objects
-                //      on the page using HTTP is automatically upgraded to HTTPS.
-                //      See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/
-                //      and http://www.w3.org/TR/upgrade-insecure-requests/
-                application.UseCsp(x => x.UpgradeInsecureRequests());
-                // OR
-                // Content-Security-Policy-Report-Only - Add the Content-Security-Policy-Report-Only HTTP header to enable
-                //      logging of violations without blocking them. This is good for testing CSP without enabling it. To
-                //      make use of this attribute, rename all the attributes below to their ReportOnlyAttribute versions
-                //      e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
-                // application.UseCspReportOnly(x => x.UpgradeInsecureRequests());
-            }
+            // Content-Security-Policy:upgrade-insecure-requests - Adds the 'upgrade-insecure-requests' directive to
+            //      the Content-Security-Policy HTTP header. This is only relevant if you are using HTTPS. Any objects
+            //      on the page using HTTP is automatically upgraded to HTTPS.
+            //      See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/
+            //      and http://www.w3.org/TR/upgrade-insecure-requests/
+            application.UseCsp(x => x.UpgradeInsecureRequests());
+            // OR
+            // Content-Security-Policy-Report-Only - Add the Content-Security-Policy-Report-Only HTTP header to enable
+            //      logging of violations without blocking them. This is good for testing CSP without enabling it. To
+            //      make use of this attribute, rename all the attributes below to their ReportOnlyAttribute versions
+            //      e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
+            // application.UseCspReportOnly(x => x.UpgradeInsecureRequests());
         }
 
-        // $End-HttpsEverywhere$
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This
         /// creates a white-list from where various content in a web page can be loaded from. (See
@@ -195,7 +181,7 @@
                         " ",
                         // $Start-ApplicationInsights-On$
                         "az416426.vo.msecnd.net",               // Allow Application Insights to run scripts.
-                        // $End-ApplicationInsights-On$
+                                                                // $End-ApplicationInsights-On$
                         ContentDeliveryNetwork.Google.Domain,
                         ContentDeliveryNetwork.Microsoft.Domain),
                     // Allow scripts from the same domain.

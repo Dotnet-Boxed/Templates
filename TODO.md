@@ -15,9 +15,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
-- Find out how to enable [randomized hashes](https://msdn.microsoft.com/library/jj152924.aspx) in xproj projects (See [issue](https://github.com/aspnet/Mvc/issues/4805)).
 - Add the Serilog logging framework as a feature.
-- Make Development mode use HTTPS using [this](https://github.com/aspnet/Mvc/pull/4113).
 - Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.

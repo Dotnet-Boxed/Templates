@@ -75,7 +75,7 @@
             services.AddApplicationInsightsTelemetry(this.configuration);
 
             // $End-ApplicationInsights$
-            ConfigureAntiforgeryServices(services, this.hostingEnvironment);
+            ConfigureAntiforgeryServices(services);
             // $Start-Glimpse$
             ConfigureDebuggingServices(services, this.hostingEnvironment);
             // $End-Glimpse$
@@ -107,6 +107,18 @@
                 .AddMvc(
                     mvcOptions =>
                     {
+                        // $Start-HttpsEverywhere$
+                        if (this.hostingEnvironment.IsDevelopment())
+                        {
+                            // Use the launchSettings.json file to get the SSL port used in Development.
+                            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+                            configurationBuilder.SetBasePath(hostingEnvironment.ContentRootPath);
+                            configurationBuilder.AddJsonFile(@"Properties\launchSettings.json");
+                            var launchConfiguration = configurationBuilder.Build();
+                            mvcOptions.SslPort = launchConfiguration.GetValue<int>("iisSettings:iisExpress:sslPort");
+                        }
+
+                        // $End-HttpsEverywhere$
                         ConfigureCacheProfiles(mvcOptions.CacheProfiles, this.configuration);
                         // $Start-RedirectToCanonicalUrl$
                         ConfigureSearchEngineOptimizationFilters(mvcOptions.Filters, routeOptions);
@@ -138,6 +150,8 @@
         /// <param name="loggerfactory">The logger factory.</param>
         public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
         {
+            UseLogging(this.hostingEnvironment, loggerfactory, this.configuration);
+
             // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
             application.UseNoServerHttpHeader();
 
@@ -153,13 +167,12 @@
             // Add static files to the request pipeline e.g. hello.html or world.css.
             application.UseStaticFiles();
 
-            ConfigureCookies(application, this.hostingEnvironment);
-            ConfigureDebugging(application, this.hostingEnvironment);
-            ConfigureLogging(this.hostingEnvironment, loggerfactory, this.configuration);
-            ConfigureErrorPages(application, this.hostingEnvironment);
+            UseCookiePolicy(application);
+            UseDebugging(application, this.hostingEnvironment);
+            UseErrorPages(application, this.hostingEnvironment);
             // $Start-HttpsEverywhere$
-            ConfigureContentSecurityPolicy(application, this.hostingEnvironment);
-            ConfigureSecurity(application, this.hostingEnvironment);
+            UseContentSecurityPolicy(application);
+            UseSecurity(application);
             // $End-HttpsEverywhere$
 
             // Add MVC to the request pipeline.
