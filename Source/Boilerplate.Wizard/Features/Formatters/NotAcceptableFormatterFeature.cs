@@ -47,12 +47,12 @@
 
         protected override Task AddFeature()
         {
-            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.Formatters.cs");
+            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.cs");
         }
 
         protected override Task RemoveFeature()
         {
-            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.Formatters.cs");
+            return this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.cs");
         }
     }
 }

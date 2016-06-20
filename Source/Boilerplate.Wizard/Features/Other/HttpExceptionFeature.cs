@@ -47,12 +47,12 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.ErrorPages.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"ApplicationBuilderExtensions.cs");
         }
 
         protected override async Task RemoveFeature()
         {
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.ErrorPages.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"ApplicationBuilderExtensions.cs");
         }
     }
 }

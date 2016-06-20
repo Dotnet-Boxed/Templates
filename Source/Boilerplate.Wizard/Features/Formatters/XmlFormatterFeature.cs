@@ -115,14 +115,14 @@
                 await this.ProjectService.EditCommentInFile(
                     this.dataContractSerializer.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
-                    "Startup.Formatters.cs");
+                    "Startup.cs");
             }
             else
             {
                 await this.ProjectService.EditCommentInFile(
                     this.dataContractSerializer.CommentName,
                     EditCommentMode.DeleteCode,
-                    "Startup.Formatters.cs");
+                    "Startup.cs");
             }
 
             if (this.xmlSerializer.IsSelected || this.both.IsSelected)
@@ -130,14 +130,14 @@
                 await this.ProjectService.EditCommentInFile(
                     this.xmlSerializer.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
-                    "Startup.Formatters.cs");
+                    "Startup.cs");
             }
             else
             {
                 await this.ProjectService.EditCommentInFile(
                     this.xmlSerializer.CommentName,
                     EditCommentMode.DeleteCode,
-                    "Startup.Formatters.cs");
+                    "Startup.cs");
             }
         }
     }

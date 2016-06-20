@@ -117,7 +117,7 @@
                     </li>
                     <li class="list-group-item">
                         <input name="HTTPS-ConfigureHPKP" type="checkbox"> <strong>Configure Public Key Pinning (HPKP)</strong> -
-                        Open the <em>Startup.Filters.cs</em> file and uncomment the <code>application.UseHpkp(...);</code> line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning (HPKP)</a>. Please note that there is some risk to setting up Public Key Pinning (HPKP), if you get it wrong people who have visited your site will get an error in their browser upon visiting your site so be careful.
+                        Open the <em>MvcOptionsExtensions.cs</em> file and uncomment the <code>application.UseHpkp(...);</code> line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning (HPKP)</a>. Please note that there is some risk to setting up Public Key Pinning (HPKP), if you get it wrong people who have visited your site will get an error in their browser upon visiting your site so be careful.
                     </li>
                     <!-- $End-NWebSec$ -->
                     <li class="list-group-item">
@@ -131,18 +131,18 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-ConfigureContentSecurityPolicy" type="checkbox"> <strong>Configure Content Security Policy</strong> -
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in <em>Startup.ContentSecurityPolicy.cs</em> or on your individual MVC controllers and actions if they have special access requirements.
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in <em>MvcOptionsExtensions.cs</em> or on your individual MVC controllers and actions if they have special access requirements.
                     </li>
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-ReportUri" type="checkbox"> <strong>Configure Report URI</strong> -
-                        Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the <code>CspReportUriAttribute</code> in <em>Startup.ContentSecurityPolicy.cs</em>.
+                        Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the <code>CspReportUriAttribute</code> in <em>MvcOptionsExtensions.cs</em>.
                     </li>
                     <li class="list-group-item">
                         <input name="ContentSecurityPolicy-CheckModernizrCSPSupport" type="checkbox"> <strong>Check Modernizr CSP Support</strong> -
                         Modernizr does not currently support
                         <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
                         because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been allowed in
-                        the CSP policy (See <em>Startup.ContentSecurityPolicy.cs</em>). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
+                        the CSP policy (See <em>MvcOptionsExtensions.cs</em>). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
                         <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
                         post and
                         <a href="https://github.com/Modernizr/Modernizr/pull/1263">this</a> issue raised on the Modernizr development site for when Modernizr
@@ -378,7 +378,7 @@
                     <!-- $End-ApplicationInsights$ -->
                     <li class="list-group-item">
                         <input name="ResilienceAndErrorHandling-Logging" type="checkbox"> <strong>Add Logging</strong> -
-                        This template comes with basic logging enabled in development mode. Consider using <a href="http://serilog.net/">Serilog</a> or another logging framework in production. Logging can be configured in <em>Startup.Logging.cs</em>.
+                        This template comes with basic logging enabled in development mode. Consider using <a href="http://serilog.net/">Serilog</a> or another logging framework in production. Logging can be configured in <em>Startup.cs</em>.
                     </li>
                 </ul>
             </article>

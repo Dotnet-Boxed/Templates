@@ -3,12 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      // $Start-HttpsEverywhere-On$
-      "applicationUrl": "https://localhost:44300/",
-      // $End-HttpsEverywhere-On$
-      // $Start-HttpsEverywhere-Off$
-      // "applicationUrl": "http://localhost:1025/",
-      // $End-HttpsEverywhere-Off$
+      "applicationUrl": "http://localhost:1025/",
       "sslPort": 44300
     }
   },
@@ -16,6 +11,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      // $Start-HttpsEverywhere-On$
+      "launchUrl": "https://localhost:44300/",
+      // $End-HttpsEverywhere-On$
+      // $Start-HttpsEverywhere-Off$
+      // "launchUrl": "http://localhost:1025/",
+      // $End-HttpsEverywhere-Off$
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

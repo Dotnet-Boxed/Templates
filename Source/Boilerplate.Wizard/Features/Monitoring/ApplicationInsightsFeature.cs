@@ -59,9 +59,8 @@
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"project.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"ReadMe.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.Configuration.cs");
-            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, @"Startup.ContentSecurityPolicy.cs");
-            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, @"Startup.ContentSecurityPolicy.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, @"MvcOptionsExtensions.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, @"MvcOptionsExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Services\Sitemap\SitemapService.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Services\SitemapPinger\SitemapPingerService.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Views\Shared\_Layout.cshtml");
@@ -77,9 +76,8 @@
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"project.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"ReadMe.html");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.Configuration.cs");
-            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, @"Startup.ContentSecurityPolicy.cs");
-            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.LeaveCodeUnchanged, @"Startup.ContentSecurityPolicy.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, @"MvcOptionsExtensions.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.LeaveCodeUnchanged, @"MvcOptionsExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Services\Sitemap\SitemapService.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Services\SitemapPinger\SitemapPingerService.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Views\Shared\_Layout.cshtml");

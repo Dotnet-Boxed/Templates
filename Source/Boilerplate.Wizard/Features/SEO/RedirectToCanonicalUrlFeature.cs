@@ -48,13 +48,13 @@
         protected override async Task AddFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.Filters.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"MvcOptionsExtensions.cs");
         }
 
         protected override async Task RemoveFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.Filters.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"MvcOptionsExtensions.cs");
         }
     }
 }

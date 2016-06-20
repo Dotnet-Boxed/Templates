@@ -137,7 +137,7 @@
                 await this.ProjectService.EditCommentInFile(
                     this.net461.CommentName,
                     EditCommentMode.DeleteCode,
-                    @"Startup.Services.cs");
+                    @"ServiceCollectionExtensions.cs");
             }
             else
             {
@@ -156,7 +156,7 @@
                 await this.ProjectService.EditCommentInFile(
                     this.net461.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
-                    @"Startup.Services.cs");
+                    @"ServiceCollectionExtensions.cs");
             }
         }
 

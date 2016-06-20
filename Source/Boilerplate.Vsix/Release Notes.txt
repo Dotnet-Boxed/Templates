@@ -1,6 +1,7 @@
 ﻿Version 3.2.0
 MVC 6
 - Development mode now uses HTTPS.
+- Major refactoring of Startup.cs making all method calls fluent.
 - ReadMe.html updated to change comment about installing the HttpPlatformHandler and installing the IIS .NET Core
   Windows Server Hosting Bundle instead.
 

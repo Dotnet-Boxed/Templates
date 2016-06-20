@@ -5,7 +5,7 @@
 
     public class JsonSerializerSettingsFeature : MultiChoiceFeature
     {
-        private const string StartupFormattersCs = "Startup.Formatters.cs";
+        private const string StartupFormattersCs = "Startup.cs";
 
         private readonly IFeatureItem camelCase;
         private readonly IFeatureItem titleCase;
