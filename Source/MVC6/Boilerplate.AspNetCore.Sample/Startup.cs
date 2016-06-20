@@ -17,7 +17,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    // $Start-JsonSerializerSettings$
     using Newtonsoft.Json.Serialization;
+    // $End-JsonSerializerSettings$
 
     /// <summary>
     /// The main start-up class for the application.
