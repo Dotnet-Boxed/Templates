@@ -129,9 +129,9 @@
                         // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
                         // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
                         // All generated URL's should append a trailing slash.
-                        this.routeOptions.AppendTrailingSlash = true;
+                        options.AppendTrailingSlash = true;
                         // All generated URL's should be lower-case.
-                        this.routeOptions.LowercaseUrls = true;
+                        options.LowercaseUrls = true;
                     })
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
