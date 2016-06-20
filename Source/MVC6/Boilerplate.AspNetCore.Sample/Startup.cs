@@ -146,11 +146,6 @@
                     options =>
                     {
                         options
-                            // $Start-HttpsEverywhere$
-                            .AddIf(
-                                this.hostingEnvironment.IsDevelopment(),
-                                x => x.AddDevelopmentSslPort(this.hostingEnvironment))
-                            // $End-HttpsEverywhere$
                             .AddCacheProfilesFromConfiguration(this.configuration)
                             // $Start-NWebSec$
                             .AddContentSecurityPolicyFilters()
@@ -161,6 +156,9 @@
                             // $Start-RedirectToCanonicalUrl$
                             .AddRedirectToCanonicalUrlFilter(this.routeOptions)
                             // $End-RedirectToCanonicalUrl$
+                            // $Start-HttpsEverywhere$
+                            .AddRequireHttpsFilter(this.hostingEnvironment)
+                            // $End-HttpsEverywhere$
                             .AddSecurityFilters();
                     })
                 // $Start-JsonSerializerSettings$

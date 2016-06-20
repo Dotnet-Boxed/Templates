@@ -256,26 +256,6 @@
             return options;
         }
         // $End-NWebSec$
-
-        /// <summary>
-        /// Sets a custom port to use for SSL in Development. The port number to use is taken from the
-        /// launchSettings.json file which Visual Studio uses to start the application using IIS Express or the
-        /// command line.
-        /// </summary>
-        /// <param name="options">The MVC options.</param>
-        /// <param name="hostingEnvironment">The hosting environment.</param>
-        /// <returns>The MVC options.</returns>
-        public static MvcOptions AddDevelopmentSslPort(this MvcOptions options, IHostingEnvironment hostingEnvironment)
-        {
-            IConfiguration configuration = new ConfigurationBuilder()
-                .SetBasePath(hostingEnvironment.ContentRootPath)
-                .AddJsonFile(@"Properties\launchSettings.json")
-                .Build();
-
-            options.SslPort = configuration.GetValue<int>("iisSettings:iisExpress:sslPort");
-
-            return options;
-        }
         // $Start-RedirectToCanonicalUrl$
 
         /// <summary>
@@ -289,18 +269,36 @@
             return options;
         }
         // $End-RedirectToCanonicalUrl$
+        // $Start-HttpsEverywhere$
+
+        /// <summary>
+        /// Require HTTPS to be used across the whole site. Also sets a custom port to use for SSL in Development. The
+        /// port number to use is taken from the launchSettings.json file which Visual Studio uses to start the
+        /// application using IIS Express or the command line.
+        /// </summary>
+        public static MvcOptions AddRequireHttpsFilter(this MvcOptions options, IHostingEnvironment hostingEnvironment)
+        {
+            if (hostingEnvironment.IsDevelopment())
+            {
+                IConfiguration configuration = new ConfigurationBuilder()
+                    .SetBasePath(hostingEnvironment.ContentRootPath)
+                    .AddJsonFile(@"Properties\launchSettings.json")
+                    .Build();
+
+                options.SslPort = configuration.GetValue<int>("iisSettings:iisExpress:sslPort");
+            }
+
+            options.Filters.Add(new RequireHttpsAttribute());
+            return options;
+        }
+        // $End-HttpsEverywhere$
+        // $Start-NWebSec$
 
         /// <summary>
         /// Adds filters which help improve security.
         /// </summary>
         public static MvcOptions AddSecurityFilters(this MvcOptions options)
         {
-            // $Start-HttpsEverywhere$
-            // Require HTTPS to be used across the whole site.
-            options.Filters.Add(new RequireHttpsAttribute());
-
-            // $End-HttpsEverywhere$
-            // $Start-NWebSec$
             // Add several NWebSec filters here which add HTTP Headers to help improve security. See
             // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/ and
             // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
@@ -342,9 +340,9 @@
                 {
                     Policy = XFrameOptionsPolicy.Deny
                 });
-            // $End-NWebSec$
 
             return options;
         }
+        // $End-NWebSec$
     }
 }
