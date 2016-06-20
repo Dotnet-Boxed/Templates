@@ -1,11 +1,17 @@
 ﻿namespace MvcBoilerplate
 {
+    // $Start-RedirectToCanonicalUrl$
     using Boilerplate.AspNetCore.Filters;
+    // $End-RedirectToCanonicalUrl$
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+    // $Start-RedirectToCanonicalUrl$
     using Microsoft.AspNetCore.Routing;
+    // $End-RedirectToCanonicalUrl$
     using Microsoft.Extensions.Configuration;
+    // $Start-NWebSec$
     using MvcBoilerplate.Constants;
+    // $End-NWebSec$
     using MvcBoilerplate.Settings;
     // $Start-NWebSec$
     using NWebsec.AspNetCore.Mvc.HttpHeaders;
@@ -32,6 +38,7 @@
 
             return options;
         }
+        // $Start-NWebSec$
 
         /// <summary>
         /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This
@@ -239,6 +246,18 @@
         }
 
         /// <summary>
+        /// Adds the Content-Security-Policy (CSP) filters used to allow Browser Link to work correctly.
+        /// </summary>
+        public static MvcOptions AddBrowserLinkContentSecurityPolicyFilters(this MvcOptions options)
+        {
+            options.Filters.Add(new CspConnectSrcAttribute() { CustomSources = string.Join(" ", "localhost:*", "ws://localhost:*") });
+            options.Filters.Add(new CspImgSrcAttribute() { CustomSources = "data:" });
+            options.Filters.Add(new CspScriptSrcAttribute() { CustomSources = "localhost:*" });
+            return options;
+        }
+        // $End-NWebSec$
+
+        /// <summary>
         /// Sets a custom port to use for SSL in Development. The port number to use is taken from the
         /// launchSettings.json file which Visual Studio uses to start the application using IIS Express or the
         /// command line.
@@ -255,17 +274,6 @@
 
             options.SslPort = configuration.GetValue<int>("iisSettings:iisExpress:sslPort");
 
-            return options;
-        }
-
-        /// <summary>
-        /// Adds the Content-Security-Policy (CSP) filters used to allow Browser Link to work correctly.
-        /// </summary>
-        public static MvcOptions AddBrowserLinkContentSecurityPolicyFilters(this MvcOptions options)
-        {
-            options.Filters.Add(new CspConnectSrcAttribute() { CustomSources = string.Join(" ", "localhost:*", "ws://localhost:*") });
-            options.Filters.Add(new CspImgSrcAttribute() { CustomSources = "data:" });
-            options.Filters.Add(new CspScriptSrcAttribute() { CustomSources = "localhost:*" });
             return options;
         }
         // $Start-RedirectToCanonicalUrl$
