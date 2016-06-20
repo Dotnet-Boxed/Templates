@@ -448,7 +448,9 @@ function () {
  */
 gulp.task('build-html', function () {
     return gulp
-        .src(paths.views + '**/*.cshtml')       // Start with the .cshtml Razor files and not .min.cshtml files.
+        .src([                                  // Start with the .cshtml Razor files and not .min.cshtml files.
+            paths.views + '**/*.cshtml',
+            '!' + paths.views + '**/*.min.cshtml'])
         .pipe(minifyCshtml())                   // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
         .pipe(rename(function (path) {          // Rename the files from .cshtml to .min.cshtml.
             path.extname = '.min.cshtml';
