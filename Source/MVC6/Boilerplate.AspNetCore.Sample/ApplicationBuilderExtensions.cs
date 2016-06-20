@@ -38,7 +38,7 @@
                     Secure = SecurePolicy.Always
                     // $End-HttpsEverywhere-On$
                     // $Start-HttpsEverywhere-Off$
-                    // Ensure that the cookie can only be transported over the same scheme as the request.
+                    // // Ensure that the cookie can only be transported over the same scheme as the request.
                     // Secure = SecurePolicy.SameAsRequest
                     // $End-HttpsEverywhere-Off$
                 });
