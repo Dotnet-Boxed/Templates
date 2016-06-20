@@ -124,8 +124,8 @@
                     {
                         // $Start-RedirectToCanonicalUrl$
                         this.routeOptions = options;
-                        // $End-RedirectToCanonicalUrl$
 
+                        // $End-RedirectToCanonicalUrl$
                         // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
                         // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
                         // All generated URL's should append a trailing slash.
