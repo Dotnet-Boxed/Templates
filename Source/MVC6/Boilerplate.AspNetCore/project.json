@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0-rc2-final-0001",
+  "version": "1.0.0-rc2-final-0002",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Added HttpRequestExtensions IsLocalRequest extension method.",
+    "releaseNotes": "Added extension methods to conditionally configure IApplicationBuilder, IConfigurationBuilder, MvcOptions and ILoggerFactory.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET MVC MVC6 Boilerplate Muhammad Rehan Saeed Framework" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
