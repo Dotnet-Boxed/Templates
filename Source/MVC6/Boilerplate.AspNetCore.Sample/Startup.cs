@@ -146,20 +146,20 @@
                     options =>
                     {
                         options
-                            .AddCacheProfilesFromConfiguration(this.configuration)
+                            // $Start-HttpsEverywhere$
+                            .AddRequireHttpsFilter(this.hostingEnvironment)
+                            // $End-HttpsEverywhere$
                             // $Start-NWebSec$
                             .AddContentSecurityPolicyFilters()
                             .AddIf(
                                 this.hostingEnvironment.IsDevelopment(),
                                 x => x.AddBrowserLinkContentSecurityPolicyFilters())
+                            .AddSecurityFilters()
                             // $End-NWebSec$
                             // $Start-RedirectToCanonicalUrl$
                             .AddRedirectToCanonicalUrlFilter(this.routeOptions)
                             // $End-RedirectToCanonicalUrl$
-                            // $Start-HttpsEverywhere$
-                            .AddRequireHttpsFilter(this.hostingEnvironment)
-                            // $End-HttpsEverywhere$
-                            .AddSecurityFilters();
+                            .AddCacheProfilesFromConfiguration(this.configuration);
                     })
                 // $Start-JsonSerializerSettings$
                 // Configures the JSON output formatter to use camel case property names like 'propertyName' instead of
