@@ -9,7 +9,6 @@
         /// <summary>
         /// Configure tools used to help with debugging the application.
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseDebugging(this IApplicationBuilder application)
         {
             // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
@@ -25,7 +24,6 @@
         /// <summary>
         /// Configure default cookie settings for the application which are more secure by default.
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseCookiePolicy(this IApplicationBuilder application)
         {
             return application.UseCookiePolicy(
@@ -51,7 +49,6 @@
         /// See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/ and
         /// http://www.w3.org/TR/upgrade-insecure-requests/
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseCspUpgradeInsecureRequestsHttpHeader(this IApplicationBuilder application)
         {
             return application.UseCsp(x => x.UpgradeInsecureRequests());
@@ -68,7 +65,6 @@
         /// Adds developer friendly error pages for the application which contain extra debug and exception information.
         /// Note: It is unsafe to use this in production.
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseDeveloperErrorPages(this IApplicationBuilder application)
         {
             // When a database error occurs, displays a detailed error page with full diagnostic information. It is
@@ -83,7 +79,6 @@
         /// <summary>
         /// Adds user friendly error pages.
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseErrorPages(this IApplicationBuilder application)
         {
             // Add error handling middle-ware which handles all HTTP status codes from 400 to 599 by re-executing
@@ -111,7 +106,6 @@
         /// See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security and
         /// http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application)
         {
             return application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
@@ -132,7 +126,6 @@
         /// See https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning and
         /// https://scotthelme.co.uk/hpkp-http-public-key-pinning/
         /// </summary>
-        /// <param name="application">The application.</param>
         public static IApplicationBuilder UsePublicKeyPinsHttpHeader(this IApplicationBuilder application)
         {
             // application.UseHpkp(options => options
@@ -144,5 +137,33 @@
             return application;
         }
         // $End-HttpsEverywhere-On$
+        // $Start-NWebSec$
+
+        /// <summary>
+        /// Adds the X-Content-Type-Options, X-Download-Options and X-Frame-Options HTTP headers to the response for
+        /// added security. See
+        // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/,
+        // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
+        // https://github.com/NWebsec/NWebsec/wiki for more information.
+        /// </summary>
+        public static IApplicationBuilder UseSecurityHttpHeaders(this IApplicationBuilder application)
+        {
+            return application
+                // X-Content-Type-Options - Adds the X-Content-Type-Options HTTP header. Stop IE9 and below from
+                //                          sniffing files and overriding the Content-Type header (MIME type).
+                .UseXContentTypeOptions()
+                // X-Download-Options - Adds the X-Download-Options HTTP header. When users save the page, stops them
+                //                      from opening it and forces a save and manual open.
+                .UseXDownloadOptions()
+                // X-Frame-Options - Adds the X-Frame-Options HTTP header. Stop clickjacking by stopping the page from
+                //                   opening in an iframe or only allowing it from the same origin.
+                //   SameOrigin - Specifies that the X-Frame-Options header should be set in the HTTP response,
+                //                instructing the browser to display the page when it is loaded in an iframe - but only
+                //                if the iframe is from the same origin as the page.
+                //   Deny - Specifies that the X-Frame-Options header should be set in the HTTP response, instructing
+                //   the browser to not display the page when it is loaded in an iframe.
+                .UseXfo(options => options.Deny());
+        }
+        // $End-NWebSec$
     }
 }

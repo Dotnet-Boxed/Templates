@@ -156,7 +156,6 @@
                             .AddIf(
                                 this.hostingEnvironment.IsDevelopment(),
                                 x => x.AddBrowserLinkContentSecurityPolicyFilters())
-                            .AddSecurityFilters()
                             // $End-NWebSec$
                             // $Start-RedirectToCanonicalUrl$
                             .AddRedirectToCanonicalUrlFilter(this.routeOptions)
@@ -229,6 +228,9 @@
                 .UseStrictTransportSecurityHttpHeader()
                 .UsePublicKeyPinsHttpHeader()
                 // $End-HttpsEverywhere$
+                // $Start-NWebSec$
+                .UseSecurityHttpHeaders()
+                // $End-NWebSec$
                 // Add MVC to the request pipeline.
                 .UseMvc();
         }

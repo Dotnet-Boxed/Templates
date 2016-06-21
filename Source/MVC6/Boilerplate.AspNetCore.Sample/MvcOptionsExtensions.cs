@@ -14,7 +14,6 @@
     // $End-NWebSec$
     using MvcBoilerplate.Settings;
     // $Start-NWebSec$
-    using NWebsec.AspNetCore.Mvc.HttpHeaders;
     using NWebsec.AspNetCore.Mvc.HttpHeaders.Csp;
     // $End-NWebSec$
 
@@ -292,57 +291,5 @@
             return options;
         }
         // $End-HttpsEverywhere$
-        // $Start-NWebSec$
-
-        /// <summary>
-        /// Adds filters which help improve security.
-        /// </summary>
-        public static MvcOptions AddSecurityFilters(this MvcOptions options)
-        {
-            // Add several NWebSec filters here which add HTTP Headers to help improve security. See
-            // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/ and
-            // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
-            // https://github.com/NWebsec/NWebsec/wiki for more information.
-            // Note: All of these filters can be applied to individual controllers and actions and indeed
-            // some of them only make sense when applied to a controller or action instead of globally here.
-
-            // Cache-Control: no-cache, no-store, must-revalidate
-            // Expires: -1
-            // Pragma: no-cache
-            //      Specifies whether appropriate headers to prevent browser caching should be set in the HTTP response.
-            //      Do not apply this attribute here globally, use it sparingly to disable caching. A good place to use
-            //      this would be on a page where you want to post back credit card information because caching credit
-            //      card information could be a security risk.
-            // options.Filters.Add(new SetNoCacheHttpHeadersAttribute());
-
-            // X-Robots-Tag - Adds the X-Robots-Tag HTTP header. Disable robots from any action or controller this
-            //                attribute is applied to.
-            // options.Filters.Add(new XRobotsTagAttribute() { NoIndex = true, NoFollow = true });
-
-            // X-Content-Type-Options - Adds the X-Content-Type-Options HTTP header. Stop IE9 and below from sniffing
-            //                          files and overriding the Content-Type header (MIME type).
-            options.Filters.Add(new XContentTypeOptionsAttribute());
-
-            // X-Download-Options - Adds the X-Download-Options HTTP header. When users save the page, stops them from
-            //                      opening it and forces a save and manual open.
-            options.Filters.Add(new XDownloadOptionsAttribute());
-
-            // X-Frame-Options - Adds the X-Frame-Options HTTP header. Stop clickjacking by stopping the page from
-            //                   opening in an iframe or only allowing it from the same origin.
-            //      Deny - Specifies that the X-Frame-Options header should be set in the HTTP response, instructing
-            //             the browser to display the page when it is loaded in an iframe - but only if the iframe is
-            //             from the same origin as the page.
-            //      SameOrigin - Specifies that the X-Frame-Options header should be set in the HTTP response,
-            //                   instructing the browser to not display the page when it is loaded in an iframe.
-            //      Disabled - Specifies that the X-Frame-Options header should not be set in the HTTP response.
-            options.Filters.Add(
-                new XFrameOptionsAttribute()
-                {
-                    Policy = XFrameOptionsPolicy.Deny
-                });
-
-            return options;
-        }
-        // $End-NWebSec$
     }
 }
