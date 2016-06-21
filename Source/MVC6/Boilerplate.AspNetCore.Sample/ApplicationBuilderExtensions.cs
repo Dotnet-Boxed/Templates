@@ -181,9 +181,9 @@
                                 var customSources = new List<string>()    // Allow AJAX and Web Sockets to the following sources.
                                 {
                                     // "*.example.com",                   // Allow AJAX and Web Sockets to example.com.
-                                    // $Start-ApplicationInsights-On$
+                                    // $Start-ApplicationInsights$
                                     "dc.services.visualstudio.com"        // Allow posting data back to Application Insights.
-                                    // $End-ApplicationInsights-On$
+                                    // $End-ApplicationInsights$
                                 };
                                 if (hostingEnvironment.IsDevelopment())   // Allow Browser Link to work correctly in Development.
                                 {
@@ -233,9 +233,9 @@
                                 x.Self();                         // Allow all scripts from the same domain.
                                 var customSources = new List<string>()
                                 {
-                                    // $Start-ApplicationInsights-On$
+                                    // $Start-ApplicationInsights$
                                     "az416426.vo.msecnd.net",             // Allow Application Insights to run scripts.
-                                    // $End-ApplicationInsights-On$
+                                    // $End-ApplicationInsights$
                                     ContentDeliveryNetwork.Google.Domain, // Allow scripts from the following CDN's.
                                     ContentDeliveryNetwork.Microsoft.Domain
                                 };
