@@ -127,10 +127,10 @@
     @* Move site.css to a content delivery network (CDN) for better performance. *@
     <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
     <meta name="x-font-awesome-stylesheet-fallback-test" class="fa">
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+    <environment names="@EnvironmentName.Development">
         <link asp-append-version="true" rel="stylesheet" href="~/css/font-awesome.css" />
     </environment>
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
+    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
         <link rel="stylesheet" href="@ContentDeliveryNetwork.MaxCdn.FontAwesomeUrl"
               asp-subresource-integrity-href="~/css/font-awesome.css" />
     </environment>
@@ -139,10 +139,10 @@
     @* Do not move this file to a CDN. See https://github.com/Microsoft/ApplicationInsights-aspnet5/issues/120 *@
     <script asp-append-version="true" src="~/js/application-insights.js"></script>
     @* $End-ApplicationInsights$ *@
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+    <environment names="@EnvironmentName.Development">
         <script asp-append-version="true" src="~/js/modernizr.js"></script>
     </environment>
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
+    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
         <script src="@ContentDeliveryNetwork.Microsoft.ModernizrUrl"></script>
     </environment>
 
@@ -237,14 +237,14 @@
     </div>
 
 
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Development">
+    <environment names="@EnvironmentName.Development">
         <script asp-append-version="true" src="~/js/jquery.js"></script>
         <script asp-append-version="true" src="~/js/jquery-validate.js"></script>
         <script asp-append-version="true" src="~/js/jquery-validate-unobtrusive.js"></script>
         <script asp-append-version="true" src="~/js/bootstrap.js"></script>
         <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
-    <environment names="@MvcBoilerplate.Constants.EnvironmentName.Staging,@MvcBoilerplate.Constants.EnvironmentName.Production">
+    <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
         @* asp-subresource-integrity-src - Ensures the CDN resource has not been tampered with.
            See http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core *@
         <script src="@ContentDeliveryNetwork.Google.JQueryUrl"
