@@ -164,7 +164,7 @@
                         // $End-HttpsEverywhere-On$
                         // default-src - Sets a default source list for a number of directives. If the other directives
                         // below are not used then this is the default setting.
-                        .DefaultSources(x => x.None())            // We disallow everything by default.
+                        .DefaultSources(x => x.None())                    // We disallow everything by default.
                         // base-uri - This directive restricts the document base URL
                         //            See http://www.w3.org/TR/html5/infrastructure.html#document-base-url.
                         // .BaseUris(x => ...)
@@ -230,7 +230,7 @@
                         .ScriptSources(
                             x =>
                             {
-                                x.Self();                         // Allow all scripts from the same domain.
+                                x.Self();                                 // Allow all scripts from the same domain.
                                 var customSources = new List<string>()
                                 {
                                     // $Start-ApplicationInsights$
@@ -262,7 +262,7 @@
                         .StyleSources(
                             x =>
                             {
-                                x.Self();                        // Allow all stylesheets from the same domain.
+                                x.Self();                                // Allow all stylesheets from the same domain.
                                 x.CustomSources(new string[]
                                 {
                                     ContentDeliveryNetwork.MaxCdn.Domain // Allow stylesheets from the following CDN's.
