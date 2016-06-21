@@ -144,12 +144,32 @@
                 {
                     if (text == null)
                     {
-                        await Task.Run(() => Directory.Delete(filePath, true));
+                        await DeleteDirectory(filePath);
                     }
                 }
             }
 
             this.files.Clear();
+        }
+
+        private static async Task DeleteDirectory(string directoryPath)
+        {
+            await Task.Run(
+                async () =>
+                {
+                    for (int i = 0; i < 20; ++i)
+                    {
+                        try
+                        {
+                            Directory.Delete(directoryPath, true);
+                            break;
+                        }
+                        catch (IOException)
+                        {
+                            await Task.Delay(50);
+                        }
+                    }
+                });
         }
 
         private static Encoding GetEncoding(string fileName)
