@@ -1,8 +1,14 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.Collections.Generic;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
+    using Microsoft.AspNetCore.Hosting;
+    // $Start-NWebSec$
+    using MvcBoilerplate.Constants;
+    using NWebsec.AspNetCore.Middleware;
+    // $End-NWebSec$
 
     public static partial class ApplicationBuilderExtensions
     {
@@ -41,25 +47,6 @@
                     // $End-HttpsEverywhere-Off$
                 });
         }
-        // $Start-HttpsEverywhere-On$
-
-        /// <summary>
-        /// Adds the 'upgrade-insecure-requests' directive to the Content-Security-Policy HTTP header. This is only
-        /// relevant if you are using HTTPS. Any objects on the page using HTTP are automatically upgraded to HTTPS.
-        /// See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/ and
-        /// http://www.w3.org/TR/upgrade-insecure-requests/
-        /// </summary>
-        public static IApplicationBuilder UseCspUpgradeInsecureRequestsHttpHeader(this IApplicationBuilder application)
-        {
-            return application.UseCsp(x => x.UpgradeInsecureRequests());
-            // OR
-            // use the Content-Security-Policy-Report-Only HTTP header to enable logging of violations without blocking
-            // them. This is good for testing CSP without enabling it. To make use of this attribute, rename all the
-            // attributes below to their ReportOnlyAttribute versions
-            // e.g. CspDefaultSrcAttribute becomes CspDefaultSrcReportOnlyAttribute.
-            // application.UseCspReportOnly(x => x.UpgradeInsecureRequests());
-        }
-        // $End-HttpsEverywhere-On$
 
         /// <summary>
         /// Adds developer friendly error pages for the application which contain extra debug and exception information.
@@ -95,6 +82,7 @@
 
             return application;
         }
+        // $Start-NWebSec$
         // $Start-HttpsEverywhere-On$
 
         /// <summary>
@@ -121,8 +109,6 @@
         /// policy. Note that the report URI must not be this site as a violation would mean that the site is blocked.
         /// You must use a separate domain using HTTPS to report to. Consider using this service:
         /// https://report-uri.io/ for this purpose.
-        /// Note: You can change UseHpkp to UseHpkpReportOnly to stop browsers blocking anything but continue reporting
-        /// any violations.
         /// See https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning and
         /// https://scotthelme.co.uk/hpkp-http-public-key-pinning/
         /// </summary>
@@ -134,17 +120,170 @@
             //         "Base64 encoded SHA-256 hash of your second backup certificate e.g. M8HztCzM3elUxkcjR2S5P4hhyBNf6lHkmjAHKhpGPWE=")
             //     .MaxAge(days: 18 * 7)
             //     .IncludeSubdomains());
+            // OR
+            // Use UseHpkpReportOnly instead to stop browsers blocking anything but continue reporting any violations.
+            // application.UseHpkpReportOnly(...)
             return application;
         }
         // $End-HttpsEverywhere-On$
-        // $Start-NWebSec$
+
+        /// <summary>
+        /// Adds the Content-Security-Policy (CSP) and/or Content-Security-Policy-Report-Only HTTP headers. This
+        /// creates a white-list from where various content in a web page can be loaded from. See
+        /// http://rehansaeed.com/content-security-policy-for-asp-net-mvc/,
+        /// https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives and
+        /// https://github.com/NWebsec/NWebsec/wiki and for more information.
+        /// Note: Filters can be applied to individual controllers and actions to override this base policy e.g. If an
+        /// action requires access to content from YouTube.com, then you can add the following attribute to the action:
+        /// [CspFrameSrc(CustomSources = "*.youtube.com")].
+        /// </summary>
+        public static IApplicationBuilder UseContentSecurityPolicyHttpHeader(
+            this IApplicationBuilder application,
+            // $Start-HttpsEverywhere-On$
+            int? sslPort,
+            // $End-HttpsEverywhere-On$
+            IHostingEnvironment hostingEnvironment)
+        {
+            // Content-Security-Policy-Report-Only - Adds the Content-Security-Policy-Report-Only HTTP header to enable
+            //      logging of violations without blocking them. This is good for testing CSP without enabling it.
+            // application.UseCspReportOnly(...);
+            // OR
+            return application.UseCsp(
+                options =>
+                {
+                    options
+                        // Enables logging of CSP violations. Register with the https://report-uri.io/ service to get a
+                        // URL where you can send your CSP violation reports and view them.
+                        .ReportUris(x => x.Uris("http://example.com/csp-report"))
+                        // $Start-HttpsEverywhere-On$
+                        // upgrade-insecure-requests - This directive is only relevant if you are using HTTPS. Any
+                        // objects on the page using HTTP are automatically upgraded to HTTPS.
+                        // See https://scotthelme.co.uk/migrating-from-http-to-https-ease-the-pain-with-csp-and-hsts/
+                        // and http://www.w3.org/TR/upgrade-insecure-requests/
+                        .UpgradeInsecureRequests(sslPort.HasValue ? sslPort.Value : 443)
+                        // $End-HttpsEverywhere-On$
+                        // default-src - Sets a default source list for a number of directives. If the other directives
+                        // below are not used then this is the default setting.
+                        .DefaultSources(x => x.None())            // We disallow everything by default.
+                        // base-uri - This directive restricts the document base URL
+                        //            See http://www.w3.org/TR/html5/infrastructure.html#document-base-url.
+                        // .BaseUris(x => ...)
+                        // child-src - This directive restricts from where the protected resource can load web workers
+                        //             or embed frames. This was introduced in CSP 2.0 to replace frame-src. frame-src
+                        //             should still be used for older browsers.
+                        // .ChildSources(x => ...)
+                        // connect-src - This directive restricts which URIs the protected resource can load using
+                        //               script interfaces (Ajax Calls and Web Sockets).
+                        .ConnectSources(
+                            x =>
+                            {
+                                x.Self();                                 // Allow all AJAX and Web Sockets calls from the same domain.
+                                var customSources = new List<string>()    // Allow AJAX and Web Sockets to the following sources.
+                                {
+                                    // "*.example.com",                   // Allow AJAX and Web Sockets to example.com.
+                                    // $Start-ApplicationInsights-On$
+                                    "dc.services.visualstudio.com"        // Allow posting data back to Application Insights.
+                                    // $End-ApplicationInsights-On$
+                                };
+                                if (hostingEnvironment.IsDevelopment())   // Allow Browser Link to work correctly in Development.
+                                {
+                                    customSources.Add("localhost:*");
+                                    customSources.Add("ws://localhost:*");
+                                }
+                                x.CustomSources(customSources.ToArray());
+                            })
+                        // font-src - This directive restricts from where the protected resource can load fonts.
+                        .FontSources(
+                            x =>
+                            {
+                                x.Self();                                 // Allow all fonts from the same domain.
+                                x.CustomSources(new string[]              // Allow fonts from the following sources.
+                                {
+                                    // "*.example.com",                   // Allow AJAX and Web Sockets to example.com.
+                                    ContentDeliveryNetwork.MaxCdn.Domain  // Allow fonts from maxcdn.bootstrapcdn.com.
+                                });
+                            })
+                        // form-action - This directive restricts which URLs can be used as the action of HTML form elements.
+                        .FormActions(x => x.Self())              // Allow the current domain.
+                        // frame-src - This directive restricts from where the protected resource can embed frames.
+                        //             This is deprecated in favour of child-src but should still be used for older browsers.
+                        // .FrameSources(x => ...)
+                        // frame-ancestors - This directive restricts from where the protected resource can embed
+                        //                   frame, iframe, object, embed or applet's.
+                        // .FrameAncestors(x => ...)
+                        // img-src - This directive restricts from where the protected resource can load images.
+                        .ImageSources(
+                            x =>
+                            {
+                                x.Self();                                 // Allow the current domain.
+                                if (hostingEnvironment.IsDevelopment())   // Allow Browser Link to work correctly in Development.
+                                {
+                                    x.CustomSources(new string[]
+                                    {
+                                        "data:"
+                                    });
+                                }
+                            })
+                        // script-src - This directive restricts which scripts the protected resource can execute.
+                        //              The directive also controls other resources, such as XSLT style sheets, which
+                        //              can cause the user agent to execute script.
+                        .ScriptSources(
+                            x =>
+                            {
+                                x.Self();                         // Allow all scripts from the same domain.
+                                var customSources = new List<string>()
+                                {
+                                    // $Start-ApplicationInsights-On$
+                                    "az416426.vo.msecnd.net",             // Allow Application Insights to run scripts.
+                                    // $End-ApplicationInsights-On$
+                                    ContentDeliveryNetwork.Google.Domain, // Allow scripts from the following CDN's.
+                                    ContentDeliveryNetwork.Microsoft.Domain
+                                };
+                                if (hostingEnvironment.IsDevelopment())   // Allow Browser Link to work correctly in Development.
+                                {
+                                    customSources.Add("localhost:*");
+                                }
+                                x.CustomSources(customSources.ToArray());
+                                // Allow the use of the eval() method to create code from strings. This is unsafe and
+                                // can open your site up to XSS vulnerabilities.
+                                // x.UnsafeEval();
+                                // Allow in-line JavaScript, this is unsafe and can open your site up to XSS vulnerabilities.
+                                // x.UnsafeInline();
+                            })
+                        // media-src - This directive restricts from where the protected resource can load video and audio.
+                        // .MediaSources(x => ...)
+                        // object-src - This directive restricts from where the protected resource can load plug-ins.
+                        // .ObjectSources(x => ...)
+                        // plugin-types - This directive restricts the set of plug-ins that can be invoked. You can
+                        //                also use the @Html.CspMediaType("application/pdf") HTML helper instead of this
+                        //                attribute. The HTML helper will add the media type to the CSP header.
+                        // .PluginTypes(x => x.MediaTypes("application/x-shockwave-flash", "application/xaml+xml"))
+                        // style-src - This directive restricts which styles the user applies to the protected resource.
+                        .StyleSources(
+                            x =>
+                            {
+                                x.Self();                        // Allow all stylesheets from the same domain.
+                                x.CustomSources(new string[]
+                                {
+                                    ContentDeliveryNetwork.MaxCdn.Domain // Allow stylesheets from the following CDN's.
+                                });
+                                // Allow in-line CSS, this is unsafe and can open your site up to XSS vulnerabilities.
+                                // Note: This is enabled because Modernizr does not support CSP and includes in-line
+                                // styles in its JavaScript files. This is a security hole. If you don't want to use
+                                // Modernizr, be sure to disable unsafe in-line styles. For more information See:
+                                // http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
+                                // https://github.com/Modernizr/Modernizr/pull/1263
+                                x.UnsafeInline();
+                            });
+                });
+        }
 
         /// <summary>
         /// Adds the X-Content-Type-Options, X-Download-Options and X-Frame-Options HTTP headers to the response for
         /// added security. See
-        // http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/,
-        // http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
-        // https://github.com/NWebsec/NWebsec/wiki for more information.
+        /// http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/,
+        /// http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
+        /// https://github.com/NWebsec/NWebsec/wiki for more information.
         /// </summary>
         public static IApplicationBuilder UseSecurityHttpHeaders(this IApplicationBuilder application)
         {

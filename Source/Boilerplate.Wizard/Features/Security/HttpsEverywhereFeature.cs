@@ -50,7 +50,8 @@
         {
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, @"Properties\launchSettings.json");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, @"Properties\launchSettings.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "MvcOptionsExtensions.cs");
@@ -62,7 +63,8 @@
         {
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, @"Properties\launchSettings.json");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, @"Properties\launchSettings.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, "Startup.cs");
+            await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "MvcOptionsExtensions.cs");

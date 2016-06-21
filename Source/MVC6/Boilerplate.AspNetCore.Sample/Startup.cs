@@ -44,6 +44,13 @@
         /// whatever you want. See http://docs.asp.net/en/latest/fundamentals/environments.html
         /// </summary>
         private readonly IHostingEnvironment hostingEnvironment;
+        // $Start-HttpsEverywhere-On$
+
+        /// <summary>
+        /// Gets or sets the port to use for HTTPS. Only used in the development environment.
+        /// </summary>
+        private readonly int? sslPort;
+        // $End-HttpsEverywhere-On$
         // $Start-RedirectToCanonicalUrl$
 
         /// <summary>
@@ -64,6 +71,7 @@
         public Startup(IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment;
+
             this.configuration = new ConfigurationBuilder()
                 .SetBasePath(hostingEnvironment.ContentRootPath)
                 // Add configuration from the config.json file.
@@ -98,6 +106,17 @@
                 .AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction())
                 // $End-ApplicationInsights$
                 .Build();
+            // $Start-HttpsEverywhere-On$
+
+            if (this.hostingEnvironment.IsDevelopment())
+            {
+                var launchConfiguration = new ConfigurationBuilder()
+                    .SetBasePath(hostingEnvironment.ContentRootPath)
+                    .AddJsonFile(@"Properties\launchSettings.json")
+                    .Build();
+                this.sslPort = launchConfiguration.GetValue<int>("iisSettings:iisExpress:sslPort");
+            }
+            // $End-HttpsEverywhere-On$
         }
 
         #endregion
@@ -148,15 +167,9 @@
                     options =>
                     {
                         options
-                            // $Start-HttpsEverywhere$
-                            .AddRequireHttpsFilter(this.hostingEnvironment)
-                            // $End-HttpsEverywhere$
-                            // $Start-NWebSec$
-                            .AddContentSecurityPolicyFilters()
-                            .AddIf(
-                                this.hostingEnvironment.IsDevelopment(),
-                                x => x.AddBrowserLinkContentSecurityPolicyFilters())
-                            // $End-NWebSec$
+                            // $Start-HttpsEverywhere-On$
+                            .AddRequireHttpsFilter(this.sslPort)
+                            // $End-HttpsEverywhere-On$
                             // $Start-RedirectToCanonicalUrl$
                             .AddRedirectToCanonicalUrlFilter(this.routeOptions)
                             // $End-RedirectToCanonicalUrl$
@@ -223,12 +236,15 @@
                         .UseDebugging()
                         .UseDeveloperErrorPages(),
                     x => x.UseErrorPages())
-                // $Start-HttpsEverywhere$
-                .UseCspUpgradeInsecureRequestsHttpHeader()
+                // $Start-NWebSec$
+                // $Start-HttpsEverywhere-On$
                 .UseStrictTransportSecurityHttpHeader()
                 .UsePublicKeyPinsHttpHeader()
-                // $End-HttpsEverywhere$
-                // $Start-NWebSec$
+                .UseContentSecurityPolicyHttpHeader(this.sslPort, this.hostingEnvironment)
+                // $End-HttpsEverywhere-On$
+                // $Start-HttpsEverywhere-Off$
+                // .UseContentSecurityPolicyHttpHeader(this.hostingEnvironment)
+                // $End-HttpsEverywhere-Off$
                 .UseSecurityHttpHeaders()
                 // $End-NWebSec$
                 // Add MVC to the request pipeline.
