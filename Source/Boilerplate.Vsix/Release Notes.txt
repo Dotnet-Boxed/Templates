@@ -12,6 +12,8 @@ MVC 6
 - ReadMe.html updated to change comment about installing the HttpPlatformHandler and installing the IIS .NET Core
   Windows Server Hosting Bundle instead.
 - Removed comments about IgnoreRoute missing from MVC 6.
+- Added the autostrip-json-comments NPM package to package.json and require statement to gulpfile.js to allow comments
+  in config.json and hosting.json.
 
 Version 3.1.1
 MVC 6

@@ -44,9 +44,9 @@ var gulp = require('gulp'),
     tslint = require('gulp-tslint'),            // TypeScript linter (https://www.npmjs.com/package/gulp-tslint/)
     typescript = require('gulp-typescript'),    // TypeScript compiler (https://www.npmjs.com/package/gulp-typescript/)
     // $End-TypeScript$
+    _ = require('autostrip-json-comments'),     // Strips JSON comments so the next two lines work (https://www.npmjs.com/package/autostrip-json-comments)
     config = require('./config.json'),          // Read the config.json file into the config variable.
-    hosting = require('./hosting.json'),        // Read the hosting.json file into the hosting variable.
-    project = require('./project.json');        // Read the project.json file into the project variable.
+    hosting = require('./hosting.json');        // Read the hosting.json file into the hosting variable.;
 
 // Holds information about the hosting environment.
 var environment = {
