@@ -1,4 +1,6 @@
 ﻿Version 3.2.0
+MVC 5 & 6
+- Removed the X-UA-Compatible HTTP header from web.config.
 MVC 6
 - Development mode now uses HTTPS if HTTPS everywhere is enabled. In development mode a SSL port is used and needs to
   be set in the MVC options and in the Content-Security-Policy settings.
