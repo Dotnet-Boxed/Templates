@@ -1,9 +1,15 @@
 ﻿Version 3.2.0
 MVC 6
-- Development mode now uses HTTPS.
+- Development mode now uses HTTPS if HTTPS everywhere is enabled. In development mode a SSL port is used and needs to
+  be set in the MVC options and in the Content-Security-Policy settings.
 - Major refactoring of Startup.cs making all method calls fluent.
+- CSP now configured using NWebSec middleware instead of NWebSec filters.
+- Anti-forgery tokens use the X-XSRF-TOKEN HTTP header name.
+- EnvironmentName.cs constant removed as the built in RC2 one with the same name now has a Staging constant in it which
+  was missing.
 - ReadMe.html updated to change comment about installing the HttpPlatformHandler and installing the IIS .NET Core
   Windows Server Hosting Bundle instead.
+- Removed comments about IgnoreRoute missing from MVC 6.
 
 Version 3.1.1
 MVC 6
