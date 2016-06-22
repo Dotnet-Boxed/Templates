@@ -17,20 +17,24 @@
         public static IServiceCollection AddAntiforgerySecurely(this IServiceCollection services)
         {
             return services.AddAntiforgery(
-                antiforgeryOptions =>
+                options =>
                 {
                     // Rename the Anti-Forgery cookie from "__RequestVerificationToken" to "f". This adds a little
                     // security through obscurity and also saves sending a few characters over the wire.
-                    antiforgeryOptions.CookieName = "f";
+                    options.CookieName = "f";
 
                     // Rename the form input name from "__RequestVerificationToken" to "f" for the same reason above
                     // e.g. <input name="__RequestVerificationToken" type="hidden" value="..." />
-                    antiforgeryOptions.FormFieldName = "f";
+                    options.FormFieldName = "f";
+
+                    // Rename the Anti-Forgery HTTP header from RequestVerificationToken to X-XSRF-TOKEN. X-XSRF-TOKEN
+                    // is not a standard but a common name given to this HTTP header popularized by Angular.
+                    options.HeaderName = "X-XSRF-TOKEN";
                     // $Start-HttpsEverywhere$
 
                     // If you have enabled SSL/TLS. Uncomment this line to ensure that the Anti-Forgery cookie requires
                     // SSL /TLS to be sent across the wire.
-                    antiforgeryOptions.RequireSsl = true;
+                    options.RequireSsl = true;
                     // $End-HttpsEverywhere$
                 });
         }
