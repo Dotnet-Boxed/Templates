@@ -1,11 +1,14 @@
+// The config.json file is responsible for holding application settings and options. It is the replacement for the
+// appSettings configuration section contained in the web.config file in ASP.NET 4.6.
 {
   "AppSettings": {
-    "SiteShortTitle": "Boilerplate",
-    "SiteTitle": "ASP.NET MVC Boilerplate"
+    "SiteShortTitle": "Boilerplate", // The short name of the site.
+    "SiteTitle": "ASP.NET MVC Boilerplate" // The name of the site.
   },
   // $Start-ApplicationInsights$
   "ApplicationInsights": {
-    "InstrumentationKey": "YOUR APPLICATION INSIGHTS KEY GOES HERE e.g. 11111111-2222-3333-4444-555555555555"
+    // The instrumentation key for Application Insights retrieved from Azure e.g. 11111111-2222-3333-4444-555555555555
+    "InstrumentationKey": "YOUR APPLICATION INSIGHTS INSTRUMENTATION KEY"
   },
   // $End-ApplicationInsights$
   "Logging": {
@@ -18,6 +21,7 @@
   },
   // $Start-Sitemap$
   "SitemapSettings": {
+    // An array of URL's where the sitemap can be pinged to. Note that Yahoo uses the same sitemap ping location as Bing.
     "SitemapPingLocations": [
       "https://www.google.com/ping?sitemap=",
       "http://www.bing.com/ping?sitemap="
@@ -27,40 +31,47 @@
   "CacheProfileSettings": {
     "CacheProfiles": {
       // $Start-Windows81IE11EdgeFavicon$
+      // Cache the browserconfig route (/browserconfig.xml) for a day.
       "BrowserConfigXml": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $End-Windows81IE11EdgeFavicon$
+      // Cache the error route (/error/404/notfound) by status code for a day.
       "Error": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $Start-Feed$
+      // Cache the Atom 1.0 feed route (/feed) for a day.
       "Feed": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $End-Feed$
       // $Start-AndroidChromeM39Favicons$
+      // Cache the manifest route (/manifest.json) for a day.
       "ManifestJson": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $End-AndroidChromeM39Favicons$
       // $Start-Search$
+      // Cache the open search route (/opensearch.xml) for a day.
       "OpenSearchXml": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $End-Search$
       // $Start-RobotsText$
+      // Cache the robots.txt route for a day.
       "RobotsText": {
         "Duration": 86400,
         "Location": "Any"
       },
       // $End-RobotsText$
       // $Start-Sitemap$
+      // Cache the nodes in the sitemap for a day.
       "SitemapNodes": {
         "Duration": 86400
       }
