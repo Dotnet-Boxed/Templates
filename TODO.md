@@ -26,6 +26,7 @@ Improvements that can be made to all project templates.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 - Add an example form controller with [RequestFormSizeLimit](https://github.com/aspnet/Entropy/blob/dd60ba088cadb5bd82bddd3f22ed76069b4b5639/samples/Mvc.FileUpload/Controllers/RequestFormLimitsController.cs) attribute.
 - Improve social tag helpers to include child elements for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
+- Provide better TypeScript support with [typings](https://github.com/DefinitelyTyped/tsd/issues/269) and a default .ts file instead of .js.
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
