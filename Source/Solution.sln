@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelection.Test", "Boilerplate.FeatureSelection.Test\Boilerplate.FeatureSelection.Test.csproj", "{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelection.FunctionalTest", "Boilerplate.FeatureSelection.FunctionalTest\Boilerplate.FeatureSelection.FunctionalTest.csproj", "{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

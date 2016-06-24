@@ -5,12 +5,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}</ProjectGuid>
+    <ProjectGuid>{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Boilerplate.Wizard</RootNamespace>
-    <AssemblyName>Boilerplate.Wizard.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <RootNamespace>Boilerplate.FeatureSelection.FunctionalTest</RootNamespace>
+    <AssemblyName>Boilerplate.FeatureSelection.FunctionalTest</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -33,12 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Moq, Version=4.5.10.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.5.10\lib\net45\Moq.dll</HintPath>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -62,23 +58,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\FileSystemServiceTest.cs" />
-    <Compile Include="Services\JsonFileFixerServiceTest.cs" />
-    <Compile Include="Services\PortServiceTest.cs" />
-    <Compile Include="Services\ProjectServiceTest.cs" />
+    <Compile Include="MVC6SampleTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Boilerplate.FeatureSelection.Client\Boilerplate.FeatureSelection.Client.csproj">
+      <Project>{9d90ca39-b283-4558-90e7-8ba2deac5efa}</Project>
+      <Name>Boilerplate.FeatureSelection.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Boilerplate.FeatureSelection\Boilerplate.FeatureSelection.csproj">
       <Project>{81b33f2a-01a6-4aa6-a6f2-6e5ff2c0528f}</Project>
       <Name>Boilerplate.FeatureSelection</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

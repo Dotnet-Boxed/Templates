@@ -40,6 +40,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerBuilderExtensions.cs" />
     <Compile Include="Features\Base\BinaryChoiceFeature.cs" />
     <Compile Include="Features\Base\Feature.cs" />
     <Compile Include="Features\Base\FeatureCollection.cs" />

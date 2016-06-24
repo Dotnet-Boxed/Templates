@@ -1,7 +1,9 @@
 ﻿namespace Boilerplate.FeatureSelection.ViewModels
 {
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Windows.Data;
+    using Autofac;
     using Boilerplate.FeatureSelection.Features;
     using Boilerplate.FeatureSelection.Services;
     using Framework.UI.Input;
@@ -9,59 +11,16 @@
     public class DesignMainViewModel : IMainViewModel
     {
         private readonly FeatureCollection features;
-        private readonly IProjectService projectService;
         private readonly ICollectionView featuresView;
 
         public DesignMainViewModel()
         {
-            this.projectService = new ProjectService(new FileSystemService(new IFileFixerService[0]), @"C:\");
-            this.features = new FeatureCollection()
-            {
-                new TargetFrameworkFeature(this.projectService),
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterServices(@"C:\");
+            builder.RegisterFeatureSet(FeatureSet.Mvc6);
+            var container = builder.Build();
 
-                new FrontEndFrameworkFeature(this.projectService),
-                new TypeScriptFeature(this.projectService),
-                new JavaScriptCodeStyleFeature(this.projectService),
-                new JavaScriptTestFrameworkFeature(this.projectService),
-
-                new JsonSerializerSettingsFeature(this.projectService),
-                new XmlFormatterFeature(this.projectService, FeatureSet.Mvc6),
-
-                new CstmlMinificationFeature(this.projectService),
-
-                new HttpsEverywhereFeature(this.projectService),
-                new NWebSecFeature(this.projectService),
-
-                new ApplicationInsightsFeature(this.projectService),
-
-                new GlimpseFeature(this.projectService),
-
-                new RobotsTextFeature(this.projectService),
-                new SitemapFeature(this.projectService),
-                new RedirectToCanonicalUrlFeature(this.projectService),
-
-                new AboutPageFeature(this.projectService),
-                new ContactPageFeature(this.projectService),
-
-                new AuthorMetaTagFeature(this.projectService),
-                new OpenGraphFeature(this.projectService),
-                new TwitterCardFeature(this.projectService),
-
-                new AppleIOSFaviconsFeature(this.projectService),
-                new AppleMacSafariFaviconFeature(this.projectService),
-                new AndroidChromeM36ToM38FaviconFeature(this.projectService),
-                new AndroidChromeM39FaviconsFeature(this.projectService),
-                new GoogleTvFaviconFeature(this.projectService),
-                new Windows8IE10FaviconFeature(this.projectService),
-                new Windows81IE11EdgeFaviconFeature(this.projectService),
-                new WebAppCapableFeature(this.projectService),
-
-                new FeedFeature(this.projectService),
-                new SearchFeature(this.projectService),
-                new SitemapFeature(this.projectService),
-                new RobotsTextFeature(this.projectService),
-                new HumansTextFeature(this.projectService)
-            };
+            this.features = new FeatureCollection(container.Resolve<IEnumerable<IFeature>>());
             this.featuresView = CollectionViewSource.GetDefaultView(this.features);
             this.featuresView.Filter = x => ((IFeature)x).IsVisible;
             this.featuresView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(IFeature.Group) + "." + nameof(IFeatureGroup.Name)));

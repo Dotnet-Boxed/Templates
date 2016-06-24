@@ -1,6 +1,5 @@
 ﻿namespace Boilerplate.FeatureSelection.Features
 {
-    using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
