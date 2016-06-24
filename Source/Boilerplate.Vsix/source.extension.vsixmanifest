@@ -21,8 +21,10 @@
   <Assets>
     <Asset Type="Microsoft.VisualStudio.ItemTemplate" Path="Output\ItemTemplates" />
     <Asset Type="Microsoft.VisualStudio.ProjectTemplate" Path="Output\ProjectTemplates" />
-    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.Wizard" Path="|Boilerplate.Wizard|" AssemblyName="|Boilerplate.Wizard;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="TemplateBuilder.dll" AssemblyName="TemplateBuilder, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="File" Path="NuGet.Core.dll" AssemblyName="NuGet.Core, Version=2.10.1.766, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.Wizard" Path="|Boilerplate.Wizard|" AssemblyName="|Boilerplate.Wizard;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.FeatureSelection" Path="|Boilerplate.FeatureSelection|" AssemblyName="|Boilerplate.FeatureSelection;AssemblyName|" />
+    <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.FeatureSelection.Client" Path="|Boilerplate.FeatureSelection.Client|" AssemblyName="|Boilerplate.FeatureSelection.Client;AssemblyName|" />
   </Assets>
 </PackageManifest>

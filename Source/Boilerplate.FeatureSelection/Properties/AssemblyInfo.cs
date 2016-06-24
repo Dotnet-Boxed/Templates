@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Boilerplate.Wizard")]
+[assembly: AssemblyTitle("Boilerplate.FeatureSelection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Muhammad Rehan Saeed")]
-[assembly: AssemblyProduct("Boilerplate.Wizard")]
+[assembly: AssemblyProduct("Boilerplate.FeatureSelection")]
 [assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

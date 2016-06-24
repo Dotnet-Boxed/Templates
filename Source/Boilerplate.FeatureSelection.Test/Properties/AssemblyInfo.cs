@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Boilerplate.Wizard")]
+[assembly: AssemblyTitle("Boilerplate.Wizard.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Muhammad Rehan Saeed")]
-[assembly: AssemblyProduct("Boilerplate.Wizard")]
+[assembly: AssemblyProduct("Boilerplate.FeatureSelection.Test")]
 [assembly: AssemblyCopyright("Copyright © Muhammad Rehan Saeed 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("81b33f2a-01a6-4aa6-a6f2-6e5ff2c0528f")]
+[assembly: Guid("e0b062af-e0b4-4f72-a284-22468f9c2a4a")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -39,10 +39,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
@@ -50,111 +46,10 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.XML" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\CssAndJavaScript\JavaScriptHintFeature.cs" />
-    <Compile Include="Features\CssAndJavaScript\JavaScriptCodeStyleFeature.cs" />
-    <Compile Include="Features\CssAndJavaScript\TypeScriptFeature.cs" />
-    <Compile Include="Features\Debugging\GlimpseFeature.cs" />
-    <Compile Include="Features\Favicons\AndroidChromeM36ToM38FaviconFeature.cs" />
-    <Compile Include="Features\Favicons\AndroidChromeM39FaviconsFeature.cs" />
-    <Compile Include="Features\Favicons\WebAppCapableFeature.cs" />
-    <Compile Include="Features\Favicons\Windows81IE11EdgeFaviconFeature.cs" />
-    <Compile Include="Features\Favicons\Windows8IE10FaviconFeature.cs" />
-    <Compile Include="Features\Favicons\GoogleTvFaviconFeature.cs" />
-    <Compile Include="Features\Favicons\AppleMacSafariFaviconFeature.cs" />
-    <Compile Include="Features\Favicons\AppleIOSFaviconsFeature.cs" />
-    <Compile Include="Features\FeatureSet.cs" />
-    <Compile Include="Features\Base\BinaryChoiceFeature.cs" />
-    <Compile Include="Features\Base\Feature.cs" />
-    <Compile Include="Features\Base\FeatureCollection.cs" />
-    <Compile Include="Features\Base\FeatureGroup.cs" />
-    <Compile Include="Features\Base\FeatureItem.cs" />
-    <Compile Include="Features\Base\FeatureItemCollection.cs" />
-    <Compile Include="Features\Base\IFeatureGroup.cs" />
-    <Compile Include="Features\CssAndJavaScript\JavaScriptTestFrameworkFeature.cs" />
-    <Compile Include="Features\FeatureGroups.cs" />
-    <Compile Include="Features\Formatters\NotAcceptableFormatterFeature.cs" />
-    <Compile Include="Features\Formatters\NoContentFormatterFeature.cs" />
-    <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
-    <Compile Include="Features\CssAndJavaScript\FrontEndFrameworkFeature.cs" />
-    <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
-    <Compile Include="Features\Hidden\NpmPackageNameFeature.cs" />
-    <Compile Include="Features\Hidden\ServicesFeature.cs" />
-    <Compile Include="Features\Hidden\AssemblyCopyrightFeature.cs" />
-    <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
-    <Compile Include="Features\Monitoring\ApplicationInsightsFeature.cs" />
-    <Compile Include="Features\Other\FeedFeature.cs" />
-    <Compile Include="Features\Other\HumansTextFeature.cs" />
-    <Compile Include="Features\Base\IBinaryChoiceFeature.cs" />
-    <Compile Include="Features\Base\IFeatureItem.cs" />
-    <Compile Include="Features\Base\IMultiChoiceFeature.cs" />
-    <Compile Include="Features\Base\MultiChoiceFeature.cs" />
-    <Compile Include="Features\Formatters\JsonFormatterFeature.cs" />
-    <Compile Include="Features\Other\HttpExceptionFeature.cs" />
-    <Compile Include="Features\Performance\CshtmlMinificationFeature.cs" />
-    <Compile Include="Features\Security\NWebSecFeature.cs" />
-    <Compile Include="Features\SEO\RedirectToCanonicalUrlFeature.cs" />
-    <Compile Include="Features\SEO\RobotsTextFeature.cs" />
-    <Compile Include="Features\Other\SearchFeature.cs" />
-    <Compile Include="Features\SEO\SitemapFeature.cs" />
-    <Compile Include="Features\Pages\ContactPageFeature.cs" />
-    <Compile Include="Features\Pages\AboutPageFeature.cs" />
-    <Compile Include="Features\Other\ReferrerMetaTagFeature.cs" />
-    <Compile Include="Features\Rest\SwaggerFeature.cs" />
-    <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
-    <Compile Include="Features\Social\OpenGraphFeature.cs" />
-    <Compile Include="Features\Social\AuthorMetaTagFeature.cs" />
-    <Compile Include="Features\Social\TwitterCardFeature.cs" />
-    <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
-    <Compile Include="Framework\ComponentModel\ItemChangedEventArgs.cs" />
-    <Compile Include="Framework\ComponentModel\ObservableItemsCollection.cs" />
-    <Compile Include="Services\IFileFixerService.cs" />
-    <Compile Include="Services\IPortService.cs" />
-    <Compile Include="Services\JsonFileFixerService.cs" />
-    <Compile Include="Services\PortService.cs" />
-    <Compile Include="ViewModels\DesignMainViewModel.cs" />
-    <Compile Include="Wizards\Mvc6ApiFeatureWizard.cs" />
-    <Compile Include="Wizards\Mvc6FeatureWizard.cs" />
-    <Compile Include="Framework\UI\Controls\LoadingContent.cs" />
-    <Compile Include="Framework\UI\Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Framework\UI\Converters\InverseBoolConverter.cs" />
-    <Compile Include="Framework\UI\Converters\InverseBoolToVisibilityConverter.cs" />
-    <Compile Include="Framework\UI\Converters\InverseNullToVisibilityConverter.cs" />
-    <Compile Include="Framework\UI\Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Framework\UI\Input\AsyncCommand.cs" />
-    <Compile Include="Framework\UI\Input\AsyncCommandT.cs" />
-    <Compile Include="Framework\UI\Input\AsyncDelegateCommand.cs" />
-    <Compile Include="Framework\UI\Input\AsyncDelegateCommandT.cs" />
-    <Compile Include="Framework\UI\Input\Command.cs" />
-    <Compile Include="Framework\UI\Input\CommandBase.cs" />
-    <Compile Include="Framework\UI\Input\CommandT.cs" />
-    <Compile Include="Framework\UI\Input\DelegateCommand.cs" />
-    <Compile Include="Framework\UI\Input\DelegateCommandT.cs" />
-    <Compile Include="Framework\ComponentModel\Disposable.cs" />
-    <Compile Include="Framework\ComponentModel\NotifyPropertyChanges.cs" />
-    <Compile Include="Features\Base\IFeature.cs" />
-    <Compile Include="Services\EditCommentMode.cs" />
-    <Compile Include="Services\FileSystemService.cs" />
-    <Compile Include="Services\IFileSystemService.cs" />
-    <Compile Include="Services\IProjectService.cs" />
-    <Compile Include="Services\ProjectService.cs" />
-    <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\IMainViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\FeatureDataTemplateSelector.cs" />
-    <Compile Include="Views\IMainView.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Mvc6ApiFeatureWizard.cs" />
+    <Compile Include="Mvc6FeatureWizard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -163,80 +58,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Bootstrap.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Zurb Foundation.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Semantic UI.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Mocha.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Jasmine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Swagger.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\TypeScript.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Open Graph.png" />
-    <Resource Include="Assets\Twitter.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\JSCS.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\JSHint.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Google Analytics.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Application Insights.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Android Chrome.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Glimpse.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\NWebSec.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\Atom Feed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\iOS.png" />
-    <Resource Include="Assets\OS X.png" />
-    <Resource Include="Assets\Windows.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\NetCore.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\NetFramework.png" />
+    <ProjectReference Include="..\Boilerplate.FeatureSelection.Client\Boilerplate.FeatureSelection.Client.csproj">
+      <Project>{9d90ca39-b283-4558-90e7-8ba2deac5efa}</Project>
+      <Name>Boilerplate.FeatureSelection.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Boilerplate.FeatureSelection\Boilerplate.FeatureSelection.csproj">
+      <Project>{81b33f2a-01a6-4aa6-a6f2-6e5ff2c0528f}</Project>
+      <Name>Boilerplate.FeatureSelection</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
