@@ -1,9 +1,8 @@
 ﻿namespace Boilerplate.AspNetCore.Middleware
 {
-    using System.IO;
-    using System.Text;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Http.Features;
 
     internal class HttpExceptionMiddleware
     {
@@ -25,8 +24,8 @@
                 context.Response.StatusCode = httpException.StatusCode;
                 if (httpException != null)
                 {
-                    var bytes = Encoding.UTF8.GetBytes(httpException.Message);
-                    context.Response.Body = new MemoryStream(bytes);
+                    var responseFeature = context.Features.Get<IHttpResponseFeature>();
+                    responseFeature.ReasonPhrase = httpException.Message;
                 }
             }
         }
