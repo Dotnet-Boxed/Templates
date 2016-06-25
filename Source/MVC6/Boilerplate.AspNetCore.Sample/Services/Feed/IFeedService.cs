@@ -1,10 +1,10 @@
-﻿// $Start-TargetFramework-NetFramework$
-#if NET461
-// The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
-// type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
-// $End-TargetFramework-NetFramework$
-namespace MvcBoilerplate.Services
+﻿namespace MvcBoilerplate.Services
 {
+    // $Start-TargetFramework-NetFramework$
+#if NET461
+    // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
+    // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+    // $End-TargetFramework-NetFramework$
     using System.ServiceModel.Syndication;
     using System.Threading;
     using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace MvcBoilerplate.Services
         /// </remarks>
         Task PublishUpdate();
     }
-}
-// $Start-TargetFramework-NetFramework$
+    // $Start-TargetFramework-NetFramework$
 #endif
-// $End-TargetFramework-NetFramework$
+    // $End-TargetFramework-NetFramework$
+}

@@ -152,14 +152,10 @@
     <ProjectReference Include="..\Boilerplate.FeatureSelection.Client\Boilerplate.FeatureSelection.Client.csproj">
       <Project>{9d90ca39-b283-4558-90e7-8ba2deac5efa}</Project>
       <Name>Boilerplate.FeatureSelection.Client</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
     <ProjectReference Include="..\Boilerplate.FeatureSelection\Boilerplate.FeatureSelection.csproj">
       <Project>{81b33f2a-01a6-4aa6-a6f2-6e5ff2c0528f}</Project>
       <Name>Boilerplate.FeatureSelection</Name>
-      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
-      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
     <ProjectReference Include="..\Boilerplate.Wizard\Boilerplate.Wizard.csproj">
       <Project>{9cea6cb2-ddcf-4ab3-8b22-0383b3f529ef}</Project>

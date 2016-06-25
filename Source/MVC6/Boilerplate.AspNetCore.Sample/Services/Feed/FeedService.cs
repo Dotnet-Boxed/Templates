@@ -1,10 +1,10 @@
-﻿// $Start-TargetFramework-NetFramework$
-#if NET461
-// The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
-// type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
-// $End-TargetFramework-NetFramework$
-namespace MvcBoilerplate.Services
+﻿namespace MvcBoilerplate.Services
 {
+    // $Start-TargetFramework-NetFramework$
+#if NET461
+    // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
+    // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
+    // $End-TargetFramework-NetFramework$
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
@@ -24,6 +24,8 @@ namespace MvcBoilerplate.Services
     /// </summary>
     public sealed class FeedService : IFeedService
     {
+        #region Fields
+
         /// <summary>
         /// The feed universally unique identifier. Do not use the URL of your feed as this can change.
         /// A much better ID is to use a GUID which you can generate from Tools->Create GUID in Visual Studio.
@@ -34,6 +36,8 @@ namespace MvcBoilerplate.Services
         private readonly IOptions<AppSettings> appSettings;
         private readonly HttpClient httpClient;
         private readonly IUrlHelper urlHelper;
+
+        #endregion
 
         #region Constructors
 
@@ -260,7 +264,7 @@ namespace MvcBoilerplate.Services
 
         #endregion
     }
-}
-// $Start-TargetFramework-NetFramework$
+    // $Start-TargetFramework-NetFramework$
 #endif
-// $End-TargetFramework-NetFramework$
+    // $End-TargetFramework-NetFramework$
+}

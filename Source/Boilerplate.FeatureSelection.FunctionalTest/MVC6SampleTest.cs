@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
     using Autofac;
     using Boilerplate.FeatureSelection.Features;
@@ -20,8 +21,10 @@
 
         public MVC6SampleTest()
         {
-            this.projectDirectoryPath = @"C:\GitHub\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample";
-            this.tempDirectoryPath = Path.Combine(Path.GetTempPath(), "Boilerplate.AspNetCore.Sample-" + Guid.NewGuid().ToString());
+            // this.projectDirectoryPath = @"C:\GitHub\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample";
+            // this.tempDirectoryPath = Path.Combine(Path.GetTempPath(), "Boilerplate.AspNetCore.Sample-" + Guid.NewGuid().ToString());
+            this.projectDirectoryPath = @"C:\Git\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample";
+            this.tempDirectoryPath = Path.Combine(@"D:\Temp", "Boilerplate.AspNetCore.Sample-" + Guid.NewGuid().ToString());
 
             CopyDirectory(this.projectDirectoryPath, this.tempDirectoryPath);
 
@@ -36,6 +39,56 @@
         [Fact]
         public async Task MVC6Sample_Default_BuildsSuccessfully()
         {
+            await this.AddOrRemoveFeatures();
+
+            await this.AssertBuildSucceeded();
+        }
+
+        [Fact]
+        public async Task MVC6Sample_Basic_BuildsSuccessfully()
+        {
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .ToList()
+                .ForEach(x => x.IsSelected = false);
+            this.features
+                .OfType<MultiChoiceFeature>()
+                .Where(x => x.IsVisible && x.IsMultiSelect)
+                .SelectMany(x => x.Items)
+                .ToList()
+                .ForEach(y => y.IsSelected = false);
+            this.features
+                .OfType<MultiChoiceFeature>()
+                .Where(x => x.IsVisible && !x.IsMultiSelect)
+                .SelectMany(x => x.Items)
+                .Last().IsSelected = true;
+
+            await this.AddOrRemoveFeatures();
+
+            await this.AssertBuildSucceeded();
+        }
+
+        [Fact]
+        public async Task MVC6Sample_Full_BuildsSuccessfully()
+        {
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .ToList()
+                .ForEach(x => x.IsSelected = true);
+            this.features
+                .OfType<MultiChoiceFeature>()
+                .Where(x => x.IsVisible && x.IsMultiSelect)
+                .SelectMany(x => x.Items)
+                .ToList()
+                .ForEach(y => y.IsSelected = true);
+            this.features
+                .OfType<MultiChoiceFeature>()
+                .Where(x => x.IsVisible && !x.IsMultiSelect)
+                .SelectMany(x => x.Items)
+                .First().IsSelected = true;
+
             await this.AddOrRemoveFeatures();
 
             await this.AssertBuildSucceeded();
@@ -102,8 +155,16 @@
         [InlineData(typeof(Windows8IE10FaviconFeature), false)]
         public async Task MVC6Sample_BinaryChoiceFeature_BuildsSuccessfully(Type type, bool isSelected)
         {
-            this.features.OfType<BinaryChoiceFeature>().Where(x => x.IsVisible).ToList().ForEach(x => x.IsSelected = false);
-            this.features.OfType<BinaryChoiceFeature>().Where(x => x.IsVisible).First(x => x.GetType() == type).IsSelected = isSelected;
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .ToList()
+                .ForEach(x => x.IsSelected = false);
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .First(x => x.GetType() == type)
+                .IsSelected = isSelected;
 
             await this.AddOrRemoveFeatures();
 
@@ -179,30 +240,29 @@
 
         private static async Task AssertStartProcess(string workingDirectory, string fileName, string arguments)
         {
-            var buildProcess = Process.Start(
+            using (var process = Process.Start(
                 new ProcessStartInfo()
                 {
                     CreateNoWindow = true,
                     FileName = fileName,
                     Arguments = arguments,
                     RedirectStandardError = true,
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
                     UseShellExecute = false,
                     WorkingDirectory = workingDirectory
-                });
-            buildProcess.WaitForExit();
-            var standardError = await buildProcess.StandardError.ReadToEndAsync();
-            var standardOutput = await buildProcess.StandardOutput.ReadToEndAsync();
-            var result = buildProcess.ExitCode == 0 ? "Succeeded" : "Failed";
-            var message = $"Executing {fileName} {arguments} {result}.\r\n\r\nStandardError:<{standardError}>\r\n\r\nStandardOutput:<{standardOutput}>.";
-            if (buildProcess.ExitCode != 0)
+                }))
             {
-                Assert.False(true, message);
-            }
-            else
-            {
-                Debug.WriteLine(message);
+                var timedOut = !process.WaitForExit(1000 * 15);
+                var standardError = await process.StandardError.ReadToEndAsync();
+                var result = process.ExitCode == 0 ? "Succeeded" : "Failed";
+                var message = $"Executing {fileName} {arguments} {result}.\r\n\r\nStandardError:\r\n{standardError}";
+                if (timedOut || process.ExitCode != 0)
+                {
+                    Assert.False(true, message);
+                }
+                else
+                {
+                    Debug.WriteLine(message);
+                }
             }
         }
 

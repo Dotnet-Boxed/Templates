@@ -100,6 +100,7 @@
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Controllers\HomeController.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"ServiceCollectionExtensions.cs");
+            this.ProjectService.DeleteDirectory("Services");
         }
 
         protected override async Task RemoveFeature()

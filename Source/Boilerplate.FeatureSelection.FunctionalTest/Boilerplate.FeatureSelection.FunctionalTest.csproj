@@ -65,17 +65,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Boilerplate.FeatureSelection.Client\Boilerplate.FeatureSelection.Client.csproj">
-      <Project>{9d90ca39-b283-4558-90e7-8ba2deac5efa}</Project>
-      <Name>Boilerplate.FeatureSelection.Client</Name>
-    </ProjectReference>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Boilerplate.FeatureSelection\Boilerplate.FeatureSelection.csproj">
       <Project>{81b33f2a-01a6-4aa6-a6f2-6e5ff2c0528f}</Project>
       <Name>Boilerplate.FeatureSelection</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

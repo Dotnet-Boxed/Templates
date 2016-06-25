@@ -19,7 +19,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Boilerplate.FeatureSelection;component/Themes/Generic.xaml"/>
+                <ResourceDictionary Source="/Boilerplate.FeatureSelection.Client;component/Themes/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate x:Key="BinaryChoiceFeatureDataTemplate">
