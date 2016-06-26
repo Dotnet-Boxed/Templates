@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using Autofac;
     using Boilerplate.FeatureSelection.Features;
@@ -21,12 +21,10 @@
 
         public MVC6SampleTest()
         {
-            // this.projectDirectoryPath = @"C:\GitHub\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample";
-            // this.tempDirectoryPath = Path.Combine(Path.GetTempPath(), "Boilerplate.AspNetCore.Sample-" + Guid.NewGuid().ToString());
-            this.projectDirectoryPath = @"C:\Git\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample";
-            this.tempDirectoryPath = Path.Combine(@"D:\Temp", "Boilerplate.AspNetCore.Sample-" + Guid.NewGuid().ToString());
+            this.projectDirectoryPath = ConfigurationManager.AppSettings["ProjectDirectoryPath"];
+            this.tempDirectoryPath = ConfigurationManager.AppSettings["TempDirectoryPath"] + Guid.NewGuid().ToString();
 
-            CopyDirectory(this.projectDirectoryPath, this.tempDirectoryPath);
+            DirectoryExtended.Copy(this.projectDirectoryPath, this.tempDirectoryPath);
 
             var container = new ContainerBuilder()
                 .RegisterServices(Path.Combine(this.tempDirectoryPath, "Boilerplate.AspNetCore.Sample.xproj"))
@@ -41,7 +39,7 @@
         {
             await this.AddOrRemoveFeatures();
 
-            await this.AssertBuildSucceeded();
+            await this.AssertDotnetBuildSucceeded();
         }
 
         [Fact]
@@ -66,7 +64,7 @@
 
             await this.AddOrRemoveFeatures();
 
-            await this.AssertBuildSucceeded();
+            await this.AssertDotnetBuildSucceeded();
         }
 
         [Fact]
@@ -91,7 +89,7 @@
 
             await this.AddOrRemoveFeatures();
 
-            await this.AssertBuildSucceeded();
+            await this.AssertDotnetBuildSucceeded();
         }
 
         [Theory]
@@ -168,7 +166,7 @@
 
             await this.AddOrRemoveFeatures();
 
-            await this.AssertBuildSucceeded();
+            await this.AssertDotnetBuildSucceeded();
         }
 
         [Theory]
@@ -195,7 +193,47 @@
 
             await this.AddOrRemoveFeatures();
 
-            await this.AssertBuildSucceeded();
+            await this.AssertDotnetBuildSucceeded();
+        }
+
+        [Theory]
+        [InlineData(typeof(ApplicationInsightsFeature), true)]
+        [InlineData(typeof(ApplicationInsightsFeature), false)]
+        [InlineData(typeof(CstmlMinificationFeature), true)]
+        [InlineData(typeof(CstmlMinificationFeature), false)]
+        [InlineData(typeof(JavaScriptCodeStyleFeature), true)]
+        [InlineData(typeof(JavaScriptCodeStyleFeature), false)]
+        [InlineData(typeof(JavaScriptHintFeature), true)]
+        [InlineData(typeof(JavaScriptHintFeature), false)]
+        [InlineData(typeof(TypeScriptFeature), true)]
+        [InlineData(typeof(TypeScriptFeature), false)]
+        public async Task MVC6Sample_BinaryChoiceFeature_GulpCleanBuildTestSuccessfull(Type type, bool isSelected)
+        {
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .ToList()
+                .ForEach(x => x.IsSelected = false);
+            this.features
+                .OfType<BinaryChoiceFeature>()
+                .Where(x => x.IsVisible)
+                .First(x => x.GetType() == type)
+                .IsSelected = isSelected;
+
+            await this.AddOrRemoveFeatures();
+
+            await this.AssertNpmInstallSucceeded();
+            await this.AssertBowerInstallSucceeded();
+            await this.AssertGulpCleanBuildTestSucceeded();
+        }
+
+
+        //[InlineData(typeof(JavaScriptTestFrameworkFeature), true)]
+        //[InlineData(typeof(JavaScriptTestFrameworkFeature), false)]
+
+        public void Dispose()
+        {
+            DirectoryExtended.Delete(this.tempDirectoryPath);
         }
 
         private async Task AddOrRemoveFeatures()
@@ -208,52 +246,34 @@
             await this.fileSystemService.SaveAll();
         }
 
-        public void Dispose()
+        private static async Task AssertStartProcess(
+            string workingDirectory,
+            string fileName,
+            string arguments,
+            TimeSpan timeout)
         {
-            Directory.Delete(this.tempDirectoryPath, true);
-        }
+            var showConsole = Debugger.IsAttached;
 
-        private async Task AssertBuildSucceeded()
-        {
-            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore");
-            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "build");
-        }
-
-        private static void GetInlineData()
-        {
-            var types = typeof(IFeature).Assembly.GetTypes();
-            var binaryChoiceFeatures = string.Join("\r\n", types
-                .Where(x => x.IsAssignableTo<IBinaryChoiceFeature>())
-                .Where(x => x != typeof(IBinaryChoiceFeature))
-                .Where(x => x != typeof(BinaryChoiceFeature))
-                .Select(x => x.Name)
-                .OrderBy(x => x)
-                .Select(x => $"[InlineData(typeof({x}), true)]\r\n[InlineData(typeof({x}), false)]"));
-            var multiChoiceFeatures = string.Join("\r\n", types
-                .Where(x => x.IsAssignableTo<IMultiChoiceFeature>())
-                .Where(x => x != typeof(IMultiChoiceFeature))
-                .Where(x => x != typeof(MultiChoiceFeature))
-                .Select(x => x.Name)
-                .OrderBy(x => x)
-                .Select(x => $"[InlineData(typeof({x}), 0)]\r\n[InlineData(typeof({x}), 1)]"));
-        }
-
-        private static async Task AssertStartProcess(string workingDirectory, string fileName, string arguments)
-        {
             using (var process = Process.Start(
                 new ProcessStartInfo()
                 {
-                    CreateNoWindow = true,
+                    CreateNoWindow = !showConsole,
                     FileName = fileName,
                     Arguments = arguments,
-                    RedirectStandardError = true,
+                    RedirectStandardError = !showConsole,
                     UseShellExecute = false,
                     WorkingDirectory = workingDirectory
                 }))
             {
-                var timedOut = !process.WaitForExit(1000 * 15);
-                var standardError = await process.StandardError.ReadToEndAsync();
-                var result = process.ExitCode == 0 ? "Succeeded" : "Failed";
+                var timedOut = !process.WaitForExit((int)timeout.TotalMilliseconds);
+
+                var standardError = string.Empty;
+                if (!showConsole)
+                {
+                    await process.StandardError.ReadToEndAsync();
+                }
+
+                var result = timedOut ? "Timed Out" : process.ExitCode == 0 ? "Succeeded" : "Failed";
                 var message = $"Executing {fileName} {arguments} {result}.\r\n\r\nStandardError:\r\n{standardError}";
                 if (timedOut || process.ExitCode != 0)
                 {
@@ -266,25 +286,34 @@
             }
         }
 
-        private static void CopyDirectory(string sourceDirectoryPath, string destinationDirectoryPath)
+        private async Task AssertDotnetBuildSucceeded()
         {
-            sourceDirectoryPath = sourceDirectoryPath.TrimEnd('\\');
+            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(10));
+            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(10));
+        }
 
-            foreach (string directoryPath in Directory.GetDirectories(
-                sourceDirectoryPath,
-                "*",
-                SearchOption.AllDirectories))
-            {
-                Directory.CreateDirectory(directoryPath.Replace(sourceDirectoryPath, destinationDirectoryPath));
-            }
+        private async Task AssertNpmInstallSucceeded()
+        {
+            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
+            var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
+            await AssertStartProcess(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
+        }
 
-            foreach (string newPath in Directory.GetFiles(
-                sourceDirectoryPath,
-                "*.*",
-                SearchOption.AllDirectories))
-            {
-                File.Copy(newPath, newPath.Replace(sourceDirectoryPath, destinationDirectoryPath), true);
-            }
+        private async Task AssertBowerInstallSucceeded()
+        {
+            await AssertStartProcess(
+                this.tempDirectoryPath,
+                @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External\bower.cmd",
+                "install",
+                TimeSpan.FromSeconds(30));
+        }
+
+        private async Task AssertGulpCleanBuildTestSucceeded()
+        {
+            var gulpFilePath = Path.Combine(this.tempDirectoryPath, @"node_modules\.bin\gulp.cmd");
+            await AssertStartProcess(this.tempDirectoryPath, gulpFilePath, "clean", TimeSpan.FromSeconds(10));
+            await AssertStartProcess(this.tempDirectoryPath, gulpFilePath, "build", TimeSpan.FromSeconds(10));
+            await AssertStartProcess(this.tempDirectoryPath, gulpFilePath, "test", TimeSpan.FromSeconds(10));
         }
     }
 }
