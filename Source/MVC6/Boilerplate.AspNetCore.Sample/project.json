@@ -3,7 +3,7 @@
   "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
 
   "dependencies": {
-    "Boilerplate.AspNetCore": "1.0.0-rc2-final-0003",
+    "Boilerplate.AspNetCore": "1.0.0-rc2-final-0004",
     "Boilerplate.AspNetCore.TagHelpers": "1.0.0-rc2-final-0001",
     // $Start-CshtmlMinification$
     "Boilerplate.AspNetCore.Razor": "1.0.0-rc2-final-0001",
