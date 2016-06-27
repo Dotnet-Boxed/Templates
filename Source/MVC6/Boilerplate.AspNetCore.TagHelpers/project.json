@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0-rc2-final-0001",
+  "version": "1.0.0",
   "title": "ASP.NET MVC 6 Boilerplate Framework Tag Helpers",
   "description": "Provides boilerplate framework tag helper code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Performance improvements.",
+    "releaseNotes": "Updated to ASP.NET Core 1.0 RTM.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET MVC MVC6 Boilerplate Tag Helper TagHelper Html Muhammad Rehan Saeed Framework" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
@@ -26,14 +26,13 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0-rc2-final",
-    "Microsoft.AspNetCore.Razor.Runtime": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc2-final"
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
+    "Microsoft.AspNetCore.Razor.Runtime": "1.0.0",
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0"
   },
 
   "frameworks": {
-    "netstandard1.5": {
-      "imports": "dnxcore50"
+    "netstandard1.6": {
     },
     "net461": {
     }

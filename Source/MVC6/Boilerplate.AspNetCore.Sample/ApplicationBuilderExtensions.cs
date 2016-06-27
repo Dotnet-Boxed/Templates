@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     // $Start-NWebSec$
     using MvcBoilerplate.Constants;
     using NWebsec.AspNetCore.Middleware;
@@ -17,14 +18,13 @@
         /// </summary>
         public static IApplicationBuilder UseDebugging(this IApplicationBuilder application)
         {
-            // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
-            // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-            // NOTE: Browser link has a bug in RC2 that causes rendering issues (See https://github.com/aspnet/Mvc/issues/4671).
-            // application.UseBrowserLink();
-
             // Browse to /runtimeinfo to see information about the runtime that is being used and the packages that
             // are included in the application. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-            return application.UseRuntimeInfoPage();
+            // application.UseRuntimeInfoPage();
+
+            // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
+            // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
+            return application.UseBrowserLink();
         }
 
         /// <summary>
@@ -39,11 +39,11 @@
                     HttpOnly = HttpOnlyPolicy.Always,
                     // $Start-HttpsEverywhere-On$
                     // Ensure that the cookie can only be transported over HTTPS.
-                    Secure = SecurePolicy.Always
+                    Secure = CookieSecurePolicy.Always
                     // $End-HttpsEverywhere-On$
                     // $Start-HttpsEverywhere-Off$
                     // // Ensure that the cookie can only be transported over the same scheme as the request.
-                    // Secure = SecurePolicy.SameAsRequest
+                    // Secure = CookieSecurePolicy.SameAsRequest
                     // $End-HttpsEverywhere-Off$
                 });
         }

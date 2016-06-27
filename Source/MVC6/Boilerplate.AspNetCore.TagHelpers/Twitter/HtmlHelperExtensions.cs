@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.AspNetCore.TagHelpers.Twitter
 {
+    using Microsoft.AspNetCore.Html;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     /// <summary>

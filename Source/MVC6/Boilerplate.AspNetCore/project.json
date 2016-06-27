@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0-rc2-final-0004",
+  "version": "1.0.0",
   "title": "ASP.NET MVC 6 Boilerplate Framework",
   "description": "Provides boilerplate framework code for an ASP.NET MVC project. ASP.NET MVC Boilerplate is a professional template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. You can download the ASP.NET MVC Boilerplate project template on the Visual Studio Gallery or download the code on GitHub.",
   "copyright": "@ Muhammad Rehan Saeed. All rights Reserved",
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Added IServiceCollection fluent interface extension methods in ServiceCollectionExtensions.",
+    "releaseNotes": "Updated to ASP.NET Core 1.0 RTM.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET MVC MVC6 Boilerplate Muhammad Rehan Saeed Framework" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
@@ -26,18 +26,17 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.0-rc2-final",
-    "Microsoft.AspNetCore.Mvc.Core": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Caching.Abstractions": "1.0.0-rc2-final",
-    "Newtonsoft.Json": "8.0.3"
+    "Microsoft.AspNetCore.Mvc.Abstractions": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
+    "Microsoft.Extensions.Caching.Abstractions": "1.0.0",
+    "Newtonsoft.Json": "9.0.1"
   },
 
   "frameworks": {
-    "netstandard1.5": {
+    "netstandard1.6": {
       "dependencies": {
-        "System.Xml.XDocument": "4.0.11-rc2-24027"
-      },
-      "imports": "dnxcore50"
+        "System.Xml.XDocument": "4.0.11"
+      }
     },
     "net461": {
       "frameworkAssemblies": {

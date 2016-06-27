@@ -1,4 +1,8 @@
-﻿Version 3.2.0
+﻿Version 4.0.0
+MVC 6
+- Updated to ASP.NET Core 1.0 RTM.
+
+Version 3.2.0
 MVC 5 & 6
 - Removed the X-UA-Compatible HTTP header from web.config.
 MVC 6
