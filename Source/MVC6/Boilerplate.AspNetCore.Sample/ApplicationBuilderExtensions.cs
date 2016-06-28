@@ -1,10 +1,14 @@
 ﻿namespace MvcBoilerplate
 {
+    // $Start-NWebSec$
     using System.Collections.Generic;
+    // $End-NWebSec$
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
+    // $Start-NWebSec$
     using Microsoft.AspNetCore.Hosting;
+    // $End-NWebSec$
     using Microsoft.AspNetCore.Http;
     // $Start-NWebSec$
     using MvcBoilerplate.Constants;
