@@ -270,7 +270,7 @@
                 var standardError = string.Empty;
                 if (!showConsole)
                 {
-                    await process.StandardError.ReadToEndAsync();
+                    standardError = await process.StandardError.ReadToEndAsync();
                 }
 
                 var result = timedOut ? "Timed Out" : process.ExitCode == 0 ? "Succeeded" : "Failed";
@@ -288,8 +288,8 @@
 
         private async Task AssertDotnetBuildSucceeded()
         {
-            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(10));
-            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(10));
+            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(15));
+            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(15));
         }
 
         private async Task AssertNpmInstallSucceeded()
