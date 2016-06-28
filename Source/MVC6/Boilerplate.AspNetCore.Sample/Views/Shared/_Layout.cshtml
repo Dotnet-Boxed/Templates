@@ -199,15 +199,16 @@
                     @* $Start-Feed$ *@
                     <li><a asp-route="@HomeControllerRoute.GetFeed"><span aria-hidden="true" class="fa fa-rss"></span> RSS</a></li>
                     @* $End-Feed$ *@
-                    @if (HostingEnvironment.IsDevelopment())
-                    {
+                    @* $Start-RuntimeInfoPage$ *@
+                    <environment names="@EnvironmentName.Development">
                         <li class="dropdown">
                             <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="~/runtimeinfo"><span aria-hidden="true" class="fa fa-info"></span> Runtime Information</a></li>
                             </ul>
                         </li>
-                    }
+                    </environment>
+                    @* $End-RuntimeInfoPage$ *@
                 </ul>
                 @* $Start-Search$ *@
                 <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">

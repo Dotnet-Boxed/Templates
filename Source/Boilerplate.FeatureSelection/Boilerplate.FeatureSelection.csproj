@@ -74,9 +74,10 @@
     <Compile Include="Features\Formatters\NotAcceptableFormatterFeature.cs" />
     <Compile Include="Features\Formatters\XmlFormatterFeature.cs" />
     <Compile Include="Features\Hidden\AssemblyCopyrightFeature.cs" />
-    <Compile Include="Features\Hidden\JavaScriptLintFeature.cs" />
+    <Compile Include="Features\Hidden\NoJavaScriptLintingFeature.cs" />
     <Compile Include="Features\Hidden\NpmPackageNameFeature.cs" />
-    <Compile Include="Features\Hidden\ServicesFeature.cs" />
+    <Compile Include="Features\Hidden\RemoveRuntimeInfoPageFeature.cs" />
+    <Compile Include="Features\Hidden\RemoveServicesNamespaceFeature.cs" />
     <Compile Include="Features\Hidden\SetRandomPortsFeature.cs" />
     <Compile Include="Features\Monitoring\ApplicationInsightsFeature.cs" />
     <Compile Include="Features\Other\FeedFeature.cs" />

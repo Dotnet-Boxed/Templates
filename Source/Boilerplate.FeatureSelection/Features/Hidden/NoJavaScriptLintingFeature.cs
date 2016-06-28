@@ -1,17 +1,16 @@
 ﻿namespace Boilerplate.FeatureSelection.Features
 {
-    using System;
     using System.ComponentModel;
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
 
-    public class JavaScriptLintFeature : BinaryChoiceFeature
+    public class NoJavaScriptLintingFeature : BinaryChoiceFeature
     {
         private readonly JavaScriptCodeStyleFeature javaScriptCodeStyleFeature;
         private readonly JavaScriptHintFeature javaScriptHintFeature;
         private readonly TypeScriptFeature typeScriptFeature;
 
-        public JavaScriptLintFeature(
+        public NoJavaScriptLintingFeature(
             IProjectService projectService,
             JavaScriptCodeStyleFeature javaScriptCodeStyleFeature,
             JavaScriptHintFeature javaScriptHintFeature,

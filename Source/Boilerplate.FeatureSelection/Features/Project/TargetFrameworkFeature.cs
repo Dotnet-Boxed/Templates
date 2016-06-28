@@ -91,6 +91,7 @@
             }
             else
             {
+                this.ProjectService.DeleteFile("app.config");
                 await this.ProjectService.EditCommentInFile(
                     this.net461.CommentName,
                     EditCommentMode.DeleteCode,

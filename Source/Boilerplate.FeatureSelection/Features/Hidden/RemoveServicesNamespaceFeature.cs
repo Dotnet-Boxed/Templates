@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
 
-    public class ServicesFeature : BinaryChoiceFeature
+    public class RemoveServicesNamespaceFeature : BinaryChoiceFeature
     {
         private readonly AndroidChromeM39FaviconsFeature androidChromeM39FaviconsFeature;
         private readonly FeedFeature feedFeature;
@@ -13,7 +13,7 @@
         private readonly SitemapFeature sitemapFeature;
         private readonly Windows81IE11EdgeFaviconFeature windows81IE11EdgeFaviconFeature;
 
-        public ServicesFeature(
+        public RemoveServicesNamespaceFeature(
             IProjectService projectService,
             AndroidChromeM39FaviconsFeature androidChromeM39FaviconsFeature,
             FeedFeature feedFeature,
