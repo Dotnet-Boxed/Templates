@@ -5,6 +5,8 @@
     using Microsoft.AspNetCore.Http.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Filters;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Options;
 
     /// <summary>
     /// To improve Search Engine Optimization SEO, there should only be a single URL for each resource. Case
@@ -28,6 +30,15 @@
         #endregion
 
         #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RedirectToCanonicalUrlAttribute"/> class.
+        /// </summary>
+        /// <param name="options">The route options.</param>
+        public RedirectToCanonicalUrlAttribute(IOptions<RouteOptions> options)
+            : this(options.Value.AppendTrailingSlash, options.Value.LowercaseUrls)
+        {
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToCanonicalUrlAttribute" /> class.
