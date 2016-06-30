@@ -1,4 +1,9 @@
-﻿Version 4.1.0
+﻿Version 4.2.0
+MVC 6
+- Updated NWebSec to the latest ASP.NET Core 1.0 Version.
+- AddApplicationInsights in Startup.ConfigureServices now added fluently as it now returns IServiceCollection.
+
+Version 4.1.0
 MVC 6
 - Fixed https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/108
 
