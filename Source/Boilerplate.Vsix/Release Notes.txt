@@ -1,4 +1,8 @@
-﻿Version 4.0.0
+﻿Version 4.1.0
+MVC 6
+- Fixed https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/108
+
+Version 4.0.0
 MVC 6
 - Updated to ASP.NET Core 1.0 RTM.
 

@@ -1,6 +1,9 @@
 ﻿namespace MvcBoilerplate
 {
     using Boilerplate.AspNetCore;
+    // $Start-RedirectToCanonicalUrl$
+    using Boilerplate.AspNetCore.Filters;
+    // $End-RedirectToCanonicalUrl$
     // $Start-CshtmlMinification$
     using Boilerplate.AspNetCore.Razor;
     // $End-CshtmlMinification$
@@ -13,12 +16,13 @@
     using Microsoft.AspNetCore.Mvc.Razor;
     // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Mvc.Routing;
-    using Microsoft.AspNetCore.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     // $Start-JsonSerializerSettings$
     using Newtonsoft.Json.Serialization;
+    using Settings;
+
     // $End-JsonSerializerSettings$
 
     /// <summary>
@@ -51,13 +55,6 @@
         /// </summary>
         private readonly int? sslPort;
         // $End-HttpsEverywhere-On$
-        // $Start-RedirectToCanonicalUrl$
-
-        /// <summary>
-        /// The route options detailing how URL's are formed.
-        /// </summary>
-        private RouteOptions routeOptions;
-        // $End-RedirectToCanonicalUrl$
 
         #endregion
 
@@ -143,10 +140,6 @@
                 .AddRouting(
                     options =>
                     {
-                        // $Start-RedirectToCanonicalUrl$
-                        this.routeOptions = options;
-
-                        // $End-RedirectToCanonicalUrl$
                         // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
                         // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
                         // All generated URL's should append a trailing slash.
@@ -162,18 +155,33 @@
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+                // $Start-RedirectToCanonicalUrl$
+                // Adds a filter which help improve search engine optimization (SEO).
+                .AddSingleton<RedirectToCanonicalUrlAttribute>()
+                // $End-RedirectToCanonicalUrl$
                 // Add many MVC services to the services container.
                 .AddMvc(
                     options =>
                     {
-                        options
-                            // $Start-HttpsEverywhere-On$
-                            .AddRequireHttpsFilter(this.sslPort)
-                            // $End-HttpsEverywhere-On$
-                            // $Start-RedirectToCanonicalUrl$
-                            .AddRedirectToCanonicalUrlFilter(this.routeOptions)
-                            // $End-RedirectToCanonicalUrl$
-                            .AddCacheProfilesFromConfiguration(this.configuration);
+                        // Controls how controller actions cache content from the config.json file.
+                        var cacheProfileSettings = this.configuration.GetSection<CacheProfileSettings>();
+                        foreach (var keyValuePair in cacheProfileSettings.CacheProfiles)
+                        {
+                            options.CacheProfiles.Add(keyValuePair);
+                        }
+                        // $Start-HttpsEverywhere-On$
+
+                        // Require HTTPS to be used across the whole site.Also sets a custom port to use for SSL in
+                        // Development.The port number to use is taken from the launchSettings.json file which Visual
+                        // Studio uses to start the application using IIS Express or the command line.
+                        options.Filters.Add(new RequireHttpsAttribute());
+                        options.SslPort = sslPort;
+                        // $End-HttpsEverywhere-On$
+                        // $Start-RedirectToCanonicalUrl$
+
+                        // Adds a filter which help improve search engine optimization (SEO).
+                        options.Filters.AddService(typeof(RedirectToCanonicalUrlAttribute));
+                        // $End-RedirectToCanonicalUrl$
                     })
                 // $Start-JsonSerializerSettings$
                 // Configures the JSON output formatter to use camel case property names like 'propertyName' instead of

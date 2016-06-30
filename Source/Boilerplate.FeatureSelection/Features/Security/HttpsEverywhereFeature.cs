@@ -54,7 +54,6 @@
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.LeaveCodeUnchanged, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, "ApplicationBuilderExtensions.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "MvcOptionsExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ServiceCollectionExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
         }
@@ -67,7 +66,6 @@
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, "Startup.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, "ApplicationBuilderExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, "ApplicationBuilderExtensions.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "MvcOptionsExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ServiceCollectionExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");
         }
