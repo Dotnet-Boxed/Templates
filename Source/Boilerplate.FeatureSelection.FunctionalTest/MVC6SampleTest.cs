@@ -288,7 +288,7 @@
 
         private async Task AssertDotnetBuildSucceeded()
         {
-            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(15));
+            await AssertStartProcess(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(20));
             await AssertStartProcess(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(15));
         }
 

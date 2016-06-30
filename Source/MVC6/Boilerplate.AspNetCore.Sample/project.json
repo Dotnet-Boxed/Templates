@@ -38,8 +38,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     // $Start-NWebSec$
-    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma-5",
-    "NWebsec.AspNetCore.Mvc": "1.0.0-gamma-5",
+    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
+    "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
     // $End-NWebSec$
     "Newtonsoft.Json": "9.0.1"
   },
