@@ -128,12 +128,11 @@
         /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // $Start-ApplicationInsights$
-            // Add Azure Application Insights data collection services to the services container.
-            services.AddApplicationInsightsTelemetry(this.configuration);
-
-            // $End-ApplicationInsights$
             services
+                // $Start-ApplicationInsights$
+                // Add Azure Application Insights data collection services to the services container.
+                .AddApplicationInsightsTelemetry(this.configuration)
+                // $End-ApplicationInsights$
                 .AddAntiforgerySecurely()
                 .AddCaching()
                 .AddOptions(this.configuration)
