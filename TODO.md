@@ -24,7 +24,7 @@ Improvements that can be made to all project templates.
 - Add an option to choose the web-server you are using IIS, Nginx etc. See [this](http://docs.asp.net/en/latest/fundamentals/servers.html) and [this](https://stackoverflow.com/questions/34212765/how-do-i-get-the-kestrel-web-server-to-listen-to-non-localhost-requests/34221690#34221690).
 - Add an option to add a Docker file.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
-- Add an example form controller with [RequestFormSizeLimit](https://github.com/aspnet/Entropy/blob/dd60ba088cadb5bd82bddd3f22ed76069b4b5639/samples/Mvc.FileUpload/Controllers/RequestFormLimitsController.cs) attribute.
+- Add an example form controller with [RequestFormSizeLimit](https://github.com/aspnet/Entropy/blob/dd60ba088cadb5bd82bddd3f22ed76069b4b5639/samples/Mvc.FileUpload/Controllers/RequestFormLimitsController.cs) attribute and [autofill](http://blog.cloudfour.com/autofill-what-web-devs-should-know-but-dont/) support.
 - Improve social tag helpers to include child elements for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
 - Provide better TypeScript support with [typings](https://github.com/DefinitelyTyped/tsd/issues/269) and a default .ts file instead of .js.
 
