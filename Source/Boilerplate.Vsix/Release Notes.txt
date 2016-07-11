@@ -1,4 +1,4 @@
-﻿Version 4.2.2
+﻿Version 4.3.0
 MVC 6
 - Get the environment in gulpfile.js by reading the launchSettings.json file if an environment variable does not exist.
 
