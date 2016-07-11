@@ -1,4 +1,8 @@
-﻿Version 4.2.1
+﻿Version 4.2.2
+MVC 6
+- Get the environment in gulpfile.js by reading the launchSettings.json file if an environment variable does not exist.
+
+Version 4.2.1
 MVC 6
 - Renamed the template in the File -> New Project window.
 

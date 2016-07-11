@@ -46,7 +46,8 @@ var gulp = require('gulp'),
     // $End-TypeScript$
     _ = require('autostrip-json-comments'),     // Strips JSON comments so the next two lines work (https://www.npmjs.com/package/autostrip-json-comments)
     config = require('./config.json'),          // Read the config.json file into the config variable.
-    hosting = require('./hosting.json');        // Read the hosting.json file into the hosting variable.;
+    hosting = require('./hosting.json'),        // Read the hosting.json file into the hosting variable.
+    launch = require('./Properties/launchSettings.json'); // Read the launchSettings.json file into the launch variable.
 
 // Holds information about the hosting environment.
 var environment = {
@@ -54,9 +55,14 @@ var environment = {
     development: 'Development',
     staging: 'Staging',
     production: 'Production',
-    // Gets the current hosting environment the application is running under. This comes from the environment variables.
+    // Gets the current hosting environment the app is running under. Looks for the ASPNETCORE_ENVIRONMENT environment
+    // variable, if not found looks at the launchSettings.json file which if not found defaults to Development.
     current: function () {
-        return process.env.ASPNETCORE_ENVIRONMENT || this.development;
+        var environ = process.env.ASPNETCORE_ENVIRONMENT ||
+            (launch && launch.profiles['IIS Express'].environmentVariables.ASPNETCORE_ENVIRONMENT) ||
+            this.development;
+        gutil.log('Current Environment: ' + environ);
+        return environ;
     },
     // Are we running under the development environment.
     isDevelopment: function () {
