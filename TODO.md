@@ -27,6 +27,7 @@ Improvements that can be made to all project templates.
 - Add an example form controller with [RequestFormSizeLimit](https://github.com/aspnet/Entropy/blob/dd60ba088cadb5bd82bddd3f22ed76069b4b5639/samples/Mvc.FileUpload/Controllers/RequestFormLimitsController.cs) attribute and [autofill](http://blog.cloudfour.com/autofill-what-web-devs-should-know-but-dont/) support.
 - Improve social tag helpers to include child elements for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
 - Provide better TypeScript support with [typings](https://github.com/DefinitelyTyped/tsd/issues/269) and a default .ts file instead of .js.
+- Implement a CDN Version TagHelper as described [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/111#issuecomment-233343619).
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
