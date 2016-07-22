@@ -3,16 +3,16 @@
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
 
-    public class CstmlMinificationFeature : BinaryChoiceFeature
+    public class GooglePageSpeedFeature : BinaryChoiceFeature
     {
-        public CstmlMinificationFeature(IProjectService projectService)
+        public GooglePageSpeedFeature(IProjectService projectService)
             : base(projectService)
         {
         }
 
         public override string Description
         {
-            get { return "Minifies .cshtml files into .min.cshtml files which are then served using a special Razor view engine looking for these files. This is an experimental feature that uses the gulp-minify-cshtml Gulp plugin created by Muhammad Rehan Saeed as a proof of concept."; }
+            get { return "Run Google Page Speed to measure the performance of your site after its deployment. Your site must be deployed and reachable on the internet. This is intended to be run by your continuous integration server after it has done a deployment."; }
         }
 
         public override IFeatureGroup Group
@@ -20,9 +20,14 @@
             get { return FeatureGroups.Performance; }
         }
 
+        public override string Icon
+        {
+            get { return "/Boilerplate.FeatureSelection;component/Assets/Google Page Speed.png"; }
+        }
+
         public override string Id
         {
-            get { return "CshtmlMinification"; }
+            get { return "GooglePageSpeed"; }
         }
 
         public override bool IsSelectedDefault
@@ -37,28 +42,24 @@
 
         public override int Order
         {
-            get { return 2; }
+            get { return 1; }
         }
 
         public override string Title
         {
-            get { return "CSHTML Minification (Experimental)"; }
+            get { return "Google Page Speed"; }
         }
 
         protected override async Task AddFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"package.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"project.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Startup.cs");
         }
 
         protected override async Task RemoveFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"package.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"project.json");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Startup.cs");
         }
     }
 }

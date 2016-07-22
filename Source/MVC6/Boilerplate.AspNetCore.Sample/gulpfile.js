@@ -36,7 +36,9 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),            // Minifies JavaScript (https://www.npmjs.com/package/gulp-uglify/)
     gutil = require('gulp-util'),               // Gulp utilities (https://www.npmjs.com/package/gulp-util/)
     merge = require('merge-stream'),            // Merges one or more gulp streams into one (https://www.npmjs.com/package/merge-stream/)
+    // $Start-GooglePageSpeed$
     psi = require('psi'),                       // Google PageSpeed performance tester (https://www.npmjs.com/package/psi/)
+    // $End-GooglePageSpeed$
     rimraf = require('rimraf'),                 // Deletes files and folders (https://www.npmjs.com/package/rimraf/)
     sass = require('gulp-sass'),                // Compile SCSS to CSS (https://www.npmjs.com/package/gulp-sass/)
     sasslint = require('gulp-sass-lint'),       // SASS linter (https://www.npmjs.com/package/gulp-sass-lint/)
@@ -549,6 +551,7 @@ gulp.task('watch-tests', function () {
  */
 gulp.task('watch', ['watch-css', 'watch-js']);
 
+// $Start-GooglePageSpeed$
 function pageSpeed(strategy, cb) {
     if (siteUrl === undefined) {
         return cb('siteUrl is undefined. Google PageSpeed requires a URL to your deployed site.');
@@ -584,6 +587,7 @@ gulp.task('pagespeed-desktop', function (cb) {
     return pageSpeed('desktop', cb);
 });
 
+// $End-GooglePageSpeed$
 /*
  * The default gulp task. This is useful for scenarios where you are not using Visual Studio. Does a full clean and
  * build before watching for any file changes.

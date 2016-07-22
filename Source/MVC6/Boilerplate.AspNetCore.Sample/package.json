@@ -40,7 +40,9 @@
     "gulp-uglify": "1.5.3",
     "gulp-util": "3.0.7",
     "merge-stream": "1.0.0",
+    // $Start-GooglePageSpeed$
     "psi": "2.0.3",
+    // $End-GooglePageSpeed$
     "rimraf": "2.5.2"
   }
 }

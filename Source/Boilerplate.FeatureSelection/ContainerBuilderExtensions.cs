@@ -32,6 +32,7 @@
                     builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<XmlFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Performance
+                    builder.RegisterType<GooglePageSpeedFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<CstmlMinificationFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Security
                     builder.RegisterType<HttpsEverywhereFeature>().AsSelf().As<IFeature>().SingleInstance();
