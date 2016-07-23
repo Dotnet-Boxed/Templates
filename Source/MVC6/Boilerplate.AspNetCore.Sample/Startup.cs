@@ -19,10 +19,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using MvcBoilerplate.Settings;
     // $Start-JsonSerializerSettings$
     using Newtonsoft.Json.Serialization;
-    using Settings;
-
     // $End-JsonSerializerSettings$
 
     /// <summary>

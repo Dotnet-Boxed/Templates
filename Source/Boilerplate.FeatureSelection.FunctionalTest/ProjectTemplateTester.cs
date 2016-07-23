@@ -12,16 +12,26 @@
     public class ProjectTemplateTester : IDisposable
     {
         private readonly string projectDirectoryPath;
-        private readonly string tempDirectoryPath;
         private readonly FeatureCollection features;
         private readonly IFileSystemService fileSystemService;
+        private readonly string tempDirectoryPath;
 
-        public ProjectTemplateTester(string projectFilePath)
+        public ProjectTemplateTester(string projectFilePath, string tempDirectoryPath)
         {
             this.projectDirectoryPath = Path.GetDirectoryName(projectFilePath);
-            this.tempDirectoryPath = Path.Combine(
-                Path.GetTempPath(),
-                Path.GetFileNameWithoutExtension(projectFilePath) + Guid.NewGuid().ToString());
+
+            if (string.IsNullOrEmpty(tempDirectoryPath))
+            {
+                this.tempDirectoryPath = Path.Combine(
+                    Path.GetTempPath(),
+                    Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
+            }
+            else
+            {
+                this.tempDirectoryPath = Path.Combine(
+                    tempDirectoryPath,
+                    Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
+            }
 
             DirectoryExtended.Copy(this.projectDirectoryPath, this.tempDirectoryPath);
 

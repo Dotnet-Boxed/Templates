@@ -15,14 +15,15 @@
     using Microsoft.AspNetCore.TestHost;
     using Xunit;
 
-    public class MVC6SampleTest
+    public class MVC6SampleTest : IDisposable
     {
         private readonly ProjectTemplateTester tester;
 
         public MVC6SampleTest()
         {
             this.tester = new ProjectTemplateTester(
-                @"C:\GitHub\ASP.NET-MVC-Boilerplate\Source\MVC6\Boilerplate.AspNetCore.Sample\Boilerplate.AspNetCore.Sample.xproj");
+                ConfigurationManager.AppSettings["ProjectPath"],
+                ConfigurationManager.AppSettings["TempDirectoryPath"]);
         }
 
         [Fact]
@@ -219,6 +220,11 @@
             await this.tester.AssertNpmInstallSucceeded();
             await this.tester.AssertBowerInstallSucceeded();
             await this.tester.AssertGulpCleanBuildTestSucceeded();
+        }
+
+        public void Dispose()
+        {
+            this.tester.Dispose();
         }
 
         //[InlineData(typeof(JavaScriptTestFrameworkFeature), true)]

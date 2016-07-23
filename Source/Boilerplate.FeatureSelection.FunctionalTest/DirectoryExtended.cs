@@ -1,5 +1,6 @@
 ﻿namespace Boilerplate.FeatureSelection.FunctionalTest
 {
+    using System.ComponentModel;
     using System.IO;
     using System.Runtime.InteropServices;
 
@@ -28,7 +29,12 @@
 
         public static void Delete(string directoryPath)
         {
-            DeleteFile(directoryPath);
+            var result = DeleteFile(directoryPath);
+            if (!result)
+            {
+                int errorCode = Marshal.GetLastWin32Error();
+                throw new Win32Exception(errorCode, "See https://msdn.microsoft.com/en-us/library/ms681382.aspx");
+            }
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
