@@ -2,6 +2,7 @@
 MVC 6
 - Get the environment in gulpfile.js by reading the launchSettings.json file if an environment variable does not exist.
 - Google Page Speed is now an optional feature under performance.
+- Set AddServerHeader to false for the Kestrel Web Server in Program.cs.
 
 Version 4.2.1
 MVC 6
@@ -52,9 +53,9 @@ MVC 5
 MVC 6
 - Upgraded to ASP.NET Core RC2!!! Too many changes to list here.
 - NuGet packages renamed:
-	- Boilerplate.Web.Mvc NuGet package renamed to Boilerplate.AspNetCore.
-	- Boilerplate.Web.Mvc.Razor NuGet package renamed to Boilerplate.AspNetCore.Razor.
-	- Boilerplate.Web.Mvc.TagHelpers NuGet package renamed to Boilerplate.AspNetCore.TagHelpers.
+    - Boilerplate.Web.Mvc NuGet package renamed to Boilerplate.AspNetCore.
+    - Boilerplate.Web.Mvc.Razor NuGet package renamed to Boilerplate.AspNetCore.Razor.
+    - Boilerplate.Web.Mvc.TagHelpers NuGet package renamed to Boilerplate.AspNetCore.TagHelpers.
 - The AssemblyCopyright attribute in AssemblyInfo.cs is now filled in automatically with the current user and year.
 - Switched from gulp-scsss-lint to gulp-sass-lint because it does not require Ruby to be installed.
 - Added a Target Framework feature selector, so that you can choose from .NET Core, .NET Framework or both.
@@ -102,12 +103,12 @@ MVC 6
 Version 2.15.0
 MVC 6
 - Boilerplate.Web.Mvc6 Updated:
-	- Performance improvements.
-	- Added ICommand and IAsyncCommand interfaces to help implement controller actions as separate classes.
-	- Refactored the DistributedCacheExtensions.
-	- Added ValidateModelStateAttribute to automatically validate ModelState.
+    - Performance improvements.
+    - Added ICommand and IAsyncCommand interfaces to help implement controller actions as separate classes.
+    - Refactored the DistributedCacheExtensions.
+    - Added ValidateModelStateAttribute to automatically validate ModelState.
 - Boilerplate.Web.Mvc6.TagHelpers Updated:
-	- Performance improvements.
+    - Performance improvements.
 - Fixed Missing jshint and jslint (See https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/89).
 - Updated JSON.NET reference.
 - Updated font-awesome to 4.6.1.

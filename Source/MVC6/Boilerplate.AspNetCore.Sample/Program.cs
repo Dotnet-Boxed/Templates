@@ -19,7 +19,12 @@
             var host = new WebHostBuilder()
                 .UseConfiguration(configuration)
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseKestrel()
+                .UseKestrel(
+                    options =>
+                    {
+                        // Do not add the Server HTTP header when using the Kestrel Web Server.
+                        options.AddServerHeader = false;
+                    })
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
