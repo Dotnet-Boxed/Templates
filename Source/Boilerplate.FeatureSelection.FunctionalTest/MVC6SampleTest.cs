@@ -193,6 +193,8 @@
         [InlineData(typeof(ApplicationInsightsFeature), false)]
         [InlineData(typeof(CstmlMinificationFeature), true)]
         [InlineData(typeof(CstmlMinificationFeature), false)]
+        [InlineData(typeof(GooglePageSpeedFeature), true)]
+        [InlineData(typeof(GooglePageSpeedFeature), false)]
         [InlineData(typeof(JavaScriptCodeStyleFeature), true)]
         [InlineData(typeof(JavaScriptCodeStyleFeature), false)]
         [InlineData(typeof(JavaScriptHintFeature), true)]
