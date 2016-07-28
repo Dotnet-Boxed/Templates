@@ -169,9 +169,9 @@
                         }
                         // $Start-HttpsEverywhere-On$
 
-                        // Require HTTPS to be used across the whole site.Also sets a custom port to use for SSL in
-                        // Development.The port number to use is taken from the launchSettings.json file which Visual
-                        // Studio uses to start the application using IIS Express or the command line.
+                        // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
+                        // Development. The port number to use is taken from the launchSettings.json file which Visual
+                        // Studio uses to start the application.
                         options.Filters.Add(new RequireHttpsAttribute());
                         options.SslPort = sslPort;
                         // $End-HttpsEverywhere-On$
