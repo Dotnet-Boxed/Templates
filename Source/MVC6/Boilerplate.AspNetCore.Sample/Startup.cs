@@ -69,20 +69,20 @@
             this.hostingEnvironment = hostingEnvironment;
 
             this.configuration = new ConfigurationBuilder()
-                .SetBasePath(hostingEnvironment.ContentRootPath)
+                .SetBasePath(this.hostingEnvironment.ContentRootPath)
                 // Add configuration from the config.json file.
                 .AddJsonFile("config.json")
                 // Add configuration from an optional config.development.json, config.staging.json or
                 // config.production.json file, depending on the environment. These settings override the ones in the
                 // config.json file.
-                .AddJsonFile($"config.{hostingEnvironment.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"config.{this.hostingEnvironment.EnvironmentName}.json", optional: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
                 // http://go.microsoft.com/fwlink/?LinkID=532709 and
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
-                    hostingEnvironment.IsDevelopment(),
+                    this.hostingEnvironment.IsDevelopment(),
                     x => x.AddUserSecrets())
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -99,7 +99,7 @@
                 // $Start-ApplicationInsights$
                 // Push telemetry data through the Azure Application Insights pipeline faster in the development and
                 // staging environments, allowing you to view results immediately.
-                .AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction())
+                .AddApplicationInsightsSettings(developerMode: !this.hostingEnvironment.IsProduction())
                 // $End-ApplicationInsights$
                 .Build();
             // $Start-HttpsEverywhere-On$
@@ -107,7 +107,7 @@
             if (this.hostingEnvironment.IsDevelopment())
             {
                 var launchConfiguration = new ConfigurationBuilder()
-                    .SetBasePath(hostingEnvironment.ContentRootPath)
+                    .SetBasePath(this.hostingEnvironment.ContentRootPath)
                     .AddJsonFile(@"Properties\launchSettings.json")
                     .Build();
                 this.sslPort = launchConfiguration.GetValue<int>("iisSettings:iisExpress:sslPort");
