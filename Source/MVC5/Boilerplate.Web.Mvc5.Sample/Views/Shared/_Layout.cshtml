@@ -77,7 +77,7 @@
     @* manifest-json - The location of the browser configuration file. It contains locations of icon files, name of the
         application and default device screen orientation. Note that the name field is mandatory.
         See https://developer.chrome.com/multidevice/android/installtohomescreen. *@
-    <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson)">
+    <link rel="manifest" href="@Url.RouteUrl(HomeControllerRoute.GetManifestJson).TrimEnd('/')">
     @* theme-color - The colour of the toolbar in Chrome M39+
         See http://updates.html5rocks.com/2014/11/Support-for-theme-color-in-Chrome-39-for-Android *@
     <meta name="theme-color" content="#1E1E1E">
