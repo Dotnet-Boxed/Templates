@@ -8,6 +8,7 @@ Improvements that can be made to all project templates.
 
 - Make use of Object Pooling code. Add note about using Object Pooling in ReadMe.html.
 - Add [Google Structured Data](https://developers.google.com/structured-data/).
+- Add a maintenance page.
 
 ## ASP.NET 4.6 MVC 5
 
