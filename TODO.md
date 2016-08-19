@@ -6,8 +6,8 @@ A list of improvements and new features to be added. Feel free to submit your ow
 
 Improvements that can be made to all project templates.
 
-- Make use of Object Pooling code. Add note about using Object Pooling in ReadMe.html.
 - Add [Google Structured Data](https://developers.google.com/structured-data/).
+- Add a maintenance page.
 
 ## ASP.NET 4.6 MVC 5
 
@@ -15,6 +15,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
+- Add Glimpse and Prefix.io as an optional feature (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/94).
 - Add the Serilog logging framework as a feature.
 - Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
@@ -28,6 +29,7 @@ Improvements that can be made to all project templates.
 - Improve social tag helpers to include child elements for images and other objects (See [this](https://channel9.msdn.com/Series/aspnetmonsters/Episode-19-Building-Advanced-Tag-Helpers?ocid=player)).
 - Provide better TypeScript support with [typings](https://github.com/DefinitelyTyped/tsd/issues/269) and a default .ts file instead of .js.
 - Implement a CDN Version TagHelper as described [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/111#issuecomment-233343619).
+- Implement an ASP.NET Identity 3 feature (See [Brock Allen](https://vimeo.com/172009501)'s video).
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
