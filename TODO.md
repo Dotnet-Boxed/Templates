@@ -6,7 +6,6 @@ A list of improvements and new features to be added. Feel free to submit your ow
 
 Improvements that can be made to all project templates.
 
-- Make use of Object Pooling code. Add note about using Object Pooling in ReadMe.html.
 - Add [Google Structured Data](https://developers.google.com/structured-data/).
 - Add a maintenance page.
 
