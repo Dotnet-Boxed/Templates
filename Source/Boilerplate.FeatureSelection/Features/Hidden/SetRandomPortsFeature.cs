@@ -52,8 +52,12 @@
 
         protected override async Task AddFeature()
         {
-            await this.ProjectService.ReplaceInFile("1025", portService.GetRandomFreePort().ToString(), @"Properties\launchSettings.json");
-            await this.ProjectService.ReplaceInFile("44300", portService.GetRandomFreePort(true).ToString(), @"Properties\launchSettings.json");
+            var httpPort = portService.GetRandomFreePort().ToString();
+            var httpsPort = portService.GetRandomFreePort(https: true).ToString();
+
+            await this.ProjectService.ReplaceInFile("1025", httpPort, @"Properties\launchSettings.json");
+            await this.ProjectService.ReplaceInFile("1025", httpPort, @"nginx.conf");
+            await this.ProjectService.ReplaceInFile("44300", httpsPort, @"Properties\launchSettings.json");
         }
     }
 }
