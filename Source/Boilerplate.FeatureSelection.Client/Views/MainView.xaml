@@ -85,6 +85,7 @@
                                Width="200">
                             <Image.Style>
                                 <Style TargetType="Image">
+                                    <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
                                     <Setter Property="Opacity" Value="0.5"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsSelected}" Value="True">

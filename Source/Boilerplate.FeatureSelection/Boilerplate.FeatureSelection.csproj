@@ -89,6 +89,7 @@
     <Compile Include="Features\Pages\ContactPageFeature.cs" />
     <Compile Include="Features\Performance\GooglePageSpeedFeature.cs" />
     <Compile Include="Features\Performance\CshtmlMinificationFeature.cs" />
+    <Compile Include="Features\Project\WebServerFeature.cs" />
     <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
     <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
@@ -188,6 +189,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Google Page Speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\IIS.png" />
+    <Resource Include="Assets\Kestrel.png" />
+    <Resource Include="Assets\Nginx.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

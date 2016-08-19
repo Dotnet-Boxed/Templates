@@ -24,7 +24,9 @@
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
+    // $Start-WebServer-IIS$
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    // $End-WebServer-IIS$
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
     "Microsoft.Extensions.Configuration.Binder": "1.0.0",
@@ -69,7 +71,9 @@
 
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
+    // $Start-WebServer-IIS$
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
+    // $End-WebServer-IIS$
     "Microsoft.DotNet.Watcher.Tools": "1.0.0-preview2-final",
     "Microsoft.Extensions.SecretManager.Tools": "1.0.0-preview2-final"
   },

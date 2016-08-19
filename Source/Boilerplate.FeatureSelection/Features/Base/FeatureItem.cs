@@ -11,6 +11,7 @@
         private readonly int order;
         private readonly string title;
 
+        private bool isEnabled = true;
         private bool isSelected;
 
         public FeatureItem(string id, string title, string description, int order, string icon = null, bool isContributionWanted = false)
@@ -52,6 +53,12 @@
         public bool IsContributionWanted
         {
             get { return this.isContributionWanted; }
+        }
+
+        public bool IsEnabled
+        {
+            get { return this.isEnabled; }
+            set { this.SetProperty(ref this.isEnabled, value); }
         }
 
         public bool IsSelected
