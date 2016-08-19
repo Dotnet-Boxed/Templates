@@ -3,6 +3,7 @@ MVC 6
 - Added Web Server feature that lets you select which web server you want to target.
 - nginx.conf added to configure the Nginx web server.
 - UseRandomizedStringHashAlgorithm setting Moved from web.config to app.config.
+- HttpExceptionMiddleware and InternalServerErrorOnExceptionMiddleware logs information messages.
 
 Version 4.3.0
 MVC 6
