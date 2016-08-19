@@ -306,7 +306,8 @@
                     return new Comment[] { Slash, Xml, Razor };
                 }
                 else if (string.Equals(fileExtension, ".ini", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(fileExtension, ".txt", StringComparison.OrdinalIgnoreCase))
+                    string.Equals(fileExtension, ".txt", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExtension, ".conf", StringComparison.OrdinalIgnoreCase))
                 {
                     return new Comment[] { Text };
                 }

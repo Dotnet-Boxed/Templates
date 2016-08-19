@@ -176,7 +176,9 @@
         {
             var encoding = Encoding.UTF8;
 
-            if (string.Equals(fileName, "bower.json", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(fileName, "bower.json", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileName, "nginx.conf", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileName, "mime.types", StringComparison.OrdinalIgnoreCase))
             {
                 encoding = new UTF8Encoding(false);
             }

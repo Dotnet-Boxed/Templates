@@ -90,6 +90,7 @@
 
             if (!this.nginx.IsSelected)
             {
+                this.ProjectService.DeleteFile("mime.types");
                 this.ProjectService.DeleteFile("nginx.conf");
             }
         }
