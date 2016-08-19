@@ -2,6 +2,8 @@
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     internal class InternalServerErrorOnExceptionMiddleware
     {
@@ -20,6 +22,12 @@
             }
             catch
             {
+                var factory = context.RequestServices.GetRequiredService<ILoggerFactory>();
+                var logger = factory.CreateLogger<InternalServerErrorOnExceptionMiddleware>();
+                logger.LogInformation(
+                    "Executing InternalServerErrorOnExceptionMiddleware, setting HTTP status code {0}.",
+                    StatusCodes.Status500InternalServerError);
+
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
         }
