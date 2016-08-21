@@ -17,12 +17,12 @@ Improvements that can be made to all project templates.
 
 - Add Glimpse and Prefix.io as an optional feature (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/94).
 - Add the Serilog logging framework as a feature.
-- Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
+- Upgrade to Gulp 4.0 when it is released.
+  - Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
 - Add a CORS feature.
 - Add an option to remove Font-Awesome.
 - Add a CSS vs SCSS (SASS) option.
-- Add an option to choose the web-server you are using IIS, Nginx etc. See [this](http://aspnetmonsters.com/2016/07/2016-07-17-nginx/), [this](http://docs.asp.net/en/latest/fundamentals/servers.html) and [this](https://stackoverflow.com/questions/34212765/how-do-i-get-the-kestrel-web-server-to-listen-to-non-localhost-requests/34221690#34221690).
 - Add an option to add a Docker file.
 - If Bootstrap 4 includes LESS support, add @ChrisOMetz's [pull request](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pulls).
 - Add an example form controller with [RequestFormSizeLimit](https://github.com/aspnet/Entropy/blob/dd60ba088cadb5bd82bddd3f22ed76069b4b5639/samples/Mvc.FileUpload/Controllers/RequestFormLimitsController.cs) attribute and [autofill](http://blog.cloudfour.com/autofill-what-web-devs-should-know-but-dont/) support.
