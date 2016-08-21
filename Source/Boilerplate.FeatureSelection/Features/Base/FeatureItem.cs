@@ -7,21 +7,20 @@
         private readonly string description;
         private readonly string icon;
         private readonly string id;
-        private readonly bool isContributionWanted;
         private readonly int order;
         private readonly string title;
 
+        private bool isContributionWanted;
         private bool isEnabled = true;
         private bool isSelected;
 
-        public FeatureItem(string id, string title, string description, int order, string icon = null, bool isContributionWanted = false)
+        public FeatureItem(string id, string title, string description, int order, string icon = null)
         {
             this.id = id;
             this.title = title;
             this.description = description;
             this.icon = icon;
             this.order = order;
-            this.isContributionWanted = isContributionWanted;
         }
 
         public string CommentName
@@ -53,6 +52,7 @@
         public bool IsContributionWanted
         {
             get { return this.isContributionWanted; }
+            set { this.SetProperty(ref this.isContributionWanted, value); }
         }
 
         public bool IsEnabled

@@ -22,6 +22,7 @@
                     builder.RegisterType<NpmPackageNameFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Target Framework
                     builder.RegisterType<TargetFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<WebServerFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript
                     builder.RegisterType<FrontEndFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<TypeScriptFeature>().AsSelf().As<IFeature>().SingleInstance();

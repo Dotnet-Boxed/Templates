@@ -28,8 +28,11 @@
                 "Zurb Foundation",
                 "The most advanced responsive front-end framework in the world.",
                 2,
-                "/Boilerplate.FeatureSelection;component/Assets/Zurb Foundation.png",
-                true);
+                "/Boilerplate.FeatureSelection;component/Assets/Zurb Foundation.png")
+            {
+                IsContributionWanted = true,
+                IsEnabled = false
+            };
             this.Items.Add(this.zurbFoundation);
 
             this.semanticUI = new FeatureItem(
@@ -37,8 +40,11 @@
                 "Semantic UI",
                 "Semantic is a development framework that helps create beautiful, responsive layouts using human-friendly HTML.",
                 3,
-                "/Boilerplate.FeatureSelection;component/Assets/Semantic UI.png",
-                true);
+                "/Boilerplate.FeatureSelection;component/Assets/Semantic UI.png")
+            {
+                IsContributionWanted = true,
+                IsEnabled = false
+            };
             this.Items.Add(this.semanticUI);
         }
 

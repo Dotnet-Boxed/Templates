@@ -5,7 +5,6 @@
 
     public class JavaScriptTestFrameworkFeature : MultiChoiceFeature
     {
-        private readonly IFeatureItem jasmine;
         private readonly IFeatureItem mocha;
         private readonly IFeatureItem none;
 
@@ -23,20 +22,11 @@
             };
             this.Items.Add(this.mocha);
 
-            this.jasmine = new FeatureItem(
-                "Jasmine",
-                "Jasmine",
-                "Mocha is a feature-rich JavaScript test framework running on Node.js and the browser, making asynchronous testing simple and fun. The Sinon stub/mocking library is also included.",
-                2,
-                "/Boilerplate.FeatureSelection;component/Assets/Jasmine.png",
-                true);
-            this.Items.Add(this.jasmine);
-
             this.none = new FeatureItem(
                 "None",
                 "None",
                 "No JavaScript testing framework.",
-                3);
+                2);
             this.Items.Add(this.none);
         }
 

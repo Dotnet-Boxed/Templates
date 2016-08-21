@@ -29,8 +29,10 @@
                 "Internet Information Services (IIS) or Azure",
                 "Internet Information Services (IIS) for Windows Server is a flexible, secure and manageable Web server for hosting anything on the Web. Select this option if you are deploying your site to Azure web apps.",
                 2,
-                "/Boilerplate.FeatureSelection;component/Assets/IIS.png",
-                true);
+                "/Boilerplate.FeatureSelection;component/Assets/IIS.png")
+            {
+                IsSelected = true
+            };
             this.Items.Add(this.iis);
 
             this.nginx = new FeatureItem(
@@ -38,8 +40,10 @@
                 "Nginx",
                 "Nginx is a free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform.",
                 3,
-                "/Boilerplate.FeatureSelection;component/Assets/Nginx.png",
-                true);
+                "/Boilerplate.FeatureSelection;component/Assets/Nginx.png")
+            {
+                IsSelected = true
+            };
             this.Items.Add(this.nginx);
         }
 

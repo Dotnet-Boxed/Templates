@@ -140,9 +140,6 @@
     <Resource Include="Assets\iOS.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Jasmine.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\JSCS.png" />
   </ItemGroup>
   <ItemGroup>
