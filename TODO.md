@@ -33,6 +33,7 @@ Improvements that can be made to all project templates.
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
+- Add Razor pre-compilation using the [tool](https://github.com/aspnet/MvcPrecompilation/blob/dev/testapps/SimpleApp/project.json).
 - Add [Subresource Integrity](https://scotthelme.co.uk/subresource-integrity/) to scripts provided by Microsoft's CDN when they add the Access-Control-Allow-Origin HTTP header.
 - CacheProfile.VaryByParam in Startup.CacheProfiles.cs.
 - System.ServiceModel.SyndicationFeed does not exist on .NET Core. See [this](https://github.com/dotnet/wcf/issues/76#issuecomment-111420491) GitHub issue.
