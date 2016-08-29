@@ -8,6 +8,8 @@ Improvements that can be made to all project templates.
 
 - Add [Google Structured Data](https://developers.google.com/structured-data/).
 - Add a maintenance page.
+- Add a way to donate to the project.
+- Build the project using AppVeyor.
 
 ## ASP.NET 4.6 MVC 5
 
