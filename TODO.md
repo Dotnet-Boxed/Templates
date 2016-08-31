@@ -32,6 +32,7 @@ Improvements that can be made to all project templates.
 - Provide better TypeScript support with [typings](https://github.com/DefinitelyTyped/tsd/issues/269) and a default .ts file instead of .js.
 - Implement a CDN Version TagHelper as described [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/111#issuecomment-233343619).
 - Implement an ASP.NET Identity 3 feature (See [Brock Allen](https://vimeo.com/172009501)'s video and [this](http://blog.securityps.com/2016/08/aspnet-core-basic-security-settings.html) blog post).
+- Add [no hot-linking middleware](http://en.هشام.com/post/secure-your-aspnet-core-application-from-image-hotlinking).
 
 Wait for Microsoft to finish MVC 6 before adding these features:
 
