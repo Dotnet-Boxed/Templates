@@ -18,7 +18,7 @@ Improvements that can be made to all project templates.
 ## ASP.NET Core MVC 6
 
 - Add Glimpse and Prefix.io as an optional feature (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/94).
-- Add the Serilog logging framework as a feature.
+- Add the Serilog logging framework as a feature (Don't forget to [flush](http://www.khalidabuhakmeh.com/looking-at-asp-net-cores-iapplicationlifetime).
 - Upgrade to Gulp 4.0 when it is released.
   - Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
 - Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
