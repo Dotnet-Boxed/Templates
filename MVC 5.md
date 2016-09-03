@@ -98,7 +98,3 @@ That's easy, just choose one of the following options:
 
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a TODO list of new features and enhancements coming soon [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md).
-
-## Bugs and Issues
-
-Please report any bugs or issues on the GitHub issues page [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues).
