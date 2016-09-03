@@ -1,47 +1,30 @@
-<h1>
-<img src="https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget Icon.png" alt="ASP.NET MVC Boilerplate Logo" width="30px" height="30px"/> <a href="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">ASP.NET 5 MVC 6 Boilerplate</a>
-</h1>
+# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget Icon.png) [ASP.NET Core MVC 6 Boilerplate](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate)
 
-<img alt="ASP.NET-MVC-5-Boilerplate Technology Map"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Preview%20Image.png" />
+![ASP.NET Core MVC 6 Boilerplate Preview Image](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%206%20Preview%20Image.png)
 
 ## Technology Map
 
-The ASP.NET 5 MVC 6 project template contains the following features:
+The ASP.NET Core MVC 6 project template contains the following features:
 
-<img alt="ASP.NET-MVC-Core-Boilerplate Technology Map"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/MVC%206%20Technology%20Map.png" />
+![ASP.NET Core MVC 6 Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%206%20Technology%20Map.png)
 
 ## Feature Selection Wizard
 
 The ASP.NET Core MVC 6 project template comes with a feature selection wizard where literally everything can be turned on
 or off with the click of a button for a truly personalized project.
 
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png" />
-     
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%202.png" />
-     
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%203.png" />
-     
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%204.png" />
-     
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%205.png" />
-     
-<img alt="ASP.NET-MVC-6-Boilerplate Feature Selection Wizard"
-     border="5"
-     src="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%206.png" />
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png)
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%202.png)
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%203.png)
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%204.png)
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%205.png)
+
+![ASP.NET Core MVC 6 Boilerplate Feature Selection Wizard Screenshot](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%206.png)
 
 ## Why Do I Need It?
 
