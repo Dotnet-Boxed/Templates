@@ -17,6 +17,7 @@ Improvements that can be made to all project templates.
 
 ## ASP.NET Core MVC 6
 
+- Use NPM instead of Bower.
 - Add a use Kestrel over HTTPS feature (See https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/125).
 - Add Glimpse and Prefix.io as an optional feature (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/94).
 - Add the Serilog logging framework as a feature (Don't forget to [flush](http://www.khalidabuhakmeh.com/looking-at-asp-net-cores-iapplicationlifetime).
