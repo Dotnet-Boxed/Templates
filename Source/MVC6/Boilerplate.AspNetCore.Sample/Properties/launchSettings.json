@@ -8,6 +8,8 @@
     }
   },
   "profiles": {
+    // Run the app using IIS Express. Use CTRL+F5 or Debug -> Start Without Debugging to edit code and refresh the browser to see your
+    // changes while the app is running.
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
@@ -21,6 +23,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    // Run the app in console mode using 'dotnet run'.
     "MvcBoilerplate": {
       "commandName": "Project",
       // $Start-HttpsEverywhere-On$
@@ -28,6 +31,27 @@
       // $End-HttpsEverywhere-On$
       // $Start-HttpsEverywhere-Off$
       // "commandLineArgs": "--server.urls http://*:1025",
+      // $End-HttpsEverywhere-Off$
+      "launchBrowser": true,
+      // $Start-HttpsEverywhere-On$
+      "launchUrl": "https://localhost:44300/",
+      // $End-HttpsEverywhere-On$
+      // $Start-HttpsEverywhere-Off$
+      // "launchUrl": "http://localhost:1025/",
+      // $End-HttpsEverywhere-Off$
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    // Use CTRL+F5 or Debug -> Start Without Debugging to use this launch profile. Launches the app using 'dotnet watch', which allows you
+    // to edit code and refresh the browser to see your changes while the app is running.
+    "dotnet watch": {
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      // $Start-HttpsEverywhere-On$
+      "commandLineArgs": "watch run --server.urls https://*:44300",
+      // $End-HttpsEverywhere-On$
+      // $Start-HttpsEverywhere-Off$
+      // "commandLineArgs": "watch run --server.urls http://*:1025",
       // $End-HttpsEverywhere-Off$
       "launchBrowser": true,
       // $Start-HttpsEverywhere-On$

@@ -1,4 +1,9 @@
-﻿Version 4.4.0
+﻿Version 4.5.0
+MVC 6
+- Added 'dotnet watch' launch profile to launchSettings.json, allowing you to edit code and refresh the browser to see your changes while
+  the app is running.
+
+Version 4.4.0
 MVC 6
 - Added Web Server feature that lets you select which web server you want to target.
 - nginx.conf added to configure the Nginx web server.
