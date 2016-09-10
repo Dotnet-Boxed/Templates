@@ -69,11 +69,14 @@
     // $End-TargetFramework-NetFramework$
   },
 
+  // Command line tools which can be run using 'dotnet [Tool Name]'.
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final",
     // $Start-WebServer-IIS$
+    // dotnet publish-iis - Modifies the web.config file for publishing.
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
     // $End-WebServer-IIS$
+    // dotnet watch - which allows you to edit code and refresh the browser to see your changes while the app is running.
     "Microsoft.DotNet.Watcher.Tools": "1.0.0-preview2-final",
     "Microsoft.Extensions.SecretManager.Tools": "1.0.0-preview2-final"
   },
@@ -123,7 +126,7 @@
     ],
     // Execute the following commands after publishing the project.
     "postpublish": [
-      // Runs the publish-iis tool in Microsoft.AspNetCore.Server.IISIntegration.Tools which modifies the web.config file.
+      // Runs the publish-iis tool which modifies the web.config file.
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
     ]
   }
