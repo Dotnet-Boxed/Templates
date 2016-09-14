@@ -145,6 +145,16 @@
                         // All generated URL's should be lower-case.
                         options.LowercaseUrls = true;
                     })
+                // $Start-CORS$
+                // Add cross-origin resource sharing (CORS) services (See https://docs.asp.net/en/latest/security/cors.html).
+                .AddCors(
+                    options =>
+                    {
+                        options.AddPolicy(
+                            options.DefaultPolicyName,
+                            builder => builder.);
+                    })
+                // $End-CORS$
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
@@ -232,7 +242,7 @@
                 // Track data about exceptions from the application. Should be configured after all error handling
                 // middleware in the request pipeline.
                 .UseApplicationInsightsExceptionTelemetry()
-                // $End-ApplicationInsights$
+                // $End-A pplicationInsights$
                 // Add static files to the request pipeline e.g. hello.html or world.css.
                 .UseStaticFiles()
                 .UseCookiePolicy()

@@ -92,6 +92,7 @@
     <Compile Include="Features\Project\WebServerFeature.cs" />
     <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
     <Compile Include="Features\Rest\SwaggerFeature.cs" />
+    <Compile Include="Features\Security\CorsFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
     <Compile Include="Features\Security\NWebSecFeature.cs" />
     <Compile Include="Features\SEO\RedirectToCanonicalUrlFeature.cs" />

@@ -94,6 +94,32 @@
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
         }
 
+        // $Start-CORS$
+        /// <summary>
+        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+        /// https://docs.asp.net/en/latest/security/cors.html
+        /// </summary>
+        /// <param name="services">The services collection or IoC container.</param>
+        public static IServiceCollection AddCorsPolicies(IServiceCollection services)
+        {
+            return services.AddCors(
+                options =>
+                {
+                    options.AddPolicy(
+                        options.DefaultPolicyName,
+                        x =>
+                        {
+                            x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+                        });
+                    options.AddPolicy(
+                        "MyCustomPolicy",
+                        x =>
+                        {
+                        });
+                });
+        }
+
+        // $End-CORS$
         /// <summary>
         /// Configures custom services to add to the ASP.NET MVC 6 Injection of Control (IoC) container.
         /// </summary>

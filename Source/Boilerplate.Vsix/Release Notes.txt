@@ -1,4 +1,9 @@
-﻿Version 4.5.0
+﻿Version 4.6.0
+MVC 6
+- Added a CORS feature.
+- project.json publishOptions updated to use globs to copy cshtml files.
+
+Version 4.5.0
 MVC 6
 - Added 'dotnet watch' launch profile to launchSettings.json, allowing you to edit code and refresh the browser to see your changes while
   the app is running.

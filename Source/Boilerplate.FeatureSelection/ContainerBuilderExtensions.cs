@@ -37,6 +37,7 @@
                     builder.RegisterType<CstmlMinificationFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Security
                     builder.RegisterType<HttpsEverywhereFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<CorsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<NWebSecFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Monitoring
                     builder.RegisterType<ApplicationInsightsFeature>().AsSelf().As<IFeature>().SingleInstance();

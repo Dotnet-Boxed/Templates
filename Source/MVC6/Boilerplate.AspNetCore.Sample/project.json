@@ -15,6 +15,9 @@
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
     // $End-ApplicationInsights$
     "Microsoft.AspNetCore.CookiePolicy": "1.0.0",
+    // $Start-CORS$
+    "Microsoft.AspNetCore.Cors": "1.0.0",
+    // $End-CORS$
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
     // $Start-XmlFormatter$
