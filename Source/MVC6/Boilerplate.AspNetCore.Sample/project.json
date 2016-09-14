@@ -110,8 +110,7 @@
     // Include the following folders and files when publishing the project.
     "include": [
       "wwwroot",
-      "Views",
-      "Areas/**/Views",
+      "**/*.cshtml",
       "config.json",
       "web.config"
     ]
