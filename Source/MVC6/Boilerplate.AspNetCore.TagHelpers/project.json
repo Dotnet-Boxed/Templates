@@ -6,7 +6,7 @@
   "authors": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
 
   "packOptions": {
-    "releaseNotes": "Updated to ASP.NET Core 1.0 RTM.",
+    "releaseNotes": "Updated to ASP.NET Core 1.0.1.",
     "owners": [ "Muhammad Rehan Saeed (RehanSaeed.com)" ],
     "tags": [ "ASP.NET", "ASP.NET Core", "MVC", "MVC 6", "Boilerplate", "Muhammad Rehan Saeed", "Framework", "TagHelper", "Tag Helper", "HTML" ],
     "iconUrl": "https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Icon.png",
@@ -26,7 +26,7 @@
   },
 
   "dependencies": {
-    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
+    "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
     "Microsoft.AspNetCore.Razor.Runtime": "1.0.0",
     "Microsoft.Extensions.Caching.Abstractions": "1.0.0"
   },
