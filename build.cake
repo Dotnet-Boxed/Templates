@@ -58,7 +58,7 @@ Task("Test")
         {
             Information("Testing: " + project);
             XUnit2(
-                project.GetDirectory().FullPath,
+                project.FullPath,
                 new XUnit2Settings()
                 {
                     OutputDirectory = artifactsDirectory
