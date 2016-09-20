@@ -183,15 +183,13 @@
   <ItemGroup>
     <Compile Include="AssertStartProcess.cs" />
     <Compile Include="CodeGenerator.cs" />
+    <Compile Include="ConfigurationService.cs" />
     <Compile Include="DirectoryExtended.cs" />
     <Compile Include="MVC6SampleTest.cs" />
     <Compile Include="ProjectTemplateTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

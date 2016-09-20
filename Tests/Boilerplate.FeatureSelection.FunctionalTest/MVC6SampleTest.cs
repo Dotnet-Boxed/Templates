@@ -1,18 +1,11 @@
 ﻿namespace Boilerplate.FeatureSelection.FunctionalTest
 {
     using System;
-    using System.Collections.Generic;
     using System.Configuration;
-    using System.Diagnostics;
-    using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
     using Autofac;
     using Boilerplate.FeatureSelection.Features;
-    using Boilerplate.FeatureSelection.Services;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.TestHost;
     using Xunit;
 
     public class MVC6SampleTest : IDisposable
@@ -22,8 +15,8 @@
         public MVC6SampleTest()
         {
             this.tester = new ProjectTemplateTester(
-                ConfigurationManager.AppSettings["ProjectPath"],
-                ConfigurationManager.AppSettings["TempDirectoryPath"]);
+                ConfigurationService.ProjectFilePath,
+                ConfigurationService.TempDirectoryPath);
         }
 
         [Fact]
