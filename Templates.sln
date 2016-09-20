@@ -17,6 +17,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F316174B-045B-4DC0-9097-8CE746A8BBB0}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		build.cake = build.cake
 		CONTRIBUTING.md = CONTRIBUTING.md
 		global.json = global.json
 		HOW TO BUILD.md = HOW TO BUILD.md

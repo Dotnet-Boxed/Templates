@@ -20,7 +20,7 @@ Task("Restore")
         foreach (var project in GetFiles("./**/*.csproj"))
         {
             NuGetRestore(
-                project, 
+                project,
                 new NuGetRestoreSettings()
                 {
                     PackagesDirectory = packagesDirectory
@@ -38,7 +38,7 @@ Task("Restore")
             .SetConfiguration(configuration)
             .SetPlatformTarget(PlatformTarget.MSIL)
             .SetMSBuildPlatform(MSBuildPlatform.x86)
-			.WithTarget("Build"));
+            .WithTarget("Build"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
@@ -53,7 +53,7 @@ Task("Test")
     .Does(() =>
     {
         Information("Testing");
-        var projects = GetFiles("./Tests/**/*.dll");
+        var projects = GetFiles("./Tests/**/*Test.dll");
         foreach(var project in projects)
         {
             Information("Testing: " + project);
