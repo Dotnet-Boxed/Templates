@@ -20,7 +20,7 @@ Task("Restore")
         foreach (var project in GetFiles("./**/*.csproj"))
         {
             NuGetRestore(
-                project, 
+                project,
                 new NuGetRestoreSettings()
                 {
                     PackagesDirectory = packagesDirectory
@@ -53,12 +53,12 @@ Task("Test")
     .Does(() =>
     {
         Information("Testing");
-        var projects = GetFiles("./Tests/**/*.dll");
+        var projects = GetFiles("./Tests/**/*Test.dll");
         foreach(var project in projects)
         {
             Information("Testing: " + project);
             XUnit2(
-                project.GetDirectory().FullPath,
+                project.FullPath,
                 new XUnit2Settings()
                 {
                     OutputDirectory = artifactsDirectory,
