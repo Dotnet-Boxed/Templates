@@ -61,23 +61,13 @@ Task("Test")
                 project.GetDirectory().FullPath,
                 new XUnit2Settings()
                 {
-                    OutputDirectory = artifactsDirectory
+                    OutputDirectory = artifactsDirectory,
+                    Parallelism = ParallelismOption.All
                 });
         }
     });
 
-Task("Upload-AppVeyor-Artifacts")
-    .IsDependentOn("Test")
-    .WithCriteria(() => AppVeyor.IsRunningOnAppVeyor)
-    .Does(() =>
-    {
-        foreach(var file in GetFiles(artifactsDirectory.Path + "/*"))
-        {
-            AppVeyor.UploadArtifact(file);
-        }
-    });
-
 Task("Default")
-    .IsDependentOn("Upload-AppVeyor-Artifacts");
+    .IsDependentOn("Test");
 
 RunTarget(target);
