@@ -23,7 +23,7 @@ Improvements that can be made to all project templates.
 - Add the Serilog logging framework as a feature (Don't forget to [flush](http://www.khalidabuhakmeh.com/looking-at-asp-net-cores-iapplicationlifetime).
 - Upgrade to Gulp 4.0 when it is released.
   - Use [gulp plugin](https://github.com/gulpjs/gulp#incremental-builds) to cache which images have already been optimized.
-- Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html)).
+- Build a localization feature (See [docs](https://docs.asp.net/en/1.0.0-rc2/fundamentals/localization.html) and [Andrew Lock](http://andrewlock.net/adding-localisation-to-an-asp-net-core-application/)).
 - Add a CORS feature.
 - Add an option to remove Font-Awesome.
 - Add a CSS vs SCSS (SASS) option.
