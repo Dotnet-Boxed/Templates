@@ -38,7 +38,7 @@ Task("Restore")
             .SetConfiguration(configuration)
             .SetPlatformTarget(PlatformTarget.MSIL)
             .SetMSBuildPlatform(MSBuildPlatform.x86)
-			.WithTarget("Build"));
+            .WithTarget("Build"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
