@@ -19,6 +19,8 @@ artifacts:
 # Store VSIX packages
 - path: .\Artifacts\**\*.vsix
   name: NuGet
+# Store xUnit Test Results
+- path: .\Artifacts\**\*.xml
 
 deploy:
 # Publish VSIX packages
