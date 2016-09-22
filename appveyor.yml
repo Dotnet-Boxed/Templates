@@ -18,7 +18,7 @@ test: off
 artifacts:
 # Store VSIX packages
 - path: .\Artifacts\**\*.vsix
-  name: NuGet
+  name: VSIX
 # Store xUnit Test Results
 - path: .\Artifacts\**\*.xml
   name: xUnit Test Results
@@ -33,4 +33,4 @@ deploy:
     # Only publish from the master branch
     branch: master
   # Publish the following file
-  artifact: ASP.NET MVC Boilerplate.vsix
+  artifact: VSIX
