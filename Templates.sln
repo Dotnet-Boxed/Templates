@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
-	ProjectSection(SolutionItems) = preProject
-		..\Framework\CONTRIBUTING.md = ..\Framework\CONTRIBUTING.md
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC6", "MVC6", "{E97C7A33-28AC-4AD6-8DC7-46886058969F}"
 EndProject

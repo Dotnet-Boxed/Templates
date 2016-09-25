@@ -19,24 +19,15 @@
         public ProjectTemplateTester(string projectFilePath, string tempDirectoryPath)
         {
             this.projectDirectoryPath = Path.GetDirectoryName(projectFilePath);
-
-            if (string.IsNullOrEmpty(tempDirectoryPath))
-            {
-                this.tempDirectoryPath = Path.Combine(
-                    Path.GetTempPath(),
-                    Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
-            }
-            else
-            {
-                this.tempDirectoryPath = Path.Combine(
-                    tempDirectoryPath,
-                    Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
-            }
+            this.tempDirectoryPath = Path.Combine(
+                tempDirectoryPath,
+                Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
+            var tempProjectFilePath = Path.Combine(this.tempDirectoryPath, Path.GetFileName(projectFilePath));
 
             DirectoryExtended.Copy(this.projectDirectoryPath, this.tempDirectoryPath);
 
             var container = new ContainerBuilder()
-                .RegisterServices(Path.Combine(this.tempDirectoryPath, "Boilerplate.AspNetCore.Sample.xproj"))
+                .RegisterServices(tempProjectFilePath)
                 .RegisterFeatureSet(FeatureSet.Mvc6)
                 .Build();
             this.features = new FeatureCollection(container.Resolve<IEnumerable<IFeature>>());

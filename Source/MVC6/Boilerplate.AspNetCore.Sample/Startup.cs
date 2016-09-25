@@ -150,9 +150,9 @@
                 .AddCors(
                     options =>
                     {
-                        options.AddPolicy(
-                            options.DefaultPolicyName,
-                            builder => builder.);
+                        //options.AddPolicy(
+                        //    options.DefaultPolicyName,
+                        //    builder => builder.);
                     })
                 // $End-CORS$
                 // Add useful interface for accessing the ActionContext outside a controller.
@@ -242,7 +242,7 @@
                 // Track data about exceptions from the application. Should be configured after all error handling
                 // middleware in the request pipeline.
                 .UseApplicationInsightsExceptionTelemetry()
-                // $End-A pplicationInsights$
+                // $End-ApplicationInsights$
                 // Add static files to the request pipeline e.g. hello.html or world.css.
                 .UseStaticFiles()
                 .UseCookiePolicy()
