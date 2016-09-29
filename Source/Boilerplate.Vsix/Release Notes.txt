@@ -1,4 +1,6 @@
 ﻿Version 4.6.0
+MVC 5 & MVC 6
+- Added item to ReadMe.html to use the Google CSP Evaluator to validate the sites CSP policy.
 MVC 6
 - Added a CORS feature.
 - project.json publishOptions updated to use globs to copy cshtml files.
