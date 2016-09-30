@@ -206,7 +206,7 @@
                            Style="{StaticResource TitleTextBlockStyle}"
                            VerticalAlignment="Center">
                     <Hyperlink Click="OnHyperlinkClick"
-                               NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate"
+                               NavigateUri="https://github.com/ASP-NET-MVC-Boilerplate/Templates"
                                Style="{StaticResource TitleHyperlinkStyle}">
                         ASP.NET MVC Boilerplate
                     </Hyperlink>
@@ -248,7 +248,7 @@
                            VerticalAlignment="Center">
                     <Run>New features are being worked on and added all the time. Have an idea for a feature you would like? </Run>
                     <Hyperlink Click="OnHyperlinkClick"
-                               NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate">Why not contribute?</Hyperlink>
+                               NavigateUri="https://github.com/ASP-NET-MVC-Boilerplate/Templates">Why not contribute?</Hyperlink>
                 </TextBlock>
 
                 <ScrollViewer Grid.Row="1"
@@ -295,7 +295,7 @@
                             Oops! One or more of your requested feature changes caused an error. The feature selection wizard made as many changes as it could but you may find that the project has errors. Please raise an
                         </Run>
                         <Hyperlink Click="OnHyperlinkClick"
-                                   NavigateUri="https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues">issue</Hyperlink>
+                                   NavigateUri="https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues">issue</Hyperlink>
                         <Run>
                             on the ASP.NET MVC Boilerplate GitHub page and copy the error below. We'll usually get it fixed pretty quickly.
                         </Run>

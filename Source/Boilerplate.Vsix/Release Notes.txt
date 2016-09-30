@@ -34,7 +34,7 @@ MVC 6
 
 Version 4.1.0
 MVC 6
-- Fixed https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/108
+- Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/108
 
 Version 4.0.0
 MVC 6
@@ -59,7 +59,7 @@ MVC 6
 
 Version 3.1.1
 MVC 6
-- Fixed https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/104
+- Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/104
 
 Version 3.1.0
 MVC 6
@@ -90,7 +90,7 @@ MVC 6
 - Added a '~' at the beginning of all URL's to local resources.
 
 Version 2.18.0
-- Fixed SitemapGenerator bug https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/96.
+- Fixed SitemapGenerator bug https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/96.
 - Boilerplate.Web.Mvc NuGet packages updated for the above change.
 MVC 5
 - jQuery updated NuGet package updated from 2.2.0 to 2.2.3. ContentDeliveryNetwork.cs and packages.config updated.
@@ -128,7 +128,7 @@ MVC 6
     - Added ValidateModelStateAttribute to automatically validate ModelState.
 - Boilerplate.Web.Mvc6.TagHelpers Updated:
     - Performance improvements.
-- Fixed Missing jshint and jslint (See https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/89).
+- Fixed Missing jshint and jslint (See https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/89).
 - Updated JSON.NET reference.
 - Updated font-awesome to 4.6.1.
 - Updated jQuery to 2.2.2.
@@ -152,12 +152,12 @@ MVC 6
 
 Version 2.13.0
 MVC 6
-- Merged [Fixed problem with broken error handling on ReExecute](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/85).
-- Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/pull/87).
+- Merged [Fixed problem with broken error handling on ReExecute](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/85).
+- Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/87).
 
 Version 2.12.0
 MVC 5
-- Add a note when debugging, always starts the site at the home page (See [this](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/84) issue).
+- Add a note when debugging, always starts the site at the home page (See [this](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/84) issue).
 
 Version 2.11.0
 MVC 5
@@ -290,7 +290,7 @@ MVC 6
 - gulpfile.js JSLint Fixes
 - webroot setting removed from project.json (https://github.com/aspnet/Announcements/issues/94).
 - ApplicationBasePath no longer needs to be set in Startup.Configuration.cs (https://github.com/aspnet/Announcements/issues/88).
-- Move Autoprefixer before sass in gulpfile.js (https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/issues/44).
+- Move Autoprefixer before sass in gulpfile.js (https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/44).
 
 Version 2.7.0
 MVC 5

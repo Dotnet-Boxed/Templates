@@ -24,7 +24,7 @@ The default MVC template that Visual Studio gives you does not make best use of 
 
 Both ASP.NET 4.6 MVC 5 and ASP.NET Core MVC 6 are supported with their own project templates.
 
-### [ASP.NET Core MVC 6](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%206.md)
+### [ASP.NET Core MVC 6](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206.md)
 
 #### Preview Image
 
@@ -43,7 +43,7 @@ or off with the click of a button for a truly personalized project.
 
 ![ASP.NET-MVC-6-Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png)
 
-### [ASP.NET 4.6 MVC 5](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/MVC%205.md)
+### [ASP.NET 4.6 MVC 5](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%205.md)
 
 #### Preview Image
 
@@ -59,10 +59,10 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 That's easy, just choose one of the following options:
 
 - Get the Visual Studio extension [here](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) and in Visual Studio go to File -> New Project -> Web.
-- Clone the git repository: `git clone https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate`
+- Clone the git repository: `git clone https://github.com/ASP-NET-MVC-Boilerplate/Templates`
 
 ## Release Notes & To-Do List
-You can find release notes for each version [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a TODO list of new features and enhancements coming soon [here](https://github.com/RehanSaeed/ASP.NET-MVC-Boilerplate/blob/master/TODO.md).
+You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
 
 ## Sites Built Using The Template
 
