@@ -10,6 +10,10 @@ nuget:
   # Do not publish for pull requests
   disable_publish_on_pr: true
 
+environment:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  
 build_script:
 - ps: .\build.ps1
 
