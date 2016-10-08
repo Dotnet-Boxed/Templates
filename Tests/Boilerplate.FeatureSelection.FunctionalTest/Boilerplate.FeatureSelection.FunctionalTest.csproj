@@ -192,6 +192,7 @@
     <Compile Include="ConsoleColorScope.cs" />
     <Compile Include="DirectoryExtended.cs" />
     <Compile Include="MVC6SampleTest.cs" />
+    <Compile Include="ProcessStartException.cs" />
     <Compile Include="ProjectTemplateTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

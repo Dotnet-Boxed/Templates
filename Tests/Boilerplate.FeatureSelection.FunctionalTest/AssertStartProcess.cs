@@ -25,8 +25,8 @@
                 var exitCode = await StartProcess(
                     fileName,
                     arguments,
-                    (int)timeout.TotalMilliseconds,
                     workingDirectory,
+                    (int)timeout.TotalMilliseconds,
                     new StringWriter(output),
                     new StringWriter(error));
                 result = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
@@ -100,59 +100,65 @@
         private static async Task<int> StartProcess(
             string filename,
             string arguments,
-            int? timeout = null,
             string workingDirectory = null,
+            int? timeout = null,
             TextWriter outputTextWriter = null,
             TextWriter errorTextWriter = null)
         {
-            using (var process = new Process()
+            var processStartInfo = new ProcessStartInfo()
             {
-                StartInfo = new ProcessStartInfo()
-                {
-                    CreateNoWindow = true,
-                    Arguments = arguments,
-                    FileName = filename,
-                    RedirectStandardOutput = outputTextWriter != null,
-                    RedirectStandardError = errorTextWriter != null,
-                    UseShellExecute = false,
-                    WorkingDirectory = workingDirectory
-                }
-            })
+                CreateNoWindow = true,
+                Arguments = arguments,
+                FileName = filename,
+                RedirectStandardOutput = outputTextWriter != null,
+                RedirectStandardError = errorTextWriter != null,
+                UseShellExecute = false,
+                WorkingDirectory = workingDirectory
+            };
+
+            try
             {
-                process.Start();
-                var cancellationTokenSource = timeout.HasValue ?
-                    new CancellationTokenSource(timeout.Value) :
-                    new CancellationTokenSource();
-
-                var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationTokenSource.Token) };
-                if (outputTextWriter != null)
+                using (var process = new Process() { StartInfo = processStartInfo })
                 {
-                    tasks.Add(ReadAsync(
-                        x =>
-                        {
-                            process.OutputDataReceived += x;
-                            process.BeginOutputReadLine();
-                        },
-                        x => process.OutputDataReceived -= x,
-                        outputTextWriter,
-                        cancellationTokenSource.Token));
-                }
+                    process.Start();
+                    var cancellationTokenSource = timeout.HasValue ?
+                        new CancellationTokenSource(timeout.Value) :
+                        new CancellationTokenSource();
 
-                if (errorTextWriter != null)
-                {
-                    tasks.Add(ReadAsync(
-                        x =>
-                        {
-                            process.ErrorDataReceived += x;
-                            process.BeginErrorReadLine();
-                        },
-                        x => process.ErrorDataReceived -= x,
-                        errorTextWriter,
-                        cancellationTokenSource.Token));
-                }
+                    var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationTokenSource.Token) };
+                    if (outputTextWriter != null)
+                    {
+                        tasks.Add(ReadAsync(
+                            x =>
+                            {
+                                process.OutputDataReceived += x;
+                                process.BeginOutputReadLine();
+                            },
+                            x => process.OutputDataReceived -= x,
+                            outputTextWriter,
+                            cancellationTokenSource.Token));
+                    }
 
-                await Task.WhenAll(tasks);
-                return process.ExitCode;
+                    if (errorTextWriter != null)
+                    {
+                        tasks.Add(ReadAsync(
+                            x =>
+                            {
+                                process.ErrorDataReceived += x;
+                                process.BeginErrorReadLine();
+                            },
+                            x => process.ErrorDataReceived -= x,
+                            errorTextWriter,
+                            cancellationTokenSource.Token));
+                    }
+
+                    await Task.WhenAll(tasks);
+                    return process.ExitCode;
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new ProcessStartException(processStartInfo, exception);
             }
         }
 
