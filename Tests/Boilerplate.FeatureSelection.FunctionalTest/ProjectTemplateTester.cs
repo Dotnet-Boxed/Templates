@@ -15,6 +15,8 @@
         private readonly FeatureCollection features;
         private readonly IFileSystemService fileSystemService;
         private readonly string tempDirectoryPath;
+        private readonly string npmCacheDirectoryPath;
+        private readonly string npmModulesDirectoryPath;
 
         public ProjectTemplateTester(string projectFilePath, string tempDirectoryPath)
         {
@@ -23,6 +25,9 @@
                 tempDirectoryPath,
                 Path.GetFileNameWithoutExtension(projectFilePath) + "-" + Guid.NewGuid().ToString());
             var tempProjectFilePath = Path.Combine(this.tempDirectoryPath, Path.GetFileName(projectFilePath));
+
+            this.npmCacheDirectoryPath = Path.Combine(tempDirectoryPath, "npm");
+            this.npmModulesDirectoryPath = Path.Combine(this.npmCacheDirectoryPath, "node_modules");
 
             DirectoryExtended.Copy(this.projectDirectoryPath, this.tempDirectoryPath);
 
@@ -51,15 +56,19 @@
 
         public async Task AssertDotnetBuildSucceeded()
         {
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(15));
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(15));
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", "restore", TimeSpan.FromSeconds(20));
+            await Task.Delay(2000);
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", "build", TimeSpan.FromSeconds(20));
         }
 
         public async Task AssertNpmInstallSucceeded()
         {
+            await this.EnsureNpmCacheInitialized();
+            DirectoryExtended.Copy(this.npmModulesDirectoryPath, Path.Combine(this.tempDirectoryPath, "node_modules"));
+
             var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
             var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(10));
         }
 
         public async Task AssertBowerInstallSucceeded()
@@ -74,9 +83,9 @@
         public async Task AssertGulpCleanBuildTestSucceeded()
         {
             var gulpFilePath = Path.Combine(this.tempDirectoryPath, @"node_modules\.bin\gulp.cmd");
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "clean", TimeSpan.FromSeconds(10));
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "build", TimeSpan.FromSeconds(10));
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "test", TimeSpan.FromSeconds(10));
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "clean", TimeSpan.FromSeconds(20));
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "build", TimeSpan.FromSeconds(20));
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, gulpFilePath, "test", TimeSpan.FromSeconds(20));
         }
 
         //private async Task AssertSiteStartsAndResponds(params string[] urls)
@@ -96,6 +105,29 @@
         public void Dispose()
         {
             DirectoryExtended.Delete(this.tempDirectoryPath);
+        }
+
+        private async Task EnsureNpmCacheInitialized()
+        {
+            var packageJsonFilePath = Path.Combine(this.projectDirectoryPath, "package.json");
+            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
+            var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
+
+            if (!Directory.Exists(this.npmModulesDirectoryPath))
+            {
+                if (!Directory.Exists(this.npmCacheDirectoryPath))
+                {
+                    Directory.CreateDirectory(this.npmCacheDirectoryPath);
+                }
+
+                var npmCachePackageJsonFilePath = Path.Combine(this.npmCacheDirectoryPath, "package.json");
+                File.Copy(packageJsonFilePath, npmCachePackageJsonFilePath, true);
+                File.WriteAllLines(
+                    npmCachePackageJsonFilePath,
+                    File.ReadAllLines(npmCachePackageJsonFilePath).Where(x => !x.Contains("//")));
+
+                await ProcessAssert.AssertStart(this.npmCacheDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(10));
+            }
         }
     }
 }
