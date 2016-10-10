@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -67,22 +65,7 @@
         {
             await this.EnsureNpmCacheInitialized();
             DirectoryExtended.Copy(this.npmModulesDirectoryPath, Path.Combine(this.tempDirectoryPath, "node_modules"));
-
-            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
-            var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
-
-            try
-            {
-                await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
-            }
-            catch (Win32Exception exception)
-            {
-                var npmFileExists = File.Exists(npmFilePath);
-                var files = Directory.GetFiles(nodeDirectoryPath);
-                throw new FileNotFoundException(
-                    $"npm.cmd {npmFileExists:Found:Not Found} in {nodeDirectoryPath} but found {string.Join(", ", files)}.",
-                    exception);
-            }
+            await ProcessAssert.AssertStart(this.tempDirectoryPath, GetNpmFilePath(), "install", TimeSpan.FromMinutes(5));
         }
 
         public async Task AssertBowerInstallSucceeded()
@@ -121,11 +104,17 @@
             DirectoryExtended.Delete(this.tempDirectoryPath);
         }
 
+        private static string GetNpmFilePath()
+        {
+            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
+            return Directory
+                .GetFiles(nodeDirectoryPath, "*", SearchOption.AllDirectories)
+                .First(x => string.Equals(Path.GetFileName(x), "npm.cmd", StringComparison.OrdinalIgnoreCase));
+        }
+
         private async Task EnsureNpmCacheInitialized()
         {
             var packageJsonFilePath = Path.Combine(this.projectDirectoryPath, "package.json");
-            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
-            var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
 
             if (!Directory.Exists(this.npmModulesDirectoryPath))
             {
@@ -140,7 +129,7 @@
                     npmCachePackageJsonFilePath,
                     File.ReadAllLines(npmCachePackageJsonFilePath).Where(x => !x.Contains("//")));
 
-                await ProcessAssert.AssertStart(this.npmCacheDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(10));
+                await ProcessAssert.AssertStart(this.npmCacheDirectoryPath, GetNpmFilePath(), "install", TimeSpan.FromMinutes(10));
             }
         }
     }
