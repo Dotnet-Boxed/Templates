@@ -14,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -179,13 +180,19 @@
       <HintPath>..\..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ZetaLongPaths, Version=1.0.0.14, Culture=neutral, PublicKeyToken=b764f59068f31f38, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ZetaLongPaths.1.0.0.14\lib\net40-full\ZetaLongPaths.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertStartProcess.cs" />
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="ConfigurationService.cs" />
+    <Compile Include="ConsoleColorScope.cs" />
     <Compile Include="DirectoryExtended.cs" />
     <Compile Include="MVC6SampleTest.cs" />
+    <Compile Include="ProcessStartException.cs" />
     <Compile Include="ProjectTemplateTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

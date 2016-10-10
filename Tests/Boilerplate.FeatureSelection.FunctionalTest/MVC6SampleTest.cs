@@ -42,11 +42,13 @@
                 .SelectMany(x => x.Items)
                 .ToList()
                 .ForEach(y => y.IsSelected = false);
-            this.tester.Features
+            foreach (var feature in this.tester.Features
                 .OfType<MultiChoiceFeature>()
-                .Where(x => x.IsVisible && !x.IsMultiSelect)
-                .SelectMany(x => x.Items)
-                .Last().IsSelected = true;
+                .Where(x => x.IsVisible && !x.IsMultiSelect))
+            {
+                feature.Items.ToList().ForEach(x => x.IsSelected = false);
+                feature.Items.Last().IsSelected = true;
+            }
 
             await this.tester.AddOrRemoveFeatures();
 
@@ -67,11 +69,13 @@
                 .SelectMany(x => x.Items)
                 .ToList()
                 .ForEach(y => y.IsSelected = true);
-            this.tester.Features
+            foreach (var feature in this.tester.Features
                 .OfType<MultiChoiceFeature>()
-                .Where(x => x.IsVisible && !x.IsMultiSelect)
-                .SelectMany(x => x.Items)
-                .First().IsSelected = true;
+                .Where(x => x.IsVisible && !x.IsMultiSelect))
+            {
+                feature.Items.ToList().ForEach(x => x.IsSelected = false);
+                feature.Items.First().IsSelected = true;
+            }
 
             await this.tester.AddOrRemoveFeatures();
 
