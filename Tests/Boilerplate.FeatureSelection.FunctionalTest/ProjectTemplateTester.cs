@@ -59,6 +59,13 @@
         {
             var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
             var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
+            if (!File.Exists(npmFilePath))
+            {
+                var files = Directory.GetFiles(nodeDirectoryPath);
+                Console.WriteLine($"npm.cmd Not Found in {nodeDirectoryPath} but found {string.Join(", ", files)}");
+                npmFilePath = "npm";
+            }
+
             await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
         }
 
