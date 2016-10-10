@@ -106,7 +106,16 @@
 
         private static string GetNpmFilePath()
         {
-            var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
+            var nodeDirectoryPath = Environment
+                .GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
+                .Split(';')
+                .Select(x => x.Replace(@"\\", @"\"))
+                .First(x => x.Contains("nodejs"));
+            if (!Directory.Exists(nodeDirectoryPath))
+            {
+                return "npm";
+            }
+
             return Directory
                 .GetFiles(nodeDirectoryPath, "*", SearchOption.AllDirectories)
                 .First(x => string.Equals(Path.GetFileName(x), "npm.cmd", StringComparison.OrdinalIgnoreCase));
