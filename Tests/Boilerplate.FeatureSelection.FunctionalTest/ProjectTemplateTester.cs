@@ -2,6 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -68,12 +70,19 @@
 
             var nodeDirectoryPath = Environment.GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine).Split(';').First(x => x.Contains("nodejs"));
             var npmFilePath = Path.Combine(nodeDirectoryPath, "npm.cmd");
-            var npmFileExists = File.Exists(npmFilePath);
-            var files = Directory.GetFiles(nodeDirectoryPath);
-            Console.WriteLine($"npm.cmd {npmFileExists:Found:Not Found} in {nodeDirectoryPath} but found {string.Join(", ", files)}");
-            npmFilePath = "npm";
 
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
+            try
+            {
+                await ProcessAssert.AssertStart(this.tempDirectoryPath, npmFilePath, "install", TimeSpan.FromMinutes(5));
+            }
+            catch (Win32Exception exception)
+            {
+                var npmFileExists = File.Exists(npmFilePath);
+                var files = Directory.GetFiles(nodeDirectoryPath);
+                throw new FileNotFoundException(
+                    $"npm.cmd {npmFileExists:Found:Not Found} in {nodeDirectoryPath} but found {string.Join(", ", files)}.",
+                    exception);
+            }
         }
 
         public async Task AssertBowerInstallSucceeded()

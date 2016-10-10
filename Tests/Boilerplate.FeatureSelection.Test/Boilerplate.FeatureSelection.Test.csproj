@@ -8,8 +8,8 @@
     <ProjectGuid>{E0B062AF-E0B4-4F72-A284-22468F9C2A4A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Boilerplate.Wizard</RootNamespace>
-    <AssemblyName>Boilerplate.Wizard.Test</AssemblyName>
+    <RootNamespace>Boilerplate.FeatureSelection</RootNamespace>
+    <AssemblyName>Boilerplate.FeatureSelection.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
