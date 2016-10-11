@@ -1,5 +1,9 @@
 {
   "version": "1.0.0-*",
+
+  // Used to store connection strings and other sensitive settings, so you don't have to check them into your source
+  // control provider. Only use this in Development, it is not intended for Production use. See
+  // http://docs.asp.net/en/latest/security/app-secrets.html
   "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
 
   "dependencies": {
