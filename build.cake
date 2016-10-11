@@ -33,12 +33,13 @@ Task("Restore")
     .Does(() =>
     {
         // Build VSIX
-        var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
+		var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
         MSBuild(vsixProject, settings => settings
             .SetConfiguration(configuration)
             .SetPlatformTarget(PlatformTarget.MSIL)
             .SetMSBuildPlatform(MSBuildPlatform.x86)
-            .WithTarget("Build"));
+            .WithTarget("Build")
+            .WithProperty("DeployExtension", "false"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
@@ -61,7 +62,7 @@ Task("Test")
                 {
                     OutputDirectory = artifactsDirectory,
                     Parallelism = ParallelismOption.All,
-					XmlReport = true
+                    XmlReport = true
                 });
         }
     });
