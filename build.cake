@@ -53,7 +53,7 @@ Task("Test")
     .Does(() =>
     {
         Information("Testing");
-        var projects = GetFiles($"./Tests/**/bin/{configuration}/*Test.dll");
+        var projects = GetFiles("./Tests/**/bin/" + configuration + "/*Test.dll");
         foreach(var project in projects)
         {
             Information("Testing: " + project);
