@@ -33,7 +33,7 @@ Task("Restore")
     .Does(() =>
     {
         // Build VSIX
-		var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
+        var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
         MSBuild(vsixProject, settings => settings
             .SetConfiguration(configuration)
             .SetPlatformTarget(PlatformTarget.MSIL)
