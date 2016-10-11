@@ -52,17 +52,16 @@ Task("Test")
     .IsDependentOn("Build")
     .Does(() =>
     {
-        Information("Testing");
         var projects = GetFiles("./Tests/**/bin/" + configuration + "/*Test.dll");
         foreach(var project in projects)
         {
-            Information("Testing: " + project);
             XUnit2(
                 project.FullPath,
                 new XUnit2Settings()
                 {
                     OutputDirectory = artifactsDirectory,
-                    Parallelism = ParallelismOption.All
+                    Parallelism = ParallelismOption.All,
+					XmlReport = true
                 });
         }
     });
