@@ -25,6 +25,7 @@
                 var projectFilePath = directory
                     .Parent
                     .GetFiles("Boilerplate.AspNetCore.Sample.xproj", SearchOption.AllDirectories)
+                    .Where(x => !IsInObjDirectory(x.Directory))
                     .First()
                     .FullName;
                 return projectFilePath;
@@ -43,6 +44,20 @@
                     .Name;
                 return Path.Combine(drivePath, "Temp");
             }
+        }
+
+        private static bool IsInObjDirectory(DirectoryInfo directoryInfo)
+        {
+            if (directoryInfo == null)
+            {
+                return false;
+            }
+            else if (string.Equals(directoryInfo.Name, "obj", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return IsInObjDirectory(directoryInfo.Parent);
         }
     }
 }
