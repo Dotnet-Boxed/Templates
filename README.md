@@ -2,6 +2,8 @@
 
 ![ASP.NET-MVC-Boilerplate in the Visual Studio 'New Project' dialogue](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/New%20Project.png)
 
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?maxAge=2592000)](https://gitter.im/ASP-NET-MVC-Boilerplate/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+
 A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at [RehanSaeed.com](http://rehansaeed.com/asp-net-mvc-boilerplate/), the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) or at [The Open Web Security Project (OWASP)](https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project). You can also follow me on Twitter at [@RehanSaeedUK](https://twitter.com/rehansaeeduk).</p>
 
 ## Why Do I Need It?
@@ -59,18 +61,12 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 
 | Name                           | Information | Download |
 | :---                           | :---        | :---     |
-| Visual Studio Extension (VSIX) | Install the Visual Studio extension then in Visual Studio go to `File -> New Project -> Web` to create a project. | [![Visual Studio Gallery](https://img.shields.io/badge/Visual%20Studio%20Gallery-Download-blue.svg)](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix) |
+| Visual Studio Extension (VSIX) | Install extension, then [create project](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/New%20Project.png). | [![Visual Studio Gallery](https://img.shields.io/badge/Visual%20Studio%20Gallery-Download-blue.svg)](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix) |
 | Visual Studio Extension (VSIX) | Follow [instructions](http://docs.myget.org/docs/walkthrough/getting-started-with-vsix) to add feed to Visual Studio. | [![My-Get Development Feed](https://img.shields.io/badge/My--Get%20Feed-Feed-blue.svg?link=https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix)](https://www.myget.org/F/aspnet-mvc-boilerplate/vsix/) |
-| Git Clone                      | Clone the git repository: `git clone https://github.com/ASP-NET-MVC-Boilerplate/Templates` | |
+| Git Clone                      | Clone the git repository. | `git clone https://github.com/ASP-NET-MVC-Boilerplate/Templates` |
 
 ## Release Notes & To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
-
-## Continuous Integration
-
-| Name     | Operating System | Status |
-| :---     | :---             | :---   |
-| AppVeyor | Windows          | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) |
 
 ## Sites Built Using The Template
 
