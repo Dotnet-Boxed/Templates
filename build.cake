@@ -1,11 +1,17 @@
 #tool "nuget:?package=xunit.runner.console"
 #r "System.Net.Http"
+#r "System.Xml.Linq"
 
 using System.Net.Http;
+using System.Xml.Linq;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var mygetApiKey = HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") : EnvironmentVariable("MyGetApiKey");
+var buildNumber = HasArgument("BuildNumber") ?
+    Argument<int>("BuildNumber") :
+    AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
+    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : -1;
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
@@ -34,8 +40,26 @@ Task("Restore")
         }
     });
 
- Task("Build")
+Task("Update-Version")
+    .WithCriteria(() => buildNumber != -1)
     .IsDependentOn("Restore")
+    .Does(() =>
+    {
+        var vsixManifest = GetFiles("./**/source.extension.vsixmanifest").First();
+
+        var document = XDocument.Parse(System.IO.File.ReadAllText(vsixManifest.ToString()));
+        var ns = XNamespace.Get("http://schemas.microsoft.com/developer/vsx-schema/2011");
+        var versionAttribute = document.Descendants(ns + "Identity").First().Attribute("Version");
+
+        var version = new Version(versionAttribute.Value);
+        versionAttribute.Value = version.Major + "." + version.Minor + "." + version.Build + "." + buildNumber.ToString("0000");
+        document.Save(vsixManifest.ToString());
+
+        Information("Version updated from " + version + " to " + versionAttribute.Value);
+    });
+
+ Task("Build")
+    .IsDependentOn("Update-Version")
     .Does(() =>
     {
         // Build VSIX
