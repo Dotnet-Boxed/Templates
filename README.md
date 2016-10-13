@@ -2,7 +2,7 @@
 
 ![ASP.NET-MVC-Boilerplate in the Visual Studio 'New Project' dialogue](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/New%20Project.png)
 
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?maxAge=2592000)](https://gitter.im/ASP-NET-MVC-Boilerplate/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at [RehanSaeed.com](http://rehansaeed.com/asp-net-mvc-boilerplate/), the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) or at [The Open Web Security Project (OWASP)](https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project). You can also follow me on Twitter at [@RehanSaeedUK](https://twitter.com/rehansaeeduk).</p>
 
