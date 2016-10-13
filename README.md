@@ -2,6 +2,8 @@
 
 ![ASP.NET-MVC-Boilerplate in the Visual Studio 'New Project' dialogue](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/New%20Project.png)
 
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates)
+
 A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at [RehanSaeed.com](http://rehansaeed.com/asp-net-mvc-boilerplate/), the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) or at [The Open Web Security Project (OWASP)](https://www.owasp.org/index.php/OWASP_ASP.NET_MVC_Boilerplate_Project). You can also follow me on Twitter at [@RehanSaeedUK](https://twitter.com/rehansaeeduk).</p>
 
 ## Why Do I Need It?
@@ -65,12 +67,6 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 
 ## Release Notes & To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
-
-## Continuous Integration
-
-| Name     | Operating System | Status |
-| :---     | :---             | :---   |
-| AppVeyor | Windows          | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) |
 
 ## Sites Built Using The Template
 
