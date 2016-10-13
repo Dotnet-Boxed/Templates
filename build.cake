@@ -1,7 +1,11 @@
 #tool "nuget:?package=xunit.runner.console"
+#r "System.Net.Http"
+
+using System.Net.Http;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var mygetApiKey = Argument<string>("MyGetApiKey");
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
@@ -68,7 +72,37 @@ Task("Test")
         }
     });
 
+Task("Publish-MyGet")
+    .WithCriteria(() =>
+        HasArgument("MyGetApiKey") &&
+        (!AppVeyor.IsRunningOnAppVeyor || AppVeyor.Environment.Repository.Branch == "master"))
+    .IsDependentOn("Test")
+    .Does(() =>
+    {
+        var vsixFilePath = GetFiles(artifactsDirectory.Path + "/*.vsix").First();
+        using (var httpClient = new HttpClient())
+        {
+            httpClient.DefaultRequestHeaders.Add("X-NuGet-ApiKey", mygetApiKey);
+            var fileStream = new FileStream(vsixFilePath.ToString(), FileMode.Open, FileAccess.Read, FileShare.Read);
+            var response = httpClient
+                .PostAsync(
+                    "https://www.myget.org/F/aspnet-mvc-boilerplate/vsix/upload",
+                    new StreamContent(fileStream))
+                .GetAwaiter()
+                .GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                Information("VSIX uploaded successfully.");
+            }
+            else
+            {
+                var content = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                Error("VSIX upload failed with status code " + (int)response.StatusCode + " " + response.StatusCode);
+            }
+        }
+    });
+
 Task("Default")
-    .IsDependentOn("Test");
+    .IsDependentOn("Publish-MyGet");
 
 RunTarget(target);
