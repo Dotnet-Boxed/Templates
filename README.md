@@ -59,7 +59,7 @@ The ASP.NET 4.6 MVC 5 project template contains the following features:
 
 | Name                           | Information | Download |
 | :---                           | :---        | :---     |
-| Visual Studio Extension (VSIX) | Install the Visual Studio extension then in Visual Studio go to File -> New Project -> Web to create a project. | [![Visual Studio Gallery](https://img.shields.io/badge/Visual%20Studio%20Gallery-Download-blue.svg)](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix) |
+| Visual Studio Extension (VSIX) | Install extension, then go to File -> New Project -> Web to create a project. | [![Visual Studio Gallery](https://img.shields.io/badge/Visual%20Studio%20Gallery-Download-blue.svg)](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix) |
 | Visual Studio Extension (VSIX) | Follow [instructions](http://docs.myget.org/docs/walkthrough/getting-started-with-vsix) to add feed to Visual Studio. | [![My-Get Development Feed](https://img.shields.io/badge/My--Get%20Feed-Feed-blue.svg?link=https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d/file/148517/112/ASP.NET%20MVC%20Boilerplate.vsix)](https://www.myget.org/F/aspnet-mvc-boilerplate/vsix/) |
 | Git Clone                      | Clone the git repository: `git clone https://github.com/ASP-NET-MVC-Boilerplate/Templates` | |
 
