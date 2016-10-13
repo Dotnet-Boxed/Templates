@@ -5,7 +5,7 @@ using System.Net.Http;
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var mygetApiKey = Argument<string>("MyGetApiKey");
+var mygetApiKey = HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") : EnvironmentVariable("MyGetApiKey");
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
@@ -74,7 +74,7 @@ Task("Test")
 
 Task("Publish-MyGet")
     .WithCriteria(() =>
-        HasArgument("MyGetApiKey") &&
+        !string.IsNullOrEmpty(mygetApiKey) &&
         (!AppVeyor.IsRunningOnAppVeyor || AppVeyor.Environment.Repository.Branch == "master"))
     .IsDependentOn("Test")
     .Does(() =>
