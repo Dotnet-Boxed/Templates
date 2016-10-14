@@ -194,7 +194,7 @@
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying if the request is cancelled.</param>
         /// <returns>A collection of <see cref="SyndicationItem"/>'s.</returns>
-        private async Task<List<SyndicationItem>> GetItems(CancellationToken cancellationToken)
+        private Task<List<SyndicationItem>> GetItems(CancellationToken cancellationToken)
         {
             List<SyndicationItem> items = new List<SyndicationItem>();
 
@@ -259,7 +259,7 @@
                 items.Add(item);
             }
 
-            return items;
+            return Task.FromResult(items);
         }
 
         #endregion
