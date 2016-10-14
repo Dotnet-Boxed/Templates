@@ -8,23 +8,22 @@
     }
   },
   "profiles": {
-    // Run the app using IIS Express. Use CTRL+F5 or Debug -> Start Without Debugging to edit code and refresh the browser to see your
-    // changes while the app is running.
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      // $Start-HttpsEverywhere-On$
-      "launchUrl": "https://localhost:44300/",
-      // $End-HttpsEverywhere-On$
-      // $Start-HttpsEverywhere-Off$
-      // "launchUrl": "http://localhost:1025/",
-      // $End-HttpsEverywhere-Off$
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    // Run the app in console mode using 'dotnet run'.
-    "dotnet run": {
+    "IIS Express (Development)": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44300/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "dotnet run (Development)": {
       "commandName": "Project",
       "commandLineArgs": "--server.urls http://*:1025",
       "launchBrowser": true,
@@ -33,15 +32,47 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    // Use CTRL+F5 or Debug -> Start Without Debugging to use this launch profile. Launches the app using 'dotnet watch', which allows you
-    // to edit code and refresh the browser to see your changes while the app is running.
-    "dotnet watch": {
+    "dotnet watch run (Development)": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
       "commandLineArgs": "watch run --server.urls http://*:1025",
       "launchBrowser": true,
       "launchUrl": "http://localhost:1025/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express (Staging)": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44300/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
+      }
+    },
+    "dotnet run (Staging)": {
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:1025",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:1025/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Staging"
+      }
+    },
+    "IIS Express (Production)": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "https://localhost:44300/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    "dotnet run (Production)": {
+      "commandName": "Project",
+      "commandLineArgs": "--server.urls http://*:1025",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:1025/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }
