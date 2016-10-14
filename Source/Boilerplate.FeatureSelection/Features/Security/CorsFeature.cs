@@ -18,7 +18,7 @@
 
         public override IFeatureGroup Group
         {
-            get{ return FeatureGroups.Security; }
+            get { return FeatureGroups.Security; }
         }
 
         public override string Id
@@ -55,6 +55,7 @@
 
         protected override async Task RemoveFeature()
         {
+            this.ProjectService.DeleteFile(@"Constants\CorsPolicyName.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ServiceCollectionExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Startup.cs");

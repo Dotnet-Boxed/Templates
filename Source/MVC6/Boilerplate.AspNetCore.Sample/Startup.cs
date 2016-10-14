@@ -19,6 +19,9 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    // $Start-CORS$
+    using MvcBoilerplate.Constants;
+    // $End-CORS$
     using MvcBoilerplate.Settings;
     // $Start-JsonSerializerSettings$
     using Newtonsoft.Json.Serialization;
@@ -120,7 +123,7 @@
 
         /// <summary>
         /// Configures the services to add to the ASP.NET MVC 6 Injection of Control (IoC) container. This method gets
-        /// called by the ASP.NET runtime. See:
+        /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
@@ -145,13 +148,19 @@
                         options.LowercaseUrls = true;
                     })
                 // $Start-CORS$
-                // Add cross-origin resource sharing (CORS) services (See https://docs.asp.net/en/latest/security/cors.html).
+                // Add cross-origin resource sharing (CORS) services. See https://docs.asp.net/en/latest/security/cors.html
                 .AddCors(
                     options =>
                     {
-                        //options.AddPolicy(
-                        //    options.DefaultPolicyName,
-                        //    builder => builder.);
+                        // Create named CORS policies here which you can consume using
+                        // application.UseCors("PolicyName") or a [EnableCors("PolicyName")] attribute on your
+                        // controller or action.
+                        options.AddPolicy(
+                            CorsPolicyName.AllowAny,
+                            builder => builder
+                                .AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader());
                     })
                 // $End-CORS$
                 // Add useful interface for accessing the ActionContext outside a controller.
@@ -223,7 +232,7 @@
         {
             // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
             loggerfactory
-                // Log to Serilog (A great logging framework) (See https://github.com/serilog/serilog-framework-logging).
+                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
                 // Add the Serilog package to project.json before uncommenting the line below.
                 // .AddSerilog()
                 .AddIf(
@@ -242,6 +251,9 @@
                 // middleware in the request pipeline.
                 .UseApplicationInsightsExceptionTelemetry()
                 // $End-ApplicationInsights$
+                // $Start-CORS$
+                .UseCors(CorsPolicyName.AllowAny)
+                // $End-CORS$
                 // Add static files to the request pipeline e.g. hello.html or world.css.
                 .UseStaticFiles()
                 .UseCookiePolicy()
