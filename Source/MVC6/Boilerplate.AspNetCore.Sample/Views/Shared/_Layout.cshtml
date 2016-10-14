@@ -246,14 +246,19 @@
         <script asp-append-version="true" src="~/js/site.js"></script>
     </environment>
     <environment names="@EnvironmentName.Staging,@EnvironmentName.Production">
-        @* asp-subresource-integrity-src - Ensures the CDN resource has not been tampered with.
-           See http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core *@
-        <script src="@ContentDeliveryNetwork.Google.JQueryUrl"
+        @* crossorigin - Enable reporting of errors from third party scripts.
+            See https://raygun.com/blog/2015/05/fixing-script-errors/
+           asp-subresource-integrity-src - Ensures the CDN resource has not been tampered with.
+            See http://rehansaeed.com/subresource-integrity-taghelper-using-asp-net-core *@
+        <script crossorigin="anonymous"
+                src="@ContentDeliveryNetwork.Google.JQueryUrl"
                 asp-subresource-integrity-src="~/js/jquery.js"></script>
-        <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"
+        <script crossorigin="anonymous"
+                src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUrl"
                 asp-subresource-integrity-src="~/js/jquery-validate.js"></script>
         <script src="@ContentDeliveryNetwork.Microsoft.JQueryValidateUnobtrusiveUrl"></script>
-        <script src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"
+        <script crossorigin="anonymous"
+                src="@ContentDeliveryNetwork.Microsoft.BootstrapUrl"
                 asp-subresource-integrity-src="~/js/bootstrap.js"></script>
         @* Move site.js to a content delivery network (CDN) for better performance. *@
         <script asp-append-version="true" src="~/js/site.js"></script>
