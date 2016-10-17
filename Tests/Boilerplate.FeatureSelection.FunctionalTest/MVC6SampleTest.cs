@@ -91,7 +91,7 @@
         [InlineData(typeof(ApplicationInsightsFeature), true)]
         [InlineData(typeof(AuthorMetaTagFeature), false)]
         [InlineData(typeof(ContactPageFeature), false)]
-        [InlineData(typeof(CorsFeature), false)]
+        [InlineData(typeof(CorsFeature), true)]
         [InlineData(typeof(FeedFeature), false)]
         //[InlineData(typeof(GlimpseFeature), true)]
         //[InlineData(typeof(GlimpseFeature), false)]
