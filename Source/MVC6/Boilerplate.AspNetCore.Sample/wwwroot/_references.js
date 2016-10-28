@@ -15,5 +15,4 @@
 /// <reference path="js/jquery.js" />
 /// <reference path="js/jquery-validate.js" />
 /// <reference path="js/jquery-validate-unobtrusive.js" />
-/// <reference path="js/modernizr.js" />
 /// <reference path="js/site.js" />

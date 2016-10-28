@@ -9,15 +9,15 @@
     "font-awesome": "4.7.0",
     "jquery": "2.2.3",
     "jquery-validation": "1.15.0",
-    "jquery-validation-unobtrusive": "3.2.6",
+    "jquery-validation-unobtrusive": "3.2.6"
+  },
+  "devDependencies": {
     // $Start-JavaScriptTestFramework-Mocha$
     "mocha": "2.4.5",
     "chai": "3.5.0",
     "sinon": "1.17.4",
     // $End-JavaScriptTestFramework-Mocha$
-    "modernizr": "2.8.3"
-  },
-  "devDependencies": {
+
     "autostrip-json-comments": "0.0.4",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "2.3.1",

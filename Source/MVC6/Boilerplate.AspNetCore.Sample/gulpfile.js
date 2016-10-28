@@ -208,11 +208,6 @@ var sources = {
             paths: paths.nodeModules + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'
         },
         {
-            name: 'modernizr.js',
-            copy: true,
-            paths: paths.nodeModules + 'modernizr/modernizr.js'
-        },
-        {
             name: 'site.js',
             paths: [
                 paths.scripts + 'fallback/styles.js',
