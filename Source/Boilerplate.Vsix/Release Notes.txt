@@ -1,4 +1,9 @@
-﻿Version 4.6.0
+﻿Version 4.7.0
+MVC 6
+- Removed bower.json, using package.json instead.
+- Upgraded Bootstrap from 3.3.6 to 3.3.7.
+
+Version 4.6.0
 MVC 5 & MVC 6
 - Added item to ReadMe.html to use the Google CSP Evaluator to validate the sites CSP policy.
 MVC 6

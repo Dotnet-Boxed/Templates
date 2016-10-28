@@ -15,7 +15,7 @@ To build this project you will require:
     > C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe
 4. Set command line arguments to:
     > /rootsuffix Exp
-5. Delete any node_modules and bower_components folders under the MVC 6 projects. This will stop errors complaining of long file paths.
+5. Delete the node_modules folder under the MVC 6 projects. This will stop errors complaining of long file paths.
 6. Hit F5 to run. An experimental instance of Visual Studio will start and you can create a new project template from there.
 
 Alternatively you can run the MVC 5 project itself to try it out. The MVC 6 projects cannot be run because of Microsoft's failure to implement comments in the various JSON config files which are required for the feature selection wizard (See http://blog.getify.com/json-comments/ for why this is silly).

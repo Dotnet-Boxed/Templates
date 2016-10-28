@@ -68,15 +68,6 @@
             await ProcessAssert.AssertStart(this.tempDirectoryPath, GetNpmFilePath(), "install", TimeSpan.FromMinutes(5));
         }
 
-        public async Task AssertBowerInstallSucceeded()
-        {
-            await ProcessAssert.AssertStart(
-                this.tempDirectoryPath,
-                @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\Web\External\bower.cmd",
-                "install",
-                TimeSpan.FromSeconds(30));
-        }
-
         public async Task AssertGulpCleanBuildTestSucceeded()
         {
             var gulpFilePath = Path.Combine(this.tempDirectoryPath, @"node_modules\.bin\gulp.cmd");

@@ -65,15 +65,11 @@
             if (this.mocha.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(
-                   this.mocha.CommentName,
-                   EditCommentMode.LeaveCodeUnchanged,
-                   "bower.json");
-                await this.ProjectService.EditCommentInFile(
-                    this.Id,
+                    this.mocha.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
                     "gulpfile.js");
                 await this.ProjectService.EditCommentInFile(
-                    this.Id,
+                    this.mocha.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
                     "package.json");
             }
@@ -81,15 +77,11 @@
             {
                 this.ProjectService.DeleteDirectory("Tests");
                 await this.ProjectService.EditCommentInFile(
-                   this.mocha.CommentName,
-                   EditCommentMode.DeleteCode,
-                   "bower.json");
-                await this.ProjectService.EditCommentInFile(
-                    this.Id,
+                    this.mocha.CommentName,
                     EditCommentMode.DeleteCode,
                     "gulpfile.js");
                 await this.ProjectService.EditCommentInFile(
-                    this.Id,
+                    this.mocha.CommentName,
                     EditCommentMode.DeleteCode,
                     "package.json");
             }

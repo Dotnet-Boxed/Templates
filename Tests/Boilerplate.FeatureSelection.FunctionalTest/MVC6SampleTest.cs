@@ -1,7 +1,6 @@
 ﻿namespace Boilerplate.FeatureSelection.FunctionalTest
 {
     using System;
-    using System.Configuration;
     using System.Linq;
     using System.Threading.Tasks;
     using Autofac;
@@ -176,7 +175,6 @@
             await this.tester.AddOrRemoveFeatures();
 
             await this.tester.AssertNpmInstallSucceeded();
-            await this.tester.AssertBowerInstallSucceeded();
             await this.tester.AssertGulpCleanBuildTestSucceeded();
         }
 

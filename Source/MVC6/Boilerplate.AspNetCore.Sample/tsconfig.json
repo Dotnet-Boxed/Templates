@@ -15,10 +15,9 @@
     // Compile to ECMAScript 5.
     "target": "es5"
   },
-  // exclude - Exclude the bower_components, node_modules and wwwroot folders from being scanned for TypeScript (.ts)
+  // exclude - Exclude the node_modules and wwwroot folders from being scanned for TypeScript (.ts)
   // or TypeScript definition (.d.ts) files.
   "exclude": [
-    "bower_components",
     "node_modules",
     "wwwroot"
   ]

@@ -92,7 +92,6 @@
     "compile": {
       // Ignore the following folders when looking for C# code to compile.
       "exclude": [
-        "bower_components",
         "node_modules",
         "wwwroot"
       ]
@@ -127,7 +126,6 @@
     // Execute the following commands before publishing the project.
     "prepublish": [
       "npm install",
-      "bower install",
       "gulp build"
     ],
     // Execute the following commands after publishing the project.

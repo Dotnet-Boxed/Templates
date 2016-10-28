@@ -1,6 +1,22 @@
 {
   "name": "asp.net-mvc-boilerplate",
   "version": "0.0.0",
+  "dependencies": {
+    // $Start-ApplicationInsights$
+    "ApplicationInsights-JS": "0.22.9",
+    // $End-ApplicationInsights$
+    "bootstrap-sass": "3.3.6",
+    "font-awesome": "4.6.3",
+    "jquery": "2.2.3",
+    "jquery-validation": "1.15.0",
+    "jquery-validation-unobtrusive": "3.2.6",
+    // $Start-JavaScriptTestFramework-Mocha$
+    "mocha": "2.4.5",
+    "chai": "3.5.0",
+    "sinon": "1.17.4",
+    // $End-JavaScriptTestFramework-Mocha$
+    "modernizr": "2.8.3"
+  },
   "devDependencies": {
     "autostrip-json-comments": "0.0.4",
     "gulp": "3.9.1",
@@ -20,9 +36,9 @@
     // $Start-CshtmlMinification$
     "gulp-minify-cshtml": "0.0.1",
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework$
+    // $Start-JavaScriptTestFramework-Mocha$
     "gulp-mocha-phantomjs": "0.11.0",
-    // $End-JavaScriptTestFramework$
+    // $End-JavaScriptTestFramework-Mocha$
     "gulp-plumber": "1.1.0",
     "gulp-rename": "1.2.2",
     // $Start-ApplicationInsights$

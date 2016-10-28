@@ -23,9 +23,9 @@ var gulp = require('gulp'),
     // $Start-CshtmlMinification$
     minifyCshtml = require('gulp-minify-cshtml'), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework$
+    // $Start-JavaScriptTestFramework-Mocha$
     mocha = require('gulp-mocha-phantomjs'),    // JavaScript test runner (https://www.npmjs.com/package/gulp-mocha-phantomjs/).
-    // $End-JavaScriptTestFramework$
+    // $End-JavaScriptTestFramework-Mocha$
     plumber = require('gulp-plumber'),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require('gulp-rename'),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     // $Start-ApplicationInsights$
@@ -86,15 +86,15 @@ var siteUrl = undefined;
 // Initialize directory paths.
 var paths = {
     // Source Directory Paths
-    bower: './bower_components/',
+    nodeModules: './node_modules/',
     scripts: 'Scripts/',
     styles: 'Styles/',
     // $Start-CshtmlMinification$
     views: 'Views/',
     // $End-CshtmlMinification$
-    // $Start-JavaScriptTestFramework$
+    // $Start-JavaScriptTestFramework-Mocha$
     tests: 'Tests/',
-    // $End-JavaScriptTestFramework$
+    // $End-JavaScriptTestFramework-Mocha$
 
     // Destination Directory Paths
     wwwroot: './' + hosting.webroot + '/',
@@ -140,7 +140,7 @@ var sources = {
             // copy - Just copy the file and don't run it through the minification pipeline.
             copy: true,
             // paths - The path to the file to copy.
-            paths: paths.bower + 'font-awesome/css/font-awesome.min.css'
+            paths: paths.nodeModules + 'font-awesome/css/font-awesome.min.css'
         },
         {
             name: 'site.css',
@@ -157,11 +157,11 @@ var sources = {
             // The name of the folder the fonts will be output to.
             name: 'bootstrap',
             // The source directory to get the font files from. Note that we support all font file types.
-            path: paths.bower + 'bootstrap-sass/**/*.{ttf,svg,woff,woff2,otf,eot}'
+            path: paths.nodeModules + 'bootstrap-sass/**/*.{ttf,svg,woff,woff2,otf,eot}'
         },
         {
             name: 'font-awesome',
-            path: paths.bower + 'font-awesome/**/*.{ttf,svg,woff,woff2,otf,eot}'
+            path: paths.nodeModules + 'font-awesome/**/*.{ttf,svg,woff,woff2,otf,eot}'
         }
     ],
     // An array of paths to images to be optimized.
@@ -173,7 +173,7 @@ var sources = {
         // $Start-ApplicationInsights$
         {
             name: 'application-insights.js',
-            paths: paths.bower + 'ApplicationInsights-JS/JavaScript/JavaScriptSDK/snippet.js',
+            paths: paths.nodeModules + 'ApplicationInsights-JS/JavaScript/JavaScriptSDK/snippet.js',
             // replacements - Replacement to be made in the files above.
             replacement: {
                 // find - The string or regular expression to find.
@@ -190,27 +190,27 @@ var sources = {
             copy: true,
             // paths - A single or array of paths to JavaScript or TypeScript files which will be concatenated and
             // minified to create a file with the above file name.
-            paths: paths.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js'
+            paths: paths.nodeModules + 'bootstrap-sass/assets/javascripts/bootstrap.min.js'
         },
         {
             name: 'jquery.js',
             copy: true,
-            paths: paths.bower + 'jquery/dist/jquery.min.js'
+            paths: paths.nodeModules + 'jquery/dist/jquery.min.js'
         },
         {
             name: 'jquery-validate.js',
             copy: true,
-            paths: paths.bower + 'jquery-validation/dist/jquery.validate.min.js'
+            paths: paths.nodeModules + 'jquery-validation/dist/jquery.validate.min.js'
         },
         {
             name: 'jquery-validate-unobtrusive.js',
             copy: true,
-            paths: paths.bower + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'
+            paths: paths.nodeModules + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'
         },
         {
             name: 'modernizr.js',
             copy: true,
-            paths: paths.bower + 'modernizr/modernizr.js'
+            paths: paths.nodeModules + 'modernizr/modernizr.js'
         },
         {
             name: 'site.js',
@@ -479,14 +479,14 @@ gulp.task('build', [
     'build-js'
 ]);
 
-// $Start-JavaScriptTestFramework$
+// $Start-JavaScriptTestFramework-Mocha$
 gulp.task('test', function () {
     return gulp
         .src(paths.tests + 'mocha.html')
         .pipe(mocha());
 });
 
-// $End-JavaScriptTestFramework$
+// $End-JavaScriptTestFramework-Mocha$
 /*
  * Optimizes and compresses the GIF, JPG, PNG and SVG images for the site.
  */
@@ -529,7 +529,7 @@ gulp.task('watch-js', function () {
         });
 });
 
-// $Start-JavaScriptTestFramework$
+// $Start-JavaScriptTestFramework-Mocha$
 /*
  * Watch the scripts and tests folder for changes to .js or .ts files. Run the JavaScript tests if something changes.
  */
@@ -545,7 +545,7 @@ gulp.task('watch-tests', function () {
         });
 });
 
-// $End-JavaScriptTestFramework$
+// $End-JavaScriptTestFramework-Mocha$
 /*
  * Watch the styles and scripts folders for changes. Build the CSS and JavaScript if something changes.
  */
@@ -597,8 +597,8 @@ gulp.task(
     [
         'clean',
         'build',
-        // $Start-JavaScriptTestFramework$
+        // $Start-JavaScriptTestFramework-Mocha$
         'test',
-        // $End-JavaScriptTestFramework$
+        // $End-JavaScriptTestFramework-Mocha$
         'watch'
     ]);

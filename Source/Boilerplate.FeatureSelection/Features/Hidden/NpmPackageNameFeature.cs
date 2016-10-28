@@ -15,7 +15,7 @@
 
         public override string Description
         {
-            get { return "Sets the name property in a package.json or bower.json file."; }
+            get { return "Sets the name property in a package.json file."; }
         }
 
         public override IFeatureGroup Group
@@ -45,7 +45,7 @@
 
         public override string Title
         {
-            get { return "Set the package.json or bower.json package name"; }
+            get { return "Set the package.json package name"; }
         }
 
         protected override async Task AddFeature()
@@ -60,10 +60,6 @@
                 .ToArray());
             name = name.Length > MaxNameLength ? name.Substring(0, MaxNameLength) : name;
 
-            await this.ProjectService.ReplaceInFile(
-                "asp.net-mvc-boilerplate",
-                name,
-                @"bower.json");
             await this.ProjectService.ReplaceInFile(
                 "asp.net-mvc-boilerplate",
                 name,

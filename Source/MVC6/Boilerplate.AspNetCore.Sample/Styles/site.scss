@@ -2,7 +2,7 @@
 $icon-font-path: '../fonts/';
 
 // Import the bootstrap SASS style-sheet so that it can be customized and variables overridden here.
-@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import '../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
 body {
   padding-bottom: 20px;
