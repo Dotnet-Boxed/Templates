@@ -20,7 +20,7 @@
             public const string JQueryValidateUrl = "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js";
             public const string JQueryValidateUnobtrusiveUrl = "https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js";
             public const string ModernizrUrl = "https://ajax.aspnetcdn.com/ajax/modernizr/modernizr-2.8.3.js";
-            public const string BootstrapUrl = "https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js";
+            public const string BootstrapUrl = "https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js";
         }
     }
 }
