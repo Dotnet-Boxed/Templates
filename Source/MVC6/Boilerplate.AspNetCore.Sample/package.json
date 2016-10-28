@@ -7,7 +7,7 @@
     // $End-ApplicationInsights$
     "bootstrap-sass": "3.3.7",
     "font-awesome": "4.7.0",
-    "jquery": "2.2.3",
+    "jquery": "3.1.1",
     "jquery-validation": "1.15.0",
     "jquery-validation-unobtrusive": "3.2.6"
   },

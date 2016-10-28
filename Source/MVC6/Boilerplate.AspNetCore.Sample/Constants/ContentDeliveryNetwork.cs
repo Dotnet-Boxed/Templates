@@ -5,7 +5,7 @@
         public static class Google
         {
             public const string Domain = "ajax.googleapis.com";
-            public const string JQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js";
+            public const string JQueryUrl = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js";
         }
 
         public static class MaxCdn
