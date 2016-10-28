@@ -17,7 +17,7 @@
         public static class Microsoft
         {
             public const string Domain = "ajax.aspnetcdn.com";
-            public const string JQueryValidateUrl = "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js";
+            public const string JQueryValidateUrl = "https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.1/jquery.validate.min.js";
             public const string JQueryValidateUnobtrusiveUrl = "https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js";
             public const string BootstrapUrl = "https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js";
         }
