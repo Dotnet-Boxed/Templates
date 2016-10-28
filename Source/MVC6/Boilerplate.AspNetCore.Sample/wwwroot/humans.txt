@@ -14,6 +14,6 @@ Name: name or url
 
 /* SITE */
 Last update: YYYY/MM/DD (Updating this could get annoying)
-Standards: HTML5, CSS3,.. (This is not a good idea from a security standpoint)
-Components: Modernizr, jQuery, etc. (This is not a good idea from a security standpoint)
+Standards: HTML5, CSS3,.. (Only list front-end standards, don't tell the world how you built the server side)
+Components: jQuery, Bootstrap etc. (Only list front-end components, don't tell the world how you built the server side)
 Software: Software used for the development (This is not a good idea from a security standpoint)

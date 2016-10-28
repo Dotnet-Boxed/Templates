@@ -3,6 +3,7 @@ MVC 6
 - Removed bower.json, using package.json instead.
 - Upgraded Bootstrap from 3.3.6 to 3.3.7.
 - Upgraded Font Awesome from 4.6.3 to 4.7.0.
+- Removed Modernizr.
 
 Version 4.6.0
 MVC 5 & MVC 6

@@ -140,17 +140,6 @@
                         Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the <code>CspReportUriAttribute</code> in <em>MvcOptionsExtensions.cs</em>.
                     </li>
                     <li class="list-group-item">
-                        <input name="ContentSecurityPolicy-CheckModernizrCSPSupport" type="checkbox"> <strong>Check Modernizr CSP Support</strong> -
-                        Modernizr does not currently support
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a>
-                        because it uses in-line CSS styles rather than separate files. To get around this problem, in-line Styles have been allowed in
-                        the CSP policy (See <em>MvcOptionsExtensions.cs</em>). This is not a good practice and reduces some of the security benefits of using it. Keep an eye on
-                        <a href="http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors">this</a> StackOverflow
-                        post and
-                        <a href="https://github.com/Modernizr/Modernizr/pull/1263">this</a> issue raised on the Modernizr development site for when Modernizr
-                        finally adds support for CSP.
-                    </li>
-                    <li class="list-group-item">
                         <input name="ContentSecurityPolicy-CSPEvaluator" type="checkbox"> <strong>Check CSP Evaluator</strong> -
                         Run the Google <a href="https://csp-evaluator.withgoogle.com/">CSP Evaluator</a> against your site to check that your CSP policy valid and secure.
                     </li>

@@ -10,7 +10,7 @@
     <ReleaseNotes>Release Notes.txt</ReleaseNotes>
     <Icon>Small Icon.png</Icon>
     <PreviewImage>Small Preview Image.png</PreviewImage>
-    <Tags>ASP.NET;MVC;Boilerplate;Template;C#;.NET;Bootstrap;Elmah;Autofac;Glimpse;Modernizr;NWebSec;HTML5</Tags>
+    <Tags>ASP.NET;MVC;Boilerplate;Template;C#;.NET;Bootstrap;Elmah;Autofac;Glimpse;NWebSec;HTML5</Tags>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,15.0)" />

@@ -9,7 +9,6 @@
         // test - Tests whether the script loaded successfully or not. Returns true if the script loaded successfully or
         //        false if the script failed to load and the fallback is required.
         // src - The URL to the fallback script.
-        { test: function () { return window.Modernizr; }, src: "/js/modernizr.js" },
         { test: function () { return window.jQuery; }, src: "/js/jquery.js" },
         { test: function () { return window.jQuery.validator; }, src: "/js/jquery-validate.js" },
         { test: function () { return window.jQuery.validator.unobtrusive; }, src: "/js/jquery-validate-unobtrusive.js" },

@@ -286,13 +286,6 @@
                                 {
                                     ContentDeliveryNetwork.MaxCdn.Domain // Allow stylesheets from the following CDN's.
                                 });
-                                // Allow in-line CSS, this is unsafe and can open your site up to XSS vulnerabilities.
-                                // Note: This is enabled because Modernizr does not support CSP and includes in-line
-                                // styles in its JavaScript files. This is a security hole. If you don't want to use
-                                // Modernizr, be sure to disable unsafe in-line styles. For more information See:
-                                // http://stackoverflow.com/questions/26532234/modernizr-causes-content-security-policy-csp-violation-errors
-                                // https://github.com/Modernizr/Modernizr/pull/1263
-                                x.UnsafeInline();
                             });
                 });
         }
