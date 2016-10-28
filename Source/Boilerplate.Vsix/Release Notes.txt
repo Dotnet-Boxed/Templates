@@ -1,6 +1,7 @@
 ﻿Version 4.7.0
 MVC 6
 - Removed bower.json, using package.json instead.
+- Upgraded applicationinsights-js from 0.22.9 to 1.0.4.
 - Upgraded Bootstrap from 3.3.6 to 3.3.7.
 - Upgraded Font Awesome from 4.6.3 to 4.7.0..
 - Upgraded jQuery from 2.2.3 to 3.1.1.

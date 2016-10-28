@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     // $Start-ApplicationInsights$
-    "ApplicationInsights-JS": "0.22.9",
+    "applicationinsights-js": "1.0.4",
     // $End-ApplicationInsights$
     "bootstrap-sass": "3.3.7",
     "font-awesome": "4.7.0",
