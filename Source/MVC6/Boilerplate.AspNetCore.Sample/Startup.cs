@@ -254,8 +254,7 @@
                 // $Start-CORS$
                 .UseCors(CorsPolicyName.AllowAny)
                 // $End-CORS$
-                // Add static files to the request pipeline e.g. hello.html or world.css.
-                .UseStaticFiles()
+                .UseStaticFilesWithCacheControl()
                 .UseCookiePolicy()
                 .UseIfElse(
                     this.hostingEnvironment.IsDevelopment(),

@@ -74,8 +74,12 @@
       // Cache the nodes in the sitemap for a day.
       "SitemapNodes": {
         "Duration": 86400
-      }
+      },
       // $End-Sitemap$
+      // Cache static files for a year.
+      "StaticFiles": {
+        "Duration": 31536000
+      }
     }
   }
 }

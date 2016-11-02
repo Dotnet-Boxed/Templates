@@ -1,8 +1,10 @@
 ﻿namespace MvcBoilerplate
 {
+    using System;
     // $Start-NWebSec$
     using System.Collections.Generic;
     // $End-NWebSec$
+    using System.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.CookiePolicy;
@@ -10,8 +12,14 @@
     using Microsoft.AspNetCore.Hosting;
     // $End-NWebSec$
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Net.Http.Headers;
     // $Start-NWebSec$
     using MvcBoilerplate.Constants;
+    // $End-NWebSec$
+    using MvcBoilerplate.Settings;
+    // $Start-NWebSec$
     using NWebsec.AspNetCore.Middleware;
     // $End-NWebSec$
 
@@ -87,6 +95,35 @@
             // $End-HttpException$
 
             return application;
+        }
+
+        /// <summary>
+        /// Uses the static files middleware to server static files and add the Cache-Control HTTP header. The cache
+        /// duration is controlled from configuration.
+        /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
+        /// </summary>
+        public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
+        {
+            var configuration = application.ApplicationServices.GetRequiredService<IConfigurationRoot>();
+            var cacheDuration = configuration
+                .GetSection<CacheProfileSettings>()
+                .CacheProfiles
+                .First(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
+                .Value
+                .Duration;
+            var headerValue = "public,max-age=" + cacheDuration;
+            return application
+                .UseStaticFiles(
+                    new StaticFileOptions()
+                    {
+                        OnPrepareResponse = context =>
+                        {
+                            if (cacheDuration.HasValue)
+                            {
+                                context.Context.Response.Headers[HeaderNames.CacheControl] = headerValue;
+                            }
+                        }
+                    });
         }
         // $Start-NWebSec$
         // $Start-HttpsEverywhere-On$
