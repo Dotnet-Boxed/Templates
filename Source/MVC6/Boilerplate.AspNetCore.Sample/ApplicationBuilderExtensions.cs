@@ -14,9 +14,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    // $Start-NWebSec$
     using MvcBoilerplate.Constants;
-    // $End-NWebSec$
     using MvcBoilerplate.Settings;
     // $Start-NWebSec$
     using NWebsec.AspNetCore.Middleware;
@@ -101,9 +99,10 @@
         /// headers. The cache duration is controlled from configuration.
         /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
         /// </summary>
-        public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
+        public static IApplicationBuilder UseStaticFilesWithCacheControl(
+            this IApplicationBuilder application,
+            IConfigurationRoot configuration)
         {
-            var configuration = application.ApplicationServices.GetRequiredService<IConfigurationRoot>();
             var cacheProfile = configuration
                 .GetSection<CacheProfileSettings>()
                 .CacheProfiles

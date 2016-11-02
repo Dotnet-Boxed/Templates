@@ -38,7 +38,7 @@
         /// Gets or sets the application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html
         /// </summary>
-        private readonly IConfiguration configuration;
+        private readonly IConfigurationRoot configuration;
 
         /// <summary>
         /// The environment the application is running under. This can be Development, Staging or Production by default.
@@ -254,7 +254,7 @@
                 // $Start-CORS$
                 .UseCors(CorsPolicyName.AllowAny)
                 // $End-CORS$
-                .UseStaticFilesWithCacheControl()
+                .UseStaticFilesWithCacheControl(this.configuration)
                 .UseCookiePolicy()
                 .UseIfElse(
                     this.hostingEnvironment.IsDevelopment(),
