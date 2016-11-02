@@ -78,7 +78,8 @@
       // $End-Sitemap$
       // Cache static files for a year.
       "StaticFiles": {
-        "Duration": 31536000
+        "Duration": 31536000,
+        "Location": "Any"
       }
     }
   }

@@ -14,7 +14,6 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Net.Http.Headers;
     // $Start-NWebSec$
     using MvcBoilerplate.Constants;
     // $End-NWebSec$
@@ -98,30 +97,25 @@
         }
 
         /// <summary>
-        /// Uses the static files middleware to server static files and add the Cache-Control HTTP header. The cache
-        /// duration is controlled from configuration.
+        /// Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
+        /// headers. The cache duration is controlled from configuration.
         /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
         /// </summary>
         public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
         {
             var configuration = application.ApplicationServices.GetRequiredService<IConfigurationRoot>();
-            var cacheDuration = configuration
+            var cacheProfile = configuration
                 .GetSection<CacheProfileSettings>()
                 .CacheProfiles
                 .First(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
-                .Value
-                .Duration;
-            var headerValue = "public,max-age=" + cacheDuration;
+                .Value;
             return application
                 .UseStaticFiles(
                     new StaticFileOptions()
                     {
                         OnPrepareResponse = context =>
                         {
-                            if (cacheDuration.HasValue)
-                            {
-                                context.Context.Response.Headers[HeaderNames.CacheControl] = headerValue;
-                            }
+                            context.Context.ApplyCacheProfile(cacheProfile);
                         }
                     });
         }
@@ -209,15 +203,15 @@
                         // default-src - Sets a default source list for a number of directives. If the other directives
                         // below are not used then this is the default setting.
                         .DefaultSources(x => x.None())                    // We disallow everything by default.
-                        // base-uri - This directive restricts the document base URL
-                        //            See http://www.w3.org/TR/html5/infrastructure.html#document-base-url.
-                        // .BaseUris(x => ...)
-                        // child-src - This directive restricts from where the protected resource can load web workers
-                        //             or embed frames. This was introduced in CSP 2.0 to replace frame-src. frame-src
-                        //             should still be used for older browsers.
-                        // .ChildSources(x => ...)
-                        // connect-src - This directive restricts which URIs the protected resource can load using
-                        //               script interfaces (Ajax Calls and Web Sockets).
+                                                                          // base-uri - This directive restricts the document base URL
+                                                                          //            See http://www.w3.org/TR/html5/infrastructure.html#document-base-url.
+                                                                          // .BaseUris(x => ...)
+                                                                          // child-src - This directive restricts from where the protected resource can load web workers
+                                                                          //             or embed frames. This was introduced in CSP 2.0 to replace frame-src. frame-src
+                                                                          //             should still be used for older browsers.
+                                                                          // .ChildSources(x => ...)
+                                                                          // connect-src - This directive restricts which URIs the protected resource can load using
+                                                                          //               script interfaces (Ajax Calls and Web Sockets).
                         .ConnectSources(
                             x =>
                             {
@@ -261,13 +255,13 @@
                             })
                         // form-action - This directive restricts which URLs can be used as the action of HTML form elements.
                         .FormActions(x => x.Self())              // Allow the current domain.
-                        // frame-src - This directive restricts from where the protected resource can embed frames.
-                        //             This is deprecated in favour of child-src but should still be used for older browsers.
-                        // .FrameSources(x => ...)
-                        // frame-ancestors - This directive restricts from where the protected resource can embed
-                        //                   frame, iframe, object, embed or applet's.
-                        // .FrameAncestors(x => ...)
-                        // img-src - This directive restricts from where the protected resource can load images.
+                                                                 // frame-src - This directive restricts from where the protected resource can embed frames.
+                                                                 //             This is deprecated in favour of child-src but should still be used for older browsers.
+                                                                 // .FrameSources(x => ...)
+                                                                 // frame-ancestors - This directive restricts from where the protected resource can embed
+                                                                 //                   frame, iframe, object, embed or applet's.
+                                                                 // .FrameAncestors(x => ...)
+                                                                 // img-src - This directive restricts from where the protected resource can load images.
                         .ImageSources(
                             x =>
                             {
