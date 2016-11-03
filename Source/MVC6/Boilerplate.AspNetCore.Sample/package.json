@@ -13,9 +13,9 @@
   },
   "devDependencies": {
     // $Start-JavaScriptTestFramework-Mocha$
-    "mocha": "2.4.5",
+    "mocha": "3.1.2",
     "chai": "3.5.0",
-    "sinon": "1.17.4",
+    "sinon": "1.17.6",
     // $End-JavaScriptTestFramework-Mocha$
 
     "autostrip-json-comments": "0.0.4",
@@ -25,7 +25,7 @@
     "gulp-csslint": "0.3.0",
     "gulp-cssnano": "2.1.2",
     "gulp-if": "2.0.1",
-    "gulp-imagemin": "2.4.0",
+    "gulp-imagemin": "3.1.0",
     // $Start-JavaScriptCodeStyle$
     "gulp-jscs": "3.0.2",
     // $End-JavaScriptCodeStyle$
@@ -50,6 +50,7 @@
     "gulp-sourcemaps": "1.6.0",
     // $Start-TypeScript$
     "gulp-typescript": "2.13.4",
+    "typescript": "2.0.6",
     "gulp-tslint": "5.0.0",
     "tslint": "3.10.2",
     // $End-TypeScript$

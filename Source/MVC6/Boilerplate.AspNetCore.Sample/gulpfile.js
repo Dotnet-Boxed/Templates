@@ -60,11 +60,9 @@ var environment = {
     // Gets the current hosting environment the app is running under. Looks for the ASPNETCORE_ENVIRONMENT environment
     // variable, if not found looks at the launchSettings.json file which if not found defaults to Development.
     current: function () {
-        var environ = process.env.ASPNETCORE_ENVIRONMENT ||
+        return process.env.ASPNETCORE_ENVIRONMENT ||
             (launch && launch.profiles['IIS Express'].environmentVariables.ASPNETCORE_ENVIRONMENT) ||
             this.development;
-        gutil.log('Current Environment: ' + environ);
-        return environ;
     },
     // Are we running under the development environment.
     isDevelopment: function () {
@@ -79,6 +77,7 @@ var environment = {
         return this.current() === this.production;
     }
 };
+gutil.log('Current Environment: ' + environment.current());
 
 // The URL to your deployed site e.g. 'http://example.com'. This is used by the Google PageSpeed tasks.
 var siteUrl = undefined;
@@ -285,7 +284,7 @@ gulp.task('lint-css', function () {
         gulp.src(lintSources.css)               // Start with the source .css files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(csslint())                    // Get any CSS linting errors.
-            .pipe(csslint.reporter()),          // Report any CSS linting errors to the console.
+            .pipe(csslint.formatter()),         // Report any CSS linting errors to the console.
         gulp.src(lintSources.scss)              // Start with the source .scss files.
             .pipe(plumber())                    // Handle any errors.
             .pipe(sasslint())                   // Run SCSS linting.
@@ -311,8 +310,10 @@ gulp.task('lint-js', function () {
         // $Start-TypeScript$
         gulp.src(lintSources.ts)                // Start with the source .ts files.
             .pipe(plumber())                    // Handle any errors.
-            .pipe(tslint())                     // Get any TypeScript linting errors.
-            .pipe(tslint.report('verbose')),    // Report any TypeScript linting errors to the console.
+            .pipe(tslint({                      // Get any TypeScript linting errors.
+                formatter: "verbose"            // Use a verbose output.
+            }))
+            .pipe(tslint.report()),             // Report any TypeScript linting errors to the console.
         // $End-TypeScript$
         // $Start-JavaScriptCodeStyle$
         gulp.src(lintSources.js)                // Start with the source .js files.
@@ -428,7 +429,7 @@ function () {
                 // $Start-TypeScript$
                 .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
                     '**/*.ts',
-                    typescript(getTypeScriptProject(source)))) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
+                    getTypeScriptProject(source.name)())) // Compile TypeScript (.ts) to JavaScript (.js) using the specified options.
                 // $End-TypeScript$
                 .pipe(concat(source.name))          // Concatenate JavaScript files into a single file with the specified name.
                 .pipe(sizeBefore(source.name))      // Write the size of the file to the console before minification.

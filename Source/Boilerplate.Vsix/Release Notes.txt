@@ -7,6 +7,11 @@ MVC 6
 - Upgraded Font Awesome from 4.6.3 to 4.7.0.
 - Upgraded jQuery from 2.2.3 to 3.1.1.
 - Upgraded jquery-validation from 1.15.0 to 1.15.1.
+- Upgraded mocha from 2.4.5 to 3.1.2.
+- Upgraded sinon from 1.17.4 to 1.17.6.
+- Updated several Gulp packages to the latest versions.
+- Added the typescript NPM package if TypeScript feature is used.
+- Removed Subresource Integrity (SRI) from jquery-validation-unobtrusive. The NPM package does not include a minified copy.
 - Removed Modernizr.
 
 Version 4.6.0
