@@ -342,7 +342,7 @@
                 //                instructing the browser to display the page when it is loaded in an iframe - but only
                 //                if the iframe is from the same origin as the page.
                 //   Deny - Specifies that the X-Frame-Options header should be set in the HTTP response, instructing
-                //   the browser to not display the page when it is loaded in an iframe.
+                //          the browser to not display the page when it is loaded in an iframe.
                 .UseXfo(options => options.Deny());
         }
         // $End-NWebSec$
