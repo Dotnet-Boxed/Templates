@@ -198,13 +198,11 @@ var sources = {
         },
         {
             name: 'jquery-validate.js',
-            copy: true,
-            paths: paths.nodeModules + 'jquery-validation/dist/jquery.validate.min.js'
+            paths: paths.nodeModules + 'jquery-validation/dist/jquery.validate.js'
         },
         {
             name: 'jquery-validate-unobtrusive.js',
-            copy: true,
-            paths: paths.nodeModules + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js'
+            paths: paths.nodeModules + 'jquery-validation-unobtrusive/jquery.validate.unobtrusive.js'
         },
         {
             name: 'site.js',
