@@ -10,8 +10,9 @@ MVC 6
 - Upgraded mocha from 2.4.5 to 3.1.2.
 - Upgraded sinon from 1.17.4 to 1.17.6.
 - Updated several Gulp packages to the latest versions.
-- Added the typescript NPM package if TypeScript feature is used.
-- Removed Subresource Integrity (SRI) from jquery-validation-unobtrusive. The NPM package does not include a minified copy.
+- Added the Typescript NPM package if TypeScript feature is used.
+- Removed Subresource Integrity (SRI) from jquery-validation and jquery-validation-unobtrusive. The NPM package does
+  not include a minified copy.
 - Removed Modernizr.
 
 Version 4.6.0
