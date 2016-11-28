@@ -96,6 +96,8 @@
         "wwwroot"
       ]
     },
+    // Use the new portable .pdb file format.
+    "debugType": "portable",
     // Require the application to use a static Main method.
     "emitEntryPoint": true,
     "preserveCompilationContext": true

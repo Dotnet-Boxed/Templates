@@ -14,6 +14,7 @@ MVC 6
 - Removed Subresource Integrity (SRI) from jquery-validation and jquery-validation-unobtrusive. The NPM package does
   not include a minified copy.
 - Removed Modernizr.
+- Use the new portable .pdb file format in project.json buildOptions.
 
 Version 4.6.0
 MVC 5 & MVC 6
