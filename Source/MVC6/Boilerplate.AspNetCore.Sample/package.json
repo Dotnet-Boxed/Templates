@@ -42,7 +42,7 @@
     "gulp-plumber": "1.1.0",
     "gulp-rename": "1.2.2",
     // $Start-ApplicationInsights$
-    "gulp-replace": "0.5.4",
+    "gulp-replace-task": "0.11.0",
     // $End-ApplicationInsights$
     "gulp-sass": "2.3.2",
     "gulp-sass-lint": "1.2.0",

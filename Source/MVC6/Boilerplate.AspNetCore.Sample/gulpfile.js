@@ -29,7 +29,7 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),          // Handles Gulp errors (https://www.npmjs.com/package/gulp-plumber)
     rename = require('gulp-rename'),            // Renames file paths (https://www.npmjs.com/package/gulp-rename/)
     // $Start-ApplicationInsights$
-    replace = require('gulp-replace'),          // String replace (https://www.npmjs.com/package/gulp-replace/)
+    replace = require('gulp-replace-task'),     // String replace (https://www.npmjs.com/package/gulp-replace-task/)
     // $End-ApplicationInsights$
     size = require('gulp-size'),                // Prints size of files to console (https://www.npmjs.com/package/gulp-size/)
     sourcemaps = require('gulp-sourcemaps'),    // Creates source map files (https://www.npmjs.com/package/gulp-sourcemaps/)
@@ -173,13 +173,19 @@ var sources = {
         {
             name: 'application-insights.js',
             paths: paths.nodeModules + 'ApplicationInsights-JS/JavaScript/JavaScriptSDK/snippet.js',
-            // replacements - Replacement to be made in the files above.
-            replacement: {
-                // find - The string or regular expression to find.
-                find: 'INSTRUMENTATION_KEY',
-                // replace - The string or function used to make the replacement.
-                replace: config.ApplicationInsights.InstrumentationKey
-            }
+            // replacements - Replacements to be made in the files above.
+            replacements: [
+                {
+                    // match - The string or regular expression to find.
+                    match: 'CDN_PATH',
+                    // replacement - The string or function used to make the replacement.
+                    replacement: config.ApplicationInsights.CdnUrl
+                },
+                {
+                    match: 'INSTRUMENTATION_KEY',
+                    replacement: config.ApplicationInsights.InstrumentationKey
+                }
+            ]
         },
         // $End-ApplicationInsights$
         {
@@ -419,10 +425,11 @@ function () {
                     sourcemaps.init()))             // Set up the generation of .map source files for the JavaScript.
                 // $Start-ApplicationInsights$
                 .pipe(gulpif(
-                    source.replacement,             // If the source has a replacement to be made.
-                    replace(                        // Carry out the specified find and replace.
-                        source.replacement ? source.replacement.find : '',
-                        source.replacement ? source.replacement.replace : '')))
+                    source.replacements !== undefined, // If the source has a replacement to be made.
+                    replace({                       // Carry out the specified find and replace.
+                        patterns: source.replacements,
+                        usePrefix: false
+                    })))
                 // $End-ApplicationInsights$
                 // $Start-TypeScript$
                 .pipe(gulpif(                       // If the file is a TypeScript (.ts) file.
