@@ -1,4 +1,8 @@
-﻿Version 4.7.0
+﻿Version 5.0.0
+MVC 6
+- Added current project as tag helper source to _ViewImports.cshtml so that View Components can be used as tag helpers.
+
+Version 4.7.0
 MVC 6
 - Add the Cache-Control HTTP header to the static files middleware and make it config driven.
 - Removed bower.json, using package.json instead.
