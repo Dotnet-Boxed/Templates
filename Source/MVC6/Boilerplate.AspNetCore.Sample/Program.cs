@@ -38,6 +38,9 @@
                         options.ListenerSettings.Authentication.AllowAnonymous = true;
                     })
                 // $End-PrimaryWebServer-WebListener$
+                // $Start-CloudProvider$
+                .UseAzureAppServices()
+                // $End-CloudProvider$
                 // $Start-ReverseProxyWebServer-IIS$
                 .UseIISIntegration()
                 // $End-ReverseProxyWebServer-IIS$

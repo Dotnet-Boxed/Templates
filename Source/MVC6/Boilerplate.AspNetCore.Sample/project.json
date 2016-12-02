@@ -15,6 +15,9 @@
     // $Start-ApplicationInsights$
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
     // $End-ApplicationInsights$
+    // $Start-CloudProvider$
+    "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
+    // $End-CloudProvider$
     "Microsoft.AspNetCore.CookiePolicy": "1.1.0",
     // $Start-CORS$
     "Microsoft.AspNetCore.Cors": "1.1.0",

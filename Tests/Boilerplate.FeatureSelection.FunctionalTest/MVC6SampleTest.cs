@@ -89,6 +89,7 @@
         [InlineData(typeof(AppleMacSafariFaviconFeature), false)]
         [InlineData(typeof(ApplicationInsightsFeature), true)]
         [InlineData(typeof(AuthorMetaTagFeature), false)]
+        [InlineData(typeof(CloudProviderFeature), false)]
         [InlineData(typeof(ContactPageFeature), false)]
         [InlineData(typeof(CorsFeature), true)]
         [InlineData(typeof(FeedFeature), false)]

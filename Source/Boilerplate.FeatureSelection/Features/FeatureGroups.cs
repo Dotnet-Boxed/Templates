@@ -6,7 +6,7 @@
 
         public static readonly IFeatureGroup Project = new FeatureGroup("Project", 1);
 
-        public static readonly IFeatureGroup WebServer = new FeatureGroup("Web Server", 2);
+        public static readonly IFeatureGroup Hosting = new FeatureGroup("Hosting", 2);
 
         public static readonly IFeatureGroup CssAndJavaScript = new FeatureGroup("CSS & JavaScript", 3);
 

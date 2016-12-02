@@ -41,7 +41,7 @@
 
         public override IFeatureGroup Group
         {
-            get { return FeatureGroups.WebServer; }
+            get { return FeatureGroups.Hosting; }
         }
 
         public override string Id
