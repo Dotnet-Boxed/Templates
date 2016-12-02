@@ -22,7 +22,9 @@
                     builder.RegisterType<NpmPackageNameFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Target Framework
                     builder.RegisterType<TargetFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<WebServerFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    // Web Server
+                    builder.RegisterType<PrimaryWebServerFeature>().AsSelf().As<IFeature>().SingleInstance();
+                    builder.RegisterType<ReverseProxyWebServerFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // CSS and JavaScript
                     builder.RegisterType<FrontEndFrameworkFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<TypeScriptFeature>().AsSelf().As<IFeature>().SingleInstance();
@@ -34,7 +36,6 @@
                     builder.RegisterType<XmlFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Performance
                     builder.RegisterType<GooglePageSpeedFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<CstmlMinificationFeature>().AsSelf().As<IFeature>().SingleInstance();
                     // Security
                     builder.RegisterType<HttpsEverywhereFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<CorsFeature>().AsSelf().As<IFeature>().SingleInstance();

@@ -89,12 +89,12 @@
                         Update the TypeScript extension from the Tools -> Extensions and Updates menu.
                     </li>
                     <!-- $End-TypeScript$ -->
-                    <!-- $Start-WebServer-IIS$ -->
+                    <!-- $Start-ReverseProxyWebServer-IIS$ -->
                     <li class="list-group-item">
                         <input name="PreRequisites-IISNETCoreWindowsServerHosting" type="checkbox"> <strong>IIS .NET Core Windows Server Hosting Bundle</strong> -
                         If you are using IIS and configuring it yourself, install the <a href="https://docs.asp.net/en/latest/publishing/iis.html">.NET Core Windows Server Hosting</a> bundle from <a href="http://go.microsoft.com/fwlink/?LinkId=798480">here</a>.
                     </li>
-                    <!-- $End-WebServer-IIS$ -->
+                    <!-- $End-ReverseProxyWebServer-IIS$ -->
                 </ul>
             </article>
 
@@ -298,12 +298,12 @@
             <article>
                 <h3><span aria-hidden="true" class="fa fa-puzzle-piece"></span> Compatibility</h3>
                 <ul class="list-group">
-                    <!-- $Start-WebServer-IIS$ -->
+                    <!-- $Start-ReverseProxyWebServer-IIS$ -->
                     <li class="list-group-item">
                         <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
                         Some <em>web.config</em> settings do not exist in older versions of IIS (7.5 and 8). If you are using an older version, edit the <em>web.config</em> file and remove the <code>dynamicIpSecurity</code> settings.
                     </li>
-                    <!-- $End-WebServer-IIS$ -->
+                    <!-- $End-ReverseProxyWebServer-IIS$ -->
                     <li class="list-group-item">
                         <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
                         Test the compatibility of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.
@@ -352,7 +352,7 @@
                             <li>
                                 <a href="https://www.cloudflare.com/">Cloudflare</a> - You can use the Cloudflare service as a proxy to your site. Cloudflare has sophisticated techniques to block attackers from accessing your site and is used by a large proportion of websites on the internet.
                             </li>
-                            <!-- $Start-WebServer-IIS$ -->
+                            <!-- $Start-ReverseProxyWebServer-IIS$ -->
                             <li>
                                 <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> is a feature of IIS that can be configured using the <code>dynamicIpSecurity</code> section of the <em>web.config</em> file. Dynamic IP Security is set to logging only mode in this site, so IIS will log malicious requests from clients without actually rejecting them. If you decide to use this feature, run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
                                 <ol>
@@ -362,7 +362,7 @@
                                 </ol>
                                 You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
                             </li>
-                            <!-- $End-WebServer-IIS$ -->
+                            <!-- $End-ReverseProxyWebServer-IIS$ -->
                         </ul>
                     </li>
                     <!-- $Start-ApplicationInsights$ -->

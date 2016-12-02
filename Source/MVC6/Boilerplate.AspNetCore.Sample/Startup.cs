@@ -4,18 +4,15 @@
     // $Start-RedirectToCanonicalUrl$
     using Boilerplate.AspNetCore.Filters;
     // $End-RedirectToCanonicalUrl$
-    // $Start-CshtmlMinification$
-    using Boilerplate.AspNetCore.Razor;
-    // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
-    // $Start-CshtmlMinification$
-    using Microsoft.AspNetCore.Mvc.Razor;
-    // $End-CshtmlMinification$
     using Microsoft.AspNetCore.Mvc.Routing;
+    // $Start-HttpsEverywhere-On$
+    using Microsoft.AspNetCore.Rewrite;
+    // $End-HttpsEverywhere-On$
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -163,6 +160,35 @@
                                 .AllowAnyHeader());
                     })
                 // $End-CORS$
+                .AddResponseCaching()
+                .AddResponseCompression(
+                    options =>
+                    {
+                        // $Start-HttpsEverywhere-On$
+                        options.EnableForHttps = true;
+                        // $End-HttpsEverywhere-On$
+                        options.MimeTypes = new string[]
+                        {
+                            // General
+                            "text/plain",
+                            "text/css",
+                            "application/javascript",
+                            "text/html",
+                            "application/xml",
+                            "text/xml",
+                            "application/rss+xml",
+                            "application/atom+xml",
+                            "application/json",
+                            "text/json",
+                            // Images
+                            "image/svg+xml",
+                            "image/x-icon",
+                            // Fonts
+                            "application/vnd.ms-fontobject",
+                            "application/x-font-ttf",
+                             "font/otf"
+                        };
+                    })
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
@@ -185,14 +211,6 @@
                         {
                             options.CacheProfiles.Add(keyValuePair);
                         }
-                        // $Start-HttpsEverywhere-On$
-
-                        // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
-                        // Development. The port number to use is taken from the launchSettings.json file which Visual
-                        // Studio uses to start the application.
-                        options.Filters.Add(new RequireHttpsAttribute());
-                        options.SslPort = sslPort;
-                        // $End-HttpsEverywhere-On$
                         // $Start-RedirectToCanonicalUrl$
 
                         // Adds a filter which help improve search engine optimization (SEO).
@@ -214,11 +232,6 @@
                 .AddXmlSerializerFormatters()
                 // $End-XmlFormatter-XmlSerializer$
                 .Services
-                // $Start-CshtmlMinification$
-                // Adds a razor view location expander which looks for minified .min.cshtml files to execute if found.
-                .Configure<RazorViewEngineOptions>(
-                    options => options.ViewLocationExpanders.Add(new MinifiedViewLocationExpander()))
-                // $End-CshtmlMinification$
                 .AddCustomServices();
         }
 
@@ -251,9 +264,18 @@
                 // middleware in the request pipeline.
                 .UseApplicationInsightsExceptionTelemetry()
                 // $End-ApplicationInsights$
+                // $Start-HttpsEverywhere-On$
+                // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
+                // Development. The port number to use is taken from the launchSettings.json file which Visual
+                // Studio uses to start the application.
+                .UseRewriter(
+                    new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, this.sslPort))
+                // $End-HttpsEverywhere-On$
                 // $Start-CORS$
                 .UseCors(CorsPolicyName.AllowAny)
                 // $End-CORS$
+                .UseResponseCaching()
+                .UseResponseCompression()
                 .UseStaticFilesWithCacheControl(this.configuration)
                 .UseCookiePolicy()
                 .UseIfElse(

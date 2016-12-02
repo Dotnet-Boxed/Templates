@@ -20,9 +20,6 @@ var gulp = require('gulp'),
     // $Start-JavaScriptHint$
     jshint = require('gulp-jshint'),            // JavaScript linter (https://www.npmjs.com/package/gulp-jshint/)
     // $End-JavaScriptHint$
-    // $Start-CshtmlMinification$
-    minifyCshtml = require('gulp-minify-cshtml'), // Minifies CSHTML (https://www.npmjs.com/package/gulp-minify-cshtml)
-    // $End-CshtmlMinification$
     // $Start-JavaScriptTestFramework-Mocha$
     mocha = require('gulp-mocha-phantomjs'),    // JavaScript test runner (https://www.npmjs.com/package/gulp-mocha-phantomjs/).
     // $End-JavaScriptTestFramework-Mocha$
@@ -88,9 +85,6 @@ var paths = {
     nodeModules: './node_modules/',
     scripts: 'Scripts/',
     styles: 'Styles/',
-    // $Start-CshtmlMinification$
-    views: 'Views/',
-    // $End-CshtmlMinification$
     // $Start-JavaScriptTestFramework-Mocha$
     tests: 'Tests/',
     // $End-JavaScriptTestFramework-Mocha$
@@ -265,15 +259,6 @@ gulp.task('clean-fonts', function (cb) {
 gulp.task('clean-js', function (cb) {
     return rimraf(paths.js, cb);
 });
-// $Start-CshtmlMinification$
-
-/*
- * Deletes all minified files and folders within the Views directory.
- */
-gulp.task('clean-html', function (cb) {
-    return rimraf(paths.views + '**/*.min.cshtml', cb);
-});
-// $End-CshtmlMinification$
 
 /*
  * Deletes all files and folders within the css, fonts and js directories.
@@ -450,35 +435,11 @@ function () {
     });
     return merge(tasks);                            // Combine multiple streams to one and return it so the task can be chained.
 });
-// $Start-CshtmlMinification$
-
-/*
- * Builds the C# HTML files (.cshtml) for the site.
- */
-gulp.task('build-html', function () {
-    return gulp
-        .src([                                  // Start with the .cshtml Razor files and not .min.cshtml files.
-            paths.views + '**/*.cshtml',
-            '!' + paths.views + '**/*.min.cshtml'])
-        .pipe(minifyCshtml())                   // Minify the CSHTML (Written by Muhammad Rehan Saeed as an example. This removes comments and white space using regular expressions, so not great but it works).
-        .pipe(rename(function (path) {          // Rename the files from .cshtml to .min.cshtml.
-            path.extname = '.min.cshtml';
-        }))
-        .pipe(gulp.dest(paths.views));          // Saves the minified Razor views to the destination path.
-});
-// $End-CshtmlMinification$
 
 /*
  * Cleans and builds the CSS, Font and JavaScript files for the site.
  */
-gulp.task('build', [
-    'build-css',
-    'build-fonts',
-    // $Start-CshtmlMinification$
-    'build-html',
-    // $End-CshtmlMinification$
-    'build-js'
-]);
+gulp.task('build', ['build-css', 'build-fonts', 'build-js']);
 
 // $Start-JavaScriptTestFramework-Mocha$
 gulp.task('test', function () {

@@ -1,5 +1,11 @@
 ﻿Version 5.0.0
 MVC 6
+- Upgraded to ASP.NET Core 1.1.
+- Upgraded all NuGet packages.
+- Removed experimental .cshtml minification feature.
+- Added primary and reverse proxy web server features. Added Web Listener web server.
+- Added response caching middleware.
+- Added response compression middleware.
 - Added current project as tag helper source to _ViewImports.cshtml so that View Components can be used as tag helpers.
 
 Version 4.7.0

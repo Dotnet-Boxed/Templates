@@ -33,9 +33,6 @@
     "gulp-jshint": "2.0.2",
     "jshint": "2.9.4",
     // $End-JavaScriptHint$
-    // $Start-CshtmlMinification$
-    "gulp-minify-cshtml": "0.0.1",
-    // $End-CshtmlMinification$
     // $Start-JavaScriptTestFramework-Mocha$
     "gulp-mocha-phantomjs": "0.12.0",
     // $End-JavaScriptTestFramework-Mocha$

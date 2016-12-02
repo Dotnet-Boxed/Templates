@@ -3,27 +3,15 @@
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
 
-    public class WebServerFeature : MultiChoiceFeature
+    public class ReverseProxyWebServerFeature : MultiChoiceFeature
     {
         private readonly IFeatureItem iis;
         private readonly IFeatureItem kestrel;
         private readonly IFeatureItem nginx;
 
-        public WebServerFeature(IProjectService projectService)
+        public ReverseProxyWebServerFeature(IProjectService projectService)
             : base(projectService)
         {
-            this.kestrel = new FeatureItem(
-                "Kestrel",
-                "Kestrel",
-                "A web server for ASP.NET Core. Not intended to be internet facing as it has not been security tested. IIS and Nginx require the Kestrel webs server, so this option is enabled by default.",
-                1,
-                "/Boilerplate.FeatureSelection;component/Assets/Kestrel.png")
-            {
-                IsEnabled = false,
-                IsSelected = true
-            };
-            this.Items.Add(this.kestrel);
-
             this.iis = new FeatureItem(
                 "IIS",
                 "Internet Information Services (IIS) or Azure",
@@ -49,17 +37,17 @@
 
         public override string Description
         {
-            get { return "The web server you want to use to host the site."; }
+            get { return "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site."; }
         }
 
         public override IFeatureGroup Group
         {
-            get { return FeatureGroups.Project; }
+            get { return FeatureGroups.WebServer; }
         }
 
         public override string Id
         {
-            get { return "WebServer"; }
+            get { return "ReverseProxyWebServer"; }
         }
 
         public override bool IsMultiSelect
@@ -79,7 +67,7 @@
 
         public override string Title
         {
-            get { return "Web Server"; }
+            get { return "Reverse Proxy Web Server"; }
         }
 
         public override async Task AddOrRemoveFeature()

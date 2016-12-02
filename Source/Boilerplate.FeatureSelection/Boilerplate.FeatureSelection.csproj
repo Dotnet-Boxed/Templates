@@ -88,8 +88,8 @@
     <Compile Include="Features\Pages\AboutPageFeature.cs" />
     <Compile Include="Features\Pages\ContactPageFeature.cs" />
     <Compile Include="Features\Performance\GooglePageSpeedFeature.cs" />
-    <Compile Include="Features\Performance\CshtmlMinificationFeature.cs" />
-    <Compile Include="Features\Project\WebServerFeature.cs" />
+    <Compile Include="Features\WebServer\PrimaryWebServerFeature.cs" />
+    <Compile Include="Features\WebServer\ReverseProxyWebServerFeature.cs" />
     <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
     <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\CorsFeature.cs" />

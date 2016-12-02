@@ -131,6 +131,8 @@
         }
 
         [Theory]
+        [InlineData(typeof(PrimaryWebServerFeature), 1)]
+        [InlineData(typeof(ReverseProxyWebServerFeature), 1)]
         [InlineData(typeof(JavaScriptTestFrameworkFeature), 1)]
         [InlineData(typeof(JsonSerializerSettingsFeature), 1)]
         [InlineData(typeof(TargetFrameworkFeature), 0)]
