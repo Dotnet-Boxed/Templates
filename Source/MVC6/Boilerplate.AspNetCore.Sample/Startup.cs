@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.Linq;
     using Boilerplate.AspNetCore;
     // $Start-RedirectToCanonicalUrl$
     using Boilerplate.AspNetCore.Filters;
@@ -10,6 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
+    using Microsoft.AspNetCore.ResponseCompression;
     // $Start-HttpsEverywhere-On$
     using Microsoft.AspNetCore.Rewrite;
     // $End-HttpsEverywhere-On$
@@ -167,27 +169,19 @@
                         // $Start-HttpsEverywhere-On$
                         options.EnableForHttps = true;
                         // $End-HttpsEverywhere-On$
-                        options.MimeTypes = new string[]
-                        {
-                            // General
-                            "text/plain",
-                            "text/css",
-                            "application/javascript",
-                            "text/html",
-                            "application/xml",
-                            "text/xml",
-                            "application/rss+xml",
-                            "application/atom+xml",
-                            "application/json",
-                            "text/json",
-                            // Images
-                            "image/svg+xml",
-                            "image/x-icon",
-                            // Fonts
-                            "application/vnd.ms-fontobject",
-                            "application/x-font-ttf",
-                             "font/otf"
-                        };
+                        options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                            new string[]
+                            {
+                                // ATOM
+                                "application/atom+xml",
+                                // Images
+                                "image/svg+xml",
+                                "image/x-icon",
+                                // Fonts
+                                "application/vnd.ms-fontobject",
+                                "application/x-font-ttf",
+                                 "font/otf"
+                            });
                     })
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
