@@ -76,6 +76,9 @@ Add your site here, just raise an issue.
 
 ## Contributions and Thanks
 
+- [VeXHarbinger](https://github.com/VeXHarbinger) - Updated Twitter cards.
+- [michalstanko](https://github.com/michalstanko) - Added Czech and Slovak characters to the FriendlyUrlHelper.
+- [miroslavpopovic](https://github.com/miroslavpopovic) - Small fix to SiteMapGenerator.
 - [Matthew-Bonner](https://github.com/Matthew-Bonner) - Fix removal of trailing slash for manifest.json.
 - [Abuson](https://github.com/abuson) - Two MVC 6 fixes to do with error pages.
 - [Shiney](https://github.com/Shiney) - Fixed typo.
