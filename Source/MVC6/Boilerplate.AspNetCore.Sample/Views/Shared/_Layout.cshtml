@@ -136,7 +136,9 @@
     @* $Start-ApplicationInsights$ *@
     @* Add Azure Application Insights JavaScript script tag. *@
     @* Do not move this file to a CDN. See https://github.com/Microsoft/ApplicationInsights-aspnet5/issues/120 *@
-    <script asp-append-version="true" src="~/js/application-insights.js"></script>
+    <script asp-append-version="true"
+            crossorigin="anonymous"
+            src="~/js/application-insights.js"></script>
     @* $End-ApplicationInsights$ *@
 
 

@@ -71,13 +71,23 @@
 
         public override async Task AddOrRemoveFeature()
         {
-            if (!this.kestrel.IsSelected)
+            if (this.kestrel.IsSelected)
+            {
+                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
+                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+            }
+            else
             {
                 await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.DeleteCode, "Program.cs");
                 await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.DeleteCode, "project.json");
             }
 
-            if (!this.webListener.IsSelected)
+            if (this.webListener.IsSelected)
+            {
+                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
+                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+            }
+            else
             {
                 await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.DeleteCode, "Program.cs");
                 await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.DeleteCode, "project.json");

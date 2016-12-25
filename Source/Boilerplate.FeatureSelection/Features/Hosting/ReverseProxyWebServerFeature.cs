@@ -6,7 +6,6 @@
     public class ReverseProxyWebServerFeature : MultiChoiceFeature
     {
         private readonly IFeatureItem iis;
-        private readonly IFeatureItem kestrel;
         private readonly IFeatureItem nginx;
 
         public ReverseProxyWebServerFeature(IProjectService projectService)
@@ -72,7 +71,13 @@
 
         public override async Task AddOrRemoveFeature()
         {
-            if (!this.iis.IsSelected)
+            if (this.iis.IsSelected)
+            {
+                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
+                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
+            }
+            else
             {
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, "Program.cs");
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, "project.json");
