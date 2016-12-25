@@ -163,25 +163,19 @@
                     })
                 // $End-CORS$
                 .AddResponseCaching()
+                // Add response compression to enable GZIP compression.
                 .AddResponseCompression(
                     options =>
                     {
                         // $Start-HttpsEverywhere-On$
                         options.EnableForHttps = true;
                         // $End-HttpsEverywhere-On$
-                        options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                            new string[]
-                            {
-                                // ATOM
-                                "application/atom+xml",
-                                // Images
-                                "image/svg+xml",
-                                "image/x-icon",
-                                // Fonts
-                                "application/vnd.ms-fontobject",
-                                "application/x-font-ttf",
-                                 "font/otf"
-                            });
+                        // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
+                        var responseCompressionSettings = configuration.GetSection<ResponseCompressionSettings>(
+                            nameof(ResponseCompressionSettings));
+                        options.MimeTypes = ResponseCompressionDefaults
+                            .MimeTypes
+                            .Concat(responseCompressionSettings.MimeTypes);
                     })
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()

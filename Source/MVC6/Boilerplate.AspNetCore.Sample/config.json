@@ -21,6 +21,20 @@
       "Microsoft": "Information"
     }
   },
+  "ResponseCompressionSettings": {
+    // Additional MIME types (other than the built in defaults) to enable GZIP compression for.
+    "MimeTypes": [
+      // ATOM
+      "application/atom+xml",
+      // Images
+      "image/svg+xml",
+      "image/x-icon",
+      // Fonts
+      "application/vnd.ms-fontobject",
+      "application/x-font-ttf",
+      "font/otf"
+    ]
+  },
   // $Start-Sitemap$
   "SitemapSettings": {
     // An array of URL's where the sitemap can be pinged to. Note that Yahoo uses the same sitemap ping location as Bing.
