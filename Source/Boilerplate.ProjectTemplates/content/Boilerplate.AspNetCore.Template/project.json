@@ -1,0 +1,159 @@
+{
+  "version": "1.0.0-*",
+
+  // Used to store connection strings and other sensitive settings, so you don't have to check them into your source
+  // control provider. Only use this in Development, it is not intended for Production use. See
+  // http://docs.asp.net/en/latest/security/app-secrets.html
+  "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
+
+  "dependencies": {
+    "Boilerplate.AspNetCore": "2.0.1",
+    "Boilerplate.AspNetCore.TagHelpers": "2.1.0",
+    // $Start-Glimpse$
+    // "Glimpse": "2.0.0-beta1",
+    // $End-Glimpse$
+    // $Start-ApplicationInsights$
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
+    // $End-ApplicationInsights$
+    // $Start-CloudProvider$
+    "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
+    // $End-CloudProvider$
+    "Microsoft.AspNetCore.CookiePolicy": "1.1.0",
+    // $Start-CORS$
+    "Microsoft.AspNetCore.Cors": "1.1.0",
+    // $End-CORS$
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    // $Start-XmlFormatter$
+    "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
+    // $End-XmlFormatter$
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "type": "build",
+      "version": "1.1.0-preview4-final"
+    },
+    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Design": {
+      "type": "build",
+      "version": "1.1.0-preview4-final"
+    },
+    "Microsoft.AspNetCore.ResponseCaching": "1.1.0",
+    "Microsoft.AspNetCore.ResponseCompression": "1.0.0",
+    // $Start-HttpsEverywhere$
+    "Microsoft.AspNetCore.Rewrite": "1.0.0",
+    // $End-HttpsEverywhere$
+    // $Start-ReverseProxyWebServer-IIS$
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    // $End-ReverseProxyWebServer-IIS$
+    // $Start-PrimaryWebServer-Kestrel$
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    // $End-PrimaryWebServer-Kestrel$
+    // $Start-PrimaryWebServer-WebListener$
+    "Microsoft.AspNetCore.Server.WebListener": "1.1.0",
+    // $End-PrimaryWebServer-WebListener$
+    "Microsoft.AspNetCore.StaticFiles": "1.1.0",
+    "Microsoft.Extensions.Configuration.Binder": "1.1.0",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
+    "Microsoft.Extensions.Logging": "1.1.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0",
+    "Microsoft.Extensions.Logging.Debug": "1.1.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
+    // $Start-NWebSec$
+    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
+    "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
+    // $End-NWebSec$
+    "Newtonsoft.Json": "9.0.1"
+  },
+
+  "frameworks": {
+    //#if (NETCore)
+    // Target the .NET Core framework.
+    "netcoreapp1.1": {
+      "dependencies": {
+        "Microsoft.NETCore.App": {
+          "version": "1.1.0",
+          "type": "platform"
+        }
+      },
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    },
+    //#endif
+    //#if (NETFramework)
+    // Target the full .NET 4.6.1 framework.
+    "net461": {
+    }
+    //#endif
+  },
+
+  // Command line tools which can be run using 'dotnet [Tool Name]'.
+  "tools": {
+    // dotnet razor-precompile - Used to pre-compile razor views for faster application startup.
+    "Microsoft.AspNetCore.Mvc.Razor.ViewCompilation.Tools": "1.1.0-preview4-final",
+    // dotnet razor-tooling - Used to resolve TagHelperDescriptors for projects at design-time.
+    "Microsoft.AspNetCore.Razor.Tools": "1.1.0-preview4-final",
+    // $Start-ReverseProxyWebServer-IIS$
+    // dotnet publish-iis - Modifies the web.config file for publishing.
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
+    // $End-ReverseProxyWebServer-IIS$
+    // dotnet watch - which allows you to edit code and refresh the browser to see your changes while the app is running.
+    "Microsoft.DotNet.Watcher.Tools": "1.1.0-preview4-final",
+    // dotnet user-secrets - Lets you store sensitive configuration securely during development like connection strings.
+    "Microsoft.Extensions.SecretManager.Tools": "1.1.0-preview4-final"
+  },
+
+  "buildOptions": {
+    "compile": {
+      // Ignore the following folders when looking for C# code to compile.
+      "exclude": [
+        "node_modules",
+        "wwwroot"
+      ]
+    },
+    // Use the new portable .pdb file format.
+    "debugType": "portable",
+    // Require the application to use a static Main method.
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
+  "runtimeOptions": {
+    "configProperties": {
+      // Concurrent - Specifies whether the common language runtime runs garbage collection on a separate thread
+      //              (See https://msdn.microsoft.com/en-us/library/yhwwzef8%28v=vs.110%29.aspx).
+      "System.GC.Concurrent": true,
+      // Server - Specifies whether the common language runtime runs server garbage collection.
+      //          (See https://msdn.microsoft.com/en-us/library/ms229357%28v=vs.110%29.aspx).
+      "System.GC.Server": true
+    }
+  },
+
+  "publishOptions": {
+    // Include the following folders and files when publishing the project.
+    "include": [
+      "wwwroot",
+      "**/*.cshtml",
+      "config.json",
+      "web.config"
+    ]
+  },
+
+  "scripts": {
+    // Execute the following commands before publishing the project.
+    "prepublish": [
+      "npm install",
+      "gulp build"
+    ],
+    // Execute the following commands after publishing the project.
+    "postpublish": [
+      // Runs the publish-iis tool which modifies the web.config file.
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
+      // Pre-compile razor views for faster application startup.
+      "dotnet razor-precompile --configuration %publish:Configuration% --framework %publish:TargetFramework% --output-path %publish:OutputPath% %publish:ProjectPath%"
+    ]
+  }
+}
