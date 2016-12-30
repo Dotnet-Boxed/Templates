@@ -1,0 +1,56 @@
+﻿namespace MvcBoilerplate.Commands
+{
+    using System.Threading.Tasks;
+    using Framework;
+    using Microsoft.AspNetCore.JsonPatch;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using MvcBoilerplate.Repositories;
+    using MvcBoilerplate.ViewModels;
+
+    public class PatchCarCommand : IPatchCarCommand
+    {
+        private readonly IActionContextAccessor actionContextAccessor;
+        private readonly ICarRepository carRepository;
+        private readonly ITranslator<Models.Car, Car> carToCarTranslator;
+        private readonly ITranslator<Models.Car, SaveCar> carToSaveCarTranslator;
+        private readonly ITranslator<SaveCar, Models.Car> saveCarToCarTranslator;
+
+        public PatchCarCommand(
+            IActionContextAccessor actionContextAccessor,
+            ICarRepository carRepository,
+            ITranslator<Models.Car, Car> carToCarTranslator,
+            ITranslator<Models.Car, SaveCar> carToSaveCarTranslator,
+            ITranslator<SaveCar, Models.Car> saveCarToCarTranslator)
+        {
+            this.actionContextAccessor = actionContextAccessor;
+            this.carRepository = carRepository;
+            this.carToCarTranslator = carToCarTranslator;
+            this.carToSaveCarTranslator = carToSaveCarTranslator;
+            this.saveCarToCarTranslator = saveCarToCarTranslator;
+        }
+
+        public async Task<IActionResult> ExecuteAsync(int carId, JsonPatchDocument<SaveCar> patch)
+        {
+            var car = await this.carRepository.Get(carId);
+            if (car == null)
+            {
+                return new NotFoundResult();
+            }
+
+            var saveCar = this.carToSaveCarTranslator.Translate(car);
+            var modelState = this.actionContextAccessor.ActionContext.ModelState;
+            patch.ApplyTo(saveCar, modelState);
+            if (!modelState.IsValid)
+            {
+                return new BadRequestObjectResult(modelState);
+            }
+
+            this.saveCarToCarTranslator.Translate(saveCar, car);
+            await this.carRepository.Update(car);
+            var projectViewModel = this.carToCarTranslator.Translate(car);
+
+            return new OkObjectResult(projectViewModel);
+        }
+    }
+}

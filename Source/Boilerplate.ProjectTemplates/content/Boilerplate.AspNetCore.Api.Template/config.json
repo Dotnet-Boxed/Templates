@@ -1,0 +1,35 @@
+// The config.json file is responsible for holding application settings and options. It is the replacement for the
+// appSettings configuration section contained in the web.config file in ASP.NET 4.6.
+{
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "ResponseCompressionSettings": {
+    // Additional MIME types (other than the built in defaults) to enable GZIP compression for.
+    "MimeTypes": [
+      // ATOM
+      "application/atom+xml",
+      // Images
+      "image/svg+xml",
+      "image/x-icon",
+      // Fonts
+      "application/vnd.ms-fontobject",
+      "application/x-font-ttf",
+      "font/otf"
+    ]
+  },
+  "CacheProfileSettings": {
+    "CacheProfiles": {
+      // Cache static files for a year.
+      "StaticFiles": {
+        "Duration": 31536000,
+        "Location": "Any"
+      }
+    }
+  }
+}

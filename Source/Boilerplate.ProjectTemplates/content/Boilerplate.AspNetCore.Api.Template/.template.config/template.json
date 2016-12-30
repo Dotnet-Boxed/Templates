@@ -1,0 +1,169 @@
+{
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [ "Web", "MVC", "Boilerplate", "API" ],
+  "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
+  "groupIdentity": "Boilerplate",
+  "identity": "Boilerplate.AspNetCore.CSharp",
+  "shortName": "api",
+  "tags": {
+    "language": "C#"
+  },
+  "sourceName": "MvcBoilerplate",
+  "preferNameDirectory": true,
+  "guids": [
+    "837bc53e-0271-4e9c-b5b5-c60ea7a7c7b5",
+    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        // TargetFramework
+        {
+          "condition": "(.NET Core)",
+          "exclude": [
+            "app.config"
+          ]
+        },
+        // StatusController
+        {
+          "condition": "(!StatusController)",
+          "exclude": [
+            "Constants/StatusControllerRoute.cs",
+            "Controllers/StatusController.cs"
+          ]
+        },
+        // CORS
+        {
+          "condition": "(!CORS)",
+          "exclude": [
+            "Constants/CorsPolicyName.cs",
+            "Controllers/StatusController.cs"
+          ]
+        },
+        // HumansTxt
+        {
+          "condition": "(!HumansTxt)",
+          "exclude": [
+            "wwwroot/humans.txt"
+          ]
+        },
+        // RobotsTxt
+        {
+          "condition": "(!RobotsTxt)",
+          "exclude": [
+            "wwwroot/robots.txt"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    // TargetFramework
+    "TargetFramework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ ".NET Core", ".NET Framework 4.6.1", "Both" ],
+      "defaultValue": "Both",
+      "description": "Decide which version of the .NET Framework to target. .NET Core can run cross platform (on Mac and Linux) and the .NET Core framework and runtime can be shipped with the application so it is fully stand-alone while the .NET Framework 4.6.1 gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed."
+    },
+    "NETCore": {
+      "type": "computed",
+      "value": "(TargetFramework == \".NET Core\" || TargetFramework == \"Both\")"
+    },
+    "NETFramework": {
+      "type": "computed",
+      "value": "(TargetFramework == \".NET Framework 4.6.1\" || TargetFramework == \"Both\")"
+    },
+    // PrimaryWebServer
+    "PrimaryWebServer": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Kestrel", "WebListener" ],
+      "defaultValue": "Kestrel",
+      "description": "The primary web server you want to use to host the site.\r\nKestrel is a web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or Nginx should be placed in front as reverse proxy web servers.\r\nWebListener is a Windows only web server. It gives you the option to take advantage of Windows specific features, like Windows authentication, port sharing, HTTPS with SNI, HTTP/2 over TLS (Windows 10), direct file transmission, and response caching WebSockets (Windows 8)."
+    },
+    "Kestrel": {
+      "type": "computed",
+      "value": "(PrimaryWebServer == \"Kestrel\")"
+    },
+    "WebListener": {
+      "type": "computed",
+      "value": "(PrimaryWebServer == \"WebListener\")"
+    },
+    // ReverseProxyWebServer
+    "ReverseProxyWebServer": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "IIS", "NGINX", "Both" ],
+      "defaultValue": "IIS",
+      "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.\r\nInternet Information Services (IIS) for Windows Server is a flexible, secure and manageable Web server for hosting anything on the Web. Select this option if you are deploying your site to Azure web apps.\r\nNginx is a free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform."
+    },
+    "IIS": {
+      "type": "computed",
+      "value": "(ReverseProxyWebServer == \"IIS\" || ReverseProxyWebServer == \"Both\")"
+    },
+    "NGINX": {
+      "type": "computed",
+      "value": "(ReverseProxyWebServer == \"NGINX\" || ReverseProxyWebServer == \"Both\")"
+    },
+    // CloudProvider
+    "CloudProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Azure", "None" ],
+      "defaultValue": "Azure",
+      "description": "Select which cloud provider you are using if any. This adds cloud specific features."
+    },
+    "Azure": {
+      "type": "computed",
+      "value": "(CloudProvider == \"Azure\")"
+    },
+    // Analytics
+    "Analytics": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Application Insights", "None" ],
+      "defaultValue": "Both",
+      "description": "Monitor internal information about how your application is running, as well as external user information."
+    },
+    "ApplicationInsights": {
+      "type": "computed",
+      "value": "(Analytics == \"Application Insights\")"
+    },
+    // StatusController
+    "StatusController": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by load balancers which can remove an instance of this API if it is not functioning correctly."
+    },
+    // HttpsEverywhere
+    "HttpsEverywhere": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS, adds Strict Transport Security (HSTS) and Public Key Pinning (HPKP) HTTP headers."
+    },
+    // CORS
+    "CORS": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
+    },
+    // HumansTxt
+    "HumansTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
+    },
+    // RobotsTxt
+    "RobotsTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a robots.txt file to tell search engines not to index this site."
+    }
+  }
+}
