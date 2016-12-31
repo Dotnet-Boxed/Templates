@@ -60,7 +60,7 @@
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
         }
 
-        // $Start-CORS$
+#if (CORS)
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
@@ -85,7 +85,7 @@
                 });
         }
 
-        // $End-CORS$
+#endif
         /// <summary>
         /// Adds project commands.
         /// </summary>

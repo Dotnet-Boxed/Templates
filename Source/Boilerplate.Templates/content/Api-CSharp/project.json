@@ -16,14 +16,14 @@
     "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
     //#endif
     "Microsoft.AspNetCore.CookiePolicy": "1.1.0",
-    //#if CORS
+    //#if (CORS)
     "Microsoft.AspNetCore.Cors": "1.1.0",
     //#endif
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Mvc": "1.1.0",
-    // $Start-XmlFormatter$
+    //#if (DataContractSerializer || XmlSerializer)
     "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
-    // $End-XmlFormatter$
+    //#endif
     "Microsoft.AspNetCore.Razor.Tools": {
       "type": "build",
       "version": "1.1.0-preview4-final"

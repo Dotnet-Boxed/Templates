@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>ASP.NET MVC Boilerplate</title>
-    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <style>
         .alert-close-checkbox {
-            display:none
+            display: none;
         }
     </style>
 </head>
@@ -19,50 +19,6 @@
                  src="https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Banner.png"
                  style="margin-bottom: 20px">
         </a>
-
-        <div class="alert alert-info">
-            <label for="Alert-GulpProblem" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </label>
-            <input id="Alert-GulpProblem" name="Alert-GulpProblem" class="alert alert-close-checkbox" type="checkbox" />
-
-            <h2><span aria-hidden="true" class="fa fa-beer"></span> Fixing Common Gulp Problem</h2>
-            <p>The gulpfile.js sometimes does not load in the Visual Studio 'Task Runner Explorer' window with the error 'Failed to load, see the output window for more information'. If you see this error try right clicking the 'Dependencies' element and clicking on 'Restore Packages'. If that does not work unload and then reload the project or close and re-open the solution.</p>
-        </div>
-
-        <div class="alert alert-info">
-            <label for="Alert-NpmProblem" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </label>
-            <input id="Alert-NpmProblem" name="Alert-NpmProblem" class="alert alert-close-checkbox" type="checkbox"/>
-
-            <h2><span aria-hidden="true" class="fa fa-archive"></span> Fixing Common NPM Problem</h2>
-            <p>
-                NPM sometimes seems to corrupt the packages it downloads into it's package cache. If this happens:
-                <ol>
-                    <li>Close the solution.</li>
-                    <li>Delete the node_modules folder.</li>
-                    <li>
-                        Use the command below in power shell to clear the cached NPM packages:
-                        <pre>npm cache clear</pre>
-                    </li>
-                </ol>
-            </p>
-        </div>
-
-        <div class="alert alert-info">
-            <label for="Alert-PathProblem" class="close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </label>
-            <input id="Alert-PathProblem" name="Alert-PathProblem" class="alert-close-checkbox" type="checkbox" />
-
-            <h2><span aria-hidden="true" class="fa fa-beer"></span> Fixing NPM Path Too Long</h2>
-            <p>The file paths under the node_modules folder can get so long that Windows cannot delete them. You can use <a href="http://www.7-zip.org/">7-Zip</a> (Great open source zipping software) and do a Shift+Del to delete folders with this problem. Long term Microsoft will fix this issue when they update Node to version 3.0 with a Visual Studio tooling update.</p>
-        </div>
-
-        <img alt="ASP.NET MVC Boilerplate Technology Map"
-             class="img-responsive"
-             src="https://github.com/ASP-NET-MVC-Boilerplate/Templates/raw/master/Images/MVC%206%20Technology%20Map.png">
 
         <section>
             <h2>Task Check List</h2>
@@ -94,7 +50,7 @@
 
             <article>
                 <h3><span aria-hidden="true" class="fa fa-lock"></span> Security</h3>
-                <!-- $Start-HttpsEverywhere$ -->
+                <!--#if (HttpsEverywhere)-->
                 <h4>TLS over HTTPS</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -119,22 +75,7 @@
                         Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.
                     </li>
                 </ul>
-                <!-- $End-HttpsEverywhere$ -->
-                <h4>Content Security Policy (CSP)</h4>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="ContentSecurityPolicy-ConfigureContentSecurityPolicy" type="checkbox"> <strong>Configure Content Security Policy</strong> -
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy">Content Security Policy (CSP)</a> is a HTTP header that controls where a web browser is allowed to load content from and the type of content it is allowed to load. It uses a white-list of allowed content and blocks anything not in the allowed list. It gives us very fine grained control and allows us to run our site in a sandbox in the users browser. Learn more about it <a href="http://rehansaeed.com/content-security-policy-for-asp-net-mvc/">here</a>, then Configure your CSP policy globally in <em>ApplicationBuilderExtensions.cs</em> or on your individual MVC controllers and actions if they have special access requirements.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="ContentSecurityPolicy-ReportUri" type="checkbox"> <strong>Configure Report URI</strong> -
-                        Register with <a href="https://report-uri.io/">Report URI</a> to get a URL where you can send your CSP violation reports. Then add this URL to the <code>CspReportUriAttribute</code> in <em>ApplicationBuilderExtensions.cs</em>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="ContentSecurityPolicy-CSPEvaluator" type="checkbox"> <strong>Check CSP Evaluator</strong> -
-                        Run the Google <a href="https://csp-evaluator.withgoogle.com/">CSP Evaluator</a> against your site to check that your CSP policy valid and secure.
-                    </li>
-                </ul>
+                <!--#endif-->
                 <h4>Understand Web Security</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -160,7 +101,7 @@
                         <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
                         There are settings in the <em>Web.config</em> file under the <code>requestLimits</code> element that limit maximum size of HTTP requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
                     </li>
-                    <!--#if (NETFramework)-->
+                    <!--#if (NetFramework)-->
                     <li class="list-group-item">
                         <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable .NET Framework Retail Mode</strong> -
                         Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
@@ -212,7 +153,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
-                        Some resources are generated programmatically and then cached for a certain time period.
+                        Some resources are generated programatically and then cached for a certain time period.
                         If these resources won't change much on your site, change the length of time they are cached. Open the <em>config.json</em> file and take a look at the cache profiles section.
                     </li>
                     <li class="list-group-item">
@@ -284,32 +225,12 @@
             <article>
                 <h3><span aria-hidden="true" class="fa fa-puzzle-piece"></span> Compatibility</h3>
                 <ul class="list-group">
-                    <!-- $Start-ReverseProxyWebServer-IIS$ -->
+                    <!--#if (IIS)-->
                     <li class="list-group-item">
                         <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
                         Some <em>web.config</em> settings do not exist in older versions of IIS (7.5 and 8). If you are using an older version, edit the <em>web.config</em> file and remove the <code>dynamicIpSecurity</code> settings.
                     </li>
-                    <!-- $End-ReverseProxyWebServer-IIS$ -->
-                    <li class="list-group-item">
-                        <input name="Compatibility-TestBrowserCompatability" type="checkbox"> <strong>Test Browser Compatibility</strong> -
-                        Test the compatibility of your site with various browsers at <a href="http://browsershots.org/">BrowserShots.org</a>, <a href="https://browserling.com/">Browserling.com</a> and <a href="https://spoon.net/browsers">Spoon.net</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-WriteFormsProperly" type="checkbox"> <strong>Write Forms Properly</strong> -
-                        Forms are hard to write, ensure you read <a href="http://diveintohtml5.info/forms.html">this</a> tutorial on how to do them properly and don't forget to set the <a href="http://html5tutorial.info/html5-contact.php">input types</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-TestSiteOnMobile" type="checkbox"> <strong>Test Site On Mobile</strong> -
-                        Test your site on real mobile devices <a href="http://opendevicelab.com/">here</a>. Ensure that the site is still fully functional. <a href="http://getbootstrap.com">Bootstrap</a> helps a lot in this regard.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-RunModernIEScan" type="checkbox"> <strong>Run Modern.IE Scan</strong> -
-                        Scan your site for issues with at <a href="https://www.modern.ie">Modern.IE</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Compatibility-PrinterFriendly" type="checkbox"> <strong>Printer Friendly (Save Some Trees)</strong> -
-                        Ensure that you use the <a href="http://getbootstrap.com/css/#responsive-utilities-print">Bootstrap Print Classes</a> to hide content from printers. Use the print preview (Please don't actually print) feature to optimize your site for printing.
-                    </li>
+                    <!--#endif-->
                 </ul>
             </article>
 
@@ -320,7 +241,8 @@
                         <input name="Authentication-Provider" type="checkbox"> <strong>Choose Authentication Provider</strong> -
                         If you want no authentication, then you don't need to do anything. <strong>Do not</strong> build your own authentication provider unless you are a security expert, it is much harder than it looks and even professionals get it wrong. Choose from one of the options below:
                         <ol>
-                            <li>ASP.NET Identity - This is basically forms authentication with Open Auth. it is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial. Don't forget to add the <code>NoLowercaseQueryStringAttribute</code> to the <code>AccountController</code> to enable the <code>RedirectToCanonicalUrlAttribute</code> to work (See comments on these classes for more information about what they do).</li>
+                            <li>IdentityServer4 - This is another site that handles all authentication with OAuth and Open ID Connect.</li>
+                            <li>ASP.NET Identity - This is basically forms authentication with OAuth and Open ID Connect. This is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial. Don't forget to add the <code>NoLowercaseQueryStringAttribute</code> to the <code>AccountController</code> to enable the <code>RedirectToCanonicalUrlAttribute</code> to work (See comments on these classes for more information about what they do).</li>
                             <li>Windows Authentication - Follow <a href="http://www.asp.net/aspnet/overview/owin-and-katana/enabling-windows-authentication-in-katana">this</a> tutorial.</li>
                         </ol>
                     </li>
@@ -338,7 +260,7 @@
                             <li>
                                 <a href="https://www.cloudflare.com/">Cloudflare</a> - You can use the Cloudflare service as a proxy to your site. Cloudflare has sophisticated techniques to block attackers from accessing your site and is used by a large proportion of websites on the internet.
                             </li>
-                            <!-- $Start-ReverseProxyWebServer-IIS$ -->
+                            <!--#if (IIS)-->
                             <li>
                                 <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> is a feature of IIS that can be configured using the <code>dynamicIpSecurity</code> section of the <em>web.config</em> file. Dynamic IP Security is set to logging only mode in this site, so IIS will log malicious requests from clients without actually rejecting them. If you decide to use this feature, run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
                                 <ol>
@@ -348,15 +270,15 @@
                                 </ol>
                                 You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
                             </li>
-                            <!-- $End-ReverseProxyWebServer-IIS$ -->
+                            <!--#endif-->
                         </ul>
                     </li>
-                    <!-- $Start-ApplicationInsights$ -->
+                    <!--#if (ApplicationInsights)-->
                     <li class="list-group-item">
                         <input name="ResilienceAndErrorHandling-ApplicationInsights" type="checkbox"> <strong>Application Insights</strong> -
                         Application Insights helps monitor your site and know about it when it goes down. Login to <a href="http://azure.microsoft.com">Azure</a>, create a new Application Insights instance, retrieve the Instrumentation Key and add it to your <em>config.json</em> file. For more information see the <a href="http://docs.asp.net/en/latest/fundamentals/application-insights.html">Getting Started</a> guide.
                     </li>
-                    <!-- $End-ApplicationInsights$ -->
+                    <!--#endif-->
                     <li class="list-group-item">
                         <input name="ResilienceAndErrorHandling-Logging" type="checkbox"> <strong>Add Logging</strong> -
                         This template comes with basic logging enabled in development mode. Consider using <a href="http://serilog.net/">Serilog</a> or another logging framework in production. Logging can be configured in <em>Startup.cs</em>.
@@ -386,90 +308,6 @@
                     <li class="list-group-item">
                         <input name="Accessibility-CheckSiteWithScreenReader" type="checkbox"> <strong>Check Site With Screen Reader</strong> -
                         Try the free <a href="http://www.nvaccess.org/">NVDA Screen Reader</a> to test the accessibility of your site.
-                    </li>
-                </ul>
-            </article>
-
-            <!-- $Start-Search$ -->
-            <article>
-                <h3><span aria-hidden="true" class="fa fa-search"></span> Search</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="Search-ImplementSearch" type="checkbox"> <strong>Implement Search</strong> -
-                        Implement search in your site by filling in the Search action in the <em>HomeController.cs</em> file.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="Search-ConfigureOpenSearchXml" type="checkbox"> <strong>Configure OpenSearch.xml</strong> -
-                        If you are implementing search, then this site implements the <a href="http://www.opensearch.org">Open Search</a> protocol. See <a href="http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart">Scott Hanselman</a>'s blog post for more information about what Open Search is. The opensearch.xml file is dynamically generated in <em>OpenSearchService.cs</em> and needs configuring.
-                    </li>
-                </ul>
-            </article>
-            <!-- $End-Search$ -->
-
-            <!-- $Start-Feed$ -->
-            <article>
-                <h3><span aria-hidden="true" class="fa fa-rss-square"></span> RSS/Atom Feed</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="RSSAtomFeed-ImplementAtomFeed" type="checkbox"> <strong>Implement Atom Feed</strong> -
-                        Implement the Atom feed for the site. See <em>FeedService.cs</em>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="RSSAtomFeed-PublishUpdates" type="checkbox"> <strong>Publish Atom Feed Updates</strong> -
-                        Call the <code>PublishUpdate</code> method on <em>FeedService.cs</em> when the feed changes. This publishes the fact that the feed has updated to subscribers using the PubSubHubbub v0.4 protocol. See <em>FeedService.cs</em> for more information.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="RSSAtomFeed-ValidateAtomFeed" type="checkbox"> <strong>Validate Atom Feed</strong> -
-                        Use <a href="http://feedvalidator.org/">Feed Validator</a> to validate your Atom feed.
-                    </li>
-                </ul>
-            </article>
-            <!-- $End-Feed$ -->
-
-            <!-- $Start-Glimpse$ -->
-            <article>
-                <h3><span aria-hidden="true" class="fa fa-code"></span> Debugging</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="Debugging-LearnGlimpse" type="checkbox"> <strong>Learn Glimpse</strong> -
-                        Navigate to {your site}/glimpse and also learn how to use Glimpse <a href="http://getglimpse.com/">here</a>.
-                        Glimpse can also be used to performance tune your application. It records the length of time taken to perform
-                        various actions.
-                    </li>
-                </ul>
-            </article>
-            <!-- $End-Glimpse$ -->
-
-            <article>
-                <h3><span aria-hidden="true" class="fa fa-share"></span> Social</h3>
-                <ul class="list-group">
-                    <!-- $Start-OpenGraph$ -->
-                    <li class="list-group-item">
-                        <input name="Social-ImplementFacebookOpenGraph" type="checkbox"> <strong>Implement Facebook OpenGraph</strong> -
-                        Open Graph meta tags have been included in all the default pages by default using ASP.NET Core tag helpers.
-                        Take a look at the header section of <em>Index.cshtml</em> for an example.
-                    </li>
-                    <!-- $End-OpenGraph$ -->
-                    <!-- $Start-TwitterCard$ -->
-                    <li class="list-group-item">
-                        <input name="Social-ImplementTwitterCards" type="checkbox"> <strong>Implement Twitter Cards</strong> -
-                        Twitter card meta tags have been included in all the default pages by default using ASP.NET Core tag helpers.
-                        Take a look at the header section of <em>Index.cshtml</em> for an example.
-                    </li>
-                    <!-- $End-TwitterCard$ -->
-                    <li class="list-group-item">
-                        <input name="Social-TestSocial" type="checkbox"> <strong>Test Social Media Meta Tags</strong> -
-                        Test your social media meta tags using the specified testing tools:
-                        <ul>
-                            <!-- $Start-OpenGraph$ -->
-                            <li><a href="https://developers.facebook.com/tools/debug">Facebook Debugger</a></li>
-                            <!-- $End-OpenGraph$ -->
-                            <!-- $Start-TwitterCard$ -->
-                            <li><a href="https://dev.twitter.com/docs/cards/validation/validator">Twitter Validation Tool</a></li>
-                            <!-- $End-TwitterCard$ -->
-                            <li><a href="http://www.google.com/webmasters/tools/richsnippets">Google Structured Data Testing Tool</a></li>
-                            <li><a href="http://developers.pinterest.com/rich_pins/validator">Pinterest Rich Pins Validator</a></li>
-                        </ul>
                     </li>
                 </ul>
             </article>

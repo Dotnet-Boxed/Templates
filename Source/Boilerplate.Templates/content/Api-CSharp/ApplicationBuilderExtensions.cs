@@ -107,31 +107,5 @@
             return application;
         }
 #endif
-
-        /// <summary>
-        /// Adds the X-Content-Type-Options, X-Download-Options and X-Frame-Options HTTP headers to the response for
-        /// added security. See
-        /// http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/,
-        /// http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
-        /// https://github.com/NWebsec/NWebsec/wiki for more information.
-        /// </summary>
-        public static IApplicationBuilder UseSecurityHttpHeaders(this IApplicationBuilder application)
-        {
-            return application
-                // X-Content-Type-Options - Adds the X-Content-Type-Options HTTP header. Stop IE9 and below from
-                //                          sniffing files and overriding the Content-Type header (MIME type).
-                .UseXContentTypeOptions()
-                // X-Download-Options - Adds the X-Download-Options HTTP header. When users save the page, stops them
-                //                      from opening it and forces a save and manual open.
-                .UseXDownloadOptions()
-                // X-Frame-Options - Adds the X-Frame-Options HTTP header. Stop clickjacking by stopping the page from
-                //                   opening in an iframe or only allowing it from the same origin.
-                //   SameOrigin - Specifies that the X-Frame-Options header should be set in the HTTP response,
-                //                instructing the browser to display the page when it is loaded in an iframe - but only
-                //                if the iframe is from the same origin as the page.
-                //   Deny - Specifies that the X-Frame-Options header should be set in the HTTP response, instructing
-                //          the browser to not display the page when it is loaded in an iframe.
-                .UseXfo(options => options.Deny());
-        }
     }
 }

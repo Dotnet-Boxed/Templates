@@ -20,9 +20,6 @@
     using MvcBoilerplate.Constants;
 #endif
     using MvcBoilerplate.Settings;
-    // $Start-JsonSerializerSettings$
-    using Newtonsoft.Json.Serialization;
-    // $End-JsonSerializerSettings$
 
     /// <summary>
     /// The main start-up class for the application.
@@ -187,20 +184,13 @@
 
                         options.ReturnHttpNotAcceptable = true;
                     })
-                // $Start-JsonSerializerSettings$
-                // Configures the JSON output formatter to use camel case property names like 'propertyName' instead of
-                // pascal case 'PropertyName' as this is the more common JavaScript/JSON style.
-                .AddJsonOptions(
-                    x => x.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
-                // $End-JsonSerializerSettings$
-                // $Start-XmlFormatter-DataContractSerializer$
+#if (DataContractSerializer)
                 // Adds the XML input and output formatter using the DataContractSerializer.
                 .AddXmlDataContractSerializerFormatters()
-                // $End-XmlFormatter-DataContractSerializer$
-                // $Start-XmlFormatter-XmlSerializer$
+#elif (XmlSerializer)
                 // Adds the XML input and output formatter using the XmlSerializer.
                 .AddXmlSerializerFormatters()
-                // $End-XmlFormatter-XmlSerializer$
+#endif
                 .Services
                 .AddCommands()
                 .AddRepositories()
@@ -258,7 +248,6 @@
                 .UseStrictTransportSecurityHttpHeader()
                 .UsePublicKeyPinsHttpHeader()
 #endif
-                .UseSecurityHttpHeaders()
                 // Add MVC to the request pipeline.
                 .UseMvc()
                 // Add Ahoy (Swagger) to the request pipeline.

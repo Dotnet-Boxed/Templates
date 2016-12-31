@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Boilerplate.Templates</id>
+    <version>0.0.1-alpha</version>
+    <title>Boilerplate Project & Item Templates</title>
+    <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
+    <description>Project and item templates containing common boilerplate code so you don't have to write it yourself. Includes special security, performance and best practice features.</description>
+    <tags>ASP.NET Core MVC 6 Boilerplate Muhammad Rehan Saeed Framework</tags>
+    <copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</copyright>
+    <language>en-GB</language>
+    <iconUrl>https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/Icon.png</iconUrl>
+    <projectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates</projectUrl>
+    <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <releaseNotes>Initial pre-release version.</releaseNotes>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <!-- dependencies>
+      <dependency id="Microsoft.TemplateEngine.Orchestrator.RunnableProjects" version="1.0.0-beta1-*" />
+    </dependencies -->
+  </metadata>
+  <files>
+    <file src="**" exclude="content\Boilerplate.AspNetCore.Template\**\*" />
+  </files>
+</package>

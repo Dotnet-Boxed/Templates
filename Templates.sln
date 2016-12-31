@@ -42,16 +42,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9-A80D-40EF-96C2-02F8DAD936FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boilerplate.ProjectTemplates", "Boilerplate.ProjectTemplates", "{2AE766ED-8072-490E-8CFB-CD956F0E14E6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boilerplate.Templates", "Boilerplate.Templates", "{2AE766ED-8072-490E-8CFB-CD956F0E14E6}"
 	ProjectSection(SolutionItems) = preProject
-		Source\Boilerplate.ProjectTemplates\Templates.nuspec = Source\Boilerplate.ProjectTemplates\Templates.nuspec
+		Source\Boilerplate.Templates\Templates.nuspec = Source\Boilerplate.Templates\Templates.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Template", "Source\Boilerplate.ProjectTemplates\content\Boilerplate.AspNetCore.Template\Boilerplate.AspNetCore.Template.xproj", "{0DB10360-95C3-4F7E-898D-BBB5997832A2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Template", "Source\Boilerplate.Templates\content\Web-CSharp\Boilerplate.AspNetCore.Template.xproj", "{0DB10360-95C3-4F7E-898D-BBB5997832A2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Api.Template", "Source\Boilerplate.ProjectTemplates\content\Boilerplate.AspNetCore.Api.Template\Boilerplate.AspNetCore.Api.Template.xproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Api.Template", "Source\Boilerplate.Templates\content\Api-CSharp\Boilerplate.AspNetCore.Api.Template.xproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -29,7 +29,8 @@
                         // Do not add the Server HTTP header when using the Kestrel Web Server.
                         options.AddServerHeader = false;
                     })
-#elif (WebListener)
+#endif
+#if (WebListener)
                 .UseWebListener(
                     options =>
                     {
@@ -40,7 +41,7 @@
 #if (Azure)
                 .UseAzureAppServices()
 #endif
-#if (IIS && !Azure) // UseAzureAppServices includes UseIISIntegration.
+#if (IIS && !Azure)
                 .UseIISIntegration()
 #endif
                 .UseStartup<Startup>()
