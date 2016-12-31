@@ -23,9 +23,34 @@ build_script:
 test: off
 
 artifacts:
+# Store NuGet packages
+- path: .\Artifacts\**\*.nupkg
+  name: NuGet
 # Store VSIX packages
 - path: .\Artifacts\**\*.vsix
   name: VSIX
 # Store xUnit Test Results
 - path: .\Artifacts\**\*.xml
   name: xUnit Test Results
+
+deploy:
+# Publish MyGet packages
+- provider: NuGet
+  server: https://www.myget.org/F/aspnet-mvc-boilerplate/api/v2
+  api_key:
+    secure: aunGGWt32irQiOTX2wIO6e2Y5Ga0girA3xSUsmQv6E9d6ohHdbK5HJpXpmxW9QM3
+  on:
+    # Only publish from the dotnet-new branch
+    branch: dotnet-new
+# Publish NuGet packages
+- provider: NuGet
+  name: production
+  api_key:
+    secure: 73eFUWSfho6pxCy1VRP1H0AYh/SFiyEREV+/ATcoj0I+sSH9dec/WXs6H2Jy5vlS
+  on:
+    # Only publish from the dotnet-new branch
+    branch: dotnet-new
+    # Only publish if the trigger was a Git tag
+    # git tag v0.1.0-beta
+    # git push origin --tags
+    appveyor_repo_tag: true
