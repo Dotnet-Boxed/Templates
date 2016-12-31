@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System;
     using Framework;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -94,10 +95,15 @@
         {
             return services
                 .AddScoped<IDeleteCarCommand, DeleteCarCommand>()
+                .AddScoped(x => new Lazy<IDeleteCarCommand>(() => x.GetRequiredService<IDeleteCarCommand>()))
                 .AddScoped<IGetCarCommand, GetCarCommand>()
+                .AddScoped(x => new Lazy<IGetCarCommand>(() => x.GetRequiredService<IGetCarCommand>()))
                 .AddScoped<IPatchCarCommand, PatchCarCommand>()
+                .AddScoped(x => new Lazy<IPatchCarCommand>(() => x.GetRequiredService<IPatchCarCommand>()))
                 .AddScoped<IPostCarCommand, PostCarCommand>()
-                .AddScoped<IPutCarCommand, PutCarCommand>();
+                .AddScoped(x => new Lazy<IPostCarCommand>(() => x.GetRequiredService<IPostCarCommand>()))
+                .AddScoped<IPutCarCommand, PutCarCommand>()
+                .AddScoped(x => new Lazy<IPutCarCommand>(() => x.GetRequiredService<IPutCarCommand>()));
 
             // Singleton - Only one instance is ever created and returned.
             // services.AddSingleton<IExampleService, ExampleService>();

@@ -15,7 +15,45 @@
             {
                 new Car()
                 {
-                    CarId = 1
+                    CarId = 1,
+                    Cylinders = 8,
+                    Make = "Lambourghini",
+                    Model = "Countach"
+                },
+                new Car()
+                {
+                    CarId = 2,
+                    Cylinders = 10,
+                    Make = "Mazda",
+                    Model = "Furai"
+                },
+                new Car()
+                {
+                    CarId = 3,
+                    Cylinders = 6,
+                    Make = "Honda",
+                    Model = "NSX"
+                },
+                new Car()
+                {
+                    CarId = 4,
+                    Cylinders = 6,
+                    Make = "Lotus",
+                    Model = "Esprit"
+                },
+                new Car()
+                {
+                    CarId = 5,
+                    Cylinders = 6,
+                    Make = "Mitsubishi",
+                    Model = "Evo"
+                },
+                new Car()
+                {
+                    CarId = 6,
+                    Cylinders = 12,
+                    Make = "McLaren",
+                    Model = "F1"
                 }
             };
         }

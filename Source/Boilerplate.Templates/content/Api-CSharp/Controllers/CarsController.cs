@@ -10,6 +10,7 @@
     using MvcBoilerplate.Constants;
     using MvcBoilerplate.ViewModels;
 
+    [Route("[controller]")]
     public class CarsController : ControllerBase
     {
         private readonly Lazy<IDeleteCarCommand> deleteCarCommand;

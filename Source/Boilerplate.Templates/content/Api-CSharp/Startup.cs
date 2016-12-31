@@ -1,12 +1,14 @@
 ﻿namespace MvcBoilerplate
 {
     using System.Linq;
+    using System.Reflection;
     using Boilerplate.AspNetCore;
     using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.AspNetCore.ResponseCompression;
@@ -20,6 +22,9 @@
     using MvcBoilerplate.Constants;
 #endif
     using MvcBoilerplate.Settings;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Swashbuckle.Swagger.Model;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -182,8 +187,25 @@
 
                         options.Filters.Add(new ValidateModelStateAttribute());
 
+                        options.OutputFormatters.RemoveType<StreamOutputFormatter>();
+                        options.OutputFormatters.RemoveType<StringOutputFormatter>();
+
                         options.ReturnHttpNotAcceptable = true;
                     })
+                .AddApiExplorer()
+                .AddAuthorization()
+                .AddFormatterMappings()
+                .AddDataAnnotations()
+                .AddJsonFormatters()
+                .AddJsonOptions(
+                    options =>
+                    {
+                        options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    })
+#if (CORS)
+                .AddCors()
+#endif
 #if (DataContractSerializer)
                 // Adds the XML input and output formatter using the DataContractSerializer.
                 .AddXmlDataContractSerializerFormatters()
@@ -194,7 +216,21 @@
                 .Services
                 .AddCommands()
                 .AddRepositories()
-                .AddTranslators();
+                .AddTranslators()
+                .AddSwaggerGen(
+                    options =>
+                    {
+                        options.DescribeAllEnumsAsStrings();
+                        options.DescribeStringEnumsInCamelCase();
+                        var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                        options.SingleApiVersion(
+                            new Info()
+                            {
+                                Version = "v1",
+                                Title = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title,
+                                Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
+                            });
+                    });
         }
 
         /// <summary>

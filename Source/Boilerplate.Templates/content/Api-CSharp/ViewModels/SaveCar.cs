@@ -1,7 +1,10 @@
 ﻿namespace MvcBoilerplate.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
+    using MvcBoilerplate.ViewModelSchemaFilters;
+    using Swashbuckle.SwaggerGen.Annotations;
 
+    [SwaggerSchemaFilter(typeof(SaveCarSchemaFilter))]
     public class SaveCar
     {
         [Range(1, 20)]

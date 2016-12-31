@@ -27,8 +27,8 @@
                 return new NotFoundResult();
             }
 
-            var projectViewModel = this.carTranslator.Translate(car);
-            return new OkObjectResult(projectViewModel);
+            var carViewModel = this.carTranslator.Translate(car);
+            return new OkObjectResult(carViewModel);
         }
     }
 }

@@ -48,9 +48,9 @@
 
             this.saveCarToCarTranslator.Translate(saveCar, car);
             await this.carRepository.Update(car);
-            var projectViewModel = this.carToCarTranslator.Translate(car);
+            var carViewModel = this.carToCarTranslator.Translate(car);
 
-            return new OkObjectResult(projectViewModel);
+            return new OkObjectResult(carViewModel);
         }
     }
 }
