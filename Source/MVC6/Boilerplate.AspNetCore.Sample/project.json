@@ -150,8 +150,10 @@
     ],
     // Execute the following commands after publishing the project.
     "postpublish": [
+      // $Start-ReverseProxyWebServer-IIS$
       // Runs the publish-iis tool which modifies the web.config file.
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
+      // $End-ReverseProxyWebServer-IIS$
       // Pre-compile razor views for faster application startup.
       "dotnet razor-precompile --configuration %publish:Configuration% --framework %publish:TargetFramework% --output-path %publish:OutputPath% %publish:ProjectPath%"
     ]
