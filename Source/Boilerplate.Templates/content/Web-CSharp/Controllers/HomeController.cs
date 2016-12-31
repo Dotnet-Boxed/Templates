@@ -22,11 +22,11 @@
         private readonly IBrowserConfigService browserConfigService;
         // $End-Windows81IE11EdgeFavicon$
         // $Start-Feed$
-#if (NETFramework)
-//#if NET461
+        // $Start-TargetFramework-NetFramework$
+#if NET461
         // The FeedService is not available for .NET Core because the System.ServiceModel.Syndication.SyndicationFeed
         // type does not yet exist. See https://github.com/dotnet/wcf/issues/76.
-#endif
+        // $End-TargetFramework-NetFramework$
         private readonly IFeedService feedService;
         // $Start-TargetFramework-NetFramework$
 #endif
