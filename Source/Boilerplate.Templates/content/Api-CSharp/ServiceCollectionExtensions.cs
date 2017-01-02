@@ -98,6 +98,8 @@
                 .AddScoped(x => new Lazy<IDeleteCarCommand>(() => x.GetRequiredService<IDeleteCarCommand>()))
                 .AddScoped<IGetCarCommand, GetCarCommand>()
                 .AddScoped(x => new Lazy<IGetCarCommand>(() => x.GetRequiredService<IGetCarCommand>()))
+                .AddScoped<IGetCarPageCommand, GetCarPageCommand>()
+                .AddScoped(x => new Lazy<IGetCarPageCommand>(() => x.GetRequiredService<IGetCarPageCommand>()))
                 .AddScoped<IPatchCarCommand, PatchCarCommand>()
                 .AddScoped(x => new Lazy<IPatchCarCommand>(() => x.GetRequiredService<IPatchCarCommand>()))
                 .AddScoped<IPostCarCommand, PostCarCommand>()

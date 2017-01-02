@@ -15,6 +15,7 @@
     {
         private readonly Lazy<IDeleteCarCommand> deleteCarCommand;
         private readonly Lazy<IGetCarCommand> getCarCommand;
+        private readonly Lazy<IGetCarPageCommand> getCarPageCommand;
         private readonly Lazy<IPatchCarCommand> patchCarCommand;
         private readonly Lazy<IPostCarCommand> postCarCommand;
         private readonly Lazy<IPutCarCommand> putCarCommand;
@@ -22,12 +23,14 @@
         public CarsController(
             Lazy<IDeleteCarCommand> deleteCarCommand,
             Lazy<IGetCarCommand> getCarCommand,
+            Lazy<IGetCarPageCommand> getCarPageCommand,
             Lazy<IPatchCarCommand> patchCarCommand,
             Lazy<IPostCarCommand> postCarCommand,
             Lazy<IPutCarCommand> putCarCommand)
         {
             this.deleteCarCommand = deleteCarCommand;
             this.getCarCommand = getCarCommand;
+            this.getCarPageCommand = getCarPageCommand;
             this.patchCarCommand = patchCarCommand;
             this.postCarCommand = postCarCommand;
             this.putCarCommand = putCarCommand;
@@ -63,6 +66,25 @@
         public Task<IActionResult> Get(int carId)
         {
             return this.getCarCommand.Value.ExecuteAsync(carId);
+        }
+
+        /// <summary>
+        /// Gets a collection of cars using the specified page number and number of items per page.
+        /// </summary>
+        /// <param name="pageRequest">The page request.</param>
+        /// <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
+        /// parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
+        /// </returns>
+        /// <response code="200">A collection of cars for the specified page.</response>
+        /// <response code="400">The page request parameters are invalid.</response>
+        /// <response code="404">A page with the specified page number was not found.</response>
+        [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
+        [ProducesResponseType(typeof(Page<Car>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public Task<IActionResult> GetPage(PageRequest pageRequest)
+        {
+            return this.getCarPageCommand.Value.ExecuteAsync(pageRequest);
         }
 
         /// <summary>

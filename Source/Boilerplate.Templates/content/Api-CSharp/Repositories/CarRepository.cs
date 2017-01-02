@@ -80,6 +80,25 @@
             return Task.FromResult(car);
         }
 
+        public Task<ICollection<Car>> GetPage(int page, int count)
+        {
+            var cars = this.cars
+                .Skip(count * (page - 1))
+                .Take(count)
+                .ToList();
+            if (cars.Count == 0)
+            {
+                cars = null;
+            }
+
+            return Task.FromResult((ICollection<Car>)cars);
+        }
+
+        public Task<int> GetTotalPages(int page, int count)
+        {
+            return Task.FromResult(this.cars.Count == 0 ? 1 : ((this.cars.Count - 1) / count) + 1);
+        }
+
         public Task<Car> Update(Car car)
         {
             this.Delete(car);
