@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace WebTemplate
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;

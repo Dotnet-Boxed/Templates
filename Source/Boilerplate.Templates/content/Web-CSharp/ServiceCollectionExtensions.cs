@@ -1,11 +1,11 @@
-﻿namespace MvcBoilerplate
+﻿namespace WebTemplate
 {
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     // $Start-Services$
-    using MvcBoilerplate.Services;
+    using WebTemplate.Services;
     // $End-Services$
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Settings;
 
     public static partial class ServiceCollectionExtensions
     {

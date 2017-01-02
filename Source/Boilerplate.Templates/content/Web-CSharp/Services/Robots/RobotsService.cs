@@ -1,9 +1,9 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System.Text;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Constants;
+    using WebTemplate.Constants;
 
     public sealed class RobotsService : IRobotsService
     {

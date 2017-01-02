@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System.Collections.Generic;
     using System.Globalization;
@@ -13,8 +13,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Constants;
+    using WebTemplate.Settings;
 
     public class SitemapPingerService : ISitemapPingerService
     {

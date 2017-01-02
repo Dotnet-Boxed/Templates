@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace WebTemplate.Settings
 {
     public class ResponseCompressionSettings
     {

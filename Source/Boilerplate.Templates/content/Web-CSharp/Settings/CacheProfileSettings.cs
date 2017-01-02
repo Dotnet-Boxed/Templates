@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace WebTemplate.Settings
 {
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;

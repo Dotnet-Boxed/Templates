@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Controllers
+﻿namespace WebTemplate.Controllers
 {
     using System.Text;
     using System.Threading;
@@ -7,11 +7,11 @@
     using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
+    using WebTemplate.Constants;
     // $Start-Services$
-    using MvcBoilerplate.Services;
+    using WebTemplate.Services;
     // $End-Services$
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Settings;
 
     public class HomeController : Controller
     {

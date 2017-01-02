@@ -1,8 +1,8 @@
-﻿namespace MvcBoilerplate.Controllers
+﻿namespace WebTemplate.Controllers
 {
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Constants;
+    using WebTemplate.Constants;
 
     /// <summary>
     /// Provides methods that respond to HTTP requests with HTTP errors.

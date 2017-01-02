@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace WebTemplate.Settings
 {
     /// <summary>
     /// The settings for the current application.

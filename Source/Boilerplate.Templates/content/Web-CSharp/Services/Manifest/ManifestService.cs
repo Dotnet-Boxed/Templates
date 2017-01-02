@@ -1,8 +1,8 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Settings;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 

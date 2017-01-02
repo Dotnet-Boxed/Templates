@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace WebTemplate.Settings
 {
     /// <summary>
     /// Stores sitemap related settings.

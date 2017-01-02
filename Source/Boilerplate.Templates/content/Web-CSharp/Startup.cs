@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace WebTemplate
 {
     using System.Linq;
     using Boilerplate.AspNetCore;
@@ -19,9 +19,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     // $Start-CORS$
-    using MvcBoilerplate.Constants;
+    using WebTemplate.Constants;
     // $End-CORS$
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Settings;
     // $Start-JsonSerializerSettings$
     using Newtonsoft.Json.Serialization;
     // $End-JsonSerializerSettings$

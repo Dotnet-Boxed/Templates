@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace WebTemplate
 {
     using System;
     // $Start-NWebSec$
@@ -14,8 +14,8 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Constants;
+    using WebTemplate.Settings;
     // $Start-NWebSec$
     using NWebsec.AspNetCore.Middleware;
     // $End-NWebSec$

@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     // $Start-TargetFramework-NetFramework$
 #if NET461

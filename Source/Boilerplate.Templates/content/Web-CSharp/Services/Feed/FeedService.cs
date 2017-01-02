@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     // $Start-TargetFramework-NetFramework$
 #if NET461
@@ -14,8 +14,8 @@
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Constants;
+    using WebTemplate.Settings;
 
     /// <summary>
     /// Builds <see cref="SyndicationFeed"/>'s containing meta data about the feed and the feed entries.

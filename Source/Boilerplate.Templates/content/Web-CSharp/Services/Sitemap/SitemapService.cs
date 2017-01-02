@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System;
     using System.Collections.Generic;
@@ -13,8 +13,8 @@
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Constants;
+    using WebTemplate.Settings;
 
     /// <summary>
     /// Generates sitemap XML for the current site.

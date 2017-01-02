@@ -1,12 +1,12 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System.Text;
     using System.Xml.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using WebTemplate.Constants;
+    using WebTemplate.Settings;
 
     public sealed class OpenSearchService : IOpenSearchService
     {

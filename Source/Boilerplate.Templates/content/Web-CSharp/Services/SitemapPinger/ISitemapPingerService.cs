@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System.Threading.Tasks;
 

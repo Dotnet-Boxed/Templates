@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Constants
+﻿namespace WebTemplate.Constants
 {
     public static class ControllerName
     {

@@ -1,10 +1,10 @@
-﻿namespace MvcBoilerplate.Services
+﻿namespace WebTemplate.Services
 {
     using System.Text;
     using System.Xml.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Constants;
+    using WebTemplate.Constants;
 
     public class BrowserConfigService : IBrowserConfigService
     {
