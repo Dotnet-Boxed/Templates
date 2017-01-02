@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Constants
+﻿namespace ApiTemplate.Constants
 {
     public static class CacheProfileName
     {

@@ -1,8 +1,8 @@
-﻿namespace MvcBoilerplate.Repositories
+﻿namespace ApiTemplate.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using MvcBoilerplate.Models;
+    using ApiTemplate.Models;
 
     public interface ICarRepository
     {

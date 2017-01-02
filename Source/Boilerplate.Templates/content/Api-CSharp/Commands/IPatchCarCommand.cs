@@ -1,8 +1,8 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.JsonPatch;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.ViewModels;
 
     public interface IPatchCarCommand : IAsyncCommand<int, JsonPatchDocument<SaveCar>>
     {

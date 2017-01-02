@@ -1,12 +1,12 @@
-﻿namespace MvcBoilerplate
+﻿namespace ApiTemplate
 {
     using System;
     using System.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Settings;
+    using ApiTemplate.Constants;
+    using ApiTemplate.Settings;
 
     public static partial class ApplicationBuilderExtensions
     {

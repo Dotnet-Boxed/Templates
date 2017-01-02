@@ -1,9 +1,9 @@
 ﻿#if (StatusController)
-namespace MvcBoilerplate.Controllers
+namespace ApiTemplate.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using MvcBoilerplate.Constants;
+    using ApiTemplate.Constants;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;

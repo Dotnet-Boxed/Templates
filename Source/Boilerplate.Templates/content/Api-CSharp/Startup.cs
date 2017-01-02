@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace ApiTemplate
 {
     using System.Linq;
     using System.Reflection;
@@ -19,9 +19,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 #if (CORS)
-    using MvcBoilerplate.Constants;
+    using ApiTemplate.Constants;
 #endif
-    using MvcBoilerplate.Settings;
+    using ApiTemplate.Settings;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Swashbuckle.Swagger.Model;

@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1C1C
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Template", "Source\Boilerplate.Templates\content\Web-CSharp\Boilerplate.AspNetCore.Template.xproj", "{0DB10360-95C3-4F7E-898D-BBB5997832A2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Boilerplate.AspNetCore.Api.Template", "Source\Boilerplate.Templates\content\Api-CSharp\Boilerplate.AspNetCore.Api.Template.xproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ApiTemplate", "Source\Boilerplate.Templates\content\Api-CSharp\ApiTemplate.xproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

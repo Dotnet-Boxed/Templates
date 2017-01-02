@@ -1,6 +1,6 @@
-﻿namespace MvcBoilerplate.ViewModelSchemaFilters
+﻿namespace ApiTemplate.ViewModelSchemaFilters
 {
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.ViewModels;
     using Swashbuckle.Swagger.Model;
     using Swashbuckle.SwaggerGen.Generator;
 

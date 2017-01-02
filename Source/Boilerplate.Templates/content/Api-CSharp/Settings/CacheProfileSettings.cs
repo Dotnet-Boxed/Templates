@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace ApiTemplate.Settings
 {
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;

@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Controllers
+﻿namespace ApiTemplate.Controllers
 {
     using System;
     using System.Threading.Tasks;
@@ -6,9 +6,9 @@
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using MvcBoilerplate.Commands;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.Commands;
+    using ApiTemplate.Constants;
+    using ApiTemplate.ViewModels;
 
     [Route("[controller]")]
     public class CarsController : ControllerBase

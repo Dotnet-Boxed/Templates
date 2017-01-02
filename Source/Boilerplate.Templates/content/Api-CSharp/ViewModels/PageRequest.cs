@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.ViewModels
+﻿namespace ApiTemplate.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 

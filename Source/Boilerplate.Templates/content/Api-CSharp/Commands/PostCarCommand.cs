@@ -1,11 +1,11 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using System.Threading.Tasks;
     using Framework;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Constants;
-    using MvcBoilerplate.Repositories;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.Constants;
+    using ApiTemplate.Repositories;
+    using ApiTemplate.ViewModels;
 
     public class PostCarCommand : IPostCarCommand
     {

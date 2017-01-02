@@ -1,14 +1,14 @@
-﻿namespace MvcBoilerplate
+﻿namespace ApiTemplate
 {
     using System;
     using Framework;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using MvcBoilerplate.Commands;
-    using MvcBoilerplate.Repositories;
-    using MvcBoilerplate.Settings;
-    using MvcBoilerplate.Translators;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.Commands;
+    using ApiTemplate.Repositories;
+    using ApiTemplate.Settings;
+    using ApiTemplate.Translators;
+    using ApiTemplate.ViewModels;
 
     public static partial class ServiceCollectionExtensions
     {

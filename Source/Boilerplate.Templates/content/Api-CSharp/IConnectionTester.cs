@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace ApiTemplate
 {
     using System.Threading.Tasks;
 

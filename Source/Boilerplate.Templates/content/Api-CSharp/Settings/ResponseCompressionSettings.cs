@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Settings
+﻿namespace ApiTemplate.Settings
 {
     public class ResponseCompressionSettings
     {

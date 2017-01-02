@@ -1,7 +1,7 @@
-﻿namespace MvcBoilerplate.Translators
+﻿namespace ApiTemplate.Translators
 {
     using Framework;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.ViewModels;
 
     public class CarToSaveCarTranslator :  ITranslator<Models.Car, SaveCar>, ITranslator<SaveCar, Models.Car>
     {

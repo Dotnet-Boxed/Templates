@@ -1,10 +1,10 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using System.Threading.Tasks;
     using Framework;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Repositories;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.Repositories;
+    using ApiTemplate.ViewModels;
 
     public class GetCarCommand : IGetCarCommand
     {

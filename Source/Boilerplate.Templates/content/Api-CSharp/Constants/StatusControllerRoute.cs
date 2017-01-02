@@ -1,5 +1,5 @@
 ﻿#if (StatusController)
-namespace MvcBoilerplate.Constants
+namespace ApiTemplate.Constants
 {
     public class StatusControllerRoute
     {

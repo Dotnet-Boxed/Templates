@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Models
+﻿namespace ApiTemplate.Models
 {
     public class Car
     {

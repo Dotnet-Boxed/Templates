@@ -1,6 +1,6 @@
-﻿namespace MvcBoilerplate.ViewModels
+﻿namespace ApiTemplate.ViewModels
 {
-    using MvcBoilerplate.ViewModelSchemaFilters;
+    using ApiTemplate.ViewModelSchemaFilters;
     using Swashbuckle.SwaggerGen.Annotations;
 
     [SwaggerSchemaFilter(typeof(CarSchemaFilter))]

@@ -1,7 +1,7 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using Boilerplate.AspNetCore;
-    using MvcBoilerplate.ViewModels;
+    using ApiTemplate.ViewModels;
 
     public interface IGetCarPageCommand : IAsyncCommand<PageRequest>
     {

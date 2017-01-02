@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using Boilerplate.AspNetCore;
 

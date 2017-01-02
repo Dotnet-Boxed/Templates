@@ -1,8 +1,8 @@
-﻿namespace MvcBoilerplate.Commands
+﻿namespace ApiTemplate.Commands
 {
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
-    using MvcBoilerplate.Repositories;
+    using ApiTemplate.Repositories;
 
     public class DeleteCarCommand : IDeleteCarCommand
     {

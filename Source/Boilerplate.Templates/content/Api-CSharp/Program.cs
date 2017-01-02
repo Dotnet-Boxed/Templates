@@ -1,4 +1,4 @@
-﻿namespace MvcBoilerplate
+﻿namespace ApiTemplate
 {
     using System.IO;
     using Microsoft.AspNetCore.Hosting;
