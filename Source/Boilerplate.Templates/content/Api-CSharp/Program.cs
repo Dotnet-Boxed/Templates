@@ -29,8 +29,7 @@
                         // Do not add the Server HTTP header when using the Kestrel Web Server.
                         options.AddServerHeader = false;
                     })
-#endif
-#if (WebListener)
+#elif (WebListener)
                 .UseWebListener(
                     options =>
                     {
