@@ -1,11 +1,11 @@
 // https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
-  "classifications": [ "Web", "MVC", "Boilerplate", "API" ],
+  "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
   "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
-  "groupIdentity": "Boilerplate",
+  "groupIdentity": "Boilerplate.AspNetCore.Api",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
-  "shortName": "api",
+  "shortName": "bapi",
   "tags": {
     "language": "C#"
   },

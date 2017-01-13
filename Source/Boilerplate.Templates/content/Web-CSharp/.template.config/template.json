@@ -3,9 +3,9 @@
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "MVC", "Boilerplate" ],
   "name": "ASP.NET Core 1.1 MVC 6 Boilerplate Web Application",
-  "groupIdentity": "Boilerplate",
-  "identity": "Boilerplate.AspNetCore.CSharp",
-  "shortName": "web",
+  "groupIdentity": "Boilerplate.AspNetCore.Web",
+  "identity": "Boilerplate.AspNetCore.Web.CSharp",
+  "shortName": "bmvc",
   "tags": {
     "language": "C#"
   },
