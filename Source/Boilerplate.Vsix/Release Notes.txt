@@ -1,4 +1,8 @@
-﻿Version 5.0.0
+﻿Version 5.1.0
+MVC 6
+- Set GZIP response compression to optimal in Startup.cs.
+
+Version 5.0.0
 MVC 6
 - Upgraded to ASP.NET Core 1.1.
 - Upgraded all NuGet packages.

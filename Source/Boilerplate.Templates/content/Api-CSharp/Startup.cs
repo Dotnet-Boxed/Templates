@@ -1,5 +1,6 @@
 ﻿namespace ApiTemplate
 {
+    using System.IO.Compression;
     using System.Linq;
     using System.Reflection;
     using Boilerplate.AspNetCore;
@@ -166,6 +167,8 @@
                             .MimeTypes
                             .Concat(responseCompressionSettings.MimeTypes);
                     })
+                .Configure<GzipCompressionProviderOptions>(
+                    options => options.Level = CompressionLevel.Optimal)
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
