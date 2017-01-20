@@ -3,7 +3,7 @@
     using Boilerplate.AspNetCore;
     using ApiTemplate.ViewModels;
 
-    public interface IGetCarPageCommand : IAsyncCommand<PageRequest>
+    public interface IGetCarPageCommand : IAsyncCommand<PageOptions>
     {
     }
 }

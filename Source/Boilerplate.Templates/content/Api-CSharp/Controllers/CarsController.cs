@@ -71,7 +71,7 @@
         /// <summary>
         /// Gets a collection of cars using the specified page number and number of items per page.
         /// </summary>
-        /// <param name="pageRequest">The page request.</param>
+        /// <param name="pageOptions">The page options.</param>
         /// <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
         /// parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
         /// </returns>
@@ -79,12 +79,12 @@
         /// <response code="400">The page request parameters are invalid.</response>
         /// <response code="404">A page with the specified page number was not found.</response>
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
-        [ProducesResponseType(typeof(Page<Car>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> GetPage(PageRequest pageRequest)
+        public Task<IActionResult> GetPage(PageOptions pageOptions)
         {
-            return this.getCarPageCommand.Value.ExecuteAsync(pageRequest);
+            return this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
         }
 
         /// <summary>
