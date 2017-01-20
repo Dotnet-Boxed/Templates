@@ -68,6 +68,15 @@
           "exclude": [
             "wwwroot/robots.txt"
           ]
+        },
+        // Swagger
+        {
+          "condition": "(!Swagger)",
+          "exclude": [
+            "Constants/HomeControllerRoute.cs",
+            "Controllers/HomeController.cs",
+            "ViewModelSchemaFilters"
+          ]
         }
       ]
     }
@@ -195,6 +204,13 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Adds a robots.txt file to tell search engines not to index this site."
+    },
+    // Swagger
+    "Swagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
     }
   }
 }

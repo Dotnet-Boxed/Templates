@@ -1,9 +1,11 @@
 ﻿namespace ApiTemplate.ViewModels
 {
+#if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
     using Swashbuckle.SwaggerGen.Annotations;
 
     [SwaggerSchemaFilter(typeof(CarSchemaFilter))]
+#endif
     public class Car
     {
         public int CarId { get; set; }

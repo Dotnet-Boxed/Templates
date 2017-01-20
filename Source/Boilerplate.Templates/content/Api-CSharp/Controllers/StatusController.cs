@@ -26,8 +26,10 @@ namespace ApiTemplate.Controllers
         /// Gets the status of this API and it's dependencies, giving an indication of it's health.
         /// </summary>
         /// <returns>A 200 OK or error response containing details of what is wrong.</returns>
+#if (Swagger)
         /// <response code="204">The API is functioning normally.</response>
         /// <response code="500">The API or one of it's dependencies is not functioning.</response>
+#endif
         [HttpGet(Name = StatusControllerRoute.GetStatus)]
         [AllowAnonymous]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]

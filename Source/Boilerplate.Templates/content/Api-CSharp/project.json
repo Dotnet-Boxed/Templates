@@ -8,7 +8,6 @@
 
   "dependencies": {
     "Boilerplate.AspNetCore": "2.0.2",
-    "Boilerplate.AspNetCore.TagHelpers": "2.1.0",
     //#if (ApplicationInsights)
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
     //#endif
@@ -60,7 +59,9 @@
     "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
     "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
     "Newtonsoft.Json": "9.0.1",
+    //#if (ApplicationInsights)
     "Swashbuckle": "6.0.0-beta902"
+    //#endif
   },
 
   "frameworks": {
@@ -109,7 +110,22 @@
     "debugType": "portable",
     // Require the application to use a static Main method.
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "define": [
+      "NETCore",
+      "NETFramework",
+      "Kestrel",
+      "IIS",
+      "NGINX",
+      "Azure",
+      "ApplicationInsights",
+      "StatusController",
+      "HttpsEverywhere",
+      "CORS",
+      "HumansTxt",
+      "RobotsTxt",
+      "Swagger"
+    ]
   },
 
   "runtimeOptions": {
