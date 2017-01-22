@@ -188,6 +188,14 @@
                             options.CacheProfiles.Add(keyValuePair);
                         }
 
+                        if (this.hostingEnvironment.IsDevelopment())
+                        {
+                            // Lets you pass a format parameter into the query string to set the response type:
+                            // e.g. ?format=application/json. Good for debugging.
+                            options.Filters.Add(new FormatFilterAttribute());
+                        }
+
+                        // Check model state for null or invalid models and automatically return a 400 Bad Request.
                         options.Filters.Add(new ValidateModelStateAttribute());
 
                         options.OutputFormatters.RemoveType<StreamOutputFormatter>();
