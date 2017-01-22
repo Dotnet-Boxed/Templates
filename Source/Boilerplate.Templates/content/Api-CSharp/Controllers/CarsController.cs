@@ -42,8 +42,10 @@
         /// <param name="carId">The car ID.</param>
         /// <returns>A 204 No Content response if the car was deleted or a 404 Not Found if a car with the specified ID
         /// was not found.</returns>
+#if (Swagger)
         /// <response code="204">The car with the specified ID was deleted.</response>
         /// <response code="404">A car with the specified ID was not found.</response>
+#endif
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -58,8 +60,10 @@
         /// <param name="carId">The car ID.</param>
         /// <returns>A 200 OK response containing the car or a 404 Not Found if a car with the specified ID was not
         /// found.</returns>
+#if (Swagger)
         /// <response code="200">The car with the specified ID.</response>
         /// <response code="404">A car with the specified ID could not be found.</response>
+#endif
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
@@ -71,20 +75,22 @@
         /// <summary>
         /// Gets a collection of cars using the specified page number and number of items per page.
         /// </summary>
-        /// <param name="pageRequest">The page request.</param>
+        /// <param name="pageOptions">The page options.</param>
         /// <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
         /// parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
         /// </returns>
+#if (Swagger)
         /// <response code="200">A collection of cars for the specified page.</response>
         /// <response code="400">The page request parameters are invalid.</response>
         /// <response code="404">A page with the specified page number was not found.</response>
+#endif
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
-        [ProducesResponseType(typeof(Page<Car>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> GetPage(PageRequest pageRequest)
+        public Task<IActionResult> GetPage(PageOptions pageOptions)
         {
-            return this.getCarPageCommand.Value.ExecuteAsync(pageRequest);
+            return this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
         }
 
         /// <summary>
@@ -94,9 +100,11 @@
         /// <param name="patch">The patch document. See http://jsonpatch.com/.</param>
         /// <returns>A 200 OK if the car was patched, a 400 Bad Request if the patch was invalid or a 404 Not Found
         /// if a car with the specified ID was not found.</returns>
+#if (Swagger)
         /// <response code="200">The patched car with the specified ID.</response>
         /// <response code="400">The patch document is invalid.</response>
         /// <response code="404">A car with the specified ID could not be found.</response>
+#endif
         [HttpPatch("{carId}", Name = CarsControllerRoute.PatchCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
@@ -112,8 +120,10 @@
         /// <param name="car">The car to create.</param>
         /// <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
         /// invalid.</returns>
+#if (Swagger)
         /// <response code="201">The car was created.</response>
         /// <response code="400">The car is invalid.</response>
+#endif
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
@@ -128,9 +138,11 @@
         /// <param name="car">The car to update.</param>
         /// <returns>A 200 OK response containing the newly updated car, a 400 Bad Request if the car is invalid or a
         /// or a 404 Not Found if a car with the specified ID was not found.</returns>
+#if (Swagger)
         /// <response code="200">The car was updated.</response>
         /// <response code="400">The car is invalid.</response>
         /// <response code="404">A car with the specified ID could not be found.</response>
+#endif
         [HttpPost("{carId}", Name = CarsControllerRoute.PutCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]

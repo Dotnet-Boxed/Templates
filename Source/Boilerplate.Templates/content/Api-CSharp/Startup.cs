@@ -1,5 +1,6 @@
 ﻿namespace ApiTemplate
 {
+    using System.IO.Compression;
     using System.Linq;
     using System.Reflection;
     using Boilerplate.AspNetCore;
@@ -166,6 +167,8 @@
                             .MimeTypes
                             .Concat(responseCompressionSettings.MimeTypes);
                     })
+                .Configure<GzipCompressionProviderOptions>(
+                    options => options.Level = CompressionLevel.Optimal)
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
@@ -214,9 +217,7 @@
                 .AddXmlSerializerFormatters()
 #endif
                 .Services
-                .AddCommands()
-                .AddRepositories()
-                .AddTranslators()
+#if (Swagger)
                 .AddSwaggerGen(
                     options =>
                     {
@@ -230,7 +231,11 @@
                                 Title = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title,
                                 Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
                             });
-                    });
+                    })
+#endif
+                .AddCommands()
+                .AddRepositories()
+                .AddTranslators();
         }
 
         /// <summary>
@@ -259,7 +264,7 @@
                 // Add Azure Application Insights to the request pipeline to track HTTP request telemetry data.
                 .UseApplicationInsightsRequestTelemetry()
                 // Track data about exceptions from the application. Should be configured after all error handling
-                // middleware in the request pipeline.
+                // middle-ware in the request pipeline.
                 .UseApplicationInsightsExceptionTelemetry()
 #endif
 #if (HttpsEverywhere)
@@ -284,11 +289,15 @@
                 .UseStrictTransportSecurityHttpHeader()
                 .UsePublicKeyPinsHttpHeader()
 #endif
-                // Add MVC to the request pipeline.
+            // Add MVC to the request pipeline.
+#if (Swagger)
                 .UseMvc()
-                // Add Ahoy (Swagger) to the request pipeline.
+                // Add Swashbuckle to the request pipeline.
                 .UseSwagger()
                 .UseSwaggerUi();
+#else
+                .UseMvc();
+#endif
         }
     }
 }

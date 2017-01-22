@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.IO.Compression;
     using System.Linq;
     using Boilerplate.AspNetCore;
     // $Start-RedirectToCanonicalUrl$
@@ -177,6 +178,8 @@
                             .MimeTypes
                             .Concat(responseCompressionSettings.MimeTypes);
                     })
+                .Configure<GzipCompressionProviderOptions>(
+                    options => options.Level = CompressionLevel.Optimal)
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.

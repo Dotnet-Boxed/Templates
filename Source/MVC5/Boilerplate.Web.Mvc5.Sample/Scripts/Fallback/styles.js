@@ -1,6 +1,6 @@
 ﻿// Performs tests to see if a stylesheet was loaded successfully, if the stylesheet failed to load, appends a new
 // link tag pointing to the local copy of the stylesheet before performing the next check.
-(function (document) {
+(function (window, document) {
     "use strict";
 
     var fallbacks = [
@@ -12,7 +12,7 @@
             metaName: "x-font-awesome-stylesheet-fallback-test",
             // test - The test to perform against the meta tag. Checks to see if the Font awesome styles loaded
             //        successfully by checking that the font-family of the meta tag is 'FontAwesome'.
-            test: function (meta) { return meta.style.fontFamily === "FontAwesome"; },
+            test: function (meta) { return window.getComputedStyle(meta, null).getPropertyValue('font-family') === "FontAwesome"; },
             // href - The URL to the fallback stylesheet.
             href: "/Content/fa"
         }
@@ -38,4 +38,4 @@
 
     }
 
-})(document);
+})(window, document);

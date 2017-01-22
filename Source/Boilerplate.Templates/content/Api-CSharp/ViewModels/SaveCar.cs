@@ -1,10 +1,14 @@
 ﻿namespace ApiTemplate.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
+#if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
     using Swashbuckle.SwaggerGen.Annotations;
+#endif
 
+#if (Swagger)
     [SwaggerSchemaFilter(typeof(SaveCarSchemaFilter))]
+#endif
     public class SaveCar
     {
         [Range(1, 20)]

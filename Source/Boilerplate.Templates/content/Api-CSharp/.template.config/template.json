@@ -1,9 +1,11 @@
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
-  "classifications": [ "Web", "MVC", "Boilerplate", "API" ],
+  "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
   "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
+  "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
-  "shortName": "api",
+  "shortName": "bapi",
   "tags": {
     "language": "C#"
   },
@@ -65,6 +67,15 @@
           "condition": "(!RobotsTxt)",
           "exclude": [
             "wwwroot/robots.txt"
+          ]
+        },
+        // Swagger
+        {
+          "condition": "(!Swagger)",
+          "exclude": [
+            "Constants/HomeControllerRoute.cs",
+            "Controllers/HomeController.cs",
+            "ViewModelSchemaFilters"
           ]
         }
       ]
@@ -193,6 +204,13 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Adds a robots.txt file to tell search engines not to index this site."
+    },
+    // Swagger
+    "Swagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
     }
   }
 }

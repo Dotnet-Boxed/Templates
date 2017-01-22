@@ -19,22 +19,22 @@
             this.carTranslator = carTranslator;
         }
 
-        public async Task<IActionResult> ExecuteAsync(PageRequest pageRequest)
+        public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions)
         {
-            var cars = await this.carRepository.GetPage(pageRequest.Page, pageRequest.Count);
+            var cars = await this.carRepository.GetPage(pageOptions.Page, pageOptions.Count);
             if (cars.Count == 0)
             {
                 return new NotFoundResult();
             }
 
-            var totalPages = await this.carRepository.GetTotalPages(pageRequest.Page, pageRequest.Count);
+            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Page, pageOptions.Count);
             var carViewModels = this.carTranslator.TranslateList(cars);
-            var page = new Page<Car>()
+            var page = new PageResult<Car>()
             {
-                Count = pageRequest.Count,
+                Count = pageOptions.Count,
                 Items = carViewModels,
-                PageNumber = pageRequest.Page,
-                TotalPages = totalPages
+                Page = pageOptions.Page,
+                Total = totalPages
             };
             return new OkObjectResult(page);
         }

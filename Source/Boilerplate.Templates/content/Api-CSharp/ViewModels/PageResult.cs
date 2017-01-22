@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class Page<T>
+    public class PageResult<T>
         where T : class
     {
-        public int PageNumber { get; set; }
+        public int Page { get; set; }
 
         public int Count { get; set; }
 
-        public int TotalPages { get; set; }
+        public int Total { get; set; }
 
         public IEnumerable<T> Items { get; set; }
     }

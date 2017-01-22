@@ -1,9 +1,10 @@
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "MVC", "Boilerplate" ],
   "name": "ASP.NET Core 1.1 MVC 6 Boilerplate Web Application",
-  "identity": "Boilerplate.AspNetCore.CSharp",
-  "shortName": "web",
+  "identity": "Boilerplate.AspNetCore.Web.CSharp",
+  "shortName": "bmvc",
   "tags": {
     "language": "C#"
   },
