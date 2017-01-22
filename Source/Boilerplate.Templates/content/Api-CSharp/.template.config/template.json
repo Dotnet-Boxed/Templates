@@ -2,7 +2,6 @@
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "MVC", "Boilerplate", "API" ],
   "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
-  "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
   "shortName": "api",
   "tags": {
