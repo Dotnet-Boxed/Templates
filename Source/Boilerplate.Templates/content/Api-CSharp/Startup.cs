@@ -2,7 +2,6 @@
 {
     using System.IO.Compression;
     using System.Linq;
-    using System.Reflection;
     using Boilerplate.AspNetCore;
     using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Builder;
@@ -25,7 +24,6 @@
     using ApiTemplate.Settings;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
-    using Swashbuckle.Swagger.Model;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -225,22 +223,7 @@
                 .AddXmlSerializerFormatters()
 #endif
                 .Services
-#if (Swagger)
-                .AddSwaggerGen(
-                    options =>
-                    {
-                        options.DescribeAllEnumsAsStrings();
-                        options.DescribeStringEnumsInCamelCase();
-                        var assembly = typeof(Startup).GetTypeInfo().Assembly;
-                        options.SingleApiVersion(
-                            new Info()
-                            {
-                                Version = "v1",
-                                Title = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title,
-                                Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
-                            });
-                    })
-#endif
+                .AddSwagger()
                 .AddCommands()
                 .AddRepositories()
                 .AddTranslators();
