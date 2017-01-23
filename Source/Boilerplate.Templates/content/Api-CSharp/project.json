@@ -19,7 +19,10 @@
     "Microsoft.AspNetCore.Cors": "1.1.0",
     //#endif
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    //#if (CORS)
+    "Microsoft.AspNetCore.Mvc.Cors": "1.1.0",
+    //#endif
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
     //#if (DataContractSerializer || XmlSerializer)
     "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
     //#endif
