@@ -223,7 +223,9 @@
                 .AddXmlSerializerFormatters()
 #endif
                 .Services
+#if (Swagger)
                 .AddSwagger()
+#endif
                 .AddCommands()
                 .AddRepositories()
                 .AddTranslators();
