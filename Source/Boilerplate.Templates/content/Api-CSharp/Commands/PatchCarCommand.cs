@@ -7,10 +7,12 @@
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
+    using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
     public class PatchCarCommand : IPatchCarCommand
     {
         private readonly IActionContextAccessor actionContextAccessor;
+        private readonly IObjectModelValidator objectModelValidator;
         private readonly ICarRepository carRepository;
         private readonly ITranslator<Models.Car, Car> carToCarTranslator;
         private readonly ITranslator<Models.Car, SaveCar> carToSaveCarTranslator;
@@ -18,12 +20,14 @@
 
         public PatchCarCommand(
             IActionContextAccessor actionContextAccessor,
+            IObjectModelValidator objectModelValidator,
             ICarRepository carRepository,
             ITranslator<Models.Car, Car> carToCarTranslator,
             ITranslator<Models.Car, SaveCar> carToSaveCarTranslator,
             ITranslator<SaveCar, Models.Car> saveCarToCarTranslator)
         {
             this.actionContextAccessor = actionContextAccessor;
+            this.objectModelValidator = objectModelValidator;
             this.carRepository = carRepository;
             this.carToCarTranslator = carToCarTranslator;
             this.carToSaveCarTranslator = carToSaveCarTranslator;
@@ -41,6 +45,11 @@
             var saveCar = this.carToSaveCarTranslator.Translate(car);
             var modelState = this.actionContextAccessor.ActionContext.ModelState;
             patch.ApplyTo(saveCar, modelState);
+            this.objectModelValidator.Validate(
+                this.actionContextAccessor.ActionContext,
+                validationState: null,
+                prefix: null,
+                model: saveCar);
             if (!modelState.IsValid)
             {
                 return new BadRequestObjectResult(modelState);
