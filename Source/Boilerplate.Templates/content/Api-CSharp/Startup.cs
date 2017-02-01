@@ -253,13 +253,6 @@
             application
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
                 .UseNoServerHttpHeader()
-#if (ApplicationInsights)
-                // Add Azure Application Insights to the request pipeline to track HTTP request telemetry data.
-                .UseApplicationInsightsRequestTelemetry()
-                // Track data about exceptions from the application. Should be configured after all error handling
-                // middle-ware in the request pipeline.
-                .UseApplicationInsightsExceptionTelemetry()
-#endif
 #if (HttpsEverywhere)
                 // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
                 // Development. The port number to use is taken from the launchSettings.json file which Visual
@@ -285,7 +278,7 @@
             // Add MVC to the request pipeline.
 #if (Swagger)
                 .UseMvc()
-                // Add Swashbuckle to the request pipeline.
+                // Add Swagger to the request pipeline.
                 .UseSwagger()
                 .UseSwaggerUi();
 #else

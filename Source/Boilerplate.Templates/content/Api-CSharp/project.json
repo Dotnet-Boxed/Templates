@@ -9,7 +9,7 @@
   "dependencies": {
     "Boilerplate.AspNetCore": "2.0.2",
     //#if (ApplicationInsights)
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
+    "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
     //#endif
     //#if (Azure)
     "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
