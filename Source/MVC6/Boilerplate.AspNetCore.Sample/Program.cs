@@ -44,6 +44,7 @@
                         if (hostingEnvironment.IsDevelopment())
                         {
                             // Use a self-signed certificate to enable 'dotnet run' to work in development.
+                            // This will give a browser security warning which you can safely ignore.
                             options.UseHttps("DevelopmentCertificate.pfx", "password");
                         }
                         // $End-HttpsEverywhere$
