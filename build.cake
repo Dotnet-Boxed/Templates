@@ -7,13 +7,18 @@ using System.Xml.Linq;
 
 var target = Argument("Target", "Default");
 var configuration =
-    HasArgument("Configuration") ? Argument("Configuration") :
-    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") : "Release";
-var mygetApiKey = HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") : EnvironmentVariable("MyGetApiKey");
+    HasArgument("Configuration") ? Argument<string>("Configuration") :
+    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
+	"Release";
+var mygetApiKey =
+	HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
+	EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
+	null;
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : 0;
+    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
+	0;
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
