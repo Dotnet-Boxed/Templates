@@ -59,7 +59,7 @@
     "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
     "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
     "Newtonsoft.Json": "9.0.1",
-    //#if (ApplicationInsights)
+    //#if (Swagger)
     "Swashbuckle": "6.0.0-beta902"
     //#endif
   },
