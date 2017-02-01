@@ -5,8 +5,10 @@
 using System.Net.Http;
 using System.Xml.Linq;
 
-var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
+var target = Argument("Target", "Default");
+var configuration =
+    HasArgument("Configuration") ? Argument("Configuration") :
+    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") : "Release";
 var mygetApiKey = HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") : EnvironmentVariable("MyGetApiKey");
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
