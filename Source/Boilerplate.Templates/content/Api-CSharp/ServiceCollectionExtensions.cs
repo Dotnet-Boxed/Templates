@@ -1,6 +1,9 @@
 ﻿namespace ApiTemplate
 {
     using System;
+#if (Swagger)
+    using System.Reflection;
+#endif
     using Framework;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +12,9 @@
     using ApiTemplate.Settings;
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
+#if (Swagger)
+    using Swashbuckle.Swagger.Model;
+#endif
 
     public static partial class ServiceCollectionExtensions
     {
@@ -84,6 +90,27 @@
                         {
                         });
                 });
+        }
+
+#endif
+#if (Swagger)
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(
+                options =>
+                {
+                    options.DescribeAllEnumsAsStrings();
+                    options.DescribeStringEnumsInCamelCase();
+                    var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                    options.SingleApiVersion(
+                        new Info()
+                        {
+                            Version = "v1",
+                            Title = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title,
+                            Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
+                        });
+                });
+            return services;
         }
 
 #endif
