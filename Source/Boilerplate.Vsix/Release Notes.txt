@@ -3,6 +3,7 @@ MVC 6
 - Upgrade ASP.NET Core to 1.1.1.
 - Upgrade Application Insights to 2.0.0.
 - Set GZIP response compression to optimal in Startup.cs.
+- Use self-signed pfx certificate in Development environment.
 
 Version 5.0.0
 MVC 6

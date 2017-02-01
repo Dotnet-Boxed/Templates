@@ -39,6 +39,13 @@
             "nginx.conf"
           ]
         },
+        // HttpsEverywhere
+        {
+          "condition": "(!HttpsEverywhere)",
+          "exclude": [
+            "DevelopmentCertificate.pfx"
+          ]
+        },
         // StatusController
         {
           "condition": "(!StatusController)",

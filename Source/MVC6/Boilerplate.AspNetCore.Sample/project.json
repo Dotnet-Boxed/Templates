@@ -45,6 +45,9 @@
     // $End-ReverseProxyWebServer-IIS$
     // $Start-PrimaryWebServer-Kestrel$
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    // $Start-HttpsEverywhere$
+    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.1.0",
+    // $End-HttpsEverywhere$
     // $End-PrimaryWebServer-Kestrel$
     // $Start-PrimaryWebServer-WebListener$
     "Microsoft.AspNetCore.Server.WebListener": "1.1.0",

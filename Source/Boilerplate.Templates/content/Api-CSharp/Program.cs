@@ -1,6 +1,7 @@
 ﻿namespace ApiTemplate
 {
     using System.IO;
+    using System.Linq;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
 #if (WebListener)
@@ -19,15 +20,33 @@
                 .AddCommandLine(args)
                 .Build();
 
+            IHostingEnvironment hostingEnvironment = null;
             var host = new WebHostBuilder()
                 .UseConfiguration(configuration)
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureServices(
+                    services =>
+                    {
+                        hostingEnvironment = services
+                            .Where(x => x.ServiceType == typeof(IHostingEnvironment))
+                            .Select(x => (IHostingEnvironment)x.ImplementationInstance)
+                            .First();
+                    })
+                // Show error page containing information about startup exceptions when in development.
+                .CaptureStartupErrors(hostingEnvironment.IsDevelopment())
 #if (Kestrel)
                 .UseKestrel(
                     options =>
                     {
                         // Do not add the Server HTTP header when using the Kestrel Web Server.
                         options.AddServerHeader = false;
+#if (HttpsEverywhere)
+                        if (hostingEnvironment.IsDevelopment())
+                        {
+                            // Use a self-signed certificate to enable 'dotnet run' to work in development.
+                            options.UseHttps("DevelopmentCertificate.pfx", "password");
+                        }
+#endif
                     })
 #elif (WebListener)
                 .UseWebListener(
