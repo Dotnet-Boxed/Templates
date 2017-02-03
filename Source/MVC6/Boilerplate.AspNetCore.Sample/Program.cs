@@ -20,10 +20,13 @@
                 .AddCommandLine(args)
                 .Build();
 
+            // $Start-HttpsEverywhere$
             IHostingEnvironment hostingEnvironment = null;
+            // $End-HttpsEverywhere$
             var host = new WebHostBuilder()
                 .UseConfiguration(configuration)
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                // $Start-HttpsEverywhere$
                 .ConfigureServices(
                     services =>
                     {
@@ -32,8 +35,7 @@
                             .Select(x => (IHostingEnvironment)x.ImplementationInstance)
                             .First();
                     })
-                // Show error page containing information about startup exceptions when in development.
-                .CaptureStartupErrors(hostingEnvironment.IsDevelopment())
+                // $End-HttpsEverywhere$
                 // $Start-PrimaryWebServer-Kestrel$
                 .UseKestrel(
                     options =>
