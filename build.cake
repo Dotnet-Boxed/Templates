@@ -5,13 +5,20 @@
 using System.Net.Http;
 using System.Xml.Linq;
 
-var target = Argument("target", "Default");
-var configuration = Argument("configuration", "Release");
-var mygetApiKey = HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") : EnvironmentVariable("MyGetApiKey");
+var target = Argument("Target", "Default");
+var configuration =
+    HasArgument("Configuration") ? Argument<string>("Configuration") :
+    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
+	"Release";
+var mygetApiKey =
+	HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
+	EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
+	null;
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) : -1;
+    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
+	0;
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
@@ -41,7 +48,7 @@ Task("Restore")
     });
 
 Task("Update-Version")
-    .WithCriteria(() => buildNumber != -1)
+    .WithCriteria(() => buildNumber != 0)
     .IsDependentOn("Restore")
     .Does(() =>
     {
@@ -62,6 +69,18 @@ Task("Update-Version")
     .IsDependentOn("Update-Version")
     .Does(() =>
     {
+        // Build Template Projects
+        var projects = GetFiles("./**/Boilerplate.Templates/**/*.xproj");
+        foreach(var project in projects)
+        {
+            DotNetCoreBuild(
+                project.GetDirectory().FullPath,
+                new DotNetCoreBuildSettings()
+                {
+                    Configuration = configuration
+                });
+        }
+
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
         MSBuild(vsixProject, settings => settings
@@ -96,11 +115,29 @@ Task("Test")
         }
     });
 
+Task("Pack")
+    .IsDependentOn("Test")
+    .Does(() =>
+    {
+        var revision = buildNumber.ToString("D4");
+        var nuspecFile = GetFiles("./**/Templates.nuspec").First().ToString();
+        var content = System.IO.File.ReadAllText(nuspecFile);
+        var newContent = content.Replace("-*", "-" + revision);
+        System.IO.File.WriteAllText(nuspecFile, newContent);
+        NuGetPack(
+            nuspecFile,
+            new NuGetPackSettings()
+            {
+                OutputDirectory = artifactsDirectory
+            });
+        System.IO.File.WriteAllText(nuspecFile, content);
+    });
+
 Task("Publish-MyGet")
     .WithCriteria(() =>
         !string.IsNullOrEmpty(mygetApiKey) &&
         (!AppVeyor.IsRunningOnAppVeyor || AppVeyor.Environment.Repository.Branch == "master"))
-    .IsDependentOn("Test")
+    .IsDependentOn("Pack")
     .Does(() =>
     {
         var vsixFilePath = GetFiles(artifactsDirectory.Path + "/*.vsix").First();

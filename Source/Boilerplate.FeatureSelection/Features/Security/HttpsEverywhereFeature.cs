@@ -63,6 +63,7 @@
 
         protected override async Task RemoveFeature()
         {
+            this.ProjectService.DeleteFile("DevelopmentCertificate.pfx");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, @"Properties\launchSettings.json");
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.UncommentCode, @"Properties\launchSettings.json");
             await this.ProjectService.EditCommentInFile(this.Id + "-On", EditCommentMode.DeleteCode, "Startup.cs");

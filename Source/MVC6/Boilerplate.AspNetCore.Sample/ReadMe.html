@@ -226,7 +226,7 @@
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
-                        Some resources are generated programmatically and then cached for a certain time period.
+                        Some resources are generated programatically and then cached for a certain time period.
                         If these resources won't change much on your site, change the length of time they are cached. Open the <em>config.json</em> file and take a look at the cache profiles section.
                     </li>
                     <li class="list-group-item">
@@ -334,7 +334,8 @@
                         <input name="Authentication-Provider" type="checkbox"> <strong>Choose Authentication Provider</strong> -
                         If you want no authentication, then you don't need to do anything. <strong>Do not</strong> build your own authentication provider unless you are a security expert, it is much harder than it looks and even professionals get it wrong. Choose from one of the options below:
                         <ol>
-                            <li>ASP.NET Identity - This is basically forms authentication with Open Auth. it is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial. Don't forget to add the <code>NoLowercaseQueryStringAttribute</code> to the <code>AccountController</code> to enable the <code>RedirectToCanonicalUrlAttribute</code> to work (See comments on these classes for more information about what they do).</li>
+                            <li>IdentityServer4 - This is another site that handles all authentication with OAuth and Open ID Connect.</li>
+                            <li>ASP.NET Identity - This is basically forms authentication with OAuth and Open ID Connect. This is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial. Don't forget to add the <code>NoLowercaseQueryStringAttribute</code> to the <code>AccountController</code> to enable the <code>RedirectToCanonicalUrlAttribute</code> to work (See comments on these classes for more information about what they do).</li>
                             <li>Windows Authentication - Follow <a href="http://www.asp.net/aspnet/overview/owin-and-katana/enabling-windows-authentication-in-katana">this</a> tutorial.</li>
                         </ol>
                     </li>
