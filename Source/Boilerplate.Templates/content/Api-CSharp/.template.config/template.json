@@ -1,0 +1,223 @@
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
+{
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
+  "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
+  "groupIdentity": "Boilerplate",
+  "identity": "Boilerplate.AspNetCore.Api.CSharp",
+  "shortName": "bapi",
+  "tags": {
+    "language": "C#"
+  },
+  "sourceName": "ApiTemplate",
+  "preferNameDirectory": true,
+  "guids": [
+    "837bc53e-0271-4e9c-b5b5-c60ea7a7c7b5",
+    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        // TargetFramework
+        {
+          "condition": "(!NETFramework)",
+          "exclude": [
+            "app.config"
+          ]
+        },
+        // ReverseProxyWebServer
+        {
+          "condition": "(!IIS)",
+          "exclude": [
+            "web.config"
+          ]
+        },
+        {
+          "condition": "(!NGINX)",
+          "exclude": [
+            "mime.types",
+            "nginx.conf"
+          ]
+        },
+        // HttpsEverywhere
+        {
+          "condition": "(!HttpsEverywhere)",
+          "exclude": [
+            "DevelopmentCertificate.pfx"
+          ]
+        },
+        // StatusController
+        {
+          "condition": "(!StatusController)",
+          "exclude": [
+            "Constants/StatusControllerRoute.cs",
+            "Controllers/StatusController.cs"
+          ]
+        },
+        // CORS
+        {
+          "condition": "(!CORS)",
+          "exclude": [
+            "Constants/CorsPolicyName.cs",
+            "Controllers/StatusController.cs"
+          ]
+        },
+        // HumansTxt
+        {
+          "condition": "(!HumansTxt)",
+          "exclude": [
+            "wwwroot/humans.txt"
+          ]
+        },
+        // RobotsTxt
+        {
+          "condition": "(!RobotsTxt)",
+          "exclude": [
+            "wwwroot/robots.txt"
+          ]
+        },
+        // Swagger
+        {
+          "condition": "(!Swagger)",
+          "exclude": [
+            "Constants/HomeControllerRoute.cs",
+            "Controllers/HomeController.cs",
+            "ViewModelSchemaFilters"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    // TargetFramework
+    "TargetFramework": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ ".NET Core", ".NET Framework", "Both" ],
+      "defaultValue": "Both",
+      "description": "Decide which version of the .NET Framework to target.\r\n- .NET Core - Run cross platform (on Mac and Linux). The framework is made up of NuGet packages which can be shipped with the application so it is fully stand-alone.\r\n- .NET Framework - Gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed.\r\n - Both - Target both .NET Core and .NET Framework."
+    },
+    "NETCore": {
+      "type": "computed",
+      "value": "(TargetFramework == \".NET Core\" || TargetFramework == \"Both\")"
+    },
+    "NETFramework": {
+      "type": "computed",
+      "value": "(TargetFramework == \".NET Framework\" || TargetFramework == \"Both\")"
+    },
+    // PrimaryWebServer
+    "PrimaryWebServer": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Kestrel", "WebListener" ],
+      "defaultValue": "Kestrel",
+      "description": "The primary web server you want to use to host the site.\r\n- Kestrel - A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or Nginx should be placed in front as reverse proxy web servers.\r\n- WebListener - A Windows only web server. It gives you the option to take advantage of Windows specific features, like Windows authentication, port sharing, HTTPS with SNI, HTTP/2 over TLS (Windows 10), direct file transmission, and response caching WebSockets (Windows 8)."
+    },
+    "Kestrel": {
+      "type": "computed",
+      "value": "(PrimaryWebServer == \"Kestrel\")"
+    },
+    "WebListener": {
+      "type": "computed",
+      "value": "(PrimaryWebServer == \"WebListener\")"
+    },
+    // ReverseProxyWebServer
+    "ReverseProxyWebServer": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "IIS", "NGINX", "Both" ],
+      "defaultValue": "Both",
+      "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.\r\n- Internet Information Services (IIS) - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.\r\n- Nginx - A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform.\r\n- Both - Support both reverse proxy web servers."
+    },
+    "IIS": {
+      "type": "computed",
+      "value": "(ReverseProxyWebServer == \"IIS\" || ReverseProxyWebServer == \"Both\")"
+    },
+    "NGINX": {
+      "type": "computed",
+      "value": "(ReverseProxyWebServer == \"NGINX\" || ReverseProxyWebServer == \"Both\")"
+    },
+    // CloudProvider
+    "CloudProvider": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Azure", "None" ],
+      "defaultValue": "None",
+      "description": "Select which cloud provider you are using if any, to add cloud specific features.\r\n- Azure - The Microsoft Azure cloud. Adds logging features that let you see logs in the Azure portal.\r\n- None - No cloud provider is being used."
+    },
+    "Azure": {
+      "type": "computed",
+      "value": "(CloudProvider == \"Azure\")"
+    },
+    // Analytics
+    "Analytics": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "Application Insights", "None" ],
+      "defaultValue": "None",
+      "description": "Monitor internal information about how your application is running, as well as external user information.\r\n- Application Insights - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
+    },
+    "ApplicationInsights": {
+      "type": "computed",
+      "value": "(Analytics == \"Application Insights\")"
+    },
+    // XmlFormatter
+    "XmlFormatter": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [ "DataContractSerializer", "XmlSerializer", "None" ],
+      "defaultValue": "None",
+      "description": "Choose whether to use the XML input/output formatter and which serializer to use."
+    },
+    "DataContractSerializer": {
+      "type": "computed",
+      "value": "(XmlFormatter == \"DataContractSerializer\")"
+    },
+    "XmlSerializer": {
+      "type": "computed",
+      "value": "(XmlFormatter == \"XmlSerializer\")"
+    },
+    // StatusController
+    "StatusController": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by load balancers which can remove an instance of this API if it is not functioning correctly."
+    },
+    // HttpsEverywhere
+    "HttpsEverywhere": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS, adds Strict Transport Security (HSTS) and Public Key Pinning (HPKP) HTTP headers."
+    },
+    // CORS
+    "CORS": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
+    },
+    // HumansTxt
+    "HumansTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
+    },
+    // RobotsTxt
+    "RobotsTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a robots.txt file to tell search engines not to index this site."
+    },
+    // Swagger
+    "Swagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
+    }
+  }
+}

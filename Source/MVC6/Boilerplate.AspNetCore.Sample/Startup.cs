@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System.IO.Compression;
     using System.Linq;
     using Boilerplate.AspNetCore;
     // $Start-RedirectToCanonicalUrl$
@@ -177,6 +178,8 @@
                             .MimeTypes
                             .Concat(responseCompressionSettings.MimeTypes);
                     })
+                .Configure<GzipCompressionProviderOptions>(
+                    options => options.Level = CompressionLevel.Optimal)
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
@@ -245,13 +248,6 @@
             application
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
                 .UseNoServerHttpHeader()
-                // $Start-ApplicationInsights$
-                // Add Azure Application Insights to the request pipeline to track HTTP request telemetry data.
-                .UseApplicationInsightsRequestTelemetry()
-                // Track data about exceptions from the application. Should be configured after all error handling
-                // middleware in the request pipeline.
-                .UseApplicationInsightsExceptionTelemetry()
-                // $End-ApplicationInsights$
                 // $Start-HttpsEverywhere-On$
                 // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
                 // Development. The port number to use is taken from the launchSettings.json file which Visual

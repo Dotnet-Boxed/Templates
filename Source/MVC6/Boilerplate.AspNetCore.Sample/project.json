@@ -13,7 +13,7 @@
     // "Glimpse": "2.0.0-beta1",
     // $End-Glimpse$
     // $Start-ApplicationInsights$
-    "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
+    "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
     // $End-ApplicationInsights$
     // $Start-CloudProvider$
     "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
@@ -45,6 +45,9 @@
     // $End-ReverseProxyWebServer-IIS$
     // $Start-PrimaryWebServer-Kestrel$
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    // $Start-HttpsEverywhere$
+    "Microsoft.AspNetCore.Server.Kestrel.Https": "1.1.0",
+    // $End-HttpsEverywhere$
     // $End-PrimaryWebServer-Kestrel$
     // $Start-PrimaryWebServer-WebListener$
     "Microsoft.AspNetCore.Server.WebListener": "1.1.0",
@@ -61,8 +64,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     // $Start-NWebSec$
-    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
-    "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
+    "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-45",
+    "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-45",
     // $End-NWebSec$
     "Newtonsoft.Json": "9.0.1"
   },
@@ -150,8 +153,10 @@
     ],
     // Execute the following commands after publishing the project.
     "postpublish": [
+      // $Start-ReverseProxyWebServer-IIS$
       // Runs the publish-iis tool which modifies the web.config file.
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%",
+      // $End-ReverseProxyWebServer-IIS$
       // Pre-compile razor views for faster application startup.
       "dotnet razor-precompile --configuration %publish:Configuration% --framework %publish:TargetFramework% --output-path %publish:OutputPath% %publish:ProjectPath%"
     ]
