@@ -94,6 +94,10 @@
 
 #endif
 #if (Swagger)
+        /// <summary>
+        /// Adds Swagger services and configures the Swagger services.
+        /// </summary>
+        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(
