@@ -17,18 +17,38 @@
     },
     "dotnet run": {
       "commandName": "Project",
-      "commandLineArgs": "--server.urls http://*:1025",
+      // $Start-HttpsEverywhere-Off$
+      // "commandLineArgs": "--server.urls http://*:1025",
+      // $End-HttpsEverywhere-Off$
+      // $Start-HttpsEverywhere-On$
+      "commandLineArgs": "--server.urls http://*:1025;https://*:44300",
+      // $End-HttpsEverywhere-On$
       "launchBrowser": true,
-      "launchUrl": "http://localhost:1025/",
+      // $Start-HttpsEverywhere-Off$
+      // "launchUrl": "http://localhost:1025/",
+      // $End-HttpsEverywhere-Off$
+      // $Start-HttpsEverywhere-On$
+      "launchUrl": "https://localhost:44300/",
+      // $End-HttpsEverywhere-On$
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "dotnet watch run": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "watch run --server.urls http://*:1025",
+      // $Start-HttpsEverywhere-Off$
+      // "commandLineArgs": "watch run --server.urls http://*:1025",
+      // $End-HttpsEverywhere-Off$
+      // $Start-HttpsEverywhere-On$
+      "commandLineArgs": "watch run --server.urls http://*:1025;https://*:44300",
+      // $End-HttpsEverywhere-On$
       "launchBrowser": true,
-      "launchUrl": "http://localhost:1025/",
+      // $Start-HttpsEverywhere-Off$
+      // "launchUrl": "http://localhost:1025/",
+      // $End-HttpsEverywhere-Off$
+      // $Start-HttpsEverywhere-On$
+      "launchUrl": "https://localhost:44300/",
+      // $End-HttpsEverywhere-On$
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

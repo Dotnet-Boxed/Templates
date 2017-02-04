@@ -17,18 +17,34 @@
     },
     "dotnet run": {
       "commandName": "Project",
-      "commandLineArgs": "--server.urls http://*:1025",
+      //#if (!HttpsEverywhere)
+      //"commandLineArgs": "--server.urls http://*:1025",
+      //#else
+      "commandLineArgs": "--server.urls http://*:1025;https://*:44300",
+      //#endif
       "launchBrowser": true,
-      "launchUrl": "http://localhost:1025/",
+      //#if (!HttpsEverywhere)
+      //"launchUrl": "http://localhost:1025/",
+      //#else
+      "launchUrl": "https://localhost:44300/",
+      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "dotnet watch run": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      "commandLineArgs": "watch run --server.urls http://*:1025",
+      //#if (!HttpsEverywhere)
+      //"commandLineArgs": "watch run --server.urls http://*:1025",
+      //#else
+      "commandLineArgs": "watch run --server.urls http://*:1025;https://*:44300",
+      //#endif
       "launchBrowser": true,
-      "launchUrl": "http://localhost:1025/",
+      ////#if (!HttpsEverywhere)
+      // "launchUrl": "http://localhost:1025/",
+      //#else
+      "launchUrl": "https://localhost:44300/",
+      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
