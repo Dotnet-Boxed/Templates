@@ -7,7 +7,7 @@
   "userSecretsId": "ApiTemplate-113f2d04-69f0-40c3-8797-ba3f356dd812",
 
   "dependencies": {
-    "Boilerplate.AspNetCore": "2.0.2",
+    "Boilerplate.AspNetCore": "2.1.0",
     //#if (ApplicationInsights)
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.2",
     //#endif
