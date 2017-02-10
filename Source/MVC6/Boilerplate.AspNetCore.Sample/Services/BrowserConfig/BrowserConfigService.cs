@@ -2,6 +2,7 @@
 {
     using System.Text;
     using System.Xml.Linq;
+    using Boilerplate;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Mvc;
     using MvcBoilerplate.Constants;

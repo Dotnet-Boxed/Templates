@@ -7,7 +7,7 @@
   "userSecretsId": "ApiTemplate-113f2d04-69f0-40c3-8797-ba3f356dd812",
 
   "dependencies": {
-    "Boilerplate.AspNetCore": "2.0.2",
+    "Boilerplate.AspNetCore": "2.1.0",
     //#if (ApplicationInsights)
     "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
     //#endif
@@ -19,7 +19,10 @@
     "Microsoft.AspNetCore.Cors": "1.1.0",
     //#endif
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    //#if (CORS)
+    "Microsoft.AspNetCore.Mvc.Cors": "1.1.0",
+    //#endif
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
     //#if (DataContractSerializer || XmlSerializer)
     "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
     //#endif
