@@ -4,6 +4,7 @@ MVC 6
 - Upgrade Application Insights to 2.0.0.
 - Set GZIP response compression to optimal in Startup.cs.
 - Use self-signed pfx certificate in Development environment.
+- Upgrade jquery-validation to 1.16.0 and use Subresource Integrity (SRI) for it.
 
 Version 5.0.0
 MVC 6
