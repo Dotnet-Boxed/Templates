@@ -73,7 +73,7 @@
   "frameworks": {
     // $Start-TargetFramework-NetCore$
     // Target the .NET Core framework.
-    "netcoreapp1.1": {
+    "netcoreapp1.0": {
       "dependencies": {
         "Microsoft.NETCore.App": {
           "version": "1.1.0",
