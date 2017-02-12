@@ -22,7 +22,7 @@
     //#if (CORS)
     "Microsoft.AspNetCore.Mvc.Cors": "1.1.0",
     //#endif
-    "Microsoft.AspNetCore.Mvc.Core": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Core": "1.1.1",
     //#if (DataContractSerializer || XmlSerializer)
     "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
     //#endif
