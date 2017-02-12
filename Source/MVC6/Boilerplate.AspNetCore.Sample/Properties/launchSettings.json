@@ -11,6 +11,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      // $Start-HttpsEverywhere-Off$
+      // "launchUrl": "http://localhost:1025/",
+      // $End-HttpsEverywhere-Off$
+      // $Start-HttpsEverywhere-On$
+      "launchUrl": "https://localhost:44300/",
+      // $End-HttpsEverywhere-On$
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
