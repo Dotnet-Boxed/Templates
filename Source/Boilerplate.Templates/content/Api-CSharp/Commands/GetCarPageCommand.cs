@@ -1,7 +1,7 @@
 ﻿namespace ApiTemplate.Commands
 {
     using System.Threading.Tasks;
-    using Framework;
+    using Boilerplate;
     using Microsoft.AspNetCore.Mvc;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;

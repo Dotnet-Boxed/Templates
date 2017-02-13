@@ -4,7 +4,7 @@
 #if (Swagger)
     using System.Reflection;
 #endif
-    using Framework;
+    using Boilerplate;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using ApiTemplate.Commands;
@@ -13,6 +13,7 @@
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
 #if (Swagger)
+    using Boilerplate.AspNetCore.Swagger;
     using Swashbuckle.Swagger.Model;
 #endif
 
@@ -105,6 +106,7 @@
                 {
                     options.DescribeAllEnumsAsStrings();
                     options.DescribeStringEnumsInCamelCase();
+
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
                     options.SingleApiVersion(
                         new Info()

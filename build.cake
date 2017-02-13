@@ -14,6 +14,11 @@ var mygetApiKey =
 	HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
 	EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
 	null;
+var preReleaseSuffix =
+    HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
+	(AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+    EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
+	"beta";
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
@@ -119,11 +124,17 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
-        var revision = buildNumber.ToString("D4");
+        string versionSuffix = null;
+		if (!string.IsNullOrEmpty(preReleaseSuffix))
+		{
+			versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
+		}
+
         var nuspecFile = GetFiles("./**/Templates.nuspec").First().ToString();
         var content = System.IO.File.ReadAllText(nuspecFile);
-        var newContent = content.Replace("-*", "-" + revision);
+        var newContent = content.Replace("-*", "-" + versionSuffix);
         System.IO.File.WriteAllText(nuspecFile, newContent);
+
         NuGetPack(
             nuspecFile,
             new NuGetPackSettings()

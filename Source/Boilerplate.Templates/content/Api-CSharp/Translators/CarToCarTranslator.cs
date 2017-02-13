@@ -1,6 +1,6 @@
 ﻿namespace ApiTemplate.Translators
 {
-    using Framework;
+    using Boilerplate;
     using ApiTemplate.ViewModels;
 
     public class CarToCarTranslator : ITranslator<Models.Car, Car>, ITranslator<Car, Models.Car>

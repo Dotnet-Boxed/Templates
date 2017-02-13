@@ -1,7 +1,7 @@
 ﻿namespace ApiTemplate.Commands
 {
     using System.Threading.Tasks;
-    using Framework;
+    using Boilerplate;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
