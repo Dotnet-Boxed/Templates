@@ -7,7 +7,7 @@
   "userSecretsId": "MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882",
 
   "dependencies": {
-    "Boilerplate.AspNetCore": "2.1.0",
+    "Boilerplate.AspNetCore": "2.2.0",
     "Boilerplate.AspNetCore.TagHelpers": "2.3.0",
     // $Start-Glimpse$
     // "Glimpse": "2.0.0-beta1",
@@ -23,9 +23,9 @@
     "Microsoft.AspNetCore.Cors": "1.1.0",
     // $End-CORS$
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "Microsoft.AspNetCore.Mvc": "1.1.0",
+    "Microsoft.AspNetCore.Mvc": "1.1.1",
     // $Start-XmlFormatter$
-    "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Formatters.Xml": "1.1.1",
     // $End-XmlFormatter$
     "Microsoft.AspNetCore.Razor.Tools": {
       "type": "build",

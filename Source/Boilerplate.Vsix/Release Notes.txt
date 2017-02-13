@@ -1,4 +1,8 @@
-﻿Version 5.1.0
+﻿Version 5.1.1
+MVC 6
+- Update NuGet packages.
+
+Version 5.1.0
 MVC 6
 - Upgrade ASP.NET Core to 1.1.1.
 - Upgrade Application Insights to 2.0.0.
