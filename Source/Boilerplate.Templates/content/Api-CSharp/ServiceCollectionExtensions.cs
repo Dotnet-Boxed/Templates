@@ -104,9 +104,6 @@
             services.AddSwaggerGen(
                 options =>
                 {
-                    options.DescribeAllEnumsAsStrings();
-                    options.DescribeStringEnumsInCamelCase();
-
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
                     options.SingleApiVersion(
                         new Info()
