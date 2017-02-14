@@ -36,7 +36,7 @@ Both ASP.NET 4.6 MVC 5 and ASP.NET Core MVC 6 are supported with their own proje
 
 The ASP.NET Core MVC 6 project template contains the following features:
 
-![ASP.NET-MVC-6-Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%206%20Technology%20Map.png)
+![ASP.NET-MVC-6-Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20Technology%20Map.png)
 
 #### Feature Selection Wizard
 
