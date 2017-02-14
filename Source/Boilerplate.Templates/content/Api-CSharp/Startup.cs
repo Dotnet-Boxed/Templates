@@ -2,6 +2,10 @@
 {
     using System.IO.Compression;
     using System.Linq;
+#if (CORS)
+    using ApiTemplate.Constants;
+#endif
+    using ApiTemplate.Settings;
     using Boilerplate.AspNetCore;
     using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Builder;
@@ -18,10 +22,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-#if (CORS)
-    using ApiTemplate.Constants;
-#endif
-    using ApiTemplate.Settings;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 

@@ -114,9 +114,6 @@
     },
     // Use the new portable .pdb file format.
     "debugType": "portable",
-    // Require the application to use a static Main method.
-    "emitEntryPoint": true,
-    "preserveCompilationContext": true,
     "define": [
       "NETCore",
       "NETFramework",
@@ -130,8 +127,21 @@
       "CORS",
       "HumansTxt",
       "RobotsTxt",
-      "Swagger"
-    ]
+      "Swagger",
+      "RequestId",
+      "UserAgent"
+    ],
+    // Require the application to use a static Main method.
+    "emitEntryPoint": true,
+    //#if (Swagger)
+    "nowarn": [
+      // Disable warning which requires comments for all public classes and methods. This happens because xmlDoc is on.
+      "CS1591"
+    ],
+    // Enable the generation of a comment XML file for this assembly used by Swagger.
+    "xmlDoc": true,
+    //#endif
+    "preserveCompilationContext": true
   },
 
   "runtimeOptions": {

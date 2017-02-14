@@ -1,7 +1,7 @@
 ﻿namespace ApiTemplate.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
     using ApiTemplate.Constants;
+    using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : ControllerBase
     {

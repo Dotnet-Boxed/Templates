@@ -4,25 +4,32 @@
 #if (Swagger)
     using System.Reflection;
 #endif
-    using Boilerplate;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
     using ApiTemplate.Commands;
     using ApiTemplate.Repositories;
     using ApiTemplate.Settings;
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
+    using Boilerplate;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
+    using Boilerplate.AspNetCore.Swagger.OperationFilters;
+    using Boilerplate.AspNetCore.Swagger.SchemaFilters;
+#endif
+    using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Caching.Memory;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
+#if (Swagger)
     using Swashbuckle.Swagger.Model;
 #endif
 
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Configures caching for the application. Registers the <see cref="IDistrbutedCache"/> and
+        /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
         /// <see cref="IMemoryCache"/> types with the services collection or IoC container. The
-        /// <see cref="IDistrbutedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
+        /// <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
         /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
         /// otherwise.
         /// </summary>
@@ -56,7 +63,7 @@
 
         /// <summary>
         /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR
-        /// Objects (POCO) and adding <see cref="IOptions{}"/> objects to the services collection.
+        /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
@@ -108,6 +115,23 @@
                     options.DescribeStringEnumsInCamelCase();
 
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
+
+                    // Add the XML comment file for this assembly, so it's contents can be displayed.
+                    options.IncludeXmlCommentsIfExists(assembly);
+
+#if (RequestId)
+                    // Show a text-box to edit the X-Request-ID HTTP header.
+                    options.OperationFilter<RequestIdOperationFilter>();
+#endif
+#if (UserAgent)
+                    // Show a text-box to edit the User-Agent HTTP header.
+                    options.OperationFilter<UserAgentOperationFilter>();
+#endif
+                    // Show an example model for JsonPatchDocument<T>.
+                    options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
+                    // Show an example model for ModelStateDictionary.
+                    options.SchemaFilter<ModelStateDictionarySchemaFilter>();
+
                     options.SingleApiVersion(
                         new Info()
                         {
@@ -120,10 +144,10 @@
         }
 
 #endif
-        /// <summary>
-        /// Adds project commands.
-        /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
+                /// <summary>
+                /// Adds project commands.
+                /// </summary>
+                /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
             return services
