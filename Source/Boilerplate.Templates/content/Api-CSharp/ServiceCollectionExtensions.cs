@@ -111,9 +111,6 @@
             services.AddSwaggerGen(
                 options =>
                 {
-                    options.DescribeAllEnumsAsStrings();
-                    options.DescribeStringEnumsInCamelCase();
-
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
 
                     // Add the XML comment file for this assembly, so it's contents can be displayed.

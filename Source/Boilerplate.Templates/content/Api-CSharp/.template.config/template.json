@@ -218,6 +218,20 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
+    },
+    // RequestId
+    "RequestId": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Require that all requests send the X-Request-ID HTTP header containing a GUID. This is useful where you have access to the client and server logs and want to correlate a request and response between the two."
+    },
+    // UserAgent
+    "UserAgent": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Require that all requests send the User-Agent HTTP header containing the application name and version of the caller."
     }
   }
 }
