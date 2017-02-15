@@ -8,7 +8,7 @@
         [HttpGet("", Name = HomeControllerRoute.GetIndex)]
         public IActionResult Index()
         {
-            return this.RedirectPermanent("/swagger/ui");
+            return this.RedirectPermanent("/swagger");
         }
     }
 }
