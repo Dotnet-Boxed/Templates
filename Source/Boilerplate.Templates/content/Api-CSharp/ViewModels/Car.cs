@@ -2,7 +2,7 @@
 {
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.SwaggerGen.Annotations;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     [SwaggerSchemaFilter(typeof(CarSchemaFilter))]
 #endif

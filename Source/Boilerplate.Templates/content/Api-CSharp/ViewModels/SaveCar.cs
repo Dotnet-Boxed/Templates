@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.SwaggerGen.Annotations;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 #endif
 
 #if (Swagger)

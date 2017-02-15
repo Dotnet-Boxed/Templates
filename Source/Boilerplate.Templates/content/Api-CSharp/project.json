@@ -7,7 +7,10 @@
   "userSecretsId": "ApiTemplate-113f2d04-69f0-40c3-8797-ba3f356dd812",
 
   "dependencies": {
-    "Boilerplate.AspNetCore.Swagger": "1.0.1",
+    "Boilerplate.AspNetCore": "2.2.1",
+    //#if (Swagger)
+    "Boilerplate.AspNetCore.Swagger": "2.0.0",
+    //#endif
     //#if (ApplicationInsights)
     "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
     //#endif
@@ -64,10 +67,7 @@
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
     "NWebsec.AspNetCore.Middleware": "1.0.0-gamma1-15",
     "NWebsec.AspNetCore.Mvc": "1.0.0-gamma1-15",
-    "Newtonsoft.Json": "9.0.1",
-    //#if (Swagger)
-    "Swashbuckle": "6.0.0-beta902"
-    //#endif
+    "Newtonsoft.Json": "9.0.1"
   },
 
   "frameworks": {

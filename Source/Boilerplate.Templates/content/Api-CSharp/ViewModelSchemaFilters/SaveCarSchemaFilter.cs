@@ -1,8 +1,8 @@
 ﻿namespace ApiTemplate.ViewModelSchemaFilters
 {
     using ApiTemplate.ViewModels;
-    using Swashbuckle.Swagger.Model;
-    using Swashbuckle.SwaggerGen.Generator;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
     public class SaveCarSchemaFilter : ISchemaFilter
     {

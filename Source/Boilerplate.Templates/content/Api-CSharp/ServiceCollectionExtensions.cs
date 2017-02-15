@@ -21,7 +21,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
 #if (Swagger)
-    using Swashbuckle.Swagger.Model;
+    using Swashbuckle.AspNetCore.Swagger;
 #endif
 
     public static partial class ServiceCollectionExtensions
@@ -129,7 +129,8 @@
                     // Show an example model for ModelStateDictionary.
                     options.SchemaFilter<ModelStateDictionarySchemaFilter>();
 
-                    options.SingleApiVersion(
+                    options.SwaggerDoc(
+                        "v1",
                         new Info()
                         {
                             Version = "v1",
