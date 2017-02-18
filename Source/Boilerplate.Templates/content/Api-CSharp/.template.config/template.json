@@ -89,26 +89,29 @@
     }
   ],
   "symbols": {
+    // Title
     "Title": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "Project Title",
       "replaces": "PROJECT-TITLE",
-      "description": "The name of the project"
+      "description": "The name of the project."
     },
+    // Description
     "Description": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "Project Description",
       "replaces": "PROJECT-DESCRIPTION",
-      "description": "A description of the project"
+      "description": "A description of the project."
     },
+    // Author
     "Author": {
       "type": "parameter",
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project"
+      "description": "The name of the author of the project."
     },
     // TargetFramework
     "TargetFramework": {
