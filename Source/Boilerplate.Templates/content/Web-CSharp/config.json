@@ -10,7 +10,7 @@
     // The CDN URL to the Application Insights JavaScript file.
     "CdnUrl": "https://az416426.vo.msecnd.net/scripts/a/ai.0.js",
     // The instrumentation key for Application Insights retrieved from Azure e.g. 11111111-2222-3333-4444-555555555555
-    "InstrumentationKey": "YOUR APPLICATION INSIGHTS INSTRUMENTATION KEY"
+    "InstrumentationKey": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY"
   },
   // $End-ApplicationInsights$
   "Logging": {
