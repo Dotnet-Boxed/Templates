@@ -1,5 +1,9 @@
 {
   "version": "1.0.0-*",
+  "title": "PROJECT-TITLE",
+  "description": "PROJECT-DESCRIPTION",
+  "copyright": "Copyright © PROJECT-AUTHOR. All rights Reserved",
+  "authors": [ "PROJECT-AUTHOR" ],
 
   // Used to store connection strings and other sensitive settings, so you don't have to check them into your source
   // control provider. Only use this in Development, it is not intended for Production use. See

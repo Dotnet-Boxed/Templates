@@ -89,6 +89,27 @@
     }
   ],
   "symbols": {
+    "Title": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Title",
+      "replaces": "PROJECT-TITLE",
+      "description": "The name of the project"
+    },
+    "Description": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Description",
+      "replaces": "PROJECT-DESCRIPTION",
+      "description": "A description of the project"
+    },
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Author",
+      "replaces": "PROJECT-AUTHOR",
+      "description": "The name of the author of the project"
+    },
     // TargetFramework
     "TargetFramework": {
       "type": "parameter",
@@ -214,6 +235,7 @@
       "type": "computed",
       "value": "(Analytics == \"Application Insights\")"
     },
+    // ApplicationInsightsInstrumentationKey
     "ApplicationInsightsInstrumentationKey": {
       "type": "parameter",
       "datatype": "string",

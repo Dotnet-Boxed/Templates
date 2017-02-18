@@ -134,7 +134,7 @@
                         new Info()
                         {
                             Version = "v1",
-                            Title = assembly.GetCustomAttribute<AssemblyTitleAttribute>().Title,
+                            Title = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product,
                             Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
                         });
                 });

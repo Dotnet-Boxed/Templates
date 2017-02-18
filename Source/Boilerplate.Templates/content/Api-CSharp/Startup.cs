@@ -280,7 +280,11 @@
                 .UseMvc()
                 // Add Swagger to the request pipeline.
                 .UseSwagger()
-                .UseSwaggerUi();
+                .UseSwaggerUi(
+                    options =>
+                    {
+                        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
+                    });
 #else
                 .UseMvc();
 #endif

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ApiTemplate")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("PROJECT-DESCRIPTION")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ApiTemplate")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyProduct("PROJECT-TITLE")]
+[assembly: AssemblyCopyright("Copyright © PROJECT-AUTHOR. All rights Reserved")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,4 +19,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("837bc53e-0271-4e9c-b5b5-c60ea7a7c7b5")]
+[assembly: Guid("8bfa391e-e1e5-43d6-b4f7-929843aec329")]
