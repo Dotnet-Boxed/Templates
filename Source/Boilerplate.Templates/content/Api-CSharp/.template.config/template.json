@@ -125,7 +125,7 @@
       "choices": [
         {
           "choice": "Kestrel",
-          "description": "A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or Nginx should be placed in front as reverse proxy web servers."
+          "description": "A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or NGINX should be placed in front as reverse proxy web servers."
         },
         {
           "choice": "WebListener",
@@ -218,7 +218,7 @@
     "XmlFormatter": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ 
+      "choices": [
         {
           "choice": "DataContractSerializer",
           "description": "The default XML serializer you should use. Requires the use of [DataContract] and [DataMember] attributes."
