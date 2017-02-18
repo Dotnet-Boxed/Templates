@@ -36,14 +36,49 @@ Both ASP.NET 4.6 MVC 5 and ASP.NET Core MVC 6 are supported with their own proje
 
 The ASP.NET Core MVC 6 project template contains the following features:
 
-![ASP.NET-MVC-6-Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20Technology%20Map.png)
+![ASP.NET MVC 6 Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20Technology%20Map.png)
 
 #### Feature Selection Wizard
 
 The ASP.NET Core MVC 6 project template comes with a feature selection wizard where literally everything can be turned on
 or off with the click of a button for a truly personalized project.
 
-![ASP.NET-MVC-6-Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png)
+![ASP.NET MVC 6 Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/ASP.NET%20MVC%20Boilerplate%20Feature%20Selection%20Wizard%201.png)
+
+
+
+
+
+
+
+
+
+
+### [ASP.NET Core MVC 6 API](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206%20API.md)
+
+#### Preview Image
+
+![ASP.NET MVC 6 API Boilerplate Preview Image](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%206%20API%20Preview%20Image.png)
+
+#### Technology Map
+
+The ASP.NET Core MVC 6 API project template contains the following features:
+
+![ASP.NET MVC 6 API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
+
+#### Dotnet New
+
+This template is not available from Visual Studio (yet!) but from the new `dotnet new` command line tool. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
+
+
+
+
+
+
+
+
+
+
 
 ### [ASP.NET 4.6 MVC 5](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%205.md)
 

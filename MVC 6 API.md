@@ -10,7 +10,7 @@ The ASP.NET Core MVC 6 API project template contains the following features:
 
 ## Feature Selection
 
-The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project.
+The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
 - **Title** - The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI.
 - **Description** - A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI.
@@ -66,8 +66,9 @@ The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to t
 That's easy, just choose one of the following options:
 
 1. You must have the latest version of the dotnet tooling. This comes with Visual Studio 2017 or from [dot.net](https://dot.net).
-2. Run `dotnet install Boilerplate.Templates::*` to install the project template.
-3. Run `dotnet new bapi --help` to see how to customize the project.
+2. Run `dotnet new --install Boilerplate.Templates::*` to install the project template.
+3. Run `dotnet new bapi --help` to see how to select the feature of the project.
+4. Run `dotnew new bapi --name 'MyTemplate'` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/Source/Boilerplate.Vsix/Release%20Notes.txt) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
