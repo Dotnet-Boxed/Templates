@@ -1,7 +1,12 @@
 ﻿namespace ApiTemplate.ViewModels
 {
     using System.Collections.Generic;
+#if (Swagger)
+    using ApiTemplate.ViewModelSchemaFilters;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
+    [SwaggerSchemaFilter(typeof(PageResultCarSchemaFilter))]
+#endif
     public class PageResult<T>
         where T : class
     {

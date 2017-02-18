@@ -22,7 +22,7 @@
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions)
         {
             var cars = await this.carRepository.GetPage(pageOptions.Page, pageOptions.Count);
-            if (cars.Count == 0)
+            if (cars == null)
             {
                 return new NotFoundResult();
             }

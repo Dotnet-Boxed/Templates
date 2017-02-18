@@ -7,11 +7,11 @@
 
     public class CarRepository : ICarRepository
     {
-        private readonly List<Car> cars;
+        private static readonly List<Car> cars;
 
-        public CarRepository()
+        static CarRepository()
         {
-            this.cars = new List<Car>()
+            cars = new List<Car>()
             {
                 new Car()
                 {
@@ -60,15 +60,16 @@
 
         public Task<Car> Add(Car car)
         {
-            this.cars.Add(car);
+            cars.Add(car);
+            car.CarId = cars.Max(x => x.CarId) + 1;
             return Task.FromResult(car);
         }
 
         public Task Delete(Car car)
         {
-            if (this.cars.Contains(car))
+            if (cars.Contains(car))
             {
-                this.cars.Remove(car);
+                cars.Remove(car);
             }
 
             return Task.FromResult(0);
@@ -76,19 +77,19 @@
 
         public Task<Car> Get(int carId)
         {
-            var car = this.cars.FirstOrDefault(x => x.CarId == carId);
+            var car = cars.FirstOrDefault(x => x.CarId == carId);
             return Task.FromResult(car);
         }
 
         public Task<ICollection<Car>> GetPage(int page, int count)
         {
-            var cars = this.cars
+            var pageCars = cars
                 .Skip(count * (page - 1))
                 .Take(count)
                 .ToList();
-            if (cars.Count == 0)
+            if (pageCars.Count == 0)
             {
-                cars = null;
+                pageCars = null;
             }
 
             return Task.FromResult((ICollection<Car>)cars);
@@ -96,13 +97,15 @@
 
         public Task<int> GetTotalPages(int page, int count)
         {
-            return Task.FromResult(this.cars.Count == 0 ? 1 : ((this.cars.Count - 1) / count) + 1);
+            return Task.FromResult(cars.Count == 0 ? 1 : ((cars.Count - 1) / count) + 1);
         }
 
         public Task<Car> Update(Car car)
         {
-            this.Delete(car);
-            this.Add(car);
+            var existingCar = cars.FirstOrDefault(x => x.CarId == car.CarId);
+            existingCar.Cylinders = car.Cylinders;
+            existingCar.Make = car.Make;
+            existingCar.Model = car.Model;
             return Task.FromResult(car);
         }
     }

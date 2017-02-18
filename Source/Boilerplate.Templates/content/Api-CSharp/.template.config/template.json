@@ -2,7 +2,7 @@
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
-  "name": "ASP.NET Core 1.1 MVC 6 Boilerplate API",
+  "name": "ASP.NET Core 1.1.1 MVC 6 Boilerplate API",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
   "shortName": "bapi",
@@ -213,6 +213,12 @@
     "ApplicationInsights": {
       "type": "computed",
       "value": "(Analytics == \"Application Insights\")"
+    },
+    "ApplicationInsightsInstrumentationKey": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
+      "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
     // XmlFormatter
     "XmlFormatter": {

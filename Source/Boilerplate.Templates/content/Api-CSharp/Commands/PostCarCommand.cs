@@ -30,7 +30,7 @@
             var carViewModel = this.carToCarTranslator.Translate(car);
 
             return new CreatedAtRouteResult(
-                CarsControllerRoute.PostCar,
+                CarsControllerRoute.GetCar,
                 new { carId = carViewModel.CarId },
                 carViewModel);
         }

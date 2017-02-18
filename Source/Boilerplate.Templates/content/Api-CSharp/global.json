@@ -1,0 +1,6 @@
+﻿{
+  "sdk": {
+    // This project requires the following version of the ASP.NET Core tooling:
+    "version": "1.0.0-preview2-1-003177"
+  }
+}

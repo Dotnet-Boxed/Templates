@@ -43,6 +43,7 @@
                         // Do not add the Server HTTP header when using the Kestrel Web Server.
                         options.AddServerHeader = false;
 #if (HttpsEverywhere)
+
                         if (hostingEnvironment.IsDevelopment())
                         {
                             // Use a self-signed certificate to enable 'dotnet run' to work in development.
@@ -51,7 +52,8 @@
                         }
 #endif
                     })
-#elif (WebListener)
+#endif
+#if (WebListener)
                 .UseWebListener(
                     options =>
                     {

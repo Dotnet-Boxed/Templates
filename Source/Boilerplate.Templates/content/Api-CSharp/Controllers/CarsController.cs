@@ -99,7 +99,7 @@
         [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> GetPage(PageOptions pageOptions)
+        public Task<IActionResult> GetPage([FromQuery] PageOptions pageOptions)
         {
             return this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
         }
@@ -146,6 +146,7 @@
         /// <summary>
         /// Updates an existing car with the specified ID.
         /// </summary>
+        /// <param name="carId">The car identifier.</param>
         /// <param name="car">The car to update.</param>
         /// <returns>A 200 OK response containing the newly updated car, a 400 Bad Request if the car is invalid or a
         /// or a 404 Not Found if a car with the specified ID was not found.</returns>
@@ -154,10 +155,10 @@
         /// <response code="400">The car is invalid.</response>
         /// <response code="404">A car with the specified ID could not be found.</response>
 #endif
-        [HttpPost("{carId}", Name = CarsControllerRoute.PutCar)]
+        [HttpPut("{carId}", Name = CarsControllerRoute.PutCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(Car), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public Task<IActionResult> Put(int carId, [FromBody] SaveCar car)
         {
             return this.putCarCommand.Value.ExecuteAsync(carId, car);
