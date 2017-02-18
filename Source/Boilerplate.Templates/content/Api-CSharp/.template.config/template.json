@@ -93,9 +93,22 @@
     "TargetFramework": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ ".NET Core", ".NET Framework", "Both" ],
+      "choices": [
+        {
+          "choice": ".NET Core",
+          "description": "Run cross platform (on Windows, Mac and Linux). The framework is made up of NuGet packages which can be shipped with the application so it is fully stand-alone."
+        },
+        {
+          "choice": ".NET Framework",
+          "description": "Gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed."
+        },
+        {
+          "choice": "Both",
+          "description": "Target both .NET Core and .NET Framework."
+        }
+      ],
       "defaultValue": "Both",
-      "description": "Decide which version of the .NET Framework to target.\r\n- .NET Core - Run cross platform (on Mac and Linux). The framework is made up of NuGet packages which can be shipped with the application so it is fully stand-alone.\r\n- .NET Framework - Gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed.\r\n - Both - Target both .NET Core and .NET Framework."
+      "description": "Decide which version of the .NET Framework to target."
     },
     "NETCore": {
       "type": "computed",
@@ -109,9 +122,18 @@
     "PrimaryWebServer": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ "Kestrel", "WebListener" ],
+      "choices": [
+        {
+          "choice": "Kestrel",
+          "description": "A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or Nginx should be placed in front as reverse proxy web servers."
+        },
+        {
+          "choice": "WebListener",
+          "description": "A Windows only web server. It gives you the option to take advantage of Windows specific features, like Windows authentication, port sharing, HTTPS with SNI, HTTP/2 over TLS (Windows 10), direct file transmission, and response caching WebSockets (Windows 8)."
+        }
+      ],
       "defaultValue": "Kestrel",
-      "description": "The primary web server you want to use to host the site.\r\n- Kestrel - A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or Nginx should be placed in front as reverse proxy web servers.\r\n- WebListener - A Windows only web server. It gives you the option to take advantage of Windows specific features, like Windows authentication, port sharing, HTTPS with SNI, HTTP/2 over TLS (Windows 10), direct file transmission, and response caching WebSockets (Windows 8)."
+      "description": "The primary web server you want to use to host the site."
     },
     "Kestrel": {
       "type": "computed",
@@ -125,13 +147,26 @@
     "ReverseProxyWebServer": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ "IIS", "NGINX", "Both" ],
+      "choices": [
+        {
+          "choice": "Internet Information Services (IIS)",
+          "description": "A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps."
+        },
+        {
+          "choice": "NGINX",
+          "description": "A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform."
+        },
+        {
+          "choice": "Both",
+          "description": "Support both reverse proxy web servers."
+        }
+      ],
       "defaultValue": "Both",
-      "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.\r\n- Internet Information Services (IIS) - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.\r\n- Nginx - A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform.\r\n- Both - Support both reverse proxy web servers."
+      "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site."
     },
     "IIS": {
       "type": "computed",
-      "value": "(ReverseProxyWebServer == \"IIS\" || ReverseProxyWebServer == \"Both\")"
+      "value": "(ReverseProxyWebServer == \"Internet Information Services (IIS)\" || ReverseProxyWebServer == \"Both\")"
     },
     "NGINX": {
       "type": "computed",
@@ -141,9 +176,18 @@
     "CloudProvider": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ "Azure", "None" ],
+      "choices": [
+        {
+          "choice": "Azure",
+          "description": "The Microsoft Azure cloud. Adds logging features that let you see logs in the Azure portal."
+        },
+        {
+          "choice": "None",
+          "description": "No cloud provider is being used."
+        }
+      ],
       "defaultValue": "None",
-      "description": "Select which cloud provider you are using if any, to add cloud specific features.\r\n- Azure - The Microsoft Azure cloud. Adds logging features that let you see logs in the Azure portal.\r\n- None - No cloud provider is being used."
+      "description": "Select which cloud provider you are using if any, to add cloud specific features."
     },
     "Azure": {
       "type": "computed",
@@ -153,9 +197,18 @@
     "Analytics": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ "Application Insights", "None" ],
+      "choices": [
+        {
+          "choice": "Application Insights",
+          "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
+        },
+        {
+          "choice": "None",
+          "description": "Not using any analytics."
+        }
+      ],
       "defaultValue": "None",
-      "description": "Monitor internal information about how your application is running, as well as external user information.\r\n- Application Insights - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
+      "description": "Monitor internal information about how your application is running, as well as external user information."
     },
     "ApplicationInsights": {
       "type": "computed",
@@ -165,7 +218,20 @@
     "XmlFormatter": {
       "type": "parameter",
       "datatype": "choice",
-      "choices": [ "DataContractSerializer", "XmlSerializer", "None" ],
+      "choices": [ 
+        {
+          "choice": "DataContractSerializer",
+          "description": "The default XML serializer you should use. Requires the use of [DataContract] and [DataMember] attributes."
+        },
+        {
+          "choice": "XmlSerializer",
+          "description": "The alternative XML serializer which is slower but gives more control. Uses the [XmlRoot], [XmlElement] and [XmlAttribute] attributes."
+        },
+        {
+          "choice": "None",
+          "description": "No XML formatter."
+        }
+      ],
       "defaultValue": "None",
       "description": "Choose whether to use the XML input/output formatter and which serializer to use."
     },
