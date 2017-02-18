@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boilerplate.Templates", "Boilerplate.Templates", "{2AE766ED-8072-490E-8CFB-CD956F0E14E6}"
 	ProjectSection(SolutionItems) = preProject
-		Source\Boilerplate.Templates\Templates.nuspec = Source\Boilerplate.Templates\Templates.nuspec
+		Source\Boilerplate.Templates\Boilerplate.Templates.nuspec = Source\Boilerplate.Templates\Boilerplate.Templates.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"

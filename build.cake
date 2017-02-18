@@ -124,15 +124,15 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
-        string versionSuffix = null;
+        string versionSuffix = string.Empty;
 		if (!string.IsNullOrEmpty(preReleaseSuffix))
 		{
-			versionSuffix = preReleaseSuffix + "-" + buildNumber.ToString("D4");
+			versionSuffix = "-" + preReleaseSuffix + "-" + buildNumber.ToString("D4");
 		}
 
-        var nuspecFile = GetFiles("./**/Templates.nuspec").First().ToString();
+        var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
         var content = System.IO.File.ReadAllText(nuspecFile);
-        var newContent = content.Replace("-*", "-" + versionSuffix);
+        var newContent = content.Replace("-*", versionSuffix);
         System.IO.File.WriteAllText(nuspecFile, newContent);
 
         NuGetPack(
