@@ -16,14 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
 		build.cake = build.cake
-		CONTRIBUTING.md = CONTRIBUTING.md
 		global.json = global.json
-		HOW TO BUILD.md = HOW TO BUILD.md
 		LICENSE = LICENSE
-		MVC 5.md = MVC 5.md
-		MVC 6.md = MVC 6.md
-		README.md = README.md
-		TODO.md = TODO.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Wizard", "Source\Boilerplate.Wizard\Boilerplate.Wizard.csproj", "{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}"
@@ -52,6 +46,23 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebTemplate", "Source\Boilerplate.Templates\content\Web-CSharp\WebTemplate.xproj", "{0DB10360-95C3-4F7E-898D-BBB5997832A2}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ApiTemplate", "Source\Boilerplate.Templates\content\Api-CSharp\ApiTemplate.xproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		HOW TO BUILD.md = HOW TO BUILD.md
+		LICENSE = LICENSE
+		MVC 5.md = MVC 5.md
+		MVC 6 API.md = MVC 6 API.md
+		MVC 6.md = MVC 6.md
+		README.md = README.md
+		RELEASE NOTES.md = RELEASE NOTES.md
+		TODO.md = TODO.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{32726C18-41CF-4358-884D-C2CD86941008}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "TemplateJsonToMarkdown", "Tools\TemplateJsonToMarkdown\TemplateJsonToMarkdown.xproj", "{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +108,10 @@ Global
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,5 +131,6 @@ Global
 		{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C} = {2AE766ED-8072-490E-8CFB-CD956F0E14E6}
 		{0DB10360-95C3-4F7E-898D-BBB5997832A2} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
+		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C} = {32726C18-41CF-4358-884D-C2CD86941008}
 	EndGlobalSection
 EndGlobal

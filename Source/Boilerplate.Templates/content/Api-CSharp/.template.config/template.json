@@ -95,7 +95,7 @@
       "datatype": "string",
       "defaultValue": "Project Title",
       "replaces": "PROJECT-TITLE",
-      "description": "The name of the project."
+      "description": "The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI."
     },
     // Description
     "Description": {
@@ -103,7 +103,7 @@
       "datatype": "string",
       "defaultValue": "Project Description",
       "replaces": "PROJECT-DESCRIPTION",
-      "description": "A description of the project."
+      "description": "A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI."
     },
     // Author
     "Author": {
@@ -111,7 +111,15 @@
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project."
+      "description": "The name of the author of the project which determines the assembly author and copyright information."
+    },
+
+    // Swagger
+    "Swagger": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
     },
     // TargetFramework
     "TargetFramework": {
@@ -174,11 +182,11 @@
       "choices": [
         {
           "choice": "Internet Information Services (IIS)",
-          "description": "A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps."
+          "description": "A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps. IIS is preconfigured to set request limits for security."
         },
         {
           "choice": "NGINX",
-          "description": "A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform."
+          "description": "A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform. If the HTTPS Everywhere feature is enabled, NGINX is pre-configured to enable the most secure TLS protocols and ciphers for security and to enable HTTP 2.0 and SSL stapling for performance."
         },
         {
           "choice": "Both",
@@ -245,6 +253,27 @@
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
+    // HttpsEverywhere
+    "HttpsEverywhere": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled. Configures the primary and reverse proxy web servers for best security and adds a development certificate file for use in your development environment."
+    },
+    // PublicKeyPinning
+    "PublicKeyPinning": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Adds the Public-Key-Pins (HPKP) HTTP header to responses. It stops man-in-the-middle attacks by telling browsers exactly which TLS certificate you expect. You must have two TLS certificates for this to work, if you get this wrong you will have performed a denial of service attack on yourself."
+    },
+    // CORS
+    "CORS": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
+    },
     // XmlFormatter
     "XmlFormatter": {
       "type": "parameter",
@@ -279,42 +308,7 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
-      "description": "Returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by load balancers which can remove an instance of this API if it is not functioning correctly."
-    },
-    // HttpsEverywhere
-    "HttpsEverywhere": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS, adds Strict Transport Security (HSTS) and Public Key Pinning (HPKP) HTTP headers."
-    },
-    // CORS
-    "CORS": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
-    },
-    // HumansTxt
-    "HumansTxt": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
-    },
-    // RobotsTxt
-    "RobotsTxt": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Adds a robots.txt file to tell search engines not to index this site."
-    },
-    // Swagger
-    "Swagger": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
+      "description": "An endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly."
     },
     // RequestId
     "RequestId": {
@@ -329,6 +323,20 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Require that all requests send the User-Agent HTTP header containing the application name and version of the caller."
+    },
+    // RobotsTxt
+    "RobotsTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a robots.txt file to tell search engines not to index this site."
+    },
+    // HumansTxt
+    "HumansTxt": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
     }
   }
 }

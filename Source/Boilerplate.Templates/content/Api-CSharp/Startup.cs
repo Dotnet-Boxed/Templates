@@ -273,9 +273,11 @@
                         .UseDeveloperErrorPages())
 #if (HttpsEverywhere)
                 .UseStrictTransportSecurityHttpHeader()
+#if (PublicKeyPinning)
                 .UsePublicKeyPinsHttpHeader()
 #endif
-            // Add MVC to the request pipeline.
+#endif
+                // Add MVC to the request pipeline.
 #if (Swagger)
                 .UseMvc()
                 // Add Swagger to the request pipeline.

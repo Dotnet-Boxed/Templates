@@ -79,6 +79,7 @@
         {
             return application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
         }
+#if (PublicKeyPinning)
 
         /// <summary>
         /// Adds the Public-Key-Pins HTTP header to responses. This HTTP header is only relevant if you are using TLS.
@@ -106,6 +107,7 @@
             // application.UseHpkpReportOnly(...)
             return application;
         }
+#endif
 #endif
     }
 }
