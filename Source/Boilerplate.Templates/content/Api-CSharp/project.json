@@ -26,6 +26,7 @@
     "Microsoft.AspNetCore.Cors": "1.1.0",
     //#endif
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.1.1",
     //#if (CORS)
     "Microsoft.AspNetCore.Mvc.Cors": "1.1.1",
     //#endif
@@ -118,6 +119,7 @@
     },
     // Use the new portable .pdb file format.
     "debugType": "portable",
+    //#if (AuthoringMode)
     "define": [
       "NETCore",
       "NETFramework",
@@ -135,6 +137,7 @@
       "RequestId",
       "UserAgent"
     ],
+    //#endif
     // Require the application to use a static Main method.
     "emitEntryPoint": true,
     //#if (Swagger)

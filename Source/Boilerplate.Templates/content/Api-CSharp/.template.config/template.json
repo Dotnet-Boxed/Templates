@@ -18,6 +18,15 @@
   "sources": [
     {
       "modifiers": [
+        // Swagger
+        {
+          "condition": "(!Swagger)",
+          "exclude": [
+            "Constants/HomeControllerRoute.cs",
+            "Controllers/HomeController.cs",
+            "ViewModelSchemaFilters/**/*"
+          ]
+        },
         // TargetFramework
         {
           "condition": "(!NETFramework)",
@@ -74,15 +83,6 @@
           "condition": "(!RobotsTxt)",
           "exclude": [
             "wwwroot/robots.txt"
-          ]
-        },
-        // Swagger
-        {
-          "condition": "(!Swagger)",
-          "exclude": [
-            "Constants/HomeControllerRoute.cs",
-            "Controllers/HomeController.cs",
-            "ViewModelSchemaFilters"
           ]
         }
       ]
@@ -337,6 +337,13 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
+    },
+    "AuthoringMode": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": false
+      }
     }
   }
 }

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Boilerplate.Templates</id>
-    <version>1.1.0-*</version>
+    <version>1.1.1-*</version>
     <title>Boilerplate Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project and item templates containing common boilerplate code so you don't have to write it yourself. Includes special security, performance and best practice features.</description>
@@ -13,7 +13,7 @@
     <projectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates</projectUrl>
     <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <releaseNotes>Initial pre-release version.</releaseNotes>
+    <releaseNotes>API template fixes.</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
