@@ -1,3 +1,8 @@
+# Boilerplate.Templates 1.1.1
+MVC 6 API
+- Fixed Swagger feature.
+- Removed conditional compilation symbols from created project.
+
 # Boilerplate.Templates 1.0.0
 MVC 6 API
 - Initial version.
