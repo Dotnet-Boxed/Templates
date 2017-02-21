@@ -121,6 +121,10 @@ That's easy, just choose one of the following options:
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
 
+## Contributing
+
+Please read the [guide](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+
 ## Bugs and Issues
 
 Please report any bugs or issues on the GitHub issues page [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues).
