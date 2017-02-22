@@ -1,25 +1,39 @@
 ﻿namespace ApiTemplate
 {
     using System;
+    using System.IO.Compression;
+    using System.Linq;
 #if (Swagger)
     using System.Reflection;
 #endif
     using ApiTemplate.Commands;
+#if (CORS)
+    using ApiTemplate.Constants;
+#endif
     using ApiTemplate.Repositories;
     using ApiTemplate.Settings;
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
     using Boilerplate;
+    using Boilerplate.AspNetCore;
+    using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
     using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
 #endif
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
 #if (Swagger)
     using Swashbuckle.AspNetCore.Swagger;
 #endif
@@ -68,11 +82,106 @@
         /// <param name="services">The services collection or IoC container.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
         /// stored.</param>
-        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
         {
             return services
                 // Adds IOptions<CacheProfileSettings> to the services container.
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
+        }
+
+        /// <summary>
+        /// Adds response compression to enable GZIP compression of responses.
+        /// </summary>
+        /// <param name="services">The services collection or IoC container.</param>
+        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
+        /// stored.</param>
+        public static IServiceCollection AddCustomResponseCompression(
+            this IServiceCollection services,
+            IConfigurationRoot configuration)
+        {
+            // Add response compression to enable GZIP compression.
+            return services
+                .AddResponseCompression(
+                    options =>
+                    {
+#if (HttpsEverywhere)
+                        // Enable response compression over HTTPS connections.
+                        options.EnableForHttps = true;
+#endif
+                        // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
+                        var responseCompressionSettings = configuration.GetSection<ResponseCompressionSettings>(
+                            nameof(ResponseCompressionSettings));
+                        options.MimeTypes = ResponseCompressionDefaults
+                            .MimeTypes
+                            .Concat(responseCompressionSettings.MimeTypes);
+                    })
+                .Configure<GzipCompressionProviderOptions>(
+                    options => options.Level = CompressionLevel.Optimal);
+        }
+
+        public static IServiceCollection AddCustomRouting(this IServiceCollection services)
+        {
+            return services.AddRouting(
+                options =>
+                {
+                    // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
+                    // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
+                    // All generated URL's should append a trailing slash.
+                    options.AppendTrailingSlash = true;
+                    // All generated URL's should be lower-case.
+                    options.LowercaseUrls = true;
+                });
+        }
+
+        public static IMvcCoreBuilder AddCustomMvc(
+            this IServiceCollection services,
+            IConfigurationRoot configuration,
+            IHostingEnvironment hostingEnvironment)
+        {
+            return services.AddMvcCore(
+                options =>
+                {
+                    // Controls how controller actions cache content from the config.json file.
+                    var cacheProfileSettings = configuration.GetSection<CacheProfileSettings>();
+                    foreach (var keyValuePair in cacheProfileSettings.CacheProfiles)
+                    {
+                        options.CacheProfiles.Add(keyValuePair);
+                    }
+
+                    if (hostingEnvironment.IsDevelopment())
+                    {
+                        // Lets you pass a format parameter into the query string to set the response type:
+                        // e.g. ?format=application/json. Good for debugging.
+                        options.Filters.Add(new FormatFilterAttribute());
+                    }
+
+                    // Check model state for null or invalid models and automatically return a 400 Bad Request.
+                    options.Filters.Add(new ValidateModelStateAttribute());
+
+                    // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
+                    options.OutputFormatters.RemoveType<StreamOutputFormatter>();
+                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
+
+                    // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
+                    options.ReturnHttpNotAcceptable = true;
+                });
+        }
+
+        /// <summary>
+        /// Adds customized JSON serializer settings.
+        /// </summary>
+        /// <param name="builder">The builder used to configure MVC services.</param>
+        public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder)
+        {
+            return builder.AddJsonOptions(
+                options =>
+                {
+                    // Parse dates as DateTimeOffset values by default. You should prefer using DateTimeOffset over
+                    // DateTime everywhere. Not doing so can cause problems with time-zones.
+                    options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+                    // Output enumeration values as strings in JSON.
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                });
         }
 
 #if (CORS)
@@ -80,23 +189,20 @@
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddCorsPolicies(IServiceCollection services)
+        /// <param name="builder">The builder used to configure MVC services.</param>
+        public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder)
         {
-            return services.AddCors(
+            return builder.AddCors(
                 options =>
                 {
+                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
+                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
                     options.AddPolicy(
-                        options.DefaultPolicyName,
-                        x =>
-                        {
-                            x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
-                        });
-                    options.AddPolicy(
-                        "MyCustomPolicy",
-                        x =>
-                        {
-                        });
+                        CorsPolicyName.AllowAny,
+                        x => x
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
                 });
         }
 
@@ -142,10 +248,10 @@
         }
 
 #endif
-                /// <summary>
-                /// Adds project commands.
-                /// </summary>
-                /// <param name="services">The services collection or IoC container.</param>
+        /// <summary>
+        /// Adds project commands.
+        /// </summary>
+        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddCommands(this IServiceCollection services)
         {
             return services

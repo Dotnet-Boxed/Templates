@@ -1,21 +1,15 @@
 ﻿namespace ApiTemplate
 {
-    using System.IO.Compression;
-    using System.Linq;
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
-    using ApiTemplate.Settings;
     using Boilerplate.AspNetCore;
-    using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
-    using Microsoft.AspNetCore.ResponseCompression;
 #if (HttpsEverywhere)
     using Microsoft.AspNetCore.Rewrite;
 #endif
@@ -123,50 +117,13 @@
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
                 .AddCaching()
-                .AddOptions(this.configuration)
-                .AddRouting(
-                    options =>
-                    {
-                        // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
-                        // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
-                        // All generated URL's should append a trailing slash.
-                        options.AppendTrailingSlash = true;
-                        // All generated URL's should be lower-case.
-                        options.LowercaseUrls = true;
-                    })
-#if (CORS)
-                // Add cross-origin resource sharing (CORS) services. See https://docs.asp.net/en/latest/security/cors.html
-                .AddCors(
-                    options =>
-                    {
-                        // Create named CORS policies here which you can consume using
-                        // application.UseCors("PolicyName") or a [EnableCors("PolicyName")] attribute on your
-                        // controller or action.
-                        options.AddPolicy(
-                            CorsPolicyName.AllowAny,
-                            builder => builder
-                                .AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader());
-                    })
-#endif
+                .AddCustomOptions(this.configuration)
+                .AddCustomRouting()
                 .AddResponseCaching()
-                // Add response compression to enable GZIP compression.
-                .AddResponseCompression(
-                    options =>
-                    {
-#if (HttpsEverywhere)
-                        options.EnableForHttps = true;
+                .AddCustomResponseCompression(this.configuration)
+#if (Swagger)
+                .AddSwagger()
 #endif
-                        // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var responseCompressionSettings = configuration.GetSection<ResponseCompressionSettings>(
-                            nameof(ResponseCompressionSettings));
-                        options.MimeTypes = ResponseCompressionDefaults
-                            .MimeTypes
-                            .Concat(responseCompressionSettings.MimeTypes);
-                    })
-                .Configure<GzipCompressionProviderOptions>(
-                    options => options.Level = CompressionLevel.Optimal)
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
@@ -175,45 +132,15 @@
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
-                // Add many MVC services to the services container.
-                .AddMvcCore(
-                    options =>
-                    {
-                        // Controls how controller actions cache content from the config.json file.
-                        var cacheProfileSettings = this.configuration.GetSection<CacheProfileSettings>();
-                        foreach (var keyValuePair in cacheProfileSettings.CacheProfiles)
-                        {
-                            options.CacheProfiles.Add(keyValuePair);
-                        }
-
-                        if (this.hostingEnvironment.IsDevelopment())
-                        {
-                            // Lets you pass a format parameter into the query string to set the response type:
-                            // e.g. ?format=application/json. Good for debugging.
-                            options.Filters.Add(new FormatFilterAttribute());
-                        }
-
-                        // Check model state for null or invalid models and automatically return a 400 Bad Request.
-                        options.Filters.Add(new ValidateModelStateAttribute());
-
-                        options.OutputFormatters.RemoveType<StreamOutputFormatter>();
-                        options.OutputFormatters.RemoveType<StringOutputFormatter>();
-
-                        options.ReturnHttpNotAcceptable = true;
-                    })
+                .AddCustomMvc(this.configuration, this.hostingEnvironment)
                 .AddApiExplorer()
                 .AddAuthorization()
                 .AddFormatterMappings()
                 .AddDataAnnotations()
                 .AddJsonFormatters()
-                .AddJsonOptions(
-                    options =>
-                    {
-                        options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
-                        options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                    })
+                .AddCustomJsonOptions()
 #if (CORS)
-                .AddCors()
+                .AddCustomCors()
 #endif
 #if (DataContractSerializer)
                 // Adds the XML input and output formatter using the DataContractSerializer.
@@ -223,9 +150,6 @@
                 .AddXmlSerializerFormatters()
 #endif
                 .Services
-#if (Swagger)
-                .AddSwagger()
-#endif
                 .AddCommands()
                 .AddRepositories()
                 .AddTranslators();
@@ -260,12 +184,12 @@
                 .UseRewriter(
                     new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, this.sslPort))
 #endif
-#if (CORS)
-                .UseCors(CorsPolicyName.AllowAny)
-#endif
                 .UseResponseCaching()
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl(this.configuration)
+#if (CORS)
+                .UseCors(CorsPolicyName.AllowAny)
+#endif
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x
