@@ -1,3 +1,9 @@
+# Boilerplate.Templates 1.1.2
+MVC 6 API
+- Fixed the CORS feature which had duplicate code. 
+- Refactoring ConfigureServices to use extension methods for everything.
+- Added more comments.
+
 # Boilerplate.Templates 1.1.1
 MVC 6 API
 - Fixed Swagger feature.
