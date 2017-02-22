@@ -15,7 +15,6 @@
                 case FeatureSet.Mvc6:
                     // Hidden
                     builder.RegisterType<NoJavaScriptLintingFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<RemoveRuntimeInfoPageFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<RemoveServicesNamespaceFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<AssemblyCopyrightFeature>().AsSelf().As<IFeature>().SingleInstance();

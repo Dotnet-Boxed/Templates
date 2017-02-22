@@ -27,12 +27,6 @@
         /// </summary>
         public static IApplicationBuilder UseDebugging(this IApplicationBuilder application)
         {
-            // $Start-RuntimeInfoPage$
-            // Browse to /runtimeinfo to see information about the runtime that is being used and the packages that
-            // are included in the application. See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-            // application.UseRuntimeInfoPage();
-
-            // $End-RuntimeInfoPage$
             // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
             // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
             return application.UseBrowserLink();
