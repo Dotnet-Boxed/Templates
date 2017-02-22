@@ -8,7 +8,7 @@ The ASP.NET Core MVC 6 API project template contains the following features:
 
 ![ASP.NET Core MVC 6 API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
 
-## Feature Selection
+## Optional Feature Selection
 
 The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
@@ -49,18 +49,44 @@ The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to t
 
 ## Always On Features
 
+#### API
+
+- **Example Controller** - The example `CarController` contains the following actions:
+  - GET - Returns single car.
+  - GET - Implements paging to return a single page worth of cars, where the page size is configurable.
+  - POST - Add a new car.
+  - PUT - Update an existing car.
+  - PATCH - Update one or more properties of an existing car.
+  - DELETE a single car.
+- **Automatically Return Not Acceptable** - Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
+
+#### Performance
+
 - **GZip Compression** - Turned on by default for static and dynamic files making them smaller and quicker to download. 
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
-- **Response Caching** - Response caching is pre-configured, so you can use the [ResponseCache] attribute. Cache settings (cache profiles) are stored in the config file and referred to by name.
-- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on you development machine.
-- **Format Filter** - The FormatFilterAttribute is turned on globally in development mode, so you can pass `?format=application/json` while debugging to set the Accept MIME type.
-- **Validate Model State** - The ValidateModelStateAttribute is turned on globally so all models passed to an action method are automatically validated and a 400 Bad Request is returned if the model is invalid.
-- **Automatically Return Not Acceptable** - Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
+- **Response Caching** - Response caching is pre-configured, so you can use the [ResponseCache] attribute. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
+- **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET MVC required for an API. Uses ControllerBase instead of Controller.
-- **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
-- **Browser Link** - Enables Browser Link in development mode which lets you hit Ctrl+Alt+Enter to refresh the browser.
-- **Developer Exception Page** - Turns on the developer exception page in development mode to give you nice exceptions.
 - **Named Routes** - Uses named attribute routes for best performance and maintainability. All route names are specified as constants.
+
+#### Security
+
+- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on you development machine.
+- **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
+- **Randomized String Hashing** - Determines whether the common language runtime calculates hash codes for strings on a per application domain basis. Only applicable to .NET, .NET Core has this turned on by default.
+- **Translates Models to ViewModels** - Using your models which usually come from a database directly in your controllers can result in a mass assignment attack. View models with a translation layer are used to avoid this.
+
+#### Debugging
+
+- **Format Filter** - The FormatFilterAttribute is turned on globally in development mode, so you can pass `?format=application/json` while debugging to set the Accept MIME type.
+- **Browser Link** - Browser Link is turned on in development mode, so you can hit Ctrl+Alt+Enter to refresh the browser.
+- **Developer Exception Page** - Shows detailed exception information in the browser. Turned on in development mode only for security.
+
+#### Patterns & Practices
+
+- **Command Pattern** - Writing all your code in your controllers can mean you end up with huge classes. The command pattern splits up each controller action into it's own class.
+- **Configure CacheProfile in JSON** - All cache profiles can be configured from a configuration file.
+- **Validate Model State** - The ValidateModelStateAttribute is turned on globally so all models passed to an action method are automatically validated and a 400 Bad Request is returned if the model is invalid.
 
 ## How can I get it?
 That's easy, just choose one of the following options:
