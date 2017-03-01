@@ -9,21 +9,21 @@ var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
-	"Release";
+    "Release";
 var mygetApiKey =
-	HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
-	EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
-	null;
+    HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
+    EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
+    null;
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
-	(AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+    (AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
-	"beta";
+    "beta";
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
-	0;
+    0;
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
@@ -75,7 +75,7 @@ Task("Update-Version")
     .Does(() =>
     {
         // Build Template Projects
-        var projects = GetFiles("./**/Boilerplate.Templates/**/*.xproj");
+        var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
         foreach(var project in projects)
         {
             DotNetCoreBuild(
@@ -125,10 +125,10 @@ Task("Pack")
     .Does(() =>
     {
         string versionSuffix = string.Empty;
-		if (!string.IsNullOrEmpty(preReleaseSuffix))
-		{
-			versionSuffix = "-" + preReleaseSuffix + "-" + buildNumber.ToString("D4");
-		}
+        if (!string.IsNullOrEmpty(preReleaseSuffix))
+        {
+            versionSuffix = "-" + preReleaseSuffix + "-" + buildNumber.ToString("D4");
+        }
 
         var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
         var content = System.IO.File.ReadAllText(nuspecFile);

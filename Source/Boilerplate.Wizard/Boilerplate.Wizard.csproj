@@ -48,7 +48,6 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mvc6ApiFeatureWizard.cs" />
     <Compile Include="Mvc6FeatureWizard.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -74,23 +74,23 @@
             if (this.kestrel.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
             }
             else
             {
                 await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.DeleteCode, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.DeleteCode, "project.json");
+                await this.ProjectService.EditCommentInFile(this.kestrel.CommentName, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
             }
 
             if (this.webListener.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
             }
             else
             {
                 await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.DeleteCode, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.DeleteCode, "project.json");
+                await this.ProjectService.EditCommentInFile(this.webListener.CommentName, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
             }
         }
     }

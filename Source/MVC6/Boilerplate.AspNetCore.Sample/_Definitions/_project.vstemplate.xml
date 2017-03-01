@@ -1,6 +1,6 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>ASP.NET Core 1.1.1 MVC 6 Boilerplate</Name>
+    <Name>ASP.NET Core 1.1.1 MVC 6 Boilerplate (VS 2017 Only)</Name>
     <Description>A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com</Description>
     <DefaultName>WebApplication</DefaultName>
 
@@ -22,7 +22,7 @@
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
   <TemplateContent>
-    <Project File="Boilerplate.AspNetCore.Sample.xproj" ReplaceParameters="true">
+    <Project File="Boilerplate.AspNetCore.Sample.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="ReadMe.html" OpenInWebBrowser="true">ReadMe.html</ProjectItem>
     </Project>
   </TemplateContent>

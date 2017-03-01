@@ -1,0 +1,7 @@
+{
+  "configProperties": {
+    // Concurrent - Specifies whether the common language runtime runs garbage collection on a separate thread
+    //              (See https://msdn.microsoft.com/en-us/library/yhwwzef8%28v=vs.110%29.aspx).
+    "System.GC.Concurrent": true
+  }
+}
