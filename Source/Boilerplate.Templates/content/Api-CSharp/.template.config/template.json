@@ -111,7 +111,7 @@
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project which determines the assembly author and copyright information."
+      "description": "The name of the author of the project which determines the assembly author, company and copyright information."
     },
 
     // Swagger
@@ -338,6 +338,7 @@
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
     },
+    // AuthoringMode
     "AuthoringMode": {
       "type": "generated",
       "generator": "constant",

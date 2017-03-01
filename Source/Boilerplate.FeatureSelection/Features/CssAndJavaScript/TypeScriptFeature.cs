@@ -52,6 +52,8 @@
 
         protected override async Task AddFeature()
         {
+            this.ProjectService.DeleteFile(@"Scripts\site.js");
+
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "package.json");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
@@ -61,6 +63,7 @@
         {
             this.ProjectService.DeleteFile("tsconfig.json");
             this.ProjectService.DeleteFile("tslint.json");
+            this.ProjectService.DeleteFile(@"Scripts\site.ts");
 
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "gulpfile.js");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "package.json");

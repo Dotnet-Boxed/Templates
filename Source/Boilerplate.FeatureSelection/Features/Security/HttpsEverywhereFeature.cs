@@ -58,7 +58,7 @@
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.DeleteCode, @"nginx.conf");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ServiceCollectionExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "project.json");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
         }
 
@@ -75,7 +75,7 @@
             await this.ProjectService.EditCommentInFile(this.Id + "-Off", EditCommentMode.LeaveCodeUnchanged, @"nginx.conf");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ServiceCollectionExtensions.cs");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "Program.cs");
-            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "ReadMe.html");
         }
     }

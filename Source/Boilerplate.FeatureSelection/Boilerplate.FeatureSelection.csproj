@@ -91,7 +91,6 @@
     <Compile Include="Features\Hosting\PrimaryWebServerFeature.cs" />
     <Compile Include="Features\Hosting\ReverseProxyWebServerFeature.cs" />
     <Compile Include="Features\Project\TargetFrameworkFeature.cs" />
-    <Compile Include="Features\Rest\SwaggerFeature.cs" />
     <Compile Include="Features\Security\CorsFeature.cs" />
     <Compile Include="Features\Security\HttpsEverywhereFeature.cs" />
     <Compile Include="Features\Security\NWebSecFeature.cs" />

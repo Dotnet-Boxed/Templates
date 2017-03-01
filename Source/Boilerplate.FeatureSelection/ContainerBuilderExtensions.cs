@@ -71,19 +71,6 @@
                     builder.RegisterType<ReferrerMetaTagFeature>().AsSelf().As<IFeature>().SingleInstance();
                     builder.RegisterType<HttpExceptionFeature>().AsSelf().As<IFeature>().SingleInstance();
                     break;
-                case FeatureSet.Mvc6Api:
-                    // Hidden
-                    builder.RegisterType<SetRandomPortsFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    // Rest
-                    builder.RegisterType<SwaggerFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    // Formatters
-                    builder.RegisterType<JsonSerializerSettingsFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<XmlFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<NoContentFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    builder.RegisterType<NotAcceptableFormatterFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    // Security
-                    builder.RegisterType<HttpsEverywhereFeature>().AsSelf().As<IFeature>().SingleInstance();
-                    break;
             }
 
             return builder;

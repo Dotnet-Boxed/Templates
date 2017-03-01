@@ -166,7 +166,7 @@
             // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
             loggerfactory
                 // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
-                // Add the Serilog package to project.json before uncommenting the line below.
+                // Add the Serilog package to the project before uncommenting the line below.
                 // .AddSerilog()
                 .AddIf(
                     hostingEnvironment.IsDevelopment(),

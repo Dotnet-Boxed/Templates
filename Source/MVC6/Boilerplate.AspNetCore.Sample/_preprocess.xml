@@ -10,7 +10,7 @@
     <add key="MvcBoilerplate" value="$safeprojectname$"/>
     <!-- Replace the ProjectGuid (Unique ID for the project) with a generated GUID. -->
     <add key="6e0ef33d-3c19-4ea2-8ca9-c7bf19bdd947" value="$guid1$"/>
-    <!-- Replace the GUID in userSecretsId in the project.json file with a generated GUID. -->
+    <!-- Replace the GUID in userSecretsId in the project file with a generated GUID. -->
     <add key="fe5dc3df-2725-4ccc-9e53-0fc56fe83882" value="$guid2$"/>
   </Replacements>
 </Preprocess>

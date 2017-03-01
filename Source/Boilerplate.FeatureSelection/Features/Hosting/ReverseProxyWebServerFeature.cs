@@ -74,13 +74,13 @@
             if (this.iis.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "project.json");
+                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.LeaveCodeUnchanged, "ReadMe.html");
             }
             else
             {
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, "Program.cs");
-                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, "project.json");
+                await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
                 await this.ProjectService.EditCommentInFile(this.iis.CommentName, EditCommentMode.DeleteCode, "ReadMe.html");
                 this.ProjectService.DeleteFile("web.config");
             }
