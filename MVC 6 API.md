@@ -117,7 +117,7 @@ That's easy, just choose one of the following options:
 1. You must have the latest version of the dotnet tooling. This comes with Visual Studio 2017 or from [dot.net](https://dot.net).
 2. Run `dotnet new --install Boilerplate.Templates::*` to install the project template.
 3. Run `dotnet new bapi --help` to see how to select the feature of the project.
-4. Run `dotnet new bapi --name "MyTemplate"` along with any other custom options to create a project from the template.
+4. Run `dotnew new bapi --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
