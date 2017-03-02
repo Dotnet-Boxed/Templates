@@ -41,8 +41,21 @@ Task("Restore")
     .Does(() =>
     {
         DotNetCoreRestore();
-        foreach (var project in GetFiles("./**/*.csproj"))
+
+        var oldProjects = new string[]
         {
+            "Boilerplate.Web.Mvc5.Sample.csproj",
+            "Boilerplate.FeatureSelection.csproj",
+            "Boilerplate.FeatureSelection.Client.csproj",
+            "Boilerplate.Vsix.csproj",
+            "Boilerplate.Wizard.csproj",
+            "Boilerplate.FeatureSelection.FunctionalTest.csproj",
+            "Boilerplate.FeatureSelection.Test.csproj"
+        };
+        foreach (var project in GetFiles("./**/*.csproj")
+            .Where(x => oldProjects.Contains(x.GetFilename().ToString())))
+        {
+            Information("nuget restore " + project.ToString());
             NuGetRestore(
                 project,
                 new NuGetRestoreSettings()
