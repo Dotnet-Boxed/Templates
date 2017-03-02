@@ -1,6 +1,0 @@
-## Ignore dynamically generated files, to stop them being check-in to Git source control.
-## If you are using another source control provider or none at all, go ahead and delete this file.
-
-css/
-fonts/
-js/
