@@ -27,4 +27,7 @@
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.FeatureSelection" Path="|Boilerplate.FeatureSelection|" AssemblyName="|Boilerplate.FeatureSelection;AssemblyName|" />
     <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="Boilerplate.FeatureSelection.Client" Path="|Boilerplate.FeatureSelection.Client|" AssemblyName="|Boilerplate.FeatureSelection.Client;AssemblyName|" />
   </Assets>
+  <Prerequisites>
+    <Prerequisite Id="Microsoft.Net.Component.4.5.2.TargetingPack" Version="[15.0.26004.1,16.0)" DisplayName=".NET Framework 4.5.2 targeting pack" />
+  </Prerequisites>
 </PackageManifest>
