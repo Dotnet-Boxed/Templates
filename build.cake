@@ -88,24 +88,36 @@ Task("Update-Version")
     .Does(() =>
     {
         // Build Template Projects
-        var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
-        foreach(var project in projects)
-        {
-            DotNetCoreBuild(
-                project.GetDirectory().FullPath,
-                new DotNetCoreBuildSettings()
-                {
-                    Configuration = configuration
-                });
-        }
+         var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+         foreach(var project in projects)
+         {
+             DotNetCoreBuild(
+                 project.GetDirectory().FullPath,
+                 new DotNetCoreBuildSettings()
+                 {
+                     Configuration = configuration
+                 });
+         }
 
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
-        MSBuild(vsixProject, settings => settings
-            .SetConfiguration(configuration)
-            .SetPlatformTarget(PlatformTarget.MSIL)
-            .SetMSBuildPlatform(MSBuildPlatform.x86)
-            .WithProperty("DeployExtension", "false"));
+        var settings = new MSBuildSettings()
+        {
+            Configuration = configuration,
+            MSBuildPlatform = MSBuildPlatform.x86,
+            PlatformTarget = PlatformTarget.MSIL,
+            Properties = new Dictionary<string, IList<string>>
+            ToolPath = new FilePath(@"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe")
+            // ToolVersion = MSBuildToolVersion.VS2017
+        };
+        settings.Properties.Add("DeployExtension", new List<string>() { "false" });
+        MSBuild(vsixProject, settings);
+        // MSBuild(vsixProject, settings => settings
+        //     .UseToolVersion(MSBuildToolVersion.VS2017)
+        //     .SetConfiguration(configuration)
+        //     .SetPlatformTarget(PlatformTarget.MSIL)
+        //     .SetMSBuildPlatform(MSBuildPlatform.x86)
+        //     .WithProperty("DeployExtension", "false"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
