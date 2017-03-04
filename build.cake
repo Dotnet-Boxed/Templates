@@ -87,8 +87,14 @@ Task("Update-Version")
     .IsDependentOn("Update-Version")
     .Does(() =>
     {
-        Environment.GetEnvironmentVariable("PATH").Split(';').Select(x => Directory.GetFiles(x)).SelectMany(x => x).ToList().ForEach(x => Console.WriteLine(x));
-        var msBuildPath = Environment.GetEnvironmentVariable("PATH").Split(';').Select(x => Directory.GetFiles(x)).SelectMany(x => x).First(x => x.ToLower().EndsWith("msbuild.exe"));
+        var msBuildPath = Environment
+        .GetEnvironmentVariable("PATH")
+        .Split(';')
+        .Select(x => System.IO.Directory.GetFiles(x))
+        .SelectMany(x => x)
+        .FirstOrDefault(x => x.ToLower().Contains("msbuild.exe"));
+        msBuildPath = msBuildPath == null ? @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" : msBuildPath;
+        Information("MSBuild Path: " + msBuildPath);
 
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
