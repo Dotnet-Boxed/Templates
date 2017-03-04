@@ -101,7 +101,7 @@ Task("Update-Version")
 
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
-        var settings = new MSBuildSettings()
+        var msBuildsettings = new MSBuildSettings()
         {
             Configuration = configuration,
             MSBuildPlatform = MSBuildPlatform.x86,
@@ -109,8 +109,8 @@ Task("Update-Version")
             ToolPath = new FilePath(@"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe")
             // ToolVersion = MSBuildToolVersion.VS2017
         };
-        settings.Properties.Add("DeployExtension", new List<string>() { "false" });
-        MSBuild(vsixProject, settings);
+        msBuildsettings.Properties.Add("DeployExtension", new List<string>() { "false" });
+        MSBuild(vsixProject, msBuildsettings);
         // MSBuild(vsixProject, settings => settings
         //     .UseToolVersion(MSBuildToolVersion.VS2017)
         //     .SetConfiguration(configuration)
