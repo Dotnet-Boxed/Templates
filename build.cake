@@ -87,17 +87,8 @@ Task("Update-Version")
     .IsDependentOn("Update-Version")
     .Does(() =>
     {
-        // Build Template Projects
-         var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
-         foreach(var project in projects)
-         {
-             DotNetCoreBuild(
-                 project.GetDirectory().FullPath,
-                 new DotNetCoreBuildSettings()
-                 {
-                     Configuration = configuration
-                 });
-         }
+        Environment.GetEnvironmentVariable("PATH").Split(';').Select(x => Directory.GetFiles(x)).SelectMany(x => x).ToList().ForEach(x => Console.WriteLine(x));
+        var msBuildPath = Environment.GetEnvironmentVariable("PATH").Split(';').Select(x => Directory.GetFiles(x)).SelectMany(x => x).First(x => x.ToLower().EndsWith("msbuild.exe"));
 
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
@@ -106,7 +97,7 @@ Task("Update-Version")
             Configuration = configuration,
             MSBuildPlatform = MSBuildPlatform.x86,
             PlatformTarget = PlatformTarget.MSIL,
-            ToolPath = new FilePath(@"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe")
+            ToolPath = new FilePath(msBuildPath)
             // ToolVersion = MSBuildToolVersion.VS2017
         };
         msBuildsettings.Properties.Add("DeployExtension", new List<string>() { "false" });
@@ -118,6 +109,18 @@ Task("Update-Version")
         //     .SetMSBuildPlatform(MSBuildPlatform.x86)
         //     .WithProperty("DeployExtension", "false"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
+        
+        // Build Template Projects
+         var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+         foreach(var project in projects)
+         {
+             DotNetCoreBuild(
+                 project.GetDirectory().FullPath,
+                 new DotNetCoreBuildSettings()
+                 {
+                     Configuration = configuration
+                 });
+         }
 
         // Build Tests
         foreach (var project in GetFiles("./Tests/**/*.csproj"))
