@@ -106,7 +106,6 @@ Task("Update-Version")
             Configuration = configuration,
             MSBuildPlatform = MSBuildPlatform.x86,
             PlatformTarget = PlatformTarget.MSIL,
-            Properties = new Dictionary<string, IList<string>>
             ToolPath = new FilePath(@"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe")
             // ToolVersion = MSBuildToolVersion.VS2017
         };
