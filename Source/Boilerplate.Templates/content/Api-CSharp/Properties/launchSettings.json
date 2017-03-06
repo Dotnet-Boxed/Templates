@@ -20,12 +20,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "dotnet run": {
+    //#if (NETCore)
+    "dotnet run (netcoreapp1.1)": {
       "commandName": "Project",
       //#if (!HttpsEverywhere)
       //"commandLineArgs": "--server.urls http://*:1025",
       //#else
-      "commandLineArgs": "--server.urls http://*:1025;https://*:44300",
+      "commandLineArgs": "--framework netcoreapp1.1 --server.urls http://*:1025;https://*:44300",
       //#endif
       "launchBrowser": true,
       //#if (!HttpsEverywhere)
@@ -37,12 +38,52 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "dotnet watch run": {
+    //#endif
+    //#if (NETFramework)
+    "dotnet run (net461)": {
+      "commandName": "Project",
+      //#if (!HttpsEverywhere)
+      //"commandLineArgs": "--server.urls http://*:1025",
+      //#else
+      "commandLineArgs": "--framework net461 --server.urls http://*:1025;https://*:44300",
+      //#endif
+      "launchBrowser": true,
+      //#if (!HttpsEverywhere)
+      //"launchUrl": "http://localhost:1025/",
+      //#else
+      "launchUrl": "https://localhost:44300/",
+      //#endif
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    //#endif
+    //#if (NETCore)
+    "dotnet watch run (netcoreapp1.1)": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
       //#if (!HttpsEverywhere)
       //"commandLineArgs": "watch run --server.urls http://*:1025",
       //#else
-      "commandLineArgs": "watch run --server.urls http://*:1025;https://*:44300",
+      "commandLineArgs": "watch run --framework netcoreapp1.1 --server.urls http://*:1025;https://*:44300",
+      //#endif
+      "launchBrowser": true,
+      ////#if (!HttpsEverywhere)
+      // "launchUrl": "http://localhost:1025/",
+      //#else
+      "launchUrl": "https://localhost:44300/",
+      //#endif
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    //#endif
+    //#if (NETFramework)
+    "dotnet watch run (net461)": {
+      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+      //#if (!HttpsEverywhere)
+      //"commandLineArgs": "watch run --server.urls http://*:1025",
+      //#else
+      "commandLineArgs": "watch run --framework net461 --server.urls http://*:1025;https://*:44300",
       //#endif
       "launchBrowser": true,
       ////#if (!HttpsEverywhere)
@@ -54,5 +95,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
+    //#endif
   }
 }
