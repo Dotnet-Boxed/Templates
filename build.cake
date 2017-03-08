@@ -87,35 +87,16 @@ Task("Update-Version")
     .IsDependentOn("Update-Version")
     .Does(() =>
     {
-        var msBuildPath = Environment
-        .GetEnvironmentVariable("PATH")
-        .Split(';')
-        .Select(x => System.IO.Directory.GetFiles(x))
-        .SelectMany(x => x)
-        .FirstOrDefault(x => x.ToLower().Contains("msbuild.exe"));
-        msBuildPath = msBuildPath == null ? @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe" : msBuildPath;
-        Information("MSBuild Path: " + msBuildPath);
-
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
-        var msBuildsettings = new MSBuildSettings()
-        {
-            Configuration = configuration,
-            MSBuildPlatform = MSBuildPlatform.x86,
-            PlatformTarget = PlatformTarget.MSIL,
-            ToolPath = new FilePath(msBuildPath)
-            // ToolVersion = MSBuildToolVersion.VS2017
-        };
-        msBuildsettings.Properties.Add("DeployExtension", new List<string>() { "false" });
-        MSBuild(vsixProject, msBuildsettings);
-        // MSBuild(vsixProject, settings => settings
-        //     .UseToolVersion(MSBuildToolVersion.VS2017)
-        //     .SetConfiguration(configuration)
-        //     .SetPlatformTarget(PlatformTarget.MSIL)
-        //     .SetMSBuildPlatform(MSBuildPlatform.x86)
-        //     .WithProperty("DeployExtension", "false"));
+        MSBuild(vsixProject, settings => settings
+            .UseToolVersion(MSBuildToolVersion.VS2017)
+            .SetConfiguration(configuration)
+            .SetPlatformTarget(PlatformTarget.MSIL)
+            .SetMSBuildPlatform(MSBuildPlatform.x86)
+            .WithProperty("DeployExtension", "false"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
-        
+
         // Build Template Projects
          var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
          foreach(var project in projects)
