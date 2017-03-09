@@ -98,11 +98,11 @@
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
   <ItemGroup Label="Tools">
     <!-- dotnet watch - which allows you to edit code and refresh the browser to see your changes while the app is running. -->
-    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.1.0-preview4-final" />
     <!-- dotnet user-secrets - Lets you store sensitive configuration securely during development like connection strings. -->
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.1.0-preview4-final" />
     <!-- dotnet aspnet-codegenerator - Code Generation tool for ASP.NET Core used for generating controllers and views. -->
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.1.0-preview4-final" />
   </ItemGroup>
 
   <!--#if (AuthoringMode)-->
