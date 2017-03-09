@@ -32,7 +32,6 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <PackageId>Api-CSharp</PackageId>
     <Version>1.0.0</Version>
     <Authors>PROJECT-AUTHOR</Authors>
     <Company>PROJECT-AUTHOR</Company>
@@ -91,8 +90,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink.Loader" Version="14.1.0" />
-    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.0.0-gamma1-15" />
-    <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.0.0-gamma1-45" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.0.0" />
+    <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
