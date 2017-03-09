@@ -28,6 +28,13 @@
     <Copyright>Copyright © PROJECT-AUTHOR. All rights Reserved</Copyright>
   </PropertyGroup>
 
+  <ItemGroup Label="Files">
+    <!-- Remove the .gitignore file from the published output. -->
+    <Content Update="wwwroot\.gitignore">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="2.2.1" />
     <PackageReference Include="Boilerplate.AspNetCore.TagHelpers" Version="2.3.0" />
@@ -46,7 +53,7 @@
     <!-- $Start-XmlFormatter$ -->
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.1" />
     <!-- $End-XmlFormatter$ -->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" PrivateAssets="All" Version="1.1.0-msbuild3-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" PrivateAssets="All" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.0" />
     <!-- $Start-HttpsEverywhere$ -->
@@ -84,11 +91,15 @@
 
   <ItemGroup Label="Tools">
     <!-- dotnet watch - which allows you to edit code and refresh the browser to see your changes while the app is running. -->
-    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.1.0-preview4-final" />
     <!-- dotnet user-secrets - Lets you store sensitive configuration securely during development like connection strings. -->
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.1.0-preview4-final" />
     <!-- dotnet aspnet-codegenerator - Code Generation tool for ASP.NET Core used for generating controllers and views. -->
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.1.0-preview4-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot/.gitignore" />
   </ItemGroup>
 
   <!-- Execute the following commands before publishing the project. -->
