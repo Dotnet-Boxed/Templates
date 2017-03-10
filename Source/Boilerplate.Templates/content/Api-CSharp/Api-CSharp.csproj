@@ -25,10 +25,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!--#endif-->
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
-         control provider. Only use this in Development, it is not intended for Production use.
-         See http://docs.asp.net/en/latest/security/app-secrets.html -->
-    <UserSecretsId>ApiTemplate-113f2d04-69f0-40c3-8797-ba3f356dd812</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">

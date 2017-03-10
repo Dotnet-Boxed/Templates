@@ -13,10 +13,6 @@
     <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net461' ">win7-x86</RuntimeIdentifier>
     <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">$(PackageTargetFallback);portable-net45+win8+wp8+wpa81</PackageTargetFallback>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
-    <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
-         control provider. Only use this in Development, it is not intended for Production use.
-         See http://docs.asp.net/en/latest/security/app-secrets.html -->
-    <UserSecretsId>MvcBoilerplate-fe5dc3df-2725-4ccc-9e53-0fc56fe83882</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
