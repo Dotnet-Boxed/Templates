@@ -32,8 +32,8 @@ Task("Clean")
     .Does(() =>
     {
         CleanDirectory(artifactsDirectory);
-        CleanDirectories("./**/bin");
-        CleanDirectories("./**/obj");
+        DeleteDirectories(GetDirectories("**/bin"), true);
+        DeleteDirectories(GetDirectories("**/obj"), true);
     });
 
 Task("Restore")
