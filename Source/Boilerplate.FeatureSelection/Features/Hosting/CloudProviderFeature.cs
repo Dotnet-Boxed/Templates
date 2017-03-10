@@ -53,12 +53,14 @@
         protected override async Task AddFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"Program.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, @"web.config");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
         }
 
         protected override async Task RemoveFeature()
         {
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"Program.cs");
+            await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, @"web.config");
             await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
         }
     }
