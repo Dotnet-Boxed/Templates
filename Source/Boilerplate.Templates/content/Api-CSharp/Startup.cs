@@ -71,7 +71,7 @@
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
-                    x => x.AddUserSecrets())
+                    x => x.AddUserSecrets<Startup>())
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
                 // override the ones in all of the above config files.
