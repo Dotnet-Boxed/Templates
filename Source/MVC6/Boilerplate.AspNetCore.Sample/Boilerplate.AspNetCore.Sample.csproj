@@ -89,6 +89,18 @@
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 
+  <!-- $Start-TargetFramework-Both$ -->
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' " Label=".NET 4.6.1 Package References">
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>
+
+  <!-- $End-TargetFramework-Both$ -->
+  <!-- $Start-TargetFramework-NetFramework$ -->
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net461' " Label=".NET 4.6.1 Package References">
+    <Reference Include="System.ServiceModel" />
+  </ItemGroup>-->
+
+  <!-- $End-TargetFramework-NetFramework$ -->
   <ItemGroup Label="Tools">
     <!-- dotnet watch - which allows you to edit code and refresh the browser to see your changes while the application is running. -->
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
