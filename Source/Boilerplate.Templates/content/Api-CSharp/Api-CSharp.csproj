@@ -41,54 +41,54 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boilerplate.AspNetCore" Version="2.2.1" />
+    <PackageReference Include="Boilerplate.AspNetCore" Version="2.2.2" />
     <!--#if (Swagger)-->
-    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="2.0.0" />
+    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="2.1.0" />
     <!--#endif-->
     <!--#if (ApplicationInsights)-->
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <!--#endif-->
     <!--#if (Azure)-->
-    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="1.0.1" />
     <!--#endif-->
-    <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ApiExplorer" Version="1.1.2" />
     <!--#if (CORS)-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Cors" Version="1.1.2" />
     <!--#endif-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="1.1.2" />
     <!--#if (DataContractSerializer || XmlSerializer)-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.2" />
     <!--#endif-->
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
     <!--#if (HttpsEverywhere)-->
-    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.1" />
     <!--#endif-->
     <!--#if (IIS)-->
-    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
     <!--#endif-->
     <!--#if (Kestrel)-->
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
     <!--#if (HttpsEverywhere)-->
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.1" />
     <!--#endif-->
     <!--#endif-->
     <!--#if (WebListener)-->
-    <PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.1" />
     <!--#endif-->
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink.Loader" Version="14.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.0.0" />
