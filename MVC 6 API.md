@@ -1,4 +1,4 @@
-# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget Icon.png) [ASP.NET Core MVC 6 API Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
+# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget%20Icon.png) [ASP.NET Core MVC 6 API Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
 
 ![ASP.NET Core MVC 6 API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
 
