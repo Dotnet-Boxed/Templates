@@ -74,12 +74,54 @@
 
         public override async Task AddOrRemoveFeature()
         {
-            if (this.net461.IsSelected)
+            if (this.net461.IsSelected && this.netCore.IsSelected)
             {
                 await this.ProjectService.EditCommentInFile(
-                    this.net461.CommentName,
+                    $"{this.Id}-Both",
                     EditCommentMode.LeaveCodeUnchanged,
-                    "project.json");
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.netCore.CommentName,
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+            }
+            else if (this.net461.IsSelected)
+            {
+                await this.ProjectService.EditCommentInFile(
+                    $"{this.Id}-Both",
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.UncommentCode,
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.netCore.CommentName,
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+            }
+            else if (this.netCore.IsSelected)
+            {
+                await this.ProjectService.EditCommentInFile(
+                    $"{this.Id}-Both",
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.net461.CommentName,
+                    EditCommentMode.DeleteCode,
+                    this.ProjectService.ProjectFileName);
+                await this.ProjectService.EditCommentInFile(
+                    this.netCore.CommentName,
+                    EditCommentMode.UncommentCode,
+                    this.ProjectService.ProjectFileName);
+            }
+
+            if (this.net461.IsSelected)
+            {
                 await this.ProjectService.EditCommentInFile(
                     this.net461.CommentName,
                     EditCommentMode.LeaveCodeUnchanged,
@@ -91,26 +133,7 @@
                 await this.ProjectService.EditCommentInFile(
                     this.net461.CommentName,
                     EditCommentMode.DeleteCode,
-                    "project.json");
-                await this.ProjectService.EditCommentInFile(
-                    this.net461.CommentName,
-                    EditCommentMode.DeleteCode,
                     "ReadMe.html");
-            }
-
-            if (this.netCore.IsSelected)
-            {
-                await this.ProjectService.EditCommentInFile(
-                    this.netCore.CommentName,
-                    EditCommentMode.LeaveCodeUnchanged,
-                    "project.json");
-            }
-            else
-            {
-                await this.ProjectService.EditCommentInFile(
-                    this.netCore.CommentName,
-                    EditCommentMode.DeleteCode,
-                    "project.json");
             }
 
             if (this.net461.IsSelected && !this.netCore.IsSelected)

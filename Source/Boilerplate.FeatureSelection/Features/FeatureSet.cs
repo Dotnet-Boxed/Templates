@@ -2,7 +2,6 @@
 {
     public enum FeatureSet
     {
-        Mvc6,
-        Mvc6Api,
+        Mvc6
     }
 }

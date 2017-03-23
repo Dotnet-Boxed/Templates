@@ -1,3 +1,17 @@
+# Boilerplate.Templates 2.0.0
+MVC 6 API
+- Upgraded to VS 2017 csproj format.
+- NWebSec upgraded to 1.0.0.
+- Disable the Application Request Routing (AAR) in web.config if using Azure.
+- Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
+
+# VSIX Version 6.0.0
+MVC 6
+- Upgraded to VS 2017 csproj format.
+- NWebSec upgraded to 1.0.0.
+- Disable the Application Request Routing (AAR) in web.config if using Azure.
+- Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
+- 
 # Boilerplate.Templates 1.1.2
 MVC 6 API
 - Fixed the CORS feature which had duplicate code. 

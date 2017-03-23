@@ -71,7 +71,7 @@
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
-                    x => x.AddUserSecrets())
+                    x => x.AddUserSecrets<Startup>())
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
                 // override the ones in all of the above config files.
@@ -166,7 +166,7 @@
             // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
             loggerfactory
                 // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
-                // Add the Serilog package to project.json before uncommenting the line below.
+                // Add the Serilog package to the project before uncommenting the line below.
                 // .AddSerilog()
                 .AddIf(
                     hostingEnvironment.IsDevelopment(),

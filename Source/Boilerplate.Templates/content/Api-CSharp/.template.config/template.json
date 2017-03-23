@@ -27,7 +27,7 @@
             "ViewModelSchemaFilters/**/*"
           ]
         },
-        // TargetFramework
+        // Framework
         {
           "condition": "(!NETFramework)",
           "exclude": [
@@ -111,7 +111,7 @@
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project which determines the assembly author and copyright information."
+      "description": "The name of the author of the project which determines the assembly author, company and copyright information."
     },
 
     // Swagger
@@ -121,8 +121,8 @@
       "defaultValue": "true",
       "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
     },
-    // TargetFramework
-    "TargetFramework": {
+    // Framework
+    "Framework": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
@@ -144,11 +144,11 @@
     },
     "NETCore": {
       "type": "computed",
-      "value": "(TargetFramework == \".NET Core\" || TargetFramework == \"Both\")"
+      "value": "(Framework == \".NET Core\" || Framework == \"Both\")"
     },
     "NETFramework": {
       "type": "computed",
-      "value": "(TargetFramework == \".NET Framework\" || TargetFramework == \"Both\")"
+      "value": "(Framework == \".NET Framework\" || Framework == \"Both\")"
     },
     // PrimaryWebServer
     "PrimaryWebServer": {
@@ -338,6 +338,7 @@
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
     },
+    // AuthoringMode
     "AuthoringMode": {
       "type": "generated",
       "generator": "constant",

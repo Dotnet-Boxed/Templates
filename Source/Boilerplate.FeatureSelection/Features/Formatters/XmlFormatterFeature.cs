@@ -1,30 +1,25 @@
 ﻿namespace Boilerplate.FeatureSelection.Features
 {
-    using System;
     using System.Threading.Tasks;
     using Boilerplate.FeatureSelection.Services;
 
     public class XmlFormatterFeature : MultiChoiceFeature
     {
-        private readonly FeatureSet featureSet;
-
         private IFeatureItem both;
         private IFeatureItem dataContractSerializer;
         private IFeatureItem none;
         private IFeatureItem xmlSerializer;
 
-        public XmlFormatterFeature(IProjectService projectService, FeatureSet featureSet)
+        public XmlFormatterFeature(IProjectService projectService)
             : base(projectService)
         {
-            this.featureSet = featureSet;
-
             this.none = new FeatureItem(
                 "None",
                 "None",
                 "No Xml Formatter",
                 1)
             {
-                IsSelected = featureSet == FeatureSet.Mvc6
+                IsSelected = true
             };
             this.Items.Add(this.none);
 
@@ -32,10 +27,7 @@
                 "DataContractSerializer",
                 "DataContractSerializer",
                 "Add the DataContractSerializer based input and output formatters.",
-                2)
-            {
-                IsSelected = featureSet == FeatureSet.Mvc6Api
-            };
+                2);
             this.Items.Add(this.dataContractSerializer);
 
             this.xmlSerializer = new FeatureItem(
@@ -70,18 +62,7 @@
 
         public override bool IsDefaultSelected
         {
-            get
-            {
-                switch (this.featureSet)
-                {
-                    case FeatureSet.Mvc6:
-                        return this.none.IsSelected;
-                    case FeatureSet.Mvc6Api:
-                        return this.dataContractSerializer.IsSelected;
-                    default:
-                        throw new Exception("FeatureSet not found.");
-                }
-            }
+            get { return this.none.IsSelected; }
         }
 
         public override bool IsVisible
@@ -103,11 +84,11 @@
         {
             if (this.none.IsSelected)
             {
-                await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, "project.json");
+                await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.DeleteCode, this.ProjectService.ProjectFileName);
             }
             else
             {
-                await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, "project.json");
+                await this.ProjectService.EditCommentInFile(this.Id, EditCommentMode.LeaveCodeUnchanged, this.ProjectService.ProjectFileName);
             }
 
             if (this.dataContractSerializer.IsSelected || this.both.IsSelected)

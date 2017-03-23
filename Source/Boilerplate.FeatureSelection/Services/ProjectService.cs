@@ -296,7 +296,7 @@
                 }
                 else if (string.Equals(fileExtension, ".html", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".config", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(fileExtension, ".xproj", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(fileExtension, ".csproj", StringComparison.OrdinalIgnoreCase) ||
                     string.Equals(fileExtension, ".xml", StringComparison.OrdinalIgnoreCase))
                 {
                     return new Comment[] { Xml };

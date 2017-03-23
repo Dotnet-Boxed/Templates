@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <FileUpgradeFlags>
@@ -102,27 +102,28 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NuGet.Core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Release Notes.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="License.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>License.txt</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Small Icon.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Small Preview Image.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="TemplateBuilder.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
   </ItemGroup>
@@ -130,12 +131,9 @@
     <TemplateReference Include="Boilerplate.Web.Mvc5.Sample.csproj">
       <PathToProject>../MVC5/Boilerplate.Web.Mvc5.Sample/Boilerplate.Web.Mvc5.Sample.csproj</PathToProject>
     </TemplateReference>
-    <TemplateReference Include="Boilerplate.AspNetCore.Sample.xproj">
-      <PathToProject>../MVC6/Boilerplate.AspNetCore.Sample/Boilerplate.AspNetCore.Sample.xproj</PathToProject>
+    <TemplateReference Include="Boilerplate.AspNetCore.Sample.csproj">
+      <PathToProject>../MVC6/Boilerplate.AspNetCore.Sample/Boilerplate.AspNetCore.Sample.csproj</PathToProject>
     </TemplateReference>
-    <!--<TemplateReference Include="Boilerplate.Web.Mvc6Api.Sample.xproj">
-      <PathToProject>../MVC6/Boilerplate.Web.Mvc6Api.Sample/Boilerplate.Web.Mvc6Api.Sample.xproj</PathToProject>
-    </TemplateReference>-->
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
