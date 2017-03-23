@@ -210,6 +210,6 @@ Task("Publish-VSIX")
     });
 
 Task("Default")
-    .IsDependentOn("Publish-VSIX");
+    .IsDependentOn("Pack");
 
 RunTarget(target);
