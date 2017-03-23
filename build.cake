@@ -42,27 +42,29 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
-        foreach(var project in projects)
-        {
-            DotNetCoreRestore(project.FullPath);
-        }
+        // Not building templates until issue https://github.com/dotnet/templating/issues/442 is fixed and released.
+        // var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+        // foreach(var project in projects)
+        // {
+        //     DotNetCoreRestore(project.FullPath);
+        // }
     });
 
  Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
-        foreach(var project in projects)
-        {
-             DotNetCoreBuild(
-                 project.GetDirectory().FullPath,
-                 new DotNetCoreBuildSettings()
-                 {
-                     Configuration = configuration
-                 });
-        }
+        // Not building templates until issue https://github.com/dotnet/templating/issues/442 is fixed and released.
+        // var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+        // foreach(var project in projects)
+        // {
+        //      DotNetCoreBuild(
+        //          project.GetDirectory().FullPath,
+        //          new DotNetCoreBuildSettings()
+        //          {
+        //              Configuration = configuration
+        //          });
+        // }
     });
 
 Task("Version")
