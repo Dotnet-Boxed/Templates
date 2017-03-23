@@ -9,40 +9,110 @@ var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
-	"Release";
+    "Release";
 var mygetApiKey =
-	HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
-	EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
-	null;
+    HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
+    EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
+    null;
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
-	(AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+    (AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
-	"beta";
+    "beta";
 var buildNumber = HasArgument("BuildNumber") ?
     Argument<int>("BuildNumber") :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
-	0;
+    0;
 
 var artifactsDirectory = Directory("./Artifacts");
 var packagesDirectory = Directory("./packages");
+var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
+var nuspecContent = string.Empty;
 
 Task("Clean")
     .Does(() =>
     {
         CleanDirectory(artifactsDirectory);
-        CleanDirectories("./**/bin/");
-        CleanDirectories("./**/obj/");
+        DeleteDirectories(GetDirectories("**/bin"), true);
+        DeleteDirectories(GetDirectories("**/obj"), true);
     });
 
 Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
-        foreach (var project in GetFiles("./**/*.csproj"))
+        // Not building templates until issue https://github.com/dotnet/templating/issues/442 is fixed and released.
+        // var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+        // foreach(var project in projects)
+        // {
+        //     DotNetCoreRestore(project.FullPath);
+        // }
+    });
+
+ Task("Build")
+    .IsDependentOn("Restore")
+    .Does(() =>
+    {
+        // Not building templates until issue https://github.com/dotnet/templating/issues/442 is fixed and released.
+        // var projects = GetFiles("./**/Boilerplate.Templates/**/*.csproj");
+        // foreach(var project in projects)
+        // {
+        //      DotNetCoreBuild(
+        //          project.GetDirectory().FullPath,
+        //          new DotNetCoreBuildSettings()
+        //          {
+        //              Configuration = configuration
+        //          });
+        // }
+    });
+
+Task("Version")
+    .IsDependentOn("Build")
+    .Does(() =>
+    {
+        string versionSuffix = string.Empty;
+        if (!string.IsNullOrEmpty(preReleaseSuffix))
         {
+            versionSuffix = "-" + preReleaseSuffix + "-" + buildNumber.ToString("D4");
+        }
+
+        nuspecContent = System.IO.File.ReadAllText(nuspecFile);
+        System.IO.File.WriteAllText(nuspecFile, nuspecContent.Replace("-*", versionSuffix));
+        Information("VersionSuffix set to " + versionSuffix);
+    });
+
+Task("Pack")
+    .IsDependentOn("Version")
+    .Does(() =>
+    {
+        NuGetPack(
+            nuspecFile,
+            new NuGetPackSettings()
+            {
+                OutputDirectory = artifactsDirectory
+            });
+        System.IO.File.WriteAllText(nuspecFile, nuspecContent);
+    });
+
+Task("Restore-VSIX")
+    .IsDependentOn("Pack")
+    .Does(() =>
+    {
+        var projects = new string[]
+        {
+            "Boilerplate.Web.Mvc5.Sample.csproj",
+            "Boilerplate.FeatureSelection.csproj",
+            "Boilerplate.FeatureSelection.Client.csproj",
+            "Boilerplate.Vsix.csproj",
+            "Boilerplate.Wizard.csproj",
+            "Boilerplate.FeatureSelection.FunctionalTest.csproj",
+            "Boilerplate.FeatureSelection.Test.csproj"
+        };
+        foreach (var project in GetFiles("./**/*.csproj")
+            .Where(x => projects.Contains(x.GetFilename().ToString())))
+        {
+            Information("nuget restore " + project.ToString());
             NuGetRestore(
                 project,
                 new NuGetRestoreSettings()
@@ -52,9 +122,9 @@ Task("Restore")
         }
     });
 
-Task("Update-Version")
+Task("Version-VSIX")
     .WithCriteria(() => buildNumber != 0)
-    .IsDependentOn("Restore")
+    .IsDependentOn("Restore-VSIX")
     .Does(() =>
     {
         var vsixManifest = GetFiles("./**/source.extension.vsixmanifest").First();
@@ -70,25 +140,14 @@ Task("Update-Version")
         Information("Version updated from " + version + " to " + versionAttribute.Value);
     });
 
- Task("Build")
-    .IsDependentOn("Update-Version")
+ Task("Build-VSIX")
+    .IsDependentOn("Version-VSIX")
     .Does(() =>
     {
-        // Build Template Projects
-        var projects = GetFiles("./**/Boilerplate.Templates/**/*.xproj");
-        foreach(var project in projects)
-        {
-            DotNetCoreBuild(
-                project.GetDirectory().FullPath,
-                new DotNetCoreBuildSettings()
-                {
-                    Configuration = configuration
-                });
-        }
-
         // Build VSIX
         var vsixProject = GetFiles("./**/Boilerplate.Vsix.csproj").First();
         MSBuild(vsixProject, settings => settings
+            .UseToolVersion(MSBuildToolVersion.VS2017)
             .SetConfiguration(configuration)
             .SetPlatformTarget(PlatformTarget.MSIL)
             .SetMSBuildPlatform(MSBuildPlatform.x86)
@@ -102,8 +161,8 @@ Task("Update-Version")
         }
     });
 
-Task("Test")
-    .IsDependentOn("Build")
+Task("Test-VSIX")
+    .IsDependentOn("Build-VSIX")
     .Does(() =>
     {
         var projects = GetFiles("./Tests/**/bin/" + configuration + "/*Test.dll");
@@ -120,35 +179,11 @@ Task("Test")
         }
     });
 
-Task("Pack")
-    .IsDependentOn("Test")
-    .Does(() =>
-    {
-        string versionSuffix = string.Empty;
-		if (!string.IsNullOrEmpty(preReleaseSuffix))
-		{
-			versionSuffix = "-" + preReleaseSuffix + "-" + buildNumber.ToString("D4");
-		}
-
-        var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
-        var content = System.IO.File.ReadAllText(nuspecFile);
-        var newContent = content.Replace("-*", versionSuffix);
-        System.IO.File.WriteAllText(nuspecFile, newContent);
-
-        NuGetPack(
-            nuspecFile,
-            new NuGetPackSettings()
-            {
-                OutputDirectory = artifactsDirectory
-            });
-        System.IO.File.WriteAllText(nuspecFile, content);
-    });
-
-Task("Publish-MyGet")
+Task("Publish-VSIX")
     .WithCriteria(() =>
         !string.IsNullOrEmpty(mygetApiKey) &&
         (!AppVeyor.IsRunningOnAppVeyor || AppVeyor.Environment.Repository.Branch == "master"))
-    .IsDependentOn("Pack")
+    .IsDependentOn("Test-VSIX")
     .Does(() =>
     {
         var vsixFilePath = GetFiles(artifactsDirectory.Path + "/*.vsix").First();
@@ -175,6 +210,6 @@ Task("Publish-MyGet")
     });
 
 Task("Default")
-    .IsDependentOn("Publish-MyGet");
+    .IsDependentOn("Pack");
 
 RunTarget(target);

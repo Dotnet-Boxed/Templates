@@ -252,11 +252,4 @@ paket-files/
 *.sln.iml
 
 # Cake
-Tools/*
-
-# Exclude Tool Projects
-!Tools/TemplateJsonToMarkdown/
-Tools/TemplateJsonToMarkdown/bin/
-Tools/TemplateJsonToMarkdown/obj/
-Tools/TemplateJsonToMarkdown/*.lock.json
-Tools/TemplateJsonToMarkdown/*.user
+cake-tools/*

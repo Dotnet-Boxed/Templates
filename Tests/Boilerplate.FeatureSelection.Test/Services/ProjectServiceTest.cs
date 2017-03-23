@@ -44,7 +44,7 @@
                 .Setup(x => x.FileWriteAllLines(
                     It.Is<string>(y => string.Equals(y, filePath)),
                     It.Is<IEnumerable<string>>(y => Enumerable.SequenceEqual(y, outputLines))));
-            IProjectService projectService = new ProjectService(fileSystemServiceMock.Object, @"C:\Project\Project.xproj");
+            IProjectService projectService = new ProjectService(fileSystemServiceMock.Object, @"C:\Project\Project.csproj");
 
             // Act
             await projectService.EditCommentInFile(commentName, mode, "File" + fileExtension);
