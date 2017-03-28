@@ -69,7 +69,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Label="TemplateBuilder">
-    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\..\packages\TemplateBuilder.1.1.4.9-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
+    <TemplateBuilderTargets Condition=" '$(TemplateBuilderTargets)'=='' ">$([System.IO.Path]::GetFullPath( $(MSBuildProjectDirectory)\..\..\packages\TemplateBuilder.1.1.5-beta\tools\ligershark.templates.targets ))</TemplateBuilderTargets>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -146,8 +146,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TemplateBuilder, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\TemplateBuilder.1.1.4.9-beta\lib\TemplateBuilder.dll</HintPath>
+      <HintPath>..\..\packages\TemplateBuilder.1.1.5-beta\lib\TemplateBuilder.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
