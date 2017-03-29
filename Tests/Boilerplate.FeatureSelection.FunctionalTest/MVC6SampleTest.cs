@@ -156,7 +156,7 @@
             await this.tester.AssertDotnetBuildSucceeded();
         }
 
-        [Theory]
+        [Theory(Skip = "Skip NPM tests")]
         [InlineData(typeof(ApplicationInsightsFeature), true)]
         [InlineData(typeof(GooglePageSpeedFeature), true)]
         [InlineData(typeof(JavaScriptCodeStyleFeature), false)]
