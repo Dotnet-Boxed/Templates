@@ -22,7 +22,7 @@
     <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
   </TemplateData>
   <TemplateContent>
-    <Project File="Boilerplate.AspNetCore.Sample.csproj" ReplaceParameters="true">
+    <Project File="MVC.csproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" TargetFileName="ReadMe.html" OpenInWebBrowser="true">ReadMe.html</ProjectItem>
     </Project>
   </TemplateContent>

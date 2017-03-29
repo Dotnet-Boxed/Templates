@@ -1,19 +1,19 @@
 ﻿export class Calculator {
-    throwOnDivideByZero: boolean;
+    private throwOnDivideByZero: boolean;
 
-    add(a: number, b: number) {
+    public add(a: number, b: number) {
         return a + b;
     }
 
-    subtract(a: number, b: number) {
+    public subtract(a: number, b: number) {
         return a - b;
     }
 
-    multiply(a: number, b: number) {
+    public multiply(a: number, b: number) {
         return a * b;
     }
 
-    divide(a: number, b: number) {
+    public divide(a: number, b: number) {
         this.checkDivideByZero(b);
         return a / b;
     }

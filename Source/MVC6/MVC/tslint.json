@@ -1,0 +1,8 @@
+// TSHint Default Configuration File (See https://github.com/palantir/tslint).
+
+// This file contains the default settings for TSHint. If you are not going to change any rules, this file can be
+// safely deleted. TSHint is used to lint your TypeScript code to highlight common errors and code smells.
+
+{
+  "extends": "tslint:recommended"
+}

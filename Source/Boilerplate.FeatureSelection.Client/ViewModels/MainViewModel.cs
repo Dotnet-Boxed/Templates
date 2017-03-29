@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Windows;
     using System.Windows.Data;
     using Boilerplate.FeatureSelection.Features;
     using Boilerplate.FeatureSelection.Services;
@@ -80,6 +81,12 @@
             try
             {
                 this.IsLoaded = false;
+
+                MessageBox.Show(
+                    "The changes you selected will now be applied. Unfortunately, due to a Visual Studio 2017 bug, this will cause Visual Studio to crash. This is totally expected and you can just re-open the project using Visual Studio and continue as normal. We are looking at ways of fixing this issue.",
+                    "ASP.NET MVC Boilerplate Project",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
 
                 List<Exception> exceptions = new List<Exception>();
 

@@ -130,8 +130,8 @@
     <TemplateReference Include="Boilerplate.Web.Mvc5.Sample.csproj">
       <PathToProject>../MVC5/Boilerplate.Web.Mvc5.Sample/Boilerplate.Web.Mvc5.Sample.csproj</PathToProject>
     </TemplateReference>
-    <TemplateReference Include="Boilerplate.AspNetCore.Sample.csproj">
-      <PathToProject>../MVC6/Boilerplate.AspNetCore.Sample/Boilerplate.AspNetCore.Sample.csproj</PathToProject>
+    <TemplateReference Include="MVC.csproj">
+      <PathToProject>../MVC6/MVC/MVC.csproj</PathToProject>
     </TemplateReference>
   </ItemGroup>
   <ItemGroup>

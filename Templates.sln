@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 EndProject
@@ -50,7 +50,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Vsix", "Source\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Wizard", "Source\Boilerplate.Wizard\Boilerplate.Wizard.csproj", "{9CEA6CB2-DDCF-4AB3-8B22-0383B3F529EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.AspNetCore.Sample", "Source\MVC6\Boilerplate.AspNetCore.Sample\Boilerplate.AspNetCore.Sample.csproj", "{6E0EF33D-3C19-4EA2-8CA9-C7BF19BDD947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "Source\MVC6\MVC\MVC.csproj", "{6E0EF33D-3C19-4EA2-8CA9-C7BF19BDD947}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelection", "Source\Boilerplate.FeatureSelection\Boilerplate.FeatureSelection.csproj", "{81B33F2A-01A6-4AA6-A6F2-6E5FF2C0528F}"
 EndProject

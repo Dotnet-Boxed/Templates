@@ -24,7 +24,7 @@
 
                 var projectFilePath = directory
                     .Parent
-                    .GetFiles("Boilerplate.AspNetCore.Sample.csproj", SearchOption.AllDirectories)
+                    .GetFiles("MVC.csproj", SearchOption.AllDirectories)
                     .Where(x => !IsInObjDirectory(x.Directory))
                     .First()
                     .FullName;

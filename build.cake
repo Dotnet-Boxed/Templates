@@ -149,9 +149,8 @@ Task("Version-VSIX")
         MSBuild(vsixProject, settings => settings
             .UseToolVersion(MSBuildToolVersion.VS2017)
             .SetConfiguration(configuration)
-            .SetPlatformTarget(PlatformTarget.MSIL)
-            .SetMSBuildPlatform(MSBuildPlatform.x86)
-            .WithProperty("DeployExtension", "false"));
+            .WithProperty("DeployExtension", "false")
+            .WithProperty("VisualStudioVersion", "15.0"));
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
@@ -210,6 +209,6 @@ Task("Publish-VSIX")
     });
 
 Task("Default")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Publish-VSIX");
 
 RunTarget(target);
