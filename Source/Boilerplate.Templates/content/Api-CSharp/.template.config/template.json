@@ -55,9 +55,9 @@
             "DevelopmentCertificate.pfx"
           ]
         },
-        // StatusController
+        // HealthCheck
         {
-          "condition": "(!StatusController)",
+          "condition": "(!HealthCheck)",
           "exclude": [
             "Constants/StatusControllerRoute.cs",
             "Controllers/StatusController.cs"
@@ -67,8 +67,7 @@
         {
           "condition": "(!CORS)",
           "exclude": [
-            "Constants/CorsPolicyName.cs",
-            "Controllers/StatusController.cs"
+            "Constants/CorsPolicyName.cs"
           ]
         },
         // HumansTxt
@@ -303,12 +302,12 @@
       "type": "computed",
       "value": "(XmlFormatter == \"XmlSerializer\")"
     },
-    // StatusController
-    "StatusController": {
+    // HealthCheck
+    "HealthCheck": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
-      "description": "An endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly."
+      "description": "A health-check endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly."
     },
     // RequestId
     "RequestId": {

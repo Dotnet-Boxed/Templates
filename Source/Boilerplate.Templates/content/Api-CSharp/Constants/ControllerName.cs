@@ -6,7 +6,7 @@
 #if (Swagger)
         public const string Home = nameof(Home);
 #endif
-#if (StatusController)
+#if (HealthCheck)
         public const string Status = nameof(Status);
 #endif
     }

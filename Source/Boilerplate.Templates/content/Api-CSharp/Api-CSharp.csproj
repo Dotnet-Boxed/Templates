@@ -82,7 +82,7 @@
   </Target>
 
   <PropertyGroup Condition="'$(AuthoringMode)' == 'true'">
-    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;StatusController;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(AuthoringMode)' == 'true'">
     <None Include=".template.config\**\*" />

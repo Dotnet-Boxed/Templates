@@ -1,5 +1,4 @@
-﻿#if (StatusController)
-namespace ApiTemplate.Controllers
+﻿namespace ApiTemplate.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -52,4 +51,3 @@ namespace ApiTemplate.Controllers
         }
     }
 }
-#endif
