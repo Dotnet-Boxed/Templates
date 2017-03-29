@@ -74,6 +74,13 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
 
+  <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish" Condition="'$(Swagger)' == 'true'">
+    <ItemGroup>
+      <DocFile Include="bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\*.xml" />
+    </ItemGroup>
+    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
+  </Target>
+
   <PropertyGroup Condition="'$(AuthoringMode)' == 'true'">
     <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;StatusController;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent</DefineConstants>
   </PropertyGroup>
