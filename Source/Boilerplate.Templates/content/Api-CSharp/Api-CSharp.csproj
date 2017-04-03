@@ -41,6 +41,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.2" Condition="'$(DataContractSerializer)' == 'true' OR '$(XmlSerializer)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-beta1" Condition="'$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.1" Condition="'$(HttpsEverywhere)' == 'true'" />
@@ -82,7 +83,7 @@
   </Target>
 
   <PropertyGroup Condition="'$(AuthoringMode)' == 'true'">
-    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(AuthoringMode)' == 'true'">
     <None Include=".template.config\**\*" />

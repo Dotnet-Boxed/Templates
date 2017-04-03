@@ -120,6 +120,13 @@
       "defaultValue": "true",
       "description": "Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models."
     },
+    // Versioning
+    "Versioning": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Enable API versioning to version API endpoints. The version can be specified in the URL query parameter (This is the default e.g. /api/foo?api-version=1.0), URL (e.g. /api/v1/foo), HTTP header (e.g. api-version: 1.0) or a custom MIME type (e.g. application/vnd.mycompany.myapp-v2+xml)."
+    },
     // Framework
     "Framework": {
       "type": "parameter",

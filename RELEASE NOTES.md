@@ -1,4 +1,7 @@
-# Boilerplate.Templates 2.0.0
+# Boilerplate.Templates 1.3.0
+- Added Versioning feature.
+
+# Boilerplate.Templates 1.2.0
 MVC 6 API
 - Upgraded to VS 2017 csproj format.
 - NWebSec upgraded to 1.0.0.

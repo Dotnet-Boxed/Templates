@@ -133,6 +133,17 @@
                 });
         }
 
+#if (Versioning)
+        public static IServiceCollection AddCustomVersioning(this IServiceCollection services)
+        {
+            return services.AddApiVersioning(
+                options =>
+                {
+                    options.ReportApiVersions = true;
+                });
+        }
+
+#endif
         public static IMvcCoreBuilder AddCustomMvc(
             this IServiceCollection services,
             IConfigurationRoot configuration,

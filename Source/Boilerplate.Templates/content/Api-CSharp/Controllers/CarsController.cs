@@ -22,6 +22,9 @@
     // Require the User-Agent HTTP header.
     [UserAgentHttpHeader]
 #endif
+#if (Versioning)
+    [ApiVersion( "1.0" )]
+#endif
     public class CarsController : ControllerBase
     {
         private readonly Lazy<IDeleteCarCommand> deleteCarCommand;

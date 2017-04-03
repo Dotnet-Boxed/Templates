@@ -132,6 +132,9 @@
                 .AddScoped<IUrlHelper>(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
+#if (Versioning)
+                .AddCustomVersioning()
+#endif
                 .AddCustomMvc(this.configuration, this.hostingEnvironment)
                 .AddApiExplorer()
                 .AddAuthorization()
