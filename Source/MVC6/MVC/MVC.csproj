@@ -86,7 +86,7 @@
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.0.0" />
     <!-- $End-NWebSec$ -->
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
 
   <!-- $Start-TargetFramework-Both$ -->

@@ -62,7 +62,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink.Loader" Version="14.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
 
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
