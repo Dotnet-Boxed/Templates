@@ -1,5 +1,6 @@
 ﻿namespace ApiTemplate.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -95,9 +96,10 @@
             return Task.FromResult((ICollection<Car>)cars);
         }
 
-        public Task<int> GetTotalPages(int page, int count)
+        public Task<int> GetTotalPages(int count)
         {
-            return Task.FromResult(cars.Count == 0 ? 1 : ((cars.Count - 1) / count) + 1);
+            var totalPages = (int)Math.Ceiling(cars.Count / (double)count);
+            return Task.FromResult(totalPages);
         }
 
         public Task<Car> Update(Car car)

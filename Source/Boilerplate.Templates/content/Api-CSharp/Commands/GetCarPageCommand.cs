@@ -27,7 +27,7 @@
                 return new NotFoundResult();
             }
 
-            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Page, pageOptions.Count);
+            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Count);
             var carViewModels = this.carTranslator.TranslateList(cars);
             var page = new PageResult<Car>()
             {
