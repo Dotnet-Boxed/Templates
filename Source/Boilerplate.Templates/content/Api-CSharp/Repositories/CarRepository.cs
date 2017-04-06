@@ -93,7 +93,7 @@
                 pageCars = null;
             }
 
-            return Task.FromResult((ICollection<Car>)cars);
+            return Task.FromResult((ICollection<Car>)pageCars);
         }
 
         public Task<int> GetTotalPages(int count)
