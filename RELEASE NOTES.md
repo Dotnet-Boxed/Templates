@@ -1,5 +1,6 @@
 # Boilerplate.Templates 1.3.0
 - Added Versioning feature.
+- Add Link HTTP Header to GET /cars to show next, previous, first, last page URL.
 
 # Boilerplate.Templates 1.2.0
 MVC 6 API
