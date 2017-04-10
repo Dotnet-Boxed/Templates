@@ -8,10 +8,8 @@
     {
         private readonly ICarRepository carRepository;
 
-        public DeleteCarCommand(ICarRepository carRepository)
-        {
+        public DeleteCarCommand(ICarRepository carRepository) =>
             this.carRepository = carRepository;
-        }
 
         public async Task<IActionResult> ExecuteAsync(int carId)
         {

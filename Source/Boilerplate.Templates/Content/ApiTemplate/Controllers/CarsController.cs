@@ -63,10 +63,8 @@
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Delete(int carId)
-        {
-            return this.deleteCarCommand.Value.ExecuteAsync(carId);
-        }
+        public Task<IActionResult> Delete(int carId) =>
+            this.deleteCarCommand.Value.ExecuteAsync(carId);
 
         /// <summary>
         /// Gets the car with the specified ID.
@@ -81,10 +79,8 @@
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Get(int carId)
-        {
-            return this.getCarCommand.Value.ExecuteAsync(carId);
-        }
+        public Task<IActionResult> Get(int carId) =>
+            this.getCarCommand.Value.ExecuteAsync(carId);
 
         /// <summary>
         /// Gets a collection of cars using the specified page number and number of items per page.
@@ -102,10 +98,8 @@
         [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> GetPage([FromQuery] PageOptions pageOptions)
-        {
-            return this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
-        }
+        public Task<IActionResult> GetPage([FromQuery] PageOptions pageOptions) =>
+            this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
 
         /// <summary>
         /// Patches the car with the specified ID.
@@ -123,10 +117,8 @@
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Patch(int carId, [FromBody] JsonPatchDocument<SaveCar> patch)
-        {
-            return this.patchCarCommand.Value.ExecuteAsync(carId, patch);
-        }
+        public Task<IActionResult> Patch(int carId, [FromBody] JsonPatchDocument<SaveCar> patch) =>
+            this.patchCarCommand.Value.ExecuteAsync(carId, patch);
 
         /// <summary>
         /// Creates a new car.
@@ -141,10 +133,8 @@
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        public Task<IActionResult> Post([FromBody] SaveCar car)
-        {
-            return this.postCarCommand.Value.ExecuteAsync(car);
-        }
+        public Task<IActionResult> Post([FromBody] SaveCar car) =>
+            this.postCarCommand.Value.ExecuteAsync(car);
 
         /// <summary>
         /// Updates an existing car with the specified ID.
@@ -162,9 +152,7 @@
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Put(int carId, [FromBody] SaveCar car)
-        {
-            return this.putCarCommand.Value.ExecuteAsync(carId, car);
-        }
+        public Task<IActionResult> Put(int carId, [FromBody] SaveCar car) =>
+            this.putCarCommand.Value.ExecuteAsync(carId, car);
     }
 }

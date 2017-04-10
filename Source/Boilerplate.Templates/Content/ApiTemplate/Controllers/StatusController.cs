@@ -16,10 +16,8 @@
     {
         private IEnumerable<IConnectionTester> connectionTesters;
 
-        public StatusController(IEnumerable<IConnectionTester> connectionTesters)
-        {
+        public StatusController(IEnumerable<IConnectionTester> connectionTesters) =>
             this.connectionTesters = connectionTesters;
-        }
 
         /// <summary>
         /// Gets the status of this API and it's dependencies, giving an indication of it's health.
