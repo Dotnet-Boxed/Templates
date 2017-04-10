@@ -307,7 +307,6 @@
         {
             return services
                 .AddSingleton<ITranslator<Models.Car, Car>, CarToCarTranslator>()
-                .AddSingleton<ITranslator<Car, Models.Car>, CarToCarTranslator>()
                 .AddSingleton<ITranslator<Models.Car, SaveCar>, CarToSaveCarTranslator>()
                 .AddSingleton<ITranslator<SaveCar, Models.Car>, CarToSaveCarTranslator>();
         }
