@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 EndProject
@@ -60,7 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelectio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.FeatureSelection.FunctionalTest", "Tests\Boilerplate.FeatureSelection.FunctionalTest\Boilerplate.FeatureSelection.FunctionalTest.csproj", "{BA1EFAB3-F6A0-4E0D-A412-7810837B009B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api-CSharp", "Source\Boilerplate.Templates\content\Api-CSharp\Api-CSharp.csproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Boilerplate.Templates\content\ApiTemplate\ApiTemplate.csproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateJsonToMarkdown", "Tools\TemplateJsonToMarkdown\TemplateJsonToMarkdown.csproj", "{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}"
 EndProject

@@ -61,12 +61,12 @@
         {
             var values = new List<string>(4);
 
-            if (page.Page < page.Total)
+            if (page.HasNextPage)
             {
                 values.Add(this.GetLinkValueItem("next", page.Page + 1, page.Count));
             }
 
-            if (page.Page > 1)
+            if (page.HasPreviousPage)
             {
                 values.Add(this.GetLinkValueItem("previous", page.Page - 1, page.Count));
             }

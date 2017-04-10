@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Boilerplate.Templates</id>
-    <version>1.3.0-*</version>
+    <version>1.3.1-*</version>
     <title>Boilerplate Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project and item templates containing common boilerplate code so you don't have to write it yourself. Includes special security, performance and best practice features.</description>
@@ -13,7 +13,7 @@
     <projectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates</projectUrl>
     <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <releaseNotes>Upgraded template to VS 2017 csproj project system.</releaseNotes>
+    <releaseNotes>Fix namespace not being set.</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
@@ -22,6 +22,6 @@
     </dependencies -->
   </metadata>
   <files>
-    <file src="**" exclude="content\Web-CSharp\**\*;**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json" />
+    <file src="**" exclude="content\WebTemplate\**\*;**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json" />
   </files>
 </package>
