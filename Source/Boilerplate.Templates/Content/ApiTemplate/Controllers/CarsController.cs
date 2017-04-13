@@ -60,7 +60,7 @@
         {
             this.HttpContext.Response.Headers.Add(
                 "Allow",
-                new string[]
+                string.Join(",", new string[]
                 {
                     HttpMethods.Delete,
                     HttpMethods.Get,
@@ -69,7 +69,7 @@
                     HttpMethods.Patch,
                     HttpMethods.Post,
                     HttpMethods.Put
-                });
+                }));
             return this.Ok();
         }
 
