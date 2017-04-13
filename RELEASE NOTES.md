@@ -1,3 +1,7 @@
+# Boilerplate.Templates 1.4.0
+- Added OPTIONS endpoint.
+- Added HEAD endpoints to all GET endpoints.
+
 # Boilerplate.Templates 1.3.0
 - Added Versioning feature.
 - Add Link HTTP Header to GET /cars to show next, previous, first, last page URL.
