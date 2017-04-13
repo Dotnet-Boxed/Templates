@@ -31,7 +31,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="2.2.2" />
-    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="2.1.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="2.1.1" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="1.0.1" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="1.1.1" />

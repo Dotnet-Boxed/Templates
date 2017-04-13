@@ -230,6 +230,10 @@
                 {
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
 
+                    options.DescribeAllEnumsAsStrings();
+                    options.DescribeAllParametersInCamelCase();
+                    options.DescribeStringEnumsInCamelCase();
+
                     // Add the XML comment file for this assembly, so it's contents can be displayed.
                     options.IncludeXmlCommentsIfExists(assembly);
 
