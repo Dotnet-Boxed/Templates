@@ -109,8 +109,7 @@
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) =>
             services
 #if (ApplicationInsights)
                 // Add Azure Application Insights data collection services to the services container.
@@ -157,7 +156,6 @@
                 .AddCommands()
                 .AddRepositories()
                 .AddTranslators();
-        }
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is

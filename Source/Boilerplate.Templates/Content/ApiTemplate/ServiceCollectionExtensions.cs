@@ -82,12 +82,12 @@
         /// <param name="services">The services collection or IoC container.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
         /// stored.</param>
-        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services
+        public static IServiceCollection AddCustomOptions(
+            this IServiceCollection services,
+            IConfiguration configuration) =>
+            services
                 // Adds IOptions<CacheProfileSettings> to the services container.
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
-        }
 
         /// <summary>
         /// Adds response compression to enable GZIP compression of responses.
@@ -97,10 +97,8 @@
         /// stored.</param>
         public static IServiceCollection AddCustomResponseCompression(
             this IServiceCollection services,
-            IConfigurationRoot configuration)
-        {
-            // Add response compression to enable GZIP compression.
-            return services
+            IConfigurationRoot configuration) =>
+            services
                 .AddResponseCompression(
                     options =>
                     {
@@ -117,11 +115,9 @@
                     })
                 .Configure<GzipCompressionProviderOptions>(
                     options => options.Level = CompressionLevel.Optimal);
-        }
 
-        public static IServiceCollection AddCustomRouting(this IServiceCollection services)
-        {
-            return services.AddRouting(
+        public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
+            services.AddRouting(
                 options =>
                 {
                     // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
@@ -131,25 +127,21 @@
                     // All generated URL's should be lower-case.
                     options.LowercaseUrls = true;
                 });
-        }
 
 #if (Versioning)
-        public static IServiceCollection AddCustomVersioning(this IServiceCollection services)
-        {
-            return services.AddApiVersioning(
+        public static IServiceCollection AddCustomVersioning(this IServiceCollection services) =>
+            services.AddApiVersioning(
                 options =>
                 {
                     options.ReportApiVersions = true;
                 });
-        }
 
 #endif
         public static IMvcCoreBuilder AddCustomMvcOptions(
             this IMvcCoreBuilder builder,
             IConfigurationRoot configuration,
-            IHostingEnvironment hostingEnvironment)
-        {
-            return builder.AddMvcOptions(
+            IHostingEnvironment hostingEnvironment) =>
+            builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the config.json file.
@@ -176,15 +168,13 @@
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
                 });
-        }
 
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
         /// <param name="builder">The builder used to configure MVC services.</param>
-        public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder)
-        {
-            return builder.AddJsonOptions(
+        public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder) =>
+            builder.AddJsonOptions(
                 options =>
                 {
                     // Parse dates as DateTimeOffset values by default. You should prefer using DateTimeOffset over
@@ -193,7 +183,6 @@
                     // Output enumeration values as strings in JSON.
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
-        }
 
 #if (CORS)
         /// <summary>
@@ -201,9 +190,8 @@
         /// https://docs.asp.net/en/latest/security/cors.html
         /// </summary>
         /// <param name="builder">The builder used to configure MVC services.</param>
-        public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder)
-        {
-            return builder.AddCors(
+        public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder) =>
+            builder.AddCors(
                 options =>
                 {
                     // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
@@ -215,7 +203,6 @@
                             .AllowAnyMethod()
                             .AllowAnyHeader());
                 });
-        }
 
 #endif
 #if (Swagger)
@@ -223,8 +210,7 @@
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
-        {
+        public static IServiceCollection AddSwagger(this IServiceCollection services) =>
             services.AddSwaggerGen(
                 options =>
                 {
@@ -259,17 +245,19 @@
                             Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
                         });
                 });
-            return services;
-        }
 
 #endif
         /// <summary>
         /// Adds project commands.
         /// </summary>
+        /// <remarks>
+        /// AddSingleton - Only one instance is ever created and returned.
+        /// AddScoped - A new instance is created and returned for each request/response cycle.
+        /// AddTransient - A new instance is created and returned each time.
+        /// </remarks>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddCommands(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddCommands(this IServiceCollection services) =>
+            services
                 .AddScoped<IDeleteCarCommand, DeleteCarCommand>()
                 .AddScoped(x => new Lazy<IDeleteCarCommand>(() => x.GetRequiredService<IDeleteCarCommand>()))
                 .AddScoped<IGetCarCommand, GetCarCommand>()
@@ -283,36 +271,22 @@
                 .AddScoped<IPutCarCommand, PutCarCommand>()
                 .AddScoped(x => new Lazy<IPutCarCommand>(() => x.GetRequiredService<IPutCarCommand>()));
 
-            // Singleton - Only one instance is ever created and returned.
-            // services.AddSingleton<IExampleService, ExampleService>();
-
-            // Scoped - A new instance is created and returned for each request/response cycle.
-            // services.AddScoped<IExampleService, ExampleService>();
-
-            // Transient - A new instance is created and returned each time.
-            // services.AddTransient<IExampleService, ExampleService>();
-        }
-
         /// <summary>
         /// Adds project repositories.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddRepositories(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddRepositories(this IServiceCollection services) =>
+            services
                 .AddScoped<ICarRepository, CarRepository>();
-        }
 
         /// <summary>
         /// Adds project translators.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddTranslators(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddTranslators(this IServiceCollection services) =>
+            services
                 .AddSingleton<ITranslator<Models.Car, Car>, CarToCarTranslator>()
                 .AddSingleton<ITranslator<Models.Car, SaveCar>, CarToSaveCarTranslator>()
                 .AddSingleton<ITranslator<SaveCar, Models.Car>, CarToSaveCarTranslator>();
-        }
     }
 }
