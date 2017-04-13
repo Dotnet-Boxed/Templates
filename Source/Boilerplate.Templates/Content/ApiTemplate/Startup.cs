@@ -135,7 +135,7 @@
 #if (Versioning)
                 .AddCustomVersioning()
 #endif
-                .AddCustomMvc(this.configuration, this.hostingEnvironment)
+                .AddMvcCore()
                 .AddApiExplorer()
                 .AddAuthorization()
                 .AddFormatterMappings()
@@ -152,6 +152,7 @@
                 // Adds the XML input and output formatter using the XmlSerializer.
                 .AddXmlSerializerFormatters()
 #endif
+                .AddCustomMvcOptions(this.configuration, this.hostingEnvironment)
                 .Services
                 .AddCommands()
                 .AddRepositories()

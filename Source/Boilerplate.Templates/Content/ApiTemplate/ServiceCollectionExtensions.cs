@@ -144,12 +144,12 @@
         }
 
 #endif
-        public static IMvcCoreBuilder AddCustomMvc(
-            this IServiceCollection services,
+        public static IMvcCoreBuilder AddCustomMvcOptions(
+            this IMvcCoreBuilder builder,
             IConfigurationRoot configuration,
             IHostingEnvironment hostingEnvironment)
         {
-            return services.AddMvcCore(
+            return builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the config.json file.

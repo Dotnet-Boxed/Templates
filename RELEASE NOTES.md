@@ -2,6 +2,7 @@
 - Added OPTIONS endpoint.
 - Added HEAD endpoints to all GET endpoints.
 - Update Swashbuckle.AspNetCore to 1.0.0-rc3
+- Use AddMvcOptions instead the delegate in AddMvcCore.
 
 # Boilerplate.Templates 1.3.0
 - Added Versioning feature.
