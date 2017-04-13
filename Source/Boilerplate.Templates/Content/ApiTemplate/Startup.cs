@@ -108,7 +108,6 @@
         /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
         public void ConfigureServices(IServiceCollection services) =>
             services
 #if (ApplicationInsights)
@@ -161,8 +160,6 @@
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        /// <param name="application">The application.</param>
-        /// <param name="loggerfactory">The logger factory.</param>
         public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
         {
             // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
@@ -177,8 +174,6 @@
                         .AddDebug());
 
             application
-                // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
-                .UseNoServerHttpHeader()
 #if (HttpsEverywhere)
                 // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
                 // Development. The port number to use is taken from the launchSettings.json file which Visual
@@ -203,10 +198,8 @@
                 .UsePublicKeyPinsHttpHeader()
 #endif
 #endif
-                // Add MVC to the request pipeline.
 #if (Swagger)
                 .UseMvc()
-                // Add Swagger to the request pipeline.
                 .UseSwagger()
                 .UseSwaggerUI(
                     options =>

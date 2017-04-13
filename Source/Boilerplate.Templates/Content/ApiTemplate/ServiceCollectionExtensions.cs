@@ -47,7 +47,6 @@
         /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
         /// otherwise.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddCaching(this IServiceCollection services)
         {
             return services
@@ -79,9 +78,6 @@
         /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
-        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
-        /// stored.</param>
         public static IServiceCollection AddCustomOptions(
             this IServiceCollection services,
             IConfiguration configuration) =>
@@ -92,9 +88,6 @@
         /// <summary>
         /// Adds response compression to enable GZIP compression of responses.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
-        /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
-        /// stored.</param>
         public static IServiceCollection AddCustomResponseCompression(
             this IServiceCollection services,
             IConfigurationRoot configuration) =>
@@ -116,6 +109,9 @@
                 .Configure<GzipCompressionProviderOptions>(
                     options => options.Level = CompressionLevel.Optimal);
 
+        /// <summary>
+        /// Add custom routing settings which determines how URL's are generated.
+        /// </summary>
         public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
             services.AddRouting(
                 options =>
@@ -172,7 +168,6 @@
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
-        /// <param name="builder">The builder used to configure MVC services.</param>
         public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder) =>
             builder.AddJsonOptions(
                 options =>
@@ -189,7 +184,6 @@
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
         /// </summary>
-        /// <param name="builder">The builder used to configure MVC services.</param>
         public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder) =>
             builder.AddCors(
                 options =>
@@ -209,7 +203,6 @@
         /// <summary>
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddSwagger(this IServiceCollection services) =>
             services.AddSwaggerGen(
                 options =>
@@ -255,7 +248,6 @@
         /// AddScoped - A new instance is created and returned for each request/response cycle.
         /// AddTransient - A new instance is created and returned each time.
         /// </remarks>
-        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddCommands(this IServiceCollection services) =>
             services
                 .AddScoped<IDeleteCarCommand, DeleteCarCommand>()
@@ -274,7 +266,6 @@
         /// <summary>
         /// Adds project repositories.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddRepositories(this IServiceCollection services) =>
             services
                 .AddScoped<ICarRepository, CarRepository>();
@@ -282,7 +273,6 @@
         /// <summary>
         /// Adds project translators.
         /// </summary>
-        /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddTranslators(this IServiceCollection services) =>
             services
                 .AddSingleton<ITranslator<Models.Car, Car>, CarToCarTranslator>()
