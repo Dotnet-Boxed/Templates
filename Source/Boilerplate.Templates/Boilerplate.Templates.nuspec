@@ -13,7 +13,12 @@
     <projectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates</projectUrl>
     <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <releaseNotes>Fix namespace not being set.</releaseNotes>
+    <releaseNotes>
+      - Added OPTIONS endpoint.
+      - Added HEAD endpoints to all GET endpoints.
+      - Update Swashbuckle.AspNetCore to 1.0.0-rc3
+      - Use AddMvcOptions instead the delegate in AddMvcCore.
+    </releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
