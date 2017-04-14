@@ -62,6 +62,26 @@
                 "Allow",
                 string.Join(",", new string[]
                 {
+                    HttpMethods.Get,
+                    HttpMethods.Head,
+                    HttpMethods.Options,
+                    HttpMethods.Post
+                }));
+            return this.Ok();
+        }
+
+        /// <summary>
+        /// Returns an Allow HTTP header with the allowed HTTP methods for a car with the specified unique identifier.
+        /// </summary>
+        /// <returns>A 200 OK response.</returns>
+        /// <response code="200">The allowed HTTP methods.</response>
+        [HttpOptions("{carId}")]
+        public IActionResult Options(int carId)
+        {
+            this.HttpContext.Response.Headers.Add(
+                "Allow",
+                string.Join(",", new string[]
+                {
                     HttpMethods.Delete,
                     HttpMethods.Get,
                     HttpMethods.Head,
