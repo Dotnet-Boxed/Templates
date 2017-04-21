@@ -1,5 +1,8 @@
 ﻿namespace ApiTemplate
 {
+#if (Versioning)
+    using System.Linq;
+#endif
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
@@ -8,6 +11,9 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+#if (Versioning)
+    using Microsoft.AspNetCore.Mvc.ApiExplorer;
+#endif
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
 #if (HttpsEverywhere)
@@ -150,6 +156,9 @@
                 // Adds the XML input and output formatter using the XmlSerializer.
                 .AddXmlSerializerFormatters()
 #endif
+#if (Swagger && Versioning)
+                .AddVersionedApiExplorer()
+#endif
                 .AddCustomMvcOptions(this.configuration, this.hostingEnvironment)
                 .Services
                 .AddCommands()
@@ -204,7 +213,19 @@
                 .UseSwaggerUI(
                     options =>
                     {
+#if (Versioning)
+                        var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
+                        foreach (var apiVersionDescription in provider
+                            .ApiVersionDescriptions
+                            .OrderByDescending(x => x.ApiVersion))
+                        {
+                            options.SwaggerEndpoint(
+                                $"/swagger/{apiVersionDescription.GroupName}/swagger.json",
+                                $"Version {apiVersionDescription.ApiVersion}");
+                        }
+#else
                         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
+#endif
                     });
 #else
                 .UseMvc();

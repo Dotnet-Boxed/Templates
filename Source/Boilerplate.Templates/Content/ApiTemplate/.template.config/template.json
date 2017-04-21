@@ -27,6 +27,13 @@
             "ViewModelSchemaFilters/**/*"
           ]
         },
+        // Versioning
+        {
+          "condition": "(!Versioning)",
+          "exclude": [
+            "OperationFilters/**/*"
+          ]
+        },
         // Framework
         {
           "condition": "(!NETFramework)",
@@ -124,7 +131,7 @@
     "Versioning": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "false",
+      "defaultValue": "true",
       "description": "Enable API versioning to version API endpoints. The version can be specified in the URL query parameter (This is the default e.g. /api/foo?api-version=1.0), URL (e.g. /api/v1/foo), HTTP header (e.g. api-version: 1.0) or a custom MIME type (e.g. application/vnd.mycompany.myapp-v2+xml)."
     },
     // Framework

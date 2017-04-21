@@ -41,7 +41,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.2" Condition="'$(DataContractSerializer)' == 'true' OR '$(XmlSerializer)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-beta1" Condition="'$(Versioning)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-beta2" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="1.0.0-beta1" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.1" Condition="'$(HttpsEverywhere)' == 'true'" />

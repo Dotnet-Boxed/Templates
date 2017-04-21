@@ -12,6 +12,9 @@
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Route("[controller]")]
+#if (Versioning)
+    [ApiVersion("1.0")]
+#endif
     public class StatusController : ControllerBase
     {
         private IEnumerable<IConnectionTester> connectionTesters;

@@ -1,3 +1,6 @@
+# Boilerplate.Templates 1.5.0
+- Added API Versioning support for Swagger.
+
 # Boilerplate.Templates 1.4.0
 - Added OPTIONS endpoint.
 - Added HEAD endpoints to all GET endpoints.

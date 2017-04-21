@@ -10,6 +10,9 @@
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
+#if (Versioning)
+    using ApiTemplate.OperationFilters;
+#endif
     using ApiTemplate.Repositories;
     using ApiTemplate.Settings;
     using ApiTemplate.Translators;
@@ -25,6 +28,9 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
+#if (Versioning)
+    using Microsoft.AspNetCore.Mvc.ApiExplorer;
+#endif
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.Caching.Distributed;
@@ -129,6 +135,7 @@
             services.AddApiVersioning(
                 options =>
                 {
+                    options.AssumeDefaultVersionWhenUnspecified = true;
                     options.ReportApiVersions = true;
                 });
 
@@ -208,6 +215,8 @@
                 options =>
                 {
                     var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                    var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
+                    var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 
                     options.DescribeAllEnumsAsStrings();
                     options.DescribeAllParametersInCamelCase();
@@ -216,6 +225,9 @@
                     // Add the XML comment file for this assembly, so it's contents can be displayed.
                     options.IncludeXmlCommentsIfExists(assembly);
 
+#if (Versioning)
+                    options.OperationFilter<ApiVersionOperationFilter>();
+#endif
 #if (RequestId)
                     // Show a text-box to edit the X-Request-ID HTTP header.
                     options.OperationFilter<RequestIdOperationFilter>();
@@ -229,14 +241,29 @@
                     // Show an example model for ModelStateDictionary.
                     options.SchemaFilter<ModelStateDictionarySchemaFilter>();
 
-                    options.SwaggerDoc(
-                        "v1",
-                        new Info()
+#if (Versioning)
+                    var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+                    foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
+                    {
+                        var info = new Info()
                         {
-                            Version = "v1",
-                            Title = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product,
-                            Description = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description
-                        });
+                            Title = $"{assemblyProduct} (Version {apiVersionDescription.ApiVersion})",
+                            Description = apiVersionDescription.IsDeprecated ?
+                                $"{assemblyDescription} This API version has been deprecated." :
+                                assemblyDescription,
+                            Version = apiVersionDescription.ApiVersion.ToString()
+                        };
+                        options.SwaggerDoc(apiVersionDescription.GroupName, info);
+                    }
+#else
+                    var info = new Info()
+                    {
+                        Title = assemblyProduct,
+                        Description = assemblyDescription,
+                        Version = "v1"
+                    };
+                    options.SwaggerDoc("v1", info);
+#endif
                 });
 
 #endif

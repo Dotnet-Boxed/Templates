@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Boilerplate.Templates</id>
-    <version>1.4.0-*</version>
+    <version>1.5.0-*</version>
     <title>Boilerplate Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project and item templates containing common boilerplate code so you don't have to write it yourself. Includes special security, performance and best practice features.</description>
@@ -14,10 +14,7 @@
     <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <releaseNotes>
-      - Added OPTIONS endpoint.
-      - Added HEAD endpoints to all GET endpoints.
-      - Update Swashbuckle.AspNetCore to 1.0.0-rc3
-      - Use AddMvcOptions instead the delegate in AddMvcCore.
+      - Added API Versioning support for Swagger.
     </releaseNotes>
     <packageTypes>
       <packageType name="Template" />
