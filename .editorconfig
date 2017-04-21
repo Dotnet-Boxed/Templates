@@ -1,0 +1,134 @@
+﻿# http://EditorConfig.org
+
+# This file is the top-most EditorConfig file
+root = true
+
+# All Files
+[*]
+charset = utf-8
+end_of_line = crlf
+indent_style = space
+indent_size = 4
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+# Solution Files
+[*.sln]
+indent_style = tab
+
+# XML Project Files
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+indent_size = 2
+
+# Configuration Files
+[*.{json,xml,props,targets,nuspec,resx,ruleset,config,yml}]
+indent_size = 2
+
+# Markdown Files
+[*.md]
+trim_trailing_whitespace = false
+
+# Web Files
+[*.{htm,html,js,ts,css,scss}]
+indent_size = 2
+insert_final_newline = true
+
+# Bash Files
+[*.sh]
+end_of_line = lf
+
+# Dotnet Code Style Settings (See https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference)
+[*.{cs,vb}]
+dotnet_sort_system_directives_first = true:warning
+dotnet_style_coalesce_expression = true:warning
+dotnet_style_collection_initializer = true:warning
+dotnet_style_explicit_tuple_names = true:warning
+dotnet_style_null_propagation = true:warning
+dotnet_style_object_initializer = true:warning
+dotnet_style_predefined_type_for_locals_parameters_members = true:warning
+dotnet_style_predefined_type_for_member_access = true:warning
+dotnet_style_qualification_for_event = true:warning
+dotnet_style_qualification_for_field = true:warning
+dotnet_style_qualification_for_method = true:warning
+dotnet_style_qualification_for_property = true:warning
+
+# C# Code Style Settings (See https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference)
+[*.cs]
+# Indentation Options (Undocumented)
+csharp_indent_block_contents = true:warning
+csharp_indent_braces = false:warning
+csharp_indent_case_contents = true:warning
+csharp_indent_switch_labels = true:warning
+csharp_indent_labels = no_change:warning
+# Style Options
+csharp_style_conditional_delegate_call = true:warning
+csharp_style_expression_bodied_accessors = true:warning
+csharp_style_expression_bodied_constructors = true:warning
+csharp_style_expression_bodied_indexers = true:warning
+csharp_style_expression_bodied_methods = true:warning
+csharp_style_expression_bodied_operators = true:warning
+csharp_style_expression_bodied_properties = true:warning
+csharp_style_inlined_variable_declaration = true:warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+csharp_style_pattern_matching_over_is_with_cast_check = true:warning
+csharp_style_throw_expression = true:warning
+csharp_style_var_elsewhere = true:warning
+csharp_style_var_for_built_in_types = true:warning
+csharp_style_var_when_type_is_apparent = true:warning
+# New Line Options
+csharp_new_line_before_catch = true:warning
+csharp_new_line_before_else = true:warning
+csharp_new_line_before_finally = true:warning
+csharp_new_line_before_members_in_anonymous_types = true:warning
+csharp_new_line_before_members_in_object_initializers = true:warning
+# BUG: Warning level cannot be set https://github.com/dotnet/roslyn/issues/18010
+csharp_new_line_before_open_brace = all
+csharp_new_line_between_query_expression_clauses = true:warning
+# Spacing Options (Undocumented)
+csharp_space_after_cast = false:warning
+csharp_space_after_colon_in_inheritance_clause = true:warning
+csharp_space_after_comma = true:warning
+csharp_space_after_dot = false:warning
+csharp_space_after_keywords_in_control_flow_statements = true:warning
+csharp_space_after_semicolon_in_for_statement = true:warning
+csharp_space_around_binary_operators = before_and_after:warning
+csharp_space_around_declaration_statements = do_not_ignore:warning
+csharp_space_before_colon_in_inheritance_clause = true:warning
+csharp_space_before_comma = false:warning
+csharp_space_before_dot = false:warning
+csharp_space_before_semicolon_in_for_statement = false:warning
+csharp_space_before_open_square_brackets = false:warning
+csharp_space_between_empty_square_brackets = false:warning
+csharp_space_between_method_declaration_name_and_open_parenthesis = false:warning
+csharp_space_between_method_declaration_parameter_list_parentheses = false:warning
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false:warning
+csharp_space_between_method_call_name_and_opening_parenthesis = false:warning
+csharp_space_between_method_call_parameter_list_parentheses = false:warning
+csharp_space_between_method_call_empty_parameter_list_parentheses = false:warning
+csharp_space_between_square_brackets = false:warning
+csharp_space_between_parentheses = expressions:warning
+# Wrapping Options (Undocumented)
+csharp_preserve_single_line_blocks = true:warning
+csharp_preserve_single_line_statements = false:warning
+# Naming Rules (Undocumented)
+# Constant Fields Should Be PascalCase
+dotnet_naming_rule.constant_fields_should_be_pascal_case.severity = warning
+dotnet_naming_rule.constant_fields_should_be_pascal_case.symbols  = constant_fields
+dotnet_naming_rule.constant_fields_should_be_pascal_case.style    = pascal_case_style
+dotnet_naming_symbols.constant_fields.applicable_kinds   = field
+dotnet_naming_symbols.constant_fields.required_modifiers = const
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+# Public Members Must Be Capitalized
+dotnet_naming_rule.public_members_must_be_capitalized.severity = warning
+dotnet_naming_rule.public_members_must_be_capitalized.symbols  = public_symbols
+dotnet_naming_rule.public_members_must_be_capitalized.style    = first_word_upper_case_style
+dotnet_naming_symbols.public_symbols.applicable_kinds   = property,method,field,event,delegate
+dotnet_naming_symbols.public_symbols.required_modifiers = public,internal,protected,protected_internal
+dotnet_naming_style.first_word_upper_case_style.capitalization = first_word_upper
+# Private, Protected and Internal Fields Should Be camelCase
+dotnet_naming_rule.camel_case_for_private_internal_fields.severity = warning
+dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
+dotnet_naming_rule.camel_case_for_private_internal_fields.style    = camel_case_underscore_style
+dotnet_naming_symbols.private_internal_fields.applicable_kinds = field
+dotnet_naming_symbols.private_internal_fields.applicable_accessibilities = private, protected, internal
+dotnet_naming_style.camel_case_underscore_style.capitalization = camel_case
