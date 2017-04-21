@@ -1,4 +1,4 @@
-// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
+﻿// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
@@ -359,5 +359,22 @@
         "value": false
       }
     }
+    // "SkipRestore": {
+    //   "type": "parameter",
+    //   "datatype": "bool",
+    //   "description": "Skips the execution of 'dotnet restore' on project creation.",
+    //   "defaultValue": "false"
+    // }
   }
+  // "postActions": [
+  //   {
+  //     "condition": "(!SkipRestore)",
+  //     "description": "Restore NuGet packages required by this project.",
+  //     "manualInstructions": [
+  //       { "text": "Run 'dotnet restore' in the directory the template was created in." }
+  //     ],
+  //     "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+  //     "continueOnError": true
+  //   }
+  // ]
 }
