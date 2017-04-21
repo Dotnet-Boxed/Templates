@@ -23,7 +23,7 @@
     [UserAgentHttpHeader]
 #endif
 #if (Versioning)
-    [ApiVersion( "1.0" )]
+    [ApiVersion("1.0")]
 #endif
     public class CarsController : ControllerBase
     {
@@ -48,6 +48,49 @@
             this.patchCarCommand = patchCarCommand;
             this.postCarCommand = postCarCommand;
             this.putCarCommand = putCarCommand;
+        }
+
+        /// <summary>
+        /// Returns an Allow HTTP header with the allowed HTTP methods.
+        /// </summary>
+        /// <returns>A 200 OK response.</returns>
+        /// <response code="200">The allowed HTTP methods.</response>
+        [HttpOptions]
+        public IActionResult Options()
+        {
+            this.HttpContext.Response.Headers.Add(
+                "Allow",
+                string.Join(",", new string[]
+                {
+                    HttpMethods.Get,
+                    HttpMethods.Head,
+                    HttpMethods.Options,
+                    HttpMethods.Post
+                }));
+            return this.Ok();
+        }
+
+        /// <summary>
+        /// Returns an Allow HTTP header with the allowed HTTP methods for a car with the specified unique identifier.
+        /// </summary>
+        /// <returns>A 200 OK response.</returns>
+        /// <response code="200">The allowed HTTP methods.</response>
+        [HttpOptions("{carId}")]
+        public IActionResult Options(int carId)
+        {
+            this.HttpContext.Response.Headers.Add(
+                "Allow",
+                string.Join(",", new string[]
+                {
+                    HttpMethods.Delete,
+                    HttpMethods.Get,
+                    HttpMethods.Head,
+                    HttpMethods.Options,
+                    HttpMethods.Patch,
+                    HttpMethods.Post,
+                    HttpMethods.Put
+                }));
+            return this.Ok();
         }
 
         /// <summary>
@@ -77,6 +120,7 @@
         /// <response code="404">A car with the specified ID could not be found.</response>
 #endif
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
+        [HttpHead("{carId}")]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public Task<IActionResult> Get(int carId) =>
@@ -95,6 +139,7 @@
         /// <response code="404">A page with the specified page number was not found.</response>
 #endif
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
+        [HttpHead("")]
         [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
