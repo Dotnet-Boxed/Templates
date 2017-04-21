@@ -112,7 +112,7 @@ Add your site here, just raise an issue.
 
 ## Contributions and Thanks
 
-- @sayedihashimi - Fixed dotnet new command in ReadMe.
+- [sayedihashimi](https://github.com/sayedihashimi) - Fixed dotnet new command in ReadMe.
 - [bobinush](https://github.com/bobinush) - Fixed typo.
 - [chrisrichards](https://github.com/chrisrichards) - Fixed paging in the API template.
 - [VeXHarbinger](https://github.com/VeXHarbinger) - Updated Twitter cards.
