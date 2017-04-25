@@ -32,8 +32,6 @@
     /// </summary>
     public partial class Startup
     {
-        #region Fields
-
         /// <summary>
         /// Gets or sets the application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html
@@ -57,10 +55,6 @@
         /// </summary>
         private readonly int? sslPort;
         // $End-HttpsEverywhere-On$
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
@@ -116,10 +110,6 @@
             }
             // $End-HttpsEverywhere-On$
         }
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Configures the services to add to the ASP.NET MVC 6 Injection of Control (IoC) container. This method gets
@@ -282,7 +272,5 @@
                 // Add MVC to the request pipeline.
                 .UseMvc();
         }
-
-        #endregion
     }
 }

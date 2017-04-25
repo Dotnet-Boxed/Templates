@@ -8,11 +8,11 @@
 
     public class ManifestService : IManifestService
     {
-        private readonly IOptions<AppSettings> appSettings;
+        private readonly IOptionsSnapshot<AppSettings> appSettings;
         private readonly IUrlHelper urlHelper;
 
         public ManifestService(
-            IOptions<AppSettings> appSettings,
+            IOptionsSnapshot<AppSettings> appSettings,
             IUrlHelper urlHelper)
         {
             this.appSettings = appSettings;

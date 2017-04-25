@@ -21,20 +21,13 @@
     /// </summary>
     public class SitemapService : SitemapGenerator, ISitemapService
     {
-        #region Fields
-
+        private readonly IOptionsSnapshot<CacheProfileSettings> cacheProfileSettings;
         private readonly IDistributedCache distributedCache;
         private readonly ILogger<SitemapService> logger;
         // $Start-ApplicationInsights$
         private readonly TelemetryClient telemetryClient;
         // $End-ApplicationInsights$
         private readonly IUrlHelper urlHelper;
-
-        private readonly TimeSpan expirationDuration;
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapService" /> class.
@@ -47,7 +40,7 @@
         // $End-ApplicationInsights$
         /// <param name="urlHelper">The URL helper.</param>
         public SitemapService(
-            IOptions<CacheProfileSettings> cacheProfileSettings,
+            IOptionsSnapshot<CacheProfileSettings> cacheProfileSettings,
             IDistributedCache distributedCache,
             ILogger<SitemapService> logger,
             // $Start-ApplicationInsights$
@@ -55,8 +48,7 @@
             // $End-ApplicationInsights$
             IUrlHelper urlHelper)
         {
-            CacheProfile cacheProfile = cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
-            this.expirationDuration = TimeSpan.FromSeconds(cacheProfile.Duration.Value);
+            this.cacheProfileSettings = cacheProfileSettings;
             this.distributedCache = distributedCache;
             this.logger = logger;
             // $Start-ApplicationInsights$
@@ -64,10 +56,6 @@
             // $End-ApplicationInsights$
             this.urlHelper = urlHelper;
         }
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Gets the sitemap XML for the current site. If an index of null is passed and there are more than 25,000
@@ -92,7 +80,7 @@
                     sitemapDocuments,
                     options: new DistributedCacheEntryOptions()
                     {
-                        AbsoluteExpirationRelativeToNow = expirationDuration
+                        AbsoluteExpirationRelativeToNow = this.GetExpirationDuration()
                     });
             }
 
@@ -103,10 +91,6 @@
 
             return sitemapDocuments[index.HasValue ? index.Value : 0];
         }
-
-        #endregion
-
-        #region Protected Methods
 
         /// <summary>
         /// Gets a collection of sitemap nodes for the current site.
@@ -166,6 +150,10 @@
             this.logger.LogWarning(exception.Message, exception);
         }
 
-        #endregion
+        private TimeSpan GetExpirationDuration()
+        {
+            var cacheProfile = this.cacheProfileSettings.Value.CacheProfiles[CacheProfileName.SitemapNodes];
+            return TimeSpan.FromSeconds(cacheProfile.Duration.Value);
+        }
     }
 }

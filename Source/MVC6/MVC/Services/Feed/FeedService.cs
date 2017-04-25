@@ -24,8 +24,6 @@
     /// </summary>
     public sealed class FeedService : IFeedService
     {
-        #region Fields
-
         /// <summary>
         /// The feed universally unique identifier. Do not use the URL of your feed as this can change.
         /// A much better ID is to use a GUID which you can generate from Tools->Create GUID in Visual Studio.
@@ -33,13 +31,9 @@
         private const string FeedId = "[INSERT GUID HERE]";
         private const string PubSubHubbubHubUrl = "https://pubsubhubbub.appspot.com/";
 
-        private readonly IOptions<AppSettings> appSettings;
+        private readonly IOptionsSnapshot<AppSettings> appSettings;
         private readonly HttpClient httpClient;
         private readonly IUrlHelper urlHelper;
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FeedService"/> class.
@@ -47,17 +41,13 @@
         /// <param name="appSettings">The application settings.</param>
         /// <param name="urlHelper">The URL helper.</param>
         public FeedService(
-            IOptions<AppSettings> appSettings,
+            IOptionsSnapshot<AppSettings> appSettings,
             IUrlHelper urlHelper)
         {
             this.appSettings = appSettings;
             this.urlHelper = urlHelper;
             this.httpClient = new HttpClient();
         }
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Gets the feed containing meta data about the feed and the feed entries.
@@ -172,10 +162,6 @@
                     }));
         }
 
-        #endregion
-
-        #region Private Methods
-
         private SyndicationPerson GetPerson()
         {
             return new SyndicationPerson()
@@ -261,8 +247,6 @@
 
             return Task.FromResult(items);
         }
-
-        #endregion
     }
     // $Start-TargetFramework-NetFramework$
 #endif

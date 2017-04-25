@@ -18,20 +18,14 @@
 
     public class SitemapPingerService : ISitemapPingerService
     {
-        #region Fields
-
         private readonly HttpClient httpClient;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogger<SitemapPingerService> logger;
-        private readonly IOptions<SitemapSettings> sitemapSettings;
+        private readonly IOptionsSnapshot<SitemapSettings> sitemapSettings;
         // $Start-ApplicationInsights$
         private readonly TelemetryClient telemetryClient;
         // $End-ApplicationInsights$
         private readonly IUrlHelper urlHelper;
-
-        #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SitemapPingerService"/> class.
@@ -47,7 +41,7 @@
         public SitemapPingerService(
             IHostingEnvironment hostingEnvironment,
             ILogger<SitemapPingerService> logger,
-            IOptions<SitemapSettings> sitemapSettings,
+            IOptionsSnapshot<SitemapSettings> sitemapSettings,
             // $Start-ApplicationInsights$
             TelemetryClient telemetryClient,
             // $End-ApplicationInsights$
@@ -63,10 +57,6 @@
 
             this.httpClient = new HttpClient();
         }
-
-        #endregion
-
-        #region Public Methods
 
         /// <summary>
         /// Send (or 'ping') the URL of this sites sitemap.xml file to search engines like Google, Bing and Yahoo,
@@ -108,7 +98,5 @@
                 }
             }
         }
-
-        #endregion
     }
 }

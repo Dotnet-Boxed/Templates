@@ -10,8 +10,6 @@
     [Route("[controller]")]
     public sealed class ErrorController : Controller
     {
-        #region Public Methods
-
         /// <summary>
         /// Gets the error view for the specified HTTP error status code. Returns a <see cref="PartialViewResult"/> if
         /// the request is an Ajax request, otherwise returns a full <see cref="ViewResult"/>.
@@ -40,7 +38,5 @@
 
             return result;
         }
-
-        #endregion
     }
 }

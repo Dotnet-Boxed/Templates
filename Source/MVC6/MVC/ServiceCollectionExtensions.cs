@@ -76,7 +76,7 @@
 
         /// <summary>
         /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR
-        /// Objects (POCO) and adding <see cref="IOptions{}"/> objects to the services collection.
+        /// Objects (POCO) and adding <see cref="IOptionsSnapshot{}"/> objects to the services collection.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
@@ -84,13 +84,13 @@
         public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                // Adds IOptions<AppSettings> to the services container.
+                // Adds IOptionsSnapshot<AppSettings> to the services container.
                 .Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)))
                 // $Start-Sitemap$
-                // Adds IOptions<SitemapSettings> to the services container.
+                // Adds IOptionsSnapshot<SitemapSettings> to the services container.
                 .Configure<SitemapSettings>(configuration.GetSection(nameof(SitemapSettings)))
                 // $End-Sitemap$
-                // Adds IOptions<CacheProfileSettings> to the services container.
+                // Adds IOptionsSnapshot<CacheProfileSettings> to the services container.
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
         }
 

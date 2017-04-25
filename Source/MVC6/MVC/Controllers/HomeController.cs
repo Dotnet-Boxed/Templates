@@ -15,9 +15,7 @@
 
     public class HomeController : Controller
     {
-        #region Fields
-
-        private readonly IOptions<AppSettings> appSettings;
+        private readonly IOptionsSnapshot<AppSettings> appSettings;
         // $Start-Windows81IE11EdgeFavicon$
         private readonly IBrowserConfigService browserConfigService;
         // $End-Windows81IE11EdgeFavicon$
@@ -44,10 +42,6 @@
         // $Start-Sitemap$
         private readonly ISitemapService sitemapService;
         // $End-Sitemap$
-
-        #endregion
-
-        #region Constructors
 
         public HomeController(
             // $Start-Windows81IE11EdgeFavicon$
@@ -76,7 +70,7 @@
             // $Start-Sitemap$
             ISitemapService sitemapService,
             // $End-Sitemap$
-            IOptions<AppSettings> appSettings)
+            IOptionsSnapshot<AppSettings> appSettings)
         {
             this.appSettings = appSettings;
             // $Start-Windows81IE11EdgeFavicon$
@@ -106,8 +100,6 @@
             this.sitemapService = sitemapService;
             // $End-Sitemap$
         }
-
-        #endregion
 
         [HttpGet("", Name = HomeControllerRoute.GetIndex)]
         public IActionResult Index()
