@@ -24,6 +24,9 @@
     using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
+#if (Prefix)
+    using StackifyMiddleware;
+#endif
 
     /// <summary>
     /// The main start-up class for the application.
@@ -183,6 +186,11 @@
                         .AddDebug());
 
             application
+#if (Prefix)
+                .UseIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseMiddleware<RequestTracerMiddleware>())
+#endif
 #if (HttpsEverywhere)
                 // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
                 // Development. The port number to use is taken from the launchSettings.json file which Visual

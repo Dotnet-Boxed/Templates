@@ -351,6 +351,27 @@
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
     },
+    // Profiler
+    "Profiler": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Prefix",
+          "description": "Built by the team at Stackify.  Prefix has almost no negative impact on application performance. Install the Prefix tool from https://prefix.io, then view your profiling information from multiple apps in one web page."
+        },
+        {
+          "choice": "None",
+          "description": "Not using any profiler."
+        }
+      ],
+      "defaultValue": "None",
+      "description": "Collect and view profiling information about HTTP requests, database queries and exceptions when running your app in development mode."
+    },
+    "Prefix": {
+      "type": "computed",
+      "value": "(Profiler == \"Prefix\")"
+    },
     // AuthoringMode
     "AuthoringMode": {
       "type": "generated",

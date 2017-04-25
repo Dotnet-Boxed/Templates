@@ -1,4 +1,4 @@
-# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget%20Icon.png) [ASP.NET Core MVC 6 API Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
+﻿# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget%20Icon.png) [ASP.NET Core MVC 6 API Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
 
 ![ASP.NET Core MVC 6 API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
 
@@ -36,7 +36,10 @@ The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to t
   - **.NET Core** - Run cross platform (on Windows, Mac and Linux). The framework is made up of NuGet packages which can be shipped with the application so it is fully stand-alone.
   - **.NET Framework** - Gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed.
   - **Both** (Default) - Target both .NET Core and .NET Framework.
-
+- **Profiler** - Collect and view profiling information about HTTP requests, database queries and exceptions when running your app in development mode.
+  - **Prefix** - Built by the team at Stackify.  Prefix has almost no negative impact on application performance. Install the Prefix tool from https://prefix.io, then view your profiling information from multiple apps in one web page.
+  - **None** (Default) - No profiler is being used.
+  - 
 #### Security
 
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled. Configures the primary and reverse proxy web servers for best security and adds a development certificate file for use in your development environment.
