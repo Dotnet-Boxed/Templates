@@ -12,6 +12,7 @@
 MVC 6 API
 - Added Prefix.io profiler option.
 - Upgraded NWebSec from 1.0.0 to 1.1.0.
+- Run health checks in parallel in StatusController.
 - 
 ### 1.5.0
 MVC 6 API

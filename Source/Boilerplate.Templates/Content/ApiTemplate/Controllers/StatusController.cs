@@ -17,10 +17,10 @@
 #endif
     public class StatusController : ControllerBase
     {
-        private IEnumerable<IConnectionTester> connectionTesters;
+        private IEnumerable<IHealthChecker> healthCheckers;
 
-        public StatusController(IEnumerable<IConnectionTester> connectionTesters) =>
-            this.connectionTesters = connectionTesters;
+        public StatusController(IEnumerable<IHealthChecker> healthCheckers) =>
+            this.healthCheckers = healthCheckers;
 
         /// <summary>
         /// Gets the status of this API and it's dependencies, giving an indication of it's health.
@@ -38,10 +38,14 @@
         {
             try
             {
-                foreach (var connectionTester in this.connectionTesters)
+                var tasks = new List<Task>();
+
+                foreach (var healthChecker in this.healthCheckers)
                 {
-                    await connectionTester.TestConnection();
+                    tasks.Add(connectionTester.CheckHealth());
                 }
+
+                await Task.WhenAll(tasks);
             }
             catch
             {

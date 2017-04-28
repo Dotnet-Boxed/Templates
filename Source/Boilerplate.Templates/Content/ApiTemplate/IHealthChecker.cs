@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
 
-    public interface IConnectionTester
+    public interface IHealthChecker
     {
-        Task TestConnection();
+        Task CheckHealth();
     }
 }
