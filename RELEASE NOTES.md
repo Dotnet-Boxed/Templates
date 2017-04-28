@@ -2,7 +2,7 @@
 
 - [dotnet new Boilerplate.Templates NuGet Package](#user-content-dotnet-new-boilerplatetemplates-nuget-package)
   - [MVC 6 API](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206%20API.md)
-- [Visual Studio Extension (VSIX)]()
+- [Visual Studio Extension (VSIX)](#user-content-visual-studio-extension-vsix)
   - [MVC 5](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%205.md)
   - [MVC 6](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206.md)
 
