@@ -179,8 +179,9 @@
                 // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
                 // Add the Serilog package to the project before uncommenting the line below.
                 // .AddSerilog()
+                // Log to the console and Visual Studio debug window if in development mode.
                 .AddIf(
-                    hostingEnvironment.IsDevelopment(),
+                    this.hostingEnvironment.IsDevelopment(),
                     x => x
                         .AddConsole(configuration.GetSection("Logging"))
                         .AddDebug());
