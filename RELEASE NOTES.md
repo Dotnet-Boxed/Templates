@@ -1,57 +1,78 @@
-﻿# Boilerplate.Templates 1.6.0
+﻿Project templates come in two delivery methods, each contains different project templates:
+
+- [dotnet new Boilerplate.Templates NuGet Package](#dotnet-new-boilerplate-templates-nuget-package)
+  - MVC 6 API
+- [Visual Studio Extension (VSIX)]()
+  - MVC 5
+  - MVC 6
+
+# dotnet new Boilerplate.Templates NuGet Package
+
+### 1.6.0
 MVC 6 API
 - Added Prefix.io profiler option.
-
-# Boilerplate.Templates 1.5.0
+- Upgraded NWebSec from 1.0.0 to 1.1.0.
+- 
+### 1.5.0
 MVC 6 API
 - Added API Versioning support for Swagger.
 
-# Boilerplate.Templates 1.4.0
+### 1.4.0
 MVC 6 API
 - Added OPTIONS endpoint.
 - Added HEAD endpoints to all GET endpoints.
 - Update Swashbuckle.AspNetCore to 1.0.0-rc3
 - Use AddMvcOptions instead the delegate in AddMvcCore.
 
-# Boilerplate.Templates 1.3.0
+### 1.3.0
 MVC 6 API
 - Added Versioning feature.
 - Add Link HTTP Header to GET /cars to show next, previous, first, last page URL.
 
-# Boilerplate.Templates 1.2.0
+### 1.2.0
 MVC 6 API
 - Upgraded to VS 2017 csproj format.
 - NWebSec upgraded to 1.0.0.
 - Disable the Application Request Routing (AAR) in web.config if using Azure.
 - Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
 
-# VSIX Version 6.0.0
+### 1.1.2
+MVC 6 API
+- Fixed the CORS feature which had duplicate code. 
+- Refactoring ConfigureServices to use extension methods for everything.
+- Added more comments.
+
+### 1.1.1
+MVC 6 API
+- Fixed Swagger feature.
+- Removed conditional compilation symbols from created project.
+
+### 1.0.0
+MVC 6 API
+- Initial version.
+
+
+
+# (VSIX)
+
+# 6.1.0
+MVC 6
+- Use IOptionsSnapshot instead of IOptions
+- Removed #region's.
+- Upgraded NWebSec from 1.0.0 to 1.1.0.
+
+# 6.0.0
 MVC 6
 - Upgraded to VS 2017 csproj format.
 - NWebSec upgraded to 1.0.0.
 - Disable the Application Request Routing (AAR) in web.config if using Azure.
 - Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
 - 
-# Boilerplate.Templates 1.1.2
-MVC 6 API
-- Fixed the CORS feature which had duplicate code. 
-- Refactoring ConfigureServices to use extension methods for everything.
-- Added more comments.
-
-# Boilerplate.Templates 1.1.1
-MVC 6 API
-- Fixed Swagger feature.
-- Removed conditional compilation symbols from created project.
-
-# Boilerplate.Templates 1.0.0
-MVC 6 API
-- Initial version.
-
-# VSIX Version 5.1.1
+# 5.1.1
 MVC 6
 - Update NuGet packages.
 
-# VSIX Version 5.1.0
+# 5.1.0
 MVC 6
 - Upgrade ASP.NET Core to 1.1.1.
 - Upgrade Application Insights to 2.0.0.
@@ -59,7 +80,7 @@ MVC 6
 - Use self-signed pfx certificate in Development environment.
 - Upgrade jquery-validation to 1.16.0 and use Subresource Integrity (SRI) for it.
 
-# VSIX Version 5.0.0
+# 5.0.0
 MVC 6
 - Upgraded to ASP.NET Core 1.1.
 - Upgraded all NuGet packages.
@@ -70,7 +91,7 @@ MVC 6
 - Added cloud provider feature which adds logging integration into the Azure portal.
 - Added current project as tag helper source to _ViewImports.cshtml so that View Components can be used as tag helpers.
 
-# VSIX Version 4.7.0
+# 4.7.0
 MVC 6
 - Add the Cache-Control HTTP header to the static files middleware and make it config driven.
 - Removed bower.json, using package.json instead.
@@ -88,7 +109,7 @@ MVC 6
 - Removed Modernizr.
 - Use the new portable .pdb file format in project.json buildOptions.
 
-# VSIX Version 4.6.0
+# 4.6.0
 MVC 5 & MVC 6
 - Added item to ReadMe.html to use the Google CSP Evaluator to validate the sites CSP policy.
 MVC 6
@@ -97,42 +118,42 @@ MVC 6
 - launchSettings.json updated to add profiles to run the app using the Staging and Production environments.
 - Add crossorigin="anonymous" attribute to external scripts supporting Access-Control-Allow-Origin: *.
 
-# VSIX Version 4.5.0
+# 4.5.0
 MVC 6
 - Added 'dotnet watch' launch profile to launchSettings.json, allowing you to edit code and refresh the browser to see your changes while
   the app is running.
 
-# VSIX Version 4.4.0
+# 4.4.0
 MVC 6
 - Added Web Server feature that lets you select which web server you want to target.
 - nginx.conf added to configure the Nginx web server.
 - UseRandomizedStringHashAlgorithm setting Moved from web.config to app.config.
 - HttpExceptionMiddleware and InternalServerErrorOnExceptionMiddleware logs information messages.
 
-# VSIX Version 4.3.0
+# 4.3.0
 MVC 6
 - Get the environment in gulpfile.js by reading the launchSettings.json file if an environment variable does not exist.
 - Google Page Speed is now an optional feature under performance.
 - Set AddServerHeader to false for the Kestrel Web Server in Program.cs.
 
-# VSIX Version 4.2.1
+# 4.2.1
 MVC 6
 - Renamed the template in the File -> New Project window.
 
-# VSIX Version 4.2.0
+# 4.2.0
 MVC 6
 - Updated NWebSec to the latest ASP.NET Core 1.0 version.
 - AddApplicationInsights in Startup.ConfigureServices now added fluently as it now returns IServiceCollection.
 
-# VSIX Version 4.1.0
+# 4.1.0
 MVC 6
 - Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/108
 
-# VSIX Version 4.0.0
+# 4.0.0
 MVC 6
 - Updated to ASP.NET Core 1.0 RTM.
 
-# VSIX Version 3.2.0
+# 3.2.0
 MVC 5 & 6
 - Removed the X-UA-Compatible HTTP header from web.config.
 MVC 6
@@ -149,16 +170,16 @@ MVC 6
 - Added the autostrip-json-comments NPM package to package.json and require statement to gulpfile.js to allow comments
   in config.json and hosting.json.
 
-# VSIX Version 3.1.1
+# 3.1.1
 MVC 6
 - Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/104
 
-# VSIX Version 3.1.0
+# 3.1.0
 MVC 6
 - Enable UseRandomizedStringHashAlgorithm for .NET Framework 4.6.1 in web.config.
 - Dont need the 404 middleware in RC2, so it has been removed from the end of the pipeline in Startup.cs.
 
-# VSIX Version 3.0.0
+# 3.0.0
 MVC 5
 - Took my name out of the AssemblyCopyright attribute in AssemblyInfo.cs and left it blank for users to fill in.
 MVC 6
@@ -176,12 +197,12 @@ MVC 6
 - The Glimpse feature has been hidden and turned off by default until it supports RC2.
 - Pre-compiled views have been removed because Microsoft removed support in RC2.
 
-# VSIX Version 2.18.1
+# 2.18.1
 MVC 6
 - Removed some commented out code relating to Elmah and trace.axd which is not relevant in MVC 6.
 - Added a '~' at the beginning of all URL's to local resources.
 
-# VSIX Version 2.18.0
+# 2.18.0
 - Fixed SitemapGenerator bug https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/96.
 - Boilerplate.Web.Mvc NuGet packages updated for the above change.
 MVC 5
@@ -199,19 +220,19 @@ updated.
 - applicationinsights-js added to bower.json and application-insights.js removed from scripts. gulpfile.js changed to
 use the source of the application insights js file.
 
-# VSIX Version 2.17.0
+# 2.17.0
 - Extension now installs for a single user, rather than all users. This enables it to auto-update.
 MVC 6
 - RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT in gulpfile.js and Startup.cs.
 - AddUserSecrets for configuration only done in Development for security in Startup.Configuration.cs.
 - Changed comments for how to add/remove environment variables in Startup.Configuration.cs.
 
-# VSIX Version 2.16.0
+# 2.16.0
 MVC 6
 - Added HttpRequestExtensions IsLocalRequest extension method.
 - Modified launchSettings.json so that the site starts on the same port when started from Kestrel or IIS Express.
 
-# VSIX Version 2.15.0
+# 2.15.0
 MVC 6
 - Boilerplate.Web.Mvc6 Updated:
     - Performance improvements.
@@ -238,35 +259,35 @@ MVC 6
 - Updated rimraf to 2.5.2.
 - Deleted tsconfig.html and moved comments to tsconfig.json as it now supports comments.
 
-# VSIX Version 2.14.0
+# 2.14.0
 MVC 6
 - Change error controller route to start at 400 to 599.
 
-# VSIX Version 2.13.0
+# 2.13.0
 MVC 6
 - Merged [Fixed problem with broken error handling on ReExecute](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/85).
 - Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/87).
 
-# VSIX Version 2.12.0
+# 2.12.0
 MVC 5
 - Add a note when debugging, always starts the site at the home page (See [this](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/84) issue).
 
-# VSIX Version 2.11.0
+# 2.11.0
 MVC 5
 - Target Framework now respects the selected version in the new project dialogue.
 
-# VSIX Version 2.10.0
+# 2.10.0
 MVC 5
 - Upgraded to .NET 4.5.2
 
-# VSIX Version 2.9.9
+# 2.9.9
 MVC 6
 - Removed trailing white space.
 - Improved the Subresource Integrity tag helper (SRI) to generate the SRi from a local file.
 - Changed gulpfile.js to only copy third party files instead of running them through the pipeline.
 - Upgraded the tag helpers NuGet package.
 
-# VSIX Version 2.9.8
+# 2.9.8
 MVC 5
 - Upgraded to TemplateBuilder NuGet package version 1.1.4.9-beta to fix a bug where using a '.'
 in the name of a project causes the NuGet package hint paths to break.
@@ -274,7 +295,7 @@ MVC 6
 - Packages file path in the .xproj is now corrected automatically with the update to the latest version of
 TemplateBuilder and the new Wizard I added to it.
 
-# VSIX Version 2.9.7
+# 2.9.7
 MVC 6
 - All NuGet packages updated.
 - Dropped TagHelpers NuGet package dependency on the base NuGet package.
@@ -291,7 +312,7 @@ error result.
 exception occurs.
 - Renamed everything from ASP.NET 5 to ASP.NET Core.
 
-# VSIX Version 2.9.6
+# 2.9.6
 MVC 5
 - Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it
 themselves if they need it.
@@ -301,7 +322,7 @@ MVC 6
 - Added a test task to gulpfile.js.
 - Renamed Test folder to Tests.
 
-# VSIX Version 2.9.5
+# 2.9.5
 MVC 5 & 6
 - Updated Newtonsoft.Json to 8.0.2.
 - Updated jQuery to 2.2.0.
@@ -318,17 +339,17 @@ the sitemap.
 - Changed gulpfile.js to add a lintSources variable with defaults to skip the application-insights.js file.
 - Add the new ASPNET_ENVIRONMENT variable in gulpfile.js. Leave the old ASPNET_ENV until RC2 upgrade.
 
-# VSIX Version 2.9.4
+# 2.9.4
 MVC 6
 - Fix issue where removing application insights caused a compile error in Startup.ContentSecurityPolicy.cs.
 
-# VSIX Version 2.9.3
+# 2.9.3
 MVC 6
 - Added new feature selection icons.
 - Updated the MVC 6 Technology Map image.
 - Updated the ReadMe to uncomment the Glimpse TODO and make the social TODO's conditional.
 
-# VSIX Version 2.9.2
+# 2.9.2
 MVC 5 & 6
 - Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when
 using the RedirectToCanonicalUrlAttribute. Added a note to use this attribute in the AccountController when using
@@ -341,27 +362,27 @@ MVC 6
 statement to RazorPreCompilation.cs.
 - Added a note to use https://report-uri.io/ to report CSP violation reports.
 
-# VSIX Version 2.9.1
+# 2.9.1
 MVC 6
 - Removed Hammer.js.
 - Fix Application Insights not registering exceptions in Startup.cs.
 
-# VSIX Version 2.9.0
+# 2.9.0
 MVC 6
 - Upgraded NWebSec to latest version and made feature visible but experimental.
 - Fixed the manifest.json link having a trailing slash in _Layout.cshtml.
 
-# VSIX Version 2.8.2
+# 2.8.2
 MVC 6
 - Added NWebSec security through HTTP Headers to Startup.Filters and project.json. Turned off and hidden for now.
 - Fixed the browserconfig.xml link having a trailing slash in _Layout.cshtml.
 - Fixed the Bootstrap CSS not pointing to the correct folder for the fonts in site.scss.
 
-# VSIX Version 2.8.1
+# 2.8.1
 MVC 6
 - webroot setting moved from project.json to hosting.json.
 
-# VSIX Version 2.8.0
+# 2.8.0
 MVC 5 & 6
 - Added a note to ReadMe.html to turn on Azure SQL Database Threat Detection.
 - Updated notes in ReadMe.html about where to get free SSL certificates.
@@ -384,7 +405,7 @@ MVC 6
 - ApplicationBasePath no longer needs to be set in Startup.Configuration.cs (https://github.com/aspnet/Announcements/issues/88).
 - Move Autoprefixer before sass in gulpfile.js (https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/44).
 
-# VSIX Version 2.7.0
+# 2.7.0
 MVC 5
 - Added a note to ReadMe.html to enable the CSP upgrade-insecure-requests directive in Startup.cs.
 MVC 6
@@ -393,7 +414,7 @@ MVC 6
 - SitemapPingerService now stores it's pinging locations in config.json using the SitemapSettings.
 - SitemapPingerService now uses the hosting environment and only works in the production environment.
 
-# VSIX Version 2.6.0
+# 2.6.0
 MVC 5
 - Added a commented out line for adding the Content-Security-Policy:upgrade-insecure-requests directive in Startup.cs.
 - CSP Policy changed to add wss://localhost:* to the allowed connect-src list in debug mode to fix browser link.
@@ -404,7 +425,7 @@ MVC 6
 - SitemapService changed to use the IDistributedCache instead of IMemoryCache.
 - Added the RouteConvention to the NuGet package to enable global route prefixes. See http://www.strathweb.com/2015/10/global-route-prefixes-with-attribute-routing-in-asp-net-5-and-mvc-6/.
 
-# VSIX Version 2.5.0
+# 2.5.0
 MVC 5
 - CacheService is now SingleInstance.
 - Fixed missing image in Readme.html.
@@ -413,7 +434,7 @@ MVC 6
 - Added a note for NPM file paths too long.
 - Added UseCookiePolicy middleware to set better more secure cookie defaults.
 
-# VSIX Version 2.4.0
+# 2.4.0
 MVC 5
 - Added a more prominent comment about removing settings from Web.config when using older versions of IIS.
 MVC 6
@@ -431,7 +452,7 @@ MVC 6
 - Startup.Debugging.cs modified to only add the console logger if running in the console using the WebListener server.
 - Razor pre-compilation updated for Beta 8 in RazorPreCompilation.cs and Startup.cs.
 
-# VSIX Version 2.3.0
+# 2.3.0
 MVC 5 & 6
 - Fixed a bug with the OpenGraphMedia type which was not handling HTTPS schemes correctly.
 - Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
@@ -458,7 +479,7 @@ MVC 6
 - The Twitter and Open Graph HTML helpers are now also tag helpers and can be used as such.
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 
-# VSIX Version 2.2.0
+# 2.2.0
 MVC 6
 - Added the Feature Selection Wizard.
 - Added Mocha JavaScript tests.
@@ -471,7 +492,7 @@ Feature Selection Wizard
 - Features can now be invisible to the UI.
 - Lots more improvements.
 
-# VSIX Version 2.1.4
+# 2.1.4
 MVC 5 & 6
 - site.js updated to use the revealing prototype pattern instead of the revealing module pattern.
 - site.js updated with comments about this vs self.
@@ -495,7 +516,7 @@ MVC 6 API (Coming Soon)
 Feature Selection Wizard (Coming Soon)
 - More improvements
 
-# VSIX Version 2.1.3
+# 2.1.3
 MVC 5 & 6
 - The calculator in site.js now throws Error instead of a string.
 MVC 6
@@ -513,7 +534,7 @@ MVC 6 API (Coming Soon)
 - Configured SideWaffle files.
 - Added to VSIX but commented out.
 
-# VSIX Version 2.1.2
+# 2.1.2
 MVC 5 & 6
 - Updated site.js with better comments, fixed undefined bug, added a namespace and calculator example using the
   revealing module pattern with full comments.
@@ -523,14 +544,14 @@ Feature Selection Wizard (Coming Soon)
 - More major enhancements and bug fixes.
 - New unit test project with ProjectService tests.
 
-# VSIX Version 2.1.1
+# 2.1.1
 MVC 6
 - Move UseStaticFiles in Startup.cs so it is the first thing to execute in the pipeline for better performance.
 - Startup.Options.cs Fixed comment.
 - Startup.Routing.cs Cleaned up IgnoreRoute comments.
 - First check-in of Feature Selection Wizard, not used yet but will allow you to select template features.
 
-# VSIX Version 2.1.0
+# 2.1.0
 MVC 5 & 6
 - browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can
   also customize it with your own tile XML. See BrowserConfigService, HomeController and constants for changes.
@@ -543,7 +564,7 @@ MVC 6
 - Site.less now imports bootstrap and bootstrap-touch-carousel.
 - Removed gulp-recess as it does not support the latest version of LESS. Added gulp-csslint instead.
 
-# VSIX Version 2.0.0
+# 2.0.0
 MVC 5 & 6
 - Template now has a Preview Image.
 - Default project name changed to WebApplication.
@@ -551,13 +572,13 @@ MVC 6
 - Cache Profile settings are now stored in a CacheProfileSettings configuration section in config.json.
 - Released!!!
 
-# VSIX Version 1.2.9
+# 1.2.9
 MVC 5
 - Web.config Set <httpErrors existingResponse="PassThrough"> for the Debug version.
 - Web.config Set <httpErrors existingResponse="Replace"> for the Release version.
 - Added link to http://rehansaeed.com/dynamically-generating-robots-txt-using-asp-net-mvc/
 
-# VSIX Version 1.2.8
+# 1.2.8
 MVC 5
 - SideWaffle fix: New GUID now generated for each project.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
@@ -594,7 +615,7 @@ MVC 6
 - web command updated in project.json and split out into hosting.ini file.
 - Added CancellationToken to RSS Feed to allow cancellation of requests. See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
 
-# VSIX Version 1.2.7
+# 1.2.7
 MVC 5
 - NoTrailingSlashAttribute updated to handle URL's with query strings.
 - Boilerplate.Web.Mvc5 NuGet package updated to 1.0.17 containing the above change.
@@ -604,7 +625,7 @@ MVC 6
 - project.json keyFile path fixed.
 - SideWaffle template settings updated in _project.cstemplate.xml.
 
-# VSIX Version 1.2.6
+# 1.2.6
 MVC 5
 - Added trailing slashes to the URL's under httpErrors.
 - RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter
@@ -623,13 +644,13 @@ MVC 6
 - Elmah constant removed from ControllerName.cs as it was no longer needed.
 - ReadMe.html updated with a comment about Web.config settings not existing when using older versions of IIS 7.5 and 8.
 
-# VSIX Version 1.2.5
+# 1.2.5
 - No changes. The release messed up somehow.
 
-# VSIX Version 1.2.4
+# 1.2.4
 - No changes. The release messed up somehow.
 
-# VSIX Version 1.2.3
+# 1.2.3
 MVC 5
 - favicon.ico moved to root of site.
 - Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com and favicon.ico meta tag removed.
@@ -644,7 +665,7 @@ MVC 6
 - Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
 - Added manifest.json and browserconfig.xml links to Home.cshtml.
 
-# VSIX Version 1.2.2
+# 1.2.2
 MVC 5
 - maxcdn.bootstrapcdn.com added to font-src CSP policy directive to enable font awesome to work.
 - fallback/font-awesome.js made generic so it can handle multiple fallback stylesheets.
@@ -657,7 +678,7 @@ MVC 6
 - Environments addedto gulpfile.js.
 - Watches fixed in gulpfile.js.
 
-# VSIX Version 1.2.1
+# 1.2.1
 MVC 5
 - Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle
   failover much better.
@@ -669,7 +690,7 @@ MVC 5
 - Updated _Layout.cshtml with the new site bundle and with a new meta tag to help with the font awesome fallback.
 - Updated _Layout.cshtml with a new site title icon in the toolbar.
 
-# VSIX Version 1.2.0
+# 1.2.0
 MVC 5
 - Renamed ContentDeliveryNetwork.MaxCdn.FontAwesome to add Url at the end.
 - Removed 'Learn More' buttons from Index.cshtml.
@@ -689,7 +710,7 @@ MVC 6
 - Changed HomeController to return a BadRequest response if the sitemap XML is null.
 - Lots more...
 
-# VSIX Version 1.1.9
+# 1.1.9
 MVC 5
 - Dropped support for IE 8 by removing the Respond.js library. IE 8 is used by 2.19% of global users, mostly in less
   developed countries and governments/businesses too lazy to upgrade from Windows XP.
@@ -699,7 +720,7 @@ MVC 5
     - Removed Respond.js from _Layout.cshtml.
 - Added Font Awesome CDN from MaxCDN.com.
 
-# VSIX Version 1.1.8
+# 1.1.8
 MVC 5
 - Updated NuGet packages:
     - Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.
@@ -710,7 +731,7 @@ MVC 5
 - HSTS no longer includes subdomains by default in Startup.cs.
 - Sample Copyright text fixed in FeedService.cs.
 
-# VSIX Version 1.1.7
+# 1.1.7
 MVC 5
 - Updated NuGet packages:
     - Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
@@ -724,17 +745,17 @@ MVC 5
 MVC 6
 - Various Updates
 
-# VSIX Version 1.1.6
+# 1.1.6
 - Minor formatting, line length and spelling fixes to _Layout.cshtml.
 
-# VSIX Version 1.1.5
+# 1.1.5
 - Thanks to Kevin P. Rice for discovering that the 192x192 icon has to come before the 96x96, 32x32 and 16x16 icons due
   to a FireFox bug.
 
-# VSIX Version 1.1.4
+# 1.1.4
 - RehanSaeed.co.uk moved to RehanSaeed.com. All comments and links updated to reflect this.
 
-# VSIX Version 1.1.3
+# 1.1.3
 MVC 5
 - FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new
   TextSyndicationContent.
@@ -763,14 +784,14 @@ MVC 6
     - Configure Routing and lower-case URL's.
     - Add UseRuntimeInfoPage.
 
-# VSIX Version 1.1.2
+# 1.1.2
 - Implemented PubSubHubbub protocol to publish changes in the Atom feed to subscribers. See IFeedServices.cs and FeedService.cs.
 - Added a note to ReadMe.html to call IFeedServices.PublishUpdate to publish PubSubHubbub updates to subscribers.
 - ErrorModel.cs deleted. Although it was being passed to the error views, we did not use it.
 - Lines now wrap at 120 characters.
 - Ran spell-check and fixed spelling errors in several files.
 
-# VSIX Version 1.1.1
+# 1.1.1
 - Updated ReadMe.html
     - New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
     - New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
@@ -782,7 +803,7 @@ MVC 6
     - Added ValidateHeaderAntiForgeryTokenAttribute which can validate anti-forgery tokens for Ajax posts by checking the HTTP headers instead of the form inputs.
     - Updated comment in RedirectToCanonicalUrlAttribute with link from Bing, explaining why 301 redirects are better than canonical URL's.
 
-# VSIX Version 1.1.0
+# 1.1.0
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
 - Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the
   .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
@@ -802,13 +823,13 @@ MVC 6
     - Twitter card and Open Graph meta tags added to the Home.cshtml, About.cshtml and Contact.cshtml files using the new OpenGraph helper.
     - open-graph-1200x630.png file added to be used in the Open Graph meta tags and displayed when someone shares the site on Facebook.
 
-# VSIX Version 1.0.45
+# 1.0.45
 - Added Elmah Controller Name to ControllerName.cs
 - Ignore requests for the ErrorController in the RedirectToCanonicalUrlAttribute.cs.
 - Updated Modernizr bundle to use CDN in BundleConfig.cs and updated comments.
 - Lots of files changed for StyleCop compliance, mostly fixing spelling mistakes and comments.
 
-# VSIX Version 1.0.44
+# 1.0.44
 - Elmah.Mvc NuGet package updated from 2.1.1 to 2.1.2.
 - Autofac.Mvc5 NuGet package updated from 3.3.3 to 3.3.4.
 - New Elmah.Mvc app setting added to Web.config file called elmah.mvc.UserAuthCaseSensitive.
@@ -828,25 +849,25 @@ MVC 6
     - Changed example.com to *.example.com.
     - Used a string.Join rather than string.Format to create the custom sources for CDN's.
 
-# VSIX Version 1.0.43
+# 1.0.43
 - Glimpse path moved back to /glimpse.axd as the path was no longer working due to a Elmah bug workaround.
 
-# VSIX Version 1.0.42
+# 1.0.42
 - Added the FriendlyUrlHelper to help create SEO and human friendly URL's.
 - Added a note to ReadMe.html to use the FriendlyUrlHelper to create SEO and human friendly URL's.
 - Removed IgnoreRoute statements for Elmah and Glimpse. It turns out you don't need these.
 
-# VSIX Version 1.0.41
+# 1.0.41
 - RedirectToHttpsAttribute set to Compile, rather than Content.
 
-# VSIX Version 1.0.40
+# 1.0.40
 - Corrected thumbnail size in FeedService.cs.
 
-# VSIX Version 1.0.39
+# 1.0.39
 - Fixed the 'Learn More' link to ASP.NET MVC Boilerplate in Index.cshtml.
 - Added a note about session state in Web.config file.
 
-# VSIX Version 1.0.38
+# 1.0.38
 - Added /content/icons/atom-icon-48x48.png and /content/icons/atom-icon-96x48.png for Atom 1.0 feed images.
 - Changed the images referred to in FeedService.cs to point to the above images.
 - Added in a default MapRoute in RouteConfig to work around a Elmah/Elmah.MVC bug.
@@ -857,18 +878,18 @@ MVC 6
 - Added similar settings to the <httpRuntime element in the Web.config with comments.
 - Added a note to ReadMe.html to edit the requestLimits and httpRuntime settings for better security.
 
-# VSIX Version 1.0.37
+# 1.0.37
 - Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
 - Ignore the Elmah pages in RedirectToCanonicalUrlAttribute.
 
-# VSIX Version 1.0.36
+# 1.0.36
 - Fixed the RedirectToHttpsAttribute class not being recognized in the project, thanks to @dls314159 for highlighting this issue.
 - Added two more IgnoreRoute statements to support Elmah, copied from Elmah.MVC (This should be part of Elmah.MVC already, have submitted a pull request to Elmah.MVC. If they accept it, we can remove this code altogether).
 - Added SitemapPingerService.cs and ISitemapPingerService.cs which sends the URL for the sitemap.xml file to Google, Microsoft and Yahoo.
 - Registered the ISitemapPingerService with Autofac in Startup.Container.cs.
 - Added a note in ReadMe.html to call the SitemapPingerService's PingSearchEngines method when your sitemap changes.
 
-# VSIX Version 1.0.35
+# 1.0.35
 - Atom feed now uses absolute URL's instead of the BaseUri. This is because Firefox has a bug and cannot handle relative URL's!!! Updated FeedService.cs.
 - Moved some code around in FeedService.cs to make it easier to read. Uncommented the media enclosure link.
 - Added self URL link to Atom feed in FeedService.cs.
@@ -876,7 +897,7 @@ MVC 6
 - Added Yahoo Media thumbnails to Atom feed entries in FeedService.cs.
 - Added a few content types to ContentType.cs and added some comments.
 
-# VSIX Version 1.0.34
+# 1.0.34
 - Added a AbsoluteContent extension method to UrlHelperExtensions.cs. This gives us an absolute URL to static content.
 - Used AbsoluteContent in OpenSearchService.cs to link to icons.
 - ReadMe.html now has check boxes next to each step which remembers if it was checked or not.
@@ -893,7 +914,7 @@ MVC 6
     - RSS/Atom section added to ReadMe.html
 - Atom, Png, and Jpg ContentType's added to ContentType.cs.
 
-# VSIX Version 1.0.33
+# 1.0.33
 - Added RequirePermanentHttpsAttribute filter which is different from System.Web.Mvc.RequireHttpsAttribute because it does a 301 Permament redirect instead of a 302 temporary redirect.
 - Changed commented out code in FilterConfig.cs to use RequirePermanentHttpsAttribute instead of RequireHttpsAttribute.
 - Added RedirectToCanonicalUrlAttribute filter which redirects requests without lowercase characters or trailing slashes to a valid one for better SEO.
@@ -909,13 +930,13 @@ MVC 6
 - Expanded the comment in RouteConfig.cs about trailing slashes and how Google treats them.
 - Added new 405 Method Not Allowed error page, used by RequireHttpsAttribute.
 
-# VSIX Version 1.0.32
+# 1.0.32
 - Added a comment in RobotsService.cs not to disallow scripts or images.
 - Added a disallow in RobotsService.cs so that the robots.txt stops robots from indexing the error pages.
 - Added About and Contact pages to sitemap.xml in SitemapService.cs
 - Added a note to the Forbidden action in ErrorController.cs that "Unlike a 401 Unauthorized response, authenticating will make no difference.".
 
-# VSIX Version 1.0.31
+# 1.0.31
 - Created IOpenSearchService.cs and OpenSearchService.cs and moved code in HomeController.cs there.
 - Created IRobotsTextService.cs and RobotsTextService.cs and moved code in HomeController.cs there.
 - Added .TrimEnd('/') to site map URL in robots.txt. See RobotsTextService.cs.
@@ -927,18 +948,18 @@ MVC 6
 - Added commented out information about Crawl-delay to RobotsService.cs.
 - Modified the .csproj file so that the IISUrl element is empty. This allows a random port to be chosen each time a project is generated from the template.
 
-# VSIX Version 1.0.30
+# 1.0.30
 - Set elmah.mvc.disableHandleErrorFilter app setting in web.config to true.
 - 500 errors now route to error/internalservererror because there is now a error folder which conflicts with the /error route.
 - Added link to my blog post about CSP at http://rehansaeed.com/content-security-policy-for-asp-net-mvc/ to ReadMe.html and FilterConfig.cs.
 - Added link to my blog post about HTTP Headers at http://rehansaeed.com/nwebsec-asp-net-mvc-security-through-http-headers/ to FilterConfig.cs.
 - Added link to my blog post about internet favicons at http://rehansaeed.com/internet-favicon-madness/ to _Layout.cshtml.
 
-# VSIX Version 1.0.29
+# 1.0.29
 - Enabled Dynamic IP Security in log only mode in the web.config file. It provides a dynamic means of blocking malicious Web requests such as a Denial of Service (DoS) attack.
 - Added a note to the ReadMe.txt file to adjust the Dynamic IP Security settings.
 
-# VSIX Version 1.0.28
+# 1.0.28
 - Add new HTTP error codes to httpErrors in web.config and new static error pages under the Error folder:
     - 403.502 Forbidden errors using a static HTML file. This occurs due to a Denial of Service (Dos) attack.
     - 500.13 Internal Server Error errors using a static HTML file. This occurs because the server is too busy.
@@ -947,15 +968,15 @@ MVC 6
 - Add new ignore routes to RouteConfig.cs to ignore the new static HTML files.
 - Added new note in Readme.html to update the static HTML error files.
 
-# VSIX Version 1.0.27
+# 1.0.27
 - Microsoft CDN Bootstrap URL updated to 3.3.4.
 - Twitter.Bootstrap.Less package updated to 3.3.4.
 
-# VSIX Version 1.0.26
+# 1.0.26
 - Fixed skip to main content link for screen readers in _Layout.cshtml.
 - Added aria-label and maxlength to search text box in _Layout.cshtml.
 
-# VSIX Version 1.0.25
+# 1.0.25
 - Added a search action to HomeController that redirects to Google and with instructions on how to setup your own search.
 - Added opensearch.xml file to site (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d#commentstart and http://www.opensearch.org for more information.
     - HomeController.cs modified.
@@ -965,7 +986,7 @@ MVC 6
 - Added a note about adding search to your site and the Open Search protocol to ReadMe.html.
 - Fixed sitemap.xml to return XML containing the version and correct encoding of UTF-8.
 
-# VSIX Version 1.0.24
+# 1.0.24
 - Added accessibility section to ReadMe.html.
 - aria-hidden="true" added to all font awesome icons for screen readers and better accessibility.
 - Use 'span' instead of 'i' for all font awesome icons.
@@ -974,18 +995,18 @@ MVC 6
 - Added aria role="complementary" to all HTML5 aside elements.
 - Added aria role="region" to all HTML5 section elements.
 
-# VSIX Version 1.0.23
+# 1.0.23
 - Enable tracing by default (Only in Debug mode).
 - Added debug menu item showing Elmah, Glimpse and Tracing links (Only visible in Debug mode).
 
-# VSIX Version 1.0.22
+# 1.0.22
 - Added 400 Bad Request to ErrorController, Views, Cache config and http.
 - Added 500 Internal Server Error to ErrorController, Views, Cache config and http.
 - Added HttpContext.Current to Elmah logging in the LoggingService. Custom logging should log extra information about the current request if available.
 - Added a security note to ReadMe.html explaining the need to keep NuGet packages up to date.
 - Added a security note to ReadMe.html about enabling retail mode.
 
-# VSIX Version 1.0.21
+# 1.0.21
 - WOFF MIME type changed to application/font-woff as per specification. See http://stackoverflow.com/questions/3594823/mime-type-for-woff-fonts.
 - Added a note to encrypt the machine key in web.config and ReadMe.html.
 - Added notes on how to update NuGet packages and files from this template to ReadMe.html.
@@ -993,22 +1014,22 @@ MVC 6
     - Add mimeMap to fix "404 not found" error when serving "ghyphicon-halflings-regular.woff2".
     - Fixed bootstrap glyphicon "404 not found" error. Path missing "/" on bootstrap "site.less".
 
-# VSIX Version 1.0.20
+# 1.0.20
 - Updated ReadMe.html with information about using the https://www.ssllabs.com/ssltest site to check that you have implemented SSL/TLS over HTTPS correctly.
 
-# VSIX Version 1.0.19
+# 1.0.19
 - Microsoft CDN jQuery Validation URL updated to 1.13.1.
 - Microsoft CDN jQuery Validation Unobtrusive URL updated to 5.2.3.
 - Microsoft CDN Modernizr URL updated to 2.8.3.
 - Microsoft CDN Bootstrap URL updated to 3.3.2.
 - Microsoft CDN Respond URL updated to 1.4.2.
 
-# VSIX Version 1.0.18
+# 1.0.18
 - Updated Startup.cs to add Preload directive to Strict-Transport-Security. See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security.
 - SSL/TLS section in ReadMe.html split up and expanded with more information and links.
 - ReadMe.html split up into sub-sections.
 
-# VSIX Version 1.0.17
+# 1.0.17
 - Stop IIS returning a 403.12 Forbidden response when navigating to a folder e.g. /Content
   by rewriting to 404 not found using Web.config. Also set defaultDocument enabled=false to achieve the same thing.
   See http://www.troyhunt.com/2014/09/solving-tyranny-of-http-403-responses.html.
@@ -1016,7 +1037,7 @@ MVC 6
   with PNG Gauntlet to losslessly compress your images.
 - Add a note to ReadMe.html saying that default document handling has been disabled and detailing how you can turn it on if you need to.
 
-# VSIX Version 1.0.16
+# 1.0.16
 - Added Android/Chrome version M39+ favicon/theming support. Layout.cshtml updated. Files added include:
     \Content\icons\android-chrome-144x144.png
     \Content\icons\android-chrome-192x192.png
@@ -1030,18 +1051,18 @@ MVC 6
 - Use HTML5 self closing tags http://stackoverflow.com/questions/3558119/are-self-closing-tags-valid-in-html5
   and http://stackoverflow.com/questions/1946426/html-5-is-it-br-br-or-br.
 
-# VSIX Version 1.0.15
+# 1.0.15
 - Strict-Transport-Security HTTP header configured for use using the NWebSec.Owin NuGet package in Startup.cs.
   Commented out by default. ReadMe.html also updated with this information.
 - NWebSec.Owin package added.
 - Added comments for the NWebSec SetNoCacheHttpHeadersAttribute attribute.
 - Removed the commented out NWebSec XXssProtectionAttribute.
 
-# VSIX Version 1.0.14
+# 1.0.14
 - Default port for site changed from 81 to 8080. Visual Studio needs admin privileges to run on a port less than 1024.
   (For more information see http://www.iis.net/learn/extensions/using-iis-express/running-iis-express-without-administrative-privileges).
 
-# VSIX Version 1.0.13
+# 1.0.13
 - Added NWebSec CSP 2.0 filters to FilterConfig.cs for default settings and comments.
 - Turn off tracing in Release mode, just in case it is turned on.
 - Remove tracing HTTP handlers in Release Mode, so navigating to /trace.axd gives us a 404 Not Found,
@@ -1052,7 +1073,7 @@ MVC 6
 - Added message to CspViolationException explaining that CSP can be set to report-only mode.
 - Added comments to LoggingService explaining where we are logging.
 
-# VSIX Version 1.0.12
+# 1.0.12
 - Microsoft.Owin package updated to 3.0.1.
 - Microsoft.Owin.Host.SystemWeb package updated to 3.0.1.
 - NWebSec updated to 4.0.0.
@@ -1064,10 +1085,10 @@ MVC 6
 - NWebSec.Mvc package updated to 4.0.0.
 - NWebSec.Core package updated to 1.3.0.
 
-# VSIX Version 1.0.11
+# 1.0.11
 - Fixed Issue #1 - Intellisense broken in cshtml
 
-# VSIX Version 1.0.10
+# 1.0.10
 - Microsoft.AspNet.Cors package updated to 5.2.3.
 - Microsoft.AspNet.Mvc package updated to 5.2.3.
 - Microsoft.AspNet.Razor package updated to 3.2.3.
@@ -1075,19 +1096,19 @@ MVC 6
 - Microsoft.jQuery.Unobtrusive.Validation package updated to 3.2.3.
 - Twitter.Bootstrap.Less package updated to 3.3.2 (Microsoft CDN URL remains on 3.3.1 as 3.3.2 is not available. Changes are minor).
 
-# VSIX Version 1.0.8
+# 1.0.8
 - jQuery NuGet package updated to 2.1.3.
 - Google CDN jQuery URL updated to 2.1.3.
 - Newtonsoft.Json NuGet package updated to 6.0.8.
 
-# VSIX Version 1.0.7
+# 1.0.7
 - Updated Visual Studio Gallery icons and New Project dialogue icons for template.
 
-# VSIX Version 1.0.6
+# 1.0.6
 - jQuery.Validation NuGet package updated to 1.13.0.
 - Twitter.Bootstrap.Less NuGet package updated to 3.3.1.
 - Link to RehanSaeed.com containing details of this project added to Home.cshtml.
 - Newtonsoft.Json NuGet package updated to 6.0.7
 
-# VSIX Version 1.0.0
+# 1.0.0
 Initial Release
