@@ -1,10 +1,10 @@
 ﻿Project templates come in two delivery methods, each contains different project templates:
 
-- [dotnet new Boilerplate.Templates NuGet Package](#dotnet-new-boilerplate-templates-nuget-package)
-  - MVC 6 API
+- [dotnet new Boilerplate.Templates NuGet Package](#user-content-dotnet-new-boilerplatetemplates-nuget-package)
+  - [MVC 6 API](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206%20API.md)
 - [Visual Studio Extension (VSIX)]()
-  - MVC 5
-  - MVC 6
+  - [MVC 5](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%205.md)
+  - [MVC 6](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206.md)
 
 # dotnet new Boilerplate.Templates NuGet Package
 
@@ -53,7 +53,7 @@ MVC 6 API
 
 
 
-# (VSIX)
+# Visual Studio Extension (VSIX)
 
 # 6.1.0
 MVC 6
