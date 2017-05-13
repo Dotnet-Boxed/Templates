@@ -121,7 +121,7 @@
 
         // $End-CORS$
         /// <summary>
-        /// Configures custom services to add to the ASP.NET MVC 6 Injection of Control (IoC) container.
+        /// Configures custom services to add to the ASP.NET Core Injection of Control (IoC) container.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
         public static IServiceCollection AddCustomServices(this IServiceCollection services)

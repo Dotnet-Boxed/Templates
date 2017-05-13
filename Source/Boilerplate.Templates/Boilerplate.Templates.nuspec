@@ -6,14 +6,14 @@
     <title>Boilerplate Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project and item templates containing common boilerplate code so you don't have to write it yourself. Includes special security, performance and best practice features.</description>
-    <tags>ASP.NET Core MVC 6 Boilerplate Muhammad Rehan Saeed Framework</tags>
+    <tags>ASP.NET Core Boilerplate Muhammad Rehan Saeed Framework</tags>
     <copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</copyright>
     <language>en-GB</language>
-    <iconUrl>https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/Icon.png</iconUrl>
-    <projectUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates</projectUrl>
-    <licenseUrl>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Icon.png</iconUrl>
+    <projectUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates</projectUrl>
+    <licenseUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <releaseNotes>https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md</releaseNotes>
+    <releaseNotes>https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>

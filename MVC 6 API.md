@@ -1,16 +1,16 @@
-﻿# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget%20Icon.png) [ASP.NET Core MVC 6 API Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
+﻿# ![ASP.NET Core Boilerplate Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Nuget%20Icon.png) [ASP.NET Core API Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates)
 
-![ASP.NET Core MVC 6 API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
+![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
 
 ## Technology Map
 
-The ASP.NET Core MVC 6 API project template contains the following features:
+The ASP.NET Core API project template contains the following features:
 
-![ASP.NET Core MVC 6 API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-MVC-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
+![ASP.NET Core API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
 
 ## Optional Feature Selection
 
-The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
+The ASP.NET Core API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
 #### API
 
@@ -39,7 +39,7 @@ The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to t
 - **Profiler** - Collect and view profiling information about HTTP requests, database queries and exceptions when running your app in development mode.
   - **Prefix** - Built by the team at Stackify.  Prefix has almost no negative impact on application performance. Install the Prefix tool from https://prefix.io, then view your profiling information from multiple apps in one web page.
   - **None** (Default) - No profiler is being used.
-  - 
+
 #### Security
 
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled. Configures the primary and reverse proxy web servers for best security and adds a development certificate file for use in your development environment.
@@ -93,7 +93,7 @@ The ASP.NET Core MVC 6 API project template uses `dotnet new` to enable you to t
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
 - **Response Caching** - Response caching is pre-configured, so you can use the [ResponseCache] attribute. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
-- **AddMvcCore** - Uses only the features and packages from ASP.NET MVC required for an API. Uses ControllerBase instead of Controller.
+- **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
 - **Named Routes** - Uses named attribute routes for best performance and maintainability. All route names are specified as constants.
 
 #### Security
@@ -124,12 +124,12 @@ That's easy, just choose one of the following options:
 4. Run `dotnet new bapi --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
-You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
+You can find release notes for each version [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-Core-Boilerplate/Templates/projects) tab.
 
 ## Contributing
 
-Please read the [guide](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+Please read the [guide](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
 
 ## Bugs and Issues
 
-Please report any bugs or issues on the GitHub issues page [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues).
+Please report any bugs or issues on the GitHub issues page [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/issues).

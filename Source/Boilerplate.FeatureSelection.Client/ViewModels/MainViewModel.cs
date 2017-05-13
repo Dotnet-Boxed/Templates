@@ -84,13 +84,13 @@
 
                 MessageBox.Show(
                     "The changes you selected will now be applied. Unfortunately, due to a Visual Studio 2017 bug, this will cause Visual Studio to crash. This is totally expected and you can just re-open the project using Visual Studio and continue as normal. We are looking at ways of fixing this issue.",
-                    "ASP.NET MVC Boilerplate Project",
+                    "ASP.NET Core Boilerplate Project",
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
 
-                List<Exception> exceptions = new List<Exception>();
+                var exceptions = new List<Exception>();
 
-                foreach (IFeature feature in this.features)
+                foreach (var feature in this.features)
                 {
                     try
                     {
@@ -124,7 +124,7 @@
 
         private void SetError(IEnumerable<Exception> exceptions)
         {
-            StringBuilder stringBuilder = new StringBuilder();
+            var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine("Features");
             stringBuilder.AppendLine();

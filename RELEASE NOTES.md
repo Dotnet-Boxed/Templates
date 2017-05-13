@@ -1,10 +1,10 @@
 ﻿Project templates come in two delivery methods, each contains different project templates:
 
 - [dotnet new Boilerplate.Templates NuGet Package](#user-content-dotnet-new-boilerplatetemplates-nuget-package)
-  - [MVC 6 API](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206%20API.md)
+  - [MVC 6 API](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
 - [Visual Studio Extension (VSIX)](#user-content-visual-studio-extension-vsix)
-  - [MVC 5](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%205.md)
-  - [MVC 6](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/MVC%206.md)
+  - [MVC 5](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%205.md)
+  - [MVC 6](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206.md)
 
 # dotnet new Boilerplate.Templates NuGet Package
 
@@ -148,7 +148,7 @@ MVC 6
 
 # 4.1.0
 MVC 6
-- Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/108
+- Fixed https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/108
 
 # 4.0.0
 MVC 6
@@ -173,7 +173,7 @@ MVC 6
 
 # 3.1.1
 MVC 6
-- Fixed https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/104
+- Fixed https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/104
 
 # 3.1.0
 MVC 6
@@ -204,7 +204,7 @@ MVC 6
 - Added a '~' at the beginning of all URL's to local resources.
 
 # 2.18.0
-- Fixed SitemapGenerator bug https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/96.
+- Fixed SitemapGenerator bug https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/96.
 - Boilerplate.Web.Mvc NuGet packages updated for the above change.
 MVC 5
 - jQuery updated NuGet package updated from 2.2.0 to 2.2.3. ContentDeliveryNetwork.cs and packages.config updated.
@@ -242,7 +242,7 @@ MVC 6
     - Added ValidateModelStateAttribute to automatically validate ModelState.
 - Boilerplate.Web.Mvc6.TagHelpers Updated:
     - Performance improvements.
-- Fixed Missing jshint and jslint (See https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/89).
+- Fixed Missing jshint and jslint (See https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/89).
 - Updated JSON.NET reference.
 - Updated font-awesome to 4.6.1.
 - Updated jQuery to 2.2.2.
@@ -266,12 +266,12 @@ MVC 6
 
 # 2.13.0
 MVC 6
-- Merged [Fixed problem with broken error handling on ReExecute](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/85).
-- Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/ASP-NET-MVC-Boilerplate/Templates/pull/87).
+- Merged [Fixed problem with broken error handling on ReExecute](https://github.com/ASP-NET-Core-Boilerplate/Templates/pull/85).
+- Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/ASP-NET-Core-Boilerplate/Templates/pull/87).
 
 # 2.12.0
 MVC 5
-- Add a note when debugging, always starts the site at the home page (See [this](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/84) issue).
+- Add a note when debugging, always starts the site at the home page (See [this](https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/84) issue).
 
 # 2.11.0
 MVC 5
@@ -404,7 +404,7 @@ MVC 6
 - gulpfile.js JSLint Fixes
 - webroot setting removed from project.json (https://github.com/aspnet/Announcements/issues/94).
 - ApplicationBasePath no longer needs to be set in Startup.Configuration.cs (https://github.com/aspnet/Announcements/issues/88).
-- Move Autoprefixer before sass in gulpfile.js (https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues/44).
+- Move Autoprefixer before sass in gulpfile.js (https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/44).
 
 # 2.7.0
 MVC 5
@@ -459,7 +459,7 @@ MVC 5 & 6
 - Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
 - Updated SitemapNode to check for null URL's and priorities out of range.
 - SitemapService updated to enter the correct priorities for the sitemap nodes.
-- Updated to use the latest version of the ASP.NET MVC Boilerplate Framework NuGet package with the above changes.
+- Updated to use the latest version of the ASP.NET Core Boilerplate Framework NuGet package with the above changes.
 - Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
 - strict mode added to Fallback scripts.js and styles.js as well as other jshint fixes.
 - Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
@@ -795,7 +795,7 @@ MVC 6
 # 1.1.1
 - Updated ReadMe.html
     - New SSL/TLS instructions. Explaining that SSL is vulnerable to the POODLE attack and should not be used.
-    - New Authentication section explaining why ASP.NET MVC does not provide authentication out of the box and how to add it.
+    - New Authentication section explaining why ASP.NET Core does not provide authentication out of the box and how to add it.
     - New step to update the browserconfig.xml file with the URL to the sites RSS feed.
 - Updated _Layout.cshtml with comment, telling you to keep title's less than 70 characters.
 - Updated Index.cshtml with comments about Title, Description and Author.
@@ -807,7 +807,7 @@ MVC 6
 # 1.1.0
 - Comment about Anti-Forgery Tokens and the name of the corresponding form input.
 - Set MvcBuildViews to true in the .csproj project file when in release mode. This builds the
-  .cshtml ASP.NET MVC views, so we get compile time errors instead of runtime errors.
+  .cshtml ASP.NET Core views, so we get compile time errors instead of runtime errors.
   We do this only in release mode because this stops edit and refresh from working.
 - Added new render section to _Layout.cshtml for meta tags in the head of the HTML.
 - Removed all classes under the Framework namespace and moved them to a separate NuGet package called Boilerplate.Web.Mvc5
@@ -865,7 +865,7 @@ MVC 6
 - Corrected thumbnail size in FeedService.cs.
 
 # 1.0.39
-- Fixed the 'Learn More' link to ASP.NET MVC Boilerplate in Index.cshtml.
+- Fixed the 'Learn More' link to ASP.NET Core Boilerplate in Index.cshtml.
 - Added a note about session state in Web.config file.
 
 # 1.0.38
@@ -880,7 +880,7 @@ MVC 6
 - Added a note to ReadMe.html to edit the requestLimits and httpRuntime settings for better security.
 
 # 1.0.37
-- Added a note to ReadMe.html to review the ASP.NET MVC Boilerplate project template.
+- Added a note to ReadMe.html to review the ASP.NET Core Boilerplate project template.
 - Ignore the Elmah pages in RedirectToCanonicalUrlAttribute.
 
 # 1.0.36
