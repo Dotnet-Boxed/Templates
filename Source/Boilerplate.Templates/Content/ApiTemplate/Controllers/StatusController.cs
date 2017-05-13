@@ -42,7 +42,7 @@
 
                 foreach (var healthChecker in this.healthCheckers)
                 {
-                    tasks.Add(connectionTester.CheckHealth());
+                    tasks.Add(healthChecker.CheckHealth());
                 }
 
                 await Task.WhenAll(tasks);
