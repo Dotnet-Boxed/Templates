@@ -14,7 +14,6 @@ MVC 6 API
 - Upgraded NWebSec from 1.0.0 to 1.1.0.
 - Run health checks in parallel in StatusController.
 - Add Last-Modified and If-Modified-Since HTTP headers to return 304 Not Modified if a car has not changed.
-- Remove static files middleware as it's not needed.
 
 ### 1.5.0
 MVC 6 API

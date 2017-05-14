@@ -51,6 +51,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" Condition="'$(Kestrel)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.2" Condition="'$(Kestrel)' == 'true' AND '$(HttpsEverywhere)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.2" Condition="'$(WebListener)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.2" />
