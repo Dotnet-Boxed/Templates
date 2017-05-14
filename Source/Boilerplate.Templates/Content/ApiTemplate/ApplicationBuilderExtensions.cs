@@ -1,12 +1,6 @@
 ﻿namespace ApiTemplate
 {
-    using System;
-    using System.Linq;
-    using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.Extensions.Configuration;
-    using ApiTemplate.Constants;
-    using ApiTemplate.Settings;
 
     public static partial class ApplicationBuilderExtensions
     {
@@ -34,31 +28,6 @@
             // See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
             return application.UseDeveloperExceptionPage();
         }
-
-        /// <summary>
-        /// Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
-        /// headers. The cache duration is controlled from configuration.
-        /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
-        /// </summary>
-        public static IApplicationBuilder UseStaticFilesWithCacheControl(
-            this IApplicationBuilder application,
-            IConfigurationRoot configuration)
-        {
-            var cacheProfile = configuration
-                .GetSection<CacheProfileSettings>()
-                .CacheProfiles
-                .First(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
-                .Value;
-            return application
-                .UseStaticFiles(
-                    new StaticFileOptions()
-                    {
-                        OnPrepareResponse = context =>
-                        {
-                            context.Context.ApplyCacheProfile(cacheProfile);
-                        }
-                    });
-        }
 #if (HttpsEverywhere)
 
         /// <summary>
@@ -71,10 +40,8 @@
         /// Note: You can refer to the following article to clear the HSTS cache in your browser:
         /// http://classically.me/blogs/how-clear-hsts-settings-major-browsers
         /// </summary>
-        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application)
-        {
-            return application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
-        }
+        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application) =>
+            application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
 #if (PublicKeyPinning)
 
         /// <summary>

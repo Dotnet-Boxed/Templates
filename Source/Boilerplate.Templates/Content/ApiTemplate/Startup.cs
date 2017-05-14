@@ -202,7 +202,6 @@
 #endif
                 .UseResponseCaching()
                 .UseResponseCompression()
-                .UseStaticFilesWithCacheControl(this.configuration)
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif

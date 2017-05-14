@@ -51,7 +51,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.2" Condition="'$(Kestrel)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.2" Condition="'$(Kestrel)' == 'true' AND '$(HttpsEverywhere)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Server.WebListener" Version="1.1.2" Condition="'$(WebListener)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.2" />
@@ -71,11 +70,11 @@
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
   <ItemGroup Label="Tools">
     <!-- dotnet watch - which allows you to edit code and refresh the browser to see your changes while the application is running. -->
-    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.1" />
     <!-- dotnet user-secrets - Lets you store sensitive configuration securely during development like connection strings. -->
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
     <!-- dotnet aspnet-codegenerator - Code Generation tool for ASP.NET Core used for generating controllers and views. -->
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish" Condition="'$(Swagger)' == 'true'">
