@@ -1,15 +1,15 @@
 ﻿Project templates come in two delivery methods, each contains different project templates:
 
 - [dotnet new Boilerplate.Templates NuGet Package](#user-content-dotnet-new-boilerplatetemplates-nuget-package)
-  - [MVC 6 API](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
+  - [ASP.NET Core API Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
 - [Visual Studio Extension (VSIX)](#user-content-visual-studio-extension-vsix)
-  - [MVC 5](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%205.md)
-  - [MVC 6](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206.md)
+  - [ASP.NET MVC 5 Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%205.md)
+  - [ASP.NET Core MVC Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206.md)
 
 # dotnet new Boilerplate.Templates NuGet Package
 
 ### 1.6.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Added Prefix.io profiler option.
 - Upgraded NWebSec from 1.0.0 to 1.1.0.
 - Run health checks in parallel in StatusController.
@@ -18,41 +18,41 @@ MVC 6 API
 - Upgraded all NuGet packages.
 
 ### 1.5.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Added API Versioning support for Swagger.
 
 ### 1.4.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Added OPTIONS endpoint.
 - Added HEAD endpoints to all GET endpoints.
 - Update Swashbuckle.AspNetCore to 1.0.0-rc3
 - Use AddMvcOptions instead the delegate in AddMvcCore.
 
 ### 1.3.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Added Versioning feature.
 - Add Link HTTP Header to GET /cars to show next, previous, first, last page URL.
 
 ### 1.2.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Upgraded to VS 2017 csproj format.
 - NWebSec upgraded to 1.0.0.
 - Disable the Application Request Routing (AAR) in web.config if using Azure.
 - Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
 
 ### 1.1.2
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Fixed the CORS feature which had duplicate code. 
 - Refactoring ConfigureServices to use extension methods for everything.
 - Added more comments.
 
 ### 1.1.1
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Fixed Swagger feature.
 - Removed conditional compilation symbols from created project.
 
 ### 1.0.0
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Initial version.
 
 
@@ -60,25 +60,25 @@ MVC 6 API
 # Visual Studio Extension (VSIX)
 
 # 6.1.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Use IOptionsSnapshot instead of IOptions
 - Removed #region's.
 - Upgraded NWebSec from 1.0.0 to 1.1.0.
 - Upgrade packages.
 
 # 6.0.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded to VS 2017 csproj format.
 - NWebSec upgraded to 1.0.0.
 - Disable the Application Request Routing (AAR) in web.config if using Azure.
 - Move to new `AddUserSecrets<T>()` syntax in Startup.cs.
 - 
 # 5.1.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Update NuGet packages.
 
 # 5.1.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgrade ASP.NET Core to 1.1.1.
 - Upgrade Application Insights to 2.0.0.
 - Set GZIP response compression to optimal in Startup.cs.
@@ -86,7 +86,7 @@ MVC 6
 - Upgrade jquery-validation to 1.16.0 and use Subresource Integrity (SRI) for it.
 
 # 5.0.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded to ASP.NET Core 1.1.
 - Upgraded all NuGet packages.
 - Removed experimental .cshtml minification feature.
@@ -97,7 +97,7 @@ MVC 6
 - Added current project as tag helper source to _ViewImports.cshtml so that View Components can be used as tag helpers.
 
 # 4.7.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Add the Cache-Control HTTP header to the static files middleware and make it config driven.
 - Removed bower.json, using package.json instead.
 - Upgraded applicationinsights-js from 0.22.9 to 1.0.4.
@@ -115,53 +115,53 @@ MVC 6
 - Use the new portable .pdb file format in project.json buildOptions.
 
 # 4.6.0
-MVC 5 & MVC 6
+ASP.NET MVC 5 Boilerplate & ASP.NET Core MVC Boilerplate
 - Added item to ReadMe.html to use the Google CSP Evaluator to validate the sites CSP policy.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added a CORS feature.
 - project.json publishOptions updated to use globs to copy cshtml files.
 - launchSettings.json updated to add profiles to run the app using the Staging and Production environments.
 - Add crossorigin="anonymous" attribute to external scripts supporting Access-Control-Allow-Origin: *.
 
 # 4.5.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added 'dotnet watch' launch profile to launchSettings.json, allowing you to edit code and refresh the browser to see your changes while
   the app is running.
 
 # 4.4.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added Web Server feature that lets you select which web server you want to target.
 - nginx.conf added to configure the Nginx web server.
 - UseRandomizedStringHashAlgorithm setting Moved from web.config to app.config.
 - HttpExceptionMiddleware and InternalServerErrorOnExceptionMiddleware logs information messages.
 
 # 4.3.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Get the environment in gulpfile.js by reading the launchSettings.json file if an environment variable does not exist.
 - Google Page Speed is now an optional feature under performance.
 - Set AddServerHeader to false for the Kestrel Web Server in Program.cs.
 
 # 4.2.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Renamed the template in the File -> New Project window.
 
 # 4.2.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Updated NWebSec to the latest ASP.NET Core 1.0 version.
 - AddApplicationInsights in Startup.ConfigureServices now added fluently as it now returns IServiceCollection.
 
 # 4.1.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Fixed https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/108
 
 # 4.0.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Updated to ASP.NET Core 1.0 RTM.
 
 # 3.2.0
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Removed the X-UA-Compatible HTTP header from web.config.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Development mode now uses HTTPS if HTTPS everywhere is enabled. In development mode a SSL port is used and needs to
   be set in the MVC options and in the Content-Security-Policy settings.
 - Major refactoring of Startup.cs making all method calls fluent.
@@ -171,23 +171,23 @@ MVC 6
   was missing.
 - ReadMe.html updated to change comment about installing the HttpPlatformHandler and installing the IIS .NET Core
   Windows Server Hosting Bundle instead.
-- Removed comments about IgnoreRoute missing from MVC 6.
+- Removed comments about IgnoreRoute missing from ASP.NET Core MVC Boilerplate.
 - Added the autostrip-json-comments NPM package to package.json and require statement to gulpfile.js to allow comments
   in config.json and hosting.json.
 
 # 3.1.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Fixed https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/104
 
 # 3.1.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Enable UseRandomizedStringHashAlgorithm for .NET Framework 4.6.1 in web.config.
 - Dont need the 404 middleware in RC2, so it has been removed from the end of the pipeline in Startup.cs.
 
 # 3.0.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Took my name out of the AssemblyCopyright attribute in AssemblyInfo.cs and left it blank for users to fill in.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded to ASP.NET Core RC2!!! Too many changes to list here.
 - NuGet packages renamed:
     - Boilerplate.Web.Mvc NuGet package renamed to Boilerplate.AspNetCore.
@@ -203,19 +203,19 @@ MVC 6
 - Pre-compiled views have been removed because Microsoft removed support in RC2.
 
 # 2.18.1
-MVC 6
-- Removed some commented out code relating to Elmah and trace.axd which is not relevant in MVC 6.
+ASP.NET Core MVC Boilerplate
+- Removed some commented out code relating to Elmah and trace.axd which is not relevant in ASP.NET Core MVC Boilerplate.
 - Added a '~' at the beginning of all URL's to local resources.
 
 # 2.18.0
 - Fixed SitemapGenerator bug https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/96.
 - Boilerplate.Web.Mvc NuGet packages updated for the above change.
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - jQuery updated NuGet package updated from 2.2.0 to 2.2.3. ContentDeliveryNetwork.cs and packages.config updated.
 - jQuery.validate NuGet package updated from 1.14.0 to 1.15.0. ContentDeliveryNetwork.cs and packages.config updated.
 - Newtonsoft.Json NuGet package updated from 8.0.2 to 8.0.3.
 - Font Awesome NuGet package updated from 4.2.0 to 4.5.0.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - jQuery updated NuGet Bower updated from 2.2.2 to 2.2.3. ContentDeliveryNetwork.cs and bower.json updated.
 - Font Awesome NuGet Bower updated from 4.6.1 to 4.6.3. ContentDeliveryNetwork.cs and bower.json updated.
 - jQuery.validate.unobtrusive Bower package updated from 3.2.5 to 3.2.6. ContentDeliveryNetwork.cs and bower.json
@@ -227,18 +227,18 @@ use the source of the application insights js file.
 
 # 2.17.0
 - Extension now installs for a single user, rather than all users. This enables it to auto-update.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - RC2 ASPNET_ENVIRONMENT is now renamed to ASPNETCORE_ENVIRONMENT in gulpfile.js and Startup.cs.
 - AddUserSecrets for configuration only done in Development for security in Startup.Configuration.cs.
 - Changed comments for how to add/remove environment variables in Startup.Configuration.cs.
 
 # 2.16.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added HttpRequestExtensions IsLocalRequest extension method.
 - Modified launchSettings.json so that the site starts on the same port when started from Kestrel or IIS Express.
 
 # 2.15.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Boilerplate.Web.Mvc6 Updated:
     - Performance improvements.
     - Added ICommand and IAsyncCommand interfaces to help implement controller actions as separate classes.
@@ -265,43 +265,43 @@ MVC 6
 - Deleted tsconfig.html and moved comments to tsconfig.json as it now supports comments.
 
 # 2.14.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Change error controller route to start at 400 to 599.
 
 # 2.13.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Merged [Fixed problem with broken error handling on ReExecute](https://github.com/ASP-NET-Core-Boilerplate/Templates/pull/85).
 - Merged [Fixes problem with returning BadGateway for StatusCodes below 200](https://github.com/ASP-NET-Core-Boilerplate/Templates/pull/87).
 
 # 2.12.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Add a note when debugging, always starts the site at the home page (See [this](https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/84) issue).
 
 # 2.11.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Target Framework now respects the selected version in the new project dialogue.
 
 # 2.10.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Upgraded to .NET 4.5.2
 
 # 2.9.9
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Removed trailing white space.
 - Improved the Subresource Integrity tag helper (SRI) to generate the SRi from a local file.
 - Changed gulpfile.js to only copy third party files instead of running them through the pipeline.
 - Upgraded the tag helpers NuGet package.
 
 # 2.9.8
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Upgraded to TemplateBuilder NuGet package version 1.1.4.9-beta to fix a bug where using a '.'
 in the name of a project causes the NuGet package hint paths to break.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Packages file path in the .xproj is now corrected automatically with the update to the latest version of
 TemplateBuilder and the new Wizard I added to it.
 
 # 2.9.7
-MVC 6
+ASP.NET Core MVC Boilerplate
 - All NuGet packages updated.
 - Dropped TagHelpers NuGet package dependency on the base NuGet package.
 - Refactored AtomActionResult to use IHostingEnvironment.
@@ -318,23 +318,23 @@ exception occurs.
 - Renamed everything from ASP.NET 5 to ASP.NET Core.
 
 # 2.9.6
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Removed AntiXss package as it was causing a warning dialogue box to show up. It was not used and people can add it
 themselves if they need it.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Automatically run Mocha JavaScript tests using gulp-mocha-phantomjs.
 - Added gulp-mocha-phantomjs to package.json.
 - Added a test task to gulpfile.js.
 - Renamed Test folder to Tests.
 
 # 2.9.5
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Updated Newtonsoft.Json to 8.0.2.
 - Updated jQuery to 2.2.0.
 - Updated Bootstrap 3.3.6.
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Switched from Twitter.Bootstrap.Less NuGet package to Bootstrap.Less.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Use an absolute expiration instead of a sliding one for the sitemap, just in case people are dynamically generating
 the sitemap.
 - Updated Font Awesome to 4.5.0.
@@ -345,53 +345,53 @@ the sitemap.
 - Add the new ASPNET_ENVIRONMENT variable in gulpfile.js. Leave the old ASPNET_ENV until RC2 upgrade.
 
 # 2.9.4
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Fix issue where removing application insights caused a compile error in Startup.ContentSecurityPolicy.cs.
 
 # 2.9.3
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added new feature selection icons.
-- Updated the MVC 6 Technology Map image.
+- Updated the ASP.NET Core MVC Boilerplate Technology Map image.
 - Updated the ReadMe to uncomment the Glimpse TODO and make the social TODO's conditional.
 
 # 2.9.2
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Added NoLowercaseQueryStringAttribute filter to allow URL's containing query strings with upper-case characters when
 using the RedirectToCanonicalUrlAttribute. Added a note to use this attribute in the AccountController when using
 ASP.NET Identity.
 - Only redirect to the canonical URL for GET requests when using the RedirectToCanonicalUrlAttribute.
 - Updated the Boilerplate NuGet packages to the latest versions.
 - Upgraded to Newtonsoft.Json 8.0.1.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added the Microsoft.AspNet.Razor.Runtime.Precompilation NuGet package for Razor pre-compilation. Added the using
 statement to RazorPreCompilation.cs.
 - Added a note to use https://report-uri.io/ to report CSP violation reports.
 
 # 2.9.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Removed Hammer.js.
 - Fix Application Insights not registering exceptions in Startup.cs.
 
 # 2.9.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded NWebSec to latest version and made feature visible but experimental.
 - Fixed the manifest.json link having a trailing slash in _Layout.cshtml.
 
 # 2.8.2
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added NWebSec security through HTTP Headers to Startup.Filters and project.json. Turned off and hidden for now.
 - Fixed the browserconfig.xml link having a trailing slash in _Layout.cshtml.
 - Fixed the Bootstrap CSS not pointing to the correct folder for the fonts in site.scss.
 
 # 2.8.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - webroot setting moved from project.json to hosting.json.
 
 # 2.8.0
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Added a note to ReadMe.html to turn on Azure SQL Database Threat Detection.
 - Updated notes in ReadMe.html about where to get free SSL certificates.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded to ASP.NET Core RC1 Update1.
 - Added Glimpse feature, enabled by default.
 - NuGet packages split into three, Boilerplate.Web.Mvc6, Boilerplate.Web.Mvc6.TagHelpers, Boilerplate.Web.Mvc6.Razor.
@@ -411,19 +411,19 @@ MVC 6
 - Move Autoprefixer before sass in gulpfile.js (https://github.com/ASP-NET-Core-Boilerplate/Templates/issues/44).
 
 # 2.7.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Added a note to ReadMe.html to enable the CSP upgrade-insecure-requests directive in Startup.cs.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added Application Insights Feature.
 - SitemapService and SitemapPingerService track custom Application Insights events.
 - SitemapPingerService now stores it's pinging locations in config.json using the SitemapSettings.
 - SitemapPingerService now uses the hosting environment and only works in the production environment.
 
 # 2.6.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Added a commented out line for adding the Content-Security-Policy:upgrade-insecure-requests directive in Startup.cs.
 - CSP Policy changed to add wss://localhost:* to the allowed connect-src list in debug mode to fix browser link.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - NPM packages updated to latest versions.
 - JS-Hint feature added, making JS-Hint optional.
 - NuGet package updated to add IDistributedCache extension methods.
@@ -431,18 +431,18 @@ MVC 6
 - Added the RouteConvention to the NuGet package to enable global route prefixes. See http://www.strathweb.com/2015/10/global-route-prefixes-with-attribute-routing-in-asp-net-5-and-mvc-6/.
 
 # 2.5.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - CacheService is now SingleInstance.
 - Fixed missing image in Readme.html.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added a note to ReadMe.html to install the HttpPlatformHandler.
 - Added a note for NPM file paths too long.
 - Added UseCookiePolicy middleware to set better more secure cookie defaults.
 
 # 2.4.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Added a more prominent comment about removing settings from Web.config when using older versions of IIS.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Updated to Beta 8.
 - HTML Helper constructors removed, so that they can be used as TagHelper's too.
 - Added a JavaScript Code Style (JSCS) feature to turn add/remove JSCS.
@@ -458,7 +458,7 @@ MVC 6
 - Razor pre-compilation updated for Beta 8 in RazorPreCompilation.cs and Startup.cs.
 
 # 2.3.0
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Fixed a bug with the OpenGraphMedia type which was not handling HTTPS schemes correctly.
 - Fixed a bug with the RedirectToCanonicalUrlAttribute which was not working if you turned off AppendTrailingSlash.
 - Updated SitemapNode to check for null URL's and priorities out of range.
@@ -468,9 +468,9 @@ MVC 5 & 6
 - strict mode added to Fallback scripts.js and styles.js as well as other jshint fixes.
 - Numerous bug fixes and improvements to the Twitter and Open Graph HTML helpers.
 - ReadMe.html improved with icons and dismiss-able alerts.
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - CSP Filters changed in FilterConfig.cs so that Browser Link now works in debug mode and is not blocked by CSP.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added gulp-autoprefixer, gulp-jscs and gulp-plumber NPM packages.
 - Implemented CSS autoprefixing in Gulpfile.js.
 - Used gulp-plumber to handle errors in Gulpfile.js.
@@ -485,10 +485,10 @@ MVC 6
 - The Twitter and Open Graph HTML helpers have been moved to the Boilerplate.Web.Mvc.TagHelpers namespace.
 
 # 2.2.0
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Added the Feature Selection Wizard.
 - Added Mocha JavaScript tests.
-MVC 6 API
+ASP.NET Core API Boilerplate
 - Added the Feature Selection Wizard.
 Feature Selection Wizard
 - Added HTTPS Everywhere feature.
@@ -498,23 +498,23 @@ Feature Selection Wizard
 - Lots more improvements.
 
 # 2.1.4
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - site.js updated to use the revealing prototype pattern instead of the revealing module pattern.
 - site.js updated with comments about this vs self.
 - Updated the jQuery Validation NuGet/Bower package to 1.14.0.
 - Updated the jQuery Validation CDN link in ContentDeliveryNetwork.cs to 1.14.0.
 - Updated the Bootstrap NuGet/Bower package to 3.3.5.
 - Updated the Bootstrap CDN link in ContentDeliveryNetwork.cs to 3.3.5.
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Added the CSharpRazorViewEngine to Boilerplate.Web.Mvc5 NuGet package.
 - Used the CSharpRazorViewEngine in Global.asax.cs instead of RazorViewEngine.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Upgraded Boilerplate.Web.Mvc6 to Beta 7 with version 1.2.0.
 - upgraded project template to Beta 7 and Boilerplate.Web.Mvc6 1.2.0.
 - Updated ReadMe.html with information about how to upgrade to Beta 7.
 - Added the Microsoft.Framework.Logging.Debug package and loggerFactory.AddDebug(); in the Development environment.
 - Updated gulpfile.js to require project.json instead of using eval.
-MVC 6 API (Coming Soon)
+ASP.NET Core API Boilerplate (Coming Soon)
 - Upgraded Boilerplate.Web.Mvc6 to Beta 7 with version 1.2.0.
 - Upgraded project template to Beta 7 and Boilerplate.Web.Mvc6 1.2.0.
 - Added BSON formatter.
@@ -522,25 +522,25 @@ Feature Selection Wizard (Coming Soon)
 - More improvements
 
 # 2.1.3
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - The calculator in site.js now throws Error instead of a string.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Updated the Boilerplate.Web.Mvc6 NuGet package to add support for BSON formatters.
 - SitemapService cache settings moved to use the CacheProfileSettings and config.json. CacheSetting constant was
   deleted and a new constant was added to CacheProfileName.
 Feature Selection Wizard (Coming Soon)
-- Support for MVC 6 API added by including a new wizard and feature sets.
+- Support for ASP.NET Core API Boilerplate added by including a new wizard and feature sets.
 - Added a link to RehanSaeed.com
 - Added a 'Give me the carefully chosen defaults' button label.
-MVC 6 API (Coming Soon)
+ASP.NET Core API Boilerplate (Coming Soon)
 - First check-in of a Web API project. Lots more work to do.
-- Copied some code from the MVC 6 project.
+- Copied some code from the ASP.NET Core MVC Boilerplate project.
 - Added Swagger.
 - Configured SideWaffle files.
 - Added to VSIX but commented out.
 
 # 2.1.2
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Updated site.js with better comments, fixed undefined bug, added a namespace and calculator example using the
   revealing module pattern with full comments.
 - Fixed a missing var keyword in styles.js.
@@ -550,48 +550,48 @@ Feature Selection Wizard (Coming Soon)
 - New unit test project with ProjectService tests.
 
 # 2.1.1
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Move UseStaticFiles in Startup.cs so it is the first thing to execute in the pipeline for better performance.
 - Startup.Options.cs Fixed comment.
 - Startup.Routing.cs Cleaned up IgnoreRoute comments.
 - First check-in of Feature Selection Wizard, not used yet but will allow you to select template features.
 
 # 2.1.0
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - browserconfig.xml is now generated dynamically, you no longer have to edit it and put in the Atom feed URL. You can
   also customize it with your own tile XML. See BrowserConfigService, HomeController and constants for changes.
 - manifest.json is now generated dynamically, you no longer have to edit it and put in the site title. See
   ManifestService, HomeController and constants for changes.
 - Updated ReadMe.html to remove a step to edit the browserconfig.xml file.
 - Updated ReadMe.html to remove a step to edit the manifest.json file.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Settings classes have been moved from Properties folder to Settings and placed under the Settings namespace.
 - Site.less now imports bootstrap and bootstrap-touch-carousel.
 - Removed gulp-recess as it does not support the latest version of LESS. Added gulp-csslint instead.
 
 # 2.0.0
-MVC 5 & 6
+ASP.NET MVC 5 Boilerplate & 6
 - Template now has a Preview Image.
 - Default project name changed to WebApplication.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Cache Profile settings are now stored in a CacheProfileSettings configuration section in config.json.
 - Released!!!
 
 # 1.2.9
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Web.config Set <httpErrors existingResponse="PassThrough"> for the Debug version.
 - Web.config Set <httpErrors existingResponse="Replace"> for the Release version.
 - Added link to http://rehansaeed.com/dynamically-generating-robots-txt-using-asp-net-mvc/
 
 # 1.2.8
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - SideWaffle fix: New GUID now generated for each project.
 - Added a note to upgrade to .NET 4.6 in ReadMe.html.
 - Added a link to webaim.org to check accessibility in ReadMe.html.
 - Fix Site.less linting errors. Fixed order.
 - Fix Site.js linting errors. Added missing semi-colons.
 - Added CancellationToken to RSS Feed to allow cancellation of requests. See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
-MVC 6
+ASP.NET Core MVC Boilerplate
 - SideWaffle fix: New GUID now generated for each project.
 - SideWaffle fix: Target VSIX project template at .NET 4.5.1.
 - gulp-tsc (TypeScript) and gulp-if added to package.json.
@@ -621,17 +621,17 @@ MVC 6
 - Added CancellationToken to RSS Feed to allow cancellation of requests. See http://www.davepaquette.com/archive/2015/07/19/cancelling-long-running-queries-in-asp-net-mvc-and-web-api.aspx
 
 # 1.2.7
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - NoTrailingSlashAttribute updated to handle URL's with query strings.
 - Boilerplate.Web.Mvc5 NuGet package updated to 1.0.17 containing the above change.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - NoTrailingSlashAttribute updated to handle URL's with query strings.
 - Boilerplate.Web.Mvc6 NuGet package updated to 1.0.4 containing the above change.
 - project.json keyFile path fixed.
 - SideWaffle template settings updated in _project.cstemplate.xml.
 
 # 1.2.6
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Added trailing slashes to the URL's under httpErrors.
 - RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter
   due to the fix above and this one it is no longer needed.
@@ -639,7 +639,7 @@ MVC 5
 - Upgraded the Boilerplate.Web.Mvc5 NuGet package to 1.0.15 which includes the above changes.
 - Elmah constant removed from ControllerName.cs as it was no longer needed.
 - ReadMe.html updated with a comment about Web.config settings not existing when using older versions of IIS 7.5 and 8.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Turn off Razor View Pre-Compilation when compiling using the DEBUG solution configuration.
 - NoCacheAttribute added to Boilerplate.Web.Mvc6 NuGet package.
 - RedirectToCanonicalUrlAttribute fixed to handle URL's with query strings and removed the ignore controllers parameter
@@ -656,12 +656,12 @@ MVC 6
 - No changes. The release messed up somehow.
 
 # 1.2.3
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - favicon.ico moved to root of site.
 - Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com and favicon.ico meta tag removed.
 - Added an empty IIFE and DOM ready event handler to site.js with comments about good practice.
 - Added manifest.json and browserconfig.xml links to Home.cshtml.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - favicon.ico moved to root of site.
 - browserconfig.xml moved to root of site.
 - Icons rearranged in _Layout.cshtml to reflect RealFaviconGenerator.com. favicon.ico and browserconfig.xml meta tags
@@ -671,20 +671,20 @@ MVC 6
 - Added manifest.json and browserconfig.xml links to Home.cshtml.
 
 # 1.2.2
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - maxcdn.bootstrapcdn.com added to font-src CSP policy directive to enable font awesome to work.
 - fallback/font-awesome.js made generic so it can handle multiple fallback stylesheets.
     - font-awesome.js renamed to styles.js
     - BundleConfig.cs updated to reflect the above change.
     - styles.js can now handle multiple fallbacks but only contains font-awesome for now.
 - Added comments to fallback/scripts.js and renamed a few variables. Nothing major.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Fallback stuff copied here also.
 - Environments addedto gulpfile.js.
 - Watches fixed in gulpfile.js.
 
 # 1.2.1
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Deleted all failover scripts and added Scripts\fallback\font-awesome.js and Scripts\fallback\scripts.js which handle
   failover much better.
 - Added a blank site.js script.
@@ -696,7 +696,7 @@ MVC 5
 - Updated _Layout.cshtml with a new site title icon in the toolbar.
 
 # 1.2.0
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Renamed ContentDeliveryNetwork.MaxCdn.FontAwesome to add Url at the end.
 - Removed 'Learn More' buttons from Index.cshtml.
 - Added 'This App Contains' section to Index.cshtml.
@@ -704,10 +704,10 @@ MVC 5
 - HKPG maxage changed to match HSTS.
 - Changed SitemapService to return null if the index is out of range instead of throwing an exception.
 - Changed HomeController to return a BadRequest response if the sitemap XML is null.
-- Update Boilerplate.Web.Mvc5 to 1.0.14 which is just a name change to the NuGet package to 'MVC 5' instead of just 'MVC'.
+- Update Boilerplate.Web.Mvc5 to 1.0.14 which is just a name change to the NuGet package to 'ASP.NET MVC 5 Boilerplate' instead of just 'MVC'.
 - Changed Atom Feed links in FeedService.cs and HomeController.cs to rehansaeed.com.
 - Updated FeedService with commented out code explaining how to add Atom feed paging.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Gulp, Bower packages and build.
 - About, Contact, Index, _Layout and _GlobalImports modified.
 - FeedService added but only if you use full .NET and not DotNetCore.
@@ -716,7 +716,7 @@ MVC 6
 - Lots more...
 
 # 1.1.9
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Dropped support for IE 8 by removing the Respond.js library. IE 8 is used by 2.19% of global users, mostly in less
   developed countries and governments/businesses too lazy to upgrade from Windows XP.
     - Removed Respond.js NuGet package.
@@ -726,7 +726,7 @@ MVC 5
 - Added Font Awesome CDN from MaxCDN.com.
 
 # 1.1.8
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Updated NuGet packages:
     - Boilerplate.Web.Mvc5 updated to 1.0.12 - Added referrer meta tag.
 - Added referrer meta tag to _Layout.cshtml to control privacy and security of the HTTP referrer header.
@@ -737,7 +737,7 @@ MVC 5
 - Sample Copyright text fixed in FeedService.cs.
 
 # 1.1.7
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - Updated NuGet packages:
     - Boilerplate.Web.Mvc5 updated to 1.0.10 - Assembly is now signed.
     - Newtonsoft.Json updated to 7.0.1
@@ -747,7 +747,7 @@ MVC 5
     - NWebsec.Owin updated to 2.1.1
 - Added comment about the NWebSec CspPluginTypesAttribute in FilterConfig.cs.
 - Added comment about implementing HPKP (Public Key Pinning) to Startup.cs and ReadMe.html.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Various Updates
 
 # 1.1.6
@@ -761,19 +761,19 @@ MVC 6
 - RehanSaeed.co.uk moved to RehanSaeed.com. All comments and links updated to reflect this.
 
 # 1.1.3
-MVC 5
+ASP.NET MVC 5 Boilerplate
 - FeedService updated to use SyndicationContent.CreatePlaintextContent static method rather than creating a new
   TextSyndicationContent.
 - Added comments and links to anti-forgery token configuration in Global.asax.cs.
 - Fixed spelling mistakes in Web.config.
-MVC 6
+ASP.NET Core MVC Boilerplate
 - Boilerplate.Web.Mvc6 NuGet package updated
-    - Filters ported from MVC 5. RedirectToHttpsAttribute not required anymore. Nothing tested yet.
+    - Filters ported from ASP.NET MVC 5 Boilerplate. RedirectToHttpsAttribute not required anymore. Nothing tested yet.
     - HttpRequestExtensions added for the IsAjaxRequest extension method.
     - UrlHelperExtensions ported.
 - Razor pre-compilation turned on in RazorPreCompilation.cs. Need to find a way to turn it off during development.
-- Constants ported from MVC 5.
-- EnvironmentName constants added for Development, Staging and Production environments in MVC 6.
+- Constants ported from ASP.NET MVC 5 Boilerplate.
+- EnvironmentName constants added for Development, Staging and Production environments in ASP.NET Core MVC Boilerplate.
 - ErrorController added. Broken still.
 - HomeController modified to use attribute routing.
 - Namespaces added to _GlobalImports.cshtml.
