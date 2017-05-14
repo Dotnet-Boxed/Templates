@@ -219,6 +219,9 @@
 #endif
 #if (Swagger)
                 .UseMvc()
+#if (Versioning)
+                .UseApiVersioning()
+#endif
                 .UseSwagger()
                 .UseSwaggerUI(
                     options =>
