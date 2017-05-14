@@ -126,7 +126,9 @@
                 .AddCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
+#if (ResponseCaching)
                 .AddResponseCaching()
+#endif
                 .AddCustomResponseCompression(this.configuration)
 #if (Swagger)
                 .AddSwagger()
@@ -200,7 +202,9 @@
                 .UseRewriter(
                     new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, this.sslPort))
 #endif
+#if (ResponseCaching)
                 .UseResponseCaching()
+#endif
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl(this.configuration)
 #if (CORS)

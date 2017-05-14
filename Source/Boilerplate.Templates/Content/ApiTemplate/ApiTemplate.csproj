@@ -44,7 +44,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Xml" Version="1.1.3" Condition="'$(DataContractSerializer)' == 'true' OR '$(XmlSerializer)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="1.1.0-rc1" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="1.0.0-rc1" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCaching" Version="1.1.2" Condition="'$(ResponseCaching)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.2" Condition="'$(HttpsEverywhere)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.2" Condition="'$(IIS)' == 'true'" />
@@ -86,7 +86,7 @@
   </Target>
 
   <PropertyGroup Condition="'$(AuthoringMode)' == 'true'">
-    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning</DefineConstants>
+    <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;ResponseCaching;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(AuthoringMode)' == 'true'">
     <None Include=".template.config\**\*" />

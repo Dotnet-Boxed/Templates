@@ -39,6 +39,10 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Profiler** - Collect and view profiling information about HTTP requests, database queries and exceptions when running your app in development mode.
   - **Prefix** - Built by the team at Stackify.  Prefix has almost no negative impact on application performance. Install the Prefix tool from https://prefix.io, then view your profiling information from multiple apps in one web page.
   - **None** (Default) - No profiler is being used.
+  
+#### Performance
+
+- **Response Caching** (Default=On) - Response caching is allows the use of the `[ResponseCache]` attribute on your action methods. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
 
 #### Security
 
@@ -91,7 +95,6 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 - **GZip Compression** - Turned on by default for static and dynamic files making them smaller and quicker to download. 
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
-- **Response Caching** - Response caching is pre-configured, so you can use the [ResponseCache] attribute. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
