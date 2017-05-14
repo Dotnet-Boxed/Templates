@@ -1,4 +1,4 @@
-{
+﻿{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -24,10 +24,10 @@
     "dotnet run": {
       "commandName": "Project",
       // $Start-HttpsEverywhere-Off$
-      // "commandLineArgs": "--server.urls http://*:1025",
+      // "commandLineArgs": "--urls http://*:1025",
       // $End-HttpsEverywhere-Off$
       // $Start-HttpsEverywhere-On$
-      "commandLineArgs": "--framework netcoreapp1.1 --server.urls http://*:1025;https://*:44300",
+      "commandLineArgs": "--framework netcoreapp1.1 --urls http://*:1025;https://*:44300",
       // $End-HttpsEverywhere-On$
       "launchBrowser": true,
       // $Start-HttpsEverywhere-Off$
@@ -43,10 +43,10 @@
     "dotnet watch run": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
       // $Start-HttpsEverywhere-Off$
-      // "commandLineArgs": "watch run --server.urls http://*:1025",
+      // "commandLineArgs": "watch run --urls http://*:1025",
       // $End-HttpsEverywhere-Off$
       // $Start-HttpsEverywhere-On$
-      "commandLineArgs": "watch run --framework netcoreapp1.1 --server.urls http://*:1025;https://*:44300",
+      "commandLineArgs": "watch run --framework netcoreapp1.1 --urls http://*:1025;https://*:44300",
       // $End-HttpsEverywhere-On$
       "launchBrowser": true,
       // $Start-HttpsEverywhere-Off$
