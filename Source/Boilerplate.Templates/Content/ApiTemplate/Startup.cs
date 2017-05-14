@@ -166,6 +166,7 @@
                 .Services
                 .AddCommands()
                 .AddRepositories()
+                .AddServices()
                 .AddTranslators();
 
         /// <summary>

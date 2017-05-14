@@ -14,6 +14,7 @@
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Repositories;
+    using ApiTemplate.Services;
     using ApiTemplate.Settings;
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
@@ -305,5 +306,12 @@
                 .AddSingleton<ITranslator<Models.Car, Car>, CarToCarTranslator>()
                 .AddSingleton<ITranslator<Models.Car, SaveCar>, CarToSaveCarTranslator>()
                 .AddSingleton<ITranslator<SaveCar, Models.Car>, CarToSaveCarTranslator>();
+
+        /// <summary>
+        /// Adds project services.
+        /// </summary>
+        public static IServiceCollection AddServices(this IServiceCollection services) =>
+            services
+                .AddSingleton<IClockService, ClockService>();
     }
 }

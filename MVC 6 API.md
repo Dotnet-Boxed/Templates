@@ -93,6 +93,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
 - **Response Caching** - Response caching is pre-configured, so you can use the [ResponseCache] attribute. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
+- **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
 - **Named Routes** - Uses named attribute routes for best performance and maintainability. All route names are specified as constants.
 
