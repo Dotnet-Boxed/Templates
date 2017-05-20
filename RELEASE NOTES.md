@@ -16,6 +16,7 @@ ASP.NET Core API Boilerplate
 - Add Last-Modified and If-Modified-Since HTTP headers to return 304 Not Modified if a car has not changed.
 - Response caching is now an optional feature.
 - Upgraded all NuGet packages.
+- Use AppendCommaSeparatedValues and HeaderNames constants.
 
 ### 1.5.0
 ASP.NET Core API Boilerplate
