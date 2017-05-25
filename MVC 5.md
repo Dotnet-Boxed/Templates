@@ -1,12 +1,12 @@
-# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/Nuget Icon.png) [ASP.NET 5 MVC 6 Boilerplate](https://github.com/ASP-NET-MVC-Boilerplate/Templates)
+﻿# ![ASP.NET MVC Boilerplate Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Nuget%20Icon.png) [ASP.NET MVC 5 Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates)
 
-![ASP.NET-MVC-5-Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%205%20Preview%20Image.png)
+![ASP.NET MVC 5 Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%205%20Preview%20Image.png)
 
 ## Technology Map
 
 The ASP.NET 4.6 MVC 5 project template contains the following features:
 
-![ASP.NET-MVC-5-Boilerplate Technology Map](https://raw.githubusercontent.com/RehanSaeed/ASP.NET-MVC-Boilerplate/master/Images/MVC%205%20Technology%20Map.png)
+![ASP.NET MVC 5 Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%205%20Technology%20Map.png)
 
 ## Why Do I Need It?
 
@@ -94,15 +94,15 @@ There is a lot more to implementing search in your application than it sounds. A
 That's easy, just choose one of the following options:
 
 - Get the Visual Studio extension [here](https://visualstudiogallery.msdn.microsoft.com/6cf50a48-fc1e-4eaf-9e82-0b2a6705ca7d) and in Visual Studio go to File -> New Project -> Web.
-- Clone the git repository: `git clone https://github.com/ASP-NET-MVC-Boilerplate/Templates`
+- Clone the git repository: `git clone https://github.com/ASP-NET-Core-Boilerplate/Templates`
 
 ## Release Notes and To-Do List
-You can find release notes for each version [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-MVC-Boilerplate/Templates/projects) tab.
+You can find release notes for each version [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-Core-Boilerplate/Templates/projects) tab.
 
 ## Contributing
 
-Please read the [guide](https://github.com/ASP-NET-MVC-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+Please read the [guide](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
 
 ## Bugs and Issues
 
-Please report any bugs or issues on the GitHub issues page [here](https://github.com/ASP-NET-MVC-Boilerplate/Templates/issues).
+Please report any bugs or issues on the GitHub issues page [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/issues).

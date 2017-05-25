@@ -113,7 +113,7 @@
         }
 
         /// <summary>
-        /// Configures the services to add to the ASP.NET MVC 6 Injection of Control (IoC) container. This method gets
+        /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
         /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
@@ -126,7 +126,9 @@
                 .AddCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
+#if (ResponseCaching)
                 .AddResponseCaching()
+#endif
                 .AddCustomResponseCompression(this.configuration)
 #if (Swagger)
                 .AddSwagger()
@@ -166,6 +168,7 @@
                 .Services
                 .AddCommands()
                 .AddRepositories()
+                .AddServices()
                 .AddTranslators();
 
         /// <summary>
@@ -199,7 +202,9 @@
                 .UseRewriter(
                     new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, this.sslPort))
 #endif
+#if (ResponseCaching)
                 .UseResponseCaching()
+#endif
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl(this.configuration)
 #if (CORS)
@@ -218,6 +223,9 @@
 #endif
 #if (Swagger)
                 .UseMvc()
+#if (Versioning)
+                .UseApiVersioning()
+#endif
                 .UseSwagger()
                 .UseSwaggerUI(
                     options =>

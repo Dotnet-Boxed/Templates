@@ -12,6 +12,7 @@
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.Net.Http.Headers;
 
     [Route("[controller]")]
 #if (RequestId)
@@ -58,15 +59,12 @@
         [HttpOptions]
         public IActionResult Options()
         {
-            this.HttpContext.Response.Headers.Add(
-                "Allow",
-                string.Join(",", new string[]
-                {
-                    HttpMethods.Get,
-                    HttpMethods.Head,
-                    HttpMethods.Options,
-                    HttpMethods.Post
-                }));
+            this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
+                HeaderNames.Allow,
+                HttpMethods.Get,
+                HttpMethods.Head,
+                HttpMethods.Options,
+                HttpMethods.Post);
             return this.Ok();
         }
 
@@ -78,18 +76,15 @@
         [HttpOptions("{carId}")]
         public IActionResult Options(int carId)
         {
-            this.HttpContext.Response.Headers.Add(
-                "Allow",
-                string.Join(",", new string[]
-                {
-                    HttpMethods.Delete,
-                    HttpMethods.Get,
-                    HttpMethods.Head,
-                    HttpMethods.Options,
-                    HttpMethods.Patch,
-                    HttpMethods.Post,
-                    HttpMethods.Put
-                }));
+            this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
+                HeaderNames.Allow,
+                HttpMethods.Delete,
+                HttpMethods.Get,
+                HttpMethods.Head,
+                HttpMethods.Options,
+                HttpMethods.Patch,
+                HttpMethods.Post,
+                HttpMethods.Put);
             return this.Ok();
         }
 
@@ -117,11 +112,13 @@
         /// found.</returns>
 #if (Swagger)
         /// <response code="200">The car with the specified ID.</response>
+        /// <response code="304">The car has not changed since the date given in the If-Modified-Since HTTP header.</response>
         /// <response code="404">A car with the specified ID could not be found.</response>
 #endif
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
         [HttpHead("{carId}")]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status304NotModified)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public Task<IActionResult> Get(int carId) =>
             this.getCarCommand.Value.ExecuteAsync(carId);

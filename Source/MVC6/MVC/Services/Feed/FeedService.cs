@@ -67,7 +67,7 @@
                 Items = await this.GetItems(cancellationToken),
                 // subtitle (Recommended) - Contains a human-readable description or subtitle for the feed.
                 Description = SyndicationContent.CreatePlaintextContent(
-                    "This is the ASP.NET MVC Boilerplate feed description."),
+                    "This is the ASP.NET Core Boilerplate feed description."),
                 // updated (Optional) - Indicates the last time the feed was modified in a significant way.
                 LastUpdatedTime = DateTimeOffset.Now,
                 // logo (Optional) - Identifies a larger image which provides visual identification for the feed.

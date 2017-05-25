@@ -71,10 +71,8 @@
         /// Note: You can refer to the following article to clear the HSTS cache in your browser:
         /// http://classically.me/blogs/how-clear-hsts-settings-major-browsers
         /// </summary>
-        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application)
-        {
-            return application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
-        }
+        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application) =>
+            application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
 #if (PublicKeyPinning)
 
         /// <summary>

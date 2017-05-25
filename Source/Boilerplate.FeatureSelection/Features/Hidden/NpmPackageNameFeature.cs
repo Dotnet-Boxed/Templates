@@ -61,7 +61,7 @@
             name = name.Length > MaxNameLength ? name.Substring(0, MaxNameLength) : name;
 
             await this.ProjectService.ReplaceInFile(
-                "asp.net-mvc-boilerplate",
+                "asp.net-core-boilerplate",
                 name,
                 @"package.json");
         }
