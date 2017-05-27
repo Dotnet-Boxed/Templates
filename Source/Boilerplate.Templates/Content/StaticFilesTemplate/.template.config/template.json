@@ -2,7 +2,7 @@
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Static Files" ],
-  "name": "ASP.NET Core 1.1.2 Static Files Boilerplate",
+  "name": "ASP.NET Core Static Files Boilerplate",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.StaticFiles.CSharp",
   "shortName": "static",

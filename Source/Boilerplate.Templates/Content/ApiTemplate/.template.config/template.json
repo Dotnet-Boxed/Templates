@@ -2,7 +2,7 @@
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
-  "name": "ASP.NET Core 1.1.2 API Boilerplate",
+  "name": "ASP.NET Core API Boilerplate",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
   "shortName": "bapi",
