@@ -29,6 +29,11 @@
     <Copyright>Copyright © PROJECT-AUTHOR. All rights Reserved</Copyright>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include=".template.config\dotnetcli.host.json" />
+    <Content Include=".template.config\template.json" />
+  </ItemGroup>
+
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="2.2.2" />
     <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="2.1.1" Condition="'$(Swagger)' == 'true'" />
@@ -89,6 +94,6 @@
     <DefineConstants>$(DefineConstants);NETCore;NETFramework;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;ResponseCaching;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="'$(AuthoringMode)' == 'true'">
-    <None Include=".template.config\**\*" />
+    <Content Include=".template.config\**\*" />
   </ItemGroup>
 </Project>

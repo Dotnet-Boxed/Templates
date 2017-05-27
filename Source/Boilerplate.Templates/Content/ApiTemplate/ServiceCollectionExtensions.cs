@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR
+        /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
         /// </summary>
         public static IServiceCollection AddCustomOptions(
@@ -148,7 +148,7 @@
             builder.AddMvcOptions(
                 options =>
                 {
-                    // Controls how controller actions cache content from the config.json file.
+                    // Controls how controller actions cache content from the appsettings.json file.
                     var cacheProfileSettings = configuration.GetSection<CacheProfileSettings>();
                     foreach (var keyValuePair in cacheProfileSettings.CacheProfiles)
                     {

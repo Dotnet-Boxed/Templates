@@ -68,11 +68,11 @@
 
             this.configuration = new ConfigurationBuilder()
                 .SetBasePath(this.hostingEnvironment.ContentRootPath)
-                // Add configuration from the config.json file.
-                .AddJsonFile("config.json")
+                // Add configuration from the appsettings.json file.
+                .AddJsonFile("appsettings.json")
                 // Add configuration from an optional config.development.json, config.staging.json or
                 // config.production.json file, depending on the environment. These settings override the ones in the
-                // config.json file.
+                // appsettings.json file.
                 .AddJsonFile($"config.{this.hostingEnvironment.EnvironmentName}.json", optional: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
