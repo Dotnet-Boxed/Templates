@@ -13,27 +13,23 @@
         /// <summary>
         /// Configure tools used to help with debugging the application.
         /// </summary>
-        public static IApplicationBuilder UseDebugging(this IApplicationBuilder application)
-        {
+        public static IApplicationBuilder UseDebugging(this IApplicationBuilder application) =>
             // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
             // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-            return application.UseBrowserLink();
-        }
+            application.UseBrowserLink();
 
         /// <summary>
         /// Adds developer friendly error pages for the application which contain extra debug and exception information.
         /// Note: It is unsafe to use this in production.
         /// </summary>
-        public static IApplicationBuilder UseDeveloperErrorPages(this IApplicationBuilder application)
-        {
-            // When a database error occurs, displays a detailed error page with full diagnostic information. It is
-            // unsafe to use this in production. Uncomment this if using a database.
-            // application.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
-
-            // When an error occurs, displays a detailed error page with full diagnostic information.
-            // See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-            return application.UseDeveloperExceptionPage();
-        }
+        public static IApplicationBuilder UseDeveloperErrorPages(this IApplicationBuilder application) =>
+            application
+                // When a database error occurs, displays a detailed error page with full diagnostic information. It is
+                // unsafe to use this in production. Uncomment this if using a database.
+                // .UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                // When an error occurs, displays a detailed error page with full diagnostic information.
+                // See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
+                .UseDeveloperExceptionPage();
 
         /// <summary>
         /// Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP

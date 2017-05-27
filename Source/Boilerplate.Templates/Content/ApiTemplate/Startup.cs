@@ -70,10 +70,10 @@
                 .SetBasePath(this.hostingEnvironment.ContentRootPath)
                 // Add configuration from the appsettings.json file.
                 .AddJsonFile("appsettings.json")
-                // Add configuration from an optional config.development.json, config.staging.json or
-                // config.production.json file, depending on the environment. These settings override the ones in the
-                // appsettings.json file.
-                .AddJsonFile($"config.{this.hostingEnvironment.EnvironmentName}.json", optional: true)
+                // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
+                // appsettings.production.json file, depending on the environment. These settings override the ones in
+                // the appsettings.json file.
+                .AddJsonFile($"appsettings.{this.hostingEnvironment.EnvironmentName}.json", optional: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
@@ -186,7 +186,7 @@
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x
-                        .AddConsole(configuration.GetSection("Logging"))
+                        .AddConsole(this.configuration.GetSection("Logging"))
                         .AddDebug());
 
             application
