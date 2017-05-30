@@ -39,14 +39,11 @@
             this.fileSystemService = container.Resolve<IFileSystemService>();
         }
 
-        public FeatureCollection Features
-        {
-            get { return this.features; }
-        }
+        public FeatureCollection Features => this.features;
 
         public async Task AddOrRemoveFeatures()
         {
-            foreach (IFeature feature in this.features)
+            foreach (var feature in this.features)
             {
                 await feature.AddOrRemoveFeature();
             }
@@ -90,14 +87,11 @@
         //    }
         //}
 
-        public void Dispose()
-        {
+        public void Dispose() =>
             DirectoryExtended.Delete(this.tempDirectoryPath);
-        }
 
-        private static string GetNpmFilePath()
-        {
-            return Environment
+        private static string GetNpmFilePath() =>
+            Environment
                 .GetEnvironmentVariable("PATH", EnvironmentVariableTarget.Machine)
                 .Split(';')
                 .Where(x => x.Contains("nodejs") && Directory.Exists(x))
@@ -105,7 +99,6 @@
                     .GetFiles(x, "*", SearchOption.AllDirectories)
                     .Where(y => string.Equals(Path.GetFileName(y), "npm.cmd", StringComparison.OrdinalIgnoreCase)))
                 .First();
-        }
 
         private async Task EnsureNpmCacheInitialized()
         {

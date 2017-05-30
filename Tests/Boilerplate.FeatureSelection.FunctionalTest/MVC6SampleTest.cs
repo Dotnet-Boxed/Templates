@@ -11,12 +11,10 @@
     {
         private readonly ProjectTemplateTester tester;
 
-        public MVC6SampleTest()
-        {
+        public MVC6SampleTest() =>
             this.tester = new ProjectTemplateTester(
                 ConfigurationService.ProjectFilePath,
                 ConfigurationService.TempDirectoryPath);
-        }
 
         [Fact]
         public async Task MVC6Sample_Default_BuildsSuccessfully()
