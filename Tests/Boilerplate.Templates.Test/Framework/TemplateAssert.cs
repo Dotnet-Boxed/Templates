@@ -4,7 +4,6 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.InteropServices;
     using System.Runtime.Loader;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
@@ -12,62 +11,88 @@
     using Microsoft.Extensions.DependencyModel;
     using Xunit;
 
-    public class TemplateAssert : IDisposable
+    public static class TemplateAssert
     {
         private static readonly string[] DefaultUrls = new string[] { "http://localhost", "https://localhost" };
-        private readonly string tempDirectoryPath;
-        private string projectDirectoryPath;
+        private static string tempDirectoryPath;
 
-        public TemplateAssert(string tempDirectoryPath = null)
+        public static string TempDirectoryPath
         {
-            if (tempDirectoryPath == null)
+            get => tempDirectoryPath;
+            set
             {
-                this.tempDirectoryPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                tempDirectoryPath = string.IsNullOrEmpty(value) ?
+                    Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()) :
+                    value;
+                DirectoryExtended.CheckCreate(tempDirectoryPath);
             }
-            else
+        }
+
+        public static Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
+            ProcessAssert.AssertStart(TempDirectoryPath, "dotnet", $"new --install \"{source}\"", timeout ?? TimeSpan.FromSeconds(20));
+
+        public static async Task<Project> DotnetNew(string templateName, string name = null, TimeSpan? timeout = null)
+        {
+            await ProcessAssert.AssertStart(TempDirectoryPath, "dotnet", $"new {templateName} --name \"{name}\"", timeout ?? TimeSpan.FromSeconds(20));
+            var projectDirectoryPath = Path.Combine(TempDirectoryPath, name);
+            var projectFilePath = Path.Combine(projectDirectoryPath, name + ".csproj");
+            return new Project(projectDirectoryPath, projectFilePath);
+        }
+
+        public static Task DotnetRestore(string projectDirectoryPath, TimeSpan? timeout = null) =>
+            ProcessAssert.AssertStart(projectDirectoryPath, "dotnet", "restore", timeout ?? TimeSpan.FromSeconds(20));
+
+        public static Task DotnetBuild(string projectDirectoryPath, TimeSpan? timeout = null) =>
+            ProcessAssert.AssertStart(projectDirectoryPath, "dotnet", "build", timeout ?? TimeSpan.FromSeconds(20));
+
+        public static Task DotnetPublish(string projectDirectoryPath, string framework, TimeSpan? timeout = null) =>
+            ProcessAssert.AssertStart(projectDirectoryPath, "dotnet", $"publish --framework {framework}", timeout ?? TimeSpan.FromSeconds(20));
+
+        public static string GetProjectDirectoryPath(Assembly assembly, string projectName) =>
+            Path.GetDirectoryName(GetProjectFilePath(assembly, projectName));
+
+        public static string GetProjectFilePath(Assembly assembly, string projectName)
+        {
+            string projectFilePath = null;
+
+            var dllPath = new Uri(assembly.CodeBase).AbsolutePath;
+
+            for (var directory = new DirectoryInfo(dllPath); directory.Parent != null; directory = directory.Parent)
             {
-                this.tempDirectoryPath = tempDirectoryPath;
+                projectFilePath = directory
+                    .Parent
+                    .GetFiles(projectName, SearchOption.AllDirectories)
+                    .Where(x => !IsInObjDirectory(x.Directory))
+                    .FirstOrDefault()
+                    ?.FullName;
+                if (projectFilePath != null)
+                {
+                    break;
+                }
             }
 
-            DirectoryExtended.CheckCreate(this.tempDirectoryPath);
+            return projectFilePath;
         }
 
-        public Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", $"new --install \"{source}\"", timeout ?? TimeSpan.FromSeconds(20));
+        public static Task NpmInstall(string projectDirectoryPath, TimeSpan? timeout = null) =>
+            ProcessAssert.AssertStart(projectDirectoryPath, GetNpmFilePath(), "install", timeout ?? TimeSpan.FromMinutes(5));
 
-        public async Task DotnetNew(string templateName, string name = null, TimeSpan? timeout = null)
+        public static async Task Gulp(string projectDirectoryPath, string command = null)
         {
-            await ProcessAssert.AssertStart(this.tempDirectoryPath, "dotnet", $"new {templateName} --name \"{name}\"", timeout ?? TimeSpan.FromSeconds(20));
-            this.projectDirectoryPath = Path.Combine(this.tempDirectoryPath, name);
+            var gulpFilePath = Path.Combine(projectDirectoryPath, @"node_modules\.bin\gulp.cmd");
+            await ProcessAssert.AssertStart(projectDirectoryPath, gulpFilePath, command, TimeSpan.FromSeconds(20));
         }
 
-        public Task DotnetRestore(TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(this.projectDirectoryPath, "dotnet", "restore", timeout ?? TimeSpan.FromSeconds(20));
-
-        public Task DotnetBuild(TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(this.projectDirectoryPath, "dotnet", "build", timeout ?? TimeSpan.FromSeconds(20));
-
-        public Task DotnetPublish(string framework, TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(this.projectDirectoryPath, "dotnet", $"publish --framework {framework}", timeout ?? TimeSpan.FromSeconds(20));
-
-        public Task NpmInstall(TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(this.projectDirectoryPath, GetNpmFilePath(), "install", timeout ?? TimeSpan.FromMinutes(5));
-
-        public async Task Gulp(string command = null)
-        {
-            var gulpFilePath = Path.Combine(this.projectDirectoryPath, @"node_modules\.bin\gulp.cmd");
-            await ProcessAssert.AssertStart(this.projectDirectoryPath, gulpFilePath, command, TimeSpan.FromSeconds(20));
-        }
-
-        public async Task DotnetRun(
+        public static async Task DotnetRun(
+            string projectDirectoryPath,
             Func<TestServer, Task> action,
             string configuration = "Debug",
             string framework = "netcoreapp1.1",
             string startupTypeName = "Startup")
         {
-            var projectName = Path.GetFileName(this.projectDirectoryPath);
+            var projectName = Path.GetFileName(projectDirectoryPath);
             var assemblyDirectoryPath = Path.Combine(
-                this.projectDirectoryPath,
+                projectDirectoryPath,
                 $@"bin\{configuration}\{framework}\publish");
             var assemblyFilePath = Path.Combine(assemblyDirectoryPath, $"{projectName}.dll");
 
@@ -125,8 +150,35 @@
             }
         }
 
-        public void Dispose() =>
-            Directory.Delete(this.tempDirectoryPath, true);
+        public class Project : IDisposable
+        {
+            public Project(string directoryPath, string filePath)
+            {
+                this.DirectoryPath = directoryPath;
+                this.FilePath = filePath;
+            }
+
+            public string DirectoryPath { get; set; }
+
+            public string FilePath { get; set; }
+
+            public void Dispose() =>
+                Directory.Delete(this.DirectoryPath, true);
+        }
+
+        private static bool IsInObjDirectory(DirectoryInfo directoryInfo)
+        {
+            if (directoryInfo == null)
+            {
+                return false;
+            }
+            else if (string.Equals(directoryInfo.Name, "obj", StringComparison.OrdinalIgnoreCase))
+            {
+                return true;
+            }
+
+            return IsInObjDirectory(directoryInfo.Parent);
+        }
 
         private static string GetNpmFilePath() =>
             Environment
