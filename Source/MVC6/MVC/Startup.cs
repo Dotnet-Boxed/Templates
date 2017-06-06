@@ -61,7 +61,9 @@
         /// </summary>
         /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
-        public Startup(IHostingEnvironment hostingEnvironment)
+        /// /// <param name="loggerFactory">The type used to configure the applications logging system.
+        /// See http://docs.asp.net/en/latest/fundamentals/logging.html</param>
+        public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
             this.hostingEnvironment = hostingEnvironment;
 
@@ -98,6 +100,16 @@
                 .AddApplicationInsightsSettings(developerMode: !this.hostingEnvironment.IsProduction())
                 // $End-ApplicationInsights$
                 .Build();
+
+            loggerFactory
+                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
+                // .AddSerilog()
+                // Log to the console and Visual Studio debug window if in development mode.
+                .AddIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x
+                        .AddConsole(this.configuration.GetSection("Logging"))
+                        .AddDebug());
             // $Start-HttpsEverywhere-On$
 
             if (this.hostingEnvironment.IsDevelopment())
@@ -117,8 +129,7 @@
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) =>
             services
                 // $Start-ApplicationInsights$
                 // Add Azure Application Insights data collection services to the services container.
@@ -162,7 +173,7 @@
                         options.EnableForHttps = true;
                         // $End-HttpsEverywhere-On$
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var responseCompressionSettings = configuration.GetSection<ResponseCompressionSettings>(
+                        var responseCompressionSettings = this.configuration.GetSection<ResponseCompressionSettings>(
                             nameof(ResponseCompressionSettings));
                         options.MimeTypes = ResponseCompressionDefaults
                             .MimeTypes
@@ -214,27 +225,12 @@
                 // $End-XmlFormatter-XmlSerializer$
                 .Services
                 .AddCustomServices();
-        }
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        /// <param name="application">The application.</param>
-        /// <param name="loggerfactory">The logger factory.</param>
-        public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
-        {
-            // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
-            loggerfactory
-                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
-                // Add the Serilog package to the project before uncommenting the line below.
-                // .AddSerilog()
-                .AddIf(
-                    hostingEnvironment.IsDevelopment(),
-                    x => x
-                        .AddConsole(configuration.GetSection("Logging"))
-                        .AddDebug());
-
+        public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory) =>
             application
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
                 .UseNoServerHttpHeader()
@@ -271,6 +267,5 @@
                 // $End-NWebSec$
                 // Add MVC to the request pipeline.
                 .UseMvc();
-        }
     }
 }

@@ -8,7 +8,13 @@
 
 # dotnet new Boilerplate.Templates NuGet Package
 
+### 1.6.2
+ASP.NET Core API Boilerplate
+- Move ILoggerFactory configuration in Startup to constructor.
+- Use C# 7 expression body members.
+
 ### 1.6.1
+ASP.NET Core API Boilerplate
 - Use AppendCommaSeparatedValues and HeaderNames constants.
 
 ### 1.6.0
@@ -61,6 +67,11 @@ ASP.NET Core API Boilerplate
 
 
 # Visual Studio Extension (VSIX)
+
+# 6.2.0
+ASP.NET Core MVC Boilerplate
+- Move ILoggerFactory configuration in Startup to constructor.
+- Use C# 7 expression body members.
 
 # 6.1.0
 ASP.NET Core MVC Boilerplate

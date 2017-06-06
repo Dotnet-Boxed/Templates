@@ -54,32 +54,30 @@
         /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
         /// otherwise.
         /// </summary>
-        public static IServiceCollection AddCaching(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddCaching(this IServiceCollection services) =>
+            services
                 // Adds IMemoryCache which is a simple in-memory cache.
                 .AddMemoryCache()
                 // Adds IDistributedCache which is a distributed cache shared between multiple servers. This adds a
                 // default implementation of IDistributedCache which is not distributed. See below:
                 .AddDistributedMemoryCache();
-            // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
-            // override any previously registered IDistributedCache service.
-            // Redis is a very fast cache provider and the recommended distributed cache provider.
-            // .AddDistributedRedisCache(
-            //     options =>
-            //     {
-            //     });
-            // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
-            // Note that this would require setting up the session state database.
-            // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
-            // .AddSqlServerCache(
-            //     x =>
-            //     {
-            //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
-            //         x.SchemaName = "dbo";
-            //         x.TableName = "Sessions";
-            //     });
-        }
+                // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
+                // override any previously registered IDistributedCache service.
+                // Redis is a very fast cache provider and the recommended distributed cache provider.
+                // .AddDistributedRedisCache(
+                //     options =>
+                //     {
+                //     });
+                // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
+                // Note that this would require setting up the session state database.
+                // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
+                // .AddSqlServerCache(
+                //     x =>
+                //     {
+                //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
+                //         x.SchemaName = "dbo";
+                //         x.TableName = "Sessions";
+                //     });
 
         /// <summary>
         /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR

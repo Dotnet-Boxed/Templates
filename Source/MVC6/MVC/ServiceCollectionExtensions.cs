@@ -14,9 +14,8 @@
         /// http://www.asp.net/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddAntiforgerySecurely(this IServiceCollection services)
-        {
-            return services.AddAntiforgery(
+        public static IServiceCollection AddAntiforgerySecurely(this IServiceCollection services) =>
+            services.AddAntiforgery(
                 options =>
                 {
                     // Rename the Anti-Forgery cookie from "__RequestVerificationToken" to "f". This adds a little
@@ -37,7 +36,6 @@
                     options.RequireSsl = true;
                     // $End-HttpsEverywhere$
                 });
-        }
 
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistrbutedCache"/> and
@@ -47,32 +45,30 @@
         /// otherwise.
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddCaching(this IServiceCollection services)
-        {
-            return services
+        public static IServiceCollection AddCaching(this IServiceCollection services) =>
+            services
                 // Adds IMemoryCache which is a simple in-memory cache.
                 .AddMemoryCache()
                 // Adds IDistributedCache which is a distributed cache shared between multiple servers. This adds a
                 // default implementation of IDistributedCache which is not distributed. See below:
                 .AddDistributedMemoryCache();
-            // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
-            // override any previously registered IDistributedCache service.
-            // Redis is a very fast cache provider and the recommended distributed cache provider.
-            // .AddDistributedRedisCache(
-            //     options =>
-            //     {
-            //     });
-            // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
-            // Note that this would require setting up the session state database.
-            // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
-            // .AddSqlServerCache(
-            //     x =>
-            //     {
-            //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
-            //         x.SchemaName = "dbo";
-            //         x.TableName = "Sessions";
-            //     });
-        }
+                // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
+                // override any previously registered IDistributedCache service.
+                // Redis is a very fast cache provider and the recommended distributed cache provider.
+                // .AddDistributedRedisCache(
+                //     options =>
+                //     {
+                //     });
+                // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
+                // Note that this would require setting up the session state database.
+                // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
+                // .AddSqlServerCache(
+                //     x =>
+                //     {
+                //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
+                //         x.SchemaName = "dbo";
+                //         x.TableName = "Sessions";
+                //     });
 
         /// <summary>
         /// Configures the settings by binding the contents of the config.json file to the specified Plain Old CLR
@@ -81,9 +77,8 @@
         /// <param name="services">The services collection or IoC container.</param>
         /// <param name="configuration">Gets or sets the application configuration, where key value pair settings are
         /// stored.</param>
-        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services
+        public static IServiceCollection AddOptions(this IServiceCollection services, IConfiguration configuration) =>
+            services
                 // Adds IOptionsSnapshot<AppSettings> to the services container.
                 .Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)))
                 // $Start-Sitemap$
@@ -92,7 +87,6 @@
                 // $End-Sitemap$
                 // Adds IOptionsSnapshot<CacheProfileSettings> to the services container.
                 .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
-        }
 
         // $Start-CORS$
         /// <summary>
@@ -100,9 +94,8 @@
         /// https://docs.asp.net/en/latest/security/cors.html
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public static IServiceCollection AddCorsPolicies(IServiceCollection services)
-        {
-            return services.AddCors(
+        public static IServiceCollection AddCorsPolicies(IServiceCollection services) =>
+            services.AddCors(
                 options =>
                 {
                     options.AddPolicy(
@@ -117,7 +110,6 @@
                         {
                         });
                 });
-        }
 
         // $End-CORS$
         /// <summary>
