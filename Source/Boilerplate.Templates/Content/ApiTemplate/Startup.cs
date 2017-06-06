@@ -62,7 +62,9 @@
         /// </summary>
         /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default.</param>
-        public Startup(IHostingEnvironment hostingEnvironment)
+        /// <param name="loggerFactory">The type used to configure the applications logging system.
+        /// See http://docs.asp.net/en/latest/fundamentals/logging.html</param>
+        public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
         {
             this.hostingEnvironment = hostingEnvironment;
 
@@ -99,6 +101,16 @@
                 .AddApplicationInsightsSettings(developerMode: !this.hostingEnvironment.IsProduction())
 #endif
                 .Build();
+
+            loggerFactory
+                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
+                // .AddSerilog()
+                // Log to the console and Visual Studio debug window if in development mode.
+                .AddIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x
+                        .AddConsole(this.configuration.GetSection("Logging"))
+                        .AddDebug());
 #if (HttpsEverywhere)
 
             if (this.hostingEnvironment.IsDevelopment())
@@ -175,20 +187,7 @@
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory)
-        {
-            // Configure application logging. See http://docs.asp.net/en/latest/fundamentals/logging.html
-            loggerfactory
-                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
-                // Add the Serilog package to the project before uncommenting the line below.
-                // .AddSerilog()
-                // Log to the console and Visual Studio debug window if in development mode.
-                .AddIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x
-                        .AddConsole(this.configuration.GetSection("Logging"))
-                        .AddDebug());
-
+        public void Configure(IApplicationBuilder application) =>
             application
 #if (Prefix)
                 .UseIf(
@@ -247,6 +246,5 @@
 #else
                 .UseMvc();
 #endif
-        }
     }
 }

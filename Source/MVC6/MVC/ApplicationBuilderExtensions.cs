@@ -25,19 +25,16 @@
         /// <summary>
         /// Configure tools used to help with debugging the application.
         /// </summary>
-        public static IApplicationBuilder UseDebugging(this IApplicationBuilder application)
-        {
+        public static IApplicationBuilder UseDebugging(this IApplicationBuilder application) =>
             // Allow updates to your files in Visual Studio to be shown in the browser. You can use the Refresh
             // browser link button in the Visual Studio toolbar or Ctrl+Alt+Enter to refresh the browser.
-            return application.UseBrowserLink();
-        }
+            application.UseBrowserLink();
 
         /// <summary>
         /// Configure default cookie settings for the application which are more secure by default.
         /// </summary>
-        public static IApplicationBuilder UseCookiePolicy(this IApplicationBuilder application)
-        {
-            return application.UseCookiePolicy(
+        public static IApplicationBuilder UseCookiePolicy(this IApplicationBuilder application) =>
+            application.UseCookiePolicy(
                 new CookiePolicyOptions()
                 {
                     // Ensure that external script cannot access the cookie.
@@ -51,22 +48,19 @@
                     // Secure = CookieSecurePolicy.SameAsRequest
                     // $End-HttpsEverywhere-Off$
                 });
-        }
 
         /// <summary>
         /// Adds developer friendly error pages for the application which contain extra debug and exception information.
         /// Note: It is unsafe to use this in production.
         /// </summary>
-        public static IApplicationBuilder UseDeveloperErrorPages(this IApplicationBuilder application)
-        {
-            // When a database error occurs, displays a detailed error page with full diagnostic information. It is
-            // unsafe to use this in production. Uncomment this if using a database.
-            // application.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
-
-            // When an error occurs, displays a detailed error page with full diagnostic information.
-            // See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
-            return application.UseDeveloperExceptionPage();
-        }
+        public static IApplicationBuilder UseDeveloperErrorPages(this IApplicationBuilder application) =>
+            application
+                // When a database error occurs, displays a detailed error page with full diagnostic information. It is
+                // unsafe to use this in production. Uncomment this if using a database.
+                // .UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                // When an error occurs, displays a detailed error page with full diagnostic information.
+                // See http://docs.asp.net/en/latest/fundamentals/diagnostics.html
+                .UseDeveloperExceptionPage();
 
         /// <summary>
         /// Adds user friendly error pages.
@@ -125,10 +119,8 @@
         /// Note: You can refer to the following article to clear the HSTS cache in your browser:
         /// http://classically.me/blogs/how-clear-hsts-settings-major-browsers
         /// </summary>
-        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application)
-        {
-            return application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
-        }
+        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application) =>
+            application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
 
         /// <summary>
         /// Adds the Public-Key-Pins HTTP header to responses. This HTTP header is only relevant if you are using TLS.
@@ -143,8 +135,7 @@
         /// See https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning and
         /// https://scotthelme.co.uk/hpkp-http-public-key-pinning/
         /// </summary>
-        public static IApplicationBuilder UsePublicKeyPinsHttpHeader(this IApplicationBuilder application)
-        {
+        public static IApplicationBuilder UsePublicKeyPinsHttpHeader(this IApplicationBuilder application) =>
             // application.UseHpkp(options => options
             //     .Sha256Pins(
             //         "Base64 encoded SHA-256 hash of your first certificate e.g. cUPcTAZWKaASuYWhhneDttWpY3oBAkE3h2+soZS7sWs=",
@@ -154,8 +145,7 @@
             // OR
             // Use UseHpkpReportOnly instead to stop browsers blocking anything but continue reporting any violations.
             // application.UseHpkpReportOnly(...)
-            return application;
-        }
+            application;
         // $End-HttpsEverywhere-On$
 
         /// <summary>
@@ -173,13 +163,12 @@
             // $Start-HttpsEverywhere-On$
             int? sslPort,
             // $End-HttpsEverywhere-On$
-            IHostingEnvironment hostingEnvironment)
-        {
+            IHostingEnvironment hostingEnvironment) =>
             // Content-Security-Policy-Report-Only - Adds the Content-Security-Policy-Report-Only HTTP header to enable
             //      logging of violations without blocking them. This is good for testing CSP without enabling it.
             // application.UseCspReportOnly(...);
             // OR
-            return application.UseCsp(
+            application.UseCsp(
                 options =>
                 {
                     options
@@ -312,7 +301,6 @@
                                 });
                             });
                 });
-        }
 
         /// <summary>
         /// Adds the X-Content-Type-Options, X-Download-Options and X-Frame-Options HTTP headers to the response for
@@ -321,9 +309,8 @@
         /// http://www.dotnetnoob.com/2012/09/security-through-http-response-headers.html and
         /// https://github.com/NWebsec/NWebsec/wiki for more information.
         /// </summary>
-        public static IApplicationBuilder UseSecurityHttpHeaders(this IApplicationBuilder application)
-        {
-            return application
+        public static IApplicationBuilder UseSecurityHttpHeaders(this IApplicationBuilder application) =>
+            application
                 // X-Content-Type-Options - Adds the X-Content-Type-Options HTTP header. Stop IE9 and below from
                 //                          sniffing files and overriding the Content-Type header (MIME type).
                 .UseXContentTypeOptions()
@@ -338,7 +325,6 @@
                 //   Deny - Specifies that the X-Frame-Options header should be set in the HTTP response, instructing
                 //          the browser to not display the page when it is loaded in an iframe.
                 .UseXfo(options => options.Deny());
-        }
         // $End-NWebSec$
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.FeatureSelection.FunctionalTest
+﻿namespace Boilerplate.Templates.Test
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +11,13 @@
 
     public static class ProcessAssert
     {
+        private enum ProcessResult
+        {
+            Succeeded,
+            Failed,
+            TimedOut
+        }
+
         public static async Task AssertStart(
             string workingDirectory,
             string fileName,
@@ -243,13 +250,6 @@
             }
 
             return taskCompletionSource.Task;
-        }
-
-        private enum ProcessResult
-        {
-            Succeeded,
-            Failed,
-            TimedOut
         }
     }
 }

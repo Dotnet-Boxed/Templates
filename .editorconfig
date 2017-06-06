@@ -119,12 +119,12 @@ dotnet_naming_symbols.constant_fields.applicable_kinds   = field
 dotnet_naming_symbols.constant_fields.required_modifiers = const
 dotnet_naming_style.pascal_case_style.capitalization = pascal_case
 # Public Members Must Be Capitalized
-dotnet_naming_rule.public_members_must_be_capitalized.severity = warning
-dotnet_naming_rule.public_members_must_be_capitalized.symbols  = public_symbols
-dotnet_naming_rule.public_members_must_be_capitalized.style    = first_word_upper_case_style
-dotnet_naming_symbols.public_symbols.applicable_kinds   = property,method,field,event,delegate
-dotnet_naming_symbols.public_symbols.required_modifiers = public,internal,protected,protected_internal
-dotnet_naming_style.first_word_upper_case_style.capitalization = first_word_upper
+# dotnet_naming_rule.public_members_must_be_capitalized.severity = warning
+# dotnet_naming_rule.public_members_must_be_capitalized.symbols  = public_symbols
+# dotnet_naming_rule.public_members_must_be_capitalized.style    = first_word_upper_case_style
+# dotnet_naming_symbols.public_symbols.applicable_kinds   = property,method,field,event,delegate
+# dotnet_naming_symbols.public_symbols.required_modifiers = public,internal,protected,protected_internal
+# dotnet_naming_style.first_word_upper_case_style.capitalization = first_word_upper
 # Private, Protected and Internal Fields Should Be camelCase
 dotnet_naming_rule.camel_case_for_private_internal_fields.severity = warning
 dotnet_naming_rule.camel_case_for_private_internal_fields.symbols  = private_internal_fields
