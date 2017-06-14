@@ -95,6 +95,13 @@
       "replaces": "PROJECT-AUTHOR",
       "description": "The name of the author of the project which determines the assembly author, company and copyright information."
     },
+    // DirectoryBrowser
+    "DirectoryBrowser": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Directory browsing allows the user of your web app to see a list of directories and files within a specified directory. Warning: Make sure you don't have secrets in your wwwroot folder. Disabling this feature only disables it in production mode."
+    },
     // Framework
     "Framework": {
       "type": "parameter",

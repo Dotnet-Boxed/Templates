@@ -130,9 +130,13 @@
                 .AddCustomCors()
 #endif
                 .AddCustomOptions(this.configuration)
+#if (DirectoryBrowser)
+                .AddDirectoryBrowser()
+#else
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.AddDirectoryBrowser())
+#endif
                 .BuildServiceProvider();
 
 
