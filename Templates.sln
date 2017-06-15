@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		cake.config = cake.config
+		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		LICENSE = LICENSE
 	EndProjectSection
 EndProject
@@ -34,6 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		CONTRIBUTING.md = CONTRIBUTING.md
 		HOW TO BUILD.md = HOW TO BUILD.md
+		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		LICENSE = LICENSE
 		MVC 5.md = MVC 5.md
 		MVC 6 API.md = MVC 6 API.md
