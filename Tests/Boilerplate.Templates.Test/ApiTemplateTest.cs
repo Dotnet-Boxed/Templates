@@ -8,7 +8,7 @@
     public class ApiTemplateTest
     {
         private const string ProjectFileName = "ApiTemplate.csproj";
-        private const string TemplateName = "bapi";
+        private const string TemplateName = "api";
 
         public ApiTemplateTest()
         {
@@ -23,7 +23,7 @@
         [Fact]
         public async Task Home_BuildsAndRuns_Returns200Ok()
         {
-            using (var project = await TemplateAssert.DotnetNew("bapi", "HomeTest"))
+            using (var project = await TemplateAssert.DotnetNew("api", "HomeTest"))
             {
                 await TemplateAssert.DotnetRestore(project.DirectoryPath);
                 await TemplateAssert.DotnetBuild(project.DirectoryPath);

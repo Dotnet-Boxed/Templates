@@ -1,7 +1,7 @@
 ﻿// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
-  "classifications": [ "Static Files" ],
+  "classifications": [ "Web", "Static Files" ],
   "name": "ASP.NET Core Static Files Boilerplate",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.StaticFiles.CSharp",
