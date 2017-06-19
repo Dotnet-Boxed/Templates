@@ -1,5 +1,6 @@
 ﻿namespace MvcBoilerplate
 {
+    using System;
     using System.IO.Compression;
     using System.Linq;
     using Boilerplate.AspNetCore;
@@ -30,7 +31,7 @@
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
-    public partial class Startup
+    public class Startup : IStartup
     {
         /// <summary>
         /// Gets or sets the application configuration, where key value pair settings are stored. See
@@ -129,7 +130,7 @@
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
         /// <param name="services">The services collection or IoC container.</param>
-        public void ConfigureServices(IServiceCollection services) =>
+        public IServiceProvider ConfigureServices(IServiceCollection services) =>
             services
                 // $Start-ApplicationInsights$
                 // Add Azure Application Insights data collection services to the services container.
@@ -224,13 +225,14 @@
                 .AddXmlSerializerFormatters()
                 // $End-XmlFormatter-XmlSerializer$
                 .Services
-                .AddCustomServices();
+                .AddCustomServices()
+                .BuildServiceProvider();
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public void Configure(IApplicationBuilder application, ILoggerFactory loggerfactory) =>
+        public void Configure(IApplicationBuilder application) =>
             application
                 // Removes the Server HTTP header from the HTTP response for marginally better security and performance.
                 .UseNoServerHttpHeader()
