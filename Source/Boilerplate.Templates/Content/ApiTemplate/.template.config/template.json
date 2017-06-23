@@ -5,7 +5,7 @@
   "name": "ASP.NET Core API Boilerplate",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
-  "shortName": "bapi",
+  "shortName": "api",
   "tags": {
     "language": "C#"
   },

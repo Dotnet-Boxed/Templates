@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 EndProject
@@ -39,6 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		LICENSE = LICENSE
 		MVC 5.md = MVC 5.md
 		MVC 6 API.md = MVC 6 API.md
+		MVC 6 Static Files.md = MVC 6 Static Files.md
 		MVC 6.md = MVC 6.md
 		README.md = README.md
 		RELEASE NOTES.md = RELEASE NOTES.md

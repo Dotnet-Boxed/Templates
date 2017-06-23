@@ -2,7 +2,10 @@
 {
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Boilerplate.Web.Mvc.Filters;
     using MvcBoilerplate.Constants;
+    using NWebsec.Mvc.HttpHeaders;
+    using NWebsec.Mvc.HttpHeaders.Csp;
 
     public static class FilterConfig
     {
