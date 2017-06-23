@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Loader;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
@@ -28,6 +29,8 @@
             }
         }
 
+        public static string PublishOutputTempDirectoryPath => Path.Combine(TempDirectoryPath, "Publish");
+
         public static Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
             ProcessAssert.AssertStart(TempDirectoryPath, "dotnet", $"new --install \"{source}\"", timeout ?? TimeSpan.FromSeconds(20));
 
@@ -45,8 +48,21 @@
         public static Task DotnetBuild(string projectDirectoryPath, TimeSpan? timeout = null) =>
             ProcessAssert.AssertStart(projectDirectoryPath, "dotnet", "build", timeout ?? TimeSpan.FromSeconds(20));
 
-        public static Task DotnetPublish(string projectDirectoryPath, string framework, TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(projectDirectoryPath, "dotnet", $"publish --framework {framework}", timeout ?? TimeSpan.FromSeconds(20));
+        public static Task DotnetPublish(
+            string projectDirectoryPath,
+            string framework = "netcoreapp1.1",
+            string runtime = null,
+            TimeSpan? timeout = null)
+        {
+            var frameworkArgument = framework == null ? null : $"--framework {framework}";
+            var runtimeArgument = runtime == null ? null : $"--self-contained --runtime {runtime}";
+            DirectoryExtended.CheckCreate(PublishOutputTempDirectoryPath);
+            return ProcessAssert.AssertStart(
+                projectDirectoryPath,
+                "dotnet",
+                $"publish {frameworkArgument} {runtimeArgument} --output '{PublishOutputTempDirectoryPath}'",
+                timeout ?? TimeSpan.FromSeconds(20));
+        }
 
         public static string GetProjectDirectoryPath(Assembly assembly, string projectName) =>
             Path.GetDirectoryName(GetProjectFilePath(assembly, projectName));
@@ -86,15 +102,12 @@
         public static async Task DotnetRun(
             string projectDirectoryPath,
             Func<TestServer, Task> action,
-            string configuration = "Debug",
-            string framework = "netcoreapp1.1",
+            string environmentName = "Development",
             string startupTypeName = "Startup")
         {
             var projectName = Path.GetFileName(projectDirectoryPath);
-            var assemblyDirectoryPath = Path.Combine(
-                projectDirectoryPath,
-                $@"bin\{configuration}\{framework}\publish");
-            var assemblyFilePath = Path.Combine(assemblyDirectoryPath, $"{projectName}.dll");
+            var directoryPath = PublishOutputTempDirectoryPath;
+            var assemblyFilePath = Path.Combine(directoryPath, $"{projectName}.dll");
 
             if (string.IsNullOrEmpty(assemblyFilePath))
             {
@@ -102,8 +115,7 @@
             }
             else
             {
-                var assemblyName = AssemblyLoadContext.GetAssemblyName(assemblyFilePath);
-                var assembly = new AssemblyLoader(assemblyDirectoryPath).LoadFromAssemblyName(assemblyName);
+                var assembly = new AssemblyLoader(directoryPath).LoadFromAssemblyPath(assemblyFilePath);
                 var startupType = assembly.ExportedTypes
                     .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
                 if (startupType == null)
@@ -111,59 +123,18 @@
                     Assert.False(true, $"Startup type '{startupTypeName}' not found.");
                 }
 
-                var webHostBuilder = new WebHostBuilder().UseStartup(startupType).UseUrls(DefaultUrls);
+                var webHostBuilder = new WebHostBuilder()
+                    .UseEnvironment(environmentName)
+                    .UseStartup(startupType)
+                    .UseUrls(DefaultUrls);
                 using (var testServer = new TestServer(webHostBuilder))
                 {
+                    var response = testServer.CreateClient().GetAsync("/");
                     await action(testServer);
                 }
 
                 // TODO: Unload startupType when supported: https://github.com/dotnet/corefx/issues/14724
             }
-        }
-
-        public class AssemblyLoader : AssemblyLoadContext
-        {
-            private readonly string directoryPath;
-
-            public AssemblyLoader(string directoryPath) =>
-                this.directoryPath = directoryPath;
-
-            protected override Assembly Load(AssemblyName assemblyName)
-            {
-                var deps = DependencyContext.Default;
-                var res = deps.CompileLibraries.Where(x => x.Name.Contains(assemblyName.Name)).ToList();
-                if (res.Count > 0)
-                {
-                    return Assembly.Load(new AssemblyName(res.First().Name));
-                }
-                else
-                {
-                    var file = new FileInfo($"{this.directoryPath}{Path.DirectorySeparatorChar}{assemblyName.Name}.dll");
-                    if (File.Exists(file.FullName))
-                    {
-                        var asemblyLoader = new AssemblyLoader(file.DirectoryName);
-                        return asemblyLoader.LoadFromAssemblyPath(file.FullName);
-                    }
-                }
-
-                return Assembly.Load(assemblyName);
-            }
-        }
-
-        public class Project : IDisposable
-        {
-            public Project(string directoryPath, string filePath)
-            {
-                this.DirectoryPath = directoryPath;
-                this.FilePath = filePath;
-            }
-
-            public string DirectoryPath { get; set; }
-
-            public string FilePath { get; set; }
-
-            public void Dispose() =>
-                Directory.Delete(this.DirectoryPath, true);
         }
 
         private static bool IsInObjDirectory(DirectoryInfo directoryInfo)
@@ -189,5 +160,61 @@
                     .GetFiles(x, "*", SearchOption.AllDirectories)
                     .Where(y => string.Equals(Path.GetFileName(y), "npm.cmd", StringComparison.OrdinalIgnoreCase)))
                 .First();
+
+        public class AssemblyLoader : AssemblyLoadContext
+        {
+            private readonly string directoryPath;
+
+            public AssemblyLoader(string directoryPath) =>
+                this.directoryPath = directoryPath;
+
+            protected override Assembly Load(AssemblyName assemblyName)
+            {
+                var dependencyContext = DependencyContext.Default;
+                var compilationLibraries = dependencyContext
+                    .CompileLibraries
+                    .Where(x => x.Name.Contains(assemblyName.Name))
+                    .ToList();
+                if (compilationLibraries.Count > 0)
+                {
+                    return Assembly.Load(new AssemblyName(compilationLibraries.First().Name));
+                }
+                else
+                {
+                    var assemblyFilePath = Path.Combine(this.directoryPath, $"{assemblyName.Name}.dll");
+                    if (File.Exists(assemblyFilePath))
+                    {
+                        return this.LoadFromAssemblyPath(assemblyFilePath);
+                    }
+                    else
+                    {
+                        var dotnetDirectoryPath = Path.GetDirectoryName(typeof(string).GetTypeInfo().Assembly.Location);
+                        var dotnetAssemblyFilePath = Path.Combine(dotnetDirectoryPath, $"{assemblyName.Name}.dll");
+                        if (File.Exists(dotnetAssemblyFilePath))
+                        {
+                            return this.LoadFromAssemblyPath(dotnetAssemblyFilePath);
+                        }
+                    }
+                }
+
+                return Assembly.Load(assemblyName);
+            }
+        }
+
+        public class Project : IDisposable
+        {
+            public Project(string directoryPath, string filePath)
+            {
+                this.DirectoryPath = directoryPath;
+                this.FilePath = filePath;
+            }
+
+            public string DirectoryPath { get; set; }
+
+            public string FilePath { get; set; }
+
+            public void Dispose() =>
+                Directory.Delete(this.DirectoryPath, true);
+        }
     }
 }
