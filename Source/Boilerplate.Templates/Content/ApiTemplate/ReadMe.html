@@ -74,6 +74,15 @@
                         <input name="HTTPS-TestHttps" type="checkbox"> <strong>Test Your HTTPS Implementation</strong> -
                         Use the <a href="https://www.ssllabs.com/ssltest">SSLLabs.com</a> site to check that you have implemented TLS over HTTPS correctly.
                     </li>
+                    <li class="list-group-item">
+                        <input name="HTTPS-CertificateTransparency" type="checkbox"> <strong>Certificate Transparency</strong> -
+                        <a href="https://scotthelme.co.uk/revocation-is-broken/">Certificate Transparency (CT)</a> requires that all Certificate Authorities (CA's) publically log all certificates they create. If a certificate is mistakenly issued for your site you can be notified by the following services:
+                        <ul>
+                          <li><a href="https://developers.facebook.com/tools/ct/">Facebook Certificate Transparency Monitoring</a></li>
+                          <li><a href="https://sslmate.com/certspotter/">sslmate CertSpotter</a></li>
+                          <li><a href="https://crt.sh/?q=example.com">crt.sh</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <!--#endif-->
                 <h4>Understand Web Security</h4>

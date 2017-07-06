@@ -13,6 +13,7 @@ ASP.NET Core API Boilerplate
 - Move ILoggerFactory configuration in Startup to constructor.
 - Use C# 7 expression body members.
 - Use IStartup interface on the Startup class.
+- Added note in ReadMe about registering for [Certificate Transparency](https://scotthelme.co.uk/revocation-is-broken/) notifications.
 ASP.NET Core Static Files Boilerplate
 - Initial version.
 
@@ -76,6 +77,7 @@ ASP.NET Core MVC Boilerplate
 - Move ILoggerFactory configuration in Startup to constructor.
 - Use C# 7 expression body members.
 - Use IStartup interface on the Startup class.
+- Added note in ReadMe about registering for [Certificate Transparency](https://scotthelme.co.uk/revocation-is-broken/) notifications.
 
 # 6.1.0
 ASP.NET Core MVC Boilerplate
