@@ -157,16 +157,12 @@
                         <input name="Images-SaveImagesForWeb" type="checkbox"> <strong>Save Images For Web</strong> -
                         Reduce the size of your images by saving them so that they are as small as possible while still looking good. The quality of JPG's can be reduced for example. Some image applications like PhotoShop have a save for the web feature.
                     </li>
-                    <li class="list-group-item">
-                        <input name="Images-CompressImages" type="checkbox"> <strong>Compress Images</strong> -
-                        Run the 'optimize-images' <a href="http://gulpjs.com/">Gulp</a> task from the 'Task Runner Explorer' in Visual Studio. This will compress the images in the wwwroot/img folder.
-                    </li>
                 </ul>
                 <h4>Caching</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
-                        Some resources are generated programatically and then cached for a certain time period.
+                        Some resources are generated programmatically and then cached for a certain time period.
                         If these resources won't change much on your site, change the length of time they are cached. Open the <em>appsettings.json</em> file and take a look at the cache profiles section.
                     </li>
                     <li class="list-group-item">
@@ -189,48 +185,8 @@
                 <h4>Other Performance</h4>
                 <ul class="list-group">
                     <li class="list-group-item">
-                        <input name="OtherPerformance-PrefetchPrerenderPages" type="checkbox"> <strong>Pre-fetch/Pre-render Pages</strong> -
-                        If there are subsequent pages that a user is likely to visit, such as the next link on a gallery page, consider adding pre-fetch or pre-render
-                        link tags to the head of the page. See <a href="http://www.stevesouders.com/blog/2013/11/07/prebrowsing/">here</a> and
-                        <a href="http://blogs.msdn.com/b/ie/archive/2013/12/04/getting-to-the-content-you-want-faster-in-ie11.aspx?Redirected=true">here</a> for more details. Also consider implementing IE11 <a href="msdn.microsoft.com/en-us/library/ie/jj883726(v=vs.85).aspx">flip ahead</a>, if you have next and previous buttons.
-                    </li>
-                    <li class="list-group-item">
                         <input name="OtherPerformance-Prefetcher" type="checkbox"> <strong>Enable Windows Server Pre-fetcher</strong> -
                         This is only relevant if your site is hosted on Windows Server. You can enable the <a href="http://en.wikipedia.org/wiki/Prefetcher">pre-fetcher</a> to get a performance and reduce the disk-read cost of application start-up. Click <a href="http://www.asp.net/aspnet/overview/aspnet-and-visual-studio-2012/whats-new#_Toc_perf_6">here</a> for more information on how to do this.
-                    </li>
-                </ul>
-            </article>
-
-            <article>
-                <h3><span aria-hidden="true" class="fa fa-certificate"></span> Code Quality</h3>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input name="CodeQuality-HTMLValidation" type="checkbox"> <strong>HTML Validation</strong> -
-                        Validate your HTML using the W3C's <a href="http://validator.w3.org/">HTML Validator</a> and/or using <a href="http://watson.addy.com/">Dr. Watson</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-CSSValidation" type="checkbox"> <strong>CSS Validation</strong> -
-                        Validate your CSS using the W3C's <a href="http://jigsaw.w3.org/css-validator/">CSS Validator</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-RunJSHint" type="checkbox"> <strong>Run CSSLint</strong> -
-                        Building this project will run the 'lint-css' <a href="http://gulpjs.com/">Gulp</a> task which will print warnings in the Visual Studio 'Task Runner Explorer' window and give you pointers in how you can improve your CSS &amp; LESS code.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-RunJSHint" type="checkbox"> <strong>Run JSHint</strong> -
-                        Building this project will run the 'lint-js' <a href="http://gulpjs.com/">Gulp</a> task which will print warnings in the Visual Studio 'Task Runner Explorer' window and give you pointers in how you can improve your JavaScript &amp; TypeScript code.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-InternationalizationValidation" type="checkbox"> <strong>Internationalization Validation</strong> -
-                        If you are supporting multiple languages, validate your CSS using the W3C's <a href="http://validator.w3.org/i18n-checker/">Internationalization Validator</a>.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-FixBrokenLinks" type="checkbox"> <strong>Fix Broken Links</strong> -
-                        Use the W3C's <a href="http://validator.w3.org/checklink">Link Checker</a> or <a href="http://iwebtool.com/broken_link_checker">IWebTool.com's Link Checker</a> to fix any broken links in your site.
-                    </li>
-                    <li class="list-group-item">
-                        <input name="CodeQuality-RunSpellCheck" type="checkbox"> <strong>Run Spell Check</strong> -
-                        Check the spelling on your site for any spelling errors using an <a href="http://www.internetmarketingninjas.com/online-spell-checker.php">Online Spell-Checker</a>.
                     </li>
                 </ul>
             </article>
