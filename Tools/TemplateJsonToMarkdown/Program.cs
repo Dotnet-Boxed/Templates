@@ -11,7 +11,8 @@
         public static void Main(string[] args)
         {
             //var filePath = args[0];
-            var filePath = @"C:\Git\Templates\Source\Boilerplate.Templates\content\ApiTemplate\.template.config\template.json";
+            //var filePath = @"C:\Git\Templates\Source\Boilerplate.Templates\content\ApiTemplate\.template.config\template.json";
+            var filePath = @"C:\GitHub\Templates\Source\Boilerplate.Templates\Content\StaticFilesTemplate\.template.config\template.json";
             var json = File.ReadAllText(filePath);
 
             var stringBuilder = new StringBuilder();

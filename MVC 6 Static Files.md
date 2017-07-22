@@ -1,28 +1,20 @@
 ﻿# ![ASP.NET Core Boilerplate Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Nuget%20Icon.png) [ASP.NET Core Static Files Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates)
 
-![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20Static%20Files%20Preview%20Image.png)
+![ASP.NET Core Static Files Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20Static%20Files%20Preview%20Image.png)
 
 ## Technology Map
 
-The ASP.NET Core API project template contains the following features:
+The ASP.NET Core Static Files project template contains the following features:
 
-![ASP.NET Core API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20Static%20Files%20Technology%20Map.png)
+![ASP.NET Core Static Files Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20Static%20Files%20Technology%20Map.png)
 
 ## Optional Feature Selection
 
 The ASP.NET Core Static Files project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
-#### API
+#### Static Files
 
-- **Swagger** (Default=On) - Swagger is a format for describing the endpoints in your API. Swashbuckle is used to generate a Swagger document and to generate beautiful API documentation, including a UI to explore and test operations, directly from your routes, controllers and models.
-- **Versioning** (Default=Off) - Enable API versioning to version API endpoints. The version can be specified in the URL query parameter (This is the default e.g. /api/foo?api-version=1.0), URL (e.g. /api/v1/foo), HTTP header (e.g. api-version: 1.0) or a custom MIME type (e.g. application/vnd.mycompany.myapp-v2+xml).
-- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly.
-- **RequestId** (Default=Off) - Require that all requests send the X-Request-ID HTTP header containing a GUID. This is useful where you have access to the client and server logs and want to correlate a request and response between the two.
-- **User-Agent** (Default=Off) - Require that all requests send the User-Agent HTTP header containing the application name and version of the caller.
-- **XmlFormatter** - Choose whether to use the XML input/output formatter and which serializer to use.
-  - **DataContractSerializer** - The default XML serializer you should use. Requires the use of [DataContract] and [DataMember] attributes.
-  - **XmlSerializer** - The alternative XML serializer which is slower but gives more control. Uses the [XmlRoot], [XmlElement] and [XmlAttribute] attributes.
-  - **None** (Default) - No XML formatter.
+- **DirectoryBrowser** (Default=Off) - Directory browsing allows the user of your web app to see a list of directories and files within a specified directory. Warning: Make sure you don't have secrets in your wwwroot folder. Disabling this feature only disables it in production mode.
 
 #### Project
 
@@ -80,24 +72,13 @@ The ASP.NET Core Static Files project template uses `dotnet new` to enable you t
 
 ## Always On Features
 
-#### API
-
-- **Example Controller** - The example `CarController` contains the following actions:
-  - GET - Returns single car.
-  - GET - Implements paging to return a single page worth of cars, where the page size is configurable.
-  - POST - Add a new car.
-  - PUT - Update an existing car.
-  - PATCH - Update one or more properties of an existing car.
-  - DELETE a single car.
-- **Automatically Return Not Acceptable** - Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
-
 #### Performance
 
 - **GZip Compression** - Turned on by default for static and dynamic files making them smaller and quicker to download. 
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.
-- **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
+- **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for serving static files. Uses ControllerBase instead of Controller.
 - **Named Routes** - Uses named attribute routes for best performance and maintainability. All route names are specified as constants.
 
 #### Security
@@ -105,27 +86,24 @@ The ASP.NET Core Static Files project template uses `dotnet new` to enable you t
 - **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on you development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
 - **Randomized String Hashing** - Determines whether the common language runtime calculates hash codes for strings on a per application domain basis. Only applicable to .NET, .NET Core has this turned on by default.
-- **Translates Models to ViewModels** - Using your models which usually come from a database directly in your controllers can result in a mass assignment attack. View models with a translation layer are used to avoid this.
 
 #### Debugging
 
-- **Format Filter** - The FormatFilterAttribute is turned on globally in development mode, so you can pass `?format=application/json` while debugging to set the Accept MIME type.
 - **Browser Link** - Browser Link is turned on in development mode, so you can hit Ctrl+Alt+Enter to refresh the browser.
 - **Developer Exception Page** - Shows detailed exception information in the browser. Turned on in development mode only for security.
 
 #### Patterns & Practices
 
-- **Command Pattern** - Writing all your code in your controllers can mean you end up with huge classes. The command pattern splits up each controller action into it's own class.
 - **Configure CacheProfile in JSON** - All cache profiles can be configured from a configuration file.
-- **Validate Model State** - The ValidateModelStateAttribute is turned on globally so all models passed to an action method are automatically validated and a 400 Bad Request is returned if the model is invalid.
 
 ## How can I get it?
 That's easy, just choose one of the following options:
 
 1. You must have the latest version of the dotnet tooling. This comes with Visual Studio 2017 or from [dot.net](https://dot.net).
-2. Run `dotnet new --install Boilerplate.Templates::*` to install the project template.
-3. Run `dotnet new static --help` to see how to select the feature of the project.
-4. Run `dotnet new static --name "MyTemplate"` along with any other custom options to create a project from the template.
+2. If you have a newer .NET Core Preview SDK installed then use a [global.json](https://www.hanselman.com/blog/ManagingDotnetCore20AndDotnetCore1xVersionedSDKsOnTheSameMachine.aspx) to default to the current stable SDK.
+3. Run `dotnet new --install Boilerplate.Templates::*` to install the project template.
+4. Run `dotnet new static --help` to see how to select the feature of the project.
+5. Run `dotnet new static --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-Core-Boilerplate/Templates/projects) tab.

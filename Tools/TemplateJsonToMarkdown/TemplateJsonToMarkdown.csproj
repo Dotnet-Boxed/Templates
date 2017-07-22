@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
+    <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.1;net461</TargetFrameworks>
     <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net461' ">win7-x86</RuntimeIdentifier>
   </PropertyGroup>
