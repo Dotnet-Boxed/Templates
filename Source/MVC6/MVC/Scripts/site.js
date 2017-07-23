@@ -1,5 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+﻿"use strict";
 var Calculator = (function () {
     function Calculator() {
     }
