@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC5", "MVC5", "{C21DC15C-CF5E-4D6E-9585-4C7C446AD18F}"
 EndProject
@@ -16,8 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.ps1 = build.ps1
 		build.sh = build.sh
 		cake.config = cake.config
-		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
-		LICENSE = LICENSE
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}"
@@ -67,9 +66,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Boile
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateJsonToMarkdown", "Tools\TemplateJsonToMarkdown\TemplateJsonToMarkdown.csproj", "{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boilerplate.Templates.Test", "Tests\Boilerplate.Templates.Test\Boilerplate.Templates.Test.csproj", "{0A6B9505-36B1-41CA-8621-66D45941055F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Templates.Test", "Tests\Boilerplate.Templates.Test\Boilerplate.Templates.Test.csproj", "{0A6B9505-36B1-41CA-8621-66D45941055F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticFilesTemplate", "Source\Boilerplate.Templates\Content\StaticFilesTemplate\StaticFilesTemplate.csproj", "{7CA00DD0-3BC7-45E5-97B7-B08D1497152C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticFilesTemplate", "Source\Boilerplate.Templates\Content\StaticFilesTemplate\StaticFilesTemplate.csproj", "{7CA00DD0-3BC7-45E5-97B7-B08D1497152C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
