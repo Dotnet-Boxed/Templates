@@ -1,4 +1,4 @@
-#tool "nuget:?package=xunit.runner.console"
+﻿#tool "nuget:?package=xunit.runner.console"
 #r "System.Net.Http"
 #r "System.Xml.Linq"
 
@@ -154,7 +154,7 @@ Task("Version-VSIX")
         CopyFileToDirectory(GetFiles("./**/*.vsix").First(), artifactsDirectory);
 
         // Build Tests
-        foreach (var project in GetFiles("./Tests/**/*.csproj"))
+        foreach (var project in GetFiles("./Tests/**/Boilerplate.FeatureSelection.*Test.csproj"))
         {
             MSBuild(project, settings => settings.SetConfiguration(configuration));
         }
@@ -164,7 +164,7 @@ Task("Test-VSIX")
     .IsDependentOn("Build-VSIX")
     .Does(() =>
     {
-        var projects = GetFiles("./Tests/**/bin/" + configuration + "/*Test.dll");
+        var projects = GetFiles("./Tests/**/bin/" + configuration + "/Boilerplate.FeatureSelection.*Test.dll");
         foreach(var project in projects)
         {
             XUnit2(
