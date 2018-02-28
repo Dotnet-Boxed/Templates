@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TemplateReport>
-  <ItemTemplates />
-  <ProjectTemplates>
-    <ProjectTemplate Path="..\MVC5\Boilerplate.Web.Mvc5.Sample\_Definitions\_project.vstemplate.xml" Name="ASP.NET MVC 5 Boilerplate" Description="A professional ASP.NET MVC template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default MVC template provided by Microsoft. Find out more at RehanSaeed.com" ProjectType="CSharp" ProjectSubType="" />
-    <ProjectTemplate Path="..\MVC6\MVC\_Definitions\_project.vstemplate.xml" Name="ASP.NET Core 1.1.2 Boilerplate (VS 2017 Only)" Description="A professional ASP.NET Core project template for building secure, fast, robust and adaptable web applications or sites. It provides the minimum amount of code required on top of the default ASP.NET Core project template provided by Microsoft. Find out more at RehanSaeed.com" ProjectType="CSharp" ProjectSubType="Web" />
-  </ProjectTemplates>
-  <Snippets />
-</TemplateReport>
