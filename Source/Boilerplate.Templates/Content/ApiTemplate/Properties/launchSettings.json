@@ -1,100 +1,62 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:1025/",
-      "sslPort": 44300
+      "applicationUrl": "http://localhost:5000/",
+      "sslPort": 5001
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      //#if (!HttpsEverywhere)
-      //"launchUrl": "http://localhost:1025/",
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001/",
       //#else
-      "launchUrl": "https://localhost:44300/",
+      //"launchUrl": "http://localhost:5000/",
       //#endif
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HTTPS_PORT": "5001"
       }
     },
-    //#if (NETCore)
-    "dotnet run (netcoreapp1.1)": {
+    "dotnet run": {
       "commandName": "Project",
-      //#if (!HttpsEverywhere)
-      //"commandLineArgs": "--urls http://*:1025",
+      //#if (HttpsEverywhere)
+      "commandLineArgs": "--urls http://*:5000;https://*:5001",
       //#else
-      "commandLineArgs": "--framework netcoreapp1.1 --urls http://*:1025;https://*:44300",
+      //"commandLineArgs": "--urls http://*:5000",
       //#endif
       "launchBrowser": true,
-      //#if (!HttpsEverywhere)
-      //"launchUrl": "http://localhost:1025/",
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001/",
       //#else
-      "launchUrl": "https://localhost:44300/",
+      //"launchUrl": "http://localhost:5000/",
       //#endif
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HTTPS_PORT": "5001"
       }
     },
-    //#endif
-    //#if (NETFramework)
-    "dotnet run (net461)": {
+    "dotnet watch run": {
       "commandName": "Project",
-      //#if (!HttpsEverywhere)
-      //"commandLineArgs": "--urls http://*:1025",
-      //#else
-      "commandLineArgs": "--framework net461 --urls http://*:1025;https://*:44300",
-      //#endif
-      "launchBrowser": true,
-      //#if (!HttpsEverywhere)
-      //"launchUrl": "http://localhost:1025/",
-      //#else
-      "launchUrl": "https://localhost:44300/",
-      //#endif
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    //#endif
-    //#if (NETCore)
-    "dotnet watch run (netcoreapp1.1)": {
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      //#if (!HttpsEverywhere)
-      //"commandLineArgs": "watch run --urls http://*:1025",
+      //#if (HttpsEverywhere)
+      "commandLineArgs": "watch run --urls http://*:5000;https://*:5001",
       //#else
-      "commandLineArgs": "watch run --framework netcoreapp1.1 --urls http://*:1025;https://*:44300",
+      //"commandLineArgs": "watch run --urls http://*:5000",
       //#endif
       "launchBrowser": true,
-      ////#if (!HttpsEverywhere)
-      // "launchUrl": "http://localhost:1025/",
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001/",
       //#else
-      "launchUrl": "https://localhost:44300/",
+      //"launchUrl": "http://localhost:5000/",
       //#endif
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    //#endif
-    //#if (NETFramework)
-    "dotnet watch run (net461)": {
-      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      //#if (!HttpsEverywhere)
-      //"commandLineArgs": "watch run --urls http://*:1025",
-      //#else
-      "commandLineArgs": "watch run --framework net461 --urls http://*:1025;https://*:44300",
-      //#endif
-      "launchBrowser": true,
-      ////#if (!HttpsEverywhere)
-      // "launchUrl": "http://localhost:1025/",
-      //#else
-      "launchUrl": "https://localhost:44300/",
-      //#endif
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HTTPS_PORT": "5001"
       }
     }
-    //#endif
   }
 }

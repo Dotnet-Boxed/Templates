@@ -1,4 +1,4 @@
-﻿// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
@@ -32,13 +32,6 @@
           "condition": "(!Versioning)",
           "exclude": [
             "OperationFilters/**/*"
-          ]
-        },
-        // Framework
-        {
-          "condition": "(!NETFramework)",
-          "exclude": [
-            "app.config"
           ]
         },
         // ReverseProxyWebServer
@@ -134,60 +127,6 @@
       "defaultValue": "true",
       "description": "Enable API versioning to version API endpoints. The version can be specified in the URL query parameter (This is the default e.g. /api/foo?api-version=1.0), URL (e.g. /api/v1/foo), HTTP header (e.g. api-version: 1.0) or a custom MIME type (e.g. application/vnd.mycompany.myapp-v2+xml)."
     },
-    // Framework
-    "Framework": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": ".NET Core",
-          "description": "Run cross platform (on Windows, Mac and Linux). The framework is made up of NuGet packages which can be shipped with the application so it is fully stand-alone."
-        },
-        {
-          "choice": ".NET Framework",
-          "description": "Gives you access to the full breadth of libraries available in .NET instead of the subset available in .NET Core but requires it to be pre-installed."
-        },
-        {
-          "choice": "Both",
-          "description": "Target both .NET Core and .NET Framework."
-        }
-      ],
-      "defaultValue": "Both",
-      "description": "Decide which version of the .NET Framework to target."
-    },
-    "NETCore": {
-      "type": "computed",
-      "value": "(Framework == \".NET Core\" || Framework == \"Both\")"
-    },
-    "NETFramework": {
-      "type": "computed",
-      "value": "(Framework == \".NET Framework\" || Framework == \"Both\")"
-    },
-    // PrimaryWebServer
-    "PrimaryWebServer": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "Kestrel",
-          "description": "A web server for ASP.NET Core that is not intended to be internet facing as it has not been security tested. IIS or NGINX should be placed in front as reverse proxy web servers."
-        },
-        {
-          "choice": "WebListener",
-          "description": "A Windows only web server. It gives you the option to take advantage of Windows specific features, like Windows authentication, port sharing, HTTPS with SNI, HTTP/2 over TLS (Windows 10), direct file transmission, and response caching WebSockets (Windows 8)."
-        }
-      ],
-      "defaultValue": "Kestrel",
-      "description": "The primary web server you want to use to host the site."
-    },
-    "Kestrel": {
-      "type": "computed",
-      "value": "(PrimaryWebServer == \"Kestrel\")"
-    },
-    "WebListener": {
-      "type": "computed",
-      "value": "(PrimaryWebServer == \"WebListener\")"
-    },
     // ReverseProxyWebServer
     "ReverseProxyWebServer": {
       "type": "parameter",
@@ -273,13 +212,6 @@
       "defaultValue": "true",
       "description": "Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled. Configures the primary and reverse proxy web servers for best security and adds a development certificate file for use in your development environment."
     },
-    // PublicKeyPinning
-    "PublicKeyPinning": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Adds the Public-Key-Pins (HPKP) HTTP header to responses. It stops man-in-the-middle attacks by telling browsers exactly which TLS certificate you expect. You must have two TLS certificates for this to work, if you get this wrong you will have performed a denial of service attack on yourself."
-    },
     // CORS
     "CORS": {
       "type": "parameter",
@@ -357,27 +289,6 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
-    },
-    // Profiler
-    "Profiler": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "Prefix",
-          "description": "Built by the team at Stackify.  Prefix has almost no negative impact on application performance. Install the Prefix tool from https://prefix.io, then view your profiling information from multiple apps in one web page."
-        },
-        {
-          "choice": "None",
-          "description": "Not using any profiler."
-        }
-      ],
-      "defaultValue": "None",
-      "description": "Collect and view profiling information about HTTP requests, database queries and exceptions when running your app in development mode."
-    },
-    "Prefix": {
-      "type": "computed",
-      "value": "(Profiler == \"Prefix\")"
     },
     // AuthoringMode
     "AuthoringMode": {

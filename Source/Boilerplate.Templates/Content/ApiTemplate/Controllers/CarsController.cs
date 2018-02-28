@@ -1,6 +1,7 @@
-﻿namespace ApiTemplate.Controllers
+namespace ApiTemplate.Controllers
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Commands;
     using ApiTemplate.Constants;
@@ -92,6 +93,7 @@
         /// Deletes the car with the specified ID.
         /// </summary>
         /// <param name="carId">The car ID.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 204 No Content response if the car was deleted or a 404 Not Found if a car with the specified ID
         /// was not found.</returns>
 #if (Swagger)
@@ -101,13 +103,14 @@
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Delete(int carId) =>
+        public Task<IActionResult> Delete(int carId, CancellationToken cancellationToken) =>
             this.deleteCarCommand.Value.ExecuteAsync(carId);
 
         /// <summary>
         /// Gets the car with the specified ID.
         /// </summary>
         /// <param name="carId">The car ID.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK response containing the car or a 404 Not Found if a car with the specified ID was not
         /// found.</returns>
 #if (Swagger)
@@ -120,13 +123,14 @@
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status304NotModified)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Get(int carId) =>
+        public Task<IActionResult> Get(int carId, CancellationToken cancellationToken) =>
             this.getCarCommand.Value.ExecuteAsync(carId);
 
         /// <summary>
         /// Gets a collection of cars using the specified page number and number of items per page.
         /// </summary>
         /// <param name="pageOptions">The page options.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
         /// parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
         /// </returns>
@@ -140,14 +144,15 @@
         [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> GetPage([FromQuery] PageOptions pageOptions) =>
+        public Task<IActionResult> GetPage([FromQuery] PageOptions pageOptions, CancellationToken cancellationToken) =>
             this.getCarPageCommand.Value.ExecuteAsync(pageOptions);
 
         /// <summary>
         /// Patches the car with the specified ID.
         /// </summary>
         /// <param name="carId">The car ID.</param>
-        /// <param name="patch">The patch document. See http://jsonpatch.com/.</param>
+        /// <param name="patch">The patch document. See http://jsonpatch.com.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK if the car was patched, a 400 Bad Request if the patch was invalid or a 404 Not Found
         /// if a car with the specified ID was not found.</returns>
 #if (Swagger)
@@ -159,13 +164,14 @@
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Patch(int carId, [FromBody] JsonPatchDocument<SaveCar> patch) =>
+        public Task<IActionResult> Patch(int carId, [FromBody] JsonPatchDocument<SaveCar> patch, CancellationToken cancellationToken) =>
             this.patchCarCommand.Value.ExecuteAsync(carId, patch);
 
         /// <summary>
         /// Creates a new car.
         /// </summary>
         /// <param name="car">The car to create.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
         /// invalid.</returns>
 #if (Swagger)
@@ -175,7 +181,7 @@
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        public Task<IActionResult> Post([FromBody] SaveCar car) =>
+        public Task<IActionResult> Post([FromBody] SaveCar car, CancellationToken cancellationToken) =>
             this.postCarCommand.Value.ExecuteAsync(car);
 
         /// <summary>
@@ -183,6 +189,7 @@
         /// </summary>
         /// <param name="carId">The car identifier.</param>
         /// <param name="car">The car to update.</param>
+        /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK response containing the newly updated car, a 400 Bad Request if the car is invalid or a
         /// or a 404 Not Found if a car with the specified ID was not found.</returns>
 #if (Swagger)
@@ -194,7 +201,7 @@
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public Task<IActionResult> Put(int carId, [FromBody] SaveCar car) =>
+        public Task<IActionResult> Put(int carId, [FromBody] SaveCar car, CancellationToken cancellationToken) =>
             this.putCarCommand.Value.ExecuteAsync(carId, car);
     }
 }

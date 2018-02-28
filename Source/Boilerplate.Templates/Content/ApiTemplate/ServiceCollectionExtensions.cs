@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate
+namespace ApiTemplate
 {
     using System;
     using System.IO.Compression;
@@ -13,12 +13,11 @@
 #if (Versioning)
     using ApiTemplate.OperationFilters;
 #endif
+    using ApiTemplate.Options;
     using ApiTemplate.Repositories;
     using ApiTemplate.Services;
-    using ApiTemplate.Settings;
     using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
-    using Boilerplate;
     using Boilerplate.AspNetCore;
     using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
@@ -26,6 +25,7 @@
     using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
 #endif
+    using Boilerplate.Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -64,10 +64,7 @@
                 // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
                 // override any previously registered IDistributedCache service.
                 // Redis is a very fast cache provider and the recommended distributed cache provider.
-                // .AddDistributedRedisCache(
-                //     options =>
-                //     {
-                //     });
+                // .AddDistributedRedisCache(options => { ... });
                 // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
                 // Note that this would require setting up the session state database.
                 // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
@@ -87,8 +84,15 @@
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // Adds IOptions<CacheProfileSettings> to the services container.
-                .Configure<CacheProfileSettings>(configuration.GetSection(nameof(CacheProfileSettings)));
+                // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
+                .Configure<ApplicationOptions>(configuration)
+                .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
+                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
+                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
+                // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
+                .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
+                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value);
 
         /// <summary>
         /// Adds response compression to enable GZIP compression of responses.
@@ -104,12 +108,13 @@
                         // Enable response compression over HTTPS connections.
                         options.EnableForHttps = true;
 #endif
+
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var responseCompressionSettings = configuration.GetSection<ResponseCompressionSettings>(
-                            nameof(ResponseCompressionSettings));
+                        var responseCompressionSettings = configuration
+                            .GetSection<ResponseCompressionOptions>(nameof(ResponseCompressionOptions));
                         options.MimeTypes = ResponseCompressionDefaults
                             .MimeTypes
-                            .Concat(responseCompressionSettings.MimeTypes);
+                            .Concat(responseCompressionSettings.MimeTypes ?? Enumerable.Empty<string>());
                     })
                 .Configure<GzipCompressionProviderOptions>(
                     options => options.Level = CompressionLevel.Optimal);
@@ -121,16 +126,12 @@
             services.AddRouting(
                 options =>
                 {
-                    // Improve SEO by stopping duplicate URL's due to case differences or trailing slashes.
-                    // See http://googlewebmastercentral.blogspot.co.uk/2010/04/to-slash-or-not-to-slash.html
-                    // All generated URL's should append a trailing slash.
-                    options.AppendTrailingSlash = true;
                     // All generated URL's should be lower-case.
                     options.LowercaseUrls = true;
                 });
 
 #if (Versioning)
-        public static IServiceCollection AddCustomVersioning(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services.AddApiVersioning(
                 options =>
                 {
@@ -147,8 +148,8 @@
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    var cacheProfileSettings = configuration.GetSection<CacheProfileSettings>();
-                    foreach (var keyValuePair in cacheProfileSettings.CacheProfiles)
+                    var cacheProfileOptions = configuration.GetSection<CacheProfileOptions>(nameof(ApplicationOptions.CacheProfiles));
+                    foreach (var keyValuePair in cacheProfileOptions)
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }
@@ -181,6 +182,7 @@
                     // Parse dates as DateTimeOffset values by default. You should prefer using DateTimeOffset over
                     // DateTime everywhere. Not doing so can cause problems with time-zones.
                     options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+
                     // Output enumeration values as strings in JSON.
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
@@ -290,20 +292,20 @@
                 .AddScoped(x => new Lazy<IPutCarCommand>(() => x.GetRequiredService<IPutCarCommand>()));
 
         /// <summary>
+        /// Adds project object to object mappers.
+        /// </summary>
+        public static IServiceCollection AddMappers(this IServiceCollection services) =>
+            services
+                .AddSingleton<IMapper<Models.Car, Car>, CarToCarMapper>()
+                .AddSingleton<IMapper<Models.Car, SaveCar>, CarToSaveCarMapper>()
+                .AddSingleton<IMapper<SaveCar, Models.Car>, CarToSaveCarMapper>();
+
+        /// <summary>
         /// Adds project repositories.
         /// </summary>
         public static IServiceCollection AddRepositories(this IServiceCollection services) =>
             services
                 .AddScoped<ICarRepository, CarRepository>();
-
-        /// <summary>
-        /// Adds project translators.
-        /// </summary>
-        public static IServiceCollection AddTranslators(this IServiceCollection services) =>
-            services
-                .AddSingleton<ITranslator<Models.Car, Car>, CarToCarTranslator>()
-                .AddSingleton<ITranslator<Models.Car, SaveCar>, CarToSaveCarTranslator>()
-                .AddSingleton<ITranslator<SaveCar, Models.Car>, CarToSaveCarTranslator>();
 
         /// <summary>
         /// Adds project services.

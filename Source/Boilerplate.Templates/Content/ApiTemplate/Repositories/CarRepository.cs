@@ -1,18 +1,19 @@
-﻿namespace ApiTemplate.Repositories
+namespace ApiTemplate.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Models;
 
     public class CarRepository : ICarRepository
     {
-        private static readonly List<Car> cars;
+        private static readonly List<Car> Cars;
 
         static CarRepository()
         {
-            cars = new List<Car>()
+            Cars = new List<Car>()
             {
                 new Car()
                 {
@@ -71,32 +72,32 @@
             };
         }
 
-        public Task<Car> Add(Car car)
+        public Task<Car> Add(Car car, CancellationToken cancellationToken)
         {
-            cars.Add(car);
-            car.CarId = cars.Max(x => x.CarId) + 1;
+            Cars.Add(car);
+            car.CarId = Cars.Max(x => x.CarId) + 1;
             return Task.FromResult(car);
         }
 
-        public Task Delete(Car car)
+        public Task Delete(Car car, CancellationToken cancellationToken)
         {
-            if (cars.Contains(car))
+            if (Cars.Contains(car))
             {
-                cars.Remove(car);
+                Cars.Remove(car);
             }
 
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
-        public Task<Car> Get(int carId)
+        public Task<Car> Get(int carId, CancellationToken cancellationToken)
         {
-            var car = cars.FirstOrDefault(x => x.CarId == carId);
+            var car = Cars.FirstOrDefault(x => x.CarId == carId);
             return Task.FromResult(car);
         }
 
-        public Task<ICollection<Car>> GetPage(int page, int count)
+        public Task<ICollection<Car>> GetPage(int page, int count, CancellationToken cancellationToken)
         {
-            var pageCars = cars
+            var pageCars = Cars
                 .Skip(count * (page - 1))
                 .Take(count)
                 .ToList();
@@ -108,15 +109,15 @@
             return Task.FromResult((ICollection<Car>)pageCars);
         }
 
-        public Task<int> GetTotalPages(int count)
+        public Task<int> GetTotalPages(int count, CancellationToken cancellationToken)
         {
-            var totalPages = (int)Math.Ceiling(cars.Count / (double)count);
+            var totalPages = (int)Math.Ceiling(Cars.Count / (double)count);
             return Task.FromResult(totalPages);
         }
 
-        public Task<Car> Update(Car car)
+        public Task<Car> Update(Car car, CancellationToken cancellationToken)
         {
-            var existingCar = cars.FirstOrDefault(x => x.CarId == car.CarId);
+            var existingCar = Cars.FirstOrDefault(x => x.CarId == car.CarId);
             existingCar.Cylinders = car.Cylinders;
             existingCar.Make = car.Make;
             existingCar.Model = car.Model;

@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Controllers
+namespace ApiTemplate.Controllers
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -10,7 +10,6 @@
     /// <summary>
     /// The status of this API.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [Route("[controller]")]
 #if (Versioning)
     [ApiVersion("1.0")]
