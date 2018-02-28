@@ -1,4 +1,4 @@
-﻿Project templates come in two delivery methods, each contains different project templates:
+Project templates come in two delivery methods, each contains different project templates:
 
 - [dotnet new Boilerplate.Templates NuGet Package](#user-content-dotnet-new-boilerplatetemplates-nuget-package)
   - [ASP.NET Core API Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
@@ -8,14 +8,16 @@
 
 # dotnet new Boilerplate.Templates NuGet Package
 
+### 1.7.0
+ASP.NET Core API Boilerplate
+- Upgraded to ASP.NET Core 2.0.5
+
 ### 1.6.2
 ASP.NET Core API Boilerplate
 - Move ILoggerFactory configuration in Startup to constructor.
 - Use C# 7 expression body members.
 - Use IStartup interface on the Startup class.
 - Added note in ReadMe about registering for [Certificate Transparency](https://scotthelme.co.uk/revocation-is-broken/) notifications.
-ASP.NET Core Static Files Boilerplate
-- Initial version.
 
 ### 1.6.1
 ASP.NET Core API Boilerplate
