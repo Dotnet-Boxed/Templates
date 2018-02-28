@@ -6,6 +6,7 @@ namespace ApiTemplate
 #endif
 #if (CORS)
     using ApiTemplate.Constants;
+    using ApiTemplate.Options;
 #endif
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
@@ -169,12 +170,18 @@ namespace ApiTemplate
         public void Configure(IApplicationBuilder application) =>
             application
 #if (HttpsEverywhere)
-                // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL from the
-                // ASPNETCORE_HTTPS_PORT environment variable.
+                // Redirect to HTTPS using a 301 Move Permanently redirect.
                 .UseRewriter(new RewriteOptions()
                     .AddRedirectToHttps(
                         StatusCodes.Status301MovedPermanently,
-                        this.configuration.GetValue<int?>("ASPNETCORE_HTTPS_PORT")))
+                        application
+                            .ApplicationServices
+                            .GetRequiredService<KestrelOptions>()
+                            .Endpoints
+                            .Where(x => x.Value.Url.Scheme == Uri.UriSchemeHttps)
+                            .Select(x => (int?)x.Value.Url.Port)
+                            .DefaultIfEmpty(null)
+                            .First()))
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()

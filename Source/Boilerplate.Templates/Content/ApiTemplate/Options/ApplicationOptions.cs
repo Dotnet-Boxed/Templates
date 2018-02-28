@@ -8,5 +8,7 @@ namespace ApiTemplate.Options
         public CacheProfileOptions CacheProfiles { get; set; }
 
         public CompressionOptions Compression { get; set; }
+
+        public KestrelOptions Kestrel { get; set; }
     }
 }

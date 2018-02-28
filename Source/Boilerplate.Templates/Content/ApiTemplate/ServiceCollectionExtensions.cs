@@ -92,7 +92,10 @@ namespace ApiTemplate
                 .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
                 // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
                 .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value);
+                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
+                // Adds IOptions<KestrelOptions> and KestrelOptions to the services container.
+                .Configure<KestrelOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)))
+                .AddSingleton(x => x.GetRequiredService<IOptions<KestrelOptions>>().Value);
 
         /// <summary>
         /// Adds response compression to enable GZIP compression of responses.
