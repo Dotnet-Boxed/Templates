@@ -1,10 +1,11 @@
-﻿namespace ApiTemplate.Commands
+namespace ApiTemplate.Commands
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
-    using Boilerplate;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
+    using Boilerplate.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -15,21 +16,21 @@
     {
         private readonly IActionContextAccessor actionContextAccessor;
         private readonly ICarRepository carRepository;
-        private readonly ITranslator<Models.Car, Car> carTranslator;
+        private readonly IMapper<Models.Car, Car> carMapper;
 
         public GetCarCommand(
             IActionContextAccessor actionContextAccessor,
             ICarRepository carRepository,
-            ITranslator<Models.Car, Car> carTranslator)
+            IMapper<Models.Car, Car> carMapper)
         {
             this.actionContextAccessor = actionContextAccessor;
             this.carRepository = carRepository;
-            this.carTranslator = carTranslator;
+            this.carMapper = carMapper;
         }
 
-        public async Task<IActionResult> ExecuteAsync(int carId)
+        public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.Get(carId);
+            var car = await this.carRepository.Get(carId, cancellationToken);
             if (car == null)
             {
                 return new NotFoundResult();
@@ -45,7 +46,7 @@
                 }
             }
 
-            var carViewModel = this.carTranslator.Translate(car);
+            var carViewModel = this.carMapper.Map(car);
             httpContext.Response.Headers.Add(HeaderNames.LastModified, car.Modified.ToString("R"));
             return new OkObjectResult(carViewModel);
         }

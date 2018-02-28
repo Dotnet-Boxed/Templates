@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.OperationFilters
+namespace ApiTemplate.OperationFilters
 {
     using System.Collections.Generic;
     using System.Linq;

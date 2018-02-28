@@ -1,43 +1,44 @@
-﻿namespace ApiTemplate.Commands
+namespace ApiTemplate.Commands
 {
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Constants;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
-    using Boilerplate;
+    using Boilerplate.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     public class GetCarPageCommand : IGetCarPageCommand
     {
         private readonly ICarRepository carRepository;
-        private readonly ITranslator<Models.Car, Car> carTranslator;
+        private readonly IMapper<Models.Car, Car> carMapper;
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IUrlHelper urlHelper;
 
         public GetCarPageCommand(
             ICarRepository carRepository,
-            ITranslator<Models.Car, Car> carTranslator,
+            IMapper<Models.Car, Car> carMapper,
             IHttpContextAccessor httpContextAccessor,
             IUrlHelper urlHelper)
         {
             this.carRepository = carRepository;
-            this.carTranslator = carTranslator;
+            this.carMapper = carMapper;
             this.httpContextAccessor = httpContextAccessor;
             this.urlHelper = urlHelper;
         }
 
-        public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions)
+        public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
         {
-            var cars = await this.carRepository.GetPage(pageOptions.Page, pageOptions.Count);
+            var cars = await this.carRepository.GetPage(pageOptions.Page, pageOptions.Count, cancellationToken);
             if (cars == null)
             {
                 return new NotFoundResult();
             }
 
-            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Count);
-            var carViewModels = this.carTranslator.TranslateList(cars);
+            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Count, cancellationToken);
+            var carViewModels = this.carMapper.MapList(cars);
             var page = new PageResult<Car>()
             {
                 Count = pageOptions.Count,

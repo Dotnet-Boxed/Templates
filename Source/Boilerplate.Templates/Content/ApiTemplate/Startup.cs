@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate
+namespace ApiTemplate
 {
     using System;
 #if (Versioning)
@@ -23,11 +23,6 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
-#if (Prefix)
-    using StackifyMiddleware;
-#endif
 
     /// <summary>
     /// The main start-up class for the application.
@@ -50,13 +45,6 @@
         /// whatever you want. See http://docs.asp.net/en/latest/fundamentals/environments.html
         /// </summary>
         private readonly IHostingEnvironment hostingEnvironment;
-#if (HttpsEverywhere)
-
-        /// <summary>
-        /// Gets or sets the port to use for HTTPS. Only used in the development environment.
-        /// </summary>
-        private readonly int? sslPort;
-#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
@@ -112,17 +100,6 @@
                     x => x
                         .AddConsole(this.configuration.GetSection("Logging"))
                         .AddDebug());
-#if (HttpsEverywhere)
-
-            if (this.hostingEnvironment.IsDevelopment())
-            {
-                var launchConfiguration = new ConfigurationBuilder()
-                    .SetBasePath(this.hostingEnvironment.ContentRootPath)
-                    .AddJsonFile(@"Properties\launchSettings.json")
-                    .Build();
-                this.sslPort = launchConfiguration.GetValue<int>("iisSettings:iisExpress:sslPort");
-            }
-#endif
         }
 
         /// <summary>
@@ -155,34 +132,34 @@
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
 #if (Versioning)
-                .AddCustomVersioning()
+                .AddCustomApiVersioning()
 #endif
                 .AddMvcCore()
-                .AddApiExplorer()
-                .AddAuthorization()
-                .AddFormatterMappings()
-                .AddDataAnnotations()
-                .AddJsonFormatters()
-                .AddCustomJsonOptions()
+                    .AddApiExplorer()
+                    .AddAuthorization()
+                    .AddFormatterMappings()
+                    .AddDataAnnotations()
+                    .AddJsonFormatters()
+                    .AddCustomJsonOptions()
 #if (CORS)
-                .AddCustomCors()
+                    .AddCustomCors()
 #endif
 #if (DataContractSerializer)
-                // Adds the XML input and output formatter using the DataContractSerializer.
-                .AddXmlDataContractSerializerFormatters()
+                    // Adds the XML input and output formatter using the DataContractSerializer.
+                    .AddXmlDataContractSerializerFormatters()
 #elif (XmlSerializer)
-                // Adds the XML input and output formatter using the XmlSerializer.
-                .AddXmlSerializerFormatters()
+                    // Adds the XML input and output formatter using the XmlSerializer.
+                    .AddXmlSerializerFormatters()
 #endif
 #if (Swagger && Versioning)
-                .AddVersionedApiExplorer()
+                    .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
-                .AddCustomMvcOptions(this.configuration, this.hostingEnvironment)
+                    .AddCustomMvcOptions(this.configuration, this.hostingEnvironment)
                 .Services
                 .AddCommands()
                 .AddRepositories()
                 .AddServices()
-                .AddTranslators()
+                .AddMappers()
                 .BuildServiceProvider();
 
         /// <summary>
@@ -191,17 +168,13 @@
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (Prefix)
-                .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseMiddleware<RequestTracerMiddleware>())
-#endif
 #if (HttpsEverywhere)
-                // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL in
-                // Development. The port number to use is taken from the launchSettings.json file which Visual
-                // Studio uses to start the application.
-                .UseRewriter(
-                    new RewriteOptions().AddRedirectToHttps(StatusCodes.Status301MovedPermanently, this.sslPort))
+                // Require HTTPS to be used across the whole site. Also set a custom port to use for SSL from the
+                // ASPNETCORE_HTTPS_PORT environment variable.
+                .UseRewriter(new RewriteOptions()
+                    .AddRedirectToHttps(
+                        StatusCodes.Status301MovedPermanently,
+                        this.configuration.GetValue<int?>("ASPNETCORE_HTTPS_PORT")))
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()
@@ -217,16 +190,12 @@
                         .UseDebugging()
                         .UseDeveloperErrorPages())
 #if (HttpsEverywhere)
-                .UseStrictTransportSecurityHttpHeader()
-#if (PublicKeyPinning)
-                .UsePublicKeyPinsHttpHeader()
-#endif
+                .UseIf(
+                    !this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseStrictTransportSecurityHttpHeader())
 #endif
 #if (Swagger)
                 .UseMvc()
-#if (Versioning)
-                .UseApiVersioning()
-#endif
                 .UseSwagger()
                 .UseSwaggerUI(
                     options =>

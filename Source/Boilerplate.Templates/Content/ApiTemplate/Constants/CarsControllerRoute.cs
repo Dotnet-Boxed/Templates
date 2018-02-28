@@ -1,6 +1,6 @@
-﻿namespace ApiTemplate.Constants
+namespace ApiTemplate.Constants
 {
-    public class CarsControllerRoute
+    public static class CarsControllerRoute
     {
         public const string DeleteCar = ControllerName.Car + nameof(DeleteCar);
         public const string GetCar = ControllerName.Car + nameof(GetCar);
