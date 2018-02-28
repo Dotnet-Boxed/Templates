@@ -23,11 +23,6 @@
     },
     "dotnet run": {
       "commandName": "Project",
-      //#if (HttpsEverywhere)
-      "commandLineArgs": "--urls http://*:5000;https://*:5001",
-      //#else
-      //"commandLineArgs": "--urls http://*:5000",
-      //#endif
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:5001/",
@@ -42,11 +37,6 @@
     "dotnet watch run": {
       "commandName": "Project",
       "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
-      //#if (HttpsEverywhere)
-      "commandLineArgs": "watch run --urls http://*:5000;https://*:5001",
-      //#else
-      //"commandLineArgs": "watch run --urls http://*:5000",
-      //#endif
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:5001/",
