@@ -1,1 +1,0 @@
-﻿See https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/RELEASE%20NOTES.md
