@@ -100,9 +100,7 @@ namespace ApiTemplate
         /// <summary>
         /// Adds response compression to enable GZIP compression of responses.
         /// </summary>
-        public static IServiceCollection AddCustomResponseCompression(
-            this IServiceCollection services,
-            IConfigurationRoot configuration) =>
+        public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
             services
                 .AddResponseCompression(
                     options =>
@@ -113,11 +111,11 @@ namespace ApiTemplate
 #endif
 
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var responseCompressionSettings = configuration
-                            .GetSection<ResponseCompressionOptions>(nameof(ResponseCompressionOptions));
-                        options.MimeTypes = ResponseCompressionDefaults
-                            .MimeTypes
-                            .Concat(responseCompressionSettings.MimeTypes ?? Enumerable.Empty<string>());
+                        var customMimeTypes = services
+                            .BuildServiceProvider()
+                            .GetRequiredService<ResponseCompressionOptions>()
+                            .MimeTypes ?? Enumerable.Empty<string>();
+                        options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
                 .Configure<GzipCompressionProviderOptions>(
                     options => options.Level = CompressionLevel.Optimal);
@@ -145,13 +143,12 @@ namespace ApiTemplate
 #endif
         public static IMvcCoreBuilder AddCustomMvcOptions(
             this IMvcCoreBuilder builder,
-            IConfigurationRoot configuration,
             IHostingEnvironment hostingEnvironment) =>
             builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    var cacheProfileOptions = configuration.GetSection<CacheProfileOptions>(nameof(ApplicationOptions.CacheProfiles));
+                    var cacheProfileOptions = builder.Services.BuildServiceProvider().GetRequiredService<CacheProfileOptions>();
                     foreach (var keyValuePair in cacheProfileOptions)
                     {
                         options.CacheProfiles.Add(keyValuePair);
