@@ -4,7 +4,6 @@ namespace ApiTemplate
     using System.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.Extensions.Configuration;
     using ApiTemplate.Constants;
     using ApiTemplate.Options;
     using Microsoft.Extensions.DependencyInjection;
@@ -37,9 +36,7 @@ namespace ApiTemplate
         /// headers. The cache duration is controlled from configuration.
         /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
         /// </summary>
-        public static IApplicationBuilder UseStaticFilesWithCacheControl(
-            this IApplicationBuilder application,
-            IConfigurationRoot configuration)
+        public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
         {
             var cacheProfile = application
                 .ApplicationServices

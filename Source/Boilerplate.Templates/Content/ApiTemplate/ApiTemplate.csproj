@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;ResponseCaching;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning;DataContractSerializer</DefineConstants>
@@ -13,9 +12,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <!--#if (Swagger)-->
     <!-- CS1591 - Don't warn about all public members not being documented. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!--#endif-->
-    <NoWarn Condition="$(DefineConstants.Contains('Swagger'))">$(NoWarn);CS1591</NoWarn>
-    <GenerateDocumentationFile Condition="$(DefineConstants.Contains('Swagger'))">true</GenerateDocumentationFile>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
@@ -33,11 +32,17 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
-    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.0" Condition="$(DefineConstants.Contains('Swagger'))" />
+    <!--#if (Swagger)-->
+    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.0" />
+    <!--#endif-->
     <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="!$(DefineConstants.Contains('Swagger')) AND $(DefineConstants.Contains('Versioning'))" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" Condition="$(DefineConstants.Contains('Swagger')) AND $(DefineConstants.Contains('Versioning'))" />
+    <!--#if (!Swagger && Versioning)-->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" />
+    <!--#endif-->
+    <!--#if (Swagger && Versioning)-->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" />
+    <!--#endif-->
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
@@ -49,7 +54,9 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" Condition="$(DefineConstants.Contains('Swagger'))" />
+    <!--#if (Swagger)-->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" />
+    <!--#endif-->
   </ItemGroup>
 
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->

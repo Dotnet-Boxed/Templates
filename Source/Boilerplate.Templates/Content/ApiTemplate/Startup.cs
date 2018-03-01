@@ -23,84 +23,26 @@ namespace ApiTemplate
 #endif
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
     public class Startup : IStartup
     {
-        /// <summary>
-        /// Gets or sets the application configuration, where key value pair settings are stored. See
-        /// http://docs.asp.net/en/latest/fundamentals/configuration.html
-        /// </summary>
-        private readonly IConfigurationRoot configuration;
-
-        /// <summary>
-        /// The environment the application is running under. This can be Development, Staging or Production by default.
-        /// To set the hosting environment on Windows:
-        /// 1. On your server, right click 'Computer' or 'My Computer' and click on 'Properties'.
-        /// 2. Go to 'Advanced System Settings'.
-        /// 3. Click on 'Environment Variables' in the Advanced tab.
-        /// 4. Add a new System Variable with the name 'ASPNETCORE_ENVIRONMENT' and value of Production, Staging or
-        /// whatever you want. See http://docs.asp.net/en/latest/fundamentals/environments.html
-        /// </summary>
+        private readonly IConfiguration configuration;
         private readonly IHostingEnvironment hostingEnvironment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
+        /// <param name="configuration">The application configuration, where key value pair settings are stored. See
+        /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
         /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default.</param>
-        /// <param name="loggerFactory">The type used to configure the applications logging system.
-        /// See http://docs.asp.net/en/latest/fundamentals/logging.html</param>
-        public Startup(IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory)
+        /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
+            this.configuration = configuration;
             this.hostingEnvironment = hostingEnvironment;
-
-            this.configuration = new ConfigurationBuilder()
-                .SetBasePath(this.hostingEnvironment.ContentRootPath)
-                // Add configuration from the appsettings.json file.
-                .AddJsonFile("appsettings.json")
-                // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
-                // appsettings.production.json file, depending on the environment. These settings override the ones in
-                // the appsettings.json file.
-                .AddJsonFile($"appsettings.{this.hostingEnvironment.EnvironmentName}.json", optional: true)
-                // This reads the configuration keys from the secret store. This allows you to store connection strings
-                // and other sensitive settings, so you don't have to check them into your source control provider.
-                // Only use this in Development, it is not intended for Production use. See
-                // http://docs.asp.net/en/latest/security/app-secrets.html
-                .AddIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.AddUserSecrets<Startup>())
-                // Add configuration specific to the Development, Staging or Production environments. This config can
-                // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
-                // override the ones in all of the above config files.
-                // Note: To set environment variables for debugging navigate to:
-                // Project Properties -> Debug Tab -> Environment Variables
-                // Note: To get environment variables for the machine use the following command in PowerShell:
-                // [System.Environment]::GetEnvironmentVariable("[VARIABLE_NAME]", [System.EnvironmentVariableTarget]::Machine)
-                // Note: To set environment variables for the machine use the following command in PowerShell:
-                // [System.Environment]::SetEnvironmentVariable("[VARIABLE_NAME]", "[VARIABLE_VALUE]", [System.EnvironmentVariableTarget]::Machine)
-                // Note: Environment variables use a colon separator e.g. You can override the site title by creating a
-                // variable named AppSettings:SiteTitle. See http://docs.asp.net/en/latest/security/app-secrets.html
-                .AddEnvironmentVariables()
-#if (ApplicationInsights)
-                // Push telemetry data through the Azure Application Insights pipeline faster in the development and
-                // staging environments, allowing you to view results immediately.
-                .AddApplicationInsightsSettings(developerMode: !this.hostingEnvironment.IsProduction())
-#endif
-                .Build();
-
-            loggerFactory
-                // Log to Serilog (A great logging framework). See https://github.com/serilog/serilog-framework-logging.
-                // .AddSerilog()
-                // Log to the console and Visual Studio debug window if in development mode.
-                .AddIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x
-                        .AddConsole(this.configuration.GetSection("Logging"))
-                        .AddDebug());
         }
 
         /// <summary>
@@ -120,7 +62,7 @@ namespace ApiTemplate
 #if (ResponseCaching)
                 .AddResponseCaching()
 #endif
-                .AddCustomResponseCompression(this.configuration)
+                .AddCustomResponseCompression()
 #if (Swagger)
                 .AddSwagger()
 #endif
@@ -155,7 +97,7 @@ namespace ApiTemplate
 #if (Swagger && Versioning)
                     .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
-                    .AddCustomMvcOptions(this.configuration, this.hostingEnvironment)
+                    .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
                 .AddCommands()
                 .AddRepositories()
@@ -187,7 +129,7 @@ namespace ApiTemplate
                 .UseResponseCaching()
 #endif
                 .UseResponseCompression()
-                .UseStaticFilesWithCacheControl(this.configuration)
+                .UseStaticFilesWithCacheControl()
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
