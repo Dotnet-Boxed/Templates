@@ -1,6 +1,8 @@
-﻿namespace Boilerplate.Templates.Test
+namespace Boilerplate.Templates.Test
 {
+    using System;
     using System.IO;
+    using System.Reflection;
 
     public static class DirectoryExtended
     {
@@ -35,6 +37,20 @@
             if (!destinationSubDirectory.Exists)
             {
                 destinationSubDirectory.Create();
+            }
+        }
+
+        public static string GetTempDirectoryPath() =>
+            Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+
+        public static string GetCurrentDirectory() =>
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        public static void SafeDelete(string directoryPath)
+        {
+            if (Directory.Exists(directoryPath))
+            {
+                Directory.Delete(directoryPath, true);
             }
         }
     }

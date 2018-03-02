@@ -1,4 +1,4 @@
-﻿namespace Boilerplate.Templates.Test
+namespace Boilerplate.Templates.Test
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@
         {
             Succeeded,
             Failed,
-            TimedOut
+            TimedOut,
         }
 
         public static async Task AssertStart(
@@ -120,7 +120,7 @@
                 RedirectStandardOutput = outputTextWriter != null,
                 RedirectStandardError = errorTextWriter != null,
                 UseShellExecute = false,
-                WorkingDirectory = workingDirectory
+                WorkingDirectory = workingDirectory,
             };
 
             try
