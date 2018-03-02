@@ -1,18 +1,17 @@
-﻿namespace Boilerplate.Templates.Test
+namespace Boilerplate.Templates.Test
 {
-    using System;
-    using System.IO;
-
-    public class Project : IDisposable
+    public class Project
     {
         public Project(
             string name,
             string filePath,
-            string directoryPath)
+            string directoryPath,
+            string publishDirectoryPath)
         {
             this.Name = name;
             this.FilePath = filePath;
             this.DirectoryPath = directoryPath;
+            this.PublishDirectoryPath = publishDirectoryPath;
         }
 
         public string DirectoryPath { get; }
@@ -21,10 +20,6 @@
 
         public string Name { get; }
 
-        public void Dispose() =>
-            DirectoryExtended.SafeDelete(this.DirectoryPath);
-
-        public string GetPublishDirectoryPath(string framework) =>
-            Path.Combine(this.DirectoryPath, "bin", "publish", framework);
+        public string PublishDirectoryPath { get; }
     }
 }
