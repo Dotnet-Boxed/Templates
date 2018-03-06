@@ -12,10 +12,18 @@ namespace Boilerplate.Templates.Test
             new TempDirectory(DirectoryExtended.GetTempDirectoryPath());
 
         public static Task DotnetNewInstall<T>(string projectName) =>
-            DotnetNewInstall(Path.GetDirectoryName(GetProjectFilePath(typeof(T).GetTypeInfo().Assembly, projectName)));
+            DotnetNewInstall(typeof(T).GetTypeInfo().Assembly, projectName);
 
-        public static Task DotnetNewInstall(Assembly assembly, string projectName) =>
-            DotnetNewInstall(Path.GetDirectoryName(GetProjectFilePath(assembly, projectName)));
+        public static Task DotnetNewInstall(Assembly assembly, string projectName)
+        {
+            var projectFilePath = Path.GetDirectoryName(GetProjectFilePath(assembly, projectName));
+            if (projectFilePath == null)
+            {
+                throw new FileNotFoundException($"{projectName} not found.");
+            }
+
+            return DotnetNewInstall(projectFilePath);
+        }
 
         public static Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
             ProcessAssert.AssertStart(
