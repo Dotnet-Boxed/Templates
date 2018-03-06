@@ -1,6 +1,5 @@
 namespace Boilerplate.Templates.Test
 {
-    using System.Reflection;
     using System.Threading.Tasks;
     using Xunit;
 
