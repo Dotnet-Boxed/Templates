@@ -1,7 +1,7 @@
 // https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
-  "classifications": [ "Web", "WebAPI", "Boilerplate", "MVC", "API" ],
+  "classifications": [ "Web", "WebAPI", "Boilerplate", "Swagger", "API" ],
   "name": "ASP.NET Core API Boilerplate",
   "groupIdentity": "Boilerplate",
   "identity": "Boilerplate.AspNetCore.Api.CSharp",
