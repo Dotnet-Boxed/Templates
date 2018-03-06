@@ -11,6 +11,9 @@ namespace Boilerplate.Templates.Test
         public static TempDirectory GetTempDirectory() =>
             new TempDirectory(DirectoryExtended.GetTempDirectoryPath());
 
+        public static Task DotnetNewInstall(Assembly assembly, string projectName) =>
+            DotnetNewInstall(Path.GetDirectoryName(GetProjectFilePath(assembly, projectName)));
+
         public static Task DotnetNewInstall(string source, TimeSpan? timeout = null) =>
             ProcessAssert.AssertStart(
                 DirectoryExtended.GetCurrentDirectory(),
@@ -18,10 +21,7 @@ namespace Boilerplate.Templates.Test
                 $"new --install \"{source}\"",
                 timeout ?? TimeSpan.FromSeconds(20));
 
-        public static string GetProjectDirectoryPath(Assembly assembly, string projectName) =>
-            Path.GetDirectoryName(GetProjectFilePath(assembly, projectName));
-
-        public static string GetProjectFilePath(Assembly assembly, string projectName)
+        private static string GetProjectFilePath(Assembly assembly, string projectName)
         {
             string projectFilePath = null;
 
