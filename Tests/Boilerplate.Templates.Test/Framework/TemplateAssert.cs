@@ -11,6 +11,9 @@ namespace Boilerplate.Templates.Test
         public static TempDirectory GetTempDirectory() =>
             new TempDirectory(DirectoryExtended.GetTempDirectoryPath());
 
+        public static Task DotnetNewInstall<T>(string projectName) =>
+            DotnetNewInstall(Path.GetDirectoryName(GetProjectFilePath(typeof(T).GetTypeInfo().Assembly, projectName)));
+
         public static Task DotnetNewInstall(Assembly assembly, string projectName) =>
             DotnetNewInstall(Path.GetDirectoryName(GetProjectFilePath(assembly, projectName)));
 

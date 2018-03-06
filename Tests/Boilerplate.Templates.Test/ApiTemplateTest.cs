@@ -6,12 +6,7 @@ namespace Boilerplate.Templates.Test
 
     public class ApiTemplateTest
     {
-        public ApiTemplateTest()
-        {
-            TemplateAssert.DotnetNewInstall(
-                typeof(ApiTemplateTest).GetTypeInfo().Assembly,
-                "ApiTemplate.csproj").Wait();
-        }
+        public ApiTemplateTest() => TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.csproj").Wait();
 
         [Fact]
         public async Task Home_BuildsAndRuns_Returns200Ok()
