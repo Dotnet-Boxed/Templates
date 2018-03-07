@@ -113,7 +113,7 @@ namespace ApiTemplate
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
                         var customMimeTypes = services
                             .BuildServiceProvider()
-                            .GetRequiredService<ResponseCompressionOptions>()
+                            .GetRequiredService<CompressionOptions>()
                             .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
