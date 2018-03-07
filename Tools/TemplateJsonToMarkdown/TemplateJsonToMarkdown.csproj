@@ -2,12 +2,11 @@
 
   <PropertyGroup Label="Build">
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp1.1;net461</TargetFrameworks>
-    <RuntimeIdentifier Condition=" '$(TargetFramework)' == 'net461' ">win7-x86</RuntimeIdentifier>
+    <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
 </Project>
