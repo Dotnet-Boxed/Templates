@@ -35,7 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		LICENSE = LICENSE
 		MVC 5.md = MVC 5.md
 		MVC 6 API.md = MVC 6 API.md
-		MVC 6 Static Files.md = MVC 6 Static Files.md
 		MVC 6.md = MVC 6.md
 		README.md = README.md
 		RELEASE NOTES.md = RELEASE NOTES.md
