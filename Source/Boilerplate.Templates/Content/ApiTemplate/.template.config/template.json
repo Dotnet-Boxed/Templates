@@ -198,8 +198,8 @@
       "type": "computed",
       "value": "(Analytics == \"Application Insights\")"
     },
-    // ApplicationInsightsInstrumentationKey
-    "ApplicationInsightsInstrumentationKey": {
+    // ApplicationInsightsKey
+    "ApplicationInsightsKey": {
       "type": "parameter",
       "datatype": "string",
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",

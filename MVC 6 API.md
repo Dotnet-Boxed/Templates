@@ -51,7 +51,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.
-- **ApplicationInsightsInstrumentationKey** - Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555.
+- **ApplicationInsightsKey** - Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555.
 
 #### Cloud
 
