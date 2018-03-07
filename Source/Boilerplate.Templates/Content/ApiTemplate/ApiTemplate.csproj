@@ -2,6 +2,9 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <DefineConstants>$(DefineConstants);Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;ResponseCaching;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning;DataContractSerializer</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <Swagger>true</Swagger>
+    <Versioning>true</Versioning>
   </PropertyGroup>
   <ItemGroup>
     <Content Include=".template.config\**\*" />
@@ -12,9 +15,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <!--#if (Swagger)-->
     <!-- CS1591 - Don't warn about all public members not being documented. -->
-    <NoWarn>$(NoWarn);CS1591</NoWarn>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!--#endif-->
+    <NoWarn Condition="'$(Swagger)' == 'true'">$(NoWarn);CS1591</NoWarn>
+    <GenerateDocumentationFile Condition="'$(Swagger)' == 'true'">true</GenerateDocumentationFile>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
@@ -32,17 +35,11 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
-    <!--#if (Swagger)-->
-    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.0" />
-    <!--#endif-->
+    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
-    <!--#if (!Swagger && Versioning)-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" />
-    <!--#endif-->
-    <!--#if (Swagger && Versioning)-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" />
-    <!--#endif-->
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
@@ -54,9 +51,7 @@
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.0" />
-    <!--#if (Swagger)-->
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" />
-    <!--#endif-->
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
@@ -68,14 +63,5 @@
     <!-- dotnet aspnet-codegenerator - Code Generation tool for ASP.NET Core used for generating controllers and views. -->
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
-
-  <!-- Ensure the projects XML documentation file is copied to the project build output.
-       See https://github.com/dotnet/sdk/issues/795 -->
-  <!--<Target Label="" Name="PrepublishScript" BeforeTargets="PrepareForPublish" Condition="'$(Swagger)' == 'true'">
-    <ItemGroup>
-      <DocFile Include="bin\$(Configuration)\$(TargetFramework)\$(RuntimeIdentifier)\*.xml" />
-    </ItemGroup>
-    <Copy SourceFiles="@(DocFile)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="false" />
-  </Target>-->
 
 </Project>
