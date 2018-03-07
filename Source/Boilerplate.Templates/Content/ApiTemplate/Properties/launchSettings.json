@@ -8,32 +8,6 @@
     }
   },
   "profiles": {
-    //#if (IIS)
-    // Run the application using full IIS using it's development time support. This requires some setup, see:
-    // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
-    "IIS": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:5001/",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
-      }
-    },
-    //#endif
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/",
-      //#else
-      //"launchUrl": "http://localhost:5000/",
-      //#endif
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
-      }
-    },
     "dotnet run": {
       "commandName": "Project",
       "launchBrowser": true,
@@ -60,6 +34,32 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HTTPS_PORT": "5001"
       }
+    }
+  },
+  //#if (IIS)
+  // Run the application using full IIS using it's development time support. This requires some setup, see:
+  // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
+  "IIS": {
+    "commandName": "IIS",
+    "launchBrowser": true,
+    "launchUrl": "https://localhost:5001/",
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development",
+      "ASPNETCORE_HTTPS_PORT": "5001"
+    }
+  },
+  //#endif
+  "IIS Express": {
+    "commandName": "IISExpress",
+    "launchBrowser": true,
+    //#if (HttpsEverywhere)
+    "launchUrl": "https://localhost:5001/",
+    //#else
+    //"launchUrl": "http://localhost:5000/",
+    //#endif
+    "environmentVariables": {
+      "ASPNETCORE_ENVIRONMENT": "Development",
+      "ASPNETCORE_HTTPS_PORT": "5001"
     }
   }
 }
