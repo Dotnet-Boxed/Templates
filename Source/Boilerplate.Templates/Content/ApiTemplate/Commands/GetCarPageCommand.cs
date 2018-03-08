@@ -74,7 +74,7 @@ namespace ApiTemplate.Commands
             }
 
             values.Add(this.GetLinkValueItem("first", 1, page.Count));
-            values.Add(this.GetLinkValueItem("last", page.Total, page.Count));
+            values.Add(this.GetLinkValueItem("last", page.TotalPages, page.Count));
 
             return string.Join(", ", values);
         }
