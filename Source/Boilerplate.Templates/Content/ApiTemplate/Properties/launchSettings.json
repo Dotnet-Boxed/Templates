@@ -8,22 +8,8 @@
     }
   },
   "profiles": {
-    "dotnet run": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/",
-      //#else
-      //"launchUrl": "http://localhost:5000/",
-      //#endif
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
-      }
-    },
-    "dotnet watch run": {
-      "commandName": "Project",
-      "executablePath": "C:\\Program Files\\dotnet\\dotnet.exe",
+    "IIS Express": {
+      "commandName": "IISExpress",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:5001/",
@@ -48,8 +34,8 @@
       }
     },
     //#endif
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "Kestrel": {
+      "commandName": "Project",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:5001/",
