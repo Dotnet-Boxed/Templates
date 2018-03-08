@@ -109,10 +109,10 @@ namespace ApiTemplate.Repositories
             return Task.FromResult((ICollection<Car>)pageCars);
         }
 
-        public Task<int> GetTotalPages(int count, CancellationToken cancellationToken)
+        public Task<(int totalCount, int totalPages)> GetTotalPages(int count, CancellationToken cancellationToken)
         {
             var totalPages = (int)Math.Ceiling(Cars.Count / (double)count);
-            return Task.FromResult(totalPages);
+            return Task.FromResult((Cars.Count, totalPages));
         }
 
         public Task<Car> Update(Car car, CancellationToken cancellationToken)

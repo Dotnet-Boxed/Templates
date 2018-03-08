@@ -15,7 +15,7 @@ namespace ApiTemplate.Repositories
 
         Task<ICollection<Car>> GetPage(int page, int count, CancellationToken cancellationToken);
 
-        Task<int> GetTotalPages(int count, CancellationToken cancellationToken);
+        Task<(int totalCount, int totalPages)> GetTotalPages(int count, CancellationToken cancellationToken);
 
         Task<Car> Update(Car car, CancellationToken cancellationToken);
     }
