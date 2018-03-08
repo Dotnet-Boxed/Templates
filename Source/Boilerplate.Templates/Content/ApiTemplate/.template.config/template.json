@@ -318,7 +318,7 @@
   "postActions": [
     {
       "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-      // "condition": "(!SkipRestore)",
+      "condition": "(!SkipRestore)",
       "continueOnError": true,
       "description": "Restore NuGet packages required by this project.",
       "manualInstructions": [
@@ -327,7 +327,7 @@
     },
     {
       "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
-      // "condition": "(!SkipOpenReadMe)",
+      "condition": "(!SkipOpenReadMe)",
       "continueOnError": true,
       "description": "Open the Read-Me for the project in a web browser.",
       "manualInstructions": [
