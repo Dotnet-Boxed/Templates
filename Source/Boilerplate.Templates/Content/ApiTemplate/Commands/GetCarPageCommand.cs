@@ -31,19 +31,20 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
         {
-            var cars = await this.carRepository.GetPage(pageOptions.Page, pageOptions.Count, cancellationToken);
+            var cars = await this.carRepository.GetPage(pageOptions.Page.Value, pageOptions.Count.Value, cancellationToken);
             if (cars == null)
             {
                 return new NotFoundResult();
+
             }
 
-            var (totalCount, totalPages) = await this.carRepository.GetTotalPages(pageOptions.Count, cancellationToken);
+            var (totalCount, totalPages) = await this.carRepository.GetTotalPages(pageOptions.Count.Value, cancellationToken);
             var carViewModels = this.carMapper.MapList(cars);
             var page = new PageResult<Car>()
             {
-                Count = pageOptions.Count,
+                Count = pageOptions.Count.Value,
                 Items = carViewModels,
-                Page = pageOptions.Page,
+                Page = pageOptions.Page.Value,
                 TotalCount = totalCount,
                 TotalPages = totalPages,
             };
