@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.ViewModels
+namespace ApiTemplate.ViewModels
 {
     using System.Collections.Generic;
 #if (Swagger)
@@ -14,11 +14,13 @@
 
         public int Count { get; set; }
 
-        public bool HasNextPage { get => this.Page < this.Total; }
+        public bool HasNextPage { get => this.Page < this.TotalPages; }
 
         public bool HasPreviousPage { get => this.Page > 1; }
 
-        public int Total { get; set; }
+        public int TotalCount { get; set; }
+
+        public int TotalPages { get; set; }
 
         public IEnumerable<T> Items { get; set; }
     }

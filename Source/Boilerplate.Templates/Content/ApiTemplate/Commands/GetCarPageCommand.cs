@@ -37,14 +37,15 @@ namespace ApiTemplate.Commands
                 return new NotFoundResult();
             }
 
-            var totalPages = await this.carRepository.GetTotalPages(pageOptions.Count, cancellationToken);
+            var (totalCount, totalPages) = await this.carRepository.GetTotalPages(pageOptions.Count, cancellationToken);
             var carViewModels = this.carMapper.MapList(cars);
             var page = new PageResult<Car>()
             {
                 Count = pageOptions.Count,
                 Items = carViewModels,
                 Page = pageOptions.Page,
-                Total = totalPages
+                TotalCount = totalCount,
+                TotalPages = totalPages,
             };
 
             // Add the Link HTTP Header to add URL's to next, previous, first and last pages.
