@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.ViewModelSchemaFilters
+namespace ApiTemplate.ViewModelSchemaFilters
 {
     using System.Collections.Generic;
     using ApiTemplate.ViewModels;
@@ -30,7 +30,8 @@
                     }
                 },
                 Page = 1,
-                Total = 10
+                TotalCount = 50,
+                TotalPages = 10
             };
         }
     }
