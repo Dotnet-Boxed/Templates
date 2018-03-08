@@ -15,6 +15,9 @@
     "837bc53e-0271-4e9c-b5b5-c60ea7a7c7b5",
     "113f2d04-69f0-40c3-8797-ba3f356dd812"
   ],
+  "primaryOutputs": [
+    { "path": "ApiTemplate.csproj" }
+  ],
   "sources": [
     {
       "modifiers": [
@@ -297,39 +300,39 @@
       "parameters": {
         "value": false
       }
-    }
+    },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
-    //"SkipRestore": {
-    //  "type": "parameter",
-    //  "datatype": "bool",
-    //  "description": "Skips the execution of 'dotnet restore' on project creation.",
-    //  "defaultValue": "false"
-    //},
-    //"SkipOpenReadMe": {
-    //  "type": "parameter",
-    //  "datatype": "bool",
-    //  "description": "Skips the opening of the projects Read-Me in a web browser.",
-    //  "defaultValue": "false"
-    //}
-  }
-  //"postActions": [
-  //  {
-  //    "condition": "(!SkipRestore)",
-  //    "description": "Restore NuGet packages required by this project.",
-  //    "manualInstructions": [
-  //      { "text": "Run 'dotnet restore' in the directory the template was created in." }
-  //    ],
-  //    "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-  //    "continueOnError": true
-  //  },
-  //  {
-  //    "condition": "(!SkipOpenReadMe)",
-  //    "description": "Open the Read-Me for the project in a web browser.",
-  //    "manualInstructions": [
-  //      { "text": "Open the ReadMe.html in a web browser." }
-  //    ],
-  //    "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
-  //    "continueOnError": true
-  //  }
-  //]
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the execution of 'dotnet restore' on project creation.",
+      "defaultValue": "false"
+    },
+    "SkipOpenReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the opening of the projects Read-Me in a web browser.",
+      "defaultValue": "false"
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      // "condition": "(!SkipRestore)",
+      "continueOnError": true,
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore' in the directory the template was created in." }
+      ]
+    },
+    {
+      "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
+      // "condition": "(!SkipOpenReadMe)",
+      "continueOnError": true,
+      "description": "Open the Read-Me for the project in a web browser.",
+      "manualInstructions": [
+        { "text": "Open the ReadMe.html in a web browser." }
+      ]
+    }
+  ]
 }
