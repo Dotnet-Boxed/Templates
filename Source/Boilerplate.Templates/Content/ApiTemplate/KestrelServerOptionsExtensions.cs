@@ -57,28 +57,31 @@ namespace ApiTemplate
 
         private static X509Certificate2 LoadCertificate(CertificateOptions options)
         {
-            if (options.Store != null && options.Location != null)
+            if (options != null)
             {
-                using (var store = new X509Store(options.Store, Enum.Parse<StoreLocation>(options.Location)))
+                if (options.Store != null && options.Location != null)
                 {
-                    store.Open(OpenFlags.ReadOnly);
-                    var certificate = store.Certificates.Find(
-                        X509FindType.FindBySubjectName,
-                        options.Subject,
-                        validOnly: !options.AllowInvalid);
-
-                    if (certificate.Count == 0)
+                    using (var store = new X509Store(options.Store, Enum.Parse<StoreLocation>(options.Location)))
                     {
-                        throw new InvalidOperationException($"Certificate not found for {options.Subject}.");
+                        store.Open(OpenFlags.ReadOnly);
+                        var certificate = store.Certificates.Find(
+                            X509FindType.FindBySubjectName,
+                            options.Subject,
+                            validOnly: !options.AllowInvalid);
+
+                        if (certificate.Count == 0)
+                        {
+                            throw new InvalidOperationException($"Certificate not found for {options.Subject}.");
+                        }
+
+                        return certificate[0];
                     }
-
-                    return certificate[0];
                 }
-            }
 
-            if (options.Path != null && options.Password != null)
-            {
-                return new X509Certificate2(options.Path, options.Password);
+                if (options.Path != null && options.Password != null)
+                {
+                    return new X509Certificate2(options.Path, options.Password);
+                }
             }
 
             throw new InvalidOperationException("No valid certificate configuration found for the current endpoint.");
