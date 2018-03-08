@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:5000/",
-      "sslPort": 5001
+      "sslPort": 44300
     }
   },
   "profiles": {
@@ -12,13 +12,13 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/",
+      "launchUrl": "https://localhost:44300/",
       //#else
       //"launchUrl": "http://localhost:5000/",
       //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
+        "ASPNETCORE_HTTPS_PORT": "44300"
       }
     },
     //#if (IIS)
@@ -27,10 +27,10 @@
     "IIS (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "https://localhost:5001/",
+      "launchUrl": "https://localhost:44300/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
+        "ASPNETCORE_HTTPS_PORT": "44300"
       }
     },
     //#endif
@@ -38,13 +38,13 @@
       "commandName": "Project",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/",
+      "launchUrl": "https://localhost:44300/",
       //#else
       //"launchUrl": "http://localhost:5000/",
       //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "5001"
+        "ASPNETCORE_HTTPS_PORT": "44300"
       }
     }
   }
