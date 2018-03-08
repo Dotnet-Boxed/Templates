@@ -4,6 +4,7 @@
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
     <DefineConstants>$(DefineConstants);Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;ResponseCaching;CORS;HumansTxt;RobotsTxt;Swagger;RequestId;UserAgent;Versioning;DataContractSerializer</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <ApplicationInsights>true</ApplicationInsights>
     <Swagger>true</Swagger>
     <Versioning>true</Versioning>
   </PropertyGroup>
@@ -52,6 +53,7 @@
     <PackageReference Include="Serilog.Exceptions" Version="4.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.5.0" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.1" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
