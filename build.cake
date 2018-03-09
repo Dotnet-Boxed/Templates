@@ -1,3 +1,5 @@
+using System.Xml.Linq;
+
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
@@ -75,8 +77,12 @@ Task("Version")
     .Does(() =>
     {
         nuspecContent = System.IO.File.ReadAllText(nuspecFile);
-        System.IO.File.WriteAllText(nuspecFile, nuspecContent.Replace("-*", versionSuffix));
-        Information("VersionSuffix set to {versionSuffix}");
+        var nuspecDocument = XDocument.Parse(nuspecContent);
+        var ns = XNamespace.Get("http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd");
+        var versionElement = nuspecDocument.Element(ns + "package").Element(ns + "metadata").Element(ns + "version");
+        versionElement.Value = versionElement.Value.Replace("*", versionSuffix);
+        System.IO.File.WriteAllText(nuspecFile, nuspecDocument.ToString());
+        Information($"VersionSuffix set to {versionSuffix}");
     });
 
 Task("Pack")
