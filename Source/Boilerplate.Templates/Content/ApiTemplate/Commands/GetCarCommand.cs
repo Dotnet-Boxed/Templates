@@ -1,6 +1,5 @@
 namespace ApiTemplate.Commands
 {
-    using System;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Repositories;
@@ -8,22 +7,19 @@ namespace ApiTemplate.Commands
     using Boilerplate.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.Extensions.Primitives;
-    using Microsoft.Net.Http.Headers;
 
     public class GetCarCommand : IGetCarCommand
     {
-        private readonly IActionContextAccessor actionContextAccessor;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carMapper;
 
         public GetCarCommand(
-            IActionContextAccessor actionContextAccessor,
+            IHttpContextAccessor httpContextAccessor,
             ICarRepository carRepository,
             IMapper<Models.Car, Car> carMapper)
         {
-            this.actionContextAccessor = actionContextAccessor;
+            this.httpContextAccessor = httpContextAccessor;
             this.carRepository = carRepository;
             this.carMapper = carMapper;
         }
@@ -36,18 +32,19 @@ namespace ApiTemplate.Commands
                 return new NotFoundResult();
             }
 
-            var httpContext = this.actionContextAccessor.ActionContext.HttpContext;
-            if (httpContext.Request.Headers.TryGetValue(HeaderNames.IfModifiedSince, out StringValues stringValues))
+            // You could use the filter instead of this code. This lets you short-cut the response
+            // if you are doing more async work after this to get more data perhaps.
+            var httpContext = this.httpContextAccessor.HttpContext;
+            if (car.HasBeenModified(httpContext.Request))
             {
-                if (DateTimeOffset.TryParse(stringValues, out DateTimeOffset modifiedSince) &&
-                    (modifiedSince >= car.Modified))
-                {
-                    return new StatusCodeResult(StatusCodes.Status304NotModified);
-                }
+                return new StatusCodeResult(StatusCodes.Status304NotModified);
+            }
+            else
+            {
+                car.SetModifiedHttpHeaders(httpContext.Response);
             }
 
             var carViewModel = this.carMapper.Map(car);
-            httpContext.Response.Headers.Add(HeaderNames.LastModified, car.Modified.ToString("R"));
             return new OkObjectResult(carViewModel);
         }
     }

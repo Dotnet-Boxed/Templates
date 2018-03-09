@@ -1,8 +1,8 @@
-﻿namespace ApiTemplate.Models
+namespace ApiTemplate.Models
 {
     using System;
 
-    public class Car
+    public class Car : IModifiableResource
     {
         public int CarId { get; set; }
 
@@ -15,5 +15,9 @@
         public string Model { get; set; }
 
         public DateTimeOffset Modified { get; set; }
+
+        string IModifiableResource.ETag => this.GetWeakETag(this.CarId.ToString());
+
+        DateTimeOffset? IModifiableResource.LastModified => this.Modified;
     }
 }
