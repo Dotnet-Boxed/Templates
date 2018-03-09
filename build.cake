@@ -23,7 +23,7 @@ var buildNumber = HasArgument("BuildNumber") ?
 var artifactsDirectory = Directory("./Artifacts");
 var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
 var nuspecContent = string.Empty;
-var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : $"-{preReleaseSuffix}-{buildNumber:D4}}";
+var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : $"-{preReleaseSuffix}-{buildNumber:D4}";
 
 Task("Clean")
     .Does(() =>
