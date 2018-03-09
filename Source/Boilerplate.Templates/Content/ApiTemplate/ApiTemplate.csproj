@@ -46,7 +46,7 @@
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
@@ -55,7 +55,7 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="2.5.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.1" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
