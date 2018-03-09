@@ -34,7 +34,7 @@
       }
     },
     //#endif
-    "Kestrel": {
+    "Kestrel (dotnet run)": {
       "commandName": "Project",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
