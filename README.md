@@ -1,4 +1,4 @@
-﻿![ASP.NET Core Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
+![ASP.NET Core Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
 
 ![ASP.NET-Core-Boilerplate in the Visual Studio 'New Project' dialogue](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/New%20Project.png)
 
@@ -26,6 +26,35 @@ The default ASP.NET Core template that Visual Studio gives you does not make bes
 
 Both ASP.NET Core and ASP.NET 4.6 MVC 5 are supported with their own project templates.
 
+
+
+
+
+
+
+### [ASP.NET Core API](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
+
+#### Preview Image
+
+![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
+
+#### Technology Map
+
+The ASP.NET Core API project template contains the following features:
+
+![ASP.NET Core API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
+
+#### Dotnet New
+
+This template is not available from Visual Studio (yet!) but from the new `dotnet new` command line tool. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
+
+
+
+
+
+
+
+
 ### [ASP.NET Core MVC](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206.md)
 
 #### Preview Image
@@ -50,25 +79,6 @@ or off with the click of a button for a truly personalized project.
 
 
 
-
-
-
-
-### [ASP.NET Core API](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/MVC%206%20API.md)
-
-#### Preview Image
-
-![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
-
-#### Technology Map
-
-The ASP.NET Core API project template contains the following features:
-
-![ASP.NET Core API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
-
-#### Dotnet New
-
-This template is not available from Visual Studio (yet!) but from the new `dotnet new` command line tool. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
 
 
