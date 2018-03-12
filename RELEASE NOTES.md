@@ -11,6 +11,8 @@ Project templates come in two delivery methods, each contains different project 
 ### 1.7.1
 ASP.NET Core API Boilerplate
 - Fixed Swagger schema filters not showing example JSON.
+- Add Application Insights appsettings.json configuration.
+- Add Serilog comments.
 
 ### 1.7.0
 ASP.NET Core API Boilerplate
