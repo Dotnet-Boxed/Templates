@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.ViewModelSchemaFilters
+namespace ApiTemplate.ViewModelSchemaFilters
 {
     using ApiTemplate.ViewModels;
     using Swashbuckle.AspNetCore.Swagger;
@@ -8,12 +8,14 @@
     {
         public void Apply(Schema model, SchemaFilterContext context)
         {
-            model.Default = new SaveCar()
+            var saveCar = new SaveCar()
             {
                 Cylinders = 6,
                 Make = "Honda",
                 Model = "Civic"
             };
+            model.Default = saveCar;
+            model.Example = saveCar;
         }
     }
 }
