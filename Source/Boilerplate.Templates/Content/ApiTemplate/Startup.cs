@@ -71,7 +71,7 @@ namespace ApiTemplate
                 // Add useful interface for accessing the HttpContext outside a controller.
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 // Add useful interface for accessing the IUrlHelper outside a controller.
-                .AddScoped<IUrlHelper>(x => x
+                .AddScoped(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
 #if (Versioning)
