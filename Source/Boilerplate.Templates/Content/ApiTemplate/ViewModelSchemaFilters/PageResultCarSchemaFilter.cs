@@ -9,7 +9,7 @@ namespace ApiTemplate.ViewModelSchemaFilters
     {
         public void Apply(Schema model, SchemaFilterContext context)
         {
-            model.Default = new PageResult<Car>()
+            var pageResult = new PageResult<Car>()
             {
                 Count = 2,
                 Items = new List<Car>()
@@ -33,6 +33,8 @@ namespace ApiTemplate.ViewModelSchemaFilters
                 TotalCount = 50,
                 TotalPages = 10
             };
+            model.Default = pageResult;
+            model.Example = pageResult;
         }
     }
 }
