@@ -12,7 +12,6 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Mvc;
 #if (Versioning)
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
@@ -56,7 +55,7 @@ namespace ApiTemplate
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-                .AddCaching()
+                .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if (ResponseCaching)
@@ -64,7 +63,7 @@ namespace ApiTemplate
 #endif
                 .AddCustomResponseCompression()
 #if (Swagger)
-                .AddSwagger()
+                .AddCustomSwagger()
 #endif
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
@@ -99,10 +98,10 @@ namespace ApiTemplate
 #endif
                     .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
-                .AddCommands()
-                .AddRepositories()
-                .AddServices()
-                .AddMappers()
+                .AddProjectCommands()
+                .AddProjectMappers()
+                .AddProjectRepositories()
+                .AddProjectServices()
                 .BuildServiceProvider();
 
         /// <summary>
