@@ -178,31 +178,30 @@ namespace Boilerplate.Templates.Test
         /// <returns>A Task representing waiting for the process to end.</returns>
         private static Task WaitForExitAsync(
             this Process process,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             process.EnableRaisingEvents = true;
 
             var taskCompletionSource = new TaskCompletionSource<object>();
 
-            EventHandler handler = null;
-            handler = (sender, args) =>
-            {
-                process.Exited -= handler;
-                taskCompletionSource.TrySetResult(null);
-            };
-            process.Exited += handler;
-
-            if (cancellationToken != default(CancellationToken))
+            process.Exited += OnExited;
+            if (cancellationToken != default)
             {
                 cancellationToken.Register(
                     () =>
                     {
-                        process.Exited -= handler;
+                        process.Exited -= OnExited;
                         taskCompletionSource.TrySetCanceled();
                     });
             }
 
             return taskCompletionSource.Task;
+
+            void OnExited(object sender, EventArgs e)
+            {
+                process.Exited -= OnExited;
+                taskCompletionSource.TrySetResult(null);
+            }
         }
 
         /// <summary>
@@ -218,7 +217,7 @@ namespace Boilerplate.Templates.Test
             this Action<DataReceivedEventHandler> addHandler,
             Action<DataReceivedEventHandler> removeHandler,
             TextWriter textWriter,
-            CancellationToken cancellationToken = default(CancellationToken))
+            CancellationToken cancellationToken = default)
         {
             var taskCompletionSource = new TaskCompletionSource<object>();
 
@@ -239,7 +238,7 @@ namespace Boilerplate.Templates.Test
 
             addHandler(handler);
 
-            if (cancellationToken != default(CancellationToken))
+            if (cancellationToken != default)
             {
                 cancellationToken.Register(
                     () =>
