@@ -10,15 +10,14 @@ namespace ApiTemplate
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
+    using ApiTemplate.Mappers;
 #if (Versioning)
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
     using ApiTemplate.Repositories;
     using ApiTemplate.Services;
-    using ApiTemplate.Translators;
     using ApiTemplate.ViewModels;
-    using Boilerplate.AspNetCore;
     using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
