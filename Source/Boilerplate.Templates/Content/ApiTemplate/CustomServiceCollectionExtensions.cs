@@ -243,7 +243,7 @@ namespace ApiTemplate
                     {
                         var info = new Info()
                         {
-                            Title = $"{assemblyProduct} (Version {apiVersionDescription.ApiVersion})",
+                            Title = assemblyProduct,
                             Description = apiVersionDescription.IsDeprecated ?
                                 $"{assemblyDescription} This API version has been deprecated." :
                                 assemblyDescription,
