@@ -8,6 +8,18 @@ Project templates come in two delivery methods, each contains different project 
 
 # dotnet new Boilerplate.Templates NuGet Package
 
+### 1.7.3
+ASP.NET Core API Boilerplate
+- Upgrade ASP.NET Core and Swashbuckle packages.
+- Split custom and project ServiceCollectionExtensions.
+- Remove API version from Swagger project title.
+- Fix formatting and namespaces.
+
+### 1.7.2
+ASP.NET Core API Boilerplate
+- Upgrade Serilog and Swashbuckle packages.
+- Fix Swagger examples not using schema filters.
+
 ### 1.7.1
 ASP.NET Core API Boilerplate
 - Fixed Swagger schema filters not showing example JSON.
