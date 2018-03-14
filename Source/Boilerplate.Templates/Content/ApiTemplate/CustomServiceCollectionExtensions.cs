@@ -1,30 +1,23 @@
 namespace ApiTemplate
 {
-    using System;
     using System.IO.Compression;
     using System.Linq;
 #if (Swagger)
     using System.Reflection;
 #endif
-    using ApiTemplate.Commands;
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
-    using ApiTemplate.Mappers;
 #if (Versioning)
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
-    using ApiTemplate.Repositories;
-    using ApiTemplate.Services;
-    using ApiTemplate.ViewModels;
     using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
     using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
 #endif
-    using Boilerplate.Mapping;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -44,7 +37,10 @@ namespace ApiTemplate
     using Swashbuckle.AspNetCore.Swagger;
 #endif
 
-    public static partial class ServiceCollectionExtensions
+    /// <summary>
+    /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
+    /// </summary>
+    public static class CustomServiceCollectionExtensions
     {
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
@@ -53,7 +49,7 @@ namespace ApiTemplate
         /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
         /// otherwise.
         /// </summary>
-        public static IServiceCollection AddCaching(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomCaching(this IServiceCollection services) =>
             services
                 // Adds IMemoryCache which is a simple in-memory cache.
                 .AddMemoryCache()
@@ -210,7 +206,7 @@ namespace ApiTemplate
         /// <summary>
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
-        public static IServiceCollection AddSwagger(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
             services.AddSwaggerGen(
                 options =>
                 {
@@ -267,50 +263,5 @@ namespace ApiTemplate
                 });
 
 #endif
-        /// <summary>
-        /// Adds project commands.
-        /// </summary>
-        /// <remarks>
-        /// AddSingleton - Only one instance is ever created and returned.
-        /// AddScoped - A new instance is created and returned for each request/response cycle.
-        /// AddTransient - A new instance is created and returned each time.
-        /// </remarks>
-        public static IServiceCollection AddCommands(this IServiceCollection services) =>
-            services
-                .AddScoped<IDeleteCarCommand, DeleteCarCommand>()
-                .AddScoped(x => new Lazy<IDeleteCarCommand>(() => x.GetRequiredService<IDeleteCarCommand>()))
-                .AddScoped<IGetCarCommand, GetCarCommand>()
-                .AddScoped(x => new Lazy<IGetCarCommand>(() => x.GetRequiredService<IGetCarCommand>()))
-                .AddScoped<IGetCarPageCommand, GetCarPageCommand>()
-                .AddScoped(x => new Lazy<IGetCarPageCommand>(() => x.GetRequiredService<IGetCarPageCommand>()))
-                .AddScoped<IPatchCarCommand, PatchCarCommand>()
-                .AddScoped(x => new Lazy<IPatchCarCommand>(() => x.GetRequiredService<IPatchCarCommand>()))
-                .AddScoped<IPostCarCommand, PostCarCommand>()
-                .AddScoped(x => new Lazy<IPostCarCommand>(() => x.GetRequiredService<IPostCarCommand>()))
-                .AddScoped<IPutCarCommand, PutCarCommand>()
-                .AddScoped(x => new Lazy<IPutCarCommand>(() => x.GetRequiredService<IPutCarCommand>()));
-
-        /// <summary>
-        /// Adds project object to object mappers.
-        /// </summary>
-        public static IServiceCollection AddMappers(this IServiceCollection services) =>
-            services
-                .AddSingleton<IMapper<Models.Car, Car>, CarToCarMapper>()
-                .AddSingleton<IMapper<Models.Car, SaveCar>, CarToSaveCarMapper>()
-                .AddSingleton<IMapper<SaveCar, Models.Car>, CarToSaveCarMapper>();
-
-        /// <summary>
-        /// Adds project repositories.
-        /// </summary>
-        public static IServiceCollection AddRepositories(this IServiceCollection services) =>
-            services
-                .AddScoped<ICarRepository, CarRepository>();
-
-        /// <summary>
-        /// Adds project services.
-        /// </summary>
-        public static IServiceCollection AddServices(this IServiceCollection services) =>
-            services
-                .AddSingleton<IClockService, ClockService>();
     }
 }
