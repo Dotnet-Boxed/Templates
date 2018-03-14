@@ -2,7 +2,7 @@ namespace ApiTemplate.Options
 {
     public class CertificateOptions
     {
-        public bool AllowInvalid { get;set; }
+        public bool AllowInvalid { get; set; }
 
         public string Subject { get; set; }
 
