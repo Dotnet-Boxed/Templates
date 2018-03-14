@@ -1,4 +1,4 @@
-namespace ApiTemplate.Translators
+namespace ApiTemplate.Mappers
 {
     using System;
     using ApiTemplate.Services;
