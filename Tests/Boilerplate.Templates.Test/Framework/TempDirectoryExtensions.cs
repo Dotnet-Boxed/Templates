@@ -1,7 +1,9 @@
 namespace Boilerplate.Templates.Test
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Text;
     using System.Threading.Tasks;
 
     public static class TempDirectoryExtensions
@@ -9,10 +11,25 @@ namespace Boilerplate.Templates.Test
         public static async Task<Project> DotnetNew(
             this TempDirectory tempDirectory,
             string templateName,
-            string name = null,
+            string name,
+            IDictionary<string, string> arguments = null,
             TimeSpan? timeout = null)
         {
-            await ProcessAssert.AssertStart(tempDirectory.DirectoryPath, "dotnet", $"new {templateName} --name \"{name}\"", timeout ?? TimeSpan.FromSeconds(20));
+            var stringBuilder = new StringBuilder($"new {templateName} --name \"{name}\"");
+            if (arguments != null)
+            {
+                foreach (var argument in arguments)
+                {
+                    stringBuilder.Append($" --{argument.Key} \"{argument.Value}\"");
+                }
+            }
+
+            await ProcessAssert.AssertStart(
+                tempDirectory.DirectoryPath,
+                "dotnet",
+                stringBuilder.ToString(),
+                timeout ?? TimeSpan.FromSeconds(20));
+
             var projectDirectoryPath = Path.Combine(tempDirectory.DirectoryPath, name);
             var projectFilePath = Path.Combine(projectDirectoryPath, name + ".csproj");
             var publishDirectoryPath = Path.Combine(projectDirectoryPath, "Publish");
