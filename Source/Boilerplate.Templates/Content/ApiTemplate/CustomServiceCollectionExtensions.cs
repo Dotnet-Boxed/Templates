@@ -8,7 +8,7 @@ namespace ApiTemplate
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
-#if (Versioning)
+#if (Swagger && Versioning)
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
