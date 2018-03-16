@@ -110,16 +110,6 @@
             <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
             There are settings in the <em>Web.config</em> file under the <code>requestLimits</code> element that limit maximum size of HTTP requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
           </li>
-          <!--#if (NetFramework)-->
-          <li class="list-group-item">
-            <input name="OtherSecurity-EnableRetailMode" type="checkbox"> <strong>Enable .NET Framework Retail Mode</strong> -
-            Enable <a href="https://msdn.microsoft.com/en-us/library/ms228298%28v=vs.85%29.aspx?f=255&MSPPError=-2147217396">retail mode</a> in the machine.config file on the production server you are hosting your site on. You can find the file in the locations below:
-            <ul>
-              <li>32-bit - %windir%\Microsoft.NET\Framework\[.NET Version]\config\machine.config</li>
-              <li>64-bit - %windir%\Microsoft.NET\Framework64\[.NET Version]\config\machine.config</li>
-            </ul>
-          </li>
-          <!--#endif-->
           <li class="list-group-item">
             <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Up To Date</strong> -
             Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
