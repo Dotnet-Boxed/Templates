@@ -13,8 +13,8 @@
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:44300/",
-      //#else
-      //"launchUrl": "http://localhost:5000/",
+      ////#else
+      //"launchUrl": "http:////localhost:5000/",
       //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
@@ -27,7 +27,11 @@
     "IIS (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
+      //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:44300/",
+      ////#else
+      //"launchUrl": "http:////localhost:5000/",
+      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HTTPS_PORT": "44300"
@@ -39,8 +43,25 @@
       "launchBrowser": true,
       //#if (HttpsEverywhere)
       "launchUrl": "https://localhost:44300/",
-      //#else
-      //"launchUrl": "http://localhost:5000/",
+      ////#else
+      //"launchUrl": "http:////localhost:5000/",
+      //#endif
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_HTTPS_PORT": "44300"
+      }
+    },
+    // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
+    "Kestrel (CTRL+F5 dotnet watch run)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch run",
+      "launchBrowser": true,
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:44300/",
+      ////#else
+      //"launchUrl": "http:////localhost:5000/",
       //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
