@@ -6,7 +6,6 @@ namespace ApiTemplate
 #endif
 #if (CORS)
     using ApiTemplate.Constants;
-    using ApiTemplate.Options;
 #endif
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
@@ -17,9 +16,6 @@ namespace ApiTemplate
 #endif
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
-#if (HttpsEverywhere)
-    using Microsoft.AspNetCore.Rewrite;
-#endif
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -110,20 +106,6 @@ namespace ApiTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (HttpsEverywhere)
-                // Redirect to HTTPS using a 301 Move Permanently redirect.
-                .UseRewriter(new RewriteOptions()
-                    .AddRedirectToHttps(
-                        StatusCodes.Status301MovedPermanently,
-                        application
-                            .ApplicationServices
-                            .GetRequiredService<KestrelOptions>()
-                            .Endpoints
-                            .Where(x => x.Value.Url.Scheme == Uri.UriSchemeHttps)
-                            .Select(x => (int?)x.Value.Url.Port)
-                            .DefaultIfEmpty(null)
-                            .First()))
-#endif
 #if (ResponseCaching)
                 .UseResponseCaching()
 #endif
