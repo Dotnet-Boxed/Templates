@@ -28,7 +28,7 @@ namespace Boilerplate.Templates.Test
                 tempDirectory.DirectoryPath,
                 "dotnet",
                 stringBuilder.ToString(),
-                timeout ?? TimeSpan.FromSeconds(20));
+                CancellationTokenFactory.GetCancellationToken(timeout));
 
             var projectDirectoryPath = Path.Combine(tempDirectory.DirectoryPath, name);
             var projectFilePath = Path.Combine(projectDirectoryPath, name + ".csproj");

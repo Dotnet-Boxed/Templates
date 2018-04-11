@@ -30,7 +30,7 @@ namespace Boilerplate.Templates.Test
                 DirectoryExtended.GetCurrentDirectory(),
                 "dotnet",
                 $"new --install \"{source}\"",
-                timeout ?? TimeSpan.FromSeconds(20));
+                CancellationTokenFactory.GetCancellationToken(timeout));
 
         private static string GetProjectFilePath(Assembly assembly, string projectName)
         {

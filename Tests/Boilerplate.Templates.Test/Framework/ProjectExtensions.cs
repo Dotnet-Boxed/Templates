@@ -3,6 +3,7 @@ namespace Boilerplate.Templates.Test
     using System;
     using System.IO;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.TestHost;
@@ -13,12 +14,20 @@ namespace Boilerplate.Templates.Test
         private static readonly string[] DefaultUrls = new string[] { "http://localhost", "https://localhost" };
 
         public static Task DotnetRestore(this Project project, TimeSpan? timeout = null) =>
-            ProcessAssert.AssertStart(project.DirectoryPath, "dotnet", "restore", timeout ?? TimeSpan.FromSeconds(20));
+            ProcessAssert.AssertStart(
+                project.DirectoryPath,
+                "dotnet",
+                "restore",
+                CancellationTokenFactory.GetCancellationToken(timeout));
 
         public static Task DotnetBuild(this Project project, bool? noRestore = true, TimeSpan? timeout = null)
         {
             var noRestoreArgument = noRestore == null ? null : "--no-restore";
-            return ProcessAssert.AssertStart(project.DirectoryPath, "dotnet", $"build {noRestoreArgument}", timeout ?? TimeSpan.FromSeconds(20));
+            return ProcessAssert.AssertStart(
+                project.DirectoryPath,
+                "dotnet",
+                $"build {noRestoreArgument}",
+                CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
         public static Task DotnetPublish(
@@ -36,10 +45,46 @@ namespace Boilerplate.Templates.Test
                 project.DirectoryPath,
                 "dotnet",
                 $"publish {noRestoreArgument} {frameworkArgument} {runtimeArgument} --output {project.PublishDirectoryPath}",
-                timeout ?? TimeSpan.FromSeconds(20));
+                CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
-        public static async Task DotnetRun(
+        public static async Task DotnetRun(this Project project, Func<Task> action, TimeSpan? delay = null)
+        {
+            var cancellationTokenSource = new CancellationTokenSource();
+            var task = ProcessAssert.AssertStart(
+                project.DirectoryPath,
+                "dotnet",
+                "run",
+                cancellationTokenSource.Token);
+            await Task.Delay(delay ?? TimeSpan.FromSeconds(3));
+
+            Exception unhandledException = null;
+            try
+            {
+                await action();
+            }
+            catch (Exception exception)
+            {
+                unhandledException = exception;
+            }
+
+            cancellationTokenSource.Cancel();
+
+            try
+            {
+                await task;
+            }
+            catch (ProcessStartException exception) when (exception.GetBaseException() is TaskCanceledException)
+            {
+            }
+
+            if (unhandledException != null)
+            {
+                Assert.False(true, unhandledException.ToString());
+            }
+        }
+
+        public static async Task DotnetRun2(
             this Project project,
             Func<TestServer, Task> action,
             string environmentName = "Development",

@@ -1,6 +1,7 @@
 namespace Boilerplate.Templates.Test
 {
     using System;
+    using System.Diagnostics;
 
     public class TempDirectory : IDisposable
     {
@@ -12,7 +13,14 @@ namespace Boilerplate.Templates.Test
 
         public string DirectoryPath { get; }
 
-        public void Dispose() =>
-            DirectoryExtended.SafeDelete(this.DirectoryPath);
+        public void Dispose()
+        {
+            var task = DirectoryExtended.TryDeleteDirectory(this.DirectoryPath);
+            task.Wait();
+            if (!task.Result)
+            {
+                Debug.WriteLine($"Failed to delete directory {this.DirectoryPath}");
+            }
+        }
     }
 }

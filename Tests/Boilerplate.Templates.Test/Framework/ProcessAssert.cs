@@ -22,7 +22,7 @@ namespace Boilerplate.Templates.Test
             string workingDirectory,
             string fileName,
             string arguments,
-            TimeSpan timeout)
+            CancellationToken cancellationToken)
         {
             var output = new StringBuilder();
             var error = new StringBuilder();
@@ -33,7 +33,7 @@ namespace Boilerplate.Templates.Test
                     fileName,
                     arguments,
                     workingDirectory,
-                    (int)timeout.TotalMilliseconds,
+                    cancellationToken,
                     new StringWriter(output),
                     new StringWriter(error));
                 result = exitCode == 0 ? ProcessResult.Succeeded : ProcessResult.Failed;
@@ -108,7 +108,7 @@ namespace Boilerplate.Templates.Test
             string filename,
             string arguments,
             string workingDirectory = null,
-            int? timeout = null,
+            CancellationToken cancellationToken = default,
             TextWriter outputTextWriter = null,
             TextWriter errorTextWriter = null)
         {
@@ -128,11 +128,8 @@ namespace Boilerplate.Templates.Test
                 using (var process = new Process() { StartInfo = processStartInfo })
                 {
                     process.Start();
-                    var cancellationTokenSource = timeout.HasValue ?
-                        new CancellationTokenSource(timeout.Value) :
-                        new CancellationTokenSource();
 
-                    var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationTokenSource.Token) };
+                    var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
                     if (outputTextWriter != null)
                     {
                         tasks.Add(ReadAsync(
@@ -143,7 +140,7 @@ namespace Boilerplate.Templates.Test
                             },
                             x => process.OutputDataReceived -= x,
                             outputTextWriter,
-                            cancellationTokenSource.Token));
+                            cancellationToken));
                     }
 
                     if (errorTextWriter != null)
@@ -156,7 +153,7 @@ namespace Boilerplate.Templates.Test
                             },
                             x => process.ErrorDataReceived -= x,
                             errorTextWriter,
-                            cancellationTokenSource.Token));
+                            cancellationToken));
                     }
 
                     await Task.WhenAll(tasks);

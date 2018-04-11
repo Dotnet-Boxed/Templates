@@ -3,6 +3,7 @@ namespace Boilerplate.Templates.Test
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Threading.Tasks;
 
     public static class DirectoryExtended
     {
@@ -46,12 +47,48 @@ namespace Boilerplate.Templates.Test
         public static string GetCurrentDirectory() =>
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-        public static void SafeDelete(string directoryPath)
+        public static async Task<bool> TryDeleteDirectory(
+           string directoryPath,
+           int maxRetries = 10,
+           int millisecondsDelay = 30)
         {
-            if (Directory.Exists(directoryPath))
+            if (directoryPath == null)
             {
-                Directory.Delete(directoryPath, true);
+                throw new ArgumentNullException(directoryPath);
             }
+
+            if (maxRetries < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxRetries));
+            }
+
+            if (millisecondsDelay < 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(millisecondsDelay));
+            }
+
+            for (int i = 0; i < maxRetries; ++i)
+            {
+                try
+                {
+                    if (Directory.Exists(directoryPath))
+                    {
+                        Directory.Delete(directoryPath, true);
+                    }
+
+                    return true;
+                }
+                catch (IOException)
+                {
+                    await Task.Delay(millisecondsDelay);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    await Task.Delay(millisecondsDelay);
+                }
+            }
+
+            return false;
         }
     }
 }
