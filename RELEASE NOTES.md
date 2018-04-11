@@ -8,6 +8,13 @@ Project templates come in two delivery methods, each contains different project 
 
 # dotnet new Boilerplate.Templates NuGet Package
 
+### 1.8.0
+ASP.NET Core API Boilerplate
+- Add LoadBalancer option.
+- Add dotnet watch run in launchSettings.json.
+- Stop starting the API with a HTTP endpoint when HttpsEverywhere is true.
+- Remove the redirect to HTTPS.
+
 ### 1.7.3
 ASP.NET Core API Boilerplate
 - Upgrade ASP.NET Core and Swashbuckle packages.
