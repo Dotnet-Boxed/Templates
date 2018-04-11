@@ -41,6 +41,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Web Server
 
+- **LoadBalancer** - If you use a load balancer, updates the request scheme using the X-Forwarded-Proto HTTP header.
 - **ReverseProxyWebServer** - The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.
   - **Internet Information Services (IIS)** - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps. IIS is preconfigured to set request limits for security.
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server. It does have a Windows version but it's not very fast and IIS is better on that platform. If the HTTPS Everywhere feature is enabled, NGINX is pre-configured to enable the most secure TLS protocols and ciphers for security and to enable HTTP 2.0 and SSL stapling for performance.
