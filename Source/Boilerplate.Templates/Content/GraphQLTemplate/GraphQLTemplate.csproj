@@ -32,9 +32,10 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
     <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
-    <PackageReference Include="GraphQL" Version="2.0.0-alpha-863" />
-    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="2.0.11" />
-    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="2.0.11" />
+    <PackageReference Include="GraphQL" Version="2.0.0-alpha-870" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0019" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0-alpha0019" />
+    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.1.0-alpha0019" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.1.0" />

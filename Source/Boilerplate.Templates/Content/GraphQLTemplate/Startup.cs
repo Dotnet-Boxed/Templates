@@ -9,6 +9,7 @@ namespace ApiTemplate
     using GraphQL;
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.WebSockets;
+    using GraphQL.Server.Ui.Playground;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -100,8 +101,8 @@ namespace ApiTemplate
                 .UseResponseCaching()
 #endif
                 .UseResponseCompression()
-                .UseDefaultFiles()
                 .UseStaticFilesWithCacheControl()
+                .UseGraphQLPlayground(new GraphQLPlaygroundOptions())
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
