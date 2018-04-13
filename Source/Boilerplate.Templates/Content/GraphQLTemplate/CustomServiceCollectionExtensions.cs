@@ -2,7 +2,6 @@ namespace ApiTemplate
 {
     using System.IO.Compression;
     using System.Linq;
-    using System.Reflection;
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
@@ -10,11 +9,8 @@ namespace ApiTemplate
     using Boilerplate.AspNetCore.Filters;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.ResponseCompression;
-    using Microsoft.Extensions.Caching.Distributed;
-    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
@@ -121,13 +117,6 @@ namespace ApiTemplate
                     foreach (var keyValuePair in cacheProfileOptions)
                     {
                         options.CacheProfiles.Add(keyValuePair);
-                    }
-
-                    if (hostingEnvironment.IsDevelopment())
-                    {
-                        // Lets you pass a format parameter into the query string to set the response type:
-                        // e.g. ?format=application/json. Good for debugging.
-                        options.Filters.Add(new FormatFilterAttribute());
                     }
 
                     // Check model state for null or invalid models and automatically return a 400 Bad Request.

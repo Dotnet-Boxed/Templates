@@ -20,7 +20,6 @@ namespace ApiTemplate
 #endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
 #if (Versioning)
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
@@ -147,13 +146,6 @@ namespace ApiTemplate
                     foreach (var keyValuePair in cacheProfileOptions)
                     {
                         options.CacheProfiles.Add(keyValuePair);
-                    }
-
-                    if (hostingEnvironment.IsDevelopment())
-                    {
-                        // Lets you pass a format parameter into the query string to set the response type:
-                        // e.g. ?format=application/json. Good for debugging.
-                        options.Filters.Add(new FormatFilterAttribute());
                     }
 
                     // Check model state for null or invalid models and automatically return a 400 Bad Request.

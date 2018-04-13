@@ -73,7 +73,6 @@ namespace ApiTemplate
                 .AddMvcCore()
                     .AddApiExplorer()
                     .AddAuthorization()
-                    .AddFormatterMappings()
                     .AddDataAnnotations()
                     .AddJsonFormatters()
                     .AddCustomJsonOptions()
@@ -102,7 +101,10 @@ namespace ApiTemplate
 #endif
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl()
-                .UseGraphQLPlayground(new GraphQLPlaygroundOptions())
+                // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.
+                .UseIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" }))
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif

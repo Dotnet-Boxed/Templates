@@ -78,7 +78,6 @@ namespace ApiTemplate
                 .AddMvcCore()
                     .AddApiExplorer()
                     .AddAuthorization()
-                    .AddFormatterMappings()
                     .AddDataAnnotations()
                     .AddJsonFormatters()
                     .AddCustomJsonOptions()

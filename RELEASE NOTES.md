@@ -8,6 +8,10 @@ Project templates come in two delivery methods, each contains different project 
 
 # dotnet new Boilerplate.Templates NuGet Package
 
+### vNext
+ASP.NET Core API Boilerplate
+- Remove FormatFilterAttribute and AddFormatterMappings for simplicity.
+
 ### 1.8.0
 ASP.NET Core API Boilerplate
 - Add LoadBalancer option.
