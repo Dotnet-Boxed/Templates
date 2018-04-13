@@ -11,6 +11,8 @@ Project templates come in two delivery methods, each contains different project 
 ### vNext
 ASP.NET Core API Boilerplate
 - Remove FormatFilterAttribute and AddFormatterMappings for simplicity.
+ASP.NET Core GraphQL Boilerplate
+- Initial version.
 
 ### 1.8.0
 ASP.NET Core API Boilerplate
