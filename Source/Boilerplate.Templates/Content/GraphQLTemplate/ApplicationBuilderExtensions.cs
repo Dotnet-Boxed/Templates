@@ -1,11 +1,11 @@
-namespace ApiTemplate
+namespace GraphQLTemplate
 {
     using System;
     using System.Linq;
     using Boilerplate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
-    using ApiTemplate.Constants;
-    using ApiTemplate.Options;
+    using GraphQLTemplate.Constants;
+    using GraphQLTemplate.Options;
     using Microsoft.Extensions.DependencyInjection;
 
     public static partial class ApplicationBuilderExtensions

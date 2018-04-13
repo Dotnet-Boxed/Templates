@@ -1,11 +1,12 @@
-namespace ApiTemplate
+namespace GraphQLTemplate
 {
-    using ApiTemplate.Queries;
-    using ApiTemplate.Repositories;
-    using ApiTemplate.Schemas;
-    using ApiTemplate.Types;
+    using GraphQLTemplate.Queries;
+    using GraphQLTemplate.Repositories;
+    using GraphQLTemplate.Schemas;
+    using GraphQLTemplate.Types;
     using GraphQL.Server.Transports.WebSockets;
     using Microsoft.Extensions.DependencyInjection;
+    using GraphQLTemplate.Mutations;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods add project services.
@@ -19,31 +20,40 @@ namespace ApiTemplate
     {
         public static IServiceCollection AddProjectRepositories(this IServiceCollection services) =>
             services
-                .AddSingleton<ICarRepository, CarRepository>()
-                .AddSingleton<IPersonRepository, PersonRepository>();
+                .AddSingleton<IDroidRepository, DroidRepository>()
+                .AddSingleton<IHumanRepository, HumanRepository>();
 
         /// <summary>
         /// Add project GraphQL types.
         /// </summary>
         public static IServiceCollection AddProjectGraphQLTypes(this IServiceCollection services) =>
             services
-                .AddSingleton<CarType>()
-                .AddSingleton<GenderType>()
-                .AddSingleton<PersonType>();
+                .AddSingleton<CharacterInterface>()
+                .AddSingleton<DroidObject>()
+                .AddSingleton<EpisodeEnumeration>()
+                .AddSingleton<HumanInputObject>()
+                .AddSingleton<HumanObject>();
 
         /// <summary>
         /// Add project GraphQL query types.
         /// </summary>
         public static IServiceCollection AddProjectGraphQLQueries(this IServiceCollection services) =>
             services
-                .AddSingleton<CarsQuery>();
+                .AddSingleton<RootQuery>();
+
+        /// <summary>
+        /// Add project GraphQL query types.
+        /// </summary>
+        public static IServiceCollection AddProjectGraphQLMutations(this IServiceCollection services) =>
+            services
+                .AddSingleton<RootMutation>();
 
         /// <summary>
         /// Add project GraphQL schema and web socket types.
         /// </summary>
         public static IServiceCollection AddProjectGraphQLSchemas(this IServiceCollection services) =>
             services
-                .AddSingleton<CarsSchema>()
-                .AddGraphQLWebSocket<CarsSchema>();
+                .AddSingleton<MainSchema>()
+                .AddGraphQLWebSocket<MainSchema>();
     }
 }

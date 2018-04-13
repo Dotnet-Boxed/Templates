@@ -1,4 +1,4 @@
-namespace ApiTemplate.Options
+namespace GraphQLTemplate.Options
 {
     using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;

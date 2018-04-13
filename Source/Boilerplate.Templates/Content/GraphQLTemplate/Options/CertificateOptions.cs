@@ -1,4 +1,4 @@
-namespace ApiTemplate.Options
+namespace GraphQLTemplate.Options
 {
     public class CertificateOptions
     {

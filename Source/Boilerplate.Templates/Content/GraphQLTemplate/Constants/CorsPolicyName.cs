@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Constants
+namespace GraphQLTemplate.Constants
 {
     public static class CorsPolicyName
     {

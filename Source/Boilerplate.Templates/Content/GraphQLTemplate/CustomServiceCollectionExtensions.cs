@@ -1,12 +1,11 @@
-namespace ApiTemplate
+namespace GraphQLTemplate
 {
     using System.IO.Compression;
     using System.Linq;
 #if (CORS)
-    using ApiTemplate.Constants;
+    using GraphQLTemplate.Constants;
 #endif
-    using ApiTemplate.Options;
-    using Boilerplate.AspNetCore.Filters;
+    using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;

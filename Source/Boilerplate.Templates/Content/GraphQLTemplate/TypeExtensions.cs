@@ -1,4 +1,4 @@
-namespace ApiTemplate
+namespace GraphQLTemplate
 {
     using System;
     using System.ComponentModel;

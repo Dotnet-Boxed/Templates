@@ -1,10 +1,10 @@
-namespace ApiTemplate
+namespace GraphQLTemplate
 {
     using System;
 #if (CORS)
-    using ApiTemplate.Constants;
+    using GraphQLTemplate.Constants;
 #endif
-    using ApiTemplate.Schemas;
+    using GraphQLTemplate.Schemas;
     using Boilerplate.AspNetCore;
     using GraphQL;
     using GraphQL.Server.Transports.AspNetCore;
@@ -79,6 +79,7 @@ namespace ApiTemplate
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
                 .AddProjectGraphQLQueries()
+                .AddProjectGraphQLMutations()
                 .AddProjectGraphQLSchemas()
                 .BuildServiceProvider();
 
@@ -109,7 +110,7 @@ namespace ApiTemplate
                     x => x.UseStrictTransportSecurityHttpHeader())
 #endif
                 .UseWebSockets()
-                .UseGraphQLWebSocket<CarsSchema>(new GraphQLWebSocketsOptions())
-                .UseGraphQLHttp<CarsSchema>(new GraphQLHttpOptions());
+                .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())
+                .UseGraphQLHttp<MainSchema>(new GraphQLHttpOptions());
     }
 }

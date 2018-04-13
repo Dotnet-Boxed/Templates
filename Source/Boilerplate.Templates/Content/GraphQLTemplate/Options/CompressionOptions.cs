@@ -1,4 +1,4 @@
-namespace ApiTemplate.Options
+namespace GraphQLTemplate.Options
 {
     /// <summary>
     /// The GZIP response compression options for the application.
