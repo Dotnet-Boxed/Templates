@@ -121,9 +121,7 @@ namespace ApiTemplate
 #endif
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
-                    x => x
-                        .UseDebugging()
-                        .UseDeveloperErrorPages())
+                    x => x.UseDeveloperErrorPages())
 #if (HttpsEverywhere)
                 .UseIf(
                     !this.hostingEnvironment.IsDevelopment(),
