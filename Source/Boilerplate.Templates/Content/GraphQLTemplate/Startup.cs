@@ -56,9 +56,6 @@ namespace ApiTemplate
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
-#if (ResponseCaching)
-                .AddResponseCaching()
-#endif
                 .AddCustomResponseCompression()
                 .AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(type => x.GetRequiredService(type)))
                 .AddGraphQLHttp()
@@ -93,9 +90,6 @@ namespace ApiTemplate
             application
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
-#endif
-#if (ResponseCaching)
-                .UseResponseCaching()
 #endif
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl()

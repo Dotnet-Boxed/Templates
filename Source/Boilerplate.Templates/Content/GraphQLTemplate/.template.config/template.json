@@ -199,13 +199,6 @@
       "defaultValue": "true",
       "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
     },
-    // ResponseCaching
-    "ResponseCaching": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Response caching is allows the use of the [ResponseCache] attribute on your action methods. Cache settings (cache profiles) are stored in the configuration file and referred to by name."
-    },
     // HealthCheck
     "HealthCheck": {
       "type": "parameter",
