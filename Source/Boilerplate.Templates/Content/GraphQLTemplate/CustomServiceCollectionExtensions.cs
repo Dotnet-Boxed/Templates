@@ -119,9 +119,6 @@ namespace ApiTemplate
                         options.CacheProfiles.Add(keyValuePair);
                     }
 
-                    // Check model state for null or invalid models and automatically return a 400 Bad Request.
-                    options.Filters.Add(new ValidateModelStateAttribute());
-
                     // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
                     options.OutputFormatters.RemoveType<StreamOutputFormatter>();
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
