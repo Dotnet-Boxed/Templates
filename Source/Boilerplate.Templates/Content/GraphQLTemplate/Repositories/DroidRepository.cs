@@ -9,7 +9,7 @@ namespace GraphQLTemplate.Repositories
 
     public class DroidRepository : IDroidRepository
     {
-        public Task<Droid> GetDroid(string id, CancellationToken cancellationToken) =>
+        public Task<Droid> GetDroid(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(Database.Droids.FirstOrDefault(x => x.Id == id));
 
         public List<Character> GetFriends(Droid droid, CancellationToken cancellationToken) =>

@@ -8,7 +8,7 @@ namespace GraphQLTemplate.Repositories
 
     public interface IDroidRepository
     {
-        Task<Droid> GetDroid(string id, CancellationToken cancellationToken);
+        Task<Droid> GetDroid(Guid id, CancellationToken cancellationToken);
 
         List<Character> GetFriends(Droid droid, CancellationToken cancellationToken);
     }

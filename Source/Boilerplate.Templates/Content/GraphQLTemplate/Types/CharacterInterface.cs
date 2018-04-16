@@ -9,7 +9,7 @@ namespace GraphQLTemplate.Types
         {
             this.Name = "Character";
 
-            this.Field(x => x.Id).Description("The unique identifier of the character.");
+            this.Field(x => x.Id, type: typeof(IdGraphType)).Description("The unique identifier of the character.");
             this.Field(x => x.Name, nullable: true).Description("The name of the character.");
 
             this.Field<ListGraphType<CharacterInterface>>("friends");

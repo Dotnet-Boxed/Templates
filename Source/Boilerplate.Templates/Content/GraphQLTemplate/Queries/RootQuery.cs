@@ -16,26 +16,25 @@ namespace GraphQLTemplate.Queries
 
             this.Field<CharacterInterface>(
                 "hero",
-                resolve: context => droidRepository.GetDroid(new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68").ToString(), context.CancellationToken));
+                resolve: context => droidRepository.GetDroid(new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"), context.CancellationToken));
             this.Field<HumanObject>(
                 "human",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<StringGraphType>>()
+                    new QueryArgument<NonNullGraphType<IdGraphType>>()
                     {
                         Name = "id",
                         Description = "The unique identifier of the human."
                     }),
-                resolve: context => humanRepository.GetHuman(context.GetArgument<string>("id"), context.CancellationToken));
-
-            this.FieldDelegate<DroidObject>(
+                resolve: context => humanRepository.GetHuman(context.GetArgument<Guid>("id"), context.CancellationToken));
+            this.Field<DroidObject>(
                 "droid",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<StringGraphType>>
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
                     {
                         Name = "id",
                         Description = "The unique identifier of the droid."
                     }),
-                resolve: new Func<ResolveFieldContext, string, object>((context, id) => droidRepository.GetDroid(id, context.CancellationToken))
+                resolve: context => droidRepository.GetDroid(context.GetArgument<Guid>("id"), context.CancellationToken)
             );
         }
     }

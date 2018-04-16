@@ -12,6 +12,6 @@ namespace GraphQLTemplate.Repositories
 
         List<Character> GetFriends(Human human, CancellationToken cancellationToken);
 
-        Task<Human> GetHuman(string id, CancellationToken cancellationToken);
+        Task<Human> GetHuman(Guid id, CancellationToken cancellationToken);
     }
 }

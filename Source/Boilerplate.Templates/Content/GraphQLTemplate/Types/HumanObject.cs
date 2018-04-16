@@ -11,7 +11,7 @@ namespace GraphQLTemplate.Types
             this.Name = "Human";
             this.Description = "A human being in the Star Wars universe.";
 
-            this.Field(x => x.Id).Description("The unique identifier of the human.");
+            this.Field(x => x.Id, type: typeof(IdGraphType)).Description("The unique identifier of the human.");
             this.Field(x => x.Name, nullable: true).Description("The name of the human.");
             this.Field(x => x.HomePlanet, nullable: true).Description("The home planet of the human.");
 
