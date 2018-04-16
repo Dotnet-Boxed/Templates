@@ -21,7 +21,6 @@ namespace GraphQLTemplate.Types
             this.Field<ListGraphType<EpisodeEnumeration>>("appearsIn", "Which movie they appear in.");
 
             this.Interface<CharacterInterface>();
-            this.IsTypeOf = x => x is HumanObject;
         }
     }
 }
