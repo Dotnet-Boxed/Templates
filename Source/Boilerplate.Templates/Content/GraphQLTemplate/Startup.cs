@@ -111,6 +111,16 @@ namespace GraphQLTemplate
 #endif
                 .UseWebSockets()
                 .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())
-                .UseGraphQLHttp<MainSchema>(new GraphQLHttpOptions());
+                .UseGraphQLHttp<MainSchema>(
+                    new GraphQLHttpOptions()
+                    {
+                        // The UserContext is accessible in field resolvers and validation rules using:
+                        // context.UserContext.As<GraphQLUserContext>()
+                        BuildUserContext = context => new GraphQLUserContext() { User = context.User },
+                        // Show stack traces in exceptions. Don't turn this on in production.
+                        ExposeExceptions = this.hostingEnvironment.IsDevelopment(),
+                        // Add your own validation rules e.g. for authentication.
+                        // ValidationRules = new[] { new RequiresAuthValidationRule() }.Concat(DocumentValidator.CoreRules());
+                    });
     }
 }
