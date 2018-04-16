@@ -49,7 +49,7 @@ namespace GraphQLTemplate.Repositories
                 new Human()
                 {
                     Id = new Guid("7f7bf389-2cfb-45f4-b91e-9d95441c1ecc"),
-                    Name = "Vader",
+                    Name = "Darth Vader",
                     Friends = new List<Guid>(),
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
                     HomePlanet = "Tatooine"

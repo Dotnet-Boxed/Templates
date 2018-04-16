@@ -23,7 +23,7 @@ namespace GraphQLTemplate.Queries
                     new QueryArgument<NonNullGraphType<IdGraphType>>()
                     {
                         Name = "id",
-                        Description = "The unique identifier of the human."
+                        Description = "The unique identifier of the human.",
                     }),
                 resolve: context => humanRepository.GetHuman(context.GetArgument<Guid>("id"), context.CancellationToken));
             this.Field<DroidObject>(
@@ -32,7 +32,7 @@ namespace GraphQLTemplate.Queries
                     new QueryArgument<NonNullGraphType<IdGraphType>>
                     {
                         Name = "id",
-                        Description = "The unique identifier of the droid."
+                        Description = "The unique identifier of the droid.",
                     }),
                 resolve: context => droidRepository.GetDroid(context.GetArgument<Guid>("id"), context.CancellationToken)
             );
