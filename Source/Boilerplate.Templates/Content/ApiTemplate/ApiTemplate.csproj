@@ -40,22 +40,22 @@
     <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
     <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.1" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
-    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
-    <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="1.1.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
+    <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Exceptions" Version="4.0.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="2.5.0" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.1" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.3.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="2.6.1" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.0" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.4.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
   <!-- Tools - Command line tools which can be run using 'dotnet [Tool Name]'. -->
