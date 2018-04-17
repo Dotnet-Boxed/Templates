@@ -12,6 +12,8 @@ Project templates come in two delivery methods, each contains different project 
 ASP.NET Core API Boilerplate
 - Remove FormatFilterAttribute and AddFormatterMappings for simplicity.
 - Remove BrowserLink.
+- Add Serilog.Sinks.Console package to fix console logging.
+- Upgrade packages.
 ASP.NET Core GraphQL Boilerplate
 - Initial version.
 
