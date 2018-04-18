@@ -1,5 +1,6 @@
 namespace GraphQLTemplate.Types
 {
+    using System.Collections.Generic;
     using GraphQL.Types;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
@@ -15,10 +16,10 @@ namespace GraphQLTemplate.Types
             this.Field(x => x.Name, nullable: true).Description("The name of the human.");
             this.Field(x => x.HomePlanet, nullable: true).Description("The home planet of the human.");
 
-            this.Field<ListGraphType<CharacterInterface>>(
+            this.FieldAsync<ListGraphType<CharacterInterface>, List<Character>>(
                 "friends",
                 resolve: context => humanRepository.GetFriends(context.Source, context.CancellationToken));
-            this.Field<ListGraphType<EpisodeEnumeration>>("appearsIn", "Which movie they appear in.");
+            this.FieldAsync<ListGraphType<EpisodeEnumeration>>("appearsIn", "Which movie they appear in.");
 
             this.Interface<CharacterInterface>();
         }

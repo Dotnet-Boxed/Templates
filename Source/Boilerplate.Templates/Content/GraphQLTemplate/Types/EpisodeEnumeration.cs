@@ -1,8 +1,9 @@
 namespace GraphQLTemplate.Types
 {
     using GraphQL.Types;
+    using GraphQLTemplate.Models;
 
-    public class EpisodeEnumeration : EnumerationGraphType
+    public class EpisodeEnumeration : EnumerationGraphType<Episode>
     {
         public EpisodeEnumeration()
         {

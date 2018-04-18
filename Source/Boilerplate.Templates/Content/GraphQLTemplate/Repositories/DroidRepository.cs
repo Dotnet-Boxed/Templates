@@ -12,7 +12,7 @@ namespace GraphQLTemplate.Repositories
         public Task<Droid> GetDroid(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(Database.Droids.FirstOrDefault(x => x.Id == id));
 
-        public List<Character> GetFriends(Droid droid, CancellationToken cancellationToken) =>
-            Database.Characters.Where(x => droid.Friends.Contains(x.Id)).ToList();
+        public Task<List<Character>> GetFriends(Droid droid, CancellationToken cancellationToken) =>
+            Task.FromResult(Database.Characters.Where(x => droid.Friends.Contains(x.Id)).ToList());
     }
 }

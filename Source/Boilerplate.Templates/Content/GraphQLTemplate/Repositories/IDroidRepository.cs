@@ -10,6 +10,6 @@ namespace GraphQLTemplate.Repositories
     {
         Task<Droid> GetDroid(Guid id, CancellationToken cancellationToken);
 
-        List<Character> GetFriends(Droid droid, CancellationToken cancellationToken);
+        Task<List<Character>> GetFriends(Droid droid, CancellationToken cancellationToken);
     }
 }

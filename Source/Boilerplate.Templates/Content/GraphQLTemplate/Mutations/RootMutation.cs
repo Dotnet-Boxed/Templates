@@ -23,7 +23,7 @@ namespace GraphQLTemplate.Mutations
             this.Name = "Mutation";
             this.Description = "The mutation type, represents all updates we can make to our data.";
 
-            this.Field<HumanObject>(
+            this.FieldAsync<HumanObject, Human>(
                 "createHuman",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<HumanInputObject>>()

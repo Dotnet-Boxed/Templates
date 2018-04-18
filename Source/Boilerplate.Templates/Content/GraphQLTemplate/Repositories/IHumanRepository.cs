@@ -10,7 +10,7 @@ namespace GraphQLTemplate.Repositories
     {
         Task<Human> AddHuman(Human human, CancellationToken cancellationToken);
 
-        List<Character> GetFriends(Human human, CancellationToken cancellationToken);
+        Task<List<Character>> GetFriends(Human human, CancellationToken cancellationToken);
 
         Task<Human> GetHuman(Guid id, CancellationToken cancellationToken);
     }
