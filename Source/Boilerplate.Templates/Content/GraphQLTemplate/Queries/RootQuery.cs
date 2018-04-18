@@ -18,7 +18,7 @@ namespace GraphQLTemplate.Queries
             this.FieldAsync<DroidObject, Droid>(
                 "droid",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IdGraphType>>
+                    new QueryArgument<IdGraphType>
                     {
                         Name = "id",
                         Description = "The unique identifier of the droid.",
@@ -30,7 +30,7 @@ namespace GraphQLTemplate.Queries
             this.FieldAsync<HumanObject, Human>(
                 "human",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IdGraphType>>()
+                    new QueryArgument<IdGraphType>()
                     {
                         Name = "id",
                         Description = "The unique identifier of the human.",
