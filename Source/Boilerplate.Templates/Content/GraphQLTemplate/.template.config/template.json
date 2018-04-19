@@ -21,6 +21,13 @@
   "sources": [
     {
       "modifiers": [
+        // Mutations
+        {
+          "condition": "(!Mutations)",
+          "exclude": [
+            "Mutations/**/*"
+          ]
+        },
         // ReverseProxyWebServer
         {
           "condition": "(!IIS)",
@@ -40,15 +47,6 @@
           "condition": "(!HttpsEverywhere)",
           "exclude": [
             "DevelopmentCertificate.pfx"
-          ]
-        },
-        // HealthCheck
-        {
-          "condition": "(!HealthCheck)",
-          "exclude": [
-            "Constants/ControllerName.cs",
-            "Constants/StatusControllerRoute.cs",
-            "Controllers/**/*"
           ]
         },
         // CORS
@@ -99,6 +97,20 @@
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
       "description": "The name of the author of the project which determines the assembly author, company and copyright information."
+    },
+    // Mutations
+    "Mutations": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add GraphQL mutations to change objects."
+    },
+    // Subscriptions
+    "Subscriptions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add GraphQL subscriptions to be notified when objects change."
     },
     // Load Balancer
     "LoadBalancer": {
@@ -198,13 +210,6 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Browser security prevents a web page from making AJAX requests to another domain. This restriction is called the same-origin policy, and prevents a malicious site from reading sensitive data from another site. CORS is a W3C standard that allows a server to relax the same-origin policy. Using CORS, a server can explicitly allow some cross-origin requests while rejecting others."
-    },
-    // HealthCheck
-    "HealthCheck": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "A health-check endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly."
     },
     // RobotsTxt
     "RobotsTxt": {

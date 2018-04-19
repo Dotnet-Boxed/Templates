@@ -2,7 +2,7 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;LoadBalancer;ResponseCaching;CORS;HumansTxt;RobotsTxt;GraphQL</DefineConstants>
+    <DefineConstants>$(DefineConstants);Mutations;Subscriptions;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;LoadBalancer;ResponseCaching;CORS;HumansTxt;RobotsTxt</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
   </PropertyGroup>

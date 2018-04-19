@@ -84,7 +84,9 @@ namespace GraphQLTemplate
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
                 .AddProjectGraphQLQueries()
+#if (Mutations)
                 .AddProjectGraphQLMutations()
+#endif
                 .AddProjectGraphQLSchemas()
                 .BuildServiceProvider();
 
@@ -114,8 +116,10 @@ namespace GraphQLTemplate
                     !this.hostingEnvironment.IsDevelopment(),
                     x => x.UseStrictTransportSecurityHttpHeader())
 #endif
+#if (Subscriptions)
                 .UseWebSockets()
                 .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())
+#endif
                 .UseGraphQLHttp<MainSchema>(
                     new GraphQLHttpOptions()
                     {

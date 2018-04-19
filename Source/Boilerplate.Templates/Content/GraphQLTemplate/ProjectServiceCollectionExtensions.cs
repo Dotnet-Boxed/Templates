@@ -40,7 +40,7 @@ namespace GraphQLTemplate
         public static IServiceCollection AddProjectGraphQLQueries(this IServiceCollection services) =>
             services
                 .AddSingleton<RootQuery>();
-
+#if (Mutations)
         /// <summary>
         /// Add project GraphQL query types.
         /// </summary>
@@ -48,6 +48,7 @@ namespace GraphQLTemplate
             services
                 .AddSingleton<RootMutation>();
 
+#endif
         /// <summary>
         /// Add project GraphQL schema and web socket types.
         /// </summary>
