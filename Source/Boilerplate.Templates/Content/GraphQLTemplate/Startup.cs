@@ -7,6 +7,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Schemas;
     using Boilerplate.AspNetCore;
     using GraphQL;
+    using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.WebSockets;
     using GraphQL.Server.Ui.Playground;
@@ -57,7 +58,11 @@ namespace GraphQLTemplate
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
                 .AddCustomResponseCompression()
+                // Add a way for GraphQL.NET to resolve types.
                 .AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(type => x.GetRequiredService(type)))
+                // Add data loader to reduce the number of calls to our repository.
+                .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
+                .AddSingleton<DataLoaderDocumentListener>()
                 .AddGraphQLHttp()
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
