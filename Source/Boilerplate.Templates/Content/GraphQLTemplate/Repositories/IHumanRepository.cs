@@ -8,6 +8,10 @@ namespace GraphQLTemplate.Repositories
 
     public interface IHumanRepository
     {
+#if (Subscriptions)
+        IObservable<Human> WhenHumanCreated { get; }
+
+#endif
         Task<Human> AddHuman(Human human, CancellationToken cancellationToken);
 
         Task<List<Character>> GetFriends(Human human, CancellationToken cancellationToken);

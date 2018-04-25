@@ -1,12 +1,10 @@
 namespace GraphQLTemplate
 {
-    using GraphQLTemplate.Queries;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Types;
     using GraphQL.Server.Transports.WebSockets;
     using Microsoft.Extensions.DependencyInjection;
-    using GraphQLTemplate.Mutations;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods add project services.
@@ -18,6 +16,9 @@ namespace GraphQLTemplate
     /// </remarks>
     public static class ProjectServiceCollectionExtensions
     {
+        /// <summary>
+        /// Add project data repositories.
+        /// </summary>
         public static IServiceCollection AddProjectRepositories(this IServiceCollection services) =>
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
@@ -31,29 +32,24 @@ namespace GraphQLTemplate
                 .AddSingleton<CharacterInterface>()
                 .AddSingleton<DroidObject>()
                 .AddSingleton<EpisodeEnumeration>()
+#if (Subscriptions)
+                .AddSingleton<HumanCreatedEvent>()
+#endif
                 .AddSingleton<HumanInputObject>()
                 .AddSingleton<HumanObject>();
 
-        /// <summary>
-        /// Add project GraphQL query types.
-        /// </summary>
-        public static IServiceCollection AddProjectGraphQLQueries(this IServiceCollection services) =>
-            services
-                .AddSingleton<RootQuery>();
-#if (Mutations)
-        /// <summary>
-        /// Add project GraphQL query types.
-        /// </summary>
-        public static IServiceCollection AddProjectGraphQLMutations(this IServiceCollection services) =>
-            services
-                .AddSingleton<RootMutation>();
-
-#endif
         /// <summary>
         /// Add project GraphQL schema and web socket types.
         /// </summary>
         public static IServiceCollection AddProjectGraphQLSchemas(this IServiceCollection services) =>
             services
+                .AddSingleton<RootQuery>()
+#if (Mutations)
+                .AddSingleton<RootMutation>()
+#endif
+#if (Subscriptions)
+                .AddSingleton<RootSubscription>()
+#endif
                 .AddSingleton<MainSchema>()
                 .AddGraphQLWebSocket<MainSchema>();
     }

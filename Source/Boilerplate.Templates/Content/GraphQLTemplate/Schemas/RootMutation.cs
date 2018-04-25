@@ -1,4 +1,4 @@
-namespace GraphQLTemplate.Mutations
+namespace GraphQLTemplate.Schemas
 {
     using GraphQL.Types;
     using GraphQLTemplate.Models;

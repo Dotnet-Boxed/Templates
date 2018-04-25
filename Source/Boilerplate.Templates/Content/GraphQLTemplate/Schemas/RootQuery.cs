@@ -1,4 +1,4 @@
-namespace GraphQLTemplate.Queries
+namespace GraphQLTemplate.Schemas
 {
     using System;
     using GraphQL.Types;

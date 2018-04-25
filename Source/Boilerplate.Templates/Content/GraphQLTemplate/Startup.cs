@@ -89,10 +89,6 @@ namespace GraphQLTemplate
                 .Services
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
-                .AddProjectGraphQLQueries()
-#if (Mutations)
-                .AddProjectGraphQLMutations()
-#endif
                 .AddProjectGraphQLSchemas()
                 .BuildServiceProvider();
 

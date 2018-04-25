@@ -2,21 +2,27 @@ namespace GraphQLTemplate.Schemas
 {
     using GraphQL;
     using GraphQL.Types;
-    using GraphQLTemplate.Mutations;
-    using GraphQLTemplate.Queries;
 
     public class MainSchema : Schema
     {
+        public MainSchema(
+            RootQuery query,
 #if (Mutations)
-        public MainSchema(IDependencyResolver resolver, RootQuery query, RootMutation mutation)
-#else
-        public MainSchema(IDependencyResolver resolver, RootQuery query)
+            RootMutation mutation,
 #endif
+#if (Subscriptions)
+            RootSubscription subscription,
+#endif
+            IDependencyResolver resolver)
+
             : base(resolver)
         {
-            this.Query = query;
+            this.Query = resolver.Resolve<RootQuery>();
 #if (Mutations)
             this.Mutation = mutation;
+#endif
+#if (Subscriptions)
+            this.Subscription = subscription;
 #endif
         }
     }

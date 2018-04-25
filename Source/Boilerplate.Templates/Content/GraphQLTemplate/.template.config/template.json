@@ -25,7 +25,14 @@
         {
           "condition": "(!Mutations)",
           "exclude": [
-            "Mutations/**/*"
+            "Schemas/RootMutation.cs"
+          ]
+        },
+        // Subscriptions
+        {
+          "condition": "(!Subscriptions)",
+          "exclude": [
+            "Schemas/RootSubscription.cs"
           ]
         },
         // ReverseProxyWebServer
