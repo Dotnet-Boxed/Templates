@@ -1,6 +1,9 @@
 namespace GraphQLTemplate
 {
     using System;
+#if (CorrelationId)
+    using CorrelationId;
+#endif
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
@@ -54,6 +57,9 @@ namespace GraphQLTemplate
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
+#if (CorrelationId)
+                .AddCorrelationId()
+#endif
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
@@ -96,6 +102,9 @@ namespace GraphQLTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
+#if (CorrelationId)
+                .UseCorrelationId()
+#endif
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
