@@ -6,13 +6,19 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Types;
 
     /// <example>
-    /// This is an example JSON request for a mutation
+    /// This is an example mutation to create a new human:
+    /// mutation createHuman($human: HumanInput!) {
+    ///   createHuman(human: $human)
+    ///   {
+    ///     id,
+    ///     name
+    ///   }
+    /// }
+    /// This is an example JSON of the variables you also need to specify to create a new human:
     /// {
-    ///   "query": "mutation ($human:HumanInput!){ createHuman(human: $human) { id name } }",
-    ///   "variables": {
-    ///     "human": {
-    ///       "name": "Boba Fett"
-    ///     }
+    ///  "human": {
+    ///     "name": "Muhammad Rehan Saeed",
+    ///     "homePlanet": "Earth"
     ///   }
     /// }
     /// </example>
@@ -29,7 +35,7 @@ namespace GraphQLTemplate.Schemas
                     new QueryArgument<NonNullGraphType<HumanInputObject>>()
                     {
                         Name = "human",
-                        Description = "A human being in the Star Wars universe."
+                        Description = "The human you want to create."
                     }),
                 resolve: context =>
                 {

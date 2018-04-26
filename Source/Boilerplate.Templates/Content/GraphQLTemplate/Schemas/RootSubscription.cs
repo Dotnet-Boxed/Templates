@@ -8,6 +8,15 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Types;
 
+    /// <example>
+    /// subscription whenHumanCreated {
+    ///   humanCreated(homePlanets: ["Earth"])
+    ///   {
+    ///     id,
+    ///     name
+    ///   }
+    /// }
+    /// </example>
     public class RootSubscription : ObjectGraphType<object>
     {
         public RootSubscription(IHumanRepository humanRepository)

@@ -7,7 +7,7 @@ namespace GraphQLTemplate.Types
         public HumanInputObject()
         {
             this.Name = "HumanInput";
-            this.Description = "A human being in the Star Wars universe.";
+            this.Description = "A humanoid creature from the Star Wars universe.";
 
             this.Field<NonNullGraphType<StringGraphType>>("name");
             this.Field<StringGraphType>("homePlanet");
