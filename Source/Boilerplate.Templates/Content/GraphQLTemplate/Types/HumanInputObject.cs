@@ -1,6 +1,7 @@
 namespace GraphQLTemplate.Types
 {
     using GraphQL.Types;
+    using GraphQLTemplate.Models;
 
     public class HumanInputObject : InputObjectGraphType
     {
@@ -9,8 +10,9 @@ namespace GraphQLTemplate.Types
             this.Name = "HumanInput";
             this.Description = "A humanoid creature from the Star Wars universe.";
 
-            this.Field<NonNullGraphType<StringGraphType>>("name");
-            this.Field<StringGraphType>("homePlanet");
+            this.Field<NonNullGraphType<StringGraphType>>(nameof(Human.Name));
+            this.Field<StringGraphType>(nameof(Human.HomePlanet));
+            this.Field<ListGraphType<EpisodeEnumeration>>(nameof(Human.AppearsIn), "Which movie they appear in.");
         }
     }
 }

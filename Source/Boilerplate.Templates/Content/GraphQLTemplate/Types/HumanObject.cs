@@ -18,7 +18,7 @@ namespace GraphQLTemplate.Types
             this.Field<ListGraphType<EpisodeEnumeration>>(nameof(Character.AppearsIn), "Which movie they appear in.");
 
             this.FieldAsync<ListGraphType<CharacterInterface>, List<Character>>(
-                "friends",
+                nameof(Human.Friends),
                 "The friends of the character, or an empty list if they have none.",
                 resolve: context => humanRepository.GetFriends(context.Source, context.CancellationToken));
 

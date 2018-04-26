@@ -1,14 +1,11 @@
 namespace GraphQLTemplate.Types
 {
-    using GraphQL.Types;
-    using GraphQLTemplate.Models;
+    using GraphQLTemplate.Repositories;
 
-    public class HumanCreatedEvent : ObjectGraphType<Human>
+    public class HumanCreatedEvent : HumanObject
     {
-        public HumanCreatedEvent()
+        public HumanCreatedEvent(IHumanRepository humanRepository) : base(humanRepository)
         {
-            this.Field<NonNullGraphType<StringGraphType>>("name");
-            this.Field<StringGraphType>("homePlanet");
         }
     }
 }

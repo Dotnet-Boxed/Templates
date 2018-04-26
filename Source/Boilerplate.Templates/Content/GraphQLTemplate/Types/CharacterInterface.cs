@@ -15,7 +15,7 @@ namespace GraphQLTemplate.Types
             this.Field<ListGraphType<EpisodeEnumeration>>("appearsIn", "Which movie they appear in.");
 
             this.Field<ListGraphType<CharacterInterface>>(
-                "friends",
+                nameof(Character.Friends),
                 "The friends of the character, or an empty list if they have none.");
         }
     }
