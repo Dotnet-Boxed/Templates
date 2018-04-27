@@ -22,7 +22,7 @@ namespace GraphQLTemplate.Schemas
         public RootSubscription(IHumanRepository humanRepository)
         {
             this.Name = "Subscription";
-            this.Description = "TODO";
+            this.Description = "The subscription type, represents all updates can be pushed to the client in real time over web sockets.";
 
             this.AddField(
                 new EventStreamFieldType()
