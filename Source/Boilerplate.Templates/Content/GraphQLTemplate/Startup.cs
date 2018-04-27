@@ -24,6 +24,7 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using GraphQL.Server.Transports.Subscriptions.Abstractions;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -70,6 +71,10 @@ namespace GraphQLTemplate
                 .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
                 .AddSingleton<DataLoaderDocumentListener>()
                 .AddGraphQLHttp()
+                // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
+                .AddIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x.AddSingleton<IOperationMessageListener, LogMessagesListener>())
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext outside a controller.
