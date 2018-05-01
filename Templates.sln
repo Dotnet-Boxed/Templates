@@ -11,44 +11,33 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cake = build.cake
 		build.ps1 = build.ps1
 		build.sh = build.sh
-		cake.config = cake.config
 		global.json = global.json
 		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}"
+	ProjectSection(SolutionItems) = preProject
+		Source\Boxed.Templates.nuspec = Source\Boxed.Templates.nuspec
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9-A80D-40EF-96C2-02F8DAD936FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Boilerplate.Templates", "Boilerplate.Templates", "{2AE766ED-8072-490E-8CFB-CD956F0E14E6}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Boilerplate.Templates\Boilerplate.Templates.nuspec = Source\Boilerplate.Templates\Boilerplate.Templates.nuspec
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "content", "content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
 	ProjectSection(SolutionItems) = preProject
+		Docs\API.md = Docs\API.md
 		CONTRIBUTING.md = CONTRIBUTING.md
-		HOW TO BUILD.md = HOW TO BUILD.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		LICENSE = LICENSE
-		MVC 5.md = MVC 5.md
-		MVC 6 API.md = MVC 6 API.md
-		MVC 6.md = MVC 6.md
 		README.md = README.md
-		RELEASE NOTES.md = RELEASE NOTES.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{32726C18-41CF-4358-884D-C2CD86941008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Content\ApiTemplate\ApiTemplate.csproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Boilerplate.Templates\content\ApiTemplate\ApiTemplate.csproj", "{8BFA391E-E1E5-43D6-B4F7-929843AEC329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates.Test", "Tests\Boxed.Templates.Test\Boxed.Templates.Test.csproj", "{0A6B9505-36B1-41CA-8621-66D45941055F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateJsonToMarkdown", "Tools\TemplateJsonToMarkdown\TemplateJsonToMarkdown.csproj", "{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boilerplate.Templates.Test", "Tests\Boilerplate.Templates.Test\Boilerplate.Templates.Test.csproj", "{0A6B9505-36B1-41CA-8621-66D45941055F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\Boilerplate.Templates\Content\GraphQLTemplate\GraphQLTemplate.csproj", "{70611FD8-D523-4E20-9703-3D841AF3D4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\Content\GraphQLTemplate\GraphQLTemplate.csproj", "{70611FD8-D523-4E20-9703-3D841AF3D4F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,10 +49,6 @@ Global
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A6B9505-36B1-41CA-8621-66D45941055F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A6B9505-36B1-41CA-8621-66D45941055F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A6B9505-36B1-41CA-8621-66D45941055F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,10 +62,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{2AE766ED-8072-490E-8CFB-CD956F0E14E6} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
-		{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C} = {2AE766ED-8072-490E-8CFB-CD956F0E14E6}
+		{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
-		{6C95000B-D1A9-4CFB-AC0E-848851D9E97C} = {32726C18-41CF-4358-884D-C2CD86941008}
 		{0A6B9505-36B1-41CA-8621-66D45941055F} = {E1186AA9-A80D-40EF-96C2-02F8DAD936FB}
 		{70611FD8-D523-4E20-9703-3D841AF3D4F4} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
 	EndGlobalSection

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Boxed.Templates</id>
+    <version>2.0.0-*</version>
+    <title>.NET Boxed Project &amp; Item Templates</title>
+    <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
+    <description>Project templates with batteries included, providing the minimum amount of code required to get you going.</description>
+    <tags>.NET Boxed Muhammad Rehan Saeed</tags>
+    <copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</copyright>
+    <language>en-GB</language>
+    <iconUrl>https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Icon.png</iconUrl>
+    <projectUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates</projectUrl>
+    <licenseUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <releaseNotes>https://github.com/ASP-NET-Core-Boilerplate/Templates/releases</releaseNotes>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <!-- dependencies>
+      <dependency id="Microsoft.TemplateEngine.Orchestrator.RunnableProjects" version="1.0.0-beta1-*" />
+    </dependencies -->
+  </metadata>
+  <files>
+    <file src="**" exclude="**\bin\**\*;**\obj\**\*;**\*.user;**\*.lock.json" />
+  </files>
+</package>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 58 58" xml:space="preserve">
+  <g class="box">
+      <polygon class="front" fill="#5c2d91" points="48,0 10,0 0,16 0,58 58,58 58,16"/>
+      <polygon class="top" fill="#6d429c" points="10,0 0,16 58,16 48,0"/>
+  </g>
+  <g class="ribbon">
+    <rect class="top" x="23" fill="#9f78cc" width="12" height="16"/>
+    <polygon class="front-top" fill="#7d52b2" points="25,21 29,25 33,21 35,23 35,16 23,16 23,23"/>
+    <polygon class="front-bottom" fill="#7d52b2" points="33,54 29,50 25,54 23,52 23,58 35,58 35,52"/>
+  </g>
+  <g class="text">
+    <text x="7" y="45" stroke="none" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif" font-size="22">.NET</text>
+  </g>
+</svg>
