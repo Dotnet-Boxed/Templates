@@ -97,7 +97,10 @@
       "datatype": "string",
       "defaultValue": "Project Title",
       "replaces": "PROJECT-TITLE",
-      "description": "The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI."
+      "description": "The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
     // Description
     "Description": {
@@ -105,7 +108,10 @@
       "datatype": "string",
       "defaultValue": "Project Description",
       "replaces": "PROJECT-DESCRIPTION",
-      "description": "A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI."
+      "description": "A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
     // Author
     "Author": {
@@ -113,7 +119,10 @@
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project which determines the assembly author, company and copyright information."
+      "description": "The name of the author of the project which determines the assembly author, company and copyright information.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
 
     // Swagger

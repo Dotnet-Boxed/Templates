@@ -87,7 +87,10 @@
       "datatype": "string",
       "defaultValue": "Project Title",
       "replaces": "PROJECT-TITLE",
-      "description": "The name of the project which determines the assembly product name."
+      "description": "The name of the project which determines the assembly product name.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
     // Description
     "Description": {
@@ -95,7 +98,10 @@
       "datatype": "string",
       "defaultValue": "Project Description",
       "replaces": "PROJECT-DESCRIPTION",
-      "description": "A description of the project which determines the assembly description."
+      "description": "A description of the project which determines the assembly description.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
     // Author
     "Author": {
@@ -103,7 +109,10 @@
       "datatype": "string",
       "defaultValue": "Project Author",
       "replaces": "PROJECT-AUTHOR",
-      "description": "The name of the author of the project which determines the assembly author, company and copyright information."
+      "description": "The name of the author of the project which determines the assembly author, company and copyright information.",
+      "forms": {
+        "global": [ "xmlEncode" ]
+      }
     },
     // Mutations
     "Mutations": {
