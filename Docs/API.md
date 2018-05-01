@@ -1,12 +1,12 @@
-# ![ASP.NET Core Boilerplate Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Nuget%20Icon.png) [ASP.NET Core API Boilerplate](https://github.com/ASP-NET-Core-Boilerplate/Templates)
+# ![.NET Boxed Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Icon-64x64.png) [.NET Boxed](https://github.com/ASP-NET-Core-Boilerplate/Templates)
 
-![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
+![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
 
 ## Technology Map
 
 The ASP.NET Core API project template contains the following features:
 
-![ASP.NET Core API Boilerplate Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
+![ASP.NET Core API Boxed Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Technology%20Map.png)
 
 ## Optional Feature Selection
 
@@ -107,12 +107,10 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Validate Model State** - The ValidateModelStateAttribute is turned on globally so all models passed to an action method are automatically validated and a 400 Bad Request is returned if the model is invalid.
 
 ## How can I get it?
-That's easy, just choose one of the following options:
 
-1. You must have the latest version of the dotnet tooling. This comes with Visual Studio 2017 or from [dot.net](https://dot.net).
-2. If you have a newer .NET Core Preview SDK installed then use a [global.json](https://www.hanselman.com/blog/ManagingDotnetCore20AndDotnetCore1xVersionedSDKsOnTheSameMachine.aspx) to default to the current stable SDK.
-3. Run `dotnet new --install Boilerplate.Templates::*` to install the project template.
-4. Run `dotnet new api --help` to see how to select the feature of the project.
+1. Install the latest [.NET Core SDK](https://dot.net).
+2. Run `dotnet new --install "Boilerplate.Templates::*"` to install the project template.
+3. Run `dotnet new api --help` to see how to select the feature of the project.
 5. Run `dotnet new api --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List

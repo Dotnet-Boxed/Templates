@@ -1,4 +1,4 @@
-![ASP.NET Core Boilerplate Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
 
 [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boilerplate.Templates.svg)](https://www.nuget.org/packages/Boilerplate.Templates/)
 
@@ -6,8 +6,8 @@ Project templates with batteries included, providing the minimum amount of code 
 
 ## Project Templates
 
-- [ASP.NET Core API](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/Docs/API.md)
-![ASP.NET Core API Boilerplate Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20API%20Preview%20Image.png)
+- [ASP.NET Core API Boxed](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/Docs/API.md)
+![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/API-Preview.png)
 
 ## How Can I Get It?
 
