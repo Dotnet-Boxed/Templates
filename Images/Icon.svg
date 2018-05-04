@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 58 58" xml:space="preserve">
-  <g class="box">
-      <polygon class="front" fill="#5c2d91" points="48,0 10,0 0,16 0,58 58,58 58,16"/>
-      <polygon class="top" fill="#6d429c" points="10,0 0,16 58,16 48,0"/>
-  </g>
-  <g class="ribbon">
-    <rect class="top" x="23" fill="#9f78cc" width="12" height="16"/>
-    <polygon class="front-top" fill="#7d52b2" points="25,21 29,25 33,21 35,23 35,16 23,16 23,23"/>
-    <polygon class="front-bottom" fill="#7d52b2" points="33,54 29,50 25,54 23,52 23,58 35,58 35,52"/>
-  </g>
-  <g class="text">
-    <text x="8" y="44" stroke="none" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif" font-size="20">.NET</text>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 66 66"><g class="box"><path class="front" fill="#4945DE" d="M48 0h-38l-10 16v42h58v-42z"/><path class="top" fill="#5D62E8" d="M10 0l-10 16h58l-10-16z"/></g><g class="ribbon"><path class="top" fill="#6E87E5" d="M26 0l-3 16h12l-3-16z"/><path class="front-top" fill="#6675FF" d="M25 21l4 4 4-4 2 2v-7h-12v7z"/><path class="front-bottom" fill="#6675FF" d="M33 54l-4-4-4 4-2-2v6h12v-6z"/></g><text x="8" y="44" fill="#fff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif" font-size="20" class="text">.NET</text></svg>
