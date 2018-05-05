@@ -115,8 +115,8 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 5. Run `dotnet new api --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
-You can find release notes for each version [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/releases) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-Core-Boilerplate/Templates/projects) tab.
+You can find release notes for each version [here](https://github.com/Dotnet-Boxed/Templates/releases) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/Dotnet-Boxed/Templates/projects) tab.
 
 ## Contributing
 
-Please read the [guide](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.

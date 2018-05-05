@@ -6,14 +6,14 @@
     <title>.NET Boxed Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project templates with batteries included, providing the minimum amount of code required to get you going.</description>
-    <tags>.NET Boxed Muhammad Rehan Saeed</tags>
+    <tags>.NET Boxed Muhammad Rehan Saeed API Swagger GraphQL</tags>
     <copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</copyright>
     <language>en-GB</language>
-    <iconUrl>https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Icon-64x64.png</iconUrl>
-    <projectUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates</projectUrl>
-    <licenseUrl>https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/LICENSE</licenseUrl>
+    <iconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</iconUrl>
+    <projectUrl>https://github.com/Dotnet-Boxed/Templates</projectUrl>
+    <licenseUrl>https://github.com/Dotnet-Boxed/Templates/blob/master/LICENSE</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <releaseNotes>https://github.com/ASP-NET-Core-Boilerplate/Templates/releases</releaseNotes>
+    <releaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
