@@ -6,9 +6,6 @@ namespace ApiTemplate.Controllers
     using ApiTemplate.Commands;
     using ApiTemplate.Constants;
     using ApiTemplate.ViewModels;
-#if (RequestId || UserAgent)
-    using Boilerplate.AspNetCore.Filters;
-#endif
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
@@ -16,14 +13,6 @@ namespace ApiTemplate.Controllers
     using Microsoft.Net.Http.Headers;
 
     [Route("[controller]")]
-#if (RequestId)
-    // Require the X-Request-ID HTTP header to be set to a GUID and forward it in the response.
-    [RequestIdHttpHeader]
-#endif
-#if (UserAgent)
-    // Require the User-Agent HTTP header.
-    [UserAgentHttpHeader]
-#endif
 #if (Versioning)
     [ApiVersion("1.0")]
 #endif

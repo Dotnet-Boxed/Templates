@@ -15,7 +15,6 @@ namespace ApiTemplate
     using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
-    using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
 #endif
     using Microsoft.AspNetCore.Builder;
@@ -215,14 +214,6 @@ namespace ApiTemplate
 
 #if (Versioning)
                     options.OperationFilter<ApiVersionOperationFilter>();
-#endif
-#if (RequestId)
-                    // Show a text-box to edit the X-Request-ID HTTP header.
-                    options.OperationFilter<RequestIdOperationFilter>();
-#endif
-#if (UserAgent)
-                    // Show a text-box to edit the User-Agent HTTP header.
-                    options.OperationFilter<UserAgentOperationFilter>();
 #endif
                     // Show an example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();

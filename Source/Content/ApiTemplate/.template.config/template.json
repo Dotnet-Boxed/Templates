@@ -290,20 +290,6 @@
       "defaultValue": "true",
       "description": "A health-check endpoint that returns the status of this API and it's dependencies, giving an indication of it's health. This endpoint can be called by site monitoring tools which ping the site or by load balancers which can remove an instance of this API if it is not functioning correctly."
     },
-    // RequestId
-    "RequestId": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Require that all requests send the X-Request-ID HTTP header containing a GUID. This is useful where you have access to the client and server logs and want to correlate a request and response between the two."
-    },
-    // UserAgent
-    "UserAgent": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Require that all requests send the User-Agent HTTP header containing the application name and version of the caller."
-    },
     // RobotsTxt
     "RobotsTxt": {
       "type": "parameter",
