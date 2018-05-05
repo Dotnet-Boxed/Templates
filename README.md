@@ -1,4 +1,4 @@
-![.NET Boxed Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
 [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boilerplate.Templates.svg)](https://www.nuget.org/packages/Boilerplate.Templates/) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
 
@@ -6,17 +6,19 @@ Project templates with batteries included, providing the minimum amount of code 
 
 ## Project Templates
 
-- [ASP.NET Core API Boxed](https://github.com/ASP-NET-Core-Boilerplate/Templates/blob/master/Docs/API.md)
-![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/API-Preview.png)
+### [ASP.NET Core API Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
+![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/API-Preview.png)
+### [ASP.NET Core GraphQL Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
+![ASP.NET Core GraphQL Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)
 
-## How Can I Get It?
+## How can I get it?
 
 1. Install the latest [.NET Core SDK](https://dot.net).
-2. Run `dotnet new --install "Boilerplate.Templates::*"` to install the project template.
+2. Run `dotnet new --install "Boxed.Templates::*"` to install the project template.
 3. Run `dotnet new api --help` to see how to select the feature of the project.
 5. Run `dotnet new api --name "MyTemplate"` along with any other custom options to create a project from the template.
 
-## Release Notes & To-Do List
+## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/ASP-NET-Core-Boilerplate/Templates/releases) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/ASP-NET-Core-Boilerplate/Templates/projects) tab.
 
 ## Contributing

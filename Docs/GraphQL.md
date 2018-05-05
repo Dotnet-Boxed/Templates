@@ -1,12 +1,12 @@
-# ![.NET Boxed Logo](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Icon-64x64.png) [.NET Boxed](https://github.com/ASP-NET-Core-Boilerplate/Templates)
+![.NET Boxed Banner](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
-![ASP.NET Core GraphQL Boxed Preview Image](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20GraphQL%20Preview%20Image.png)
+![ASP.NET Core GraphQL Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)
 
 ## Technology Map
 
 The ASP.NET Core GraphQL project template contains the following features:
 
-![ASP.NET Core GraphQL Boxed Technology Map](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/MVC%206%20GraphQL%20Technology%20Map.png)
+![ASP.NET Core GraphQL Boxed Technology Map](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/GraphQL-Technology-Map.png)
 
 ## Optional Feature Selection
 
