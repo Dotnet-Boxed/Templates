@@ -15,6 +15,7 @@ namespace ApiTemplate
     using Boilerplate.AspNetCore.Filters;
 #if (Swagger)
     using Boilerplate.AspNetCore.Swagger;
+    using Boilerplate.AspNetCore.Swagger.OperationFilters;
     using Boilerplate.AspNetCore.Swagger.SchemaFilters;
 #endif
     using Microsoft.AspNetCore.Builder;
@@ -215,6 +216,9 @@ namespace ApiTemplate
 #if (Versioning)
                     options.OperationFilter<ApiVersionOperationFilter>();
 #endif
+                    options.OperationFilter<ForbiddenResponseOperationFilter>();
+                    options.OperationFilter<UnauthorizedResponseOperationFilter>();
+
                     // Show an example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
                     // Show an example model for ModelStateDictionary.
