@@ -1,8 +1,8 @@
 ![.NET Boxed Banner](https://raw.githubusercontent.com/ASP-NET-Core-Boilerplate/Templates/master/Images/Banner.png)
 
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boilerplate.Templates.svg)](https://www.nuget.org/packages/Boilerplate.Templates/)
+[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boilerplate.Templates.svg)](https://www.nuget.org/packages/Boilerplate.Templates/) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
 
-Project templates with batteries included, providing the minimum amount of code required to get you going. You can also follow me on Twitter at [@RehanSaeedUK](https://twitter.com/rehansaeeduk).
+Project templates with batteries included, providing the minimum amount of code required to get you going.
 
 ## Project Templates
 
