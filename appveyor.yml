@@ -28,9 +28,6 @@ artifacts:
 # Store NuGet packages
 - path: .\Artifacts\**\*.nupkg
   name: NuGet
-# Store VSIX packages
-- path: .\Artifacts\**\*.vsix
-  name: VSIX
 # Store xUnit Test Results
 - path: .\Artifacts\**\*.xml
   name: xUnit Test Results
