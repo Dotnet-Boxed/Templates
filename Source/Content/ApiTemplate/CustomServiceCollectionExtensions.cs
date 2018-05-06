@@ -225,6 +225,7 @@ namespace ApiTemplate
 #if (Versioning)
                     options.OperationFilter<ApiVersionOperationFilter>();
 #endif
+                    options.OperationFilter<CorrelationIdOperationFilter>();
                     options.OperationFilter<ForbiddenResponseOperationFilter>();
                     options.OperationFilter<UnauthorizedResponseOperationFilter>();
 
