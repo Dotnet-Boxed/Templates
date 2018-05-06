@@ -1,7 +1,7 @@
-﻿namespace ApiTemplate.Commands
+namespace ApiTemplate.Commands
 {
-    using Boilerplate.AspNetCore;
     using ApiTemplate.ViewModels;
+    using Boxed.AspNetCore;
 
     public interface IPostCarCommand : IAsyncCommand<SaveCar>
     {

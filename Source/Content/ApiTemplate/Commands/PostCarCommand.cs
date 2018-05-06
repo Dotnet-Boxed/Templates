@@ -5,7 +5,7 @@ namespace ApiTemplate.Commands
     using ApiTemplate.Constants;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
-    using Boilerplate.Mapping;
+    using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
 
     public class PostCarCommand : IPostCarCommand

@@ -4,7 +4,7 @@ namespace ApiTemplate.Commands
     using System.Threading.Tasks;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
-    using Boilerplate.Mapping;
+    using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
 
     public class PutCarCommand : IPutCarCommand

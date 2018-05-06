@@ -6,7 +6,7 @@ namespace ApiTemplate
     using ApiTemplate.Repositories;
     using ApiTemplate.Services;
     using ApiTemplate.ViewModels;
-    using Boilerplate.Mapping;
+    using Boxed.Mapping;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

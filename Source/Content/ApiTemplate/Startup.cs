@@ -7,7 +7,7 @@ namespace ApiTemplate
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
-    using Boilerplate.AspNetCore;
+    using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

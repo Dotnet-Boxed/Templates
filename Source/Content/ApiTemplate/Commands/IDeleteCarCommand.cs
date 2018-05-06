@@ -1,6 +1,6 @@
-﻿namespace ApiTemplate.Commands
+namespace ApiTemplate.Commands
 {
-    using Boilerplate.AspNetCore;
+    using Boxed.AspNetCore;
 
     public interface IDeleteCarCommand : IAsyncCommand<int>
     {

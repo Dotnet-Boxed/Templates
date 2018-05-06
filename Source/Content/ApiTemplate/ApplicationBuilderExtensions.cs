@@ -2,10 +2,10 @@ namespace ApiTemplate
 {
     using System;
     using System.Linq;
-    using Boilerplate.AspNetCore;
-    using Microsoft.AspNetCore.Builder;
     using ApiTemplate.Constants;
     using ApiTemplate.Options;
+    using Boxed.AspNetCore;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 
     public static partial class ApplicationBuilderExtensions

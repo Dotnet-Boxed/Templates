@@ -3,7 +3,7 @@ namespace ApiTemplate.Mappers
     using System;
     using ApiTemplate.Services;
     using ApiTemplate.ViewModels;
-    using Boilerplate.Mapping;
+    using Boxed.Mapping;
 
     public class CarToSaveCarMapper :  IMapper<Models.Car, SaveCar>, IMapper<SaveCar, Models.Car>
     {

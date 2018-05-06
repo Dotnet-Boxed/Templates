@@ -5,7 +5,7 @@ namespace ApiTemplate.Commands
     using System.Threading.Tasks;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
-    using Boilerplate.Mapping;
+    using Boxed.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;

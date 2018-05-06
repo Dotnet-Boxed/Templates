@@ -37,9 +37,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
-    <PackageReference Include="Boilerplate.AspNetCore.Swagger" Version="3.0.1" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="1.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.Mapping" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />

@@ -3,7 +3,7 @@ namespace GraphQLTemplate
     using System;
     using System.IO;
     using System.Reflection;
-    using Boilerplate.AspNetCore;
+    using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

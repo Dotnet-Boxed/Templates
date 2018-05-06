@@ -4,14 +4,15 @@ namespace GraphQLTemplate
 #if (CorrelationId)
     using CorrelationId;
 #endif
+    using Boxed.AspNetCore;
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
     using GraphQLTemplate.Schemas;
-    using Boilerplate.AspNetCore;
     using GraphQL;
     using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
+    using GraphQL.Server.Transports.Subscriptions.Abstractions;
     using GraphQL.Server.Transports.WebSockets;
     using GraphQL.Server.Ui.Playground;
     using Microsoft.AspNetCore.Builder;
@@ -24,7 +25,6 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using GraphQL.Server.Transports.Subscriptions.Abstractions;
 
     /// <summary>
     /// The main start-up class for the application.

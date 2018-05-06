@@ -31,8 +31,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boilerplate.AspNetCore" Version="3.0.0" />
-    <PackageReference Include="Boilerplate.Mapping" Version="1.0.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="1.0.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="GraphQL" Version="2.0.0-alpha-870" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0019" />

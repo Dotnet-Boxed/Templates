@@ -12,11 +12,11 @@ namespace ApiTemplate
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
-    using Boilerplate.AspNetCore.Filters;
+    using Boxed.AspNetCore.Filters;
 #if (Swagger)
-    using Boilerplate.AspNetCore.Swagger;
-    using Boilerplate.AspNetCore.Swagger.OperationFilters;
-    using Boilerplate.AspNetCore.Swagger.SchemaFilters;
+    using Boxed.AspNetCore.Swagger;
+    using Boxed.AspNetCore.Swagger.OperationFilters;
+    using Boxed.AspNetCore.Swagger.SchemaFilters;
 #endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
