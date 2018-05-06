@@ -18,6 +18,9 @@ namespace ApiTemplate
     using Boxed.AspNetCore.Swagger.OperationFilters;
     using Boxed.AspNetCore.Swagger.SchemaFilters;
 #endif
+#if (CorrelationId)
+    using CorrelationId;
+#endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
 #if (Versioning)
@@ -41,6 +44,12 @@ namespace ApiTemplate
     /// </summary>
     public static class CustomServiceCollectionExtensions
     {
+        public static IServiceCollection AddCorrelationIdFluent(this IServiceCollection services)
+        {
+            services.AddCorrelationId();
+            return services;
+        }
+
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
         /// <see cref="IMemoryCache"/> types with the services collection or IoC container. The

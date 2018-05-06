@@ -54,6 +54,9 @@ namespace ApiTemplate
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
+#if (CorrelationId)
+                .AddCorrelationIdFluent()
+#endif
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()

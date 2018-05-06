@@ -47,6 +47,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Analytics
 
+- **CorrelationId** (Default=On) - Correlate requests between clients and this API. Pass a GUID in the X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier. The header is also reflected back in a response.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.

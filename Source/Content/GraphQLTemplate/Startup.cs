@@ -59,7 +59,7 @@ namespace GraphQLTemplate
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
 #if (CorrelationId)
-                .AddCorrelationId()
+                .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
