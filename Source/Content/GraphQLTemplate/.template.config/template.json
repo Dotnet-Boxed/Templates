@@ -3,8 +3,8 @@
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boxed", "GraphQL", "API" ],
   "name": "ASP.NET Core GraphQL Boxed",
-  "groupIdentity": "Dotnet.Boxed",
-  "identity": "Boxed.AspNetCore.GraphQL.CSharp",
+  "groupIdentity": "Dotnet.Boxed.GraphQL",
+  "identity": "Dotnet.Boxed.GraphQL.CSharp",
   "shortName": "graphql",
   "tags": {
     "language": "C#",

@@ -3,8 +3,8 @@
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boxed", "Swagger", "API" ],
   "name": "ASP.NET Core API Boxed",
-  "groupIdentity": "Dotnet.Boxed",
-  "identity": "Boxed.AspNetCore.Api.CSharp",
+  "groupIdentity": "Dotnet.Boxed.API",
+  "identity": "Dotnet.Boxed.API.CSharp",
   "shortName": "api",
   "tags": {
     "language": "C#",
