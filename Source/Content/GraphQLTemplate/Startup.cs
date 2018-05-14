@@ -70,7 +70,7 @@ namespace GraphQLTemplate
                 // Add data loader to reduce the number of calls to our repository.
                 .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
                 .AddSingleton<DataLoaderDocumentListener>()
-                .AddGraphQLHttp()
+                .AddGraphQLHttp<GraphQLUserContextBuilder>()
                 // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
@@ -134,9 +134,6 @@ namespace GraphQLTemplate
                 .UseGraphQLHttp<MainSchema>(
                     new GraphQLHttpOptions()
                     {
-                        // The UserContext is accessible in field resolvers and validation rules using:
-                        // context.UserContext.As<GraphQLUserContext>()
-                        BuildUserContext = context => new GraphQLUserContext() { User = context.User },
                         // Show stack traces in exceptions. Don't turn this on in production.
                         ExposeExceptions = this.hostingEnvironment.IsDevelopment(),
                         // Add your own validation rules e.g. for authentication.
