@@ -37,7 +37,7 @@
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0019" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0-alpha0019" />
     <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.1.0-alpha0019" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
