@@ -75,11 +75,11 @@ namespace GraphQLTemplate
                 .AddIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.AddSingleton<IOperationMessageListener, LogMessagesListener>())
-                // Add useful interface for accessing the ActionContext outside a controller.
+                // Add useful interface for accessing the ActionContext.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
-                // Add useful interface for accessing the HttpContext outside a controller.
+                // Add useful interface for accessing the HttpContext.
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
-                // Add useful interface for accessing the IUrlHelper outside a controller.
+                // Add useful interface for accessing the IUrlHelper.
                 .AddScoped(x => x
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
