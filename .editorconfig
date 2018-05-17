@@ -141,7 +141,7 @@ dotnet_naming_rule.interface_types_must_be_prefixed_with_i.style = prefix_interf
 # C# Code Style Settings
 # See https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 # See http://kent-boogaart.com/blog/editorconfig-reference-for-c-developers
-[*.cs,csx,cake]
+[*.{cs,csx,cake}]
 # Indentation Options
 csharp_indent_block_contents = true:warning
 csharp_indent_braces = false:warning
