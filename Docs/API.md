@@ -89,7 +89,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Security
 
-- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on you development machine.
+- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on your development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
 - **Translates Models to ViewModels** - Using your models which usually come from a database directly in your controllers can result in a mass assignment attack. View models with a translation layer are used to avoid this.
 
