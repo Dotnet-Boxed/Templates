@@ -70,7 +70,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 #### Security
 
-- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on you development machine.
+- **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on your development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
 
 #### Logging
