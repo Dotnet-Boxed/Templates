@@ -28,6 +28,7 @@
           "exclude": [
             "Constants/HomeControllerRoute.cs",
             "Controllers/HomeController.cs",
+            "OperationFilters/**/*",
             "ViewModelSchemaFilters/**/*"
           ]
         },
