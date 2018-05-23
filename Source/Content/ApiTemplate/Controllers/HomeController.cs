@@ -12,6 +12,6 @@ namespace ApiTemplate.Controllers
         /// </summary>
         /// <returns>A 301 Moved Permanently response.</returns>
         [HttpGet("", Name = HomeControllerRoute.GetIndex)]
-        public IActionResult Index() => this.RedirectPermanent("/swagger");
+        public IActionResult Index() => this.Redirect("/swagger");
     }
 }
