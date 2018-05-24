@@ -1,2 +1,74 @@
 {
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "Title": {
+      "longName": "title"
+    },
+    "TitleXmlEncoded": {
+      "isHidden": true
+    },
+    "Description": {
+      "longName": "description"
+    },
+    "DescriptionXmlEncoded": {
+      "isHidden": true
+    },
+    "Author": {
+      "longName": "author"
+    },
+    "AuthorXmlEncoded": {
+      "isHidden": true
+    },
+    "Swagger": {
+      "longName": "swagger"
+    },
+    "Versioning": {
+      "longName": "versioning"
+    },
+    "LoadBalancer": {
+      "longName": "load-balancer"
+    },
+    "ReverseProxyWebServer": {
+      "longName": "reverse-proxy"
+    },
+    "CloudProvider": {
+      "longName": "cloud-provider"
+    },
+    "Analytics": {
+      "longName": "analytics"
+    },
+    "ApplicationInsightsKey": {
+      "longName": "app-insights-key"
+    },
+    "HttpsEverywhere": {
+      "longName": "https-everywhere"
+    },
+    "CORS": {
+      "longName": "cors"
+    },
+    "CorrelationId": {
+      "longName": "correlation-id"
+    },
+    "ResponseCaching": {
+      "longName": "response-caching"
+    },
+    "XmlFormatter": {
+      "longName": "xml-formatter"
+    },
+    "HealthCheck": {
+      "longName": "health-check"
+    },
+    "RobotsTxt": {
+      "longName": "robots-txt"
+    },
+    "HumansTxt": {
+      "longName": "humans-txt"
+    },
+    "SkipRestore": {
+      "longName": "no-restore"
+    },
+    "SkipOpenReadMe": {
+      "longName": "no-open-readme"
+    }
+  }
 }
