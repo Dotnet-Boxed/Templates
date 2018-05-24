@@ -76,6 +76,8 @@ namespace ApiTemplate
                         .Assembly
                         .GetCustomAttribute<AssemblyProductAttribute>()
                         .Product;
+                    // Set the Swagger UI to render at '/'.
+                    options.RoutePrefix = string.Empty;
 #if (Versioning)
                     var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider
