@@ -78,6 +78,8 @@ namespace ApiTemplate
                         .Product;
                     // Set the Swagger UI to render at '/'.
                     options.RoutePrefix = string.Empty;
+                    options.DisplayRequestDuration();
+
 #if (Versioning)
                     var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider
