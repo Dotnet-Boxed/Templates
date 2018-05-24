@@ -1,9 +1,6 @@
 namespace ApiTemplate
 {
     using System;
-#if (Versioning)
-    using System.Linq;
-#endif
 #if (CORS)
     using ApiTemplate.Constants;
 #endif
@@ -13,9 +10,6 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Http;
 #if (LoadBalancer)
     using Microsoft.AspNetCore.HttpOverrides;
-#endif
-#if (Versioning)
-    using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
@@ -133,23 +127,7 @@ namespace ApiTemplate
 #if (Swagger)
                 .UseMvc()
                 .UseSwagger()
-                .UseSwaggerUI(
-                    options =>
-                    {
-#if (Versioning)
-                        var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
-                        foreach (var apiVersionDescription in provider
-                            .ApiVersionDescriptions
-                            .OrderByDescending(x => x.ApiVersion))
-                        {
-                            options.SwaggerEndpoint(
-                                $"/swagger/{apiVersionDescription.GroupName}/swagger.json",
-                                $"Version {apiVersionDescription.ApiVersion}");
-                        }
-#else
-                        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
-#endif
-                    });
+                .UseCustomSwaggerUI();
 #else
                 .UseMvc();
 #endif

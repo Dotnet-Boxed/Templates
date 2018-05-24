@@ -211,7 +211,7 @@ namespace ApiTemplate
             services.AddSwaggerGen(
                 options =>
                 {
-                    var assembly = typeof(Startup).GetTypeInfo().Assembly;
+                    var assembly = typeof(Startup).Assembly;
                     var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                     var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 

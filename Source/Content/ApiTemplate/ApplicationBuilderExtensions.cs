@@ -2,10 +2,16 @@ namespace ApiTemplate
 {
     using System;
     using System.Linq;
+#if (Versioning)
+    using System.Reflection;
+#endif
     using ApiTemplate.Constants;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
+#if (Versioning)
+    using Microsoft.AspNetCore.Mvc.ApiExplorer;
+#endif
     using Microsoft.Extensions.DependencyInjection;
 
     public static partial class ApplicationBuilderExtensions
@@ -59,6 +65,31 @@ namespace ApiTemplate
         /// </summary>
         public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application) =>
             application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
+#endif
+#if (Swagger)
+
+        public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>
+            application.UseSwaggerUI(
+                options =>
+                {
+                    options.DocumentTitle = typeof(Startup)
+                        .Assembly
+                        .GetCustomAttribute<AssemblyProductAttribute>()
+                        .Product;
+#if (Versioning)
+                    var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
+                    foreach (var apiVersionDescription in provider
+                        .ApiVersionDescriptions
+                        .OrderByDescending(x => x.ApiVersion))
+                    {
+                        options.SwaggerEndpoint(
+                            $"/swagger/{apiVersionDescription.GroupName}/swagger.json",
+                            $"Version {apiVersionDescription.ApiVersion}");
+                    }
+#else
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
+#endif
+                });
 #endif
     }
 }
