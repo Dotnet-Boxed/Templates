@@ -171,10 +171,16 @@ namespace ApiTemplate
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
-        public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder) =>
+        public static IMvcCoreBuilder AddCustomJsonOptions(this IMvcCoreBuilder builder, IHostingEnvironment hostingEnvironment) =>
             builder.AddJsonOptions(
                 options =>
                 {
+                    if (hostingEnvironment.IsDevelopment())
+                    {
+                        // Pretty print the JSON in development for easier debugging.
+                        options.SerializerSettings.Formatting = Formatting.Indented;
+                    }
+
                     // Parse dates as DateTimeOffset values by default. You should prefer using DateTimeOffset over
                     // DateTime everywhere. Not doing so can cause problems with time-zones.
                     options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;

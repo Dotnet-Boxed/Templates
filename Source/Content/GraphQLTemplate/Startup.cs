@@ -86,7 +86,7 @@ namespace GraphQLTemplate
                 .AddMvcCore()
                     .AddAuthorization()
                     .AddJsonFormatters()
-                    .AddCustomJsonOptions()
+                    .AddCustomJsonOptions(this.hostingEnvironment)
 #if (CORS)
                     .AddCustomCors()
 #endif

@@ -77,7 +77,7 @@ namespace ApiTemplate
                     .AddAuthorization()
                     .AddDataAnnotations()
                     .AddJsonFormatters()
-                    .AddCustomJsonOptions()
+                    .AddCustomJsonOptions(this.hostingEnvironment)
 #if (CORS)
                     .AddCustomCors()
 #endif
