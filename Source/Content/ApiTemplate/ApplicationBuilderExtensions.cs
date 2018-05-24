@@ -72,12 +72,14 @@ namespace ApiTemplate
             application.UseSwaggerUI(
                 options =>
                 {
+                    // Set the Swagger UI browser document title.
                     options.DocumentTitle = typeof(Startup)
                         .Assembly
                         .GetCustomAttribute<AssemblyProductAttribute>()
                         .Product;
                     // Set the Swagger UI to render at '/'.
                     options.RoutePrefix = string.Empty;
+                    // Show the request duration in Swagger UI.
                     options.DisplayRequestDuration();
 
 #if (Versioning)
