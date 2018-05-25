@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.ViewModels
+namespace ApiTemplate.ViewModels
 {
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
@@ -15,5 +15,7 @@
         public string Make { get; set; }
 
         public string Model { get; set; }
+
+        public string Url { get; set; }
     }
 }
