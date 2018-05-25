@@ -39,8 +39,8 @@ namespace ApiTemplate
             var cacheProfile = application
                 .ApplicationServices
                 .GetRequiredService<CacheProfileOptions>()
-                .First(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
-                .Value;
+                .Single(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
+                .Value ?? throw new InvalidOperationException("CacheProfiles.StaticFiles section is missing in appsettings.json");
             return application
                 .UseStaticFiles(
                     new StaticFileOptions()
