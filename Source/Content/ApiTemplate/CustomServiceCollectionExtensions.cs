@@ -160,6 +160,20 @@ namespace ApiTemplate
                     // Check model state for null or invalid models and automatically return a 400 Bad Request.
                     options.Filters.Add(new ValidateModelStateAttribute());
 
+                    // Add RESTful JSON media type to the JSON input and output formatters. See http://restfuljson.org/
+                    options
+                        .InputFormatters
+                        .OfType<JsonInputFormatter>()
+                        .First()
+                        .SupportedMediaTypes
+                        .Add("application/vnd.restful+json");
+                    options
+                        .OutputFormatters
+                        .OfType<JsonOutputFormatter>()
+                        .First()
+                        .SupportedMediaTypes
+                        .Add("application/vnd.restful+json");
+
                     // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
                     options.OutputFormatters.RemoveType<StreamOutputFormatter>();
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
