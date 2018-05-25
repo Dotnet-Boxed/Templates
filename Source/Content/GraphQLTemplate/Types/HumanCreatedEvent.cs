@@ -4,7 +4,8 @@ namespace GraphQLTemplate.Types
 
     public class HumanCreatedEvent : HumanObject
     {
-        public HumanCreatedEvent(IHumanRepository humanRepository) : base(humanRepository)
+        public HumanCreatedEvent(IHumanRepository humanRepository)
+            : base(humanRepository)
         {
         }
     }

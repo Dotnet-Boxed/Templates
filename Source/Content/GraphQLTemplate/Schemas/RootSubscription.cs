@@ -8,7 +8,12 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Types;
 
+    /// <summary>
+    /// All subscriptions defined in the schema used to be notified of changes in data.
+    /// </summary>
     /// <example>
+    /// The is an example subscription to be notified when a human is created.
+    /// <c>
     /// subscription whenHumanCreated {
     ///   humanCreated(homePlanets: ["Earth"])
     ///   {
@@ -16,6 +21,7 @@ namespace GraphQLTemplate.Schemas
     ///     name
     ///   }
     /// }
+    /// </c>
     /// </example>
     public class RootSubscription : ObjectGraphType<object>
     {
@@ -31,7 +37,7 @@ namespace GraphQLTemplate.Schemas
                     Arguments = new QueryArguments(
                         new QueryArgument<ListGraphType<StringGraphType>>()
                         {
-                            Name = "homePlanets"
+                            Name = "homePlanets",
                         }),
                     Type = typeof(HumanCreatedEvent),
                     Resolver = new FuncFieldResolver<Human>(context => context.Source as Human),

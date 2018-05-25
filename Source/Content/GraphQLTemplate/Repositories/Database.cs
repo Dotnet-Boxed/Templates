@@ -18,10 +18,10 @@ namespace GraphQLTemplate.Repositories
                     Friends = new List<Guid>()
                     {
                         new Guid("94fbd693-2027-4804-bf40-ed427fe76fda"),
-                        new Guid("c2bbf949-764b-4d4f-bce6-0404211810fa")
+                        new Guid("c2bbf949-764b-4d4f-bce6-0404211810fa"),
                     },
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
-                    PrimaryFunction = "Astromech"
+                    PrimaryFunction = "Astromech",
                 },
                 new Droid()
                 {
@@ -29,8 +29,8 @@ namespace GraphQLTemplate.Repositories
                     Name = "C-3PO",
                     Friends = new List<Guid>(),
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
-                    PrimaryFunction = "Protocol"
-                }
+                    PrimaryFunction = "Protocol",
+                },
             };
             Humans = new List<Human>()
             {
@@ -41,10 +41,10 @@ namespace GraphQLTemplate.Repositories
                     Friends = new List<Guid>()
                     {
                         new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"),
-                        new Guid("c2bbf949-764b-4d4f-bce6-0404211810fa")
+                        new Guid("c2bbf949-764b-4d4f-bce6-0404211810fa"),
                     },
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
-                    HomePlanet = "Tatooine"
+                    HomePlanet = "Tatooine",
                 },
                 new Human()
                 {
@@ -52,8 +52,8 @@ namespace GraphQLTemplate.Repositories
                     Name = "Darth Vader",
                     Friends = new List<Guid>(),
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
-                    HomePlanet = "Tatooine"
-                }
+                    HomePlanet = "Tatooine",
+                },
             };
             Characters = Droids.AsEnumerable<Character>().Concat(Humans).ToList();
         }

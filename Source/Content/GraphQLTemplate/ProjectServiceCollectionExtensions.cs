@@ -1,9 +1,9 @@
 namespace GraphQLTemplate
 {
+    using GraphQL.Server.Transports.WebSockets;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Types;
-    using GraphQL.Server.Transports.WebSockets;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>

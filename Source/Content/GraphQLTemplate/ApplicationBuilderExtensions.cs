@@ -3,9 +3,9 @@ namespace GraphQLTemplate
     using System;
     using System.Linq;
     using Boxed.AspNetCore;
-    using Microsoft.AspNetCore.Builder;
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.DependencyInjection;
 
     public static partial class ApplicationBuilderExtensions
@@ -42,7 +42,7 @@ namespace GraphQLTemplate
                         OnPrepareResponse = context =>
                         {
                             context.Context.ApplyCacheProfile(cacheProfile);
-                        }
+                        },
                     });
         }
 #if (HttpsEverywhere)

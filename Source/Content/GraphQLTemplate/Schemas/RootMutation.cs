@@ -5,8 +5,12 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Types;
 
+    /// <summary>
+    /// All mutations defined in the schema used to modify data.
+    /// </summary>
     /// <example>
-    /// This is an example mutation to create a new human:
+    /// This is an example mutation to create a new human.
+    /// <c>
     /// mutation createHuman($human: HumanInput!) {
     ///   createHuman(human: $human)
     ///   {
@@ -21,6 +25,7 @@ namespace GraphQLTemplate.Schemas
     ///     "homePlanet": "Earth"
     ///   }
     /// }
+    /// </c>
     /// </example>
     public class RootMutation : ObjectGraphType<object>
     {
@@ -35,7 +40,7 @@ namespace GraphQLTemplate.Schemas
                     new QueryArgument<NonNullGraphType<HumanInputObject>>()
                     {
                         Name = "human",
-                        Description = "The human you want to create."
+                        Description = "The human you want to create.",
                     }),
                 resolve: context =>
                 {

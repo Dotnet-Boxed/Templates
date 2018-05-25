@@ -4,6 +4,6 @@ namespace GraphQLTemplate.Models
     {
         NEWHOPE = 4,
         EMPIRE = 5,
-        JEDI = 6
+        JEDI = 6,
     }
 }

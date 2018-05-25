@@ -6,8 +6,12 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Types;
 
+    /// <summary>
+    /// All queries defined in the schema used to retrieve data.
+    /// </summary>
     /// <example>
-    /// The is an example query to get a human and the details of their friends:
+    /// The is an example query to get a human and the details of their friends.
+    /// <c>
     /// query getHuman {
     ///   human(id: "94fbd693-2027-4804-bf40-ed427fe76fda")
     ///   {
@@ -20,13 +24,14 @@ namespace GraphQLTemplate.Schemas
     ///       ... on Droid {
     ///         primaryFunction
     ///       }
-    ///   	  ... on Human
+    ///       ... on Human
     ///       {
     ///         homePlanet
     ///       }
     ///     }
     ///   }
     /// }
+    /// </c>
     /// </example>
     public class RootQuery : ObjectGraphType<object>
     {

@@ -11,10 +11,10 @@ namespace GraphQLTemplate
         {
             var metadata = new Dictionary<string, object>
             {
-                {"typeName", context.ParentType.Name},
-                {"fieldName", context.FieldName},
-                {"path", context.Path},
-                {"arguments", context.Arguments},
+                { "typeName", context.ParentType.Name },
+                { "fieldName", context.FieldName },
+                { "path", context.Path },
+                { "arguments", context.Arguments },
             };
             var path = $"{context.ParentType.Name}.{context.FieldName}";
 

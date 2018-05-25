@@ -1,20 +1,20 @@
 namespace GraphQLTemplate
 {
     using System;
+    using Boxed.AspNetCore;
 #if (CorrelationId)
     using CorrelationId;
 #endif
-    using Boxed.AspNetCore;
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
-    using GraphQLTemplate.Schemas;
     using GraphQL;
     using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.Subscriptions.Abstractions;
     using GraphQL.Server.Transports.WebSockets;
     using GraphQL.Server.Ui.Playground;
+    using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
