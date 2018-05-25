@@ -35,7 +35,6 @@ namespace ApiTemplate.Commands
             if (cars == null)
             {
                 return new NotFoundResult();
-
             }
 
             var (totalCount, totalPages) = await this.carRepository.GetTotalPages(pageOptions.Count.Value, cancellationToken);

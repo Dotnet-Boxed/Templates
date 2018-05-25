@@ -1,9 +1,9 @@
 namespace ApiTemplate.Commands
 {
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
-    using ApiTemplate.Repositories;
     using System.Threading;
+    using System.Threading.Tasks;
+    using ApiTemplate.Repositories;
+    using Microsoft.AspNetCore.Mvc;
 
     public class DeleteCarCommand : IDeleteCarCommand
     {

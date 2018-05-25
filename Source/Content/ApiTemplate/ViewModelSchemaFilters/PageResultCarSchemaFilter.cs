@@ -19,19 +19,19 @@ namespace ApiTemplate.ViewModelSchemaFilters
                         CarId = 1,
                         Cylinders = 6,
                         Make = "Honda",
-                        Model = "Civic"
+                        Model = "Civic",
                     },
                     new Car()
                     {
                         CarId = 2,
                         Cylinders = 8,
                         Make = "Lambourghini",
-                        Model = "Countach"
-                    }
+                        Model = "Countach",
+                    },
                 },
                 Page = 1,
                 TotalCount = 50,
-                TotalPages = 10
+                TotalPages = 10,
             };
             model.Default = pageResult;
             model.Example = pageResult;

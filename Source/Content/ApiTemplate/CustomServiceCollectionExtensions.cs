@@ -264,7 +264,7 @@ namespace ApiTemplate
                             Description = apiVersionDescription.IsDeprecated ?
                                 $"{assemblyDescription} This API version has been deprecated." :
                                 assemblyDescription,
-                            Version = apiVersionDescription.ApiVersion.ToString()
+                            Version = apiVersionDescription.ApiVersion.ToString(),
                         };
                         options.SwaggerDoc(apiVersionDescription.GroupName, info);
                     }

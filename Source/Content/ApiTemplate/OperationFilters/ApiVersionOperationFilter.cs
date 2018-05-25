@@ -43,7 +43,7 @@ namespace ApiTemplate.OperationFilters
                     Required = true,
                     Default = apiVersion.ToString(),
                     In = "query",
-                    Type = "string"
+                    Type = "string",
                 };
                 parameters.Add(parameter);
             }

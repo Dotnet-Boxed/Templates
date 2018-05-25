@@ -5,7 +5,7 @@ namespace ApiTemplate.Mappers
     using ApiTemplate.ViewModels;
     using Boxed.Mapping;
 
-    public class CarToSaveCarMapper :  IMapper<Models.Car, SaveCar>, IMapper<SaveCar, Models.Car>
+    public class CarToSaveCarMapper : IMapper<Models.Car, SaveCar>, IMapper<SaveCar, Models.Car>
     {
         private readonly IClockService clockService;
 

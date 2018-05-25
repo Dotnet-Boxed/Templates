@@ -12,7 +12,7 @@ namespace ApiTemplate.ViewModelSchemaFilters
             {
                 Cylinders = 6,
                 Make = "Honda",
-                Model = "Civic"
+                Model = "Civic",
             };
             model.Default = saveCar;
             model.Example = saveCar;

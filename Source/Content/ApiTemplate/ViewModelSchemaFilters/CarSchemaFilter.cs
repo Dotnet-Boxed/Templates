@@ -14,7 +14,7 @@ namespace ApiTemplate.ViewModelSchemaFilters
                 Cylinders = 6,
                 Make = "Honda",
                 Model = "Civic",
-                Url = "/cars/1"
+                Url = "/cars/1",
             };
             model.Default = car;
             model.Example = car;

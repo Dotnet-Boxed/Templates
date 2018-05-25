@@ -48,7 +48,7 @@ namespace ApiTemplate
                         OnPrepareResponse = context =>
                         {
                             context.Context.ApplyCacheProfile(cacheProfile);
-                        }
+                        },
                     });
         }
 #if (HttpsEverywhere)

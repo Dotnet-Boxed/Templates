@@ -22,7 +22,7 @@ namespace ApiTemplate.Repositories
                     Cylinders = 8,
                     Make = "Lambourghini",
                     Model = "Countach",
-                    Modified = DateTimeOffset.UtcNow.AddDays(-8)
+                    Modified = DateTimeOffset.UtcNow.AddDays(-8),
                 },
                 new Car()
                 {
@@ -31,7 +31,7 @@ namespace ApiTemplate.Repositories
                     Cylinders = 10,
                     Make = "Mazda",
                     Model = "Furai",
-                    Modified = DateTimeOffset.UtcNow.AddDays(-6)
+                    Modified = DateTimeOffset.UtcNow.AddDays(-6),
                 },
                 new Car()
                 {
@@ -68,7 +68,7 @@ namespace ApiTemplate.Repositories
                     Make = "McLaren",
                     Model = "F1",
                     Modified = DateTimeOffset.UtcNow.AddDays(-1),
-                }
+                },
             };
         }
 

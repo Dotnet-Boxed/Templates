@@ -32,7 +32,7 @@ namespace ApiTemplate.OperationFilters
                     In = "header",
                     Name = "X-Correlation-ID",
                     Required = false,
-                    Type = "string"
+                    Type = "string",
                 });
         }
     }
