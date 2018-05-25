@@ -36,11 +36,23 @@ namespace ApiTemplate
         /// </summary>
         public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
         {
-            var cacheProfile = application
-                .ApplicationServices
-                .GetRequiredService<CacheProfileOptions>()
-                .First(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
-                .Value;
+	        var cacheProfileOptions = application
+		        .ApplicationServices
+		        .GetRequiredService<CacheProfileOptions>();
+
+	        if(!cacheProfileOptions.TryGetValue(CacheProfileName.StaticFiles, out var cacheProfile))
+		        throw new Exception(
+			        $@"Please make sure that you have a CacheProfile setting configured in the with a '{CacheProfileName.StaticFiles}' section, such as in your appsetting.json, E.g.
+  
+  ""CacheProfiles"": {{
+    // Cache static files for a year.
+    ""StaticFiles"": {{
+      ""Duration"": 31536000,
+      ""Location"": ""Any""
+    }}
+  }},
+
+");
             return application
                 .UseStaticFiles(
                     new StaticFileOptions()
