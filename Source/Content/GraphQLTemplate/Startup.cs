@@ -8,10 +8,7 @@ namespace GraphQLTemplate
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
-    using GraphQL;
-    using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
-    using GraphQL.Server.Transports.Subscriptions.Abstractions;
     using GraphQL.Server.Transports.WebSockets;
     using GraphQL.Server.Ui.Playground;
     using GraphQLTemplate.Schemas;
@@ -65,16 +62,6 @@ namespace GraphQLTemplate
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
                 .AddCustomResponseCompression()
-                // Add a way for GraphQL.NET to resolve types.
-                .AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(type => x.GetRequiredService(type)))
-                // Add data loader to reduce the number of calls to our repository.
-                .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
-                .AddSingleton<DataLoaderDocumentListener>()
-                .AddGraphQLHttp<GraphQLUserContextBuilder>()
-                // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
-                .AddIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.AddSingleton<IOperationMessageListener, LogMessagesListener>())
                 // Add useful interface for accessing the ActionContext.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext.
@@ -92,6 +79,8 @@ namespace GraphQLTemplate
 #endif
                     .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
+                .AddCustomGraphQL(this.hostingEnvironment)
+                .AddGraphQLRelayTypes()
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
                 .AddProjectGraphQLSchemas()

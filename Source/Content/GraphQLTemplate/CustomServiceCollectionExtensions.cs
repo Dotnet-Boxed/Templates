@@ -2,9 +2,15 @@ namespace GraphQLTemplate
 {
     using System.IO.Compression;
     using System.Linq;
+    using Boxed.AspNetCore;
 #if (CorrelationId)
     using CorrelationId;
 #endif
+    using GraphQL;
+    using GraphQL.DataLoader;
+    using GraphQL.Server.Transports.AspNetCore;
+    using GraphQL.Server.Transports.Subscriptions.Abstractions;
+    using GraphQL.Types.Relay;
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
@@ -155,8 +161,8 @@ namespace GraphQLTemplate
                     // Output enumeration values as strings in JSON.
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
-
 #if (CORS)
+
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
@@ -174,7 +180,26 @@ namespace GraphQLTemplate
                             .AllowAnyMethod()
                             .AllowAnyHeader());
                 });
-
 #endif
+
+        public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostingEnvironment hostingEnvironment) =>
+            services
+                // Add a way for GraphQL.NET to resolve types.
+                .AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(type => x.GetRequiredService(type)))
+                // Add a user context from the HttpContext and make it available in field resolvers.
+                .AddGraphQLHttp<GraphQLUserContextBuilder>()
+                // Add GraphQL data loader to reduce the number of calls to our repository.
+                .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
+                .AddSingleton<DataLoaderDocumentListener>()
+                // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
+                .AddIf(
+                    hostingEnvironment.IsDevelopment(),
+                    x => x.AddSingleton<IOperationMessageListener, LogMessagesListener>());
+
+        public static IServiceCollection AddGraphQLRelayTypes(this IServiceCollection services) =>
+            services
+                .AddSingleton(typeof(ConnectionType<>))
+                .AddSingleton(typeof(EdgeType<>))
+                .AddSingleton<PageInfoType>();
     }
 }
