@@ -33,10 +33,10 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="1.0.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
-    <PackageReference Include="GraphQL" Version="2.0.0-alpha-870" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0019" />
-    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0-alpha0019" />
-    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.1.0-alpha0019" />
+    <PackageReference Include="GraphQL" Version="2.0.0-alpha-912" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0020" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0-alpha0020" />
+    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.1.0-alpha0020" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="2.0.0" />
