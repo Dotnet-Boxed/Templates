@@ -33,9 +33,9 @@ namespace GraphQLTemplate.Schemas
     /// }
     /// </c>
     /// </example>
-    public class RootQuery : ObjectGraphType<object>
+    public class QueryObject : ObjectGraphType<object>
     {
-        public RootQuery(
+        public QueryObject(
             IDroidRepository droidRepository,
             IHumanRepository humanRepository)
         {

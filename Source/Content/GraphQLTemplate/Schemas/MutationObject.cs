@@ -27,9 +27,9 @@ namespace GraphQLTemplate.Schemas
     /// }
     /// </c>
     /// </example>
-    public class RootMutation : ObjectGraphType<object>
+    public class MutationObject : ObjectGraphType<object>
     {
-        public RootMutation(IHumanRepository humanRepository)
+        public MutationObject(IHumanRepository humanRepository)
         {
             this.Name = "Mutation";
             this.Description = "The mutation type, represents all updates we can make to our data.";

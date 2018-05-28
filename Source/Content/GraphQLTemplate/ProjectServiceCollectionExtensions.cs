@@ -43,12 +43,12 @@ namespace GraphQLTemplate
         /// </summary>
         public static IServiceCollection AddProjectGraphQLSchemas(this IServiceCollection services) =>
             services
-                .AddSingleton<RootQuery>()
+                .AddSingleton<QueryObject>()
 #if (Mutations)
-                .AddSingleton<RootMutation>()
+                .AddSingleton<MutationObject>()
 #endif
 #if (Subscriptions)
-                .AddSingleton<RootSubscription>()
+                .AddSingleton<SubscriptionObject>()
 #endif
                 .AddSingleton<MainSchema>()
                 .AddGraphQLWebSocket<MainSchema>();

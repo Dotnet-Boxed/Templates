@@ -23,9 +23,9 @@ namespace GraphQLTemplate.Schemas
     /// }
     /// </c>
     /// </example>
-    public class RootSubscription : ObjectGraphType<object>
+    public class SubscriptionObject : ObjectGraphType<object>
     {
-        public RootSubscription(IHumanRepository humanRepository)
+        public SubscriptionObject(IHumanRepository humanRepository)
         {
             this.Name = "Subscription";
             this.Description = "The subscription type, represents all updates can be pushed to the client in real time over web sockets.";

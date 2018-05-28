@@ -6,18 +6,18 @@ namespace GraphQLTemplate.Schemas
     public class MainSchema : Schema
     {
         public MainSchema(
-            RootQuery query,
+            QueryObject query,
 #if (Mutations)
-            RootMutation mutation,
+            MutationObject mutation,
 #endif
 #if (Subscriptions)
-            RootSubscription subscription,
+            SubscriptionObject subscription,
 #endif
             IDependencyResolver resolver)
 
             : base(resolver)
         {
-            this.Query = resolver.Resolve<RootQuery>();
+            this.Query = resolver.Resolve<QueryObject>();
 #if (Mutations)
             this.Mutation = mutation;
 #endif
