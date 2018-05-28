@@ -14,6 +14,7 @@ namespace GraphQLTemplate.Repositories
                 new Droid()
                 {
                     Id = new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"),
+                    Created = new DateTime(3001, 1, 1),
                     Name = "R2-D2",
                     Friends = new List<Guid>()
                     {
@@ -26,10 +27,20 @@ namespace GraphQLTemplate.Repositories
                 new Droid()
                 {
                     Id = new Guid("c2bbf949-764b-4d4f-bce6-0404211810fa"),
+                    Created = new DateTime(3002, 2, 2),
                     Name = "C-3PO",
                     Friends = new List<Guid>(),
                     AppearsIn = new List<Episode>() { Episode.NEWHOPE, Episode.EMPIRE, Episode.JEDI, },
                     PrimaryFunction = "Protocol",
+                },
+                new Droid()
+                {
+                    Id = new Guid("bcf83480-32c3-4d79-ba5d-2bea3bd1a279"),
+                    Created = new DateTime(3003, 3, 3),
+                    Name = "2-1B",
+                    Friends = new List<Guid>(),
+                    AppearsIn = new List<Episode>() { Episode.EMPIRE, },
+                    PrimaryFunction = "Surgical",
                 },
             };
             Humans = new List<Human>()
