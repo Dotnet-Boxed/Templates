@@ -44,6 +44,7 @@ namespace GraphQLTemplate.Schemas
 
             this.FieldAsync<DroidObject, Droid>(
                 "droid",
+                "Get a droid by it's unique identifier.",
                 arguments: new QueryArguments(
                     new QueryArgument<IdGraphType>
                     {
@@ -56,6 +57,7 @@ namespace GraphQLTemplate.Schemas
                         context.CancellationToken));
             this.FieldAsync<HumanObject, Human>(
                 "human",
+                "Get a human by it's unique identifier.",
                 arguments: new QueryArguments(
                     new QueryArgument<IdGraphType>()
                     {

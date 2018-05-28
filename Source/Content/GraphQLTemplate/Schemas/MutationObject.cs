@@ -36,6 +36,7 @@ namespace GraphQLTemplate.Schemas
 
             this.FieldAsync<HumanObject, Human>(
                 "createHuman",
+                "Create a new human.",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<HumanInputObject>>()
                     {

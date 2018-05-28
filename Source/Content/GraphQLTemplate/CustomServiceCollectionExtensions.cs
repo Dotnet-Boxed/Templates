@@ -198,6 +198,7 @@ namespace GraphQLTemplate
 
         public static IServiceCollection AddGraphQLRelayTypes(this IServiceCollection services) =>
             services
+                // Add types used for paging.
                 .AddSingleton(typeof(ConnectionType<>))
                 .AddSingleton(typeof(EdgeType<>))
                 .AddSingleton<PageInfoType>();

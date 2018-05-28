@@ -34,6 +34,7 @@ namespace GraphQLTemplate.Schemas
                 new EventStreamFieldType()
                 {
                     Name = "humanCreated",
+                    Description = "Subscribe to human created events.",
                     Arguments = new QueryArguments(
                         new QueryArgument<ListGraphType<StringGraphType>>()
                         {
