@@ -38,9 +38,9 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boxed.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="1.0.0" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Boxed.Mapping" Version="1.0.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="1.1.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.Mapping" Version="1.1.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
