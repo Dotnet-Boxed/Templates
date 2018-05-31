@@ -12,7 +12,7 @@ namespace ApiTemplate
 
     public sealed class Program
     {
-        public static int Main(string[] args) => LogAndRun(BuildWebHost(args));
+        public static int Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
 
         public static int LogAndRun(IWebHost webHost)
         {
@@ -36,7 +36,7 @@ namespace ApiTemplate
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             new WebHostBuilder()
                 .UseKestrel(
                     options =>
@@ -56,8 +56,7 @@ namespace ApiTemplate
                 .UseDefaultServiceProvider((context, options) =>
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
                 .UseSerilog()
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
 
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,

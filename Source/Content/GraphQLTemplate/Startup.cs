@@ -18,6 +18,7 @@ namespace GraphQLTemplate
 #if (LoadBalancer)
     using Microsoft.AspNetCore.HttpOverrides;
 #endif
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
@@ -71,6 +72,7 @@ namespace GraphQLTemplate
                     .GetRequiredService<IUrlHelperFactory>()
                     .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
                 .AddMvcCore()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     .AddAuthorization()
                     .AddJsonFormatters()
                     .AddCustomJsonOptions(this.hostingEnvironment)

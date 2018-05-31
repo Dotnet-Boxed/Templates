@@ -11,6 +11,7 @@ namespace ApiTemplate
 #if (LoadBalancer)
     using Microsoft.AspNetCore.HttpOverrides;
 #endif
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
@@ -73,6 +74,7 @@ namespace ApiTemplate
                 .AddCustomApiVersioning()
 #endif
                 .AddMvcCore()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                     .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
