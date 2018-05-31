@@ -13,6 +13,7 @@ namespace ApiTemplate.Controllers
     using Microsoft.Net.Http.Headers;
 
     [Route("[controller]")]
+    [ApiController]
 #if (Versioning)
     [ApiVersion("1.0")]
 #endif

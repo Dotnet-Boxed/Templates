@@ -11,6 +11,7 @@ namespace ApiTemplate.Controllers
     /// The status of this API.
     /// </summary>
     [Route("[controller]")]
+    [ApiController]
 #if (Versioning)
     [ApiVersion("1.0")]
 #endif
