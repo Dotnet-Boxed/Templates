@@ -4,6 +4,7 @@ namespace GraphQLTemplate
     using System.IO;
     using System.Reflection;
     using Boxed.AspNetCore;
+    using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -38,15 +39,19 @@ namespace GraphQLTemplate
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             new WebHostBuilder()
+                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
                 .UseKestrel(
-                    options =>
+                    (builderContext, options) =>
                     {
-                        options.AddServerHeader = false; // Do not add the Server HTTP header.
-                        options.ConfigureEndpoints();
+                        // Do not add the Server HTTP header.
+                        options.AddServerHeader = false;
+                        // Configure Kestrel from appsettings.json.
+                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
                     })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
+                .UseSerilog()
 #if (Azure)
                 .UseAzureAppServices()
 #endif
@@ -55,7 +60,6 @@ namespace GraphQLTemplate
 #endif
                 .UseDefaultServiceProvider((context, options) =>
                     options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
-                .UseSerilog()
                 .UseStartup<Startup>();
 
         private static IConfigurationBuilder AddConfiguration(
