@@ -33,7 +33,7 @@
       }
     },
     //#endif
-    "Kestrel (dotnet run)": {
+    "Kestrel": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",
@@ -46,8 +46,16 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "Kestrel Production": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
-    "Kestrel (CTRL+F5 dotnet watch run)": {
+    "Watch Kestrel (CTRL+F5)": {
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
