@@ -76,7 +76,6 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
   - PATCH - Update one or more properties of an existing car.
   - DELETE a single car.
 - **Automatically Return Not Acceptable** - Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
-- **Validate Model State** - The ValidateModelStateAttribute is turned on globally so all models passed to an action method are automatically validated and a 400 Bad Request is returned if the model is invalid.
 
 #### Performance
 
