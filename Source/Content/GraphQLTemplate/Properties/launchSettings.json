@@ -1,24 +1,24 @@
 {
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5000/",
+      "applicationUrl": "http://localhost:43300/",
+      //#if (HttpsEverywhere)
       "sslPort": 44300
+      //#else
+      //"sslPort": 0
+      //#endif
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:44300/",
-      ////#else
-      //"launchUrl": "http:////localhost:5000/",
-      //#endif
+      "launchUrl": "",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "44300"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     //#if (IIS)
@@ -27,28 +27,23 @@
     "IIS (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:44300/",
-      ////#else
-      //"launchUrl": "http:////localhost:5000/",
-      //#endif
+      "launchUrl": "",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "44300"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     //#endif
     "Kestrel (dotnet run)": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "",
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:44300/",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       ////#else
-      //"launchUrl": "http:////localhost:5000/",
+      //"applicationUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "44300"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
@@ -57,15 +52,8 @@
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch run",
-      "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:44300/",
-      ////#else
-      //"launchUrl": "http:////localhost:5000/",
-      //#endif
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HTTPS_PORT": "44300"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
