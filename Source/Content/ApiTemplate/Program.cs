@@ -6,6 +6,7 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
@@ -47,6 +48,15 @@ namespace ApiTemplate
                         options.AddServerHeader = false;
                         // Configure Kestrel from appsettings.json.
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
+
+                        // Configuring Limits from appsettings.json is not supported. So we manually copy them from config.
+                        // See https://github.com/aspnet/KestrelHttpServer/issues/2216
+                        var kestrelOptions = builderContext.Configuration.GetSection<KestrelServerOptions>(nameof(ApplicationOptions.Kestrel));
+                        foreach (var property in typeof(KestrelServerLimits).GetProperties())
+                        {
+                            var value = property.GetValue(kestrelOptions.Limits);
+                            property.SetValue(options.Limits, value);
+                        }
                     })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) =>

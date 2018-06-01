@@ -70,6 +70,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 #### Security
 
+- **Kestrel Limits** - Allow configuring Kestrel security limits such as maximum request size via configuration and set sensible stricter defaults.
 - **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on your development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
 
