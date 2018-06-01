@@ -12,7 +12,6 @@ namespace ApiTemplate
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
-    using Boxed.AspNetCore.Filters;
 #if (Swagger)
     using Boxed.AspNetCore.Swagger;
     using Boxed.AspNetCore.Swagger.OperationFilters;
@@ -156,9 +155,6 @@ namespace ApiTemplate
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }
-
-                    // Check model state for null or invalid models and automatically return a 400 Bad Request.
-                    options.Filters.Add(new ValidateModelStateAttribute());
 
                     // Add RESTful JSON media type to the JSON input and output formatters. See http://restfuljson.org/
                     options
