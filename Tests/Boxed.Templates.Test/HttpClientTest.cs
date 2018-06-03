@@ -32,7 +32,6 @@ namespace Boxed.Templates.Test
             X509Certificate2 certificate,
             X509Chain chain,
             SslPolicyErrors errors) =>
-            string.Equals(certificate.Subject, "CN=Boilerplate, O=Boilerplate", StringComparison.Ordinal) &&
-            string.Equals(certificate.Thumbprint, "5CFDCEFEF6831B69E0C83CDF8D71A32D48C43600", StringComparison.Ordinal);
+            string.Equals(certificate.Subject, "CN=localhost", StringComparison.Ordinal);
     }
 }

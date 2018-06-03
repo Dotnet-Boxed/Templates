@@ -63,7 +63,9 @@ namespace GraphQLTemplate
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
                 .AddCustomResponseCompression()
+#if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
+#endif
                 // Add useful interface for accessing the ActionContext.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 // Add useful interface for accessing the HttpContext.

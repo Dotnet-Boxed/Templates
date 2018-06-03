@@ -1,5 +1,6 @@
 namespace Boxed.Templates.Test
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -8,7 +9,7 @@ namespace Boxed.Templates.Test
         public GraphQLTemplateTest() =>
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
 
-        [Fact(Skip = "Figure out why this is broken.")]
+        [Fact]
         public async Task Build_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -16,14 +17,39 @@ namespace Boxed.Templates.Test
                 var project = await tempDirectory.DotnetNew("graphql", "Default");
                 await project.DotnetRestore();
                 await project.DotnetBuild();
-                // await project.DotnetRun(
-                //     async () =>
-                //     {
-                //         await Assert.ThrowsAsync<HttpRequestException>(
-                //             () => this.HttpClient.GetAsync("http://localhost:5000/status"));
-                //         var response = await this.HttpClient.GetAsync("https://localhost:44300/status");
-                //         response.EnsureSuccessStatusCode();
-                //     });
+                await project.DotnetRun(
+                    async () =>
+                    {
+                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000");
+                        httpResponse.EnsureSuccessStatusCode();
+                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001");
+                        httpsResponse.EnsureSuccessStatusCode();
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Build_HttpsEverywhereFalse_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "graphql",
+                    "HttpsEverywhereFalse",
+                    new Dictionary<string, string>()
+                    {
+                        { "https-everywhere", "false" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async () =>
+                    {
+                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000");
+                        httpResponse.EnsureSuccessStatusCode();
+                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001");
+                        httpsResponse.EnsureSuccessStatusCode();
+                    });
             }
         }
     }

@@ -59,7 +59,9 @@ namespace ApiTemplate
                 .AddResponseCaching()
 #endif
                 .AddCustomResponseCompression()
+#if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
+#endif
 #if (Swagger)
                 .AddCustomSwagger()
 #endif
