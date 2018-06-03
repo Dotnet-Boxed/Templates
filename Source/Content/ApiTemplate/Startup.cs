@@ -59,7 +59,7 @@ namespace ApiTemplate
                 .AddResponseCaching()
 #endif
                 .AddCustomResponseCompression()
-                .AddCustomHttps()
+                .AddCustomStrictTransportSecurity()
 #if (Swagger)
                 .AddCustomSwagger()
 #endif
@@ -110,9 +110,6 @@ namespace ApiTemplate
             application
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
-#endif
-#if (HttpsEverywhere)
-                .UseHttpsRedirection()
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()

@@ -133,9 +133,8 @@ namespace ApiTemplate
                 });
 
 #if (HttpsEverywhere)
-        public static IServiceCollection AddCustomHttps(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomStrictTransportSecurity(this IServiceCollection services) =>
             services
-                .AddHttpsRedirection(options => options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect)
                 .AddHsts(
                     options =>
                     {
