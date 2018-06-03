@@ -64,6 +64,12 @@
     "HumansTxt": {
       "longName": "humans-txt"
     },
+    "HttpPort": {
+      "longName": "http-port"
+    },
+    "HttpsPort": {
+      "longName": "https-port"
+    },
     "SkipRestore": {
       "longName": "no-restore"
     },
