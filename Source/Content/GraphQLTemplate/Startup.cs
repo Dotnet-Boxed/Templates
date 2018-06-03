@@ -102,10 +102,9 @@ namespace GraphQLTemplate
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
-                .UseIf(
-                    !this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseHsts())
+#if (HttpsEverywhere)
                 .UseHttpsRedirection()
+#endif
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl()
                 // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.
@@ -115,14 +114,14 @@ namespace GraphQLTemplate
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
-                .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperErrorPages())
 #if (HttpsEverywhere)
                 .UseIf(
                     !this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseStrictTransportSecurityHttpHeader())
+                    x => x.UseHsts())
 #endif
+                .UseIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseDeveloperErrorPages())
 #if (Subscriptions)
                 .UseWebSockets()
                 .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())

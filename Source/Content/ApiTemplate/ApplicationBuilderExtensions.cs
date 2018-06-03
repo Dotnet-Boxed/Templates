@@ -53,21 +53,7 @@ namespace ApiTemplate
                         },
                     });
         }
-#if (HttpsEverywhere)
 
-        /// <summary>
-        /// Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
-        /// using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
-        /// errors and warnings.
-        /// See https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security and
-        /// http://www.troyhunt.com/2015/06/understanding-http-strict-transport.html
-        /// Note: Including subdomains and a minimum maxage of 18 weeks is required for preloading.
-        /// Note: You can refer to the following article to clear the HSTS cache in your browser:
-        /// http://classically.me/blogs/how-clear-hsts-settings-major-browsers
-        /// </summary>
-        public static IApplicationBuilder UseStrictTransportSecurityHttpHeader(this IApplicationBuilder application) =>
-            application.UseHsts(options => options.MaxAge(days: 18 * 7).IncludeSubdomains().Preload());
-#endif
 #if (Swagger)
 
         public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>

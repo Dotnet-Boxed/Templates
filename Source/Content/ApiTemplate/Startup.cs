@@ -111,10 +111,9 @@ namespace ApiTemplate
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
-                .UseIf(
-                    !this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseHsts())
+#if (HttpsEverywhere)
                 .UseHttpsRedirection()
+#endif
 #if (ResponseCaching)
                 .UseResponseCaching()
 #endif
@@ -123,14 +122,14 @@ namespace ApiTemplate
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
-                .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperErrorPages())
 #if (HttpsEverywhere)
                 .UseIf(
                     !this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseStrictTransportSecurityHttpHeader())
+                    x => x.UseHsts())
 #endif
+                .UseIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseDeveloperErrorPages())
 #if (Swagger)
                 .UseMvc()
                 .UseSwagger()
