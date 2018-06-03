@@ -1,6 +1,5 @@
 namespace ApiTemplate
 {
-    using System;
     using ApiTemplate.Commands;
     using ApiTemplate.Mappers;
     using ApiTemplate.Repositories;
@@ -22,17 +21,11 @@ namespace ApiTemplate
         public static IServiceCollection AddProjectCommands(this IServiceCollection services) =>
             services
                 .AddSingleton<IDeleteCarCommand, DeleteCarCommand>()
-                .AddSingleton(x => new Lazy<IDeleteCarCommand>(() => x.GetRequiredService<IDeleteCarCommand>()))
                 .AddSingleton<IGetCarCommand, GetCarCommand>()
-                .AddSingleton(x => new Lazy<IGetCarCommand>(() => x.GetRequiredService<IGetCarCommand>()))
                 .AddSingleton<IGetCarPageCommand, GetCarPageCommand>()
-                .AddSingleton(x => new Lazy<IGetCarPageCommand>(() => x.GetRequiredService<IGetCarPageCommand>()))
                 .AddSingleton<IPatchCarCommand, PatchCarCommand>()
-                .AddSingleton(x => new Lazy<IPatchCarCommand>(() => x.GetRequiredService<IPatchCarCommand>()))
                 .AddSingleton<IPostCarCommand, PostCarCommand>()
-                .AddSingleton(x => new Lazy<IPostCarCommand>(() => x.GetRequiredService<IPostCarCommand>()))
-                .AddSingleton<IPutCarCommand, PutCarCommand>()
-                .AddSingleton(x => new Lazy<IPutCarCommand>(() => x.GetRequiredService<IPutCarCommand>()));
+                .AddSingleton<IPutCarCommand, PutCarCommand>();
 
         public static IServiceCollection AddProjectMappers(this IServiceCollection services) =>
             services
