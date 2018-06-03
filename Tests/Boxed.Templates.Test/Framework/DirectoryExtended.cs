@@ -67,7 +67,7 @@ namespace Boxed.Templates.Test
                 throw new ArgumentOutOfRangeException(nameof(millisecondsDelay));
             }
 
-            for (int i = 0; i < maxRetries; ++i)
+            for (var i = 0; i < maxRetries; ++i)
             {
                 try
                 {
