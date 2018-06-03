@@ -1,5 +1,6 @@
 namespace ApiTemplate
 {
+    using System;
     using System.IO.Compression;
     using System.Linq;
 #if (Swagger)
@@ -22,6 +23,7 @@ namespace ApiTemplate
 #endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
 #if (Versioning)
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
@@ -130,6 +132,26 @@ namespace ApiTemplate
                     options.LowercaseUrls = true;
                 });
 
+#if (HttpsEverywhere)
+        public static IServiceCollection AddCustomHttps(this IServiceCollection services) =>
+            services
+                .AddHttpsRedirection(options => options.RedirectStatusCode = StatusCodes.Status308PermanentRedirect)
+                .AddHsts(
+                    options =>
+                    {
+                        // Preload the HSTS HTTP header for better security. See https://hstspreload.org/
+#if (HstsPreload)
+                        options.IncludeSubDomains = true;
+                        options.MaxAge = TimeSpan.FromSeconds(31536000); // 1 Year
+                        options.Preload = true;
+#else
+                        // options.IncludeSubDomains = true;
+                        // options.MaxAge = TimeSpan.FromSeconds(31536000); // 1 Year
+                        // options.Preload = true;
+#endif
+                    });
+
+#endif
 #if (Versioning)
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services.AddApiVersioning(

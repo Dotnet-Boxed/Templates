@@ -43,6 +43,9 @@
     "HttpsEverywhere": {
       "longName": "https-everywhere"
     },
+    "HstsPreload": {
+      "longName": "hsts-preload"
+    },
     "CORS": {
       "longName": "cors"
     },

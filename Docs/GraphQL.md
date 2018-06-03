@@ -28,6 +28,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### Security
 
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled.
+- **HstsPreload** (Default=Off) - Enable Strict Transport Security (HSTS) HTTP header with preloading.
 - **CORS** (Default=On) - Browser security prevents a web page from making AJAX requests to another domain.
 
 #### Web Server
