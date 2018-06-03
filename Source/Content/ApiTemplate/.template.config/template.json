@@ -1,5 +1,6 @@
 // https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
+  "$schema": "http://json.schemastore.org/template",
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boxed", "Swagger", "API" ],
   "name": "ASP.NET Core API Boxed",
