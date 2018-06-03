@@ -1,7 +1,6 @@
 namespace Boxed.Templates.Test
 {
     using System.Collections.Generic;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Xunit;
 
