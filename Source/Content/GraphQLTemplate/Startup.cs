@@ -101,6 +101,10 @@ namespace GraphQLTemplate
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
+                .UseIf(
+                    !this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseHsts())
+                .UseHttpsRedirection()
                 .UseResponseCompression()
                 .UseStaticFilesWithCacheControl()
                 // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.

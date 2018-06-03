@@ -110,6 +110,10 @@ namespace ApiTemplate
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
+                .UseIf(
+                    !this.hostingEnvironment.IsDevelopment(),
+                    x => x.UseHsts())
+                .UseHttpsRedirection()
 #if (ResponseCaching)
                 .UseResponseCaching()
 #endif
