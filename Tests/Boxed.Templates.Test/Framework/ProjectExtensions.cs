@@ -51,24 +51,22 @@ namespace Boxed.Templates.Test
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
-        public static async Task DotnetRun(this Project project, Func<HttpClient, HttpClient, Task> action, TimeSpan? delay = null)
+        public static async Task DotnetRun(
+            this Project project,
+            Func<HttpClient, HttpClient, Task> action,
+            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
+            TimeSpan? delay = null)
         {
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpsPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
-            var cancellationTokenSource = new CancellationTokenSource();
-            var task = ProcessAssert.AssertStart(
-                project.DirectoryPath,
-                "dotnet",
-                $"run --urls {httpUrl};{httpsUrl}",
-                cancellationTokenSource.Token);
-            await Task.Delay(delay ?? TimeSpan.FromSeconds(2));
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, delay, httpUrl, httpsUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
-                ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
+                ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
             };
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };
             var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpsUrl) };
@@ -83,30 +81,16 @@ namespace Boxed.Templates.Test
                 unhandledException = exception;
             }
 
-            cancellationTokenSource.Cancel();
             httpClient.Dispose();
             httpsClient.Dispose();
             httpClientHandler.Dispose();
-
-            try
-            {
-                await task;
-            }
-            catch (ProcessStartException exception) when (exception.GetBaseException() is TaskCanceledException)
-            {
-            }
+            dotnetRun.Dispose();
 
             if (unhandledException != null)
             {
                 Assert.False(true, unhandledException.ToString());
             }
         }
-
-        public static bool DefaultValidateCertificate(
-            HttpRequestMessage request,
-            X509Certificate2 certificate,
-            X509Chain chain,
-            SslPolicyErrors errors) => true;
 
         public static async Task DotnetRunInMemory(
             this Project project,
@@ -145,5 +129,41 @@ namespace Boxed.Templates.Test
                 // TODO: Unload startupType when supported: https://github.com/dotnet/corefx/issues/14724
             }
         }
+
+        private static async Task<IDisposable> DotnetRunInternal(
+            string directoryPath,
+            TimeSpan? delay = null,
+            params string[] urls)
+        {
+            var cancellationTokenSource = new CancellationTokenSource();
+            var urlsParameter = string.Join(';', urls);
+            var task = ProcessAssert.AssertStart(
+                directoryPath,
+                "dotnet",
+                $"run --urls {urlsParameter}",
+                cancellationTokenSource.Token);
+            await Task.Delay(delay ?? TimeSpan.FromSeconds(2));
+
+            return new DisposableAction(
+                () =>
+                {
+                    cancellationTokenSource.Cancel();
+
+                    try
+                    {
+                        task.Wait();
+                    }
+                    catch (AggregateException exception)
+                    when (exception.GetBaseException().GetBaseException() is TaskCanceledException)
+                    {
+                    }
+                });
+        }
+
+        private static bool DefaultValidateCertificate(
+            HttpRequestMessage request,
+            X509Certificate2 certificate,
+            X509Chain chain,
+            SslPolicyErrors errors) => true;
     }
 }
