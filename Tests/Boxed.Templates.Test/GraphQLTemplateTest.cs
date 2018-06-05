@@ -4,7 +4,7 @@ namespace Boxed.Templates.Test
     using System.Threading.Tasks;
     using Xunit;
 
-    public class GraphQLTemplateTest : HttpClientTest
+    public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
@@ -18,11 +18,11 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async () =>
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000");
+                        var httpResponse = await httpClient.GetAsync("/");
                         httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001");
+                        var httpsResponse = await httpsClient.GetAsync("/");
                         httpsResponse.EnsureSuccessStatusCode();
                     });
             }
@@ -43,11 +43,11 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async () =>
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000");
+                        var httpResponse = await httpClient.GetAsync("/");
                         httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001");
+                        var httpsResponse = await httpsClient.GetAsync("/");
                         httpsResponse.EnsureSuccessStatusCode();
                     });
             }

@@ -4,7 +4,7 @@ namespace Boxed.Templates.Test
     using System.Threading.Tasks;
     using Xunit;
 
-    public class ApiTemplateTest : HttpClientTest
+    public class ApiTemplateTest
     {
         public ApiTemplateTest() =>
             TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.csproj").Wait();
@@ -18,11 +18,11 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async () =>
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000/status");
+                        var httpResponse = await httpClient.GetAsync("status");
                         httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001/status");
+                        var httpsResponse = await httpsClient.GetAsync("status");
                         httpsResponse.EnsureSuccessStatusCode();
                     });
             }
@@ -43,11 +43,11 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async () =>
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await this.HttpClient.GetAsync("http://localhost:5000/status");
+                        var httpResponse = await httpClient.GetAsync("status");
                         httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await this.HttpClient.GetAsync("https://localhost:5001/status");
+                        var httpsResponse = await httpsClient.GetAsync("status");
                         httpsResponse.EnsureSuccessStatusCode();
                     });
             }

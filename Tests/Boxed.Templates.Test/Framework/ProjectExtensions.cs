@@ -3,6 +3,9 @@ namespace Boxed.Templates.Test
     using System;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
+    using System.Net.Security;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Hosting;
@@ -48,20 +51,32 @@ namespace Boxed.Templates.Test
                 CancellationTokenFactory.GetCancellationToken(timeout));
         }
 
-        public static async Task DotnetRun(this Project project, Func<Task> action, TimeSpan? delay = null)
+        public static async Task DotnetRun(this Project project, Func<HttpClient, HttpClient, Task> action, TimeSpan? delay = null)
         {
+            var httpPort = PortHelper.GetFreeTcpPort();
+            var httpsPort = PortHelper.GetFreeTcpPort();
+            var httpUrl = $"http://localhost:{httpPort}";
+            var httpsUrl = $"https://localhost:{httpsPort}";
+
             var cancellationTokenSource = new CancellationTokenSource();
             var task = ProcessAssert.AssertStart(
                 project.DirectoryPath,
                 "dotnet",
-                "run",
+                $"run --urls {httpUrl};{httpsUrl}",
                 cancellationTokenSource.Token);
-            await Task.Delay(delay ?? TimeSpan.FromSeconds(3));
+            await Task.Delay(delay ?? TimeSpan.FromSeconds(2));
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
+            };
+            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };
+            var httpsClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpsUrl) };
 
             Exception unhandledException = null;
             try
             {
-                await action();
+                await action(httpClient, httpsClient);
             }
             catch (Exception exception)
             {
@@ -69,6 +84,9 @@ namespace Boxed.Templates.Test
             }
 
             cancellationTokenSource.Cancel();
+            httpClient.Dispose();
+            httpsClient.Dispose();
+            httpClientHandler.Dispose();
 
             try
             {
@@ -84,7 +102,13 @@ namespace Boxed.Templates.Test
             }
         }
 
-        public static async Task DotnetRun2(
+        public static bool DefaultValidateCertificate(
+            HttpRequestMessage request,
+            X509Certificate2 certificate,
+            X509Chain chain,
+            SslPolicyErrors errors) => true;
+
+        public static async Task DotnetRunInMemory(
             this Project project,
             Func<TestServer, Task> action,
             string environmentName = "Development",
