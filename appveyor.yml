@@ -31,7 +31,7 @@ artifacts:
 - path: .\Artifacts\**\*.nupkg
   name: NuGet
 # Store xUnit Test Results
-- path: .\Artifacts\**\*.xml
+- path: .\Artifacts\**\*.trx
   name: xUnit Test Results
 
 deploy:
