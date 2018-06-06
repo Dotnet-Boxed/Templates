@@ -24,6 +24,8 @@ namespace Boxed.Templates.Test
             string arguments,
             CancellationToken cancellationToken)
         {
+            Console.WriteLine($"Executing {fileName} {arguments} from {workingDirectory}");
+
             var output = new StringBuilder();
             var error = new StringBuilder();
             ProcessResult result;
@@ -53,7 +55,6 @@ namespace Boxed.Templates.Test
                 result,
                 standardOutput,
                 standardError);
-            Debug.WriteLine(message);
             if (result != ProcessResult.Succeeded)
             {
                 Assert.False(true, message);
@@ -69,10 +70,6 @@ namespace Boxed.Templates.Test
             string standardError)
         {
             var stringBuilder = new StringBuilder();
-
-            var message = $"Executing {fileName} {arguments} from {workingDirectory}";
-            stringBuilder.AppendLine(message);
-            Console.WriteLine(message);
 
             stringBuilder.AppendLine($"Result: {result}");
             Console.Write("Result: ");
