@@ -21,7 +21,7 @@ environment:
 
 build_script:
 # Install .NET Core SDK
-- ps: choco install dotnetcore-sdk -y --version 2.1.300
+- ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.1.300
 - ps: .\build.ps1
 
 test: off
