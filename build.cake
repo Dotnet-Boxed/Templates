@@ -65,11 +65,13 @@ Task("Test")
                 new DotNetCoreTestSettings()
                 {
                     Configuration = configuration,
+                    DiagnosticFile = $"{project.GetFilenameWithoutExtension()}.txt",
                     Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                     NoBuild = true,
                     NoRestore = true,
                     ResultsDirectory = artifactsDirectory,
                     Verbosity = DotNetCoreVerbosity.Diagnostic
+                    --diag:log.txt
                 });
         }
     });
