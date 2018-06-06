@@ -24,8 +24,6 @@ namespace Boxed.Templates.Test
             string arguments,
             CancellationToken cancellationToken)
         {
-            Console.WriteLine($"{fileName} {arguments}");
-
             var output = new StringBuilder();
             var error = new StringBuilder();
             ProcessResult result;
