@@ -71,7 +71,6 @@ Task("Test")
                     NoRestore = true,
                     ResultsDirectory = artifactsDirectory,
                     Verbosity = DotNetCoreVerbosity.Diagnostic
-                    --diag:log.txt
                 });
         }
     });
