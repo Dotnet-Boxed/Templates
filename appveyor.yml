@@ -2,7 +2,7 @@
 
 version: '{build}'
 
-image: Visual Studio 2017
+image: Previous Visual Studio 2017
 install:
 - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
