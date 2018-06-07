@@ -65,10 +65,9 @@ namespace ApiTemplate
 #if (Swagger)
                 .AddCustomSwagger()
 #endif
+                .AddHttpContextAccessor()
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
-                // Add useful interface for accessing the HttpContext outside a controller.
-                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 // Add useful interface for accessing the IUrlHelper outside a controller.
                 .AddScoped(x => x
                     .GetRequiredService<IUrlHelperFactory>()

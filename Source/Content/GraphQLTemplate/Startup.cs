@@ -66,10 +66,9 @@ namespace GraphQLTemplate
 #if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
 #endif
+                .AddHttpContextAccessor()
                 // Add useful interface for accessing the ActionContext.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
-                // Add useful interface for accessing the HttpContext.
-                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
                 // Add useful interface for accessing the IUrlHelper.
                 .AddScoped(x => x
                     .GetRequiredService<IUrlHelperFactory>()
