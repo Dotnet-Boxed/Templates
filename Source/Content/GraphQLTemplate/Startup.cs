@@ -14,10 +14,6 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-#if (LoadBalancer)
-    using Microsoft.AspNetCore.HttpOverrides;
-#endif
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
@@ -103,7 +99,7 @@ namespace GraphQLTemplate
                 .UseCorrelationId()
 #endif
 #if (LoadBalancer)
-                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
+                .UseForwardedHeaders()
 #endif
 #if (ResponseCompression)
                 .UseResponseCompression()

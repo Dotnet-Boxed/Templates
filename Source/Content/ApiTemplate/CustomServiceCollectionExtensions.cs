@@ -94,6 +94,10 @@ namespace ApiTemplate
                 // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
                 .Configure<ApplicationOptions>(configuration)
                 .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
+#if (LoadBalancer)
+                // Adds IOptions<ForwardedHeadersOptions> to the services container.
+                .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+#endif
 #if (ResponseCompression)
                 // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
                 .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))

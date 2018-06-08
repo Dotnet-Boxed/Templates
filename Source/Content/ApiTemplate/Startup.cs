@@ -7,10 +7,6 @@ namespace ApiTemplate
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
-#if (LoadBalancer)
-    using Microsoft.AspNetCore.HttpOverrides;
-#endif
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.Routing;
@@ -112,7 +108,7 @@ namespace ApiTemplate
         public void Configure(IApplicationBuilder application) =>
             application
 #if (LoadBalancer)
-                .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
+                .UseForwardedHeaders()
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()
