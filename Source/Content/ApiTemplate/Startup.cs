@@ -5,6 +5,9 @@ namespace ApiTemplate
     using ApiTemplate.Constants;
 #endif
     using Boxed.AspNetCore;
+#if (CorrelationId)
+    using CorrelationId;
+#endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -109,6 +112,10 @@ namespace ApiTemplate
             application
 #if (LoadBalancer)
                 .UseForwardedHeaders()
+#endif
+#if (CorrelationId)
+                // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
+                .UseCorrelationId()
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()

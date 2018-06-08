@@ -94,12 +94,12 @@ namespace GraphQLTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
+#if (LoadBalancer)
+                .UseForwardedHeaders()
+#endif
 #if (CorrelationId)
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
                 .UseCorrelationId()
-#endif
-#if (LoadBalancer)
-                .UseForwardedHeaders()
 #endif
 #if (ResponseCompression)
                 .UseResponseCompression()
