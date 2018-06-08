@@ -18,7 +18,6 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.AspNetCore.ResponseCompression;
     using Microsoft.Extensions.Configuration;
@@ -93,11 +92,6 @@ namespace GraphQLTemplate
                 .AddResponseCompression(
                     options =>
                     {
-#if (HttpsEverywhere)
-                        // Enable response compression over HTTPS connections.
-                        options.EnableForHttps = true;
-#endif
-
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
                         var customMimeTypes = services
                             .BuildServiceProvider()

@@ -23,7 +23,6 @@ namespace ApiTemplate
 #endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
 #if (Versioning)
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
@@ -106,11 +105,6 @@ namespace ApiTemplate
                 .AddResponseCompression(
                     options =>
                     {
-#if (HttpsEverywhere)
-                        // Enable response compression over HTTPS connections.
-                        options.EnableForHttps = true;
-#endif
-
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
                         var customMimeTypes = services
                             .BuildServiceProvider()
