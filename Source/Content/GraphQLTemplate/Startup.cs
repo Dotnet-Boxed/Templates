@@ -94,17 +94,16 @@ namespace GraphQLTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (ForwardedHeaders)
-                .UseForwardedHeaders()
-#endif
 #if (CorrelationId)
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
                 .UseCorrelationId()
 #endif
+#if (ForwardedHeaders)
+                .UseForwardedHeaders()
+#endif
 #if (ResponseCompression)
                 .UseResponseCompression()
 #endif
-                .UseStaticFilesWithCacheControl()
                 // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
@@ -120,6 +119,7 @@ namespace GraphQLTemplate
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
+                .UseStaticFilesWithCacheControl()
 #if (Subscriptions)
                 .UseWebSockets()
                 .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())

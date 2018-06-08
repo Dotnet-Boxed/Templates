@@ -110,12 +110,12 @@ namespace ApiTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (ForwardedHeaders)
-                .UseForwardedHeaders()
-#endif
 #if (CorrelationId)
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
                 .UseCorrelationId()
+#endif
+#if (ForwardedHeaders)
+                .UseForwardedHeaders()
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()
@@ -123,7 +123,6 @@ namespace ApiTemplate
 #if (ResponseCompression)
                 .UseResponseCompression()
 #endif
-                .UseStaticFilesWithCacheControl()
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
@@ -135,6 +134,7 @@ namespace ApiTemplate
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
+                .UseStaticFilesWithCacheControl()
 #if (Swagger)
                 .UseMvc()
                 .UseSwagger()
