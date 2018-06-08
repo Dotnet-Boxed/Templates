@@ -25,8 +25,8 @@
     "Versioning": {
       "longName": "versioning"
     },
-    "LoadBalancer": {
-      "longName": "load-balancer"
+    "ForwardedHeaders": {
+      "longName": "forwarded-headers"
     },
     "ReverseProxyWebServer": {
       "longName": "reverse-proxy"

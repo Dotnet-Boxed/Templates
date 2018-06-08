@@ -110,7 +110,7 @@ namespace ApiTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (LoadBalancer)
+#if (ForwardedHeaders)
                 .UseForwardedHeaders()
 #endif
 #if (CorrelationId)

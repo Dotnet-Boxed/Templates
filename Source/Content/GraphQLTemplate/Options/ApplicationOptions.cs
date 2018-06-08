@@ -1,6 +1,6 @@
 namespace GraphQLTemplate.Options
 {
-#if (LoadBalancer)
+#if (ForwardedHeaders)
     using Microsoft.AspNetCore.Builder;
 #endif
     using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -16,7 +16,7 @@ namespace GraphQLTemplate.Options
         public CompressionOptions Compression { get; set; }
 
 #endif
-#if (LoadBalancer)
+#if (ForwardedHeaders)
         public ForwardedHeadersOptions ForwardedHeaders { get; set; }
 
 #endif

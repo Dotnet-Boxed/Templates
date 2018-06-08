@@ -43,7 +43,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Web Server
 
-- **LoadBalancer** - If you use a load balancer, updates the request scheme using the X-Forwarded-Proto HTTP header.
+- **ForwardedHeaders** - If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers.
 - **ReverseProxyWebServer** - The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.
   - **IIS** - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy.

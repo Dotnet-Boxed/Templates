@@ -157,11 +157,11 @@
       "description": "Enable API versioning to version API endpoints."
     },
     // Load Balancer
-    "LoadBalancer": {
+    "ForwardedHeaders": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
-      "description": "If you use a load balancer, updates the request scheme using the X-Forwarded-Proto HTTP header."
+      "description": "If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers."
     },
     // ReverseProxyWebServer
     "ReverseProxyWebServer": {

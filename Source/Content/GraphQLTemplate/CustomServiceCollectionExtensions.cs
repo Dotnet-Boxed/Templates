@@ -86,7 +86,7 @@ namespace GraphQLTemplate
                 .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
                 .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
 #endif
-#if (LoadBalancer)
+#if (ForwardedHeaders)
                 // Adds IOptions<ForwardedHeadersOptions> to the services container.
                 .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
 #endif
