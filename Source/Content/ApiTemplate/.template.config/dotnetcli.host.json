@@ -55,6 +55,9 @@
     "ResponseCaching": {
       "longName": "response-caching"
     },
+    "ResponseCompression": {
+      "longName": "response-compression"
+    },
     "XmlFormatter": {
       "longName": "xml-formatter"
     },

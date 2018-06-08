@@ -52,6 +52,9 @@
     "CorrelationId": {
       "longName": "correlation-id"
     },
+    "ResponseCompression": {
+      "longName": "response-compression"
+    },
     "RobotsTxt": {
       "longName": "robots-txt"
     },
