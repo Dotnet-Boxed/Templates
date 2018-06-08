@@ -1,7 +1,7 @@
 namespace GraphQLTemplate.Options
 {
     /// <summary>
-    /// The GZIP response compression options for the application.
+    /// The dynamic response compression options for the application.
     /// </summary>
     public class CompressionOptions
     {

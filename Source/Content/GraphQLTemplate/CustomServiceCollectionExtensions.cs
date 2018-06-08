@@ -1,7 +1,9 @@
 namespace GraphQLTemplate
 {
     using System;
+#if (ResponseCompression)
     using System.IO.Compression;
+#endif
     using System.Linq;
     using Boxed.AspNetCore;
 #if (CorrelationId)
@@ -19,7 +21,9 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
+#if (ResponseCompression)
     using Microsoft.AspNetCore.ResponseCompression;
+#endif
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
@@ -77,15 +81,19 @@ namespace GraphQLTemplate
                 // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
                 .Configure<ApplicationOptions>(configuration)
                 .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
-                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
-                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
+#if (ResponseCompression)
                 // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
                 .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value);
+                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
+#endif
+                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
+                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value);
 
+#if (ResponseCompression)
         /// <summary>
-        /// Adds response compression to enable GZIP compression of responses.
+        /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
+        /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
         public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
             services
@@ -99,9 +107,9 @@ namespace GraphQLTemplate
                             .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
-                .Configure<GzipCompressionProviderOptions>(
-                    options => options.Level = CompressionLevel.Optimal);
+                .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
 
+#endif
         /// <summary>
         /// Add custom routing settings which determines how URL's are generated.
         /// </summary>

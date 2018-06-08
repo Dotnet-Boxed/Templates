@@ -58,7 +58,9 @@ namespace ApiTemplate
 #if (ResponseCaching)
                 .AddResponseCaching()
 #endif
+#if (ResponseCompression)
                 .AddCustomResponseCompression()
+#endif
 #if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
 #endif
@@ -115,7 +117,9 @@ namespace ApiTemplate
 #if (ResponseCaching)
                 .UseResponseCaching()
 #endif
+#if (ResponseCompression)
                 .UseResponseCompression()
+#endif
                 .UseStaticFilesWithCacheControl()
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)

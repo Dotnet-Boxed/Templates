@@ -65,6 +65,13 @@
             "Constants/CorsPolicyName.cs"
           ]
         },
+        // ResponseCompression
+        {
+          "condition": "(!ResponseCompression)",
+          "exclude": [
+            "Options/CompressionOptions.cs"
+          ]
+        },
         // HumansTxt
         {
           "condition": "(!HumansTxt)",
@@ -252,6 +259,13 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Correlate requests between clients and this API. Pass a GUID in the X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier. The header is also reflected back in a response."
+    },
+    // ResponseCompression
+    "ResponseCompression": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability."
     },
     // RobotsTxt
     "RobotsTxt": {

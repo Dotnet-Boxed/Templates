@@ -1,7 +1,9 @@
 namespace ApiTemplate
 {
     using System;
+#if (ResponseCompression)
     using System.IO.Compression;
+#endif
     using System.Linq;
 #if (Swagger)
     using System.Reflection;
@@ -27,7 +29,9 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
     using Microsoft.AspNetCore.Mvc.Formatters;
+#if (ResponseCompression)
     using Microsoft.AspNetCore.ResponseCompression;
+#endif
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Configuration;
@@ -90,15 +94,19 @@ namespace ApiTemplate
                 // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
                 .Configure<ApplicationOptions>(configuration)
                 .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
-                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
-                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
+#if (ResponseCompression)
                 // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
                 .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value);
+                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
+#endif
+                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
+                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value);
 
+#if (ResponseCompression)
         /// <summary>
-        /// Adds response compression to enable GZIP compression of responses.
+        /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
+        /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
         public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
             services
@@ -112,9 +120,9 @@ namespace ApiTemplate
                             .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
-                .Configure<GzipCompressionProviderOptions>(
-                    options => options.Level = CompressionLevel.Optimal);
+                .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
 
+#endif
         /// <summary>
         /// Add custom routing settings which determines how URL's are generated.
         /// </summary>

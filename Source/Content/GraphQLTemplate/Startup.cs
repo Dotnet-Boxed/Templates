@@ -62,7 +62,9 @@ namespace GraphQLTemplate
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
+#if (ResponseCompression)
                 .AddCustomResponseCompression()
+#endif
 #if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
 #endif
@@ -103,7 +105,9 @@ namespace GraphQLTemplate
 #if (LoadBalancer)
                 .UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedProto })
 #endif
+#if (ResponseCompression)
                 .UseResponseCompression()
+#endif
                 .UseStaticFilesWithCacheControl()
                 // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.
                 .UseIf(

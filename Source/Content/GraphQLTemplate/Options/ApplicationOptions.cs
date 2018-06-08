@@ -9,8 +9,10 @@ namespace GraphQLTemplate.Options
     {
         public CacheProfileOptions CacheProfiles { get; set; }
 
+#if (ResponseCompression)
         public CompressionOptions Compression { get; set; }
 
+#endif
         public KestrelServerOptions Kestrel { get; set; }
     }
 }

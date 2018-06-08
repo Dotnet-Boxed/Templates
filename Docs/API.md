@@ -33,6 +33,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 #### Performance
 
 - **Response Caching** (Default=On) - Response caching is allows the use of the `[ResponseCache]` attribute on your action methods. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
+- **Response Compression** (Default=On) - Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability.
 
 #### Security
 
@@ -82,7 +83,6 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Performance
 
-- **GZip Compression** - Turned on by default for static and dynamic files making them smaller and quicker to download. 
 - **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.

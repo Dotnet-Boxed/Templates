@@ -24,7 +24,11 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.
 - **HttpsPort** - Port number to use for the HTTPS endpoint in launchSettings.json.
-- 
+
+#### Performance
+
+- **Response Compression** (Default=On) - Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability.
+
 #### Security
 
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled.
@@ -67,7 +71,6 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 #### Performance
 
-- **GZip Compression** - Turned on by default for static and dynamic files making them smaller and quicker to download. 
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for [GraphQL](http://graphql.org/).
 
