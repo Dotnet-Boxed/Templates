@@ -24,7 +24,7 @@ namespace Boxed.Templates.Test
             string arguments,
             CancellationToken cancellationToken)
         {
-            Console.WriteLine($"Executing {fileName} {arguments} from {workingDirectory}");
+            WriteLine($"Executing {fileName} {arguments} from {workingDirectory}");
 
             var output = new StringBuilder();
             var error = new StringBuilder();
@@ -42,6 +42,7 @@ namespace Boxed.Templates.Test
             }
             catch (TaskCanceledException)
             {
+                WriteLine($"Timed Out {fileName} {arguments} from {workingDirectory}");
                 result = ProcessResult.TimedOut;
             }
 
@@ -72,30 +73,24 @@ namespace Boxed.Templates.Test
             var stringBuilder = new StringBuilder();
 
             stringBuilder.AppendLine($"Result: {result}");
-            Console.Write("Result: ");
-            using (new ConsoleColorScope(result == ProcessResult.Succeeded ? ConsoleColor.Green : ConsoleColor.Red))
-            {
-                Console.WriteLine(result);
-            }
+            Write("Result: ");
+            WriteLine(result.ToString(), result == ProcessResult.Succeeded ? ConsoleColor.Green : ConsoleColor.Red);
 
             if (!string.IsNullOrEmpty(standardError))
             {
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"StandardError: {standardError}");
-                Console.WriteLine("StandardError: ");
-                using (new ConsoleColorScope(ConsoleColor.Red))
-                {
-                    Console.WriteLine(standardError);
-                    Console.WriteLine();
-                }
+                WriteLine("StandardError: ");
+                WriteLine(standardError, ConsoleColor.Red);
+                WriteLine();
             }
 
             if (!string.IsNullOrEmpty(standardOutput))
             {
                 stringBuilder.AppendLine();
                 stringBuilder.AppendLine($"StandardOutput: {standardOutput}");
-                Console.WriteLine();
-                Console.WriteLine($"StandardOutput: {standardOutput}");
+                WriteLine();
+                WriteLine($"StandardOutput: {standardOutput}");
             }
 
             return stringBuilder.ToString();
@@ -153,7 +148,16 @@ namespace Boxed.Templates.Test
                             cancellationToken));
                     }
 
-                    await Task.WhenAll(tasks);
+                    try
+                    {
+                        await Task.WhenAll(tasks);
+                    }
+                    catch
+                    {
+                        process.Kill();
+                        throw;
+                    }
+
                     return process.ExitCode;
                 }
             }
@@ -243,6 +247,45 @@ namespace Boxed.Templates.Test
             }
 
             return taskCompletionSource.Task;
+        }
+
+        private static void Write(string message, ConsoleColor? color = null) =>
+            UseColor(
+                () =>
+                {
+                    Debug.Write(message);
+                    Console.Write(message);
+                },
+                color);
+
+        private static void WriteLine()
+        {
+            Debug.WriteLine(string.Empty);
+            Console.WriteLine();
+        }
+
+        private static void WriteLine(string message, ConsoleColor? color = null) =>
+            UseColor(
+                () =>
+                {
+                    Debug.WriteLine(message);
+                    Console.WriteLine(message);
+                },
+                color);
+
+        private static void UseColor(Action action, ConsoleColor? color = null)
+        {
+            if (color.HasValue)
+            {
+                using (new ConsoleColorScope(color.Value))
+                {
+                    action();
+                }
+            }
+            else
+            {
+                action();
+            }
         }
     }
 }
