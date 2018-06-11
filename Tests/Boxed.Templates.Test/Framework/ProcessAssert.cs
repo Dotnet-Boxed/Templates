@@ -11,11 +11,27 @@ namespace Boxed.Templates.Test
 
     public static class ProcessAssert
     {
+        private static readonly List<int> ProcessIds = new List<int>();
+
         private enum ProcessResult
         {
             Succeeded,
             Failed,
             TimedOut,
+        }
+
+        public static void KillProcesses()
+        {
+            foreach (var processId in ProcessIds)
+            {
+                using (var process = Process.GetProcessById(processId))
+                {
+                    TestLogger.WriteLine($"Killing process {processId}");
+                    process.Kill();
+                }
+            }
+
+            ProcessIds.Clear();
         }
 
         public static async Task AssertStart(
@@ -120,6 +136,7 @@ namespace Boxed.Templates.Test
                 using (var process = new Process() { StartInfo = processStartInfo })
                 {
                     process.Start();
+                    ProcessIds.Add(process.Id);
 
                     var tasks = new List<Task>(3) { process.WaitForExitAsync(cancellationToken) };
                     if (outputTextWriter != null)
