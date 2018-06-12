@@ -8,7 +8,7 @@
 
 # Define directories.
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-TOOLS_DIR=$SCRIPT_DIR/cake-tools
+TOOLS_DIR=$SCRIPT_DIR/tools
 NUGET_EXE=$TOOLS_DIR/nuget.exe
 CAKE_EXE=$TOOLS_DIR/Cake/Cake.exe
 PACKAGES_CONFIG=$TOOLS_DIR/packages.config
@@ -54,9 +54,9 @@ fi
 # Make sure that packages.config exist.
 if [ ! -f "$TOOLS_DIR/packages.config" ]; then
     echo "Downloading packages.config..."
-    curl -Lsfo "$TOOLS_DIR/packages.config" http://cakebuild.net/download/bootstrapper/packages
+    curl -Lsfo "$TOOLS_DIR/packages.config" https://cakebuild.net/download/bootstrapper/packages
     if [ $? -ne 0 ]; then
-        echo "An error occured while downloading packages.config."
+        echo "An error occurred while downloading packages.config."
         exit 1
     fi
 fi
@@ -66,7 +66,7 @@ if [ ! -f "$NUGET_EXE" ]; then
     echo "Downloading NuGet..."
     curl -Lsfo "$NUGET_EXE" https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
     if [ $? -ne 0 ]; then
-        echo "An error occured while downloading nuget.exe."
+        echo "An error occurred while downloading nuget.exe."
         exit 1
     fi
 fi
