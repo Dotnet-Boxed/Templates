@@ -1,11 +1,10 @@
 namespace Boxed.Templates.Test
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Xunit;
 
-    public class GraphQLTemplateTest : IDisposable
+    public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
@@ -53,7 +52,5 @@ namespace Boxed.Templates.Test
                     });
             }
         }
-
-        public void Dispose() => ProcessAssert.KillProcesses();
     }
 }
