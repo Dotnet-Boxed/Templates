@@ -23,6 +23,7 @@ build_script:
 # Install .NET Core SDK
 - ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.1.300
 - ps: .\build.ps1 -Verbosity Diagnostic
+- ps: Write-Output "Exit Code: $LastExitCode"
 
 test: off
 
