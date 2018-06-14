@@ -19,6 +19,9 @@ namespace GraphQLTemplate
 #endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
+#if (!ForwardedHeaders && HostFiltering)
+    using Microsoft.AspNetCore.HostFiltering;
+#endif
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
 #if (ResponseCompression)
@@ -89,6 +92,9 @@ namespace GraphQLTemplate
 #if (ForwardedHeaders)
                 // Adds IOptions<ForwardedHeadersOptions> to the services container.
                 .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+#elif (HostFiltering)
+                // Adds IOptions<HostFilteringOptions> to the services container.
+                .Configure<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
                 // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
                 .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))

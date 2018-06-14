@@ -156,12 +156,19 @@
       "defaultValue": "true",
       "description": "Enable API versioning to version API endpoints."
     },
-    // Load Balancer
+    // Forwarded Headers
     "ForwardedHeaders": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
       "description": "If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers."
+    },
+    // Host Filtering
+    "HostFiltering": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "A white-list of host names allowed by the Kestrel web server e.g. example.com. You don't need this if you are using a properly configured reverse proxy."
     },
     // ReverseProxyWebServer
     "ReverseProxyWebServer": {

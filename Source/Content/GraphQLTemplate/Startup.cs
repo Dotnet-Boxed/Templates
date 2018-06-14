@@ -100,6 +100,8 @@ namespace GraphQLTemplate
 #endif
 #if (ForwardedHeaders)
                 .UseForwardedHeaders()
+#elif (HostFiltering)
+                .UseHostFiltering()
 #endif
 #if (ResponseCompression)
                 .UseResponseCompression()

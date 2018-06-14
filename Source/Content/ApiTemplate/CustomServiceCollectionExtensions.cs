@@ -24,6 +24,9 @@ namespace ApiTemplate
     using CorrelationId;
 #endif
     using Microsoft.AspNetCore.Builder;
+#if (!ForwardedHeaders && HostFiltering)
+    using Microsoft.AspNetCore.HostFiltering;
+#endif
     using Microsoft.AspNetCore.Hosting;
 #if (Versioning)
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -97,6 +100,9 @@ namespace ApiTemplate
 #if (ForwardedHeaders)
                 // Adds IOptions<ForwardedHeadersOptions> to the services container.
                 .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+#elif (HostFiltering)
+                // Adds IOptions<HostFilteringOptions> to the services container.
+                .Configure<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
 #if (ResponseCompression)
                 // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.

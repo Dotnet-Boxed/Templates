@@ -2,6 +2,8 @@ namespace ApiTemplate.Options
 {
 #if (ForwardedHeaders)
     using Microsoft.AspNetCore.Builder;
+#elif (HostFiltering)
+    using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Server.Kestrel.Core;
 
@@ -18,6 +20,9 @@ namespace ApiTemplate.Options
 #endif
 #if (ForwardedHeaders)
         public ForwardedHeadersOptions ForwardedHeaders { get; set; }
+
+#elif (HostFiltering)
+        public HostFilteringOptions HostFiltering { get; set; }
 
 #endif
         public KestrelServerOptions Kestrel { get; set; }

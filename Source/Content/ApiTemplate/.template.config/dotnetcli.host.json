@@ -28,6 +28,9 @@
     "ForwardedHeaders": {
       "longName": "forwarded-headers"
     },
+    "HostFiltering": {
+      "longName": "host-filtering"
+    },
     "ReverseProxyWebServer": {
       "longName": "reverse-proxy"
     },

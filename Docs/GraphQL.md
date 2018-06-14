@@ -34,10 +34,11 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled.
 - **HstsPreload** (Default=Off) - Enable Strict Transport Security (HSTS) HTTP header with preloading.
 - **CORS** (Default=On) - Browser security prevents a web page from making AJAX requests to another domain.
+- **HostFiltering** (Default=On) - A white-list of host names allowed by the Kestrel web server e.g. example.com. You don't need this if you are using a properly configured reverse proxy.
 
 #### Web Server
 
-- **ForwardedHeaders** - If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers.
+- **ForwardedHeaders** (Default=On) - If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers.
 - **ReverseProxyWebServer** - The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.
   - **IIS** - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy.

@@ -116,6 +116,8 @@ namespace ApiTemplate
 #endif
 #if (ForwardedHeaders)
                 .UseForwardedHeaders()
+#elif (HostFiltering)
+                .UseHostFiltering()
 #endif
 #if (ResponseCaching)
                 .UseResponseCaching()
