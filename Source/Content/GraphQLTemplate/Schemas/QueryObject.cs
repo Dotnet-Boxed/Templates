@@ -83,7 +83,7 @@ namespace GraphQLTemplate.Schemas
                 .Bidirectional()
                 // Set the maximum size of a page, use .ReturnAll() to set no maximum size.
                 .PageSize(MaxPageSize)
-                .Resolve(context => ResolveConnection(droidRepository, context).GetAwaiter().GetResult());
+                .ResolveAsync(context => ResolveConnection(droidRepository, context));
         }
 
         private async static Task<object> ResolveConnection(
@@ -91,10 +91,6 @@ namespace GraphQLTemplate.Schemas
             ResolveConnectionContext<object> context)
         {
             var first = context.First;
-            if (!context.First.HasValue && !context.Last.HasValue)
-            {
-                first = context.PageSize;
-            }
             var afterCursor = Cursor.FromNullableCursor<DateTime>(context.After);
             var last = context.Last;
             var beforeCursor = Cursor.FromNullableCursor<DateTime>(context.Before);
