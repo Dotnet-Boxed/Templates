@@ -55,14 +55,14 @@ namespace Boxed.Templates.Test
             this Project project,
             Func<HttpClient, HttpClient, Task> action,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
-            TimeSpan? delay = null)
+            TimeSpan? startupDelay = null)
         {
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpsPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, delay, httpUrl, httpsUrl);
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, startupDelay, httpUrl, httpsUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -132,7 +132,7 @@ namespace Boxed.Templates.Test
 
         private static async Task<IDisposable> DotnetRunInternal(
             string directoryPath,
-            TimeSpan? delay = null,
+            TimeSpan? startupDelay = null,
             params string[] urls)
         {
             var cancellationTokenSource = new CancellationTokenSource();
@@ -142,7 +142,7 @@ namespace Boxed.Templates.Test
                 "dotnet",
                 $"run --urls {urlsParameter}",
                 cancellationTokenSource.Token);
-            await Task.Delay(delay ?? TimeSpan.FromSeconds(2));
+            await Task.Delay(startupDelay ?? TimeSpan.FromSeconds(5));
 
             return new DisposableAction(
                 () =>

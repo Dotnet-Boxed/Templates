@@ -154,7 +154,11 @@ namespace Boxed.Templates.Test
                     }
                     catch
                     {
-                        process.Kill();
+                        if (!process.HasExited)
+                        {
+                            process.Kill();
+                        }
+
                         throw;
                     }
 

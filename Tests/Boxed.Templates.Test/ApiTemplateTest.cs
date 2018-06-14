@@ -24,6 +24,8 @@ namespace Boxed.Templates.Test
                         httpResponse.EnsureSuccessStatusCode();
                         var httpsResponse = await httpsClient.GetAsync("status");
                         httpsResponse.EnsureSuccessStatusCode();
+                        var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
+                        swaggerJsonResponse.EnsureSuccessStatusCode();
                     });
             }
         }
