@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Xml.Linq;
 
 var target = Argument("Target", "Default");
