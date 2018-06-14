@@ -56,6 +56,7 @@ Task("Restore")
 
 Task("Test")
     .IsDependentOn("Build")
+    .ContinueOnError()
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
@@ -101,5 +102,18 @@ Task("Pack")
 
 Task("Default")
     .IsDependentOn("Pack");
+
+Teardown(context =>
+{
+    // Appveyor is failing to exit the cake script.
+    if (AppVeyor.IsRunningOnAppVeyor)
+    {
+        foreach (var process in Process.GetProcessesByName("dotnet"))
+        {
+            process.Kill();
+        }
+    }
+});
+
 
 RunTarget(target);

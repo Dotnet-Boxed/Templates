@@ -9,7 +9,7 @@ namespace Boxed.Templates.Test
         public GraphQLTemplateTest() =>
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
 
-        [Fact(Skip = "Appveyor having trouble")]
+        [Fact]
         public async Task Build_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -28,7 +28,7 @@ namespace Boxed.Templates.Test
             }
         }
 
-        [Fact(Skip = "Appveyor having trouble")]
+        [Fact]
         public async Task Build_HttpsEverywhereFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
