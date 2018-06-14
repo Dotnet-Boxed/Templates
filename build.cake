@@ -104,17 +104,4 @@ Task("Pack")
 Task("Default")
     .IsDependentOn("Pack");
 
-Teardown(context =>
-{
-    // Appveyor is failing to exit the cake script.
-    if (AppVeyor.IsRunningOnAppVeyor)
-    {
-        foreach (var process in Process.GetProcessesByName("dotnet"))
-        {
-            process.Kill();
-        }
-    }
-});
-
-
 RunTarget(target);
