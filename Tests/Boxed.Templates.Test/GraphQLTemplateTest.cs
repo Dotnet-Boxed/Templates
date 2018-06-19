@@ -11,13 +11,22 @@ namespace Boxed.Templates.Test
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
 
         [Fact]
-        public async Task Build_Default_Successful()
+        public async Task RestoreAndBuild_Default_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew("graphql", "RestoreAndBuild");
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+            }
+        }
+
+        [Fact]
+        public async Task Run_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("graphql", "Default");
-                await project.DotnetRestore();
-                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
@@ -31,7 +40,7 @@ namespace Boxed.Templates.Test
         }
 
         [Fact]
-        public async Task Build_HttpsEverywhereFalse_Successful()
+        public async Task Run_HttpsEverywhereFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
@@ -42,8 +51,6 @@ namespace Boxed.Templates.Test
                     {
                         { "https-everywhere", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient) =>
                     {

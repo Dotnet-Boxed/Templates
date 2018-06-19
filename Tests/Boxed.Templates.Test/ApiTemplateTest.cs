@@ -11,13 +11,22 @@ namespace Boxed.Templates.Test
             TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.csproj").Wait();
 
         [Fact]
-        public async Task Build_Default_Successful()
+        public async Task RestoreAndBuild_Default_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew("api", "RestoreAndBuild");
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+            }
+        }
+
+        [Fact]
+        public async Task Run_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("api", "Default");
-                await project.DotnetRestore();
-                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
@@ -34,7 +43,7 @@ namespace Boxed.Templates.Test
         }
 
         [Fact]
-        public async Task Build_HttpsEverywhereFalse_Successful()
+        public async Task Run_HttpsEverywhereFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
@@ -45,8 +54,6 @@ namespace Boxed.Templates.Test
                     {
                         { "https-everywhere", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
                 await project.DotnetRun(
                     async httpClient =>
                     {
@@ -57,7 +64,7 @@ namespace Boxed.Templates.Test
         }
 
         [Fact]
-        public async Task Build_SwaggerFalse_Successful()
+        public async Task Run_SwaggerFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
@@ -68,8 +75,6 @@ namespace Boxed.Templates.Test
                     {
                         { "swagger", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
