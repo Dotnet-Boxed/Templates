@@ -53,6 +53,44 @@ namespace Boxed.Templates.Test
 
         public static async Task DotnetRun(
             this Project project,
+            Func<HttpClient, Task> action,
+            Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
+            TimeSpan? startupDelay = null)
+        {
+            var httpPort = PortHelper.GetFreeTcpPort();
+            var httpUrl = $"http://localhost:{httpPort}";
+
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, startupDelay, httpUrl);
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
+            };
+            var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };
+
+            Exception unhandledException = null;
+            try
+            {
+                await action(httpClient);
+            }
+            catch (Exception exception)
+            {
+                unhandledException = exception;
+            }
+
+            httpClient.Dispose();
+            httpClientHandler.Dispose();
+            dotnetRun.Dispose();
+
+            if (unhandledException != null)
+            {
+                Assert.False(true, unhandledException.ToString());
+            }
+        }
+
+        public static async Task DotnetRun(
+            this Project project,
             Func<HttpClient, HttpClient, Task> action,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? startupDelay = null)
@@ -66,6 +104,7 @@ namespace Boxed.Templates.Test
 
             var httpClientHandler = new HttpClientHandler()
             {
+                AllowAutoRedirect = false,
                 ServerCertificateCustomValidationCallback = validateCertificate ?? DefaultValidateCertificate,
             };
             var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(httpUrl) };

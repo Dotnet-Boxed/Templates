@@ -1,6 +1,7 @@
 namespace Boxed.Templates.Test
 {
     using System.Collections.Generic;
+    using System.Net;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -21,11 +22,13 @@ namespace Boxed.Templates.Test
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("status");
-                        httpResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.NoContent, httpResponse.StatusCode);
+
                         var httpsResponse = await httpsClient.GetAsync("status");
-                        httpsResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.NoContent, httpsResponse.StatusCode);
+
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
-                        swaggerJsonResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
                     });
             }
         }
@@ -45,12 +48,33 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async (httpClient, httpsClient) =>
+                    async httpClient =>
                     {
                         var httpResponse = await httpClient.GetAsync("status");
-                        httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await httpsClient.GetAsync("status");
-                        httpsResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.NoContent, httpResponse.StatusCode);
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Build_SwaggerFalse_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "api",
+                    "SwaggerFalse",
+                    new Dictionary<string, string>()
+                    {
+                        { "swagger", "false" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async (httpClient, httpsClient) =>
+                    {
+                        var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
+                        Assert.Equal(HttpStatusCode.NotFound, swaggerJsonResponse.StatusCode);
                     });
             }
         }

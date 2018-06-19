@@ -1,6 +1,7 @@
 namespace Boxed.Templates.Test
 {
     using System.Collections.Generic;
+    using System.Net;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -21,9 +22,10 @@ namespace Boxed.Templates.Test
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
-                        httpResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+
                         var httpsResponse = await httpsClient.GetAsync("/");
-                        httpsResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });
             }
         }
@@ -43,12 +45,10 @@ namespace Boxed.Templates.Test
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
-                    async (httpClient, httpsClient) =>
+                    async (httpClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
-                        httpResponse.EnsureSuccessStatusCode();
-                        var httpsResponse = await httpsClient.GetAsync("/");
-                        httpsResponse.EnsureSuccessStatusCode();
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });
             }
         }
