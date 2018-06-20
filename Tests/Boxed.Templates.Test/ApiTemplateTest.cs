@@ -1,6 +1,8 @@
 namespace Boxed.Templates.Test
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using Xunit;
@@ -10,12 +12,19 @@ namespace Boxed.Templates.Test
         public ApiTemplateTest() =>
             TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.csproj").Wait();
 
-        [Fact]
-        public async Task RestoreAndBuild_Default_Successful()
+        [Theory]
+        [InlineData("Default")]
+        [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
+        [InlineData("NoHostFiltering", "host-filtering=false")]
+        [InlineData("NoForwardedHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
+        public async Task RestoreAndBuild_Default_Successful(string name, params string[] arguments)
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew("api", "RestoreAndBuild");
+                var dictionary = arguments
+                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .ToDictionary(x => x.First(), x => x.Last());
+                var project = await tempDirectory.DotnetNew("api", name, dictionary);
                 await project.DotnetRestore();
                 await project.DotnetBuild();
             }
