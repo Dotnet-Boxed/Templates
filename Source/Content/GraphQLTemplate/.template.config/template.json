@@ -167,6 +167,10 @@
       "datatype": "choice",
       "choices": [
         {
+          "choice": "None",
+          "description": "Use Kestrel directly instead of a reverse proxy."
+        },
+        {
           "choice": "IIS",
           "description": "A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps."
         },

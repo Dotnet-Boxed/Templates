@@ -40,6 +40,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 - **ForwardedHeaders** (Default=On) - If you use a load balancer, updates the request host and scheme using the X-Forwarded-Host and X-Forwarded-Proto HTTP headers.
 - **ReverseProxyWebServer** - The internet facing reverse proxy web server you want to use in front of the primary web server to host the site.
+  - **None** - Use Kestrel directly instead of a reverse proxy.
   - **IIS** - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy.
   - **Both** (Default) - Support both reverse proxy web servers.
