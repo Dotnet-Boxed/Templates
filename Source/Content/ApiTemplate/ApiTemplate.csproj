@@ -48,9 +48,9 @@
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="2.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="1.1.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.1.0" Condition="'$(Azure)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.1.1" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.1.1" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="2.1.0" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="2.2.0" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
