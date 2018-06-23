@@ -15,6 +15,7 @@ namespace ApiTemplate
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
+    using Boxed.AspNetCore;
 #if (Swagger)
     using Boxed.AspNetCore.Swagger;
     using Boxed.AspNetCore.Swagger.OperationFilters;
@@ -196,19 +197,21 @@ namespace ApiTemplate
                         options.CacheProfiles.Add(keyValuePair);
                     }
 
-                    // Add RESTful JSON media type to the JSON input and output formatters. See http://restfuljson.org/
-                    options
+                    var jsonInputFormatterMediaTypes = options
                         .InputFormatters
                         .OfType<JsonInputFormatter>()
                         .First()
-                        .SupportedMediaTypes
-                        .Add("application/vnd.restful+json");
-                    options
+                        .SupportedMediaTypes;
+                    var jsonOutputFormatterMediaTypes = options
                         .OutputFormatters
                         .OfType<JsonOutputFormatter>()
                         .First()
-                        .SupportedMediaTypes
-                        .Add("application/vnd.restful+json");
+                        .SupportedMediaTypes;
+
+                    // Add RESTful JSON media type (application/vnd.restful+json) to the JSON input and output formatters.
+                    // See http://restfuljson.org/
+                    jsonInputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
+                    jsonOutputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
 
                     // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
                     options.OutputFormatters.RemoveType<StreamOutputFormatter>();
