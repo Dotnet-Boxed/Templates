@@ -213,16 +213,32 @@ namespace Boxed.Templates.Test
                         await httpClient.GetAsync("/");
                     }
                     catch (HttpRequestException exception)
-                    when (exception.GetBaseException() is SocketException socketException &&
-                        string.Equals(
-                            socketException.Message,
-                            "No connection could be made because the target machine actively refused it",
-                            StringComparison.Ordinal))
+                    when (IsApiDownException(exception))
                     {
                         await Task.Delay(intervalMilliseconds);
                     }
                 }
             }
+        }
+
+        private static bool IsApiDownException(Exception exception)
+        {
+            var result = false;
+            if (exception.GetBaseException() is SocketException socketException)
+            {
+                result =
+                    string.Equals(
+                        socketException.Message,
+                        "No connection could be made because the target machine actively refused it",
+                        StringComparison.Ordinal)
+                    ||
+                    string.Equals(
+                        socketException.Message,
+                        "Connection refused",
+                        StringComparison.Ordinal);
+            }
+
+            return result;
         }
 
         private static bool DefaultValidateCertificate(
