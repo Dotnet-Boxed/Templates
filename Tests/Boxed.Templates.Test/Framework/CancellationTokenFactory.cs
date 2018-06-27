@@ -6,7 +6,7 @@ namespace Boxed.Templates.Test
     public static class CancellationTokenFactory
     {
         public static CancellationToken GetCancellationToken(TimeSpan? timeout) =>
-            GetCancellationToken(timeout ?? TimeSpan.FromSeconds(30));
+            GetCancellationToken(timeout ?? TimeSpan.FromMinutes(1));
 
         public static CancellationToken GetCancellationToken(TimeSpan timeout) =>
             new CancellationTokenSource(timeout).Token;
