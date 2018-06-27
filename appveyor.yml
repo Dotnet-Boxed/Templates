@@ -24,7 +24,6 @@ environment:
     secure: aunGGWt32irQiOTX2wIO6e2Y5Ga0girA3xSUsmQv6E9d6ohHdbK5HJpXpmxW9QM3
 
 build_script:
-# Install .NET Core SDK
 - ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.1.301
 - ps: .\build.ps1
 - sh: sudo apt-get update
