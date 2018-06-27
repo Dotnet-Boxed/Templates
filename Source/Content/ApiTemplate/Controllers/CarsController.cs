@@ -68,8 +68,8 @@ namespace ApiTemplate.Controllers
         /// <response code="404">A car with the specified ID was not found.</response>
 #endif
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public Task<IActionResult> Delete(
             [FromServices] IDeleteCarCommand command,
             int carId,
@@ -91,8 +91,8 @@ namespace ApiTemplate.Controllers
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
         [HttpHead("{carId}")]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status304NotModified)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status304NotModified)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public Task<IActionResult> Get(
             [FromServices] IGetCarCommand command,
             int carId,
@@ -116,7 +116,7 @@ namespace ApiTemplate.Controllers
         [HttpHead("")]
         [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public Task<IActionResult> GetPage(
             [FromServices] IGetCarPageCommand command,
             [FromQuery] PageOptions pageOptions,
@@ -139,7 +139,7 @@ namespace ApiTemplate.Controllers
         [HttpPatch("{carId}", Name = CarsControllerRoute.PatchCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public Task<IActionResult> Patch(
             [FromServices] IPatchCarCommand command,
             int carId,
@@ -183,7 +183,7 @@ namespace ApiTemplate.Controllers
         [HttpPut("{carId}", Name = CarsControllerRoute.PutCar)]
         [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public Task<IActionResult> Put(
             [FromServices] IPutCarCommand command,
             int carId,

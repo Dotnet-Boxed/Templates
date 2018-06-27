@@ -32,8 +32,8 @@ namespace ApiTemplate.Controllers
 #endif
         [HttpGet(Name = StatusControllerRoute.GetStatus)]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(void), StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
         public async Task<IActionResult> GetStatus()
         {
             try
