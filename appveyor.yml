@@ -2,7 +2,9 @@
 
 version: '{build}'
 
-image: Visual Studio 2017
+image:
+  - Visual Studio 2017
+  - Ubuntu
 install:
 - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 
@@ -11,6 +13,8 @@ pull_requests:
   do_not_increment_build_number: true
 
 environment:
+  # Run sh scripts on Linux
+  APPVEYOR_YML_DISABLE_PS_LINUX: true
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   # Disable sending usage data to Microsoft
@@ -23,7 +27,10 @@ build_script:
 # Install .NET Core SDK
 - ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.1.300
 - ps: .\build.ps1 -Verbosity Diagnostic
-- ps: $LastExitCode
+- sh: apt-get install apt-transport-https
+- sh: apt-get update
+- sh: apt-get install dotnet-sdk-2.1
+- sh: ./build.sh --verbosity=Diagnostic
 
 test: off
 
