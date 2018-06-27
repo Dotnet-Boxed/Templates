@@ -211,6 +211,7 @@ namespace Boxed.Templates.Test
                     try
                     {
                         await httpClient.GetAsync("/");
+                        return;
                     }
                     catch (HttpRequestException exception)
                     when (IsApiDownException(exception))
@@ -218,6 +219,9 @@ namespace Boxed.Templates.Test
                         await Task.Delay(intervalMilliseconds);
                     }
                 }
+
+                throw new TimeoutException(
+                    $"Timed out after waiting {timeout} for application to start using dotnet run.");
             }
         }
 
