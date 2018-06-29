@@ -249,6 +249,13 @@ namespace Boxed.Templates.Test
                     "The server returned an invalid or unrecognized response.",
                     StringComparison.Ordinal);
             }
+            else if (exception is HttpRequestException httpRequestException)
+            {
+                result = string.Equals(
+                    httpRequestException.Message,
+                    "The server returned an invalid or unrecognized response.",
+                    StringComparison.Ordinal);
+            }
 
             return result;
         }
