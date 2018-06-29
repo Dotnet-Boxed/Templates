@@ -228,7 +228,8 @@ namespace Boxed.Templates.Test
         private static bool IsApiDownException(Exception exception)
         {
             var result = false;
-            if (exception.GetBaseException() is SocketException socketException)
+            var baseException = exception.GetBaseException();
+            if (baseException is SocketException socketException)
             {
                 result =
                     string.Equals(
@@ -240,6 +241,13 @@ namespace Boxed.Templates.Test
                         socketException.Message,
                         "Connection refused",
                         StringComparison.Ordinal);
+            }
+            else if (baseException is IOException ioException)
+            {
+                result = string.Equals(
+                    ioException.Message,
+                    "The server returned an invalid or unrecognized response.",
+                    StringComparison.Ordinal);
             }
 
             return result;
