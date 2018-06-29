@@ -241,11 +241,6 @@ namespace Boxed.Templates.Test
                     string.Equals(
                         socketException.Message,
                         "No connection could be made because the target machine actively refused it",
-                        StringComparison.Ordinal)
-                    ||
-                    string.Equals(
-                        socketException.Message,
-                        "Connection refused",
                         StringComparison.Ordinal);
             }
 
