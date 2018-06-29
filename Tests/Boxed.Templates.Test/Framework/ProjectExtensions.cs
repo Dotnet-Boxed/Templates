@@ -204,7 +204,13 @@ namespace Boxed.Templates.Test
         private static async Task WaitForStart(string url, TimeSpan timeout)
         {
             const int intervalMilliseconds = 100;
-            using (var httpClient = new HttpClient() { BaseAddress = new Uri(url) })
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
+            };
+            using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
             {
                 for (var i = 0; i < (timeout.TotalMilliseconds / intervalMilliseconds); ++i)
                 {
@@ -241,20 +247,6 @@ namespace Boxed.Templates.Test
                         socketException.Message,
                         "Connection refused",
                         StringComparison.Ordinal);
-            }
-            else if (baseException is IOException ioException)
-            {
-                result = string.Equals(
-                    ioException.Message,
-                    "The server returned an invalid or unrecognized response.",
-                    StringComparison.Ordinal);
-            }
-            else if (exception is HttpRequestException httpRequestException)
-            {
-                result = string.Equals(
-                    httpRequestException.Message,
-                    "The server returned an invalid or unrecognized response.",
-                    StringComparison.Ordinal);
             }
 
             return result;
