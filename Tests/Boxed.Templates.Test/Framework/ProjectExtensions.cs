@@ -183,7 +183,7 @@ namespace Boxed.Templates.Test
                 "dotnet",
                 $"run --urls {urlsParameter}",
                 cancellationTokenSource.Token);
-            await WaitForStart(urls.First(), timeout ?? TimeSpan.FromSeconds(10));
+            await WaitForStart(urls.First(), timeout ?? TimeSpan.FromMinutes(1));
 
             return new DisposableAction(
                 () =>
