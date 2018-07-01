@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Boxed.Templates</id>
-    <version>1.3.0-*</version>
+    <version>1.4.0-*</version>
     <title>.NET Boxed Project &amp; Item Templates</title>
     <authors>Muhammad Rehan Saeed (RehanSaeed.com)</authors>
     <description>Project templates with batteries included, providing the minimum amount of code required to get you going.</description>
