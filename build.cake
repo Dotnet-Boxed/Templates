@@ -57,7 +57,6 @@ Task("Restore")
 
 Task("Test")
     .IsDependentOn("Build")
-    .ContinueOnError()
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))

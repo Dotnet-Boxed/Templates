@@ -3,8 +3,10 @@ namespace Boxed.Templates.Test
     using System;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Net.Http;
     using System.Net.Security;
+    using System.Net.Sockets;
     using System.Security.Cryptography.X509Certificates;
     using System.Threading;
     using System.Threading.Tasks;
@@ -55,12 +57,12 @@ namespace Boxed.Templates.Test
             this Project project,
             Func<HttpClient, Task> action,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
-            TimeSpan? startupDelay = null)
+            TimeSpan? timeout = null)
         {
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, startupDelay, httpUrl);
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, timeout, httpUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -93,14 +95,14 @@ namespace Boxed.Templates.Test
             this Project project,
             Func<HttpClient, HttpClient, Task> action,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
-            TimeSpan? startupDelay = null)
+            TimeSpan? timeout = null)
         {
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpsPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, startupDelay, httpUrl, httpsUrl);
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, timeout, httpUrl, httpsUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -171,7 +173,7 @@ namespace Boxed.Templates.Test
 
         private static async Task<IDisposable> DotnetRunInternal(
             string directoryPath,
-            TimeSpan? startupDelay = null,
+            TimeSpan? timeout = null,
             params string[] urls)
         {
             var cancellationTokenSource = new CancellationTokenSource();
@@ -181,7 +183,7 @@ namespace Boxed.Templates.Test
                 "dotnet",
                 $"run --urls {urlsParameter}",
                 cancellationTokenSource.Token);
-            await Task.Delay(startupDelay ?? TimeSpan.FromSeconds(5));
+            await WaitForStart(urls.First(), timeout ?? TimeSpan.FromMinutes(1));
 
             return new DisposableAction(
                 () =>
@@ -197,6 +199,57 @@ namespace Boxed.Templates.Test
                     {
                     }
                 });
+        }
+
+        private static async Task WaitForStart(string url, TimeSpan timeout)
+        {
+            const int intervalMilliseconds = 100;
+
+            var httpClientHandler = new HttpClientHandler()
+            {
+                AllowAutoRedirect = false,
+                ServerCertificateCustomValidationCallback = DefaultValidateCertificate,
+            };
+            using (var httpClient = new HttpClient(httpClientHandler) { BaseAddress = new Uri(url) })
+            {
+                for (var i = 0; i < (timeout.TotalMilliseconds / intervalMilliseconds); ++i)
+                {
+                    try
+                    {
+                        await httpClient.GetAsync("/");
+                        return;
+                    }
+                    catch (HttpRequestException exception)
+                    when (IsApiDownException(exception))
+                    {
+                        await Task.Delay(intervalMilliseconds);
+                    }
+                }
+
+                throw new TimeoutException(
+                    $"Timed out after waiting {timeout} for application to start using dotnet run.");
+            }
+        }
+
+        private static bool IsApiDownException(Exception exception)
+        {
+            var result = false;
+            var baseException = exception.GetBaseException();
+            if (baseException is SocketException socketException)
+            {
+                result =
+                    string.Equals(
+                        socketException.Message,
+                        "No connection could be made because the target machine actively refused it",
+                        StringComparison.Ordinal)
+                    ||
+                    string.Equals(
+                        socketException.Message,
+                        "Connection refused",
+                        StringComparison.Ordinal);
+            }
+
+            return result;
         }
 
         private static bool DefaultValidateCertificate(
