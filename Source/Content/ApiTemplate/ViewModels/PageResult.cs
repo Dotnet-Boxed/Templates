@@ -3,7 +3,7 @@ namespace ApiTemplate.ViewModels
     using System.Collections.Generic;
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.AspNetCore.SwaggerGen;
+    using Swashbuckle.AspNetCore.Annotations;
 
     [SwaggerSchemaFilter(typeof(PageResultCarSchemaFilter))]
 #endif

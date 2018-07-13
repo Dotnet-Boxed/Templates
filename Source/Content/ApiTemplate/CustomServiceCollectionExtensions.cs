@@ -191,6 +191,7 @@ namespace ApiTemplate
                     options.DescribeAllEnumsAsStrings();
                     options.DescribeAllParametersInCamelCase();
                     options.DescribeStringEnumsInCamelCase();
+                    options.EnableAnnotations();
 
                     // Add the XML comment file for this assembly, so it's contents can be displayed.
                     options.IncludeXmlCommentsIfExists(assembly);

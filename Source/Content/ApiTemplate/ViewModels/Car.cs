@@ -2,7 +2,7 @@ namespace ApiTemplate.ViewModels
 {
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.AspNetCore.SwaggerGen;
+    using Swashbuckle.AspNetCore.Annotations;
 
     /// <summary>
     /// A make and model of car.

@@ -3,7 +3,7 @@ namespace ApiTemplate.ViewModels
     using System.ComponentModel.DataAnnotations;
 #if (Swagger)
     using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.AspNetCore.SwaggerGen;
+    using Swashbuckle.AspNetCore.Annotations;
 #endif
 
 #if (Swagger)
