@@ -19,6 +19,9 @@
     "AuthorXmlEncoded": {
       "isHidden": true
     },
+    "TreatWarningsAsErrors": {
+      "longName": "treat-warnings-as-errors"
+    },
     "Swagger": {
       "longName": "swagger"
     },

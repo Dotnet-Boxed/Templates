@@ -22,6 +22,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **Title** - The name of the project which determines the assembly product name.
 - **Description** - A description of the project which determines the assembly description.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
+- **TreatWarningsAsErrors** - Treat warnings as errors.
 - **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.
 - **HttpsPort** - Port number to use for the HTTPS endpoint in launchSettings.json.
 

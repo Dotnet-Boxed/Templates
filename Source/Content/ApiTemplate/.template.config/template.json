@@ -141,6 +141,13 @@
       "valueSource": "Author",
       "valueTransform": "xmlEncode"
     },
+    // TreatWarningsAsErrors
+    "TreatWarningsAsErrors": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Treat warnings as errors."
+    },
 
     // Swagger
     "Swagger": {

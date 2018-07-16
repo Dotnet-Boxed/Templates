@@ -27,6 +27,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Title** - The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI.
 - **Description** - A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
+- **TreatWarningsAsErrors** - Treat warnings as errors.
 - **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.
 - **HttpsPort** - Port number to use for the HTTPS endpoint in launchSettings.json.
 
