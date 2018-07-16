@@ -54,7 +54,7 @@ namespace GraphQLTemplate.Schemas
                 "droid",
                 "Get a droid by it's unique identifier.",
                 arguments: new QueryArguments(
-                    new QueryArgument<IdGraphType>
+                    new QueryArgument<NonNullGraphType<IdGraphType>>
                     {
                         Name = "id",
                         Description = "The unique identifier of the droid.",
@@ -67,7 +67,7 @@ namespace GraphQLTemplate.Schemas
                 "human",
                 "Get a human by it's unique identifier.",
                 arguments: new QueryArguments(
-                    new QueryArgument<IdGraphType>()
+                    new QueryArgument<NonNullGraphType<IdGraphType>>()
                     {
                         Name = "id",
                         Description = "The unique identifier of the human.",
