@@ -72,8 +72,10 @@ namespace ApiTemplate.Controllers
         /// <returns>A 204 No Content response if the car was deleted or a 404 Not Found if a car with the specified
         /// unique identifier was not found.</returns>
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
+#if (Swagger)
         [SwaggerResponse(StatusCodes.Status204NoContent, "The car with the specified unique identifier was deleted.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier was not found.")]
+#endif
         public Task<IActionResult> Delete(
             [FromServices] IDeleteCarCommand command,
             int carId,
