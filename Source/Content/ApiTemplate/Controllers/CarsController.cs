@@ -10,6 +10,9 @@ namespace ApiTemplate.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.Net.Http.Headers;
+#if (Swagger)
+    using Swashbuckle.AspNetCore.Annotations;
+#endif
 
     [Route("[controller]")]
     [ApiController]
@@ -22,8 +25,10 @@ namespace ApiTemplate.Controllers
         /// Returns an Allow HTTP header with the allowed HTTP methods.
         /// </summary>
         /// <returns>A 200 OK response.</returns>
-        /// <response code="200">The allowed HTTP methods.</response>
         [HttpOptions]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
+#endif
         public IActionResult Options()
         {
             this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
@@ -39,8 +44,10 @@ namespace ApiTemplate.Controllers
         /// Returns an Allow HTTP header with the allowed HTTP methods for a car with the specified unique identifier.
         /// </summary>
         /// <returns>A 200 OK response.</returns>
-        /// <response code="200">The allowed HTTP methods.</response>
         [HttpOptions("{carId}")]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
+#endif
         public IActionResult Options(int carId)
         {
             this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
@@ -63,13 +70,9 @@ namespace ApiTemplate.Controllers
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 204 No Content response if the car was deleted or a 404 Not Found if a car with the specified ID
         /// was not found.</returns>
-#if (Swagger)
-        /// <response code="204">The car with the specified ID was deleted.</response>
-        /// <response code="404">A car with the specified ID was not found.</response>
-#endif
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [SwaggerResponse(StatusCodes.Status204NoContent, "The car with the specified ID was deleted.")]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified ID was not found.")]
         public Task<IActionResult> Delete(
             [FromServices] IDeleteCarCommand command,
             int carId,
@@ -83,16 +86,13 @@ namespace ApiTemplate.Controllers
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK response containing the car or a 404 Not Found if a car with the specified ID was not
         /// found.</returns>
-#if (Swagger)
-        /// <response code="200">The car with the specified ID.</response>
-        /// <response code="304">The car has not changed since the date given in the If-Modified-Since HTTP header.</response>
-        /// <response code="404">A car with the specified ID could not be found.</response>
-#endif
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
-        [HttpHead("{carId}")]
-        [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status304NotModified)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpHead("{carId}", Name = CarsControllerRoute.HeadCar)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "The car with the specified ID.", typeof(Car))]
+        [SwaggerResponse(StatusCodes.Status304NotModified, "The car has not changed since the date given in the If-Modified-Since HTTP header.")]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified ID could not be found.")]
+#endif
         public Task<IActionResult> Get(
             [FromServices] IGetCarCommand command,
             int carId,
@@ -107,16 +107,13 @@ namespace ApiTemplate.Controllers
         /// <returns>A 200 OK response containing a collection of cars, a 400 Bad Request if the page request
         /// parameters are invalid or a 404 Not Found if a page with the specified page number was not found.
         /// </returns>
-#if (Swagger)
-        /// <response code="200">A collection of cars for the specified page.</response>
-        /// <response code="400">The page request parameters are invalid.</response>
-        /// <response code="404">A page with the specified page number was not found.</response>
-#endif
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
-        [HttpHead("")]
-        [ProducesResponseType(typeof(PageResult<Car>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpHead("", Name = CarsControllerRoute.HeadCarPage)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(PageResult<Car>))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.")]
+#endif
         public Task<IActionResult> GetPage(
             [FromServices] IGetCarPageCommand command,
             [FromQuery] PageOptions pageOptions,
@@ -131,15 +128,12 @@ namespace ApiTemplate.Controllers
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK if the car was patched, a 400 Bad Request if the patch was invalid or a 404 Not Found
         /// if a car with the specified ID was not found.</returns>
-#if (Swagger)
-        /// <response code="200">The patched car with the specified ID.</response>
-        /// <response code="400">The patch document is invalid.</response>
-        /// <response code="404">A car with the specified ID could not be found.</response>
-#endif
         [HttpPatch("{carId}", Name = CarsControllerRoute.PatchCar)]
-        [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "The patched car with the specified ID.", typeof(Car))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The patch document is invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified ID could not be found.")]
+#endif
         public Task<IActionResult> Patch(
             [FromServices] IPatchCarCommand command,
             int carId,
@@ -154,13 +148,11 @@ namespace ApiTemplate.Controllers
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 201 Created response containing the newly created car or a 400 Bad Request if the car is
         /// invalid.</returns>
-#if (Swagger)
-        /// <response code="201">The car was created.</response>
-        /// <response code="400">The car is invalid.</response>
-#endif
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
-        [ProducesResponseType(typeof(Car), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status201Created, "The car was created.", typeof(Car))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ModelStateDictionary))]
+#endif
         public Task<IActionResult> Post(
             [FromServices] IPostCarCommand command,
             [FromBody] SaveCar car,
@@ -175,15 +167,12 @@ namespace ApiTemplate.Controllers
         /// <param name="cancellationToken">The cancellation token used to cancel the HTTP request.</param>
         /// <returns>A 200 OK response containing the newly updated car, a 400 Bad Request if the car is invalid or a
         /// or a 404 Not Found if a car with the specified ID was not found.</returns>
-#if (Swagger)
-        /// <response code="200">The car was updated.</response>
-        /// <response code="400">The car is invalid.</response>
-        /// <response code="404">A car with the specified ID could not be found.</response>
-#endif
         [HttpPut("{carId}", Name = CarsControllerRoute.PutCar)]
-        [ProducesResponseType(typeof(Car), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status200OK, "The car was updated.", typeof(Car))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified ID could not be found.")]
+#endif
         public Task<IActionResult> Put(
             [FromServices] IPutCarCommand command,
             int carId,

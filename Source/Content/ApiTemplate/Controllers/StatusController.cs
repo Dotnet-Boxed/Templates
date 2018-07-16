@@ -6,6 +6,9 @@ namespace ApiTemplate.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+#if (Swagger)
+    using Swashbuckle.AspNetCore.Annotations;
+#endif
 
     /// <summary>
     /// The status of this API.
@@ -26,14 +29,12 @@ namespace ApiTemplate.Controllers
         /// Gets the status of this API and it's dependencies, giving an indication of it's health.
         /// </summary>
         /// <returns>A 200 OK or error response containing details of what is wrong.</returns>
-#if (Swagger)
-        /// <response code="204">The API is functioning normally.</response>
-        /// <response code="503">The API or one of it's dependencies is not functioning, the service is unavailable.</response>
-#endif
         [HttpGet(Name = StatusControllerRoute.GetStatus)]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
+#if (Swagger)
+        [SwaggerResponse(StatusCodes.Status204NoContent, "The API is functioning normally.")]
+        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "The API or one of it's dependencies is not functioning, the service is unavailable.")]
+#endif
         public async Task<IActionResult> GetStatus()
         {
             try
