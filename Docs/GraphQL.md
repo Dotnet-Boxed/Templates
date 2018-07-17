@@ -36,6 +36,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **HstsPreload** (Default=Off) - Enable Strict Transport Security (HSTS) HTTP header with preloading.
 - **CORS** (Default=On) - Browser security prevents a web page from making AJAX requests to another domain.
 - **HostFiltering** (Default=On) - A white-list of host names allowed by the Kestrel web server e.g. example.com. You don't need this if you are using a properly configured reverse proxy.
+- **SecurityTxt** - Adds a security.txt file to allow people to contact you if they find a security vulnerability.
 
 #### Web Server
 

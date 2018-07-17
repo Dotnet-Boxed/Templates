@@ -47,6 +47,15 @@ namespace Boxed.Templates.Test
 
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
                         Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
+
+                        var robotsTxtResponse = await httpsClient.GetAsync("robots.txt");
+                        Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
+
+                        var securityTxtResponse = await httpsClient.GetAsync(".well-known/security.txt");
+                        Assert.Equal(HttpStatusCode.OK, securityTxtResponse.StatusCode);
+
+                        var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
+                        Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
                     });
             }
         }

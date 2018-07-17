@@ -44,6 +44,15 @@ namespace Boxed.Templates.Test
 
                         var httpsResponse = await httpsClient.GetAsync("/");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+
+                        var robotsTxtResponse = await httpsClient.GetAsync("robots.txt");
+                        Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
+
+                        var securityTxtResponse = await httpsClient.GetAsync(".well-known/security.txt");
+                        Assert.Equal(HttpStatusCode.OK, securityTxtResponse.StatusCode);
+
+                        var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
+                        Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
                     });
             }
         }

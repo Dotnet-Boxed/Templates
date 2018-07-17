@@ -64,6 +64,9 @@
     "RobotsTxt": {
       "longName": "robots-txt"
     },
+    "SecurityTxt": {
+      "longName": "security-txt"
+    },
     "HumansTxt": {
       "longName": "humans-txt"
     },

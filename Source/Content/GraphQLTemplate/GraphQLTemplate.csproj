@@ -2,7 +2,7 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;RobotsTxt;CorrelationId;ResponseCompression</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;CorrelationId;ResponseCompression</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
@@ -40,6 +40,12 @@
     <Description>PROJECT-DESCRIPTION-XML</Description>
     <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\.well-known\security.txt">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
