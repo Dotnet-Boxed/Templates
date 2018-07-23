@@ -11,8 +11,7 @@ namespace ApiTemplate.Repositories
     {
         private static readonly List<Car> Cars;
 
-        static CarRepository()
-        {
+        static CarRepository() =>
             Cars = new List<Car>()
             {
                 new Car()
@@ -70,7 +69,6 @@ namespace ApiTemplate.Repositories
                     Modified = DateTimeOffset.UtcNow.AddDays(-1),
                 },
             };
-        }
 
         public Task<Car> Add(Car car, CancellationToken cancellationToken)
         {

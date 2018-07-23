@@ -37,9 +37,9 @@ namespace ApiTemplate.Commands
             }
 
             var httpContext = this.actionContextAccessor.ActionContext.HttpContext;
-            if (httpContext.Request.Headers.TryGetValue(HeaderNames.IfModifiedSince, out StringValues stringValues))
+            if (httpContext.Request.Headers.TryGetValue(HeaderNames.IfModifiedSince, out var stringValues))
             {
-                if (DateTimeOffset.TryParse(stringValues, out DateTimeOffset modifiedSince) &&
+                if (DateTimeOffset.TryParse(stringValues, out var modifiedSince) &&
                     (modifiedSince >= car.Modified))
                 {
                     return new StatusCodeResult(StatusCodes.Status304NotModified);
