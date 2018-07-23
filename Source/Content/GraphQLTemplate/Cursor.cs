@@ -10,6 +10,33 @@ namespace GraphQLTemplate
     {
         private const string Prefix = "arrayconnection";
 
+        public static T FromCursor<T>(string cursor)
+        {
+            if (string.IsNullOrEmpty(cursor))
+            {
+                return default;
+            }
+
+            string decodedValue;
+            try
+            {
+                decodedValue = Base64Decode(cursor);
+            }
+            catch (FormatException)
+            {
+                return default;
+            }
+
+            var prefixIndex = Prefix.Length + 1;
+            if (decodedValue.Length <= prefixIndex)
+            {
+                return default;
+            }
+
+            var value = decodedValue.Substring(prefixIndex);
+            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+        }
+
         public static (string firstCursor, string lastCursor) GetFirstAndLastCursor<TItem, TCursor>(
             IEnumerable<TItem> enumerable,
             Func<TItem, TCursor> getCursorProperty)
@@ -28,29 +55,6 @@ namespace GraphQLTemplate
             var lastCursor = ToCursor(getCursorProperty(enumerable.Last()));
 
             return (firstCursor, lastCursor);
-        }
-
-        public static T? FromNullableCursor<T>(string cursor)
-            where T : struct
-        {
-            if (string.IsNullOrEmpty(cursor))
-            {
-                return null;
-            }
-
-            var value = Base64Decode(cursor).Substring(Prefix.Length + 1);
-            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
-        }
-
-        public static T FromCursor<T>(string cursor)
-        {
-            if (string.IsNullOrEmpty(cursor))
-            {
-                return default(T);
-            }
-
-            var value = Base64Decode(cursor).Substring(Prefix.Length + 1);
-            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
         }
 
         public static string ToCursor<T>(T value)

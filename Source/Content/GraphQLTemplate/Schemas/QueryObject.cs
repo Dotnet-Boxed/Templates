@@ -91,9 +91,9 @@ namespace GraphQLTemplate.Schemas
             ResolveConnectionContext<object> context)
         {
             var first = context.First;
-            var afterCursor = Cursor.FromNullableCursor<DateTime>(context.After);
+            var afterCursor = Cursor.FromCursor<DateTime?>(context.After);
             var last = context.Last;
-            var beforeCursor = Cursor.FromNullableCursor<DateTime>(context.Before);
+            var beforeCursor = Cursor.FromCursor<DateTime?>(context.Before);
             var cancellationToken = context.CancellationToken;
 
             var getDroidsTask = GetDroids(droidRepository, first, afterCursor, last, beforeCursor, cancellationToken);
