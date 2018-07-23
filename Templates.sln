@@ -40,6 +40,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates.Test", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\Content\GraphQLTemplate\GraphQLTemplate.csproj", "{70611FD8-D523-4E20-9703-3D841AF3D4F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates.FunctionalTest", "Tests\Boxed.Templates.FunctionalTest\Boxed.Templates.FunctionalTest.csproj", "{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{70611FD8-D523-4E20-9703-3D841AF3D4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70611FD8-D523-4E20-9703-3D841AF3D4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70611FD8-D523-4E20-9703-3D841AF3D4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{8BFA391E-E1E5-43D6-B4F7-929843AEC329} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
 		{0A6B9505-36B1-41CA-8621-66D45941055F} = {E1186AA9-A80D-40EF-96C2-02F8DAD936FB}
 		{70611FD8-D523-4E20-9703-3D841AF3D4F4} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
+		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8} = {E1186AA9-A80D-40EF-96C2-02F8DAD936FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}

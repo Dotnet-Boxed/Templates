@@ -1,4 +1,4 @@
-namespace Boxed.Templates.Test
+namespace Boxed.Templates.FunctionalTest
 {
     using System;
     using System.Threading;

@@ -1,9 +1,8 @@
-namespace Boxed.Templates.Test
+namespace Boxed.Templates.FunctionalTest
 {
     using System;
     using System.IO;
     using System.Linq;
-    using System.Net;
     using System.Net.Http;
     using System.Net.Security;
     using System.Net.Sockets;
@@ -149,8 +148,9 @@ namespace Boxed.Templates.Test
             }
             else
             {
-                var assembly = new AssemblyLoader2(directoryPath).LoadFromAssemblyPath(assemblyFilePath);
-                var startupType = assembly.ExportedTypes
+                var assembly = new AssemblyResolver(assemblyFilePath).Assembly;
+                var startupType = assembly
+                    .DefinedTypes
                     .FirstOrDefault(x => string.Equals(x.Name, startupTypeName, StringComparison.Ordinal));
                 if (startupType == null)
                 {
@@ -163,7 +163,6 @@ namespace Boxed.Templates.Test
                     .UseUrls(DefaultUrls);
                 using (var testServer = new TestServer(webHostBuilder))
                 {
-                    var response = testServer.CreateClient().GetAsync("/");
                     await action(testServer);
                 }
 
