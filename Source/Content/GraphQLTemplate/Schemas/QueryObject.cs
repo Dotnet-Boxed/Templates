@@ -21,17 +21,20 @@ namespace GraphQLTemplate.Schemas
     /// query getHuman {
     ///   human(id: "94fbd693-2027-4804-bf40-ed427fe76fda")
     ///   {
-    ///     id,
-    ///     name,
-    ///     homePlanet,
-    ///     appearsIn,
+    ///     id
+    ///     name
+    ///     dateOfBirth
+    ///     homePlanet
+    ///     appearsIn
     ///     friends {
     ///       name
     ///       ... on Droid {
+    ///         created
     ///         primaryFunction
     ///       }
     ///       ... on Human
     ///       {
+    ///         dateOfBirth
     ///         homePlanet
     ///       }
     ///     }

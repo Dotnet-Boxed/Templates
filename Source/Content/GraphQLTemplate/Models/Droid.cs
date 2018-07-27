@@ -4,7 +4,7 @@ namespace GraphQLTemplate.Models
 
     public class Droid : Character
     {
-        public DateTime Created { get; set; }
+        public DateTimeOffset Created { get; set; }
 
         public string PrimaryFunction { get; set; }
     }

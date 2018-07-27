@@ -10,9 +10,12 @@ namespace GraphQLTemplate.Types
             this.Name = "Character";
             this.Description = "A character from the Star Wars universe";
 
-            this.Field(x => x.Id, type: typeof(IdGraphType)).Description("The unique identifier of the character.");
-            this.Field(x => x.Name, nullable: true).Description("The name of the character.");
-            this.Field<ListGraphType<EpisodeEnumeration>>("appearsIn", "Which movie they appear in.");
+            this.Field(x => x.Id, type: typeof(NonNullGraphType<IdGraphType>))
+                .Description("The unique identifier of the character.");
+            this.Field(x => x.Name, nullable: true)
+                .Description("The name of the character.");
+            this.Field(x => x.AppearsIn, type: typeof(ListGraphType<EpisodeEnumeration>))
+                .Description("Which movie they appear in.");
 
             this.Field<ListGraphType<CharacterInterface>>(
                 nameof(Character.Friends),

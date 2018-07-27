@@ -17,8 +17,11 @@ namespace GraphQLTemplate.Schemas
     /// subscription whenHumanCreated {
     ///   humanCreated(homePlanets: ["Earth"])
     ///   {
-    ///     id,
+    ///     id
     ///     name
+    ///     dateOfBirth
+    ///     homePlanet
+    ///     appearsIn
     ///   }
     /// }
     /// </c>

@@ -14,15 +14,19 @@ namespace GraphQLTemplate.Schemas
     /// mutation createHuman($human: HumanInput!) {
     ///   createHuman(human: $human)
     ///   {
-    ///     id,
+    ///     id
     ///     name
+    ///     dateOfBirth
+    ///     appearsIn
     ///   }
     /// }
     /// This is an example JSON of the variables you also need to specify to create a new human:
     /// {
     ///  "human": {
     ///     "name": "Muhammad Rehan Saeed",
-    ///     "homePlanet": "Earth"
+    ///     "homePlanet": "Earth",
+    ///     "dateOfBirth": "2000-01-01",
+    ///     "appearsIn": [ "NEWHOPE" ]
     ///   }
     /// }
     /// </c>
