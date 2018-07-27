@@ -6,6 +6,8 @@ namespace GraphQLTemplate.Models
     {
         public DateTimeOffset Created { get; set; }
 
+        public TimeSpan ChargePeriod { get; set; }
+
         public string PrimaryFunction { get; set; }
     }
 }

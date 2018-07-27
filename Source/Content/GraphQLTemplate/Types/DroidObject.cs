@@ -16,6 +16,8 @@ namespace GraphQLTemplate.Types
                 .Description("The unique identifier of the droid.");
             this.Field(x => x.Name)
                 .Description("The name of the droid.");
+            this.Field(x => x.ChargePeriod)
+                .Description("The time the droid can go without charging its batteries.");
             this.Field(x => x.Created)
                 .Description("The date the droid was created.");
             this.Field(x => x.PrimaryFunction, nullable: true)

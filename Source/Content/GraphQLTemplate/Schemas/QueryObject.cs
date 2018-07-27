@@ -29,6 +29,7 @@ namespace GraphQLTemplate.Schemas
     ///     friends {
     ///       name
     ///       ... on Droid {
+    ///         chargePeriod
     ///         created
     ///         primaryFunction
     ///       }
