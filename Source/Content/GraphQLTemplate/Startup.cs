@@ -11,6 +11,7 @@ namespace GraphQLTemplate
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.WebSockets;
     using GraphQL.Server.Ui.Playground;
+    using GraphQL.Validation;
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -126,13 +127,27 @@ namespace GraphQLTemplate
                 .UseWebSockets()
                 .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())
 #endif
-                .UseGraphQLHttp<MainSchema>(
-                    new GraphQLHttpOptions()
-                    {
-                        // Show stack traces in exceptions. Don't turn this on in production.
-                        ExposeExceptions = this.hostingEnvironment.IsDevelopment(),
-                        // Add your own validation rules e.g. for authentication.
-                        // ValidationRules = new[] { new RequiresAuthValidationRule() }.Concat(DocumentValidator.CoreRules());
-                    });
+                .UseGraphQLHttp<MainSchema>(GetGraphQLHttpOptions(application));
+
+        private GraphQLHttpOptions GetGraphQLHttpOptions(IApplicationBuilder application)
+        {
+            var options = new GraphQLHttpOptions()
+            {
+                // Show stack traces in exceptions. Don't turn this on in production.
+                ExposeExceptions = this.hostingEnvironment.IsDevelopment(),
+            };
+
+            // Add your own validation rules e.g. for authentication or custom field validation.
+            var validationRules = application.ApplicationServices.GetServices<IValidationRule>();
+            if (validationRules != null)
+            {
+                foreach (var validationRule in validationRules)
+                {
+                    options.ValidationRules.Add(validationRule);
+                }
+            }
+
+            return options;
+        }
     }
 }
