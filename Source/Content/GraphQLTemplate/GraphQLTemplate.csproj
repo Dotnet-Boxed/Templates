@@ -1,9 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;CorrelationId;ResponseCompression</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;CorrelationId;ResponseCompression</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <Authorization>true</Authorization>
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
     <CorrelationId>true</CorrelationId>
@@ -51,6 +52,7 @@
     <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="GraphQL" Version="2.0.0-alpha-951" />
+    <PackageReference Include="GraphQL.Authorization" Version="1.0.16-alpha-16" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.1.0-alpha0022" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.1.0-alpha0022" />
     <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.1.0-alpha0022" />

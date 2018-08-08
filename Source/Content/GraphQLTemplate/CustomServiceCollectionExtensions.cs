@@ -10,10 +10,13 @@ namespace GraphQLTemplate
     using CorrelationId;
 #endif
     using GraphQL;
+    using GraphQL.Authorization;
     using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.Subscriptions.Abstractions;
     using GraphQL.Types.Relay;
+    using GraphQL.Validation;
+    using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
@@ -163,6 +166,20 @@ namespace GraphQLTemplate
                 // Add GraphQL data loader to reduce the number of calls to our repository.
                 .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
                 .AddSingleton<DataLoaderDocumentListener>()
+#if (Authorization)
+                // Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
+                .AddSingleton<IAuthorizationEvaluator, AuthorizationEvaluator>()
+                .AddTransient<IValidationRule, AuthorizationValidationRule>()
+                .AddSingleton(
+                    x =>
+                    {
+                        var authorizationSettings = new AuthorizationSettings();
+                        authorizationSettings.AddPolicy(
+                            AuthorizationPolicyName.Admin,
+                            y => y.RequireClaim("role", "admin"));
+                        return authorizationSettings;
+                    })
+#endif
                 // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
                 .AddIf(
                     hostingEnvironment.IsDevelopment(),

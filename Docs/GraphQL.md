@@ -34,6 +34,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 - **HttpsEverywhere** (Default=On) - Use the HTTPS scheme and TLS security across the entire site, redirects HTTP to HTTPS and adds a Strict Transport Security (HSTS) HTTP header with preloading enabled.
 - **HstsPreload** (Default=Off) - Enable Strict Transport Security (HSTS) HTTP header with preloading.
+- **Authorization** (Default=On) - Enable the use of authorization policies to secure GraphQL types and fields by requiring certain claims. You need to setup authentication yourself.
 - **CORS** (Default=On) - Browser security prevents a web page from making AJAX requests to another domain.
 - **HostFiltering** (Default=On) - A white-list of host names allowed by the Kestrel web server e.g. example.com. You don't need this if you are using a properly configured reverse proxy.
 - **SecurityTxt** - Adds a security.txt file to allow people to contact you if they find a security vulnerability.

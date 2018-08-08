@@ -58,6 +58,13 @@
             "DevelopmentCertificate.pfx"
           ]
         },
+        // Authorization
+        {
+          "condition": "(!Authorization)",
+          "exclude": [
+            "Constants/AuthorizationPolicyName.cs"
+          ]
+        },
         // CORS
         {
           "condition": "(!CORS)",
@@ -270,6 +277,13 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Enable Strict Transport Security (HSTS) HTTP header with preloading."
+    },
+    // Authorization
+    "Authorization": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Enable the use of authorization policies to secure GraphQL types and fields by requiring certain claims. You need to setup authentication yourself."
     },
     // CORS
     "CORS": {
