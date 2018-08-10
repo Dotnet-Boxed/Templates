@@ -10,7 +10,9 @@ namespace GraphQLTemplate
     using CorrelationId;
 #endif
     using GraphQL;
+#if (Authorization)
     using GraphQL.Authorization;
+#endif
     using GraphQL.DataLoader;
     using GraphQL.Server.Transports.AspNetCore;
     using GraphQL.Server.Transports.Subscriptions.Abstractions;

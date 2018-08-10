@@ -36,6 +36,8 @@ namespace Boxed.Templates.FunctionalTest
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("api", "Default");
+                await project.DotnetRestore();
+                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
@@ -72,6 +74,8 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         { "https-everywhere", "false" },
                     });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
                 await project.DotnetRun(
                     async httpClient =>
                     {
@@ -93,6 +97,8 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         { "swagger", "false" },
                     });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {

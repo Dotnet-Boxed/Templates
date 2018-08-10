@@ -55,13 +55,14 @@ namespace Boxed.Templates.FunctionalTest
         public static async Task DotnetRun(
             this Project project,
             Func<HttpClient, Task> action,
+            bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, timeout, httpUrl);
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, noRestore, timeout, httpUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -93,6 +94,7 @@ namespace Boxed.Templates.FunctionalTest
         public static async Task DotnetRun(
             this Project project,
             Func<HttpClient, HttpClient, Task> action,
+            bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
             TimeSpan? timeout = null)
         {
@@ -101,7 +103,7 @@ namespace Boxed.Templates.FunctionalTest
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, timeout, httpUrl, httpsUrl);
+            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, noRestore, timeout, httpUrl, httpsUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -172,15 +174,17 @@ namespace Boxed.Templates.FunctionalTest
 
         private static async Task<IDisposable> DotnetRunInternal(
             string directoryPath,
+            bool? noRestore = true,
             TimeSpan? timeout = null,
             params string[] urls)
         {
             var cancellationTokenSource = new CancellationTokenSource();
+            var noRestoreArgument = noRestore == null ? null : "--no-restore";
             var urlsParameter = string.Join(';', urls);
             var task = ProcessAssert.AssertStart(
                 directoryPath,
                 "dotnet",
-                $"run --urls {urlsParameter}",
+                $"run {noRestoreArgument} --urls {urlsParameter}",
                 cancellationTokenSource.Token);
             await WaitForStart(urls.First(), timeout ?? TimeSpan.FromMinutes(1));
 

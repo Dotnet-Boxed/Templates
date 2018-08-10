@@ -1,7 +1,9 @@
 namespace GraphQLTemplate.Types
 {
     using System.Collections.Generic;
+#if (Authorization)
     using GraphQL.Authorization;
+#endif
     using GraphQL.Types;
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Models;
@@ -13,14 +15,18 @@ namespace GraphQLTemplate.Types
         {
             this.Name = "Human";
             this.Description = "A humanoid creature from the Star Wars universe.";
+#if (Authorization)
             // this.AuthorizeWith(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
+#endif
 
             this.Field(x => x.Id, type: typeof(IdGraphType))
                 .Description("The unique identifier of the human.");
             this.Field(x => x.Name)
                 .Description("The name of the human.");
             this.Field(x => x.DateOfBirth)
+#if (Authorization)
                 .AuthorizeWith(AuthorizationPolicyName.Admin)
+#endif
                 .Description("The humans date of birth.");
             this.Field(x => x.HomePlanet, nullable: true)
                 .Description("The home planet of the human.");

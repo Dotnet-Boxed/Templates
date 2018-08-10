@@ -52,6 +52,9 @@
     "HstsPreload": {
       "longName": "hsts-preload"
     },
+    "Authorization": {
+      "longName": "authorization"
+    },
     "CORS": {
       "longName": "cors"
     },

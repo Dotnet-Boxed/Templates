@@ -36,6 +36,8 @@ namespace Boxed.Templates.FunctionalTest
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("graphql", "Default");
+                await project.DotnetRestore();
+                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
@@ -69,10 +71,60 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         { "https-everywhere", "false" },
                     });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
                 await project.DotnetRun(
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Run_AuthorizationTrue_Returns400BadRequest()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "graphql",
+                    "AuthorizationTrue",
+                    new Dictionary<string, string>()
+                    {
+                        { "authorization", "true" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async (httpClient) =>
+                    {
+                        var httpResponse = await httpClient.PostGraphQL(
+                            "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
+                        Assert.Equal(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfully()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "graphql",
+                    "AuthorizationFalse",
+                    new Dictionary<string, string>()
+                    {
+                        { "authorization", "false" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async (httpClient) =>
+                    {
+                        var httpResponse = await httpClient.PostGraphQL(
+                            "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });
             }
