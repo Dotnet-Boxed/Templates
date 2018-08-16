@@ -1,6 +1,5 @@
 namespace GraphQLTemplate
 {
-    using GraphQL.Server.Transports.WebSockets;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Types;
@@ -50,7 +49,6 @@ namespace GraphQLTemplate
 #if (Subscriptions)
                 .AddSingleton<SubscriptionObject>()
 #endif
-                .AddSingleton<MainSchema>()
-                .AddGraphQLWebSocket<MainSchema>();
+                .AddSingleton<MainSchema>();
     }
 }

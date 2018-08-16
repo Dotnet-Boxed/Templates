@@ -8,15 +8,13 @@ namespace GraphQLTemplate
 #if (CORS)
     using GraphQLTemplate.Constants;
 #endif
-    using GraphQL.Server.Transports.AspNetCore;
-    using GraphQL.Server.Transports.WebSockets;
+    using GraphQL.Server;
     using GraphQL.Server.Ui.Playground;
+    using GraphQL.Server.Ui.Voyager;
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -76,7 +74,10 @@ namespace GraphQLTemplate
                     .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
                 .AddCustomGraphQL(this.hostingEnvironment)
-                .AddGraphQLRelayTypes()
+#if (Authorization)
+                .AddCustomGraphQLAuthorization()
+#endif
+                .AddCustomGraphQLRelayTypes()
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
                 .AddProjectGraphQLSchemas()
@@ -100,10 +101,6 @@ namespace GraphQLTemplate
 #if (ResponseCompression)
                 .UseResponseCompression()
 #endif
-                // Add the GraphQL playground UI to try out the GraphQL API. Not recommended to be run in production.
-                .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" }))
 #if (CORS)
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
@@ -118,13 +115,12 @@ namespace GraphQLTemplate
                 .UseStaticFilesWithCacheControl()
 #if (Subscriptions)
                 .UseWebSockets()
-                .UseGraphQLWebSocket<MainSchema>(new GraphQLWebSocketsOptions())
+                .UseGraphQLWebSockets<MainSchema>("/graphql")
 #endif
-                .UseGraphQLHttp<MainSchema>(
-                    new GraphQLHttpOptions()
-                    {
-                        // Show stack traces in exceptions. Don't turn this on in production.
-                        ExposeExceptions = this.hostingEnvironment.IsDevelopment(),
-                    });
+                .UseGraphQL<MainSchema>("/graphql")
+                // Add the GraphQL Playground UI to try out the GraphQL API.
+                .UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" })
+                // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
+                .UseGraphQLVoyager(new GraphQLVoyagerOptions() { Path = "/voyager" });
     }
 }

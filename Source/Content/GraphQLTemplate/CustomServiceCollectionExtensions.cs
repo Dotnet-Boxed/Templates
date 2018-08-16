@@ -5,7 +5,6 @@ namespace GraphQLTemplate
     using System.IO.Compression;
 #endif
     using System.Linq;
-    using Boxed.AspNetCore;
 #if (CorrelationId)
     using CorrelationId;
 #endif
@@ -13,9 +12,7 @@ namespace GraphQLTemplate
 #if (Authorization)
     using GraphQL.Authorization;
 #endif
-    using GraphQL.DataLoader;
-    using GraphQL.Server.Transports.AspNetCore;
-    using GraphQL.Server.Transports.Subscriptions.Abstractions;
+    using GraphQL.Server;
     using GraphQL.Types.Relay;
     using GraphQL.Validation;
     using GraphQLTemplate.Constants;
@@ -97,7 +94,9 @@ namespace GraphQLTemplate
 #endif
                 // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
                 .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value);
+                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
+                // Add IOptions<GraphQLOptions> to the services container.
+                .Configure<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
 
 #if (ResponseCompression)
         /// <summary>
@@ -162,14 +161,34 @@ namespace GraphQLTemplate
         public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostingEnvironment hostingEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.
-                .AddSingleton<IDependencyResolver>(x => new FuncDependencyResolver(type => x.GetRequiredService(type)))
+                .AddSingleton<IDependencyResolver, GraphQLDependencyResolver>()
+                .AddGraphQL(
+                    options =>
+                    {
+                        // Set some limits for security, read from configuration.
+                        options.ComplexityConfiguration = services
+                            .BuildServiceProvider()
+                            .GetRequiredService<IOptions<GraphQLOptions>>()
+                            .Value
+                            .ComplexityConfiguration;
+                        // Show stack traces in exceptions. Don't turn this on in production.
+                        options.ExposeExceptions = hostingEnvironment.IsDevelopment();
+                    })
+                // Add graph types from the current assembly.
+                // .AddGraphTypes()
                 // Add a user context from the HttpContext and make it available in field resolvers.
-                .AddGraphQLHttp<GraphQLUserContextBuilder>()
+                .AddUserContextBuilder(context => new GraphQLUserContext() { User = context.User })
                 // Add GraphQL data loader to reduce the number of calls to our repository.
-                .AddSingleton<IDataLoaderContextAccessor, DataLoaderContextAccessor>()
-                .AddSingleton<DataLoaderDocumentListener>()
+                .AddDataLoader()
+                .AddWebSockets()
+                .Services;
+
 #if (Authorization)
-                // Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
+        /// <summary>
+        /// Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
+        /// </summary>
+        public static IServiceCollection AddCustomGraphQLAuthorization(this IServiceCollection services) =>
+            services
                 .AddSingleton<IAuthorizationEvaluator, AuthorizationEvaluator>()
                 .AddTransient<IValidationRule, AuthorizationValidationRule>()
                 .AddSingleton(
@@ -180,14 +199,10 @@ namespace GraphQLTemplate
                             AuthorizationPolicyName.Admin,
                             y => y.RequireClaim("role", "admin"));
                         return authorizationSettings;
-                    })
-#endif
-                // Log GraphQL request as debug messages. Turned off in production to avoid logging sensitive information.
-                .AddIf(
-                    hostingEnvironment.IsDevelopment(),
-                    x => x.AddSingleton<IOperationMessageListener, LogMessagesListener>());
+                    });
 
-        public static IServiceCollection AddGraphQLRelayTypes(this IServiceCollection services) =>
+#endif
+        public static IServiceCollection AddCustomGraphQLRelayTypes(this IServiceCollection services) =>
             services
                 // Add types used for paging.
                 .AddSingleton(typeof(ConnectionType<>))

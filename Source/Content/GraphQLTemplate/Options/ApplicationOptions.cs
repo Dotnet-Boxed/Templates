@@ -1,5 +1,6 @@
 namespace GraphQLTemplate.Options
 {
+    using GraphQL.Server;
 #if (ForwardedHeaders)
     using Microsoft.AspNetCore.Builder;
 #elif (HostFiltering)
@@ -25,6 +26,8 @@ namespace GraphQLTemplate.Options
         public HostFilteringOptions HostFiltering { get; set; }
 
 #endif
+        public GraphQLOptions GraphQL { get; set; }
+
         public KestrelServerOptions Kestrel { get; set; }
     }
 }
