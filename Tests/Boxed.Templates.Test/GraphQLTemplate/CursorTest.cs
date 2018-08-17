@@ -2,16 +2,15 @@ namespace Boxed.Templates.Test.GraphQLTemplate
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using global::GraphQLTemplate;
     using Xunit;
 
     public class CursorTest
     {
         [Theory]
-        [InlineData("YXJyYXljb25uZWN0aW9uOjA=", 0)]
-        [InlineData("YXJyYXljb25uZWN0aW9uOjU=", 5)]
-        [InlineData("YXJyYXljb25uZWN0aW9uOi01", -5)]
+        [InlineData("MA=", 0)]
+        [InlineData("NQ==", 5)]
+        [InlineData("LTU=", -5)]
         public void FromCursor_IntValue_ReturnsPrefixedBase64Cursor(string cursor, int expectedValue)
         {
             var value = Cursor.FromCursor<int>(cursor);
@@ -20,8 +19,8 @@ namespace Boxed.Templates.Test.GraphQLTemplate
         }
 
         [Theory]
-        [InlineData("YXJyYXljb25uZWN0aW9uOkY=", "F")]
-        [InlineData("YXJyYXljb25uZWN0aW9uOkZvbw==", "Foo")]
+        [InlineData("Rg==", "F")]
+        [InlineData("Rm9v", "Foo")]
         public void FromCursor_StringValue_ReturnsPrefixedBase64Cursor(string cursor, string expectedValue)
         {
             var value = Cursor.FromCursor<string>(cursor);
@@ -49,20 +48,6 @@ namespace Boxed.Templates.Test.GraphQLTemplate
         public void FromCursor_InvalidBase64String_ReturnsNull()
         {
             var value = Cursor.FromCursor<string>("This is not base 64");
-
-            Assert.Null(value);
-        }
-
-        [Theory]
-        [InlineData("arrayconnectio")]
-        [InlineData("arrayconnectio:")]
-        [InlineData("arrayconnection")]
-        [InlineData("arrayconnection:")]
-        public void FromCursor_CursorWithInvalidPrefixLength_ReturnsNull(string cursorValue)
-        {
-            var cursor = Convert.ToBase64String(Encoding.UTF8.GetBytes(cursorValue));
-
-            var value = Cursor.FromCursor<string>(cursor);
 
             Assert.Null(value);
         }
@@ -109,8 +94,8 @@ namespace Boxed.Templates.Test.GraphQLTemplate
 
             var (first, last) = Cursor.GetFirstAndLastCursor(items, x => x.Integer);
 
-            Assert.Equal("YXJyYXljb25uZWN0aW9uOjE=", first);
-            Assert.Equal("YXJyYXljb25uZWN0aW9uOjE=", last);
+            Assert.Equal("MQ==", first);
+            Assert.Equal("MQ==", last);
         }
 
         [Fact]
@@ -124,8 +109,8 @@ namespace Boxed.Templates.Test.GraphQLTemplate
 
             var (first, last) = Cursor.GetFirstAndLastCursor(items, x => x.Integer);
 
-            Assert.Equal("YXJyYXljb25uZWN0aW9uOjE=", first);
-            Assert.Equal("YXJyYXljb25uZWN0aW9uOjI=", last);
+            Assert.Equal("MQ==", first);
+            Assert.Equal("Mg==", last);
         }
 
         [Fact]
@@ -133,9 +118,9 @@ namespace Boxed.Templates.Test.GraphQLTemplate
             Assert.Throws<ArgumentNullException>(() => Cursor.ToCursor<string>(null));
 
         [Theory]
-        [InlineData(0, "YXJyYXljb25uZWN0aW9uOjA=")]
-        [InlineData(5, "YXJyYXljb25uZWN0aW9uOjU=")]
-        [InlineData(-5, "YXJyYXljb25uZWN0aW9uOi01")]
+        [InlineData(0, "MA==")]
+        [InlineData(5, "NQ==")]
+        [InlineData(-5, "LTU=")]
         public void ToCursor_IntValue_ReturnsPrefixedBase64Cursor(int value, string expectedCursor)
         {
             var cursor = Cursor.ToCursor(value);
@@ -144,8 +129,8 @@ namespace Boxed.Templates.Test.GraphQLTemplate
         }
 
         [Theory]
-        [InlineData("", "YXJyYXljb25uZWN0aW9uOg==")]
-        [InlineData("Foo", "YXJyYXljb25uZWN0aW9uOkZvbw==")]
+        [InlineData("", "")]
+        [InlineData("Foo", "Rm9v")]
         public void ToCursor_StringValue_ReturnsPrefixedBase64Cursor(string value, string expectedCursor)
         {
             var cursor = Cursor.ToCursor(value);

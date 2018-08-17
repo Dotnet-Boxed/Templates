@@ -8,8 +8,6 @@ namespace GraphQLTemplate
 
     public static class Cursor
     {
-        private const string Prefix = "arrayconnection";
-
         public static T FromCursor<T>(string cursor)
         {
             if (string.IsNullOrEmpty(cursor))
@@ -27,14 +25,7 @@ namespace GraphQLTemplate
                 return default;
             }
 
-            var prefixIndex = Prefix.Length + 1;
-            if (decodedValue.Length <= prefixIndex)
-            {
-                return default;
-            }
-
-            var value = decodedValue.Substring(prefixIndex);
-            return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+            return (T)Convert.ChangeType(decodedValue, typeof(T), CultureInfo.InvariantCulture);
         }
 
         public static (string firstCursor, string lastCursor) GetFirstAndLastCursor<TItem, TCursor>(
@@ -64,7 +55,7 @@ namespace GraphQLTemplate
                 throw new ArgumentNullException(nameof(value));
             }
 
-            return Base64Encode(string.Format(CultureInfo.InvariantCulture, "{0}:{1}", Prefix, value));
+            return Base64Encode(value.ToString());
         }
 
         private static string Base64Decode(string value) => Encoding.UTF8.GetString(Convert.FromBase64String(value));
