@@ -3,6 +3,7 @@ namespace ApiTemplate.Mappers
     using System;
     using ApiTemplate.Constants;
     using ApiTemplate.ViewModels;
+    using Boxed.AspNetCore;
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ namespace ApiTemplate.Mappers
             destination.Cylinders = source.Cylinders;
             destination.Make = source.Make;
             destination.Model = source.Model;
-            destination.Url = this.urlHelper.RouteUrl(CarsControllerRoute.GetCar, new { CarId = source.CarId });
+            destination.Url = this.urlHelper.AbsoluteRouteUrl(CarsControllerRoute.GetCar, new { source.CarId });
         }
     }
 }

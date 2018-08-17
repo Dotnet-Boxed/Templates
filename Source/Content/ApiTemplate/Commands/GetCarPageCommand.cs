@@ -6,6 +6,7 @@ namespace ApiTemplate.Commands
     using ApiTemplate.Constants;
     using ApiTemplate.Repositories;
     using ApiTemplate.ViewModels;
+    using Boxed.AspNetCore;
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
@@ -81,7 +82,7 @@ namespace ApiTemplate.Commands
 
         private string GetLinkValueItem(string rel, int page, int count)
         {
-            var url = this.urlHelper.RouteUrl(
+            var url = this.urlHelper.AbsoluteRouteUrl(
                 CarsControllerRoute.GetCarPage,
                 new PageOptions { Page = page, Count = count });
             return $"<{url}>; rel=\"{rel}\"";
