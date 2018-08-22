@@ -77,7 +77,6 @@ namespace GraphQLTemplate
 #if (Authorization)
                 .AddCustomGraphQLAuthorization()
 #endif
-                .AddCustomGraphQLRelayTypes()
                 .AddProjectRepositories()
                 .AddProjectGraphQLTypes()
                 .AddProjectGraphQLSchemas()
@@ -115,12 +114,17 @@ namespace GraphQLTemplate
                 .UseStaticFilesWithCacheControl()
 #if (Subscriptions)
                 .UseWebSockets()
-                .UseGraphQLWebSockets<MainSchema>("/graphql")
+                // Use the GraphQL subscriptions in the specified schema and make them available at /graphql.
+                .UseGraphQLWebSockets<MainSchema>()
 #endif
-                .UseGraphQL<MainSchema>("/graphql")
-                // Add the GraphQL Playground UI to try out the GraphQL API.
-                .UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" })
-                // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
-                .UseGraphQLVoyager(new GraphQLVoyagerOptions() { Path = "/voyager" });
+                // Use the specified GraphQL schema and make them available at /graphql.
+                .UseGraphQL<MainSchema>()
+                .UseIf(
+                    this.hostingEnvironment.IsDevelopment(),
+                    x => x
+                        // Add the GraphQL Playground UI to try out the GraphQL API at /.
+                        .UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" })
+                        // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
+                        .UseGraphQLVoyager(new GraphQLVoyagerOptions() { Path = "/voyager" }));
     }
 }

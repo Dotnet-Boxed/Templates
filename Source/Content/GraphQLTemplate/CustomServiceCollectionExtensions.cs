@@ -174,16 +174,22 @@ namespace GraphQLTemplate
                         // Show stack traces in exceptions. Don't turn this on in production.
                         options.ExposeExceptions = hostingEnvironment.IsDevelopment();
                     })
-                // Add graph types from the current assembly.
-                // .AddGraphTypes()
+                // Adds all graph types in the current assembly.
+                .AddGraphTypes(ServiceLifetime.Singleton)
+                // Adds ConnectionType<T>, EdgeType<T> and PageInfoType.
+                .AddRelayGraphTypes()
                 // Add a user context from the HttpContext and make it available in field resolvers.
-                .AddUserContextBuilder(context => new GraphQLUserContext() { User = context.User })
+                .AddUserContextBuilder<GraphQLUserContextBuilder>()
                 // Add GraphQL data loader to reduce the number of calls to our repository.
                 .AddDataLoader()
+#if (Subscriptions)
+                // Add WebSockets support for subscriptions.
                 .AddWebSockets()
+#endif
                 .Services;
 
 #if (Authorization)
+
         /// <summary>
         /// Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
         /// </summary>
@@ -200,13 +206,6 @@ namespace GraphQLTemplate
                             y => y.RequireClaim("role", "admin"));
                         return authorizationSettings;
                     });
-
 #endif
-        public static IServiceCollection AddCustomGraphQLRelayTypes(this IServiceCollection services) =>
-            services
-                // Add types used for paging.
-                .AddSingleton(typeof(ConnectionType<>))
-                .AddSingleton(typeof(EdgeType<>))
-                .AddSingleton<PageInfoType>();
     }
 }
