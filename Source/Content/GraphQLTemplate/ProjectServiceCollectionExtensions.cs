@@ -2,7 +2,6 @@ namespace GraphQLTemplate
 {
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Schemas;
-    using GraphQLTemplate.Types;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -24,31 +23,10 @@ namespace GraphQLTemplate
                 .AddSingleton<IHumanRepository, HumanRepository>();
 
         /// <summary>
-        /// Add project GraphQL types.
-        /// </summary>
-        public static IServiceCollection AddProjectGraphQLTypes(this IServiceCollection services) =>
-            services
-                .AddSingleton<CharacterInterface>()
-                .AddSingleton<DroidObject>()
-                .AddSingleton<EpisodeEnumeration>()
-#if (Subscriptions)
-                .AddSingleton<HumanCreatedEvent>()
-#endif
-                .AddSingleton<HumanInputObject>()
-                .AddSingleton<HumanObject>();
-
-        /// <summary>
         /// Add project GraphQL schema and web socket types.
         /// </summary>
-        public static IServiceCollection AddProjectGraphQLSchemas(this IServiceCollection services) =>
+        public static IServiceCollection AddProjectSchemas(this IServiceCollection services) =>
             services
-                .AddSingleton<QueryObject>()
-#if (Mutations)
-                .AddSingleton<MutationObject>()
-#endif
-#if (Subscriptions)
-                .AddSingleton<SubscriptionObject>()
-#endif
                 .AddSingleton<MainSchema>();
     }
 }

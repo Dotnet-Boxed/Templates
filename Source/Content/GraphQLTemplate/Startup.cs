@@ -78,8 +78,7 @@ namespace GraphQLTemplate
                 .AddCustomGraphQLAuthorization()
 #endif
                 .AddProjectRepositories()
-                .AddProjectGraphQLTypes()
-                .AddProjectGraphQLSchemas()
+                .AddProjectSchemas()
                 .BuildServiceProvider();
 
         /// <summary>

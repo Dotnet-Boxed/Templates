@@ -174,8 +174,8 @@ namespace GraphQLTemplate
                         // Show stack traces in exceptions. Don't turn this on in production.
                         options.ExposeExceptions = hostingEnvironment.IsDevelopment();
                     })
-                // Adds all graph types in the current assembly.
-                .AddGraphTypes(ServiceLifetime.Singleton)
+                // Adds all graph types in the current assembly with a singleton lifetime.
+                .AddGraphTypes()
                 // Adds ConnectionType<T>, EdgeType<T> and PageInfoType.
                 .AddRelayGraphTypes()
                 // Add a user context from the HttpContext and make it available in field resolvers.
