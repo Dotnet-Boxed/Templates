@@ -13,7 +13,6 @@ namespace GraphQLTemplate
     using GraphQL.Authorization;
 #endif
     using GraphQL.Server;
-    using GraphQL.Types.Relay;
     using GraphQL.Validation;
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;

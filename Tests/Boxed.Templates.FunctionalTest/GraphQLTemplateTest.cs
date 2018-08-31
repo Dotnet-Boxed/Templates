@@ -4,7 +4,9 @@ namespace Boxed.Templates.FunctionalTest
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
+    using Boxed.Templates.FunctionalTest.Models;
     using Xunit;
 
     public class GraphQLTemplateTest
@@ -82,7 +84,7 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Need to get a release out")]
+        [Fact]
         public async Task Run_AuthorizationTrue_Returns400BadRequest()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -101,7 +103,13 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         var httpResponse = await httpClient.PostGraphQL(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
-                        Assert.Equal(HttpStatusCode.BadRequest, httpResponse.StatusCode);
+                        var response = await httpResponse.Content.ReadAsAsync<GraphQLResponse>();
+
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
+                        var error = Assert.Single(response.Errors);
+                        Assert.Equal(
+                            "You are not authorized to run this query.\nRequired claim 'role' with any value of 'admin' is not present.",
+                            error.Message);
                     });
             }
         }

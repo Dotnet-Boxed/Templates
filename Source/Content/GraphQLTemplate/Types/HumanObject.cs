@@ -25,7 +25,7 @@ namespace GraphQLTemplate.Types
                 .Description("The name of the human.");
             this.Field(x => x.DateOfBirth)
 #if (Authorization)
-                .AuthorizeWith(AuthorizationPolicyName.Admin)
+                .AuthorizeWith(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
 #endif
                 .Description("The humans date of birth.");
             this.Field(x => x.HomePlanet, nullable: true)
