@@ -58,12 +58,25 @@ namespace Boxed.Templates.FunctionalTest
 
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
+                    });
+            }
+        }
 
+        [Fact]
+        public async Task Run_QueryGraphQlIntrospection_ReturnsResults()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew("graphql", "Default");
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async (httpClient, httpsClient) =>
+                    {
                         var introspectionQuery = await httpClient.PostGraphQL(GraphQlQuery.Introspection);
                         Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
-                        var introspectionContent = await introspectionQuery.Content.ReadAsStringAsync();
-                        Assert.DoesNotContain("Error", introspectionContent);
-                        Assert.DoesNotContain("Exception", introspectionContent);
+                        var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
+                        Assert.Empty(introspectionContent.Errors);
                     });
             }
         }
