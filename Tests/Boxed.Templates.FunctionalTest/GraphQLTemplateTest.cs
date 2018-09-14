@@ -76,7 +76,7 @@ namespace Boxed.Templates.FunctionalTest
                         var introspectionQuery = await httpClient.PostGraphQL(GraphQlQuery.Introspection);
                         Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
                         var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
-                        Assert.Empty(introspectionContent.Errors);
+                        Assert.Null(introspectionContent.Errors);
                     });
             }
         }
