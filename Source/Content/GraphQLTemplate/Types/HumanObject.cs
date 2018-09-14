@@ -19,7 +19,7 @@ namespace GraphQLTemplate.Types
             // this.AuthorizeWith(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
 #endif
 
-            this.Field(x => x.Id, type: typeof(IdGraphType))
+            this.Field(x => x.Id, type: typeof(NonNullGraphType<IdGraphType>))
                 .Description("The unique identifier of the human.");
             this.Field(x => x.Name)
                 .Description("The name of the human.");
