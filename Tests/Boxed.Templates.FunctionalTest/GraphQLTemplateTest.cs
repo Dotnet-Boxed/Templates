@@ -6,6 +6,7 @@ namespace Boxed.Templates.FunctionalTest
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Boxed.Templates.FunctionalTest.Constants;
     using Boxed.Templates.FunctionalTest.Models;
     using Xunit;
 
@@ -57,6 +58,12 @@ namespace Boxed.Templates.FunctionalTest
 
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
+
+                        var introspectionQuery = await httpClient.PostGraphQL(GraphQlQuery.Introspection);
+                        Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
+                        var introspectionContent = await introspectionQuery.Content.ReadAsStringAsync();
+                        Assert.DoesNotContain("Error", introspectionContent);
+                        Assert.DoesNotContain("Exception", introspectionContent);
                     });
             }
         }
