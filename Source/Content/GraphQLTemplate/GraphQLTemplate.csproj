@@ -51,7 +51,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
-    <PackageReference Include="GraphQL" Version="2.0.0" />
+    <PackageReference Include="GraphQL" Version="2.1.0" />
     <PackageReference Include="GraphQL.Authorization" Version="1.1.26" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
