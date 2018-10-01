@@ -56,7 +56,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="3.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="3.0.1" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="1.2.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.4" />
