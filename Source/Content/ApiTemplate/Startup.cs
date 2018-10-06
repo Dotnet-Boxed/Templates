@@ -77,7 +77,7 @@ namespace ApiTemplate
                 .AddCustomApiVersioning()
 #endif
                 .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                    .SetCompatibilityVersion(CompatibilityVersion.Latest)
                     .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
