@@ -26,14 +26,14 @@ namespace ApiTemplate.Controllers
             this.healthCheckers = healthCheckers;
 
         /// <summary>
-        /// Gets the status of this API and it's dependencies, giving an indication of it's health.
+        /// Gets the status of this API and its dependencies, giving an indication of its health.
         /// </summary>
         /// <returns>A 200 OK or error response containing details of what is wrong.</returns>
         [HttpGet(Name = StatusControllerRoute.GetStatus)]
         [AllowAnonymous]
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status204NoContent, "The API is functioning normally.")]
-        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "The API or one of it's dependencies is not functioning, the service is unavailable.")]
+        [SwaggerResponse(StatusCodes.Status503ServiceUnavailable, "The API or one of its dependencies is not functioning, the service is unavailable.")]
 #endif
         public async Task<IActionResult> GetStatus()
         {
