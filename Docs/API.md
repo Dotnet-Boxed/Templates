@@ -14,9 +14,9 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### API
 
-- **Swagger** (Default=On) - Swagger is a format for describing the endpoints in your API and letting you try out your site using it's user interface.
+- **Swagger** (Default=On) - Swagger is a format for describing the endpoints in your API and letting you try out your site using its user interface.
 - **Versioning** (Default=On) - Enable API versioning to version API endpoints.
-- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and it's dependencies, giving an indication of it's health.
+- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
 - **XmlFormatter** - Choose whether to use the XML input/output formatter and which serializer to use.
   - **DataContractSerializer** - The default XML serializer you should use. Requires the use of [DataContract] and [DataMember] attributes.
   - **XmlSerializer** - The alternative XML serializer which is slower but gives more control. Uses the [XmlRoot], [XmlElement] and [XmlAttribute] attributes.
@@ -87,7 +87,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Performance
 
-- **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores it's data.
+- **Caching** - Both in-memory and distributed cache are configured. You do need to specify where the distributed cache stores its data.
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
@@ -110,7 +110,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Patterns & Practices
 
-- **Command Pattern** - Writing all your code in your controllers can mean you end up with huge classes. The command pattern splits up each controller action into it's own class.
+- **Command Pattern** - Writing all your code in your controllers can mean you end up with huge classes. The command pattern splits up each controller action into its own class.
 - **Configure CacheProfile in JSON** - All cache profiles can be configured from a configuration file.
 
 ## How can I get it?
