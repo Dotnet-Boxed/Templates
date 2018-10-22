@@ -12,6 +12,7 @@ namespace ApiTemplate
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
+    using Boxed.AspNetCore;
 #if (Swagger)
     using Boxed.AspNetCore.Swagger;
     using Boxed.AspNetCore.Swagger.OperationFilters;
@@ -64,20 +65,20 @@ namespace ApiTemplate
                 // Adds IDistributedCache which is a distributed cache shared between multiple servers. This adds a
                 // default implementation of IDistributedCache which is not distributed. See below:
                 .AddDistributedMemoryCache();
-                // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
-                // override any previously registered IDistributedCache service.
-                // Redis is a very fast cache provider and the recommended distributed cache provider.
-                // .AddDistributedRedisCache(options => { ... });
-                // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
-                // Note that this would require setting up the session state database.
-                // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
-                // .AddSqlServerCache(
-                //     x =>
-                //     {
-                //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
-                //         x.SchemaName = "dbo";
-                //         x.TableName = "Sessions";
-                //     });
+        // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
+        // override any previously registered IDistributedCache service.
+        // Redis is a very fast cache provider and the recommended distributed cache provider.
+        // .AddDistributedRedisCache(options => { ... });
+        // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
+        // Note that this would require setting up the session state database.
+        // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
+        // .AddSqlServerCache(
+        //     x =>
+        //     {
+        //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
+        //         x.SchemaName = "dbo";
+        //         x.TableName = "Sessions";
+        //     });
 
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
@@ -87,24 +88,17 @@ namespace ApiTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
-                .Configure<ApplicationOptions>(configuration)
-                .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
-#if (ForwardedHeaders)
-                // Adds IOptions<ForwardedHeadersOptions> to the services container.
-                .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
-#elif (HostFiltering)
-                // Adds IOptions<HostFilteringOptions> to the services container.
-                .Configure<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
-#endif
+                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                .ConfigureSingleton<ApplicationOptions>(configuration)
+                .ConfigureSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
 #if (ResponseCompression)
-                // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
-                .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
+                .ConfigureSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
 #endif
-                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
-                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value);
+#if (ForwardedHeaders)
+                .ConfigureSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)));
+#elif (HostFiltering)
+                .ConfigureSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)));
+#endif
 
 #if (ResponseCompression)
         /// <summary>

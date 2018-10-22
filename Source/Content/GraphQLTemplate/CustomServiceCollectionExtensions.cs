@@ -8,6 +8,7 @@ namespace GraphQLTemplate
 #if (CorrelationId)
     using CorrelationId;
 #endif
+    using Boxed.AspNetCore;
     using GraphQL;
 #if (Authorization)
     using GraphQL.Authorization;
@@ -76,26 +77,18 @@ namespace GraphQLTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // Adds IOptions<ApplicationOptions> and ApplicationOptions to the services container.
-                .Configure<ApplicationOptions>(configuration)
-                .AddSingleton(x => x.GetRequiredService<IOptions<ApplicationOptions>>().Value)
+                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                .ConfigureSingleton<ApplicationOptions>(configuration)
+                .ConfigureSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
 #if (ResponseCompression)
-                // Adds IOptions<CompressionOptions> and CompressionOptions to the services container.
-                .Configure<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CompressionOptions>>().Value)
+                .ConfigureSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
 #endif
 #if (ForwardedHeaders)
-                // Adds IOptions<ForwardedHeadersOptions> to the services container.
-                .Configure<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+                .ConfigureSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
 #elif (HostFiltering)
-                // Adds IOptions<HostFilteringOptions> to the services container.
-                .Configure<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
+                .ConfigureSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                // Adds IOptions<CacheProfileOptions> and CacheProfileOptions to the services container.
-                .Configure<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .AddSingleton(x => x.GetRequiredService<IOptions<CacheProfileOptions>>().Value)
-                // Add IOptions<GraphQLOptions> to the services container.
-                .Configure<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
+                .ConfigureSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
 
 #if (ResponseCompression)
         /// <summary>
