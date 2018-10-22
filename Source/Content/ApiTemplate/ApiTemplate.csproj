@@ -55,7 +55,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="2.2.2" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="3.0.1" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="1.2.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
@@ -70,7 +70,7 @@
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Exceptions" Version="4.1.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />

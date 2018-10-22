@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
@@ -49,14 +49,14 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boxed.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Boxed.AspNetCore" Version="2.2.2" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="GraphQL" Version="2.3.0" />
-    <PackageReference Include="GraphQL.Authorization" Version="1.1.26" Condition="'$(Authorization)' == 'true'" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Authorization" Version="2.0.27" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.2.0" />
     <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.1.1" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.1.1" Condition="'$(Azure)' == 'true'" />
@@ -66,7 +66,7 @@
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.0.0" />
     <PackageReference Include="Serilog.Exceptions" Version="4.1.0" />
-    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.0.1" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
