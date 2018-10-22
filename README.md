@@ -42,3 +42,4 @@ A big thank you to the following contributors:
 - [ChrisOMetz](https://github.com/ChrisOMetz) - ASP.NET Core LESS feature.
 - [mcliment](https://github.com/mcliment) - Updated template to ASP.NET Core RC 1.
 - [surfsflo](https://github.com/surfsflo) - Added woff2 support for Font Awesome.
+- [rarrarrarr](https://github.com/rarrarrarr) - Fixed grammar mistakes.

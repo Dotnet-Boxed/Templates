@@ -187,7 +187,7 @@ namespace ApiTemplate
                     options.DescribeStringEnumsInCamelCase();
                     options.EnableAnnotations();
 
-                    // Add the XML comment file for this assembly, so it's contents can be displayed.
+                    // Add the XML comment file for this assembly, so its contents can be displayed.
                     options.IncludeXmlCommentsIfExists(assembly);
 
 #if (Versioning)
