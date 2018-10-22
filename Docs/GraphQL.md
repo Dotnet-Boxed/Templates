@@ -72,6 +72,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### GraphQL
 
 - **Example Queries, Mutations, Subscriptions** - Provides an example schema based on the Star Wars movie.
+- **Apollo Tracing** - Add instrumentation data showing how long field resolvers take to execute to the JSON response in Apollo Tracing format. [Apollo Engine](https://www.apollographql.com/engine/) can use the Apollo Tracing data to produce nice charts.
 - **Automatically Return Not Acceptable** - Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
 
 #### Performance

@@ -14,6 +14,7 @@ namespace GraphQLTemplate
     using GraphQL.Authorization;
 #endif
     using GraphQL.Server;
+    using GraphQL.Server.Internal;
     using GraphQL.Validation;
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
@@ -178,7 +179,8 @@ namespace GraphQLTemplate
                 // Add WebSockets support for subscriptions.
                 .AddWebSockets()
 #endif
-                .Services;
+                .Services
+                .AddTransient(typeof(IGraphQLExecuter<>), typeof(InstrumentingGraphQLExecutor<>));
 
 #if (Authorization)
 
