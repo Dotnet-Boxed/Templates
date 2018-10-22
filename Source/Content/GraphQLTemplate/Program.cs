@@ -2,6 +2,7 @@ namespace GraphQLTemplate
 {
     using System;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using Boxed.AspNetCore;
     using GraphQLTemplate.Options;
@@ -46,17 +47,10 @@ namespace GraphQLTemplate
                     {
                         // Do not add the Server HTTP header.
                         options.AddServerHeader = false;
+
                         // Configure Kestrel from appsettings.json.
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-
-                        // Configuring Limits from appsettings.json is not supported. So we manually copy them from config.
-                        // See https://github.com/aspnet/KestrelHttpServer/issues/2216
-                        var kestrelOptions = builderContext.Configuration.GetSection<KestrelServerOptions>(nameof(ApplicationOptions.Kestrel));
-                        foreach (var property in typeof(KestrelServerLimits).GetProperties())
-                        {
-                            var value = property.GetValue(kestrelOptions.Limits);
-                            property.SetValue(options.Limits, value);
-                        }
+                        ConfigureKestrelServerLimits(builderContext, options);
                     })
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -113,5 +107,36 @@ namespace GraphQLTemplate
 
         private static string GetAssemblyProductName() =>
             Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+
+        /// <summary>
+        /// Configure Kestrel server limits from appsettings.json is not supported. So we manually copy them from config.
+        /// See https://github.com/aspnet/KestrelHttpServer/issues/2216
+        /// </summary>
+        private static void ConfigureKestrelServerLimits(
+            WebHostBuilderContext builderContext,
+            KestrelServerOptions options)
+        {
+            var kestrelOptions = new KestrelServerOptions();
+            builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)).Bind(kestrelOptions);
+            foreach (var property in typeof(KestrelServerLimits).GetProperties())
+            {
+                if (property.PropertyType == typeof(MinDataRate))
+                {
+                    var section = builderContext.Configuration.GetSection(
+                        $"{nameof(ApplicationOptions.Kestrel)}:{nameof(KestrelServerOptions.Limits)}");
+                    if (section.GetChildren().Any(x => string.Equals(x.Key, property.Name, StringComparison.Ordinal)))
+                    {
+                        var bytesPerSecond = section.GetValue<double>($"{property.Name}:{nameof(MinDataRate.BytesPerSecond)}");
+                        var gracePeriod = section.GetValue<TimeSpan>($"{property.Name}:{nameof(MinDataRate.GracePeriod)}");
+                        property.SetValue(options.Limits, new MinDataRate(bytesPerSecond, gracePeriod));
+                    }
+                }
+                else
+                {
+                    var value = property.GetValue(kestrelOptions.Limits);
+                    property.SetValue(options.Limits, value);
+                }
+            }
+        }
     }
 }
