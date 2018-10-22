@@ -128,7 +128,7 @@ namespace Boxed.Templates.FunctionalTest
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                         var error = Assert.Single(response.Errors);
                         Assert.Equal(
-                            "You are not authorized to run this query.\nRequired claim 'role' with any value of 'admin' is not present.",
+                            "GraphQL.Validation.ValidationError: You are not authorized to run this query.\nRequired claim 'role' with any value of 'admin' is not present.",
                             error.Message);
                     });
             }

@@ -90,15 +90,15 @@ namespace ApiTemplate
             services
                 // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureSingleton<ApplicationOptions>(configuration)
-                .ConfigureSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
 #if (ResponseCompression)
                 .ConfigureSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
 #endif
 #if (ForwardedHeaders)
-                .ConfigureSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)));
+                .ConfigureSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
 #elif (HostFiltering)
-                .ConfigureSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)));
+                .ConfigureSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
+                .ConfigureSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)));
 
 #if (ResponseCompression)
         /// <summary>
