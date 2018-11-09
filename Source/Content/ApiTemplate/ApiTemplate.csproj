@@ -56,7 +56,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="2.2.2" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="3.0.1" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="4.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="1.2.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.5" />
@@ -74,8 +74,8 @@
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="3.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="4.0.1" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
 </Project>
