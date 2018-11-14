@@ -57,7 +57,7 @@
     <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.5" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.1.1" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.1.1" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
