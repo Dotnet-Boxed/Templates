@@ -59,7 +59,7 @@
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.1.1" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.1.1" Condition="'$(Azure)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="2.2.0" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.2" />
