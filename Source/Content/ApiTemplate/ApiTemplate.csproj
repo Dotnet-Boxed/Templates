@@ -17,7 +17,7 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <!-- Use the latest version of the C# language. -->
     <LangVersion>latest</LangVersion>
     <!--#if (Swagger)-->
