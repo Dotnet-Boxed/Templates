@@ -76,8 +76,11 @@ namespace ApiTemplate
 #if (Versioning)
                 .AddCustomApiVersioning()
 #endif
+#if (Swagger && Versioning)
+                .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
+#endif
                 .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Latest)
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                     .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
@@ -92,9 +95,6 @@ namespace ApiTemplate
 #elif (XmlSerializer)
                     // Adds the XML input and output formatter using the XmlSerializer.
                     .AddXmlSerializerFormatters()
-#endif
-#if (Swagger && Versioning)
-                    .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
                     .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
