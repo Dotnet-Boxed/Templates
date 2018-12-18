@@ -18,6 +18,7 @@
 
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <!-- Use the latest version of the C# language. -->
     <LangVersion>latest</LangVersion>
     <!--#if (Swagger)-->
