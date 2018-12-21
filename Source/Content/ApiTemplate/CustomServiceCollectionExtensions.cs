@@ -114,7 +114,7 @@ namespace ApiTemplate
                         var customMimeTypes = services
                             .BuildServiceProvider()
                             .GetRequiredService<CompressionOptions>()
-                            .MimeTypes;
+                            .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
@@ -207,8 +207,6 @@ namespace ApiTemplate
 
                     // Show an example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
-                    // Show an example model for ModelStateDictionary.
-                    options.SchemaFilter<ModelStateDictionarySchemaFilter>();
 
 #if (Versioning)
                     var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
