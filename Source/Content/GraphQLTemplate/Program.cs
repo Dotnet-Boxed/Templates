@@ -2,7 +2,6 @@ namespace GraphQLTemplate
 {
     using System;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using Boxed.AspNetCore;
     using GraphQLTemplate.Options;
@@ -116,27 +115,34 @@ namespace GraphQLTemplate
             WebHostBuilderContext builderContext,
             KestrelServerOptions options)
         {
-            var kestrelOptions = new KestrelServerOptions();
-            builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)).Bind(kestrelOptions);
-            foreach (var property in typeof(KestrelServerLimits).GetProperties())
-            {
-                if (property.PropertyType == typeof(MinDataRate))
-                {
-                    var section = builderContext.Configuration.GetSection(
-                        $"{nameof(ApplicationOptions.Kestrel)}:{nameof(KestrelServerOptions.Limits)}");
-                    if (section.GetChildren().Any(x => string.Equals(x.Key, property.Name, StringComparison.Ordinal)))
-                    {
-                        var bytesPerSecond = section.GetValue<double>($"{property.Name}:{nameof(MinDataRate.BytesPerSecond)}");
-                        var gracePeriod = section.GetValue<TimeSpan>($"{property.Name}:{nameof(MinDataRate.GracePeriod)}");
-                        property.SetValue(options.Limits, new MinDataRate(bytesPerSecond, gracePeriod));
-                    }
-                }
-                else
-                {
-                    var value = property.GetValue(kestrelOptions.Limits);
-                    property.SetValue(options.Limits, value);
-                }
-            }
+            var source = new KestrelServerOptions();
+            builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)).Bind(source);
+
+            var limits = options.Limits;
+            var sourceLimits = source.Limits;
+
+            var http2 = limits.Http2;
+            var sourceHttp2 = sourceLimits.Http2;
+
+            http2.HeaderTableSize = sourceHttp2.HeaderTableSize;
+            http2.InitialConnectionWindowSize = sourceHttp2.InitialConnectionWindowSize;
+            http2.InitialStreamWindowSize = sourceHttp2.InitialStreamWindowSize;
+            http2.MaxFrameSize = sourceHttp2.MaxFrameSize;
+            http2.MaxRequestHeaderFieldSize = sourceHttp2.MaxRequestHeaderFieldSize;
+            http2.MaxStreamsPerConnection = sourceHttp2.MaxStreamsPerConnection;
+
+            limits.KeepAliveTimeout = sourceLimits.KeepAliveTimeout;
+            limits.MaxConcurrentConnections = sourceLimits.MaxConcurrentConnections;
+            limits.MaxConcurrentUpgradedConnections = sourceLimits.MaxConcurrentUpgradedConnections;
+            limits.MaxRequestBodySize = sourceLimits.MaxRequestBodySize;
+            limits.MaxRequestBufferSize = sourceLimits.MaxRequestBufferSize;
+            limits.MaxRequestHeaderCount = sourceLimits.MaxRequestHeaderCount;
+            limits.MaxRequestHeadersTotalSize = sourceLimits.MaxRequestHeadersTotalSize;
+            limits.MaxRequestLineSize = sourceLimits.MaxRequestLineSize;
+            limits.MaxResponseBufferSize = sourceLimits.MaxResponseBufferSize;
+            limits.MinRequestBodyDataRate = sourceLimits.MinRequestBodyDataRate;
+            limits.MinResponseDataRate = sourceLimits.MinResponseDataRate;
+            limits.RequestHeadersTimeout = sourceLimits.RequestHeadersTimeout;
         }
     }
 }
