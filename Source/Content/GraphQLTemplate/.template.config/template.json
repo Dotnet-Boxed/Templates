@@ -306,6 +306,13 @@
       "defaultValue": "true",
       "description": "Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability."
     },
+    // HealthCheck
+    "HealthCheck": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health."
+    },
     // RobotsTxt
     "RobotsTxt": {
       "type": "parameter",

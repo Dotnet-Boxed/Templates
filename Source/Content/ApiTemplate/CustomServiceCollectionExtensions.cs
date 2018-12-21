@@ -160,6 +160,14 @@ namespace ApiTemplate
                     });
 
 #endif
+#if (HealthCheck)
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
+            services
+                .AddHealthChecks()
+                // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+                .Services;
+
+#endif
 #if (Versioning)
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services.AddApiVersioning(

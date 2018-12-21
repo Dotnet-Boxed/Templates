@@ -16,7 +16,6 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 - **Swagger** (Default=On) - Swagger is a format for describing the endpoints in your API and letting you try out your site using its user interface.
 - **Versioning** (Default=On) - Enable API versioning to version API endpoints.
-- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
 - **XmlFormatter** - Choose whether to use the XML input/output formatter and which serializer to use.
   - **DataContractSerializer** - The default XML serializer you should use. Requires the use of [DataContract] and [DataMember] attributes.
   - **XmlSerializer** - The alternative XML serializer which is slower but gives more control. Uses the [XmlRoot], [XmlElement] and [XmlAttribute] attributes.
@@ -55,6 +54,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Analytics
 
+- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
 - **CorrelationId** (Default=On) - Correlate requests between clients and this API. Pass a GUID in the X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier. The header is also reflected back in a response.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.

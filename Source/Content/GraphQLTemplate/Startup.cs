@@ -13,6 +13,9 @@ namespace GraphQLTemplate
     using GraphQL.Server.Ui.Voyager;
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
+#if (HealthCheck)
+    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+#endif
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -62,6 +65,9 @@ namespace GraphQLTemplate
 #if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
 #endif
+#if (HealthCheck)
+                .AddCustomHealthChecks()
+#endif
                 .AddHttpContextAccessor()
                 .AddMvcCore()
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
@@ -110,6 +116,10 @@ namespace GraphQLTemplate
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
+#if (HealthCheck)
+                .UseHealthChecks("/status/live", new HealthCheckOptions() { Predicate = _ => false })
+                .UseHealthChecks("/status/ready")
+#endif
                 .UseStaticFilesWithCacheControl()
 #if (Subscriptions)
                 .UseWebSockets()

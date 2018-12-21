@@ -64,6 +64,9 @@
     "ResponseCompression": {
       "longName": "response-compression"
     },
+    "HealthCheck": {
+      "longName": "health-check"
+    },
     "RobotsTxt": {
       "longName": "robots-txt"
     },

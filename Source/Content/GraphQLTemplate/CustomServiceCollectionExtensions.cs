@@ -151,6 +151,14 @@ namespace GraphQLTemplate
                     });
 
 #endif
+#if (HealthCheck)
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
+            services
+                .AddHealthChecks()
+                // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+                .Services;
+
+#endif
         public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostingEnvironment hostingEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.

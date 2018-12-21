@@ -9,6 +9,9 @@ namespace ApiTemplate
     using CorrelationId;
 #endif
     using Microsoft.AspNetCore.Builder;
+#if (HealthCheck)
+    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+#endif
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -62,6 +65,9 @@ namespace ApiTemplate
 #endif
 #if (HttpsEverywhere)
                 .AddCustomStrictTransportSecurity()
+#endif
+#if (HealthCheck)
+                .AddCustomHealthChecks()
 #endif
 #if (Swagger)
                 .AddCustomSwagger()
@@ -136,6 +142,10 @@ namespace ApiTemplate
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
+#if (HealthCheck)
+                .UseHealthChecks("/status/live", new HealthCheckOptions() { Predicate = _ => false })
+                .UseHealthChecks("/status/ready")
+#endif
                 .UseStaticFilesWithCacheControl()
 #if (Swagger)
                 .UseMvc()
