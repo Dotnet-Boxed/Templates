@@ -35,8 +35,7 @@ namespace GraphQLTemplate
                 .GetRequiredService<CacheProfileOptions>()
                 .Where(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
                 .Select(x => x.Value)
-                .SingleOrDefault() ??
-                throw new InvalidOperationException("CacheProfiles.StaticFiles section is missing in appsettings.json");
+                .SingleOrDefault();
             return application
                 .UseStaticFiles(
                     new StaticFileOptions()

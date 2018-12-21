@@ -105,7 +105,7 @@ namespace GraphQLTemplate
                         var customMimeTypes = services
                             .BuildServiceProvider()
                             .GetRequiredService<CompressionOptions>()
-                            .MimeTypes ?? Enumerable.Empty<string>();
+                            .MimeTypes;
                         options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
                     })
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
