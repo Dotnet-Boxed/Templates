@@ -8,7 +8,6 @@ namespace ApiTemplate.Controllers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.Net.Http.Headers;
 #if (Swagger)
     using Swashbuckle.AspNetCore.Annotations;
@@ -114,7 +113,7 @@ namespace ApiTemplate.Controllers
         [HttpHead("", Name = CarsControllerRoute.HeadCarPage)]
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(PageResult<Car>))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.")]
 #endif
         public Task<IActionResult> GetPage(
@@ -134,7 +133,7 @@ namespace ApiTemplate.Controllers
         [HttpPatch("{carId}", Name = CarsControllerRoute.PatchCar)]
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status200OK, "The patched car with the specified unique identifier.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The patch document is invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The patch document is invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
 #endif
         public Task<IActionResult> Patch(
@@ -154,7 +153,7 @@ namespace ApiTemplate.Controllers
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status201Created, "The car was created.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.")]
 #endif
         public Task<IActionResult> Post(
             [FromServices] IPostCarCommand command,
@@ -173,7 +172,7 @@ namespace ApiTemplate.Controllers
         [HttpPut("{carId}", Name = CarsControllerRoute.PutCar)]
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status200OK, "The car was updated.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ModelStateDictionary))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
 #endif
         public Task<IActionResult> Put(
