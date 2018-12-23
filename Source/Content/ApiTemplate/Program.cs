@@ -41,7 +41,7 @@ namespace ApiTemplate
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             new WebHostBuilder()
                 .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
-                .UseKestrel(
+                .ConfigureKestrel(
                     (builderContext, options) =>
                     {
                         // Do not add the Server HTTP header.
