@@ -50,6 +50,12 @@ namespace Boxed.Templates.FunctionalTest
                         var httpsResponse = await httpsClient.GetAsync("/");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
+                        var liveResponse = await httpsClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.OK, liveResponse.StatusCode);
+
+                        var readyResponse = await httpsClient.GetAsync("status/ready");
+                        Assert.Equal(HttpStatusCode.OK, readyResponse.StatusCode);
+
                         var robotsTxtResponse = await httpsClient.GetAsync("robots.txt");
                         Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
 
@@ -58,6 +64,32 @@ namespace Boxed.Templates.FunctionalTest
 
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Run_HealthCheckFalse_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "graphql",
+                    "HealthCheckFalse",
+                    new Dictionary<string, string>()
+                    {
+                        { "health-check", "false" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async httpClient =>
+                    {
+                        var liveResponse = await httpClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.NotFound, liveResponse.StatusCode);
+
+                        var readyResponse = await httpClient.GetAsync("status/ready");
+                        Assert.Equal(HttpStatusCode.NotFound, readyResponse.StatusCode);
                     });
             }
         }

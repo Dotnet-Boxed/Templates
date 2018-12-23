@@ -41,11 +41,14 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRun(
                     async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await httpClient.GetAsync("status");
-                        Assert.Equal(HttpStatusCode.NoContent, httpResponse.StatusCode);
+                        var httpResponse = await httpClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
-                        var httpsResponse = await httpsClient.GetAsync("status");
-                        Assert.Equal(HttpStatusCode.NoContent, httpsResponse.StatusCode);
+                        var liveResponse = await httpsClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.OK, liveResponse.StatusCode);
+
+                        var readyResponse = await httpsClient.GetAsync("status/ready");
+                        Assert.Equal(HttpStatusCode.OK, readyResponse.StatusCode);
 
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
                         Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
@@ -58,6 +61,32 @@ namespace Boxed.Templates.FunctionalTest
 
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
+                    });
+            }
+        }
+
+        [Fact]
+        public async Task Run_HealthCheckFalse_Successful()
+        {
+            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            {
+                var project = await tempDirectory.DotnetNew(
+                    "api",
+                    "HealthCheckFalse",
+                    new Dictionary<string, string>()
+                    {
+                        { "health-check", "false" },
+                    });
+                await project.DotnetRestore();
+                await project.DotnetBuild();
+                await project.DotnetRun(
+                    async httpClient =>
+                    {
+                        var liveResponse = await httpClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.NotFound, liveResponse.StatusCode);
+
+                        var readyResponse = await httpClient.GetAsync("status/ready");
+                        Assert.Equal(HttpStatusCode.NotFound, readyResponse.StatusCode);
                     });
             }
         }
@@ -79,8 +108,8 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRun(
                     async httpClient =>
                     {
-                        var httpResponse = await httpClient.GetAsync("status");
-                        Assert.Equal(HttpStatusCode.NoContent, httpResponse.StatusCode);
+                        var httpResponse = await httpClient.GetAsync("status/live");
+                        Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });
             }
         }
