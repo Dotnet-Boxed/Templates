@@ -41,7 +41,7 @@ namespace GraphQLTemplate
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             new WebHostBuilder()
                 .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
-                .ConfigureKestrel(
+                .UseKestrel(
                     (builderContext, options) =>
                     {
                         // Do not add the Server HTTP header.
