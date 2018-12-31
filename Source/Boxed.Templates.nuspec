@@ -11,7 +11,8 @@
     <language>en-GB</language>
     <iconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</iconUrl>
     <projectUrl>https://github.com/Dotnet-Boxed/Templates</projectUrl>
-    <license type="expression">MIT</license>
+    <licenseUrl>https://github.com/Dotnet-Boxed/Templates/blob/master/LICENSE</licenseUrl>
+    <!--<license type="expression">MIT</license>-->
     <releaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</releaseNotes>
     <packageTypes>
       <packageType name="Template" />
