@@ -40,7 +40,17 @@ namespace ApiTemplate
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             new WebHostBuilder()
-                .UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build())
+                .UseIf(
+                    x => string.IsNullOrEmpty(x.GetSetting(WebHostDefaults.ContentRootKey)),
+                    x => x.UseContentRoot(Directory.GetCurrentDirectory()))
+                .UseIf(
+                    args != null,
+                    x => x.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build()))
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                    AddConfiguration(config, hostingContext.HostingEnvironment, args))
+                .UseSerilog()
+                .UseDefaultServiceProvider((context, options) =>
+                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
                 .UseKestrel(
                     (builderContext, options) =>
                     {
@@ -51,18 +61,15 @@ namespace ApiTemplate
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
                         ConfigureKestrelServerLimits(builderContext, options);
                     })
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                    AddConfiguration(config, hostingContext.HostingEnvironment, args))
-                .UseSerilog()
 #if (Azure)
                 .UseAzureAppServices()
 #endif
-#if (IIS && !Azure)
-                .UseIISIntegration()
+#if (!IIS)
+                // Required to use IIS Express.
 #endif
-                .UseDefaultServiceProvider((context, options) =>
-                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
+                .UseIIS()
+                .UseIISIntegration()
+
                 .UseStartup<Startup>();
 
         private static IConfigurationBuilder AddConfiguration(
