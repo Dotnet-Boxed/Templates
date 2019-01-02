@@ -64,11 +64,8 @@ namespace GraphQLTemplate
 #if (Azure)
                 .UseAzureAppServices()
 #endif
-#if (!IIS)
-                // Required to use IIS Express.
-#endif
+                // Used for IIS and IIS Express for in-process hosting. Use UseIISIntegration for out-of-process hosting.
                 .UseIIS()
-                .UseIISIntegration()
 
                 .UseStartup<Startup>();
 
