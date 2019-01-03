@@ -95,7 +95,8 @@ namespace GraphQLTemplate
             application
 #if (CorrelationId)
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
-                .UseCorrelationId()
+                // UpdateTraceIdentifier must be false due to a bug. See https://github.com/aspnet/AspNetCore/issues/5144
+                .UseCorrelationId(new CorrelationIdOptions() { UpdateTraceIdentifier = false })
 #endif
 #if (ForwardedHeaders)
                 .UseForwardedHeaders()
