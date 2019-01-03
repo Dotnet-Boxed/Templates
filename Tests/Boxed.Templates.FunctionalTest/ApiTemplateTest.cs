@@ -50,6 +50,9 @@ namespace Boxed.Templates.FunctionalTest
                         var readyResponse = await httpsClient.GetAsync("status/ready");
                         Assert.Equal(HttpStatusCode.OK, readyResponse.StatusCode);
 
+                        var carsResponse = await httpsClient.GetAsync("/cars");
+                        Assert.Equal(HttpStatusCode.OK, carsResponse.StatusCode);
+
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
                         Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
 
