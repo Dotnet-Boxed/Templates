@@ -55,7 +55,7 @@
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="GraphQL.Authorization" Version="2.0.27" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.2.0" />
-    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.2.0" />
+    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.3.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
