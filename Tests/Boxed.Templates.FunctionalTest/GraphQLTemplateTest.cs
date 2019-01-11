@@ -50,11 +50,11 @@ namespace Boxed.Templates.FunctionalTest
                         var httpsResponse = await httpsClient.GetAsync("/");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
-                        var liveResponse = await httpsClient.GetAsync("status/live");
-                        Assert.Equal(HttpStatusCode.OK, liveResponse.StatusCode);
+                        var statusResponse = await httpsClient.GetAsync("status");
+                        Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
 
-                        var readyResponse = await httpsClient.GetAsync("status/ready");
-                        Assert.Equal(HttpStatusCode.OK, readyResponse.StatusCode);
+                        var statusSelfResponse = await httpsClient.GetAsync("status/self");
+                        Assert.Equal(HttpStatusCode.OK, statusSelfResponse.StatusCode);
 
                         var robotsTxtResponse = await httpsClient.GetAsync("robots.txt");
                         Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
@@ -85,11 +85,11 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRun(
                     async httpClient =>
                     {
-                        var liveResponse = await httpClient.GetAsync("status/live");
-                        Assert.Equal(HttpStatusCode.NotFound, liveResponse.StatusCode);
+                        var statusResponse = await httpClient.GetAsync("status");
+                        Assert.Equal(HttpStatusCode.NotFound, statusResponse.StatusCode);
 
-                        var readyResponse = await httpClient.GetAsync("status/ready");
-                        Assert.Equal(HttpStatusCode.NotFound, readyResponse.StatusCode);
+                        var statusSelfResponse = await httpClient.GetAsync("status/self");
+                        Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
                     });
             }
         }
