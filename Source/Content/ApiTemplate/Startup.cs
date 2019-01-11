@@ -144,8 +144,8 @@ namespace ApiTemplate
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
 #if (HealthCheck)
-                .UseHealthChecks("/status/live", new HealthCheckOptions() { Predicate = _ => false })
-                .UseHealthChecks("/status/ready")
+                .UseHealthChecks("/status")
+                .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
 #endif
                 .UseStaticFilesWithCacheControl()
 #if (Swagger)
