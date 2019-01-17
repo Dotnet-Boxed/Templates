@@ -103,8 +103,8 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 1. Install the latest [.NET Core SDK](https://dot.net).
 2. Run `dotnet new --install "Boxed.Templates::*"` to install the project template.
-3. Run `dotnet new api --help` to see how to select the feature of the project.
-5. Run `dotnet new api --name "MyTemplate"` along with any other custom options to create a project from the template.
+3. Run `dotnet new graphql --help` to see how to select the feature of the project.
+5. Run `dotnet new graphql --name "MyTemplate"` along with any other custom options to create a project from the template.
 
 ## Release Notes and To-Do List
 You can find release notes for each version [here](https://github.com/Dotnet-Boxed/Templates/releases) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/Dotnet-Boxed/Templates/projects) tab.
