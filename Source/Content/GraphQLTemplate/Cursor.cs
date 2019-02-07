@@ -24,8 +24,11 @@ namespace GraphQLTemplate
             {
                 return default;
             }
-
-            return (T)Convert.ChangeType(decodedValue, typeof(T), CultureInfo.InvariantCulture);
+            
+            var type = typeof(T);
+            type = Nullable.GetUnderlyingType(type) ?? type;
+            
+            return (T)Convert.ChangeType(decodedValue, type, CultureInfo.InvariantCulture);
         }
 
         public static (string firstCursor, string lastCursor) GetFirstAndLastCursor<TItem, TCursor>(
