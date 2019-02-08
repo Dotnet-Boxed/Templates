@@ -9,11 +9,24 @@ namespace Boxed.Templates.Test.GraphQLTemplate
     {
         [Theory]
         [InlineData("MA=", 0)]
+        [InlineData("MA==", 0)]
         [InlineData("NQ==", 5)]
         [InlineData("LTU=", -5)]
         public void FromCursor_IntValue_ReturnsPrefixedBase64Cursor(string cursor, int expectedValue)
         {
             var value = Cursor.FromCursor<int>(cursor);
+
+            Assert.Equal(expectedValue, value);
+        }
+
+        [Theory]
+        [InlineData("MA=", null)]
+        [InlineData("MA==", 0)]
+        [InlineData("NQ==", 5)]
+        [InlineData("LTU=", -5)]
+        public void FromCursor_NullableIntValue_ReturnsPrefixedBase64Cursor(string cursor, int? expectedValue)
+        {
+            var value = Cursor.FromCursor<int?>(cursor);
 
             Assert.Equal(expectedValue, value);
         }
@@ -125,6 +138,16 @@ namespace Boxed.Templates.Test.GraphQLTemplate
         {
             var cursor = Cursor.ToCursor(value);
 
+            Assert.Equal(expectedCursor, cursor);
+        }
+
+        [Theory]
+        [InlineData(0, "MA==")]
+        [InlineData(5, "NQ==")]
+        [InlineData(-5, "LTU=")]
+        public void ToCursor_NullableIntValue_ReturnsPrefixedBase64Cursor(int? value, string expectedCursor)
+        {
+            var cursor = Cursor.ToCursor(value);
             Assert.Equal(expectedCursor, cursor);
         }
 
