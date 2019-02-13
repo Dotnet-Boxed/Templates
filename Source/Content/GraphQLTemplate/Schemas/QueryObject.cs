@@ -5,6 +5,7 @@ namespace GraphQLTemplate.Schemas
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Boxed.AspNetCore;
     using GraphQL.Builders;
     using GraphQL.Types;
     using GraphQL.Types.Relay.DataObjects;
