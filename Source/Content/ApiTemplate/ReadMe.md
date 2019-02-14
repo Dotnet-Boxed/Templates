@@ -1,4 +1,6 @@
-<div id="main" class="container body-content" role="main">[![.NET Boxed](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)](https://github.com/Dotnet-Boxed/Templates) 
+<div id="main" class="container body-content" role="main">   
+    
+![.NET Boxed Banner](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
 <section>
 
