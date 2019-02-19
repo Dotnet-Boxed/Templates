@@ -111,6 +111,7 @@ namespace GraphQLTemplate
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 
                         options.Providers.Add<BrotliCompressionProvider>();
+                        options.Providers.Add<GzipCompressionProvider>();
                     });
 
 #endif
