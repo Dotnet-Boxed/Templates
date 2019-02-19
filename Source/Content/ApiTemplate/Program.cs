@@ -57,6 +57,9 @@ namespace ApiTemplate
                         // Do not add the Server HTTP header.
                         options.AddServerHeader = false;
 
+                        // Throw an exception if synchronous API's are used, forcing the use of async for performance.
+                        options.AllowSynchronousIO = false;
+
                         // Configure Kestrel from appsettings.json.
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
                         ConfigureKestrelServerLimits(builderContext, options);
