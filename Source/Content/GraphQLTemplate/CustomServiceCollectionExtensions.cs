@@ -98,6 +98,8 @@ namespace GraphQLTemplate
         /// </summary>
         public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
             services
+                .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
+                .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
                 .AddResponseCompression(
                     options =>
                     {
@@ -106,9 +108,10 @@ namespace GraphQLTemplate
                             .BuildServiceProvider()
                             .GetRequiredService<CompressionOptions>()
                             .MimeTypes ?? Enumerable.Empty<string>();
-                        options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(customMimeTypes);
-                    })
-                .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal);
+                        options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
+
+                        options.Providers.Add<BrotliCompressionProvider>();
+                    });
 
 #endif
         /// <summary>
