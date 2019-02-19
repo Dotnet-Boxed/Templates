@@ -68,10 +68,6 @@ namespace GraphQLTemplate
                         options.CacheProfiles.Add(keyValuePair);
                     }
 
-                    // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
-                    options.OutputFormatters.RemoveType<StreamOutputFormatter>();
-                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
-
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
                 });

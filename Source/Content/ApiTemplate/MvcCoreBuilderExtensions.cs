@@ -89,13 +89,9 @@ namespace ApiTemplate
                     jsonInputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
 
-                    // Add Problem Details media type (application/problem+json) to the JSON input and output formatters.
+                    // Add Problem Details media type (application/problem+json) to the JSON output formatters.
                     // See https://tools.ietf.org/html/rfc7807
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
-
-                    // Remove string and stream output formatters. These are not useful for an API serving JSON or XML.
-                    options.OutputFormatters.RemoveType<StreamOutputFormatter>();
-                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
