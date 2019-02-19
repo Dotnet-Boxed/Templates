@@ -94,6 +94,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "The car with the specified unique identifier.", typeof(Car))]
         [SwaggerResponse(StatusCodes.Status304NotModified, "The car has not changed since the date given in the If-Modified-Since HTTP header.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
+        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
         public Task<IActionResult> Get(
             [FromServices] IGetCarCommand command,
@@ -115,6 +116,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(PageResult<Car>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.")]
+        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
         public Task<IActionResult> GetPage(
             [FromServices] IGetCarPageCommand command,
@@ -135,6 +137,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "The patched car with the specified unique identifier.", typeof(Car))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The patch document is invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
+        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
         public Task<IActionResult> Patch(
             [FromServices] IPatchCarCommand command,
@@ -154,6 +157,7 @@ namespace ApiTemplate.Controllers
 #if (Swagger)
         [SwaggerResponse(StatusCodes.Status201Created, "The car was created.", typeof(Car))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.")]
+        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
         public Task<IActionResult> Post(
             [FromServices] IPostCarCommand command,
@@ -174,6 +178,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status200OK, "The car was updated.", typeof(Car))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
+        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
         public Task<IActionResult> Put(
             [FromServices] IPutCarCommand command,
