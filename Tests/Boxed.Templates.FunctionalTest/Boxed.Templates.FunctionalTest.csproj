@@ -10,7 +10,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.2.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.0" />
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.1-beta.61" />
     <PackageReference Include="System.IO.FileSystem.DriveInfo" Version="4.3.1" />
