@@ -170,12 +170,14 @@ namespace GraphQLTemplate
                 .AddGraphQL(
                     options =>
                     {
-                        // Set some limits for security, read from configuration.
-                        options.ComplexityConfiguration = services
+                        var configuration = services
                             .BuildServiceProvider()
                             .GetRequiredService<IOptions<GraphQLOptions>>()
-                            .Value
-                            .ComplexityConfiguration;
+                            .Value;
+                        // Set some limits for security, read from configuration.
+                        options.ComplexityConfiguration = configuration.ComplexityConfiguration;
+                        // Enable GraphQL metrics to be output in the response, read from configuration.
+                        options.EnableMetrics = configuration.EnableMetrics;
                         // Show stack traces in exceptions. Don't turn this on in production.
                         options.ExposeExceptions = hostingEnvironment.IsDevelopment();
                     })
