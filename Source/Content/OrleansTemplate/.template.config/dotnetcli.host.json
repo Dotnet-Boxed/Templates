@@ -25,12 +25,9 @@
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
     },
-    "SkipRestore": {
-      "longName": "no-restore"
-    },
-    "SkipOpenReadMe": {
-      "longName": "no-open-readme"
-    },
+    //"SkipOpenReadMe": {
+    //  "longName": "no-open-readme"
+    //},
     "SkipOpenAzureStorageEmulator": {
       "longName": "no-storage-emulator"
     }

@@ -89,18 +89,12 @@
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
-    "SkipRestore": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Skips the execution of 'dotnet restore' on project creation.",
-      "defaultValue": "false"
-    },
-    "SkipOpenReadMe": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Skips the opening of the projects Read-Me in a web browser.",
-      "defaultValue": "false"
-    },
+    //"SkipOpenReadMe": {
+    //  "type": "parameter",
+    //  "datatype": "bool",
+    //  "description": "Skips the opening of the projects Read-Me in a web browser.",
+    //  "defaultValue": "false"
+    //},
     "SkipOpenAzureStorageEmulator": {
       "type": "parameter",
       "datatype": "bool",
@@ -109,24 +103,15 @@
     }
   },
   "postActions": [
-    {
-      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
-      "condition": "(!SkipRestore)",
-      "continueOnError": true,
-      "description": "Restore NuGet packages required by this project.",
-      "manualInstructions": [
-        { "text": "Run 'dotnet restore' in the directory the template was created in." }
-      ]
-    },
-    {
-      "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
-      "condition": "(!SkipOpenReadMe)",
-      "continueOnError": true,
-      "description": "Open the Read-Me for the project in a web browser.",
-      "manualInstructions": [
-        { "text": "Open the ReadMe.html in a web browser." }
-      ]
-    },
+    //{
+    //  "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
+    //  "condition": "(!SkipOpenReadMe)",
+    //  "continueOnError": true,
+    //  "description": "Open the Read-Me for the project in a web browser.",
+    //  "manualInstructions": [
+    //    { "text": "Open the ReadMe.html in a web browser." }
+    //  ]
+    //},
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
       "condition": "(!SkipOpenAzureStorageEmulator)",
