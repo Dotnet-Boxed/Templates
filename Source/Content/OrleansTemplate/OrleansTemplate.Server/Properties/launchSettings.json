@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Development": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8080",
+      "environmentVariables": {
+        "ENVIRONMENT": "Development"
+      }
+    },
+    "Production": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8080",
+      "environmentVariables": {
+        "ENVIRONMENT": "Production"
+      }
+    },
+    // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
+    "Watch Development (CTRL+F5)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch run",
+      "environmentVariables": {
+        "ENVIRONMENT": "Development"
+      }
+    },
+    "Watch Production (CTRL+F5)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch run",
+      "environmentVariables": {
+        "ENVIRONMENT": "Production"
+      }
+    }
+  }
+}

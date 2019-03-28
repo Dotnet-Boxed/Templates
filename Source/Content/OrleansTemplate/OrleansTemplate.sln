@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Abstractions", "OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj", "{957E822A-7B7B-4203-B797-AB488069E880}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Grains", "OrleansTemplate.Grains\OrleansTemplate.Grains.csproj", "{85DE5CAC-5403-4700-8EFA-DC57638D81DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server", "OrleansTemplate.Server\OrleansTemplate.Server.csproj", "{19E98B99-4874-47DA-A307-0F7C47ADD5DD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server.IntegrationTest", "OrleansTemplate.Server.IntegrationTest\OrleansTemplate.Server.IntegrationTest.csproj", "{32D1809C-765D-4390-9561-821FA0F24CDA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Client", "OrleansTemplate.Client\OrleansTemplate.Client.csproj", "{B3DC9D97-6F5A-45BC-B21F-CED45A00A9A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{957E822A-7B7B-4203-B797-AB488069E880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{957E822A-7B7B-4203-B797-AB488069E880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{957E822A-7B7B-4203-B797-AB488069E880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{957E822A-7B7B-4203-B797-AB488069E880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85DE5CAC-5403-4700-8EFA-DC57638D81DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85DE5CAC-5403-4700-8EFA-DC57638D81DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85DE5CAC-5403-4700-8EFA-DC57638D81DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85DE5CAC-5403-4700-8EFA-DC57638D81DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E98B99-4874-47DA-A307-0F7C47ADD5DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E98B99-4874-47DA-A307-0F7C47ADD5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E98B99-4874-47DA-A307-0F7C47ADD5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E98B99-4874-47DA-A307-0F7C47ADD5DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D1809C-765D-4390-9561-821FA0F24CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D1809C-765D-4390-9561-821FA0F24CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D1809C-765D-4390-9561-821FA0F24CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D1809C-765D-4390-9561-821FA0F24CDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3DC9D97-6F5A-45BC-B21F-CED45A00A9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3DC9D97-6F5A-45BC-B21F-CED45A00A9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3DC9D97-6F5A-45BC-B21F-CED45A00A9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3DC9D97-6F5A-45BC-B21F-CED45A00A9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E464B40-8B3D-427D-BA61-053DB0B94967}
+	EndGlobalSection
+EndGlobal

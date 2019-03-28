@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Exe</OutputType>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="OrleansDashboard" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj" />
+    <ProjectReference Include="..\OrleansTemplate.Grains\OrleansTemplate.Grains.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

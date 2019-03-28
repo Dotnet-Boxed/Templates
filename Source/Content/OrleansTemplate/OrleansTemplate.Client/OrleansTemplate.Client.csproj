@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Client" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
