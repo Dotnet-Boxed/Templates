@@ -2,9 +2,13 @@
 
 ![Microsoft Orleans Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)
 
+## What is Microsoft Orleans?
+
+[Microsoft Orleans](https://dotnet.github.io/orleans/) is the database and business logic layer for your app. It's extremely fast, highly scalable and super cheap to run as you can use Azure Table Storage to store your data (which costs peanuts) all while making software development simpler using something called the [Actor model](https://en.wikipedia.org/wiki/Actor_model). You can mostly forget about having to write boilerplate code to retrieve and store data from the database, [Microsoft Orleans](https://dotnet.github.io/orleans/) takes care of that for you.
+
 ## Optional Feature Selection
 
-The Microsoft Orleans project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
+The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
 #### Project
 
