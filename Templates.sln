@@ -67,6 +67,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Client", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server.IntegrationTest", "Source\Content\OrleansTemplate\Tests\OrleansTemplate.Server.IntegrationTest\OrleansTemplate.Server.IntegrationTest.csproj", "{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1826213-EB72-4F7E-8FBC-9F09EBF38077}"
+	ProjectSection(SolutionItems) = preProject
+		Source\Content\OrleansTemplate\.editorconfig = Source\Content\OrleansTemplate\.editorconfig
+		Source\Content\OrleansTemplate\.gitignore = Source\Content\OrleansTemplate\.gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +129,7 @@ Global
 		{9099F216-3BCD-40C4-BAC1-C66C9BE5683A} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{42C68564-D31F-47B6-9C6E-658830D6F737} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10} = {B2B5B578-0E87-4C61-9566-173E96EFC131}
+		{F1826213-EB72-4F7E-8FBC-9F09EBF38077} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}
