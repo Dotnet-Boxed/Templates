@@ -67,7 +67,10 @@ namespace OrleansTemplate.Server
                         services.Configure<ApplicationOptions>(context.Configuration);
                         services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
                         services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)));
-                        services.Configure<ApplicationInsightsTelemetryConsumerOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
+#if (ApplicationInsights)
+                        services.Configure<ApplicationInsightsTelemetryConsumerOptions>(
+                            context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
+#endif
 
                         storageOptions = services.BuildServiceProvider().GetRequiredService<IOptions<StorageOptions>>().Value;
                     })
