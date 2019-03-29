@@ -15,25 +15,39 @@ namespace OrleansTemplate.Server
     using OrleansTemplate.Abstractions.Constants;
     using OrleansTemplate.Grains;
     using OrleansTemplate.Server.Options;
+    using Serilog;
+    using Serilog.Core;
 
     public class Program
     {
-        static async Task<int> Main(string[] args)
+        public static Task<int> Main(string[] args) => LogAndRun(CreateSiloHostBuilder(args).Build());
+
+        public static async Task<int> LogAndRun(ISiloHost siloHost)
         {
+            Log.Logger = BuildLogger(siloHost.Services.GetRequiredService<IConfiguration>());
+
             try
             {
-                var siloHost = CreateSiloHostBuilder(args).Build();
+                Log.Information("Starting application");
                 await siloHost.StartAsync();
+                Log.Information("Started application");
 
                 Console.Read();
 
+                Log.Information("Stopping application");
                 await siloHost.StopAsync();
+                Log.Information("Stopped application");
+
                 return 0;
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.ToString());
-                return -1;
+                Log.Fatal(exception, "Application terminated unexpectedly");
+                return 1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
             }
         }
 
@@ -65,7 +79,7 @@ namespace OrleansTemplate.Server
 #if (ApplicationInsights)
                 .AddApplicationInsightsTelemetryConsumer("")
 #endif
-                .ConfigureLogging(logging => logging.AddConsole())
+                .ConfigureLogging(logging => logging.AddSerilog())
                 .AddAzureTableGrainStorageAsDefault(
                     options =>
                     {
@@ -111,7 +125,16 @@ namespace OrleansTemplate.Server
                     args != null,
                     x => x.AddCommandLine(args));
 
+        private static Logger BuildLogger(IConfiguration configuration) =>
+            new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .Enrich.WithProperty("Application", GetAssemblyProductName())
+                .CreateLogger();
+
         private static string GetEnvironmentName() =>
             Environment.GetEnvironmentVariable("ENVIRONMENT") ?? EnvironmentName.Production;
+
+        private static string GetAssemblyProductName() =>
+            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
     }
 }
