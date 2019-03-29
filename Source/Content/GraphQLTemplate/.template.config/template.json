@@ -449,7 +449,7 @@
       "continueOnError": true,
       "description": "Open the Read-Me for the project in a web browser.",
       "manualInstructions": [
-        { "text": "Open the ReadMe.html in a web browser." }
+        { "text": "Open the ReadMe.html in a web browser to see a to-do list." }
       ]
     }
   ]
