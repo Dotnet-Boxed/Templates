@@ -23,13 +23,6 @@
   "sources": [
     {
       "modifiers": [
-        // ApplicationInsights
-        {
-          "condition": "(!ApplicationInsights)",
-          "exclude": [
-            "OrleansTemplate.Server/Options/ApplicationInsightsOptions.cs"
-          ]
-        }
       ]
     }
   ],
@@ -129,6 +122,14 @@
       "datatype": "bool",
       "description": "Skips the running of the Azure Storage Emulator.",
       "defaultValue": "false"
+    },
+    // AuthoringMode
+    "AuthoringMode": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": false
+      }
     }
   },
   "postActions": [

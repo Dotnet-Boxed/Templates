@@ -1,6 +1,7 @@
 namespace OrleansTemplate.Server
 {
     using System;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
@@ -52,7 +53,7 @@ namespace OrleansTemplate.Server
 
         private static ISiloHostBuilder CreateSiloHostBuilder(string[] args)
         {
-            ApplicationOptions applicationOptions = null;
+            StorageOptions storageOptions = null;
             return new SiloHostBuilder()
                 .ConfigureAppConfiguration(
                     (context, configurationBuilder) =>
@@ -66,30 +67,31 @@ namespace OrleansTemplate.Server
                         services.Configure<ApplicationOptions>(context.Configuration);
                         services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
                         services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)));
+                        services.Configure<ApplicationInsightsTelemetryConsumerOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
 
-                        applicationOptions = services.BuildServiceProvider().GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                        storageOptions = services.BuildServiceProvider().GetRequiredService<IOptions<StorageOptions>>().Value;
                     })
-                .UseAzureStorageClustering(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
+                .UseAzureStorageClustering(options => options.ConnectionString = storageOptions.ConnectionString)
                 .ConfigureEndpoints(
                     EndpointOptions.DEFAULT_SILO_PORT,
                     EndpointOptions.DEFAULT_GATEWAY_PORT,
-                    listenOnAnyHostAddress: true) // TODO: Figure out how to set this to false when hostingEnvironment.IsDevelopment()
+                    listenOnAnyHostAddress: !IsRunningInDevelopment())
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
 #if (ApplicationInsights)
-                .AddApplicationInsightsTelemetryConsumer(applicationOptions.ApplicationInsights.InstrumentationKey)
+                .AddApplicationInsightsTelemetryConsumer()
 #endif
                 .ConfigureLogging(logging => logging.AddSerilog())
                 .AddAzureTableGrainStorageAsDefault(
                     options =>
                     {
-                        options.ConnectionString = applicationOptions.Storage.ConnectionString;
+                        options.ConnectionString = storageOptions.ConnectionString;
                         options.UseJson = true;
                     })
-                .UseAzureTableReminderService(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
+                .UseAzureTableReminderService(options => options.ConnectionString = storageOptions.ConnectionString)
                 .UseTransactions(withStatisticsReporter: true)
-                .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
+                .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = storageOptions.ConnectionString)
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default)
-                .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
+                .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = storageOptions.ConnectionString)
                 .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
                     x => x.UsePerfCounterEnvironmentStatistics())
@@ -101,6 +103,7 @@ namespace OrleansTemplate.Server
             string environmentName,
             string[] args) =>
             configurationBuilder
+                .SetBasePath(Directory.GetCurrentDirectory())
                 // Add configuration from the appsettings.json file.
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
@@ -129,6 +132,8 @@ namespace OrleansTemplate.Server
                 .ReadFrom.Configuration(configuration)
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
                 .CreateLogger();
+
+        private static bool IsRunningInDevelopment() => string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
 
         private static string GetEnvironmentName() =>
             Environment.GetEnvironmentVariable("ENVIRONMENT") ?? EnvironmentName.Production;

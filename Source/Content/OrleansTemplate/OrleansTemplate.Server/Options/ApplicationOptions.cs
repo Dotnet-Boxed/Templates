@@ -5,7 +5,7 @@ namespace OrleansTemplate.Server.Options
     public class ApplicationOptions
     {
 #if (ApplicationInsights)
-        public ApplicationInsightsOptions ApplicationInsights { get; set; }
+        public ApplicationInsightsTelemetryConsumerOptions ApplicationInsights { get; set; }
 
 #endif
         public ClusterOptions Cluster { get; set; }
