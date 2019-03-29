@@ -49,7 +49,7 @@
     <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Files">
     <Content Include="wwwroot\.well-known\security.txt">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
