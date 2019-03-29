@@ -23,6 +23,13 @@
   "sources": [
     {
       "modifiers": [
+        // ApplicationInsights
+        {
+          "condition": "(!ApplicationInsights)",
+          "exclude": [
+            "OrleansTemplate.Server/Options/ApplicationInsightsOptions.cs"
+          ]
+        }
       ]
     }
   ],
@@ -75,6 +82,27 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Treat warnings as errors."
+    },
+    // Analytics
+    "Analytics": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Application Insights",
+          "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
+        },
+        {
+          "choice": "None",
+          "description": "Not using any analytics."
+        }
+      ],
+      "defaultValue": "None",
+      "description": "Monitor internal information about how your application is running, as well as external user information."
+    },
+    "ApplicationInsights": {
+      "type": "computed",
+      "value": "(Analytics == \"Application Insights\")"
     },
     // ApplicationInsightsKey
     "ApplicationInsightsKey": {

@@ -6,7 +6,6 @@ namespace OrleansTemplate.Server
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Orleans;
     using Orleans.Configuration;
@@ -53,7 +52,7 @@ namespace OrleansTemplate.Server
 
         private static ISiloHostBuilder CreateSiloHostBuilder(string[] args)
         {
-            StorageOptions storageOptions = null;
+            ApplicationOptions applicationOptions = null;
             return new SiloHostBuilder()
                 .ConfigureAppConfiguration(
                     (context, configurationBuilder) =>
@@ -68,9 +67,9 @@ namespace OrleansTemplate.Server
                         services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
                         services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)));
 
-                        storageOptions = services.BuildServiceProvider().GetRequiredService<IOptions<StorageOptions>>().Value;
+                        applicationOptions = services.BuildServiceProvider().GetRequiredService<IOptions<ApplicationOptions>>().Value;
                     })
-                .UseAzureStorageClustering(options => options.ConnectionString = storageOptions.ConnectionString)
+                .UseAzureStorageClustering(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
                 .ConfigureEndpoints(
                     EndpointOptions.DEFAULT_SILO_PORT,
                     EndpointOptions.DEFAULT_GATEWAY_PORT,
@@ -83,14 +82,14 @@ namespace OrleansTemplate.Server
                 .AddAzureTableGrainStorageAsDefault(
                     options =>
                     {
-                        options.ConnectionString = storageOptions.ConnectionString;
+                        options.ConnectionString = applicationOptions.Storage.ConnectionString;
                         options.UseJson = true;
                     })
-                .UseAzureTableReminderService(options => options.ConnectionString = storageOptions.ConnectionString)
+                .UseAzureTableReminderService(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
                 .UseTransactions(withStatisticsReporter: true)
-                .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = storageOptions.ConnectionString)
+                .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default)
-                .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = storageOptions.ConnectionString)
+                .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = applicationOptions.Storage.ConnectionString)
                 .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
                     x => x.UsePerfCounterEnvironmentStatistics())
