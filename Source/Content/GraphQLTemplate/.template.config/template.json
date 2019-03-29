@@ -113,6 +113,13 @@
           "exclude": [
             "Source/GraphQLTemplate/wwwroot/humans.txt"
           ]
+        },
+        // IntegrationTest
+        {
+          "condition": "(!IntegrationTest)",
+          "exclude": [
+            "Tests/ApiTemplate.IntegrationTest/**/*"
+          ]
         }
       ]
     }
@@ -418,6 +425,12 @@
         "fallbackVariableName": "HttpsPortGenerated"
       },
       "replaces": "44300"
+    },
+    "IntegrationTest": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds an integration test project.",
+      "defaultValue": "true"
     },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
     "SkipRestore": {
