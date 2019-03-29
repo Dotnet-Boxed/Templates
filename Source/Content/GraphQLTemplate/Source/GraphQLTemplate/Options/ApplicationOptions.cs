@@ -18,7 +18,6 @@ namespace GraphQLTemplate.Options
         public CacheProfileOptions CacheProfiles { get; set; }
 
 #if (ResponseCompression)
-        [Required]
         public CompressionOptions Compression { get; set; }
 
 #endif

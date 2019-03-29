@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\GraphQLTemplate\GraphQLTemplate.csproj", "{36941087-72D0-4649-86F6-69AFDC1EC71B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{C76FD924-71ED-4A92-A891-D226C0724933}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,12 +32,17 @@ Global
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C76FD924-71ED-4A92-A891-D226C0724933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C76FD924-71ED-4A92-A891-D226C0724933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C76FD924-71ED-4A92-A891-D226C0724933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C76FD924-71ED-4A92-A891-D226C0724933}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{36941087-72D0-4649-86F6-69AFDC1EC71B} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
+		{C76FD924-71ED-4A92-A891-D226C0724933} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E464B40-8B3D-427D-BA61-053DB0B94967}

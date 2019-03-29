@@ -1,16 +1,16 @@
-namespace ApiTemplate.IntegrationTest.Controllers
+namespace GraphQLTemplate.IntegrationTest.Controllers
 {
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using ApiTemplate.IntegrationTest.Fixtures;
+    using GraphQLTemplate.IntegrationTest.Fixtures;
     using Xunit;
 
-    public class StatusControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class HealthCheckTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient client;
 
-        public StatusControllerTest(CustomWebApplicationFactory<Startup> factory) =>
+        public HealthCheckTest(CustomWebApplicationFactory<Startup> factory) =>
             this.client = factory.CreateClient();
 
         [Fact]

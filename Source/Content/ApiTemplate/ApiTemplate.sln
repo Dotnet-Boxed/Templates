@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\ApiTemplate\ApiTemplate.csproj", "{37F1F839-E685-4E26-B50E-40E3C4896737}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IntegrationTest", "Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{57839160-3C89-4A5A-BC23-A78F39551C1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,12 +32,17 @@ Global
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{37F1F839-E685-4E26-B50E-40E3C4896737} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
+		{57839160-3C89-4A5A-BC23-A78F39551C1E} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E464B40-8B3D-427D-BA61-053DB0B94967}

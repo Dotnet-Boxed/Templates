@@ -34,6 +34,9 @@
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
     },
+    "IntegrationTest": {
+      "longName": "integration-test"
+    },
     "SkipRestore": {
       "longName": "no-restore"
     },

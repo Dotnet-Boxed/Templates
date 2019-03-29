@@ -85,6 +85,9 @@
     "HttpsPort": {
       "longName": "https-port"
     },
+    "IntegrationTest": {
+      "longName": "integration-test"
+    },
     "SkipRestore": {
       "longName": "no-restore"
     },
