@@ -25,6 +25,9 @@
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
     },
+    "SkipRestore": {
+      "longName": "no-restore"
+    },
     //"SkipOpenReadMe": {
     //  "longName": "no-open-readme"
     //},

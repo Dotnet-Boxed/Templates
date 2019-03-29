@@ -18,12 +18,7 @@
     "113f2d04-69f0-40c3-8797-ba3f356dd812"
   ],
   "primaryOutputs": [
-    { "path": "OrleansTemplate.Abstractions.csproj" },
-    { "path": "OrleansTemplate.Client.csproj" },
-    { "path": "OrleansTemplate.Abstractions.csproj" },
-    { "path": "OrleansTemplate.Grains.csproj" },
-    { "path": "OrleansTemplate.Server.csproj" },
-    { "path": "OrleansTemplate.Server.IntegrationTest.csproj" }
+    { "path": "OrleansTemplate.sln" }
   ],
   "sources": [
     {
@@ -89,6 +84,12 @@
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the execution of 'dotnet restore' on project creation.",
+      "defaultValue": "false"
+    },
     //"SkipOpenReadMe": {
     //  "type": "parameter",
     //  "datatype": "bool",
@@ -103,6 +104,15 @@
     }
   },
   "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "condition": "(!SkipRestore)",
+      "continueOnError": true,
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore' in the directory the template was created in." }
+      ]
+    },
     //{
     //  "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
     //  "condition": "(!SkipOpenReadMe)",
@@ -113,16 +123,12 @@
     //  ]
     //},
     {
-      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
       "condition": "(!SkipOpenAzureStorageEmulator)",
       "continueOnError": true,
       "description": "Run the Azure Storage Emulator.",
-      "args": {
-        "executable": "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\Storage Emulator\\StartStorageEmulator.cmd",
-        "args": ""
-      },
       "manualInstructions": [
-        { "text": "Install the Azure Storage Emulator (https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator) and run it." }
+        { "text": "Run the Azure Storage Emulator (Download at https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator)." }
       ]
     }
   ]
