@@ -22,6 +22,9 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **Title** - The name of the project which determines the assembly product name.
 - **Description** - A description of the project which determines the assembly description.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
+- **EditorConfig** - Add a .editorconfig file to set a fixed code style.
+- **GitIgnore** - Add a .gitignore file to stop Git from checking in temporary files.
+- **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 - **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.
 - **HttpsPort** - Port number to use for the HTTPS endpoint in launchSettings.json.
@@ -63,6 +66,10 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
   - **Azure** - The Microsoft Azure cloud. Adds logging features that let you see logs in the Azure portal.
   - **None** (Default) - No cloud provider is being used.
 
+#### Tests
+
+- **IntegrationTest** - Adds an integration test project.
+- 
 #### Other
 
 - **robots.txt** (Default=On) - Adds a robots.txt file to tell search engines not to index this site.
