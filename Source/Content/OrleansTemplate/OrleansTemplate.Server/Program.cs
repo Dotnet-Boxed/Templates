@@ -134,6 +134,7 @@ namespace OrleansTemplate.Server
             new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
+                .Enrich.With(new TraceIdEnricher())
                 .CreateLogger();
 
         private static bool IsRunningInDevelopment() => string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
