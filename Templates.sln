@@ -3,24 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B8BF1E3-12A1-42BB-8E01-30D3AF5EE10E}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		Source\Content\OrleansTemplate\.editorconfig = Source\Content\OrleansTemplate\.editorconfig
-		Source\Content\ApiTemplate\.editorconfig = Source\Content\ApiTemplate\.editorconfig
-		Source\Content\GraphQLTemplate\.editorconfig = Source\Content\GraphQLTemplate\.editorconfig
-		.gitignore = .gitignore
-		Source\Content\OrleansTemplate\.gitignore = Source\Content\OrleansTemplate\.gitignore
-		Source\Content\ApiTemplate\.gitignore = Source\Content\ApiTemplate\.gitignore
-		Source\Content\GraphQLTemplate\.gitignore = Source\Content\GraphQLTemplate\.gitignore
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		global.json = global.json
-		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}"
 	ProjectSection(SolutionItems) = preProject
 		Source\Boxed.Templates.nuspec = Source\Boxed.Templates.nuspec
@@ -69,24 +51,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Client", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server.IntegrationTest", "Source\Content\OrleansTemplate\Tests\OrleansTemplate.Server.IntegrationTest\OrleansTemplate.Server.IntegrationTest.csproj", "{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B8BF1E3-12A1-42BB-8E01-30D3AF5EE10E}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		Source\Content\OrleansTemplate\.editorconfig = Source\Content\OrleansTemplate\.editorconfig
-		Source\Content\ApiTemplate\.editorconfig = Source\Content\ApiTemplate\.editorconfig
-		Source\Content\GraphQLTemplate\.editorconfig = Source\Content\GraphQLTemplate\.editorconfig
-		.gitignore = .gitignore
-		Source\Content\OrleansTemplate\.gitignore = Source\Content\OrleansTemplate\.gitignore
-		Source\Content\ApiTemplate\.gitignore = Source\Content\ApiTemplate\.gitignore
-		Source\Content\GraphQLTemplate\.gitignore = Source\Content\GraphQLTemplate\.gitignore
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		global.json = global.json
-		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiTemplate", "ApiTemplate", "{4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GraphQLTemplate", "GraphQLTemplate", "{A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}"
@@ -98,42 +62,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{172D189E-2277-4B19-984A-DF4F3F5917B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B8BF1E3-12A1-42BB-8E01-30D3AF5EE10E}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		Source\Content\OrleansTemplate\.editorconfig = Source\Content\OrleansTemplate\.editorconfig
-		Source\Content\ApiTemplate\.editorconfig = Source\Content\ApiTemplate\.editorconfig
-		Source\Content\GraphQLTemplate\.editorconfig = Source\Content\GraphQLTemplate\.editorconfig
-		.gitignore = .gitignore
-		Source\Content\OrleansTemplate\.gitignore = Source\Content\OrleansTemplate\.gitignore
-		Source\Content\ApiTemplate\.gitignore = Source\Content\ApiTemplate\.gitignore
-		Source\Content\GraphQLTemplate\.gitignore = Source\Content\GraphQLTemplate\.gitignore
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		global.json = global.json
-		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B8BF1E3-12A1-42BB-8E01-30D3AF5EE10E}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		Source\Content\OrleansTemplate\.editorconfig = Source\Content\OrleansTemplate\.editorconfig
-		Source\Content\ApiTemplate\.editorconfig = Source\Content\ApiTemplate\.editorconfig
-		Source\Content\GraphQLTemplate\.editorconfig = Source\Content\GraphQLTemplate\.editorconfig
-		.gitignore = .gitignore
-		Source\Content\OrleansTemplate\.gitignore = Source\Content\OrleansTemplate\.gitignore
-		Source\Content\ApiTemplate\.gitignore = Source\Content\ApiTemplate\.gitignore
-		Source\Content\GraphQLTemplate\.gitignore = Source\Content\GraphQLTemplate\.gitignore
-		appveyor.yml = appveyor.yml
-		build.cake = build.cake
-		build.ps1 = build.ps1
-		build.sh = build.sh
-		global.json = global.json
-		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Content\ApiTemplate\Source\ApiTemplate\ApiTemplate.csproj", "{8BB5296C-463E-4EC2-82DE-19F0E6EFB681}"
 EndProject
@@ -153,24 +81,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".templa
 		Source\Content\GraphQLTemplate\.template.config\template.json = Source\Content\GraphQLTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DA6A4403-47D5-4CE1-8696-AA3DFE1CF96D}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Content\OrleansTemplate\README.md = Source\Content\OrleansTemplate\README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{7419DC37-24AB-4A96-9D06-A8384FEE1A89}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Content\GraphQLTemplate\README.md = Source\Content\GraphQLTemplate\README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{F054C178-0558-4EAC-B308-7D7A5B7168D4}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Content\ApiTemplate\README.md = Source\Content\ApiTemplate\README.md
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.IntegrationTest", "Source\Content\ApiTemplate\Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{934FF421-704C-4323-8E70-CF4DE397D169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IntegrationTest", "Source\Content\ApiTemplate\Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{934FF421-704C-4323-8E70-CF4DE397D169}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Source\Content\GraphQLTemplate\Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{03120185-3DD6-48C5-B051-335DD4493AE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4D1734C-E814-432B-9E37-9506E450C6DE}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		global.json = global.json
+		Key.snk = Key.snk
+		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -234,22 +160,16 @@ Global
 		{9099F216-3BCD-40C4-BAC1-C66C9BE5683A} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{42C68564-D31F-47B6-9C6E-658830D6F737} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10} = {B2B5B578-0E87-4C61-9566-173E96EFC131}
-		{F1826213-EB72-4F7E-8FBC-9F09EBF38077} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
 		{4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
 		{A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
 		{3883E656-40FA-4387-99E4-A17D257CC06C} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
 		{72A80BD5-6179-4ED8-AFA0-6B5D7420AE56} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
 		{172D189E-2277-4B19-984A-DF4F3F5917B9} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
 		{C8521BC9-DB53-4AC2-BBDE-0453E472E9D9} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
-		{491EDA85-82E1-48BD-9174-9BCF3236AE89} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
-		{5B8BF1E3-12A1-42BB-8E01-30D3AF5EE10E} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
 		{8BB5296C-463E-4EC2-82DE-19F0E6EFB681} = {3883E656-40FA-4387-99E4-A17D257CC06C}
 		{A5DC4676-9FE2-46C8-9A22-DA37220E9599} = {72A80BD5-6179-4ED8-AFA0-6B5D7420AE56}
 		{805B6196-7461-44E4-9DC8-411242540E7C} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
 		{A3624EC5-8766-435F-9706-9F5CF13A9433} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
-		{DA6A4403-47D5-4CE1-8696-AA3DFE1CF96D} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
-		{7419DC37-24AB-4A96-9D06-A8384FEE1A89} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
-		{F054C178-0558-4EAC-B308-7D7A5B7168D4} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
 		{934FF421-704C-4323-8E70-CF4DE397D169} = {172D189E-2277-4B19-984A-DF4F3F5917B9}
 		{03120185-3DD6-48C5-B051-335DD4493AE4} = {C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}
 	EndGlobalSection
