@@ -4,6 +4,7 @@
     "Development": {
       "commandName": "Project",
       "launchBrowser": true,
+      "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
         "ENVIRONMENT": "Development"
@@ -12,6 +13,7 @@
     "Production": {
       "commandName": "Project",
       "launchBrowser": true,
+      "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
         "ENVIRONMENT": "Production"
