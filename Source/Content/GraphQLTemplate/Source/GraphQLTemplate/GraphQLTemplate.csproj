@@ -9,10 +9,6 @@
     <Azure>true</Azure>
     <CorrelationId>true</CorrelationId>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- Show the .template.config folder in the project. -->
-    <Content Include=".template.config\**\*" />
-  </ItemGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\Source\Content\ApiTemplate\ApiTemplate.csproj" />
-    <ProjectReference Include="..\..\Source\Content\GraphQLTemplate\GraphQLTemplate.csproj" />
+    <ProjectReference Include="..\..\Source\Content\ApiTemplate\Source\ApiTemplate\ApiTemplate.csproj" />
+    <ProjectReference Include="..\..\Source\Content\GraphQLTemplate\Source\GraphQLTemplate\GraphQLTemplate.csproj" />
   </ItemGroup>
 
 </Project>

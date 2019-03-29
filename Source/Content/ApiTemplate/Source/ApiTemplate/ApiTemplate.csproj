@@ -10,10 +10,6 @@
     <Swagger>true</Swagger>
     <Versioning>true</Versioning>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- Show the .template.config folder in the project. -->
-    <Content Include=".template.config\**\*" />
-  </ItemGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">

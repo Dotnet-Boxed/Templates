@@ -18,7 +18,7 @@
     "113f2d04-69f0-40c3-8797-ba3f356dd812"
   ],
   "primaryOutputs": [
-    { "path": "ApiTemplate.csproj" }
+    { "path": "ApiTemplate.sln" }
   ],
   "sources": [
     {
@@ -27,71 +27,64 @@
         {
           "condition": "(!Swagger)",
           "exclude": [
-            "OperationFilters/**/*",
-            "ViewModelSchemaFilters/**/*"
+            "Source/ApiTemplate/OperationFilters/**/*",
+            "Source/ApiTemplate/ViewModelSchemaFilters/**/*"
           ]
         },
         // Versioning
         {
           "condition": "(!Versioning)",
           "exclude": [
-            "OperationFilters/**/*"
+            "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },
         // ReverseProxyWebServer
         {
           "condition": "(!IIS)",
           "exclude": [
-            "web.config"
+            "Source/ApiTemplate/web.config"
           ]
         },
         {
           "condition": "(!NGINX)",
           "exclude": [
-            "mime.types",
-            "nginx.conf"
-          ]
-        },
-        // HttpsEverywhere
-        {
-          "condition": "(!HttpsEverywhere)",
-          "exclude": [
-            "DevelopmentCertificate.pfx"
+            "Source/ApiTemplate/mime.types",
+            "Source/ApiTemplate/nginx.conf"
           ]
         },
         // CORS
         {
           "condition": "(!CORS)",
           "exclude": [
-            "Constants/CorsPolicyName.cs"
+            "Source/ApiTemplate/Constants/CorsPolicyName.cs"
           ]
         },
         // ResponseCompression
         {
           "condition": "(!ResponseCompression)",
           "exclude": [
-            "Options/CompressionOptions.cs"
+            "Source/ApiTemplate/Options/CompressionOptions.cs"
           ]
         },
         // RobotsTxt
         {
           "condition": "(!RobotsTxt)",
           "exclude": [
-            "wwwroot/robots.txt"
+            "Source/ApiTemplate/wwwroot/robots.txt"
           ]
         },
         // SecurityTxt
         {
           "condition": "(!SecurityTxt)",
           "exclude": [
-            "wwwroot/.well-known/security.txt"
+            "Source/ApiTemplate/wwwroot/.well-known/security.txt"
           ]
         },
         // HumansTxt
         {
           "condition": "(!HumansTxt)",
           "exclude": [
-            "wwwroot/humans.txt"
+            "Source/ApiTemplate/wwwroot/humans.txt"
           ]
         }
       ]
