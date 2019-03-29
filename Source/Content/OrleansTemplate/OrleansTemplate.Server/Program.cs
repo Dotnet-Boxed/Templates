@@ -76,7 +76,7 @@ namespace OrleansTemplate.Server
                     listenOnAnyHostAddress: true) // TODO: Figure out how to set this to false when hostingEnvironment.IsDevelopment()
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
 #if (ApplicationInsights)
-                .AddApplicationInsightsTelemetryConsumer("")
+                .AddApplicationInsightsTelemetryConsumer(applicationOptions.ApplicationInsights.InstrumentationKey)
 #endif
                 .ConfigureLogging(logging => logging.AddSerilog())
                 .AddAzureTableGrainStorageAsDefault(
