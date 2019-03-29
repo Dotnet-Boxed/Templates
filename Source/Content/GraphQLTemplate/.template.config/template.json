@@ -23,6 +23,27 @@
   "sources": [
     {
       "modifiers": [
+        // EditorConfig
+        {
+          "condition": "(!EditorConfig)",
+          "exclude": [
+            ".editorconfig"
+          ]
+        },
+        // GitIgnore
+        {
+          "condition": "(!GitIgnore)",
+          "exclude": [
+            ".gitignore"
+          ]
+        },
+        // ReadMe
+        {
+          "condition": "(!ReadMe)",
+          "exclude": [
+            "README.md"
+          ]
+        },
         // Mutations
         {
           "condition": "(!Mutations)",
@@ -138,6 +159,27 @@
       "replaces": "PROJECT-AUTHOR-XML",
       "valueSource": "Author",
       "valueTransform": "xmlEncode"
+    },
+    // EditorConfig
+    "EditorConfig": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .editorconfig file to set a fixed code style."
+    },
+    // GitIgnore
+    "GitIgnore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .gitignore file to stop Git from checking in temporary files."
+    },
+    // ReadMe
+    "ReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a README.md markdown file describing the project."
     },
     // TreatWarningsAsErrors
     "TreatWarningsAsErrors": {
