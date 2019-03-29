@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		Docs\GraphQL.md = Docs\GraphQL.md
 		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
 		LICENSE = LICENSE
+		Docs\Orleans.md = Docs\Orleans.md
 		README.md = README.md
 	EndProjectSection
 EndProject
