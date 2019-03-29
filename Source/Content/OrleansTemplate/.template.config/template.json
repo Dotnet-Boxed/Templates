@@ -36,6 +36,13 @@
           "exclude": [
             ".gitignore"
           ]
+        },
+        // ReadMe
+        {
+          "condition": "(!ReadMe)",
+          "exclude": [
+            "README.md"
+          ]
         }
       ]
     }
@@ -96,6 +103,13 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Add a .gitignore file to stop Git from checking in temporary files."
+    },
+    // ReadMe
+    "ReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a README.md markdown file describing the project."
     },
     // TreatWarningsAsErrors
     "TreatWarningsAsErrors": {

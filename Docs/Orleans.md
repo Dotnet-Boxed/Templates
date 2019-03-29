@@ -17,6 +17,7 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **GitIgnore** - Add a .gitignore file to stop Git from checking in temporary files.
+- **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 
 #### Analytics
