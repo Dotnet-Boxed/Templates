@@ -14,7 +14,7 @@ namespace Boxed.Templates.FunctionalTest
     public class ApiTemplateTest
     {
         public ApiTemplateTest() =>
-            TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.csproj").Wait();
+            TemplateAssert.DotnetNewInstall<ApiTemplateTest>("ApiTemplate.sln").Wait();
 
         [Theory]
         [InlineData("Default")]
@@ -43,6 +43,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("status");
@@ -103,6 +104,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\HealthCheckFalse",
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -129,6 +131,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\HttpsEverywhereFalse",
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -152,6 +155,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\SwaggerFalse",
                     async (httpClient, httpsClient) =>
                     {
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");

@@ -13,7 +13,7 @@ namespace Boxed.Templates.FunctionalTest
     public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
-            TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.csproj").Wait();
+            TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
 
         [Theory]
         [InlineData("Default")]
@@ -42,6 +42,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
@@ -83,6 +84,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\HealthCheckFalse",
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -103,6 +105,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
                         var introspectionQuery = await httpClient.PostGraphQL(GraphQlQuery.Introspection);
@@ -128,6 +131,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\HttpsEverywhereFalse",
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
@@ -151,6 +155,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\AuthorizationTrue",
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.PostGraphQL(
@@ -181,6 +186,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestore();
                 await project.DotnetBuild();
                 await project.DotnetRun(
+                    @"Source\AuthorizationFalse",
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.PostGraphQL(

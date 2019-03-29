@@ -11,15 +11,15 @@ namespace Boxed.Templates.FunctionalTest
         public static TempDirectory GetTempDirectory() =>
             new TempDirectory(DirectoryExtended.GetTempDirectoryPath());
 
-        public static Task DotnetNewInstall<T>(string projectName) =>
-            DotnetNewInstall(typeof(T).GetTypeInfo().Assembly, projectName);
+        public static Task DotnetNewInstall<T>(string fileName) =>
+            DotnetNewInstall(typeof(T).GetTypeInfo().Assembly, fileName);
 
-        public static Task DotnetNewInstall(Assembly assembly, string projectName)
+        public static Task DotnetNewInstall(Assembly assembly, string fileName)
         {
-            var projectFilePath = Path.GetDirectoryName(GetProjectFilePath(assembly, projectName));
+            var projectFilePath = Path.GetDirectoryName(GetFilePath(assembly, fileName));
             if (projectFilePath == null)
             {
-                throw new FileNotFoundException($"{projectName} not found.");
+                throw new FileNotFoundException($"{fileName} not found.");
             }
 
             return DotnetNewInstall(projectFilePath);
@@ -32,7 +32,7 @@ namespace Boxed.Templates.FunctionalTest
                 $"new --install \"{source}\"",
                 CancellationTokenFactory.GetCancellationToken(timeout));
 
-        private static string GetProjectFilePath(Assembly assembly, string projectName)
+        private static string GetFilePath(Assembly assembly, string projectName)
         {
             string projectFilePath = null;
 

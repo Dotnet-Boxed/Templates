@@ -54,6 +54,7 @@ namespace Boxed.Templates.FunctionalTest
 
         public static async Task DotnetRun(
             this Project project,
+            string projectRelativeDirectoryPath,
             Func<HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
@@ -62,7 +63,8 @@ namespace Boxed.Templates.FunctionalTest
             var httpPort = PortHelper.GetFreeTcpPort();
             var httpUrl = $"http://localhost:{httpPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, noRestore, timeout, httpUrl);
+            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
+            var dotnetRun = await DotnetRunInternal(projectFilePath, noRestore, timeout, httpUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
@@ -93,6 +95,7 @@ namespace Boxed.Templates.FunctionalTest
 
         public static async Task DotnetRun(
             this Project project,
+            string projectRelativeDirectoryPath,
             Func<HttpClient, HttpClient, Task> action,
             bool? noRestore = true,
             Func<HttpRequestMessage, X509Certificate2, X509Chain, SslPolicyErrors, bool> validateCertificate = null,
@@ -103,7 +106,8 @@ namespace Boxed.Templates.FunctionalTest
             var httpUrl = $"http://localhost:{httpPort}";
             var httpsUrl = $"https://localhost:{httpsPort}";
 
-            var dotnetRun = await DotnetRunInternal(project.DirectoryPath, noRestore, timeout, httpUrl, httpsUrl);
+            var projectFilePath = Path.Combine(project.DirectoryPath, projectRelativeDirectoryPath);
+            var dotnetRun = await DotnetRunInternal(projectFilePath, noRestore, timeout, httpUrl, httpsUrl);
 
             var httpClientHandler = new HttpClientHandler()
             {
