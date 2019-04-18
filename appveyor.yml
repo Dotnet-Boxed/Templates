@@ -23,7 +23,7 @@ environment:
     secure: aunGGWt32irQiOTX2wIO6e2Y5Ga0girA3xSUsmQv6E9d6ohHdbK5HJpXpmxW9QM3
 
 build_script:
-- ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.104
+- ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.203
 - ps: .\build.ps1
 
 test: off
