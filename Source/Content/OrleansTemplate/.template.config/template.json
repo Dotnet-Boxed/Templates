@@ -5,7 +5,7 @@
   "classifications": [ "Web", "WebAPI", "Boxed", "Orleans", "API", "Actor" ],
   "name": "ASP.NET Core Orleans Boxed (beta)",
   "groupIdentity": "Dotnet.Boxed.Orleans",
-  "identity": "Dotnet.Boxed.API.CSharp",
+  "identity": "Dotnet.Boxed.Orleans.CSharp",
   "shortName": "orleans",
   "tags": {
     "language": "C#",
