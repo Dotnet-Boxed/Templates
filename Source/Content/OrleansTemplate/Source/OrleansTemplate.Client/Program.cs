@@ -6,6 +6,7 @@ namespace OrleansTemplate.Client
     using Orleans.Configuration;
     using Orleans.Hosting;
     using Orleans.Runtime;
+    using Orleans.Streams;
     using OrleansTemplate.Abstractions.Constants;
     using OrleansTemplate.Abstractions.Grains;
 
@@ -19,10 +20,16 @@ namespace OrleansTemplate.Client
                 await clusterClient.Connect();
                 RequestContext.Set("TraceId", Guid.NewGuid());
 
+                var streamProvider = clusterClient.GetStreamProvider(StreamProviderName.Default);
+                var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
+                var subscription = await stream.SubscribeAsync(OnSaidHello);
+
                 Console.WriteLine("What is your name?");
                 var name = Console.ReadLine();
                 var helloGrain = clusterClient.GetGrain<IHelloGrain>(Guid.NewGuid());
                 Console.WriteLine(await helloGrain.SayHello(name));
+
+                await subscription.UnsubscribeAsync();
             }
             catch (Exception exception)
             {
@@ -31,6 +38,12 @@ namespace OrleansTemplate.Client
             }
 
             return 0;
+        }
+
+        private static Task OnSaidHello(string name, StreamSequenceToken token)
+        {
+            Console.WriteLine($"{name} said hello.");
+            return Task.CompletedTask;
         }
 
         private static IClientBuilder CreateClientBuilder() =>

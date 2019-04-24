@@ -8,6 +8,7 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
         public ClusterFixture()
         {
             var builder = new TestClusterBuilder();
+            builder.AddClientBuilderConfigurator<TestClientBuilderConfigurator>();
             builder.AddSiloBuilderConfigurator<TestSiloBuilderConfigurator>();
             this.Cluster = builder.Build();
             this.Cluster.Deploy();

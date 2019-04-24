@@ -28,7 +28,7 @@ namespace OrleansTemplate.Server
 
             try
             {
-                Log.Information("Starting application");
+                Log.Information("Starting application.");
                 await siloHost.StartAsync();
                 Log.Information("Started application");
 
@@ -137,7 +137,8 @@ namespace OrleansTemplate.Server
                 .Enrich.With(new TraceIdEnricher())
                 .CreateLogger();
 
-        private static bool IsRunningInDevelopment() => string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
+        private static bool IsRunningInDevelopment() =>
+            string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
 
         private static string GetEnvironmentName() =>
             Environment.GetEnvironmentVariable("ENVIRONMENT") ?? EnvironmentName.Production;
