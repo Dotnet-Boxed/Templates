@@ -6,6 +6,12 @@ namespace OrleansTemplate.Grains
 
     public class HelloGrain : Grain, IHelloGrain
     {
-        public Task<string> SayHello(string name) => Task.FromResult($"Hello {name}!");
+        public async Task<string> SayHello(string name)
+        {
+            var counter = this.GrainFactory.GetGrain<ICounterStatelessGrain>(0L);
+            await counter.Increment();
+
+            return $"Hello {name}!";
+        }
     }
 }

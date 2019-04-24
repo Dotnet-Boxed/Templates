@@ -43,7 +43,7 @@ namespace OrleansTemplate.Client
                 })
                 .ConfigureApplicationParts(
                     parts => parts
-                        .AddApplicationPart(typeof(IHelloGrain).Assembly)
+                        .AddApplicationPart(typeof(ICounterGrain).Assembly)
                         .WithReferences())
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default);
     }

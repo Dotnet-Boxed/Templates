@@ -16,9 +16,9 @@ namespace OrleansTemplate.Server.IntegrationTest
         [Fact]
         public async Task SayHello_PassName_ReturnsGreeting()
         {
-            var helloGrain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
+            var grain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
 
-            var greeting = await helloGrain.SayHello("Rehan");
+            var greeting = await grain.SayHello("Rehan");
 
             Assert.Equal("Hello Rehan!", greeting);
         }
