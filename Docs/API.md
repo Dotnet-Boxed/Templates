@@ -27,7 +27,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Description** - A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **EditorConfig** - Add a .editorconfig file to set a fixed code style.
-- **GitIgnore** - Add a .gitignore file to stop Git from checking in temporary files.
+- **Git** - Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS.
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 - **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.

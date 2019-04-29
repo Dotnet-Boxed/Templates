@@ -22,8 +22,8 @@
     "EditorConfig": {
       "longName": "editorconfig"
     },
-    "GitIgnore": {
-      "longName": "gitignore"
+    "Git": {
+      "longName": "git"
     },
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
