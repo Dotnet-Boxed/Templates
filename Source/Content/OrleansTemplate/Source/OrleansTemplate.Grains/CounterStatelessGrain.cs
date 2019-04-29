@@ -24,6 +24,8 @@ namespace OrleansTemplate.Grains
 
         public override Task OnActivateAsync()
         {
+            // Timers are stored in-memory so are not resilient to nodes going down. They should be used for short
+            // high-frequency timers their period should be measured in seconds.
             this.RegisterTimer(this.OnTimerTick, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
             return base.OnActivateAsync();
         }
