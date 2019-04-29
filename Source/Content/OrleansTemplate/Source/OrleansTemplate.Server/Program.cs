@@ -96,6 +96,9 @@ namespace OrleansTemplate.Server
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default)
                 .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = storageOptions.ConnectionString)
                 .UseIf(
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
+                    x => x.UseLinuxEnvironmentStatistics())
+                .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
                     x => x.UsePerfCounterEnvironmentStatistics())
                 .UseDashboard();

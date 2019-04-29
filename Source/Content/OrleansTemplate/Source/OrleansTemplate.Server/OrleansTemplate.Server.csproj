@@ -43,6 +43,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="2.3.1" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.1" />
