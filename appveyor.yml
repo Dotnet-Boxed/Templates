@@ -24,7 +24,8 @@ environment:
 
 build_script:
 - ps: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.203
-- ps: .\build.ps1
+- ps: dotnet tool install --global Cake.Tool
+- ps: dotnet cake
 
 test: off
 
