@@ -46,7 +46,7 @@
     <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="2.3.1" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.5" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="2.3.1" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="2.3.1" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
