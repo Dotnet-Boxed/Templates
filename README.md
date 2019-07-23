@@ -32,6 +32,7 @@ Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CO
 
 A big thank you to the following contributors:
 
+- [tomecho](https://github.com/tomecho) - Fixing GraphQL Apollo Tracing.
 - [sayedihashimi](https://github.com/sayedihashimi) - Fixed dotnet new command in ReadMe.
 - [bobinush](https://github.com/bobinush) - Fixed typo.
 - [chrisrichards](https://github.com/chrisrichards) - Fixed paging in the API template.
