@@ -1,5 +1,5 @@
-# Version: 1.0.3 (Using https://semver.org/)
-# Updated: 2019-06-28
+# Version: 1.2.0 (Using https://semver.org/)
+# Updated: 2019-07-22
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
 
@@ -61,35 +61,36 @@ end_of_line = lf
 
 ##########################################
 # .NET Language Conventions
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#language-conventions
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions
 ##########################################
 
 # .NET Code Style Settings
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#net-code-style-settings
 [*.{cs,csx,cake,vb}]
 # "this." and "Me." qualifiers
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#this_and_me
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#this-and-me
 dotnet_style_qualification_for_field = true:warning
 dotnet_style_qualification_for_property = true:warning
 dotnet_style_qualification_for_method = true:warning
 dotnet_style_qualification_for_event = true:warning
 # Language keywords instead of framework type names for type references
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#language_keywords
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#language-keywords
 dotnet_style_predefined_type_for_locals_parameters_members = true:warning
 dotnet_style_predefined_type_for_member_access = true:warning
 # Modifier preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#normalize_modifiers
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#normalize-modifiers
 dotnet_style_require_accessibility_modifiers = always:warning
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
 visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async
 dotnet_style_readonly_field = true:warning
 # Parentheses preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#parentheses
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#parentheses-preferences
 dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:warning
 dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:warning
 dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:warning
 dotnet_style_parentheses_in_other_operators = never_if_unnecessary:suggestion
 # Expression-level preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#expression_level
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#expression-level-preferences
 dotnet_style_object_initializer = true:warning
 dotnet_style_collection_initializer = true:warning
 dotnet_style_explicit_tuple_names = true:warning
@@ -99,45 +100,68 @@ dotnet_style_prefer_auto_properties = true:warning
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
 dotnet_style_prefer_conditional_expression_over_assignment = false:suggestion
 dotnet_style_prefer_conditional_expression_over_return = false:suggestion
+dotnet_style_prefer_compound_assignment = true:warning
 # Null-checking preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#null_checking
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#null-checking-preferences
 dotnet_style_coalesce_expression = true:warning
 dotnet_style_null_propagation = true:warning
+# Parameter preferences
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#parameter-preferences
+dotnet_code_quality_unused_parameters = all:warning
+# More style options (Undocumented)
+# https://github.com/MicrosoftDocs/visualstudio-docs/issues/3641
+dotnet_style_operator_placement_when_wrapping = end_of_line
 
 # C# Code Style Settings
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#c-code-style-settings
 [*.{cs,csx,cake}]
 # Implicit and explicit types
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#implicit-and-explicit-types
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#implicit-and-explicit-types
 csharp_style_var_for_built_in_types = true:warning
 csharp_style_var_when_type_is_apparent = true:warning
 csharp_style_var_elsewhere = true:warning
 # Expression-bodied members
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#expression_bodied_members
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#expression-bodied-members
 csharp_style_expression_bodied_methods = true:warning
 csharp_style_expression_bodied_constructors = true:warning
 csharp_style_expression_bodied_operators = true:warning
 csharp_style_expression_bodied_properties = true:warning
 csharp_style_expression_bodied_indexers = true:warning
 csharp_style_expression_bodied_accessors = true:warning
+csharp_style_expression_bodied_lambdas = true:warning
+csharp_style_expression_bodied_local_functions = true:warning
 # Pattern matching
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#pattern_matching
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#pattern-matching
 csharp_style_pattern_matching_over_is_with_cast_check = true:warning
 csharp_style_pattern_matching_over_as_with_null_check = true:warning
 # Inlined variable declarations
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#inlined_variable_declarations
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#inlined-variable-declarations
 csharp_style_inlined_variable_declaration = true:warning
 # Expression-level preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#expression_level_csharp
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#expression-level-preferences
 csharp_prefer_simple_default_expression = true:warning
-csharp_style_deconstructed_variable_declaration = true:warning
-csharp_style_pattern_local_over_anonymous_function = true:warning
 # "Null" checking preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#null_checking_csharp
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#c-null-checking-preferences
 csharp_style_throw_expression = true:warning
 csharp_style_conditional_delegate_call = true:warning
 # Code block preferences
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#code_block
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#code-block-preferences
 csharp_prefer_braces = true:warning
+# Unused value preferences
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#unused-value-preferences
+csharp_style_unused_value_expression_statement_preference = discard_variable:warning
+csharp_style_unused_value_assignment_preference = discard_variable:warning
+# Index and range preferences
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#index-and-range-preferences
+csharp_style_prefer_index_operator = true:warning
+csharp_style_prefer_range_operator = true:warning
+# Miscellaneous preferences
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#miscellaneous-preferences
+csharp_style_deconstructed_variable_declaration = true:warning
+csharp_style_pattern_local_over_anonymous_function = true:warning
+csharp_using_directive_placement = inside_namespace:warning
+csharp_prefer_static_local_function = true:warning
+csharp_prefer_simple_using_statement = false:warning
 
 ##########################################
 # .NET Formatting Conventions
@@ -145,12 +169,10 @@ csharp_prefer_braces = true:warning
 ##########################################
 
 # Organize usings
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#usings
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions#organize-using-directives
 dotnet_sort_system_directives_first = true
-# Using statement placement (Undocumented)
-csharp_using_directive_placement = inside_namespace:warning
-# C# formatting settings
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#c-formatting-settings
+# Newline options
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions#new-line-options
 csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
@@ -159,42 +181,41 @@ csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_between_query_expression_clauses = true
 # Indentation options
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#indent
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions#indentation-options
 csharp_indent_case_contents = true
 csharp_indent_switch_labels = true
 csharp_indent_labels = no_change
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents_when_block = false
 # Spacing options
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#spacing
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions#spacing-options
 csharp_space_after_cast = false
 csharp_space_after_keywords_in_control_flow_statements = true
-csharp_space_between_method_declaration_parameter_list_parentheses = false
-csharp_space_between_method_call_parameter_list_parentheses = false
 csharp_space_between_parentheses = false
 csharp_space_before_colon_in_inheritance_clause = true
 csharp_space_after_colon_in_inheritance_clause = true
 csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_parameter_list_parentheses = false
 csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
-csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
 csharp_space_between_method_call_empty_parameter_list_parentheses = false
-# Wrapping options
-# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference#wrapping
-csharp_preserve_single_line_statements = false
-csharp_preserve_single_line_blocks = true
-# More Indentation options (Undocumented)
-csharp_indent_block_contents = true
-csharp_indent_braces = false
-# Spacing Options (Undocumented)
+csharp_space_between_method_call_name_and_opening_parenthesis = false
 csharp_space_after_comma = true
-csharp_space_after_dot = false
-csharp_space_after_semicolon_in_for_statement = true
-csharp_space_around_declaration_statements = do_not_ignore
 csharp_space_before_comma = false
+csharp_space_after_dot = false
 csharp_space_before_dot = false
+csharp_space_after_semicolon_in_for_statement = true
 csharp_space_before_semicolon_in_for_statement = false
+csharp_space_around_declaration_statements = false
 csharp_space_before_open_square_brackets = false
 csharp_space_between_empty_square_brackets = false
-csharp_space_between_method_declaration_name_and_open_parenthesis = false
 csharp_space_between_square_brackets = false
+# Wrapping options
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-formatting-conventions#wrap-options
+csharp_preserve_single_line_statements = false
+csharp_preserve_single_line_blocks = true
 
 ##########################################
 # .NET Naming Conventions
