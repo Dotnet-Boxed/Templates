@@ -6,17 +6,15 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
     "Release";
-var mygetApiKey =
-    HasArgument("MyGetApiKey") ? Argument<string>("MyGetApiKey") :
-    EnvironmentVariable("MyGetApiKey") != null ? EnvironmentVariable("MyGetApiKey") :
-    null;
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
+    (TFBuild.IsRunningOnAzurePipelinesHosted && Environment.GetEnvironmentVariable("BUILD_SOURCEBRANCH").StartsWith("refs/tags/")) ? null :
     (AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
-var buildNumber = HasArgument("BuildNumber") ?
-    Argument<int>("BuildNumber") :
+var buildNumber =
+    HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
+    TFBuild.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
     AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
@@ -56,7 +54,6 @@ Task("Restore")
     });
 
 Task("Test")
-    .IsDependentOn("Build")
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
@@ -75,7 +72,6 @@ Task("Test")
     });
 
 Task("Version")
-    .IsDependentOn("Test")
     .Does(() =>
     {
         nuspecContent = System.IO.File.ReadAllText(nuspecFile);
@@ -88,7 +84,6 @@ Task("Version")
     });
 
 Task("Pack")
-    .IsDependentOn("Version")
     .Does(() =>
     {
         NuGetPack(
@@ -101,19 +96,8 @@ Task("Pack")
     });
 
 Task("Default")
+    .IsDependentOn("Build")
+    .IsDependentOn("Test")
     .IsDependentOn("Pack");
-
-Teardown(context =>
-{
-    // Appveyor is failing to exit the cake script.
-    if (AppVeyor.IsRunningOnAppVeyor)
-    {
-        foreach (var process in Process.GetProcessesByName("dotnet"))
-        {
-            process.Kill();
-        }
-    }
-});
-
 
 RunTarget(target);
