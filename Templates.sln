@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
 	ProjectSection(SolutionItems) = preProject
 		Docs\API.md = Docs\API.md
 		CONTRIBUTING.md = CONTRIBUTING.md
