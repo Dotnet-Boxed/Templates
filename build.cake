@@ -1,3 +1,5 @@
+#tool "NuGet.CommandLine"
+
 using System.Diagnostics;
 using System.Xml.Linq;
 
