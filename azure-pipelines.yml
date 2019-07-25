@@ -74,13 +74,14 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DotNetCoreCLI@2
-            displayName: 'Dotnet NuGet Push'
+          - task: NuGetCommand@2
+            displayName: 'NuGet Push'
             inputs:
               command: push
               nuGetFeedType: internal
-              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
+              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishVstsFeed: dotnet-boxed
+              allowPackageConflicts: true
   - deployment: NuGet
     pool:
       vmImage: ubuntu-latest
@@ -90,11 +91,11 @@ stages:
       runOnce:
         deploy:
           steps:
-          # Dotnet NuGet does not work yet https://github.com/Microsoft/azure-pipelines-tasks/issues/7160
           - task: NuGetCommand@2
-            displayName: 'Dotnet NuGet Push'
+            displayName: 'NuGet Push'
             inputs:
               command: push
               nuGetFeedType: external
-              packagesToPush: '$(Build.BuildDirectory)/Windows/*.nupkg'
+              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishFeedCredentials: NuGet
+              allowPackageConflicts: true
