@@ -1,6 +1,6 @@
 ![.NET Boxed Banner](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
-[![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boxed.Templates.svg)](https://www.nuget.org/packages/Boxed.Templates/) [![Boxed.Templates MyGet Package](https://img.shields.io/myget/dotnet-boxed/vpre/Boxed.Templates.svg)](https://www.myget.org/feed/dotnet-boxed/package/nuget/Boxed.Templates) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
+ [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boxed.Templates.svg)](https://www.nuget.org/packages/Boxed.Templates/)  [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
 
 Project templates with batteries included, providing the minimum amount of code required to get you going.
 
@@ -27,6 +27,15 @@ You can find release notes for each version [here](https://github.com/Dotnet-Box
 ## Contributing
 
 Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+
+## Continuous Integration
+
+| Name         | Operating System | Status | History |
+| :---         | :---             | :---   | :---    |
+| Azure DevOps | Ubuntu           | [![Azure DevOps Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| AppVeyor     | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Templates?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Templates) |
 
 ## Thanks
 
