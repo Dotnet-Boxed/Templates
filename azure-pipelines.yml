@@ -44,7 +44,7 @@ stages:
     - script: 'dotnet cake --target=Build'
       displayName: 'Dotnet Cake Build'
       failOnStderr: true
-    - script: dotnet dev-certs https --clean
+    - script: 'dotnet dev-certs https --trust --quiet'
       displayName: 'Install Developer Certificate'
     - script: 'dotnet cake --target=Test'
       displayName: 'Dotnet Cake Test'
