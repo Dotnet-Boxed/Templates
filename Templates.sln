@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Boxed.Templates.nuspec = Source\Boxed.Templates.nuspec
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9-A80D-40EF-96C2-02F8DAD936FB}"
 EndProject
@@ -96,6 +93,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxed.Templates", "Source\Boxed.Templates\Boxed.Templates.csproj", "{425A157F-DB19-4EE8-B53E-9796D46CD89A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +141,10 @@ Global
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,6 +173,7 @@ Global
 		{A3624EC5-8766-435F-9706-9F5CF13A9433} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
 		{934FF421-704C-4323-8E70-CF4DE397D169} = {172D189E-2277-4B19-984A-DF4F3F5917B9}
 		{03120185-3DD6-48C5-B051-335DD4493AE4} = {C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}
+		{425A157F-DB19-4EE8-B53E-9796D46CD89A} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}

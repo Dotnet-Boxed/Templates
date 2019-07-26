@@ -1,8 +1,3 @@
-#tool "NuGet.CommandLine"
-
-using System.Diagnostics;
-using System.Xml.Linq;
-
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
@@ -22,7 +17,7 @@ var buildNumber =
     0;
 
 var artifactsDirectory = Directory("./Artifacts");
-var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : $"-{preReleaseSuffix}-{buildNumber:D4}";
+var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 
 Task("Clean")
     .Does(() =>
@@ -73,19 +68,15 @@ Task("Test")
 Task("Pack")
     .Does(() =>
     {
-        var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
-        var nuspecContent = System.IO.File.ReadAllText(nuspecFile);
-        var nuspecDocument = XDocument.Parse(nuspecContent);
-        var ns = XNamespace.Get("http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd");
-        var versionElement = nuspecDocument.Element(ns + "package").Element(ns + "metadata").Element(ns + "version");
-        var version = versionElement.Value.Replace("-*", versionSuffix);
-
-        NuGetPack(
-            nuspecFile,
-            new NuGetPackSettings()
+        DotNetCorePack(
+            GetFiles("**/Boxed.Templates.csproj").First().ToString(),
+            new DotNetCorePackSettings()
             {
+                Configuration = configuration,
+                NoBuild = true,
+                NoRestore = true,
                 OutputDirectory = artifactsDirectory,
-                Version = version
+                VersionSuffix = versionSuffix,
             });
     });
 

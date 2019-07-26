@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Build">
+    <PackageType>Template</PackageType>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <VersionPrefix>2.2.0</VersionPrefix>
+    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
+    <Title>.NET Boxed Project &amp; Item Templates</Title>
+    <Description>Project templates with batteries included, providing the minimum amount of code required to get you going.</Description>
+    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Dotnet-Boxed/Templates</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/RehanSaeed/Schema.NET.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>.NET Boxed Muhammad Rehan Saeed API Swagger GraphQL Orleans</PackageTags>
+    <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Label="Files">
+    <Content Include="..\Content\**\*" Exclude="..\Content\**\bin\**\*;..\Content\**\obj\**\*;..\Content\**\.vs\**\*" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+
+</Project>
