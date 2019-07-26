@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4CE320
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1186AA9-A80D-40EF-96C2-02F8DAD936FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Content", "Content", "{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
 	ProjectSection(SolutionItems) = preProject
 		Docs\API.md = Docs\API.md
@@ -23,30 +21,27 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates.FunctionalTest", "Tests\Boxed.Templates.FunctionalTest\Boxed.Templates.FunctionalTest.csproj", "{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrleansTemplate", "OrleansTemplate", "{DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}"
-	ProjectSection(SolutionItems) = preProject
-		Source\Content\OrleansTemplate\OrleansTemplate.sln = Source\Content\OrleansTemplate\OrleansTemplate.sln
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{91182EA8-20D9-444A-B365-166FCE27C2B5}"
 	ProjectSection(SolutionItems) = preProject
-		Source\Content\OrleansTemplate\.template.config\dotnetcli.host.json = Source\Content\OrleansTemplate\.template.config\dotnetcli.host.json
-		Source\Content\OrleansTemplate\.template.config\icon.png = Source\Content\OrleansTemplate\.template.config\icon.png
-		Source\Content\OrleansTemplate\.template.config\template.json = Source\Content\OrleansTemplate\.template.config\template.json
+		Source\OrleansTemplate\.template.config\dotnetcli.host.json = Source\OrleansTemplate\.template.config\dotnetcli.host.json
+		Source\OrleansTemplate\.template.config\icon.png = Source\OrleansTemplate\.template.config\icon.png
+		Source\OrleansTemplate\.template.config\template.json = Source\OrleansTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B2B5B578-0E87-4C61-9566-173E96EFC131}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Abstractions", "Source\Content\OrleansTemplate\Source\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj", "{F41596F4-D38D-4D91-B311-0E4C641434B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Abstractions", "Source\OrleansTemplate\Source\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj", "{F41596F4-D38D-4D91-B311-0E4C641434B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Grains", "Source\Content\OrleansTemplate\Source\OrleansTemplate.Grains\OrleansTemplate.Grains.csproj", "{37D844CC-257B-4745-ACCB-E2D01D00DC96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Grains", "Source\OrleansTemplate\Source\OrleansTemplate.Grains\OrleansTemplate.Grains.csproj", "{37D844CC-257B-4745-ACCB-E2D01D00DC96}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server", "Source\Content\OrleansTemplate\Source\OrleansTemplate.Server\OrleansTemplate.Server.csproj", "{9099F216-3BCD-40C4-BAC1-C66C9BE5683A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server", "Source\OrleansTemplate\Source\OrleansTemplate.Server\OrleansTemplate.Server.csproj", "{9099F216-3BCD-40C4-BAC1-C66C9BE5683A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Client", "Source\Content\OrleansTemplate\Source\OrleansTemplate.Client\OrleansTemplate.Client.csproj", "{42C68564-D31F-47B6-9C6E-658830D6F737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Client", "Source\OrleansTemplate\Source\OrleansTemplate.Client\OrleansTemplate.Client.csproj", "{42C68564-D31F-47B6-9C6E-658830D6F737}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server.IntegrationTest", "Source\Content\OrleansTemplate\Tests\OrleansTemplate.Server.IntegrationTest\OrleansTemplate.Server.IntegrationTest.csproj", "{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrleansTemplate.Server.IntegrationTest", "Source\OrleansTemplate\Tests\OrleansTemplate.Server.IntegrationTest\OrleansTemplate.Server.IntegrationTest.csproj", "{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiTemplate", "ApiTemplate", "{4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}"
 EndProject
@@ -60,27 +55,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{172D189E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\Content\ApiTemplate\Source\ApiTemplate\ApiTemplate.csproj", "{8BB5296C-463E-4EC2-82DE-19F0E6EFB681}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\ApiTemplate\Source\ApiTemplate\ApiTemplate.csproj", "{8BB5296C-463E-4EC2-82DE-19F0E6EFB681}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\Content\GraphQLTemplate\Source\GraphQLTemplate\GraphQLTemplate.csproj", "{A5DC4676-9FE2-46C8-9A22-DA37220E9599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\GraphQLTemplate\Source\GraphQLTemplate\GraphQLTemplate.csproj", "{A5DC4676-9FE2-46C8-9A22-DA37220E9599}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{805B6196-7461-44E4-9DC8-411242540E7C}"
 	ProjectSection(SolutionItems) = preProject
-		Source\Content\ApiTemplate\.template.config\dotnetcli.host.json = Source\Content\ApiTemplate\.template.config\dotnetcli.host.json
-		Source\Content\ApiTemplate\.template.config\icon.png = Source\Content\ApiTemplate\.template.config\icon.png
-		Source\Content\ApiTemplate\.template.config\template.json = Source\Content\ApiTemplate\.template.config\template.json
+		Source\ApiTemplate\.template.config\dotnetcli.host.json = Source\ApiTemplate\.template.config\dotnetcli.host.json
+		Source\ApiTemplate\.template.config\icon.png = Source\ApiTemplate\.template.config\icon.png
+		Source\ApiTemplate\.template.config\template.json = Source\ApiTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{A3624EC5-8766-435F-9706-9F5CF13A9433}"
 	ProjectSection(SolutionItems) = preProject
-		Source\Content\GraphQLTemplate\.template.config\dotnetcli.host.json = Source\Content\GraphQLTemplate\.template.config\dotnetcli.host.json
-		Source\Content\GraphQLTemplate\.template.config\icon.png = Source\Content\GraphQLTemplate\.template.config\icon.png
-		Source\Content\GraphQLTemplate\.template.config\template.json = Source\Content\GraphQLTemplate\.template.config\template.json
+		Source\GraphQLTemplate\.template.config\dotnetcli.host.json = Source\GraphQLTemplate\.template.config\dotnetcli.host.json
+		Source\GraphQLTemplate\.template.config\icon.png = Source\GraphQLTemplate\.template.config\icon.png
+		Source\GraphQLTemplate\.template.config\template.json = Source\GraphQLTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IntegrationTest", "Source\Content\ApiTemplate\Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{934FF421-704C-4323-8E70-CF4DE397D169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IntegrationTest", "Source\ApiTemplate\Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{934FF421-704C-4323-8E70-CF4DE397D169}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Source\Content\GraphQLTemplate\Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{03120185-3DD6-48C5-B051-335DD4493AE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Source\GraphQLTemplate\Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{03120185-3DD6-48C5-B051-335DD4493AE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4D1734C-E814-432B-9E37-9506E450C6DE}"
 	ProjectSection(SolutionItems) = preProject
@@ -93,7 +88,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		MinimumRecommendedRulesWithStyleCop.ruleset = MinimumRecommendedRulesWithStyleCop.ruleset
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boxed.Templates", "Source\Boxed.Templates\Boxed.Templates.csproj", "{425A157F-DB19-4EE8-B53E-9796D46CD89A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates", "Source\Boxed.Templates.csproj", "{7B294041-5B26-4B32-B084-05CCD35A89B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,18 +136,17 @@ Global
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03120185-3DD6-48C5-B051-335DD4493AE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{425A157F-DB19-4EE8-B53E-9796D46CD89A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8} = {E1186AA9-A80D-40EF-96C2-02F8DAD936FB}
-		{DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
+		{DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 		{91182EA8-20D9-444A-B365-166FCE27C2B5} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
 		{1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
 		{B2B5B578-0E87-4C61-9566-173E96EFC131} = {DB0BA899-B348-4DFA-90F4-C76DF0E1A8E8}
@@ -161,8 +155,8 @@ Global
 		{9099F216-3BCD-40C4-BAC1-C66C9BE5683A} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{42C68564-D31F-47B6-9C6E-658830D6F737} = {1EC5A4F6-7B94-413A-A9ED-69FAB16D3CA1}
 		{3997DDD0-5EEB-43D4-81A0-8A8CA6D74E10} = {B2B5B578-0E87-4C61-9566-173E96EFC131}
-		{4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
-		{A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF} = {1C1CA8D2-D624-4A6B-9E82-4FE37A3E3B2C}
+		{4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
+		{A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 		{3883E656-40FA-4387-99E4-A17D257CC06C} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
 		{72A80BD5-6179-4ED8-AFA0-6B5D7420AE56} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
 		{172D189E-2277-4B19-984A-DF4F3F5917B9} = {4717E9F6-8D3B-40B1-B3F0-EA83AF348EDD}
@@ -173,7 +167,7 @@ Global
 		{A3624EC5-8766-435F-9706-9F5CF13A9433} = {A4F65E1A-3A26-4FAC-99A6-BDEB25D60EFF}
 		{934FF421-704C-4323-8E70-CF4DE397D169} = {172D189E-2277-4B19-984A-DF4F3F5917B9}
 		{03120185-3DD6-48C5-B051-335DD4493AE4} = {C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}
-		{425A157F-DB19-4EE8-B53E-9796D46CD89A} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
+		{7B294041-5B26-4B32-B084-05CCD35A89B4} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}

@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <ApplicationInsights>true</ApplicationInsights>
+  </PropertyGroup>
+  <!--#endif-->
+
+  <PropertyGroup Label="Build">
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <!-- Use the latest version of the C# language. -->
+    <LangVersion>latest</LangVersion>
+    <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
+         control provider. Only use this in Development, it is not intended for Production use.
+         See http://docs.asp.net/en/latest/security/app-secrets.html -->
+    <UserSecretsId>OrleansTemplate.Server-113f2d04-69f0-40c3-8797-ba3f356dd812</UserSecretsId>
+    <!-- Enable tiered JIT compilation for better performance.
+         See http://mattwarren.org/2017/12/15/How-does-.NET-JIT-a-method-and-Tiered-Compilation/ -->
+    <TieredCompilation>true</TieredCompilation>
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <Version>1.0.0</Version>
+    <Authors>PROJECT-AUTHOR-XML</Authors>
+    <Company>PROJECT-AUTHOR-XML</Company>
+    <Product>PROJECT-TITLE-XML</Product>
+    <Description>PROJECT-DESCRIPTION-XML</Description>
+    <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="OrleansDashboard" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.3.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="2.3.6" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="2.3.6" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="2.3.6" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="5.3.1" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="2.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.5.2" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj" />
+    <ProjectReference Include="..\OrleansTemplate.Grains\OrleansTemplate.Grains.csproj" />
+  </ItemGroup>
+
+</Project>

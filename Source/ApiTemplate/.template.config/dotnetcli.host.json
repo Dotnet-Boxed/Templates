@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "Title": {
+      "longName": "title"
+    },
+    "TitleXmlEncoded": {
+      "isHidden": true
+    },
+    "Description": {
+      "longName": "description"
+    },
+    "DescriptionXmlEncoded": {
+      "isHidden": true
+    },
+    "Author": {
+      "longName": "author"
+    },
+    "AuthorXmlEncoded": {
+      "isHidden": true
+    },
+    "EditorConfig": {
+      "longName": "editorconfig"
+    },
+    "Git": {
+      "longName": "git"
+    },
+    "TreatWarningsAsErrors": {
+      "longName": "treat-warnings-as-errors"
+    },
+    "Swagger": {
+      "longName": "swagger"
+    },
+    "Versioning": {
+      "longName": "versioning"
+    },
+    "ForwardedHeaders": {
+      "longName": "forwarded-headers"
+    },
+    "HostFiltering": {
+      "longName": "host-filtering"
+    },
+    "ReverseProxyWebServer": {
+      "longName": "reverse-proxy"
+    },
+    "CloudProvider": {
+      "longName": "cloud-provider"
+    },
+    "Analytics": {
+      "longName": "analytics"
+    },
+    "ApplicationInsightsKey": {
+      "longName": "app-insights-key"
+    },
+    "HttpsEverywhere": {
+      "longName": "https-everywhere"
+    },
+    "HstsPreload": {
+      "longName": "hsts-preload"
+    },
+    "CORS": {
+      "longName": "cors"
+    },
+    "CorrelationId": {
+      "longName": "correlation-id"
+    },
+    "ResponseCaching": {
+      "longName": "response-caching"
+    },
+    "ResponseCompression": {
+      "longName": "response-compression"
+    },
+    "XmlFormatter": {
+      "longName": "xml-formatter"
+    },
+    "HealthCheck": {
+      "longName": "health-check"
+    },
+    "RobotsTxt": {
+      "longName": "robots-txt"
+    },
+    "SecurityTxt": {
+      "longName": "security-txt"
+    },
+    "HumansTxt": {
+      "longName": "humans-txt"
+    },
+    "HttpPort": {
+      "longName": "http-port"
+    },
+    "HttpsPort": {
+      "longName": "https-port"
+    },
+    "IntegrationTest": {
+      "longName": "integration-test"
+    },
+    "SkipRestore": {
+      "longName": "no-restore"
+    },
+    "SkipOpenReadMe": {
+      "longName": "no-open-readme"
+    }
+  }
+}

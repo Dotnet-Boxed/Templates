@@ -1,0 +1,220 @@
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [ "Web", "WebAPI", "Boxed", "Orleans", "API", "Actor" ],
+  "name": "ASP.NET Core Orleans Boxed (beta)",
+  "groupIdentity": "Dotnet.Boxed.Orleans",
+  "identity": "Dotnet.Boxed.Orleans.CSharp",
+  "shortName": "orleans",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "OrleansTemplate",
+  "preferNameDirectory": true,
+  "guids": [
+    "837bc53e-0271-4e9c-b5b5-c60ea7a7c7b5",
+    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+  ],
+  "primaryOutputs": [
+    { "path": "OrleansTemplate.sln" }
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        // EditorConfig
+        {
+          "condition": "(!EditorConfig)",
+          "exclude": [
+            ".editorconfig"
+          ]
+        },
+        // Git
+        {
+          "condition": "(!Git)",
+          "exclude": [
+            ".gitattributes",
+            ".gitignore"
+          ]
+        },
+        // ReadMe
+        {
+          "condition": "(!ReadMe)",
+          "exclude": [
+            "README.md"
+          ]
+        },
+        // IntegrationTest
+        {
+          "condition": "(!IntegrationTest)",
+          "exclude": [
+            "Tests/ApiTemplate.IntegrationTest/**/*"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    // Title
+    "Title": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Title",
+      "replaces": "PROJECT-TITLE",
+      "description": "The name of the project which determines the assembly product name. If the Swagger feature is enabled, shows the title on the Swagger UI."
+    },
+    "TitleXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-TITLE-XML",
+      "valueSource": "Title",
+      "valueTransform": "xmlEncode"
+    },
+    // Description
+    "Description": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Description",
+      "replaces": "PROJECT-DESCRIPTION",
+      "description": "A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI."
+    },
+    "DescriptionXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-DESCRIPTION-XML",
+      "valueSource": "Description",
+      "valueTransform": "xmlEncode"
+    },
+    // Author
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Author",
+      "replaces": "PROJECT-AUTHOR",
+      "description": "The name of the author of the project which determines the assembly author, company and copyright information."
+    },
+    "AuthorXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-AUTHOR-XML",
+      "valueSource": "Author",
+      "valueTransform": "xmlEncode"
+    },
+    // EditorConfig
+    "EditorConfig": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .editorconfig file to set a fixed code style."
+    },
+    // Git
+    "Git": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS."
+    },
+    // ReadMe
+    "ReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a README.md markdown file describing the project."
+    },
+    // TreatWarningsAsErrors
+    "TreatWarningsAsErrors": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Treat warnings as errors."
+    },
+    // Analytics
+    "Analytics": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Application Insights",
+          "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
+        },
+        {
+          "choice": "None",
+          "description": "Not using any analytics."
+        }
+      ],
+      "defaultValue": "None",
+      "description": "Monitor internal information about how your application is running, as well as external user information."
+    },
+    "ApplicationInsights": {
+      "type": "computed",
+      "value": "(Analytics == \"Application Insights\")"
+    },
+    // ApplicationInsightsKey
+    "ApplicationInsightsKey": {
+      "type": "parameter",
+      "datatype": "string",
+      "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
+      "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
+    },
+    "IntegrationTest": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds an integration test project.",
+      "defaultValue": "true"
+    },
+    // https://github.com/dotnet/templating/wiki/Post-Action-Registry
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the execution of 'dotnet restore' on project creation.",
+      "defaultValue": "false"
+    },
+    //"SkipOpenReadMe": {
+    //  "type": "parameter",
+    //  "datatype": "bool",
+    //  "description": "Skips the opening of the projects Read-Me in a web browser.",
+    //  "defaultValue": "false"
+    //},
+    "SkipOpenAzureStorageEmulator": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the running of the Azure Storage Emulator.",
+      "defaultValue": "false"
+    },
+    // AuthoringMode
+    "AuthoringMode": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": false
+      }
+    }
+  },
+  "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "condition": "(!SkipRestore)",
+      "continueOnError": true,
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore' in the directory the template was created in." }
+      ]
+    },
+    //{
+    //  "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
+    //  "condition": "(!SkipOpenReadMe)",
+    //  "continueOnError": true,
+    //  "description": "Open the Read-Me for the project in a web browser.",
+    //  "manualInstructions": [
+    //    { "text": "Open the ReadMe.html in a web browser to see a to-do list." }
+    //  ]
+    //},
+    {
+      "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
+      "condition": "(!SkipOpenAzureStorageEmulator)",
+      "continueOnError": true,
+      "description": "Run the Azure Storage Emulator.",
+      "manualInstructions": [
+        { "text": "Run the Azure Storage Emulator (Download at https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator)." }
+      ]
+    }
+  ]
+}
