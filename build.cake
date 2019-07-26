@@ -22,8 +22,6 @@ var buildNumber =
     0;
 
 var artifactsDirectory = Directory("./Artifacts");
-var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
-var nuspecContent = string.Empty;
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : $"-{preReleaseSuffix}-{buildNumber:D4}";
 
 Task("Clean")
@@ -73,28 +71,23 @@ Task("Test")
         }
     });
 
-Task("Version")
-    .Does(() =>
-    {
-        nuspecContent = System.IO.File.ReadAllText(nuspecFile);
-        var nuspecDocument = XDocument.Parse(nuspecContent);
-        var ns = XNamespace.Get("http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd");
-        var versionElement = nuspecDocument.Element(ns + "package").Element(ns + "metadata").Element(ns + "version");
-        versionElement.Value = versionElement.Value.Replace("-*", versionSuffix);
-        System.IO.File.WriteAllText(nuspecFile, nuspecDocument.ToString());
-        Information($"VersionSuffix set to {versionSuffix}");
-    });
-
 Task("Pack")
     .Does(() =>
     {
+        var nuspecFile = GetFiles("./**/*.nuspec").First().ToString();
+        var nuspecContent = System.IO.File.ReadAllText(nuspecFile);
+        var nuspecDocument = XDocument.Parse(nuspecContent);
+        var ns = XNamespace.Get("http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd");
+        var versionElement = nuspecDocument.Element(ns + "package").Element(ns + "metadata").Element(ns + "version");
+        var version = versionElement.Value.Replace("-*", versionSuffix);
+
         NuGetPack(
             nuspecFile,
             new NuGetPackSettings()
             {
-                OutputDirectory = artifactsDirectory
+                OutputDirectory = artifactsDirectory,
+                Version = version
             });
-        System.IO.File.WriteAllText(nuspecFile, nuspecContent);
     });
 
 Task("Default")

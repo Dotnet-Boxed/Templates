@@ -47,9 +47,6 @@ stages:
     - script: 'dotnet cake --target=Test'
       displayName: 'Dotnet Cake Test'
       failOnStderr: true
-    - script: 'dotnet cake --target=Version'
-      displayName: 'Dotnet Cake Version'
-      failOnStderr: true
     - script: 'dotnet cake --target=Pack'
       displayName: 'Dotnet Cake Pack'
       failOnStderr: true
