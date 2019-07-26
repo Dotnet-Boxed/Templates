@@ -34,7 +34,7 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
         public async Task Run_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
