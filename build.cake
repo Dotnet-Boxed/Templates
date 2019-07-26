@@ -48,8 +48,7 @@ Task("Restore")
             new DotNetCoreBuildSettings()
             {
                 Configuration = configuration,
-                NoRestore = true,
-                VersionSuffix = versionSuffix
+                NoRestore = true
             });
     });
 
