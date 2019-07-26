@@ -92,7 +92,7 @@ Teardown(context =>
     // Appveyor is failing to exit the cake script.
     if (AppVeyor.IsRunningOnAppVeyor)
     {
-        foreach (var process in Process.GetProcessesByName("dotnet"))
+        foreach (var process in System.Diagnostics.Process.GetProcessesByName("dotnet"))
         {
             process.Kill();
         }
