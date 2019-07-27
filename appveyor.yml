@@ -27,7 +27,6 @@ build_script:
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=Test
-- pwsh: dotnet cake --target=Version
 - pwsh: dotnet cake --target=Pack
 
 test: off
