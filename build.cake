@@ -17,6 +17,7 @@ var buildNumber =
     0;
 
 var artifactsDirectory = Directory("./Artifacts");
+var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
 
@@ -71,7 +72,7 @@ Task("Pack")
     .Does(() =>
     {
         DotNetCorePack(
-            GetFiles("**/Boxed.Templates.csproj").First().ToString(),
+            GetFiles(templatePackProject).Single().ToString(),
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
