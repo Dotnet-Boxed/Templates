@@ -15,7 +15,8 @@ namespace Boxed.Templates.FunctionalTest
         public GraphQLTemplateTest() =>
             TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
 
-        [Theory(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Theory]
+        [Trait("IsUsingDotnetRun", "false")]
         [InlineData("Default")]
         [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("NoHostFiltering", "host-filtering=false")]
@@ -33,7 +34,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_Default_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -69,7 +71,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_HealthCheckFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -96,7 +99,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_QueryGraphQlIntrospection_ReturnsResults()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -116,7 +120,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_HttpsEverywhereFalse_Successful()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -140,7 +145,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_AuthorizationTrue_Returns400BadRequest()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
@@ -171,7 +177,8 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        [Fact(Skip = "Skip until AppVeyor supports VS 2019")]
+        [Fact]
+        [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfully()
         {
             using (var tempDirectory = TemplateAssert.GetTempDirectory())
