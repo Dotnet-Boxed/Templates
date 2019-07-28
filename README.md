@@ -30,13 +30,13 @@ Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CO
 
 ## Continuous Integration
 
-| Name         | Operating System | Status | History |
-| :---         | :---             | :---   | :---    |
-| Azure DevOps | Ubuntu           | [![Azure DevOps Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
-| Azure DevOps | Mac              | [![Azure DevOps Mac Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
-| Azure DevOps | Windows          | [![Azure DevOps Windows Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
-| Azure DevOps | Overall          | [![Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
-| AppVeyor     | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Templates?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Templates) |
+| Name            | Operating System | Status | History |
+| :---            | :---             | :---   | :---    |
+| Azure Pipelines | Ubuntu           | [![Azure Pipelines Ubuntu Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| Azure Pipelines | Mac              | [![Azure Pipelines Mac Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| Azure Pipelines | Windows          | [![Azure Pipelines Windows Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| Azure Pipelines | Overall          | [![Azure Pipelines Overall Build Status](https://dev.azure.com/dotnet-boxed/Templates/_apis/build/status/Dotnet-Boxed.Templates?branchName=master)](https://dev.azure.com/dotnet-boxed/Templates/_build/latest?definitionId=2&branchName=master) | |
+| AppVeyor        | Ubuntu & Windows | [![AppVeyor Build status](https://ci.appveyor.com/api/projects/status/munmh9if4vfeqy62?svg=true)](https://ci.appveyor.com/project/RehanSaeed/templates) | [![AppVeyor Build history](https://buildstats.info/appveyor/chart/RehanSaeed/Templates?branch=master&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/Templates) |
 
 ## Thanks
 
