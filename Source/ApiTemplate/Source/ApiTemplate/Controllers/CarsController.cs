@@ -16,7 +16,7 @@ namespace ApiTemplate.Controllers
     [Route("[controller]")]
     [ApiController]
 #if (Versioning)
-    [ApiVersion("1.0")]
+    [ApiVersion(ApiVersionName.V1)]
 #endif
     public class CarsController : ControllerBase
     {
