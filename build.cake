@@ -23,7 +23,7 @@ var artifactsDirectory = Directory("./Artifacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
-var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
+var isDotnetRunEnabled = AppVeyor.IsRunningOnAppVeyor || (TFBuild.IsRunningOnAzurePipelinesHosted && IsRunningOnWindows());
 
 Task("Clean")
     .Does(() =>
@@ -54,27 +54,33 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
-    .WithCriteria(x => isDotnetRunEnabled)
     .Does(() =>
     {
-        var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
-        StartProcess(
-            "dotnet",
-            new ProcessArgumentBuilder()
-                .Append("dev-certs")
-                .Append("https")
-                .AppendSwitch("--export-path", certificateFilePath));
-        Information($"Dotnet Developer Certificate saved");
-
-        var certificate = new X509Certificate2(certificateFilePath);
-        using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+        if (isDotnetRunEnabled)
         {
-            store.Open(OpenFlags.ReadWrite);
-            store.Add(certificate);
-        }
-        Information($"Dotnet Developer Certificate installed to local machine");
+            var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
+            StartProcess(
+                "dotnet",
+                new ProcessArgumentBuilder()
+                    .Append("dev-certs")
+                    .Append("https")
+                    .AppendSwitch("--export-path", certificateFilePath));
+            Information($"Dotnet Developer Certificate saved");
 
-        System.IO.File.Delete(certificateFilePath);
+            var certificate = new X509Certificate2(certificateFilePath);
+            using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+            {
+                store.Open(OpenFlags.ReadWrite);
+                store.Add(certificate);
+            }
+            Information($"Dotnet Developer Certificate installed to local machine");
+
+            System.IO.File.Delete(certificateFilePath);
+        }
+        else
+        {
+            Information("This CI server does not support installing certificates")
+        }
     });
 
 Task("Test")
