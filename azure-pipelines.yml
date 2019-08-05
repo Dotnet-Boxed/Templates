@@ -31,7 +31,7 @@ stages:
           vmImageName: windows-latest
     pool:
       vmImage: $(vmImageName)
-    timeoutInMinutes: 10
+    timeoutInMinutes: 20
     steps:
     - task: UseDotNet@2
       displayName: 'Install .NET Core SDK'
