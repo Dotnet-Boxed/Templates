@@ -102,13 +102,13 @@ Task("Test")
         }
 
         // CI is failing to exit the cake script.
-        if (isRunningOnCI)
-        {
-            foreach (var process in Process.GetProcessesByName("dotnet"))
-            {
-                process.Kill();
-            }
-        }
+        // if (isRunningOnCI)
+        // {
+        //     foreach (var process in Process.GetProcessesByName("dotnet"))
+        //     {
+        //         process.Kill();
+        //     }
+        // }
     });
 
 Task("Pack")
