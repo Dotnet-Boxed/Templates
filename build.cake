@@ -79,7 +79,7 @@ Task("InstallDeveloperCertificate")
         }
         else
         {
-            Information("This CI server does not support installing certificates")
+            Information("This CI server does not support installing certificates");
         }
     });
 
