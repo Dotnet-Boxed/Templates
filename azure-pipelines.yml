@@ -46,7 +46,7 @@ stages:
       failOnStderr: true
     - script: 'dotnet cake --target=InstallDeveloperCertificate'
       displayName: 'Dotnet Cake InstallDeveloperCertificate'
-      failOnStderr: true
+      failOnStderr: false
     - script: 'dotnet cake --target=Test'
       displayName: 'Dotnet Cake Test'
       failOnStderr: true
