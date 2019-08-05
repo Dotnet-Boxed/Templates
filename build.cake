@@ -22,6 +22,7 @@ var artifactsDirectory = Directory("./Artifacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
+var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
 
 Task("Clean")
     .Does(() =>
@@ -52,7 +53,7 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
-    .WithCriteria(x =>  isRunningOnCI)
+    .WithCriteria(x =>  isDotnetRunEnabled)
     .Does(() =>
     {
         var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
@@ -85,7 +86,7 @@ Task("Test")
                 new DotNetCoreTestSettings()
                 {
                     Configuration = configuration,
-                    Filter = isRunningOnCI && !IsRunningOnWindows() ? "IsUsingDotnetRun=false" : null,
+                    Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
                     Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                     NoBuild = true,
                     NoRestore = true,
