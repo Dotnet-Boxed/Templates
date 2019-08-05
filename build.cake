@@ -52,7 +52,7 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
-    .WithCriteria(x => TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor)
+    .WithCriteria(x =>  isRunningOnCI)
     .Does(() =>
     {
         var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
@@ -65,7 +65,7 @@ Task("InstallDeveloperCertificate")
         Information($"Dotnet Developer Certificate saved");
 
         var certificate = new X509Certificate2(certificateFilePath);
-        using (var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser))
+        using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
         {
             store.Open(OpenFlags.ReadWrite);
             store.Add(certificate);
@@ -76,7 +76,6 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
-    .IsDependentOn("InstallDeveloperCertificate")
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
@@ -86,7 +85,7 @@ Task("Test")
                 new DotNetCoreTestSettings()
                 {
                     Configuration = configuration,
-                    Filter = isRunningOnCI ? "IsUsingDotnetRun=false" : null,
+                    Filter = isRunningOnCI && !IsRunningOnWindows() ? "IsUsingDotnetRun=false" : null,
                     Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                     NoBuild = true,
                     NoRestore = true,
