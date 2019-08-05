@@ -23,7 +23,7 @@ var artifactsDirectory = Directory("./Artifacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
-var isDotnetRunEnabled = AppVeyor.IsRunningOnAppVeyor || (TFBuild.IsRunningOnAzurePipelinesHosted && IsRunningOnWindows());
+var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
 
 Task("Clean")
     .Does(() =>
@@ -84,7 +84,6 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
-    .IsDependentOn("InstallDeveloperCertificate")
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
