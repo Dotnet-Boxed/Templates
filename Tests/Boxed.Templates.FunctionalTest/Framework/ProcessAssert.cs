@@ -78,8 +78,9 @@ namespace Boxed.Templates.FunctionalTest
 
             if (!string.IsNullOrEmpty(standardError))
             {
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"StandardError: {standardError}");
+                stringBuilder
+                    .AppendLine()
+                    .AppendLine($"StandardError: {standardError}");
                 TestLogger.WriteLine("StandardError: ");
                 TestLogger.WriteLine(standardError, ConsoleColor.Red);
                 TestLogger.WriteLine();
@@ -87,8 +88,9 @@ namespace Boxed.Templates.FunctionalTest
 
             if (!string.IsNullOrEmpty(standardOutput))
             {
-                stringBuilder.AppendLine();
-                stringBuilder.AppendLine($"StandardOutput: {standardOutput}");
+                stringBuilder
+                    .AppendLine()
+                    .AppendLine($"StandardOutput: {standardOutput}");
                 TestLogger.WriteLine();
                 TestLogger.WriteLine($"StandardOutput: {standardOutput}");
             }
@@ -156,6 +158,7 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         if (!process.HasExited)
                         {
+                            // Add process.Kill(true) when 3.0 comes out to kill the entire process tree.
                             process.Kill();
                         }
 
