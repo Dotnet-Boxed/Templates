@@ -47,7 +47,7 @@ stages:
     - script: 'dotnet cake --target=InstallDeveloperCertificate'
       displayName: 'Dotnet Cake InstallDeveloperCertificate'
       failOnStderr: true
-    - script: 'dotnet cake --target=Test'
+    - script: 'dotnet cake --target=Test --verbosity=Diagnostic'
       displayName: 'Dotnet Cake Test'
       failOnStderr: true
     - script: 'dotnet cake --target=Pack'
