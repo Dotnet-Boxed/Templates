@@ -100,15 +100,6 @@ Task("Test")
                     ResultsDirectory = artifactsDirectory
                 });
         }
-
-        // CI is failing to exit the cake script.
-        // if (isRunningOnCI)
-        // {
-        //     foreach (var process in Process.GetProcessesByName("dotnet"))
-        //     {
-        //         process.Kill();
-        //     }
-        // }
     });
 
 Task("Pack")
@@ -132,6 +123,18 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
+
+Teardown(context =>
+{
+    // CI is failing to exit the cake script.
+    if (isRunningOnCI)
+    {
+        foreach (var process in System.Diagnostics.Process.GetProcessesByName("dotnet"))
+        {
+            process.Kill();
+        }
+    }
+});
 
 public void StartProcess(string processName, ProcessArgumentBuilder builder)
 {
