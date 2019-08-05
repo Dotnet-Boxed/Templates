@@ -159,7 +159,7 @@ namespace Boxed.Templates.FunctionalTest
                         if (!process.HasExited)
                         {
                             // Add process.Kill(true) when 3.0 comes out to kill the entire process tree.
-                            process.Kill();
+                            process.KillTree();
                         }
 
                         throw;
@@ -171,41 +171,6 @@ namespace Boxed.Templates.FunctionalTest
             catch (Exception exception)
             {
                 throw new ProcessStartException(processStartInfo, exception);
-            }
-        }
-
-        /// <summary>
-        /// Waits asynchronously for the process to exit.
-        /// </summary>
-        /// <param name="process">The process to wait for cancellation.</param>
-        /// <param name="cancellationToken">A cancellation token. If invoked, the task will return
-        /// immediately as cancelled.</param>
-        /// <returns>A Task representing waiting for the process to end.</returns>
-        private static Task WaitForExitAsync(
-            this Process process,
-            CancellationToken cancellationToken = default)
-        {
-            process.EnableRaisingEvents = true;
-
-            var taskCompletionSource = new TaskCompletionSource<object>();
-
-            process.Exited += OnExited;
-            if (cancellationToken != default)
-            {
-                cancellationToken.Register(
-                    () =>
-                    {
-                        process.Exited -= OnExited;
-                        taskCompletionSource.TrySetCanceled();
-                    });
-            }
-
-            return taskCompletionSource.Task;
-
-            void OnExited(object sender, EventArgs e)
-            {
-                process.Exited -= OnExited;
-                taskCompletionSource.TrySetResult(null);
             }
         }
 
