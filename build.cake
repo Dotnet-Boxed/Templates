@@ -65,7 +65,7 @@ Task("InstallDeveloperCertificate")
         Information($"Dotnet Developer Certificate saved");
 
         var certificate = new X509Certificate2(certificateFilePath);
-        using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+        using (var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser))
         {
             store.Open(OpenFlags.ReadWrite);
             store.Add(certificate);
