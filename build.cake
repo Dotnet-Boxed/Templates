@@ -99,6 +99,7 @@ Task("Test")
                     NoRestore = true,
                     ResultsDirectory = artifactsDirectory
                 });
+            Information($"Completed {project.GetFilenameWithoutExtension()} tests");
         }
     });
 
@@ -131,6 +132,7 @@ Teardown(context =>
     {
         foreach (var process in System.Diagnostics.Process.GetProcessesByName("dotnet"))
         {
+            Information("Killing dotnet process");
             process.Kill();
         }
     }
