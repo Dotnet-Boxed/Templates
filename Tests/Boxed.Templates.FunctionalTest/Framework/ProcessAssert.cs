@@ -50,6 +50,9 @@ namespace Boxed.Templates.FunctionalTest
             var standardError = error.ToString();
 
             var message = GetAndWriteMessage(
+                fileName,
+                arguments,
+                workingDirectory,
                 result,
                 standardOutput,
                 standardError);
@@ -60,6 +63,9 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         private static string GetAndWriteMessage(
+            string fileName,
+            string arguments,
+            string workingDirectory,
             ProcessResult result,
             string standardOutput,
             string standardError)
@@ -72,9 +78,8 @@ namespace Boxed.Templates.FunctionalTest
 
             if (!string.IsNullOrEmpty(standardError))
             {
-                stringBuilder
-                    .AppendLine()
-                    .AppendLine($"StandardError: {standardError}");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine($"StandardError: {standardError}");
                 TestLogger.WriteLine("StandardError: ");
                 TestLogger.WriteLine(standardError, ConsoleColor.Red);
                 TestLogger.WriteLine();
@@ -82,9 +87,8 @@ namespace Boxed.Templates.FunctionalTest
 
             if (!string.IsNullOrEmpty(standardOutput))
             {
-                stringBuilder
-                    .AppendLine()
-                    .AppendLine($"StandardOutput: {standardOutput}");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine($"StandardOutput: {standardOutput}");
                 TestLogger.WriteLine();
                 TestLogger.WriteLine($"StandardOutput: {standardOutput}");
             }
@@ -189,7 +193,7 @@ namespace Boxed.Templates.FunctionalTest
                     () =>
                     {
                         process.Exited -= OnExited;
-                        taskCompletionSource.SetCanceled();
+                        taskCompletionSource.TrySetCanceled();
                     });
             }
 
@@ -198,7 +202,7 @@ namespace Boxed.Templates.FunctionalTest
             void OnExited(object sender, EventArgs e)
             {
                 process.Exited -= OnExited;
-                taskCompletionSource.SetResult(null);
+                taskCompletionSource.TrySetResult(null);
             }
         }
 
@@ -226,7 +230,7 @@ namespace Boxed.Templates.FunctionalTest
                     if (e.Data == null)
                     {
                         removeHandler(handler);
-                        taskCompletionSource.SetResult(null);
+                        taskCompletionSource.TrySetResult(null);
                     }
                     else
                     {
@@ -242,7 +246,7 @@ namespace Boxed.Templates.FunctionalTest
                     () =>
                     {
                         removeHandler(handler);
-                        taskCompletionSource.SetCanceled();
+                        taskCompletionSource.TrySetCanceled();
                     });
             }
 
