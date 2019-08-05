@@ -125,19 +125,6 @@ Task("Default")
 
 RunTarget(target);
 
-Teardown(context =>
-{
-    // CI is failing to exit the cake script.
-    if (isRunningOnCI)
-    {
-        foreach (var process in System.Diagnostics.Process.GetProcessesByName("dotnet"))
-        {
-            Information("Killing dotnet process");
-            process.Kill();
-        }
-    }
-});
-
 public void StartProcess(string processName, ProcessArgumentBuilder builder)
 {
     var command = $"{processName} {builder.RenderSafe()}";
