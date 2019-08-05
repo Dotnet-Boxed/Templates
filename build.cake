@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 
 var target = Argument("Target", "Default");
@@ -53,7 +54,7 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
-    .WithCriteria(x =>  isDotnetRunEnabled)
+    .WithCriteria(x => isDotnetRunEnabled)
     .Does(() =>
     {
         var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
@@ -77,6 +78,7 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
+    .IsDependentOn("InstallDeveloperCertificate")
     .Does(() =>
     {
         foreach(var project in GetFiles("./Tests/**/*.csproj"))
@@ -92,6 +94,15 @@ Task("Test")
                     NoRestore = true,
                     ResultsDirectory = artifactsDirectory
                 });
+        }
+
+        // CI is failing to exit the cake script.
+        if (isRunningOnCI)
+        {
+            foreach (var process in Process.GetProcessesByName("dotnet"))
+            {
+                process.Kill();
+            }
         }
     });
 
@@ -116,18 +127,6 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
-
-Teardown(context =>
-{
-    // CI is failing to exit the cake script.
-    if (isRunningOnCI)
-    {
-        foreach (var process in System.Diagnostics.Process.GetProcessesByName("dotnet"))
-        {
-            process.Kill();
-        }
-    }
-});
 
 public void StartProcess(string processName, ProcessArgumentBuilder builder)
 {
