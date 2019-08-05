@@ -27,7 +27,7 @@ build_script:
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=InstallDeveloperCertificate
-- pwsh: dotnet cake --target=Test --verbosity=Diagnostic
+- pwsh: dotnet cake --target=Test
 - pwsh: dotnet cake --target=Pack
 
 test: off
