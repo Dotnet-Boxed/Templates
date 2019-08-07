@@ -14,9 +14,9 @@ namespace ApiTemplate.ViewModels
 
         public int Count { get; set; }
 
-        public bool HasNextPage { get => this.Page < this.TotalPages; }
+        public bool HasNextPage => this.Page < this.TotalPages;
 
-        public bool HasPreviousPage { get => this.Page > 1; }
+        public bool HasPreviousPage => this.Page > 1;
 
         public int TotalCount { get; set; }
 
