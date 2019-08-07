@@ -2,14 +2,14 @@ namespace ApiTemplate
 {
     using System;
     using System.Linq;
-#if (Versioning)
+#if Versioning
     using System.Reflection;
 #endif
     using ApiTemplate.Constants;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
-#if (Versioning)
+#if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
     using Microsoft.Extensions.DependencyInjection;
@@ -46,14 +46,11 @@ namespace ApiTemplate
                 .UseStaticFiles(
                     new StaticFileOptions()
                     {
-                        OnPrepareResponse = context =>
-                        {
-                            context.Context.ApplyCacheProfile(cacheProfile);
-                        },
+                        OnPrepareResponse = context => context.Context.ApplyCacheProfile(cacheProfile),
                     });
         }
 
-#if (Swagger)
+#if Swagger
 
         public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>
             application.UseSwaggerUI(
@@ -69,7 +66,7 @@ namespace ApiTemplate
                     // Show the request duration in Swagger UI.
                     options.DisplayRequestDuration();
 
-#if (Versioning)
+#if Versioning
                     var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider
                         .ApiVersionDescriptions

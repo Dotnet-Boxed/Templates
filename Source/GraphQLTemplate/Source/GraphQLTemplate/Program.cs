@@ -61,7 +61,7 @@ namespace GraphQLTemplate
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
                         ConfigureKestrelServerLimits(builderContext, options);
                     })
-#if (Azure)
+#if Azure
                 .UseAzureAppServices()
 #endif
                 // Used for IIS and IIS Express for in-process hosting. Use UseIISIntegration for out-of-process hosting.
@@ -92,7 +92,7 @@ namespace GraphQLTemplate
                 // override the ones in all of the above config files. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddEnvironmentVariables()
-#if (ApplicationInsights)
+#if ApplicationInsights
                 // Push telemetry data through the Azure Application Insights pipeline faster in the development and
                 // staging environments, allowing you to view results immediately.
                 .AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction())

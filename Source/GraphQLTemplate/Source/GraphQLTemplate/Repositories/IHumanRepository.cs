@@ -8,7 +8,7 @@ namespace GraphQLTemplate.Repositories
 
     public interface IHumanRepository
     {
-#if (Subscriptions)
+#if Subscriptions
         IObservable<Human> WhenHumanCreated { get; }
 
 #endif

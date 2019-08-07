@@ -3,7 +3,7 @@ namespace GraphQLTemplate.Repositories
     using System;
     using System.Collections.Generic;
     using System.Linq;
-#if (Subscriptions)
+#if Subscriptions
     using System.Reactive.Linq;
     using System.Reactive.Subjects;
 #endif
@@ -13,7 +13,7 @@ namespace GraphQLTemplate.Repositories
 
     public class HumanRepository : IHumanRepository
     {
-#if (Subscriptions)
+#if Subscriptions
         private readonly Subject<Human> whenHumanCreated;
 
         public HumanRepository() => this.whenHumanCreated = new Subject<Human>();
@@ -25,7 +25,7 @@ namespace GraphQLTemplate.Repositories
         {
             human.Id = Guid.NewGuid();
             Database.Humans.Add(human);
-#if (Subscriptions)
+#if Subscriptions
             this.whenHumanCreated.OnNext(human);
 #endif
             return Task.FromResult(human);

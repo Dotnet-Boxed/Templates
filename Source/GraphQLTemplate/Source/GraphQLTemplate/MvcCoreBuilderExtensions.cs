@@ -1,6 +1,6 @@
 namespace GraphQLTemplate
 {
-#if (CORS)
+#if CORS
     using GraphQLTemplate.Constants;
 #endif
     using GraphQLTemplate.Options;
@@ -12,7 +12,7 @@ namespace GraphQLTemplate
 
     public static class MvcCoreBuilderExtensions
     {
-#if (CORS)
+#if CORS
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html

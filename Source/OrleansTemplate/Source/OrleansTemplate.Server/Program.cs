@@ -67,7 +67,7 @@ namespace OrleansTemplate.Server
                         services.Configure<ApplicationOptions>(context.Configuration);
                         services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
                         services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)));
-#if (ApplicationInsights)
+#if ApplicationInsights
                         services.Configure<ApplicationInsightsTelemetryConsumerOptions>(
                             context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
 #endif
@@ -80,7 +80,7 @@ namespace OrleansTemplate.Server
                     EndpointOptions.DEFAULT_GATEWAY_PORT,
                     listenOnAnyHostAddress: !IsRunningInDevelopment())
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
-#if (ApplicationInsights)
+#if ApplicationInsights
                 .AddApplicationInsightsTelemetryConsumer()
 #endif
                 .ConfigureLogging(logging => logging.AddSerilog())

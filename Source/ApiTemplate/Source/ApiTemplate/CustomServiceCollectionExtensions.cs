@@ -1,34 +1,34 @@
 namespace ApiTemplate
 {
     using System;
-#if (ResponseCompression)
+#if ResponseCompression
     using System.IO.Compression;
 #endif
     using System.Linq;
-#if (Swagger)
+#if Swagger
     using System.Reflection;
 #endif
-#if (Swagger && Versioning)
+#if Swagger && Versioning
     using ApiTemplate.OperationFilters;
 #endif
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
-#if (Swagger)
+#if Swagger
     using Boxed.AspNetCore.Swagger;
     using Boxed.AspNetCore.Swagger.OperationFilters;
     using Boxed.AspNetCore.Swagger.SchemaFilters;
 #endif
-#if (CorrelationId)
+#if CorrelationId
     using CorrelationId;
 #endif
     using Microsoft.AspNetCore.Builder;
-#if (!ForwardedHeaders && HostFiltering)
+#if !ForwardedHeaders && HostFiltering
     using Microsoft.AspNetCore.HostFiltering;
 #endif
-#if (Versioning)
+#if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
-#if (ResponseCompression)
+#if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
     using Microsoft.Extensions.Caching.Distributed;
@@ -36,7 +36,7 @@ namespace ApiTemplate
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-#if (Swagger)
+#if Swagger
     using Swashbuckle.AspNetCore.Swagger;
 #endif
 
@@ -90,17 +90,17 @@ namespace ApiTemplate
             services
                 // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
-#if (ResponseCompression)
+#if ResponseCompression
                 .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
 #endif
-#if (ForwardedHeaders)
+#if ForwardedHeaders
                 .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
-#elif (HostFiltering)
+#elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)));
 
-#if (ResponseCompression)
+#if ResponseCompression
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
@@ -135,7 +135,7 @@ namespace ApiTemplate
                     options.LowercaseUrls = true;
                 });
 
-#if (HttpsEverywhere)
+#if HttpsEverywhere
         /// <summary>
         /// Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
         /// using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
@@ -152,7 +152,7 @@ namespace ApiTemplate
                     options =>
                     {
                         // Preload the HSTS HTTP header for better security. See https://hstspreload.org/
-#if (HstsPreload)
+#if HstsPreload
                         options.IncludeSubDomains = true;
                         options.MaxAge = TimeSpan.FromSeconds(31536000); // 1 Year
                         options.Preload = true;
@@ -164,7 +164,7 @@ namespace ApiTemplate
                     });
 
 #endif
-#if (HealthCheck)
+#if HealthCheck
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
             services
                 .AddHealthChecks()
@@ -172,7 +172,7 @@ namespace ApiTemplate
                 .Services;
 
 #endif
-#if (Versioning)
+#if Versioning
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services.AddApiVersioning(
                 options =>
@@ -182,7 +182,7 @@ namespace ApiTemplate
                 });
 
 #endif
-#if (Swagger)
+#if Swagger
         /// <summary>
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
@@ -202,7 +202,7 @@ namespace ApiTemplate
                     // Add the XML comment file for this assembly, so its contents can be displayed.
                     options.IncludeXmlCommentsIfExists(assembly);
 
-#if (Versioning)
+#if Versioning
                     options.OperationFilter<ApiVersionOperationFilter>();
 #endif
                     options.OperationFilter<CorrelationIdOperationFilter>();
@@ -212,7 +212,7 @@ namespace ApiTemplate
                     // Show an example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
 
-#if (Versioning)
+#if Versioning
                     var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
                     {

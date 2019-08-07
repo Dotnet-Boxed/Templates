@@ -1,16 +1,16 @@
 namespace GraphQLTemplate
 {
     using System;
-#if (ResponseCompression)
+#if ResponseCompression
     using System.IO.Compression;
 #endif
     using System.Linq;
-#if (CorrelationId)
+#if CorrelationId
     using CorrelationId;
 #endif
     using Boxed.AspNetCore;
     using GraphQL;
-#if (Authorization)
+#if Authorization
     using GraphQL.Authorization;
 #endif
     using GraphQL.Server;
@@ -19,11 +19,11 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
-#if (!ForwardedHeaders && HostFiltering)
+#if !ForwardedHeaders && HostFiltering
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Hosting;
-#if (ResponseCompression)
+#if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
     using Microsoft.Extensions.Configuration;
@@ -81,17 +81,17 @@ namespace GraphQLTemplate
                 // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-#if (ResponseCompression)
+#if ResponseCompression
                 .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
 #endif
-#if (ForwardedHeaders)
+#if ForwardedHeaders
                 .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
-#elif (HostFiltering)
+#elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
                 .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
 
-#if (ResponseCompression)
+#if ResponseCompression
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
@@ -126,7 +126,7 @@ namespace GraphQLTemplate
                     options.LowercaseUrls = true;
                 });
 
-#if (HttpsEverywhere)
+#if HttpsEverywhere
         /// <summary>
         /// Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
         /// using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
@@ -143,7 +143,7 @@ namespace GraphQLTemplate
                     options =>
                     {
                         // Preload the HSTS HTTP header for better security. See https://hstspreload.org/
-#if (HstsPreload)
+#if HstsPreload
                         options.IncludeSubDomains = true;
                         options.MaxAge = TimeSpan.FromSeconds(31536000); // 1 Year
                         options.Preload = true;
@@ -155,7 +155,7 @@ namespace GraphQLTemplate
                     });
 
 #endif
-#if (HealthCheck)
+#if HealthCheck
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
             services
                 .AddHealthChecks()
@@ -189,14 +189,14 @@ namespace GraphQLTemplate
                 .AddUserContextBuilder<GraphQLUserContextBuilder>()
                 // Add GraphQL data loader to reduce the number of calls to our repository.
                 .AddDataLoader()
-#if (Subscriptions)
+#if Subscriptions
                 // Add WebSockets support for subscriptions.
                 .AddWebSockets()
 #endif
                 .Services
                 .AddTransient(typeof(IGraphQLExecuter<>), typeof(InstrumentingGraphQLExecutor<>));
 
-#if (Authorization)
+#if Authorization
 
         /// <summary>
         /// Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).

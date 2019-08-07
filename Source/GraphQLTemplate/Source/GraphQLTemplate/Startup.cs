@@ -2,10 +2,10 @@ namespace GraphQLTemplate
 {
     using System;
     using Boxed.AspNetCore;
-#if (CorrelationId)
+#if CorrelationId
     using CorrelationId;
 #endif
-#if (CORS)
+#if CORS
     using GraphQLTemplate.Constants;
 #endif
     using GraphQL.Server;
@@ -13,7 +13,7 @@ namespace GraphQLTemplate
     using GraphQL.Server.Ui.Voyager;
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
-#if (HealthCheck)
+#if HealthCheck
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
@@ -49,23 +49,23 @@ namespace GraphQLTemplate
         /// </summary>
         public IServiceProvider ConfigureServices(IServiceCollection services) =>
             services
-#if (ApplicationInsights)
+#if ApplicationInsights
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-#if (CorrelationId)
+#if CorrelationId
                 .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
-#if (ResponseCompression)
+#if ResponseCompression
                 .AddCustomResponseCompression()
 #endif
-#if (HttpsEverywhere)
+#if HttpsEverywhere
                 .AddCustomStrictTransportSecurity()
 #endif
-#if (HealthCheck)
+#if HealthCheck
                 .AddCustomHealthChecks()
 #endif
                 .AddHttpContextAccessor()
@@ -74,13 +74,13 @@ namespace GraphQLTemplate
                     .AddAuthorization()
                     .AddJsonFormatters()
                     .AddCustomJsonOptions(this.hostingEnvironment)
-#if (CORS)
+#if CORS
                     .AddCustomCors()
 #endif
                     .AddCustomMvcOptions(this.hostingEnvironment)
                 .Services
                 .AddCustomGraphQL(this.hostingEnvironment)
-#if (Authorization)
+#if Authorization
                 .AddCustomGraphQLAuthorization()
 #endif
                 .AddProjectRepositories()
@@ -93,23 +93,23 @@ namespace GraphQLTemplate
         /// </summary>
         public void Configure(IApplicationBuilder application) =>
             application
-#if (CorrelationId)
+#if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
                 // UpdateTraceIdentifier must be false due to a bug. See https://github.com/aspnet/AspNetCore/issues/5144
                 .UseCorrelationId(new CorrelationIdOptions() { UpdateTraceIdentifier = false })
 #endif
-#if (ForwardedHeaders)
+#if ForwardedHeaders
                 .UseForwardedHeaders()
-#elif (HostFiltering)
+#elif HostFiltering
                 .UseHostFiltering()
 #endif
-#if (ResponseCompression)
+#if ResponseCompression
                 .UseResponseCompression()
 #endif
-#if (CORS)
+#if CORS
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
-#if (HttpsEverywhere)
+#if HttpsEverywhere
                 .UseIf(
                     !this.hostingEnvironment.IsDevelopment(),
                     x => x.UseHsts())
@@ -117,12 +117,12 @@ namespace GraphQLTemplate
                 .UseIf(
                     this.hostingEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
-#if (HealthCheck)
+#if HealthCheck
                 .UseHealthChecks("/status")
                 .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
 #endif
                 .UseStaticFilesWithCacheControl()
-#if (Subscriptions)
+#if Subscriptions
                 .UseWebSockets()
                 // Use the GraphQL subscriptions in the specified schema and make them available at /graphql.
                 .UseGraphQLWebSockets<MainSchema>()

@@ -1,7 +1,7 @@
 namespace ApiTemplate.ViewModels
 {
     using System.Collections.Generic;
-#if (Swagger)
+#if Swagger
     using ApiTemplate.ViewModelSchemaFilters;
     using Swashbuckle.AspNetCore.Annotations;
 

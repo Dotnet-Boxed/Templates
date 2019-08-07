@@ -7,10 +7,10 @@ namespace GraphQLTemplate.Schemas
     {
         public MainSchema(
             QueryObject query,
-#if (Mutations)
+#if Mutations
             MutationObject mutation,
 #endif
-#if (Subscriptions)
+#if Subscriptions
             SubscriptionObject subscription,
 #endif
             IDependencyResolver resolver)
@@ -18,10 +18,10 @@ namespace GraphQLTemplate.Schemas
             : base(resolver)
         {
             this.Query = resolver.Resolve<QueryObject>();
-#if (Mutations)
+#if Mutations
             this.Mutation = mutation;
 #endif
-#if (Subscriptions)
+#if Subscriptions
             this.Subscription = subscription;
 #endif
         }

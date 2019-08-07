@@ -1,9 +1,9 @@
 namespace ApiTemplate.Options
 {
     using System.ComponentModel.DataAnnotations;
-#if (ForwardedHeaders)
+#if ForwardedHeaders
     using Microsoft.AspNetCore.Builder;
-#elif (HostFiltering)
+#elif HostFiltering
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -16,16 +16,16 @@ namespace ApiTemplate.Options
         [Required]
         public CacheProfileOptions CacheProfiles { get; set; }
 
-#if (ResponseCompression)
+#if ResponseCompression
         [Required]
         public CompressionOptions Compression { get; set; }
 
 #endif
-#if (ForwardedHeaders)
+#if ForwardedHeaders
         [Required]
         public ForwardedHeadersOptions ForwardedHeaders { get; set; }
 
-#elif (HostFiltering)
+#elif HostFiltering
         [Required]
         public HostFilteringOptions HostFiltering { get; set; }
 
