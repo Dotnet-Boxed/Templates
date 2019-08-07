@@ -128,12 +128,7 @@ namespace ApiTemplate
         /// Add custom routing settings which determines how URL's are generated.
         /// </summary>
         public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
-            services.AddRouting(
-                options =>
-                {
-                    // All generated URL's should be lower-case.
-                    options.LowercaseUrls = true;
-                });
+            services.AddRouting(options => options.LowercaseUrls = true);
 
 #if HttpsEverywhere
         /// <summary>
