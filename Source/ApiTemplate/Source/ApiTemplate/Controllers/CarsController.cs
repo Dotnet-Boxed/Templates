@@ -78,7 +78,7 @@ namespace ApiTemplate.Controllers
         public Task<IActionResult> Delete(
             [FromServices] IDeleteCarCommand command,
             int carId,
-            CancellationToken cancellationToken) => command.ExecuteAsync(carId);
+            CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
         /// <summary>
         /// Gets the car with the specified unique identifier.
@@ -99,7 +99,7 @@ namespace ApiTemplate.Controllers
         public Task<IActionResult> Get(
             [FromServices] IGetCarCommand command,
             int carId,
-            CancellationToken cancellationToken) => command.ExecuteAsync(carId);
+            CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
         /// <summary>
         /// Gets a collection of cars using the specified page number and number of items per page.
@@ -121,7 +121,7 @@ namespace ApiTemplate.Controllers
         public Task<IActionResult> GetPage(
             [FromServices] IGetCarPageCommand command,
             [FromQuery] PageOptions pageOptions,
-            CancellationToken cancellationToken) => command.ExecuteAsync(pageOptions);
+            CancellationToken cancellationToken) => command.ExecuteAsync(pageOptions, cancellationToken);
 
         /// <summary>
         /// Patches the car with the specified unique identifier.
@@ -143,7 +143,7 @@ namespace ApiTemplate.Controllers
             [FromServices] IPatchCarCommand command,
             int carId,
             [FromBody] JsonPatchDocument<SaveCar> patch,
-            CancellationToken cancellationToken) => command.ExecuteAsync(carId, patch);
+            CancellationToken cancellationToken) => command.ExecuteAsync(carId, patch, cancellationToken);
 
         /// <summary>
         /// Creates a new car.
@@ -162,7 +162,7 @@ namespace ApiTemplate.Controllers
         public Task<IActionResult> Post(
             [FromServices] IPostCarCommand command,
             [FromBody] SaveCar car,
-            CancellationToken cancellationToken) => command.ExecuteAsync(car);
+            CancellationToken cancellationToken) => command.ExecuteAsync(car, cancellationToken);
 
         /// <summary>
         /// Updates an existing car with the specified unique identifier.
@@ -184,6 +184,6 @@ namespace ApiTemplate.Controllers
             [FromServices] IPutCarCommand command,
             int carId,
             [FromBody] SaveCar car,
-            CancellationToken cancellationToken) => command.ExecuteAsync(carId, car);
+            CancellationToken cancellationToken) => command.ExecuteAsync(carId, car, cancellationToken);
     }
 }
