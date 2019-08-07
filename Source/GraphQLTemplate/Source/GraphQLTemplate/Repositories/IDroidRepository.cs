@@ -16,8 +16,8 @@ namespace GraphQLTemplate.Repositories
             CancellationToken cancellationToken);
 
         Task<List<Droid>> GetDroidsReverse(
-            int? first,
-            DateTime? createdAfter,
+            int? last,
+            DateTime? createdBefore,
             CancellationToken cancellationToken);
 
         Task<bool> GetHasNextPage(
