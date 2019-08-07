@@ -1,5 +1,6 @@
-# Version: 1.2.0 (Using https://semver.org/)
-# Updated: 2019-07-22
+# Version: 1.3.0 (Using https://semver.org/)
+# Updated: 2019-08-04
+# See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
 
@@ -13,10 +14,9 @@ root = true
 # All Files
 [*]
 charset = utf-8
-end_of_line = crlf
 indent_style = space
 indent_size = 4
-insert_final_newline = false
+insert_final_newline = true
 trim_trailing_whitespace = true
 
 ##########################################
@@ -50,7 +50,6 @@ trim_trailing_whitespace = false
 # Web Files
 [*.{htm,html,js,ts,tsx,css,sass,scss,less,svg,vue}]
 indent_size = 2
-insert_final_newline = true
 
 # Batch Files
 [*.{cmd,bat}]
@@ -149,8 +148,8 @@ csharp_style_conditional_delegate_call = true:warning
 csharp_prefer_braces = true:warning
 # Unused value preferences
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#unused-value-preferences
-csharp_style_unused_value_expression_statement_preference = discard_variable:warning
-csharp_style_unused_value_assignment_preference = discard_variable:warning
+csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:suggestion
 # Index and range preferences
 # https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-language-conventions#index-and-range-preferences
 csharp_style_prefer_index_operator = true:warning
