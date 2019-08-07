@@ -150,11 +150,8 @@ namespace ApiTemplate
                 .UseStaticFilesWithCacheControl()
 #if Swagger
                 .UseMvc()
-                .UseSwagger(
-                    options =>
-                    {
-                        options.PreSerializeFilters.Add((swaggerDoc, httpReq) => swaggerDoc.Host = httpReq.Host.Value);
-                    })
+                .UseSwagger(options => options.PreSerializeFilters.Add(
+                    (swaggerDoc, httpReq) => swaggerDoc.Host = httpReq.Host.Value))
                 .UseCustomSwaggerUI();
 #else
                 .UseMvc();
