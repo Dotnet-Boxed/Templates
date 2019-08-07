@@ -102,7 +102,7 @@ namespace ApiTemplate
                     // Adds the XML input and output formatter using the XmlSerializer.
                     .AddXmlSerializerFormatters()
 #endif
-                    .AddCustomMvcOptions(this.hostingEnvironment)
+                    .AddCustomMvcOptions()
                 .Services
                 .AddProjectCommands()
                 .AddProjectMappers()
