@@ -4,10 +4,14 @@ namespace ApiTemplate.ViewModels
 
     public class PageOptions
     {
-        [Range(1, int.MaxValue)]
-        public int? Page { get; set; } = 1;
+        [Range(1, 20)]
+        public int? First { get; set; }
 
         [Range(1, 20)]
-        public int? Count { get; set; } = 10;
+        public int? Last { get; set; }
+
+        public string After { get; set; }
+
+        public string Before { get; set; }
     }
 }
