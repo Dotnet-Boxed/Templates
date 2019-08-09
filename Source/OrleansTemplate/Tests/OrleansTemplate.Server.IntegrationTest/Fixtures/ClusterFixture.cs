@@ -14,8 +14,9 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
             this.Cluster.Deploy();
         }
 
-        public void Dispose() => this.Cluster.StopAllSilos();
+        public TestCluster Cluster { get; }
 
-        public TestCluster Cluster { get; private set; }
+        // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in .NET Core 3.0.
+        public void Dispose() => this.Cluster.Dispose();
     }
 }
