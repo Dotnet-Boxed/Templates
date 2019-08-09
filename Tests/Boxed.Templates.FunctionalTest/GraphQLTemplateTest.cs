@@ -6,6 +6,7 @@ namespace Boxed.Templates.FunctionalTest
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Boxed.DotnetNewTest;
     using Boxed.Templates.FunctionalTest.Constants;
     using Boxed.Templates.FunctionalTest.Models;
     using Xunit;
@@ -13,7 +14,7 @@ namespace Boxed.Templates.FunctionalTest
     public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
-            TemplateAssert.DotnetNewInstall<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
+            DotnetNew.Install<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
@@ -23,7 +24,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("NoForwardedHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
         public async Task RestoreAndBuild_Default_Successful(string name, params string[] arguments)
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
@@ -38,7 +39,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_Default_Successful()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("graphql", "Default");
                 await project.DotnetRestore();
@@ -75,7 +76,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_HealthCheckFalse_Successful()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew(
                     "graphql",
@@ -103,7 +104,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_QueryGraphQlIntrospection_ReturnsResults()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew("graphql", "Default");
                 await project.DotnetRestore();
@@ -124,7 +125,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_HttpsEverywhereFalse_Successful()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew(
                     "graphql",
@@ -149,7 +150,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_AuthorizationTrue_Returns400BadRequest()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew(
                     "graphql",
@@ -181,7 +182,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "true")]
         public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfully()
         {
-            using (var tempDirectory = TemplateAssert.GetTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNew(
                     "graphql",
