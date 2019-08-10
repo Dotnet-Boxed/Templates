@@ -40,6 +40,8 @@ Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CO
 
 ## Contributions and Thanks
 
+Please view the [Contributing](CONTRIBUTING.md) guide for more information.
+
 - [tomecho](https://github.com/tomecho) - Fixing GraphQL Apollo Tracing.
 - [sayedihashimi](https://github.com/sayedihashimi) - Fixed dotnet new command in ReadMe.
 - [bobinush](https://github.com/bobinush) - Fixed typo.
