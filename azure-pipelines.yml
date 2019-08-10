@@ -68,7 +68,7 @@ stages:
   - deployment: AzureArtifacts
     displayName: 'Azure Artifacts'
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
     environment: 'Azure Artifacts'
     strategy:
       runOnce:
@@ -84,7 +84,7 @@ stages:
               allowPackageConflicts: true
   - deployment: NuGet
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
     environment: 'NuGet'
     condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
     strategy:
