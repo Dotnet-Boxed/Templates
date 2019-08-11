@@ -24,10 +24,6 @@ Project templates with batteries included, providing the minimum amount of code 
 
 You can find release notes for each version [here](https://github.com/Dotnet-Boxed/Templates/releases) and a To-Do list of new features and enhancements coming soon in the [projects](https://github.com/Dotnet-Boxed/Templates/projects) tab.
 
-## Contributing
-
-Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
-
 ## Continuous Integration
 
 | Name            | Operating System | Status | History |
