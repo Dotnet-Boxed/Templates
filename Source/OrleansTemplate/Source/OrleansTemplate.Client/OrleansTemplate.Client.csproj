@@ -10,7 +10,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.Orleans.Client" Version="2.4.0" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.4.0" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.4.0">
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
