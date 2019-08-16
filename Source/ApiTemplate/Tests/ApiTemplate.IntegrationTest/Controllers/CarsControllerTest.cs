@@ -1,5 +1,6 @@
 namespace ApiTemplate.IntegrationTest.Controllers
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -8,12 +9,16 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using Boxed.AspNetCore;
     using Xunit;
 
-    public class CarsControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class CarsControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>, IDisposable
     {
         private readonly HttpClient client;
+        private readonly CustomWebApplicationFactory<Startup> factory;
 
-        public CarsControllerTest(CustomWebApplicationFactory<Startup> factory) =>
+        public CarsControllerTest(CustomWebApplicationFactory<Startup> factory)
+        {
+            this.factory = factory;
             this.client = factory.CreateClient();
+        }
 
         [Fact]
         public async Task GetPage_Default_Returns200Ok()
@@ -39,5 +44,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
         }
+
+        public void Dispose() => this.factory.VerifyAllMocks();
     }
 }

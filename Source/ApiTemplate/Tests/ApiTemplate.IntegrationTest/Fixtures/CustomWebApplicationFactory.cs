@@ -3,6 +3,7 @@ namespace ApiTemplate.IntegrationTest.Fixtures
     using System;
     using System.Net.Http;
     using ApiTemplate.Options;
+    using ApiTemplate.Repositories;
     using ApiTemplate.Services;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
@@ -14,53 +15,48 @@ namespace ApiTemplate.IntegrationTest.Fixtures
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
         where TStartup : class
     {
-        private IServiceScope serviceScope;
-
-        public CustomWebApplicationFactory() =>
+        public CustomWebApplicationFactory()
+        {
+            this.CarRepositoryMock = new Mock<ICarRepository>(MockBehavior.Strict);
             this.ClockServiceMock = new Mock<IClockService>(MockBehavior.Strict);
+        }
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        public Mock<IClockService> ClockServiceMock { get; private set; }
+        public Mock<ICarRepository> CarRepositoryMock { get; }
 
+        public Mock<IClockService> ClockServiceMock { get; }
+
+        public new HttpClient CreateClient() =>
+            base.CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
+
+        public void VerifyAllMocks() => Mock.VerifyAll(this.CarRepositoryMock, this.ClockServiceMock);
+
+#if HttpsEverywhere
         protected override void ConfigureClient(HttpClient client) =>
-            client.BaseAddress = new Uri("http://localhost");
+            client.BaseAddress = new Uri("https://localhost");
 
+#endif
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
             builder
                 .ConfigureServices(
                     services =>
                     {
+                        var serviceProvider = services.BuildServiceProvider();
+                        using (var serviceScope = serviceProvider.CreateScope())
+                        {
+                            this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                        }
                     })
                 .ConfigureTestServices(
                     services =>
                     {
+                        services.AddSingleton(this.CarRepositoryMock.Object);
                         services.AddSingleton(this.ClockServiceMock.Object);
                     });
 
-            var testServer = base.CreateServer(builder);
-
-            this.serviceScope = testServer.Host.Services.CreateScope();
-            var serviceProvider = this.serviceScope.ServiceProvider;
-            this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
-
-            return testServer;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (this.serviceScope != null)
-                {
-                    this.serviceScope.Dispose();
-                }
-
-                Mock.VerifyAll(this.ClockServiceMock);
-            }
-
-            base.Dispose(disposing);
+            return base.CreateServer(builder);
         }
     }
 }
