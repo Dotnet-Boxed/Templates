@@ -1,7 +1,6 @@
 namespace ApiTemplate.IntegrationTest.Fixtures
 {
     using System;
-    using System.Net.Http;
     using ApiTemplate.Options;
     using ApiTemplate.Repositories;
     using ApiTemplate.Services;
@@ -12,42 +11,35 @@ namespace ApiTemplate.IntegrationTest.Fixtures
     using Microsoft.Extensions.Options;
     using Moq;
 
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
-        where TStartup : class
+    public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+        where TEntryPoint : class
     {
         public CustomWebApplicationFactory()
         {
-            this.CarRepositoryMock = new Mock<ICarRepository>(MockBehavior.Strict);
-            this.ClockServiceMock = new Mock<IClockService>(MockBehavior.Strict);
+            this.ClientOptions.AllowAutoRedirect = false;
+#if HttpsEverywhere
+            this.ClientOptions.BaseAddress = new Uri("https://localhost");
+#endif
         }
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        public Mock<ICarRepository> CarRepositoryMock { get; }
+        public Mock<ICarRepository> CarRepositoryMock { get; private set; }
 
-        public Mock<IClockService> ClockServiceMock { get; }
-
-        public new HttpClient CreateClient() =>
-            base.CreateClient(new WebApplicationFactoryClientOptions() { AllowAutoRedirect = false });
+        public Mock<IClockService> ClockServiceMock { get; private set; }
 
         public void VerifyAllMocks() => Mock.VerifyAll(this.CarRepositoryMock, this.ClockServiceMock);
 
-#if HttpsEverywhere
-        protected override void ConfigureClient(HttpClient client) =>
-            client.BaseAddress = new Uri("https://localhost");
-
-#endif
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
+            this.CarRepositoryMock = new Mock<ICarRepository>(MockBehavior.Strict);
+            this.ClockServiceMock = new Mock<IClockService>(MockBehavior.Strict);
+
             builder
+                .UseEnvironment("Testing")
                 .ConfigureServices(
                     services =>
                     {
-                        var serviceProvider = services.BuildServiceProvider();
-                        using (var serviceScope = serviceProvider.CreateScope())
-                        {
-                            this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
-                        }
                     })
                 .ConfigureTestServices(
                     services =>
@@ -56,7 +48,15 @@ namespace ApiTemplate.IntegrationTest.Fixtures
                         services.AddSingleton(this.ClockServiceMock.Object);
                     });
 
-            return base.CreateServer(builder);
+            var testServer = base.CreateServer(builder);
+
+            using (var serviceScope = testServer.Host.Services.CreateScope())
+            {
+                var serviceProvider = serviceScope.ServiceProvider;
+                this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+            }
+
+            return testServer;
         }
     }
 }

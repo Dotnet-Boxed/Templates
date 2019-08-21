@@ -1,3 +1,4 @@
 {
+  "parallelizeTestCollections": false,
   "shadowCopy": false
 }
