@@ -32,21 +32,9 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
-            this.CarRepositoryMock = new Mock<ICarRepository>(MockBehavior.Strict);
-            this.ClockServiceMock = new Mock<IClockService>(MockBehavior.Strict);
-
             builder
                 .UseEnvironment("Testing")
-                .ConfigureServices(
-                    services =>
-                    {
-                    })
-                .ConfigureTestServices(
-                    services =>
-                    {
-                        services.AddSingleton(this.CarRepositoryMock.Object);
-                        services.AddSingleton(this.ClockServiceMock.Object);
-                    });
+                .UseStartup<TestStartup>();
 
             var testServer = base.CreateServer(builder);
 
@@ -54,6 +42,8 @@ namespace ApiTemplate.IntegrationTest.Fixtures
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                this.CarRepositoryMock = serviceProvider.GetRequiredService<Mock<ICarRepository>>();
+                this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
             }
 
             return testServer;
