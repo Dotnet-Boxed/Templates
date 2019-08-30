@@ -65,22 +65,22 @@ namespace ApiTemplate.Commands
                     Count = carViewModels.Count,
                     HasNextPage = hasNextPage,
                     HasPreviousPage = hasPreviousPage,
-                    NextPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                    NextPageUrl = hasNextPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             First = pageOptions.First,
                             Last = pageOptions.Last,
                             After = endCursor,
-                        })),
-                    PreviousPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                        })) : null,
+                    PreviousPageUrl = hasPreviousPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             First = pageOptions.First,
                             Last = pageOptions.Last,
                             Before = startCursor
-                        })),
+                        })) : null,
                     FirstPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
