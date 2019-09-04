@@ -48,5 +48,15 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 
             return testServer;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.VerifyAllMocks();
+            }
+
+            base.Dispose(disposing);
+        }
     }
 }
