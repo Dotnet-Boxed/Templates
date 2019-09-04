@@ -48,7 +48,9 @@ namespace ApiTemplate.Controllers
 #if Swagger
         [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
 #endif
+#pragma warning disable IDE0060 // Remove unused parameter
         public IActionResult Options(int carId)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
                 HeaderNames.Allow,
