@@ -103,6 +103,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Theory]
         [InlineData("/cars")]
         [InlineData("/cars?first=3")]
+        [InlineData("/cars?first=3&after=THIS_IS_INVALID")]
         public async Task GetPage_FirstPage_Returns200Ok(string uri)
         {
             var cars = GetCars();
@@ -162,8 +163,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(4, connection.TotalCount);
         }
 
-        [Fact]
-        public async Task GetPage_LastPage_Returns200Ok()
+        [Theory]
+        [InlineData("/cars?last=3")]
+        [InlineData("/cars?last=3&before=THIS_IS_INVALID")]
+        public async Task GetPage_LastPage_Returns200Ok(string uri)
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -176,7 +179,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.GetHasPreviousPage(3, null, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
-            var response = await this.client.GetAsync("/cars?last=3");
+            var response = await this.client.GetAsync(uri);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
