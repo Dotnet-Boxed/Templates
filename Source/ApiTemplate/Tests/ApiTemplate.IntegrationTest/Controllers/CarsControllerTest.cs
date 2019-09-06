@@ -6,14 +6,16 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Formatting;
-    using System.Net.Http.Headers;
+    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.IntegrationTest.Fixtures;
     using ApiTemplate.ViewModels;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.JsonPatch;
     using Moq;
+    using Newtonsoft.Json;
     using Xunit;
 
     public class CarsControllerTest : CustomWebApplicationFactory<Startup>
@@ -25,7 +27,39 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             this.client = this.CreateClient();
             this.formatters = new MediaTypeFormatterCollection();
-            this.formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue(ContentType.RestfulJson));
+            this.formatters.JsonFormatter.SupportedMediaTypes.Add(
+                new System.Net.Http.Headers.MediaTypeHeaderValue(ContentType.RestfulJson));
+        }
+
+        [Fact]
+        public async Task Options_CarsRoot_Returns200Ok()
+        {
+            var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars"));
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(
+                new string[] { HttpMethods.Get, HttpMethods.Head, HttpMethods.Options, HttpMethods.Post },
+                response.Content.Headers.Allow);
+        }
+
+        [Fact]
+        public async Task Options_CarsWithId_Returns200Ok()
+        {
+            var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars/1"));
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(
+                new string[]
+                {
+                    HttpMethods.Delete,
+                    HttpMethods.Get,
+                    HttpMethods.Head,
+                    HttpMethods.Options,
+                    HttpMethods.Patch,
+                    HttpMethods.Post,
+                    HttpMethods.Put
+                },
+                response.Content.Headers.Allow);
         }
 
         [Fact]
@@ -121,16 +155,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
-            Assert.Equal(3, connection.Items.Count);
-            Assert.Equal(3, connection.PageInfo.Count);
-            Assert.Equal(new Uri("https://localhost/cars?First=3"), connection.PageInfo.FirstPageUrl);
-            Assert.True(connection.PageInfo.HasNextPage);
-            Assert.False(connection.PageInfo.HasPreviousPage);
-            Assert.Equal(new Uri("https://localhost/cars?Last=3"), connection.PageInfo.LastPageUrl);
-            Assert.Equal(new Uri("https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw"), connection.PageInfo.NextPageUrl);
-            Assert.Null(connection.PageInfo.PreviousPageUrl);
-            Assert.Equal(4, connection.TotalCount);
+            await this.AssertPageUrls(
+                response,
+                nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                previousPageUrl: null);
         }
 
         [Fact]
@@ -151,16 +179,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
-            Assert.Single(connection.Items);
-            Assert.Equal(1, connection.PageInfo.Count);
-            Assert.Equal(new Uri("https://localhost/cars?First=3"), connection.PageInfo.FirstPageUrl);
-            Assert.False(connection.PageInfo.HasNextPage);
-            Assert.False(connection.PageInfo.HasPreviousPage);
-            Assert.Equal(new Uri("https://localhost/cars?Last=3"), connection.PageInfo.LastPageUrl);
-            Assert.Null(connection.PageInfo.NextPageUrl);
-            Assert.Null(connection.PageInfo.PreviousPageUrl);
-            Assert.Equal(4, connection.TotalCount);
+            await this.AssertPageUrls(
+                response,
+                nextPageUrl: null,
+                previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                pageCount: 1);
         }
 
         [Theory]
@@ -183,16 +206,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
-            Assert.Equal(3, connection.Items.Count);
-            Assert.Equal(3, connection.PageInfo.Count);
-            Assert.Equal(new Uri("https://localhost/cars?First=3"), connection.PageInfo.FirstPageUrl);
-            Assert.False(connection.PageInfo.HasNextPage);
-            Assert.True(connection.PageInfo.HasPreviousPage);
-            Assert.Equal(new Uri("https://localhost/cars?Last=3"), connection.PageInfo.LastPageUrl);
-            Assert.Null(connection.PageInfo.NextPageUrl);
-            Assert.Equal(new Uri("https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw"), connection.PageInfo.PreviousPageUrl);
-            Assert.Equal(4, connection.TotalCount);
+            await this.AssertPageUrls(
+                response,
+                nextPageUrl: null,
+                previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
         }
 
         [Fact]
@@ -213,16 +230,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
-            Assert.Single(connection.Items);
-            Assert.Equal(1, connection.PageInfo.Count);
-            Assert.Equal(new Uri("https://localhost/cars?First=3"), connection.PageInfo.FirstPageUrl);
-            Assert.False(connection.PageInfo.HasNextPage);
-            Assert.False(connection.PageInfo.HasPreviousPage);
-            Assert.Equal(new Uri("https://localhost/cars?Last=3"), connection.PageInfo.LastPageUrl);
-            Assert.Null(connection.PageInfo.NextPageUrl);
-            Assert.Null(connection.PageInfo.PreviousPageUrl);
-            Assert.Equal(4, connection.TotalCount);
+            await this.AssertPageUrls(
+                response,
+                nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                previousPageUrl: null,
+                pageCount: 1);
         }
 
         [Fact]
@@ -234,7 +246,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 Make = "Honda",
                 Model = "Civic"
             };
-            var car = new Models.Car();
+            var car = new Models.Car() { CarId = 1 };
             this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
             this.CarRepositoryMock
                 .Setup(x => x.Add(It.IsAny<Models.Car>(), It.IsAny<CancellationToken>()))
@@ -245,6 +257,181 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            Assert.Equal(new Uri("https://localhost/cars/1"), response.Headers.Location);
+        }
+
+        [Fact]
+        public async Task PostCar_Invalid_Returns400BadRequest()
+        {
+            var response = await this.client.PostAsJsonAsync("cars", new SaveCar());
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutCar_Valid_Returns200Ok()
+        {
+            var saveCar = new SaveCar()
+            {
+                Cylinders = 2,
+                Make = "Honda",
+                Model = "Civic"
+            };
+            var car = new Models.Car() { CarId = 1 };
+            this.CarRepositoryMock
+                .Setup(x => x.Get(1, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(car);
+            this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+            this.CarRepositoryMock.Setup(x => x.Update(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+
+            var response = await this.client.PutAsJsonAsync("cars/1", saveCar);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+        }
+
+        [Fact]
+        public async Task PutCar_CarNotFound_Returns404NotFound()
+        {
+            var saveCar = new SaveCar()
+            {
+                Cylinders = 2,
+                Make = "Honda",
+                Model = "Civic"
+            };
+            this.CarRepositoryMock.Setup(x => x.Get(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
+
+            var response = await this.client.PutAsJsonAsync("cars/999", saveCar);
+
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PutCar_Invalid_Returns400BadRequest()
+        {
+            var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar());
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PatchCar_CarNotFound_Returns404NotFound()
+        {
+            var saveCar = new SaveCar()
+            {
+                Cylinders = 2,
+                Make = "Honda",
+                Model = "Civic"
+            };
+            var patch = new JsonPatchDocument<SaveCar>();
+            patch.Remove(x => x.Make);
+            var json = JsonConvert.SerializeObject(patch);
+            this.CarRepositoryMock.Setup(x => x.Get(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
+
+            var response = await this.client.PatchAsync("cars/999", new StringContent(json, Encoding.UTF8, ContentType.Json));
+
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PatchCar_InvalidCar_Returns400BadRequest()
+        {
+            var saveCar = new SaveCar()
+            {
+                Cylinders = 2,
+                Make = "Honda",
+                Model = "Civic"
+            };
+            var patch = new JsonPatchDocument<SaveCar>();
+            patch.Remove(x => x.Make);
+            var json = JsonConvert.SerializeObject(patch);
+            var car = new Models.Car();
+            this.CarRepositoryMock.Setup(x => x.Get(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+
+            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.Json));
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task PatchCar_ValidCar_Returns200Ok()
+        {
+            var saveCar = new SaveCar()
+            {
+                Cylinders = 2,
+                Make = "Honda",
+                Model = "Civic"
+            };
+            var patch = new JsonPatchDocument<SaveCar>();
+            patch.Add(x => x.Model, "Civic Type-R");
+            var json = JsonConvert.SerializeObject(patch);
+            var car = new Models.Car() { CarId = 1, Cylinders = 2, Make = "Honda", Model = "Civic" };
+            this.CarRepositoryMock.Setup(x => x.Get(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+            this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+            this.CarRepositoryMock.Setup(x => x.Update(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+
+            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.Json));
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            Assert.Equal("Civic Type-R", carViewModel.Model);
+        }
+
+        private async Task AssertPageUrls(
+            HttpResponseMessage response,
+            string nextPageUrl,
+            string previousPageUrl,
+            int pageCount = 3,
+            int requestedPageCount = 3,
+            int totalCount = 4)
+        {
+            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
+
+            Assert.Equal(pageCount, connection.Items.Count);
+            Assert.Equal(pageCount, connection.PageInfo.Count);
+            Assert.Equal(totalCount, connection.TotalCount);
+
+            Assert.Equal(nextPageUrl != null, connection.PageInfo.HasNextPage);
+            Assert.Equal(previousPageUrl != null, connection.PageInfo.HasPreviousPage);
+
+            if (nextPageUrl == null)
+            {
+                Assert.Null(nextPageUrl);
+            }
+            else
+            {
+                Assert.Equal(new Uri(nextPageUrl), connection.PageInfo.NextPageUrl);
+            }
+
+            if (previousPageUrl == null)
+            {
+                Assert.Null(previousPageUrl);
+            }
+            else
+            {
+                Assert.Equal(new Uri(previousPageUrl), connection.PageInfo.PreviousPageUrl);
+            }
+
+            var firstPageUrl = $"https://localhost/cars?First={requestedPageCount}";
+            var lastPageUrl = $"https://localhost/cars?Last={requestedPageCount}";
+
+            Assert.Equal(new Uri(firstPageUrl), connection.PageInfo.FirstPageUrl);
+            Assert.Equal(new Uri(lastPageUrl), connection.PageInfo.LastPageUrl);
+
+            var linkValue = Assert.Single(response.Headers.GetValues("Link"));
+            var expectedLink = $"<{firstPageUrl}>; rel=\"first\", <{lastPageUrl}>; rel=\"last\"";
+            if (previousPageUrl != null)
+            {
+                expectedLink = $"<{previousPageUrl}>; rel=\"previous\", " + expectedLink;
+            }
+
+            if (nextPageUrl != null)
+            {
+                expectedLink = $"<{nextPageUrl}>; rel=\"next\", " + expectedLink;
+            }
+
+            Assert.Equal(expectedLink, linkValue);
         }
 
         private static List<Models.Car> GetCars() =>

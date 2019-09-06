@@ -14,6 +14,7 @@ namespace ApiTemplate.Commands
 
     public class GetCarPageCommand : IGetCarPageCommand
     {
+        private const string LinkHttpHeaderName = "Link";
         private const int DefaultPageSize = 3;
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carMapper;
@@ -39,8 +40,8 @@ namespace ApiTemplate.Commands
             var createdBefore = Cursor.FromCursor<DateTimeOffset?>(pageOptions.Before);
 
             var getCarsTask = this.GetCars(pageOptions.First, pageOptions.Last, createdAfter, createdBefore, cancellationToken);
-            var getHasNextPageTask = this.GetHasNextPage(pageOptions.First, createdAfter, cancellationToken);
-            var getHasPreviousPageTask = this.GetHasPreviousPage(pageOptions.Last, createdBefore, cancellationToken);
+            var getHasNextPageTask = this.GetHasNextPage(pageOptions.First, createdAfter, createdBefore, cancellationToken);
+            var getHasPreviousPageTask = this.GetHasPreviousPage(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
             var totalCountTask = this.carRepository.GetTotalCount(cancellationToken);
 
             await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
@@ -98,7 +99,7 @@ namespace ApiTemplate.Commands
             };
 
             this.httpContextAccessor.HttpContext.Response.Headers.Add(
-                "Link",
+                LinkHttpHeaderName,
                 connection.PageInfo.ToLinkHttpHeaderValue());
 
             return new OkObjectResult(connection);
@@ -126,32 +127,38 @@ namespace ApiTemplate.Commands
 
         private async Task<bool> GetHasNextPage(
             int? first,
-            DateTimeOffset? afterCursor,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
             CancellationToken cancellationToken)
         {
             if (first.HasValue)
             {
-                return await this.carRepository.GetHasNextPage(first, afterCursor, cancellationToken);
+                return await this.carRepository.GetHasNextPage(first, createdAfter, cancellationToken);
             }
-            else
+            else if (createdBefore.HasValue)
             {
-                return false;
+                return true;
             }
+
+            return false;
         }
 
         private async Task<bool> GetHasPreviousPage(
             int? last,
-            DateTimeOffset? beforeCursor,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
             CancellationToken cancellationToken)
         {
             if (last.HasValue)
             {
-                return await this.carRepository.GetHasPreviousPage(last, beforeCursor, cancellationToken);
+                return await this.carRepository.GetHasPreviousPage(last, createdBefore, cancellationToken);
             }
-            else
+            else if (createdAfter.HasValue)
             {
-                return false;
+                return true;
             }
+
+            return false;
         }
     }
 }
