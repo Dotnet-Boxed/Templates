@@ -1,5 +1,6 @@
 namespace ApiTemplate.Commands
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace ApiTemplate.Commands
 
     public class GetCarPageCommand : IGetCarPageCommand
     {
+        private const string LinkHttpHeaderName = "Link";
+        private const int DefaultPageSize = 3;
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carMapper;
         private readonly IHttpContextAccessor httpContextAccessor;
@@ -32,60 +35,130 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
         {
-            var cars = await this.carRepository.GetPage(pageOptions.Page.Value, pageOptions.Count.Value, cancellationToken);
+            pageOptions.First = !pageOptions.First.HasValue && !pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
+            var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);
+            var createdBefore = Cursor.FromCursor<DateTimeOffset?>(pageOptions.Before);
+
+            var getCarsTask = this.GetCars(pageOptions.First, pageOptions.Last, createdAfter, createdBefore, cancellationToken);
+            var getHasNextPageTask = this.GetHasNextPage(pageOptions.First, createdAfter, createdBefore, cancellationToken);
+            var getHasPreviousPageTask = this.GetHasPreviousPage(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
+            var totalCountTask = this.carRepository.GetTotalCount(cancellationToken);
+
+            await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
+            var cars = getCarsTask.Result;
+            var hasNextPage = getHasNextPageTask.Result;
+            var hasPreviousPage = getHasPreviousPageTask.Result;
+            var totalCount = totalCountTask.Result;
+
             if (cars == null)
             {
                 return new NotFoundResult();
             }
 
-            var (totalCount, totalPages) = await this.carRepository.GetTotalPages(pageOptions.Count.Value, cancellationToken);
+            var (startCursor, endCursor) = Cursor.GetFirstAndLastCursor(cars, x => x.Created);
             var carViewModels = this.carMapper.MapList(cars);
-            var page = new PageResult<Car>()
+
+            var connection = new Connection<Car>()
             {
-                Count = pageOptions.Count.Value,
                 Items = carViewModels,
-                Page = pageOptions.Page.Value,
+                PageInfo = new PageInfo()
+                {
+                    Count = carViewModels.Count,
+                    HasNextPage = hasNextPage,
+                    HasPreviousPage = hasPreviousPage,
+                    NextPageUrl = hasNextPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
+                        CarsControllerRoute.GetCarPage,
+                        new PageOptions()
+                        {
+                            First = pageOptions.First,
+                            Last = pageOptions.Last,
+                            After = endCursor,
+                        })) : null,
+                    PreviousPageUrl = hasPreviousPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
+                        CarsControllerRoute.GetCarPage,
+                        new PageOptions()
+                        {
+                            First = pageOptions.First,
+                            Last = pageOptions.Last,
+                            Before = startCursor
+                        })) : null,
+                    FirstPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                        CarsControllerRoute.GetCarPage,
+                        new PageOptions()
+                        {
+                            First = pageOptions.First ?? pageOptions.Last,
+                        })),
+                    LastPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                        CarsControllerRoute.GetCarPage,
+                        new PageOptions()
+                        {
+                            Last = pageOptions.First ?? pageOptions.Last,
+                        })),
+                },
                 TotalCount = totalCount,
-                TotalPages = totalPages,
             };
 
-            // Add the Link HTTP Header to add URL's to next, previous, first and last pages.
-            // See https://tools.ietf.org/html/rfc5988#page-6
-            // There is a standard list of link relation types e.g. next, previous, first and last.
-            // See https://www.iana.org/assignments/link-relations/link-relations.xhtml
             this.httpContextAccessor.HttpContext.Response.Headers.Add(
-                "Link",
-                this.GetLinkValue(page));
+                LinkHttpHeaderName,
+                connection.PageInfo.ToLinkHttpHeaderValue());
 
-            return new OkObjectResult(page);
+            return new OkObjectResult(connection);
         }
 
-        private string GetLinkValue(PageResult<Car> page)
+        private Task<List<Models.Car>> GetCars(
+            int? first,
+            int? last,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken)
         {
-            var values = new List<string>(4);
-
-            if (page.HasNextPage)
+            Task<List<Models.Car>> getCarsTask;
+            if (first.HasValue)
             {
-                values.Add(this.GetLinkValueItem("next", page.Page + 1, page.Count));
+                getCarsTask = this.carRepository.GetCars(first, createdAfter, createdBefore, cancellationToken);
+            }
+            else
+            {
+                getCarsTask = this.carRepository.GetCarsReverse(last, createdAfter, createdBefore, cancellationToken);
             }
 
-            if (page.HasPreviousPage)
-            {
-                values.Add(this.GetLinkValueItem("previous", page.Page - 1, page.Count));
-            }
-
-            values.Add(this.GetLinkValueItem("first", 1, page.Count));
-            values.Add(this.GetLinkValueItem("last", page.TotalPages, page.Count));
-
-            return string.Join(", ", values);
+            return getCarsTask;
         }
 
-        private string GetLinkValueItem(string rel, int page, int count)
+        private async Task<bool> GetHasNextPage(
+            int? first,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken)
         {
-            var url = this.urlHelper.AbsoluteRouteUrl(
-                CarsControllerRoute.GetCarPage,
-                new PageOptions { Page = page, Count = count });
-            return $"<{url}>; rel=\"{rel}\"";
+            if (first.HasValue)
+            {
+                return await this.carRepository.GetHasNextPage(first, createdAfter, cancellationToken);
+            }
+            else if (createdBefore.HasValue)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private async Task<bool> GetHasPreviousPage(
+            int? last,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken)
+        {
+            if (last.HasValue)
+            {
+                return await this.carRepository.GetHasPreviousPage(last, createdBefore, cancellationToken);
+            }
+            else if (createdAfter.HasValue)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

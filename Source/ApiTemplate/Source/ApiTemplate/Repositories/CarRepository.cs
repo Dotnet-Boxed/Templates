@@ -93,25 +93,47 @@ namespace ApiTemplate.Repositories
             return Task.FromResult(car);
         }
 
-        public Task<ICollection<Car>> GetPage(int page, int count, CancellationToken cancellationToken)
-        {
-            var pageCars = Cars
-                .Skip(count * (page - 1))
-                .Take(count)
-                .ToList();
-            if (pageCars.Count == 0)
-            {
-                pageCars = null;
-            }
+        public Task<List<Car>> GetCars(
+            int? first,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken) =>
+            Task.FromResult(Cars
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
+                .If(first.HasValue, x => x.Take(first.Value))
+                .ToList());
 
-            return Task.FromResult((ICollection<Car>)pageCars);
-        }
+        public Task<List<Car>> GetCarsReverse(
+            int? last,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken) =>
+            Task.FromResult(Cars
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
+                .If(last.HasValue, x => x.TakeLast(last.Value))
+                .ToList());
 
-        public Task<(int totalCount, int totalPages)> GetTotalPages(int count, CancellationToken cancellationToken)
-        {
-            var totalPages = (int)Math.Ceiling(Cars.Count / (double)count);
-            return Task.FromResult((Cars.Count, totalPages));
-        }
+        public Task<bool> GetHasNextPage(
+            int? first,
+            DateTimeOffset? createdAfter,
+            CancellationToken cancellationToken) =>
+            Task.FromResult(Cars
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
+                .Skip(first.Value)
+                .Any());
+
+        public Task<bool> GetHasPreviousPage(
+            int? last,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken) =>
+            Task.FromResult(Cars
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
+                .SkipLast(last.Value)
+                .Any());
+
+        public Task<int> GetTotalCount(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
 
         public Task<Car> Update(Car car, CancellationToken cancellationToken)
         {

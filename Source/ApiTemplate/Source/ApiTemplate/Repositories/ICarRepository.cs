@@ -1,5 +1,6 @@
 namespace ApiTemplate.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,9 +14,29 @@ namespace ApiTemplate.Repositories
 
         Task<Car> Get(int carId, CancellationToken cancellationToken);
 
-        Task<ICollection<Car>> GetPage(int page, int count, CancellationToken cancellationToken);
+        Task<List<Car>> GetCars(
+            int? first,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken);
 
-        Task<(int totalCount, int totalPages)> GetTotalPages(int count, CancellationToken cancellationToken);
+        Task<List<Car>> GetCarsReverse(
+            int? last,
+            DateTimeOffset? createdAfter,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken);
+
+        Task<bool> GetHasNextPage(
+            int? first,
+            DateTimeOffset? createdAfter,
+            CancellationToken cancellationToken);
+
+        Task<bool> GetHasPreviousPage(
+            int? last,
+            DateTimeOffset? createdBefore,
+            CancellationToken cancellationToken);
+
+        Task<int> GetTotalCount(CancellationToken cancellationToken);
 
         Task<Car> Update(Car car, CancellationToken cancellationToken);
     }

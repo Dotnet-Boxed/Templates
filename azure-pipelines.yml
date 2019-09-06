@@ -86,7 +86,7 @@ stages:
     pool:
       vmImage: windows-latest
     environment: 'NuGet'
-    condition: startsWith(variables['build.sourceBranch'], 'refs/tags/')
+    condition: startsWith(variables['Build.sourceBranch'], 'refs/tags/')
     strategy:
       runOnce:
         deploy:
