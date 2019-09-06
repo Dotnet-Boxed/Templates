@@ -1,41 +1,45 @@
 namespace GraphQLTemplate.IntegrationTest.Fixtures
 {
     using System;
-    using System.Net.Http;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.AspNetCore.TestHost;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
+    using Moq;
 
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>
-        where TStartup : class
+    public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+        where TEntryPoint : class
     {
-        private IServiceScope serviceScope;
+        public CustomWebApplicationFactory()
+        {
+            this.ClientOptions.AllowAutoRedirect = false;
+#if HttpsEverywhere
+            this.ClientOptions.BaseAddress = new Uri("https://localhost");
+#endif
+        }
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        protected override void ConfigureClient(HttpClient client) =>
-            client.BaseAddress = new Uri("http://localhost");
+        // public Mock<IClockService> ClockServiceMock { get; private set; }
+
+        public void VerifyAllMocks() => Mock.VerifyAll();
 
         protected override TestServer CreateServer(IWebHostBuilder builder)
         {
             builder
-                .ConfigureServices(
-                    services =>
-                    {
-                    })
-                .ConfigureTestServices(
-                    services =>
-                    {
-                    });
+                .UseEnvironment("Testing")
+                .UseStartup<TestStartup>();
 
             var testServer = base.CreateServer(builder);
 
-            this.serviceScope = testServer.Host.Services.CreateScope();
-            var serviceProvider = this.serviceScope.ServiceProvider;
-            this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+            using (var serviceScope = testServer.Host.Services.CreateScope())
+            {
+                var serviceProvider = serviceScope.ServiceProvider;
+                this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                // this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
+            }
 
             return testServer;
         }
@@ -44,10 +48,7 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
         {
             if (disposing)
             {
-                if (this.serviceScope != null)
-                {
-                    this.serviceScope.Dispose();
-                }
+                this.VerifyAllMocks();
             }
 
             base.Dispose(disposing);

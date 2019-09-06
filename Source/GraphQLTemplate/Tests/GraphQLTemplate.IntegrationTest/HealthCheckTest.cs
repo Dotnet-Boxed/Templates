@@ -6,12 +6,11 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using GraphQLTemplate.IntegrationTest.Fixtures;
     using Xunit;
 
-    public class HealthCheckTest : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class HealthCheckTest : CustomWebApplicationFactory<Startup>
     {
         private readonly HttpClient client;
 
-        public HealthCheckTest(CustomWebApplicationFactory<Startup> factory) =>
-            this.client = factory.CreateClient();
+        public HealthCheckTest() => this.client = this.CreateClient();
 
         [Fact]
         public async Task GetStatus_Default_Returns200Ok()
