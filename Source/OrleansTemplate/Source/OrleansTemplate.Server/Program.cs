@@ -9,6 +9,8 @@ namespace OrleansTemplate.Server
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using Orleans;
     using Orleans.Configuration;
     using Orleans.Hosting;
@@ -110,13 +112,21 @@ namespace OrleansTemplate.Server
                     options =>
                     {
                         options.ConnectionString = storageOptions.ConnectionString;
+                        options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                         options.UseJson = true;
                     })
                 .UseAzureTableReminderService(options => options.ConnectionString = storageOptions.ConnectionString)
                 .UseTransactions(withStatisticsReporter: true)
                 .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = storageOptions.ConnectionString)
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default)
-                .AddAzureTableGrainStorage("PubSubStore", options => options.ConnectionString = storageOptions.ConnectionString)
+                .AddAzureTableGrainStorage(
+                    "PubSubStore",
+                    options =>
+                    {
+                        options.ConnectionString = storageOptions.ConnectionString;
+                        options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
+                        options.UseJson = true;
+                    })
                 .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
                     x => x.UseLinuxEnvironmentStatistics())
@@ -161,6 +171,12 @@ namespace OrleansTemplate.Server
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
                 .Enrich.With(new TraceIdEnricher())
                 .CreateLogger();
+
+        private static void ConfigureJsonSerializerSettings(JsonSerializerSettings jsonSerializerSettings)
+        {
+            jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            jsonSerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+        }
 
         private static bool IsRunningInDevelopment() =>
             string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
