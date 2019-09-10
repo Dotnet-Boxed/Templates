@@ -4,6 +4,7 @@ namespace OrleansTemplate.Server
     using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -28,15 +29,34 @@ namespace OrleansTemplate.Server
 
             try
             {
-                Log.Information("Starting application.");
+                Log.Information("Starting application");
                 await siloHost.StartAsync();
-                Log.Information("Started application");
+                Log.Information("Started application, press CTRL+C to exit");
 
-                Console.Read();
+                var siloStopped = new ManualResetEvent(false);
+                void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
+                {
+                    Console.CancelKeyPress -= OnCancelKeyPress; // Remove handler to stop listening to CTRL+C events.
+                    e.Cancel = true;                            // Prevent the application from crashing ungracefully.
+                    Task.Run(async () =>                        // Shutdown gracefully on a background thread.
+                    {
+                        try
+                        {
+                            Log.Information("Stopping application");
+                            await siloHost.StopAsync();
+                            Log.Information("Stopped application");
 
-                Log.Information("Stopping application");
-                await siloHost.StopAsync();
-                Log.Information("Stopped application");
+                            siloStopped.Set();
+                        }
+                        catch (Exception exception)
+                        {
+                            Log.Fatal(exception, "Application stopped ungracefully");
+                        }
+                    });
+                }
+                Console.CancelKeyPress += OnCancelKeyPress;
+
+                siloStopped.WaitOne();
 
                 return 0;
             }
@@ -55,6 +75,8 @@ namespace OrleansTemplate.Server
         {
             StorageOptions storageOptions = null;
             return new SiloHostBuilder()
+                // Prevent the silo from automatically stopping itself when the cancel key is pressed.
+                .Configure<ProcessExitHandlingOptions>(options => options.FastKillOnProcessExit = false)
                 .ConfigureAppConfiguration(
                     (context, configurationBuilder) =>
                     {
