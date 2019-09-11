@@ -23,7 +23,7 @@ environment:
 build_script:
 - sh: sudo apt-get update
 - sh: sudo apt-get install -y dotnet-sdk-2.2
-- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.301
+- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.402
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=InstallDeveloperCertificate

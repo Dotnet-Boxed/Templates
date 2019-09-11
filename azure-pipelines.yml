@@ -37,7 +37,7 @@ stages:
       displayName: 'Install .NET Core SDK'
       inputs:
         packageType: 'sdk'
-        version: '2.2.301'
+        version: '2.2.402'
     - script: 'dotnet tool install --global Cake.Tool'
       displayName: 'Install Cake Tool'
       failOnStderr: true
