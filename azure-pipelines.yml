@@ -38,7 +38,7 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '2.2.402'
-    - script: 'dotnet tool install --global Cake.Tool --version 0.35.0-alpha0015 --add-source https://www.myget.org/F/cake/api/v3/index.json'
+    - script: 'dotnet tool install --global Cake.Tool --version 0.35.0-alpha0029 --add-source https://pkgs.dev.azure.com/cake-build/Cake/_packaging/cake/nuget/v3/index.json'
       displayName: 'Install Cake Tool'
       failOnStderr: true
     - script: 'dotnet cake --target=Build'
