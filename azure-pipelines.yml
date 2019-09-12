@@ -91,11 +91,8 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: NuGetCommand@2
+          - task: NuGetToolInstaller@1
+            displayName: 'Install NuGet'
+          - script: nuget push $(Agent.BuildDirectory)/Windows/*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
             displayName: 'NuGet Push'
-            inputs:
-              command: push
-              nuGetFeedType: external
-              packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
-              publishFeedCredentials: NuGet
-              allowPackageConflicts: true
+            failOnStderr: true
