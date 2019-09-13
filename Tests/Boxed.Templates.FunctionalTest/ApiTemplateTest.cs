@@ -15,7 +15,7 @@ namespace Boxed.Templates.FunctionalTest
     public class ApiTemplateTest
     {
         public ApiTemplateTest() =>
-            DotnetNew.Install<ApiTemplateTest>("ApiTemplate.sln").Wait();
+            DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln").Wait();
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
@@ -30,9 +30,9 @@ namespace Boxed.Templates.FunctionalTest
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNew("api", name, dictionary);
-                await project.DotnetRestore();
-                await project.DotnetBuild();
+                var project = await tempDirectory.DotnetNewAsync("api", name, dictionary);
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
             }
         }
 
@@ -42,10 +42,10 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew("api", "Default");
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                var project = await tempDirectory.DotnetNewAsync("api", "Default");
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
@@ -98,16 +98,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "api",
                     "HealthCheckFalse",
                     new Dictionary<string, string>()
                     {
                         { "health-check", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
                     async httpClient =>
                     {
@@ -126,16 +126,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "api",
                     "HttpsEverywhereFalse",
                     new Dictionary<string, string>()
                     {
                         { "https-everywhere", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
                     async httpClient =>
                     {
@@ -151,16 +151,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "api",
                     "SwaggerFalse",
                     new Dictionary<string, string>()
                     {
                         { "swagger", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\SwaggerFalse",
                     async (httpClient, httpsClient) =>
                     {

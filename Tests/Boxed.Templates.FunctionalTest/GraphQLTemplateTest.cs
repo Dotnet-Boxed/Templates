@@ -14,7 +14,7 @@ namespace Boxed.Templates.FunctionalTest
     public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
-            DotnetNew.Install<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
+            DotnetNew.InstallAsync<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
@@ -29,9 +29,9 @@ namespace Boxed.Templates.FunctionalTest
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNew("graphql", name, dictionary);
-                await project.DotnetRestore();
-                await project.DotnetBuild();
+                var project = await tempDirectory.DotnetNewAsync("graphql", name, dictionary);
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
             }
         }
 
@@ -41,10 +41,10 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew("graphql", "Default");
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                var project = await tempDirectory.DotnetNewAsync("graphql", "Default");
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
@@ -78,16 +78,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "graphql",
                     "HealthCheckFalse",
                     new Dictionary<string, string>()
                     {
                         { "health-check", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
                     async httpClient =>
                     {
@@ -106,10 +106,10 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew("graphql", "Default");
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                var project = await tempDirectory.DotnetNewAsync("graphql", "Default");
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
@@ -127,16 +127,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "graphql",
                     "HttpsEverywhereFalse",
                     new Dictionary<string, string>()
                     {
                         { "https-everywhere", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
                     async (httpClient) =>
                     {
@@ -152,16 +152,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "graphql",
                     "AuthorizationTrue",
                     new Dictionary<string, string>()
                     {
                         { "authorization", "true" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\AuthorizationTrue",
                     async (httpClient) =>
                     {
@@ -184,16 +184,16 @@ namespace Boxed.Templates.FunctionalTest
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNew(
+                var project = await tempDirectory.DotnetNewAsync(
                     "graphql",
                     "AuthorizationFalse",
                     new Dictionary<string, string>()
                     {
                         { "authorization", "false" },
                     });
-                await project.DotnetRestore();
-                await project.DotnetBuild();
-                await project.DotnetRun(
+                await project.DotnetRestoreAsync();
+                await project.DotnetBuildAsync();
+                await project.DotnetRunAsync(
                     @"Source\AuthorizationFalse",
                     async (httpClient) =>
                     {
