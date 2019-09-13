@@ -84,7 +84,7 @@ stages:
               allowPackageConflicts: true
   - deployment: NuGet
     pool:
-      vmImage: windows-latest
+      vmImage: ubuntu-latest
     environment: 'NuGet'
     condition: startsWith(variables['Build.sourceBranch'], 'refs/tags/')
     strategy:
