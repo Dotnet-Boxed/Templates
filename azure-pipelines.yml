@@ -81,7 +81,7 @@ stages:
               nuGetFeedType: internal
               packagesToPush: '$(Agent.BuildDirectory)/Windows/*.nupkg'
               publishVstsFeed: dotnet-boxed
-              allowPackageConflicts: true
+              allowPackageConflicts: true # Only works on Windows
   - deployment: NuGet
     pool:
       vmImage: ubuntu-latest
