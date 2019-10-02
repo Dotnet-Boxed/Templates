@@ -97,9 +97,9 @@ Task("Test")
                     Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                     NoBuild = true,
                     NoRestore = true,
-                    ResultsDirectory = artifactsDirectory
+                    ResultsDirectory = artifactsDirectory,
+                    ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
                 });
-            Information($"Completed {project.GetFilenameWithoutExtension()} tests");
         }
     });
 

@@ -37,5 +37,7 @@ artifacts:
   path: ./Artifacts/**/*.nupkg
 - name: NuGet Symbol Packages
   path: ./Artifacts/**/*.snupkg
-- name: xUnit Test Results
+- name: xUnit XML Test Results
   path: ./Artifacts/**/*.xml
+- name: xUnit HTML Test Results
+  path: ./Artifacts/**/*.html
