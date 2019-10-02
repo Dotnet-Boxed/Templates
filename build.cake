@@ -26,6 +26,7 @@ var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunnin
 var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
 
 Task("Clean")
+    .Description("Cleans the artefacts, bin and obj directories.")
     .Does(() =>
     {
         CleanDirectory(artefactsDirectory);
@@ -34,6 +35,7 @@ Task("Clean")
     });
 
 Task("Restore")
+    .Description("Restores NuGet packages.")
     .IsDependentOn("Clean")
     .Does(() =>
     {
@@ -41,6 +43,7 @@ Task("Restore")
     });
 
  Task("Build")
+    .Description("Builds the solution.")
     .IsDependentOn("Restore")
     .Does(() =>
     {
@@ -54,6 +57,7 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
+    .Description("Installs a developer certificate using the dotnet dev-certs tool.")
     .Does(() =>
     {
         if (isDotnetRunEnabled)
@@ -84,6 +88,7 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
+    .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
         DotNetCoreTest(
@@ -101,6 +106,7 @@ Task("Test")
     });
 
 Task("Pack")
+    .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
         DotNetCorePack(
@@ -116,6 +122,7 @@ Task("Pack")
     });
 
 Task("Default")
+    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then creates NuGet packages.")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
     .IsDependentOn("Pack");
