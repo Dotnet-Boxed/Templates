@@ -7,7 +7,7 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
