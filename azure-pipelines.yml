@@ -60,11 +60,9 @@ stages:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/*.trx'
-    - task: PublishPipelineArtifact@0
-      displayName: 'Publish Artifacts'
-      inputs:
-        artifactName: $(matrixName)
-        targetPath: './Artifacts'
+    - publish: './Artefacts'
+      artifact: $(matrixName)
+      displayName: 'Publish Artefacts'
 - stage: Deploy
   jobs:
   - deployment: AzureArtifacts
