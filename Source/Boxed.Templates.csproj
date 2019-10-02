@@ -17,7 +17,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Dotnet-Boxed/Templates</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Icon-256x256.png</PackageIconUrl>
+    <PackageIcon>Icon-256x256.png</PackageIcon>
     <RepositoryUrl>https://github.com/RehanSaeed/Schema.NET.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>.NET Boxed Muhammad Rehan Saeed API Swagger GraphQL Orleans</PackageTags>
@@ -27,6 +27,7 @@
   <ItemGroup Label="Files">
     <Content Include="**\*" Exclude="**\bin\**\*;**\obj\**\*;**\.vs\**\*" />
     <Compile Remove="**\*" />
+    <None Include="..\..\Images\Icon-256x256.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

@@ -33,6 +33,8 @@ stages:
       vmImage: $(vmImageName)
     timeoutInMinutes: 20
     steps:
+    - checkout: self
+      lfs: true
     - task: UseDotNet@2
       displayName: 'Install .NET Core SDK'
       inputs:
