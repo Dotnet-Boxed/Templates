@@ -19,7 +19,7 @@ var buildNumber =
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
-var artifactsDirectory = Directory("./Artifacts");
+var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
@@ -28,7 +28,7 @@ var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows(
 Task("Clean")
     .Does(() =>
     {
-        CleanDirectory(artifactsDirectory);
+        CleanDirectory(artefactsDirectory);
         DeleteDirectories(GetDirectories("**/bin"), new DeleteDirectorySettings() { Force = true, Recursive = true });
         DeleteDirectories(GetDirectories("**/obj"), new DeleteDirectorySettings() { Force = true, Recursive = true });
     });
@@ -84,23 +84,20 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
-    .Does(() =>
+    .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
-        foreach(var project in GetFiles("./Tests/**/*.csproj"))
-        {
-            DotNetCoreTest(
-                project.ToString(),
-                new DotNetCoreTestSettings()
-                {
-                    Configuration = configuration,
-                    Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
-                    Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
-                    NoBuild = true,
-                    NoRestore = true,
-                    ResultsDirectory = artifactsDirectory,
-                    ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
-                });
-        }
+        DotNetCoreTest(
+            project.ToString(),
+            new DotNetCoreTestSettings()
+            {
+                Configuration = configuration,
+                Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
+                Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                NoBuild = true,
+                NoRestore = true,
+                ResultsDirectory = artefactsDirectory,
+                ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
+            });
     });
 
 Task("Pack")
@@ -113,7 +110,7 @@ Task("Pack")
                 Configuration = configuration,
                 NoBuild = true,
                 NoRestore = true,
-                OutputDirectory = artifactsDirectory,
+                OutputDirectory = artefactsDirectory,
                 VersionSuffix = versionSuffix,
             });
     });
