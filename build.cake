@@ -19,21 +19,23 @@ var buildNumber =
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
-var artifactsDirectory = Directory("./Artifacts");
+var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted || AppVeyor.IsRunningOnAppVeyor;
 var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
 
 Task("Clean")
+    .Description("Cleans the artefacts, bin and obj directories.")
     .Does(() =>
     {
-        CleanDirectory(artifactsDirectory);
+        CleanDirectory(artefactsDirectory);
         DeleteDirectories(GetDirectories("**/bin"), new DeleteDirectorySettings() { Force = true, Recursive = true });
         DeleteDirectories(GetDirectories("**/obj"), new DeleteDirectorySettings() { Force = true, Recursive = true });
     });
 
 Task("Restore")
+    .Description("Restores NuGet packages.")
     .IsDependentOn("Clean")
     .Does(() =>
     {
@@ -41,6 +43,7 @@ Task("Restore")
     });
 
  Task("Build")
+    .Description("Builds the solution.")
     .IsDependentOn("Restore")
     .Does(() =>
     {
@@ -54,6 +57,7 @@ Task("Restore")
     });
 
 Task("InstallDeveloperCertificate")
+    .Description("Installs a developer certificate using the dotnet dev-certs tool.")
     .Does(() =>
     {
         if (isDotnetRunEnabled)
@@ -84,26 +88,25 @@ Task("InstallDeveloperCertificate")
     });
 
 Task("Test")
-    .Does(() =>
+    .Description("Runs unit tests and outputs test results to the artefacts directory.")
+    .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
-        foreach(var project in GetFiles("./Tests/**/*.csproj"))
-        {
-            DotNetCoreTest(
-                project.ToString(),
-                new DotNetCoreTestSettings()
-                {
-                    Configuration = configuration,
-                    Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
-                    Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
-                    NoBuild = true,
-                    NoRestore = true,
-                    ResultsDirectory = artifactsDirectory
-                });
-            Information($"Completed {project.GetFilenameWithoutExtension()} tests");
-        }
+        DotNetCoreTest(
+            project.ToString(),
+            new DotNetCoreTestSettings()
+            {
+                Configuration = configuration,
+                Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
+                Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                NoBuild = true,
+                NoRestore = true,
+                ResultsDirectory = artefactsDirectory,
+                ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
+            });
     });
 
 Task("Pack")
+    .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
         DotNetCorePack(
@@ -113,12 +116,13 @@ Task("Pack")
                 Configuration = configuration,
                 NoBuild = true,
                 NoRestore = true,
-                OutputDirectory = artifactsDirectory,
+                OutputDirectory = artefactsDirectory,
                 VersionSuffix = versionSuffix,
             });
     });
 
 Task("Default")
+    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then creates NuGet packages.")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
     .IsDependentOn("Pack");

@@ -21,9 +21,9 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 build_script:
-- sh: sudo apt-get update
-- sh: sudo apt-get install -y dotnet-sdk-2.2
-- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 2.2.402
+- sh: sudo apt update
+- sh: sudo apt install -y apt-transport-https dotnet-sdk-3.0
+- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.0.100
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=InstallDeveloperCertificate
@@ -37,5 +37,7 @@ artifacts:
   path: ./Artifacts/**/*.nupkg
 - name: NuGet Symbol Packages
   path: ./Artifacts/**/*.snupkg
-- name: xUnit Test Results
+- name: xUnit XML Test Results
   path: ./Artifacts/**/*.xml
+- name: xUnit HTML Test Results
+  path: ./Artifacts/**/*.html
