@@ -10,10 +10,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{90C10D88-B3C3-4802-A02B-88A07E5A8087}"
 	ProjectSection(SolutionItems) = preProject
 		Docs\API.md = Docs\API.md
-		CONTRIBUTING.md = CONTRIBUTING.md
 		Docs\GraphQL.md = Docs\GraphQL.md
-		ISSUE_TEMPLATE.md = ISSUE_TEMPLATE.md
-		LICENSE = LICENSE
+		LICENSE.md = LICENSE.md
 		Docs\Orleans.md = Docs\Orleans.md
 		README.md = README.md
 	EndProjectSection
@@ -90,6 +88,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates", "Source\Boxed.Templates.csproj", "{7B294041-5B26-4B32-B084-05CCD35A89B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{EC645147-507B-4210-9152-5159DBC8A062}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\BUG_REPORT.md = .github\ISSUE_TEMPLATE\BUG_REPORT.md
+		.github\ISSUE_TEMPLATE\FEATURE_REQUEST.md = .github\ISSUE_TEMPLATE\FEATURE_REQUEST.md
+		.github\ISSUE_TEMPLATE\QUESTION.md = .github\ISSUE_TEMPLATE\QUESTION.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{BF3053CB-9A64-4062-A69F-C67D0A2C2902}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODE_OF_CONDUCT.md = .github\CODE_OF_CONDUCT.md
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\FUNDING.yml = .github\FUNDING.yml
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		.github\SECURITY.md = .github\SECURITY.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -169,6 +183,8 @@ Global
 		{934FF421-704C-4323-8E70-CF4DE397D169} = {172D189E-2277-4B19-984A-DF4F3F5917B9}
 		{03120185-3DD6-48C5-B051-335DD4493AE4} = {C8521BC9-DB53-4AC2-BBDE-0453E472E9D9}
 		{7B294041-5B26-4B32-B084-05CCD35A89B4} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
+		{EC645147-507B-4210-9152-5159DBC8A062} = {BF3053CB-9A64-4062-A69F-C67D0A2C2902}
+		{BF3053CB-9A64-4062-A69F-C67D0A2C2902} = {90C10D88-B3C3-4802-A02B-88A07E5A8087}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}
