@@ -36,7 +36,7 @@ You can find release notes for each version [here](https://github.com/Dotnet-Box
 
 ## Contributions and Thanks
 
-Please view the [Contributing](CONTRIBUTING.md) guide for more information.
+Please view the [Contributing](/.github/CONTRIBUTING.md) guide for more information.
 
 - [tomecho](https://github.com/tomecho) - Fixing GraphQL Apollo Tracing.
 - [sayedihashimi](https://github.com/sayedihashimi) - Fixed dotnet new command in ReadMe.

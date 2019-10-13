@@ -49,4 +49,4 @@ You can find release notes for each version [here](https://github.com/Dotnet-Box
 
 ## Contributing
 
-Please read the [guide](https://github.com/Dotnet-Boxed/Templates/blob/master/CONTRIBUTING.md) to learn how you can make a contribution.
+Please view the [Contributing](/.github/CONTRIBUTING.md) guide for more information.
