@@ -15,7 +15,6 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.AspNetCore.Mvc.Routing;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -75,10 +74,6 @@ namespace ApiTemplate
                 .AddHttpContextAccessor()
                 // Add useful interface for accessing the ActionContext outside a controller.
                 .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
-                // Add useful interface for accessing the IUrlHelper outside a controller.
-                .AddScoped(x => x
-                    .GetRequiredService<IUrlHelperFactory>()
-                    .GetUrlHelper(x.GetRequiredService<IActionContextAccessor>().ActionContext))
 #if Versioning
                 .AddCustomApiVersioning()
 #endif

@@ -11,6 +11,7 @@ namespace ApiTemplate.Commands
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
 
     public class GetCarPageCommand : IGetCarPageCommand
     {
@@ -19,18 +20,18 @@ namespace ApiTemplate.Commands
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carMapper;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IUrlHelper urlHelper;
+        private readonly LinkGenerator linkGenerator;
 
         public GetCarPageCommand(
             ICarRepository carRepository,
             IMapper<Models.Car, Car> carMapper,
             IHttpContextAccessor httpContextAccessor,
-            IUrlHelper urlHelper)
+            LinkGenerator linkGenerator)
         {
             this.carRepository = carRepository;
             this.carMapper = carMapper;
             this.httpContextAccessor = httpContextAccessor;
-            this.urlHelper = urlHelper;
+            this.linkGenerator = linkGenerator;
         }
 
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
@@ -66,7 +67,8 @@ namespace ApiTemplate.Commands
                     Count = carViewModels.Count,
                     HasNextPage = hasNextPage,
                     HasPreviousPage = hasPreviousPage,
-                    NextPageUrl = hasNextPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
+                    NextPageUrl = hasNextPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
+                        this.httpContextAccessor.HttpContext,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
@@ -74,7 +76,8 @@ namespace ApiTemplate.Commands
                             Last = pageOptions.Last,
                             After = endCursor,
                         })) : null,
-                    PreviousPageUrl = hasPreviousPage ? new Uri(this.urlHelper.AbsoluteRouteUrl(
+                    PreviousPageUrl = hasPreviousPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
+                        this.httpContextAccessor.HttpContext,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
@@ -82,13 +85,15 @@ namespace ApiTemplate.Commands
                             Last = pageOptions.Last,
                             Before = startCursor
                         })) : null,
-                    FirstPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                    FirstPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
+                        this.httpContextAccessor.HttpContext,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             First = pageOptions.First ?? pageOptions.Last,
                         })),
-                    LastPageUrl = new Uri(this.urlHelper.AbsoluteRouteUrl(
+                    LastPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
+                        this.httpContextAccessor.HttpContext,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {

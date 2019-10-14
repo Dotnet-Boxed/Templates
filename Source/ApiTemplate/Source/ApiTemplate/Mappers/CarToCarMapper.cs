@@ -3,15 +3,22 @@ namespace ApiTemplate.Mappers
     using System;
     using ApiTemplate.Constants;
     using ApiTemplate.ViewModels;
-    using Boxed.AspNetCore;
     using Boxed.Mapping;
-    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Routing;
 
     public class CarToCarMapper : IMapper<Models.Car, Car>
     {
-        private readonly IUrlHelper urlHelper;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly LinkGenerator linkGenerator;
 
-        public CarToCarMapper(IUrlHelper urlHelper) => this.urlHelper = urlHelper;
+        public CarToCarMapper(
+            IHttpContextAccessor httpContextAccessor,
+            LinkGenerator linkGenerator)
+        {
+            this.httpContextAccessor = httpContextAccessor;
+            this.linkGenerator = linkGenerator;
+        }
 
         public void Map(Models.Car source, Car destination)
         {
@@ -29,7 +36,10 @@ namespace ApiTemplate.Mappers
             destination.Cylinders = source.Cylinders;
             destination.Make = source.Make;
             destination.Model = source.Model;
-            destination.Url = this.urlHelper.AbsoluteRouteUrl(CarsControllerRoute.GetCar, new { source.CarId });
+            destination.Url = this.linkGenerator.GetUriByRouteValues(
+                this.httpContextAccessor.HttpContext,
+                CarsControllerRoute.GetCar,
+                new { source.CarId });
         }
     }
 }
