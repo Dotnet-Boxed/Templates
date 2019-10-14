@@ -77,7 +77,7 @@ namespace GraphQLTemplate
 #if CORS
                     .AddCustomCors()
 #endif
-                    .AddCustomMvcOptions(this.hostingEnvironment)
+                    .AddCustomMvcOptions()
                 .Services
                 .AddCustomGraphQL(this.hostingEnvironment)
 #if Authorization

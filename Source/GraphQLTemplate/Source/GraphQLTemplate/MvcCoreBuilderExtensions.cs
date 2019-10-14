@@ -20,7 +20,6 @@ namespace GraphQLTemplate
         public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder) =>
             builder.AddCors(
                 options =>
-                {
                     // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
                     // or a [EnableCors("PolicyName")] attribute on your controller or action.
                     options.AddPolicy(
@@ -28,8 +27,7 @@ namespace GraphQLTemplate
                         x => x
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
-                            .AllowAnyHeader());
-                });
+                            .AllowAnyHeader()));
 
 #endif
         /// <summary>
@@ -55,9 +53,7 @@ namespace GraphQLTemplate
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
 
-        public static IMvcCoreBuilder AddCustomMvcOptions(
-            this IMvcCoreBuilder builder,
-            IHostingEnvironment hostingEnvironment) =>
+        public static IMvcCoreBuilder AddCustomMvcOptions(this IMvcCoreBuilder builder) =>
             builder.AddMvcOptions(
                 options =>
                 {

@@ -40,10 +40,7 @@ namespace GraphQLTemplate
                 .UseStaticFiles(
                     new StaticFileOptions()
                     {
-                        OnPrepareResponse = context =>
-                        {
-                            context.Context.ApplyCacheProfile(cacheProfile);
-                        },
+                        OnPrepareResponse = context => context.Context.ApplyCacheProfile(cacheProfile),
                     });
         }
     }
