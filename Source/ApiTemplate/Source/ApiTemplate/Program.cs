@@ -118,8 +118,9 @@ namespace ApiTemplate
             WebHostBuilderContext builderContext,
             KestrelServerOptions options)
         {
-            var source = new KestrelServerOptions();
-            builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)).Bind(source);
+            var source = builderContext.Configuration
+                .GetSection(nameof(ApplicationOptions.Kestrel))
+                .Get<KestrelServerOptions>();
 
             var limits = options.Limits;
             var sourceLimits = source.Limits;
