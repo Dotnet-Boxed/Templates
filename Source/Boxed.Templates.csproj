@@ -2,14 +2,14 @@
 
   <PropertyGroup Label="Build">
     <PackageType>Template</PackageType>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>2.2.0</VersionPrefix>
+    <VersionPrefix>3.0.0</VersionPrefix>
     <Title>.NET Boxed Project &amp; Item Templates</Title>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Description>Project templates with batteries included, providing the minimum amount of code required to get you going.</Description>
