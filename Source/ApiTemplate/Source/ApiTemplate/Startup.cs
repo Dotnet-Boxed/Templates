@@ -17,6 +17,7 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -24,19 +25,19 @@ namespace ApiTemplate
     public class Startup : StartupBase
     {
         private readonly IConfiguration configuration;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostEnvironment hostEnvironment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">The application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
-        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
+        /// <param name="hostEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
-        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
             this.configuration = configuration;
-            this.hostingEnvironment = hostingEnvironment;
+            this.hostEnvironment = hostEnvironment;
         }
 
         /// <summary>
@@ -81,12 +82,12 @@ namespace ApiTemplate
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
                 .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
-                    .AddJsonFormatters()
-                    .AddCustomJsonOptions(this.hostingEnvironment)
+                    // .AddJsonFormatters()
+                    .AddCustomJsonOptions(this.hostEnvironment)
 #if CORS
                     .AddCustomCors()
 #endif
@@ -131,11 +132,11 @@ namespace ApiTemplate
 #endif
 #if HttpsEverywhere
                 .UseIf(
-                    !this.hostingEnvironment.IsDevelopment(),
+                    !this.hostEnvironment.IsDevelopment(),
                     x => x.UseHsts())
 #endif
                 .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
+                    this.hostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperErrorPages())
 #if HealthCheck
                 .UseHealthChecks("/status")

@@ -5,10 +5,10 @@ namespace ApiTemplate
     using System.Reflection;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Serilog;
     using Serilog.Core;
 
@@ -16,14 +16,14 @@ namespace ApiTemplate
     {
         public static int Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
 
-        public static int LogAndRun(IWebHost webHost)
+        public static int LogAndRun(IHost host)
         {
-            Log.Logger = BuildLogger(webHost);
+            Log.Logger = BuildLogger(host);
 
             try
             {
                 Log.Information("Starting application");
-                webHost.Run();
+                host.Run();
                 Log.Information("Stopped application");
                 return 0;
             }
@@ -38,8 +38,8 @@ namespace ApiTemplate
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
+        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+            new HostBuilder()
                 .UseIf(
                     x => string.IsNullOrEmpty(x.GetSetting(WebHostDefaults.ContentRootKey)),
                     x => x.UseContentRoot(Directory.GetCurrentDirectory()))
@@ -70,7 +70,7 @@ namespace ApiTemplate
 
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,
-            IHostingEnvironment hostingEnvironment,
+            IHostEnvironment hostEnvironment,
             string[] args) =>
             configurationBuilder
                 // Add configuration from the appsettings.json file.
@@ -78,13 +78,13 @@ namespace ApiTemplate
                 // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
                 // appsettings.production.json file, depending on the environment. These settings override the ones in
                 // the appsettings.json file.
-                .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
-                    hostingEnvironment.IsDevelopment(),
+                    hostEnvironment.IsDevelopment(),
                     x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true))
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -94,16 +94,16 @@ namespace ApiTemplate
 #if ApplicationInsights
                 // Push telemetry data through the Azure Application Insights pipeline faster in the development and
                 // staging environments, allowing you to view results immediately.
-                .AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction())
+                .AddApplicationInsightsSettings(developerMode: !hostEnvironment.IsProduction())
 #endif
                 // Add command line options. These take the highest priority.
                 .AddIf(
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger BuildLogger(IWebHost webHost) =>
+        private static Logger BuildLogger(IHost host) =>
             new LoggerConfiguration()
-                .ReadFrom.Configuration(webHost.Services.GetRequiredService<IConfiguration>())
+                .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
                 .CreateLogger();
 
@@ -115,7 +115,7 @@ namespace ApiTemplate
         /// See https://github.com/aspnet/KestrelHttpServer/issues/2216
         /// </summary>
         private static void ConfigureKestrelServerLimits(
-            WebHostBuilderContext builderContext,
+            HostBuilderContext builderContext,
             KestrelServerOptions options)
         {
             var source = builderContext.Configuration

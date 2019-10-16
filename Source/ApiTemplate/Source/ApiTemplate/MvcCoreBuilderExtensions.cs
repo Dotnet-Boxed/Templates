@@ -9,6 +9,7 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
@@ -37,11 +38,11 @@ namespace ApiTemplate
         /// </summary>
         public static IMvcCoreBuilder AddCustomJsonOptions(
             this IMvcCoreBuilder builder,
-            IHostingEnvironment hostingEnvironment) =>
+            IHostEnvironment hostEnvironment) =>
             builder.AddJsonOptions(
                 options =>
                 {
-                    if (hostingEnvironment.IsDevelopment())
+                    if (hostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
                         options.SerializerSettings.Formatting = Formatting.Indented;
