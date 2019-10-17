@@ -25,14 +25,14 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(int carId, SaveCar saveCar, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.Get(carId, cancellationToken);
+            var car = await this.carRepository.GetAsync(carId, cancellationToken);
             if (car == null)
             {
                 return new NotFoundResult();
             }
 
             this.saveCarToCarMapper.Map(saveCar, car);
-            car = await this.carRepository.Update(car, cancellationToken);
+            car = await this.carRepository.UpdateAsync(car, cancellationToken);
             var carViewModel = this.carToCarMapper.Map(car);
 
             return new OkObjectResult(carViewModel);

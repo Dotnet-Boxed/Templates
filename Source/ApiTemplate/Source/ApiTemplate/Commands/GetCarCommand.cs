@@ -30,7 +30,7 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.Get(carId, cancellationToken);
+            var car = await this.carRepository.GetAsync(carId, cancellationToken);
             if (car == null)
             {
                 return new NotFoundResult();

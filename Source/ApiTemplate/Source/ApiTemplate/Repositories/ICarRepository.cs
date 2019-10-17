@@ -8,36 +8,36 @@ namespace ApiTemplate.Repositories
 
     public interface ICarRepository
     {
-        Task<Car> Add(Car car, CancellationToken cancellationToken);
+        Task<Car> AddAsync(Car car, CancellationToken cancellationToken);
 
-        Task Delete(Car car, CancellationToken cancellationToken);
+        Task DeleteAsync(Car car, CancellationToken cancellationToken);
 
-        Task<Car> Get(int carId, CancellationToken cancellationToken);
+        Task<Car> GetAsync(int carId, CancellationToken cancellationToken);
 
-        Task<List<Car>> GetCars(
+        Task<List<Car>> GetCarsAsync(
             int? first,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken);
 
-        Task<List<Car>> GetCarsReverse(
+        Task<List<Car>> GetCarsReverseAsync(
             int? last,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken);
 
-        Task<bool> GetHasNextPage(
+        Task<bool> GetHasNextPageAsync(
             int? first,
             DateTimeOffset? createdAfter,
             CancellationToken cancellationToken);
 
-        Task<bool> GetHasPreviousPage(
+        Task<bool> GetHasPreviousPageAsync(
             int? last,
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken);
 
-        Task<int> GetTotalCount(CancellationToken cancellationToken);
+        Task<int> GetTotalCountAsync(CancellationToken cancellationToken);
 
-        Task<Car> Update(Car car, CancellationToken cancellationToken);
+        Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken);
     }
 }

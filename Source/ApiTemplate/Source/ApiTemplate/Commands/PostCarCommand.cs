@@ -27,7 +27,7 @@ namespace ApiTemplate.Commands
         public async Task<IActionResult> ExecuteAsync(SaveCar saveCar, CancellationToken cancellationToken)
         {
             var car = this.saveCarToCarMapper.Map(saveCar);
-            car = await this.carRepository.Add(car, cancellationToken);
+            car = await this.carRepository.AddAsync(car, cancellationToken);
             var carViewModel = this.carToCarMapper.Map(car);
 
             return new CreatedAtRouteResult(

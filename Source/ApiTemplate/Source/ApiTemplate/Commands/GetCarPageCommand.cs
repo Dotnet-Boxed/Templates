@@ -43,7 +43,7 @@ namespace ApiTemplate.Commands
             var getCarsTask = this.GetCars(pageOptions.First, pageOptions.Last, createdAfter, createdBefore, cancellationToken);
             var getHasNextPageTask = this.GetHasNextPage(pageOptions.First, createdAfter, createdBefore, cancellationToken);
             var getHasPreviousPageTask = this.GetHasPreviousPage(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
-            var totalCountTask = this.carRepository.GetTotalCount(cancellationToken);
+            var totalCountTask = this.carRepository.GetTotalCountAsync(cancellationToken);
 
             await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
             var cars = getCarsTask.Result;
@@ -120,11 +120,11 @@ namespace ApiTemplate.Commands
             Task<List<Models.Car>> getCarsTask;
             if (first.HasValue)
             {
-                getCarsTask = this.carRepository.GetCars(first, createdAfter, createdBefore, cancellationToken);
+                getCarsTask = this.carRepository.GetCarsAsync(first, createdAfter, createdBefore, cancellationToken);
             }
             else
             {
-                getCarsTask = this.carRepository.GetCarsReverse(last, createdAfter, createdBefore, cancellationToken);
+                getCarsTask = this.carRepository.GetCarsReverseAsync(last, createdAfter, createdBefore, cancellationToken);
             }
 
             return getCarsTask;
@@ -138,7 +138,7 @@ namespace ApiTemplate.Commands
         {
             if (first.HasValue)
             {
-                return await this.carRepository.GetHasNextPage(first, createdAfter, cancellationToken);
+                return await this.carRepository.GetHasNextPageAsync(first, createdAfter, cancellationToken);
             }
             else if (createdBefore.HasValue)
             {
@@ -156,7 +156,7 @@ namespace ApiTemplate.Commands
         {
             if (last.HasValue)
             {
-                return await this.carRepository.GetHasPreviousPage(last, createdBefore, cancellationToken);
+                return await this.carRepository.GetHasPreviousPageAsync(last, createdBefore, cancellationToken);
             }
             else if (createdAfter.HasValue)
             {
