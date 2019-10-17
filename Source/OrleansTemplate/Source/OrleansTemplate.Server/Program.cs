@@ -1,13 +1,12 @@
 namespace OrleansTemplate.Server
 {
     using System;
-    using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
@@ -23,43 +22,17 @@ namespace OrleansTemplate.Server
 
     public class Program
     {
-        public static Task<int> Main(string[] args) => LogAndRun(CreateSiloHostBuilder(args).Build());
+        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
 
-        public static async Task<int> LogAndRun(ISiloHost siloHost)
+        public static async Task<int> LogAndRunAsync(IHost host)
         {
-            Log.Logger = BuildLogger(siloHost.Services.GetRequiredService<IConfiguration>());
+            Log.Logger = CreateLogger(host);
 
             try
             {
                 Log.Information("Starting application");
-                await siloHost.StartAsync();
-                Log.Information("Started application, press CTRL+C to exit");
-
-                var siloStopped = new ManualResetEvent(false);
-                void OnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
-                {
-                    Console.CancelKeyPress -= OnCancelKeyPress; // Remove handler to stop listening to CTRL+C events.
-                    e.Cancel = true;                            // Prevent the application from crashing ungracefully.
-                    Task.Run(async () =>                        // Shutdown gracefully on a background thread.
-                    {
-                        try
-                        {
-                            Log.Information("Stopping application");
-                            await siloHost.StopAsync();
-                            Log.Information("Stopped application");
-
-                            siloStopped.Set();
-                        }
-                        catch (Exception exception)
-                        {
-                            Log.Fatal(exception, "Application stopped ungracefully");
-                        }
-                    });
-                }
-                Console.CancelKeyPress += OnCancelKeyPress;
-
-                siloStopped.WaitOne();
-
+                await host.RunAsync().ConfigureAwait(false);
+                Log.Information("Stopped application");
                 return 0;
             }
             catch (Exception exception)
@@ -73,18 +46,23 @@ namespace OrleansTemplate.Server
             }
         }
 
-        private static ISiloHostBuilder CreateSiloHostBuilder(string[] args)
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
+            new HostBuilder()
+                // .UseIf(
+                //     args != null,
+                //     x => x.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build()))
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                    AddConfiguration(config, hostingContext.HostingEnvironment, args))
+                .UseOrleans(ConfigureSiloBuilder);
+
+        private static void ConfigureSiloBuilder(
+            Microsoft.Extensions.Hosting.HostBuilderContext context,
+            ISiloBuilder siloBuilder)
         {
             StorageOptions storageOptions = null;
-            return new SiloHostBuilder()
+            siloBuilder
                 // Prevent the silo from automatically stopping itself when the cancel key is pressed.
                 .Configure<ProcessExitHandlingOptions>(options => options.FastKillOnProcessExit = false)
-                .ConfigureAppConfiguration(
-                    (context, configurationBuilder) =>
-                    {
-                        context.HostingEnvironment.EnvironmentName = GetEnvironmentName();
-                        AddConfiguration(configurationBuilder, context.HostingEnvironment.EnvironmentName, args);
-                    })
                 .ConfigureServices(
                     (context, services) =>
                     {
@@ -102,7 +80,7 @@ namespace OrleansTemplate.Server
                 .ConfigureEndpoints(
                     EndpointOptions.DEFAULT_SILO_PORT,
                     EndpointOptions.DEFAULT_GATEWAY_PORT,
-                    listenOnAnyHostAddress: !IsRunningInDevelopment())
+                    listenOnAnyHostAddress: !context.HostingEnvironment.IsDevelopment())
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
 #if ApplicationInsights
                 .AddApplicationInsightsTelemetryConsumer()
@@ -138,22 +116,21 @@ namespace OrleansTemplate.Server
 
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,
-            string environmentName,
+            IHostEnvironment hostEnvironment,
             string[] args) =>
             configurationBuilder
-                .SetBasePath(Directory.GetCurrentDirectory())
                 // Add configuration from the appsettings.json file.
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
                 // appsettings.production.json file, depending on the environment. These settings override the ones in
                 // the appsettings.json file.
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
-                    string.Equals(environmentName, EnvironmentName.Development, StringComparison.Ordinal),
+                    hostEnvironment.IsDevelopment(),
                     x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true))
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -165,9 +142,9 @@ namespace OrleansTemplate.Server
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger BuildLogger(IConfiguration configuration) =>
+        private static Logger CreateLogger(IHost host) =>
             new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
+                .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
                 .Enrich.With(new TraceIdEnricher())
                 .CreateLogger();
@@ -177,12 +154,6 @@ namespace OrleansTemplate.Server
             jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonSerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
         }
-
-        private static bool IsRunningInDevelopment() =>
-            string.Equals(GetEnvironmentName(), EnvironmentName.Development, StringComparison.Ordinal);
-
-        private static string GetEnvironmentName() =>
-            Environment.GetEnvironmentVariable("ENVIRONMENT") ?? EnvironmentName.Production;
 
         private static string GetAssemblyProductName() =>
             Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
