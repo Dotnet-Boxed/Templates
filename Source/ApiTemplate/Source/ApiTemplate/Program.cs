@@ -6,6 +6,7 @@ namespace ApiTemplate
     using System.Threading.Tasks;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -15,9 +16,9 @@ namespace ApiTemplate
 
     public sealed class Program
     {
-        public static Task<int> Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
+        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
 
-        public static async Task<int> LogAndRun(IHost host)
+        public static async Task<int> LogAndRunAsync(IHost host)
         {
             Log.Logger = CreateLogger(host);
 
@@ -39,19 +40,29 @@ namespace ApiTemplate
             }
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             new HostBuilder()
-                .UseIf(
-                    x => string.IsNullOrEmpty(x.GetSetting(WebHostDefaults.ContentRootKey)),
-                    x => x.UseContentRoot(Directory.GetCurrentDirectory()))
-                .UseIf(
-                    args != null,
-                    x => x.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build()))
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureHostConfiguration(
+                    configurationBuilder => configurationBuilder
+                        .AddEnvironmentVariables(prefix: "DOTNET_")
+                        .AddIf(
+                            args != null,
+                            x => x.AddCommandLine(args)))
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
                 .UseSerilog()
-                .UseDefaultServiceProvider((context, options) =>
-                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
+                .UseDefaultServiceProvider(
+                    (context, options) =>
+                    {
+                        var isDevelopment = context.HostingEnvironment.IsDevelopment();
+                        options.ValidateScopes = isDevelopment;
+                        options.ValidateOnBuild = isDevelopment;
+                    })
+                .ConfigureWebHost(ConfigureWebHostBuilder);
+
+        private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
+            webHostBuilder
                 .UseKestrel(
                     (builderContext, options) =>
                     {
@@ -60,7 +71,7 @@ namespace ApiTemplate
 
                         // Configure Kestrel from appsettings.json.
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-                        ConfigureKestrelServerLimits(builderContext, options);
+                        ConfigureKestrelServerLimits(builderContext.Configuration, options);
                     })
 #if Azure
                 .UseAzureAppServices()
@@ -75,17 +86,17 @@ namespace ApiTemplate
             string[] args) =>
             configurationBuilder
                 // Add configuration from the appsettings.json file.
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
                 // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
                 // appsettings.production.json file, depending on the environment. These settings override the ones in
                 // the appsettings.json file.
-                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: false)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
-                    hostEnvironment.IsDevelopment(),
+                    hostEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostEnvironment.ApplicationName),
                     x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true))
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -116,10 +127,10 @@ namespace ApiTemplate
         /// See https://github.com/aspnet/KestrelHttpServer/issues/2216
         /// </summary>
         private static void ConfigureKestrelServerLimits(
-            HostBuilderContext builderContext,
+            IConfiguration configuration,
             KestrelServerOptions options)
         {
-            var source = builderContext.Configuration
+            var source = configuration
                 .GetSection(nameof(ApplicationOptions.Kestrel))
                 .Get<KestrelServerOptions>();
 
