@@ -3,6 +3,7 @@ namespace ApiTemplate
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Threading.Tasks;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -14,16 +15,16 @@ namespace ApiTemplate
 
     public sealed class Program
     {
-        public static int Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
+        public static Task<int> Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
 
-        public static int LogAndRun(IHost host)
+        public static async Task<int> LogAndRun(IHost host)
         {
-            Log.Logger = BuildLogger(host);
+            Log.Logger = CreateLogger(host);
 
             try
             {
                 Log.Information("Starting application");
-                host.Run();
+                await host.RunAsync().ConfigureAwait(false);
                 Log.Information("Stopped application");
                 return 0;
             }
@@ -101,7 +102,7 @@ namespace ApiTemplate
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger BuildLogger(IHost host) =>
+        private static Logger CreateLogger(IHost host) =>
             new LoggerConfiguration()
                 .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", GetAssemblyProductName())

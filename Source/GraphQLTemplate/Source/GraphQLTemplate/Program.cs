@@ -3,6 +3,7 @@ namespace GraphQLTemplate
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Threading.Tasks;
     using Boxed.AspNetCore;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
@@ -14,16 +15,16 @@ namespace GraphQLTemplate
 
     public sealed class Program
     {
-        public static int Main(string[] args) => LogAndRun(CreateWebHostBuilder(args).Build());
+        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateWebHostBuilder(args).Build());
 
-        public static int LogAndRun(IWebHost webHost)
+        public static async Task<int> LogAndRunAsync(IWebHost webHost)
         {
-            Log.Logger = BuildLogger(webHost);
+            Log.Logger = CreateLogger(webHost);
 
             try
             {
                 Log.Information("Starting application");
-                webHost.Run();
+                await webHost.RunAsync().ConfigureAwait(false);
                 Log.Information("Stopped application");
                 return 0;
             }
@@ -102,7 +103,7 @@ namespace GraphQLTemplate
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger BuildLogger(IWebHost webHost) =>
+        private static Logger CreateLogger(IWebHost webHost) =>
             new LoggerConfiguration()
                 .ReadFrom.Configuration(webHost.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
