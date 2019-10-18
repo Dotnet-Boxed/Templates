@@ -10,21 +10,22 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Serilog;
     using Serilog.Core;
 
     public sealed class Program
     {
-        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateWebHostBuilder(args).Build());
+        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
 
-        public static async Task<int> LogAndRunAsync(IWebHost webHost)
+        public static async Task<int> LogAndRunAsync(IHost host)
         {
-            Log.Logger = CreateLogger(webHost);
+            Log.Logger = CreateLogger(host);
 
             try
             {
                 Log.Information("Starting application");
-                await webHost.RunAsync().ConfigureAwait(false);
+                await host.RunAsync().ConfigureAwait(false);
                 Log.Information("Stopped application");
                 return 0;
             }
@@ -39,19 +40,29 @@ namespace GraphQLTemplate
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            new WebHostBuilder()
-                .UseIf(
-                    x => string.IsNullOrEmpty(x.GetSetting(WebHostDefaults.ContentRootKey)),
-                    x => x.UseContentRoot(Directory.GetCurrentDirectory()))
-                .UseIf(
-                    args != null,
-                    x => x.UseConfiguration(new ConfigurationBuilder().AddCommandLine(args).Build()))
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            new HostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .ConfigureHostConfiguration(
+                    configurationBuilder => configurationBuilder
+                        .AddEnvironmentVariables(prefix: "DOTNET_")
+                        .AddIf(
+                            args != null,
+                            x => x.AddCommandLine(args)))
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
                 .UseSerilog()
-                .UseDefaultServiceProvider((context, options) =>
-                    options.ValidateScopes = context.HostingEnvironment.IsDevelopment())
+                .UseDefaultServiceProvider(
+                    (context, options) =>
+                    {
+                        var isDevelopment = context.HostingEnvironment.IsDevelopment();
+                        options.ValidateScopes = isDevelopment;
+                        options.ValidateOnBuild = isDevelopment;
+                    })
+                .ConfigureWebHost(ConfigureWebHostBuilder);
+
+        private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
+            webHostBuilder
                 .UseKestrel(
                     (builderContext, options) =>
                     {
@@ -60,33 +71,32 @@ namespace GraphQLTemplate
 
                         // Configure Kestrel from appsettings.json.
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-                        ConfigureKestrelServerLimits(builderContext, options);
+                        ConfigureKestrelServerLimits(builderContext.Configuration, options);
                     })
 #if Azure
                 .UseAzureAppServices()
 #endif
                 // Used for IIS and IIS Express for in-process hosting. Use UseIISIntegration for out-of-process hosting.
                 .UseIIS()
-
                 .UseStartup<Startup>();
 
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,
-            IHostingEnvironment hostingEnvironment,
+            IHostEnvironment hostEnvironment,
             string[] args) =>
             configurationBuilder
                 // Add configuration from the appsettings.json file.
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
                 // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
                 // appsettings.production.json file, depending on the environment. These settings override the ones in
                 // the appsettings.json file.
-                .AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: false)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
                 // http://docs.asp.net/en/latest/security/app-secrets.html
                 .AddIf(
-                    hostingEnvironment.IsDevelopment(),
+                    hostEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostEnvironment.ApplicationName),
                     x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true))
                 // Add configuration specific to the Development, Staging or Production environments. This config can
                 // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
@@ -96,16 +106,16 @@ namespace GraphQLTemplate
 #if ApplicationInsights
                 // Push telemetry data through the Azure Application Insights pipeline faster in the development and
                 // staging environments, allowing you to view results immediately.
-                .AddApplicationInsightsSettings(developerMode: !hostingEnvironment.IsProduction())
+                .AddApplicationInsightsSettings(developerMode: !hostEnvironment.IsProduction())
 #endif
                 // Add command line options. These take the highest priority.
                 .AddIf(
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger CreateLogger(IWebHost webHost) =>
+        private static Logger CreateLogger(IHost host) =>
             new LoggerConfiguration()
-                .ReadFrom.Configuration(webHost.Services.GetRequiredService<IConfiguration>())
+                .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", GetAssemblyProductName())
                 .CreateLogger();
 
@@ -117,10 +127,10 @@ namespace GraphQLTemplate
         /// See https://github.com/aspnet/KestrelHttpServer/issues/2216
         /// </summary>
         private static void ConfigureKestrelServerLimits(
-            WebHostBuilderContext builderContext,
+            IConfiguration configuration,
             KestrelServerOptions options)
         {
-            var source = builderContext.Configuration
+            var source = configuration
                 .GetSection(nameof(ApplicationOptions.Kestrel))
                 .Get<KestrelServerOptions>();
 
