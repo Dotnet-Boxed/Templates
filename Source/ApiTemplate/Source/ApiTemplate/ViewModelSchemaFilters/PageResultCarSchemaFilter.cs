@@ -2,12 +2,12 @@ namespace ApiTemplate.ViewModelSchemaFilters
 {
     using System.Collections.Generic;
     using ApiTemplate.ViewModels;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     public class PageResultCarSchemaFilter : ISchemaFilter
     {
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             var pageResult = new PageResult<Car>()
             {
@@ -33,8 +33,8 @@ namespace ApiTemplate.ViewModelSchemaFilters
                 TotalCount = 50,
                 TotalPages = 10,
             };
-            model.Default = pageResult;
-            model.Example = pageResult;
+            // model.Default = pageResult;
+            // model.Example = pageResult;
         }
     }
 }

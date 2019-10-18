@@ -1,12 +1,12 @@
 namespace ApiTemplate.ViewModelSchemaFilters
 {
     using ApiTemplate.ViewModels;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     public class SaveCarSchemaFilter : ISchemaFilter
     {
-        public void Apply(Schema model, SchemaFilterContext context)
+        public void Apply(OpenApiSchema model, SchemaFilterContext context)
         {
             var saveCar = new SaveCar()
             {
@@ -14,8 +14,8 @@ namespace ApiTemplate.ViewModelSchemaFilters
                 Make = "Honda",
                 Model = "Civic",
             };
-            model.Default = saveCar;
-            model.Example = saveCar;
+            // model.Default = saveCar;
+            // model.Example = saveCar;
         }
     }
 }

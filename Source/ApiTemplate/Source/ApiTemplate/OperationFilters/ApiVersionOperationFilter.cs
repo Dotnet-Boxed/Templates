@@ -3,12 +3,12 @@ namespace ApiTemplate.OperationFilters
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
     public class ApiVersionOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             var apiVersion = context.ApiDescription.GetApiVersion();
 
@@ -23,7 +23,7 @@ namespace ApiTemplate.OperationFilters
 
             if (parameters == null)
             {
-                operation.Parameters = parameters = new List<IParameter>();
+                operation.Parameters = parameters = new List<OpenApiParameter>();
             }
 
             // Note: In most applications, service authors will choose a single, consistent approach to how API
@@ -37,21 +37,21 @@ namespace ApiTemplate.OperationFilters
             if (parameter == null)
             {
                 // the only other method in this sample is by query string
-                parameter = new NonBodyParameter()
+                parameter = new OpenApiParameter()
                 {
                     Name = "api-version",
                     Required = true,
-                    Default = apiVersion.ToString(),
-                    In = "query",
-                    Type = "string",
+                    // Default = apiVersion.ToString(),
+                    In = ParameterLocation.Query,
+                    // Type = "string",
                 };
                 parameters.Add(parameter);
             }
-            else if (parameter is NonBodyParameter pathParameter)
+            else if (parameter is OpenApiParameter pathParameter)
             {
                 // Update the default value with the current API version so that the route can be invoked in the
                 // "Try It!" feature.
-                pathParameter.Default = apiVersion.ToString();
+                // pathParameter.Default = apiVersion.ToString();
             }
 
             parameter.Description = "The requested API version";
