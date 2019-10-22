@@ -81,15 +81,8 @@ namespace ApiTemplate
 #if Swagger && Versioning
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
-                .AddMvcCore()
-                    .AddApiExplorer()
-                    .AddAuthorization()
-                    .AddDataAnnotations()
-                    // .AddJsonFormatters()
+                .AddControllers()
                     .AddCustomJsonOptions(this.hostEnvironment)
-#if CORS
-                    .AddCustomCors()
-#endif
 #if DataContractSerializer
                     // Adds the XML input and output formatter using the DataContractSerializer.
                     .AddXmlDataContractSerializerFormatters()

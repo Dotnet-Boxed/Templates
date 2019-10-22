@@ -7,11 +7,8 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Converters;
 
     public static class MvcCoreBuilderExtensions
     {
@@ -36,8 +33,8 @@ namespace ApiTemplate
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
-        public static IMvcCoreBuilder AddCustomJsonOptions(
-            this IMvcCoreBuilder builder,
+        public static IMvcBuilder AddCustomJsonOptions(
+            this IMvcBuilder builder,
             IHostEnvironment hostEnvironment) =>
             builder.AddJsonOptions(
                 options =>
@@ -45,18 +42,13 @@ namespace ApiTemplate
                     if (hostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
-                        options.SerializerSettings.Formatting = Formatting.Indented;
+                        options.JsonSerializerOptions.WriteIndented = true;
                     }
 
-                    // Parse dates as DateTimeOffset values by default. You should prefer using DateTimeOffset over
-                    // DateTime everywhere. Not doing so can cause problems with time-zones.
-                    options.SerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
-
-                    // Output enumeration values as strings in JSON.
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    // TODO
                 });
 
-        public static IMvcCoreBuilder AddCustomMvcOptions(this IMvcCoreBuilder builder) =>
+        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder) =>
             builder.AddMvcOptions(
                 options =>
                 {
