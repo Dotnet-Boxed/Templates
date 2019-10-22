@@ -59,7 +59,8 @@ namespace ApiTemplate
                         options.ValidateScopes = isDevelopment;
                         options.ValidateOnBuild = isDevelopment;
                     })
-                .ConfigureWebHost(ConfigureWebHostBuilder);
+                .ConfigureWebHost(ConfigureWebHostBuilder)
+                .UseConsoleLifetime();
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
             webHostBuilder

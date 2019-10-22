@@ -66,7 +66,8 @@ namespace OrleansTemplate.Server
                         options.ValidateScopes = isDevelopment;
                         options.ValidateOnBuild = isDevelopment;
                     })
-                .UseOrleans(ConfigureSiloBuilder);
+                .UseOrleans(ConfigureSiloBuilder)
+                .UseConsoleLifetime();
 
         private static void ConfigureSiloBuilder(
             Microsoft.Extensions.Hosting.HostBuilderContext context,
