@@ -71,7 +71,6 @@ namespace GraphQLTemplate
 #endif
                 .AddHttpContextAccessor()
                 .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddAuthorization()
                     .AddJsonFormatters()
                     .AddCustomJsonOptions(this.hostEnvironment)

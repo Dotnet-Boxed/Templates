@@ -82,7 +82,6 @@ namespace ApiTemplate
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
                 .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddApiExplorer()
                     .AddAuthorization()
                     .AddDataAnnotations()
