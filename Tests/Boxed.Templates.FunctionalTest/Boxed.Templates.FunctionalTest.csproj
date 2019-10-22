@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boxed.DotnetNewTest" Version="2.0.0" />
+    <ProjectReference Include="..\..\..\Framework\Source\Boxed.DotnetNewTest\Boxed.DotnetNewTest.csproj" />
+    <!--<PackageReference Include="Boxed.DotnetNewTest" Version="2.0.0" />-->
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
