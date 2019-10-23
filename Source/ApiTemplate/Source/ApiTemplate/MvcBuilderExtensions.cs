@@ -1,6 +1,7 @@
 namespace ApiTemplate
 {
     using System.Linq;
+    using System.Text.Json;
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -10,7 +11,7 @@ namespace ApiTemplate
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
-    public static class MvcCoreBuilderExtensions
+    public static class MvcBuilderExtensions
     {
 #if CORS
         /// <summary>
@@ -39,13 +40,15 @@ namespace ApiTemplate
             builder.AddJsonOptions(
                 options =>
                 {
+                    var jsonSerializerOptions = options.JsonSerializerOptions;
                     if (hostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
-                        options.JsonSerializerOptions.WriteIndented = true;
+                        jsonSerializerOptions.WriteIndented = true;
                     }
 
-                    // TODO
+                    jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                    jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
 
         public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder) =>
