@@ -60,6 +60,7 @@ namespace ApiTemplate
                         options.ValidateOnBuild = isDevelopment;
                     })
                 .ConfigureWebHost(ConfigureWebHostBuilder)
+                // Listens for SIGTERM or Ctrl+C events and stops the application.
                 .UseConsoleLifetime();
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
