@@ -67,7 +67,6 @@ namespace OrleansTemplate.Server
                         options.ValidateOnBuild = isDevelopment;
                     })
                 .UseOrleans(ConfigureSiloBuilder)
-                // Listens for SIGTERM or Ctrl+C events and stops the application.
                 .UseConsoleLifetime();
 
         private static void ConfigureSiloBuilder(
