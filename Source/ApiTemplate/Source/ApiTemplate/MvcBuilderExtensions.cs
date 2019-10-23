@@ -2,6 +2,7 @@ namespace ApiTemplate
 {
     using System.Linq;
     using System.Text.Json;
+    using System.Text.Json.Serialization;
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -47,6 +48,7 @@ namespace ApiTemplate
                         jsonSerializerOptions.WriteIndented = true;
                     }
 
+                    jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
                     jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
