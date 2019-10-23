@@ -9,6 +9,7 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
@@ -69,12 +70,12 @@ namespace ApiTemplate
 
                     var jsonInputFormatterMediaTypes = options
                         .InputFormatters
-                        .OfType<JsonInputFormatter>()
+                        .OfType<SystemTextJsonInputFormatter>()
                         .First()
                         .SupportedMediaTypes;
                     var jsonOutputFormatterMediaTypes = options
                         .OutputFormatters
-                        .OfType<JsonOutputFormatter>()
+                        .OfType<SystemTextJsonOutputFormatter>()
                         .First()
                         .SupportedMediaTypes;
 
