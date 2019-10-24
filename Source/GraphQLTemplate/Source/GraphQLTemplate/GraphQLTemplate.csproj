@@ -20,6 +20,10 @@
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
     <UserSecretsId>GraphQLTemplate-113f2d04-69f0-40c3-8797-ba3f356dd812</UserSecretsId>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+    <!--#if (!IIS)-->
+    <!-- Disable publishing of a web.config file for IIS when calling dotnet publish. -->
+    <!--#endif-->
+    <IsTransformWebConfigDisabled Condition="'$(IIS)' == 'false'">true</IsTransformWebConfigDisabled>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
