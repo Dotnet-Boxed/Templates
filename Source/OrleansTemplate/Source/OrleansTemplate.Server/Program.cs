@@ -138,6 +138,9 @@ namespace OrleansTemplate.Server
                 // appsettings.production.json file, depending on the environment. These settings override the ones in
                 // the appsettings.json file.
                 .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: false)
+                // Add configuration from files in the specified directory. The name of the file is the key and the
+                // contents the value.
+                .AddKeyPerFile(Path.Combine(Directory.GetCurrentDirectory(), "configuration"), optional: true)
                 // This reads the configuration keys from the secret store. This allows you to store connection strings
                 // and other sensitive settings, so you don't have to check them into your source control provider.
                 // Only use this in Development, it is not intended for Production use. See
