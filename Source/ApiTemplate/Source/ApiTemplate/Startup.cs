@@ -120,6 +120,8 @@ namespace ApiTemplate
                 .UseResponseCompression()
 #endif
 #if CORS
+                // TODO: With endpoint routing, the CORS middleware must be configured to execute between the calls to
+                // UseRouting and UseEndpoints. Incorrect configuration will cause the middleware to stop functioning correctly.
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
 #if HttpsEverywhere
