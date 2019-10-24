@@ -1,6 +1,5 @@
 namespace ApiTemplate
 {
-    using System;
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -13,7 +12,6 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -128,7 +126,7 @@ namespace ApiTemplate
 #endif
                 .UseIf(
                     this.hostEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperErrorPages())
+                    x => x.UseDeveloperExceptionPage())
 #if HealthCheck
                 .UseHealthChecks("/status")
                 .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })

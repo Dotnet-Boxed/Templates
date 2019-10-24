@@ -1,6 +1,5 @@
 namespace GraphQLTemplate
 {
-    using System;
     using Boxed.AspNetCore;
 #if CorrelationId
     using CorrelationId;
@@ -17,7 +16,6 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -70,13 +68,8 @@ namespace GraphQLTemplate
                 .AddCustomHealthChecks()
 #endif
                 .AddHttpContextAccessor()
-                .AddMvcCore()
-                    .AddAuthorization()
-                    .AddJsonFormatters()
+                .AddControllers()
                     .AddCustomJsonOptions(this.hostEnvironment)
-#if CORS
-                    .AddCustomCors()
-#endif
                     .AddCustomMvcOptions()
                 .Services
                 .AddCustomGraphQL(this.hostEnvironment)
@@ -114,7 +107,7 @@ namespace GraphQLTemplate
 #endif
                 .UseIf(
                     this.hostEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperErrorPages())
+                    x => x.UseDeveloperExceptionPage())
 #if HealthCheck
                 .UseHealthChecks("/status")
                 .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })

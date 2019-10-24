@@ -5,12 +5,12 @@ namespace GraphQLTemplate
 #endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public static class MvcCoreBuilderExtensions
+    public static class MvcBuilderExtensions
     {
 #if CORS
         /// <summary>
@@ -33,13 +33,13 @@ namespace GraphQLTemplate
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
-        public static IMvcCoreBuilder AddCustomJsonOptions(
-            this IMvcCoreBuilder builder,
-            IHostingEnvironment hostingEnvironment) =>
-            builder.AddJsonOptions(
+        public static IMvcBuilder AddCustomJsonOptions(
+            this IMvcBuilder builder,
+            IHostEnvironment hostEnvironment) =>
+            builder.AddNewtonsoftJson(
                 options =>
                 {
-                    if (hostingEnvironment.IsDevelopment())
+                    if (hostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
                         options.SerializerSettings.Formatting = Formatting.Indented;
@@ -53,7 +53,7 @@ namespace GraphQLTemplate
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
 
-        public static IMvcCoreBuilder AddCustomMvcOptions(this IMvcCoreBuilder builder) =>
+        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder) =>
             builder.AddMvcOptions(
                 options =>
                 {
