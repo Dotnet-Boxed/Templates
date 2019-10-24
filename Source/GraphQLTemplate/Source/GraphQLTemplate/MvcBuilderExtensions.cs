@@ -1,8 +1,5 @@
 namespace GraphQLTemplate
 {
-#if CORS
-    using GraphQLTemplate.Constants;
-#endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.DependencyInjection;
@@ -12,24 +9,6 @@ namespace GraphQLTemplate
 
     public static class MvcBuilderExtensions
     {
-#if CORS
-        /// <summary>
-        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
-        /// https://docs.asp.net/en/latest/security/cors.html
-        /// </summary>
-        public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder) =>
-            builder.AddCors(
-                options =>
-                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
-                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
-                    options.AddPolicy(
-                        CorsPolicyName.AllowAny,
-                        x => x
-                            .AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()));
-
-#endif
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>

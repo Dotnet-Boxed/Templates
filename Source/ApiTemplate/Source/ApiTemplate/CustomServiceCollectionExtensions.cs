@@ -8,6 +8,9 @@ namespace ApiTemplate
 #if Swagger
     using System.Reflection;
 #endif
+#if CORS
+    using ApiTemplate.Constants;
+#endif
 #if Swagger && Versioning
     using ApiTemplate.OperationFilters;
 #endif
@@ -37,7 +40,7 @@ namespace ApiTemplate
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
 #if Swagger
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
 #endif
 
     /// <summary>
@@ -80,6 +83,24 @@ namespace ApiTemplate
         //         x.TableName = "Sessions";
         //     });
 
+#if CORS
+        /// <summary>
+        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+        /// https://docs.asp.net/en/latest/security/cors.html
+        /// </summary>
+        public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
+            services.AddCors(
+                options =>
+                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
+                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
+                    options.AddPolicy(
+                        CorsPolicyName.AllowAny,
+                        x => x
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()));
+
+#endif
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -189,9 +210,7 @@ namespace ApiTemplate
                     var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                     var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 
-                    options.DescribeAllEnumsAsStrings();
                     options.DescribeAllParametersInCamelCase();
-                    options.DescribeStringEnumsInCamelCase();
                     options.EnableAnnotations();
 
                     // Add the XML comment file for this assembly, so its contents can be displayed.
@@ -211,7 +230,7 @@ namespace ApiTemplate
                     var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
                     {
-                        var info = new Info()
+                        var info = new OpenApiInfo()
                         {
                             Title = assemblyProduct,
                             Description = apiVersionDescription.IsDeprecated ?

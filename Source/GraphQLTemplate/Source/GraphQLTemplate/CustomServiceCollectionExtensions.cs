@@ -16,7 +16,9 @@ namespace GraphQLTemplate
     using GraphQL.Server;
     using GraphQL.Server.Internal;
     using GraphQL.Validation;
+#if Authorization || CORS
     using GraphQLTemplate.Constants;
+#endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
 #if !ForwardedHeaders && HostFiltering
@@ -28,6 +30,7 @@ namespace GraphQLTemplate
 #endif
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 
     /// <summary>
@@ -70,6 +73,24 @@ namespace GraphQLTemplate
                 //         x.TableName = "Sessions";
                 //     });
 
+#if CORS
+        /// <summary>
+        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+        /// https://docs.asp.net/en/latest/security/cors.html
+        /// </summary>
+        public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
+            services.AddCors(
+                options =>
+                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
+                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
+                    options.AddPolicy(
+                        CorsPolicyName.AllowAny,
+                        x => x
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()));
+
+#endif
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -158,7 +179,7 @@ namespace GraphQLTemplate
                 .Services;
 
 #endif
-        public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostingEnvironment hostingEnvironment) =>
+        public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostEnvironment hostEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.
                 .AddSingleton<IDependencyResolver, GraphQLDependencyResolver>()
@@ -174,7 +195,7 @@ namespace GraphQLTemplate
                         // Enable GraphQL metrics to be output in the response, read from configuration.
                         options.EnableMetrics = configuration.EnableMetrics;
                         // Show stack traces in exceptions. Don't turn this on in production.
-                        options.ExposeExceptions = hostingEnvironment.IsDevelopment();
+                        options.ExposeExceptions = hostEnvironment.IsDevelopment();
                     })
                 // Adds all graph types in the current assembly with a singleton lifetime.
                 .AddGraphTypes()
@@ -190,7 +211,6 @@ namespace GraphQLTemplate
 #endif
                 .Services
                 .AddTransient(typeof(IGraphQLExecuter<>), typeof(InstrumentingGraphQLExecutor<>));
-
 #if Authorization
 
         /// <summary>

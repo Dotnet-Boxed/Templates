@@ -56,6 +56,9 @@ namespace GraphQLTemplate
                 .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
+#if CORS
+                .AddCustomCors()
+#endif
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if ResponseCompression

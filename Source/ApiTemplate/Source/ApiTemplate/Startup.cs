@@ -53,6 +53,9 @@ namespace ApiTemplate
                 .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
+#if CORS
+                .AddCustomCors()
+#endif
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if ResponseCaching
