@@ -122,6 +122,10 @@ namespace ApiTemplate
 #if CORS
                 // TODO: With endpoint routing, the CORS middleware must be configured to execute between the calls to
                 // UseRouting and UseEndpoints. Incorrect configuration will cause the middleware to stop functioning correctly.
+                // app.UseEndpoints(endpoints =>
+                // {
+                //      endpoints.MapControllers().RequireCors("policy-name");
+                // });
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
 #if HttpsEverywhere
