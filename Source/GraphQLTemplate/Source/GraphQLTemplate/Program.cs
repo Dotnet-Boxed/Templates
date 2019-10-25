@@ -4,6 +4,7 @@ namespace GraphQLTemplate
     using System.IO;
     using System.Reflection;
     using System.Threading.Tasks;
+    using System.Transactions;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -62,7 +63,12 @@ namespace GraphQLTemplate
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
             webHostBuilder
-                .UseKestrel((builderContext, options) => options.AddServerHeader = false)
+                .UseKestrel(
+                    (builderContext, options) =>
+                    {
+                        options.AddServerHeader = false;
+                        options.AllowSynchronousIO = true;
+                    })
 #if Azure
                 .UseAzureAppServices()
 #endif
