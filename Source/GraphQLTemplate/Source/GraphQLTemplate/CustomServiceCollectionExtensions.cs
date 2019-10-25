@@ -28,6 +28,7 @@ namespace GraphQLTemplate
 #if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -99,7 +100,7 @@ namespace GraphQLTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
 #if ResponseCompression
@@ -110,7 +111,8 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
+                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 
 #if ResponseCompression
         /// <summary>

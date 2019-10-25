@@ -5,9 +5,7 @@ namespace GraphQLTemplate
     using System.Reflection;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
-    using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -64,16 +62,7 @@ namespace GraphQLTemplate
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
             webHostBuilder
-                .UseKestrel(
-                    (builderContext, options) =>
-                    {
-                        // Do not add the Server HTTP header.
-                        options.AddServerHeader = false;
-
-                        // Configure Kestrel from appsettings.json.
-                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-                        ConfigureKestrelServerLimits(builderContext.Configuration, options);
-                    })
+                .UseKestrel((builderContext, options) => options.AddServerHeader = false)
 #if Azure
                 .UseAzureAppServices()
 #endif
@@ -125,44 +114,5 @@ namespace GraphQLTemplate
 
         private static string GetAssemblyProductName() =>
             Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
-
-        /// <summary>
-        /// Configure Kestrel server limits from appsettings.json is not supported. So we manually copy them from config.
-        /// See https://github.com/aspnet/KestrelHttpServer/issues/2216
-        /// </summary>
-        private static void ConfigureKestrelServerLimits(
-            IConfiguration configuration,
-            KestrelServerOptions options)
-        {
-            var source = configuration
-                .GetSection(nameof(ApplicationOptions.Kestrel))
-                .Get<KestrelServerOptions>();
-
-            var limits = options.Limits;
-            var sourceLimits = source.Limits;
-
-            var http2 = limits.Http2;
-            var sourceHttp2 = sourceLimits.Http2;
-
-            http2.HeaderTableSize = sourceHttp2.HeaderTableSize;
-            http2.InitialConnectionWindowSize = sourceHttp2.InitialConnectionWindowSize;
-            http2.InitialStreamWindowSize = sourceHttp2.InitialStreamWindowSize;
-            http2.MaxFrameSize = sourceHttp2.MaxFrameSize;
-            http2.MaxRequestHeaderFieldSize = sourceHttp2.MaxRequestHeaderFieldSize;
-            http2.MaxStreamsPerConnection = sourceHttp2.MaxStreamsPerConnection;
-
-            limits.KeepAliveTimeout = sourceLimits.KeepAliveTimeout;
-            limits.MaxConcurrentConnections = sourceLimits.MaxConcurrentConnections;
-            limits.MaxConcurrentUpgradedConnections = sourceLimits.MaxConcurrentUpgradedConnections;
-            limits.MaxRequestBodySize = sourceLimits.MaxRequestBodySize;
-            limits.MaxRequestBufferSize = sourceLimits.MaxRequestBufferSize;
-            limits.MaxRequestHeaderCount = sourceLimits.MaxRequestHeaderCount;
-            limits.MaxRequestHeadersTotalSize = sourceLimits.MaxRequestHeadersTotalSize;
-            limits.MaxRequestLineSize = sourceLimits.MaxRequestLineSize;
-            limits.MaxResponseBufferSize = sourceLimits.MaxResponseBufferSize;
-            limits.MinRequestBodyDataRate = sourceLimits.MinRequestBodyDataRate;
-            limits.MinResponseDataRate = sourceLimits.MinResponseDataRate;
-            limits.RequestHeadersTimeout = sourceLimits.RequestHeadersTimeout;
-        }
     }
 }

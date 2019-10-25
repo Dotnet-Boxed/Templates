@@ -34,6 +34,7 @@ namespace ApiTemplate
 #if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Configuration;
@@ -109,7 +110,7 @@ namespace ApiTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
 #if ResponseCompression
                 .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
@@ -119,7 +120,8 @@ namespace ApiTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)));
+                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 
 #if ResponseCompression
         /// <summary>
