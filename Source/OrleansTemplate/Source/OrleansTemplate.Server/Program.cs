@@ -14,6 +14,7 @@ namespace OrleansTemplate.Server
     using Orleans;
     using Orleans.Configuration;
     using Orleans.Hosting;
+    using Orleans.Runtime;
     using Orleans.Statistics;
     using OrleansTemplate.Abstractions.Constants;
     using OrleansTemplate.Grains;
@@ -90,6 +91,7 @@ namespace OrleansTemplate.Server
 
                         storageOptions = services.BuildServiceProvider().GetRequiredService<IOptions<StorageOptions>>().Value;
                     })
+                .UseSiloUnobservedExceptionsHandler()
                 .UseAzureStorageClustering(options => options.ConnectionString = storageOptions.ConnectionString)
                 .ConfigureEndpoints(
                     EndpointOptions.DEFAULT_SILO_PORT,
