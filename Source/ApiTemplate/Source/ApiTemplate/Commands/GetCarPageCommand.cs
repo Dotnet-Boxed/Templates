@@ -40,9 +40,9 @@ namespace ApiTemplate.Commands
             var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);
             var createdBefore = Cursor.FromCursor<DateTimeOffset?>(pageOptions.Before);
 
-            var getCarsTask = this.GetCars(pageOptions.First, pageOptions.Last, createdAfter, createdBefore, cancellationToken);
-            var getHasNextPageTask = this.GetHasNextPage(pageOptions.First, createdAfter, createdBefore, cancellationToken);
-            var getHasPreviousPageTask = this.GetHasPreviousPage(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
+            var getCarsTask = this.GetCarsAsync(pageOptions.First, pageOptions.Last, createdAfter, createdBefore, cancellationToken);
+            var getHasNextPageTask = this.GetHasNextPageAsync(pageOptions.First, createdAfter, createdBefore, cancellationToken);
+            var getHasPreviousPageTask = this.GetHasPreviousPageAsync(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
             var totalCountTask = this.carRepository.GetTotalCountAsync(cancellationToken);
 
             await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
@@ -110,7 +110,7 @@ namespace ApiTemplate.Commands
             return new OkObjectResult(connection);
         }
 
-        private Task<List<Models.Car>> GetCars(
+        private Task<List<Models.Car>> GetCarsAsync(
             int? first,
             int? last,
             DateTimeOffset? createdAfter,
@@ -130,7 +130,7 @@ namespace ApiTemplate.Commands
             return getCarsTask;
         }
 
-        private async Task<bool> GetHasNextPage(
+        private async Task<bool> GetHasNextPageAsync(
             int? first,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
@@ -148,7 +148,7 @@ namespace ApiTemplate.Commands
             return false;
         }
 
-        private async Task<bool> GetHasPreviousPage(
+        private async Task<bool> GetHasPreviousPageAsync(
             int? last,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
