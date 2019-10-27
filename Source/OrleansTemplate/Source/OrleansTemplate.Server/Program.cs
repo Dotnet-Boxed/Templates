@@ -120,6 +120,19 @@ namespace OrleansTemplate.Server
                         options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                         options.UseJson = true;
                     })
+#if TLS
+                .UseTls(
+                    options =>
+                    {
+                        // TODO: Configure a certificate.
+                        options.LocalCertificate = null;
+
+                        if (context.HostingEnvironment.IsDevelopment())
+                        {
+                            options.AllowAnyRemoteCertificate();
+                        }
+                    })
+#endif
                 .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
                     x => x.UseLinuxEnvironmentStatistics())
