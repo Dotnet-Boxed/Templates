@@ -77,7 +77,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status204NoContent, "The car with the specified unique identifier was deleted.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier was not found.")]
 #endif
-        public Task<IActionResult> Delete(
+        public Task<IActionResult> DeleteAsync(
             [FromServices] IDeleteCarCommand command,
             int carId,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
@@ -98,7 +98,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
-        public Task<IActionResult> Get(
+        public Task<IActionResult> GetAsync(
             [FromServices] IGetCarCommand command,
             int carId,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
@@ -120,7 +120,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
-        public Task<IActionResult> GetPage(
+        public Task<IActionResult> GetPageAsync(
             [FromServices] IGetCarPageCommand command,
             [FromQuery] PageOptions pageOptions,
             CancellationToken cancellationToken) => command.ExecuteAsync(pageOptions, cancellationToken);
@@ -141,7 +141,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
-        public Task<IActionResult> Patch(
+        public Task<IActionResult> PatchAsync(
             [FromServices] IPatchCarCommand command,
             int carId,
             [FromBody] JsonPatchDocument<SaveCar> patch,
@@ -161,7 +161,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
-        public Task<IActionResult> Post(
+        public Task<IActionResult> PostAsync(
             [FromServices] IPostCarCommand command,
             [FromBody] SaveCar car,
             CancellationToken cancellationToken) => command.ExecuteAsync(car, cancellationToken);
@@ -182,7 +182,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
 #endif
-        public Task<IActionResult> Put(
+        public Task<IActionResult> PutAsync(
             [FromServices] IPutCarCommand command,
             int carId,
             [FromBody] SaveCar car,
