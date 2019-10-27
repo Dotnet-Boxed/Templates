@@ -144,7 +144,11 @@ namespace ApiTemplate
 #if Swagger
                 .UseMvc()
                 .UseSwagger(options => options.PreSerializeFilters.Add(
-                    (swaggerDoc, httpReq) => swaggerDoc.Host = httpReq.Host.Value))
+                    (swaggerDoc, httpReq) =>
+                    {
+                        // TODO:
+                        // swaggerDoc.Host = httpReq.Host.Value;
+                    }))
                 .UseCustomSwaggerUI();
 #else
                 .UseMvc();
