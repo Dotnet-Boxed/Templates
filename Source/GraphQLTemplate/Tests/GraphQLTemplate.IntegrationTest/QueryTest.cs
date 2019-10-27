@@ -17,7 +17,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task IntrospectionQuery_Default_Returns200Ok()
         {
-            var introspectionQuery = await this.client.PostGraphQL(GraphQlQuery.Introspection);
+            var introspectionQuery = await this.client.PostGraphQLAsync(GraphQlQuery.Introspection);
             var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
 
             Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);

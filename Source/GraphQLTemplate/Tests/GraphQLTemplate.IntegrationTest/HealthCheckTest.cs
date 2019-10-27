@@ -13,7 +13,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         public HealthCheckTest() => this.client = this.CreateClient();
 
         [Fact]
-        public async Task GetStatus_Default_Returns200Ok()
+        public async Task GetStatus_Default_Returns200OkAsync()
         {
             var response = await this.client.GetAsync("/status");
 
@@ -21,7 +21,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task GetStatusSelf_Default_Returns200Ok()
+        public async Task GetStatusSelf_Default_Returns200OkAsync()
         {
             var response = await this.client.GetAsync("/status/self");
 
