@@ -15,7 +15,9 @@ namespace Boxed.Templates.FunctionalTest
     public class ApiTemplateTest
     {
         public ApiTemplateTest() =>
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln").Wait();
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
@@ -23,7 +25,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("NoHostFiltering", "host-filtering=false")]
         [InlineData("NoForwardedHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
-        public async Task RestoreAndBuild_Default_Successful(string name, params string[] arguments)
+        public async Task RestoreAndBuild_Default_SuccessfulAsync(string name, params string[] arguments)
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -38,7 +40,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_Default_Successful()
+        public async Task Run_Default_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -94,7 +96,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_HealthCheckFalse_Successful()
+        public async Task Run_HealthCheckFalse_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -122,7 +124,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_HttpsEverywhereFalse_Successful()
+        public async Task Run_HttpsEverywhereFalse_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -147,7 +149,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_SwaggerFalse_Successful()
+        public async Task Run_SwaggerFalse_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {

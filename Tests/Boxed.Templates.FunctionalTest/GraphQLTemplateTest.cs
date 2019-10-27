@@ -14,7 +14,9 @@ namespace Boxed.Templates.FunctionalTest
     public class GraphQLTemplateTest
     {
         public GraphQLTemplateTest() =>
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             DotnetNew.InstallAsync<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
@@ -22,7 +24,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("NoHostFiltering", "host-filtering=false")]
         [InlineData("NoForwardedHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
-        public async Task RestoreAndBuild_Default_Successful(string name, params string[] arguments)
+        public async Task RestoreAndBuild_Default_SuccessfulAsync(string name, params string[] arguments)
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -37,7 +39,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_Default_Successful()
+        public async Task Run_Default_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -74,7 +76,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_HealthCheckFalse_Successful()
+        public async Task Run_HealthCheckFalse_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -102,7 +104,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_QueryGraphQlIntrospection_ReturnsResults()
+        public async Task Run_QueryGraphQlIntrospection_ReturnsResultsAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -113,7 +115,7 @@ namespace Boxed.Templates.FunctionalTest
                     @"Source\Default",
                     async (httpClient, httpsClient) =>
                     {
-                        var introspectionQuery = await httpClient.PostGraphQL(GraphQlQuery.Introspection);
+                        var introspectionQuery = await httpClient.PostGraphQLAsync(GraphQlQuery.Introspection);
                         Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
                         var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
                         Assert.Null(introspectionContent.Errors);
@@ -123,7 +125,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_HttpsEverywhereFalse_Successful()
+        public async Task Run_HttpsEverywhereFalse_SuccessfulAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -148,7 +150,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_AuthorizationTrue_Returns400BadRequest()
+        public async Task Run_AuthorizationTrue_Returns400BadRequestAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -165,7 +167,7 @@ namespace Boxed.Templates.FunctionalTest
                     @"Source\AuthorizationTrue",
                     async (httpClient) =>
                     {
-                        var httpResponse = await httpClient.PostGraphQL(
+                        var httpResponse = await httpClient.PostGraphQLAsync(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         var response = await httpResponse.Content.ReadAsAsync<GraphQLResponse>();
 
@@ -180,7 +182,7 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfully()
+        public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfullyAsync()
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
@@ -197,7 +199,7 @@ namespace Boxed.Templates.FunctionalTest
                     @"Source\AuthorizationFalse",
                     async (httpClient) =>
                     {
-                        var httpResponse = await httpClient.PostGraphQL(
+                        var httpResponse = await httpClient.PostGraphQLAsync(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });

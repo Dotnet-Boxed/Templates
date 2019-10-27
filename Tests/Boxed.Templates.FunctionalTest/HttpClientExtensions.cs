@@ -8,7 +8,7 @@ namespace Boxed.Templates.FunctionalTest
     {
         private const string GraphQLContentType = "application/graphql";
 
-        public static Task<HttpResponseMessage> PostGraphQL(this HttpClient httpClient, string content)
+        public static Task<HttpResponseMessage> PostGraphQLAsync(this HttpClient httpClient, string content)
         {
             var stringContent = new StringContent(content, Encoding.UTF8, GraphQLContentType);
             return httpClient.PostAsync("/graphql", stringContent);
