@@ -2,9 +2,9 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 {
     using ApiTemplate.Repositories;
     using ApiTemplate.Services;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Moq;
 
 public class TestStartup : Startup
@@ -12,8 +12,8 @@ public class TestStartup : Startup
     private readonly Mock<ICarRepository> carRepositoryMock;
     private readonly Mock<IClockService> clockServiceMock;
 
-    public TestStartup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
-        : base(configuration, hostingEnvironment)
+    public TestStartup(IConfiguration configuration, IHostEnvironment hostEnvironment)
+        : base(configuration, hostEnvironment)
     {
         this.carRepositoryMock = new Mock<ICarRepository>(MockBehavior.Strict);
         this.clockServiceMock = new Mock<IClockService>(MockBehavior.Strict);

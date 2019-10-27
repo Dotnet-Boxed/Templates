@@ -32,7 +32,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Options_CarsRoot_Returns200Ok()
+        public async Task Options_CarsRoot_Returns200OkAsync()
         {
             var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars"));
 
@@ -43,7 +43,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Options_CarsWithId_Returns200Ok()
+        public async Task Options_CarsWithId_Returns200OkAsync()
         {
             var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars/1"));
 
@@ -63,7 +63,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Delete_CarFound_Returns204NoContent()
+        public async Task Delete_CarFound_Returns204NoContentAsync()
         {
             var car = new Models.Car();
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
@@ -75,7 +75,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Delete_CarNotFound_Returns404NotFound()
+        public async Task Delete_CarNotFound_Returns404NotFoundAsync()
         {
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
@@ -85,7 +85,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Get_CarFound_Returns200Ok()
+        public async Task Get_CarFound_Returns200OkAsync()
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 2, 3, 4, 5, TimeSpan.FromHours(6)) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
@@ -99,7 +99,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Get_CarNotFound_Returns404NotFound()
+        public async Task Get_CarNotFound_Returns404NotFoundAsync()
         {
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
@@ -109,7 +109,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Get_CarNotModifiedSince_Returns304NotModified()
+        public async Task Get_CarNotModifiedSince_Returns304NotModifiedAsync()
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 23, 59, 59, TimeSpan.Zero) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
@@ -122,7 +122,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task Get_CarHasBeenModifiedSince_Returns200OK()
+        public async Task Get_CarHasBeenModifiedSince_Returns200OKAsync()
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 0, 0, 1, TimeSpan.Zero) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
@@ -138,7 +138,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [InlineData("/cars")]
         [InlineData("/cars?first=3")]
         [InlineData("/cars?first=3&after=THIS_IS_INVALID")]
-        public async Task GetPage_FirstPage_Returns200Ok(string uri)
+        public async Task GetPage_FirstPage_Returns200OkAsync(string uri)
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -155,14 +155,14 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            await this.AssertPageUrls(
+            await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
                 previousPageUrl: null);
         }
 
         [Fact]
-        public async Task GetPage_SecondPage_Returns200Ok()
+        public async Task GetPage_SecondPage_Returns200OkAsync()
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -179,7 +179,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            await this.AssertPageUrls(
+            await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: null,
                 previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
@@ -189,7 +189,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Theory]
         [InlineData("/cars?last=3")]
         [InlineData("/cars?last=3&before=THIS_IS_INVALID")]
-        public async Task GetPage_LastPage_Returns200Ok(string uri)
+        public async Task GetPage_LastPage_Returns200OkAsync(string uri)
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -206,14 +206,14 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            await this.AssertPageUrls(
+            await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: null,
                 previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
         }
 
         [Fact]
-        public async Task GetPage_SecondLastPage_Returns200Ok()
+        public async Task GetPage_SecondLastPage_Returns200OkAsync()
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -230,7 +230,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            await this.AssertPageUrls(
+            await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
                 previousPageUrl: null,
@@ -238,7 +238,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PostCar_Valid_Returns201Created()
+        public async Task PostCar_Valid_Returns201CreatedAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -261,7 +261,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PostCar_Invalid_Returns400BadRequest()
+        public async Task PostCar_Invalid_Returns400BadRequestAsync()
         {
             var response = await this.client.PostAsJsonAsync("cars", new SaveCar());
 
@@ -269,7 +269,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PutCar_Valid_Returns200Ok()
+        public async Task PutCar_Valid_Returns200OkAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -292,7 +292,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PutCar_CarNotFound_Returns404NotFound()
+        public async Task PutCar_CarNotFound_Returns404NotFoundAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -308,7 +308,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PutCar_Invalid_Returns400BadRequest()
+        public async Task PutCar_Invalid_Returns400BadRequestAsync()
         {
             var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar());
 
@@ -316,7 +316,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PatchCar_CarNotFound_Returns404NotFound()
+        public async Task PatchCar_CarNotFound_Returns404NotFoundAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -335,7 +335,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PatchCar_InvalidCar_Returns400BadRequest()
+        public async Task PatchCar_InvalidCar_Returns400BadRequestAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -355,7 +355,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
-        public async Task PatchCar_ValidCar_Returns200Ok()
+        public async Task PatchCar_ValidCar_Returns200OkAsync()
         {
             var saveCar = new SaveCar()
             {
@@ -378,7 +378,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal("Civic Type-R", carViewModel.Model);
         }
 
-        private async Task AssertPageUrls(
+        private async Task AssertPageUrlsAsync(
             HttpResponseMessage response,
             string nextPageUrl,
             string previousPageUrl,
