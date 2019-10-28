@@ -146,7 +146,6 @@ namespace ApiTemplate
                         builder.MapHealthChecks("/status");
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
-
 #if !Swagger
                     });
 #else
