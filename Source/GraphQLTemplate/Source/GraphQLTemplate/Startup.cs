@@ -111,11 +111,16 @@ namespace GraphQLTemplate
                 .UseIf(
                     this.hostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
-#if HealthCheck
-                .UseHealthChecks("/status")
-                .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
-#endif
                 .UseStaticFilesWithCacheControl()
+                .UseRouting()
+                .UseEndpoints(
+                    builder =>
+                    {
+#if HealthCheck
+                        builder.MapHealthChecks("/status");
+                        builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+#endif
+                    })
 #if Subscriptions
                 .UseWebSockets()
                 // Use the GraphQL subscriptions in the specified schema and make them available at /graphql.

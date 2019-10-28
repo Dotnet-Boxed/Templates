@@ -136,13 +136,21 @@ namespace ApiTemplate
                 .UseIf(
                     this.hostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
-#if HealthCheck
-                .UseHealthChecks("/status")
-                .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
-#endif
                 .UseStaticFilesWithCacheControl()
-#if Swagger
-                .UseMvc()
+                .UseRouting()
+                .UseEndpoints(
+                    builder =>
+                    {
+                        builder.MapControllers();
+#if HealthCheck
+                        builder.MapHealthChecks("/status");
+                        builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+#endif
+
+#if !Swagger
+                    });
+#else
+                    })
                 .UseSwagger(options => options.PreSerializeFilters.Add(
                     (swaggerDoc, httpReq) =>
                     {
@@ -150,8 +158,6 @@ namespace ApiTemplate
                         // swaggerDoc.Host = httpReq.Host.Value;
                     }))
                 .UseCustomSwaggerUI();
-#else
-                .UseMvc();
 #endif
     }
 }
