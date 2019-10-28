@@ -100,9 +100,6 @@ namespace GraphQLTemplate
 #if ResponseCompression
                 .UseResponseCompression()
 #endif
-#if CORS
-                .UseCors(CorsPolicyName.AllowAny)
-#endif
 #if HttpsEverywhere
                 .UseIf(
                     !this.hostEnvironment.IsDevelopment(),
@@ -113,12 +110,24 @@ namespace GraphQLTemplate
                     x => x.UseDeveloperExceptionPage())
                 .UseStaticFilesWithCacheControl()
                 .UseRouting()
+#if CORS
+                .UseCors(CorsPolicyName.AllowAny)
+#endif
                 .UseEndpoints(
                     builder =>
                     {
 #if HealthCheck
+#if CORS
+                        builder
+                            .MapHealthChecks("/status")
+                            .RequireCors(CorsPolicyName.AllowAny);
+                        builder
+                            .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                            .RequireCors(CorsPolicyName.AllowAny);
+#else
                         builder.MapHealthChecks("/status");
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+#endif
 #endif
                     })
 #if Subscriptions

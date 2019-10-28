@@ -119,15 +119,6 @@ namespace ApiTemplate
 #if ResponseCompression
                 .UseResponseCompression()
 #endif
-#if CORS
-                // TODO: With endpoint routing, the CORS middleware must be configured to execute between the calls to
-                // UseRouting and UseEndpoints. Incorrect configuration will cause the middleware to stop functioning correctly.
-                // app.UseEndpoints(endpoints =>
-                // {
-                //      endpoints.MapControllers().RequireCors("policy-name");
-                // });
-                .UseCors(CorsPolicyName.AllowAny)
-#endif
 #if HttpsEverywhere
                 .UseIf(
                     !this.hostEnvironment.IsDevelopment(),
@@ -138,13 +129,29 @@ namespace ApiTemplate
                     x => x.UseDeveloperExceptionPage())
                 .UseStaticFilesWithCacheControl()
                 .UseRouting()
+#if CORS
+                .UseCors(CorsPolicyName.AllowAny)
+#endif
                 .UseEndpoints(
                     builder =>
                     {
+#if CORS
+                        builder.MapControllers().RequireCors(CorsPolicyName.AllowAny);
+#else
                         builder.MapControllers();
+#endif
 #if HealthCheck
+#if CORS
+                        builder
+                            .MapHealthChecks("/status")
+                            .RequireCors(CorsPolicyName.AllowAny);
+                        builder
+                            .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                            .RequireCors(CorsPolicyName.AllowAny);
+#else
                         builder.MapHealthChecks("/status");
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+#endif
 #endif
 #if !Swagger
                     });
