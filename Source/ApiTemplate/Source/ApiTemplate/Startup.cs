@@ -157,12 +157,10 @@ namespace ApiTemplate
                     });
 #else
                     })
-                .UseSwagger(options => options.PreSerializeFilters.Add(
-                    (swaggerDoc, httpReq) =>
-                    {
-                        // TODO:
-                        // swaggerDoc.Host = httpReq.Host.Value;
-                    }))
+                .UseSwagger(c => c.PreSerializeFilters.Add((swagger, httpReq) =>
+                {
+                    swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}" } };
+                }))
                 .UseCustomSwaggerUI();
 #endif
     }
