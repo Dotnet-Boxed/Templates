@@ -2,6 +2,7 @@ namespace GraphQLTemplate
 {
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Newtonsoft.Json;
@@ -42,6 +43,9 @@ namespace GraphQLTemplate
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }
+
+                    // Remove plain text (text/plain) output formatter.
+                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;

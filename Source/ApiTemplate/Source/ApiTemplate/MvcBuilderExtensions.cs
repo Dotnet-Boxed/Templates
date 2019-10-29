@@ -47,6 +47,9 @@ namespace ApiTemplate
                         options.CacheProfiles.Add(keyValuePair);
                     }
 
+                    // Remove plain text (text/plain) output formatter.
+                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
+
                     var jsonInputFormatterMediaTypes = options
                         .InputFormatters
                         .OfType<SystemTextJsonInputFormatter>()
