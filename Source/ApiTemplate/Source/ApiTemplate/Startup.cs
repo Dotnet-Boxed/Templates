@@ -127,11 +127,11 @@ namespace ApiTemplate
                 .UseIf(
                     this.hostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
+                .UseStaticFilesWithCacheControl()
                 .UseRouting()
 #if CORS
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
-                .UseStaticFilesWithCacheControl()
                 .UseEndpoints(
                     builder =>
                     {
