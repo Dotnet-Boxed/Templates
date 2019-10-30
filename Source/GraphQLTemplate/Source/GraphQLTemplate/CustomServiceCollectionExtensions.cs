@@ -181,7 +181,9 @@ namespace GraphQLTemplate
                 .Services;
 
 #endif
-        public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostEnvironment hostEnvironment) =>
+        public static IServiceCollection AddCustomGraphQL(
+            this IServiceCollection services,
+            IWebHostEnvironment webHostEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.
                 .AddSingleton<IDependencyResolver, GraphQLDependencyResolver>()
@@ -197,7 +199,7 @@ namespace GraphQLTemplate
                         // Enable GraphQL metrics to be output in the response, read from configuration.
                         options.EnableMetrics = configuration.EnableMetrics;
                         // Show stack traces in exceptions. Don't turn this on in production.
-                        options.ExposeExceptions = hostEnvironment.IsDevelopment();
+                        options.ExposeExceptions = webHostEnvironment.IsDevelopment();
                     })
                 // Adds all graph types in the current assembly with a singleton lifetime.
                 .AddGraphTypes()

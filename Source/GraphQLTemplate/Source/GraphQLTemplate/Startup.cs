@@ -26,19 +26,19 @@ namespace GraphQLTemplate
     public class Startup : StartupBase
     {
         private readonly IConfiguration configuration;
-        private readonly IHostEnvironment hostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">The application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
-        /// <param name="hostEnvironment">The environment the application is running under. This can be Development,
+        /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
-        public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
-            this.hostEnvironment = hostEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -72,10 +72,10 @@ namespace GraphQLTemplate
 #endif
                 .AddHttpContextAccessor()
                 .AddControllers()
-                    .AddCustomJsonOptions(this.hostEnvironment)
+                    .AddCustomJsonOptions(this.webHostEnvironment)
                     .AddCustomMvcOptions()
                 .Services
-                .AddCustomGraphQL(this.hostEnvironment)
+                .AddCustomGraphQL(this.webHostEnvironment)
 #if Authorization
                 .AddCustomGraphQLAuthorization()
 #endif
@@ -102,11 +102,11 @@ namespace GraphQLTemplate
 #endif
 #if HttpsEverywhere
                 .UseIf(
-                    !this.hostEnvironment.IsDevelopment(),
+                    !this.webHostEnvironment.IsDevelopment(),
                     x => x.UseHsts())
 #endif
                 .UseIf(
-                    this.hostEnvironment.IsDevelopment(),
+                    this.webHostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
                 .UseRouting()
 #if CORS
@@ -138,7 +138,7 @@ namespace GraphQLTemplate
                 // Use the specified GraphQL schema and make them available at /graphql.
                 .UseGraphQL<MainSchema>()
                 .UseIf(
-                    this.hostEnvironment.IsDevelopment(),
+                    this.webHostEnvironment.IsDevelopment(),
                     x => x
                         // Add the GraphQL Playground UI to try out the GraphQL API at /.
                         .UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" })

@@ -17,12 +17,12 @@ namespace ApiTemplate
         /// </summary>
         public static IMvcBuilder AddCustomJsonOptions(
             this IMvcBuilder builder,
-            IHostEnvironment hostEnvironment) =>
+            IWebHostEnvironment webHostEnvironment) =>
             builder.AddJsonOptions(
                 options =>
                 {
                     var jsonSerializerOptions = options.JsonSerializerOptions;
-                    if (hostEnvironment.IsDevelopment())
+                    if (webHostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
                         jsonSerializerOptions.WriteIndented = true;

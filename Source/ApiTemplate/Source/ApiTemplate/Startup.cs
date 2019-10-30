@@ -23,19 +23,19 @@ namespace ApiTemplate
     public class Startup : StartupBase
     {
         private readonly IConfiguration configuration;
-        private readonly IHostEnvironment hostEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">The application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
-        /// <param name="hostEnvironment">The environment the application is running under. This can be Development,
+        /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
-        public Startup(IConfiguration configuration, IHostEnvironment hostEnvironment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
-            this.hostEnvironment = hostEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace ApiTemplate
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
 #endif
                 .AddControllers()
-                    .AddCustomJsonOptions(this.hostEnvironment)
+                    .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer
                     // Adds the XML input and output formatter using the DataContractSerializer.
                     .AddXmlDataContractSerializerFormatters()
@@ -121,11 +121,11 @@ namespace ApiTemplate
 #endif
 #if HttpsEverywhere
                 .UseIf(
-                    !this.hostEnvironment.IsDevelopment(),
+                    !this.webHostEnvironment.IsDevelopment(),
                     x => x.UseHsts())
 #endif
                 .UseIf(
-                    this.hostEnvironment.IsDevelopment(),
+                    this.webHostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
                 .UseRouting()
 #if CORS
