@@ -2,6 +2,7 @@ namespace ApiTemplate.OperationFilters
 {
     using System;
     using System.Collections.Generic;
+    using Microsoft.OpenApi.Any;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -27,12 +28,15 @@ namespace ApiTemplate.OperationFilters
             operation.Parameters.Add(
                 new OpenApiParameter()
                 {
-                    // Default = Guid.NewGuid(),
                     Description = "Used to uniquely identify the HTTP request. This ID is used to correlate the HTTP request between a client and server.",
                     In = ParameterLocation.Header,
                     Name = "X-Correlation-ID",
                     Required = false,
-                    // Type = "string",
+                    Schema = new OpenApiSchema()
+                    {
+                        Default = new OpenApiString(Guid.NewGuid().ToString()),
+                        Type = "string",
+                    },
                 });
         }
     }

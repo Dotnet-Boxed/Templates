@@ -3,6 +3,7 @@ namespace ApiTemplate.OperationFilters
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.OpenApi.Any;
     using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -12,18 +13,16 @@ namespace ApiTemplate.OperationFilters
         {
             var apiVersion = context.ApiDescription.GetApiVersion();
 
-            // If the api explorer did not capture an API version for this operation then the action must be API
+            // If the API explorer did not capture an API version for this operation then the action must be API
             // version-neutral, so there's nothing to add.
             if (apiVersion == null)
             {
                 return;
             }
 
-            var parameters = operation.Parameters;
-
-            if (parameters == null)
+            if (operation.Parameters == null)
             {
-                operation.Parameters = parameters = new List<OpenApiParameter>();
+                operation.Parameters = new List<OpenApiParameter>();
             }
 
             // Note: In most applications, service authors will choose a single, consistent approach to how API
@@ -32,8 +31,8 @@ namespace ApiTemplate.OperationFilters
             // 2. URL path segment with the route parameter name "api-version".
             // Unless you allow multiple API versioning methods in your app, your implementation could be simpler.
 
-            // consider the url path segment parameter first
-            var parameter = parameters.FirstOrDefault(p => p.Name == "api-version");
+            // Consider the url path segment parameter first
+            var parameter = operation.Parameters.FirstOrDefault(x => x.Name == "api-version");
             if (parameter == null)
             {
                 // the only other method in this sample is by query string
@@ -41,17 +40,25 @@ namespace ApiTemplate.OperationFilters
                 {
                     Name = "api-version",
                     Required = true,
-                    // Default = apiVersion.ToString(),
                     In = ParameterLocation.Query,
-                    // Type = "string",
+                    Schema = new OpenApiSchema()
+                    {
+                        Default = new OpenApiString(apiVersion.ToString()),
+                        Type = "string",
+                    },
                 };
-                parameters.Add(parameter);
+                operation.Parameters.Add(parameter);
             }
-            else if (parameter is OpenApiParameter pathParameter)
+            else
             {
                 // Update the default value with the current API version so that the route can be invoked in the
                 // "Try It!" feature.
-                // pathParameter.Default = apiVersion.ToString();
+                if (parameter.Schema == null)
+                {
+                    parameter.Schema = new OpenApiSchema();
+                }
+
+                parameter.Schema.Default = new OpenApiString(apiVersion.ToString());
             }
 
             parameter.Description = "The requested API version";
