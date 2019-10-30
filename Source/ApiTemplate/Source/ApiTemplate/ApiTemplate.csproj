@@ -58,8 +58,7 @@
     <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector" Version="2.11.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="3.0.0" Condition="'$(Azure)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.1.5" Condition="'$(Swagger)' == 'false' AND '$(Versioning)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="3.2.1" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioninlg.ApiExplorer" Version="4.0.0" Condition="'$(Swagger)' == 'true' AND '$(Versioning)' == 'true'" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
