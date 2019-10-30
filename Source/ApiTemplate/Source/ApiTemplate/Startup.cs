@@ -28,7 +28,7 @@ namespace ApiTemplate
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
-    public class Startup : StartupBase
+    public class Startup
     {
         private readonly IConfiguration configuration;
         private readonly IWebHostEnvironment webHostEnvironment;
@@ -51,7 +51,7 @@ namespace ApiTemplate
         /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
-        public override void ConfigureServices(IServiceCollection services) =>
+        public virtual void ConfigureServices(IServiceCollection services) =>
             services
 #if ApplicationInsights
                 // Add Azure Application Insights data collection services to the services container.
@@ -110,7 +110,7 @@ namespace ApiTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public override void Configure(IApplicationBuilder application) =>
+        public virtual void Configure(IApplicationBuilder application) =>
             application
 #if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
