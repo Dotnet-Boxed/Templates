@@ -1,5 +1,10 @@
 namespace ApiTemplate
 {
+#if Swagger
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+#endif
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -16,6 +21,9 @@ namespace ApiTemplate
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+#if Swagger
+    using Microsoft.OpenApi.Models;
+#endif
 
     /// <summary>
     /// The main start-up class for the application.
@@ -158,11 +166,16 @@ namespace ApiTemplate
 #else
                     })
                 .UseSwagger(options => options.PreSerializeFilters.Add(
-                    (swaggerDoc, httpReq) =>
-                    {
-                        // TODO:
-                        // swaggerDoc.Host = httpReq.Host.Value;
-                    }))
+                    (openApiDocument, request) =>
+                        // TODO: Do we need this?
+                        openApiDocument.Servers = new List<OpenApiServer>()
+                        {
+                            new OpenApiServer()
+                            {
+                                Description = typeof(Startup).Assembly.GetCustomAttribute<AssemblyProductAttribute>().Product + "TODO",
+                                Url = new UriBuilder(request.Scheme, request.Host.Value).Uri.ToString(),
+                            },
+                        }))
                 .UseCustomSwaggerUI();
 #endif
     }
