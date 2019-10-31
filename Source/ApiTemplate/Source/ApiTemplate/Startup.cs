@@ -87,9 +87,6 @@ namespace ApiTemplate
 #if Versioning
                 .AddCustomApiVersioning()
 #endif
-#if Swagger && Versioning
-                .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
-#endif
                 .AddControllers()
                     .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer

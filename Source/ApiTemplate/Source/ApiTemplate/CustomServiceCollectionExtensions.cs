@@ -192,12 +192,18 @@ namespace ApiTemplate
 #endif
 #if Versioning
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
-            services.AddApiVersioning(
-                options =>
-                {
-                    options.AssumeDefaultVersionWhenUnspecified = true;
-                    options.ReportApiVersions = true;
-                });
+            services
+                .AddApiVersioning(
+                    options =>
+                    {
+                        options.AssumeDefaultVersionWhenUnspecified = true;
+                        options.ReportApiVersions = true;
+#if !Versioning
+                    });
+#else
+                    })
+                .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
+#endif
 
 #endif
 #if Swagger
