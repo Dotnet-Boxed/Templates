@@ -6,9 +6,12 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.JsonPatch;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Formatters;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Options;
 
     public static class MvcBuilderExtensions
     {
@@ -50,6 +53,9 @@ namespace ApiTemplate
                     // Remove plain text (text/plain) output formatter.
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
+                    // Add support for de-serializing JsonPatchDocument<T>.
+                    options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
+
                     var jsonInputFormatterMediaTypes = options
                         .InputFormatters
                         .OfType<SystemTextJsonInputFormatter>()
@@ -73,5 +79,25 @@ namespace ApiTemplate
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
                 });
+
+        /// <summary>
+        /// Gets the JSON patch input formatter. The <see cref="JsonPatchDocument{T}"/> does not support the new
+        /// System.Text.Json API's for de-serialization. You must use Newtonsoft.Json instead. See
+        /// https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-3.0#jsonpatch-addnewtonsoftjson-and-systemtextjson
+        /// </summary>
+        /// <returns>The JSON patch input formatter using Newtonsoft.Json.</returns>
+        private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()
+        {
+            var services = new ServiceCollection()
+                .AddLogging()
+                .AddMvc()
+                .AddNewtonsoftJson()
+                .Services;
+            var serviceProvider = services.BuildServiceProvider();
+            var mvcOptions = serviceProvider.GetRequiredService<IOptions<MvcOptions>>().Value;
+            return mvcOptions.InputFormatters
+                .OfType<NewtonsoftJsonPatchInputFormatter>()
+                .First();
+        }
     }
 }
