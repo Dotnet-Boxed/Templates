@@ -9,7 +9,6 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.Extensions.Primitives;
     using Microsoft.Net.Http.Headers;
 
     public class GetCarCommand : IGetCarCommand

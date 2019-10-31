@@ -115,7 +115,7 @@ namespace ApiTemplate.Controllers
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
         [HttpHead("", Name = CarsControllerRoute.HeadCarPage)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(PageResult<Car>))]
+        [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(Connection<Car>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.")]
         [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.")]
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The specified Accept MIME type is not acceptable.")]
