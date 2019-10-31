@@ -318,18 +318,12 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task PatchCar_CarNotFound_Returns404NotFoundAsync()
         {
-            var saveCar = new SaveCar()
-            {
-                Cylinders = 2,
-                Make = "Honda",
-                Model = "Civic"
-            };
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Remove(x => x.Make);
             var json = JsonConvert.SerializeObject(patch);
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
-            var response = await this.client.PatchAsync("cars/999", new StringContent(json, Encoding.UTF8, ContentType.Json));
+            var response = await this.client.PatchAsync("cars/999", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
@@ -337,19 +331,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task PatchCar_InvalidCar_Returns400BadRequestAsync()
         {
-            var saveCar = new SaveCar()
-            {
-                Cylinders = 2,
-                Make = "Honda",
-                Model = "Civic"
-            };
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Remove(x => x.Make);
             var json = JsonConvert.SerializeObject(patch);
             var car = new Models.Car();
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.Json));
+            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -357,12 +345,6 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task PatchCar_ValidCar_Returns200OkAsync()
         {
-            var saveCar = new SaveCar()
-            {
-                Cylinders = 2,
-                Make = "Honda",
-                Model = "Civic"
-            };
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Add(x => x.Model, "Civic Type-R");
             var json = JsonConvert.SerializeObject(patch);
@@ -371,7 +353,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
             this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.Json));
+            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
