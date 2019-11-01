@@ -24,7 +24,7 @@ namespace ApiTemplate.Controllers
         /// Returns an Allow HTTP header with the allowed HTTP methods.
         /// </summary>
         /// <returns>A 200 OK response.</returns>
-        [HttpOptions]
+        [HttpOptions(Name = CarsControllerRoute.OptionsCars)]
 #if Swagger
         [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
 #endif
@@ -44,7 +44,7 @@ namespace ApiTemplate.Controllers
         /// </summary>
         /// <param name="carId">The cars unique identifier.</param>
         /// <returns>A 200 OK response.</returns>
-        [HttpOptions("{carId}")]
+        [HttpOptions("{carId}", Name = CarsControllerRoute.OptionsCar)]
 #if Swagger
         [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
 #endif
