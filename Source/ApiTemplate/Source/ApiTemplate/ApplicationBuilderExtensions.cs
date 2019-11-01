@@ -50,7 +50,8 @@ namespace ApiTemplate
                         .Product;
                     // Set the Swagger UI to render at '/'.
                     options.RoutePrefix = string.Empty;
-                    // Show the request duration in Swagger UI.
+
+                    options.DisplayOperationId();
                     options.DisplayRequestDuration();
 
 #if Versioning
