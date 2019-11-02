@@ -3,44 +3,67 @@ namespace ApiTemplate.ViewModels
     using System;
     using System.Collections.Generic;
 
+#if Swagger
     /// <summary>
     /// Holds metadata about a page of items.
     /// </summary>
+#endif
     public class PageInfo
     {
+#if Swagger
         /// <summary>
         /// Gets or sets the count of items.
         /// </summary>
+        /// <example>10</example>
+#endif
         public int Count { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets a value indicating whether this instance has a next page.
         /// </summary>
+        /// <example>true</example>
+#endif
         public bool HasNextPage { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets a value indicating whether this instance has a previous page.
         /// </summary>
+        /// <example>false</example>
+#endif
         public bool HasPreviousPage { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets the next page URL.
         /// </summary>
+        /// <example>/cars?First=10&amp;After=MjAxOS0xMC0yNlQxNDozNDo1MC4xOTgwNzY2KzAwOjAw</example>
+#endif
         public Uri NextPageUrl { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets the previous page URL.
         /// </summary>
+        /// <example>/cars?First=10&amp;Before=MjAxOS0xMC0yNlQxNDozNDo1MC4xOTgwNzY2KzAwOjAw</example>
+#endif
         public Uri PreviousPageUrl { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets the URL to the first page.
         /// </summary>
+        /// <example>/cars?First=10</example>
+#endif
         public Uri FirstPageUrl { get; set; }
 
+#if Swagger
         /// <summary>
         /// Gets or sets the URL to the last page.
         /// </summary>
+        /// <example>/cars?Last=10</example>
+#endif
         public Uri LastPageUrl { get; set; }
 
         /// <summary>
