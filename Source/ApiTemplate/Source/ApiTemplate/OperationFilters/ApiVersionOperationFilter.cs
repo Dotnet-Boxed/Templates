@@ -16,8 +16,19 @@ namespace ApiTemplate.OperationFilters
     /// - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413</remarks>
     public class ApiVersionOperationFilter : IOperationFilter
     {
+        /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
+            if (operation == null)
+            {
+                throw new ArgumentNullException(nameof(operation));
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
             var apiDescription = context.ApiDescription;
             operation.Deprecated |= apiDescription.IsDeprecated();
 
