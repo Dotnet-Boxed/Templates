@@ -53,7 +53,7 @@ namespace ApiTemplate
                     // Remove plain text (text/plain) output formatter.
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
-                    // Add support for de-serializing JsonPatchDocument<T>.
+                    // Add support for de-serializing JsonPatchDocument<T> by adding an input formatter.
                     options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
 
                     var jsonInputFormatterMediaTypes = options
@@ -67,6 +67,10 @@ namespace ApiTemplate
                         .First()
                         .SupportedMediaTypes;
 
+                    // Remove JSON text (text/json) media type from the JSON input and output formatters.
+                    jsonInputFormatterMediaTypes.Remove("text/json");
+                    jsonOutputFormatterMediaTypes.Remove("text/json");
+
                     // Add Problem Details media type (application/problem+json) to the JSON output formatters.
                     // See https://tools.ietf.org/html/rfc7807
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
@@ -76,6 +80,31 @@ namespace ApiTemplate
                     jsonInputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
 
+#if DataContractSerializer || XmlSerializer
+                    var xmlInputFormatterMediaTypes = options
+                        .InputFormatters
+#if DataContractSerializer
+                        .OfType<XmlDataContractSerializerInputFormatter>()
+#elif XmlSerializer
+                        .OfType<XmlSerializerInputFormatter>()
+#endif
+                        .First()
+                        .SupportedMediaTypes;
+                    var xmlOutputFormatterMediaTypes = options
+                        .OutputFormatters
+#if DataContractSerializer
+                        .OfType<XmlDataContractSerializerOutputFormatter>()
+#elif XmlSerializer
+                        .OfType<XmlSerializerOutputFormatter>()
+#endif
+                        .First()
+                        .SupportedMediaTypes;
+
+                    // Remove XML text (text/xml) media type from the XML input and output formatters.
+                    xmlInputFormatterMediaTypes.Remove("text/xml");
+                    xmlOutputFormatterMediaTypes.Remove("text/xml");
+
+#endif
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
                 });
