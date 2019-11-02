@@ -49,8 +49,7 @@
         {
           "condition": "(!Swagger)",
           "exclude": [
-            "Source/ApiTemplate/OperationFilters/**/*",
-            "Source/ApiTemplate/ViewModelSchemaFilters/**/*"
+            "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },
         // Versioning
