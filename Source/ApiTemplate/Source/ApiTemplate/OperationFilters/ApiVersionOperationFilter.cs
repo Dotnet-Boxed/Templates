@@ -11,7 +11,9 @@ namespace ApiTemplate.OperationFilters
     /// An Open API operation filter used to document the implicit API version parameter.
     /// </summary>
     /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
-    /// Once they are fixed and published, this class can be removed.</remarks>
+    /// Once they are fixed and published, this class can be removed. See:
+    /// - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
+    /// - https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413</remarks>
     public class ApiVersionOperationFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
@@ -24,8 +26,6 @@ namespace ApiTemplate.OperationFilters
                 return;
             }
 
-            // See: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
-            // See: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413
             foreach (var parameter in operation.Parameters)
             {
                 var description = apiDescription.ParameterDescriptions
