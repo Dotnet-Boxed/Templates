@@ -10,6 +10,11 @@ namespace ApiTemplate.ViewModels
 #endif
     public class PageInfo
     {
+        private const string NextLinkItem = "next";
+        private const string PreviousLinkItem = "previous";
+        private const string FirstLinkItem = "first";
+        private const string LastLinkItem = "last";
+
 #if Swagger
         /// <summary>
         /// Gets or sets the count of items.
@@ -79,22 +84,22 @@ namespace ApiTemplate.ViewModels
 
             if (this.HasNextPage && this.NextPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem("next", this.NextPageUrl));
+                values.Add(this.GetLinkValueItem(NextLinkItem, this.NextPageUrl));
             }
 
             if (this.HasPreviousPage && this.PreviousPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem("previous", this.PreviousPageUrl));
+                values.Add(this.GetLinkValueItem(PreviousLinkItem, this.PreviousPageUrl));
             }
 
             if (this.FirstPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem("first", this.FirstPageUrl));
+                values.Add(this.GetLinkValueItem(FirstLinkItem, this.FirstPageUrl));
             }
 
             if (this.LastPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem("last", this.LastPageUrl));
+                values.Add(this.GetLinkValueItem(LastLinkItem, this.LastPageUrl));
             }
 
             return string.Join(", ", values);
