@@ -13,7 +13,7 @@
     }
   },
   "profiles": {
-    "IIS Express Development": {
+    "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "",
@@ -32,7 +32,7 @@
     //#if (IIS)
     // Run the application using full IIS using its development time support. This requires some setup, see:
     // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
-    "IIS Development (Setup Required)": {
+    "IIS (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
       "launchUrl": "",
@@ -49,7 +49,7 @@
       }
     },
     //#endif
-    "Kestrel Development": {
+    "Kestrel": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",
@@ -71,7 +71,7 @@
       }
     },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
-    "Watch Kestrel Development (CTRL+F5)": {
+    "Watch Kestrel (CTRL+F5)": {
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
