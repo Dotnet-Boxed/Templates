@@ -18,6 +18,7 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
 #if HttpsEverywhere
             this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
+            this.Server.AllowSynchronousIO = true;
         }
 
         public ApplicationOptions ApplicationOptions { get; private set; }
