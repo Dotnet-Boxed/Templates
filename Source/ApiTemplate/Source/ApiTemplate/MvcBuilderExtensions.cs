@@ -53,7 +53,7 @@ namespace ApiTemplate
                     // Remove plain text (text/plain) output formatter.
                     options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
-                    // Add support for de-serializing JsonPatchDocument<T> by adding an input formatter.
+                    // Add support for JSON Patch (application/json-patch+json) by adding an input formatter.
                     options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
 
                     var jsonInputFormatterMediaTypes = options
@@ -66,19 +66,6 @@ namespace ApiTemplate
                         .OfType<SystemTextJsonOutputFormatter>()
                         .First()
                         .SupportedMediaTypes;
-
-                    // Remove JSON text (text/json) media type from the JSON input and output formatters.
-                    jsonInputFormatterMediaTypes.Remove("text/json");
-                    jsonOutputFormatterMediaTypes.Remove("text/json");
-
-                    // Add Problem Details media type (application/problem+json) to the JSON output formatters.
-                    // See https://tools.ietf.org/html/rfc7807
-                    jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
-
-                    // Add RESTful JSON media type (application/vnd.restful+json) to the JSON input and output formatters.
-                    // See http://restfuljson.org/
-                    jsonInputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
-                    jsonOutputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
 
 #if DataContractSerializer || XmlSerializer
                     var xmlInputFormatterMediaTypes = options
@@ -105,6 +92,22 @@ namespace ApiTemplate
                     xmlOutputFormatterMediaTypes.Remove("text/xml");
 
 #endif
+                    // Remove JSON text (text/json) media type from the JSON input and output formatters.
+                    jsonInputFormatterMediaTypes.Remove("text/json");
+                    jsonOutputFormatterMediaTypes.Remove("text/json");
+
+                    // Add ProblemDetails media type (application/problem+json) to the output formatters.
+                    // See https://tools.ietf.org/html/rfc7807
+                    jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
+#if DataContractSerializer || XmlSerializer
+                    xmlOutputFormatterMediaTypes.Insert(0, ContentType.ProblemXml);
+#endif
+
+                    // Add RESTful JSON media type (application/vnd.restful+json) to the JSON input and output formatters.
+                    // See http://restfuljson.org/
+                    jsonInputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
+                    jsonOutputFormatterMediaTypes.Insert(0, ContentType.RestfulJson);
+
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;
                 });
