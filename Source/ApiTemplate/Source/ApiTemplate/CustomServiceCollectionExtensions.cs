@@ -232,9 +232,8 @@ namespace ApiTemplate
                     options.OperationFilter<ForbiddenResponseOperationFilter>();
                     options.OperationFilter<UnauthorizedResponseOperationFilter>();
 
-                    // Show an example model for JsonPatchDocument<T> and ProblemDetails.
+                    // Show an example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
-                    options.SchemaFilter<ProblemDetailsSchemaFilter>();
 
 #if Versioning
                     var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
