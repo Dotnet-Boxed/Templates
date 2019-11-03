@@ -6,6 +6,7 @@ namespace GraphQLTemplate
     using System.Threading.Tasks;
     using System.Transactions;
     using Boxed.AspNetCore;
+    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -74,6 +75,8 @@ namespace GraphQLTemplate
 #endif
                 // Used for IIS and IIS Express for in-process hosting. Use UseIISIntegration for out-of-process hosting.
                 .UseIIS()
+                .ConfigureServices(
+                    services => services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true))
                 .UseStartup<Startup>();
 
         private static IConfigurationBuilder AddConfiguration(
