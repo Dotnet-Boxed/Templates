@@ -6,6 +6,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using System.Net;
     using System.Net.Http;
     using System.Net.Http.Formatting;
+    using System.Net.Http.Headers;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.JsonPatch;
+    using Microsoft.AspNetCore.Mvc;
     using Moq;
     using Newtonsoft.Json;
     using Xunit;
@@ -27,8 +29,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             this.client = this.CreateClient();
             this.formatters = new MediaTypeFormatterCollection();
-            this.formatters.JsonFormatter.SupportedMediaTypes.Add(
-                new System.Net.Http.Headers.MediaTypeHeaderValue(ContentType.RestfulJson));
+            this.formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue(ContentType.RestfulJson));
+            this.formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue(ContentType.ProblemJson));
         }
 
         [Fact]
@@ -82,6 +84,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.DeleteAsync("/cars/999");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
         [Fact]
@@ -106,6 +110,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.GetAsync("/cars/999");
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
         [Fact]
@@ -266,6 +272,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PostAsJsonAsync("cars", new SaveCar());
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         }
 
         [Fact]
@@ -305,6 +313,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PutAsJsonAsync("cars/999", saveCar);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
         [Fact]
@@ -313,6 +323,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar());
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         }
 
         [Fact]
@@ -326,6 +338,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PatchAsync("cars/999", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
         [Fact]
