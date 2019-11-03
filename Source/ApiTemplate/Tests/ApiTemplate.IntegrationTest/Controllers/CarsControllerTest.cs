@@ -115,6 +115,18 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
+        public async Task Get_InvalidAcceptHeader_Returns406NotAcceptableAsync()
+        {
+            this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentType.Text));
+
+            var response = await this.client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
+        }
+
+        [Fact]
         public async Task Get_CarNotModifiedSince_Returns304NotModifiedAsync()
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 23, 59, 59, TimeSpan.Zero) };
@@ -274,6 +286,21 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
             Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        }
+
+        [Fact]
+        public async Task PostCar_UnsupportedMediaType_Returns415UnsupportedMediaTypeAsync()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "cars")
+            {
+                Content = new ObjectContent<SaveCar>(new SaveCar(), new JsonMediaTypeFormatter(), ContentType.Text)
+            };
+
+            var response = await this.client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status415UnsupportedMediaType, problemDetails.Status);
         }
 
         [Fact]
