@@ -21,12 +21,12 @@ namespace OrleansTemplate.Server
             bool condition,
             Func<ISiloBuilder, ISiloBuilder> action)
         {
-            if (siloBuilder == null)
+            if (siloBuilder is null)
             {
                 throw new ArgumentNullException(nameof(siloBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -52,17 +52,17 @@ namespace OrleansTemplate.Server
             Func<ISiloBuilder, bool> condition,
             Func<ISiloBuilder, ISiloBuilder> action)
         {
-            if (siloBuilder == null)
+            if (siloBuilder is null)
             {
                 throw new ArgumentNullException(nameof(siloBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }

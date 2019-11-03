@@ -418,7 +418,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(nextPageUrl != null, connection.PageInfo.HasNextPage);
             Assert.Equal(previousPageUrl != null, connection.PageInfo.HasPreviousPage);
 
-            if (nextPageUrl == null)
+            if (nextPageUrl is null)
             {
                 Assert.Null(nextPageUrl);
             }
@@ -427,7 +427,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 Assert.Equal(new Uri(nextPageUrl), connection.PageInfo.NextPageUrl);
             }
 
-            if (previousPageUrl == null)
+            if (previousPageUrl is null)
             {
                 Assert.Null(previousPageUrl);
             }

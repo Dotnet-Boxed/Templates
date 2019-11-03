@@ -19,12 +19,12 @@ namespace ApiTemplate.OperationFilters
         /// <inheritdoc/>
         public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
-            if (operation == null)
+            if (operation is null)
             {
                 throw new ArgumentNullException(nameof(operation));
             }
 
-            if (context == null)
+            if (context is null)
             {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -32,7 +32,7 @@ namespace ApiTemplate.OperationFilters
             var apiDescription = context.ApiDescription;
             operation.Deprecated |= apiDescription.IsDeprecated();
 
-            if (operation.Parameters == null)
+            if (operation.Parameters is null)
             {
                 return;
             }
@@ -42,12 +42,12 @@ namespace ApiTemplate.OperationFilters
                 var description = apiDescription.ParameterDescriptions
                     .First(x => string.Equals(x.Name, parameter.Name, StringComparison.OrdinalIgnoreCase));
 
-                if (parameter.Description == null)
+                if (parameter.Description is null)
                 {
                     parameter.Description = description.ModelMetadata?.Description;
                 }
 
-                if (parameter.Schema.Default == null && description.DefaultValue != null)
+                if (parameter.Schema.Default is null && description.DefaultValue != null)
                 {
                     parameter.Schema.Default = new OpenApiString(description.DefaultValue.ToString());
                 }

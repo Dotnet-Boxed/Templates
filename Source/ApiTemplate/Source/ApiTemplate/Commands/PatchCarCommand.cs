@@ -41,7 +41,7 @@ namespace ApiTemplate.Commands
             CancellationToken cancellationToken)
         {
             var car = await this.carRepository.GetAsync(carId, cancellationToken);
-            if (car == null)
+            if (car is null)
             {
                 return new NotFoundResult();
             }

@@ -50,7 +50,7 @@ namespace GraphQLTemplate.Schemas
                         var homePlanets = context.GetArgument<List<string>>("homePlanets");
                         return humanRepository
                             .WhenHumanCreated
-                            .Where(x => homePlanets == null || homePlanets.Contains(x.HomePlanet));
+                            .Where(x => homePlanets is null || homePlanets.Contains(x.HomePlanet));
                     }),
                 });
         }

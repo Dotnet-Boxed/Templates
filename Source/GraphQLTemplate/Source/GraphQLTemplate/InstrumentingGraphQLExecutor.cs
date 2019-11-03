@@ -36,7 +36,7 @@ namespace GraphQLTemplate
         {
             var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
 
-            if (this.options.EnableMetrics && (result.Errors == null || result.Errors.Count == 0))
+            if (this.options.EnableMetrics && (result.Errors is null || result.Errors.Count == 0))
             {
                 // Add instrumentation data showing how long field resolvers take to execute to the JSON response in
                 // Apollo Tracing format. Apollo Engine can use the Apollo Tracing data to produce nice charts showing this

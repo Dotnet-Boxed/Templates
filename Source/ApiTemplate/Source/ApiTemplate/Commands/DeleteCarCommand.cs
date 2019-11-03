@@ -15,7 +15,7 @@ namespace ApiTemplate.Commands
         public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
             var car = await this.carRepository.GetAsync(carId, cancellationToken);
-            if (car == null)
+            if (car is null)
             {
                 return new NotFoundResult();
             }

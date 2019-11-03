@@ -21,12 +21,12 @@ namespace OrleansTemplate.Server
             bool condition,
             Func<IHostBuilder, IHostBuilder> action)
         {
-            if (hostBuilder == null)
+            if (hostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(hostBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -52,17 +52,17 @@ namespace OrleansTemplate.Server
             Func<IHostBuilder, bool> condition,
             Func<IHostBuilder, IHostBuilder> action)
         {
-            if (hostBuilder == null)
+            if (hostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(hostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -92,17 +92,17 @@ namespace OrleansTemplate.Server
             Func<IHostBuilder, IHostBuilder> ifAction,
             Func<IHostBuilder, IHostBuilder> elseAction)
         {
-            if (hostBuilder == null)
+            if (hostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(hostBuilder));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }
@@ -136,22 +136,22 @@ namespace OrleansTemplate.Server
             Func<IHostBuilder, IHostBuilder> ifAction,
             Func<IHostBuilder, IHostBuilder> elseAction)
         {
-            if (hostBuilder == null)
+            if (hostBuilder is null)
             {
                 throw new ArgumentNullException(nameof(hostBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }

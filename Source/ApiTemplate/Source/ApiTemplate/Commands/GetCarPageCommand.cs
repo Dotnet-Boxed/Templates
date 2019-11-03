@@ -51,7 +51,7 @@ namespace ApiTemplate.Commands
             var hasPreviousPage = getHasPreviousPageTask.Result;
             var totalCount = totalCountTask.Result;
 
-            if (cars == null)
+            if (cars is null)
             {
                 return new NotFoundResult();
             }
