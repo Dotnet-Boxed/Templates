@@ -1,10 +1,10 @@
 namespace GraphQLTemplate.IntegrationTest.Fixtures
 {
     using System;
+    using System.Net.Http;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
-    using Microsoft.AspNetCore.TestHost;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Moq;
@@ -26,23 +26,22 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
 
         public void VerifyAllMocks() => Mock.VerifyAll();
 
-        protected override TestServer CreateServer(IWebHostBuilder builder)
+        protected override void ConfigureClient(HttpClient client)
         {
-            builder
-                .UseEnvironment("Testing")
-                .UseStartup<TestStartup>();
-
-            var testServer = base.CreateServer(builder);
-
-            using (var serviceScope = testServer.Host.Services.CreateScope())
+            using (var serviceScope = this.Services.CreateScope())
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
                 // this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
             }
 
-            return testServer;
+            base.ConfigureClient(client);
         }
+
+        protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+            builder
+                .UseEnvironment("Testing")
+                .UseStartup<TestStartup>();
 
         protected override void Dispose(bool disposing)
         {
