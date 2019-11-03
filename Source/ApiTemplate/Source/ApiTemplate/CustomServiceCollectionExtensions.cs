@@ -232,7 +232,7 @@ namespace ApiTemplate
                     options.OperationFilter<ForbiddenResponseOperationFilter>();
                     options.OperationFilter<UnauthorizedResponseOperationFilter>();
 
-                    // Show an example model for JsonPatchDocument<T>.
+                    // Show a default and example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
 
 #if Versioning
