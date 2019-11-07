@@ -124,6 +124,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
+            // Note: ASP.NET Core should be automatically returning a ProblemDetails response but is returning an empty
+            // response body instead. See https://github.com/aspnet/AspNetCore/issues/16889
         }
 
         [Fact]
