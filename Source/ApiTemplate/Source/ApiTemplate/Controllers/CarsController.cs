@@ -18,6 +18,7 @@ namespace ApiTemplate.Controllers
 #if Versioning
     [ApiVersion(ApiVersionName.V1)]
 #endif
+    [SwaggerResponse(StatusCodes.Status500InternalServerError, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
     public class CarsController : ControllerBase
     {
         /// <summary>
