@@ -46,10 +46,10 @@ namespace ApiTemplate.Commands
             var totalCountTask = this.carRepository.GetTotalCountAsync(cancellationToken);
 
             await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
-            var cars = getCarsTask.Result;
-            var hasNextPage = getHasNextPageTask.Result;
-            var hasPreviousPage = getHasPreviousPageTask.Result;
-            var totalCount = totalCountTask.Result;
+            var cars = await getCarsTask;
+            var hasNextPage = await getHasNextPageTask;
+            var hasPreviousPage = await getHasPreviousPageTask;
+            var totalCount = await totalCountTask;
 
             if (cars is null)
             {
