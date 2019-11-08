@@ -33,6 +33,10 @@ namespace GraphQLTemplate
                     });
         }
 
+        /// <summary>
+        /// Uses custom serilog request logging. Adds additional properties to each log.
+        /// See https://github.com/serilog/serilog-aspnetcore.
+        /// </summary>
         public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
