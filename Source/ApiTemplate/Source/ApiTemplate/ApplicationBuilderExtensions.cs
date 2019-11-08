@@ -11,6 +11,7 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Builder;
 #if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
 #endif
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
@@ -42,8 +43,9 @@ namespace ApiTemplate
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    // diagnosticContext.Set("ActionName", context.ActionDescriptor.DisplayName);
-                    // diagnosticContext.Set("ActionId", context.ActionDescriptor.Id);
+                    var actionContext = application.ApplicationServices.GetRequiredService<IActionContextAccessor>().ActionContext;
+                    diagnosticContext.Set("ActionName", actionContext.ActionDescriptor.DisplayName);
+                    diagnosticContext.Set("ActionId", actionContext.ActionDescriptor.Id);
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });

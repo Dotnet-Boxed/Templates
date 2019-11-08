@@ -6,6 +6,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
 
@@ -36,8 +37,9 @@ namespace GraphQLTemplate
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    // diagnosticContext.Set("ActionName", context.ActionDescriptor.DisplayName);
-                    // diagnosticContext.Set("ActionId", context.ActionDescriptor.Id);
+                    var actionContext = application.ApplicationServices.GetRequiredService<IActionContextAccessor>().ActionContext;
+                    diagnosticContext.Set("ActionName", actionContext.ActionDescriptor.DisplayName);
+                    diagnosticContext.Set("ActionId", actionContext.ActionDescriptor.Id);
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });
