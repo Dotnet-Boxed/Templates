@@ -291,6 +291,21 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         [Fact]
+        public async Task PostCar_EmptyRequestBody_Returns400BadRequestAsync()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "cars")
+            {
+                Content = new ObjectContent<SaveCar>(null, new JsonMediaTypeFormatter(), ContentType.Json)
+            };
+
+            var response = await this.client.SendAsync(request);
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        }
+
+        [Fact]
         public async Task PostCar_UnsupportedMediaType_Returns415UnsupportedMediaTypeAsync()
         {
             var request = new HttpRequestMessage(HttpMethod.Post, "cars")
