@@ -19,6 +19,7 @@ namespace GraphQLTemplate
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Serilog;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -113,6 +114,7 @@ namespace GraphQLTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
+                .UseSerilogRequestLogging()
                 .UseEndpoints(
                     builder =>
                     {
