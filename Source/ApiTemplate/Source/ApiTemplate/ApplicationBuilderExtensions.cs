@@ -13,6 +13,7 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
     using Microsoft.Extensions.DependencyInjection;
+    using Serilog;
 
     public static partial class ApplicationBuilderExtensions
     {
@@ -36,6 +37,16 @@ namespace ApiTemplate
                         OnPrepareResponse = context => context.Context.ApplyCacheProfile(cacheProfile),
                     });
         }
+
+        public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
+            application.UseSerilogRequestLogging(
+                options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    // diagnosticContext.Set("ActionName", context.ActionDescriptor.DisplayName);
+                    // diagnosticContext.Set("ActionId", context.ActionDescriptor.Id);
+                    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
+                    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                });
 
 #if Swagger
 

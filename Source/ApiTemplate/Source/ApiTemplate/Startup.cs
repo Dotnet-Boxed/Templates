@@ -16,7 +16,6 @@ namespace ApiTemplate
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Serilog;
 
     /// <summary>
     /// The main start-up class for the application.
@@ -130,7 +129,7 @@ namespace ApiTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
-                .UseSerilogRequestLogging()
+                .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
                     builder =>
                     {
