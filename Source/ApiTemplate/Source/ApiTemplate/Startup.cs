@@ -99,7 +99,7 @@ namespace ApiTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public virtual void Configure(IApplicationBuilder application) =>
+        public virtual void Configure(IApplicationBuilder application, IActionContextAccessor actionContextAccessor) =>
             application
 #if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
@@ -129,7 +129,7 @@ namespace ApiTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
-                .UseCustomSerilogRequestLogging()
+                .UseCustomSerilogRequestLogging(actionContextAccessor)
                 .UseEndpoints(
                     builder =>
                     {

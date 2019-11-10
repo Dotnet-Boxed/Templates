@@ -16,6 +16,7 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -86,7 +87,7 @@ namespace GraphQLTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public virtual void Configure(IApplicationBuilder application) =>
+        public virtual void Configure(IApplicationBuilder application, IActionContextAccessor actionContextAccessor) =>
             application
 #if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
@@ -113,7 +114,7 @@ namespace GraphQLTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
-                .UseCustomSerilogRequestLogging()
+                .UseCustomSerilogRequestLogging(actionContextAccessor)
                 .UseEndpoints(
                     builder =>
                     {
