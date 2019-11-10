@@ -105,12 +105,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{BF30
 		.github\SECURITY.md = .github\SECURITY.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{474898B0-0EC1-43FE-8963-489E857BA91A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{474898B0-0EC1-43FE-8963-489E857BA91A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474898B0-0EC1-43FE-8963-489E857BA91A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}.Release|Any CPU.ActiveCfg = Release|Any CPU

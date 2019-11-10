@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <RootNamespace></RootNamespace>
+    <IsPackable>False</IsPackable>
+    <NoWarn>CS0649;CS0169</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nuke.Common" Version="0.23.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <NukeSpecificationFiles Include="**\*.json" Exclude="bin\**;obj\**" />
+    <NukeExternalFiles Include="**\*.*.ext" Exclude="bin\**;obj\**" />
+    <None Remove="*.csproj.DotSettings;*.ref.*.txt" />
+
+    <!-- Common build related files -->
+    <None Include="..\Source\ApiTemplate\build.ps1" />
+    <None Include="..\Source\ApiTemplate\build.sh" />
+
+    <None Include="..\.nuke" LinkBase="config" />
+    <None Include="..\global.json" LinkBase="config" Condition="Exists('..\global.json')" />
+    <None Include="..\nuget.config" LinkBase="config" Condition="Exists('..\nuget.config')" />
+    <None Include="..\GitVersion.yml" LinkBase="config" Condition="Exists('..\GitVersion.yml')" />
+
+    <None Include="..\.teamcity\settings.kts" LinkBase="ci" Condition="Exists('..\.teamcity\settings.kts')" />
+    <None Include="..\.github\workflows\*.yml" LinkBase="ci" />
+    <None Include="..\azure-pipelines.yml" LinkBase="ci" Condition="Exists('..\azure-pipelines.yml')" />
+    <None Include="..\Jenkinsfile" LinkBase="ci" Condition="Exists('..\Jenkinsfile')" />
+    <None Include="..\appveyor.yml" LinkBase="ci" Condition="Exists('..\appveyor.yml')" />
+    <None Include="..\.travis.yml" LinkBase="ci" Condition="Exists('..\.travis.yml')" />
+  </ItemGroup>
+
+</Project>
