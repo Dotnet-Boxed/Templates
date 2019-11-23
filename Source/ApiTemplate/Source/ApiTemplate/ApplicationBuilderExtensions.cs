@@ -9,9 +9,10 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
 #if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
+    using Microsoft.AspNetCore.Routing;
 #endif
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
@@ -43,15 +44,14 @@ namespace ApiTemplate
         /// Uses custom serilog request logging. Adds additional properties to each log.
         /// See https://github.com/serilog/serilog-aspnetcore.
         /// </summary>
-        public static IApplicationBuilder UseCustomSerilogRequestLogging(
-            this IApplicationBuilder application,
-            IActionContextAccessor actionContextAccessor) =>
+        public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    var actionDescriptor = actionContextAccessor.ActionContext.ActionDescriptor;
-                    diagnosticContext.Set("ActionName", actionDescriptor.DisplayName);
-                    diagnosticContext.Set("ActionId", actionDescriptor.Id);
+                    var endpoint = httpContext.GetEndpoint();
+                    var routeName = endpoint?.Metadata?.GetMetadata<RouteNameMetadata>()?.RouteName;
+                    diagnosticContext.Set("RouteName", routeName);
+
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });

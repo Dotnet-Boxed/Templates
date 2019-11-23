@@ -16,7 +16,6 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -63,7 +62,7 @@ namespace GraphQLTemplate
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if ResponseCompression
-                .AddCustomResponseCompression()
+                .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
                 .AddCustomStrictTransportSecurity()
@@ -74,9 +73,9 @@ namespace GraphQLTemplate
                 .AddHttpContextAccessor()
                 .AddControllers()
                     .AddCustomJsonOptions(this.webHostEnvironment)
-                    .AddCustomMvcOptions()
+                    .AddCustomMvcOptions(this.configuration)
                 .Services
-                .AddCustomGraphQL(this.webHostEnvironment)
+                .AddCustomGraphQL(this.configuration, this.webHostEnvironment)
 #if Authorization
                 .AddCustomGraphQLAuthorization()
 #endif
@@ -87,7 +86,7 @@ namespace GraphQLTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public virtual void Configure(IApplicationBuilder application, IActionContextAccessor actionContextAccessor) =>
+        public virtual void Configure(IApplicationBuilder application) =>
             application
 #if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
@@ -114,7 +113,7 @@ namespace GraphQLTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
-                .UseCustomSerilogRequestLogging(actionContextAccessor)
+                .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
                     builder =>
                     {

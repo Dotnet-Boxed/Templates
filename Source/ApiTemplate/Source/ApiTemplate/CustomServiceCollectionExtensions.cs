@@ -128,7 +128,9 @@ namespace ApiTemplate
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
-        public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomResponseCompression(
+            this IServiceCollection services,
+            IConfiguration configuration) =>
             services
                 .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
@@ -136,9 +138,9 @@ namespace ApiTemplate
                     options =>
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var customMimeTypes = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<CompressionOptions>()
+                        var customMimeTypes = configuration
+                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .Get<CompressionOptions>()
                             .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 

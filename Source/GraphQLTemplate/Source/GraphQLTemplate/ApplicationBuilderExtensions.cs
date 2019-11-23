@@ -6,7 +6,6 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
 
@@ -37,15 +36,10 @@ namespace GraphQLTemplate
         /// Uses custom serilog request logging. Adds additional properties to each log.
         /// See https://github.com/serilog/serilog-aspnetcore.
         /// </summary>
-        public static IApplicationBuilder UseCustomSerilogRequestLogging(
-            this IApplicationBuilder application,
-            IActionContextAccessor actionContextAccessor) =>
+        public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    var actionDescriptor = actionContextAccessor.ActionContext.ActionDescriptor;
-                    diagnosticContext.Set("ActionName", actionDescriptor.DisplayName);
-                    diagnosticContext.Set("ActionId", actionDescriptor.Id);
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });

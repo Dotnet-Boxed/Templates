@@ -119,7 +119,9 @@ namespace GraphQLTemplate
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
-        public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomResponseCompression(
+            this IServiceCollection services,
+            IConfiguration configuration) =>
             services
                 .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
@@ -127,9 +129,9 @@ namespace GraphQLTemplate
                     options =>
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var customMimeTypes = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<CompressionOptions>()
+                        var customMimeTypes = configuration
+                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .Get<CompressionOptions>()
                             .MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 
@@ -183,6 +185,7 @@ namespace GraphQLTemplate
 #endif
         public static IServiceCollection AddCustomGraphQL(
             this IServiceCollection services,
+            IConfiguration configuration,
             IWebHostEnvironment webHostEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.
@@ -190,14 +193,13 @@ namespace GraphQLTemplate
                 .AddGraphQL(
                     options =>
                     {
-                        var configuration = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<IOptions<GraphQLOptions>>()
-                            .Value;
+                        var graphQLOptions = configuration
+                            .GetSection(nameof(ApplicationOptions.GraphQL))
+                            .Get<GraphQLOptions>();
                         // Set some limits for security, read from configuration.
-                        options.ComplexityConfiguration = configuration.ComplexityConfiguration;
+                        options.ComplexityConfiguration = graphQLOptions.ComplexityConfiguration;
                         // Enable GraphQL metrics to be output in the response, read from configuration.
-                        options.EnableMetrics = configuration.EnableMetrics;
+                        options.EnableMetrics = graphQLOptions.EnableMetrics;
                         // Show stack traces in exceptions. Don't turn this on in production.
                         options.ExposeExceptions = webHostEnvironment.IsDevelopment();
                     })

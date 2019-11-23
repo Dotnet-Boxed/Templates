@@ -72,9 +72,7 @@ namespace OrleansTemplate.Server
 
         private static void ConfigureSiloBuilder(
             Microsoft.Extensions.Hosting.HostBuilderContext context,
-            ISiloBuilder siloBuilder)
-        {
-            StorageOptions storageOptions = null;
+            ISiloBuilder siloBuilder) =>
             siloBuilder
                 // Prevent the silo from automatically stopping itself when the cancel key is pressed.
                 .Configure<ProcessExitHandlingOptions>(options => options.FastKillOnProcessExit = false)
@@ -88,11 +86,10 @@ namespace OrleansTemplate.Server
                         services.Configure<ApplicationInsightsTelemetryConsumerOptions>(
                             context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
 #endif
-
-                        storageOptions = services.BuildServiceProvider().GetRequiredService<IOptions<StorageOptions>>().Value;
                     })
                 .UseSiloUnobservedExceptionsHandler()
-                .UseAzureStorageClustering(options => options.ConnectionString = storageOptions.ConnectionString)
+                .UseAzureStorageClustering(
+                    options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
                 .ConfigureEndpoints(
                     EndpointOptions.DEFAULT_SILO_PORT,
                     EndpointOptions.DEFAULT_GATEWAY_PORT,
@@ -104,35 +101,24 @@ namespace OrleansTemplate.Server
                 .AddAzureTableGrainStorageAsDefault(
                     options =>
                     {
-                        options.ConnectionString = storageOptions.ConnectionString;
+                        options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString;
                         options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                         options.UseJson = true;
                     })
-                .UseAzureTableReminderService(options => options.ConnectionString = storageOptions.ConnectionString)
+                .UseAzureTableReminderService(
+                    options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
                 .UseTransactions(withStatisticsReporter: true)
-                .AddAzureTableTransactionalStateStorageAsDefault(options => options.ConnectionString = storageOptions.ConnectionString)
+                .AddAzureTableTransactionalStateStorageAsDefault(
+                    options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default)
                 .AddAzureTableGrainStorage(
                     "PubSubStore",
                     options =>
                     {
-                        options.ConnectionString = storageOptions.ConnectionString;
+                        options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString;
                         options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                         options.UseJson = true;
                     })
-#if TLS
-                .UseTls(
-                    options =>
-                    {
-                        // TODO: Configure a certificate.
-                        options.LocalCertificate = null;
-
-                        if (context.HostingEnvironment.IsDevelopment())
-                        {
-                            options.AllowAnyRemoteCertificate();
-                        }
-                    })
-#endif
                 .UseIf(
                     RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
                     x => x.UseLinuxEnvironmentStatistics())
@@ -140,7 +126,6 @@ namespace OrleansTemplate.Server
                     RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
                     x => x.UsePerfCounterEnvironmentStatistics())
                 .UseDashboard();
-        }
 
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,
@@ -185,6 +170,9 @@ namespace OrleansTemplate.Server
             jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonSerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
         }
+
+        private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
+            configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>();
 
         private static string GetAssemblyProductName() =>
             Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
