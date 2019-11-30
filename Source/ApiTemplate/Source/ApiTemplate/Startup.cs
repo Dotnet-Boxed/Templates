@@ -138,25 +138,23 @@ namespace ApiTemplate
 #else
                         builder.MapControllers();
 #endif
-#if HealthCheck
-#if CORS
+#if HealthCheck && CORS
                         builder
                             .MapHealthChecks("/status")
                             .RequireCors(CorsPolicyName.AllowAny);
                         builder
                             .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
                             .RequireCors(CorsPolicyName.AllowAny);
-#else
+#elif HealthCheck
                         builder.MapHealthChecks("/status");
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
-#endif
-#if !Swagger
-                    });
-#else
+#if Swagger
                     })
                 .UseSwagger()
                 .UseCustomSwaggerUI();
+#else
+                    });
 #endif
     }
 }
