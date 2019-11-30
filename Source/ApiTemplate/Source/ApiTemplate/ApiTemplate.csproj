@@ -48,12 +48,9 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <ProjectReference Include="..\..\..\..\..\Framework\Source\Boxed.AspNetCore\Boxed.AspNetCore.csproj" />
-    <ProjectReference Include="..\..\..\..\..\Framework\Source\Boxed.AspNetCore.Swagger\Boxed.AspNetCore.Swagger.csproj" Condition="'$(Swagger)' == 'true'" />
-    <ProjectReference Include="..\..\..\..\..\Framework\Source\Boxed.Mapping\Boxed.Mapping.csproj" />
-    <!--<PackageReference Include="Boxed.AspNetCore" Version="4.0.0" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="5.1.0" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Boxed.Mapping" Version="2.0.0" />-->
+    <PackageReference Include="Boxed.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="6.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.Mapping" Version="3.0.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />

@@ -42,8 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <ProjectReference Include="..\..\..\..\..\Framework\Source\Boxed.AspNetCore\Boxed.AspNetCore.csproj" />
-    <!--<PackageReference Include="Boxed.AspNetCore" Version="4.0.0" />-->
+    <PackageReference Include="Boxed.AspNetCore" Version="5.0.0" />
     <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="GraphQL" Version="2.4.0" />
     <PackageReference Include="GraphQL.Authorization" Version="2.1.29" Condition="'$(Authorization)' == 'true'" />

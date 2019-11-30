@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <ProjectReference Include="..\..\..\Framework\Source\Boxed.DotnetNewTest\Boxed.DotnetNewTest.csproj" />
-    <!--<PackageReference Include="Boxed.DotnetNewTest" Version="2.0.0" />-->
+    <PackageReference Include="Boxed.DotnetNewTest" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
