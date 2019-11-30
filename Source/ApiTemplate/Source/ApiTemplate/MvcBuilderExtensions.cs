@@ -9,6 +9,7 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
@@ -36,16 +37,14 @@ namespace ApiTemplate
                     jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
 
-        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder) =>
+        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
             builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    var cacheProfileOptions = builder
-                        .Services
-                        .BuildServiceProvider()
-                        .GetRequiredService<CacheProfileOptions>();
-                    foreach (var keyValuePair in cacheProfileOptions)
+                    foreach (var keyValuePair in configuration
+                        .GetSection(nameof(ApplicationOptions.CacheProfiles))
+                        .Get<CacheProfileOptions>())
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }

@@ -62,7 +62,7 @@ namespace ApiTemplate
                 .AddResponseCaching()
 #endif
 #if ResponseCompression
-                .AddCustomResponseCompression()
+                .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
                 .AddCustomStrictTransportSecurity()
@@ -88,7 +88,7 @@ namespace ApiTemplate
                     // Adds the XML input and output formatter using the XmlSerializer.
                     .AddXmlSerializerFormatters()
 #endif
-                    .AddCustomMvcOptions()
+                    .AddCustomMvcOptions(this.configuration)
                 .Services
                 .AddProjectCommands()
                 .AddProjectMappers()
@@ -129,6 +129,7 @@ namespace ApiTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
+                .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
                     builder =>
                     {

@@ -62,7 +62,7 @@ namespace GraphQLTemplate
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if ResponseCompression
-                .AddCustomResponseCompression()
+                .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
                 .AddCustomStrictTransportSecurity()
@@ -73,9 +73,9 @@ namespace GraphQLTemplate
                 .AddHttpContextAccessor()
                 .AddControllers()
                     .AddCustomJsonOptions(this.webHostEnvironment)
-                    .AddCustomMvcOptions()
+                    .AddCustomMvcOptions(this.configuration)
                 .Services
-                .AddCustomGraphQL(this.webHostEnvironment)
+                .AddCustomGraphQL(this.configuration, this.webHostEnvironment)
 #if Authorization
                 .AddCustomGraphQLAuthorization()
 #endif
@@ -113,6 +113,7 @@ namespace GraphQLTemplate
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
+                .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
                     builder =>
                     {

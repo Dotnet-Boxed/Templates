@@ -124,6 +124,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
+            // Note: ASP.NET Core should be automatically returning a ProblemDetails response but is returning an empty
+            // response body instead. See https://github.com/aspnet/AspNetCore/issues/16889
         }
 
         [Fact]
@@ -282,6 +284,21 @@ namespace ApiTemplate.IntegrationTest.Controllers
         public async Task PostCar_Invalid_Returns400BadRequestAsync()
         {
             var response = await this.client.PostAsJsonAsync("cars", new SaveCar());
+
+            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        }
+
+        [Fact]
+        public async Task PostCar_EmptyRequestBody_Returns400BadRequestAsync()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "cars")
+            {
+                Content = new ObjectContent<SaveCar>(null, new JsonMediaTypeFormatter(), ContentType.Json)
+            };
+
+            var response = await this.client.SendAsync(request);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);

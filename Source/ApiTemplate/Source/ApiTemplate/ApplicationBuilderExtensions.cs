@@ -9,10 +9,13 @@ namespace ApiTemplate
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
 #if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.AspNetCore.Routing;
 #endif
     using Microsoft.Extensions.DependencyInjection;
+    using Serilog;
 
     public static partial class ApplicationBuilderExtensions
     {
@@ -36,6 +39,22 @@ namespace ApiTemplate
                         OnPrepareResponse = context => context.Context.ApplyCacheProfile(cacheProfile),
                     });
         }
+
+        /// <summary>
+        /// Uses custom serilog request logging. Adds additional properties to each log.
+        /// See https://github.com/serilog/serilog-aspnetcore.
+        /// </summary>
+        public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
+            application.UseSerilogRequestLogging(
+                options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    var endpoint = httpContext.GetEndpoint();
+                    var routeName = endpoint?.Metadata?.GetMetadata<RouteNameMetadata>()?.RouteName;
+                    diagnosticContext.Set("RouteName", routeName);
+
+                    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
+                    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                });
 
 #if Swagger
 

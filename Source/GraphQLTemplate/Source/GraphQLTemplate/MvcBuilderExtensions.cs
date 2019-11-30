@@ -3,6 +3,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Newtonsoft.Json;
@@ -33,13 +34,14 @@ namespace GraphQLTemplate
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
 
-        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder) =>
+        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
             builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    var cacheProfileOptions = builder.Services.BuildServiceProvider().GetRequiredService<CacheProfileOptions>();
-                    foreach (var keyValuePair in cacheProfileOptions)
+                    foreach (var keyValuePair in configuration
+                        .GetSection(nameof(ApplicationOptions.CacheProfiles))
+                        .Get<CacheProfileOptions>())
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }
