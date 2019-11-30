@@ -132,7 +132,7 @@ namespace GraphQLTemplate
                         var customMimeTypes = configuration
                             .GetSection(nameof(ApplicationOptions.Compression))
                             .Get<CompressionOptions>()
-                            .MimeTypes ?? Enumerable.Empty<string>();
+                            ?.MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 
                         options.Providers.Add<BrotliCompressionProvider>();
