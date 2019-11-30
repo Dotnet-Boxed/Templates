@@ -22,6 +22,8 @@ namespace OrleansTemplate.Server.IntegrationTest
             await Task.Delay(TimeSpan.FromSeconds(2));
 
             var countAfter = await counterGrain.GetCount();
+
+            Assert.Equal(1L, countAfter);
         }
     }
 }
