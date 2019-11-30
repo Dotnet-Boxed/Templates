@@ -24,7 +24,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("Default")]
         [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("NoHostFiltering", "host-filtering=false")]
-        [InlineData("NoForwardedHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
+        [InlineData("NoFwdHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
         public async Task RestoreAndBuild_Default_SuccessfulAsync(string name, params string[] arguments)
         {
             using (var tempDirectory = TempDirectory.NewTempDirectory())
