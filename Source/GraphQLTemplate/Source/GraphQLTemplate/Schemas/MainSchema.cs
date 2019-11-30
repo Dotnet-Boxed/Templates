@@ -17,7 +17,7 @@ namespace GraphQLTemplate.Schemas
 
             : base(resolver)
         {
-            this.Query = resolver.Resolve<QueryObject>();
+            this.Query = query;
 #if Mutations
             this.Mutation = mutation;
 #endif
