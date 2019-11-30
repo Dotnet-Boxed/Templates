@@ -16,12 +16,12 @@ namespace GraphQLTemplate
     using GraphQL.Server;
     using GraphQL.Server.Internal;
     using GraphQL.Validation;
-#if Authorization || CORS
+#if (Authorization || CORS)
     using GraphQLTemplate.Constants;
 #endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
-#if !ForwardedHeaders && HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Hosting;

@@ -25,7 +25,7 @@ namespace ApiTemplate
     using CorrelationId;
 #endif
     using Microsoft.AspNetCore.Builder;
-#if !ForwardedHeaders && HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
 #endif
 #if Versioning
@@ -200,7 +200,7 @@ namespace ApiTemplate
                     {
                         options.AssumeDefaultVersionWhenUnspecified = true;
                         options.ReportApiVersions = true;
-#if !Versioning
+#if (!Versioning)
                     });
 #else
                     })

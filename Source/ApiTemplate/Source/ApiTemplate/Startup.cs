@@ -138,7 +138,7 @@ namespace ApiTemplate
 #else
                         builder.MapControllers();
 #endif
-#if HealthCheck && CORS
+#if (HealthCheck && CORS)
                         builder
                             .MapHealthChecks("/status")
                             .RequireCors(CorsPolicyName.AllowAny);
