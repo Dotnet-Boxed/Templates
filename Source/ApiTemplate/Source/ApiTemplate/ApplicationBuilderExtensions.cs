@@ -49,7 +49,7 @@ namespace ApiTemplate
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
                     var endpoint = httpContext.GetEndpoint();
-                    var routeName = endpoint?.Metadata?.GetMetadata<RouteNameMetadata>()?.RouteName;
+                    var routeName = endpoint?.Metadata?.GetMetadata<IRouteNameMetadata>()?.RouteName;
                     diagnosticContext.Set("RouteName", routeName);
 
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
