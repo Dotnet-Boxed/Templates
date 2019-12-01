@@ -2,7 +2,7 @@
 
   <PropertyGroup Label="Build">
     <PackageType>Template</PackageType>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard3.0</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <ContentTargetFolders>content</ContentTargetFolders>
