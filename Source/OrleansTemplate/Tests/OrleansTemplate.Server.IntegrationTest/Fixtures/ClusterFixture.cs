@@ -13,13 +13,11 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 
         public TestCluster Cluster { get; }
 
-        public TestCluster CreateTestCluster()
-        {
-            var builder = new TestClusterBuilder();
-            builder.AddClientBuilderConfigurator<TestClientBuilderConfigurator>();
-            builder.AddSiloBuilderConfigurator<TestSiloBuilderConfigurator>();
-            return builder.Build();
-        }
+        public TestCluster CreateTestCluster() =>
+            new TestClusterBuilder()
+                .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
+                .AddSiloBuilderConfigurator<TestSiloBuilderConfigurator>()
+                .Build();
 
         // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in .NET Core 3.0.
         public void Dispose() => this.Cluster.Dispose();

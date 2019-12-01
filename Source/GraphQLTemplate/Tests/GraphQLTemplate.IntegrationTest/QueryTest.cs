@@ -17,11 +17,11 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task IntrospectionQuery_Default_Returns200Ok()
         {
-            var introspectionQuery = await this.client.PostGraphQL(GraphQlQuery.Introspection);
-            var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
+            var response = await this.client.PostGraphQLAsync(GraphQlQuery.Introspection);
 
-            Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
-            Assert.Null(introspectionContent.Errors);
+            var graphQlResponse = await response.Content.ReadAsAsync<GraphQLResponse>();
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Null(graphQlResponse.Errors);
         }
     }
 }

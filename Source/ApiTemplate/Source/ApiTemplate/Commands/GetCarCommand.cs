@@ -9,7 +9,6 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.Extensions.Primitives;
     using Microsoft.Net.Http.Headers;
 
     public class GetCarCommand : IGetCarCommand
@@ -30,8 +29,8 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.Get(carId, cancellationToken);
-            if (car == null)
+            var car = await this.carRepository.GetAsync(carId, cancellationToken);
+            if (car is null)
             {
                 return new NotFoundResult();
             }

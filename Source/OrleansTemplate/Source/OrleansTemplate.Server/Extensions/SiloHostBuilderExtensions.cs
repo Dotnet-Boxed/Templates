@@ -3,73 +3,76 @@ namespace OrleansTemplate.Server
     using System;
     using Orleans.Hosting;
 
-    public static class SiloHostBuilderExtensions
+    /// <summary>
+    /// <see cref="ISiloBuilder"/> extension methods.
+    /// </summary>
+    public static class SiloBuilderExtensions
     {
         /// <summary>
         /// Executes the specified action if the specified <paramref name="condition"/> is <c>true</c> which can be
-        /// used to conditionally add to the host builder.
+        /// used to conditionally add to the silo builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="siloBuilder">The silo builder.</param>
         /// <param name="condition">If set to <c>true</c> the action is executed.</param>
-        /// <param name="action">The action used to add to the host builder.</param>
-        /// <returns>The same host builder.</returns>
-        public static ISiloHostBuilder UseIf(
-            this ISiloHostBuilder hostBuilder,
+        /// <param name="action">The action used to add to the silo builder.</param>
+        /// <returns>The same silo builder.</returns>
+        public static ISiloBuilder UseIf(
+            this ISiloBuilder siloBuilder,
             bool condition,
-            Func<ISiloHostBuilder, ISiloHostBuilder> action)
+            Func<ISiloBuilder, ISiloBuilder> action)
         {
-            if (hostBuilder == null)
+            if (siloBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(siloBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
             if (condition)
             {
-                hostBuilder = action(hostBuilder);
+                siloBuilder = action(siloBuilder);
             }
 
-            return hostBuilder;
+            return siloBuilder;
         }
 
         /// <summary>
         /// Executes the specified action if the specified <paramref name="condition"/> is <c>true</c> which can be
-        /// used to conditionally add to the host builder.
+        /// used to conditionally add to the silo builder.
         /// </summary>
-        /// <param name="hostBuilder">The host builder.</param>
+        /// <param name="siloBuilder">The silo builder.</param>
         /// <param name="condition">If <c>true</c> is returned the action is executed.</param>
-        /// <param name="action">The action used to add to the host builder.</param>
-        /// <returns>The same host builder.</returns>
-        public static ISiloHostBuilder UseIf(
-            this ISiloHostBuilder hostBuilder,
-            Func<ISiloHostBuilder, bool> condition,
-            Func<ISiloHostBuilder, ISiloHostBuilder> action)
+        /// <param name="action">The action used to add to the silo builder.</param>
+        /// <returns>The same silo builder.</returns>
+        public static ISiloBuilder UseIf(
+            this ISiloBuilder siloBuilder,
+            Func<ISiloBuilder, bool> condition,
+            Func<ISiloBuilder, ISiloBuilder> action)
         {
-            if (hostBuilder == null)
+            if (siloBuilder is null)
             {
-                throw new ArgumentNullException(nameof(hostBuilder));
+                throw new ArgumentNullException(nameof(siloBuilder));
             }
 
-            if (condition == null)
+            if (condition is null)
             {
                 throw new ArgumentNullException(nameof(condition));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            if (condition(hostBuilder))
+            if (condition(siloBuilder))
             {
-                hostBuilder = action(hostBuilder);
+                siloBuilder = action(siloBuilder);
             }
 
-            return hostBuilder;
+            return siloBuilder;
         }
     }
 }

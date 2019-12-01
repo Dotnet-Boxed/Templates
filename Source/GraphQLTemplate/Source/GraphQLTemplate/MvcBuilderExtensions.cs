@@ -1,45 +1,26 @@
 namespace GraphQLTemplate
 {
-#if CORS
-    using GraphQLTemplate.Constants;
-#endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Formatters;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public static class MvcCoreBuilderExtensions
+    public static class MvcBuilderExtensions
     {
-#if CORS
-        /// <summary>
-        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
-        /// https://docs.asp.net/en/latest/security/cors.html
-        /// </summary>
-        public static IMvcCoreBuilder AddCustomCors(this IMvcCoreBuilder builder) =>
-            builder.AddCors(
-                options =>
-                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
-                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
-                    options.AddPolicy(
-                        CorsPolicyName.AllowAny,
-                        x => x
-                            .AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()));
-
-#endif
         /// <summary>
         /// Adds customized JSON serializer settings.
         /// </summary>
-        public static IMvcCoreBuilder AddCustomJsonOptions(
-            this IMvcCoreBuilder builder,
-            IHostingEnvironment hostingEnvironment) =>
-            builder.AddJsonOptions(
+        public static IMvcBuilder AddCustomJsonOptions(
+            this IMvcBuilder builder,
+            IWebHostEnvironment webHostEnvironment) =>
+            builder.AddNewtonsoftJson(
                 options =>
                 {
-                    if (hostingEnvironment.IsDevelopment())
+                    if (webHostEnvironment.IsDevelopment())
                     {
                         // Pretty print the JSON in development for easier debugging.
                         options.SerializerSettings.Formatting = Formatting.Indented;
@@ -53,16 +34,20 @@ namespace GraphQLTemplate
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
 
-        public static IMvcCoreBuilder AddCustomMvcOptions(this IMvcCoreBuilder builder) =>
+        public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
             builder.AddMvcOptions(
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    var cacheProfileOptions = builder.Services.BuildServiceProvider().GetRequiredService<CacheProfileOptions>();
-                    foreach (var keyValuePair in cacheProfileOptions)
+                    foreach (var keyValuePair in configuration
+                        .GetSection(nameof(ApplicationOptions.CacheProfiles))
+                        .Get<CacheProfileOptions>())
                     {
                         options.CacheProfiles.Add(keyValuePair);
                     }
+
+                    // Remove plain text (text/plain) output formatter.
+                    options.OutputFormatters.RemoveType<StringOutputFormatter>();
 
                     // Returns a 406 Not Acceptable if the MIME type in the Accept HTTP header is not valid.
                     options.ReturnHttpNotAcceptable = true;

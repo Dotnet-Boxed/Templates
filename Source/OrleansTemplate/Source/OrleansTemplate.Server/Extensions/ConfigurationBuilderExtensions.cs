@@ -21,12 +21,12 @@ namespace OrleansTemplate.Server
             bool condition,
             Func<IConfigurationBuilder, IConfigurationBuilder> action)
         {
-            if (configurationBuilder == null)
+            if (configurationBuilder is null)
             {
                 throw new ArgumentNullException(nameof(configurationBuilder));
             }
 
-            if (action == null)
+            if (action is null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
@@ -58,17 +58,17 @@ namespace OrleansTemplate.Server
             Func<IConfigurationBuilder, IConfigurationBuilder> ifAction,
             Func<IConfigurationBuilder, IConfigurationBuilder> elseAction)
         {
-            if (configurationBuilder == null)
+            if (configurationBuilder is null)
             {
                 throw new ArgumentNullException(nameof(configurationBuilder));
             }
 
-            if (ifAction == null)
+            if (ifAction is null)
             {
                 throw new ArgumentNullException(nameof(ifAction));
             }
 
-            if (elseAction == null)
+            if (elseAction is null)
             {
                 throw new ArgumentNullException(nameof(elseAction));
             }

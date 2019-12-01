@@ -1,7 +1,7 @@
 namespace GraphQLTemplate.IntegrationTest.Fixtures
 {
-    // using GraphQLTemplate.Services;
     using Microsoft.AspNetCore.Hosting;
+    // using GraphQLTemplate.Services;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Moq;
@@ -10,8 +10,8 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
     {
         // private readonly Mock<IClockService> clockServiceMock;
 
-        public TestStartup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
-            : base(configuration, hostingEnvironment)
+        public TestStartup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
+            : base(configuration, webHostEnvironment)
         {
             // this.clockServiceMock = new Mock<IClockService>(MockBehavior.Strict);
         }

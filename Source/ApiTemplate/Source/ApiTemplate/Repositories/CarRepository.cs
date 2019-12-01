@@ -70,14 +70,14 @@ namespace ApiTemplate.Repositories
                 },
             };
 
-        public Task<Car> Add(Car car, CancellationToken cancellationToken)
+        public Task<Car> AddAsync(Car car, CancellationToken cancellationToken)
         {
             Cars.Add(car);
             car.CarId = Cars.Max(x => x.CarId) + 1;
             return Task.FromResult(car);
         }
 
-        public Task Delete(Car car, CancellationToken cancellationToken)
+        public Task DeleteAsync(Car car, CancellationToken cancellationToken)
         {
             if (Cars.Contains(car))
             {
@@ -87,13 +87,13 @@ namespace ApiTemplate.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<Car> Get(int carId, CancellationToken cancellationToken)
+        public Task<Car> GetAsync(int carId, CancellationToken cancellationToken)
         {
             var car = Cars.FirstOrDefault(x => x.CarId == carId);
             return Task.FromResult(car);
         }
 
-        public Task<List<Car>> GetCars(
+        public Task<List<Car>> GetCarsAsync(
             int? first,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
@@ -104,7 +104,7 @@ namespace ApiTemplate.Repositories
                 .If(first.HasValue, x => x.Take(first.Value))
                 .ToList());
 
-        public Task<List<Car>> GetCarsReverse(
+        public Task<List<Car>> GetCarsReverseAsync(
             int? last,
             DateTimeOffset? createdAfter,
             DateTimeOffset? createdBefore,
@@ -115,7 +115,7 @@ namespace ApiTemplate.Repositories
                 .If(last.HasValue, x => x.TakeLast(last.Value))
                 .ToList());
 
-        public Task<bool> GetHasNextPage(
+        public Task<bool> GetHasNextPageAsync(
             int? first,
             DateTimeOffset? createdAfter,
             CancellationToken cancellationToken) =>
@@ -124,7 +124,7 @@ namespace ApiTemplate.Repositories
                 .Skip(first.Value)
                 .Any());
 
-        public Task<bool> GetHasPreviousPage(
+        public Task<bool> GetHasPreviousPageAsync(
             int? last,
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
@@ -133,9 +133,9 @@ namespace ApiTemplate.Repositories
                 .SkipLast(last.Value)
                 .Any());
 
-        public Task<int> GetTotalCount(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
+        public Task<int> GetTotalCountAsync(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
 
-        public Task<Car> Update(Car car, CancellationToken cancellationToken)
+        public Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken)
         {
             var existingCar = Cars.FirstOrDefault(x => x.CarId == car.CarId);
             existingCar.Cylinders = car.Cylinders;

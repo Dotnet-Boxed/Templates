@@ -16,18 +16,22 @@ namespace GraphQLTemplate
     using GraphQL.Server;
     using GraphQL.Server.Internal;
     using GraphQL.Validation;
+#if (Authorization || CORS)
     using GraphQLTemplate.Constants;
+#endif
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
-#if !ForwardedHeaders && HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Hosting;
 #if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 
     /// <summary>
@@ -70,6 +74,24 @@ namespace GraphQLTemplate
                 //         x.TableName = "Sessions";
                 //     });
 
+#if CORS
+        /// <summary>
+        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+        /// https://docs.asp.net/en/latest/security/cors.html
+        /// </summary>
+        public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
+            services.AddCors(
+                options =>
+                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
+                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
+                    options.AddPolicy(
+                        CorsPolicyName.AllowAny,
+                        x => x
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()));
+
+#endif
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -78,7 +100,7 @@ namespace GraphQLTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
 #if ResponseCompression
@@ -89,14 +111,17 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)));
+                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 
 #if ResponseCompression
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
-        public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomResponseCompression(
+            this IServiceCollection services,
+            IConfiguration configuration) =>
             services
                 .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
@@ -104,10 +129,10 @@ namespace GraphQLTemplate
                     options =>
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var customMimeTypes = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<CompressionOptions>()
-                            .MimeTypes ?? Enumerable.Empty<string>();
+                        var customMimeTypes = configuration
+                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .Get<CompressionOptions>()
+                            ?.MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 
                         options.Providers.Add<BrotliCompressionProvider>();
@@ -158,23 +183,25 @@ namespace GraphQLTemplate
                 .Services;
 
 #endif
-        public static IServiceCollection AddCustomGraphQL(this IServiceCollection services, IHostingEnvironment hostingEnvironment) =>
+        public static IServiceCollection AddCustomGraphQL(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            IWebHostEnvironment webHostEnvironment) =>
             services
                 // Add a way for GraphQL.NET to resolve types.
                 .AddSingleton<IDependencyResolver, GraphQLDependencyResolver>()
                 .AddGraphQL(
                     options =>
                     {
-                        var configuration = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<IOptions<GraphQLOptions>>()
-                            .Value;
+                        var graphQLOptions = configuration
+                            .GetSection(nameof(ApplicationOptions.GraphQL))
+                            .Get<GraphQLOptions>();
                         // Set some limits for security, read from configuration.
-                        options.ComplexityConfiguration = configuration.ComplexityConfiguration;
+                        options.ComplexityConfiguration = graphQLOptions.ComplexityConfiguration;
                         // Enable GraphQL metrics to be output in the response, read from configuration.
-                        options.EnableMetrics = configuration.EnableMetrics;
+                        options.EnableMetrics = graphQLOptions.EnableMetrics;
                         // Show stack traces in exceptions. Don't turn this on in production.
-                        options.ExposeExceptions = hostingEnvironment.IsDevelopment();
+                        options.ExposeExceptions = webHostEnvironment.IsDevelopment();
                     })
                 // Adds all graph types in the current assembly with a singleton lifetime.
                 .AddGraphTypes()
@@ -190,7 +217,6 @@ namespace GraphQLTemplate
 #endif
                 .Services
                 .AddTransient(typeof(IGraphQLExecuter<>), typeof(InstrumentingGraphQLExecutor<>));
-
 #if Authorization
 
         /// <summary>

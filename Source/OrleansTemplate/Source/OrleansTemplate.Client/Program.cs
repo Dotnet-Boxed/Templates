@@ -72,6 +72,19 @@ namespace OrleansTemplate.Client
                     parts => parts
                         .AddApplicationPart(typeof(ICounterGrain).Assembly)
                         .WithReferences())
+#if TLS
+                .AddSimpleMessageStreamProvider(StreamProviderName.Default)
+                .UseTls(
+                    options =>
+                    {
+                        // TODO: Configure a certificate.
+                        options.LocalCertificate = null;
+
+                        // TODO: Do not allow any remote certificates in production.
+                        options.AllowAnyRemoteCertificate();
+                    });
+#else
                 .AddSimpleMessageStreamProvider(StreamProviderName.Default);
+#endif
     }
 }

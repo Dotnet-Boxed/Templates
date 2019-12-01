@@ -154,6 +154,12 @@
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
+    "TLS": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds TLS transport encryption to secure communication between the client and server.",
+      "defaultValue": "false"
+    },
     "IntegrationTest": {
       "type": "parameter",
       "datatype": "bool",

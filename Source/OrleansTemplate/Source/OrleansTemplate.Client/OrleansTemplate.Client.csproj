@@ -1,19 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+    <DefineConstants>$(DefineConstants);TLS</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <TLS>true</TLS>
+  </PropertyGroup>
+  <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Orleans.Client" Version="2.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="2.4.2" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" Version="2.4.2">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Orleans.Client" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.0.1" Condition="'$(TLS)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

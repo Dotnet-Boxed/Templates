@@ -1,6 +1,5 @@
 namespace ApiTemplate
 {
-    using System;
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -13,30 +12,30 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// The main start-up class for the application.
     /// </summary>
-    public class Startup : StartupBase
+    public class Startup
     {
         private readonly IConfiguration configuration;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
         /// <param name="configuration">The application configuration, where key value pair settings are stored. See
         /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
-        /// <param name="hostingEnvironment">The environment the application is running under. This can be Development,
+        /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
         /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
-        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
-            this.hostingEnvironment = hostingEnvironment;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
         /// <summary>
@@ -44,7 +43,7 @@ namespace ApiTemplate
         /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
-        public override void ConfigureServices(IServiceCollection services) =>
+        public virtual void ConfigureServices(IServiceCollection services) =>
             services
 #if ApplicationInsights
                 // Add Azure Application Insights data collection services to the services container.
@@ -54,13 +53,16 @@ namespace ApiTemplate
                 .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
+#if CORS
+                .AddCustomCors()
+#endif
                 .AddCustomOptions(this.configuration)
                 .AddCustomRouting()
 #if ResponseCaching
                 .AddResponseCaching()
 #endif
 #if ResponseCompression
-                .AddCustomResponseCompression()
+                .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
                 .AddCustomStrictTransportSecurity()
@@ -77,19 +79,8 @@ namespace ApiTemplate
 #if Versioning
                 .AddCustomApiVersioning()
 #endif
-#if Swagger && Versioning
-                .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV") // Version format: 'v'major[.minor][-status]
-#endif
-                .AddMvcCore()
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                    .AddApiExplorer()
-                    .AddAuthorization()
-                    .AddDataAnnotations()
-                    .AddJsonFormatters()
-                    .AddCustomJsonOptions(this.hostingEnvironment)
-#if CORS
-                    .AddCustomCors()
-#endif
+                .AddControllers()
+                    .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer
                     // Adds the XML input and output formatter using the DataContractSerializer.
                     .AddXmlDataContractSerializerFormatters()
@@ -97,7 +88,7 @@ namespace ApiTemplate
                     // Adds the XML input and output formatter using the XmlSerializer.
                     .AddXmlSerializerFormatters()
 #endif
-                    .AddCustomMvcOptions()
+                    .AddCustomMvcOptions(this.configuration)
                 .Services
                 .AddProjectCommands()
                 .AddProjectMappers()
@@ -108,12 +99,11 @@ namespace ApiTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
-        public override void Configure(IApplicationBuilder application) =>
+        public virtual void Configure(IApplicationBuilder application) =>
             application
 #if CorrelationId
                 // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
-                // UpdateTraceIdentifier must be false due to a bug. See https://github.com/aspnet/AspNetCore/issues/5144
-                .UseCorrelationId(new CorrelationIdOptions() { UpdateTraceIdentifier = false })
+                .UseCorrelationId()
 #endif
 #if ForwardedHeaders
                 .UseForwardedHeaders()
@@ -126,29 +116,45 @@ namespace ApiTemplate
 #if ResponseCompression
                 .UseResponseCompression()
 #endif
-#if CORS
-                .UseCors(CorsPolicyName.AllowAny)
-#endif
 #if HttpsEverywhere
                 .UseIf(
-                    !this.hostingEnvironment.IsDevelopment(),
+                    !this.webHostEnvironment.IsDevelopment(),
                     x => x.UseHsts())
 #endif
                 .UseIf(
-                    this.hostingEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperErrorPages())
-#if HealthCheck
-                .UseHealthChecks("/status")
-                .UseHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                    this.webHostEnvironment.IsDevelopment(),
+                    x => x.UseDeveloperExceptionPage())
+                .UseRouting()
+#if CORS
+                .UseCors(CorsPolicyName.AllowAny)
 #endif
                 .UseStaticFilesWithCacheControl()
+                .UseCustomSerilogRequestLogging()
+                .UseEndpoints(
+                    builder =>
+                    {
+#if CORS
+                        builder.MapControllers().RequireCors(CorsPolicyName.AllowAny);
+#else
+                        builder.MapControllers();
+#endif
+#if (HealthCheck && CORS)
+                        builder
+                            .MapHealthChecks("/status")
+                            .RequireCors(CorsPolicyName.AllowAny);
+                        builder
+                            .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                            .RequireCors(CorsPolicyName.AllowAny);
+#elif HealthCheck
+                        builder.MapHealthChecks("/status");
+                        builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+#endif
 #if Swagger
-                .UseMvc()
-                .UseSwagger(options => options.PreSerializeFilters.Add(
-                    (swaggerDoc, httpReq) => swaggerDoc.Host = httpReq.Host.Value))
+                    })
+                .UseSwagger()
                 .UseCustomSwaggerUI();
 #else
-                .UseMvc();
+                    });
 #endif
     }
 }

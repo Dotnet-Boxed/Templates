@@ -20,6 +20,10 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 
+#### Security
+
+- **TLS** (Default=Off) - Adds TLS transport encryption to secure communication between the client and server.
+
 #### Analytics
 
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.

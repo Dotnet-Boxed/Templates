@@ -22,12 +22,12 @@ namespace ApiTemplate.Mappers
 
         public void Map(Models.Car source, Car destination)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (destination == null)
+            if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));
             }

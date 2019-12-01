@@ -8,6 +8,9 @@ namespace ApiTemplate
 #if Swagger
     using System.Reflection;
 #endif
+#if CORS
+    using ApiTemplate.Constants;
+#endif
 #if Swagger && Versioning
     using ApiTemplate.OperationFilters;
 #endif
@@ -22,7 +25,7 @@ namespace ApiTemplate
     using CorrelationId;
 #endif
     using Microsoft.AspNetCore.Builder;
-#if !ForwardedHeaders && HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
 #endif
 #if Versioning
@@ -31,13 +34,14 @@ namespace ApiTemplate
 #if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
 #endif
+    using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
 #if Swagger
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
 #endif
 
     /// <summary>
@@ -80,6 +84,24 @@ namespace ApiTemplate
         //         x.TableName = "Sessions";
         //     });
 
+#if CORS
+        /// <summary>
+        /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
+        /// https://docs.asp.net/en/latest/security/cors.html
+        /// </summary>
+        public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
+            services.AddCors(
+                options =>
+                    // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
+                    // or a [EnableCors("PolicyName")] attribute on your controller or action.
+                    options.AddPolicy(
+                        CorsPolicyName.AllowAny,
+                        x => x
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()));
+
+#endif
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -88,7 +110,7 @@ namespace ApiTemplate
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                // ConfigureSingleton registers IOptions<T> and also T as a singleton to the services collection.
+                // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
 #if ResponseCompression
                 .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
@@ -98,14 +120,17 @@ namespace ApiTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)));
+                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 
 #if ResponseCompression
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
-        public static IServiceCollection AddCustomResponseCompression(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomResponseCompression(
+            this IServiceCollection services,
+            IConfiguration configuration) =>
             services
                 .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
                 .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
@@ -113,10 +138,10 @@ namespace ApiTemplate
                     options =>
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                        var customMimeTypes = services
-                            .BuildServiceProvider()
-                            .GetRequiredService<CompressionOptions>()
-                            .MimeTypes ?? Enumerable.Empty<string>();
+                        var customMimeTypes = configuration
+                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .Get<CompressionOptions>()
+                            ?.MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
 
                         options.Providers.Add<BrotliCompressionProvider>();
@@ -169,12 +194,18 @@ namespace ApiTemplate
 #endif
 #if Versioning
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
-            services.AddApiVersioning(
-                options =>
-                {
-                    options.AssumeDefaultVersionWhenUnspecified = true;
-                    options.ReportApiVersions = true;
-                });
+            services
+                .AddApiVersioning(
+                    options =>
+                    {
+                        options.AssumeDefaultVersionWhenUnspecified = true;
+                        options.ReportApiVersions = true;
+#if (!Versioning)
+                    });
+#else
+                    })
+                .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
+#endif
 
 #endif
 #if Swagger
@@ -189,9 +220,7 @@ namespace ApiTemplate
                     var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
                     var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
 
-                    options.DescribeAllEnumsAsStrings();
                     options.DescribeAllParametersInCamelCase();
-                    options.DescribeStringEnumsInCamelCase();
                     options.EnableAnnotations();
 
                     // Add the XML comment file for this assembly, so its contents can be displayed.
@@ -201,17 +230,18 @@ namespace ApiTemplate
                     options.OperationFilter<ApiVersionOperationFilter>();
 #endif
                     options.OperationFilter<CorrelationIdOperationFilter>();
+                    options.OperationFilter<ClaimsOperationFilter>();
                     options.OperationFilter<ForbiddenResponseOperationFilter>();
                     options.OperationFilter<UnauthorizedResponseOperationFilter>();
 
-                    // Show an example model for JsonPatchDocument<T>.
+                    // Show a default and example model for JsonPatchDocument<T>.
                     options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
 
 #if Versioning
                     var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
                     {
-                        var info = new Info()
+                        var info = new OpenApiInfo()
                         {
                             Title = assemblyProduct,
                             Description = apiVersionDescription.IsDeprecated ?

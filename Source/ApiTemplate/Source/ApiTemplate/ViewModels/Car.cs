@@ -1,13 +1,9 @@
 namespace ApiTemplate.ViewModels
 {
 #if Swagger
-    using ApiTemplate.ViewModelSchemaFilters;
-    using Swashbuckle.AspNetCore.Annotations;
-
     /// <summary>
     /// A make and model of car.
     /// </summary>
-    [SwaggerSchemaFilter(typeof(CarSchemaFilter))]
 #endif
     public class Car
     {
@@ -15,6 +11,7 @@ namespace ApiTemplate.ViewModels
         /// <summary>
         /// The cars unique identifier.
         /// </summary>
+        /// <example>1</example>
 #endif
         public int CarId { get; set; }
 
@@ -22,6 +19,7 @@ namespace ApiTemplate.ViewModels
         /// <summary>
         /// The number of cylinders in the cars engine.
         /// </summary>
+        /// <example>6</example>
 #endif
         public int Cylinders { get; set; }
 
@@ -29,6 +27,7 @@ namespace ApiTemplate.ViewModels
         /// <summary>
         /// The make of the car.
         /// </summary>
+        /// <example>Honda</example>
 #endif
         public string Make { get; set; }
 
@@ -36,6 +35,7 @@ namespace ApiTemplate.ViewModels
         /// <summary>
         /// The model of the car.
         /// </summary>
+        /// <example>Civic</example>
 #endif
         public string Model { get; set; }
 
@@ -43,6 +43,7 @@ namespace ApiTemplate.ViewModels
         /// <summary>
         /// The URL used to retrieve the resource conforming to REST'ful JSON http://restfuljson.org/.
         /// </summary>
+        /// <example>/cars/1</example>
 #endif
         public string Url { get; set; }
     }

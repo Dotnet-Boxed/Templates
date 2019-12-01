@@ -14,12 +14,12 @@ namespace ApiTemplate.Mappers
 
         public void Map(Models.Car source, SaveCar destination)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (destination == null)
+            if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));
             }
@@ -31,12 +31,12 @@ namespace ApiTemplate.Mappers
 
         public void Map(SaveCar source, Models.Car destination)
         {
-            if (source == null)
+            if (source is null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            if (destination == null)
+            if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));
             }

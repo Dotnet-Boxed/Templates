@@ -63,23 +63,30 @@ Task("InstallDeveloperCertificate")
         if (isDotnetRunEnabled)
         {
             var certificateFilePath = System.IO.Path.ChangeExtension(System.IO.Path.GetTempFileName(), ".pfx");
-            StartProcess(
-                "dotnet",
-                new ProcessArgumentBuilder()
-                    .Append("dev-certs")
-                    .Append("https")
-                    .AppendSwitch("--export-path", certificateFilePath));
-            Information($"Dotnet Developer Certificate saved");
-
-            var certificate = new X509Certificate2(certificateFilePath);
-            using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+            try
             {
-                store.Open(OpenFlags.ReadWrite);
-                store.Add(certificate);
-            }
-            Information($"Dotnet Developer Certificate installed to local machine");
+                StartProcess(
+                    "dotnet",
+                    new ProcessArgumentBuilder()
+                        .Append("dev-certs")
+                        .Append("https")
+                        .AppendSwitch("--export-path", certificateFilePath));
 
-            System.IO.File.Delete(certificateFilePath);
+                var certificate = new X509Certificate2(certificateFilePath);
+                using (var store = new X509Store(StoreName.Root, StoreLocation.LocalMachine))
+                {
+                    store.Open(OpenFlags.ReadWrite);
+                    store.Add(certificate);
+                }
+                Information($"Dotnet developer certificate installed to local machine's root certificates.");
+            }
+            finally
+            {
+                if (System.IO.File.Exists(certificateFilePath))
+                {
+                    System.IO.File.Delete(certificateFilePath);
+                }
+            }
         }
         else
         {
@@ -101,7 +108,7 @@ Task("Test")
                 NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
-                // ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
+                ArgumentCustomization = x => x.Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html"),
             });
     });
 

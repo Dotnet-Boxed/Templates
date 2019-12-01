@@ -34,6 +34,9 @@
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
     },
+    "TLS": {
+      "longName": "tls"
+    },
     "IntegrationTest": {
       "longName": "integration-test"
     },

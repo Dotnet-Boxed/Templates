@@ -14,13 +14,13 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.Get(carId, cancellationToken);
-            if (car == null)
+            var car = await this.carRepository.GetAsync(carId, cancellationToken);
+            if (car is null)
             {
                 return new NotFoundResult();
             }
 
-            await this.carRepository.Delete(car, cancellationToken);
+            await this.carRepository.DeleteAsync(car, cancellationToken);
 
             return new NoContentResult();
         }
