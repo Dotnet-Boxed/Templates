@@ -34,7 +34,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="OrleansDashboard" Version="3.0.7" />
+    <PackageReference Include="OrleansDashboard" Version="3.0.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.1" />
