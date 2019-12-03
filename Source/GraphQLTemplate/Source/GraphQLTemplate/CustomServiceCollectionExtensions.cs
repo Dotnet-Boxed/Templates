@@ -5,9 +5,6 @@ namespace GraphQLTemplate
     using System.IO.Compression;
 #endif
     using System.Linq;
-#if CorrelationId
-    using CorrelationId;
-#endif
     using Boxed.AspNetCore;
     using GraphQL;
 #if Authorization
@@ -39,12 +36,6 @@ namespace GraphQLTemplate
     /// </summary>
     public static class CustomServiceCollectionExtensions
     {
-        public static IServiceCollection AddCorrelationIdFluent(this IServiceCollection services)
-        {
-            services.AddCorrelationId();
-            return services;
-        }
-
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
         /// <see cref="IMemoryCache"/> types with the services collection or IoC container. The

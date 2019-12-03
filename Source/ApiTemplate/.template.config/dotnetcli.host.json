@@ -61,9 +61,6 @@
     "CORS": {
       "longName": "cors"
     },
-    "CorrelationId": {
-      "longName": "correlation-id"
-    },
     "ResponseCaching": {
       "longName": "response-caching"
     },

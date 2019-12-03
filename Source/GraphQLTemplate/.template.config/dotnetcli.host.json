@@ -64,9 +64,6 @@
     "CORS": {
       "longName": "cors"
     },
-    "CorrelationId": {
-      "longName": "correlation-id"
-    },
     "ResponseCompression": {
       "longName": "response-compression"
     },

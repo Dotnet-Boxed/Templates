@@ -4,9 +4,6 @@ namespace ApiTemplate
     using ApiTemplate.Constants;
 #endif
     using Boxed.AspNetCore;
-#if CorrelationId
-    using CorrelationId;
-#endif
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -48,9 +45,6 @@ namespace ApiTemplate
 #if ApplicationInsights
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
-#endif
-#if CorrelationId
-                .AddCorrelationIdFluent()
 #endif
                 .AddCustomCaching()
 #if CORS
@@ -101,10 +95,6 @@ namespace ApiTemplate
         /// </summary>
         public virtual void Configure(IApplicationBuilder application) =>
             application
-#if CorrelationId
-                // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
-                .UseCorrelationId()
-#endif
 #if ForwardedHeaders
                 .UseForwardedHeaders()
 #elif HostFiltering

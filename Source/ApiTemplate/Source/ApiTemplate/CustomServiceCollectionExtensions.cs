@@ -21,9 +21,6 @@ namespace ApiTemplate
     using Boxed.AspNetCore.Swagger.OperationFilters;
     using Boxed.AspNetCore.Swagger.SchemaFilters;
 #endif
-#if CorrelationId
-    using CorrelationId;
-#endif
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -49,12 +46,6 @@ namespace ApiTemplate
     /// </summary>
     public static class CustomServiceCollectionExtensions
     {
-        public static IServiceCollection AddCorrelationIdFluent(this IServiceCollection services)
-        {
-            services.AddCorrelationId();
-            return services;
-        }
-
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
         /// <see cref="IMemoryCache"/> types with the services collection or IoC container. The
@@ -229,7 +220,6 @@ namespace ApiTemplate
 #if Versioning
                     options.OperationFilter<ApiVersionOperationFilter>();
 #endif
-                    options.OperationFilter<CorrelationIdOperationFilter>();
                     options.OperationFilter<ClaimsOperationFilter>();
                     options.OperationFilter<ForbiddenResponseOperationFilter>();
                     options.OperationFilter<UnauthorizedResponseOperationFilter>();

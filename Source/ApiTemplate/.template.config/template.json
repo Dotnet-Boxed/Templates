@@ -322,13 +322,6 @@
       "defaultValue": "true",
       "description": "Browser security prevents a web page from making AJAX requests to another domain."
     },
-    // CorrelationId
-    "CorrelationId": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Correlate requests between clients and this API. Pass a GUID in the X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier. The header is also reflected back in a response."
-    },
     // ResponseCaching
     "ResponseCaching": {
       "type": "parameter",

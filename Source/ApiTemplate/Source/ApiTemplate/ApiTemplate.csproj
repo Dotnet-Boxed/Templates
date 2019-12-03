@@ -2,11 +2,10 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer;CorrelationId</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
-    <CorrelationId>true</CorrelationId>
     <Swagger>true</Swagger>
     <Versioning>true</Versioning>
   </PropertyGroup>
@@ -51,7 +50,6 @@
     <PackageReference Include="Boxed.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="6.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="3.0.0" />
-    <PackageReference Include="CorrelationId" Version="2.1.0" Condition="'$(CorrelationId)' == 'true'" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.8.2" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="3.0.0" Condition="'$(Azure)' == 'true'" />

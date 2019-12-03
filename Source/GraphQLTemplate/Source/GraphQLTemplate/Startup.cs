@@ -1,9 +1,6 @@
 namespace GraphQLTemplate
 {
     using Boxed.AspNetCore;
-#if CorrelationId
-    using CorrelationId;
-#endif
 #if CORS
     using GraphQLTemplate.Constants;
 #endif
@@ -52,9 +49,6 @@ namespace GraphQLTemplate
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-#if CorrelationId
-                .AddCorrelationIdFluent()
-#endif
                 .AddCustomCaching()
 #if CORS
                 .AddCustomCors()
@@ -88,10 +82,6 @@ namespace GraphQLTemplate
         /// </summary>
         public virtual void Configure(IApplicationBuilder application) =>
             application
-#if CorrelationId
-                // Pass a GUID in a X-Correlation-ID HTTP header to set the HttpContext.TraceIdentifier.
-                .UseCorrelationId()
-#endif
 #if ForwardedHeaders
                 .UseForwardedHeaders()
 #elif HostFiltering
