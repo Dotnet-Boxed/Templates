@@ -10,13 +10,17 @@ namespace Boxed.Templates.FunctionalTest
     using Boxed.Templates.FunctionalTest.Constants;
     using Boxed.Templates.FunctionalTest.Models;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class GraphQLTemplateTest
     {
-        public GraphQLTemplateTest() =>
+        public GraphQLTemplateTest(ITestOutputHelper testOutputHelper)
+        {
+            TestLogger.WriteMessage = testOutputHelper.WriteLine;
 #pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             DotnetNew.InstallAsync<GraphQLTemplateTest>("GraphQLTemplate.sln").Wait();
 #pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+        }
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]

@@ -11,13 +11,17 @@ namespace Boxed.Templates.FunctionalTest
     using Boxed.AspNetCore;
     using Boxed.DotnetNewTest;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class ApiTemplateTest
     {
-        public ApiTemplateTest() =>
+        public ApiTemplateTest(ITestOutputHelper testOutputHelper)
+        {
+            TestLogger.WriteMessage = testOutputHelper.WriteLine;
 #pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln").Wait();
 #pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+        }
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
