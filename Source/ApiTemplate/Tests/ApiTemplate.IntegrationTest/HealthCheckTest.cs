@@ -5,12 +5,15 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using System.Threading.Tasks;
     using ApiTemplate.IntegrationTest.Fixtures;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class HealthCheckTest : CustomWebApplicationFactory<Startup>
     {
         private readonly HttpClient client;
 
-        public HealthCheckTest() => this.client = this.CreateClient();
+        public HealthCheckTest(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) =>
+            this.client = this.CreateClient();
 
         [Fact]
         public async Task GetStatus_Default_Returns200OkAsync()

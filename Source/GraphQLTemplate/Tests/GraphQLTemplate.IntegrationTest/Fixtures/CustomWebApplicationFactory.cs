@@ -8,17 +8,25 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Moq;
+    using Serilog;
+    using Serilog.Events;
+    using Xunit.Abstractions;
 
     public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
         where TEntryPoint : class
     {
-        public CustomWebApplicationFactory()
+        public CustomWebApplicationFactory(ITestOutputHelper testOutputHelper)
         {
             this.ClientOptions.AllowAutoRedirect = false;
 #if HttpsEverywhere
             this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
             this.Server.AllowSynchronousIO = true;
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Debug()
+                .WriteTo.Sink(new TestOutputSink(testOutputHelper), LogEventLevel.Verbose)
+                .CreateLogger();
         }
 
         public ApplicationOptions ApplicationOptions { get; private set; }

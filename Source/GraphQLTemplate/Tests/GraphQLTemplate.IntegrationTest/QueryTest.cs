@@ -7,12 +7,15 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using GraphQLTemplate.IntegrationTest.Fixtures;
     using GraphQLTemplate.IntegrationTest.Models;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class QueryTest : CustomWebApplicationFactory<Startup>
     {
         private readonly HttpClient client;
 
-        public QueryTest() => this.client = this.CreateClient();
+        public QueryTest(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) =>
+            this.client = this.CreateClient();
 
         [Fact]
         public async Task IntrospectionQuery_Default_Returns200Ok()

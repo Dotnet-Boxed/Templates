@@ -19,13 +19,15 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using Moq;
     using Newtonsoft.Json;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class CarsControllerTest : CustomWebApplicationFactory<Startup>
     {
         private readonly HttpClient client;
         private readonly MediaTypeFormatterCollection formatters;
 
-        public CarsControllerTest()
+        public CarsControllerTest(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper)
         {
             this.client = this.CreateClient();
             this.formatters = new MediaTypeFormatterCollection();
