@@ -10,7 +10,7 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <!-- Use the latest version of the C# language. -->
     <LangVersion>latest</LangVersion>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
@@ -34,10 +34,10 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="OrleansDashboard" Version="3.0.7" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.1" />
+    <PackageReference Include="OrleansDashboard" Version="3.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.0.1" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.0.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

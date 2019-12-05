@@ -22,8 +22,8 @@ environment:
 
 build_script:
 - sh: sudo apt update
-- sh: sudo apt install -y apt-transport-https dotnet-sdk-3.0
-- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.0.101
+- sh: sudo apt install -y apt-transport-https dotnet-sdk-3.1
+- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.1.100
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=InstallDeveloperCertificate
