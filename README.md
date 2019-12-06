@@ -1,4 +1,4 @@
-![.NET Boxed Banner](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
  [![Boilerplate.Templates NuGet Package](https://img.shields.io/nuget/v/Boxed.Templates.svg)](https://www.nuget.org/packages/Boxed.Templates/) [![Boxed.Templates package in dotnet-boxed feed in Azure Artifacts](https://feeds.dev.azure.com/dotnet-boxed/_apis/public/Packaging/Feeds/03bd56a4-9269-43f7-9f75-d82037c56a46/Packages/d253caa8-4749-4cc9-892d-1342497a439e/Badge)](https://dev.azure.com/dotnet-boxed/Templates/_packaging?_a=package&feed=03bd56a4-9269-43f7-9f75-d82037c56a46&package=d253caa8-4749-4cc9-892d-1342497a439e&preferRelease=true) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
 
@@ -7,11 +7,11 @@ Project templates with batteries included, providing the minimum amount of code 
 ## Project Templates
 
 ### [ASP.NET Core API Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
-[![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/API-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
+[![ASP.NET Core API Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/API-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
 ### [ASP.NET Core GraphQL Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
-[![ASP.NET Core GraphQL Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
+[![ASP.NET Core GraphQL Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
 ### [Microsoft Orleans Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
-[![Microsoft Orleans Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
+[![Microsoft Orleans Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
 
 ## How can I get it?
 
