@@ -74,8 +74,7 @@ namespace Boxed.Templates.FunctionalTest
 
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -103,8 +102,7 @@ namespace Boxed.Templates.FunctionalTest
 
                         var statusSelfResponse = await httpClient.GetAsync("status/self");
                         Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -125,8 +123,7 @@ namespace Boxed.Templates.FunctionalTest
                         Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
                         var introspectionContent = await introspectionQuery.Content.ReadAsAsync<GraphQLResponse>();
                         Assert.Null(introspectionContent.Errors);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -151,8 +148,7 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         var httpResponse = await httpClient.GetAsync("/");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -184,8 +180,7 @@ namespace Boxed.Templates.FunctionalTest
                         Assert.Equal(
                             "GraphQL.Validation.ValidationError: You are not authorized to run this query.\nRequired claim 'role' with any value of 'admin' is not present.",
                             error.Message);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -211,8 +206,7 @@ namespace Boxed.Templates.FunctionalTest
                         var httpResponse = await httpClient.PostGraphQLAsync(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
     }

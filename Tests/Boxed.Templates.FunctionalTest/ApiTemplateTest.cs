@@ -123,8 +123,7 @@ namespace Boxed.Templates.FunctionalTest
 
                         var statusSelfResponse = await httpClient.GetAsync("status/self");
                         Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -149,8 +148,7 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         var statusResponse = await httpClient.GetAsync("status");
                         Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
 
@@ -175,8 +173,7 @@ namespace Boxed.Templates.FunctionalTest
                     {
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");
                         Assert.Equal(HttpStatusCode.NotFound, swaggerJsonResponse.StatusCode);
-                    },
-                    timeout: TimeSpan.FromMinutes(2));
+                    });
             }
         }
     }
