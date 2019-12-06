@@ -1,6 +1,8 @@
 ![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
 
-![ASP.NET Core GraphQL Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)
+![ASP.NET Core GraphQL Boxed Preview Image 1](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)
+
+![ASP.NET Core GraphQL Boxed Preview Image 2](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/GraphQL-Voyager-Preview.gif)
 
 ## Technology Map
 
@@ -68,7 +70,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### Tests
 
 - **IntegrationTest** - Adds an integration test project.
-- 
+
 #### Other
 
 - **robots.txt** (Default=On) - Adds a robots.txt file to tell search engines not to index this site.
