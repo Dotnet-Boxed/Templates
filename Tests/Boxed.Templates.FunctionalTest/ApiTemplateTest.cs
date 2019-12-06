@@ -53,6 +53,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("status");
@@ -116,6 +117,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
+                    new Uri("/", UriKind.Relative),
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -144,6 +146,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
+                    new Uri("/status/self", UriKind.Relative),
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -169,6 +172,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\SwaggerFalse",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient, httpsClient) =>
                     {
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");

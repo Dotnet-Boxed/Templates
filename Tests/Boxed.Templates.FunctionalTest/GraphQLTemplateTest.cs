@@ -52,6 +52,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
@@ -95,6 +96,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
+                    new Uri("/", UriKind.Relative),
                     async httpClient =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
@@ -117,6 +119,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient, httpsClient) =>
                     {
                         var introspectionQuery = await httpClient.PostGraphQLAsync(GraphQlQuery.Introspection);
@@ -144,6 +147,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
@@ -169,6 +173,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\AuthorizationTrue",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.PostGraphQLAsync(
@@ -201,6 +206,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\AuthorizationFalse",
+                    new Uri("/status/self", UriKind.Relative),
                     async (httpClient) =>
                     {
                         var httpResponse = await httpClient.PostGraphQLAsync(
