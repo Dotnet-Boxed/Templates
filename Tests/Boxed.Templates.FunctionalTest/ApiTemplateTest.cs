@@ -94,7 +94,8 @@ namespace Boxed.Templates.FunctionalTest
                         var humansTxtResponse = await httpsClient.GetAsync("humans.txt");
                         Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
                         Assert.Equal(ContentType.Text, humansTxtResponse.Content.Headers.ContentType.MediaType);
-                    });
+                    },
+                    timeout: TimeSpan.FromMinutes(2));
             }
         }
 
