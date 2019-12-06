@@ -7,11 +7,11 @@ Project templates with batteries included, providing the minimum amount of code 
 ## Project Templates
 
 ### [ASP.NET Core API Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
-[![ASP.NET Core API Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/API-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
+[![ASP.NET Core API Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/API-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md)
 ### [ASP.NET Core GraphQL Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
-[![ASP.NET Core GraphQL Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
+[![ASP.NET Core GraphQL Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/GraphQL-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md)
 ### [Microsoft Orleans Boxed](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
-[![Microsoft Orleans Boxed Preview Image](https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
+[![Microsoft Orleans Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)](https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md)
 
 ## How can I get it?
 
