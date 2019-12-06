@@ -32,7 +32,7 @@ namespace OrleansTemplate.Server
 
             try
             {
-                Log.Information("Starting application");
+                Log.Information("Started application");
                 await host.RunAsync().ConfigureAwait(false);
                 Log.Information("Stopped application");
                 return 0;
