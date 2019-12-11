@@ -53,7 +53,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
-                    new Uri("/status/self", UriKind.Relative),
+                    ReadinessCheck.StatusSelf,
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("status");
@@ -117,13 +117,13 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
-                    new Uri("/", UriKind.Relative),
-                    async httpClient =>
+                    ReadinessCheck.Favicon,
+                    async (httpClient, httpsClient) =>
                     {
-                        var statusResponse = await httpClient.GetAsync("status");
+                        var statusResponse = await httpsClient.GetAsync("status");
                         Assert.Equal(HttpStatusCode.NotFound, statusResponse.StatusCode);
 
-                        var statusSelfResponse = await httpClient.GetAsync("status/self");
+                        var statusSelfResponse = await httpsClient.GetAsync("status/self");
                         Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
                     });
             }
@@ -146,8 +146,8 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
-                    new Uri("/status/self", UriKind.Relative),
-                    async httpClient =>
+                    ReadinessCheck.StatusSelfOverHttp,
+                    async (httpClient, httpsClient) =>
                     {
                         var statusResponse = await httpClient.GetAsync("status");
                         Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
@@ -172,7 +172,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\SwaggerFalse",
-                    new Uri("/status/self", UriKind.Relative),
+                    ReadinessCheck.StatusSelf,
                     async (httpClient, httpsClient) =>
                     {
                         var swaggerJsonResponse = await httpsClient.GetAsync("swagger/v1/swagger.json");

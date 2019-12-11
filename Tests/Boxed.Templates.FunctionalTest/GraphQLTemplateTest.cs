@@ -52,7 +52,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
-                    new Uri("/status/self", UriKind.Relative),
+                    ReadinessCheck.StatusSelf,
                     async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
@@ -96,13 +96,13 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HealthCheckFalse",
-                    new Uri("/", UriKind.Relative),
-                    async httpClient =>
+                    ReadinessCheck.Favicon,
+                    async (httpClient, httpsClient) =>
                     {
-                        var statusResponse = await httpClient.GetAsync("status");
+                        var statusResponse = await httpsClient.GetAsync("status");
                         Assert.Equal(HttpStatusCode.NotFound, statusResponse.StatusCode);
 
-                        var statusSelfResponse = await httpClient.GetAsync("status/self");
+                        var statusSelfResponse = await httpsClient.GetAsync("status/self");
                         Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
                     });
             }
@@ -119,7 +119,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\Default",
-                    new Uri("/status/self", UriKind.Relative),
+                    ReadinessCheck.StatusSelf,
                     async (httpClient, httpsClient) =>
                     {
                         var introspectionQuery = await httpClient.PostGraphQLAsync(GraphQlQuery.Introspection);
@@ -147,8 +147,8 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\HttpsEverywhereFalse",
-                    new Uri("/status/self", UriKind.Relative),
-                    async (httpClient) =>
+                    ReadinessCheck.StatusSelfOverHttp,
+                    async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient.GetAsync("/");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
@@ -173,10 +173,10 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\AuthorizationTrue",
-                    new Uri("/status/self", UriKind.Relative),
-                    async (httpClient) =>
+                    ReadinessCheck.StatusSelf,
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await httpClient.PostGraphQLAsync(
+                        var httpResponse = await httpsClient.PostGraphQLAsync(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         var response = await httpResponse.Content.ReadAsAsync<GraphQLResponse>();
 
@@ -206,10 +206,10 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync();
                 await project.DotnetRunAsync(
                     @"Source\AuthorizationFalse",
-                    new Uri("/status/self", UriKind.Relative),
-                    async (httpClient) =>
+                    ReadinessCheck.StatusSelf,
+                    async (httpClient, httpsClient) =>
                     {
-                        var httpResponse = await httpClient.PostGraphQLAsync(
+                        var httpResponse = await httpsClient.PostGraphQLAsync(
                             "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }");
                         Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
                     });
