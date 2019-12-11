@@ -73,6 +73,7 @@ namespace ApiTemplate
 #if Versioning
                 .AddCustomApiVersioning()
 #endif
+                .AddServerTiming()
                 .AddControllers()
                     .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer
@@ -95,6 +96,9 @@ namespace ApiTemplate
         /// </summary>
         public virtual void Configure(IApplicationBuilder application) =>
             application
+                .UseIf(
+                    this.webHostEnvironment.IsDevelopment(),
+                    x => x.UseServerTiming())
 #if ForwardedHeaders
                 .UseForwardedHeaders()
 #elif HostFiltering

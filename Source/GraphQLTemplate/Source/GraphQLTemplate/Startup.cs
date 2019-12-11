@@ -65,6 +65,7 @@ namespace GraphQLTemplate
                 .AddCustomHealthChecks()
 #endif
                 .AddHttpContextAccessor()
+                .AddServerTiming()
                 .AddControllers()
                     .AddCustomJsonOptions(this.webHostEnvironment)
                     .AddCustomMvcOptions(this.configuration)
@@ -82,6 +83,9 @@ namespace GraphQLTemplate
         /// </summary>
         public virtual void Configure(IApplicationBuilder application) =>
             application
+                .UseIf(
+                    this.webHostEnvironment.IsDevelopment(),
+                    x => x.UseServerTiming())
 #if ForwardedHeaders
                 .UseForwardedHeaders()
 #elif HostFiltering

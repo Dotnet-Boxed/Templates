@@ -88,6 +88,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 - **Caching Static Files** - Static files are cached by default using the `Cache-Control` HTTP header.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for [GraphQL](http://graphql.org/).
+- **Server Timing** - Adds the [`Server-Timing` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing) to responses, so browser developer tools can show how long the server took to respond.
 
 #### Security
 

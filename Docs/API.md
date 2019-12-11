@@ -98,6 +98,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **304 Not Modified** - Last-Modified and If-Modified-Since HTTP headers are used to return 304 Not Modified if a resource has not changed.
 - **AddMvcCore** - Uses only the features and packages from ASP.NET Core required for an API. Uses ControllerBase instead of Controller.
 - **Named Routes** - Uses named attribute routes for best performance and maintainability. All route names are specified as constants.
+- **Server Timing** - Adds the [`Server-Timing` HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing) to responses, so browser developer tools can show how long the server took to respond.
 
 #### Security
 
