@@ -179,7 +179,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
                 response,
+#if HttpsEverywhere
                 nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#else
+                nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#endif
                 previousPageUrl: null);
         }
 
@@ -204,7 +208,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: null,
+#if HttpsEverywhere
                 previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#else
+                previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#endif
                 pageCount: 1);
         }
 
@@ -231,7 +239,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                 response,
                 nextPageUrl: null,
+#if HttpsEverywhere
                 previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+#else
+                previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+#endif
         }
 
         [Fact]
@@ -254,7 +266,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
                 response,
+#if HttpsEverywhere
                 nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#else
+                nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+#endif
                 previousPageUrl: null,
                 pageCount: 1);
         }
@@ -279,7 +295,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+#if HttpsEverywhere
             Assert.Equal(new Uri("https://localhost/cars/1"), response.Headers.Location);
+#else
+            Assert.Equal(new Uri("http://localhost/cars/1"), response.Headers.Location);
+#endif
         }
 
         [Fact]
@@ -455,8 +475,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 Assert.Equal(new Uri(previousPageUrl), connection.PageInfo.PreviousPageUrl);
             }
 
+#if HttpsEverywhere
             var firstPageUrl = $"https://localhost/cars?First={requestedPageCount}";
             var lastPageUrl = $"https://localhost/cars?Last={requestedPageCount}";
+#else
+            var firstPageUrl = $"http://localhost/cars?First={requestedPageCount}";
+            var lastPageUrl = $"http://localhost/cars?Last={requestedPageCount}";
+#endif
 
             Assert.Equal(new Uri(firstPageUrl), connection.PageInfo.FirstPageUrl);
             Assert.Equal(new Uri(lastPageUrl), connection.PageInfo.LastPageUrl);
