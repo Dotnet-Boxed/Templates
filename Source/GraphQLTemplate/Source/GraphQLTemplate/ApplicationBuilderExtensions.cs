@@ -40,6 +40,18 @@ namespace GraphQLTemplate
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
+                    var clientName = httpContext.Request.Headers["apollographql-client-name"];
+                    if (clientName.Any())
+                    {
+                        diagnosticContext.Set("ClientName", clientName);
+                    }
+
+                    var clientVersion = httpContext.Request.Headers["apollographql-client-version"];
+                    if (clientVersion.Any())
+                    {
+                        diagnosticContext.Set("ClientVersion", clientVersion);
+                    }
+
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });
