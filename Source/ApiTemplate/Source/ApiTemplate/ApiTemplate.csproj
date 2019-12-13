@@ -66,7 +66,7 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0-rc4" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0-rc5" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
 </Project>
