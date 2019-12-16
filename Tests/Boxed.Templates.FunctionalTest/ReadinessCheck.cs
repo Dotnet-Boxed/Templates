@@ -1,5 +1,6 @@
 namespace Boxed.Templates.FunctionalTest
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -7,29 +8,59 @@ namespace Boxed.Templates.FunctionalTest
 
     public static class ReadinessCheck
     {
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static async Task<bool> StatusSelf(HttpClient httpClient, HttpClient httpsClient)
-#pragma warning restore IDE0060 // Remove unused parameter
+        public static async Task<bool> StatusSelfAsync(HttpClient httpClient, HttpClient httpsClient)
         {
-            var response = await httpsClient.GetAsync("/status/self");
+            if (httpClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+
+            if (httpsClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpsClient));
+            }
+
+            var response = await httpsClient
+                .GetAsync(new Uri("/status/self", UriKind.Relative))
+                .ConfigureAwait(false);
             LogStatusCode(response.StatusCode);
             return response.IsSuccessStatusCode;
         }
 
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static async Task<bool> StatusSelfOverHttp(HttpClient httpClient, HttpClient httpsClient)
-#pragma warning restore IDE0060 // Remove unused parameter
+        public static async Task<bool> StatusSelfOverHttpAsync(HttpClient httpClient, HttpClient httpsClient)
         {
-            var response = await httpClient.GetAsync("/status/self");
+            if (httpClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+
+            if (httpsClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpsClient));
+            }
+
+            var response = await httpClient
+                .GetAsync(new Uri("/status/self", UriKind.Relative))
+                .ConfigureAwait(false);
             LogStatusCode(response.StatusCode);
             return response.IsSuccessStatusCode;
         }
 
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static async Task<bool> Favicon(HttpClient httpClient, HttpClient httpsClient)
-#pragma warning restore IDE0060 // Remove unused parameter
+        public static async Task<bool> FaviconAsync(HttpClient httpClient, HttpClient httpsClient)
         {
-            var response = await httpsClient.GetAsync("/favicon.ico");
+            if (httpClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+
+            if (httpsClient is null)
+            {
+                throw new ArgumentNullException(nameof(httpsClient));
+            }
+
+            var response = await httpsClient
+                .GetAsync(new Uri("/favicon.ico", UriKind.Relative))
+                .ConfigureAwait(false);
             LogStatusCode(response.StatusCode);
             return response.IsSuccessStatusCode;
         }

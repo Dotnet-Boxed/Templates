@@ -4,6 +4,8 @@ namespace Boxed.Templates.FunctionalTest.Models
 
     public class GraphQLResponse
     {
-        public List<GraphQLError> Errors { get; set; }
+        public GraphQLResponse() => this.Errors = new List<GraphQLError>();
+
+        public List<GraphQLError> Errors { get; }
     }
 }
