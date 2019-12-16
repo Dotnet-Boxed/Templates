@@ -11,7 +11,7 @@ namespace ApiTemplate.ViewModels
     {
 #if Swagger
         /// <summary>
-        /// The number of cylinders in the cars engine.
+        /// Gets or sets the number of cylinders in the cars engine.
         /// </summary>
         /// <example>6</example>
 #endif
@@ -20,7 +20,7 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The make of the car.
+        /// Gets or sets the make of the car.
         /// </summary>
         /// <example>Honda</example>
 #endif
@@ -29,7 +29,7 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The model of the car.
+        /// Gets or sets the model of the car.
         /// </summary>
         /// <example>Civic</example>
 #endif

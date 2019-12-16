@@ -13,8 +13,10 @@ namespace ApiTemplate.Options
     /// </summary>
     public class ApplicationOptions
     {
+        public ApplicationOptions() => this.CacheProfiles = new CacheProfileOptions();
+
         [Required]
-        public CacheProfileOptions CacheProfiles { get; set; }
+        public CacheProfileOptions CacheProfiles { get; }
 
 #if ResponseCompression
         [Required]

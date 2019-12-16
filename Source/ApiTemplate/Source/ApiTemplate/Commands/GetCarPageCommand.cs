@@ -36,6 +36,11 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
         {
+            if (pageOptions is null)
+            {
+                throw new ArgumentNullException(nameof(pageOptions));
+            }
+
             pageOptions.First = !pageOptions.First.HasValue && !pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
             var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);
             var createdBefore = Cursor.FromCursor<DateTimeOffset?>(pageOptions.Before);
@@ -45,11 +50,11 @@ namespace ApiTemplate.Commands
             var getHasPreviousPageTask = this.GetHasPreviousPageAsync(pageOptions.Last, createdAfter, createdBefore, cancellationToken);
             var totalCountTask = this.carRepository.GetTotalCountAsync(cancellationToken);
 
-            await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
-            var cars = await getCarsTask;
-            var hasNextPage = await getHasNextPageTask;
-            var hasPreviousPage = await getHasPreviousPageTask;
-            var totalCount = await totalCountTask;
+            await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask).ConfigureAwait(false);
+            var cars = await getCarsTask.ConfigureAwait(false);
+            var hasNextPage = await getHasNextPageTask.ConfigureAwait(false);
+            var hasPreviousPage = await getHasPreviousPageTask.ConfigureAwait(false);
+            var totalCount = await totalCountTask.ConfigureAwait(false);
 
             if (cars is null)
             {
@@ -61,7 +66,6 @@ namespace ApiTemplate.Commands
 
             var connection = new Connection<Car>()
             {
-                Items = carViewModels,
                 PageInfo = new PageInfo()
                 {
                     Count = carViewModels.Count,
@@ -83,7 +87,7 @@ namespace ApiTemplate.Commands
                         {
                             First = pageOptions.First,
                             Last = pageOptions.Last,
-                            Before = startCursor
+                            Before = startCursor,
                         })) : null,
                     FirstPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
                         this.httpContextAccessor.HttpContext,
@@ -102,6 +106,7 @@ namespace ApiTemplate.Commands
                 },
                 TotalCount = totalCount,
             };
+            connection.Items.AddRange(carViewModels);
 
             this.httpContextAccessor.HttpContext.Response.Headers.Add(
                 LinkHttpHeaderName,
@@ -138,7 +143,9 @@ namespace ApiTemplate.Commands
         {
             if (first.HasValue)
             {
-                return await this.carRepository.GetHasNextPageAsync(first, createdAfter, cancellationToken);
+                return await this.carRepository
+                    .GetHasNextPageAsync(first, createdAfter, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else if (createdBefore.HasValue)
             {
@@ -156,7 +163,9 @@ namespace ApiTemplate.Commands
         {
             if (last.HasValue)
             {
-                return await this.carRepository.GetHasPreviousPageAsync(last, createdBefore, cancellationToken);
+                return await this.carRepository
+                    .GetHasPreviousPageAsync(last, createdBefore, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else if (createdAfter.HasValue)
             {

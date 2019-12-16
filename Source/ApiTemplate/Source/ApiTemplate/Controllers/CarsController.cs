@@ -21,6 +21,8 @@ namespace ApiTemplate.Controllers
 #if Swagger
     [SwaggerResponse(StatusCodes.Status500InternalServerError, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
 #endif
+#pragma warning disable CA1822 // Mark members as static
+#pragma warning disable CA1062 // Validate arguments of public methods
     public class CarsController : ControllerBase
     {
         /// <summary>
@@ -51,9 +53,9 @@ namespace ApiTemplate.Controllers
 #if Swagger
         [SwaggerResponse(StatusCodes.Status200OK, "The allowed HTTP methods.")]
 #endif
-#pragma warning disable IDE0060 // Remove unused parameter
+#pragma warning disable IDE0060, CA1801 // Remove unused parameter
         public IActionResult Options(int carId)
-#pragma warning restore IDE0060 // Remove unused parameter
+#pragma warning restore IDE0060, CA1801 // Remove unused parameter
         {
             this.HttpContext.Response.Headers.AppendCommaSeparatedValues(
                 HeaderNames.Allow,
@@ -195,3 +197,5 @@ namespace ApiTemplate.Controllers
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, car, cancellationToken);
     }
 }
+#pragma warning restore CA1062 // Validate arguments of public methods
+#pragma warning restore CA1822 // Mark members as static

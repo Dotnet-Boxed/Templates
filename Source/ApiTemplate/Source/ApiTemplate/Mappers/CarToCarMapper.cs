@@ -36,10 +36,10 @@ namespace ApiTemplate.Mappers
             destination.Cylinders = source.Cylinders;
             destination.Make = source.Make;
             destination.Model = source.Model;
-            destination.Url = this.linkGenerator.GetUriByRouteValues(
+            destination.Url = new Uri(this.linkGenerator.GetUriByRouteValues(
                 this.httpContextAccessor.HttpContext,
                 CarsControllerRoute.GetCar,
-                new { source.CarId });
+                new { source.CarId }));
         }
     }
 }

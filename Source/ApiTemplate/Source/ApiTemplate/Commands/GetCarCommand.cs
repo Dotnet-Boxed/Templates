@@ -1,6 +1,7 @@
 namespace ApiTemplate.Commands
 {
     using System;
+    using System.Globalization;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Repositories;
@@ -29,7 +30,7 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(int carId, CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.GetAsync(carId, cancellationToken);
+            var car = await this.carRepository.GetAsync(carId, cancellationToken).ConfigureAwait(false);
             if (car is null)
             {
                 return new NotFoundResult();
@@ -46,7 +47,9 @@ namespace ApiTemplate.Commands
             }
 
             var carViewModel = this.carMapper.Map(car);
-            httpContext.Response.Headers.Add(HeaderNames.LastModified, car.Modified.ToString("R"));
+            httpContext.Response.Headers.Add(
+                HeaderNames.LastModified,
+                car.Modified.ToString("R", CultureInfo.InvariantCulture));
             return new OkObjectResult(carViewModel);
         }
     }

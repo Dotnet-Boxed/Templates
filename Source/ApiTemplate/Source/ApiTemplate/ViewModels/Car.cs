@@ -1,5 +1,7 @@
 namespace ApiTemplate.ViewModels
 {
+    using System;
+
 #if Swagger
     /// <summary>
     /// A make and model of car.
@@ -9,7 +11,7 @@ namespace ApiTemplate.ViewModels
     {
 #if Swagger
         /// <summary>
-        /// The cars unique identifier.
+        /// Gets or sets the cars unique identifier.
         /// </summary>
         /// <example>1</example>
 #endif
@@ -17,7 +19,7 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The number of cylinders in the cars engine.
+        /// Gets or sets the number of cylinders in the cars engine.
         /// </summary>
         /// <example>6</example>
 #endif
@@ -25,7 +27,7 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The make of the car.
+        /// Gets or sets the make of the car.
         /// </summary>
         /// <example>Honda</example>
 #endif
@@ -33,7 +35,7 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The model of the car.
+        /// Gets or sets the model of the car.
         /// </summary>
         /// <example>Civic</example>
 #endif
@@ -41,10 +43,10 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// The URL used to retrieve the resource conforming to REST'ful JSON http://restfuljson.org/.
+        /// Gets or sets the URL used to retrieve the resource conforming to REST'ful JSON http://restfuljson.org/.
         /// </summary>
         /// <example>/cars/1</example>
 #endif
-        public string Url { get; set; }
+        public Uri Url { get; set; }
     }
 }

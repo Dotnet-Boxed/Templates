@@ -10,6 +10,8 @@ namespace ApiTemplate.ViewModels
 #endif
     public class Connection<T>
     {
+        public Connection() => this.Items = new List<T>();
+
 #if Swagger
         /// <summary>
         /// Gets or sets the total count of items.
@@ -27,9 +29,9 @@ namespace ApiTemplate.ViewModels
 
 #if Swagger
         /// <summary>
-        /// Gets or sets the items.
+        /// Gets the items.
         /// </summary>
 #endif
-        public List<T> Items { get; set; }
+        public List<T> Items { get; }
     }
 }
