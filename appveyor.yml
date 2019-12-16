@@ -34,10 +34,10 @@ test: off
 
 artifacts:
 - name: NuGet Packages
-  path: ./Artifacts/**/*.nupkg
+  path: ./Artefacts/**/*.nupkg
 - name: NuGet Symbol Packages
-  path: ./Artifacts/**/*.snupkg
+  path: ./Artefacts/**/*.snupkg
 - name: xUnit XML Test Results
-  path: ./Artifacts/**/*.xml
+  path: ./Artefacts/**/*.xml
 - name: xUnit HTML Test Results
-  path: ./Artifacts/**/*.html
+  path: ./Artefacts/**/*.html
