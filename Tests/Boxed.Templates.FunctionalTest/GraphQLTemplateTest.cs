@@ -26,11 +26,11 @@ namespace Boxed.Templates.FunctionalTest
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
-        [InlineData("Default")]
+        [InlineData("GraphQLDefaults")]
         [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("NoHostFiltering", "host-filtering=false")]
         [InlineData("NoFwdHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
-        public async Task RestoreAndBuild_Default_SuccessfulAsync(string name, params string[] arguments)
+        public async Task RestoreAndBuild_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -46,17 +46,17 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_Default_SuccessfulAsync()
+        public async Task Run_GraphQLDefaults_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("graphql", "Default").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\Default",
+                        @"Source\GraphQLDefaults",
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -144,12 +144,12 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("graphql", "Default").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\Default",
+                        @"Source\GraphQLDefaults",
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {

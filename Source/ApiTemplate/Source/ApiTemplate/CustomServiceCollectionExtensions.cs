@@ -62,8 +62,8 @@ namespace ApiTemplate
                 // default implementation of IDistributedCache which is not distributed. You probably want to use the
                 // Redis cache provider by calling AddDistributedRedisCache.
                 .AddDistributedMemoryCache();
-
 #if CORS
+
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
@@ -81,8 +81,8 @@ namespace ApiTemplate
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()));
-
 #endif
+
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -106,8 +106,8 @@ namespace ApiTemplate
 #endif
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-
 #if ResponseCompression
+
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
@@ -134,8 +134,8 @@ namespace ApiTemplate
                         options.Providers.Add<BrotliCompressionProvider>();
                         options.Providers.Add<GzipCompressionProvider>();
                     });
-
 #endif
+
         /// <summary>
         /// Add custom routing settings which determines how URL's are generated.
         /// </summary>
@@ -143,8 +143,8 @@ namespace ApiTemplate
         /// <returns>The services with routing services added.</returns>
         public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
             services.AddRouting(options => options.LowercaseUrls = true);
-
 #if HttpsEverywhere
+
         /// <summary>
         /// Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
         /// using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
@@ -173,17 +173,17 @@ namespace ApiTemplate
                         // options.Preload = true;
 #endif
                     });
-
 #endif
 #if HealthCheck
+
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
             services
                 .AddHealthChecks()
                 // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
                 .Services;
-
 #endif
 #if Versioning
+
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services
                 .AddApiVersioning(
@@ -191,15 +191,11 @@ namespace ApiTemplate
                     {
                         options.AssumeDefaultVersionWhenUnspecified = true;
                         options.ReportApiVersions = true;
-#if (!Versioning)
-                    });
-#else
                     })
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
 #endif
-
-#endif
 #if Swagger
+
         /// <summary>
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
@@ -253,7 +249,6 @@ namespace ApiTemplate
                     options.SwaggerDoc("v1", info);
 #endif
                 });
-
 #endif
     }
 }

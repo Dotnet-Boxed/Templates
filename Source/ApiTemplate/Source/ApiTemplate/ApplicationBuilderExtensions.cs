@@ -59,7 +59,6 @@ namespace ApiTemplate
                     diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
                     diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
                 });
-
 #if Swagger
 
         public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>

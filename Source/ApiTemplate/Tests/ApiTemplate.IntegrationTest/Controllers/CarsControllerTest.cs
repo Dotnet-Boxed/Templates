@@ -38,7 +38,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task Options_CarsRoot_Returns200OkAsync()
         {
-            var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars"));
+            using var request = new HttpRequestMessage(HttpMethod.Options, "cars");
+
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(
@@ -49,7 +51,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task Options_CarsWithId_Returns200OkAsync()
         {
-            var response = await this.client.SendAsync(new HttpRequestMessage(HttpMethod.Options, "cars/1"));
+            using var request = new HttpRequestMessage(HttpMethod.Options, "cars/1");
+
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(
@@ -61,7 +65,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                     HttpMethods.Options,
                     HttpMethods.Patch,
                     HttpMethods.Post,
-                    HttpMethods.Put
+                    HttpMethods.Put,
                 },
                 response.Content.Headers.Allow);
         }
@@ -73,7 +77,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
             this.CarRepositoryMock.Setup(x => x.DeleteAsync(car, It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
-            var response = await this.client.DeleteAsync("/cars/1");
+            var response = await this.client.DeleteAsync(new Uri("/cars/1", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
@@ -83,10 +87,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
-            var response = await this.client.DeleteAsync("/cars/999");
+            var response = await this.client.DeleteAsync(new Uri("/cars/999", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
@@ -96,12 +100,12 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 2, 3, 4, 5, TimeSpan.FromHours(6)) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.GetAsync("/cars/1");
+            var response = await this.client.GetAsync(new Uri("/cars/1", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(new DateTimeOffset(2000, 1, 2, 3, 4, 5, TimeSpan.FromHours(6)), response.Content.Headers.LastModified);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
         }
 
         [Fact]
@@ -109,10 +113,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
-            var response = await this.client.GetAsync("/cars/999");
+            var response = await this.client.GetAsync(new Uri("/cars/999", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
@@ -120,10 +124,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
         public async Task Get_InvalidAcceptHeader_Returns406NotAcceptableAsync()
         {
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
-            var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentType.Text));
 
-            var response = await this.client.SendAsync(request);
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotAcceptable, response.StatusCode);
             // Note: ASP.NET Core should be automatically returning a ProblemDetails response but is returning an empty
@@ -135,10 +139,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 23, 59, 59, TimeSpan.Zero) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
-            var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
             request.Headers.IfModifiedSince = new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero);
 
-            var response = await this.client.SendAsync(request);
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotModified, response.StatusCode);
         }
@@ -148,10 +152,10 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 0, 0, 1, TimeSpan.Zero) };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
-            var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
+            using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
             request.Headers.IfModifiedSince = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
 
-            var response = await this.client.SendAsync(request);
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -160,7 +164,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [InlineData("/cars")]
         [InlineData("/cars?first=3")]
         [InlineData("/cars?first=3&after=THIS_IS_INVALID")]
-        public async Task GetPage_FirstPage_Returns200OkAsync(string uri)
+        public async Task GetPage_FirstPage_Returns200OkAsync(string path)
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -173,18 +177,19 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.GetHasNextPageAsync(3, null, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
-            var response = await this.client.GetAsync(uri);
+            var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
-                response,
+                    response,
 #if HttpsEverywhere
-                nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
-                previousPageUrl: null);
+                    previousPageUrl: null)
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -201,25 +206,28 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.GetHasNextPageAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
-            var response = await this.client.GetAsync("/cars?first=3&after=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+            var response = await this.client
+                .GetAsync(new Uri("/cars?first=3&after=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw", UriKind.Relative))
+                .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
-                response,
-                nextPageUrl: null,
+                    response,
+                    nextPageUrl: null,
 #if HttpsEverywhere
-                previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
-                pageCount: 1);
+                    pageCount: 1)
+                .ConfigureAwait(false);
         }
 
         [Theory]
         [InlineData("/cars?last=3")]
         [InlineData("/cars?last=3&before=THIS_IS_INVALID")]
-        public async Task GetPage_LastPage_Returns200OkAsync(string uri)
+        public async Task GetPage_LastPage_Returns200OkAsync(string path)
         {
             var cars = GetCars();
             this.CarRepositoryMock
@@ -232,18 +240,19 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.GetHasPreviousPageAsync(3, null, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
-            var response = await this.client.GetAsync(uri);
+            var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
-                response,
-                nextPageUrl: null,
+                    response,
+                    nextPageUrl: null,
 #if HttpsEverywhere
-                previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+                    previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw")
 #else
-                previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+                    previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw")
 #endif
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -260,19 +269,22 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.GetHasPreviousPageAsync(3, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
-            var response = await this.client.GetAsync("/cars?last=3&before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw");
+            var response = await this.client
+                .GetAsync(new Uri("/cars?last=3&before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw", UriKind.Relative))
+                .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
             await this.AssertPageUrlsAsync(
-                response,
+                    response,
 #if HttpsEverywhere
-                nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
-                previousPageUrl: null,
-                pageCount: 1);
+                    previousPageUrl: null,
+                    pageCount: 1)
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -282,7 +294,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             {
                 Cylinders = 2,
                 Make = "Honda",
-                Model = "Civic"
+                Model = "Civic",
             };
             var car = new Models.Car() { CarId = 1 };
             this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
@@ -290,11 +302,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .Setup(x => x.AddAsync(It.IsAny<Models.Car>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(car);
 
-            var response = await this.client.PostAsJsonAsync("cars", saveCar);
+            var response = await this.client.PostAsJsonAsync("cars", saveCar).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
 #if HttpsEverywhere
             Assert.Equal(new Uri("https://localhost/cars/1"), response.Headers.Location);
 #else
@@ -305,40 +317,40 @@ namespace ApiTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task PostCar_Invalid_Returns400BadRequestAsync()
         {
-            var response = await this.client.PostAsJsonAsync("cars", new SaveCar());
+            var response = await this.client.PostAsJsonAsync("cars", new SaveCar()).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         }
 
         [Fact]
         public async Task PostCar_EmptyRequestBody_Returns400BadRequestAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "cars")
+            using var request = new HttpRequestMessage(HttpMethod.Post, "cars")
             {
-                Content = new ObjectContent<SaveCar>(null, new JsonMediaTypeFormatter(), ContentType.Json)
+                Content = new ObjectContent<SaveCar>(null, new JsonMediaTypeFormatter(), ContentType.Json),
             };
 
-            var response = await this.client.SendAsync(request);
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         }
 
         [Fact]
         public async Task PostCar_UnsupportedMediaType_Returns415UnsupportedMediaTypeAsync()
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "cars")
+            using var request = new HttpRequestMessage(HttpMethod.Post, "cars")
             {
-                Content = new ObjectContent<SaveCar>(new SaveCar(), new JsonMediaTypeFormatter(), ContentType.Text)
+                Content = new ObjectContent<SaveCar>(new SaveCar(), new JsonMediaTypeFormatter(), ContentType.Text),
             };
 
-            var response = await this.client.SendAsync(request);
+            var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, problemDetails.Status);
         }
 
@@ -349,7 +361,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             {
                 Cylinders = 2,
                 Make = "Honda",
-                Model = "Civic"
+                Model = "Civic",
             };
             var car = new Models.Car() { CarId = 1 };
             this.CarRepositoryMock
@@ -358,11 +370,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
             this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.PutAsJsonAsync("cars/1", saveCar);
+            var response = await this.client.PutAsJsonAsync("cars/1", saveCar).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
-            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
         }
 
         [Fact]
@@ -372,24 +384,24 @@ namespace ApiTemplate.IntegrationTest.Controllers
             {
                 Cylinders = 2,
                 Make = "Honda",
-                Model = "Civic"
+                Model = "Civic",
             };
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
-            var response = await this.client.PutAsJsonAsync("cars/999", saveCar);
+            var response = await this.client.PutAsJsonAsync("cars/999", saveCar).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
         [Fact]
         public async Task PutCar_Invalid_Returns400BadRequestAsync()
         {
-            var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar());
+            var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar()).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
         }
 
@@ -399,12 +411,15 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Remove(x => x.Make);
             var json = JsonConvert.SerializeObject(patch);
+            using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
             this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car)null);
 
-            var response = await this.client.PatchAsync("cars/999", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
+            var response = await this.client
+                .PatchAsync(new Uri("cars/999", UriKind.Relative), content)
+                .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters);
+            var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
             Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
         }
 
@@ -414,10 +429,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Remove(x => x.Make);
             var json = JsonConvert.SerializeObject(patch);
+            using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
             var car = new Models.Car();
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
+            var response = await this.client
+                .PatchAsync(new Uri("cars/1", UriKind.Relative), content)
+                .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
         }
@@ -428,17 +446,29 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var patch = new JsonPatchDocument<SaveCar>();
             patch.Add(x => x.Model, "Civic Type-R");
             var json = JsonConvert.SerializeObject(patch);
+            using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
             var car = new Models.Car() { CarId = 1, Cylinders = 2, Make = "Honda", Model = "Civic" };
             this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
             this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
             this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
-            var response = await this.client.PatchAsync("cars/1", new StringContent(json, Encoding.UTF8, ContentType.JsonPatch));
+            var response = await this.client
+                .PatchAsync(new Uri("cars/1", UriKind.Relative), content)
+                .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters);
+            var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
             Assert.Equal("Civic Type-R", carViewModel.Model);
         }
+
+        private static List<Models.Car> GetCars() =>
+            new List<Models.Car>()
+            {
+                new Models.Car() { Created = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero) },
+                new Models.Car() { Created = new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero) },
+                new Models.Car() { Created = new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero) },
+                new Models.Car() { Created = new DateTimeOffset(2000, 1, 4, 0, 0, 0, TimeSpan.Zero) },
+            };
 
         private async Task AssertPageUrlsAsync(
             HttpResponseMessage response,
@@ -448,7 +478,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             int requestedPageCount = 3,
             int totalCount = 4)
         {
-            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters);
+            var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters).ConfigureAwait(false);
 
             Assert.Equal(pageCount, connection.Items.Count);
             Assert.Equal(pageCount, connection.PageInfo.Count);
@@ -500,14 +530,5 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(expectedLink, linkValue);
         }
-
-        private static List<Models.Car> GetCars() =>
-            new List<Models.Car>()
-            {
-                new Models.Car() { Created = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero) },
-                new Models.Car() { Created = new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero) },
-                new Models.Car() { Created = new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero) },
-                new Models.Car() { Created = new DateTimeOffset(2000, 1, 4, 0, 0, 0, TimeSpan.Zero) },
-            };
     }
 }
