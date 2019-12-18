@@ -6,13 +6,13 @@ namespace OrleansTemplate.Grains
 
     public class CounterGrain : Grain<long>, ICounterGrain
     {
-        public async Task<long> AddCount(long value)
+        public async Task<long> AddCountAsync(long value)
         {
             this.State += value;
-            await this.WriteStateAsync();
+            await this.WriteStateAsync().ConfigureAwait(true);
             return this.State;
         }
 
-        public Task<long> GetCount() => Task.FromResult(this.State);
+        public Task<long> GetCountAsync() => Task.FromResult(this.State);
     }
 }

@@ -12,7 +12,7 @@ namespace OrleansTemplate.Grains
         private const string ReminderName = "SomeReminder";
         private string reminder;
 
-        public Task SetReminder(string reminder)
+        public Task SetReminderAsync(string reminder)
         {
             this.reminder = reminder;
             return Task.CompletedTask;
@@ -23,10 +23,11 @@ namespace OrleansTemplate.Grains
             // Reminders are timers that are persisted to storage, so they are resilient if the node goes down. They
             // should not be used for high-frequency timers their period should be measured in minutes, hours or days.
             await this.RegisterOrUpdateReminder(
-                ReminderName,
-                TimeSpan.FromSeconds(150),
-                TimeSpan.FromSeconds(60));
-            await base.OnActivateAsync();
+                    ReminderName,
+                    TimeSpan.FromSeconds(150),
+                    TimeSpan.FromSeconds(60))
+                .ConfigureAwait(true);
+            await base.OnActivateAsync().ConfigureAwait(true);
         }
 
         public async Task ReceiveReminder(string reminderName, TickStatus status)
@@ -35,12 +36,12 @@ namespace OrleansTemplate.Grains
             {
                 if (!string.IsNullOrEmpty(this.reminder))
                 {
-                    await this.PublishReminder(this.reminder);
+                    await this.PublishReminderAsync(this.reminder).ConfigureAwait(true);
                 }
             }
         }
 
-        private Task PublishReminder(string reminder)
+        private Task PublishReminderAsync(string reminder)
         {
             var streamProvider = this.GetStreamProvider(StreamProviderName.Default);
             var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.Reminder);

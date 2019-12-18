@@ -13,47 +13,57 @@ namespace OrleansTemplate.Server.IntegrationTest
     {
         private readonly TestCluster cluster;
 
-        public HelloGrainTest(ClusterFixture fixture) => this.cluster = fixture.Cluster;
+        public HelloGrainTest(ClusterFixture fixture)
+        {
+            if (fixture is null)
+            {
+                throw new ArgumentNullException(nameof(fixture));
+            }
+
+            this.cluster = fixture.Cluster;
+        }
 
         [Fact]
-        public async Task SayHello_PassName_ReturnsGreeting()
+        public async Task SayHello_PassName_ReturnsGreetingAsync()
         {
             var grain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
 
-            var greeting = await grain.SayHello("Rehan");
+            var greeting = await grain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
             Assert.Equal("Hello Rehan!", greeting);
         }
 
         [Fact]
-        public async Task SayHello_PassName_CountIncremented()
+        public async Task SayHello_PassName_CountIncrementedAsync()
         {
             var helloGrain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
             var counterGrain = this.cluster.GrainFactory.GetGrain<ICounterGrain>(Guid.Empty);
 
-            await helloGrain.SayHello("Rehan");
+            await helloGrain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
-            await Task.Delay(TimeSpan.FromSeconds(2));
-            var count = await counterGrain.GetCount();
+            await Task.Delay(TimeSpan.FromSeconds(2)).ConfigureAwait(false);
+            var count = await counterGrain.GetCountAsync().ConfigureAwait(false);
 
             Assert.Equal(1L, count);
         }
 
         [Fact]
-        public async Task SayHello_PassName_SaidHelloPublished()
+        public async Task SayHello_PassName_SaidHelloPublishedAsync()
         {
             string hello = null;
             var helloGrain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
             var streamProvider = this.cluster.Client.GetStreamProvider(StreamProviderName.Default);
             var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
-            var subscription = await stream.SubscribeAsync(
-                (x, token) =>
-                {
-                    hello = x;
-                    return Task.CompletedTask;
-                });
+            var subscription = await stream
+                .SubscribeAsync(
+                    (x, token) =>
+                    {
+                        hello = x;
+                        return Task.CompletedTask;
+                    })
+                .ConfigureAwait(false);
 
-            await helloGrain.SayHello("Rehan");
+            await helloGrain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
             Assert.Equal("Rehan", hello);
         }

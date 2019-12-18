@@ -436,7 +436,7 @@ dotnet_diagnostic.SA1600.severity = silent
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1601.md
 dotnet_diagnostic.SA1601.severity = silent
 
-# An item within a C# enumeration is missing an Xml documentation header.
+# An item within a C# enumeration is missing an XML documentation header.
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
 dotnet_diagnostic.SA1602.severity = silent
 

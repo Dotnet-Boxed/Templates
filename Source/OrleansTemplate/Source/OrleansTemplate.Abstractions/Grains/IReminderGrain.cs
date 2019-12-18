@@ -5,6 +5,6 @@ namespace OrleansTemplate.Abstractions.Grains
 
     public interface IReminderGrain : IGrainWithGuidKey
     {
-        Task SetReminder(string reminder);
+        Task SetReminderAsync(string reminder);
     }
 }

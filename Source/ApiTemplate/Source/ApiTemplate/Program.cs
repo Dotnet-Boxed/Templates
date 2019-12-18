@@ -13,7 +13,7 @@ namespace ApiTemplate
     using Serilog;
     using Serilog.Core;
 
-    public sealed class Program
+    public static class Program
     {
         public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
 

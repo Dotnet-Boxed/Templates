@@ -8,21 +8,21 @@ namespace OrleansTemplate.Grains
 
     public class HelloGrain : Grain, IHelloGrain
     {
-        public async Task<string> SayHello(string name)
+        public async Task<string> SayHelloAsync(string name)
         {
-            await this.IncrementCounter();
-            await this.PublishSaidHello(name);
+            await this.IncrementCounterAsync().ConfigureAwait(true);
+            await this.PublishSaidHelloAsync(name).ConfigureAwait(true);
 
             return $"Hello {name}!";
         }
 
-        private Task IncrementCounter()
+        private Task IncrementCounterAsync()
         {
             var counter = this.GrainFactory.GetGrain<ICounterStatelessGrain>(0L);
-            return counter.Increment();
+            return counter.IncrementAsync();
         }
 
-        private Task PublishSaidHello(string name)
+        private Task PublishSaidHelloAsync(string name)
         {
             var streamProvider = this.GetStreamProvider(StreamProviderName.Default);
             var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
