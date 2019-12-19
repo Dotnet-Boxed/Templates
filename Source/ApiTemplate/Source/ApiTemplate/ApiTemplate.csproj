@@ -19,10 +19,6 @@
     <!-- CS1591 - Don't warn about all public members not being documented. -->
     <!--#endif-->
     <NoWarn Condition="'$(Swagger)' == 'true'">$(NoWarn);CS1591</NoWarn>
-    <!--#if (!Swagger)-->
-    <!-- SA0001 - XML comment analysis is disabled due to project configuration. -->
-    <!--#endif-->
-    <NoWarn Condition="'$(Swagger)' == 'false'">$(NoWarn);SA0001</NoWarn>
     <GenerateDocumentationFile Condition="'$(Swagger)' == 'true'">true</GenerateDocumentationFile>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.

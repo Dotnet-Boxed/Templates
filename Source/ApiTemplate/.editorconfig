@@ -382,6 +382,52 @@ dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
 ##########################################
+# StyleCop
+##########################################
+
+[*]
+# SA0001: XML comment analysis is disabled due to project configuration.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
+dotnet_diagnostic.SA0001.severity = none
+
+[*.cs]
+# SA1515: Single-line comment should be preceded by blank line.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md
+dotnet_diagnostic.SA1515.severity = none
+
+# SA1600: A C# code element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: A C# partial element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1601.md
+dotnet_diagnostic.SA1601.severity = none
+
+# SA1602: An item within a C# enumeration is missing an XML documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
+dotnet_diagnostic.SA1602.severity = none
+
+# SA1627: Documentation text should not be empty
+# Justification: <example></example> Swagger documentation needs to be empty to represent a null value.
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1627.md
+dotnet_diagnostic.SA1627.severity = none
+
+# SA1629: Documentation text should end with a period
+# Justification: <example></example> Swagger documentation needs to be empty to represent a null value.
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1629.md
+dotnet_diagnostic.SA1629.severity = none
+
+# SA1633: A C# code file is missing a standard file header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
+dotnet_diagnostic.SA1633.severity = none
+
+##########################################
 # License
 ##########################################
 # The following applies as to the .editorconfig file ONLY, and is
@@ -415,39 +461,3 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 ##########################################
-
-##########################################
-# StyleCop
-##########################################
-
-# XML comment analysis is disabled due to project configuration
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
-dotnet_diagnostic.SA0001.severity = silent
-
-# Single-line comment should be preceded by blank line
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md
-dotnet_diagnostic.SA1515.severity = silent
-
-# A C# code element is missing a documentation header.
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
-dotnet_diagnostic.SA1600.severity = silent
-
-# A C# partial element is missing a documentation header.
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1601.md
-dotnet_diagnostic.SA1601.severity = silent
-
-# An item within a C# enumeration is missing an XML documentation header.
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
-dotnet_diagnostic.SA1602.severity = silent
-
-# Documentation text should not be empty
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1627.md
-dotnet_diagnostic.SA1627.severity = silent
-
-# Documentation text should end with a period
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1629.md
-dotnet_diagnostic.SA1629.severity = silent
-
-# A C# code file is missing a standard file header.
-# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
-dotnet_diagnostic.SA1633.severity = silent
