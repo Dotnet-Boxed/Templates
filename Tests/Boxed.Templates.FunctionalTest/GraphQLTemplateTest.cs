@@ -27,9 +27,9 @@ namespace Boxed.Templates.FunctionalTest
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("GraphQLDefaults")]
-        [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
-        [InlineData("NoHostFiltering", "host-filtering=false")]
-        [InlineData("NoFwdHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
+        [InlineData("GraphQLNoForwardedHeaders", "forwarded-headers=false")]
+        [InlineData("GraphQLNoHostFiltering", "host-filtering=false")]
+        [InlineData("GraphQLNoFwdHeadersOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
         public async Task RestoreAndBuild_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
