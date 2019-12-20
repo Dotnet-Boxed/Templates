@@ -24,7 +24,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
 
             var graphQlResponse = await response.Content.ReadAsAsync<GraphQLResponse>().ConfigureAwait(false);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Null(graphQlResponse.Errors);
+            Assert.Empty(graphQlResponse.Errors);
         }
     }
 }

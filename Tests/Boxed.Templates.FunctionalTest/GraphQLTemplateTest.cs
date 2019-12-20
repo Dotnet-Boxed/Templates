@@ -33,7 +33,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreAndBuild_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
@@ -49,7 +49,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_GraphQLDefaults_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
@@ -104,7 +104,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_HealthCheckFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -142,7 +142,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_QueryGraphQlIntrospection_ReturnsResultsAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
@@ -171,7 +171,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_HttpsEverywhereFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -204,7 +204,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_AuthorizationTrue_Returns400BadRequestAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -246,7 +246,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfullyAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
