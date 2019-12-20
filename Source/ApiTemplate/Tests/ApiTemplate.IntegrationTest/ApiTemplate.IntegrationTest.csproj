@@ -22,7 +22,7 @@
 
   <ItemGroup Label="Analyzer Package References">
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.4.33" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.4.43" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" />
   </ItemGroup>
 

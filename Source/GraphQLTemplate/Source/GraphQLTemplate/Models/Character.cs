@@ -5,12 +5,22 @@ namespace GraphQLTemplate.Models
 
     public abstract class Character
     {
+        public Character()
+        {
+            this.AppearsIn = new List<Episode>();
+            this.Friends = new List<Guid>();
+        }
+
         public Guid Id { get; set; }
 
         public string Name { get; set; }
 
-        public List<Guid> Friends { get; set; }
+        public List<Guid> Friends { get; }
 
-        public List<Episode> AppearsIn { get; set; }
+        public List<Episode> AppearsIn { get; }
+
+        public DateTimeOffset Created { get; set; }
+
+        public DateTimeOffset Modified { get; set; }
     }
 }

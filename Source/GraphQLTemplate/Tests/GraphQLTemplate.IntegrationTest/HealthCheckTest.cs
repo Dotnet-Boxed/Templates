@@ -1,5 +1,6 @@
 namespace GraphQLTemplate.IntegrationTest.Controllers
 {
+    using System;
     using System.Net;
     using System.Net.Http;
     using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task GetStatus_Default_Returns200OkAsync()
         {
-            var response = await this.client.GetAsync("/status");
+            var response = await this.client.GetAsync(new Uri("/status", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -26,7 +27,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
         [Fact]
         public async Task GetStatusSelf_Default_Returns200OkAsync()
         {
-            var response = await this.client.GetAsync("/status/self");
+            var response = await this.client.GetAsync(new Uri("/status/self", UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }

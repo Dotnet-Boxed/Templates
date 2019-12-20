@@ -1,4 +1,9 @@
-[*.cs]
+##########################################
+# Custom
+##########################################
 
+[*.cs]
 # CA1707: Identifiers should not contain underscores
-dotnet_diagnostic.CA1707.severity = silent
+# Justification: Test method names contain underscores
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
+dotnet_diagnostic.CA1707.severity = none

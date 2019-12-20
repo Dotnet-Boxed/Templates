@@ -14,8 +14,10 @@ namespace GraphQLTemplate.Options
     /// </summary>
     public class ApplicationOptions
     {
+        public ApplicationOptions() => this.CacheProfiles = new CacheProfileOptions();
+
         [Required]
-        public CacheProfileOptions CacheProfiles { get; set; }
+        public CacheProfileOptions CacheProfiles { get; }
 
 #if ResponseCompression
         public CompressionOptions Compression { get; set; }

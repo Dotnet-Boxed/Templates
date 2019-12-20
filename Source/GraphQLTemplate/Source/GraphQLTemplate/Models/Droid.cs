@@ -4,7 +4,7 @@ namespace GraphQLTemplate.Models
 
     public class Droid : Character
     {
-        public DateTimeOffset Created { get; set; }
+        public DateTimeOffset Manufactured { get; set; }
 
         public TimeSpan ChargePeriod { get; set; }
 

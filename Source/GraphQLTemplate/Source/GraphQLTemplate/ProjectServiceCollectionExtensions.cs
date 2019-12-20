@@ -2,6 +2,7 @@ namespace GraphQLTemplate
 {
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Schemas;
+    using GraphQLTemplate.Services;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -12,11 +13,17 @@ namespace GraphQLTemplate
     /// AddScoped - A new instance is created and returned for each request/response cycle.
     /// AddTransient - A new instance is created and returned each time.
     /// </remarks>
-    public static class ProjectServiceCollectionExtensions
+    internal static class ProjectServiceCollectionExtensions
     {
+        public static IServiceCollection AddProjectServices(this IServiceCollection services) =>
+            services
+                .AddSingleton<IClockService, ClockService>();
+
         /// <summary>
         /// Add project data repositories.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddProjectRepositories(this IServiceCollection services) =>
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
@@ -25,6 +32,8 @@ namespace GraphQLTemplate
         /// <summary>
         /// Add project GraphQL schema and web socket types.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddProjectSchemas(this IServiceCollection services) =>
             services
                 .AddSingleton<MainSchema>();

@@ -43,6 +43,7 @@ namespace GraphQLTemplate.Schemas
     ///   }
     /// }
     /// </c>
+    /// It retrieves common properties, as well as properties specific to droids and humans.
     /// </example>
     public class QueryObject : ObjectGraphType<object>
     {
@@ -65,7 +66,7 @@ namespace GraphQLTemplate.Schemas
                         Description = "The unique identifier of the droid.",
                     }),
                 resolve: context =>
-                    droidRepository.GetDroid(
+                    droidRepository.GetDroidAsync(
                         context.GetArgument("id", defaultValue: new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68")),
                         context.CancellationToken));
             this.FieldAsync<HumanObject, Human>(
@@ -77,7 +78,7 @@ namespace GraphQLTemplate.Schemas
                         Name = "id",
                         Description = "The unique identifier of the human.",
                     }),
-                resolve: context => humanRepository.GetHuman(
+                resolve: context => humanRepository.GetHumanAsync(
                     context.GetArgument("id", defaultValue: new Guid("94fbd693-2027-4804-bf40-ed427fe76fda")),
                     context.CancellationToken));
 
@@ -88,10 +89,10 @@ namespace GraphQLTemplate.Schemas
                 .Bidirectional()
                 // Set the maximum size of a page, use .ReturnAll() to set no maximum size.
                 .PageSize(MaxPageSize)
-                .ResolveAsync(context => ResolveConnection(droidRepository, context));
+                .ResolveAsync(context => ResolveConnectionAsync(droidRepository, context));
         }
 
-        private async static Task<object> ResolveConnection(
+        private static async Task<object> ResolveConnectionAsync(
             IDroidRepository droidRepository,
             ResolveConnectionContext<object> context)
         {
@@ -101,17 +102,17 @@ namespace GraphQLTemplate.Schemas
             var beforeCursor = Cursor.FromCursor<DateTime?>(context.Before);
             var cancellationToken = context.CancellationToken;
 
-            var getDroidsTask = GetDroids(droidRepository, first, afterCursor, last, beforeCursor, cancellationToken);
-            var getHasNextPageTask = GetHasNextPage(droidRepository, first, afterCursor, cancellationToken);
-            var getHasPreviousPageTask = GetHasPreviousPage(droidRepository, last, beforeCursor, cancellationToken);
-            var totalCountTask = droidRepository.GetTotalCount(cancellationToken);
+            var getDroidsTask = GetDroidsAsync(droidRepository, first, afterCursor, last, beforeCursor, cancellationToken);
+            var getHasNextPageTask = GetHasNextPageAsync(droidRepository, first, afterCursor, cancellationToken);
+            var getHasPreviousPageTask = GetHasPreviousPageAsync(droidRepository, last, beforeCursor, cancellationToken);
+            var totalCountTask = droidRepository.GetTotalCountAsync(cancellationToken);
 
-            await Task.WhenAll(getDroidsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask);
-            var droids = getDroidsTask.Result;
-            var hasNextPage = getHasNextPageTask.Result;
-            var hasPreviousPage = getHasPreviousPageTask.Result;
-            var totalCount = totalCountTask.Result;
-            var (firstCursor, lastCursor) = Cursor.GetFirstAndLastCursor(droids, x => x.Created);
+            await Task.WhenAll(getDroidsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask).ConfigureAwait(false);
+            var droids = await getDroidsTask.ConfigureAwait(false);
+            var hasNextPage = await getHasNextPageTask.ConfigureAwait(false);
+            var hasPreviousPage = await getHasPreviousPageTask.ConfigureAwait(false);
+            var totalCount = await totalCountTask.ConfigureAwait(false);
+            var (firstCursor, lastCursor) = Cursor.GetFirstAndLastCursor(droids, x => x.Manufactured);
 
             return new Connection<Droid>()
             {
@@ -119,8 +120,8 @@ namespace GraphQLTemplate.Schemas
                     .Select(x =>
                         new Edge<Droid>()
                         {
-                            Cursor = Cursor.ToCursor(x.Created),
-                            Node = x
+                            Cursor = Cursor.ToCursor(x.Manufactured),
+                            Node = x,
                         })
                     .ToList(),
                 PageInfo = new PageInfo()
@@ -134,7 +135,7 @@ namespace GraphQLTemplate.Schemas
             };
         }
 
-        private static Task<List<Droid>> GetDroids(
+        private static Task<List<Droid>> GetDroidsAsync(
             IDroidRepository droidRepository,
             int? first,
             DateTime? afterCursor,
@@ -145,17 +146,17 @@ namespace GraphQLTemplate.Schemas
             Task<List<Droid>> getDroidsTask;
             if (first.HasValue)
             {
-                getDroidsTask = droidRepository.GetDroids(first, afterCursor, cancellationToken);
+                getDroidsTask = droidRepository.GetDroidsAsync(first, afterCursor, cancellationToken);
             }
             else
             {
-                getDroidsTask = droidRepository.GetDroidsReverse(last, beforeCursor, cancellationToken);
+                getDroidsTask = droidRepository.GetDroidsReverseAsync(last, beforeCursor, cancellationToken);
             }
 
             return getDroidsTask;
         }
 
-        private static async Task<bool> GetHasNextPage(
+        private static Task<bool> GetHasNextPageAsync(
             IDroidRepository droidRepository,
             int? first,
             DateTime? afterCursor,
@@ -163,15 +164,15 @@ namespace GraphQLTemplate.Schemas
         {
             if (first.HasValue)
             {
-                return await droidRepository.GetHasNextPage(first, afterCursor, cancellationToken);
+                return droidRepository.GetHasNextPageAsync(first, afterCursor, cancellationToken);
             }
             else
             {
-                return false;
+                return Task.FromResult(false);
             }
         }
 
-        private static async Task<bool> GetHasPreviousPage(
+        private static Task<bool> GetHasPreviousPageAsync(
             IDroidRepository droidRepository,
             int? last,
             DateTime? beforeCursor,
@@ -179,11 +180,11 @@ namespace GraphQLTemplate.Schemas
         {
             if (last.HasValue)
             {
-                return await droidRepository.GetHasPreviousPage(last, beforeCursor, cancellationToken);
+                return droidRepository.GetHasPreviousPageAsync(last, beforeCursor, cancellationToken);
             }
             else
             {
-                return false;
+                return Task.FromResult(false);
             }
         }
     }

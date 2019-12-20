@@ -3,6 +3,7 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
     using System;
     using System.Net.Http;
     using GraphQLTemplate.Options;
+    using GraphQLTemplate.Services;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.Extensions.DependencyInjection;
@@ -31,9 +32,9 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        // public Mock<IClockService> ClockServiceMock { get; private set; }
+        public Mock<IClockService> ClockServiceMock { get; private set; }
 
-        public void VerifyAllMocks() => Mock.VerifyAll();
+        public void VerifyAllMocks() => Mock.VerifyAll(this.ClockServiceMock);
 
         protected override void ConfigureClient(HttpClient client)
         {
@@ -41,7 +42,7 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
-                // this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
+                this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
             }
 
             base.ConfigureClient(client);

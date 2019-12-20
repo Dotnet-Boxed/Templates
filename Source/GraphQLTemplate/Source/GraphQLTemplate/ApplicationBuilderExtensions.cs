@@ -9,13 +9,15 @@ namespace GraphQLTemplate
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
 
-    public static partial class ApplicationBuilderExtensions
+    internal static partial class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
         /// headers. The cache duration is controlled from configuration.
         /// See http://andrewlock.net/adding-cache-control-headers-to-static-files-in-asp-net-core/.
         /// </summary>
+        /// <param name="application">The application builder.</param>
+        /// <returns>The application builder with the static files middleware configured.</returns>
         public static IApplicationBuilder UseStaticFilesWithCacheControl(this IApplicationBuilder application)
         {
             var cacheProfile = application
@@ -36,6 +38,8 @@ namespace GraphQLTemplate
         /// Uses custom serilog request logging. Adds additional properties to each log.
         /// See https://github.com/serilog/serilog-aspnetcore.
         /// </summary>
+        /// <param name="application">The application builder.</param>
+        /// <returns>The application builder with the Serilog middleware configured.</returns>
         public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
