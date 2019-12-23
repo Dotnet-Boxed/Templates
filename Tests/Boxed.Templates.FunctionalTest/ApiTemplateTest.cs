@@ -27,11 +27,11 @@ namespace Boxed.Templates.FunctionalTest
 
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
-        [InlineData("Default")]
-        [InlineData("NoForwardedHeaders", "forwarded-headers=false")]
-        [InlineData("NoHostFiltering", "host-filtering=false")]
-        [InlineData("NoFwdHeadersOrHostFiltering", "forwarded-headers=false", "host-filtering=false")]
-        public async Task RestoreAndBuild_Default_SuccessfulAsync(string name, params string[] arguments)
+        [InlineData("ApiDefaults")]
+        [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
+        [InlineData("ApiNoHostFiltering", "host-filtering=false")]
+        [InlineData("ApiNoFwdHeadersOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
+        public async Task RestoreAndBuild_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -47,17 +47,17 @@ namespace Boxed.Templates.FunctionalTest
 
         [Fact]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task Run_Default_SuccessfulAsync()
+        public async Task Run_ApiDefaults_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("api", "Default").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync("api", "ApiDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\Default",
+                        @"Source\ApiDefaults",
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -138,7 +138,7 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "api",
-                        "HealthCheckFalse",
+                        "ApiHealthCheckFalse",
                         new Dictionary<string, string>()
                         {
                             { "health-check", "false" },
@@ -148,7 +148,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\HealthCheckFalse",
+                        @"Source\ApiHealthCheckFalse",
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -176,7 +176,7 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "api",
-                        "HttpsEverywhereFalse",
+                        "ApiHttpsEverywhereFalse",
                         new Dictionary<string, string>()
                         {
                             { "https-everywhere", "false" },
@@ -186,7 +186,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\HttpsEverywhereFalse",
+                        @"Source\ApiHttpsEverywhereFalse",
                         ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -209,7 +209,7 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "api",
-                        "SwaggerFalse",
+                        "ApiSwaggerFalse",
                         new Dictionary<string, string>()
                         {
                             { "swagger", "false" },
@@ -219,7 +219,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\SwaggerFalse",
+                        @"Source\ApiSwaggerFalse",
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -232,6 +232,6 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("GraphQLTemplate.sln");
+        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln");
     }
 }

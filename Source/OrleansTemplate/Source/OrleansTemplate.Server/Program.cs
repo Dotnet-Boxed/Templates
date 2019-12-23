@@ -21,12 +21,17 @@ namespace OrleansTemplate.Server
     using Serilog;
     using Serilog.Core;
 
-    public class Program
+    public static class Program
     {
         public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
 
         public static async Task<int> LogAndRunAsync(IHost host)
         {
+            if (host is null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             Log.Logger = CreateLogger(host);
 
             try
@@ -36,7 +41,9 @@ namespace OrleansTemplate.Server
                 Log.Information("Stopped application");
                 return 0;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 Log.Fatal(exception, "Application terminated unexpectedly");
                 return 1;

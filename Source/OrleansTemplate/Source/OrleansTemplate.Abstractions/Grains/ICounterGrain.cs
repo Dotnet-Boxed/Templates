@@ -10,8 +10,8 @@ namespace OrleansTemplate.Abstractions.Grains
     /// <seealso cref="IGrainWithGuidKey" />
     public interface ICounterGrain : IGrainWithGuidKey
     {
-        Task<long> AddCount(long value);
+        Task<long> AddCountAsync(long value);
 
-        Task<long> GetCount();
+        Task<long> GetCountAsync();
     }
 }

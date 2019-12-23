@@ -3,6 +3,7 @@ namespace GraphQLTemplate.Schemas
     using GraphQL.Types;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using GraphQLTemplate.Services;
     using GraphQLTemplate.Types;
 
     /// <summary>
@@ -30,10 +31,11 @@ namespace GraphQLTemplate.Schemas
     ///   }
     /// }
     /// </c>
+    /// These can be customized by the client.
     /// </example>
     public class MutationObject : ObjectGraphType<object>
     {
-        public MutationObject(IHumanRepository humanRepository)
+        public MutationObject(IClockService clockService, IHumanRepository humanRepository)
         {
             this.Name = "Mutation";
             this.Description = "The mutation type, represents all updates we can make to our data.";
@@ -50,7 +52,10 @@ namespace GraphQLTemplate.Schemas
                 resolve: context =>
                 {
                     var human = context.GetArgument<Human>("human");
-                    return humanRepository.AddHuman(human, context.CancellationToken);
+                    var now = clockService.UtcNow;
+                    human.Created = now;
+                    human.Modified = now;
+                    return humanRepository.AddHumanAsync(human, context.CancellationToken);
                 });
         }
     }

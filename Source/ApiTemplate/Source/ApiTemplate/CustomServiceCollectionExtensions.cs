@@ -44,7 +44,7 @@ namespace ApiTemplate
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
     /// </summary>
-    public static class CustomServiceCollectionExtensions
+    internal static class CustomServiceCollectionExtensions
     {
         /// <summary>
         /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
@@ -53,33 +53,23 @@ namespace ApiTemplate
         /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
         /// otherwise.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddCustomCaching(this IServiceCollection services) =>
             services
-                // Adds IMemoryCache which is a simple in-memory cache.
                 .AddMemoryCache()
                 // Adds IDistributedCache which is a distributed cache shared between multiple servers. This adds a
-                // default implementation of IDistributedCache which is not distributed. See below:
+                // default implementation of IDistributedCache which is not distributed. You probably want to use the
+                // Redis cache provider by calling AddDistributedRedisCache.
                 .AddDistributedMemoryCache();
-        // Uncomment the following line to use the Redis implementation of IDistributedCache. This will
-        // override any previously registered IDistributedCache service.
-        // Redis is a very fast cache provider and the recommended distributed cache provider.
-        // .AddDistributedRedisCache(options => { ... });
-        // Uncomment the following line to use the Microsoft SQL Server implementation of IDistributedCache.
-        // Note that this would require setting up the session state database.
-        // Redis is the preferred cache implementation but you can use SQL Server if you don't have an alternative.
-        // .AddSqlServerCache(
-        //     x =>
-        //     {
-        //         x.ConnectionString = "Server=.;Database=ASPNET5SessionState;Trusted_Connection=True;";
-        //         x.SchemaName = "dbo";
-        //         x.TableName = "Sessions";
-        //     });
-
 #if CORS
+
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
         /// https://docs.asp.net/en/latest/security/cors.html
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with CORS services added.</returns>
         public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
             services.AddCors(
                 options =>
@@ -91,12 +81,15 @@ namespace ApiTemplate
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()));
-
 #endif
+
         /// <summary>
         /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
         /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The services with options services added.</returns>
         public static IServiceCollection AddCustomOptions(
             this IServiceCollection services,
             IConfiguration configuration) =>
@@ -113,12 +106,15 @@ namespace ApiTemplate
 #endif
                 .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
-
 #if ResponseCompression
+
         /// <summary>
         /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
         /// requests by default to avoid the BREACH security vulnerability.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The services with response compression services added.</returns>
         public static IServiceCollection AddCustomResponseCompression(
             this IServiceCollection services,
             IConfiguration configuration) =>
@@ -138,15 +134,17 @@ namespace ApiTemplate
                         options.Providers.Add<BrotliCompressionProvider>();
                         options.Providers.Add<GzipCompressionProvider>();
                     });
-
 #endif
+
         /// <summary>
         /// Add custom routing settings which determines how URL's are generated.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with routing services added.</returns>
         public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
             services.AddRouting(options => options.LowercaseUrls = true);
-
 #if HttpsEverywhere
+
         /// <summary>
         /// Adds the Strict-Transport-Security HTTP header to responses. This HTTP header is only relevant if you are
         /// using TLS. It ensures that content is loaded over HTTPS and refuses to connect in case of certificate
@@ -157,6 +155,8 @@ namespace ApiTemplate
         /// Note: You can refer to the following article to clear the HSTS cache in your browser:
         /// http://classically.me/blogs/how-clear-hsts-settings-major-browsers
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with HSTS services added.</returns>
         public static IServiceCollection AddCustomStrictTransportSecurity(this IServiceCollection services) =>
             services
                 .AddHsts(
@@ -173,17 +173,17 @@ namespace ApiTemplate
                         // options.Preload = true;
 #endif
                     });
-
 #endif
 #if HealthCheck
+
         public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
             services
                 .AddHealthChecks()
                 // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
                 .Services;
-
 #endif
 #if Versioning
+
         public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
             services
                 .AddApiVersioning(
@@ -191,18 +191,16 @@ namespace ApiTemplate
                     {
                         options.AssumeDefaultVersionWhenUnspecified = true;
                         options.ReportApiVersions = true;
-#if (!Versioning)
-                    });
-#else
                     })
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
 #endif
-
-#endif
 #if Swagger
+
         /// <summary>
         /// Adds Swagger services and configures the Swagger services.
         /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with Swagger services added.</returns>
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
             services.AddSwaggerGen(
                 options =>
@@ -251,7 +249,6 @@ namespace ApiTemplate
                     options.SwaggerDoc("v1", info);
 #endif
                 });
-
 #endif
     }
 }

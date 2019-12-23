@@ -40,7 +40,7 @@ namespace ApiTemplate.Commands
             JsonPatchDocument<SaveCar> patch,
             CancellationToken cancellationToken)
         {
-            var car = await this.carRepository.GetAsync(carId, cancellationToken);
+            var car = await this.carRepository.GetAsync(carId, cancellationToken).ConfigureAwait(false);
             if (car is null)
             {
                 return new NotFoundResult();
@@ -60,7 +60,7 @@ namespace ApiTemplate.Commands
             }
 
             this.saveCarToCarMapper.Map(saveCar, car);
-            await this.carRepository.UpdateAsync(car, cancellationToken);
+            await this.carRepository.UpdateAsync(car, cancellationToken).ConfigureAwait(false);
             var carViewModel = this.carToCarMapper.Map(car);
 
             return new OkObjectResult(carViewModel);

@@ -5,6 +5,6 @@ namespace OrleansTemplate.Abstractions.Grains
 
     public interface IHelloGrain : IGrainWithGuidKey
     {
-        Task<string> SayHello(string name);
+        Task<string> SayHelloAsync(string name);
     }
 }

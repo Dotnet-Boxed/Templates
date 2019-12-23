@@ -382,6 +382,42 @@ dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
 ##########################################
+# StyleCop
+##########################################
+
+[*]
+# SA0001: XML comment analysis is disabled due to project configuration
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
+dotnet_diagnostic.SA0001.severity = none
+
+[*.cs]
+# SA1515: Single-line comment should be preceded by blank line.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1515.md
+dotnet_diagnostic.SA1515.severity = none
+
+# SA1600: A C# code element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: A C# partial element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1601.md
+dotnet_diagnostic.SA1601.severity = none
+
+# SA1602: An item within a C# enumeration is missing an XML documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
+dotnet_diagnostic.SA1602.severity = none
+
+# SA1633: A C# code file is missing a standard file header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
+dotnet_diagnostic.SA1633.severity = none
+
+##########################################
 # License
 ##########################################
 # The following applies as to the .editorconfig file ONLY, and is

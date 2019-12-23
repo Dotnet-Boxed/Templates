@@ -12,10 +12,10 @@ namespace GraphQLTemplate.Repositories
         IObservable<Human> WhenHumanCreated { get; }
 
 #endif
-        Task<Human> AddHuman(Human human, CancellationToken cancellationToken);
+        Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken);
 
-        Task<List<Character>> GetFriends(Human human, CancellationToken cancellationToken);
+        Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken);
 
-        Task<Human> GetHuman(Guid id, CancellationToken cancellationToken);
+        Task<Human> GetHumanAsync(Guid id, CancellationToken cancellationToken);
     }
 }

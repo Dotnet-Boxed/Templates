@@ -15,6 +15,11 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
 
         public void Emit(LogEvent logEvent)
         {
+            if (logEvent is null)
+            {
+                throw new ArgumentNullException(nameof(logEvent));
+            }
+
             var shortLogLevel = logEvent.Level.ToString().Substring(0, 3).ToUpperInvariant();
             var renderedMessage = logEvent.MessageTemplate.Render(logEvent.Properties, CultureInfo.InvariantCulture);
             var message = FormattableString.Invariant($"[{logEvent.Timestamp:HH:mm:ss} {shortLogLevel}] {renderedMessage}");

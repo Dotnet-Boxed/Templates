@@ -1,12 +1,12 @@
 namespace GraphQLTemplate
 {
     using Boxed.AspNetCore;
-#if CORS
-    using GraphQLTemplate.Constants;
-#endif
     using GraphQL.Server;
     using GraphQL.Server.Ui.Playground;
     using GraphQL.Server.Ui.Voyager;
+#if CORS
+    using GraphQLTemplate.Constants;
+#endif
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
@@ -28,10 +28,10 @@ namespace GraphQLTemplate
         /// <summary>
         /// Initializes a new instance of the <see cref="Startup"/> class.
         /// </summary>
-        /// <param name="configuration">The application configuration, where key value pair settings are stored. See
-        /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
+        /// <param name="configuration">The application configuration, where key value pair settings are stored (See
+        /// http://docs.asp.net/en/latest/fundamentals/configuration.html).</param>
         /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
+        /// Staging or Production by default (See http://docs.asp.net/en/latest/fundamentals/environments.html).</param>
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             this.configuration = configuration;
@@ -40,9 +40,10 @@ namespace GraphQLTemplate
 
         /// <summary>
         /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
-        /// called by the ASP.NET runtime. See
-        /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
+        /// called by the ASP.NET runtime (See
+        /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx).
         /// </summary>
+        /// <param name="services">The services.</param>
         public virtual void ConfigureServices(IServiceCollection services) =>
             services
 #if ApplicationInsights
@@ -74,6 +75,7 @@ namespace GraphQLTemplate
 #if Authorization
                 .AddCustomGraphQLAuthorization()
 #endif
+                .AddProjectServices()
                 .AddProjectRepositories()
                 .AddProjectSchemas();
 
@@ -81,6 +83,7 @@ namespace GraphQLTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
+        /// <param name="application">The application builder.</param>
         public virtual void Configure(IApplicationBuilder application) =>
             application
                 .UseIf(

@@ -11,7 +11,7 @@ namespace GraphQLTemplate.Repositories
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
 
-    public class HumanRepository : IHumanRepository
+    public sealed class HumanRepository : IHumanRepository, IDisposable
     {
 #if Subscriptions
         private readonly Subject<Human> whenHumanCreated;
@@ -21,8 +21,13 @@ namespace GraphQLTemplate.Repositories
         public IObservable<Human> WhenHumanCreated => this.whenHumanCreated.AsObservable();
 
 #endif
-        public Task<Human> AddHuman(Human human, CancellationToken cancellationToken)
+        public Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken)
         {
+            if (human is null)
+            {
+                throw new ArgumentNullException(nameof(human));
+            }
+
             human.Id = Guid.NewGuid();
             Database.Humans.Add(human);
 #if Subscriptions
@@ -31,10 +36,19 @@ namespace GraphQLTemplate.Repositories
             return Task.FromResult(human);
         }
 
-        public Task<List<Character>> GetFriends(Human human, CancellationToken cancellationToken) =>
-            Task.FromResult(Database.Characters.Where(x => human.Friends.Contains(x.Id)).ToList());
+        public void Dispose() => this.whenHumanCreated.Dispose();
 
-        public Task<Human> GetHuman(Guid id, CancellationToken cancellationToken) =>
+        public Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken)
+        {
+            if (human is null)
+            {
+                throw new ArgumentNullException(nameof(human));
+            }
+
+            return Task.FromResult(Database.Characters.Where(x => human.Friends.Contains(x.Id)).ToList());
+        }
+
+        public Task<Human> GetHumanAsync(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(Database.Humans.FirstOrDefault(x => x.Id == id));
     }
 }

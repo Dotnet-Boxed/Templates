@@ -40,6 +40,7 @@ namespace ApiTemplate
         /// called by the ASP.NET runtime. See
         /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
         /// </summary>
+        /// <param name="services">The services.</param>
         public virtual void ConfigureServices(IServiceCollection services) =>
             services
 #if ApplicationInsights
@@ -94,6 +95,7 @@ namespace ApiTemplate
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
         /// called by the ASP.NET runtime.
         /// </summary>
+        /// <param name="application">The application builder.</param>
         public virtual void Configure(IApplicationBuilder application) =>
             application
                 .UseIf(

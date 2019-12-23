@@ -1,9 +1,8 @@
 namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 {
-    using System;
     using Orleans.TestingHost;
 
-    public class ClusterFixture : IDisposable
+    public class ClusterFixture : Disposable
     {
         public ClusterFixture()
         {
@@ -13,13 +12,15 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 
         public TestCluster Cluster { get; }
 
+#pragma warning disable CA1822 // Mark members as static
         public TestCluster CreateTestCluster() =>
+#pragma warning restore CA1822 // Mark members as static
             new TestClusterBuilder()
                 .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
                 .AddSiloBuilderConfigurator<TestSiloBuilderConfigurator>()
                 .Build();
 
-        // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in .NET Core 3.0.
-        public void Dispose() => this.Cluster.Dispose();
+        // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in the next Orleans update.
+        protected override void DisposeManaged() => this.Cluster.Dispose();
     }
 }

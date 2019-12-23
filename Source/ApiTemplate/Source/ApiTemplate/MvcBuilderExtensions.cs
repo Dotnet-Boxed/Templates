@@ -14,11 +14,8 @@ namespace ApiTemplate
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 
-    public static class MvcBuilderExtensions
+    internal static class MvcBuilderExtensions
     {
-        /// <summary>
-        /// Adds customized JSON serializer settings.
-        /// </summary>
         public static IMvcBuilder AddCustomJsonOptions(
             this IMvcBuilder builder,
             IWebHostEnvironment webHostEnvironment) =>
@@ -113,8 +110,8 @@ namespace ApiTemplate
 
         /// <summary>
         /// Gets the JSON patch input formatter. The <see cref="JsonPatchDocument{T}"/> does not support the new
-        /// System.Text.Json API's for de-serialization. You must use Newtonsoft.Json instead. See
-        /// https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-3.0#jsonpatch-addnewtonsoftjson-and-systemtextjson
+        /// System.Text.Json API's for de-serialization. You must use Newtonsoft.Json instead (See
+        /// https://docs.microsoft.com/en-us/aspnet/core/web-api/jsonpatch?view=aspnetcore-3.0#jsonpatch-addnewtonsoftjson-and-systemtextjson).
         /// </summary>
         /// <returns>The JSON patch input formatter using Newtonsoft.Json.</returns>
         private static NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter()

@@ -1,0 +1,14 @@
+##########################################
+# Custom
+##########################################
+
+[*.cs]
+# CA1303: Do not pass literals as localized parameters
+# Justification: This is a unit test project
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1303
+dotnet_diagnostic.CA1303.severity = none
+
+# CA1707: Identifiers should not contain underscores
+# Justification: Test method names contain underscores
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
+dotnet_diagnostic.CA1707.severity = none

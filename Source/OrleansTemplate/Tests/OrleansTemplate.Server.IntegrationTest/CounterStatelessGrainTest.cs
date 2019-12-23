@@ -9,19 +9,19 @@ namespace OrleansTemplate.Server.IntegrationTest
     public class CounterStatelessGrainTest : ClusterFixture
     {
         [Fact]
-        public async Task Increment_Default_EventuallyIncrementsTotalCount()
+        public async Task Increment_Default_EventuallyIncrementsTotalCountAsync()
         {
             var grain = this.Cluster.GrainFactory.GetGrain<ICounterStatelessGrain>(0L);
             var counterGrain = this.Cluster.GrainFactory.GetGrain<ICounterGrain>(Guid.Empty);
 
-            await grain.Increment();
-            var countBefore = await counterGrain.GetCount();
+            await grain.IncrementAsync().ConfigureAwait(false);
+            var countBefore = await counterGrain.GetCountAsync().ConfigureAwait(false);
 
             Assert.Equal(0L, countBefore);
 
-            await Task.Delay(TimeSpan.FromSeconds(2));
+            await Task.Delay(TimeSpan.FromSeconds(2)).ConfigureAwait(false);
 
-            var countAfter = await counterGrain.GetCount();
+            var countAfter = await counterGrain.GetCountAsync().ConfigureAwait(false);
 
             Assert.Equal(1L, countAfter);
         }

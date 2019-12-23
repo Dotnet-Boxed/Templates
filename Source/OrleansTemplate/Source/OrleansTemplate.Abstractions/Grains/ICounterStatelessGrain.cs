@@ -10,6 +10,6 @@ namespace OrleansTemplate.Abstractions.Grains
     /// <seealso cref="IGrain" />
     public interface ICounterStatelessGrain : IGrainWithIntegerKey
     {
-        Task Increment();
+        Task IncrementAsync();
     }
 }

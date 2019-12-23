@@ -84,28 +84,28 @@ namespace ApiTemplate.ViewModels
 
             if (this.HasNextPage && this.NextPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem(NextLinkItem, this.NextPageUrl));
+                values.Add(GetLinkValueItem(NextLinkItem, this.NextPageUrl));
             }
 
             if (this.HasPreviousPage && this.PreviousPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem(PreviousLinkItem, this.PreviousPageUrl));
+                values.Add(GetLinkValueItem(PreviousLinkItem, this.PreviousPageUrl));
             }
 
             if (this.FirstPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem(FirstLinkItem, this.FirstPageUrl));
+                values.Add(GetLinkValueItem(FirstLinkItem, this.FirstPageUrl));
             }
 
             if (this.LastPageUrl != null)
             {
-                values.Add(this.GetLinkValueItem(LastLinkItem, this.LastPageUrl));
+                values.Add(GetLinkValueItem(LastLinkItem, this.LastPageUrl));
             }
 
             return string.Join(", ", values);
         }
 
-        private string GetLinkValueItem(string rel, Uri url) =>
+        private static string GetLinkValueItem(string rel, Uri url) =>
             FormattableString.Invariant($"<{url}>; rel=\"{rel}\"");
     }
 }

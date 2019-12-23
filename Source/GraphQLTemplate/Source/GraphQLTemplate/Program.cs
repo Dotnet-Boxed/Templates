@@ -20,6 +20,11 @@ namespace GraphQLTemplate
 
         public static async Task<int> LogAndRunAsync(IHost host)
         {
+            if (host is null)
+            {
+                throw new ArgumentNullException(nameof(host));
+            }
+
             // Use the W3C Trace Context format to propagate distributed trace identifiers.
             // See https://devblogs.microsoft.com/aspnet/improvements-in-net-core-3-0-for-troubleshooting-and-monitoring-distributed-apps/
             Activity.DefaultIdFormat = ActivityIdFormat.W3C;
@@ -33,7 +38,9 @@ namespace GraphQLTemplate
                 Log.Information("Stopped application");
                 return 0;
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 Log.Fatal(exception, "Application terminated unexpectedly");
                 return 1;

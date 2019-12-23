@@ -24,8 +24,15 @@ namespace GraphQLTemplate
             IOptions<GraphQLOptions> options,
             IEnumerable<IDocumentExecutionListener> listeners,
             IEnumerable<IValidationRule> validationRules)
-            : base(schema, documentExecuter, options, listeners, validationRules) =>
+            : base(schema, documentExecuter, options, listeners, validationRules)
+        {
+            if (options is null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
             this.options = options.Value;
+        }
 
         public override async Task<ExecutionResult> ExecuteAsync(
             string operationName,
@@ -34,7 +41,9 @@ namespace GraphQLTemplate
             object context,
             CancellationToken cancellationToken = default)
         {
-            var result = await base.ExecuteAsync(operationName, query, variables, context, cancellationToken);
+            var result = await base
+                .ExecuteAsync(operationName, query, variables, context, cancellationToken)
+                .ConfigureAwait(false);
 
             if (this.options.EnableMetrics && (result.Errors is null || result.Errors.Count == 0))
             {

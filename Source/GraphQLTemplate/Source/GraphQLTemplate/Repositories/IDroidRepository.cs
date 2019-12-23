@@ -8,30 +8,30 @@ namespace GraphQLTemplate.Repositories
 
     public interface IDroidRepository
     {
-        Task<Droid> GetDroid(Guid id, CancellationToken cancellationToken);
+        Task<Droid> GetDroidAsync(Guid id, CancellationToken cancellationToken);
 
-        Task<List<Droid>> GetDroids(
+        Task<List<Droid>> GetDroidsAsync(
             int? first,
             DateTime? createdAfter,
             CancellationToken cancellationToken);
 
-        Task<List<Droid>> GetDroidsReverse(
+        Task<List<Droid>> GetDroidsReverseAsync(
             int? last,
             DateTime? createdBefore,
             CancellationToken cancellationToken);
 
-        Task<bool> GetHasNextPage(
+        Task<bool> GetHasNextPageAsync(
             int? first,
             DateTime? createdAfter,
             CancellationToken cancellationToken);
 
-        Task<bool> GetHasPreviousPage(
+        Task<bool> GetHasPreviousPageAsync(
             int? last,
             DateTime? createdBefore,
             CancellationToken cancellationToken);
 
-        Task<List<Character>> GetFriends(Droid droid, CancellationToken cancellationToken);
+        Task<List<Character>> GetFriendsAsync(Droid droid, CancellationToken cancellationToken);
 
-        Task<int> GetTotalCount(CancellationToken cancellationToken);
+        Task<int> GetTotalCountAsync(CancellationToken cancellationToken);
     }
 }
