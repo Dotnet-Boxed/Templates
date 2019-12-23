@@ -15,10 +15,10 @@ namespace GraphQLTemplate.Types
         {
             this.Name = "Human";
             this.Description = "A humanoid creature from the Star Wars universe.";
+
 #if Authorization
             // this.AuthorizeWith(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
 #endif
-
             this.Field(x => x.Id, type: typeof(NonNullGraphType<IdGraphType>))
                 .Description("The unique identifier of the human.");
             this.Field(x => x.Name)

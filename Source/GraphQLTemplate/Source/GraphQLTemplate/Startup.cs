@@ -1,12 +1,12 @@
 namespace GraphQLTemplate
 {
     using Boxed.AspNetCore;
-#if CORS
-    using GraphQLTemplate.Constants;
-#endif
     using GraphQL.Server;
     using GraphQL.Server.Ui.Playground;
     using GraphQL.Server.Ui.Voyager;
+#if CORS
+    using GraphQLTemplate.Constants;
+#endif
     using GraphQLTemplate.Schemas;
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
