@@ -275,6 +275,6 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln");
+        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("GraphQLTemplate.sln");
     }
 }
