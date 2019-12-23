@@ -27,13 +27,13 @@ namespace Boxed.Templates.FunctionalTest
         [Theory]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("GraphQLDefaults")]
-        [InlineData("GraphQLNoForwardedHeaders", "forwarded-headers=false")]
-        [InlineData("GraphQLNoHostFiltering", "host-filtering=false")]
-        [InlineData("GraphQLNoFwdHeadersOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
+        [InlineData("GraphQLNoFH", "forwarded-headers=false")]
+        [InlineData("GraphQLNoHF", "host-filtering=false")]
+        [InlineData("GraphQLNoFWOrHF", "forwarded-headers=false", "host-filtering=false")]
         public async Task RestoreAndBuild_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
@@ -49,7 +49,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_GraphQLDefaults_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
@@ -104,12 +104,12 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_HealthCheckFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "graphql",
-                        "GraphQLHealthCheckFalse",
+                        "GraphQLNoHC",
                         new Dictionary<string, string>()
                         {
                             { "health-check", "false" },
@@ -119,7 +119,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLHealthCheckFalse",
+                        @"Source\GraphQLNoHC",
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -142,7 +142,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_QueryGraphQlIntrospection_ReturnsResultsAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
@@ -171,12 +171,12 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_HttpsEverywhereFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "graphql",
-                        "GraphQLHttpsEverywhereFalse",
+                        "GraphQLNoHE",
                         new Dictionary<string, string>()
                         {
                             { "https-everywhere", "false" },
@@ -186,7 +186,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLHttpsEverywhereFalse",
+                        @"Source\GraphQLNoHE",
                         ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -204,12 +204,12 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_AuthorizationTrue_Returns400BadRequestAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "graphql",
-                        "GraphQLAuthorizationTrue",
+                        "GraphQLA",
                         new Dictionary<string, string>()
                         {
                             { "authorization", "true" },
@@ -219,7 +219,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLAuthorizationTrue",
+                        @"Source\GraphQLA",
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -246,12 +246,12 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Run_AuthorizationFalse_DateOfBirthReturnedSuccessfullyAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewShortTempDirectory())
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         "graphql",
-                        "GraphQLAuthorizationFalse",
+                        "GraphQLNoA",
                         new Dictionary<string, string>()
                         {
                             { "authorization", "false" },
