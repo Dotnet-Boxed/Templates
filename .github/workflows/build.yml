@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+    
+env:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build:
+    name: Build-${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+    - name: 'Install .NET Core SDK'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: 'Dotnet Cake Build'
+      uses: ecampidoglio/cake-action@v1.1.1
+      with:
+        target: Build
+    - name: 'Dotnet Cake Test'
+      uses: ecampidoglio/cake-action@v1.1.1
+      with:
+        target: Test
+    - name: 'Dotnet Cake Pack'
+      uses: ecampidoglio/cake-action@v1.1.1
+      with:
+        target: Pack
+    - name: 'Publish Artefacts'
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{matrix.os}}
+        path: './Artefacts'
