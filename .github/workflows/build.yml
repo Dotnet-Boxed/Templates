@@ -33,6 +33,10 @@ jobs:
       uses: ecampidoglio/cake-action@v1.1.1
       with:
         target: Build
+    - name: 'Dotnet Cake InstallDeveloperCertificate'
+      uses: ecampidoglio/cake-action@v1.1.1
+      with:
+        target: InstallDeveloperCertificate
     - name: 'Dotnet Cake Test'
       uses: ecampidoglio/cake-action@v1.1.1
       with:
