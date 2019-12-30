@@ -22,7 +22,9 @@ var buildNumber =
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
-var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
+var isLocalBuild = BuildSystem.IsLocalBuild ||
+    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != null;
+var isDotnetRunEnabled = isLocalBuild || (!isLocalBuild && IsRunningOnWindows());
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
