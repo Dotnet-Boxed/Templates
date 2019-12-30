@@ -22,10 +22,7 @@ var buildNumber =
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
-var isRunningOnCI = TFBuild.IsRunningOnAzurePipelinesHosted ||
-    AppVeyor.IsRunningOnAppVeyor ||
-    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != null;
-var isDotnetRunEnabled = !isRunningOnCI || (isRunningOnCI && IsRunningOnWindows());
+var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
