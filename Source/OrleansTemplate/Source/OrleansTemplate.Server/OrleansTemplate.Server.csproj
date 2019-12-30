@@ -2,10 +2,11 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights;TLS</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights;TLS;StyleCop</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
     <TLS>true</TLS>
+    <StyleCop>true</StyleCop>
   </PropertyGroup>
   <!--#endif-->
 
@@ -66,7 +67,7 @@
   <ItemGroup Label="Analyzer Package References">
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.4.43" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

@@ -381,6 +381,7 @@ dotnet_naming_rule.parameters_rule.symbols              = parameters_group
 dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
+##if (StyleCop)
 ##########################################
 # StyleCop
 ##########################################
@@ -427,6 +428,7 @@ dotnet_diagnostic.SA1629.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
 dotnet_diagnostic.SA1633.severity = none
 
+##endif
 ##########################################
 # License
 ##########################################

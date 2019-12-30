@@ -166,6 +166,12 @@
       "description": "Adds an integration test project.",
       "defaultValue": "true"
     },
+    "StyleCop": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds and enforces StyleCop analyzers.",
+      "defaultValue": "true"
+    },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
     "SkipRestore": {
       "type": "parameter",

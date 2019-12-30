@@ -88,6 +88,9 @@
     "IntegrationTest": {
       "longName": "integration-test"
     },
+    "StyleCop": {
+      "longName": "style-cop"
+    },
     "SkipRestore": {
       "longName": "no-restore"
     },
