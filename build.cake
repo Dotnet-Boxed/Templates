@@ -22,8 +22,8 @@ var buildNumber =
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
-var isLocalBuild = BuildSystem.IsLocalBuild ||
-    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") != null;
+var isLocalBuild = BuildSystem.IsLocalBuild &&
+    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == null;
 var isDotnetRunEnabled = isLocalBuild || (!isLocalBuild && IsRunningOnWindows());
 
 Task("Clean")
