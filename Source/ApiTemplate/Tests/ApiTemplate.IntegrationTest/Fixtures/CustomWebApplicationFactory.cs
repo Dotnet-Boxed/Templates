@@ -27,7 +27,7 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Debug()
-                .WriteTo.Sink(new TestOutputSink(testOutputHelper), LogEventLevel.Verbose)
+                .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
                 .CreateLogger();
         }
 
