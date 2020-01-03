@@ -169,8 +169,8 @@
     "StyleCop": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds and enforces StyleCop analyzers.",
-      "defaultValue": "true"
+      "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine.",
+      "defaultValue": "false"
     },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
     "SkipRestore": {
