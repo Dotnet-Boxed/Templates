@@ -2,13 +2,14 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer;StyleCop</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer;StyleCop;Docker</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
     <Swagger>true</Swagger>
     <Versioning>true</Versioning>
     <StyleCop>true</StyleCop>
+    <Docker>true</Docker>
   </PropertyGroup>
   <!--#endif-->
 
@@ -30,6 +31,11 @@
     <!-- Disable publishing of a web.config file for IIS when calling dotnet publish. -->
     <!--#endif-->
     <IsTransformWebConfigDisabled Condition="'$(IIS)' == 'false'">true</IsTransformWebConfigDisabled>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Docker" Condition="'$(Docker)' == 'true'">
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\</DockerfileContext>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
@@ -56,6 +62,7 @@
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="3.1.1" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="4.1.1" Condition="'$(Versioning)' == 'true'" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
