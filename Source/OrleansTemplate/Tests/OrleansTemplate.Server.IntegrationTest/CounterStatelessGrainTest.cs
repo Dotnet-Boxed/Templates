@@ -5,9 +5,15 @@ namespace OrleansTemplate.Server.IntegrationTest
     using OrleansTemplate.Abstractions.Grains;
     using OrleansTemplate.Server.IntegrationTest.Fixtures;
     using Xunit;
+    using Xunit.Abstractions;
 
     public class CounterStatelessGrainTest : ClusterFixture
     {
+        public CounterStatelessGrainTest(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper)
+        {
+        }
+
         [Fact]
         public async Task Increment_Default_EventuallyIncrementsTotalCountAsync()
         {

@@ -3,30 +3,23 @@ namespace OrleansTemplate.Server.IntegrationTest
     using System;
     using System.Threading.Tasks;
     using Orleans.Streams;
-    using Orleans.TestingHost;
     using OrleansTemplate.Abstractions.Constants;
     using OrleansTemplate.Abstractions.Grains;
     using OrleansTemplate.Server.IntegrationTest.Fixtures;
     using Xunit;
+    using Xunit.Abstractions;
 
-    public class HelloGrainTest : IClassFixture<ClusterFixture>
+    public class HelloGrainTest : ClusterFixture
     {
-        private readonly TestCluster cluster;
-
-        public HelloGrainTest(ClusterFixture fixture)
+        public HelloGrainTest(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper)
         {
-            if (fixture is null)
-            {
-                throw new ArgumentNullException(nameof(fixture));
-            }
-
-            this.cluster = fixture.Cluster;
         }
 
         [Fact]
         public async Task SayHello_PassName_ReturnsGreetingAsync()
         {
-            var grain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
+            var grain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
 
             var greeting = await grain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
@@ -36,8 +29,8 @@ namespace OrleansTemplate.Server.IntegrationTest
         [Fact]
         public async Task SayHello_PassName_CountIncrementedAsync()
         {
-            var helloGrain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
-            var counterGrain = this.cluster.GrainFactory.GetGrain<ICounterGrain>(Guid.Empty);
+            var helloGrain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
+            var counterGrain = this.Cluster.GrainFactory.GetGrain<ICounterGrain>(Guid.Empty);
 
             await helloGrain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
@@ -51,8 +44,8 @@ namespace OrleansTemplate.Server.IntegrationTest
         public async Task SayHello_PassName_SaidHelloPublishedAsync()
         {
             string hello = null;
-            var helloGrain = this.cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
-            var streamProvider = this.cluster.Client.GetStreamProvider(StreamProviderName.Default);
+            var helloGrain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
+            var streamProvider = this.Cluster.Client.GetStreamProvider(StreamProviderName.Default);
             var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
             var subscription = await stream
                 .SubscribeAsync(

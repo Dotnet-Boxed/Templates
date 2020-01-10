@@ -1,16 +1,28 @@
 namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 {
     using Orleans.TestingHost;
+    using Serilog;
+    using Serilog.Events;
+    using Xunit.Abstractions;
 
     public class ClusterFixture : Disposable
     {
-        public ClusterFixture()
+        public ClusterFixture(ITestOutputHelper testOutputHelper)
         {
+            this.TestOutputHelper = testOutputHelper;
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Debug()
+                .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
+                .CreateLogger();
+
             this.Cluster = this.CreateTestCluster();
             this.Cluster.Deploy();
         }
 
         public TestCluster Cluster { get; }
+
+        public ITestOutputHelper TestOutputHelper { get; }
 
 #pragma warning disable CA1822 // Mark members as static
         public TestCluster CreateTestCluster() =>
