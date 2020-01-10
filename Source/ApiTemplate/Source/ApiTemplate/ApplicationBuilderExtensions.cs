@@ -52,12 +52,25 @@ namespace ApiTemplate
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
+                    var request = httpContext.Request;
+                    var response = httpContext.Response;
                     var endpoint = httpContext.GetEndpoint();
-                    var routeName = endpoint?.Metadata?.GetMetadata<IRouteNameMetadata>()?.RouteName;
-                    diagnosticContext.Set("RouteName", routeName);
 
-                    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
-                    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                    diagnosticContext.Set("Host", request.Host);
+                    diagnosticContext.Set("Protocol", request.Protocol);
+                    diagnosticContext.Set("Scheme", request.Scheme);
+
+                    if (request.QueryString.HasValue)
+                    {
+                        diagnosticContext.Set("QueryString", request.QueryString.Value);
+                    }
+
+                    if (endpoint != null)
+                    {
+                        diagnosticContext.Set("EndpointName", endpoint.DisplayName);
+                    }
+
+                    diagnosticContext.Set("ContentType", response.ContentType);
                 });
 #if Swagger
 

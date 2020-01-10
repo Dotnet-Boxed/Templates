@@ -6,6 +6,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
 
@@ -44,20 +45,37 @@ namespace GraphQLTemplate
             application.UseSerilogRequestLogging(
                 options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                 {
-                    var clientName = httpContext.Request.Headers["apollographql-client-name"];
+                    var request = httpContext.Request;
+                    var response = httpContext.Response;
+                    var endpoint = httpContext.GetEndpoint();
+
+                    diagnosticContext.Set("Host", request.Host);
+                    diagnosticContext.Set("Protocol", request.Protocol);
+                    diagnosticContext.Set("Scheme", request.Scheme);
+
+                    if (request.QueryString.HasValue)
+                    {
+                        diagnosticContext.Set("QueryString", request.QueryString.Value);
+                    }
+
+                    var clientName = request.Headers["apollographql-client-name"];
                     if (clientName.Any())
                     {
                         diagnosticContext.Set("ClientName", clientName);
                     }
 
-                    var clientVersion = httpContext.Request.Headers["apollographql-client-version"];
+                    var clientVersion = request.Headers["apollographql-client-version"];
                     if (clientVersion.Any())
                     {
                         diagnosticContext.Set("ClientVersion", clientVersion);
                     }
 
-                    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
-                    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                    if (endpoint != null)
+                    {
+                        diagnosticContext.Set("EndpointName", endpoint.DisplayName);
+                    }
+
+                    diagnosticContext.Set("ContentType", response.ContentType);
                 });
     }
 }
