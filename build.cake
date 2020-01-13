@@ -8,23 +8,23 @@ var configuration =
     "Release";
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
-    (TFBuild.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
-    (AppVeyor.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+    (BuildSystem.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
+    (BuildSystem.IsRunningOnGitHubActions && BuildSystem.GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
+    (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
-    TFBuild.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
-    AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
+    BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
+    BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
+    BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
-var isLocalBuild = BuildSystem.IsLocalBuild &&
-    Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == null;
-var isDotnetRunEnabled = isLocalBuild || (!isLocalBuild && IsRunningOnWindows());
+var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
