@@ -26,6 +26,7 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 
 #### Analytics
 
+- **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.

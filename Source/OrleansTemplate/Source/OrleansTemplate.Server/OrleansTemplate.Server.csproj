@@ -2,9 +2,10 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights;TLS;StyleCop</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights;TLS;StyleCop;HealthCheck</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
+    <HealthCheck>true</HealthCheck>
     <TLS>true</TLS>
     <StyleCop>true</StyleCop>
   </PropertyGroup>
