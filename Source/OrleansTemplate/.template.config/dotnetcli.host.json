@@ -34,6 +34,9 @@
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
     },
+    "HealthCheck": {
+      "longName": "health-check"
+    },
     "TLS": {
       "longName": "tls"
     },

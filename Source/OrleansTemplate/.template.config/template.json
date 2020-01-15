@@ -45,6 +45,16 @@
             "README.md"
           ]
         },
+        // HealthCheck
+        {
+          "condition": "(!HealthCheck)",
+          "exclude": [
+            "Source/OrleansTemplate.Abstractions/Grains/HealthChecks/**/*",
+            "Source/OrleansTemplate.Grains/HealthChecks/**/*",
+            "Source/OrleansTemplate.Server/HealthChecks/**/*",
+            "Source/OrleansTemplate.Server/Startup.cs"
+          ]
+        },
         // IntegrationTest
         {
           "condition": "(!IntegrationTest)",
@@ -153,6 +163,13 @@
       "datatype": "string",
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
+    },
+    // HealthCheck
+    "HealthCheck": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health."
     },
     "TLS": {
       "type": "parameter",

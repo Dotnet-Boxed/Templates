@@ -5,6 +5,9 @@ namespace OrleansTemplate.Server
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
+#if HealthCheck
+    using Microsoft.AspNetCore.Hosting;
+#endif
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
@@ -74,6 +77,9 @@ namespace OrleansTemplate.Server
                         options.ValidateOnBuild = isDevelopment;
                     })
                 .UseOrleans(ConfigureSiloBuilder)
+#if HealthCheck
+                .ConfigureWebHost(ConfigureWebHostBuilder)
+#endif
                 .UseConsoleLifetime();
 
         private static void ConfigureSiloBuilder(
@@ -133,6 +139,13 @@ namespace OrleansTemplate.Server
                     x => x.UsePerfCounterEnvironmentStatistics())
                 .UseDashboard();
 
+#if HealthCheck
+        private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
+            webHostBuilder
+                .UseKestrel((builderContext, options) => options.AddServerHeader = false)
+                .UseStartup<Startup>();
+
+#endif
         private static IConfigurationBuilder AddConfiguration(
             IConfigurationBuilder configurationBuilder,
             IHostEnvironment hostEnvironment,
