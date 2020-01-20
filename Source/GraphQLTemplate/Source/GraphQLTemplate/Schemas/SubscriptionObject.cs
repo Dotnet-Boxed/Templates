@@ -12,7 +12,6 @@ namespace GraphQLTemplate.Schemas
     /// All subscriptions defined in the schema used to be notified of changes in data.
     /// </summary>
     /// <example>
-    /// The is an example subscription to be notified when a human is created.
     /// <c>
     /// subscription whenHumanCreated {
     ///   humanCreated(homePlanets: ["Earth"])
@@ -25,6 +24,7 @@ namespace GraphQLTemplate.Schemas
     ///   }
     /// }
     /// </c>
+    /// The is an example subscription to be notified when a human is created.
     /// </example>
     public class SubscriptionObject : ObjectGraphType<object>
     {

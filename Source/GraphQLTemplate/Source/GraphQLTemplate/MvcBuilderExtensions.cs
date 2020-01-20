@@ -11,9 +11,6 @@ namespace GraphQLTemplate
 
     public static class MvcBuilderExtensions
     {
-        /// <summary>
-        /// Adds customized JSON serializer settings.
-        /// </summary>
         public static IMvcBuilder AddCustomJsonOptions(
             this IMvcBuilder builder,
             IWebHostEnvironment webHostEnvironment) =>

@@ -16,7 +16,7 @@ namespace GraphQLTemplate
 #endif
     {
         /// <summary>
-        /// Gets the current users claims principal.
+        /// Gets or sets the current users claims principal.
         /// </summary>
         public ClaimsPrincipal User { get; set; }
     }
