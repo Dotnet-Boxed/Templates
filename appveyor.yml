@@ -25,7 +25,7 @@ build_script:
 - sh: sudo dpkg -i packages-microsoft-prod.deb
 - sh: sudo apt update
 - sh: sudo apt install -y apt-transport-https dotnet-sdk-3.1
-- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.1.100
+- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.1.101
 - pwsh: dotnet tool install --global Cake.Tool
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=InstallDeveloperCertificate

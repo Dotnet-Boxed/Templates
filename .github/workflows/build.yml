@@ -6,7 +6,7 @@ on:
       - '*'
     tags:
       - '*'
-    
+
 env:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -28,7 +28,7 @@ jobs:
     - name: 'Install .NET Core SDK'
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.100
+        dotnet-version: 3.1.101
     - name: 'Dotnet Cake Build'
       uses: ecampidoglio/cake-action@v1.1.1
       with:
