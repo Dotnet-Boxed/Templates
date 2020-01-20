@@ -16,7 +16,7 @@
   <ItemGroup Label="Package Versions">
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.1" />
     <PackageReference Include="Moq" Version="4.13.1" />
     <PackageReference Include="Serilog.Sinks.XUnit" Version="1.0.21" />
     <PackageReference Include="xunit" Version="2.4.1" />
