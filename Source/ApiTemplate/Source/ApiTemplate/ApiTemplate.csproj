@@ -49,7 +49,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="5.1.1" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="6.0.1" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="7.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="3.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.12.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
