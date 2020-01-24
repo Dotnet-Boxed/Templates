@@ -9,6 +9,9 @@ namespace Boxed.Templates.FunctionalTest
 
     public class OrleansTemplateTest
     {
+        private const string TemplateName = "orleans";
+        private const string SolutionFileName = "OrleansTemplate.sln";
+
         public OrleansTemplateTest(ITestOutputHelper testOutputHelper)
         {
             if (testOutputHelper is null)
@@ -32,12 +35,12 @@ namespace Boxed.Templates.FunctionalTest
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync("orleans", name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
             }
         }
 
-        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<OrleansTemplateTest>("OrleansTemplate.sln");
+        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<OrleansTemplateTest>(SolutionFileName);
     }
 }

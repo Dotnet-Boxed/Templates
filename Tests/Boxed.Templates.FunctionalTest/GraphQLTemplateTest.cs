@@ -14,6 +14,9 @@ namespace Boxed.Templates.FunctionalTest
 
     public class GraphQLTemplateTest
     {
+        private const string TemplateName = "graphql";
+        private const string SolutionFileName = "GraphQLTemplate.sln";
+
         public GraphQLTemplateTest(ITestOutputHelper testOutputHelper)
         {
             if (testOutputHelper is null)
@@ -39,7 +42,7 @@ namespace Boxed.Templates.FunctionalTest
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync("graphql", name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
             }
@@ -52,7 +55,7 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLTDefaults").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, "GraphQLTDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
@@ -109,7 +112,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "graphql",
+                        TemplateName,
                         "GraphQLTHealthCheckFalse",
                         new Dictionary<string, string>()
                         {
@@ -145,7 +148,7 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("graphql", "GraphQLTDefaults").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, "GraphQLTDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
@@ -176,7 +179,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "graphql",
+                        TemplateName,
                         "GraphQLTHttpsEverywhereFalse",
                         new Dictionary<string, string>()
                         {
@@ -209,7 +212,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "graphql",
+                        TemplateName,
                         "GraphQLTAuthorizationTrue",
                         new Dictionary<string, string>()
                         {
@@ -251,7 +254,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "graphql",
+                        TemplateName,
                         "GraphQLTAuthorizationFalse",
                         new Dictionary<string, string>()
                         {
@@ -276,6 +279,6 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("GraphQLTemplate.sln");
+        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<GraphQLTemplateTest>(SolutionFileName);
     }
 }

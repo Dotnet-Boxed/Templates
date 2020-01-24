@@ -15,6 +15,9 @@ namespace Boxed.Templates.FunctionalTest
 
     public class ApiTemplateTest
     {
+        private const string TemplateName = "api";
+        private const string SolutionFileName = "ApiTemplate.sln";
+
         public ApiTemplateTest(ITestOutputHelper testOutputHelper)
         {
             if (testOutputHelper is null)
@@ -40,7 +43,7 @@ namespace Boxed.Templates.FunctionalTest
                 var dictionary = arguments
                     .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync("api", name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
             }
@@ -53,7 +56,7 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync("api", "ApiDefaults").ConfigureAwait(false);
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, "ApiDefaults").ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project
@@ -138,7 +141,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "api",
+                        TemplateName,
                         "ApiHealthCheckFalse",
                         new Dictionary<string, string>()
                         {
@@ -176,7 +179,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "api",
+                        TemplateName,
                         "ApiHttpsEverywhereFalse",
                         new Dictionary<string, string>()
                         {
@@ -209,7 +212,7 @@ namespace Boxed.Templates.FunctionalTest
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
-                        "api",
+                        TemplateName,
                         "ApiSwaggerFalse",
                         new Dictionary<string, string>()
                         {
@@ -233,6 +236,6 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>("ApiTemplate.sln");
+        private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<ApiTemplateTest>(SolutionFileName);
     }
 }
