@@ -14,8 +14,8 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netstandard2.0;net472</TargetFrameworks>
-    <TargetFramework Condition="'$(DotnetCore)' == 'true'">netstandard2.0</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <TargetFramework Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'false'">netstandard2.0</TargetFramework>
+    <TargetFramework Condition="'$(DotnetCore)' == 'false' AND '$(DotnetFramework)' == 'true'">net472</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>

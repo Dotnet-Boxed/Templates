@@ -13,8 +13,8 @@
 
   <PropertyGroup Label="Build">
     <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netcoreapp3.1;net472</TargetFrameworks>
-    <TargetFramework Condition="'$(DotnetCore)' == 'true'">netcoreapp3.1</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <TargetFramework Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'false'">netcoreapp3.1</TargetFramework>
+    <TargetFramework Condition="'$(DotnetCore)' == 'false' AND '$(DotnetFramework)' == 'true'">net472</TargetFramework>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
   </PropertyGroup>
