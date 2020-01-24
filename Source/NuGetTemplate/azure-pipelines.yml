@@ -1,0 +1,122 @@
+# Azure Pipelines documentation https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+    - '*'
+  tags:
+    include:
+    - '*'
+
+variables:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        Linux:
+          matrixName: Ubuntu
+          vmImageName: ubuntu-latest
+        Mac:
+          matrixName: Mac
+          vmImageName: macos-latest
+        Windows:
+          matrixName: Windows
+          vmImageName: windows-latest
+    pool:
+      vmImage: $(vmImageName)
+    timeoutInMinutes: 10
+    steps:
+    - checkout: self
+      lfs: true
+    - task: UseDotNet@2
+      displayName: 'Install .NET Core SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '3.1.101'
+    - script: 'dotnet tool install --global Cake.Tool'
+      displayName: 'Install Cake Tool'
+      failOnStderr: true
+    - script: 'dotnet cake --target=Build'
+      displayName: 'Dotnet Cake Build'
+      failOnStderr: true
+    - script: 'dotnet cake --target=Test'
+      displayName: 'Dotnet Cake Test'
+      failOnStderr: true
+    - script: 'dotnet cake --target=Pack'
+      displayName: 'Dotnet Cake Pack'
+      failOnStderr: true
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/*.trx'
+    - publish: './Artefacts'
+      artifact: $(matrixName)
+      displayName: 'Publish Artefacts'
+- stage: Deploy
+  jobs:
+  # Deploy to Azure Artefacts
+  # You need to enable access to publish to Azure Artefacts and also set-up the following variables in Azure Pipelines:
+  # - AzureArtefactsSource - https://pkgs.dev.azure.com/<Organisation Name>/_packaging/<Project Name>/nuget/v3/index.json
+  - deployment: AzureArtefacts
+    displayName: 'Azure Artefacts'
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    pool:
+      vmImage: windows-latest
+    environment: 'Azure Artefacts'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'NuGet Install'
+          - task: NuGetAuthenticate@0
+            displayName: 'NuGet Authenticate'
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source $(AzureArtefactsSource) -ApiKey AzureArtifacts -SkipDuplicate
+            displayName: 'NuGet Push'
+            failOnStderr: true
+  # Deploy to GitHub Packages
+  # You need to set-up the following variables in Azure Pipelines:
+  # - GitHubPersonalAccessToken - Get this from your account at https://github.com.
+  - deployment: GitHub
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    pool:
+      vmImage: windows-latest
+    environment: 'GitHub'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'NuGet Install'
+          - script: nuget source Add -Name GitHub -Source https://nuget.pkg.github.com/GITHUB-USERNAME -UserName GITHUB-USERNAME -Password $(GitHubPersonalAccessToken)
+            displayName: 'NuGet Add Source'
+            failOnStderr: true
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source GitHub -SkipDuplicate
+            displayName: 'NuGet Push'
+            failOnStderr: true
+  # Deploy to NuGet
+  # This only occurs when you push a tag to your Git repository
+  # You need to set-up the following variables in Azure Pipelines:
+  # - NuGetApiKey - Get this from your account at https://nuget.org.
+  - deployment: NuGet
+    condition: and(ne(variables['Build.Reason'], 'PullRequest'), startsWith(variables['Build.sourceBranch'], 'refs/tags/'))
+    pool:
+      vmImage: windows-latest
+    environment: 'NuGet'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: NuGetToolInstaller@1
+            displayName: 'Install NuGet'
+          - script: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
+            displayName: 'NuGet Push'
+            failOnStderr: true

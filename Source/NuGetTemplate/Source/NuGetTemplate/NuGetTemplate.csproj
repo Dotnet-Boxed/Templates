@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <DotnetCore>true</DotnetCore>
+    <DotnetFramework>true</DotnetFramework>
+    <MIT>true</MIT>
+    <StyleCop>true</StyleCop>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!--#endif-->
+
+  <PropertyGroup Label="Build">
+    <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netstandard2.0;net472</TargetFrameworks>
+    <TargetFramework Condition="'$(DotnetCore)' == 'true'">netstandard2.0</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <VersionPrefix>0.0.1</VersionPrefix>
+    <Product>PROJECT-TITLE-XML</Product>
+    <Description>PROJECT-DESCRIPTION-XML</Description>
+    <Authors>PROJECT-AUTHOR-XML</Authors>
+    <Company>PROJECT-AUTHOR-XML</Company>
+    <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
+    <PackageTags>PROJECT-TAGS</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression Condition="'$(MIT)' == 'true'">MIT</PackageLicenseExpression>
+    <PackageIcon>Icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Signing">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
+    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Source Link">
+    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- Optional: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0" Condition="'$(DotnetFramework)' == 'true'" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" Version="1.0.0" Condition="'$(GitHub)' == 'true'" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzer Package References">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.4.45" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
+  </ItemGroup>
+
+  <ItemGroup Label="Files">
+    <None Include="..\..\Images\Icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
