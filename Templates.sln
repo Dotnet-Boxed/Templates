@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Docs\API.md = Docs\API.md
 		Docs\GraphQL.md = Docs\GraphQL.md
 		LICENSE.md = LICENSE.md
+		Docs\NuGet.md = Docs\NuGet.md
 		Docs\Orleans.md = Docs\Orleans.md
 		README.md = README.md
 	EndProjectSection

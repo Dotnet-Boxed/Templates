@@ -137,7 +137,7 @@
       "datatype": "string",
       "defaultValue": "Tag1;Tag2;Tag3",
       "replaces": "PROJECT-TAGS",
-      "description": "A semi-colon ';' delimeted list of tags for the NuGet package."
+      "description": "A semi-colon ';' delimited list of tags for the NuGet package."
     },
     "TagsXmlEncoded": {
       "type": "derived",
