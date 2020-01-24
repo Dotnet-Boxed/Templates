@@ -393,14 +393,6 @@
       "defaultValue": "true",
       "description": "Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers."
     },
-    // AuthoringMode
-    "AuthoringMode": {
-      "type": "generated",
-      "generator": "constant",
-      "parameters": {
-        "value": false
-      }
-    },
     // HttpPort
     "HttpPort": {
       "type": "parameter",
@@ -455,6 +447,15 @@
       "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine.",
       "defaultValue": "false"
     },
+
+    // AuthoringMode
+    "AuthoringMode": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": false
+      }
+    },
     // https://github.com/dotnet/templating/wiki/Post-Action-Registry
     "SkipRestore": {
       "type": "parameter",
@@ -462,10 +463,10 @@
       "description": "Skips the execution of 'dotnet restore' on project creation.",
       "defaultValue": "false"
     },
-    "SkipOpenReadMe": {
+    "SkipOpenToDo": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Skips the opening of the projects Read-Me in a web browser.",
+      "description": "Skips opening the to-do list for the project in a web browser.",
       "defaultValue": "false"
     }
   },
@@ -481,11 +482,11 @@
     },
     {
       "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
-      "condition": "(!SkipOpenReadMe)",
+      "condition": "(!SkipOpenToDo)",
       "continueOnError": true,
-      "description": "Open the Read-Me for the project in a web browser.",
+      "description": "Open the to-do list for the project in a web browser.",
       "manualInstructions": [
-        { "text": "Open the ReadMe.html in a web browser to see a to-do list." }
+        { "text": "Open the TODO.html in a web browser to see a to-do list." }
       ]
     }
   ]

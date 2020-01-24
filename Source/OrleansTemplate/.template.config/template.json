@@ -189,25 +189,7 @@
       "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine.",
       "defaultValue": "false"
     },
-    // https://github.com/dotnet/templating/wiki/Post-Action-Registry
-    "SkipRestore": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Skips the execution of 'dotnet restore' on project creation.",
-      "defaultValue": "false"
-    },
-    //"SkipOpenReadMe": {
-    //  "type": "parameter",
-    //  "datatype": "bool",
-    //  "description": "Skips the opening of the projects Read-Me in a web browser.",
-    //  "defaultValue": "false"
-    //},
-    "SkipOpenAzureStorageEmulator": {
-      "type": "parameter",
-      "datatype": "bool",
-      "description": "Skips the running of the Azure Storage Emulator.",
-      "defaultValue": "false"
-    },
+
     // AuthoringMode
     "AuthoringMode": {
       "type": "generated",
@@ -215,6 +197,25 @@
       "parameters": {
         "value": false
       }
+    },
+    // https://github.com/dotnet/templating/wiki/Post-Action-Registry
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the execution of 'dotnet restore' on project creation.",
+      "defaultValue": "false"
+    },
+    //"SkipOpenToDo": {
+    //  "type": "parameter",
+    //  "datatype": "bool",
+    //  "description": "Skips opening the to-do list for the project in a web browser.",
+    //  "defaultValue": "false"
+    //},
+    "SkipOpenAzureStorageEmulator": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the running of the Azure Storage Emulator.",
+      "defaultValue": "false"
     }
   },
   "postActions": [
@@ -229,11 +230,11 @@
     },
     //{
     //  "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
-    //  "condition": "(!SkipOpenReadMe)",
+    //  "condition": "(!SkipOpenToDo)",
     //  "continueOnError": true,
-    //  "description": "Open the Read-Me for the project in a web browser.",
+    //  "description": "Open the to-do list for the project in a web browser.",
     //  "manualInstructions": [
-    //    { "text": "Open the ReadMe.html in a web browser to see a to-do list." }
+    //    { "text": "Open the TODO.html in a web browser to see a to-do list." }
     //  ]
     //},
     {

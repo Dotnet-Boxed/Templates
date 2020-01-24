@@ -49,8 +49,8 @@
     "SkipRestore": {
       "longName": "no-restore"
     },
-    //"SkipOpenReadMe": {
-    //  "longName": "no-open-readme"
+    //"SkipOpenToDo": {
+    //  "longName": "no-open-todo"
     //},
     "SkipOpenAzureStorageEmulator": {
       "longName": "no-storage-emulator"
