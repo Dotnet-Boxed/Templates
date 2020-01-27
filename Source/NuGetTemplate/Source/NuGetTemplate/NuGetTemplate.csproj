@@ -23,19 +23,19 @@
 
   <PropertyGroup Label="Package">
     <VersionPrefix>0.0.1</VersionPrefix>
-    <Product>PROJECT-TITLE-XML</Product>
-    <Description>PROJECT-DESCRIPTION-XML</Description>
     <Authors>PROJECT-AUTHOR-XML</Authors>
     <Company>PROJECT-AUTHOR-XML</Company>
+    <Product>PROJECT-TITLE-XML</Product>
+    <Description>PROJECT-DESCRIPTION-XML</Description>
     <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
-    <PackageTags>PROJECT-TAGS</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression Condition="'$(MIT)' == 'true'">MIT</PackageLicenseExpression>
-    <PackageIcon>Icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT</PackageProjectUrl>
-    <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
-    <RepositoryType>git</RepositoryType>
+    <PackageIcon>Icon.png</PackageIcon>
     <RepositoryUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>PROJECT-TAGS</PackageTags>
+    <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing">
