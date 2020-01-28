@@ -41,7 +41,7 @@
   <PropertyGroup Label="Signing">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
-    <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
+    <PublicSign>true</PublicSign>
   </PropertyGroup>
 
   <PropertyGroup Label="Source Link">
