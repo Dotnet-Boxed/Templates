@@ -29,18 +29,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: 'Dotnet Tool Restore'
+      run: dotnet tool restore
+      shell: pwsh
     - name: 'Dotnet Cake Build'
-      uses: ecampidoglio/cake-action@v1.1.1
-      with:
-        target: Build
+      run: dotnet cake --target=Build
+      shell: pwsh
     - name: 'Dotnet Cake Test'
-      uses: ecampidoglio/cake-action@v1.1.1
-      with:
-        target: Test
+      run: dotnet cake --target=Test
+      shell: pwsh
     - name: 'Dotnet Cake Pack'
-      uses: ecampidoglio/cake-action@v1.1.1
-      with:
-        target: Pack
+      run: dotnet cake --target=Pack
+      shell: pwsh
     - name: 'Publish Artefacts'
       uses: actions/upload-artifact@v1.0.0
       with:

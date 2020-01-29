@@ -40,8 +40,8 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '3.1.101'
-    - script: 'dotnet tool install --global Cake.Tool'
-      displayName: 'Install Cake Tool'
+    - script: 'dotnet tool restore'
+      displayName: 'Dotnet Tool Restore'
       failOnStderr: true
     - script: 'dotnet cake --target=Build'
       displayName: 'Dotnet Cake Build'
