@@ -35,9 +35,6 @@ jobs:
     - name: 'Dotnet Cake Build'
       run: dotnet cake --target=Build
       shell: pwsh
-    - name: 'Dotnet Cake InstallDeveloperCertificate'
-      run: dotnet cake --target=InstallDeveloperCertificate
-      shell: pwsh
     - name: 'Dotnet Cake Test'
       run: dotnet cake --target=Test
       shell: pwsh

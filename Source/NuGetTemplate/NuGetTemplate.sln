@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{719809C2-A551-4C4A-9EFD-B10FB5E35BC0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F20E2797-D1E3-4321-91BB-FAE54954D2A0}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		appveyor.yml = appveyor.yml
+		azure-pipelines.yml = azure-pipelines.yml
+		build.cake = build.cake
+		.github\workflows\build.yml = .github\workflows\build.yml
+		dotnet-tools.json = dotnet-tools.json
+		Key.snk = Key.snk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{7EDFA103-DB69-4C88-9DE4-97ADBF8253A1}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E1B24F25-B8A4-46EE-B7EB-7803DCFC543F}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\.editorconfig = Tests\.editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{26F71F5B-2940-4FB0-9681-A76060CBCEF9}"
+	ProjectSection(SolutionItems) = preProject
+		Images\Banner.png = Images\Banner.png
+		Images\Hero.png = Images\Hero.png
+		Images\Icon.png = Images\Icon.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Issue Templates", "Issue Templates", "{566DF0E2-1288-4083-9B55-4C8B69BB1432}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\BUG_REPORT.md = .github\ISSUE_TEMPLATE\BUG_REPORT.md
+		.github\ISSUE_TEMPLATE\FEATURE_REQUEST.md = .github\ISSUE_TEMPLATE\FEATURE_REQUEST.md
+		.github\ISSUE_TEMPLATE\QUESTION.md = .github\ISSUE_TEMPLATE\QUESTION.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{0555C737-CE4B-4C78-87AB-6296E1E32D01}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODE_OF_CONDUCT.md = .github\CODE_OF_CONDUCT.md
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		.github\SECURITY.md = .github\SECURITY.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate", "Source\NuGetTemplate\NuGetTemplate.csproj", "{D49F5A02-D549-4EF4-8776-89C35A71EB2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate.Test", "Tests\NuGetTemplate.Test\NuGetTemplate.Test.csproj", "{528E66EB-2232-4534-A20D-9BC8A240BF2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D49F5A02-D549-4EF4-8776-89C35A71EB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49F5A02-D549-4EF4-8776-89C35A71EB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49F5A02-D549-4EF4-8776-89C35A71EB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49F5A02-D549-4EF4-8776-89C35A71EB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{528E66EB-2232-4534-A20D-9BC8A240BF2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{528E66EB-2232-4534-A20D-9BC8A240BF2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{528E66EB-2232-4534-A20D-9BC8A240BF2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{528E66EB-2232-4534-A20D-9BC8A240BF2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{566DF0E2-1288-4083-9B55-4C8B69BB1432} = {0555C737-CE4B-4C78-87AB-6296E1E32D01}
+		{0555C737-CE4B-4C78-87AB-6296E1E32D01} = {7EDFA103-DB69-4C88-9DE4-97ADBF8253A1}
+		{D49F5A02-D549-4EF4-8776-89C35A71EB2D} = {719809C2-A551-4C4A-9EFD-B10FB5E35BC0}
+		{528E66EB-2232-4534-A20D-9BC8A240BF2F} = {E1B24F25-B8A4-46EE-B7EB-7803DCFC543F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {73F36209-F8D6-4066-8951-D97729F773CF}
+	EndGlobalSection
+EndGlobal

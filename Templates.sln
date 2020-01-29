@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Docs\API.md = Docs\API.md
 		Docs\GraphQL.md = Docs\GraphQL.md
 		LICENSE.md = LICENSE.md
+		Docs\NuGet.md = Docs\NuGet.md
 		Docs\Orleans.md = Docs\Orleans.md
 		README.md = README.md
 	EndProjectSection
@@ -87,6 +88,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
 		.github\workflows\build.yml = .github\workflows\build.yml
+		dotnet-tools.json = dotnet-tools.json
 		Key.snk = Key.snk
 	EndProjectSection
 EndProject
@@ -107,6 +109,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{BF30
 		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
 		.github\SECURITY.md = .github\SECURITY.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetTemplate", "NuGetTemplate", "{4CC44063-2D00-4F9E-9793-38828D2886BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".template.config", "{131BCBC0-F92C-4BCB-A2DE-6E54164F8BE2}"
+	ProjectSection(SolutionItems) = preProject
+		Source\NuGetTemplate\.template.config\dotnetcli.host.json = Source\NuGetTemplate\.template.config\dotnetcli.host.json
+		Source\NuGetTemplate\.template.config\icon.png = Source\NuGetTemplate\.template.config\icon.png
+		Source\NuGetTemplate\.template.config\template.json = Source\NuGetTemplate\.template.config\template.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{AB5B9C65-1F15-4456-B2C3-EE500514D5CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1AC95678-7653-4D1B-B09C-BE3D1ADA92C3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate", "Source\NuGetTemplate\Source\NuGetTemplate\NuGetTemplate.csproj", "{B6544A26-600A-417E-BC40-0E928AA7BEB6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate.Test", "Source\NuGetTemplate\Tests\NuGetTemplate.Test\NuGetTemplate.Test.csproj", "{349A1B03-52C5-48FA-96F3-50816835FBE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +177,14 @@ Global
 		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B294041-5B26-4B32-B084-05CCD35A89B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6544A26-600A-417E-BC40-0E928AA7BEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6544A26-600A-417E-BC40-0E928AA7BEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6544A26-600A-417E-BC40-0E928AA7BEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6544A26-600A-417E-BC40-0E928AA7BEB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{349A1B03-52C5-48FA-96F3-50816835FBE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{349A1B03-52C5-48FA-96F3-50816835FBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{349A1B03-52C5-48FA-96F3-50816835FBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{349A1B03-52C5-48FA-96F3-50816835FBE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +215,12 @@ Global
 		{7B294041-5B26-4B32-B084-05CCD35A89B4} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
 		{EC645147-507B-4210-9152-5159DBC8A062} = {BF3053CB-9A64-4062-A69F-C67D0A2C2902}
 		{BF3053CB-9A64-4062-A69F-C67D0A2C2902} = {90C10D88-B3C3-4802-A02B-88A07E5A8087}
+		{4CC44063-2D00-4F9E-9793-38828D2886BC} = {4CE320D7-3C4E-4E1F-8E51-411684C7CE2A}
+		{131BCBC0-F92C-4BCB-A2DE-6E54164F8BE2} = {4CC44063-2D00-4F9E-9793-38828D2886BC}
+		{AB5B9C65-1F15-4456-B2C3-EE500514D5CC} = {4CC44063-2D00-4F9E-9793-38828D2886BC}
+		{1AC95678-7653-4D1B-B09C-BE3D1ADA92C3} = {4CC44063-2D00-4F9E-9793-38828D2886BC}
+		{B6544A26-600A-417E-BC40-0E928AA7BEB6} = {AB5B9C65-1F15-4456-B2C3-EE500514D5CC}
+		{349A1B03-52C5-48FA-96F3-50816835FBE8} = {1AC95678-7653-4D1B-B09C-BE3D1ADA92C3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}

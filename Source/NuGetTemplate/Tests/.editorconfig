@@ -1,0 +1,40 @@
+##########################################
+# StyleCop
+##########################################
+
+[*]
+# SA0001: XML comment analysis is disabled due to project configuration
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
+dotnet_diagnostic.SA0001.severity = none
+
+[*.cs]
+# SA1600: A C# code element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: A C# partial element is missing a documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1601.md
+dotnet_diagnostic.SA1601.severity = none
+
+# SA1602: An item within a C# enumeration is missing an XML documentation header.
+# Justification: Comments turned off
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1602.md
+dotnet_diagnostic.SA1602.severity = none
+
+##########################################
+# Custom
+##########################################
+
+[*.cs]
+# CA1062: Validate arguments of public methods
+# Justification: xUnit Theory method parameters don't need to be validated
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1062
+dotnet_diagnostic.CA1062.severity = none
+
+# CA1707: Identifiers should not contain underscores
+# Justification: Test method names contain underscores
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
+dotnet_diagnostic.CA1707.severity = none

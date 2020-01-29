@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <DotnetCore>true</DotnetCore>
+    <DotnetFramework>true</DotnetFramework>
+    <StyleCop>true</StyleCop>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!--#endif-->
+
+  <PropertyGroup Label="Build">
+    <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netcoreapp3.1;net472</TargetFrameworks>
+    <TargetFramework Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'false'">netcoreapp3.1</TargetFramework>
+    <TargetFramework Condition="'$(DotnetCore)' == 'false' AND '$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="..\..\Source\NuGetTemplate\NuGetTemplate.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0" Condition="'$(DotnetFramework)' == 'true'" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup Label="Analyzer Package References">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.4.45" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
+  </ItemGroup>
+
+</Project>

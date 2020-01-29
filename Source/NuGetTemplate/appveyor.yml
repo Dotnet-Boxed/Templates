@@ -1,0 +1,44 @@
+# AppVeyor documentation https://www.appveyor.com/docs
+
+version: '{build}'
+
+image:
+- Ubuntu
+- Visual Studio 2019
+
+pull_requests:
+  # Do not increment build number for pull requests
+  do_not_increment_build_number: true
+
+nuget:
+  # Do not publish for pull requests
+  disable_publish_on_pr: true
+
+environment:
+  # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending usage data to Microsoft
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+build_script:
+- sh: wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+- sh: sudo dpkg -i packages-microsoft-prod.deb
+- sh: sudo apt update
+- sh: sudo apt install -y apt-transport-https dotnet-sdk-3.1
+- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.1.101
+- pwsh: dotnet tool restore
+- pwsh: dotnet cake --target=Build
+- pwsh: dotnet cake --target=Test
+- pwsh: dotnet cake --target=Pack
+
+test: off
+
+artifacts:
+- name: NuGet Packages
+  path: ./Artefacts/**/*.nupkg
+- name: NuGet Symbol Packages
+  path: ./Artefacts/**/*.snupkg
+- name: xUnit XML Test Results
+  path: ./Artefacts/**/*.xml
+- name: xUnit HTML Test Results
+  path: ./Artefacts/**/*.html

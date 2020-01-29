@@ -10,7 +10,7 @@ The ASP.NET Core API project template contains the following features:
 
 ## Optional Feature Selection
 
-The ASP.NET Core API project template uses `dotnet new` to enable you to turn features of the project template on or off. Literally everything can be turned on or off with the click of a button for a truly personalized project. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
+The ASP.NET Core API project template uses `dotnet new` to enable you to turn features of the project template on or off. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
 #### API
 

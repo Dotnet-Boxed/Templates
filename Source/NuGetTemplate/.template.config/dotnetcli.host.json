@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "Title": {
+      "longName": "title"
+    },
+    "TitleXmlEncoded": {
+      "isHidden": true
+    },
+    "Description": {
+      "longName": "description"
+    },
+    "DescriptionXmlEncoded": {
+      "isHidden": true
+    },
+    "Author": {
+      "longName": "author"
+    },
+    "AuthorXmlEncoded": {
+      "isHidden": true
+    },
+    "Tags": {
+      "longName": "tags"
+    },
+    "TagsXmlEncoded": {
+      "isHidden": true
+    },
+    "Contact": {
+      "longName": "contact"
+    },
+    "ContactXmlEncoded": {
+      "isHidden": true
+    },
+    "DotnetCore": {
+      "longName": "dotnet-core"
+    },
+    "DotnetFramework": {
+      "longName": "dotnet-framework"
+    },
+    "ReadMe": {
+      "longName": "readme"
+    },
+    "EditorConfig": {
+      "longName": "editorconfig"
+    },
+    "Git": {
+      "longName": "git"
+    },
+    "SourceControl": {
+      "longName": "source-control"
+    },
+    "GitHubUsername": {
+      "longName": "github-username"
+    },
+    "GitHubProject": {
+      "longName": "github-project"
+    },
+    "License": {
+      "longName": "license"
+    },
+    "TreatWarningsAsErrors": {
+      "longName": "treat-warnings-as-errors"
+    },
+    "StyleCop": {
+      "longName": "style-cop"
+    },
+    "Tests": {
+      "longName": "tests"
+    },
+    "AppVeyor": {
+      "longName": "appveyor"
+    },
+    "AzurePipelines": {
+      "longName": "azurep-ipelines"
+    },
+    "GitHubActions": {
+      "longName": "github-actions"
+    },
+    "SkipRestore": {
+      "longName": "no-restore"
+    },
+    "SkipOpenReadMe": {
+      "longName": "no-open-readme"
+    }
+  }
+}

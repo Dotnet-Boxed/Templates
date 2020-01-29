@@ -1,0 +1,340 @@
+// https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [ "NuGet", "Package", "Library", "Boxed" ],
+  "name": "NuGet Package Boxed",
+  "groupIdentity": "Dotnet.Boxed.NuGetPackage",
+  "identity": "Dotnet.Boxed.NuGetPackage.CSharp",
+  "shortName": "nuget",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "NuGetTemplate",
+  "preferNameDirectory": true,
+  "guids": [
+  ],
+  "primaryOutputs": [
+    { "path": "NuGetTemplate.sln" }
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        // EditorConfig
+        {
+          "condition": "(!EditorConfig)",
+          "exclude": [
+            ".editorconfig"
+          ]
+        },
+        // Git
+        {
+          "condition": "(!Git)",
+          "exclude": [
+            ".gitattributes",
+            ".gitignore"
+          ]
+        },
+        // GitHub
+        {
+          "condition": "(!GitHub)",
+          "exclude": [
+            ".github/**/*"
+          ]
+        },
+        // License
+        {
+          "condition": "(License == \"None\")",
+          "exclude": [
+            ".github/LICENSE.md"
+          ]
+        },
+        // ReadMe
+        {
+          "condition": "(!ReadMe)",
+          "exclude": [
+            "README.md"
+          ]
+        },
+        // Tests
+        {
+          "condition": "(!Tests)",
+          "exclude": [
+            "Tests/NuGetTemplate.Test/**/*"
+          ]
+        },
+        // AppVeyor
+        {
+          "condition": "(!AppVeyor)",
+          "exclude": [
+            "appveyor.yml"
+          ]
+        },
+        // AzurePipelines
+        {
+          "condition": "(!AzurePipelines)",
+          "exclude": [
+            "azure-pipelines.yml"
+          ]
+        },
+        // GitHubActions
+        {
+          "condition": "(!GitHubActions)",
+          "exclude": [
+            ".github/workflows/build.yml"
+          ]
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    // Title
+    "Title": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Title",
+      "replaces": "PROJECT-TITLE",
+      "description": "The name of the project which determines the NuGet package name and assembly product name."
+    },
+    "TitleXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-TITLE-XML",
+      "valueSource": "Title",
+      "valueTransform": "xmlEncode"
+    },
+    // Description
+    "Description": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Description",
+      "replaces": "PROJECT-DESCRIPTION",
+      "description": "A description of the project which determines the NuGet package description and assembly description."
+    },
+    "DescriptionXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-DESCRIPTION-XML",
+      "valueSource": "Description",
+      "valueTransform": "xmlEncode"
+    },
+    // Author
+    "Author": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project Author",
+      "replaces": "PROJECT-AUTHOR",
+      "description": "The name of the author of the project which determines the NuGet package author, assembly author, company and copyright information."
+    },
+    "AuthorXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-AUTHOR-XML",
+      "valueSource": "Author",
+      "valueTransform": "xmlEncode"
+    },
+    // Tags
+    "Tags": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Tag1;Tag2;Tag3",
+      "replaces": "PROJECT-TAGS",
+      "description": "A semi-colon ';' delimited list of tags for the NuGet package."
+    },
+    "TagsXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-TAGS-XML",
+      "valueSource": "Tags",
+      "valueTransform": "xmlEncode"
+    },
+    // Contact
+    "Contact": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "[user@example.com|@ExampleUser]",
+      "replaces": "PROJECT-CONTACT",
+      "description": "The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues."
+    },
+    "ContactXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-CONTACT-XML",
+      "valueSource": "Contact",
+      "valueTransform": "xmlEncode"
+    },
+    // DotnetCore
+    "DotnetCore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Sets .NET Core as one of the target frameworks."
+    },
+    // DotnetFramework
+    "DotnetFramework": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Sets .NET Framework as one of the target frameworks."
+    },
+    // ReadMe
+    "ReadMe": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a README.md markdown file describing the project."
+    },
+    // EditorConfig
+    "EditorConfig": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .editorconfig file to set a fixed code style."
+    },
+    // Git
+    "Git": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS."
+    },
+    // SourceControl
+    "SourceControl": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "GitHub",
+          "description": "Adds .github directory containing a code of conduct, contributing guide, pull request template and issue templates."
+        },
+        {
+          "choice": "None",
+          "description": "No source control provider is being used."
+        }
+      ],
+      "defaultValue": "GitHub",
+      "description": "Select which source control provider you are using if any, to add provider specific features."
+    },
+    "GitHub": {
+      "type": "computed",
+      "value": "(SourceControl == \"GitHub\")"
+    },
+    // GitHubUsername
+    "GitHubUsername": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Username",
+      "replaces": "GITHUB-USERNAME",
+      "description": "Your GitHub username or organisation name that the project lives under."
+    },
+    // GitHubProject
+    "GitHubProject": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project",
+      "replaces": "GITHUB-PROJECT",
+      "description": "The name of your GitHub project."
+    },
+    // License
+    "License": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "MIT",
+          "description": "The MIT license."
+        },
+        {
+          "choice": "None",
+          "description": "No license, the source code cannot be legally shared."
+        }
+      ],
+      "defaultValue": "MIT",
+      "description": "The legal license applied to the source code in this project."
+    },
+    "MIT": {
+      "type": "computed",
+      "value": "(License == \"MIT\")"
+    },
+    // TreatWarningsAsErrors
+    "TreatWarningsAsErrors": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Treat warnings as errors."
+    },
+    // StyleCop
+    "StyleCop": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds and enforces StyleCop analysers.",
+      "defaultValue": "true"
+    },
+    // Tests
+    "Tests": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds a unit test project.",
+      "defaultValue": "true"
+    },
+    // AppVeyor
+    "AppVeyor": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds AppVeyor continuation integration build file appveyor.yml.",
+      "defaultValue": "true"
+    },
+    // AzurePipelines
+    "AzurePipelines": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds Azure Pipelines continuation integration build file azure-pipelines.yml.",
+      "defaultValue": "true"
+    },
+    // GitHubActions
+    "GitHubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds GitHub Actions continuation integration build file .github/workflow/build.yml.",
+      "defaultValue": "true"
+    },
+
+    // AuthoringMode
+    "AuthoringMode": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": false
+      }
+    },
+    // https://github.com/dotnet/templating/wiki/Post-Action-Registry
+    "SkipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Skips the execution of 'dotnet restore' on project creation.",
+      "defaultValue": "false"
+    }
+    //"SkipOpenToDo": {
+    //  "type": "parameter",
+    //  "datatype": "bool",
+    //  "description": "Skips opening the to-do list for the project in a web browser.",
+    //  "defaultValue": "false"
+    //}
+  },
+  "postActions": [
+    {
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "condition": "(!SkipRestore)",
+      "continueOnError": true,
+      "description": "Restore NuGet packages required by this project.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore' in the directory the template was created in." }
+      ]
+    }
+    //{
+    //  "actionId": "FEA7469E-E2E7-4431-B86B-27EBC1744883",
+    //  "condition": "(!SkipOpenToDo)",
+    //  "continueOnError": true,
+    //  "description": "Open the to-do list for the project in a web browser.",
+    //  "manualInstructions": [
+    //    { "text": "Open the TODO.html in a web browser to see a to-do list." }
+    //  ]
+    //}
+  ]
+}
