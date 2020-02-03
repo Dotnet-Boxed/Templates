@@ -126,7 +126,7 @@
         {
           "condition": "(!Docker)",
           "exclude": [
-            "Source/ApiTemplate/Dockerfile",
+            "Source/GraphQLTemplate/Dockerfile",
             ".dockerignore"
           ]
         }
