@@ -13,6 +13,19 @@
     }
   },
   "profiles": {
+    //#if (Docker)
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      //#if (HttpsEverywhere)
+      "useSSL": true
+      ////#else
+      //"useSSL": false
+      //#endif
+    },
+    //#endif
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,

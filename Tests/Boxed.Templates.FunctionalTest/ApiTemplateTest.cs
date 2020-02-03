@@ -2,6 +2,7 @@ namespace Boxed.Templates.FunctionalTest
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Net.Http;
@@ -200,6 +201,12 @@ namespace Boxed.Templates.FunctionalTest
                             Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
                         })
                     .ConfigureAwait(false);
+
+                var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
+
+                var dockerfileInfo = files.First(x => x.Name == "Dockerfile");
+                var dockerfile = File.ReadAllText(dockerfileInfo.FullName);
+                Assert.DoesNotContain("443", dockerfile, StringComparison.Ordinal);
             }
         }
 
@@ -233,6 +240,31 @@ namespace Boxed.Templates.FunctionalTest
                             Assert.Equal(HttpStatusCode.NotFound, swaggerJsonResponse.StatusCode);
                         })
                     .ConfigureAwait(false);
+            }
+        }
+
+        [Fact]
+        public async Task Run_DockerFalse_SuccessfulAsync()
+        {
+            await InstallTemplateAsync().ConfigureAwait(false);
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            {
+                var project = await tempDirectory
+                    .DotnetNewAsync(
+                        TemplateName,
+                        "ApiDockerFalse",
+                        new Dictionary<string, string>()
+                        {
+                            { "docker", "false" },
+                        })
+                    .ConfigureAwait(false);
+                await project.DotnetRestoreAsync().ConfigureAwait(false);
+                await project.DotnetBuildAsync().ConfigureAwait(false);
+
+                var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
+
+                Assert.DoesNotContain(files, x => x.Name == ".dockerignore");
+                Assert.DoesNotContain(files, x => x.Name == "Dockerfile");
             }
         }
 
