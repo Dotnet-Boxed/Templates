@@ -121,6 +121,14 @@
           "exclude": [
             "Tests/ApiTemplate.IntegrationTest/**/*"
           ]
+        },
+        // Docker
+        {
+          "condition": "(!Docker)",
+          "exclude": [
+            "Source/ApiTemplate/Dockerfile",
+            ".dockerignore"
+          ]
         }
       ]
     }
@@ -423,6 +431,12 @@
       "datatype": "bool",
       "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine.",
       "defaultValue": "false"
+    },
+    "Docker": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds an optimised Dockerfile to add the ability build a Docker image.",
+      "defaultValue": "true"
     },
 
     // AuthoringMode
