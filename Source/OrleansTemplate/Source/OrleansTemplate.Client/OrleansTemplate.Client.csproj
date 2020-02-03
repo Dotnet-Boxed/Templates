@@ -19,16 +19,16 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.1" />
     <PackageReference Include="Microsoft.Orleans.Client" Version="3.0.2" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.0.2" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.0.2">
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="All" Version="3.0.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.0.2" Condition="'$(TLS)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.4.45" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.4.45" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

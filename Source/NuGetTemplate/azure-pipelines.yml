@@ -57,6 +57,10 @@ stages:
       inputs:
         testResultsFormat: 'VSTest'
         testResultsFiles: '**/*.trx'
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: cobertura
+        summaryFileLocation: '**/*.cobertura.xml'
     - publish: './Artefacts'
       artifact: $(matrixName)
       displayName: 'Publish Artefacts'

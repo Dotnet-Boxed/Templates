@@ -42,3 +42,5 @@ artifacts:
   path: ./Artefacts/**/*.xml
 - name: xUnit HTML Test Results
   path: ./Artefacts/**/*.html
+- name: Code Coverage
+  path: ./Artefacts/**/*.cobertura.xml
