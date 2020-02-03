@@ -75,6 +75,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Other
 
+- **Docker** (Default=On) - Adds an optimised Dockerfile to add the ability build a Docker image.
 - **robots.txt** (Default=On) - Adds a robots.txt file to tell search engines not to index this site.
 - **humans.txt** (Default=On) - Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers.
 
