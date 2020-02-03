@@ -6,7 +6,7 @@ var configuration =
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
     (BuildSystem.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
-    (BuildSystem.IsRunningOnGitHubActions && BuildSystem.GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
+    (BuildSystem.IsRunningOnGitHubActions && GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
     (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
