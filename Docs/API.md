@@ -1,12 +1,12 @@
-![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](../Images/Banner.png)
 
-![ASP.NET Core API Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/API-Preview.png)
+![ASP.NET Core API Boxed Preview Image](../Images/API-Preview.png)
 
 ## Technology Map
 
 The ASP.NET Core API project template contains the following features:
 
-![ASP.NET Core API Boxed Technology Map](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/API-Technology-Map.png)
+![ASP.NET Core API Boxed Technology Map](../Images/API-Technology-Map.png)
 
 ## Optional Feature Selection
 

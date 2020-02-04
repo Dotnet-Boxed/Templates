@@ -1,6 +1,6 @@
-![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](../Images/Banner.png)
 
-![Microsoft Orleans Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)
+![Microsoft Orleans Boxed Preview Image](../Images/Orleans-Preview.png)
 
 ## What is Microsoft Orleans?
 
