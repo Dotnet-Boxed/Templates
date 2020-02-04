@@ -27,7 +27,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("OrleansDefaults")]
         [InlineData("OrleansStyleCop", "style-cop=true")]
         [InlineData("OrleansNoHealthCheck", "health-check=false")]
-        public async Task RestoreAndBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
+        public async Task RestoreBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
