@@ -16,7 +16,7 @@ Project templates with batteries included, providing the minimum amount of code 
 [![Microsoft Orleans Boxed Preview Image](Images/Orleans-Preview.png)](Docs/Orleans.md)
 
 ### [NuGet Package Boxed](Docs/NuGet.md)
-[![NuGet Package Boxed Preview Image](Images/NuGet-Preview.png)](Docs/Orleans.md)
+[![NuGet Package Boxed Preview Image](Images/NuGet-Preview.png)](Docs/NuGet.md)
 
 ## How can I get it?
 
