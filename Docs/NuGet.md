@@ -1,6 +1,6 @@
-![.NET Boxed Banner](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png)
+![.NET Boxed Banner](../Images/Banner.png)
 
-![NuGet Package Boxed Preview Image](https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Orleans-Preview.png)
+![NuGet Package Boxed Preview Image](../Images/NuGet-Preview.png)
 
 ## Optional Feature Selection
 
