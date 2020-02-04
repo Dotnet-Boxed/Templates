@@ -170,8 +170,15 @@
     "DotnetFramework": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true",
+      "defaultValue": "false",
       "description": "Sets .NET Framework as one of the target frameworks."
+    },
+    // PublicSign
+    "PublicSign": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Signs the NuGet package with a public key."
     },
     // ReadMe
     "ReadMe": {

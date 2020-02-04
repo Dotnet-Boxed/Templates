@@ -5,7 +5,7 @@
     <DefineConstants>$(DefineConstants);</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <DotnetCore>true</DotnetCore>
-    <DotnetFramework>true</DotnetFramework>
+    <DotnetFramework>false</DotnetFramework>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
