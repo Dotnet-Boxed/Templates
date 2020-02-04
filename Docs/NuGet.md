@@ -15,6 +15,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 - **Contact** - The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues.
 - **DotnetCore** - Sets .NET Core as one of the target frameworks.
 - **DotnetFramework** - Sets .NET Framework as one of the target frameworks.
+- **PublicSign** - Signs the NuGet package with a public key.
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **License** - The legal license applied to the source code in this project.

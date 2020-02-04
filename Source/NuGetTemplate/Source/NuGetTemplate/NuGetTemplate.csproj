@@ -5,10 +5,11 @@
     <DefineConstants>$(DefineConstants);</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <DotnetCore>true</DotnetCore>
-    <DotnetFramework>true</DotnetFramework>
+    <DotnetFramework>false</DotnetFramework>
     <MIT>true</MIT>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <PublicSign>true</PublicSign>
   </PropertyGroup>
   <!--#endif-->
 
@@ -38,7 +39,7 @@
     <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
   </PropertyGroup>
 
-  <PropertyGroup Label="Signing">
+  <PropertyGroup Label="Signing" Condition="'$(PublicSign)' == 'true'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
     <PublicSign>true</PublicSign>

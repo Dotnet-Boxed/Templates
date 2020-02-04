@@ -109,6 +109,13 @@
             "Source/ApiTemplate/wwwroot/humans.txt"
           ]
         },
+        // HealthCheck
+        {
+          "condition": "(!HealthCheck)",
+          "exclude": [
+            "Tests/ApiTemplate.IntegrationTest/HealthCheckTest.cs"
+          ]
+        },
         // IntegrationTest
         {
           "condition": "(!IntegrationTest)",

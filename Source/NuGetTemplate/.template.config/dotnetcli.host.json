@@ -37,6 +37,9 @@
     "DotnetFramework": {
       "longName": "dotnet-framework"
     },
+    "PublicSign": {
+      "longName": "public-sign"
+    },
     "ReadMe": {
       "longName": "readme"
     },
