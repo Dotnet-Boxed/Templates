@@ -18,6 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		Docs\NuGet.md = Docs\NuGet.md
 		Docs\Orleans.md = Docs\Orleans.md
 		README.md = README.md
+		Docs\Tweets.md = Docs\Tweets.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boxed.Templates.FunctionalTest", "Tests\Boxed.Templates.FunctionalTest\Boxed.Templates.FunctionalTest.csproj", "{FB8AD86C-611F-44FB-BC0F-BF1CF8F490C8}"

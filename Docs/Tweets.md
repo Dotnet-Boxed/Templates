@@ -1,0 +1,76 @@
+# Twitter Tweet Templates
+
+These are templates for Twitter tweets when a new version is released.
+
+## Main Tweet
+
+All tweets below are retweeted off this one.
+
+```
+Upgraded .NET Boxed API, GraphQL, Orleans & NuGet project templates. Install now:
+
+dotnet new --install Boxed.Templates
+dotnet new api
+dotnet new graphql
+dotnet new orleans
+dotnet new nuget
+
+https://github.com/Dotnet-Boxed/Templates
+
+#dotnet #aspnetcore #swagger #openapi #graphql #orleans #nuget
+```
+
+## API Tweet
+
+```
+.NET Boxed API project template updated.
+
+dotnet new --install Boxed.Templates
+dotnet new api
+
+https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md
+
+#dotnet #dotnetcore #aspnetcore #swagger #openapi
+```
+
+## GraphQL Tweet
+
+
+```
+.NET Boxed GraphQL project template updated.
+
+dotnet new --install Boxed.Templates
+dotnet new graphql
+
+https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md
+
+#dotnet #dotnetcore #aspnetcore #graphql
+```
+
+## Orleans Tweet
+
+```
+.NET Boxed Microsoft Orleans project template updated.
+
+dotnet new --install Boxed.Templates
+dotnet new orleans
+
+https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md
+
+#dotnet #dotnetcore #orleans
+```
+
+## NuGet Tweet
+
+
+```
+.NET Boxed NuGet project template updated. The fastest way to get your NuGet package published.
+
+dotnet new nuget
+git commit -a -m "Initial" && git push
+GitHub Actions, Azure DevOps and AppVeyor CI Builds
+
+https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/NuGet.md
+
+#dotnet #dotnetcore #nuget
+```
