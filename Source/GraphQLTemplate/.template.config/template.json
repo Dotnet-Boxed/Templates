@@ -115,6 +115,13 @@
             "Source/GraphQLTemplate/wwwroot/humans.txt"
           ]
         },
+        // HealthCheck
+        {
+          "condition": "(!HealthCheck)",
+          "exclude": [
+            "Tests/GraphQLTemplate.IntegrationTest/HealthCheckTest.cs"
+          ]
+        },
         // IntegrationTest
         {
           "condition": "(!IntegrationTest)",
