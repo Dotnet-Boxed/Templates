@@ -25,7 +25,7 @@ var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
-var isDockerEnabled = StartProcess("docker", new ProcessSettings { Arguments = "--version" }) == 0;
+var isDockerInstalled = GetIsDockerInstalled();
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -106,7 +106,7 @@ Task("Test")
             filter = "IsUsingDotnetRun=false";
         }
 
-        if (!isDockerEnabled)
+        if (!isDockerInstalled)
         {
             filter = "IsUsingDocker=false";
         }
@@ -150,6 +150,19 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
+
+public bool GetIsDockerInstalled()
+{
+    try
+    {
+       return StartProcess("docker", new ProcessSettings { Arguments = "--version" }) == 0;
+    }
+    catch
+    {
+        Information("Docker not installed.");
+        return false;
+    }
+}
 
 public void StartProcess(string processName, ProcessArgumentBuilder builder)
 {
