@@ -47,6 +47,8 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync().ConfigureAwait(false);
             }
         }
 
@@ -311,11 +313,17 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync().ConfigureAwait(false);
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
                 Assert.DoesNotContain(files, x => x.Name == ".dockerignore");
                 Assert.DoesNotContain(files, x => x.Name == "Dockerfile");
+
+                var cake = await File.ReadAllTextAsync(files.Single(x => x.Name == "build.cake").FullName).ConfigureAwait(false);
+
+                Assert.DoesNotContain(cake, "Docker", StringComparison.Ordinal);
             }
         }
 
