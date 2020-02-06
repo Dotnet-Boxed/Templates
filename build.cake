@@ -100,15 +100,15 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
-        string filter = string.Empty;
+        var filters = new List<string>();
         if (!isDotnetRunEnabled)
         {
-            filter = "IsUsingDotnetRun=false";
+            filters.Add("IsUsingDotnetRun=false");
         }
 
         if (!isDockerInstalled)
         {
-            filter = "IsUsingDocker=false";
+            filters.Add("IsUsingDocker=false");
         }
 
         DotNetCoreTest(
@@ -116,7 +116,7 @@ Task("Test")
             new DotNetCoreTestSettings()
             {
                 Configuration = configuration,
-                Filter = filter,
+                Filter = string.Join("&", filters),
                 Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                 NoBuild = true,
                 NoRestore = true,
