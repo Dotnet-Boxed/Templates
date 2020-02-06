@@ -64,7 +64,7 @@ namespace Boxed.Templates.FunctionalTest
                     .ToDictionary(x => x.First(), x => x.Last());
                 var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(2)).ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
             }
         }
 
