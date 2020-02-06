@@ -103,12 +103,12 @@ Task("Test")
         string filter = string.Empty;
         if (!isDotnetRunEnabled)
         {
-            filter = "IsUsingDotnetRun=false"
+            filter = "IsUsingDotnetRun=false";
         }
 
         if (!isDockerEnabled)
         {
-            filter = "IsUsingDocker=false"
+            filter = "IsUsingDocker=false";
         }
 
         DotNetCoreTest(
