@@ -5,16 +5,28 @@ var configuration =
     "Release";
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
+//#if (AzurePipelines)
     (BuildSystem.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
+//#endif
+//#if (GitHubActions)
     (BuildSystem.IsRunningOnGitHubActions && GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
+//#endif
+//#if (AppVeyor)
     (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
+//#endif
     EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
+//#if (AzurePipelines)
     BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
+//#endif
+//#if (GitHubActions)
     BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
+//#endif
+//#if (AppVeyor)
     BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
+//#endif
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 

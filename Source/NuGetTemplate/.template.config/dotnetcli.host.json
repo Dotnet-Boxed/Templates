@@ -74,7 +74,7 @@
       "longName": "appveyor"
     },
     "AzurePipelines": {
-      "longName": "azurep-ipelines"
+      "longName": "azure-pipelines"
     },
     "GitHubActions": {
       "longName": "github-actions"
