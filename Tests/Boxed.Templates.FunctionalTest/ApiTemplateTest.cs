@@ -49,7 +49,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(2)).ConfigureAwait(false);
             }
         }
 
@@ -269,7 +269,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(2)).ConfigureAwait(false);
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
