@@ -47,6 +47,21 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
+            }
+        }
+
+        [Theory]
+        [Trait("IsUsingDotnetRun", "false")]
+        [InlineData("GraphQLTDefaults")]
+        public async Task Cake_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
+        {
+            await InstallTemplateAsync().ConfigureAwait(false);
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            {
+                var dictionary = arguments
+                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .ToDictionary(x => x.First(), x => x.Last());
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
                 await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(2)).ConfigureAwait(false);
             }
@@ -314,7 +329,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(2)).ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(3)).ConfigureAwait(false);
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
