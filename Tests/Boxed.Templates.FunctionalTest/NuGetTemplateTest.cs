@@ -25,6 +25,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetDefaults")]
         [InlineData("NuGetStyleCop", "style-cop=true")]
@@ -53,6 +54,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetDefaults")]
         public async Task Cake_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
@@ -70,6 +72,8 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetNoAppVeyor", "appveyor.yml", "AppVeyor", "appveyor=false")]
         [InlineData("NuGetNoAzurePipelines", "azure-pipelines.yml", "AzurePipelines", "azure-pipelines=false")]
         [InlineData("NuGetNoGitHubActions", @"/.github/workflows/build.yml", "GitHubActions", "github-actions=false")]
@@ -99,6 +103,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         public async Task RestoreBuildTest_PublicSignFalse_SuccessfulAsync()
         {

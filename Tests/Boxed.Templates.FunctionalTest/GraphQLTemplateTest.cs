@@ -29,6 +29,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("GraphQLTDefaults")]
         [InlineData("GraphQLTNoForwardedHeaders", "forwarded-headers=false")]
@@ -51,6 +52,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "true")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("GraphQLTDefaults")]
         public async Task Cake_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
@@ -68,6 +70,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_GraphQLDefaults_SuccessfulAsync()
         {
@@ -124,6 +127,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HealthCheckFalse_SuccessfulAsync()
         {
@@ -163,6 +167,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_QueryGraphQlIntrospection_ReturnsResultsAsync()
         {
@@ -193,6 +198,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HttpsEverywhereFalse_SuccessfulAsync()
         {
@@ -233,6 +239,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_AuthorizationTrue_Returns400BadRequestAsync()
         {
@@ -276,6 +283,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_AuthorizationFalse_DateOfBirthReturnedSuccessfullyAsync()
         {
@@ -311,6 +319,8 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
         public async Task RestoreBuildTestRun_DockerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);

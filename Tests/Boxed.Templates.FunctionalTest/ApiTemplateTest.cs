@@ -30,6 +30,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("ApiDefaults")]
         [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
@@ -52,6 +53,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "true")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("ApiDefaults")]
         public async Task Cake_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
@@ -69,6 +71,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_ApiDefaults_SuccessfulAsync()
         {
@@ -153,6 +156,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HealthCheckFalse_SuccessfulAsync()
         {
@@ -192,6 +196,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HttpsEverywhereFalse_SuccessfulAsync()
         {
@@ -232,6 +237,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_SwaggerFalse_SuccessfulAsync()
         {
@@ -266,6 +272,8 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
         public async Task RestoreBuildTestRun_DockerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);

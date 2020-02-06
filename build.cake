@@ -25,6 +25,7 @@ var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
+var isDockerEnabled = StartProcess("docker", new ProcessSettings { Arguments = "--version" }) == 0;
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -99,12 +100,23 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
+        string filter = string.Empty;
+        if (!isDotnetRunEnabled)
+        {
+            filter = "IsUsingDotnetRun=false"
+        }
+
+        if (!isDockerEnabled)
+        {
+            filter = "IsUsingDocker=false"
+        }
+
         DotNetCoreTest(
             project.ToString(),
             new DotNetCoreTestSettings()
             {
                 Configuration = configuration,
-                Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
+                Filter = filter,
                 Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                 NoBuild = true,
                 NoRestore = true,
