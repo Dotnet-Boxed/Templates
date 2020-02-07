@@ -25,6 +25,7 @@ var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
+var isDockerInstalled = GetIsDockerInstalled();
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -99,12 +100,23 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
+        var filters = new List<string>();
+        if (!isDotnetRunEnabled)
+        {
+            filters.Add("IsUsingDotnetRun=false");
+        }
+
+        if (!isDockerInstalled)
+        {
+            filters.Add("IsUsingDocker=false");
+        }
+
         DotNetCoreTest(
             project.ToString(),
             new DotNetCoreTestSettings()
             {
                 Configuration = configuration,
-                Filter = isDotnetRunEnabled ? null : "IsUsingDotnetRun=false",
+                Filter = string.Join("&", filters),
                 Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
                 NoBuild = true,
                 NoRestore = true,
@@ -138,6 +150,19 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
+
+public bool GetIsDockerInstalled()
+{
+    try
+    {
+       return StartProcess("docker", new ProcessSettings { Arguments = "--version" }) == 0;
+    }
+    catch
+    {
+        Information("Docker not installed.");
+        return false;
+    }
+}
 
 public void StartProcess(string processName, ProcessArgumentBuilder builder)
 {

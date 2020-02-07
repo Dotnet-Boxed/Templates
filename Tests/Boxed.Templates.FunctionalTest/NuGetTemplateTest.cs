@@ -25,12 +25,13 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetDefaults")]
         [InlineData("NuGetStyleCop", "style-cop=true")]
         [InlineData("NuGetNoDotnetFramework", "dotnet-framework=true")]
         [InlineData("NuGetNoDotnetCore", "dotnet-core=false", "dotnet-framework=true")]
-        public async Task RestoreBuildTestCake_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
+        public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -48,13 +49,31 @@ namespace Boxed.Templates.FunctionalTest
                 if (!arguments.Contains("dotnet-framework=true"))
                 {
                     await project.DotnetTestAsync().ConfigureAwait(false);
-                    await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                    await project.DotnetCakeAsync().ConfigureAwait(false);
                 }
             }
         }
 
-        [Theory(Skip = "#if pre-processor statements don't work in .cake files. See https://github.com/dotnet/templating/issues/2243")]
+        [Theory]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
+        [InlineData("NuGetDefaults")]
+        public async Task Cake_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
+        {
+            await InstallTemplateAsync().ConfigureAwait(false);
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            {
+                var dictionary = arguments
+                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .ToDictionary(x => x.First(), x => x.Last());
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync().ConfigureAwait(false);
+            }
+        }
+
+        [Theory]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetNoAppVeyor", "appveyor.yml", "AppVeyor", "appveyor=false")]
         [InlineData("NuGetNoAzurePipelines", "azure-pipelines.yml", "AzurePipelines", "azure-pipelines=false")]
         [InlineData("NuGetNoGitHubActions", @"/.github/workflows/build.yml", "GitHubActions", "github-actions=false")]
@@ -84,8 +103,9 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
-        public async Task RestoreBuildTestCake_PublicSignFalse_SuccessfulAsync()
+        public async Task RestoreBuildTest_PublicSignFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -102,8 +122,6 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
-                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync().ConfigureAwait(false);
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 

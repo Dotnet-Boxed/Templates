@@ -23,6 +23,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("OrleansDefaults")]
         [InlineData("OrleansStyleCop", "style-cop=true")]

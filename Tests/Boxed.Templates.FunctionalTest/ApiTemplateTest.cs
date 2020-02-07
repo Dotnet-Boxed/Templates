@@ -30,6 +30,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Theory]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("ApiDefaults")]
         [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
@@ -51,7 +52,26 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
+        [Theory]
+        [Trait("IsUsingDocker", "true")]
+        [Trait("IsUsingDotnetRun", "false")]
+        [InlineData("ApiDefaults")]
+        public async Task Cake_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
+        {
+            await InstallTemplateAsync().ConfigureAwait(false);
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            {
+                var dictionary = arguments
+                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .ToDictionary(x => x.First(), x => x.Last());
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
+            }
+        }
+
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_ApiDefaults_SuccessfulAsync()
         {
@@ -136,6 +156,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HealthCheckFalse_SuccessfulAsync()
         {
@@ -175,6 +196,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HttpsEverywhereFalse_SuccessfulAsync()
         {
@@ -215,6 +237,7 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_SwaggerFalse_SuccessfulAsync()
         {
@@ -249,6 +272,8 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         [Fact]
+        [Trait("IsUsingDocker", "false")]
+        [Trait("IsUsingDotnetRun", "false")]
         public async Task RestoreBuildTestRun_DockerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
@@ -266,11 +291,17 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(3)).ConfigureAwait(false);
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
                 Assert.DoesNotContain(files, x => x.Name == ".dockerignore");
                 Assert.DoesNotContain(files, x => x.Name == "Dockerfile");
+
+                var cake = await File.ReadAllTextAsync(files.Single(x => x.Name == "build.cake").FullName).ConfigureAwait(false);
+
+                Assert.DoesNotContain(cake, "Docker", StringComparison.Ordinal);
             }
         }
 

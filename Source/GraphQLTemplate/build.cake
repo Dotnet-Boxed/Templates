@@ -3,35 +3,20 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
     "Release";
-var preReleaseSuffix =
-    HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
-//#if (AzurePipelines)
-    (BuildSystem.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
-//#endif
-//#if (GitHubActions)
-    (BuildSystem.IsRunningOnGitHubActions && GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
-//#endif
-//#if (AppVeyor)
-    (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
-//#endif
-    EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
-    "beta";
+var versionTemplate =
+    HasArgument("VersionTemplate") ? Argument<string>("VersionTemplate") :
+    EnvironmentVariable("VersionTemplate") != null ? EnvironmentVariable("VersionTemplate") :
+    "1.0.{0:D4}";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
-//#if (AzurePipelines)
     BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
-//#endif
-//#if (GitHubActions)
     BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
-//#endif
-//#if (AppVeyor)
     BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-//#endif
     EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
 var artefactsDirectory = Directory("./Artefacts");
-var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
+var version = string.Format(versionTemplate, buildNumber);
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -60,8 +45,8 @@ Task("Build")
             new DotNetCoreBuildSettings()
             {
                 Configuration = configuration,
+                MSBuildSettings = new DotNetCoreMSBuildSettings().SetVersion(version),
                 NoRestore = true,
-                VersionSuffix = versionSuffix,
             });
     });
 
@@ -84,28 +69,55 @@ Task("Test")
             });
     });
 
-Task("Pack")
-    .Description("Creates NuGet packages and outputs them to the artefacts directory.")
+Task("Publish")
+    .Description("Publishes the solution.")
     .Does(() =>
     {
-        DotNetCorePack(
+        Information(artefactsDirectory.GetType().Name);
+        DotNetCorePublish(
             ".",
-            new DotNetCorePackSettings()
+            new DotNetCorePublishSettings()
             {
                 Configuration = configuration,
-                IncludeSymbols = true,
-                MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("SymbolPackageFormat", "snupkg"),
+                MSBuildSettings = new DotNetCoreMSBuildSettings().SetVersion(version),
                 NoBuild = true,
                 NoRestore = true,
-                OutputDirectory = artefactsDirectory,
-                VersionSuffix = versionSuffix,
+                OutputDirectory = artefactsDirectory + Directory("Publish"),
             });
     });
 
+//#if (Docker)
+Task("DockerBuild")
+    .Description("Builds a Docker image.")
+    .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
+    {
+        // Uncomment the following lines if using docker buildx.
+        StartProcess(
+            "docker",
+            new ProcessArgumentBuilder()
+                //.Append("buildx")
+                .Append("build")
+                //.AppendSwitch("--progress", "plain")
+                .AppendSwitchQuoted("--tag", $"{dockerfile.GetDirectory().GetDirectoryName().ToLower()}:{version}")
+                .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
+                .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.Now:o}")
+                .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
+                .AppendSwitchQuoted("--file", dockerfile.ToString())
+                .Append(".")
+                .RenderSafe());
+    });
+
 Task("Default")
-    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then creates NuGet packages.")
+    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then builds a Docker image.")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
-    .IsDependentOn("Pack");
+    .IsDependentOn("DockerBuild");
+////#else
+//Task("Default")
+//    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then publishes.")
+//    .IsDependentOn("Build")
+//    .IsDependentOn("Test")
+//    .IsDependentOn("Publish");
+//#endif
 
 RunTarget(target);
