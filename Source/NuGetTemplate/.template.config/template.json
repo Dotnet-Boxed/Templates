@@ -173,12 +173,12 @@
       "defaultValue": "false",
       "description": "Sets .NET Framework as one of the target frameworks."
     },
-    // PublicSign
-    "PublicSign": {
+    // Sign
+    "Sign": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
-      "description": "Signs the NuGet package with a public key."
+      "description": "Signs the NuGet package."
     },
     // ReadMe
     "ReadMe": {

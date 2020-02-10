@@ -42,14 +42,7 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
-
-                // There is currently an issue with enabling .NET Framework and PublicSign.
-                // https://github.com/dotnet/sdk/issues/10597
-                // https://stackoverflow.com/questions/60058571
-                if (!arguments.Contains("dotnet-framework=true"))
-                {
-                    await project.DotnetTestAsync().ConfigureAwait(false);
-                }
+                await project.DotnetTestAsync().ConfigureAwait(false);
             }
         }
 
@@ -105,7 +98,7 @@ namespace Boxed.Templates.FunctionalTest
         [Fact]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
-        public async Task RestoreBuildTest_PublicSignFalse_SuccessfulAsync()
+        public async Task RestoreBuildTest_SignFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -113,10 +106,10 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         TemplateName,
-                        "NuGetPublicSignFalse",
+                        "NuGetSignFalse",
                         new Dictionary<string, string>()
                         {
-                            { "public-sign", "false" },
+                            { "sign", "false" },
                         })
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
@@ -125,9 +118,9 @@ namespace Boxed.Templates.FunctionalTest
 
                 var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
-                var csprojFile = files.Single(x => x.Name == "NuGetPublicSignFalse.csproj");
+                var csprojFile = files.Single(x => x.Name == "NuGetSignFalse.csproj");
                 var csproj = File.ReadAllText(csprojFile.FullName);
-                Assert.DoesNotContain("PublicSign", csproj, StringComparison.Ordinal);
+                Assert.DoesNotContain("Sign", csproj, StringComparison.Ordinal);
             }
         }
 

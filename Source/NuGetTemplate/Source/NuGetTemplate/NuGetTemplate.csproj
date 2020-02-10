@@ -9,7 +9,7 @@
     <MIT>true</MIT>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <PublicSign>true</PublicSign>
+    <Sign>true</Sign>
   </PropertyGroup>
   <!--#endif-->
 
@@ -39,10 +39,9 @@
     <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
   </PropertyGroup>
 
-  <PropertyGroup Label="Signing" Condition="'$(PublicSign)' == 'true'">
+  <PropertyGroup Label="Signing" Condition="'$(Sign)' == 'true'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
-    <PublicSign>true</PublicSign>
   </PropertyGroup>
 
   <PropertyGroup Label="Source Link">
