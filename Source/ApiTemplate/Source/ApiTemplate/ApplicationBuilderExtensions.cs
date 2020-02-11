@@ -12,10 +12,12 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Http;
 #if Versioning
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
-    using Microsoft.AspNetCore.Routing;
 #endif
     using Microsoft.Extensions.DependencyInjection;
     using Serilog;
+#if HealthCheck
+    using Serilog.Events;
+#endif
 
     internal static partial class ApplicationBuilderExtensions
     {
@@ -50,27 +52,59 @@ namespace ApiTemplate
         /// <returns>The application builder with the Serilog middleware configured.</returns>
         public static IApplicationBuilder UseCustomSerilogRequestLogging(this IApplicationBuilder application) =>
             application.UseSerilogRequestLogging(
-                options => options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                options =>
                 {
-                    var request = httpContext.Request;
-                    var response = httpContext.Response;
-                    var endpoint = httpContext.GetEndpoint();
-
-                    diagnosticContext.Set("Host", request.Host);
-                    diagnosticContext.Set("Protocol", request.Protocol);
-                    diagnosticContext.Set("Scheme", request.Scheme);
-
-                    if (request.QueryString.HasValue)
+                    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
                     {
-                        diagnosticContext.Set("QueryString", request.QueryString.Value);
+                        var request = httpContext.Request;
+                        var response = httpContext.Response;
+                        var endpoint = httpContext.GetEndpoint();
+
+                        diagnosticContext.Set("Host", request.Host);
+                        diagnosticContext.Set("Protocol", request.Protocol);
+                        diagnosticContext.Set("Scheme", request.Scheme);
+
+                        if (request.QueryString.HasValue)
+                        {
+                            diagnosticContext.Set("QueryString", request.QueryString.Value);
+                        }
+
+                        if (endpoint != null)
+                        {
+                            diagnosticContext.Set("EndpointName", endpoint.DisplayName);
+                        }
+
+                        diagnosticContext.Set("ContentType", response.ContentType);
+                    };
+#if HealthCheck
+                    options.GetLevel = GetLevel;
+
+                    static LogEventLevel GetLevel(HttpContext httpContext, double elapsedMilliseconds, Exception exception)
+                    {
+                        if (exception == null && httpContext.Response.StatusCode <= 499)
+                        {
+                            if (IsHealthCheckEndpoint(httpContext))
+                            {
+                                return LogEventLevel.Verbose;
+                            }
+
+                            return LogEventLevel.Information;
+                        }
+
+                        return LogEventLevel.Error;
                     }
 
-                    if (endpoint != null)
+                    static bool IsHealthCheckEndpoint(HttpContext httpContext)
                     {
-                        diagnosticContext.Set("EndpointName", endpoint.DisplayName);
-                    }
+                        var endpoint = httpContext.GetEndpoint();
+                        if (endpoint != null)
+                        {
+                            return endpoint.DisplayName == "Health checks";
+                        }
 
-                    diagnosticContext.Set("ContentType", response.ContentType);
+                        return false;
+                    }
+#endif
                 });
 #if Swagger
 
