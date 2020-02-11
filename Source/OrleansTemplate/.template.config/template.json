@@ -52,6 +52,7 @@
             "Source/OrleansTemplate.Abstractions/Grains/HealthChecks/**/*",
             "Source/OrleansTemplate.Grains/HealthChecks/**/*",
             "Source/OrleansTemplate.Server/HealthChecks/**/*",
+            "Source/OrleansTemplate.Server/ApplicationBuilderExtensions.cs",
             "Source/OrleansTemplate.Server/Startup.cs"
           ]
         },
