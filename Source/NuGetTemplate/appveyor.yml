@@ -21,11 +21,17 @@ environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: true
 
 build_script:
-- sh: wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-- sh: sudo dpkg -i packages-microsoft-prod.deb
-- sh: sudo apt update
-- sh: sudo apt install -y apt-transport-https dotnet-sdk-3.1
-- cmd: choco install dotnetcore-sdk --no-progress --confirm --version 3.1.101
+# https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script
+- pwsh: |
+    if ($isWindows) {
+      Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
+      ./dotnet-install.ps1 -JSonFile global.json
+    }
+    else {
+      Invoke-WebRequest "https://dot.net/v1/dotnet-install.sh" -OutFile "./dotnet-install.sh"
+      chmod u+x dotnet-install.sh
+      sudo ./dotnet-install.sh --jsonfile global.json --install-dir /usr/share/dotnet
+    }
 - pwsh: dotnet tool restore
 - pwsh: dotnet cake --target=Build
 - pwsh: dotnet cake --target=Test

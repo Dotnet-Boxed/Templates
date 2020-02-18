@@ -39,7 +39,7 @@ stages:
       displayName: 'Install .NET Core SDK'
       inputs:
         packageType: 'sdk'
-        version: '3.1.101'
+        useGlobalJson: true
     - script: 'dotnet tool restore'
       displayName: 'Dotnet Tool Restore'
       failOnStderr: true
