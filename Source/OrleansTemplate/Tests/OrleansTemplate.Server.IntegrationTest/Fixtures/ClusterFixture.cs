@@ -29,7 +29,7 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 #pragma warning restore CA1822 // Mark members as static
             new TestClusterBuilder()
                 .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
-                .AddSiloBuilderConfigurator<TestSiloBuilderConfigurator>()
+                .AddSiloBuilderConfigurator<TestSiloConfigurator>()
                 .Build();
 
         // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in the next Orleans update.

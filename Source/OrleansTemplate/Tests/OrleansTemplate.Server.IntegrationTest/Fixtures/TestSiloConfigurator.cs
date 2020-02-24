@@ -7,10 +7,10 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
     using OrleansTemplate.Abstractions.Constants;
     using Serilog.Extensions.Logging;
 
-    public class TestSiloBuilderConfigurator : ISiloBuilderConfigurator
+    public class TestSiloConfigurator : ISiloConfigurator
     {
-        public void Configure(ISiloHostBuilder siloHostBuilder) =>
-            siloHostBuilder
+        public void Configure(ISiloBuilder siloBuilder) =>
+            siloBuilder
                 .ConfigureServices(services => services.AddSingleton<ILoggerFactory>(x => new SerilogLoggerFactory()))
                 .AddMemoryGrainStorageAsDefault()
                 .AddMemoryGrainStorage("PubSubStore")
