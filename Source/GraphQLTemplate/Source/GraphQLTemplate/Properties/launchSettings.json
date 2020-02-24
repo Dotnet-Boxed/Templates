@@ -7,8 +7,8 @@
       "applicationUrl": "http://localhost:43300/",
       //#if (HttpsEverywhere)
       "sslPort": 44300
-      //#else
-      ////"sslPort": 0
+      ////#else
+      //"sslPort": 0
       //#endif
     }
   },
@@ -79,6 +79,11 @@
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "",
+      //#if (HttpsEverywhere)
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      ////#else
+      //"applicationUrl": "http:////localhost:5000",
+      //#endif
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }

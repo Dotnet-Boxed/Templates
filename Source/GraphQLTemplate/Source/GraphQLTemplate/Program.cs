@@ -6,6 +6,9 @@ namespace GraphQLTemplate
     using System.Reflection;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
+#if ApplicationInsights
+    using Microsoft.ApplicationInsights.Extensibility;
+#endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -126,13 +129,21 @@ namespace GraphQLTemplate
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger CreateLogger(IHost host) =>
-            new LoggerConfiguration()
+        private static Logger CreateLogger(IHost host)
+        {
+            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+            return new LoggerConfiguration()
                 .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
-                .Enrich.WithProperty("Application", GetAssemblyProductName())
+                .Enrich.WithProperty("Application", hostEnvironment.ApplicationName)
+                .WriteTo.Conditional(
+                    x => !hostEnvironment.IsProduction(),
+                    x => x.Console().WriteTo.Debug())
+#if ApplicationInsights
+                .WriteTo.Conditional(
+                    x => hostEnvironment.IsProduction(),
+                    x => x.ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces))
+#endif
                 .CreateLogger();
-
-        private static string GetAssemblyProductName() =>
-            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+        }
     }
 }
