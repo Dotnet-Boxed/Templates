@@ -64,7 +64,8 @@ Task("Test")
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
                 ArgumentCustomization = x => x
-                    .Append($"--logger html;LogFileName={project.GetFilenameWithoutExtension()}.html")
+                    .Append("--blame")
+                    .AppendSwitch("--logger", $"html;LogFileName={project.GetFilenameWithoutExtension()}.html")
                     .Append("--collect:\"XPlat Code Coverage\""),
             });
     });
