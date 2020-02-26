@@ -5,6 +5,9 @@ namespace OrleansTemplate.Server
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
+#if ApplicationInsights
+    using Microsoft.ApplicationInsights.Extensibility;
+#endif
 #if HealthCheck
     using Microsoft.AspNetCore.Hosting;
 #endif
@@ -177,12 +180,23 @@ namespace OrleansTemplate.Server
                     args != null,
                     x => x.AddCommandLine(args));
 
-        private static Logger CreateLogger(IHost host) =>
-            new LoggerConfiguration()
+        private static Logger CreateLogger(IHost host)
+        {
+            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+            return new LoggerConfiguration()
                 .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
-                .Enrich.WithProperty("Application", GetAssemblyProductName())
+                .Enrich.WithProperty("Application", hostEnvironment.ApplicationName)
                 .Enrich.With(new TraceIdEnricher())
+                .WriteTo.Conditional(
+                    x => !hostEnvironment.IsProduction(),
+                    x => x.Console().WriteTo.Debug())
+#if ApplicationInsights
+                .WriteTo.Conditional(
+                    x => hostEnvironment.IsProduction(),
+                    x => x.ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces))
+#endif
                 .CreateLogger();
+        }
 
         private static void ConfigureJsonSerializerSettings(JsonSerializerSettings jsonSerializerSettings)
         {
@@ -192,8 +206,5 @@ namespace OrleansTemplate.Server
 
         private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
             configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>();
-
-        private static string GetAssemblyProductName() =>
-            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
     }
 }

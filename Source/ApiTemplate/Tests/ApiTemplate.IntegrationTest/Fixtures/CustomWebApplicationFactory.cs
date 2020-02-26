@@ -54,7 +54,7 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 
         protected override void ConfigureWebHost(IWebHostBuilder builder) =>
             builder
-                .UseEnvironment("Testing")
+                .UseEnvironment("Test")
                 .UseStartup<TestStartup>();
 
         protected override void Dispose(bool disposing)
