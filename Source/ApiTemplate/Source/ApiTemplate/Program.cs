@@ -128,6 +128,7 @@ namespace ApiTemplate
             return new LoggerConfiguration()
                 .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
                 .Enrich.WithProperty("Application", hostEnvironment.ApplicationName)
+                .Enrich.WithProperty("Environment", hostEnvironment.EnvironmentName)
                 .WriteTo.Conditional(
                     x => !hostEnvironment.IsProduction(),
                     x => x.Console().WriteTo.Debug())
