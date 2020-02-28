@@ -33,6 +33,9 @@ namespace GraphQLTemplate
             Activity.DefaultIdFormat = ActivityIdFormat.W3C;
             Activity.ForceDefaultIdFormat = true;
 
+            host.Services.GetRequiredService<IHostEnvironment>().ApplicationName =
+                Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+
             Log.Logger = CreateLogger(host);
 
             try

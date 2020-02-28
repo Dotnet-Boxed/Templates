@@ -38,6 +38,9 @@ namespace OrleansTemplate.Server
                 throw new ArgumentNullException(nameof(host));
             }
 
+            host.Services.GetRequiredService<IHostEnvironment>().ApplicationName =
+                Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+
             Log.Logger = CreateLogger(host);
 
             try
