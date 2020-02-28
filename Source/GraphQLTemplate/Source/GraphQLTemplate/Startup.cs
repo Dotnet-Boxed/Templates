@@ -1,13 +1,13 @@
 namespace GraphQLTemplate
 {
     using Boxed.AspNetCore;
-    using GraphQL.Server;
-    using GraphQL.Server.Ui.Playground;
-    using GraphQL.Server.Ui.Voyager;
 #if CORS
     using GraphQLTemplate.Constants;
 #endif
     using GraphQLTemplate.Schemas;
+    using HotChocolate.AspNetCore;
+    using HotChocolate.AspNetCore.Playground;
+    using HotChocolate.AspNetCore.Voyager;
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -133,17 +133,16 @@ namespace GraphQLTemplate
                     })
 #if Subscriptions
                 .UseWebSockets()
-                // Use the GraphQL subscriptions in the specified schema and make them available at /graphql.
-                .UseGraphQLWebSockets<MainSchema>()
 #endif
                 // Use the specified GraphQL schema and make them available at /graphql.
-                .UseGraphQL<MainSchema>()
+                .UseGraphQL(new QueryMiddlewareOptions() { Path = "/graphql" })
                 .UseIf(
                     this.webHostEnvironment.IsDevelopment(),
                     x => x
                         // Add the GraphQL Playground UI to try out the GraphQL API at /.
-                        .UseGraphQLPlayground(new GraphQLPlaygroundOptions() { Path = "/" })
+                        // TODO: Hot Chocolate 11 fixes a bug which throws when you set the path to /.
+                        .UsePlayground(new PlaygroundOptions() { Path = "/playground", QueryPath = "/graphql" })
                         // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
-                        .UseGraphQLVoyager(new GraphQLVoyagerOptions() { Path = "/voyager" }));
+                        .UseVoyager(new VoyagerOptions() { Path = "/voyager", QueryPath = "/graphql" }));
     }
 }
