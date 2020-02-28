@@ -8,17 +8,12 @@ namespace GraphQLTemplate
     using System.Linq;
     using System.Reflection;
     using Boxed.AspNetCore;
-    using GraphQL;
-#if Authorization
-    using GraphQL.Authorization;
-#endif
-    using GraphQL.Server;
-    using GraphQL.Server.Internal;
-    using GraphQL.Validation;
 #if (Authorization || CORS)
     using GraphQLTemplate.Constants;
 #endif
     using GraphQLTemplate.Options;
+    using HotChocolate;
+    using HotChocolate.Subscriptions;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -111,7 +106,6 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 #if ResponseCompression
 
@@ -284,35 +278,24 @@ namespace GraphQLTemplate
             IConfiguration configuration,
             IWebHostEnvironment webHostEnvironment) =>
             services
-                // Add a way for GraphQL.NET to resolve types.
-                .AddSingleton<IDependencyResolver, GraphQLDependencyResolver>()
-                .AddGraphQL(
-                    options =>
-                    {
-                        var graphQLOptions = configuration
-                            .GetSection(nameof(ApplicationOptions.GraphQL))
-                            .Get<GraphQLOptions>();
-                        // Set some limits for security, read from configuration.
-                        options.ComplexityConfiguration = graphQLOptions.ComplexityConfiguration;
-                        // Enable GraphQL metrics to be output in the response, read from configuration.
-                        options.EnableMetrics = graphQLOptions.EnableMetrics;
-                        // Show stack traces in exceptions. Don't turn this on in production.
-                        options.ExposeExceptions = webHostEnvironment.IsDevelopment();
-                    })
-                // Adds all graph types in the current assembly with a singleton lifetime.
-                .AddGraphTypes()
-                // Adds ConnectionType<T>, EdgeType<T> and PageInfoType.
-                .AddRelayGraphTypes()
-                // Add a user context from the HttpContext and make it available in field resolvers.
-                .AddUserContextBuilder<GraphQLUserContextBuilder>()
-                // Add GraphQL data loader to reduce the number of calls to our repository.
-                .AddDataLoader()
 #if Subscriptions
-                // Add WebSockets support for subscriptions.
-                .AddWebSockets()
+                .AddInMemorySubscriptionProvider()
 #endif
-                .Services
-                .AddTransient(typeof(IGraphQLExecuter<>), typeof(InstrumentingGraphQLExecutor<>));
+                .AddGraphQL(serviceProvider => SchemaBuilder.New()
+                    .AddServices(serviceProvider)
+                    .AddQueryType(x => x.Name("Query"))
+                    .AddMutationType(x => x.Name("Mutation"))
+#if Subscriptions
+                    .AddSubscriptionType(x => x.Name("Subscription"))
+#endif
+                    .AddType<CharacterQueries>()
+                    .AddType<ReviewQueries>()
+                    .AddType<ReviewMutations>()
+                    .AddType<ReviewSubscriptions>()
+                    .AddType<Human>()
+                    .AddType<Droid>()
+                    .AddType<Starship>()
+                    .Create());
 #if Authorization
 
         /// <summary>
