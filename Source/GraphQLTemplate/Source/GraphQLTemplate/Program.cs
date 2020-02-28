@@ -31,6 +31,7 @@ namespace GraphQLTemplate
             // Use the W3C Trace Context format to propagate distributed trace identifiers.
             // See https://devblogs.microsoft.com/aspnet/improvements-in-net-core-3-0-for-troubleshooting-and-monitoring-distributed-apps/
             Activity.DefaultIdFormat = ActivityIdFormat.W3C;
+            Activity.ForceDefaultIdFormat = true;
 
             Log.Logger = CreateLogger(host);
 
