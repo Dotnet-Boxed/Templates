@@ -92,8 +92,6 @@ namespace OrleansTemplate.Server
             Microsoft.Extensions.Hosting.HostBuilderContext context,
             ISiloBuilder siloBuilder) =>
             siloBuilder
-                // Prevent the silo from automatically stopping itself when the cancel key is pressed.
-                .Configure<ProcessExitHandlingOptions>(options => options.FastKillOnProcessExit = false)
                 .ConfigureServices(
                     (context, services) =>
                     {
