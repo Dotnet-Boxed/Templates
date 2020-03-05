@@ -52,7 +52,7 @@
     <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.1.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.1.1" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.1.2" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
