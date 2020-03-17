@@ -70,8 +70,8 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="5.4.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.1.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.1.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
