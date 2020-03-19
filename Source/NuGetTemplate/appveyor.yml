@@ -3,16 +3,13 @@
 version: '{build}'
 
 image:
+# - MacOS
 - Ubuntu
 - Visual Studio 2019
 
 pull_requests:
   # Do not increment build number for pull requests
   do_not_increment_build_number: true
-
-nuget:
-  # Do not publish for pull requests
-  disable_publish_on_pr: true
 
 environment:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
@@ -29,8 +26,12 @@ build_script:
     }
     else {
       Invoke-WebRequest "https://dot.net/v1/dotnet-install.sh" -OutFile "./dotnet-install.sh"
-      chmod u+x dotnet-install.sh
-      sudo ./dotnet-install.sh --jsonfile global.json --install-dir /usr/share/dotnet
+      sudo chmod u+x dotnet-install.sh
+      if ($isMacOS) {
+        sudo ./dotnet-install.sh --jsonfile global.json --install-dir '/Users/appveyor/.dotnet'
+      } else {
+        sudo ./dotnet-install.sh --jsonfile global.json --install-dir '/usr/share/dotnet'
+      }
     }
 - pwsh: dotnet tool restore
 - pwsh: dotnet cake --target=Build
