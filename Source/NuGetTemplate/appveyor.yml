@@ -22,7 +22,7 @@ build_script:
 - pwsh: |
     if ($isWindows) {
       Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
-      ./dotnet-install.ps1 -JSonFile global.json
+      ./dotnet-install.ps1 -JSonFile global.json -InstallDir 'C:\Program Files\dotnet'
     }
     else {
       Invoke-WebRequest "https://dot.net/v1/dotnet-install.sh" -OutFile "./dotnet-install.sh"
