@@ -6,24 +6,9 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
     "Release";
-var preReleaseSuffix =
-    HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
-    (BuildSystem.IsRunningOnAzurePipelinesHosted && TFBuild.Environment.Repository.SourceBranch.StartsWith("refs/tags/")) ? null :
-    (BuildSystem.IsRunningOnGitHubActions && GitHubActions.Environment.Workflow.Ref.StartsWith("refs/tags/")) ? null :
-    (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
-    EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
-    "beta";
-var buildNumber =
-    HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
-    BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
-    BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
-    BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
-    0;
 
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
-var versionSuffix = string.IsNullOrEmpty(preReleaseSuffix) ? null : preReleaseSuffix + "-" + buildNumber.ToString("D4");
 var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
 var isDockerInstalled = GetIsDockerInstalled();
 
@@ -140,7 +125,6 @@ Task("Pack")
                 NoBuild = true,
                 NoRestore = true,
                 OutputDirectory = artefactsDirectory,
-                VersionSuffix = versionSuffix,
             });
     });
 
