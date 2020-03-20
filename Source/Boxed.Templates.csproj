@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <VersionPrefix>4.1.0</VersionPrefix>
     <Title>.NET Boxed Project &amp; Item Templates</Title>
     <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
     <Description>Project templates with batteries included, providing the minimum amount of code required to get you going.</Description>
@@ -23,6 +22,16 @@
     <PackageTags>.NET Boxed Muhammad Rehan Saeed API Swagger GraphQL Orleans</PackageTags>
     <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</PackageReleaseNotes>
   </PropertyGroup>
+
+  <PropertyGroup Label="Versioning">
+    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+    <MinVerTagPrefix>$(PackageId).</MinVerTagPrefix>
+    <MinVerVerbosity>normal</MinVerVerbosity>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="MinVer" PrivateAssets="All" Version="2.2.0" />
+  </ItemGroup>
 
   <ItemGroup Label="Files">
     <Content Include="**\*" Exclude="**\bin\**\*;**\obj\**\*;**\.vs\**\*" />

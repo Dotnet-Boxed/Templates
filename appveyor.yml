@@ -16,6 +16,8 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   # Disable sending usage data to Microsoft
   DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Set the build number in MinVer
+  MINVERBUILDMETADATA: build.%APPVEYOR_BUILD_NUMBER%
 
 build_script:
 # https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-install-script
