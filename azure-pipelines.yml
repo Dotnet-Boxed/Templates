@@ -116,6 +116,6 @@ stages:
           steps:
           - task: NuGetToolInstaller@1
             displayName: 'Install NuGet'
-          - pwsh: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate
+          - pwsh: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate -NoSymbols
             displayName: 'NuGet Push'
             failOnStderr: true
