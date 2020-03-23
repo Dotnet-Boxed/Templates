@@ -23,12 +23,6 @@
     <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</PackageReleaseNotes>
   </PropertyGroup>
 
-  <PropertyGroup Label="Versioning">
-    <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
-    <MinVerTagPrefix>$(PackageId).</MinVerTagPrefix>
-    <MinVerVerbosity>normal</MinVerVerbosity>
-  </PropertyGroup>
-
   <ItemGroup Label="Package References">
     <PackageReference Include="MinVer" PrivateAssets="All" Version="2.2.0" />
   </ItemGroup>
@@ -38,5 +32,13 @@
     <Compile Remove="**\*" />
     <None Include="..\Images\Icon-256x256.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
+
+  <Target Name="Versioning" BeforeTargets="MinVer">
+    <PropertyGroup Label="Build">
+      <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+      <MinVerTagPrefix>$(PackageId).</MinVerTagPrefix>
+      <MinVerVerbosity>normal</MinVerVerbosity>
+    </PropertyGroup>
+  </Target>
 
 </Project>
