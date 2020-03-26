@@ -1,7 +1,7 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
+    EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
 var preReleaseSuffix =
     HasArgument("PreReleaseSuffix") ? Argument<string>("PreReleaseSuffix") :
@@ -14,7 +14,7 @@ var preReleaseSuffix =
 //#if (AppVeyor)
     (BuildSystem.IsRunningOnAppVeyor && AppVeyor.Environment.Repository.Tag.IsTag) ? null :
 //#endif
-    EnvironmentVariable("PreReleaseSuffix") != null ? EnvironmentVariable("PreReleaseSuffix") :
+    EnvironmentVariable("PreReleaseSuffix") is object ? EnvironmentVariable("PreReleaseSuffix") :
     "beta";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
@@ -27,7 +27,7 @@ var buildNumber =
 //#if (AppVeyor)
     BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
 //#endif
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
+    EnvironmentVariable("BuildNumber") is object ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
 var artefactsDirectory = Directory("./Artefacts");
