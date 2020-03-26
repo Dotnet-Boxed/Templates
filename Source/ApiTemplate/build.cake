@@ -1,18 +1,18 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") != null ? EnvironmentVariable("Configuration") :
+    EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
 var versionTemplate =
     HasArgument("VersionTemplate") ? Argument<string>("VersionTemplate") :
-    EnvironmentVariable("VersionTemplate") != null ? EnvironmentVariable("VersionTemplate") :
+    EnvironmentVariable("VersionTemplate") is object ? EnvironmentVariable("VersionTemplate") :
     "1.0.{0:D4}";
 var buildNumber =
     HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
     BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
     BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
     BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    EnvironmentVariable("BuildNumber") != null ? int.Parse(EnvironmentVariable("BuildNumber")) :
+    EnvironmentVariable("BuildNumber") is object ? int.Parse(EnvironmentVariable("BuildNumber")) :
     0;
 
 var artefactsDirectory = Directory("./Artefacts");

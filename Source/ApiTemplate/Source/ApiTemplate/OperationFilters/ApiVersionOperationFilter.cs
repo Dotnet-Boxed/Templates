@@ -47,7 +47,7 @@ namespace ApiTemplate.OperationFilters
                     parameter.Description = description.ModelMetadata?.Description;
                 }
 
-                if (parameter.Schema.Default is null && description.DefaultValue != null)
+                if (parameter.Schema.Default is null && description.DefaultValue is object)
                 {
                     parameter.Schema.Default = new OpenApiString(description.DefaultValue.ToString());
                 }
