@@ -28,14 +28,6 @@
             ".editorconfig"
           ]
         },
-        // Git
-        {
-          "condition": "(!Git)",
-          "exclude": [
-            ".gitattributes",
-            ".gitignore"
-          ]
-        },
         // GitHub
         {
           "condition": "(!GitHub)",
@@ -194,21 +186,30 @@
       "defaultValue": "true",
       "description": "Add a .editorconfig file to set a fixed code style."
     },
-    // Git
-    "Git": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS."
-    },
     // SourceControl
     "SourceControl": {
       "type": "parameter",
       "datatype": "choice",
       "choices": [
         {
+          "choice": "AzureDevOpsServer",
+          "description": "Adds source link."
+        },
+        {
+          "choice": "AzureRepos",
+          "description": "Adds source link."
+        },
+        {
+          "choice": "Bitbucket",
+          "description": "Adds source link."
+        },
+        {
           "choice": "GitHub",
-          "description": "Adds .github directory containing a code of conduct, contributing guide, pull request template and issue templates."
+          "description": "Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates."
+        },
+        {
+          "choice": "GitLab",
+          "description": "Adds source link."
         },
         {
           "choice": "None",
@@ -218,9 +219,25 @@
       "defaultValue": "GitHub",
       "description": "Select which source control provider you are using if any, to add provider specific features."
     },
+    "AzureDevOpsServer": {
+      "type": "computed",
+      "value": "(SourceControl == \"AzureDevOpsServer\")"
+    },
+    "AzureRepos": {
+      "type": "computed",
+      "value": "(SourceControl == \"AzureRepos\")"
+    },
+    "Bitbucket": {
+      "type": "computed",
+      "value": "(SourceControl == \"Bitbucket\")"
+    },
     "GitHub": {
       "type": "computed",
       "value": "(SourceControl == \"GitHub\")"
+    },
+    "GitLab": {
+      "type": "computed",
+      "value": "(SourceControl == \"GitLab\")"
     },
     // GitHubUsername
     "GitHubUsername": {

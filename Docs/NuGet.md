@@ -27,9 +27,12 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 #### Source Control
 
-- **Git** - Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS.
 - **SourceControl** - Select which source control provider you are using if any, to add provider specific features.
-  - **GitHub** - Adds .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
+  - **AzureDevOpsServer** - Adds source link.
+  - **AzureRepos** - Adds source link.
+  - **Bitbucket** - Adds source link.
+  - **GitHub** - Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
+  - **GitLab** - Adds source link.
   - **None** - No source control provider is being used.
 - **GitHubUsername** - Your GitHub username or organisation name that the project lives under.
 - **GitHubProject** - The name of your GitHub project.
