@@ -1,0 +1,38 @@
+<Project>
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <DotnetFramework>false</DotnetFramework>
+    <MIT>true</MIT>
+    <StyleCop>true</StyleCop>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <!--#endif-->
+
+  <PropertyGroup Label="Build">
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <Authors>PROJECT-AUTHOR-XML</Authors>
+    <Company>PROJECT-AUTHOR-XML</Company>
+    <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
+    <PackageRequireLicenseAcceptance Condition="'$(License)' != 'None'">true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression Condition="'$(MIT)' == 'true'">MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT</PackageProjectUrl>
+    <PackageIcon>Icon.png</PackageIcon>
+    <RepositoryUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="2.9.8" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="All" Version="1.0.0" Condition="'$(DotnetFramework)' == 'true'" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.5.132" />
+    <PackageReference Include="MinVer" PrivateAssets="All" Version="2.2.0" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
+  </ItemGroup>
+
+</Project>

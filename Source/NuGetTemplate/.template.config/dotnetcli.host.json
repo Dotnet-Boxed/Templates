@@ -46,9 +46,6 @@
     "EditorConfig": {
       "longName": "editorconfig"
     },
-    "Git": {
-      "longName": "git"
-    },
     "SourceControl": {
       "longName": "source-control"
     },
