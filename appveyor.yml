@@ -4,7 +4,7 @@ version: '{build}'
 
 image:
 # - MacOS
-- Ubuntu
+# - Ubuntu
 - Visual Studio 2019
 
 pull_requests:
