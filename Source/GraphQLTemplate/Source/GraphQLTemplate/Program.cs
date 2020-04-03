@@ -6,9 +6,6 @@ namespace GraphQLTemplate
     using System.Reflection;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
-#if ApplicationInsights
-    using Microsoft.ApplicationInsights.Extensibility;
-#endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
@@ -146,7 +143,7 @@ namespace GraphQLTemplate
 #if ApplicationInsights
                 .WriteTo.Conditional(
                     x => hostEnvironment.IsProduction(),
-                    x => x.ApplicationInsights(TelemetryConfiguration.CreateDefault(), TelemetryConverter.Traces))
+                    x => x.ApplicationInsights(TelemetryConverter.Traces))
 #endif
                 .CreateLogger();
         }
