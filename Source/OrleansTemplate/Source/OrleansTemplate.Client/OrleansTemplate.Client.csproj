@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.1.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.1.4" Condition="'$(TLS)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.1.5" Condition="'$(TLS)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
