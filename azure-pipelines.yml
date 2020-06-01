@@ -116,6 +116,9 @@ stages:
           steps:
           - task: NuGetToolInstaller@1
             displayName: 'Install NuGet'
-          - pwsh: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate -NoSymbols
+          - pwsh: |
+              Get-ChildItem $(Agent.BuildDirectory)\Windows -Filter *.nupkg |
+              Where-Object { !$_.Name.Contains('preview') } |
+              ForEach-Object { nuget push $_ -Source https://api.nuget.org/v3/index.json -ApiKey $(NuGetApiKey) -SkipDuplicate }
             displayName: 'NuGet Push'
             failOnStderr: true
