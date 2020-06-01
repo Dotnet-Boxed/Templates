@@ -14,15 +14,15 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.1.6">
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.1.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Orleans.Core" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Orleans.Core" Version="3.1.7" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="2.9.8" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.6.13" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
