@@ -1,6 +1,15 @@
 {
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
+    //#if (Docker)
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "publishAllPorts": true,
+      "useSSL": false
+    },
+    //#endif
     "Development": {
       "commandName": "Project",
       "launchBrowser": true,
@@ -16,7 +25,7 @@
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Production"
+        "DOTNET_ENVIRONMEfNT": "Production"
       }
     },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
