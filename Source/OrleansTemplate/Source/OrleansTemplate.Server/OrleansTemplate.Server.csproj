@@ -2,32 +2,32 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;ApplicationInsights;TLS;StyleCop;HealthCheck</DefineConstants>
+    <DefineConstants>$(DefineConstants);ApplicationInsights;TLS;Docker</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
-    <HealthCheck>true</HealthCheck>
     <TLS>true</TLS>
-    <StyleCop>true</StyleCop>
+    <Docker>true</Docker>
   </PropertyGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <!-- Use the latest version of the C# language. -->
-    <LangVersion>latest</LangVersion>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
     <UserSecretsId>OrleansTemplate.Server-113f2d04-69f0-40c3-8797-ba3f356dd812</UserSecretsId>
-    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
     <!--#if (!IIS)-->
     <!-- Disable publishing of a web.config file for IIS when calling dotnet publish. -->
     <!--#endif-->
     <IsTransformWebConfigDisabled Condition="'$(IIS)' == 'false'">true</IsTransformWebConfigDisabled>
   </PropertyGroup>
 
+  <PropertyGroup Label="Docker" Condition="'$(Docker)' == 'true'">
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\</DockerfileContext>
+  </PropertyGroup>
+
   <PropertyGroup Label="Package">
-    <Version>1.0.0</Version>
     <Authors>PROJECT-AUTHOR-XML</Authors>
     <Company>PROJECT-AUTHOR-XML</Company>
     <Product>PROJECT-TITLE-XML</Product>
@@ -53,6 +53,7 @@
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.1.7" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.1.7" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.1.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="Serilog" Version="2.9.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
@@ -60,12 +61,6 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="5.4.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
-  </ItemGroup>
-
-  <ItemGroup Label="Analyzer Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.6.13" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">

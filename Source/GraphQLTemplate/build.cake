@@ -3,20 +3,8 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
-var versionTemplate =
-    HasArgument("VersionTemplate") ? Argument<string>("VersionTemplate") :
-    EnvironmentVariable("VersionTemplate") is object ? EnvironmentVariable("VersionTemplate") :
-    "1.0.{0:D4}";
-var buildNumber =
-    HasArgument("BuildNumber") ? Argument<int>("BuildNumber") :
-    BuildSystem.IsRunningOnAzurePipelinesHosted ? TFBuild.Environment.Build.Id :
-    BuildSystem.IsRunningOnGitHubActions ? 1 : // GitHub Actions doesn't support build numbers
-    BuildSystem.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number :
-    EnvironmentVariable("BuildNumber") is object ? int.Parse(EnvironmentVariable("BuildNumber")) :
-    0;
 
 var artefactsDirectory = Directory("./Artefacts");
-var version = string.Format(versionTemplate, buildNumber);
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -45,7 +33,6 @@ Task("Build")
             new DotNetCoreBuildSettings()
             {
                 Configuration = configuration,
-                MSBuildSettings = new DotNetCoreMSBuildSettings().SetVersion(version),
                 NoRestore = true,
             });
     });
@@ -80,7 +67,6 @@ Task("Publish")
             new DotNetCorePublishSettings()
             {
                 Configuration = configuration,
-                MSBuildSettings = new DotNetCoreMSBuildSettings().SetVersion(version),
                 NoBuild = true,
                 NoRestore = true,
                 OutputDirectory = artefactsDirectory + Directory("Publish"),
@@ -92,6 +78,28 @@ Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
     {
+        var directoryBuildPropsFilePath = GetFiles("Directory.Build.props").Single().ToString();
+        var directoryBuildPropsDocument = System.Xml.Linq.XDocument.Load(directoryBuildPropsFilePath);
+        var preReleasePhase = directoryBuildPropsDocument.Descendants("MinVerDefaultPreReleasePhase").Single().Value;
+
+        string version = null;
+        StartProcess(
+            "dotnet",
+            new ProcessSettings()
+                .WithArguments(x => x
+                    .Append("minver")
+                    .AppendSwitch("--default-pre-release-phase", preReleasePhase))
+                .SetRedirectStandardOutput(true)
+                .SetRedirectedStandardOutputHandler(
+                    output =>
+                    {
+                        if (output != null)
+                        {
+                            version = output;
+                        }
+                        return output;
+                    }));
+
         // Uncomment the following lines if using docker buildx.
         StartProcess(
             "docker",
@@ -101,7 +109,7 @@ Task("DockerBuild")
                 //.AppendSwitch("--progress", "plain")
                 .AppendSwitchQuoted("--tag", $"{dockerfile.GetDirectory().GetDirectoryName().ToLower()}:{version}")
                 .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
-                .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.Now:o}")
+                .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
                 .AppendSwitchQuoted("--file", dockerfile.ToString())
                 .Append(".")
