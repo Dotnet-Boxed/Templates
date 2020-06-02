@@ -39,10 +39,6 @@ RUN apk add --no-cache \
 # Install time zone database to enable use of System.TimeZoneInfo
     tzdata
 WORKDIR /app
-//#if (HttpsEverywhere)
-EXPOSE 80 443
-//#else
-EXPOSE 80
-//#endif
+EXPOSE 80 11111 30000
 COPY --from=sdk /app .
 ENTRYPOINT ["dotnet", "OrleansTemplate.Server.dll"]
