@@ -92,6 +92,12 @@ namespace GraphQLTemplate
 #endif
 #if ForwardedHeaders
                 .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+                .Configure<ForwardedHeadersOptions>(
+                    options =>
+                    {
+                        options.KnownNetworks.Clear();
+                        options.KnownProxies.Clear();
+                    })
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
