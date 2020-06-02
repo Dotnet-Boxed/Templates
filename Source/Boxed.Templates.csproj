@@ -24,13 +24,13 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="MinVer" PrivateAssets="All" Version="2.2.0" />
+    <PackageReference Include="MinVer" PrivateAssets="All" Version="2.3.0" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
     <Content Include="**\*" Exclude="**\bin\**\*;**\obj\**\*;**\.vs\**\*" />
     <Compile Remove="**\*" />
-    <None Include="..\Images\Icon-256x256.png" Pack="true" PackagePath="\"/>
+    <None Include="..\Images\Icon-256x256.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <Target Name="Versioning" BeforeTargets="MinVer">
