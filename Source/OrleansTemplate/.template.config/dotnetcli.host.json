@@ -46,6 +46,9 @@
     "StyleCop": {
       "longName": "style-cop"
     },
+    "Docker": {
+      "longName": "docker"
+    },
     "SkipRestore": {
       "longName": "no-restore"
     },
