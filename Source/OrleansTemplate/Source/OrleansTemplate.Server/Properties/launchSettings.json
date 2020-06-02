@@ -7,7 +7,7 @@
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
-        "ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development"
       }
     },
     "Production": {
@@ -16,7 +16,7 @@
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
-        "ENVIRONMENT": "Production"
+        "DOTNET_ENVIRONMENT": "Production"
       }
     },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
@@ -26,7 +26,7 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch run",
       "environmentVariables": {
-        "ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development"
       }
     },
     "Watch Production (CTRL+F5)": {
@@ -35,7 +35,7 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch run",
       "environmentVariables": {
-        "ENVIRONMENT": "Production"
+        "DOTNET_ENVIRONMENT": "Production"
       }
     }
   }
