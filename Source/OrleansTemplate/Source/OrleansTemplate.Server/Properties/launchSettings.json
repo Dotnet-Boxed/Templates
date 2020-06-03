@@ -25,7 +25,7 @@
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
       "environmentVariables": {
-        "DOTNET_ENVIRONMEfNT": "Production"
+        "DOTNET_ENVIRONMENT": "Production"
       }
     },
     // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
