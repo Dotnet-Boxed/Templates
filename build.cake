@@ -10,7 +10,7 @@ var configuration =
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
 var isDotnetRunEnabled = BuildSystem.IsLocalBuild || (!BuildSystem.IsLocalBuild && IsRunningOnWindows());
-var isDockerInstalled = GetIsDockerInstalled();
+var isDockerEnabled = BuildSystem.IsLocalBuild;
 
 Task("Clean")
     .Description("Cleans the artefacts, bin and obj directories.")
@@ -91,7 +91,7 @@ Task("Test")
             filters.Add("IsUsingDotnetRun=false");
         }
 
-        if (!isDockerInstalled)
+        if (!isDockerEnabled)
         {
             filters.Add("IsUsingDocker=false");
         }
@@ -135,32 +135,3 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
-
-public bool GetIsDockerInstalled()
-{
-    try
-    {
-       return StartProcess("docker", new ProcessSettings { Arguments = "--version" }) == 0;
-    }
-    catch
-    {
-        Information("Docker not installed.");
-        return false;
-    }
-}
-
-public void StartProcess(string processName, ProcessArgumentBuilder builder)
-{
-    var command = $"{processName} {builder.RenderSafe()}";
-    Information($"Executing: {command}");
-    var exitCode = StartProcess(
-        processName,
-        new ProcessSettings()
-        {
-            Arguments = builder
-        });
-    if (exitCode != 0 && !AzurePipelines.IsRunningOnAzurePipelinesHosted)
-    {
-        throw new Exception($"'{command}' failed with exit code {exitCode}.");
-    }
-}
