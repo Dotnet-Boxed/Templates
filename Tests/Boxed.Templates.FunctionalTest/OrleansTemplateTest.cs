@@ -42,6 +42,25 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
+        [Theory]
+        [Trait("IsUsingDocker", "true")]
+        [Trait("IsUsingDotnetRun", "false")]
+        [InlineData("OrleansDefaults")]
+        [InlineData("OrleansNoDocker", "docker=false")]
+        public async Task Cake_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
+        {
+            await InstallTemplateAsync().ConfigureAwait(false);
+            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            {
+                var dictionary = arguments
+                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .ToDictionary(x => x.First(), x => x.Last());
+                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                await project.DotnetToolRestoreAsync().ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
+            }
+        }
+
         private static Task InstallTemplateAsync() => DotnetNew.InstallAsync<OrleansTemplateTest>(SolutionFileName);
     }
 }
