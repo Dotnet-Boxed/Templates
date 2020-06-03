@@ -135,3 +135,19 @@ Task("Default")
     .IsDependentOn("Pack");
 
 RunTarget(target);
+
+public void StartProcess(string processName, ProcessArgumentBuilder builder)
+{
+    var command = $"{processName} {builder.RenderSafe()}";
+    Information($"Executing: {command}");
+    var exitCode = StartProcess(
+        processName,
+        new ProcessSettings()
+        {
+            Arguments = builder
+        });
+    if (exitCode != 0 && !AzurePipelines.IsRunningOnAzurePipelinesHosted)
+    {
+        throw new Exception($"'{command}' failed with exit code {exitCode}.");
+    }
+}
