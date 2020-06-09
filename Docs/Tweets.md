@@ -22,6 +22,8 @@ https://github.com/Dotnet-Boxed/Templates
 
 ## API Tweet
 
+**Don't forget the pictures!!!**
+
 ```
 .NET Boxed API project template updated.
 
@@ -35,6 +37,7 @@ https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md
 
 ## GraphQL Tweet
 
+**Don't forget the pictures!!!**
 
 ```
 .NET Boxed GraphQL project template updated.
@@ -49,6 +52,8 @@ https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md
 
 ## Orleans Tweet
 
+**Don't forget the pictures!!!**
+
 ```
 .NET Boxed Microsoft Orleans project template updated.
 
@@ -57,11 +62,12 @@ dotnet new orleans
 
 https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md
 
-#dotnet #dotnetcore #orleans
+#dotnet #dotnetcore #orleans @reubenbond
 ```
 
 ## NuGet Tweet
 
+**Don't forget the pictures!!!**
 
 ```
 .NET Boxed NuGet project template updated. The fastest way to get your NuGet package published.
