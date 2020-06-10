@@ -4,7 +4,7 @@
 # docker buildx build --progress plain --file "Source\OrleansTemplate.Server\Dockerfile" --tag orleans .
 
 # SDK image used to build and publish the application
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.300-alpine AS sdk
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS sdk
 # To use the debug build configuration pass --build-arg Configuration=Debug
 ARG Configuration=Release
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true \
@@ -25,7 +25,7 @@ RUN dotnet test --configuration $Configuration --no-build
 RUN dotnet publish "Source/OrleansTemplate.Server/OrleansTemplate.Server.csproj" --configuration $Configuration --no-build --output /app
 
 # Runtime image used to run the application
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.4-alpine AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
 # Open Container Initiative (OCI) labels (See https://github.com/opencontainers/image-spec/blob/master/annotations.md).
 LABEL org.opencontainers.image.title="PROJECT-TITLE" \
       org.opencontainers.image.description="PROJECT-DESCRIPTION" \
