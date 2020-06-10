@@ -6,5 +6,5 @@ template/GraphQL:
   - Source/GraphQLTemplate
 template/NuGet:
   - Source/NuGetTemplate
-template/Orleans':
+template/Orleans:
   - Source/OrleansTemplate
