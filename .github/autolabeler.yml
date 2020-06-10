@@ -1,0 +1,4 @@
+'template/API': ['Source/ApiTemplate']
+'template/GraphQL': ['Source/GraphQLTemplate']
+'template/Orleans': ['Source/OrleansTemplate']
+'template/NuGet': ['Source/NuGetTemplate']
