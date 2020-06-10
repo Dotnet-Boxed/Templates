@@ -38,7 +38,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="OrleansDashboard" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.4" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.4" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.2.0" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.2.0">
