@@ -88,7 +88,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		appveyor.yml = appveyor.yml
 		azure-pipelines.yml = azure-pipelines.yml
 		build.cake = build.cake
-		.github\workflows\build.yml = .github\workflows\build.yml
 		dotnet-tools.json = dotnet-tools.json
 		global.json = global.json
 		Key.snk = Key.snk
@@ -128,6 +127,17 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate", "Source\NuGetTemplate\Source\NuGetTemplate\NuGetTemplate.csproj", "{B6544A26-600A-417E-BC40-0E928AA7BEB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTemplate.Test", "Source\NuGetTemplate\Tests\NuGetTemplate.Test\NuGetTemplate.Test.csproj", "{349A1B03-52C5-48FA-96F3-50816835FBE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4EF24D41-295C-441C-91BB-B9B494CACFBB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\release-drafter.yml = .github\release-drafter.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5E91ACD7-52BB-4F1E-9528-6636248F3E58}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release-drafter.yml = .github\workflows\release-drafter.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -223,6 +233,8 @@ Global
 		{1AC95678-7653-4D1B-B09C-BE3D1ADA92C3} = {4CC44063-2D00-4F9E-9793-38828D2886BC}
 		{B6544A26-600A-417E-BC40-0E928AA7BEB6} = {AB5B9C65-1F15-4456-B2C3-EE500514D5CC}
 		{349A1B03-52C5-48FA-96F3-50816835FBE8} = {1AC95678-7653-4D1B-B09C-BE3D1ADA92C3}
+		{4EF24D41-295C-441C-91BB-B9B494CACFBB} = {C4D1734C-E814-432B-9E37-9506E450C6DE}
+		{5E91ACD7-52BB-4F1E-9528-6636248F3E58} = {4EF24D41-295C-441C-91BB-B9B494CACFBB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CA0C66-F0B6-4175-80D9-4E4452CF9D19}

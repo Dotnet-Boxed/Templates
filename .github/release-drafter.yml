@@ -1,0 +1,37 @@
+name-template: 'Boxed Templates $RESOLVED_VERSION'
+tag-template: 'Boxed.Templates.$RESOLVED_VERSION'
+change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
+no-changes-template: '- No changes'
+categories:
+  - title: '📦 ASP.NET Core API Boxed'
+    labels:
+      - 'template/API'
+  - title: '📦 ASP.NET Core GraphQL Boxed'
+    labels:
+      - 'template/GraphQL'
+  - title: '📦 Microsoft Orleans Boxed'
+    labels:
+      - 'template/Orleans'
+  - title: '📦 Microsoft NuGet Package Boxed'
+    labels:
+      - 'template/NuGet'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'maintenance'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  $CHANGES
+
+  ## 👨🏼‍💻 Contributors
+
+  $CONTRIBUTORS
