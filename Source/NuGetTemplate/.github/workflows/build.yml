@@ -52,3 +52,22 @@ jobs:
       with:
         name: ${{matrix.os}}
         path: './Artefacts'
+
+    # Push to GitHub Actions
+    - name: 'Dotnet NuGet Add GitHub Source'
+      if: (matrix.os == 'windows-latest') && ((github.ref == 'refs/heads/master') || startsWith(github.ref, 'refs/tags/'))
+      run: dotnet nuget add source https://nuget.pkg.github.com/GITHUB-USERNAME --name GitHub --username GITHUB-USERNAME --password ${{secrets.GITHUB_TOKEN}}
+      shell: pwsh
+    - name: 'Dotnet NuGet Push to GitHub'
+      if: (matrix.os == 'windows-latest') && ((github.ref == 'refs/heads/master') || startsWith(github.ref, 'refs/tags/'))
+      run: dotnet nuget push .\Artefacts\*.nupkg --source GitHub --skip-duplicate
+      shell: pwsh
+
+    # Push to NuGet
+    - name: 'Dotnet NuGet Push to NuGet'
+      if: (matrix.os == 'windows-latest') && startsWith(github.ref, 'refs/tags/')
+      run: |
+        Get-ChildItem .\Artefacts -Filter *.nupkg |
+        Where-Object { !$_.Name.Contains('preview') } |
+        ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+      shell: pwsh
