@@ -342,6 +342,32 @@
     //}
   },
   "SpecialCustomOperations": {
+    "**/*.md": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "actionableIf": [ "<!--#if" ],
+            "actionableElse": [ "#else", "<!--#else" ],
+            "actionableElseif": [ "#elseif", "<!--#elseif", "#elif", "<!--#elif" ],
+            "endif": [ "#endif", "<!--#endif" ],
+            "trim": "true",
+            "wholeLine": "true",
+            "actions": [ "fixPseudoNestedComments" ]
+          }
+        },
+        {
+          "type": "balancednesting",
+          "configuration": {
+            "id": "fixPseudoNestedComments",
+            "startToken": "<!--",
+            "realEndToken": "-->",
+            "pseudoEndToken": "-- >",
+            "resetFlag": "_TestResetFlag_"
+          }
+        }
+      ]
+    },
     "**/.editorconfig": {
       "operations": [
         {
