@@ -13,17 +13,17 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **Tags** - A semi-colon `;` delimited list of tags for the NuGet package.
 - **Contact** - The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues.
-- **DotnetCore** - Sets .NET Core as one of the target frameworks.
-- **DotnetFramework** - Sets .NET Framework as one of the target frameworks.
-- **Sign** - Signs the NuGet package.
-- **ReadMe** - Add a README.md markdown file describing the project.
-- **EditorConfig** - Add a .editorconfig file to set a fixed code style.
+- **DotnetCore** (Default=On) - Sets .NET Core as one of the target frameworks.
+- **DotnetFramework** (Default=Off) - Sets .NET Framework as one of the target frameworks.
+- **Sign** (Default=On) - Signs the NuGet package.
+- **ReadMe** (Default=On) - Add a README.md markdown file describing the project.
+- **EditorConfig** (Default=On) - Add a .editorconfig file to set a fixed code style.
 - **License** - The legal license applied to the source code in this project.
-  - **MIT** - The MIT license.
+  - **MIT** (Default) - The MIT license.
   - **None** - No license, the source code cannot be legally shared.
-- **TreatWarningsAsErrors** - Treat warnings as errors.
-- **StyleCop** - Adds and enforces StyleCop analysers.
-- **Tests** - Adds a unit test project.
+- **TreatWarningsAsErrors** (Default=On) - Treat warnings as errors.
+- **StyleCop** (Default=On) - Adds and enforces StyleCop analysers.
+- **Tests** (Default=On) - Adds a unit test project.
 
 #### Source Control
 
@@ -31,7 +31,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
   - **AzureDevOpsServer** - Adds source link.
   - **AzureRepos** - Adds source link.
   - **Bitbucket** - Adds source link.
-  - **GitHub** - Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
+  - **GitHub** (Default) - Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
   - **GitLab** - Adds source link.
   - **None** - No source control provider is being used.
 - **GitHubUsername** - Your GitHub username or organisation name that the project lives under.
@@ -39,9 +39,9 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 #### Continuous Integration (CI)
 
-- **AppVeyor** - Adds AppVeyor continuation integration build file appveyor.yml.
-- **AzurePipelines** - Adds Azure Pipelines continuation integration build file azure-pipelines.yml.
-- **GitHubActions** - Adds GitHub Actions continuation integration build file .github/workflow/build.yml.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration build file `.github/workflow/build.yml`.
+- **AppVeyor** (Default=Off) - Adds AppVeyor continuation integration build file `appveyor.yml`.
+- **AzurePipelines** (Default=Off) - Adds Azure Pipelines continuation integration build file `azure-pipelines.yml`.
 
 ## Always On Features
 
