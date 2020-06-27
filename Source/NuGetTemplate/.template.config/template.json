@@ -302,14 +302,14 @@
       "type": "parameter",
       "datatype": "bool",
       "description": "Adds AppVeyor continuation integration build file appveyor.yml.",
-      "defaultValue": "true"
+      "defaultValue": "false"
     },
     // AzurePipelines
     "AzurePipelines": {
       "type": "parameter",
       "datatype": "bool",
       "description": "Adds Azure Pipelines continuation integration build file azure-pipelines.yml.",
-      "defaultValue": "true"
+      "defaultValue": "false"
     },
     // GitHubActions
     "GitHubActions": {
