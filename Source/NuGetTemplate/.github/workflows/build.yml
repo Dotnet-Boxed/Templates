@@ -23,7 +23,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - name: Checkout
+    - name: 'Checkout'
       uses: actions/checkout@v2
       with:
         lfs: true
@@ -53,21 +53,36 @@ jobs:
         name: ${{matrix.os}}
         path: './Artefacts'
 
-    # Push to GitHub Actions
-    - name: 'Dotnet NuGet Add GitHub Source'
-      if: (matrix.os == 'windows-latest') && ((github.ref == 'refs/heads/master') || startsWith(github.ref, 'refs/tags/'))
-      run: dotnet nuget add source https://nuget.pkg.github.com/GITHUB-USERNAME --name GitHub --username GITHUB-USERNAME --password ${{secrets.GITHUB_TOKEN}}
-      shell: pwsh
-    - name: 'Dotnet NuGet Push to GitHub'
-      if: (matrix.os == 'windows-latest') && ((github.ref == 'refs/heads/master') || startsWith(github.ref, 'refs/tags/'))
-      run: dotnet nuget push .\Artefacts\*.nupkg --source GitHub --skip-duplicate
-      shell: pwsh
+  push-github-packages:
+    name: 'Push GitHub Packages'
+    needs: build
+    if: github.ref == 'refs/heads/master' || github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+      - name: 'Download Artefact'
+        uses: actions/download-artifact@v1
+        with:
+          name: 'windows-latest'
+      - name: 'Dotnet NuGet Add Source'
+        run: dotnet nuget add source https://nuget.pkg.github.com/GITHUB-USERNAME --name GitHub --username GITHUB-USERNAME --password ${{secrets.GITHUB_TOKEN}}
+        shell: pwsh
+      - name: 'Dotnet NuGet Push'
+        run: dotnet nuget push .\windows-latest\*.nupkg --source GitHub --skip-duplicate
+        shell: pwsh
 
-    # Push to NuGet
-    - name: 'Dotnet NuGet Push to NuGet'
-      if: (matrix.os == 'windows-latest') && startsWith(github.ref, 'refs/tags/')
-      run: |
-        Get-ChildItem .\Artefacts -Filter *.nupkg |
-        Where-Object { !$_.Name.Contains('preview') } |
-        ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
-      shell: pwsh
+  push-nuget:
+    name: 'Push NuGet'
+    needs: build
+    if: github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+      - name: 'Download Artefact'
+        uses: actions/download-artifact@v1
+        with:
+          name: 'windows-latest'
+      - name: 'Dotnet NuGet Push'
+        run: |
+          Get-ChildItem .\windows-latest -Filter *.nupkg |
+          Where-Object { !$_.Name.Contains('preview') } |
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+        shell: pwsh
