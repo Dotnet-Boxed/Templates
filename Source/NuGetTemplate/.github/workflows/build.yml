@@ -2,10 +2,10 @@ name: Build
 
 on:
   push:
-    branches:
-      - '*'
-    tags:
-      - '*'
+  pull_request:
+  release:
+    types:
+      - published
 
 env:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
@@ -71,7 +71,7 @@ jobs:
         shell: pwsh
 
   push-nuget:
-    name: 'Push NuGet'
+    name: 'Push NuGet Packages'
     needs: build
     if: github.event_name == 'release'
     runs-on: windows-latest
