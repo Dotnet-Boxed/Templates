@@ -2,10 +2,10 @@ name: Build
 
 on:
   push:
-    branches:
-      - '*'
-    tags:
-      - '*'
+  pull_request:
+  release:
+    types:
+      - published
 
 env:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
@@ -23,7 +23,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - name: Checkout
+    - name: 'Checkout'
       uses: actions/checkout@v2
       with:
         lfs: true
@@ -55,3 +55,43 @@ jobs:
       with:
         name: ${{matrix.os}}
         path: './Artefacts'
+
+  push-github-packages:
+    name: 'Push GitHub Packages'
+    needs: build
+    if: github.ref == 'refs/heads/master' || github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+      - name: 'Download Artefact'
+        uses: actions/download-artifact@v1
+        with:
+          name: 'windows-latest'
+      - name: 'Dotnet NuGet Add Source'
+        run: dotnet nuget add source https://nuget.pkg.github.com/Dotnet-Boxed/index.json --name GitHub --username RehanSaeed --password ${{secrets.GITHUB_TOKEN}}
+        shell: pwsh
+      - name: 'Dotnet NuGet Push'
+        run: |
+          $count = 0;
+          do {
+              ++$count;
+              dotnet nuget push .\windows-latest\*.nupkg --source GitHub --skip-duplicate;
+          }
+          while ($count -lt 30 -and $LastExitCode -ne 0)
+        shell: pwsh
+
+  push-nuget:
+    name: 'Push NuGet Packages'
+    needs: build
+    if: github.event_name == 'release'
+    runs-on: windows-latest
+    steps:
+      - name: 'Download Artefact'
+        uses: actions/download-artifact@v1
+        with:
+          name: 'windows-latest'
+      - name: 'Dotnet NuGet Push'
+        run: |
+          Get-ChildItem .\windows-latest -Filter *.nupkg |
+          Where-Object { !$_.Name.Contains('preview') } |
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+        shell: pwsh
