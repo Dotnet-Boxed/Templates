@@ -2,6 +2,10 @@
 
 ![NuGet Package Boxed Preview Image](../Images/NuGet-Preview.png)
 
+## Walk Through Guide
+
+Read [The Fastest NuGet Package Ever Published (Probably)](https://rehansaeed.com/the-fastest-nuget-package-ever-published-probably/) for a full walk through guide with screenshots on how you can create a brand new project using this template and get a NuGet package in a couple of minutes. 
+
 ## Optional Feature Selection
 
 The NuGet package project template uses `dotnet new` to enable you to turn features of the project template on or off. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
