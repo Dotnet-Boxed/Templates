@@ -18,7 +18,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Dotnet-Boxed/Templates</PackageProjectUrl>
     <PackageIcon>Icon-256x256.png</PackageIcon>
-    <RepositoryUrl>https://github.com/RehanSaeed/Schema.NET.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Dotnet-Boxed/Templates.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>.NET Boxed Muhammad Rehan Saeed API Swagger GraphQL Orleans</PackageTags>
     <PackageReleaseNotes>https://github.com/Dotnet-Boxed/Templates/releases</PackageReleaseNotes>
