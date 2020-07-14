@@ -17,6 +17,44 @@ variables:
   MINVERBUILDMETADATA: build.$(Build.BuildId)
 
 stages:
+- stage: Build
+  jobs:
+  - job: Build
+    strategy:
+      matrix:
+        Linux:
+          matrixName: Ubuntu
+          vmImageName: ubuntu-latest
+        Mac:
+          matrixName: Mac
+          vmImageName: macos-latest
+        Windows:
+          matrixName: Windows
+          vmImageName: windows-latest
+    pool:
+      vmImage: $(vmImageName)
+    timeoutInMinutes: 20
+    steps:
+    - checkout: self
+      lfs: true
+    - task: UseDotNet@2
+      displayName: 'Install .NET Core SDK'
+      inputs:
+        packageType: 'sdk'
+        useGlobalJson: true
+    - pwsh: 'dotnet tool restore'
+      displayName: 'Dotnet Tool Restore'
+      failOnStderr: true
+    - pwsh: 'dotnet cake --target=Build'
+      displayName: 'Dotnet Cake Build'
+      failOnStderr: true
+    - pwsh: 'dotnet cake --target=Pack'
+      displayName: 'Dotnet Cake Pack'
+      failOnStderr: true
+    - publish: './Artefacts'
+      artifact: $(matrixName)
+      displayName: 'Publish Artefacts'
+
 - stage: Test
   jobs:
   - job: Test
@@ -90,44 +128,6 @@ stages:
       inputs:
         codeCoverageTool: cobertura
         summaryFileLocation: '**/*.cobertura.xml'
-
-- stage: Build
-  jobs:
-  - job: Build
-    strategy:
-      matrix:
-        Linux:
-          matrixName: Ubuntu
-          vmImageName: ubuntu-latest
-        Mac:
-          matrixName: Mac
-          vmImageName: macos-latest
-        Windows:
-          matrixName: Windows
-          vmImageName: windows-latest
-    pool:
-      vmImage: $(vmImageName)
-    timeoutInMinutes: 20
-    steps:
-    - checkout: self
-      lfs: true
-    - task: UseDotNet@2
-      displayName: 'Install .NET Core SDK'
-      inputs:
-        packageType: 'sdk'
-        useGlobalJson: true
-    - pwsh: 'dotnet tool restore'
-      displayName: 'Dotnet Tool Restore'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Build'
-      displayName: 'Dotnet Cake Build'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Pack'
-      displayName: 'Dotnet Cake Pack'
-      failOnStderr: true
-    - publish: './Artefacts'
-      artifact: $(matrixName)
-      displayName: 'Publish Artefacts'
 
 - stage: Deploy
   jobs:
