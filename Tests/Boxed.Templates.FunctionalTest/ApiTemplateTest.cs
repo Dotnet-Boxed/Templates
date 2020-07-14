@@ -14,6 +14,7 @@ namespace Boxed.Templates.FunctionalTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Trait("Template", "API")]
     public class ApiTemplateTest
     {
         private const string TemplateName = "api";

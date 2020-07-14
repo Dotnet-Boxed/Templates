@@ -7,6 +7,7 @@ namespace Boxed.Templates.FunctionalTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Trait("Template", "Orleans")]
     public class OrleansTemplateTest
     {
         private const string TemplateName = "orleans";

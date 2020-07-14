@@ -13,6 +13,7 @@ namespace Boxed.Templates.FunctionalTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Trait("Template", "GraphQL")]
     public class GraphQLTemplateTest
     {
         private const string TemplateName = "graphql";
