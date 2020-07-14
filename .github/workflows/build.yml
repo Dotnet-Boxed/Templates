@@ -85,7 +85,7 @@ jobs:
 
   push-github-packages:
     name: 'Push GitHub Packages'
-    needs: build
+    needs: [build, test]
     if: github.ref == 'refs/heads/master' || github.event_name == 'release'
     runs-on: windows-latest
     steps:
@@ -108,7 +108,7 @@ jobs:
 
   push-nuget:
     name: 'Push NuGet Packages'
-    needs: build
+    needs: [build, test]
     if: github.event_name == 'release'
     runs-on: windows-latest
     steps:
