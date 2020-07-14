@@ -4,7 +4,7 @@
 
 ## Walk Through Guide
 
-Read [The Fastest NuGet Package Ever Published (Probably)](https://rehansaeed.com/the-fastest-nuget-package-ever-published-probably/) for a full walk through guide with screenshots on how you can create a brand new project using this template and get a NuGet package in a couple of minutes. 
+Read [The Fastest NuGet Package Ever Published (Probably)](https://rehansaeed.com/the-fastest-nuget-package-ever-published-probably/) for a full walk through guide with screenshots on how you can create a brand new project using this template and get a NuGet package published in a couple of minutes. 
 
 ## Optional Feature Selection
 
