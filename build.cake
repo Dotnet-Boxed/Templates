@@ -6,6 +6,10 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
+var template =
+    HasArgument("Template") ? Argument<string>("Template") :
+    EnvironmentVariable("Template") is object ? EnvironmentVariable("Template") :
+    null;
 
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
@@ -94,6 +98,11 @@ Task("Test")
         if (!isDockerEnabled)
         {
             filters.Add("IsUsingDocker=false");
+        }
+
+        if (template != null)
+        {
+            filters.Add($"Template={template}");
         }
 
         DotNetCoreTest(

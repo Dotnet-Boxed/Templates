@@ -9,6 +9,7 @@ namespace Boxed.Templates.FunctionalTest
     using Xunit;
     using Xunit.Abstractions;
 
+    [Trait("Template", "NuGet")]
     public class NuGetTemplateTest
     {
         private const string TemplateName = "nuget";

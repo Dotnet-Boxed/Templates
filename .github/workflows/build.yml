@@ -16,6 +16,39 @@ env:
   MINVERBUILDMETADATA: build.${{github.run_number}}
 
 jobs:
+  test:
+    name: Test-${{matrix.template}}-${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        template: ['API', 'GraphQL', 'Orleans', 'NuGet']
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+        fetch-depth: 0
+    - name: 'Git Fetch Tags'
+      run: git fetch --tags
+      shell: pwsh
+    - name: 'Install .NET Core SDK'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: 'Dotnet Tool Restore'
+      run: dotnet tool restore
+      shell: pwsh
+    - name: 'Dotnet Cake Build'
+      run: dotnet cake --target=Build
+      shell: pwsh
+    - name: 'Dotnet Cake InstallDeveloperCertificate'
+      run: dotnet cake --target=InstallDeveloperCertificate
+      shell: pwsh
+    - name: 'Dotnet Cake Test'
+      run: dotnet cake --target=Test --template=${{matrix.template}}
+      shell: pwsh
+
   build:
     name: Build-${{matrix.os}}
     runs-on: ${{matrix.os}}
@@ -40,12 +73,6 @@ jobs:
       shell: pwsh
     - name: 'Dotnet Cake Build'
       run: dotnet cake --target=Build
-      shell: pwsh
-    - name: 'Dotnet Cake InstallDeveloperCertificate'
-      run: dotnet cake --target=InstallDeveloperCertificate
-      shell: pwsh
-    - name: 'Dotnet Cake Test'
-      run: dotnet cake --target=Test
       shell: pwsh
     - name: 'Dotnet Cake Pack'
       run: dotnet cake --target=Pack

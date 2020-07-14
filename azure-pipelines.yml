@@ -8,6 +8,10 @@ trigger:
     include:
     - '*'
 
+parameters:
+  os: ['ubuntu-latest', 'windows-latest', 'macOS-latest']
+  template: ['API', 'GraphQL', 'Orleans', 'NuGet']
+
 variables:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -17,6 +21,57 @@ variables:
   MINVERBUILDMETADATA: build.$(Build.BuildId)
 
 stages:
+- stage: Test
+  jobs:
+  - job: Test
+    strategy:
+      matrix:
+        ${{ each os in parameters.os }}:
+          ${{ each template in parameters.template }}:
+            ${{ format('{0}-{1}', template, os) }}:
+              vmImageName: ${{ os }}:
+        Linux:
+          matrixName: Ubuntu
+          vmImageName: ubuntu-latest
+        Mac:
+          matrixName: Mac
+          vmImageName: macos-latest
+        Windows:
+          matrixName: Windows
+          vmImageName: windows-latest
+    pool:
+      vmImage: $(vmImageName)
+    timeoutInMinutes: 20
+    steps:
+    - checkout: self
+      lfs: true
+    - task: UseDotNet@2
+      displayName: 'Install .NET Core SDK'
+      inputs:
+        packageType: 'sdk'
+        useGlobalJson: true
+    - pwsh: 'dotnet tool restore'
+      displayName: 'Dotnet Tool Restore'
+      failOnStderr: true
+    - pwsh: 'dotnet cake --target=Build'
+      displayName: 'Dotnet Cake Build'
+      failOnStderr: true
+    - pwsh: 'dotnet cake --target=InstallDeveloperCertificate'
+      displayName: 'Dotnet Cake InstallDeveloperCertificate'
+      failOnStderr: true
+    - pwsh: 'dotnet cake --target=Test --template=${{ template }}'
+      displayName: 'Dotnet Cake Test'
+      failOnStderr: true
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: 'VSTest'
+        testResultsFiles: '**/*.trx'
+    - task: PublishCodeCoverageResults@1
+      inputs:
+        codeCoverageTool: cobertura
+        summaryFileLocation: '**/*.cobertura.xml'
+
 - stage: Build
   jobs:
   - job: Build
@@ -48,27 +103,13 @@ stages:
     - pwsh: 'dotnet cake --target=Build'
       displayName: 'Dotnet Cake Build'
       failOnStderr: true
-    - pwsh: 'dotnet cake --target=InstallDeveloperCertificate'
-      displayName: 'Dotnet Cake InstallDeveloperCertificate'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Test'
-      displayName: 'Dotnet Cake Test'
-      failOnStderr: true
     - pwsh: 'dotnet cake --target=Pack'
       displayName: 'Dotnet Cake Pack'
       failOnStderr: true
-    - task: PublishTestResults@2
-      displayName: 'Publish Test Results'
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/*.trx'
-    - task: PublishCodeCoverageResults@1
-      inputs:
-        codeCoverageTool: cobertura
-        summaryFileLocation: '**/*.cobertura.xml'
     - publish: './Artefacts'
       artifact: $(matrixName)
       displayName: 'Publish Artefacts'
+
 - stage: Deploy
   jobs:
   - deployment: AzureArtefacts
