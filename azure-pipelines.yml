@@ -8,10 +8,6 @@ trigger:
     include:
     - '*'
 
-parameters:
-  os: ['ubuntu-latest', 'windows-latest', 'macOS-latest']
-  template: ['API', 'GraphQL', 'Orleans', 'NuGet']
-
 variables:
   # Set the DOTNET_SKIP_FIRST_TIME_EXPERIENCE environment variable to stop wasting time caching packages
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -26,19 +22,42 @@ stages:
   - job: Test
     strategy:
       matrix:
-        ${{ each os in parameters.os }}:
-          ${{ each template in parameters.template }}:
-            ${{ format('{0}-{1}', template, os) }}:
-              vmImageName: ${{ os }}:
-        Linux:
-          matrixName: Ubuntu
+        'API-Linux':
           vmImageName: ubuntu-latest
-        Mac:
-          matrixName: Mac
+          template: 'API'
+        'API-MacOS':
           vmImageName: macos-latest
-        Windows:
-          matrixName: Windows
+          template: 'API'
+        'API-Windows':
           vmImageName: windows-latest
+          template: 'API'
+        'GraphQL-Linux':
+          vmImageName: ubuntu-latest
+          template: 'GraphQL'
+        'GraphQL-MacOS':
+          vmImageName: macos-latest
+          template: 'GraphQL'
+        'GraphQL-Windows':
+          vmImageName: windows-latest
+          template: 'GraphQL'
+        'Orleans-Linux':
+          vmImageName: ubuntu-latest
+          template: 'Orleans'
+        'Orleans-MacOS':
+          vmImageName: macos-latest
+          template: 'Orleans'
+        'Orleans-Windows':
+          vmImageName: windows-latest
+          template: 'Orleans'
+        'NuGet-Linux':
+          vmImageName: ubuntu-latest
+          template: 'NuGet'
+        'NuGet-MacOS':
+          vmImageName: macos-latest
+          template: 'NuGet'
+        'NuGet-Windows':
+          vmImageName: windows-latest
+          template: 'NuGet'
     pool:
       vmImage: $(vmImageName)
     timeoutInMinutes: 20
