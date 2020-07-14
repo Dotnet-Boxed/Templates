@@ -78,7 +78,7 @@ stages:
     - pwsh: 'dotnet cake --target=InstallDeveloperCertificate'
       displayName: 'Dotnet Cake InstallDeveloperCertificate'
       failOnStderr: true
-    - pwsh: 'dotnet cake --target=Test --template=${{ template }}'
+    - pwsh: 'dotnet cake --target=Test --template=$(template)'
       displayName: 'Dotnet Cake Test'
       failOnStderr: true
     - task: PublishTestResults@2
