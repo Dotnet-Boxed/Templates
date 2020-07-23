@@ -3,8 +3,12 @@
 trigger:
   branches:
     include:
-    - '*'
+    - 'master'
   tags:
+    include:
+    - '*'
+pr:
+  branches:
     include:
     - '*'
 
