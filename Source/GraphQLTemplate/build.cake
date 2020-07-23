@@ -3,6 +3,12 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
+//#if (Docker)
+var platform =
+    HasArgument("Platform") ? Argument<string>("Platform") :
+    EnvironmentVariable("Platform") is object ? EnvironmentVariable("Platform") :
+    "linux/amd64,linux/arm64";
+//#endif
 
 var artefactsDirectory = Directory("./Artefacts");
 
@@ -100,13 +106,19 @@ Task("DockerBuild")
                         return output;
                     }));
 
-        // Uncomment the following lines if using docker buildx.
+        // Docker buildx allows you to build Docker images for multiple platforms and push them at the same time.
+        // To enable buildx, you may need to enable experimental support. Then run the following commands:
+        // docker buildx create --name builder --driver docker-container --use
+        // docker buildx inspect --bootstrap
+        // To stop using buildx remove the buildx parameter and the --platform, --progress switches.
+        // See https://github.com/docker/buildx
         StartProcess(
             "docker",
             new ProcessArgumentBuilder()
-                //.Append("buildx")
+                .Append("buildx")
                 .Append("build")
-                //.AppendSwitch("--progress", "plain")
+                .AppendSwitchQuoted("--platform", platform)
+                .AppendSwitchQuoted("--progress", "plain")
                 .AppendSwitchQuoted("--tag", $"{dockerfile.GetDirectory().GetDirectoryName().ToLower()}:{version}")
                 .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
