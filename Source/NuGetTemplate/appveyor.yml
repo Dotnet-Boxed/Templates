@@ -7,10 +7,6 @@ image:
 - Ubuntu
 - Visual Studio 2019
 
-pull_requests:
-  # Do not increment build number for pull requests
-  do_not_increment_build_number: true
-
 environment:
   # Disable the .NET logo in the console output.
   DOTNET_NOLOGO: true
