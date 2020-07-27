@@ -15,9 +15,20 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 - **Title** - The name of the project which determines the assembly product name.
 - **Description** - A description of the project which determines the assembly description.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
+- **Contact** - The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues.
 - **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
+
+#### Source Control
+
+- **SourceControl** - Select which source control provider you are using if any, to add provider specific features.
+  - **GitHub** (Default) - Adds .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
+  - **None** - No source control provider is being used.
+
+#### Continuous Integration (CI)
+
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration build file `.github/workflow/build.yml`.
 
 #### Security
 

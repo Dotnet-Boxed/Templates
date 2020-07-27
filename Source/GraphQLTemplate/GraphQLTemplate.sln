@@ -30,6 +30,32 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{C76FD924-71ED-4A92-A891-D226C0724933}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{539EF653-396F-4D8F-862B-F7C9E02DE3E6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\release-drafter.yml = .github\release-drafter.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{12D470EA-4FD9-4764-A391-C8FD4534EDE9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release-drafter.yml = .github\workflows\release-drafter.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{39201BE6-3136-42D1-8B2B-0552FAD18A78}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODE_OF_CONDUCT.md = .github\CODE_OF_CONDUCT.md
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		.github\SECURITY.md = .github\SECURITY.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{623ED17E-E051-4F69-A3BF-3D362A3A3735}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\BUG_REPORT.md = .github\ISSUE_TEMPLATE\BUG_REPORT.md
+		.github\ISSUE_TEMPLATE\FEATURE_REQUEST.md = .github\ISSUE_TEMPLATE\FEATURE_REQUEST.md
+		.github\ISSUE_TEMPLATE\QUESTION.md = .github\ISSUE_TEMPLATE\QUESTION.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +77,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{36941087-72D0-4649-86F6-69AFDC1EC71B} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
 		{C76FD924-71ED-4A92-A891-D226C0724933} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
+		{539EF653-396F-4D8F-862B-F7C9E02DE3E6} = {FBD2504D-975E-4B64-B938-7DDD19C7DB9D}
+		{12D470EA-4FD9-4764-A391-C8FD4534EDE9} = {539EF653-396F-4D8F-862B-F7C9E02DE3E6}
+		{39201BE6-3136-42D1-8B2B-0552FAD18A78} = {60E0F62E-605A-48F2-BFCA-C63B45AB6335}
+		{623ED17E-E051-4F69-A3BF-3D362A3A3735} = {39201BE6-3136-42D1-8B2B-0552FAD18A78}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E464B40-8B3D-427D-BA61-053DB0B94967}

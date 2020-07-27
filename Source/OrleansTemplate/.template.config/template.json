@@ -30,6 +30,18 @@
             ".editorconfig"
           ]
         },
+        // GitHub
+        {
+          "condition": "(!GitHub)",
+          "exclude": [
+            ".github/**/*"
+          ],
+          "include": [
+            ".github/workflows/build.yml",
+            ".github/workflows/release-drafter.yml",
+            ".github/release-drafter.yml"
+          ]
+        },
         // ReadMe
         {
           "condition": "(!ReadMe)",
@@ -61,6 +73,15 @@
           "exclude": [
             "Source/OrleansTemplate.Server/Dockerfile",
             ".dockerignore"
+          ]
+        },
+        // GitHubActions
+        {
+          "condition": "(!GitHubActions)",
+          "exclude": [
+            ".github/workflows/build.yml",
+            ".github/workflows/release-drafter.yml",
+            ".github/release-drafter.yml"
           ]
         }
       ]
@@ -109,12 +130,47 @@
       "valueSource": "Author",
       "valueTransform": "xmlEncode"
     },
+    // Contact
+    "Contact": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "[user@example.com|@ExampleUser]",
+      "replaces": "PROJECT-CONTACT",
+      "description": "The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues."
+    },
+    "ContactXmlEncoded": {
+      "type": "derived",
+      "replaces": "PROJECT-CONTACT-XML",
+      "valueSource": "Contact",
+      "valueTransform": "xmlEncode"
+    },
     // EditorConfig
     "EditorConfig": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Add a .editorconfig file to set a fixed code style."
+    },
+    // SourceControl
+    "SourceControl": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "GitHub",
+          "description": "Adds a .github directory containing a code of conduct, contributing guide, pull request template and issue templates."
+        },
+        {
+          "choice": "None",
+          "description": "No source control provider is being used."
+        }
+      ],
+      "defaultValue": "GitHub",
+      "description": "Select which source control provider you are using if any, to add provider specific features."
+    },
+    "GitHub": {
+      "type": "computed",
+      "value": "(SourceControl == \"GitHub\")"
     },
     // ReadMe
     "ReadMe": {
@@ -187,6 +243,13 @@
       "type": "parameter",
       "datatype": "bool",
       "description": "Adds an optimised Dockerfile to add the ability build a Docker image.",
+      "defaultValue": "true"
+    },
+    // GitHubActions
+    "GitHubActions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Adds GitHub Actions continuation integration build file .github/workflow/build.yml.",
       "defaultValue": "true"
     },
 
