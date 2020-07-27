@@ -28,7 +28,7 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration build file `.github/workflow/build.yml`.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration and automatic release drafting.
 
 #### Security
 
