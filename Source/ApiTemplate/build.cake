@@ -8,6 +8,10 @@ var platform =
     HasArgument("Platform") ? Argument<string>("Platform") :
     EnvironmentVariable("Platform") is object ? EnvironmentVariable("Platform") :
     "linux/amd64,linux/arm64";
+var push =
+    HasArgument("Push") ? Argument<bool>("Push") :
+    EnvironmentVariable("Push") is object ? bool.Parse(EnvironmentVariable("Push")) :
+    false;
 //#endif
 
 var artefactsDirectory = Directory("./Artefacts");
@@ -118,7 +122,8 @@ Task("DockerBuild")
                 .Append("buildx")
                 .Append("build")
                 .AppendSwitchQuoted("--platform", platform)
-                .AppendSwitchQuoted("--progress", "plain")
+                .AppendSwitchQuoted("--progress", BuildSystem.IsLocalBuild ? "auto" : "plain")
+                .Append($"--push={push}")
                 .AppendSwitchQuoted("--tag", $"{dockerfile.GetDirectory().GetDirectoryName().ToLower()}:{version}")
                 .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
