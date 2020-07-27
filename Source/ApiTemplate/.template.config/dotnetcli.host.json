@@ -22,9 +22,6 @@
     "EditorConfig": {
       "longName": "editorconfig"
     },
-    "Git": {
-      "longName": "git"
-    },
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
     },

@@ -30,14 +30,6 @@
             ".editorconfig"
           ]
         },
-        // Git
-        {
-          "condition": "(!Git)",
-          "exclude": [
-            ".gitattributes",
-            ".gitignore"
-          ]
-        },
         // ReadMe
         {
           "condition": "(!ReadMe)",
@@ -123,13 +115,6 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Add a .editorconfig file to set a fixed code style."
-    },
-    // Git
-    "Git": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Add a .gitignore file to stop Git from checking in temporary files and a .gitattributes to use git LFS."
     },
     // ReadMe
     "ReadMe": {
