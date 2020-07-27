@@ -41,7 +41,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration build file `.github/workflow/build.yml`.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration and automatic release drafting.
 
 #### Performance
 
