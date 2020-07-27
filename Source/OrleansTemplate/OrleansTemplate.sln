@@ -36,6 +36,32 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{76BD1373-F876-4779-A7C8-6FAAF1088B16}"
+	ProjectSection(SolutionItems) = preProject
+		.github\release-drafter.yml = .github\release-drafter.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{050450CA-B8A7-4B91-BB2A-9B59FAE1A52B}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+		.github\workflows\release-drafter.yml = .github\workflows\release-drafter.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{90F1A60D-6607-44BF-AB4C-F53B1E31194F}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODE_OF_CONDUCT.md = .github\CODE_OF_CONDUCT.md
+		.github\CONTRIBUTING.md = .github\CONTRIBUTING.md
+		.github\PULL_REQUEST_TEMPLATE.md = .github\PULL_REQUEST_TEMPLATE.md
+		.github\SECURITY.md = .github\SECURITY.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ISSUE_TEMPLATE", "ISSUE_TEMPLATE", "{90110DBA-335A-4A7A-AD43-48CB1A15346D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\ISSUE_TEMPLATE\BUG_REPORT.md = .github\ISSUE_TEMPLATE\BUG_REPORT.md
+		.github\ISSUE_TEMPLATE\FEATURE_REQUEST.md = .github\ISSUE_TEMPLATE\FEATURE_REQUEST.md
+		.github\ISSUE_TEMPLATE\QUESTION.md = .github\ISSUE_TEMPLATE\QUESTION.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,6 +98,10 @@ Global
 		{F522EB3C-EF6B-4517-B8D7-F1363E7ADC6E} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
 		{2A41B472-8BCE-42D5-A64B-C1ED9C9BA60C} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
 		{B186DB6A-88E5-40AB-B3E1-1468C925C9B7} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
+		{76BD1373-F876-4779-A7C8-6FAAF1088B16} = {FBD2504D-975E-4B64-B938-7DDD19C7DB9D}
+		{050450CA-B8A7-4B91-BB2A-9B59FAE1A52B} = {76BD1373-F876-4779-A7C8-6FAAF1088B16}
+		{90F1A60D-6607-44BF-AB4C-F53B1E31194F} = {60E0F62E-605A-48F2-BFCA-C63B45AB6335}
+		{90110DBA-335A-4A7A-AD43-48CB1A15346D} = {90F1A60D-6607-44BF-AB4C-F53B1E31194F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E464B40-8B3D-427D-BA61-053DB0B94967}

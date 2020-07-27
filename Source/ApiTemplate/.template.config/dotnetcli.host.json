@@ -19,8 +19,17 @@
     "AuthorXmlEncoded": {
       "isHidden": true
     },
+    "Contact": {
+      "longName": "contact"
+    },
+    "ContactXmlEncoded": {
+      "isHidden": true
+    },
     "EditorConfig": {
       "longName": "editorconfig"
+    },
+    "SourceControl": {
+      "longName": "source-control"
     },
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
@@ -93,6 +102,9 @@
     },
     "Docker": {
       "longName": "docker"
+    },
+    "GitHubActions": {
+      "longName": "github-actions"
     },
     "SkipRestore": {
       "longName": "no-restore"

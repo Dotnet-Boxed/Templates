@@ -33,6 +33,11 @@
           "condition": "(!GitHub)",
           "exclude": [
             ".github/**/*"
+          ],
+          "include": [
+            ".github/workflows/build.yml",
+            ".github/workflows/release-drafter.yml",
+            ".github/release-drafter.yml"
           ]
         },
         // License
@@ -74,7 +79,9 @@
         {
           "condition": "(!GitHubActions)",
           "exclude": [
-            ".github/workflows/build.yml"
+            ".github/workflows/build.yml",
+            ".github/workflows/release-drafter.yml",
+            ".github/release-drafter.yml"
           ]
         }
       ]

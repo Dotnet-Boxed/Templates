@@ -1,0 +1,99 @@
+name: Build
+
+on:
+  push:
+    branches: master
+  pull_request:
+  release:
+    types:
+      - published
+
+env:
+  # Disable the .NET logo in the console output.
+  DOTNET_NOLOGO: true
+  # Disable the .NET first time experience to skip caching NuGet packages and speed up the build.
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  # Disable sending .NET CLI telemetry to Microsoft.
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Set the build number in MinVer.
+  MINVERBUILDMETADATA: build.${{github.run_number}}
+
+jobs:
+  build:
+    name: Build-${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+        fetch-depth: 0
+    - name: 'Git Fetch Tags'
+      run: git fetch --tags
+      shell: pwsh
+    - name: 'Install .NET Core SDK'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.302
+    - name: 'Dotnet Tool Restore'
+      run: dotnet tool restore
+      shell: pwsh
+    - name: 'Dotnet Cake Build'
+      run: dotnet cake --target=Build
+      shell: pwsh
+    - name: 'Dotnet Cake Test'
+      run: dotnet cake --target=Test
+      shell: pwsh
+    - name: 'Dotnet Cake Publish'
+      run: dotnet cake --target=Publish
+      shell: pwsh
+    - name: 'Publish Artefacts'
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: ${{matrix.os}}
+        path: './Artefacts'
+
+  docker:
+    name: Docker-${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v2
+      with:
+        lfs: true
+        fetch-depth: 0
+    - name: 'Git Fetch Tags'
+      run: git fetch --tags
+      shell: pwsh
+    - name: 'Install .NET Core SDK'
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.302
+    - name: 'Dotnet Tool Restore'
+      run: dotnet tool restore
+      shell: pwsh
+    - name: 'Install Docker BuildX'
+      id: buildx
+      uses: crazy-max/ghaction-docker-buildx@v2
+      with:
+        buildx-version: latest
+        qemu-version: latest
+    - name: Available platforms
+      run: echo ${{steps.buildx.outputs.platforms}}
+      shell: pwsh
+    - name: 'Docker Login'
+      if: github.ref == 'refs/heads/master'
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: echo $env:DOCKER_PASSWORD | docker login --username "$($env:DOCKER_USERNAME)" --password-stdin
+      shell: pwsh
+    - name: 'Dotnet Cake DockerBuild'
+      run: dotnet cake --target=DockerBuild --push=${{github.ref == 'refs/heads/master'}}
+      shell: pwsh
