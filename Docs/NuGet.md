@@ -43,9 +43,9 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration and automatic release drafting.
-- **AppVeyor** (Default=Off) - Adds AppVeyor continuation integration build file `appveyor.yml`.
-- **AzurePipelines** (Default=Off) - Adds Azure Pipelines continuation integration build file `azure-pipelines.yml`.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration and automatic release drafting.
+- **AppVeyor** (Default=Off) - Adds AppVeyor continuous integration build file `appveyor.yml`.
+- **AzurePipelines** (Default=Off) - Adds Azure Pipelines continuous integration build file `azure-pipelines.yml`.
 
 ## Always On Features
 
