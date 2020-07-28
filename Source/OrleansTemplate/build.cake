@@ -4,6 +4,10 @@ var configuration =
     EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
     "Release";
 //#if (Docker)
+var tag =
+    HasArgument("Tag") ? Argument<string>("Tag") :
+    EnvironmentVariable("Tag") is object ? EnvironmentVariable("Tag") :
+    null;
 var platform =
     HasArgument("Platform") ? Argument<string>("Platform") :
     EnvironmentVariable("Platform") is object ? EnvironmentVariable("Platform") :
@@ -109,6 +113,7 @@ Task("DockerBuild")
                         }
                         return output;
                     }));
+        tag = tag ?? dockerfile.GetDirectory().GetDirectoryName().ToLower();
 
         // Docker buildx allows you to build Docker images for multiple platforms and push them at the same time.
         // To enable buildx, you may need to enable experimental support. Then run the following commands:
@@ -124,7 +129,7 @@ Task("DockerBuild")
                 .AppendSwitchQuoted("--platform", platform)
                 .AppendSwitchQuoted("--progress", BuildSystem.IsLocalBuild ? "auto" : "plain")
                 .Append($"--push={push}")
-                .AppendSwitchQuoted("--tag", $"{dockerfile.GetDirectory().GetDirectoryName().ToLower()}:{version}")
+                .AppendSwitchQuoted("--tag", $"{tag}:{version}")
                 .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
