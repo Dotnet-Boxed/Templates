@@ -238,6 +238,22 @@
       "type": "computed",
       "value": "(SourceControl == \"GitHub\")"
     },
+    // GitHubUsername
+    "GitHubUsername": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Username",
+      "replaces": "GITHUB-USERNAME",
+      "description": "Your GitHub username or organisation name that the project lives under."
+    },
+    // GitHubProject
+    "GitHubProject": {
+      "type": "parameter",
+      "datatype": "string",
+      "defaultValue": "Project",
+      "replaces": "GITHUB-PROJECT",
+      "description": "The name of your GitHub project."
+    },
     // ReadMe
     "ReadMe": {
       "type": "parameter",
