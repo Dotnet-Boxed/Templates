@@ -31,6 +31,12 @@
     "SourceControl": {
       "longName": "source-control"
     },
+    "GitHubUsername": {
+      "longName": "github-username"
+    },
+    "GitHubProject": {
+      "longName": "github-project"
+    },
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
     },
