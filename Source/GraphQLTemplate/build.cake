@@ -115,8 +115,8 @@ Task("DockerBuild")
                     }));
         tag = tag ?? dockerfile.GetDirectory().GetDirectoryName().ToLower();
 
-        // Docker buildx allows you to build Docker images for multiple platforms and push them at the same time.
-        // To enable buildx, you may need to enable experimental support. Then run the following commands:
+        // Docker buildx allows you to build Docker images for multiple platforms (including x64, x86 and ARM64) and
+        // push them at the same time. To enable buildx, you may need to enable experimental support with these commands:
         // docker buildx create --name builder --driver docker-container --use
         // docker buildx inspect --bootstrap
         // To stop using buildx remove the buildx parameter and the --platform, --progress switches.
@@ -136,6 +136,27 @@ Task("DockerBuild")
                 .AppendSwitchQuoted("--file", dockerfile.ToString())
                 .Append(".")
                 .RenderSafe());
+
+        // If you'd rather not use buildx, then you can uncomment these lines instead.
+        // StartProcess(
+        //     "docker",
+        //     new ProcessArgumentBuilder()
+        //         .Append("build")
+        //         .AppendSwitchQuoted("--tag", $"{tag}:{version}")
+        //         .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
+        //         .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
+        //         .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
+        //         .AppendSwitchQuoted("--file", dockerfile.ToString())
+        //         .Append(".")
+        //         .RenderSafe());
+        // if (push)
+        // {
+        //     StartProcess(
+        //         "docker",
+        //         new ProcessArgumentBuilder()
+        //             .AppendSwitchQuoted("push", $"{tag}:{version}")
+        //             .RenderSafe());
+        // }
     });
 
 Task("Default")
