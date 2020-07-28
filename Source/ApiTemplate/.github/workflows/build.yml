@@ -55,6 +55,7 @@ jobs:
       with:
         name: ${{matrix.os}}
         path: './Artefacts'
+#if (Docker)
 
   docker:
     name: Docker-${{matrix.os}}
@@ -97,3 +98,4 @@ jobs:
     - name: 'Dotnet Cake DockerBuild'
       run: dotnet cake --target=DockerBuild --push=${{github.ref == 'refs/heads/master'}}
       shell: pwsh
+#endif
