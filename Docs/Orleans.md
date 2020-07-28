@@ -25,6 +25,8 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 - **SourceControl** - Select which source control provider you are using if any, to add provider specific features.
   - **GitHub** (Default) - Adds .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
   - **None** - No source control provider is being used.
+- **GitHubUsername** - Your GitHub username or organisation name that the project lives under.
+- **GitHubProject** - The name of your GitHub project.
 
 #### Continuous Integration (CI)
 
