@@ -32,12 +32,11 @@
         {
           "condition": "(!GitHub)",
           "exclude": [
-            ".github/**/*"
-          ],
-          "include": [
-            ".github/workflows/build.yml",
-            ".github/workflows/release-drafter.yml",
-            ".github/release-drafter.yml"
+            ".github/ISSUE_TEMPLATE/**/*",
+            ".github/CODE_OF_CONDUCT.md",
+            ".github/CONTRIBUTING.md",
+            ".github/PULL_REQUEST_TEMPLATE.md",
+            ".github/SECURITY.md"
           ]
         },
         // License
