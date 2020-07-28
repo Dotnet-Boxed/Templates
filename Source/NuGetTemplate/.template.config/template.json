@@ -308,21 +308,21 @@
     "AppVeyor": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds AppVeyor continuation integration build file appveyor.yml.",
+      "description": "Adds AppVeyor continuous integration build file appveyor.yml.",
       "defaultValue": "false"
     },
     // AzurePipelines
     "AzurePipelines": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds Azure Pipelines continuation integration build file azure-pipelines.yml.",
+      "description": "Adds Azure Pipelines continuous integration build file azure-pipelines.yml.",
       "defaultValue": "false"
     },
     // GitHubActions
     "GitHubActions": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds GitHub Actions continuation integration and automatic release drafting.",
+      "description": "Adds GitHub Actions continuous integration and automatic release drafting.",
       "defaultValue": "true"
     },
 

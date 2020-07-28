@@ -39,7 +39,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuation integration and automatic release drafting.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration and automatic release drafting.
 
 #### Performance
 

@@ -249,7 +249,7 @@
     "GitHubActions": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds GitHub Actions continuation integration and automatic release drafting.",
+      "description": "Adds GitHub Actions continuous integration and automatic release drafting.",
       "defaultValue": "true"
     },
 
