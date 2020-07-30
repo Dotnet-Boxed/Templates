@@ -78,7 +78,8 @@ namespace GraphQLTemplate
                 .AddCustomGraphQLAuthorization()
 #endif
                 .AddProjectServices()
-                .AddProjectRepositories();
+                .AddProjectRepositories()
+                .AddProjectDataLoaders();
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is

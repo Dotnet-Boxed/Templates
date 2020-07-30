@@ -32,11 +32,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .AsNode()
                 .IdField(x => x.Id)
-                .NodeResolver((context, id) => context.DataLoader<HumanDataLoader>().LoadAsync(id, context.RequestAborted));
-            //descriptor
-            //    .Field(x => x.Id)
-            //    .Type<NonNullType<IdType>>()
-            //    .Description("The unique identifier of the human.");
+                .NodeResolver((context, id) => context.DataLoader<IHumanDataLoader>().LoadAsync(id, context.RequestAborted));
             descriptor
                 .Field(x => x.Name)
                 .Type<StringType>()

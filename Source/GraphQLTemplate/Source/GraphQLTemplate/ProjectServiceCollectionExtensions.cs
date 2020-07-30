@@ -1,7 +1,9 @@
 namespace GraphQLTemplate
 {
+    using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Services;
+    using HotChocolate;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -27,5 +29,15 @@ namespace GraphQLTemplate
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
+
+        /// <summary>
+        /// Add project data loaders.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with caching services added.</returns>
+        public static IServiceCollection AddProjectDataLoaders(this IServiceCollection services) =>
+            services
+                .AddDataLoader<IDroidDataLoader, DroidDataLoader>()
+                .AddDataLoader<IHumanDataLoader, HumanDataLoader>();
     }
 }

@@ -29,11 +29,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .AsNode()
                 .IdField(x => x.Id)
-                .NodeResolver((context, id) => context.DataLoader<DroidDataLoader>().LoadAsync(id, context.RequestAborted));
-            //descriptor
-            //    .Field(x => x.Id)
-            //    .Type<NonNullType<IdType>>()
-            //    .Description("The unique identifier of the droid.");
+                .NodeResolver((context, id) => context.DataLoader<IDroidDataLoader>().LoadAsync(id, context.RequestAborted));
             descriptor
                 .Field(x => x.Name)
                 .Type<StringType>()
