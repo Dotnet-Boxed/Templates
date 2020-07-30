@@ -6,6 +6,7 @@ namespace GraphQLTemplate.Schemas
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using GraphQLTemplate.Resolvers;
     using GraphQLTemplate.Types;
     using HotChocolate.Types;
 
@@ -16,32 +17,33 @@ namespace GraphQLTemplate.Schemas
     /// The is an example query to get a human and the details of their friends.
     /// <c>
     /// query getHuman {
-    ///   human(id: "94fbd693-2027-4804-bf40-ed427fe76fda")
-    ///   {
+    ///   human(id: "94fbd693-2027-4804-bf40-ed427fe76fda") {
     ///     id
     ///     name
     ///     dateOfBirth
     ///     homePlanet
     ///     appearsIn
     ///     friends {
+    ///       id
     ///       name
     ///       ... on Droid {
-    ///         chargePeriod
-    ///         created
     ///         primaryFunction
+    ///         manufactured
+    ///         chargePeriod
     ///       }
-    ///       ... on Human
-    ///       {
+    ///       ... on Human {
     ///         dateOfBirth
     ///         homePlanet
     ///       }
     ///     }
+    ///     created
+    ///     modified
     ///   }
     /// }
     /// </c>
     /// It retrieves common properties, as well as properties specific to droids and humans.
     /// </example>
-    public class QueryObject : ObjectType<Query>
+    public class QueryObject : ObjectType<QueryResolvers>
     {
         private const int MaxPageSize = 10;
 
@@ -51,49 +53,24 @@ namespace GraphQLTemplate.Schemas
             this.Description = "The query type, represents all of the entry points into our object graph.";
         }
 
-        protected override void Configure(IObjectTypeDescriptor<Query> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<QueryResolvers> descriptor)
         {
             if (descriptor is null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            descriptor.Field("sayHello")
-                .Type<NonNullType<StringType>>()
-                .Resolver("Hello!");
-
             descriptor
-                .Field(x => x.Droid(default, default))
+                .Field<QueryResolvers>(x => x.GetDroidAsync(default, default))
                 .Type<DroidObject>()
                 .Description("Get a droid by its unique identifier.")
                 .Argument("id", x => x.Description("The unique identifier of the droid.").DefaultValue("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"));
+            descriptor
+                .Field<QueryResolvers>(x => x.GetHumanAsync(default, default))
+                .Type<HumanObject>()
+                .Description("Get a human by its unique identifier.")
+                .Argument("id", x => x.Description("The unique identifier of the human.").DefaultValue("94fbd693-2027-4804-bf40-ed427fe76fda"));
 
-            // descriptor.FieldAsync<DroidObject, Droid>(
-            //     "droid",
-            //     "Get a droid by its unique identifier.",
-            //     arguments: new QueryArguments(
-            //         new QueryArgument<NonNullGraphType<IdGraphType>>
-            //         {
-            //             Name = "id",
-            //             Description = "The unique identifier of the droid.",
-            //         }),
-            //     resolve: context =>
-            //         droidRepository.GetDroidAsync(
-            //             context.GetArgument("id", defaultValue: new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68")),
-            //             context.CancellationToken));
-            // descriptor.FieldAsync<HumanObject, Human>(
-            //     "human",
-            //     "Get a human by its unique identifier.",
-            //     arguments: new QueryArguments(
-            //         new QueryArgument<NonNullGraphType<IdGraphType>>()
-            //         {
-            //             Name = "id",
-            //             Description = "The unique identifier of the human.",
-            //         }),
-            //     resolve: context => humanRepository.GetHumanAsync(
-            //         context.GetArgument("id", defaultValue: new Guid("94fbd693-2027-4804-bf40-ed427fe76fda")),
-            //         context.CancellationToken));
-            //
             // descriptor.Connection<DroidObject>()
             //     .Name("droids")
             //     .Description("Gets pages of droids.")
