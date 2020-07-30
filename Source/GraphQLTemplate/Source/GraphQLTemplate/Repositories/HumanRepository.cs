@@ -46,8 +46,8 @@ namespace GraphQLTemplate.Repositories
             return Task.FromResult(Database.Characters.Where(x => human.Friends.Contains(x.Id)).ToList());
         }
 
-        public Task<Human> GetHumanAsync(Guid id, CancellationToken cancellationToken) =>
-            Task.FromResult(Database.Humans.FirstOrDefault(x => x.Id == id));
+        public Task<IQueryable<Human>> GetHumansAsync(CancellationToken cancellationToken) =>
+            Task.FromResult(Database.Humans.AsQueryable());
 
         public Task<IEnumerable<Human>> GetHumansAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken) =>
             Task.FromResult(Database.Humans.Where(x => ids.Contains(x.Id)));
