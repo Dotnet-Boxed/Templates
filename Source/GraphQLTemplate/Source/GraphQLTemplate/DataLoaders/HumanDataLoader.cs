@@ -9,7 +9,7 @@ namespace GraphQLTemplate.DataLoaders
     using GraphQLTemplate.Repositories;
     using GreenDonut;
 
-    public class HumanDataLoader : DataLoaderBase<Guid, Human>
+    public class HumanDataLoader : DataLoaderBase<Guid, Human>, IHumanDataLoader
     {
         private readonly IHumanRepository repository;
 

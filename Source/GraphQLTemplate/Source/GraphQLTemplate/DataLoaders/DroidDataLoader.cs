@@ -9,7 +9,7 @@ namespace GraphQLTemplate.DataLoaders
     using GraphQLTemplate.Repositories;
     using GreenDonut;
 
-    public class DroidDataLoader : DataLoaderBase<Guid, Droid>
+    public class DroidDataLoader : DataLoaderBase<Guid, Droid>, IDroidDataLoader
     {
         private readonly IDroidRepository repository;
 
