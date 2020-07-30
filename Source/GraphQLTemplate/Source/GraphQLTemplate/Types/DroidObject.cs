@@ -1,9 +1,12 @@
 namespace GraphQLTemplate.Types
 {
     using System;
+    using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using HotChocolate.Resolvers;
     using HotChocolate.Types;
+    using HotChocolate.Types.Relay;
 
     public class DroidObject : ObjectType<Droid>
     {
@@ -24,9 +27,13 @@ namespace GraphQLTemplate.Types
             descriptor.Implements<CharacterInterface>();
 
             descriptor
-                .Field(x => x.Id)
-                .Type<NonNullType<IdType>>()
-                .Description("The unique identifier of the droid.");
+                .AsNode()
+                .IdField(x => x.Id)
+                .NodeResolver((context, id) => context.DataLoader<DroidDataLoader>().LoadAsync(id, context.RequestAborted));
+            //descriptor
+            //    .Field(x => x.Id)
+            //    .Type<NonNullType<IdType>>()
+            //    .Description("The unique identifier of the droid.");
             descriptor
                 .Field(x => x.Name)
                 .Type<StringType>()

@@ -7,7 +7,6 @@ namespace GraphQLTemplate.Schemas
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Resolvers;
-    using GraphQLTemplate.Types;
     using HotChocolate.Types;
 
     /// <summary>
@@ -59,17 +58,6 @@ namespace GraphQLTemplate.Schemas
             {
                 throw new ArgumentNullException(nameof(descriptor));
             }
-
-            descriptor
-                .Field<QueryResolvers>(x => x.GetDroidAsync(default, default))
-                .Type<DroidObject>()
-                .Description("Get a droid by its unique identifier.")
-                .Argument("id", x => x.Description("The unique identifier of the droid.").DefaultValue("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"));
-            descriptor
-                .Field<QueryResolvers>(x => x.GetHumanAsync(default, default))
-                .Type<HumanObject>()
-                .Description("Get a human by its unique identifier.")
-                .Argument("id", x => x.Description("The unique identifier of the human.").DefaultValue("94fbd693-2027-4804-bf40-ed427fe76fda"));
 
             // descriptor.Connection<DroidObject>()
             //     .Name("droids")

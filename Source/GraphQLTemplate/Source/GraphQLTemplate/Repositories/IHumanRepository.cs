@@ -17,5 +17,7 @@ namespace GraphQLTemplate.Repositories
         Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken);
 
         Task<Human> GetHumanAsync(Guid id, CancellationToken cancellationToken);
+
+        Task<IEnumerable<Human>> GetHumansAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
     }
 }
