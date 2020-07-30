@@ -76,7 +76,7 @@ namespace GraphQLTemplate
 #if Authorization
                 .AddCustomAuthorization()
 #endif
-                .AddCustomGraphQL(this.configuration, this.webHostEnvironment)
+                .AddCustomGraphQL(this.configuration)
                 .AddProjectServices()
                 .AddProjectRepositories()
                 .AddProjectDataLoaders();

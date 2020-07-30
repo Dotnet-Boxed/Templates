@@ -1,6 +1,7 @@
 namespace GraphQLTemplate.Options
 {
     using System.ComponentModel.DataAnnotations;
+    using HotChocolate.Execution.Configuration;
 #if ForwardedHeaders
     using Microsoft.AspNetCore.Builder;
 #elif HostFiltering
@@ -31,8 +32,8 @@ namespace GraphQLTemplate.Options
         public HostFilteringOptions HostFiltering { get; set; }
 
 #endif
-        // [Required]
-        // public GraphQLOptions GraphQL { get; set; }
+        [Required]
+        public QueryExecutionOptions GraphQL { get; set; }
 
         public KestrelServerOptions Kestrel { get; set; }
     }

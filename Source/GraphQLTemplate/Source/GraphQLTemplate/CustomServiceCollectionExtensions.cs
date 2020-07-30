@@ -15,6 +15,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Types;
     using HotChocolate;
+    using HotChocolate.Execution.Configuration;
     using HotChocolate.Subscriptions;
     using HotChocolate.Types;
     using Microsoft.AspNetCore.Builder;
@@ -108,6 +109,7 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
+                .ConfigureAndValidateSingleton<QueryExecutionOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
 #if ResponseCompression
 
@@ -288,34 +290,38 @@ namespace GraphQLTemplate
 
         public static IServiceCollection AddCustomGraphQL(
             this IServiceCollection services,
-            IConfiguration configuration,
-            IWebHostEnvironment webHostEnvironment) =>
+            IConfiguration configuration) =>
             services
-                .AddGraphQL(serviceProvider => SchemaBuilder.New()
-                    .AddServices(serviceProvider)
+                .AddGraphQL(
+                    serviceProvider => SchemaBuilder.New()
+                        .AddServices(serviceProvider)
 #if Authorization
-                    .AddAuthorizeDirectiveType()
+                        .AddAuthorizeDirectiveType()
 #endif
-                    .ModifyOptions(
-                        options =>
-                        {
-                            options.DefaultBindingBehavior = BindingBehavior.Explicit;
-                            options.RemoveUnreachableTypes = true;
-                            options.UseXmlDocumentation = false;
-                        })
-                    .EnableRelaySupport()
-                    .SetSchema<MainSchema>()
-                    .AddQueryType<QueryObject>()
-                    .AddMutationType<MutationObject>()
+                        .ModifyOptions(
+                            options =>
+                            {
+                                options.DefaultBindingBehavior = BindingBehavior.Explicit;
+                                options.RemoveUnreachableTypes = true;
+                                options.UseXmlDocumentation = false;
+                            })
+                        .EnableRelaySupport()
+                        .SetSchema<MainSchema>()
+                        .AddQueryType<QueryObject>()
+                        .AddMutationType<MutationObject>()
 #if Subscriptions
-                    // .AddSubscriptionType<SubscriptionObject>()
+                        // .AddSubscriptionType<SubscriptionObject>()
 #endif
-                    .AddType<EpisodeEnumeration>()
-                    .AddType<CharacterInterface>()
-                    .AddType<DroidObject>()
-                    .AddType<HumanObject>()
-                    .AddType<HumanInputObject>()
-                    .Create())
+                        .AddType<EpisodeEnumeration>()
+                        .AddType<CharacterInterface>()
+                        .AddType<DroidObject>()
+                        .AddType<HumanObject>()
+                        .AddType<HumanInputObject>()
+                        .AddType(new PaginationAmountType(100))
+                        .Create(),
+                    configuration
+                        .GetSection(nameof(ApplicationOptions.GraphQL))
+                        .Get<QueryExecutionOptions>())
 #if Subscriptions
                 .AddInMemorySubscriptionProvider()
 #endif
