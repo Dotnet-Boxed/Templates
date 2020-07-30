@@ -73,10 +73,10 @@ namespace GraphQLTemplate
                     .AddCustomJsonOptions(this.webHostEnvironment)
                     .AddCustomMvcOptions(this.configuration)
                 .Services
-                .AddCustomGraphQL(this.configuration, this.webHostEnvironment)
 #if Authorization
-                .AddCustomGraphQLAuthorization()
+                .AddCustomAuthorization()
 #endif
+                .AddCustomGraphQL(this.configuration, this.webHostEnvironment)
                 .AddProjectServices()
                 .AddProjectRepositories()
                 .AddProjectDataLoaders();

@@ -1,6 +1,7 @@
 namespace GraphQLTemplate.Types
 {
     using System;
+    using GraphQLTemplate.Constants;
     using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
@@ -14,6 +15,11 @@ namespace GraphQLTemplate.Types
 
         public HumanObject(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
 
+        /// <summary>
+        /// Configures the specified descriptor.
+        /// </summary>
+        /// <param name="descriptor">The descriptor.</param>
+        /// <exception cref="ArgumentNullException">descriptor</exception>
         protected override void Configure(IObjectTypeDescriptor<Human> descriptor)
         {
             if (descriptor is null)
@@ -27,7 +33,7 @@ namespace GraphQLTemplate.Types
             descriptor.Implements<CharacterInterface>();
 
 #if Authorization
-            // this.AuthorizeWith(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
+            // descriptor.Authorize(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
 #endif
             descriptor
                 .AsNode()
@@ -41,7 +47,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.DateOfBirth)
                 .Type<NonNullType<DateType>>()
 #if Authorization
-                // .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
+                .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
 #endif
                 .Description("The humans date of birth.");
             descriptor
