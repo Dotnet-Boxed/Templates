@@ -10,6 +10,7 @@ namespace GraphQLTemplate
     using Boxed.AspNetCore;
 #if (Authorization || CORS)
     using GraphQLTemplate.Constants;
+    using GraphQLTemplate.Directives;
 #endif
     using GraphQLTemplate.Options;
     using GraphQLTemplate.Schemas;
@@ -302,10 +303,15 @@ namespace GraphQLTemplate
                             options =>
                             {
                                 options.DefaultBindingBehavior = BindingBehavior.Explicit;
-                                options.RemoveUnreachableTypes = true;
+
+                                // Required to use custom directives
+                                // https://github.com/ChilliCream/hotchocolate/issues/1470
+                                options.RemoveUnreachableTypes = false;
+
                                 options.UseXmlDocumentation = false;
                             })
                         .EnableRelaySupport()
+                        .AddDirectiveType<UpperDirectiveType>()
                         .SetSchema<MainSchema>()
                         .AddQueryType<QueryObject>()
                         .AddMutationType<MutationObject>()

@@ -20,21 +20,11 @@ namespace GraphQLTemplate
             services
                 .AddSingleton<IClockService, ClockService>();
 
-        /// <summary>
-        /// Add project data repositories.
-        /// </summary>
-        /// <param name="services">The services.</param>
-        /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddProjectRepositories(this IServiceCollection services) =>
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
 
-        /// <summary>
-        /// Add project data loaders.
-        /// </summary>
-        /// <param name="services">The services.</param>
-        /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddProjectDataLoaders(this IServiceCollection services) =>
             services
                 .AddDataLoader<IDroidDataLoader, DroidDataLoader>()
