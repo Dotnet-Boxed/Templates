@@ -22,10 +22,10 @@ namespace GraphQLTemplate.Types
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            descriptor.Name("Human");
-            descriptor.Description("A humanoid creature from the Star Wars universe.");
-
-            descriptor.Implements<CharacterInterface>();
+            descriptor
+                .Name("Human")
+                .Description("A humanoid creature from the Star Wars universe.")
+                .Implements<CharacterInterface>();
 
 #if Authorization
             // descriptor.Authorize(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.

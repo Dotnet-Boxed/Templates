@@ -13,8 +13,9 @@ namespace GraphQLTemplate.Types
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            descriptor.Name("HumanInput");
-            descriptor.Description("A humanoid creature from the Star Wars universe.");
+            descriptor
+                .Name("HumanInput")
+                .Description("A humanoid creature from the Star Wars universe.");
 
             descriptor
                 .Field(x => x.Name)
