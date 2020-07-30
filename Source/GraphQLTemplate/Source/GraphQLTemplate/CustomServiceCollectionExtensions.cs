@@ -201,7 +201,7 @@ namespace GraphQLTemplate
                             .CreateDefault()
                             .AddService(
                                 webHostEnvironment.ApplicationName,
-                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version)
+                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version)
                             .AddAttributes(
                                 new KeyValuePair<string, object>[]
                                 {
@@ -272,6 +272,17 @@ namespace GraphQLTemplate
                     // TODO: Add OpenTelemetry.Exporter.* NuGet packages and configure them here to export open telemetry span data.
                     //       E.g. Add the OpenTelemetry.Exporter.OpenTelemetryProtocol package to export span data to Jaeger.
                 });
+#if Authorization
+
+        /// <summary>
+        /// Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with caching services added.</returns>
+        public static IServiceCollection AddCustomAuthorization(this IServiceCollection services) =>
+            services
+                .AddAuthorization(options => options
+                    .AddPolicy(AuthorizationPolicyName.Admin, x => x.RequireAuthenticatedUser()));
 #endif
 
         public static IServiceCollection AddCustomGraphQL(
@@ -281,6 +292,15 @@ namespace GraphQLTemplate
             services
                 .AddGraphQL(serviceProvider => SchemaBuilder.New()
                     .AddServices(serviceProvider)
+#if Authorization
+                    .AddAuthorizeDirectiveType()
+#endif
+                    .ModifyOptions(
+                        options =>
+                        {
+                            options.RemoveUnreachableTypes = true;
+                            options.UseXmlDocumentation = false;
+                        })
                     .EnableRelaySupport()
                     .SetSchema<MainSchema>()
                     .AddQueryType<QueryObject>()
@@ -298,26 +318,5 @@ namespace GraphQLTemplate
                 .AddInMemorySubscriptionProvider()
 #endif
                 .AddDataLoaderRegistry();
-#if Authorization
-
-        /// <summary>
-        /// Add GraphQL authorization (See https://github.com/graphql-dotnet/authorization).
-        /// </summary>
-        /// <param name="services">The services.</param>
-        /// <returns>The services with caching services added.</returns>
-        public static IServiceCollection AddCustomGraphQLAuthorization(this IServiceCollection services) =>
-            services;
-        // .AddSingleton<IAuthorizationEvaluator, AuthorizationEvaluator>()
-        // .AddTransient<IValidationRule, AuthorizationValidationRule>()
-        // .AddSingleton(
-        //     x =>
-        //     {
-        //         var authorizationSettings = new AuthorizationSettings();
-        //         authorizationSettings.AddPolicy(
-        //             AuthorizationPolicyName.Admin,
-        //             y => y.RequireClaim("role", "admin"));
-        //         return authorizationSettings;
-        //     });
-#endif
     }
 }
