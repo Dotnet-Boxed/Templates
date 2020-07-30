@@ -279,11 +279,9 @@ namespace GraphQLTemplate
             IConfiguration configuration,
             IWebHostEnvironment webHostEnvironment) =>
             services
-#if Subscriptions
-                .AddInMemorySubscriptionProvider()
-#endif
                 .AddGraphQL(serviceProvider => SchemaBuilder.New()
                     .AddServices(serviceProvider)
+                    .EnableRelaySupport()
                     .SetSchema<MainSchema>()
                     .AddQueryType<QueryObject>()
                     // .AddMutationType<MutationObject>()
@@ -295,7 +293,11 @@ namespace GraphQLTemplate
                     .AddType<DroidObject>()
                     .AddType<HumanObject>()
                     // .AddType<HumanInputObject>()
-                    .Create());
+                    .Create())
+#if Subscriptions
+                .AddInMemorySubscriptionProvider()
+#endif
+                .AddDataLoaderRegistry();
 #if Authorization
 
         /// <summary>

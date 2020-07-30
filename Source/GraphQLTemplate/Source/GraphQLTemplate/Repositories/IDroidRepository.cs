@@ -10,6 +10,8 @@ namespace GraphQLTemplate.Repositories
     {
         Task<Droid> GetDroidAsync(Guid id, CancellationToken cancellationToken);
 
+        Task<IEnumerable<Droid>> GetDroidsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
+
         Task<List<Droid>> GetDroidsAsync(
             int? first,
             DateTime? createdAfter,

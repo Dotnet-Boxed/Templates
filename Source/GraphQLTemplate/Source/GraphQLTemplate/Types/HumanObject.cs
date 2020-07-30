@@ -1,9 +1,12 @@
 namespace GraphQLTemplate.Types
 {
     using System;
+    using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using HotChocolate.Resolvers;
     using HotChocolate.Types;
+    using HotChocolate.Types.Relay;
 
     public class HumanObject : ObjectType<Human>
     {
@@ -27,9 +30,13 @@ namespace GraphQLTemplate.Types
             // this.AuthorizeWith(AuthorizationPolicyName.Admin); // To require authorization for all fields in this type.
 #endif
             descriptor
-                .Field(x => x.Id)
-                .Type<NonNullType<IdType>>()
-                .Description("The unique identifier of the human.");
+                .AsNode()
+                .IdField(x => x.Id)
+                .NodeResolver((context, id) => context.DataLoader<HumanDataLoader>().LoadAsync(id, context.RequestAborted));
+            //descriptor
+            //    .Field(x => x.Id)
+            //    .Type<NonNullType<IdType>>()
+            //    .Description("The unique identifier of the human.");
             descriptor
                 .Field(x => x.Name)
                 .Type<StringType>()

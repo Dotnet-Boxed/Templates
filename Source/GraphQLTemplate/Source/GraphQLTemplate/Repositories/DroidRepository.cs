@@ -12,6 +12,9 @@ namespace GraphQLTemplate.Repositories
         public Task<Droid> GetDroidAsync(Guid id, CancellationToken cancellationToken) =>
             Task.FromResult(Database.Droids.FirstOrDefault(x => x.Id == id));
 
+        public Task<IEnumerable<Droid>> GetDroidsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken) =>
+            Task.FromResult(Database.Droids.Where(x => ids.Contains(x.Id)));
+
         public Task<List<Droid>> GetDroidsAsync(
             int? first,
             DateTime? createdAfter,
