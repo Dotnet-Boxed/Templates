@@ -16,7 +16,6 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Types;
     using HotChocolate;
-    using HotChocolate.Execution.Batching;
     using HotChocolate.Execution.Configuration;
     using HotChocolate.Subscriptions;
     using HotChocolate.Types;
@@ -316,7 +315,6 @@ namespace GraphQLTemplate
                         .AddDirectiveType<LowerDirectiveType>()
                         .AddDirectiveType<IncludeDirectiveType>()
                         .AddDirectiveType<SkipDirectiveType>()
-                        .AddDirectiveType<ExportDirectiveType>()
                         .SetSchema<MainSchema>()
                         .AddQueryType<QueryObject>()
                         .AddMutationType<MutationObject>()
