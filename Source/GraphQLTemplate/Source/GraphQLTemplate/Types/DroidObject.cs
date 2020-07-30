@@ -21,10 +21,10 @@ namespace GraphQLTemplate.Types
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            descriptor.Name("Droid");
-            descriptor.Description("A mechanical creature in the Star Wars universe.");
-
-            descriptor.Implements<CharacterInterface>();
+            descriptor
+                .Name("Droid")
+                .Description("A mechanical creature in the Star Wars universe.")
+                .Implements<CharacterInterface>();
 
             descriptor
                 .AsNode()
