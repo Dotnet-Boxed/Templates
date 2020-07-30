@@ -16,6 +16,7 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Types;
     using HotChocolate;
     using HotChocolate.Subscriptions;
+    using HotChocolate.Types;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -298,13 +299,14 @@ namespace GraphQLTemplate
                     .ModifyOptions(
                         options =>
                         {
+                            options.DefaultBindingBehavior = BindingBehavior.Explicit;
                             options.RemoveUnreachableTypes = true;
                             options.UseXmlDocumentation = false;
                         })
                     .EnableRelaySupport()
                     .SetSchema<MainSchema>()
                     .AddQueryType<QueryObject>()
-                    // .AddMutationType<MutationObject>()
+                    .AddMutationType<MutationObject>()
 #if Subscriptions
                     // .AddSubscriptionType<SubscriptionObject>()
 #endif
@@ -312,7 +314,7 @@ namespace GraphQLTemplate
                     .AddType<CharacterInterface>()
                     .AddType<DroidObject>()
                     .AddType<HumanObject>()
-                    // .AddType<HumanInputObject>()
+                    .AddType<HumanInputObject>()
                     .Create())
 #if Subscriptions
                 .AddInMemorySubscriptionProvider()

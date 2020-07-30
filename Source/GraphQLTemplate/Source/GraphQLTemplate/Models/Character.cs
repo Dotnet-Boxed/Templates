@@ -15,9 +15,9 @@ namespace GraphQLTemplate.Models
 
         public string Name { get; set; }
 
-        public List<Guid> Friends { get; }
+        public List<Guid> Friends { get; set; }
 
-        public List<Episode> AppearsIn { get; }
+        public List<Episode> AppearsIn { get; set; }
 
         public DateTimeOffset Created { get; set; }
 

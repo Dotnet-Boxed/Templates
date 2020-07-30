@@ -15,11 +15,6 @@ namespace GraphQLTemplate.Types
 
         public HumanObject(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
 
-        /// <summary>
-        /// Configures the specified descriptor.
-        /// </summary>
-        /// <param name="descriptor">The descriptor.</param>
-        /// <exception cref="ArgumentNullException">descriptor</exception>
         protected override void Configure(IObjectTypeDescriptor<Human> descriptor)
         {
             if (descriptor is null)

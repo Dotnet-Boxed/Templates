@@ -2,6 +2,7 @@ namespace GraphQLTemplate.Schemas
 {
     using System;
     using GraphQLTemplate.Repositories;
+    using GraphQLTemplate.Resolvers;
     using GraphQLTemplate.Services;
     using HotChocolate.Types;
 
@@ -32,7 +33,7 @@ namespace GraphQLTemplate.Schemas
     /// </c>
     /// These can be customized by the client.
     /// </example>
-    public class MutationObject : ObjectType
+    public class MutationObject : ObjectType<MutationResolvers>
     {
         private readonly IClockService clockService;
         private readonly IHumanRepository humanRepository;
@@ -46,30 +47,17 @@ namespace GraphQLTemplate.Schemas
             this.Description = "The mutation type, represents all updates we can make to our data.";
         }
 
-        protected override void Configure(IObjectTypeDescriptor descriptor)
+        protected override void Configure(IObjectTypeDescriptor<MutationResolvers> descriptor)
         {
             if (descriptor is null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
             }
 
-            // this.FieldAsync<HumanObject, Human>(
-            //     "createHuman",
-            //     "Create a new human.",
-            //     arguments: new QueryArguments(
-            //         new QueryArgument<NonNullGraphType<HumanInputObject>>()
-            //         {
-            //             Name = "human",
-            //             Description = "The human you want to create.",
-            //         }),
-            //     resolve: context =>
-            //     {
-            //         var human = context.GetArgument<Human>("human");
-            //         var now = clockService.UtcNow;
-            //         human.Created = now;
-            //         human.Modified = now;
-            //         return humanRepository.AddHumanAsync(human, context.CancellationToken);
-            //     });
+            descriptor
+                .Field(x => x.CreateHumanAsync(default!, default!))
+                .Description("Create a new human.")
+                .Argument("human", x => x.Description("The human you want to create."));
         }
     }
 }

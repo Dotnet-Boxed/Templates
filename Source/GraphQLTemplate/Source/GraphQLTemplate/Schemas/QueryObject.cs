@@ -55,13 +55,13 @@ namespace GraphQLTemplate.Schemas
             // this.Description = "The query type, represents all of the entry points into our object graph.";
 
             descriptor
-                .Field(x => x.GetDroidsAsync(default))
+                .Field(x => x.GetDroidsAsync(default!))
                 .Description("Gets droids.")
                 .UsePaging<DroidObject, Droid>()
                 .UseFiltering()
                 .UseSorting();
             descriptor
-                .Field(x => x.GetHumansAsync(default))
+                .Field(x => x.GetHumansAsync(default!))
                 .Description("Gets humans.")
                 .UsePaging<HumanObject, Human>()
                 .UseFiltering()
