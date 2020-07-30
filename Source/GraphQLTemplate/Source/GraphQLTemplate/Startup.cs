@@ -4,7 +4,6 @@ namespace GraphQLTemplate
 #if CORS
     using GraphQLTemplate.Constants;
 #endif
-    using GraphQLTemplate.Schemas;
     using HotChocolate.AspNetCore;
     using HotChocolate.AspNetCore.Playground;
     using HotChocolate.AspNetCore.Voyager;
@@ -79,8 +78,7 @@ namespace GraphQLTemplate
                 .AddCustomGraphQLAuthorization()
 #endif
                 .AddProjectServices()
-                .AddProjectRepositories()
-                .AddProjectSchemas();
+                .AddProjectRepositories();
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is

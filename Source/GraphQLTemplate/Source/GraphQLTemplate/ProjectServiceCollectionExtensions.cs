@@ -1,7 +1,6 @@
 namespace GraphQLTemplate
 {
     using GraphQLTemplate.Repositories;
-    using GraphQLTemplate.Schemas;
     using GraphQLTemplate.Services;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -28,14 +27,5 @@ namespace GraphQLTemplate
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
-
-        /// <summary>
-        /// Add project GraphQL schema and web socket types.
-        /// </summary>
-        /// <param name="services">The services.</param>
-        /// <returns>The services with caching services added.</returns>
-        public static IServiceCollection AddProjectSchemas(this IServiceCollection services) =>
-            services
-                .AddSingleton<MainSchema>();
     }
 }

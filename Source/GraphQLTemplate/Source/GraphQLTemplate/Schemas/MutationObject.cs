@@ -1,10 +1,9 @@
 namespace GraphQLTemplate.Schemas
 {
-    using GraphQL.Types;
-    using GraphQLTemplate.Models;
+    using System;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Services;
-    using GraphQLTemplate.Types;
+    using HotChocolate.Types;
 
     /// <summary>
     /// All mutations defined in the schema used to modify data.
@@ -33,30 +32,44 @@ namespace GraphQLTemplate.Schemas
     /// </c>
     /// These can be customized by the client.
     /// </example>
-    public class MutationObject : ObjectGraphType<object>
+    public class MutationObject : ObjectType
     {
+        private readonly IClockService clockService;
+        private readonly IHumanRepository humanRepository;
+
         public MutationObject(IClockService clockService, IHumanRepository humanRepository)
         {
+            this.clockService = clockService;
+            this.humanRepository = humanRepository;
+
             this.Name = "Mutation";
             this.Description = "The mutation type, represents all updates we can make to our data.";
+        }
 
-            this.FieldAsync<HumanObject, Human>(
-                "createHuman",
-                "Create a new human.",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<HumanInputObject>>()
-                    {
-                        Name = "human",
-                        Description = "The human you want to create.",
-                    }),
-                resolve: context =>
-                {
-                    var human = context.GetArgument<Human>("human");
-                    var now = clockService.UtcNow;
-                    human.Created = now;
-                    human.Modified = now;
-                    return humanRepository.AddHumanAsync(human, context.CancellationToken);
-                });
+        protected override void Configure(IObjectTypeDescriptor descriptor)
+        {
+            if (descriptor is null)
+            {
+                throw new ArgumentNullException(nameof(descriptor));
+            }
+
+            // this.FieldAsync<HumanObject, Human>(
+            //     "createHuman",
+            //     "Create a new human.",
+            //     arguments: new QueryArguments(
+            //         new QueryArgument<NonNullGraphType<HumanInputObject>>()
+            //         {
+            //             Name = "human",
+            //             Description = "The human you want to create.",
+            //         }),
+            //     resolve: context =>
+            //     {
+            //         var human = context.GetArgument<Human>("human");
+            //         var now = clockService.UtcNow;
+            //         human.Created = now;
+            //         human.Modified = now;
+            //         return humanRepository.AddHumanAsync(human, context.CancellationToken);
+            //     });
         }
     }
 }

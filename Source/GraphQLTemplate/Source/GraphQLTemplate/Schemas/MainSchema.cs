@@ -1,29 +1,19 @@
 namespace GraphQLTemplate.Schemas
 {
-    using GraphQL;
-    using GraphQL.Types;
+    using System;
+    using HotChocolate;
+    using HotChocolate.Types;
 
     public class MainSchema : Schema
     {
-        public MainSchema(
-            QueryObject query,
-#if Mutations
-            MutationObject mutation,
-#endif
-#if Subscriptions
-            SubscriptionObject subscription,
-#endif
-            IDependencyResolver resolver)
-
-            : base(resolver)
+        protected override void Configure(ISchemaTypeDescriptor descriptor)
         {
-            this.Query = query;
-#if Mutations
-            this.Mutation = mutation;
-#endif
-#if Subscriptions
-            this.Subscription = subscription;
-#endif
+            if (descriptor is null)
+            {
+                throw new ArgumentNullException(nameof(descriptor));
+            }
+
+            descriptor.Description("This is my schema description that can be accessed by introspection");
         }
     }
 }

@@ -1,36 +1,57 @@
 namespace GraphQLTemplate.Types
 {
-    using System.Collections.Generic;
-    using GraphQL.Types;
+    using System;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using HotChocolate.Types;
 
-    public class DroidObject : ObjectGraphType<Droid>
+    public class DroidObject : ObjectType<Droid>
     {
-        public DroidObject(IDroidRepository droidRepository)
+        private readonly IDroidRepository droidRepository;
+
+        public DroidObject(IDroidRepository droidRepository) => this.droidRepository = droidRepository;
+
+        protected override void Configure(IObjectTypeDescriptor<Droid> descriptor)
         {
-            this.Name = "Droid";
-            this.Description = "A mechanical creature in the Star Wars universe.";
+            if (descriptor is null)
+            {
+                throw new ArgumentNullException(nameof(descriptor));
+            }
 
-            this.Field(x => x.Id, type: typeof(NonNullGraphType<IdGraphType>))
+            descriptor.Name("Droid");
+            descriptor.Description("A mechanical creature in the Star Wars universe.");
+
+            descriptor.Implements<CharacterInterface>();
+
+            descriptor
+                .Field(x => x.Id)
+                .Type<NonNullType<IdType>>()
                 .Description("The unique identifier of the droid.");
-            this.Field(x => x.Name)
+            descriptor
+                .Field(x => x.Name)
+                .Type<StringType>()
                 .Description("The name of the droid.");
-            this.Field(x => x.ChargePeriod)
+            descriptor
+                .Field(x => x.ChargePeriod)
+                .Type<NonNullType<TimeSpanType>>()
                 .Description("The time the droid can go without charging its batteries.");
-            this.Field(x => x.Manufactured)
-                .Description("The date the droid was manufactured.");
-            this.Field(x => x.PrimaryFunction, nullable: true)
+            descriptor
+               .Field(x => x.Manufactured)
+               .Type<NonNullType<DateTimeType>>()
+               .Description("The date the droid was manufactured.");
+            descriptor
+                .Field(x => x.PrimaryFunction)
+                .Type<StringType>()
                 .Description("The primary function of the droid.");
-            this.Field(x => x.AppearsIn, type: typeof(ListGraphType<EpisodeEnumeration>))
+            descriptor
+                .Field(x => x.AppearsIn)
+                .Type<ListType<NonNullType<EpisodeEnumeration>>>()
                 .Description("Which movie they appear in.");
-
-            this.FieldAsync<ListGraphType<CharacterInterface>, List<Character>>(
-                nameof(Droid.Friends),
-                "The friends of the character, or an empty list if they have none.",
-                resolve: context => droidRepository.GetFriendsAsync(context.Source, context.CancellationToken));
-
-            this.Interface<CharacterInterface>();
+            descriptor
+                .Field(x => x.Friends)
+                .Type<ListType<NonNullType<CharacterInterface>>>()
+                .Description("The friends of the character, or an empty list if they have none.")
+                .Resolver(context => this.droidRepository.GetFriendsAsync(context.Parent<Droid>(), context.RequestAborted));
         }
     }
 }

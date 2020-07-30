@@ -4,21 +4,19 @@ namespace GraphQLTemplate.Repositories
     using System.Collections.Generic;
     using System.Linq;
 #if Subscriptions
-    using System.Reactive.Linq;
-    using System.Reactive.Subjects;
 #endif
     using System.Threading;
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
 
-    public sealed class HumanRepository : IHumanRepository, IDisposable
+    public sealed class HumanRepository : IHumanRepository// , IDisposable
     {
 #if Subscriptions
-        private readonly Subject<Human> whenHumanCreated;
+        // private readonly Subject<Human> whenHumanCreated;
 
-        public HumanRepository() => this.whenHumanCreated = new Subject<Human>();
+        // public HumanRepository() => this.whenHumanCreated = new Subject<Human>();
 
-        public IObservable<Human> WhenHumanCreated => this.whenHumanCreated.AsObservable();
+        public IObservable<Human> WhenHumanCreated => null!; // this.whenHumanCreated.AsObservable();
 
 #endif
         public Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken)
@@ -31,12 +29,12 @@ namespace GraphQLTemplate.Repositories
             human.Id = Guid.NewGuid();
             Database.Humans.Add(human);
 #if Subscriptions
-            this.whenHumanCreated.OnNext(human);
+            // this.whenHumanCreated.OnNext(human);
 #endif
             return Task.FromResult(human);
         }
 
-        public void Dispose() => this.whenHumanCreated.Dispose();
+        // public void Dispose() => this.whenHumanCreated.Dispose();
 
         public Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken)
         {
