@@ -62,6 +62,14 @@
             "Source/GraphQLTemplate/Schemas/RootSubscription.cs"
           ]
         },
+        // PersistedQueries
+        {
+          "condition": "(!PersistedQueries)",
+          "exclude": [
+            "Source/GraphQLTemplate/Options/RedisOptions.cs"
+          ]
+        },
+        // ReverseProxyWebServer
         {
           "condition": "(!IIS)",
           "exclude": [
@@ -280,6 +288,14 @@
       "defaultValue": "true",
       "description": "Add GraphQL subscriptions to be notified when objects change."
     },
+    // PersistedQueries
+    "PersistedQueries": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query."
+    },
+    // Forwarded Headers
     "ForwardedHeaders": {
       "type": "parameter",
       "datatype": "bool",
