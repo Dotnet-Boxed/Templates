@@ -36,5 +36,10 @@ namespace GraphQLTemplate.Options
         public QueryExecutionOptions GraphQL { get; set; }
 
         public KestrelServerOptions Kestrel { get; set; }
+#if PersistedQueries
+
+        [Required]
+        public RedisOptions Redis { get; set; }
+#endif
     }
 }
