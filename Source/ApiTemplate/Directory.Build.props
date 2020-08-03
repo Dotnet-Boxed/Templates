@@ -19,7 +19,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="All" Version="3.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.6.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="All" Version="16.7.54" />
     <PackageReference Include="MinVer" PrivateAssets="All" Version="2.3.0" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="All" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
