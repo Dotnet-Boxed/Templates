@@ -2,6 +2,7 @@ namespace GraphQLTemplate.Schemas
 {
     using System;
     using GraphQLTemplate.Repositories;
+    using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
     /// <summary>
@@ -22,7 +23,7 @@ namespace GraphQLTemplate.Schemas
     /// </c>
     /// The is an example subscription to be notified when a human is created.
     /// </example>
-    public class SubscriptionObject : ObjectType
+    public class SubscriptionObject : ObjectType<SubscriptionResolvers>
     {
         private readonly IHumanRepository humanRepository;
 
@@ -34,12 +35,29 @@ namespace GraphQLTemplate.Schemas
             this.Description = "The subscription type, represents all updates can be pushed to the client in real time over web sockets.";
         }
 
-        protected override void Configure(IObjectTypeDescriptor descriptor)
+        protected override void Configure(IObjectTypeDescriptor<SubscriptionResolvers> descriptor)
         {
             if (descriptor is null)
             {
                 throw new ArgumentNullException(nameof(descriptor));
             }
+
+            // descriptor
+            //     .Field("humanCreated")
+            //     .Description("Subscribe to human created events.")
+            //     .Argument("homePlanets", x => x.Description("The home planets of the humans created."))
+            //     .Subscribe(async ctx =>
+            //     {
+            //         async foreach (var payload in await serviceBus.OnMessageReceiveAsync())
+            //         {
+            //             yield return payload;
+            //         }
+            //     });
+            //
+            // descriptor
+            //     .Field(t => t.OnReview(default, default))
+            //     .Type<NonNullType<ReviewType>>()
+            //     .Argument("episode", arg => arg.Type<NonNullType<EpisodeType>>());
 
             // this.AddField(
             //     new EventStreamFieldType()
