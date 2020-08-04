@@ -22,7 +22,9 @@
     <PackageReference Include="Moq" Version="4.14.5" />
     <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
+    <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Label="Project References">
