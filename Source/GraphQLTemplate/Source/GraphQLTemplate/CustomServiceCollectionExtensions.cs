@@ -297,7 +297,7 @@ namespace GraphQLTemplate
                 .AddAuthorization(options => options
                     .AddPolicy(AuthorizationPolicyName.Admin, x => x.RequireAuthenticatedUser()));
 #endif
-#if PersistedQueries
+#if (Subscriptions || PersistedQueries)
 
         public static IServiceCollection AddCustomRedis(
             this IServiceCollection services,
@@ -314,7 +314,7 @@ namespace GraphQLTemplate
             services
                 .AddDataLoaderRegistry()
 #if Subscriptions
-                .AddInMemorySubscriptionProvider()
+                .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
 #endif
 #if PersistedQueries
                  .AddQueryExecutor(queryExecutionBuilder => queryExecutionBuilder
@@ -348,7 +348,7 @@ namespace GraphQLTemplate
                         .AddQueryType<QueryObject>()
                         .AddMutationType<MutationObject>()
 #if Subscriptions
-                        // .AddSubscriptionType<SubscriptionObject>()
+                        .AddSubscriptionType<SubscriptionObject>()
 #endif
                         .AddType<EpisodeEnumeration>()
                         .AddType<CharacterInterface>()
