@@ -6,6 +6,9 @@ namespace ApiTemplate
     using System.Reflection;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
+#if ApplicationInsights
+    using Microsoft.ApplicationInsights.Extensibility;
+#endif
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -135,7 +138,9 @@ namespace ApiTemplate
 #if ApplicationInsights
                 .WriteTo.Conditional(
                     x => hostEnvironment.IsProduction(),
-                    x => x.ApplicationInsights(TelemetryConverter.Traces))
+                    x => x.ApplicationInsights(
+                        host.Services.GetRequiredService<TelemetryConfiguration>(),
+                        TelemetryConverter.Traces))
 #endif
                 .CreateLogger();
         }

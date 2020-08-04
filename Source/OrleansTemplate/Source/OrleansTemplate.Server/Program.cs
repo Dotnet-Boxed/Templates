@@ -5,6 +5,9 @@ namespace OrleansTemplate.Server
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
+#if ApplicationInsights
+    using Microsoft.ApplicationInsights.Extensibility;
+#endif
 #if HealthCheck
     using Microsoft.AspNetCore.Hosting;
 #endif
@@ -192,7 +195,9 @@ namespace OrleansTemplate.Server
 #if ApplicationInsights
                 .WriteTo.Conditional(
                     x => hostEnvironment.IsProduction(),
-                    x => x.ApplicationInsights(TelemetryConverter.Traces))
+                    x => x.ApplicationInsights(
+                        host.Services.GetRequiredService<TelemetryConfiguration>(),
+                        TelemetryConverter.Traces))
 #endif
                 .CreateLogger();
         }
