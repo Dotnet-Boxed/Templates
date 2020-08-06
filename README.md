@@ -18,6 +18,11 @@ Project templates with batteries included, providing the minimum amount of code 
 ### [NuGet Package Boxed](Docs/NuGet.md)
 [![NuGet Package Boxed Preview Image](Images/NuGet-Preview.png)](Docs/NuGet.md)
 
+## Item Templates
+
+- `.editorconfig` - A very generic [.editorconfig](https://github.com/RehanSaeed/EditorConfig) file supporting .NET, C#, VB and web technologies.
+- `.gitattributes` - A [.gitattributes](https://rehansaeed.com/gitattributes-best-practices/) file supporting normalized line endings and Git Large File System (LFS).
+
 ## How can I get it?
 
 1. Install the latest [.NET Core SDK](https://dot.net).
