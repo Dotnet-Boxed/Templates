@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [
+    "Config"
+  ],
+  "identity": "Dotnet.Boxed.gitattributes.CSharp",
+  "name": ".gitattributes file",
+  "shortName": "gitattributes",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  }
+}
