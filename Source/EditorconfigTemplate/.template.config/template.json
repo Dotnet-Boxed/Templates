@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "classifications": [
+    "Config"
+  ],
+  "identity": "Dotnet.Boxed.editorconfig.CSharp",
+  "name": ".editorconfig file",
+  "shortName": "editorconfig",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  }
+}
