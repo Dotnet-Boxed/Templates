@@ -8,3 +8,6 @@ template/NuGet:
   - Source/NuGetTemplate
 template/Orleans:
   - Source/OrleansTemplate
+template/Item:
+  - Source/EditorconfigTemplate
+  - Source/GitattributesTemplate

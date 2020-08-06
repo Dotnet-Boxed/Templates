@@ -15,6 +15,9 @@ categories:
   - title: '📦 Microsoft NuGet Package Boxed'
     labels:
       - 'template/NuGet'
+  - title: '📄 Item Templates'
+    labels:
+      - 'template/Item'
   - title: '🧰 Maintenance'
     labels:
       - 'maintenance'
