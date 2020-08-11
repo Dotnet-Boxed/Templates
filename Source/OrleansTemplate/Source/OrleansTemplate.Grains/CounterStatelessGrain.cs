@@ -14,7 +14,7 @@ namespace OrleansTemplate.Grains
     [StatelessWorker]
     public class CounterStatelessGrain : Grain, ICounterStatelessGrain
     {
-        private long count = 0;
+        private long count;
 
         public Task IncrementAsync()
         {
