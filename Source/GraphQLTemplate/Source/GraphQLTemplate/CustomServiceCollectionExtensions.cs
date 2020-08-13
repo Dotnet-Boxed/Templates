@@ -302,7 +302,8 @@ namespace GraphQLTemplate
         public static IServiceCollection AddCustomRedis(
             this IServiceCollection services,
             IConfiguration configuration) =>
-            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(
+            services.AddSingleton<IConnectionMultiplexer>(
+                ConnectionMultiplexer.Connect(
                      configuration
                         .GetSection(nameof(ApplicationOptions.Redis))
                         .Get<RedisOptions>()
