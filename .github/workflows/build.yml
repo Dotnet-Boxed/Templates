@@ -100,6 +100,9 @@ jobs:
         run: dotnet nuget add source https://nuget.pkg.github.com/Dotnet-Boxed/index.json --name GitHub --username RehanSaeed --password ${{secrets.GITHUB_TOKEN}}
         shell: pwsh
       - name: 'Dotnet NuGet Push'
+        # Workaround bug when pushing to GitHub Packages. See https://github.com/NuGet/Home/issues/9775
+        env:
+          DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER: 0
         run: |
           $count = 0;
           do {
