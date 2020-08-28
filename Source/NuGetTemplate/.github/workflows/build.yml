@@ -79,7 +79,7 @@ jobs:
               ++$count;
               dotnet nuget push .\windows-latest\*.nupkg --source GitHub --skip-duplicate;
           }
-          while ($count -lt 30 -and $LastExitCode -ne 0)
+          while ($count -lt 200 -and $LastExitCode -ne 0)
         shell: pwsh
 
   push-nuget:
