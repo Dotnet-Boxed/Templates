@@ -3,7 +3,7 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
   "classifications": [ "Web", "WebAPI", "Boxed", "Orleans", "API", "Actor" ],
-  "name": "ASP.NET Core Orleans Boxed (beta)",
+  "name": "ASP.NET Core Orleans Boxed",
   "groupIdentity": "Dotnet.Boxed.Orleans",
   "identity": "Dotnet.Boxed.Orleans.CSharp",
   "shortName": "orleans",
