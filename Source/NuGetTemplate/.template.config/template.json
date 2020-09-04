@@ -1,7 +1,7 @@
 // https://github.com/dotnet/templating/wiki/%22Runnable-Project%22-Templates#configuration
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Muhammad Rehan Saeed (RehanSaeed.com)",
+  "author": ".NET Boxed",
   "classifications": [ "NuGet", "Package", "Library", "Boxed" ],
   "name": "NuGet Package Boxed",
   "groupIdentity": "Dotnet.Boxed.NuGetPackage",
