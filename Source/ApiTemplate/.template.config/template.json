@@ -7,6 +7,7 @@
   "groupIdentity": "Dotnet.Boxed.API",
   "identity": "Dotnet.Boxed.API.CSharp",
   "shortName": "api",
+  "defaultName": "ApiApplication1",
   "tags": {
     "language": "C#",
     "type": "project"

@@ -7,6 +7,7 @@
   "identity": "Dotnet.Boxed.gitattributes.CSharp",
   "name": ".gitattributes file",
   "shortName": "gitattributes",
+  "defaultName": ".gitattributes",
   "tags": {
     "language": "C#",
     "type": "item"
