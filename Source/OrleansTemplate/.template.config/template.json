@@ -7,6 +7,7 @@
   "groupIdentity": "Dotnet.Boxed.Orleans",
   "identity": "Dotnet.Boxed.Orleans.CSharp",
   "shortName": "orleans",
+  "defaultName": "OrleansApplication1",
   "tags": {
     "language": "C#",
     "type": "project"

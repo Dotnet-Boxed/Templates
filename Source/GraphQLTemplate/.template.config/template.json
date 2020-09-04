@@ -7,6 +7,7 @@
   "groupIdentity": "Dotnet.Boxed.GraphQL",
   "identity": "Dotnet.Boxed.GraphQL.CSharp",
   "shortName": "graphql",
+  "defaultName": "GraphQLApplication1",
   "tags": {
     "language": "C#",
     "type": "project"

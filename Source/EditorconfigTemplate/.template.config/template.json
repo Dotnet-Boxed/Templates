@@ -7,6 +7,7 @@
   "identity": "Dotnet.Boxed.editorconfig.CSharp",
   "name": ".editorconfig file",
   "shortName": "editorconfig",
+  "defaultName": ".editorconfig",
   "tags": {
     "language": "C#",
     "type": "item"
