@@ -96,6 +96,6 @@ jobs:
       run: echo $env:DOCKER_PASSWORD | docker login --username "$($env:DOCKER_USERNAME)" --password-stdin
       shell: pwsh
     - name: 'Dotnet Cake DockerBuild'
-      run: dotnet cake --target=DockerBuild --tag=${{secrets.DOCKER_USERNAME}}/orleans --push=${{github.ref == 'refs/heads/master'}}
+      run: dotnet cake --target=DockerBuild --tag=${{secrets.DOCKER_USERNAME}}/orleanstemplate --push=${{github.ref == 'refs/heads/master'}}
       shell: pwsh
 #endif
