@@ -37,7 +37,7 @@ jobs:
     - name: 'Install .NET Core SDK'
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.401
+        dotnet-version: 3.1.402
     - name: 'Dotnet Tool Restore'
       run: dotnet tool restore
       shell: pwsh
