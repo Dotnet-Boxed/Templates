@@ -26,6 +26,42 @@
       //#endif
     },
     //#endif
+    "WSL 2": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001",
+      ////#else
+      //"launchUrl": "http:////localhost:5000",
+      //#endif
+      "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
+    },
+    "WSL 2 Production": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001",
+      ////#else
+      //"launchUrl": "http:////localhost:5000",
+      //#endif
+      "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "distributionName": ""
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
