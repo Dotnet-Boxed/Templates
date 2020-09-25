@@ -25,15 +25,20 @@ RUN dotnet publish "Source/GraphQLTemplate/GraphQLTemplate.csproj" --configurati
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS runtime
 # Open Container Initiative (OCI) labels (See https://github.com/opencontainers/image-spec/blob/master/annotations.md).
 LABEL org.opencontainers.image.title="PROJECT-TITLE" \
-      org.opencontainers.image.description="PROJECT-DESCRIPTION" \
-      org.opencontainers.image.vendor="PROJECT-AUTHOR"
+    org.opencontainers.image.description="PROJECT-DESCRIPTION" \
+#if (GitHub)
+    org.opencontainers.image.documentation="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
+    org.opencontainers.image.source="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git" \
+    org.opencontainers.image.url="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
+#endif
+    org.opencontainers.image.vendor="PROJECT-AUTHOR"
 # Disable the culture invariant mode which defaults to true in the base alpine image
 # (See https://github.com/dotnet/corefx/blob/8245ee1e8f6063ccc7a3a60cafe821d29e85b02f/Documentation/architecture/globalization-invariant-mode.md)
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 RUN apk add --no-cache \
-# Install cultures to enable use of System.CultureInfo
+    # Install cultures to enable use of System.CultureInfo
     icu-libs \
-# Install time zone database to enable use of System.TimeZoneInfo
+    # Install time zone database to enable use of System.TimeZoneInfo
     tzdata
 WORKDIR /app
 #if (HttpsEverywhere)
