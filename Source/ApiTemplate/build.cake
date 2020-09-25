@@ -92,28 +92,9 @@ Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
     {
-        var directoryBuildPropsFilePath = GetFiles("Directory.Build.props").Single().ToString();
-        var directoryBuildPropsDocument = System.Xml.Linq.XDocument.Load(directoryBuildPropsFilePath);
-        var preReleasePhase = directoryBuildPropsDocument.Descendants("MinVerDefaultPreReleasePhase").Single().Value;
-
-        string version = null;
-        StartProcess(
-            "dotnet",
-            new ProcessSettings()
-                .WithArguments(x => x
-                    .Append("minver")
-                    .AppendSwitch("--default-pre-release-phase", preReleasePhase))
-                .SetRedirectStandardOutput(true)
-                .SetRedirectedStandardOutputHandler(
-                    output =>
-                    {
-                        if (output != null)
-                        {
-                            version = output;
-                        }
-                        return output;
-                    }));
         tag = tag ?? dockerfile.GetDirectory().GetDirectoryName().ToLower();
+        var version = GetVersion();
+        var gitCommitSha = GetGitCommitSha();
 
         // Docker buildx allows you to build Docker images for multiple platforms (including x64, x86 and ARM64) and
         // push them at the same time. To enable buildx, you may need to enable experimental support with these commands:
@@ -132,6 +113,7 @@ Task("DockerBuild")
                 .AppendSwitchQuoted("--tag", $"{tag}:{version}")
                 .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
+                .AppendSwitchQuoted("--label", $"org.opencontainers.image.revision={gitCommitSha}")
                 .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
                 .AppendSwitchQuoted("--file", dockerfile.ToString())
                 .Append(".")
@@ -145,6 +127,7 @@ Task("DockerBuild")
         //         .AppendSwitchQuoted("--tag", $"{tag}:{version}")
         //         .AppendSwitchQuoted("--build-arg", $"Configuration={configuration}")
         //         .AppendSwitchQuoted("--label", $"org.opencontainers.image.created={DateTimeOffset.UtcNow:o}")
+        //         .AppendSwitchQuoted("--label", $"org.opencontainers.image.revision={gitCommitSha}")
         //         .AppendSwitchQuoted("--label", $"org.opencontainers.image.version={version}")
         //         .AppendSwitchQuoted("--file", dockerfile.ToString())
         //         .Append(".")
@@ -157,6 +140,34 @@ Task("DockerBuild")
         //             .AppendSwitchQuoted("push", $"{tag}:{version}")
         //             .RenderSafe());
         // }
+
+        string GetVersion()
+        {
+            var directoryBuildPropsFilePath = GetFiles("Directory.Build.props").Single().ToString();
+            var directoryBuildPropsDocument = System.Xml.Linq.XDocument.Load(directoryBuildPropsFilePath);
+            var preReleasePhase = directoryBuildPropsDocument.Descendants("MinVerDefaultPreReleasePhase").Single().Value;
+
+            StartProcess(
+                "dotnet",
+                new ProcessSettings()
+                    .WithArguments(x => x
+                        .Append("minver")
+                        .AppendSwitch("--default-pre-release-phase", preReleasePhase))
+                    .SetRedirectStandardOutput(true),
+                    out var versionLines);
+            return versionLines.LastOrDefault();
+        }
+
+        string GetGitCommitSha()
+        {
+            StartProcess(
+                "git",
+                new ProcessSettings()
+                    .WithArguments(x => x.Append("rev-parse HEAD"))
+                    .SetRedirectStandardOutput(true),
+                out var shaLines);
+            return shaLines.LastOrDefault();
+        }
     });
 
 Task("Default")
