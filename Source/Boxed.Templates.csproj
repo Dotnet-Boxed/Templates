@@ -25,7 +25,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="MinVer" PrivateAssets="all" Version="2.3.0" />
+    <PackageReference Include="MinVer" PrivateAssets="all" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
