@@ -1,11 +1,11 @@
-namespace SampleApiProject.Repositories
+namespace ApiTemplate.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using SampleApiProject.Models;
+    using ApiTemplate.Models;
 
     public class CarRepository : ICarRepository
     {
