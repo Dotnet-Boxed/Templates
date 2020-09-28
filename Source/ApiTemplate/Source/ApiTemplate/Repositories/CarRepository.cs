@@ -1,11 +1,11 @@
-namespace ApiTemplate.Repositories
+namespace SampleApiProject.Repositories
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using ApiTemplate.Models;
+    using SampleApiProject.Models;
 
     public class CarRepository : ICarRepository
     {
@@ -23,7 +23,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 2,
-                Created = DateTimeOffset.UtcNow.AddDays(-7),
+                Created = DateTimeOffset.UtcNow.AddDays(-5),
                 Cylinders = 10,
                 Make = "Mazda",
                 Model = "Furai",
@@ -32,7 +32,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 3,
-                Created = DateTimeOffset.UtcNow.AddDays(-7),
+                Created = DateTimeOffset.UtcNow.AddDays(-10),
                 Cylinders = 6,
                 Make = "Honda",
                 Model = "NSX",
@@ -41,7 +41,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 4,
-                Created = DateTimeOffset.UtcNow.AddDays(-5),
+                Created = DateTimeOffset.UtcNow.AddDays(-3),
                 Cylinders = 6,
                 Make = "Lotus",
                 Model = "Esprit",
@@ -50,7 +50,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 5,
-                Created = DateTimeOffset.UtcNow.AddDays(-4),
+                Created = DateTimeOffset.UtcNow.AddDays(-12),
                 Cylinders = 6,
                 Make = "Mitsubishi",
                 Model = "Evo",
@@ -59,7 +59,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 6,
-                Created = DateTimeOffset.UtcNow.AddDays(-4),
+                Created = DateTimeOffset.UtcNow.AddDays(-1),
                 Cylinders = 12,
                 Make = "McLaren",
                 Model = "F1",
@@ -101,6 +101,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
+                .OrderBy(x=>x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .If(first.HasValue, x => x.Take(first.Value))
@@ -112,6 +113,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
+                .OrderBy(x=>x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .If(last.HasValue, x => x.TakeLast(last.Value))
@@ -122,6 +124,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdAfter,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
+                .OrderBy(x=>x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .Skip(first.Value)
                 .Any());
@@ -131,6 +134,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
+                .OrderBy(x=>x.Created)
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .SkipLast(last.Value)
                 .Any());
