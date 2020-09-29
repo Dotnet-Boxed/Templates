@@ -101,7 +101,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
-                .OrderBy(x=>x.Created)
+                .OrderBy(x => x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .If(first.HasValue, x => x.Take(first.Value))
@@ -113,7 +113,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
-                .OrderBy(x=>x.Created)
+                .OrderBy(x => x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .If(last.HasValue, x => x.TakeLast(last.Value))
@@ -124,7 +124,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdAfter,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
-                .OrderBy(x=>x.Created)
+                .OrderBy(x => x.Created)
                 .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
                 .Skip(first.Value)
                 .Any());
@@ -134,7 +134,7 @@ namespace ApiTemplate.Repositories
             DateTimeOffset? createdBefore,
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
-                .OrderBy(x=>x.Created)
+                .OrderBy(x => x.Created)
                 .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
                 .SkipLast(last.Value)
                 .Any());
