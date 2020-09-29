@@ -63,7 +63,7 @@ namespace ApiTemplate
                         .First()
                         .SupportedMediaTypes;
 
-#if DataContractSerializer || XmlSerializer
+#if (DataContractSerializer || XmlSerializer)
                     var xmlInputFormatterMediaTypes = options
                         .InputFormatters
 #if DataContractSerializer
@@ -95,7 +95,7 @@ namespace ApiTemplate
                     // Add ProblemDetails media type (application/problem+json) to the output formatters.
                     // See https://tools.ietf.org/html/rfc7807
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
-#if DataContractSerializer || XmlSerializer
+#if (DataContractSerializer || XmlSerializer)
                     xmlOutputFormatterMediaTypes.Insert(0, ContentType.ProblemXml);
 #endif
 
