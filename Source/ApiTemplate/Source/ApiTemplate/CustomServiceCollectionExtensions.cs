@@ -22,7 +22,7 @@ namespace ApiTemplate
     using Boxed.AspNetCore.Swagger.SchemaFilters;
 #endif
     using Microsoft.AspNetCore.Builder;
-#if !ForwardedHeaders && HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
 #endif
 #if Versioning
