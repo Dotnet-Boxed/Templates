@@ -30,7 +30,7 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration and automatic release drafting.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration, automatic release drafting and [CodeQL](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) security scanning.
 
 #### Security
 
