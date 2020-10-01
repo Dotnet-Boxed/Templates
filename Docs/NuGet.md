@@ -49,7 +49,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 ## Always On Features
 
-- **Signing** - The package is signed. However, you should change the .pfx file.
+- **Signing** - The package is signed. However, you should change the .snk file.
 - **SourceLink** - During debugging, you can step into code from your NuGet package using [Source Link](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink).
 
 ## How can I get it?
