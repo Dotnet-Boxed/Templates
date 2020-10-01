@@ -80,6 +80,7 @@
           "condition": "(!GitHubActions)",
           "exclude": [
             ".github/workflows/build.yml",
+            ".github/workflows/codeql-analysis.yml",
             ".github/workflows/release-drafter.yml",
             ".github/release-drafter.yml"
           ]
@@ -322,7 +323,7 @@
     "GitHubActions": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds GitHub Actions continuous integration and automatic release drafting.",
+      "description": "Adds GitHub Actions continuous integration, automatic release drafting and CodeQL security scanning.",
       "defaultValue": "true"
     },
 

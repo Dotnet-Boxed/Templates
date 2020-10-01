@@ -43,7 +43,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### Continuous Integration (CI)
 
-- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration and automatic release drafting.
+- **GitHubActions** (Default=On) - Adds GitHub Actions continuous integration, automatic release drafting and [CodeQL](https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/about-code-scanning) security scanning.
 
 #### Performance
 
