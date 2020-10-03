@@ -6,6 +6,8 @@ namespace ApiTemplate.Repositories
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Models;
+    using Ardalis.Specification;
+    using Ardalis.Specification.EntityFrameworkCore;
 
     public class CarRepository : ICarRepository
     {
@@ -96,48 +98,20 @@ namespace ApiTemplate.Repositories
         }
 
         public Task<List<Car>> GetCarsAsync(
-            int? first,
-            DateTimeOffset? createdAfter,
-            DateTimeOffset? createdBefore,
+            ISpecification<Car> specFirst,
             CancellationToken cancellationToken) =>
-            Task.FromResult(Cars
-                .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .If(first.HasValue, x => x.Take(first.Value))
-                .ToList());
+            Task.FromResult(ApplySpecification(specFirst).ToList());
 
-        public Task<List<Car>> GetCarsReverseAsync(
-            int? last,
-            DateTimeOffset? createdAfter,
-            DateTimeOffset? createdBefore,
+        public Task<bool> GetHasAnyCarAsync(
+            ISpecification<Car> specFirst,
             CancellationToken cancellationToken) =>
-            Task.FromResult(Cars
-                .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .If(last.HasValue, x => x.TakeLast(last.Value))
-                .ToList());
+            Task.FromResult(ApplySpecification(specFirst).Any());
 
-        public Task<bool> GetHasNextPageAsync(
-            int? first,
-            DateTimeOffset? createdAfter,
-            CancellationToken cancellationToken) =>
-            Task.FromResult(Cars
-                .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .Skip(first.Value)
-                .Any());
-
-        public Task<bool> GetHasPreviousPageAsync(
-            int? last,
-            DateTimeOffset? createdBefore,
-            CancellationToken cancellationToken) =>
-            Task.FromResult(Cars
-                .OrderBy(x => x.Created)
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .SkipLast(last.Value)
-                .Any());
+        private static IQueryable<Car> ApplySpecification(ISpecification<Car> spec)
+        {
+            var evaluator = new SpecificationEvaluator<Car>();
+            return evaluator.GetQuery(Cars.AsQueryable(), spec);
+        }
 
         public Task<int> GetTotalCountAsync(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
 

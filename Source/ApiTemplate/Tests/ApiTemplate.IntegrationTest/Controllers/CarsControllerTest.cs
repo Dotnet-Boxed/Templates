@@ -11,7 +11,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.IntegrationTest.Fixtures;
+    using ApiTemplate.Specifications;
     using ApiTemplate.ViewModels;
+    using Ardalis.Specification;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.JsonPatch;
@@ -168,13 +170,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             var cars = GetCars();
             this.CarRepositoryMock
-                .Setup(x => x.GetCarsAsync(3, null, null, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetCarsAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Take(3).ToList());
             this.CarRepositoryMock
                 .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Count);
             this.CarRepositoryMock
-                .Setup(x => x.GetHasNextPageAsync(3, null, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetHasAnyCarAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
             var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
@@ -196,14 +198,16 @@ namespace ApiTemplate.IntegrationTest.Controllers
         public async Task GetPage_SecondPage_Returns200OkAsync()
         {
             var cars = GetCars();
+            var firstCarsSpec = new CarSpecification(3, null, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), null);
             this.CarRepositoryMock
-                .Setup(x => x.GetCarsAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetCarsAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Skip(3).Take(3).ToList());
             this.CarRepositoryMock
                 .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Count);
+            var nextCarsSpec = new NextCarSpecification(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero));
             this.CarRepositoryMock
-                .Setup(x => x.GetHasNextPageAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetHasAnyCarAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             var response = await this.client
@@ -216,9 +220,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
                     response,
                     nextPageUrl: null,
 #if HttpsEverywhere
-                    previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                    previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
                     pageCount: 1)
                 .ConfigureAwait(false);
@@ -231,13 +235,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             var cars = GetCars();
             this.CarRepositoryMock
-                .Setup(x => x.GetCarsReverseAsync(3, null, null, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetCarsAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.TakeLast(3).ToList());
             this.CarRepositoryMock
                 .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Count);
             this.CarRepositoryMock
-                .Setup(x => x.GetHasPreviousPageAsync(3, null, It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetHasAnyCarAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
 
             var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
@@ -260,13 +264,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
         {
             var cars = GetCars();
             this.CarRepositoryMock
-                .Setup(x => x.GetCarsReverseAsync(3, null, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetCarsAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Skip(3).TakeLast(3).ToList());
             this.CarRepositoryMock
                 .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Count);
             this.CarRepositoryMock
-                .Setup(x => x.GetHasPreviousPageAsync(3, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+                .Setup(x => x.GetHasAnyCarAsync(It.IsAny<ISpecification<Models.Car>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
 
             var response = await this.client
@@ -278,9 +282,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
-                    nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                    nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
                     previousPageUrl: null,
                     pageCount: 1)

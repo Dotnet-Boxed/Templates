@@ -2,10 +2,12 @@ namespace ApiTemplate.Commands
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Constants;
     using ApiTemplate.Repositories;
+    using ApiTemplate.Specifications;
     using ApiTemplate.ViewModels;
     using Boxed.AspNetCore;
     using Boxed.Mapping;
@@ -52,6 +54,12 @@ namespace ApiTemplate.Commands
 
             await Task.WhenAll(getCarsTask, getHasNextPageTask, getHasPreviousPageTask, totalCountTask).ConfigureAwait(false);
             var cars = await getCarsTask.ConfigureAwait(false);
+
+            if (pageOptions.Last.HasValue)
+            {
+                cars = cars.OrderBy(x => x.Created).ToList();
+            }
+
             var hasNextPage = await getHasNextPageTask.ConfigureAwait(false);
             var hasPreviousPage = await getHasPreviousPageTask.ConfigureAwait(false);
             var totalCount = await totalCountTask.ConfigureAwait(false);
@@ -76,8 +84,7 @@ namespace ApiTemplate.Commands
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
-                            First = pageOptions.First,
-                            Last = pageOptions.Last,
+                            First = pageOptions.First ?? pageOptions.Last,
                             After = endCursor,
                         })) : null,
                     PreviousPageUrl = hasPreviousPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
@@ -85,8 +92,7 @@ namespace ApiTemplate.Commands
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
-                            First = pageOptions.First,
-                            Last = pageOptions.Last,
+                            Last = pageOptions.First ?? pageOptions.Last,
                             Before = startCursor,
                         })) : null,
                     FirstPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
@@ -125,11 +131,13 @@ namespace ApiTemplate.Commands
             Task<List<Models.Car>> getCarsTask;
             if (first.HasValue)
             {
-                getCarsTask = this.carRepository.GetCarsAsync(first, createdAfter, createdBefore, cancellationToken);
+                var firstCarsSpec = new CarSpecification(first, null, createdAfter, createdBefore);
+                getCarsTask = this.carRepository.GetCarsAsync(firstCarsSpec, cancellationToken);
             }
             else
             {
-                getCarsTask = this.carRepository.GetCarsReverseAsync(last, createdAfter, createdBefore, cancellationToken);
+                var lastCarsSpec = new CarSpecification(null, last, createdAfter, createdBefore);
+                getCarsTask = this.carRepository.GetCarsAsync(lastCarsSpec, cancellationToken);
             }
 
             return getCarsTask;
@@ -143,8 +151,9 @@ namespace ApiTemplate.Commands
         {
             if (first.HasValue)
             {
+                var nextCarsSpec = new NextCarSpecification(first.Value, createdAfter);
                 return await this.carRepository
-                    .GetHasNextPageAsync(first, createdAfter, cancellationToken)
+                    .GetHasAnyCarAsync(nextCarsSpec, cancellationToken)
                     .ConfigureAwait(false);
             }
             else if (createdBefore.HasValue)
@@ -163,8 +172,9 @@ namespace ApiTemplate.Commands
         {
             if (last.HasValue)
             {
+                var previousCarsSpec = new PreviousCarSpecification(last.Value, createdBefore);
                 return await this.carRepository
-                    .GetHasPreviousPageAsync(last, createdBefore, cancellationToken)
+                    .GetHasAnyCarAsync(previousCarsSpec, cancellationToken)
                     .ConfigureAwait(false);
             }
             else if (createdAfter.HasValue)

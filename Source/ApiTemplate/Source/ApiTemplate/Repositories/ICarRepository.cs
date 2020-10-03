@@ -1,10 +1,10 @@
 namespace ApiTemplate.Repositories
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Models;
+    using Ardalis.Specification;
 
     public interface ICarRepository
     {
@@ -15,25 +15,11 @@ namespace ApiTemplate.Repositories
         Task<Car> GetAsync(int carId, CancellationToken cancellationToken);
 
         Task<List<Car>> GetCarsAsync(
-            int? first,
-            DateTimeOffset? createdAfter,
-            DateTimeOffset? createdBefore,
+            ISpecification<Car> spec,
             CancellationToken cancellationToken);
 
-        Task<List<Car>> GetCarsReverseAsync(
-            int? last,
-            DateTimeOffset? createdAfter,
-            DateTimeOffset? createdBefore,
-            CancellationToken cancellationToken);
-
-        Task<bool> GetHasNextPageAsync(
-            int? first,
-            DateTimeOffset? createdAfter,
-            CancellationToken cancellationToken);
-
-        Task<bool> GetHasPreviousPageAsync(
-            int? last,
-            DateTimeOffset? createdBefore,
+        Task<bool> GetHasAnyCarAsync(
+            ISpecification<Car> spec,
             CancellationToken cancellationToken);
 
         Task<int> GetTotalCountAsync(CancellationToken cancellationToken);
