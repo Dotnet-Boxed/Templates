@@ -1,5 +1,5 @@
-# Version: 1.5.0 (Using https://semver.org/)
-# Updated: 2020-03-09
+# Version: 1.6.1 (Using https://semver.org/)
+# Updated: 2020-10-01
 # See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
@@ -62,6 +62,18 @@ end_of_line = lf
 # Makefiles
 [Makefile]
 indent_style = tab
+
+##########################################
+# File Header (Uncomment to support file headers)
+# https://docs.microsoft.com/visualstudio/ide/reference/add-file-header
+##########################################
+
+# [*.{cs,csx,cake,vb,vbx}]
+# file_header_template = <copyright file="{fileName}" company="PROJECT-AUTHOR">\n© PROJECT-AUTHOR\n</copyright>
+
+# SA1636: File header copyright text should match
+# Justification: .editorconfig supports file headers. If this is changed to a value other than "none", a stylecop.json file will need to added to the project.
+# dotnet_diagnostic.SA1636.severity = none
 
 ##########################################
 # .NET Language Conventions
@@ -250,7 +262,7 @@ dotnet_naming_style.prefix_type_parameters_with_t_style.required_prefix = T
 dotnet_naming_style.disallowed_style.capitalization  = pascal_case
 dotnet_naming_style.disallowed_style.required_prefix = ____RULE_VIOLATION____
 dotnet_naming_style.disallowed_style.required_suffix = ____RULE_VIOLATION____
-# internal_error_style - This style should never occur... if it does, it's indicates a bug in file or in the parser using the file
+# internal_error_style - This style should never occur... if it does, it indicates a bug in file or in the parser using the file
 dotnet_naming_style.internal_error_style.capitalization  = pascal_case
 dotnet_naming_style.internal_error_style.required_prefix = ____INTERNAL_ERROR____
 dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR____
