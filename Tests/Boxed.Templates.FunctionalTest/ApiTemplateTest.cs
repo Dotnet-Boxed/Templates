@@ -85,7 +85,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\ApiDefaults",
+                        Path.Join("Source", "ApiDefaults"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -178,7 +178,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\ApiHealthCheckFalse",
+                        Path.Join("Source", "ApiHealthCheckFalse"),
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -218,7 +218,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\ApiHttpsEverywhereFalse",
+                        Path.Join("Source", "ApiHttpsEverywhereFalse"),
                         ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -259,7 +259,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\ApiSwaggerFalse",
+                        Path.Join("Source", "ApiSwaggerFalse"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
