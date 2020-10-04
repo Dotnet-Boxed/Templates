@@ -84,7 +84,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTDefaults",
+                        Path.Join("Source", "GraphQLTDefaults"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -149,7 +149,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTHealthCheckFalse",
+                        Path.Join("Source", "GraphQLTHealthCheckFalse"),
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -181,7 +181,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTDefaults",
+                        Path.Join("Source", "GraphQLTDefaults"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -220,7 +220,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTHttpsEverywhereFalse",
+                        Path.Join("Source", "GraphQLTHttpsEverywhereFalse"),
                         ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -261,7 +261,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTAuthorizationTrue",
+                        Path.Join("Source", "GraphQLTAuthorizationTrue"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
@@ -305,7 +305,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        @"Source\GraphQLTAuthorizationFalse",
+                        Path.Join("Source", "GraphQLTAuthorizationFalse"),
                         ReadinessCheck.StatusSelfAsync,
                         async (httpClient, httpsClient) =>
                         {
