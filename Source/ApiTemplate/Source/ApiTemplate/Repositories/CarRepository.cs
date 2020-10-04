@@ -25,7 +25,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 2,
-                Created = DateTimeOffset.UtcNow.AddDays(-5),
+                Created = DateTimeOffset.UtcNow.AddDays(-7),
                 Cylinders = 10,
                 Make = "Mazda",
                 Model = "Furai",
@@ -34,7 +34,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 3,
-                Created = DateTimeOffset.UtcNow.AddDays(-10),
+                Created = DateTimeOffset.UtcNow.AddDays(-7),
                 Cylinders = 6,
                 Make = "Honda",
                 Model = "NSX",
@@ -43,7 +43,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 4,
-                Created = DateTimeOffset.UtcNow.AddDays(-3),
+                Created = DateTimeOffset.UtcNow.AddDays(-5),
                 Cylinders = 6,
                 Make = "Lotus",
                 Model = "Esprit",
@@ -52,7 +52,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 5,
-                Created = DateTimeOffset.UtcNow.AddDays(-12),
+                Created = DateTimeOffset.UtcNow.AddDays(-4),
                 Cylinders = 6,
                 Make = "Mitsubishi",
                 Model = "Evo",
@@ -61,7 +61,7 @@ namespace ApiTemplate.Repositories
             new Car()
             {
                 CarId = 6,
-                Created = DateTimeOffset.UtcNow.AddDays(-1),
+                Created = DateTimeOffset.UtcNow.AddDays(-4),
                 Cylinders = 12,
                 Make = "McLaren",
                 Model = "F1",
@@ -112,9 +112,11 @@ namespace ApiTemplate.Repositories
             var evaluator = new SpecificationEvaluator<Car>();
             return evaluator.GetQuery(Cars.AsQueryable(), spec);
         }
+        #pragma warning disable SA1202
 
         public Task<int> GetTotalCountAsync(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
 
+        #pragma warning restore SA1202
         public Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken)
         {
             if (car is null)
