@@ -1,5 +1,5 @@
-# Version: 1.6.0 (Using https://semver.org/)
-# Updated: 2020-07-28
+# Version: 1.6.1 (Using https://semver.org/)
+# Updated: 2020-10-01
 # See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
@@ -65,14 +65,14 @@ indent_style = tab
 
 ##########################################
 # File Header (Uncomment to support file headers)
-# https://docs.microsoft.com/en-us/visualstudio/ide/reference/add-file-header
+# https://docs.microsoft.com/visualstudio/ide/reference/add-file-header
 ##########################################
 
 # [*.{cs,csx,cake,vb,vbx}]
-# file_header_template = <copyright file="{fileName}" company="PROJECT-AUTHOR">\nCopyright (©) PROJECT-AUTHOR. All Rights Reserved\n</copyright>
+# file_header_template = <copyright file="{fileName}" company="PROJECT-AUTHOR">\n© PROJECT-AUTHOR\n</copyright>
 
 # SA1636: File header copyright text should match
-# Justification: .editorconfig supports file headers, so specifying a stylecop.json file with the file header is not needed.
+# Justification: .editorconfig supports file headers. If this is changed to a value other than "none", a stylecop.json file will need to added to the project.
 # dotnet_diagnostic.SA1636.severity = none
 
 ##########################################
