@@ -216,9 +216,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
                     response,
                     nextPageUrl: null,
 #if HttpsEverywhere
-                    previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                    previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
                     pageCount: 1)
                 .ConfigureAwait(false);
@@ -278,9 +278,9 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
-                    nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #else
-                    nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
 #endif
                     previousPageUrl: null,
                     pageCount: 1)
