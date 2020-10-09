@@ -76,8 +76,7 @@ namespace ApiTemplate.Commands
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
-                            First = pageOptions.First,
-                            Last = pageOptions.Last,
+                            First = pageOptions.First ?? pageOptions.Last,
                             After = endCursor,
                         })) : null,
                     PreviousPageUrl = hasPreviousPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
@@ -85,8 +84,7 @@ namespace ApiTemplate.Commands
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
-                            First = pageOptions.First,
-                            Last = pageOptions.Last,
+                            Last = pageOptions.First ?? pageOptions.Last,
                             Before = startCursor,
                         })) : null,
                     FirstPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
