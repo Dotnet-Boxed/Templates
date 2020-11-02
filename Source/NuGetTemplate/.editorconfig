@@ -1,5 +1,5 @@
-# Version: 1.6.1 (Using https://semver.org/)
-# Updated: 2020-10-01
+# Version: 1.6.2 (Using https://semver.org/)
+# Updated: 2020-11-02
 # See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
@@ -96,8 +96,8 @@ dotnet_style_predefined_type_for_member_access = true:warning
 # Modifier preferences
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-language-conventions#normalize-modifiers
 dotnet_style_require_accessibility_modifiers = always:warning
-csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async
-visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async
+csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:warning
+visual_basic_preferred_modifier_order = Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,Dim,Const,WithEvents,Widening,Narrowing,Custom,Async:warning
 dotnet_style_readonly_field = true:warning
 # Parentheses preferences
 # https://docs.microsoft.com/visualstudio/ide/editorconfig-language-conventions#parentheses-preferences
