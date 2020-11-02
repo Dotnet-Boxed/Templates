@@ -75,7 +75,6 @@ Task("Publish")
     .Description("Publishes the solution.")
     .Does(() =>
     {
-        Information(artefactsDirectory.GetType().Name);
         DotNetCorePublish(
             ".",
             new DotNetCorePublishSettings()
