@@ -27,8 +27,8 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **Description** - A description of the project which determines the assembly description. If the Swagger feature is enabled, shows the description on the Swagger UI.
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **Contact** - The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues.
-- **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **ReadMe** - Add a README.md markdown file describing the project.
+- **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 
 #### Ports

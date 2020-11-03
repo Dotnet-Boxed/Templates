@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json.schemastore.org/vs-2017.3.host",
+  "order": 0,
+  "learnMoreLink": "https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/NuGet.md",
+  "icon": "icon.png",
+  "symbolInfo": [
+    {
+      "id": "Title",
+      "isVisible": true
+    },
+    {
+      "id": "Description",
+      "isVisible": true
+    },
+    {
+      "id": "Author",
+      "isVisible": true
+    },
+    {
+      "id": "Tags",
+      "isVisible": true
+    },
+    {
+      "id": "Contact",
+      "isVisible": true
+    },
+    {
+      "id": "DotnetCore",
+      "name": {
+        "text": "Target .NET Core"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "DotnetFramework",
+      "name": {
+        "text": "Target .NET Framework"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "Sign",
+      "isVisible": true
+    },
+    {
+      "id": "ReadMe",
+      "name": {
+        "text": "Include README.md File"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "EditorConfig",
+      "name": {
+        "text": "Include .editorconfig File"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "SourceControl",
+      "isVisible": true
+    },
+    {
+      "id": "GitHubUsername",
+      "name": {
+        "text": "GitHub Username"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "GitHubProject",
+      "name": {
+        "text": "GitHub Project"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "License",
+      "isVisible": true
+    },
+    {
+      "id": "TreatWarningsAsErrors",
+      "name": {
+        "text": "Treat Warnings As Errors"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "StyleCop",
+      "isVisible": true
+    },
+    {
+      "id": "Tests",
+      "isVisible": true
+    },
+    {
+      "id": "AppVeyor",
+      "isVisible": true
+    },
+    {
+      "id": "AzurePipelines",
+      "name": {
+        "text": "Azure Pipelines"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "GitHubActions",
+      "name": {
+        "text": "GitHub Actions"
+      },
+      "isVisible": true
+    }
+  ]
+}

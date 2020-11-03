@@ -1,8 +1,14 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": ".NET Boxed",
-  "classifications": [ "Web", "WebAPI", "Boxed", "Orleans", "API", "Actor" ],
+  "classifications": [
+    ".NET Boxed",
+    "Cloud",
+    "Service",
+    "Web"
+  ],
   "name": "ASP.NET Core Orleans Boxed",
+  "description": "A solution and project for creating and publishing a Microsoft Orleans API.",
   "groupIdentity": "Dotnet.Boxed.Orleans",
   "identity": "Dotnet.Boxed.Orleans.CSharp",
   "shortName": "orleans",
@@ -80,6 +86,19 @@
     }
   ],
   "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "netcoreapp3.1",
+          "description": "Target netcoreapp3.1"
+        }
+      ],
+      "replaces": "netcoreapp3.1",
+      "defaultValue": "netcoreapp3.1"
+    },
     "Title": {
       "type": "parameter",
       "datatype": "string",
