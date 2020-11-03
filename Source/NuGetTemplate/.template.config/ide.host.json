@@ -5,6 +5,17 @@
   "icon": "icon.png",
   "symbolInfo": [
     {
+      "id": "Framework",
+      "name": {
+        "text": "Target Framework"
+      },
+      "isVisible": true
+    },
+    {
+      "id": "Sign",
+      "isVisible": true
+    },
+    {
       "id": "Title",
       "isVisible": true
     },
@@ -22,24 +33,6 @@
     },
     {
       "id": "Contact",
-      "isVisible": true
-    },
-    {
-      "id": "DotnetCore",
-      "name": {
-        "text": "Target .NET Core"
-      },
-      "isVisible": true
-    },
-    {
-      "id": "DotnetFramework",
-      "name": {
-        "text": "Target .NET Framework"
-      },
-      "isVisible": true
-    },
-    {
-      "id": "Sign",
       "isVisible": true
     },
     {
