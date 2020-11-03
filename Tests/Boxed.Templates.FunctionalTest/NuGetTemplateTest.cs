@@ -29,8 +29,8 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("NuGetDefaults")]
         [InlineData("NuGetStyleCop", "style-cop=true")]
-        [InlineData("NuGetDotnetCoreAndFramework", "dotnet-framework=true")]
-        [InlineData("NuGetDotnetFramework", "dotnet-core=false", "dotnet-framework=true")]
+        [InlineData("NuGetDotnetCore", "framework=netstandard2.0")]
+        [InlineData("NuGetDotnetFramework", "framework=net472")]
         public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
@@ -42,8 +42,8 @@ namespace Boxed.Templates.FunctionalTest
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
 
-                if (!arguments.Contains("dotnet-framework=true") ||
-                    (arguments.Contains("dotnet-framework=true") && Environment.OSVersion.Platform == PlatformID.Win32NT))
+                if (!arguments.Contains("framework=net472") ||
+                    (arguments.Contains("framework=net472") && Environment.OSVersion.Platform == PlatformID.Win32NT))
                 {
                     // There seems to be a bug that stops xUnit working on Mono.
                     await project.DotnetTestAsync().ConfigureAwait(false);

@@ -4,15 +4,13 @@
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
     <DefineConstants>$(DefineConstants);</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
-    <DotnetCore>true</DotnetCore>
     <DotnetFramework>false</DotnetFramework>
   </PropertyGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netcoreapp3.1;net472</TargetFrameworks>
-    <TargetFramework Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'false'">netcoreapp3.1</TargetFramework>
-    <TargetFramework Condition="'$(DotnetCore)' == 'false' AND '$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'false'">netcoreapp3.1</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true'">netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">

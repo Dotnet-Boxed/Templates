@@ -90,12 +90,74 @@
       "datatype": "choice",
       "choices": [
         {
+          "choice": "net5.0",
+          "description": ".NET 5 (net5.0)"
+        },
+        {
+          "choice": "netstandard2.1",
+          "description": ".NET Standard 2.1 (netstandard2.1)"
+        },
+        {
           "choice": "netstandard2.0",
-          "description": "Target netstandard2.0"
+          "description": ".NET Standard 2.0 (netstandard2.0)"
+        },
+        {
+          "choice": "netcoreapp3.1",
+          "description": ".NET Core 3.1 (netcoreapp3.1) - Long Term Support (LTS)"
+        },
+        {
+          "choice": "netcoreapp3.0",
+          "description": ".NET Core 3.0 (netcoreapp3.0)"
+        },
+        {
+          "choice": "netcoreapp2.2",
+          "description": ".NET Core 2.2 (netcoreapp2.2)"
+        },
+        {
+          "choice": "netcoreapp2.1",
+          "description": ".NET Core 2.1 (netcoreapp2.1) - Long Term Support (LTS)"
+        },
+        {
+          "choice": "net48",
+          "description": ".NET Framework 4.8 (net48)"
+        },
+        {
+          "choice": "net472",
+          "description": ".NET Framework 4.72 (net472)"
+        },
+        {
+          "choice": "net471",
+          "description": ".NET Framework 4.71 (net471)"
+        },
+        {
+          "choice": "net47",
+          "description": ".NET Framework 4.7 (net47)"
+        },
+        {
+          "choice": "net462",
+          "description": ".NET Framework 4.62 (net462)"
+        },
+        {
+          "choice": "net461",
+          "description": ".NET Framework 4.61 (net461)"
+        },
+        {
+          "choice": "net46",
+          "description": ".NET Framework 4.6 (net46)"
         }
       ],
-      "replaces": "netstandard2.0",
-      "defaultValue": "netstandard2.0"
+      "replaces": "netstandard2.1",
+      "defaultValue": "netstandard2.1"
+    },
+    "DotnetFramework": {
+      "type": "computed",
+      "value": "(Framework == \"net48\") || (Framework == \"net472\") || (Framework == \"net471\") || (Framework == \"net47\") || (Framework == \"net462\") || (Framework == \"net461\") || (Framework == \"net46\")"
+    },
+    "Sign": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Signs the NuGet package."
     },
     "Title": {
       "type": "parameter",
@@ -161,24 +223,6 @@
       "replaces": "PROJECT-CONTACT-XML",
       "valueSource": "Contact",
       "valueTransform": "xmlEncode"
-    },
-    "DotnetCore": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Sets .NET Core as one of the target frameworks."
-    },
-    "DotnetFramework": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "false",
-      "description": "Sets .NET Framework as one of the target frameworks."
-    },
-    "Sign": {
-      "type": "parameter",
-      "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Signs the NuGet package."
     },
     "ReadMe": {
       "type": "parameter",

@@ -10,6 +10,11 @@ Read [The Fastest NuGet Package Ever Published (Probably)](https://rehansaeed.co
 
 The NuGet package project template uses `dotnet new` to enable you to turn features of the project template on or off. Find out more about `dotnet new` [here](http://rehansaeed.com/custom-project-templates-using-dotnet-new/).
 
+#### Framework
+
+- **Framework** (Default=netstandard2.1) - The target framework for the project.
+- **Sign** (Default=On) - Signs the NuGet package.
+
 #### Project
 
 - **Title** - The name of the project which determines the assembly product name.
@@ -17,9 +22,6 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 - **Author** - The name of the author of the project which determines the assembly author and copyright information.
 - **Tags** - A semi-colon `;` delimited list of tags for the NuGet package.
 - **Contact** - The contact details to use if someone wants to contact you about a security vulnerability or code of conduct issues.
-- **DotnetCore** (Default=On) - Sets .NET Core as one of the target frameworks.
-- **DotnetFramework** (Default=Off) - Sets .NET Framework as one of the target frameworks.
-- **Sign** (Default=On) - Signs the NuGet package.
 - **ReadMe** (Default=On) - Add a README.md markdown file describing the project.
 - **EditorConfig** (Default=On) - Add a .editorconfig file to set a fixed code style.
 - **License** - The legal license applied to the source code in this project.
@@ -49,7 +51,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 ## Always On Features
 
-- **Signing** - The package is signed. However, you should change the .snk file.
+- **Sign** - The package is signed. However, you should change the .snk file.
 - **SourceLink** - During debugging, you can step into code from your NuGet package using [Source Link](https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink).
 
 ## How can I get it?

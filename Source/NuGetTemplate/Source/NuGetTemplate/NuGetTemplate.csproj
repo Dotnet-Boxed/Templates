@@ -1,18 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!--#if (AuthoringMode)-->
-  <PropertyGroup>
-    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);</DefineConstants>
-    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
-    <DotnetCore>true</DotnetCore>
-    <DotnetFramework>false</DotnetFramework>
-  </PropertyGroup>
-  <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'true'">netstandard2.0;net472</TargetFrameworks>
-    <TargetFramework Condition="'$(DotnetCore)' == 'true' AND '$(DotnetFramework)' == 'false'">netstandard2.0</TargetFramework>
-    <TargetFramework Condition="'$(DotnetCore)' == 'false' AND '$(DotnetFramework)' == 'true'">net472</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
