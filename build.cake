@@ -33,7 +33,7 @@ Task("Restore")
         DotNetCoreRestore();
     });
 
- Task("Build")
+Task("Build")
     .Description("Builds the solution.")
     .IsDependentOn("Restore")
     .Does(() =>
@@ -135,6 +135,38 @@ Task("Pack")
                 NoRestore = true,
                 OutputDirectory = artefactsDirectory,
             });
+    });
+
+Task("Install")
+    .Description("Installs the templates.")
+    .IsDependentOn("Pack")
+    .Does(() =>
+    {
+        foreach (var process in System.Diagnostics.Process.GetProcessesByName("devenv"))
+        {
+            process.Kill();
+        }
+
+        var templateEnginePath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".templateengine");
+        CleanDirectory(templateEnginePath);
+
+        var nugetPackages = GetFiles(artefactsDirectory.ToString() + "/*.nupkg");
+        foreach (var nugetPackage in nugetPackages)
+        {
+            StartProcess(
+                "dotnet",
+                new ProcessArgumentBuilder()
+                    .Append("new")
+                    .AppendSwitchQuoted("--install", nugetPackage.ToString()));
+        }
+    });
+
+Task("Start")
+    .Description("Starts Visual Studio.")
+    .IsDependentOn("Install")
+    .Does(() =>
+    {
+        StartAndReturnProcess(@"C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\Common7\IDE\devenv.exe");
     });
 
 Task("Default")

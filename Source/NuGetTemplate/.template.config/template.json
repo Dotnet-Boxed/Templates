@@ -1,8 +1,12 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": ".NET Boxed",
-  "classifications": [ "NuGet", "Package", "Library", "Boxed" ],
+  "classifications": [
+    ".NET Boxed",
+    "Library"
+  ],
   "name": "NuGet Package Boxed",
+  "description": "A solution and project for creating and publishing a NuGet package.",
   "groupIdentity": "Dotnet.Boxed.NuGetPackage",
   "identity": "Dotnet.Boxed.NuGetPackage.CSharp",
   "shortName": "nuget",
@@ -80,6 +84,19 @@
     }
   ],
   "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "netstandard2.0",
+          "description": "Target netstandard2.0"
+        }
+      ],
+      "replaces": "netstandard2.0",
+      "defaultValue": "netstandard2.0"
+    },
     "Title": {
       "type": "parameter",
       "datatype": "string",

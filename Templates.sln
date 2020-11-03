@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".templa
 	ProjectSection(SolutionItems) = preProject
 		Source\OrleansTemplate\.template.config\dotnetcli.host.json = Source\OrleansTemplate\.template.config\dotnetcli.host.json
 		Source\OrleansTemplate\.template.config\icon.png = Source\OrleansTemplate\.template.config\icon.png
+		Source\OrleansTemplate\.template.config\ide.host.json = Source\OrleansTemplate\.template.config\ide.host.json
 		Source\OrleansTemplate\.template.config\template.json = Source\OrleansTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
@@ -66,6 +67,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".templa
 	ProjectSection(SolutionItems) = preProject
 		Source\ApiTemplate\.template.config\dotnetcli.host.json = Source\ApiTemplate\.template.config\dotnetcli.host.json
 		Source\ApiTemplate\.template.config\icon.png = Source\ApiTemplate\.template.config\icon.png
+		Source\ApiTemplate\.template.config\ide.host.json = Source\ApiTemplate\.template.config\ide.host.json
 		Source\ApiTemplate\.template.config\template.json = Source\ApiTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
@@ -73,6 +75,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".templa
 	ProjectSection(SolutionItems) = preProject
 		Source\GraphQLTemplate\.template.config\dotnetcli.host.json = Source\GraphQLTemplate\.template.config\dotnetcli.host.json
 		Source\GraphQLTemplate\.template.config\icon.png = Source\GraphQLTemplate\.template.config\icon.png
+		Source\GraphQLTemplate\.template.config\ide.host.json = Source\GraphQLTemplate\.template.config\ide.host.json
 		Source\GraphQLTemplate\.template.config\template.json = Source\GraphQLTemplate\.template.config\template.json
 	EndProjectSection
 EndProject
@@ -117,6 +120,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".template.config", ".templa
 	ProjectSection(SolutionItems) = preProject
 		Source\NuGetTemplate\.template.config\dotnetcli.host.json = Source\NuGetTemplate\.template.config\dotnetcli.host.json
 		Source\NuGetTemplate\.template.config\icon.png = Source\NuGetTemplate\.template.config\icon.png
+		Source\NuGetTemplate\.template.config\ide.host.json = Source\NuGetTemplate\.template.config\ide.host.json
 		Source\NuGetTemplate\.template.config\template.json = Source\NuGetTemplate\.template.config\template.json
 	EndProjectSection
 EndProject

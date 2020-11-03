@@ -1,8 +1,14 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": ".NET Boxed",
-  "classifications": [ "Web", "WebAPI", "Boxed", "API", "Swagger", "Open API" ],
+  "classifications": [
+    ".NET Boxed",
+    "Cloud",
+    "Service",
+    "Web"
+  ],
   "name": "ASP.NET Core API Boxed",
+  "description": "A solution and project for creating and publishing an Open API (Swagger) based API.",
   "groupIdentity": "Dotnet.Boxed.API",
   "identity": "Dotnet.Boxed.API.CSharp",
   "shortName": "api",
@@ -132,6 +138,19 @@
     }
   ],
   "symbols": {
+    "Framework": {
+      "type": "parameter",
+      "description": "The target framework for the project.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "netcoreapp3.1",
+          "description": "Target netcoreapp3.1"
+        }
+      ],
+      "replaces": "netcoreapp3.1",
+      "defaultValue": "netcoreapp3.1"
+    },
     "Title": {
       "type": "parameter",
       "datatype": "string",
