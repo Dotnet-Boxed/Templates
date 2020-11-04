@@ -49,6 +49,9 @@
     "HealthCheck": {
       "longName": "health-check"
     },
+    "HttpPort": {
+      "longName": "http-port"
+    },
     "TLS": {
       "longName": "tls"
     },
