@@ -64,14 +64,11 @@
     "GitHubActions": {
       "longName": "github-actions"
     },
-    "SkipRestore": {
-      "longName": "no-restore"
+    "SkipInstallAzureStorageEmulator": {
+      "longName": "no-install-storage-emulator"
     },
-    //"SkipOpenToDo": {
-    //  "longName": "no-open-todo"
-    //},
-    "SkipOpenAzureStorageEmulator": {
-      "longName": "no-storage-emulator"
+    "SkiStartAzureStorageEmulator": {
+      "longName": "no-start-storage-emulator"
     }
   }
 }

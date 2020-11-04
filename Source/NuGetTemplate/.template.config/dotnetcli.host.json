@@ -75,12 +75,6 @@
     },
     "GitHubActions": {
       "longName": "github-actions"
-    },
-    "SkipRestore": {
-      "longName": "no-restore"
-    },
-    "SkipOpenReadMe": {
-      "longName": "no-open-readme"
     }
   }
 }
