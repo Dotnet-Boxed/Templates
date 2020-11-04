@@ -73,10 +73,10 @@ Task("Test")
 
 Task("Publish")
     .Description("Publishes the solution.")
-    .Does(() =>
+    .DoesForEach(GetFiles("./Source/**/*.csproj"), project =>
     {
         DotNetCorePublish(
-            ".",
+            project.ToString(),
             new DotNetCorePublishSettings()
             {
                 Configuration = configuration,
