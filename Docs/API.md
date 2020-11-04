@@ -30,8 +30,12 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **EditorConfig** - Add a .editorconfig file to set a fixed code style.
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
-- **HttpPort** - Port number to use for the HTTP endpoint in launchSettings.json.
-- **HttpsPort** - Port number to use for the HTTPS endpoint in launchSettings.json.
+
+#### Ports
+
+- **HttpPort** (Default=5000) - Port number to use for the Kestrel HTTP endpoint in `launchSettings.json`.
+- **HttpsPort** (Default=5001) - Port number to use for the Kestrel HTTPS endpoint in `launchSettings.json`.
+- **IISExpressHttpsPort** (Default=44300) - Port number to use for the IIS Express HTTPS endpoint in `launchSettings.json` (Must be between 44300 and 44399).
 
 #### Source Control
 

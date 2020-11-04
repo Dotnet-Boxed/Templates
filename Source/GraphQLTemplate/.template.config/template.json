@@ -401,32 +401,35 @@
     "HttpPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
+      "description": "Port number to use for the Kestrel HTTP endpoint in launchSettings.json.",
+      "defaultValue": "5000"
     },
-    "HttpPortGenerated": {
+    "HttpPortConstant": {
       "type": "generated",
-      "generator": "port"
+      "generator": "constant",
+      "parameters": {
+        "value": "5000"
+      }
     },
     "HttpPortReplacer": {
       "type": "generated",
       "generator": "coalesce",
       "parameters": {
         "sourceVariableName": "HttpPort",
-        "fallbackVariableName": "HttpPortGenerated"
+        "fallbackVariableName": "HttpPortConstant"
       },
-      "replaces": "43300"
+      "replaces": "5000"
     },
     "HttpsPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the HTTPS endpoint in launchSettings.json."
+      "description": "Port number to use for the Kestrel HTTPS endpoint in launchSettings.json."
     },
-    "HttpsPortGenerated": {
+    "HttpsPortConstant": {
       "type": "generated",
-      "generator": "port",
+      "generator": "constant",
       "parameters": {
-        "low": 44300,
-        "high": 44399
+        "value": "5001"
       }
     },
     "HttpsPortReplacer": {
@@ -434,7 +437,28 @@
       "generator": "coalesce",
       "parameters": {
         "sourceVariableName": "HttpsPort",
-        "fallbackVariableName": "HttpsPortGenerated"
+        "fallbackVariableName": "HttpsPortConstant"
+      },
+      "replaces": "5001"
+    },
+    "IISExpressHttpsPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json (Must be between 44300 and 44399)."
+    },
+    "IISExpressHttpsPortConstant": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": "44300"
+      }
+    },
+    "IISExpressHttpsPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "IISExpressHttpsPort",
+        "fallbackVariableName": "IISExpressHttpsPortConstant"
       },
       "replaces": "44300"
     },

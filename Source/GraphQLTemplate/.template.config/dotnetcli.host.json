@@ -97,6 +97,9 @@
     "HttpsPort": {
       "longName": "https-port"
     },
+    "IISExpressHttpsPort": {
+      "longName": "iis-express-https-port"
+    },
     "IntegrationTest": {
       "longName": "integration-test"
     },
