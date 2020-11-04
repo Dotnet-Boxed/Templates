@@ -16,33 +16,29 @@
     <a href="https://github.com/Dotnet-Boxed/Templates">
       <img alt=".NET Boxed"
            class="img-responsive"
-           src="https://raw.githubusercontent.com/Dotnet-Boxed/Templates/master/Images/Banner.png"
+           src="https://media.githubusercontent.com/media/Dotnet-Boxed/Templates/master/Images/Banner.png"
            style="margin-bottom: 20px">
     </a>
 
     <section>
-      <h2>Task Check List</h2>
-      <p>This is a check-list of tasks you must perform to get your site up and running faster. Open this file in the browser of your choice and it will remember what you have checked, just don't clear your cache.</p>
+      <h2>ASP.NET Core API Boxed To-Do List</h2>
+      <p>A short to-do list of tasks to configure your app and set it up for greater performance and security.</p>
 
       <article>
         <h3><span aria-hidden="true" class="fa fa-list"></span> Pre-Requisites</h3>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="PreRequisites-UpdateVisualStudio" type="checkbox"> <strong>Update Visual Studio / Visual Studio Code</strong> -
-            Update your version of Visual Studio or Visual Studio Code with all patches and updates.
+            <input name="PreRequisites-UpdateVisualStudio" type="checkbox"> <strong>Update Visual Studio/Visual Studio Code</strong> -
+            Update your version of Visual Studio or Visual Studio Code to the latest version.
           </li>
           <li class="list-group-item">
-            <input name="PreRequisites-UpdateNuGet" type="checkbox"> <strong>Update NuGet</strong> -
-            Update the NuGet Visual Studio extension from the Tools -> Extensions and Updates menu.
-          </li>
-          <li class="list-group-item">
-            <input name="PreRequisites-UpdateDNVM" type="checkbox"> <strong>Update Visual Studio ASP.NET Core Tools</strong> -
-            Update the Visual Studio ASP.NET Core tools. Find out more at <a href="https://dot.net">dot.net</a>.
+            <input name="PreRequisites-UpdateDotnetSDK" type="checkbox"> <strong>Update .NET SDK</strong> -
+            Update the .NET SDK. You can download the latest version from <a href="https://dot.net">dot.net</a>.
           </li>
           <!--#if (IIS)-->
           <li class="list-group-item">
-            <input name="PreRequisites-IISNETCoreWindowsServerHosting" type="checkbox"> <strong>IIS .NET Core Windows Server Hosting Bundle</strong> -
-            If you are using IIS and configuring it yourself, install the <a href="https://docs.asp.net/en/latest/publishing/iis.html">.NET Core Windows Server Hosting</a> bundle from <a href="http://go.microsoft.com/fwlink/?LinkId=798480">here</a>.
+            <input name="PreRequisites-IISNETCoreWindowsServerHosting" type="checkbox"> <strong>IIS .NET Hosting Bundle</strong> -
+            If you are hosting your app on IIS, install the <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/">IIS .NET Hosting Bundle</a> bundle from <a href="https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/iis/#install-the-net-core-hosting-bundle">here</a>.
           </li>
           <!--#endif-->
         </ul>
@@ -52,8 +48,12 @@
         <h3><span aria-hidden="true" class="fa fa-lock"></span> API Guidelines</h3>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="HTTPS-ConfigureHSTSPreload" type="checkbox"> <strong>Zalando REST'ful API Guidelines</strong> -
-            Read the <a href="https://opensource.zalando.com/restful-api-guidelines/">Zalando REST'ful API Guidelines</a>.
+            <input name="APIGuidelines-Microsoft" type="checkbox"> <strong>Microsoft REST API Guidelines</strong> -
+            Read the <a href="https://github.com/microsoft/api-guidelines/">Microsoft REST API Guidelines</a> to learn how to write a REST API.
+          </li>
+          <li class="list-group-item">
+            <input name="APIGuidelines-Zalando" type="checkbox"> <strong>Zalando REST'ful API Guidelines</strong> -
+            Read the <a href="https://opensource.zalando.com/restful-api-guidelines/">Zalando REST'ful API Guidelines</a> to learn how to write a REST API.
           </li>
         </ul>
       </article>
@@ -64,21 +64,12 @@
         <h4>TLS over HTTPS</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="HTTPS-ConfigureSitewideHTTPS" type="checkbox"> <strong>Configure Site-Wide HTTPS</strong> -
-            Please note that <a href="http://en.wikipedia.org/wiki/SSL">SSL</a> has been superseded by <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. SSL is vulnerable to the <a href="http://en.wikipedia.org/wiki/POODLE">POODLE</a> security vulnerability and should not be used. These steps outline how to secure your site so that all requests and responses are made over <a href="http://en.wikipedia.org/wiki/HTTPS">HTTPS</a> using TLS, you should consider using it across your whole site for best security, rather than having a mix of HTTP and HTTPS pages. TLS certificates can be obtained for free at:
-            <ul>
-              <li><a href="https://letsencrypt.org/">LetsEncrypt.org</a></li>
-              <li><a href="https://www.startssl.com/">StartSSL.com</a> (You can follow <a href="http://www.troyhunt.com/2013/09/the-complete-guide-to-loading-free-ssl.html">this</a> guide to setting up TLS using StartSSL.)</li>
-              <li><a href="https://www.digicert.com/friends/mvp.php">Digicert</a> (Digicert is only for Microsoft employees or MVP's)</li>
-            </ul>
+            <input name="HTTPS-SetupTLS" type="checkbox"> <strong>Setup a TLS Certificate</strong> -
+            Obtain a TLS certificate and configure it in your <em>appsettings.json</em> file. See <a href="https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl">this</a> for more information.
           </li>
           <li class="list-group-item">
             <input name="HTTPS-ConfigureHSTSPreload" type="checkbox"> <strong>Configure Strict Transport Security (HSTS) Preloading</strong> -
             If using Strict-Transport-Security, submit your domain to the <a href="https://hstspreload.appspot.com/">HSTS Preload</a> site so that your domain can be preloaded using HTTPS rather than HTTP See <a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security#Preloading_Strict_Transport_Security">this</a> for more information about preloading.
-          </li>
-          <li class="list-group-item">
-            <input name="HTTPS-ConfigureHPKP" type="checkbox"> <strong>Configure Public Key Pinning (HPKP)</strong> -
-            Open the <em>ApplicationBuilderExtensions.cs</em> file and uncomment the <code>application.UseHpkp(...);</code> line to turn on <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning">Public Key Pinning (HPKP)</a>. Please note that there is some risk to setting up Public Key Pinning (HPKP), if you get it wrong people who have visited your site will get an error in their browser upon visiting your site so be careful.
           </li>
           <li class="list-group-item">
             <input name="HTTPS-TestHttps" type="checkbox"> <strong>Test Your HTTPS Implementation</strong> -
@@ -113,15 +104,15 @@
         <h4>Other Security</h4>
         <ul class="list-group">
           <li class="list-group-item">
+            <input name="OtherSecurity-ConfigureSecurityTxt" type="checkbox"> <strong>Configure security.txt</strong> -
+            <a href="https://securitytxt.org/">Security.txt</a> is a standard which allows you to define a security policy. Edit the <em>security.txt</em> file at the root of the site. This is totally optional, you can delete this file if you want.
+          </li>
+          <li class="list-group-item">
             <input name="OtherSecurity-SecretStore" type="checkbox"> <strong>Use Secret Store</strong> -
-            If you want to use connection strings or other secrets without checking them in to your source control repository, use the secret store. See <a href="http://go.microsoft.com/fwlink/?LinkID=532709">this</a> and <a href="http://docs.asp.net/en/latest/security/app-secrets.html">this</a> for more information.
+            If you want to use connection strings or other secrets without checking them in to your source control repository, use the secret store. See <a href="http://go.microsoft.com/fwlink/?LinkID=532709">this</a> for more information.
           </li>
           <li class="list-group-item">
-            <input name="OtherSecurity-RequestLimits" type="checkbox"> <strong>Adjust Request Limits</strong> -
-            There are settings in the <em>Web.config</em> file under the <code>requestLimits</code> element that limit maximum size of HTTP requests clients can make to your site. You can limit the maximum content size, maximum URL length and maximum query string length. You should lower these as much as possible, while still having a working site.
-          </li>
-          <li class="list-group-item">
-            <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Up To Date</strong> -
+            <input name="OtherSecurity-KeepNuGetUpToDate" type="checkbox"> <strong>Keep NuGet Packages Up To Date</strong> -
             Keep your NuGet packages up to date to patch security vulnerabilities. See the section about updating below.
           </li>
           <!--#if (Azure)-->
@@ -138,11 +129,10 @@
         <h4>Content Delivery Networks (CDN)</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="ContentDeliveryNetworks-UploadStaticFilesToCDN" type="checkbox"> <strong>Upload Static Files to CDN</strong> -
-            Upload the static files to a <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> for vastly better performance.
-            Examples of static content include your images, minified CSS bundle content, minified JavaScript bundle content, etc.
+            <input name="ContentDeliveryNetworks-UploadStaticFilesToCDN" type="checkbox"> <strong>Use a CDN</strong> -
+            Point a <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a> to your API for vastly better performance.
             <ul>
-              <li><a href="http://www.cloudflare.com/CDN">Cloudflare CDN</a></li>
+              <li><a href="http://www.cloudflare.com">Cloudflare CDN</a></li>
               <li><a href="http://azure.microsoft.com/en-us/documentation/articles/cdn-serve-content-from-cdn-in-your-web-application/">Azure CDN</a></li>
             </ul>
           </li>
@@ -151,24 +141,24 @@
         <ul class="list-group">
           <li class="list-group-item">
             <input name="Caching-ConfigureCaching" type="checkbox"> <strong>Configure Caching</strong> -
-            Some resources are generated programmatically and then cached for a certain time period.
+            Some resources are generated at runtime and then cached for a certain time period.
             If these resources won't change much on your site, change the length of time they are cached. Open the <em>appsettings.json</em> file and take a look at the cache profiles section.
           </li>
           <li class="list-group-item">
             <input name="Caching-AddMoreCaching" type="checkbox"> <strong>Add More Caching</strong> -
-            Use the <code>[ResponseCache]</code> attribute in conjunction with the cache profiles section in the appsettings.json file to cache pages that don't change often and do not contain sensitive information. See
+            Use the <code>[ResponseCache]</code> attribute in conjunction with the cache profiles section in the <em>appsettings.json</em> file to cache pages that don't change often and do not contain sensitive information. See
             <a href="http://www.asp.net/mvc/overview/older-versions-1/controllers-and-routing/improving-performance-with-output-caching-cs">this</a> for more information.
           </li>
         </ul>
         <h4>Benchmarking</h4>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="OtherPerformance-RunGooglePageSpeed" type="checkbox"> <strong>Run Google Page Speed</strong> -
-            Use <a href="https://developers.google.com/speed/pagespeed/">Google Page Speed</a> to benchmark your sites performance and to get suggestions on how to further improve performance. Note that this template is already very quick to begin with.
+            <input name="OtherPerformance-GoogleLighthouse" type="checkbox"> <strong>Run Google Lighthouse</strong> -
+            Use <a href="https://developers.google.com/web/tools/lighthouse/">Google Lighthouse</a> to benchmark your sites performance and to get suggestions on how to further improve performance.
           </li>
           <li class="list-group-item">
-            <input name="OtherPerformance-RunYahooYSlow" type="checkbox"> <strong>Run Yahoo's YSlow</strong> -
-            Use <a href="http://yslow.org/">Yahoo's YSlow</a> to benchmark your sites performance and to get suggestions on how to further improve performance.
+            <input name="OtherPerformance-Webhint" type="checkbox"> <strong>Run Webhint</strong> -
+            Use <a href="https://webhint.io/">Webhint</a> to benchmark your sites performance and to get suggestions on how to further improve performance.
           </li>
         </ul>
         <h4>Other Performance</h4>
@@ -180,76 +170,24 @@
         </ul>
       </article>
 
-      <article>
-        <h3><span aria-hidden="true" class="fa fa-puzzle-piece"></span> Compatibility</h3>
-        <ul class="list-group">
-          <!--#if (IIS)-->
-          <li class="list-group-item">
-            <input name="Compatibility-OldIIS" type="checkbox"> <strong>IIS 7.5/8</strong> -
-            Some <em>web.config</em> settings do not exist in older versions of IIS (7.5 and 8). If you are using an older version, edit the <em>web.config</em> file and remove the <code>dynamicIpSecurity</code> settings.
-          </li>
-          <!--#endif-->
-        </ul>
-      </article>
-
-      <article>
-        <h3><span aria-hidden="true" class="fa fa-user"></span> Authentication &amp; Authorization</h3>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <input name="Authentication-Provider" type="checkbox"> <strong>Choose Authentication Provider</strong> -
-            If you want no authentication, then you don't need to do anything. <strong>Do not</strong> build your own authentication provider unless you are a security expert, it is much harder than it looks and even professionals get it wrong. Choose from one of the options below:
-            <ol>
-              <li>IdentityServer4 - This is another site that handles all authentication with OAuth and Open ID Connect.</li>
-              <li>ASP.NET Identity - This is basically forms authentication with OAuth and Open ID Connect. This is what you get when you select 'Individual Account' from Microsoft's '<a href="http://i2.asp.net/media/47397/ConfigureAuthDialog.png?cdn_id=2015-05-22-001">Change Authentication</a>' dialogue, when you create a new Web Project. Follow <a href="http://www.asp.net/identity/overview/getting-started">this</a> tutorial. Don't forget to add the <code>NoLowercaseQueryStringAttribute</code> to the <code>AccountController</code> to enable the <code>RedirectToCanonicalUrlAttribute</code> to work (See comments on these classes for more information about what they do).</li>
-              <li>Windows Authentication - Follow <a href="http://www.asp.net/aspnet/overview/owin-and-katana/enabling-windows-authentication-in-katana">this</a> tutorial.</li>
-            </ol>
-          </li>
-        </ul>
-      </article>
-
+      <!--#if (ApplicationInsights)-->
       <article>
         <h3><span aria-hidden="true" class="fa fa-exclamation-triangle"></span> Resilience and Error Handling</h3>
         <ul class="list-group">
-
-          <li class="list-group-item">
-            <input name="ResilienceAndErrorHandling-DosProtection" type="checkbox"> <strong>Denial of Service (DoS) Protection</strong> -
-            There are a number of ways to protect your site from <a href="http://en.wikipedia.org/wiki/Denial-of-service_attack">Denial of Service (DoS)</a> attacks:
-            <ul>
-              <li>
-                <a href="https://www.cloudflare.com/">Cloudflare</a> - You can use the Cloudflare service as a proxy to your site. Cloudflare has sophisticated techniques to block attackers from accessing your site and is used by a large proportion of websites on the internet.
-              </li>
-              <!--#if (IIS)-->
-              <li>
-                <a href="http://www.iis.net/configreference/system.webserver/security/dynamicipsecurity">Dynamic IP Security</a> is a feature of IIS that can be configured using the <code>dynamicIpSecurity</code> section of the <em>web.config</em> file. Dynamic IP Security is set to logging only mode in this site, so IIS will log malicious requests from clients without actually rejecting them. If you decide to use this feature, run your site in this mode for some time and slowly raise the limits until you get no more 403.501 or 403.502 errors. Normal legitimate requests that can look like a DoS attack are:
-                <ol>
-                  <li>Google and Bing often make large numbers of requests that can look like a DoS attack and you do not want to block them by accident.</li>
-                  <li>Some organizations put themselves behind a proxy and their requests can look like they are from a single IP address.</li>
-                  <li>Pages on your site that cause a large number of requests to be made your site may trigger the Dynamic IP Security limits to be triggered and the page loading will be treated like a Denial of Service (DoS) attack.</li>
-                </ol>
-                You can test this feature by recording a request to your site using <a href="http://www.telerik.com/fiddler">Fiddler</a> and then replaying it many times.
-              </li>
-              <!--#endif-->
-            </ul>
-          </li>
-          <!--#if (ApplicationInsights)-->
           <li class="list-group-item">
             <input name="ResilienceAndErrorHandling-ApplicationInsights" type="checkbox"> <strong>Application Insights</strong> -
             Application Insights helps monitor your site and know about it when it goes down. Login to <a href="http://azure.microsoft.com">Azure</a>, create a new Application Insights instance, retrieve the Instrumentation Key and add it to your <em>appsettings.json</em> file. For more information see the <a href="http://docs.asp.net/en/latest/fundamentals/application-insights.html">Getting Started</a> guide.
           </li>
-          <!--#endif-->
-          <li class="list-group-item">
-            <input name="ResilienceAndErrorHandling-Logging" type="checkbox"> <strong>Add Logging</strong> -
-            This template comes with basic logging enabled in development mode. Consider using <a href="http://serilog.net/">Serilog</a> or another logging framework in production. Logging can be configured in <em>Startup.cs</em>.
-          </li>
         </ul>
       </article>
+      <!--#endif-->
 
       <article>
         <h3><span aria-hidden="true" class="fa fa-users"></span> Thank Developers</h3>
         <ul class="list-group">
           <li class="list-group-item">
-            <input name="ThankDevelopers-ConfigureHumansTxt" type="checkbox"> <strong>Configure Humans.txt</strong> -
-            Edit the <em>humans.txt</em> file at the root of the site. This is totally optional, you can delete this file if you want.
+            <input name="ThankDevelopers-ConfigureHumansTxt" type="checkbox"> <strong>Configure humans.txt</strong> -
+            <a href="http://humanstxt.org/">Humans.txt</a> is a standard way of describing and thanking the people that built your app. Edit the <em>humans.txt</em> file at the root of the app. This is totally optional, you can delete this file if you want.
             Be careful what you put into this file, you could give away clues about potential attack vectors on your site.
             Even giving contact details can be an attack vector (Most hackers manipulate people to get access).
           </li>
@@ -265,12 +203,7 @@
         <ul class="list-group">
           <li class="list-group-item">
             <input name="KeepingYourSiteUpToDate-KeepNuGetPackagesUpToDate" type="checkbox"> <strong>Keep NuGet Packages Up To Date</strong> -
-            Most updates can be easily carried out by simply updating <a href="https://www.nuget.org/">NuGet</a> packages. See <a href="https://docs.nuget.org/consume/package-manager-dialog">this</a> link for more information. However, there are a few things to watch out for before updating a package:
-            <ol>
-              <li>It's worth reading the NuGet package release notes to see what has changed and base the urgency of upgrading on this information. Blindly updating, can sometimes cause things to break. Sometimes packages are incompatible with other packages or there are special upgrade steps that need to be carried out.</li>
-              <li>When updating JavaScript or CSS framework Bower Packages, be careful that the particular version you are updating to is also available on the <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>. Some CDN's update more often than others. This project template uses the popular Google and Microsoft CDN's as it is likely that their scripts are already preloaded in a browsers cache. However, their CDN service also does not update too often.</li>
-              <li>You need to ensure that you update your JavaScript and CSS framework Bower packages when there are new versions to obtain security patches but also because <a href="http://en.wikipedia.org/wiki/Content_delivery_network">CDN</a>'s sometimes retire very old scripts. This template provides fallback scripts, so if a CDN does retire a script or goes down, it will use the scripts in this template instead. This will result in a slight performance degradation.</li>
-            </ol>
+            Most updates can be easily carried out by simply updating <a href="https://www.nuget.org/">NuGet</a> packages. See <a href="https://docs.nuget.org/consume/package-manager-dialog">this</a> link for more information.
           </li>
           <li class="list-group-item">
             <input name="KeepingYourSiteUpToDate-KeepTemplateUpToDate" type="checkbox"> <strong>Keep Template Up To Date</strong> -
