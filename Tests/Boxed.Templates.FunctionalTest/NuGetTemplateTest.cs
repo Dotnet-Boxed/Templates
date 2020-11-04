@@ -1,7 +1,6 @@
 namespace Boxed.Templates.FunctionalTest
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -37,10 +36,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
 
@@ -62,10 +60,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
+                    .ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
                 await project.DotnetCakeAsync().ConfigureAwait(false);
             }
@@ -86,10 +83,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
@@ -114,10 +110,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "NuGetSignFalse",
-                        new Dictionary<string, string>()
-                        {
-                            { "sign", "false" },
-                        })
+                        new string[] { "sign=false" }.ToArguments())
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);

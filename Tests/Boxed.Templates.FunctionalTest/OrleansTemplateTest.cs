@@ -1,7 +1,6 @@
 namespace Boxed.Templates.FunctionalTest
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Boxed.DotnetNewTest;
     using Xunit;
@@ -12,6 +11,11 @@ namespace Boxed.Templates.FunctionalTest
     {
         private const string TemplateName = "orleans";
         private const string SolutionFileName = "OrleansTemplate.sln";
+        private static readonly string[] DefaultArguments = new string[]
+        {
+            "no-install-storage-emulator=true",
+            "no-start-storage-emulator=true",
+        };
 
         public OrleansTemplateTest(ITestOutputHelper testOutputHelper)
         {
@@ -34,10 +38,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
             }
@@ -53,10 +56,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
+                    .ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
                 await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
             }

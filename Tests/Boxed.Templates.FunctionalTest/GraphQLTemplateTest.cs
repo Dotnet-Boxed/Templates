@@ -1,7 +1,6 @@
 namespace Boxed.Templates.FunctionalTest
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Net;
@@ -18,6 +17,10 @@ namespace Boxed.Templates.FunctionalTest
     {
         private const string TemplateName = "graphql";
         private const string SolutionFileName = "GraphQLTemplate.sln";
+        private static readonly string[] DefaultArguments = new string[]
+        {
+            "no-open-todo=true",
+        };
 
         public GraphQLTemplateTest(ITestOutputHelper testOutputHelper)
         {
@@ -42,10 +45,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
@@ -61,10 +63,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var dictionary = arguments
-                    .Select(x => x.Split('=', StringSplitOptions.RemoveEmptyEntries))
-                    .ToDictionary(x => x.First(), x => x.Last());
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, name, dictionary).ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
+                    .ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
                 await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
             }
@@ -139,10 +140,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "GraphQLTHealthCheckFalse",
-                        new Dictionary<string, string>()
-                        {
-                            { "health-check", "false" },
-                        })
+                        DefaultArguments.ToArguments(new string[] { "health-check=false" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
@@ -210,10 +208,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "GraphQLTHttpsEverywhereFalse",
-                        new Dictionary<string, string>()
-                        {
-                            { "https-everywhere", "false" },
-                        })
+                        DefaultArguments.ToArguments(new string[] { "https-everywhere=false" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
@@ -251,10 +246,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "GraphQLTAuthorizationTrue",
-                        new Dictionary<string, string>()
-                        {
-                            { "authorization", "true" },
-                        })
+                        DefaultArguments.ToArguments(new string[] { "authorization=true" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
@@ -295,10 +287,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "GraphQLTAuthorizationFalse",
-                        new Dictionary<string, string>()
-                        {
-                            { "authorization", "false" },
-                        })
+                        DefaultArguments.ToArguments(new string[] { "authorization=false" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
@@ -331,10 +320,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(
                         TemplateName,
                         "GraphQLDockerFalse",
-                        new Dictionary<string, string>()
-                        {
-                            { "docker", "false" },
-                        })
+                        DefaultArguments.ToArguments(new string[] { "docker=false" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
