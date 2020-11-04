@@ -112,9 +112,6 @@
     "GitHubActions": {
       "longName": "github-actions"
     },
-    "SkipRestore": {
-      "longName": "no-restore"
-    },
     "SkipOpenToDo": {
       "longName": "no-open-todo"
     }
