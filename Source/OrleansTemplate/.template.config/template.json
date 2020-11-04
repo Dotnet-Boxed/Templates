@@ -216,6 +216,28 @@
       "defaultValue": "true",
       "description": "A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health."
     },
+    "HttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json.",
+      "defaultValue": "8080"
+    },
+    "HttpPortConstant": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": "8080"
+      }
+    },
+    "HttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "HttpPort",
+        "fallbackVariableName": "HttpPortConstant"
+      },
+      "replaces": "8080"
+    },
     "TLS": {
       "type": "parameter",
       "datatype": "bool",

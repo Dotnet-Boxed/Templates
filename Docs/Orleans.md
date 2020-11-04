@@ -20,6 +20,10 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 - **ReadMe** - Add a README.md markdown file describing the project.
 - **TreatWarningsAsErrors** - Treat warnings as errors.
 
+#### Ports
+
+- **HttpPort** (Default=8080) - Port number to use for the HTTP endpoint in `launchSettings.json`.
+
 #### Source Control
 
 - **SourceControl** - Select which source control provider you are using if any, to add provider specific features.
