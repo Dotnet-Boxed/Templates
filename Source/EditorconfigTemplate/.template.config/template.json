@@ -8,6 +8,7 @@
   "name": ".editorconfig file",
   "shortName": "editorconfig",
   "defaultName": ".editorconfig",
+  "description": "Persists your editor, code and code style settings. Provides default settings for all file types.",
   "tags": {
     "language": "C#",
     "type": "item"

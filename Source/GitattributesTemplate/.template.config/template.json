@@ -8,6 +8,7 @@
   "name": ".gitattributes file",
   "shortName": "gitattributes",
   "defaultName": ".gitattributes",
+  "description": "Controls Git settings like line endings, which files are treated as binary files and Git Large File System (LFS) settings.",
   "tags": {
     "language": "C#",
     "type": "item"
