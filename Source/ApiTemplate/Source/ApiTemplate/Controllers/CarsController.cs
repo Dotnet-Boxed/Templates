@@ -109,7 +109,7 @@ namespace ApiTemplate.Controllers
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
         /// <summary>
-        /// Gets a collection of cars using the specified page number and number of items per page.
+        /// Gets a collection of cars.
         /// </summary>
         /// <param name="command">The action command.</param>
         /// <param name="pageOptions">The page options.</param>
