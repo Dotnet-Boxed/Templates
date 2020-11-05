@@ -184,11 +184,14 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
-                    nextPageUrl: "https://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: $"https://localhost/cars?First=3&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero))}",
 #else
-                    nextPageUrl: "http://localhost/cars?First=3&After=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: $"http://localhost/cars?First=3&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero))}",
 #endif
-                    previousPageUrl: null)
+                    previousPageUrl: null,
+                    expectedPageCount: 3,
+                    actualPageCount: 3,
+                    totalCount: 4)
                 .ConfigureAwait(false);
         }
 
@@ -207,7 +210,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .ReturnsAsync(false);
 
             var response = await this.client
-                .GetAsync(new Uri("/cars?first=3&after=MjAwMC0wMS0wM1QwMDowMDowMC4wMDAwMDAwKzAwOjAw", UriKind.Relative))
+                .GetAsync(new Uri($"/cars?First=3&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero))}", UriKind.Relative))
                 .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -216,11 +219,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
                     response,
                     nextPageUrl: null,
 #if HttpsEverywhere
-                    previousPageUrl: "https://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: $"https://localhost/cars?Last=3&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 4, 0, 0, 0, TimeSpan.Zero))}",
 #else
-                    previousPageUrl: "http://localhost/cars?First=3&Before=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    previousPageUrl: $"http://localhost/cars?Last=3&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 4, 0, 0, 0, TimeSpan.Zero))}",
 #endif
-                    pageCount: 1)
+                    expectedPageCount: 3,
+                    actualPageCount: 1,
+                    totalCount: 4)
                 .ConfigureAwait(false);
         }
 
@@ -248,10 +253,13 @@ namespace ApiTemplate.IntegrationTest.Controllers
                     response,
                     nextPageUrl: null,
 #if HttpsEverywhere
-                    previousPageUrl: "https://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw")
+                    previousPageUrl: $"https://localhost/cars?Last=3&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero))}",
 #else
-                    previousPageUrl: "http://localhost/cars?Last=3&Before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw")
+                    previousPageUrl: $"http://localhost/cars?Last=3&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero))}",
 #endif
+                    expectedPageCount: 3,
+                    actualPageCount: 3,
+                    totalCount: 4)
                 .ConfigureAwait(false);
         }
 
@@ -261,7 +269,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var cars = GetCars();
             this.CarRepositoryMock
                 .Setup(x => x.GetCarsReverseAsync(3, null, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(cars.Skip(3).TakeLast(3).ToList());
+                .ReturnsAsync(cars.SkipLast(3).TakeLast(3).ToList());
             this.CarRepositoryMock
                 .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
                 .ReturnsAsync(cars.Count);
@@ -270,7 +278,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .ReturnsAsync(false);
 
             var response = await this.client
-                .GetAsync(new Uri("/cars?last=3&before=MjAwMC0wMS0wMlQwMDowMDowMC4wMDAwMDAwKzAwOjAw", UriKind.Relative))
+                .GetAsync(new Uri($"/cars?Last=3&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero))}", UriKind.Relative))
                 .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -278,12 +286,52 @@ namespace ApiTemplate.IntegrationTest.Controllers
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
-                    nextPageUrl: "https://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: $"https://localhost/cars?First=3&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero))}",
 #else
-                    nextPageUrl: "http://localhost/cars?Last=3&After=MjAwMC0wMS0wNFQwMDowMDowMC4wMDAwMDAwKzAwOjAw",
+                    nextPageUrl: $"http://localhost/cars?First=3&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero))}",
 #endif
                     previousPageUrl: null,
-                    pageCount: 1)
+                    expectedPageCount: 3,
+                    actualPageCount: 1,
+                    totalCount: 4)
+                .ConfigureAwait(false);
+        }
+
+        [Fact]
+        public async Task GetPage_MiddlePage_Returns200OkAsync()
+        {
+            var cars = GetCars();
+            this.CarRepositoryMock
+                .Setup(x => x.GetCarsAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(cars.Skip(1).Take(2).ToList());
+            this.CarRepositoryMock
+                .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+                .ReturnsAsync(cars.Count);
+            this.CarRepositoryMock
+                .Setup(x => x.GetHasNextPageAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
+
+            var response = await this.client
+                .GetAsync(new Uri($"/cars?First=2&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero))}", UriKind.Relative))
+                .ConfigureAwait(false);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType.MediaType);
+            await this.AssertPageUrlsAsync(
+                    response,
+#if HttpsEverywhere
+                    nextPageUrl: $"https://localhost/cars?First=2&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero))}",
+#else
+                    nextPageUrl: $"http://localhost/cars?First=2&After={Cursor.ToCursor(new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero))}",
+#endif
+#if HttpsEverywhere
+                    previousPageUrl: $"https://localhost/cars?Last=2&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero))}",
+#else
+                    previousPageUrl: $"http://localhost/cars?Last=2&Before={Cursor.ToCursor(new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero))}",
+#endif
+                    expectedPageCount: 2,
+                    actualPageCount: 2,
+                    totalCount: 4)
                 .ConfigureAwait(false);
         }
 
@@ -474,14 +522,14 @@ namespace ApiTemplate.IntegrationTest.Controllers
             HttpResponseMessage response,
             string nextPageUrl,
             string previousPageUrl,
-            int pageCount = 3,
-            int requestedPageCount = 3,
-            int totalCount = 4)
+            int expectedPageCount,
+            int actualPageCount,
+            int totalCount)
         {
             var connection = await response.Content.ReadAsAsync<Connection<Car>>(this.formatters).ConfigureAwait(false);
 
-            Assert.Equal(pageCount, connection.Items.Count);
-            Assert.Equal(pageCount, connection.PageInfo.Count);
+            Assert.Equal(actualPageCount, connection.Items.Count);
+            Assert.Equal(actualPageCount, connection.PageInfo.Count);
             Assert.Equal(totalCount, connection.TotalCount);
 
             Assert.Equal(nextPageUrl is object, connection.PageInfo.HasNextPage);
@@ -506,11 +554,11 @@ namespace ApiTemplate.IntegrationTest.Controllers
             }
 
 #if HttpsEverywhere
-            var firstPageUrl = $"https://localhost/cars?First={requestedPageCount}";
-            var lastPageUrl = $"https://localhost/cars?Last={requestedPageCount}";
+            var firstPageUrl = $"https://localhost/cars?First={expectedPageCount}";
+            var lastPageUrl = $"https://localhost/cars?Last={expectedPageCount}";
 #else
-            var firstPageUrl = $"http://localhost/cars?First={requestedPageCount}";
-            var lastPageUrl = $"http://localhost/cars?Last={requestedPageCount}";
+            var firstPageUrl = $"http://localhost/cars?First={expectedPageCount}";
+            var lastPageUrl = $"http://localhost/cars?Last={expectedPageCount}";
 #endif
 
             Assert.Equal(new Uri(firstPageUrl), connection.PageInfo.FirstPageUrl);
