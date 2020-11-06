@@ -30,7 +30,7 @@ https://github.com/Dotnet-Boxed/Templates
 dotnet new --install Boxed.Templates
 dotnet new api
 
-https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md
+https://github.com/Dotnet-Boxed/Templates/blob/main/Docs/API.md
 
 #dotnet #dotnetcore #aspnetcore #swagger #openapi
 ```
@@ -45,7 +45,7 @@ https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/API.md
 dotnet new --install Boxed.Templates
 dotnet new graphql
 
-https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md
+https://github.com/Dotnet-Boxed/Templates/blob/main/Docs/GraphQL.md
 
 #dotnet #dotnetcore #aspnetcore #graphql
 ```
@@ -60,7 +60,7 @@ https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/GraphQL.md
 dotnet new --install Boxed.Templates
 dotnet new orleans
 
-https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/Orleans.md
+https://github.com/Dotnet-Boxed/Templates/blob/main/Docs/Orleans.md
 
 #dotnet #dotnetcore #orleans @reubenbond
 ```
@@ -76,7 +76,7 @@ dotnet new nuget
 git commit -a -m "Initial" && git push
 GitHub Actions, Azure DevOps and AppVeyor CI Builds
 
-https://github.com/Dotnet-Boxed/Templates/blob/master/Docs/NuGet.md
+https://github.com/Dotnet-Boxed/Templates/blob/main/Docs/NuGet.md
 
 #dotnet #dotnetcore #nuget
 ```

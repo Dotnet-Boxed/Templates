@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: master
+    branches: main
   pull_request:
   release:
     types:
@@ -57,7 +57,7 @@ jobs:
   push-github-packages:
     name: 'Push GitHub Packages'
     needs: build
-    if: github.ref == 'refs/heads/master' || github.event_name == 'release'
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
