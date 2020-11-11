@@ -53,7 +53,7 @@
     <PackageReference Include="Boxed.AspNetCore" Version="5.1.2" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="7.1.1" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="5.0.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="3.1.9" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
