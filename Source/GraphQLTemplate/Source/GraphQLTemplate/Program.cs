@@ -1,7 +1,6 @@
 namespace GraphQLTemplate
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
     using System.Reflection;
     using System.Threading.Tasks;
@@ -27,11 +26,6 @@ namespace GraphQLTemplate
             {
                 throw new ArgumentNullException(nameof(host));
             }
-
-            // Use the W3C Trace Context format to propagate distributed trace identifiers.
-            // See https://devblogs.microsoft.com/aspnet/improvements-in-net-core-3-0-for-troubleshooting-and-monitoring-distributed-apps/
-            Activity.DefaultIdFormat = ActivityIdFormat.W3C;
-            Activity.ForceDefaultIdFormat = true;
 
             host.Services.GetRequiredService<IHostEnvironment>().ApplicationName =
                 Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
