@@ -9,8 +9,14 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework Condition="'$(DotnetFramework)' == 'false'">netcoreapp3.1</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true'">netstandard2.1</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'false'">net5.0</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net48'">net48</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net472'">net472</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net471'">net471</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net47'">net47</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net462'">net462</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net461'">net461</TargetFramework>
+    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net46'">net46</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">

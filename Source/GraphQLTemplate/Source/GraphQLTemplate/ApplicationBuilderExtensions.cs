@@ -75,7 +75,7 @@ namespace GraphQLTemplate
                             diagnosticContext.Set("ClientVersion", clientVersion);
                         }
 
-                        if (endpoint is object)
+                        if (endpoint is not null)
                         {
                             diagnosticContext.Set("EndpointName", endpoint.DisplayName);
                         }
@@ -103,7 +103,7 @@ namespace GraphQLTemplate
                     static bool IsHealthCheckEndpoint(HttpContext httpContext)
                     {
                         var endpoint = httpContext.GetEndpoint();
-                        if (endpoint is object)
+                        if (endpoint is not null)
                         {
                             return endpoint.DisplayName == "Health checks";
                         }

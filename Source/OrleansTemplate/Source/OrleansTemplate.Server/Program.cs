@@ -67,7 +67,7 @@ namespace OrleansTemplate.Server
                     configurationBuilder => configurationBuilder
                         .AddEnvironmentVariables(prefix: "DOTNET_")
                         .AddIf(
-                            args is object,
+                            args is not null,
                             x => x.AddCommandLine(args)))
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
@@ -175,7 +175,7 @@ namespace OrleansTemplate.Server
                 .AddEnvironmentVariables()
                 // Add command line options. These take the highest priority.
                 .AddIf(
-                    args is object,
+                    args is not null,
                     x => x.AddCommandLine(args));
 
         private static Logger CreateLogger(IHost host)

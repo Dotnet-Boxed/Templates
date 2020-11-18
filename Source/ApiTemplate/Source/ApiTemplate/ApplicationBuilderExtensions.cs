@@ -69,7 +69,7 @@ namespace ApiTemplate
                             diagnosticContext.Set("QueryString", request.QueryString.Value);
                         }
 
-                        if (endpoint is object)
+                        if (endpoint is not null)
                         {
                             diagnosticContext.Set("EndpointName", endpoint.DisplayName);
                         }
@@ -97,7 +97,7 @@ namespace ApiTemplate
                     static bool IsHealthCheckEndpoint(HttpContext httpContext)
                     {
                         var endpoint = httpContext.GetEndpoint();
-                        if (endpoint is object)
+                        if (endpoint is not null)
                         {
                             return endpoint.DisplayName == "Health checks";
                         }

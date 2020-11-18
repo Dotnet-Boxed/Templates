@@ -532,8 +532,8 @@ namespace ApiTemplate.IntegrationTest.Controllers
             Assert.Equal(actualPageCount, connection.PageInfo.Count);
             Assert.Equal(totalCount, connection.TotalCount);
 
-            Assert.Equal(nextPageUrl is object, connection.PageInfo.HasNextPage);
-            Assert.Equal(previousPageUrl is object, connection.PageInfo.HasPreviousPage);
+            Assert.Equal(nextPageUrl is not null, connection.PageInfo.HasNextPage);
+            Assert.Equal(previousPageUrl is not null, connection.PageInfo.HasPreviousPage);
 
             if (nextPageUrl is null)
             {
@@ -566,12 +566,12 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             var linkValue = Assert.Single(response.Headers.GetValues("Link"));
             var expectedLink = $"<{firstPageUrl}>; rel=\"first\", <{lastPageUrl}>; rel=\"last\"";
-            if (previousPageUrl is object)
+            if (previousPageUrl is not null)
             {
                 expectedLink = $"<{previousPageUrl}>; rel=\"previous\", " + expectedLink;
             }
 
-            if (nextPageUrl is object)
+            if (nextPageUrl is not null)
             {
                 expectedLink = $"<{nextPageUrl}>; rel=\"next\", " + expectedLink;
             }

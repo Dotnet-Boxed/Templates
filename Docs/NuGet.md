@@ -12,7 +12,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 
 #### Framework
 
-- **Framework** (Default=netstandard2.1) - The target framework for the project.
+- **Framework** (Default=net5.0) - The target framework for the project.
 - **Sign** (Default=On) - Signs the NuGet package.
 
 #### Project
