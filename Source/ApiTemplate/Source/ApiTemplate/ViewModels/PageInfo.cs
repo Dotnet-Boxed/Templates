@@ -82,22 +82,22 @@ namespace ApiTemplate.ViewModels
         {
             var values = new List<string>(4);
 
-            if (this.HasNextPage && this.NextPageUrl is object)
+            if (this.HasNextPage && this.NextPageUrl is not null)
             {
                 values.Add(GetLinkValueItem(NextLinkItem, this.NextPageUrl));
             }
 
-            if (this.HasPreviousPage && this.PreviousPageUrl is object)
+            if (this.HasPreviousPage && this.PreviousPageUrl is not null)
             {
                 values.Add(GetLinkValueItem(PreviousLinkItem, this.PreviousPageUrl));
             }
 
-            if (this.FirstPageUrl is object)
+            if (this.FirstPageUrl is not null)
             {
                 values.Add(GetLinkValueItem(FirstLinkItem, this.FirstPageUrl));
             }
 
-            if (this.LastPageUrl is object)
+            if (this.LastPageUrl is not null)
             {
                 values.Add(GetLinkValueItem(LastLinkItem, this.LastPageUrl));
             }

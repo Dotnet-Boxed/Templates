@@ -1,7 +1,7 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
+    EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
     "Release";
 
 var artefactsDirectory = Directory("./Artefacts");
@@ -45,15 +45,17 @@ Task("Test")
             project.ToString(),
             new DotNetCoreTestSettings()
             {
+                Collectors = new string[] { "XPlat Code Coverage" },
                 Configuration = configuration,
-                Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                Loggers = new string[]
+                {
+                    $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                    $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
+                },
                 NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
-                ArgumentCustomization = x => x
-                    .Append("--blame")
-                    .AppendSwitch("--logger", $"html;LogFileName={project.GetFilenameWithoutExtension()}.html")
-                    .Append("--collect:\"XPlat Code Coverage\""),
+                ArgumentCustomization = x => x.Append("--blame"),
             });
     });
 

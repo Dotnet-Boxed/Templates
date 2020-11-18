@@ -1,20 +1,20 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") is object ? EnvironmentVariable("Configuration") :
+    EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
     "Release";
 //#if (Docker)
 var tag =
     HasArgument("Tag") ? Argument<string>("Tag") :
-    EnvironmentVariable("Tag") is object ? EnvironmentVariable("Tag") :
+    EnvironmentVariable("Tag") is not null ? EnvironmentVariable("Tag") :
     null;
 var platform =
     HasArgument("Platform") ? Argument<string>("Platform") :
-    EnvironmentVariable("Platform") is object ? EnvironmentVariable("Platform") :
+    EnvironmentVariable("Platform") is not null ? EnvironmentVariable("Platform") :
     "linux/amd64,linux/arm64";
 var push =
     HasArgument("Push") ? Argument<bool>("Push") :
-    EnvironmentVariable("Push") is object ? bool.Parse(EnvironmentVariable("Push")) :
+    EnvironmentVariable("Push") is not null ? bool.Parse(EnvironmentVariable("Push")) :
     false;
 //#endif
 
@@ -59,15 +59,17 @@ Task("Test")
             project.ToString(),
             new DotNetCoreTestSettings()
             {
+                Collectors = new string[] { "XPlat Code Coverage" },
                 Configuration = configuration,
-                Logger = $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                Loggers = new string[]
+                {
+                    $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                    $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
+                },
                 NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
-                ArgumentCustomization = x => x
-                    .Append("--blame")
-                    .AppendSwitch("--logger", $"html;LogFileName={project.GetFilenameWithoutExtension()}.html")
-                    .Append("--collect:\"XPlat Code Coverage\""),
+                ArgumentCustomization = x => x.Append("--blame"),
             });
     });
 

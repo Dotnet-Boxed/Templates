@@ -3,6 +3,7 @@
   <PropertyGroup>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <DotnetFramework>false</DotnetFramework>
+    <EditorConfig>true</EditorConfig>
     <MIT>true</MIT>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -11,6 +12,7 @@
 
   <PropertyGroup Label="Build">
     <LangVersion>latest</LangVersion>
+    <EnforceCodeStyleInBuild Condition="'$(EditorConfig)' == 'true'">true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -29,7 +31,6 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="3.3.1" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="all" Version="1.0.0" Condition="'$(DotnetFramework)' == 'true'" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.8.55" />
     <PackageReference Include="MinVer" PrivateAssets="all" Version="2.3.1" />

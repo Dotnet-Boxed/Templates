@@ -2,6 +2,7 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <EditorConfig>true</EditorConfig>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -9,6 +10,7 @@
 
   <PropertyGroup Label="Build">
     <LangVersion>latest</LangVersion>
+    <EnforceCodeStyleInBuild Condition="'$(EditorConfig)' == 'true'">true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -19,7 +21,6 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" PrivateAssets="all" Version="3.3.1" />
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.8.55" />
     <PackageReference Include="MinVer" PrivateAssets="all" Version="2.3.1" />
     <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.1.118" Condition="'$(StyleCop)' == 'true'" />
