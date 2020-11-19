@@ -143,7 +143,12 @@ namespace OrleansTemplate.Server
 #if HealthCheck
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
             webHostBuilder
-                .UseKestrel((builderContext, options) => options.AddServerHeader = false)
+                .UseKestrel(
+                    (builderContext, options) =>
+                    {
+                        options.AddServerHeader = false;
+                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
+                    })
                 .UseStartup<Startup>();
 
 #endif

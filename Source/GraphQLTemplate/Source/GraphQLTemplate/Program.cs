@@ -6,6 +6,7 @@ namespace GraphQLTemplate
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
+    using GraphQLTemplate.Options;
 #if ApplicationInsights
     using Microsoft.ApplicationInsights.Extensibility;
 #endif
@@ -82,6 +83,7 @@ namespace GraphQLTemplate
                     {
                         options.AddServerHeader = false;
                         options.AllowSynchronousIO = true;
+                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
                     })
 #if Azure
                 .UseAzureAppServices()

@@ -32,7 +32,6 @@ namespace ApiTemplate.Options
         public HostFilteringOptions HostFiltering { get; set; }
 
 #endif
-        [Required]
         public KestrelServerOptions Kestrel { get; set; }
     }
 }
