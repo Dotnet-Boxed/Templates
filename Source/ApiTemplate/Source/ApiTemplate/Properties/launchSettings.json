@@ -100,6 +100,7 @@
     //#endif
     "Kestrel": {
       "commandName": "Project",
+      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "",
       //#if (HttpsEverywhere)
@@ -113,6 +114,7 @@
     },
     "Kestrel Production": {
       "commandName": "Project",
+      "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "",
       //#if (HttpsEverywhere)
