@@ -100,7 +100,7 @@ Task("Test")
             filters.Add("IsUsingDocker=false");
         }
 
-        if (template != null)
+        if (template is not null)
         {
             filters.Add($"Template={template}");
         }
