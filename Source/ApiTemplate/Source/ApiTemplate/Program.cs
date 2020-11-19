@@ -3,6 +3,7 @@ namespace ApiTemplate
     using System;
     using System.IO;
     using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Threading.Tasks;
     using Boxed.AspNetCore;
 #if ApplicationInsights
@@ -127,8 +128,11 @@ namespace ApiTemplate
                 .Enrich.WithProperty("Application", hostEnvironment.ApplicationName)
                 .Enrich.WithProperty("Environment", hostEnvironment.EnvironmentName)
                 .WriteTo.Conditional(
-                    x => !hostEnvironment.IsProduction(),
+                    x => hostEnvironment.IsDevelopment(),
                     x => x.Console().WriteTo.Debug())
+                .WriteTo.Conditional(
+                    x => hostEnvironment.IsDevelopment() && RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
+                    x => x.EventLog(hostEnvironment.ApplicationName, manageEventSource: true))
 #if ApplicationInsights
                 .WriteTo.Conditional(
                     x => hostEnvironment.IsProduction(),
