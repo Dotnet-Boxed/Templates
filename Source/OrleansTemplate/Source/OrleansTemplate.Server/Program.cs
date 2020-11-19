@@ -187,8 +187,11 @@ namespace OrleansTemplate.Server
                 .Enrich.WithProperty("Environment", hostEnvironment.EnvironmentName)
                 .Enrich.With(new TraceIdEnricher())
                 .WriteTo.Conditional(
-                    x => !hostEnvironment.IsProduction(),
+                    x => hostEnvironment.IsDevelopment(),
                     x => x.Console().WriteTo.Debug())
+                .WriteTo.Conditional(
+                    x => hostEnvironment.IsDevelopment() && RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
+                    x => x.EventLog(hostEnvironment.ApplicationName, manageEventSource: true))
 #if ApplicationInsights
                 .WriteTo.Conditional(
                     x => hostEnvironment.IsProduction(),
