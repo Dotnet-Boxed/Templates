@@ -35,7 +35,6 @@ namespace GraphQLTemplate.Options
         [Required]
         public GraphQLOptions GraphQL { get; set; }
 
-        [Required]
         public KestrelServerOptions Kestrel { get; set; }
     }
 }

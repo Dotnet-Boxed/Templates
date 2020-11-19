@@ -5,6 +5,7 @@ namespace ApiTemplate
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
+    using ApiTemplate.Options;
     using Boxed.AspNetCore;
 #if ApplicationInsights
     using Microsoft.ApplicationInsights.Extensibility;
@@ -76,7 +77,12 @@ namespace ApiTemplate
 
         private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
             webHostBuilder
-                .UseKestrel((builderContext, options) => options.AddServerHeader = false)
+                .UseKestrel(
+                    (builderContext, options) =>
+                    {
+                        options.AddServerHeader = false;
+                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
+                    })
 #if Azure
                 .UseAzureAppServices()
 #endif
