@@ -22,6 +22,7 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+**/launchSettings.json
 LICENSE
 README.md
 TODO.html
