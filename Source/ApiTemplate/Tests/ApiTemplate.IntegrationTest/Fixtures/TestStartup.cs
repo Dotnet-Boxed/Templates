@@ -25,8 +25,6 @@ namespace ApiTemplate.IntegrationTest.Fixtures
                 .AddSingleton(this.carRepositoryMock)
                 .AddSingleton(this.clockServiceMock);
 
-            base.ConfigureServices(services);
-
             services
                 .AddSingleton(this.carRepositoryMock.Object)
                 .AddSingleton(this.clockServiceMock.Object);
