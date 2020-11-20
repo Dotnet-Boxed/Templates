@@ -17,10 +17,6 @@
     <TargetFramework>net5.0</TargetFramework>
     <!-- Trim unused assemblies from the published output: https://devblogs.microsoft.com/dotnet/app-trimming-in-net-5/ -->
     <PublishTrimmed>true</PublishTrimmed>
-    <!--#if (Swagger)-->
-    <!-- CS1591 - Don't warn about all public members not being documented. -->
-    <!--#endif-->
-    <NoWarn Condition="'$(Swagger)' == 'true'">$(NoWarn);CS1591</NoWarn>
     <GenerateDocumentationFile Condition="'$(Swagger)' == 'true'">true</GenerateDocumentationFile>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.

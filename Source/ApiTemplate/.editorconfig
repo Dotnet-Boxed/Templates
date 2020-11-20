@@ -408,6 +408,16 @@ dotnet_naming_rule.parameters_rule.symbols              = parameters_group
 dotnet_naming_rule.parameters_rule.style                = camel_case_style
 dotnet_naming_rule.parameters_rule.severity             = warning
 
+#if (Swagger)
+##########################################
+# Code Style
+##########################################
+
+# CS1591: Missing XML comment for publicly visible type or member.
+# Justification: We only need comments for members that will be exposed publicly in Swagger.
+dotnet_diagnostic.CS1591.severity = none
+
+#endif
 #if (StyleCop)
 ##########################################
 # StyleCop
