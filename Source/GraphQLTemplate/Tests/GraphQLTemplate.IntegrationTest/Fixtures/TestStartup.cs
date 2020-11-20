@@ -19,8 +19,6 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
             services
                 .AddSingleton(this.clockServiceMock);
 
-            base.ConfigureServices(services);
-
             services
                 .AddSingleton(this.clockServiceMock.Object);
         }
