@@ -129,7 +129,7 @@ Task("Pack")
     .Does(() =>
     {
         DotNetCorePack(
-            GetFiles(templatePackProject).Single().ToString(),
+            GetFiles(templatePackProject.ToString()).Single().ToString(),
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
