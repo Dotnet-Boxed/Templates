@@ -1,11 +1,13 @@
 namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 {
+    using System.Threading.Tasks;
     using Orleans.TestingHost;
     using Serilog;
     using Serilog.Events;
+    using Xunit;
     using Xunit.Abstractions;
 
-    public class ClusterFixture : Disposable
+    public class ClusterFixture : IAsyncLifetime
     {
         public ClusterFixture(ITestOutputHelper testOutputHelper)
         {
@@ -16,23 +18,18 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
                 .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
                 .CreateLogger();
 
-            this.Cluster = this.CreateTestCluster();
-            this.Cluster.Deploy();
+            this.Cluster = new TestClusterBuilder()
+                .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
+                .AddSiloBuilderConfigurator<TestSiloConfigurator>()
+                .Build();
         }
 
         public TestCluster Cluster { get; }
 
         public ITestOutputHelper TestOutputHelper { get; }
 
-#pragma warning disable CA1822 // Mark members as static
-        public TestCluster CreateTestCluster() =>
-#pragma warning restore CA1822 // Mark members as static
-            new TestClusterBuilder()
-                .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
-                .AddSiloBuilderConfigurator<TestSiloConfigurator>()
-                .Build();
+        public Task DisposeAsync() => this.Cluster.DisposeAsync().AsTask();
 
-        // Switch to IAsyncDisposable.DisposeAsync and call Cluster.DisposeAsync in the next Orleans update.
-        protected override void DisposeManaged() => this.Cluster.Dispose();
+        public Task InitializeAsync() => this.Cluster.DeployAsync();
     }
 }
