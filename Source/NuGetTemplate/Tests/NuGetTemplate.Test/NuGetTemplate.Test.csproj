@@ -4,19 +4,25 @@
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
     <DefineConstants>$(DefineConstants);</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
-    <DotnetFramework>false</DotnetFramework>
+    <Framework>net5.0</Framework>
   </PropertyGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework Condition="'$(DotnetFramework)' == 'false'">net5.0</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net48'">net48</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net472'">net472</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net471'">net471</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net47'">net47</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net462'">net462</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net461'">net461</TargetFramework>
-    <TargetFramework Condition="'$(DotnetFramework)' == 'true' AND '$(Framework)' == 'net46'">net46</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net5.0'">net5.0</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netstandard2.1'">net5.0</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netstandard2.0'">net5.0</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netcoreapp3.1'">netcoreapp3.1</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netcoreapp3.0'">netcoreapp3.0</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netcoreapp2.2'">netcoreapp2.2</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'netcoreapp2.1'">netcoreapp2.1</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net48'">net48</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net472'">net472</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net471'">net471</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net47'">net47</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net462'">net462</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net461'">net461</TargetFramework>
+    <TargetFramework Condition="'$(Framework)' == 'net46'">net46</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Label="Project References">
