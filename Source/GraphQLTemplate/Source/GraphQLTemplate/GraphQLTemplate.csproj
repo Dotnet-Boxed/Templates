@@ -14,8 +14,6 @@
 
   <PropertyGroup Label="Build">
     <TargetFramework>net5.0</TargetFramework>
-    <!-- Trim unused assemblies from the published output: https://devblogs.microsoft.com/dotnet/app-trimming-in-net-5/ -->
-    <PublishTrimmed>true</PublishTrimmed>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
