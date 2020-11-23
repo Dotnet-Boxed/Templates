@@ -20,11 +20,19 @@ namespace Boxed.Templates.FunctionalTest
                 throw new ArgumentNullException(nameof(httpsClient));
             }
 
-            var response = await httpsClient
-                .GetAsync(new Uri("/status/self", UriKind.Relative))
-                .ConfigureAwait(false);
-            LogStatusCode(response.StatusCode);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var response = await httpsClient
+                    .GetAsync(new Uri("/status/self", UriKind.Relative))
+                    .ConfigureAwait(false);
+                LogStatusCode(response.StatusCode);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                return false;
+            }
         }
 
         public static async Task<bool> StatusSelfOverHttpAsync(HttpClient httpClient, HttpClient httpsClient)
@@ -39,11 +47,19 @@ namespace Boxed.Templates.FunctionalTest
                 throw new ArgumentNullException(nameof(httpsClient));
             }
 
-            var response = await httpClient
-                .GetAsync(new Uri("/status/self", UriKind.Relative))
-                .ConfigureAwait(false);
-            LogStatusCode(response.StatusCode);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var response = await httpClient
+                    .GetAsync(new Uri("/status/self", UriKind.Relative))
+                    .ConfigureAwait(false);
+                LogStatusCode(response.StatusCode);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                return false;
+            }
         }
 
         public static async Task<bool> FaviconAsync(HttpClient httpClient, HttpClient httpsClient)
@@ -58,14 +74,25 @@ namespace Boxed.Templates.FunctionalTest
                 throw new ArgumentNullException(nameof(httpsClient));
             }
 
-            var response = await httpsClient
-                .GetAsync(new Uri("/favicon.ico", UriKind.Relative))
-                .ConfigureAwait(false);
-            LogStatusCode(response.StatusCode);
-            return response.IsSuccessStatusCode;
+            try
+            {
+                var response = await httpsClient
+                    .GetAsync(new Uri("/favicon.ico", UriKind.Relative))
+                    .ConfigureAwait(false);
+                LogStatusCode(response.StatusCode);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception exception)
+            {
+                LogException(exception);
+                return false;
+            }
         }
 
         private static void LogStatusCode(HttpStatusCode statusCode) =>
             TestLogger.WriteMessage($"Waiting for app to start. Readiness check returned {(int)statusCode}.");
+
+        private static void LogException(Exception exception) =>
+            TestLogger.WriteMessage($"Waiting for app to start. Readiness check threw {exception.GetType().Name}.{Environment.NewLine}{exception}");
     }
 }
