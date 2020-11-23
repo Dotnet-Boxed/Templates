@@ -28,23 +28,33 @@ namespace GraphQLTemplate
                 throw new ArgumentNullException(nameof(host));
             }
 
-            host.Services.GetRequiredService<IHostEnvironment>().ApplicationName =
-                Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+            hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
 
             Log.Logger = CreateLogger(host);
 
             try
             {
-                Log.Information("Started application");
+                Log.Information(
+                    "Started {Application} in {Environment} mode.",
+                    hostEnvironment.ApplicationName,
+                    hostEnvironment.EnvironmentName);
                 await host.RunAsync().ConfigureAwait(false);
-                Log.Information("Stopped application");
+                Log.Information(
+                    "Stopped {Application} in {Environment} mode.",
+                    hostEnvironment.ApplicationName,
+                    hostEnvironment.EnvironmentName);
                 return 0;
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                Log.Fatal(exception, "Application terminated unexpectedly");
+                Log.Fatal(
+                    exception,
+                    "{Application} terminated unexpectedly in {Environment} mode.",
+                    hostEnvironment.ApplicationName,
+                    hostEnvironment.EnvironmentName);
                 return 1;
             }
             finally
