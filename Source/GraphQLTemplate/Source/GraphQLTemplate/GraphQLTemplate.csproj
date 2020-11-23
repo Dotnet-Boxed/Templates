@@ -65,7 +65,6 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Serilog.Sinks.EventLog" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
