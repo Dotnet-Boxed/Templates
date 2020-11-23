@@ -79,7 +79,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, "GraphQLTDefaults").ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, "GraphQLTDefaults", DefaultArguments.ToArguments())
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
@@ -173,7 +175,9 @@ namespace Boxed.Templates.FunctionalTest
             await InstallTemplateAsync().ConfigureAwait(false);
             using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
-                var project = await tempDirectory.DotnetNewAsync(TemplateName, "GraphQLTDefaults").ConfigureAwait(false);
+                var project = await tempDirectory
+                    .DotnetNewAsync(TemplateName, "GraphQLTDefaults", DefaultArguments.ToArguments())
+                    .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
