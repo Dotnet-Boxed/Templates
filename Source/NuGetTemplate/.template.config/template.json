@@ -146,7 +146,6 @@
           "description": ".NET Framework 4.6 (net46)"
         }
       ],
-      "replaces": "net5.0",
       "defaultValue": "net5.0"
     },
     "DotnetFramework": {
