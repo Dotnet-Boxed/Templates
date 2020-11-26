@@ -4,7 +4,6 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using System.Net.Http;
     using System.Threading.Tasks;
     using GraphQLTemplate.IntegrationTest.Constants;
-    using GraphQLTemplate.IntegrationTest.Fixtures;
     using GraphQLTemplate.IntegrationTest.Models;
     using Xunit;
     using Xunit.Abstractions;

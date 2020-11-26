@@ -10,7 +10,6 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using ApiTemplate.IntegrationTest.Fixtures;
     using ApiTemplate.ViewModels;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Http;
