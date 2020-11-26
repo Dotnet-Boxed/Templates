@@ -21,6 +21,8 @@ namespace Boxed.Templates.FunctionalTest
         private static readonly string[] DefaultArguments = new string[]
         {
             "no-open-todo=true",
+            "https-port={HTTPS_PORT}",
+            "http-port={HTTP_PORT}",
         };
 
         public ApiTemplateTest(ITestOutputHelper testOutputHelper)

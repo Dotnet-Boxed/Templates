@@ -15,6 +15,7 @@ namespace Boxed.Templates.FunctionalTest
         {
             "no-install-storage-emulator=true",
             "no-start-storage-emulator=true",
+            "http-port={HTTP_PORT}",
         };
 
         public OrleansTemplateTest(ITestOutputHelper testOutputHelper)
