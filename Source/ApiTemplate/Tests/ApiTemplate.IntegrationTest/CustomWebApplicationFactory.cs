@@ -1,4 +1,4 @@
-namespace ApiTemplate.IntegrationTest.Fixtures
+namespace ApiTemplate.IntegrationTest
 {
     using System;
     using System.Net.Http;
@@ -8,7 +8,6 @@ namespace ApiTemplate.IntegrationTest.Fixtures
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
     using Moq;
     using Serilog;
@@ -33,9 +32,9 @@ namespace ApiTemplate.IntegrationTest.Fixtures
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        public Mock<ICarRepository> CarRepositoryMock { get; private set; }
+        public Mock<ICarRepository> CarRepositoryMock { get; } = new Mock<ICarRepository>(MockBehavior.Strict);
 
-        public Mock<IClockService> ClockServiceMock { get; private set; }
+        public Mock<IClockService> ClockServiceMock { get; } = new Mock<IClockService>(MockBehavior.Strict);
 
         public void VerifyAllMocks() => Mock.VerifyAll(this.CarRepositoryMock, this.ClockServiceMock);
 
@@ -45,8 +44,6 @@ namespace ApiTemplate.IntegrationTest.Fixtures
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
-                this.CarRepositoryMock = serviceProvider.GetRequiredService<Mock<ICarRepository>>();
-                this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
             }
 
             base.ConfigureClient(client);
@@ -55,7 +52,12 @@ namespace ApiTemplate.IntegrationTest.Fixtures
         protected override void ConfigureWebHost(IWebHostBuilder builder) =>
             builder
                 .UseEnvironment("Test")
-                .UseStartup<TestStartup>();
+                .ConfigureServices(this.ConfigureServices);
+
+        protected virtual void ConfigureServices(IServiceCollection services) =>
+            services
+                .AddSingleton(this.CarRepositoryMock.Object)
+                .AddSingleton(this.ClockServiceMock.Object);
 
         protected override void Dispose(bool disposing)
         {

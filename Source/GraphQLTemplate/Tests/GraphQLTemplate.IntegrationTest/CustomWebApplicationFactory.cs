@@ -1,4 +1,4 @@
-namespace GraphQLTemplate.IntegrationTest.Fixtures
+namespace GraphQLTemplate.IntegrationTest
 {
     using System;
     using System.Net.Http;
@@ -32,7 +32,7 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
 
         public ApplicationOptions ApplicationOptions { get; private set; }
 
-        public Mock<IClockService> ClockServiceMock { get; private set; }
+        public Mock<IClockService> ClockServiceMock { get; } = new Mock<IClockService>(MockBehavior.Strict);
 
         public void VerifyAllMocks() => Mock.VerifyAll(this.ClockServiceMock);
 
@@ -42,7 +42,6 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
-                this.ClockServiceMock = serviceProvider.GetRequiredService<Mock<IClockService>>();
             }
 
             base.ConfigureClient(client);
@@ -51,7 +50,10 @@ namespace GraphQLTemplate.IntegrationTest.Fixtures
         protected override void ConfigureWebHost(IWebHostBuilder builder) =>
             builder
                 .UseEnvironment("Test")
-                .UseStartup<TestStartup>();
+                .ConfigureServices(this.ConfigureServices);
+
+        protected virtual void ConfigureServices(IServiceCollection services) =>
+            services.AddSingleton(this.ClockServiceMock.Object);
 
         protected override void Dispose(bool disposing)
         {
