@@ -65,6 +65,9 @@ namespace ApiTemplate
 #if HealthCheck
                 .AddCustomHealthChecks()
 #endif
+#if OpenTelemetry
+                .AddCustomOpenTelemetryTracing()
+#endif
 #if Swagger
                 .AddCustomSwagger()
 #endif
