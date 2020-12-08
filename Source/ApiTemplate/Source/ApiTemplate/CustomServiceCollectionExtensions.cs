@@ -40,6 +40,9 @@ namespace ApiTemplate
 #if Swagger
     using Microsoft.OpenApi.Models;
 #endif
+#if OpenTelemetry
+    using OpenTelemetry.Trace;
+#endif
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
@@ -199,6 +202,21 @@ namespace ApiTemplate
                         options.ReportApiVersions = true;
                     })
                 .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
+#endif
+#if OpenTelemetry
+
+        /// <summary>
+        /// Adds Open Telemetry services and configures instrumentation and exporters.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>The services with open telemetry added.</returns>
+        public static IServiceCollection AddCustomOpenTelemetryTracing(this IServiceCollection services) =>
+            services.AddOpenTelemetryTracing(
+                builder =>
+                {
+                    builder.AddAspNetCoreInstrumentation(options => options.RecordException = true);
+                    // TODO: Add OpenTelemetry.Exporter.* NuGet packages and configure them here to export open telemetry span data.
+                });
 #endif
 #if Swagger
 
