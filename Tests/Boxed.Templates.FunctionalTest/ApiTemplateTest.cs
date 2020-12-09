@@ -43,6 +43,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("ApiNoHostFiltering", "host-filtering=false")]
         [InlineData("ApiNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
         [InlineData("ApiStyleCop", "style-cop=true")]
+        [InlineData("ApiOpenTelemetry", "open-telemetry=false")]
         public async Task RestoreBuildTest_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
