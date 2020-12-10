@@ -63,13 +63,19 @@ Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
+        var buildSettings = new DotNetCoreMSBuildSettings();
+        if (!BuildSystem.IsLocalBuild)
+        {
+            buildSettings.WithProperty("ContinuousIntegrationBuild", "true");
+        }
+
         DotNetCorePack(
             ".",
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
                 IncludeSymbols = true,
-                MSBuildSettings = new DotNetCoreMSBuildSettings().WithProperty("SymbolPackageFormat", "snupkg"),
+                MSBuildSettings = buildSettings,
                 NoBuild = true,
                 NoRestore = true,
                 OutputDirectory = artefactsDirectory,
