@@ -11,6 +11,7 @@
 
   <PropertyGroup Label="Build">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing" Condition="'$(Sign)' == 'true'">
