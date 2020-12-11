@@ -60,6 +60,10 @@
       "isVisible": true
     },
     {
+      "id": "OpenTelemetry",
+      "isVisible": true
+    },
+    {
       "id": "Analytics",
       "isVisible": true
     },

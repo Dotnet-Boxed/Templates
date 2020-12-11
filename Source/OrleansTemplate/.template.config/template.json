@@ -203,6 +203,12 @@
       "defaultValue": "true",
       "description": "Treat warnings as errors."
     },
+    "OpenTelemetry": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard."
+    },
     "Analytics": {
       "type": "parameter",
       "datatype": "choice",

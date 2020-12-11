@@ -12,6 +12,9 @@ namespace OrleansTemplate.Server
         public virtual void ConfigureServices(IServiceCollection services) =>
             services
                 .AddRouting()
+#if OpenTelemetry
+                .AddCustomOpenTelemetryTracing()
+#endif
                 .AddHealthChecks()
                 .AddCheck<ClusterHealthCheck>(nameof(ClusterHealthCheck))
                 .AddCheck<GrainHealthCheck>(nameof(GrainHealthCheck))
