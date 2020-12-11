@@ -34,6 +34,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("OrleansDefaults")]
         [InlineData("OrleansStyleCop", "style-cop=true")]
         [InlineData("OrleansNoHealthCheck", "health-check=false")]
+        [InlineData("OrleansOpenTelemetry", "open-telemetry=false")]
         public async Task RestoreBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
