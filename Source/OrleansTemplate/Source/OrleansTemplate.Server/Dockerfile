@@ -4,7 +4,7 @@
 # docker buildx build --progress plain --file "Source\OrleansTemplate.Server\Dockerfile" --tag orleans .
 
 # SDK image used to build and publish the application
-FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS sdk
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS sdk
 # To use the debug build configuration pass --build-arg Configuration=Debug
 ARG Configuration=Release
 ENV DOTNET_CLI_TELEMETRY_OPTOUT=true \
