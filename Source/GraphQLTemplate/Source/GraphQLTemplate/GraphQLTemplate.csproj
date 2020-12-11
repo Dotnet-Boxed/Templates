@@ -2,11 +2,12 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <Authorization>true</Authorization>
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
+    <OpenTelemetry>true</OpenTelemetry>
     <StyleCop>true</StyleCop>
     <Docker>true</Docker>
   </PropertyGroup>
@@ -57,11 +58,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc1.1" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc1.1" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
-    <PackageReference Include="Serilog.Enrichers.Span" Version="1.0.1" />
+    <PackageReference Include="Serilog.Enrichers.Span" Version="1.0.1" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />

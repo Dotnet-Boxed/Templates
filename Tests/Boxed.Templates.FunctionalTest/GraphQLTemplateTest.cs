@@ -42,6 +42,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("GraphQLTNoHostFiltering", "host-filtering=false")]
         [InlineData("GraphQLTNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
         [InlineData("GraphQLStyleCop", "style-cop=true")]
+        [InlineData("GraphQLOpenTelemetry", "open-telemetry=false")]
         public async Task RestoreBuildTest_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
