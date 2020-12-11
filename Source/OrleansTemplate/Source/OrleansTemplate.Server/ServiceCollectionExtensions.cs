@@ -9,7 +9,7 @@ namespace OrleansTemplate.Server
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
     /// </summary>
-    public static class AddCustomServiceCollectionExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds Open Telemetry services and configures instrumentation and exporters.
