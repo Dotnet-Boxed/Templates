@@ -90,6 +90,10 @@
       "isVisible": true
     },
     {
+      "id": "OpenTelemetry",
+      "isVisible": true
+    },
+    {
       "id": "Analytics",
       "isVisible": true
     },
@@ -178,6 +182,6 @@
         "text": "GitHub Actions"
       },
       "isVisible": true
-    },
+    }
   ]
 }
