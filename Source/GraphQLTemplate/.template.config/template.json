@@ -138,6 +138,12 @@
             ".github/workflows/release-drafter.yml",
             ".github/release-drafter.yml"
           ]
+        },
+        {
+          "condition": "(!OpenTelemetry)",
+          "exclude": [
+            "Source/GraphQLTemplate/Constants/OpenTelemetryAttributeName.cs"
+          ]
         }
       ]
     }

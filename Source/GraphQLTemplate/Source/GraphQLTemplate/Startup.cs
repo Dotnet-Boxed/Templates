@@ -65,6 +65,9 @@ namespace GraphQLTemplate
 #if HealthCheck
                 .AddCustomHealthChecks()
 #endif
+#if OpenTelemetry
+                .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
+#endif
                 .AddHttpContextAccessor()
                 .AddServerTiming()
                 .AddControllers()

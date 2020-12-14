@@ -85,6 +85,7 @@
         {
           "condition": "(!OpenTelemetry)",
           "exclude": [
+            "Source/OrleansTemplate.Abstractions/Constants/**/*",
             "Source/OrleansTemplate.Server/ServiceCollectionExtensions.cs"
           ]
         }
