@@ -1,10 +1,16 @@
 namespace OrleansTemplate.Server
 {
     using System;
+    using System.Linq;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.HttpOverrides;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using OpenTelemetry;
+    using OpenTelemetry.Exporter;
+    using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
+    using OrleansTemplate.Abstractions.Constants;
 
     /// <summary>
     /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
@@ -15,12 +21,14 @@ namespace OrleansTemplate.Server
         /// Adds Open Telemetry services and configures instrumentation and exporters.
         /// </summary>
         /// <param name="services">The services.</param>
+        /// <param name="webHostEnvironment">The environment the application is running under.</param>
         /// <returns>The services with open telemetry added.</returns>
-        public static IServiceCollection AddCustomOpenTelemetryTracing(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomOpenTelemetryTracing(this IServiceCollection services, IWebHostEnvironment webHostEnvironment) =>
             services.AddOpenTelemetryTracing(
                 builder =>
                 {
                     builder
+                        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(webHostEnvironment.ApplicationName))
                         .AddAspNetCoreInstrumentation(
                             options =>
                             {
@@ -30,16 +38,24 @@ namespace OrleansTemplate.Server
                                 {
                                     if (obj is HttpRequest request)
                                     {
-                                        activity.AddTag("http.flavor", GetHttpFlavour(request.Protocol));
-                                        activity.AddTag("http.scheme", request.Scheme);
-                                        activity.AddTag("http.client_ip", request.Headers[ForwardedHeadersDefaults.XForwardedForHeaderName]);
-                                        activity.AddTag("http.request_content_length", request.ContentLength);
-                                        activity.AddTag("http.request_content_type", request.ContentType);
+                                        var context = request.HttpContext;
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.Flavor, GetHttpFlavour(request.Protocol));
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.Scheme, request.Scheme);
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
+
+                                        var user = context.User;
+                                        if (user.Identity.Name is not null)
+                                        {
+                                            activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
+                                            activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
+                                        }
                                     }
                                     else if (obj is HttpResponse response)
                                     {
-                                        activity.AddTag("http.response_content_length", response.ContentLength);
-                                        activity.AddTag("http.response_content_type", response.ContentType);
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
+                                        activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
                                     }
 
                                     static string GetHttpFlavour(string protocol)
@@ -66,10 +82,16 @@ namespace OrleansTemplate.Server
                                 };
                                 options.RecordException = true;
                             });
+
+                    if (webHostEnvironment.IsDevelopment())
+                    {
+                        builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Debug);
+                    }
+
                     // TODO: Add OpenTelemetry.Instrumentation.* NuGet packages and configure them to collect more span data.
-                    //       E.g. add OpenTelemetry.Instrumentation.Http to instrument calls to HttpClient.
+                    //       E.g. Add the OpenTelemetry.Instrumentation.Http package to instrument calls to HttpClient.
                     // TODO: Add OpenTelemetry.Exporter.* NuGet packages and configure them here to export open telemetry span data.
-                    //       E.g. Add OpenTelemetry.Exporter.Jaeger to export span data to Jaeger.
+                    //       E.g. Add the OpenTelemetry.Exporter.OpenTelemetryProtocol package to export span data to Jaeger.
                 });
     }
 }
