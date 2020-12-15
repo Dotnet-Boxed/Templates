@@ -31,7 +31,7 @@ namespace Boxed.Templates.FunctionalTest
         [Theory]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
-        [InlineData("OrleansOpenTelemetry", "open-telemetry=false")]
+        [InlineData("OrleansOpenTelemetry", "open-telemetry=true")]
         public async Task RestoreBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);

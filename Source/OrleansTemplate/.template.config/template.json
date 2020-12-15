@@ -213,7 +213,7 @@
     "OpenTelemetry": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true",
+      "defaultValue": "false",
       "description": "Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard."
     },
     "Analytics": {
