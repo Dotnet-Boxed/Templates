@@ -25,7 +25,7 @@ namespace ApiTemplate.ViewModels
         /// <example>Honda</example>
 #endif
         [Required]
-        public string Make { get; set; }
+        public string Make { get; set; } = default!;
 
 #if Swagger
         /// <summary>
@@ -34,6 +34,6 @@ namespace ApiTemplate.ViewModels
         /// <example>Civic</example>
 #endif
         [Required]
-        public string Model { get; set; }
+        public string Model { get; set; } = default!;
     }
 }

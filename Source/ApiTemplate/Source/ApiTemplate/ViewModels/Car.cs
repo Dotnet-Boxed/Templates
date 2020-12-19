@@ -31,7 +31,7 @@ namespace ApiTemplate.ViewModels
         /// </summary>
         /// <example>Honda</example>
 #endif
-        public string Make { get; set; }
+        public string Make { get; set; } = default!;
 
 #if Swagger
         /// <summary>
@@ -39,7 +39,7 @@ namespace ApiTemplate.ViewModels
         /// </summary>
         /// <example>Civic</example>
 #endif
-        public string Model { get; set; }
+        public string Model { get; set; } = default!;
 
 #if Swagger
         /// <summary>
@@ -47,6 +47,6 @@ namespace ApiTemplate.ViewModels
         /// </summary>
         /// <example>/cars/1</example>
 #endif
-        public Uri Url { get; set; }
+        public Uri Url { get; set; } = default!;
     }
 }

@@ -252,7 +252,7 @@ namespace ApiTemplate
                                         activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
 
                                         var user = context.User;
-                                        if (user.Identity.Name is not null)
+                                        if (user.Identity?.Name is not null)
                                         {
                                             activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
                                             activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));

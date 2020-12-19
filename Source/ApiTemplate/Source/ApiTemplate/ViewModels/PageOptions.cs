@@ -33,7 +33,7 @@ namespace ApiTemplate.ViewModels
         /// </summary>
         /// <example></example>
 #endif
-        public string After { get; set; }
+        public string? After { get; set; }
 
 #if Swagger
         /// <summary>
@@ -41,6 +41,6 @@ namespace ApiTemplate.ViewModels
         /// </summary>
         /// <example></example>
 #endif
-        public string Before { get; set; }
+        public string? Before { get; set; }
     }
 }

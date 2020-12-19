@@ -118,7 +118,7 @@ namespace ApiTemplate
                     options.DisplayRequestDuration();
 
 #if Versioning
-                    var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
+                    var provider = application.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
                     foreach (var apiVersionDescription in provider
                         .ApiVersionDescriptions
                         .OrderByDescending(x => x.ApiVersion))

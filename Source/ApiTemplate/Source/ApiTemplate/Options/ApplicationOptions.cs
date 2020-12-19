@@ -20,18 +20,18 @@ namespace ApiTemplate.Options
 
 #if ResponseCompression
         [Required]
-        public CompressionOptions Compression { get; set; }
+        public CompressionOptions Compression { get; set; } = default!;
 
 #endif
 #if ForwardedHeaders
         [Required]
-        public ForwardedHeadersOptions ForwardedHeaders { get; set; }
+        public ForwardedHeadersOptions ForwardedHeaders { get; set; } = default!;
 
 #elif HostFiltering
         [Required]
-        public HostFilteringOptions HostFiltering { get; set; }
+        public HostFilteringOptions HostFiltering { get; set; } = default!;
 
 #endif
-        public KestrelServerOptions Kestrel { get; set; }
+        public KestrelServerOptions Kestrel { get; set; } = default!;
     }
 }

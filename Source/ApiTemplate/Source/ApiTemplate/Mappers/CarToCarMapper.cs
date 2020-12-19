@@ -37,9 +37,9 @@ namespace ApiTemplate.Mappers
             destination.Make = source.Make;
             destination.Model = source.Model;
             destination.Url = new Uri(this.linkGenerator.GetUriByRouteValues(
-                this.httpContextAccessor.HttpContext,
+                this.httpContextAccessor.HttpContext!,
                 CarsControllerRoute.GetCar,
-                new { source.CarId }));
+                new { source.CarId })!);
         }
     }
 }
