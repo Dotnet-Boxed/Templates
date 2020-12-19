@@ -30,7 +30,7 @@ namespace ApiTemplate.IntegrationTest
                 .CreateLogger();
         }
 
-        public ApplicationOptions ApplicationOptions { get; private set; }
+        public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
         public Mock<ICarRepository> CarRepositoryMock { get; } = new Mock<ICarRepository>(MockBehavior.Strict);
 

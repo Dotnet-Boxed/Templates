@@ -13,6 +13,7 @@
     <EnforceCodeStyleInBuild Condition="'$(EditorConfig)' == 'true'">true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Label="Versioning">

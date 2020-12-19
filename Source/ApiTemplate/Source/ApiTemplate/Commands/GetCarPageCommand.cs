@@ -72,41 +72,41 @@ namespace ApiTemplate.Commands
                     HasNextPage = hasNextPage,
                     HasPreviousPage = hasPreviousPage,
                     NextPageUrl = hasNextPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
-                        this.httpContextAccessor.HttpContext,
+                        this.httpContextAccessor.HttpContext!,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             First = pageOptions.First ?? pageOptions.Last,
                             After = endCursor,
-                        })) : null,
+                        })!) : null,
                     PreviousPageUrl = hasPreviousPage ? new Uri(this.linkGenerator.GetUriByRouteValues(
-                        this.httpContextAccessor.HttpContext,
+                        this.httpContextAccessor.HttpContext!,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             Last = pageOptions.First ?? pageOptions.Last,
                             Before = startCursor,
-                        })) : null,
+                        })!) : null,
                     FirstPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
-                        this.httpContextAccessor.HttpContext,
+                        this.httpContextAccessor.HttpContext!,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             First = pageOptions.First ?? pageOptions.Last,
-                        })),
+                        })!),
                     LastPageUrl = new Uri(this.linkGenerator.GetUriByRouteValues(
-                        this.httpContextAccessor.HttpContext,
+                        this.httpContextAccessor.HttpContext!,
                         CarsControllerRoute.GetCarPage,
                         new PageOptions()
                         {
                             Last = pageOptions.First ?? pageOptions.Last,
-                        })),
+                        })!),
                 },
                 TotalCount = totalCount,
             };
             connection.Items.AddRange(carViewModels);
 
-            this.httpContextAccessor.HttpContext.Response.Headers.Add(
+            this.httpContextAccessor.HttpContext!.Response.Headers.Add(
                 LinkHttpHeaderName,
                 connection.PageInfo.ToLinkHttpHeaderValue());
 

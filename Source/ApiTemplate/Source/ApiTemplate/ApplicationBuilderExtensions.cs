@@ -113,10 +113,10 @@ namespace ApiTemplate
                 options =>
                 {
                     // Set the Swagger UI browser document title.
-                    options.DocumentTitle = typeof(Startup)
-                        .Assembly
-                        .GetCustomAttribute<AssemblyProductAttribute>()
-                        .Product;
+                    var assembly = typeof(Startup).Assembly;
+                    options.DocumentTitle = assembly!
+                        .GetCustomAttribute<AssemblyProductAttribute>()?
+                         .Product;
                     // Set the Swagger UI to render at '/'.
                     options.RoutePrefix = string.Empty;
 
@@ -125,6 +125,11 @@ namespace ApiTemplate
 
 #if Versioning
                     var provider = application.ApplicationServices.GetService<IApiVersionDescriptionProvider>();
+                    if (provider is null)
+                    {
+                        throw new Exception($"{nameof(IApiVersionDescriptionProvider)} service is null.");
+                    }
+
                     foreach (var apiVersionDescription in provider
                         .ApiVersionDescriptions
                         .OrderByDescending(x => x.ApiVersion))

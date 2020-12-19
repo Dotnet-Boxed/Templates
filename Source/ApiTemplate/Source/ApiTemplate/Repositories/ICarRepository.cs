@@ -12,7 +12,7 @@ namespace ApiTemplate.Repositories
 
         Task DeleteAsync(Car car, CancellationToken cancellationToken);
 
-        Task<Car> GetAsync(int carId, CancellationToken cancellationToken);
+        Task<Car?> GetAsync(int carId, CancellationToken cancellationToken);
 
         Task<List<Car>> GetCarsAsync(
             int? first,
