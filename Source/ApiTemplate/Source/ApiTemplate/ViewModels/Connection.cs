@@ -25,7 +25,7 @@ namespace ApiTemplate.ViewModels
         /// Gets or sets the page information.
         /// </summary>
 #endif
-        public PageInfo PageInfo { get; set; }
+        public PageInfo PageInfo { get; set; } = default!;
 
 #if Swagger
         /// <summary>

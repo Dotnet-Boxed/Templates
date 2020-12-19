@@ -16,7 +16,7 @@ namespace ApiTemplate.Repositories
                 CarId = 1,
                 Created = DateTimeOffset.UtcNow.AddDays(-8),
                 Cylinders = 8,
-                Make = "Lambourghini",
+                Make = "Lamborghini",
                 Model = "Countach",
                 Modified = DateTimeOffset.UtcNow.AddDays(-8),
             },
@@ -89,7 +89,7 @@ namespace ApiTemplate.Repositories
             return Task.CompletedTask;
         }
 
-        public Task<Car> GetAsync(int carId, CancellationToken cancellationToken)
+        public Task<Car?> GetAsync(int carId, CancellationToken cancellationToken)
         {
             var car = Cars.FirstOrDefault(x => x.CarId == carId);
             return Task.FromResult(car);
@@ -102,9 +102,9 @@ namespace ApiTemplate.Repositories
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
                 .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .If(first.HasValue, x => x.Take(first.Value))
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
+                .If(first.HasValue, x => x.Take(first!.Value))
                 .ToList());
 
         public Task<List<Car>> GetCarsReverseAsync(
@@ -114,9 +114,9 @@ namespace ApiTemplate.Repositories
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
                 .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .If(last.HasValue, x => x.TakeLast(last.Value))
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
+                .If(last.HasValue, x => x.TakeLast(last!.Value))
                 .ToList());
 
         public Task<bool> GetHasNextPageAsync(
@@ -125,8 +125,8 @@ namespace ApiTemplate.Repositories
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
                 .OrderBy(x => x.Created)
-                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter.Value))
-                .Skip(first.Value)
+                .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
+                .If(first.HasValue, x => x.Skip(first!.Value))
                 .Any());
 
         public Task<bool> GetHasPreviousPageAsync(
@@ -135,8 +135,8 @@ namespace ApiTemplate.Repositories
             CancellationToken cancellationToken) =>
             Task.FromResult(Cars
                 .OrderBy(x => x.Created)
-                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore.Value))
-                .SkipLast(last.Value)
+                .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
+                .If(last.HasValue, x => x.SkipLast(last!.Value))
                 .Any());
 
         public Task<int> GetTotalCountAsync(CancellationToken cancellationToken) => Task.FromResult(Cars.Count);
@@ -148,7 +148,7 @@ namespace ApiTemplate.Repositories
                 throw new ArgumentNullException(nameof(car));
             }
 
-            var existingCar = Cars.FirstOrDefault(x => x.CarId == car.CarId);
+            var existingCar = Cars.First(x => x.CarId == car.CarId);
             existingCar.Cylinders = car.Cylinders;
             existingCar.Make = car.Make;
             existingCar.Model = car.Model;
