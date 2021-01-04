@@ -27,7 +27,7 @@
 
   <PropertyGroup Label="Docker" Condition="'$(Docker)' == 'true'">
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\</DockerfileContext>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
