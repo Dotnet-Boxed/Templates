@@ -24,9 +24,9 @@ namespace OrleansTemplate.Server.HealthChecks
 
             foreach (var participant in this.participants)
             {
-                if (!participant.CheckHealth(thisLastCheckTime))
+                if (!participant.CheckHealth(thisLastCheckTime, out var reason))
                 {
-                    return Task.FromResult(HealthCheckResult.Degraded());
+                    return Task.FromResult(HealthCheckResult.Degraded(reason));
                 }
             }
 
