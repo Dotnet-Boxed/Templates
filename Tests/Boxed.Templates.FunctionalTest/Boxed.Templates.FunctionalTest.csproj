@@ -10,7 +10,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.DotnetNewTest" Version="3.7.1" />
-    <PackageReference Include="coverlet.collector" PrivateAssets="all" Version="1.3.0">
+    <PackageReference Include="coverlet.collector" PrivateAssets="all" Version="3.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
