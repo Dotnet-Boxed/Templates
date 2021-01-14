@@ -35,7 +35,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
@@ -53,7 +53,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Cake_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))

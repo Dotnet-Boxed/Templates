@@ -47,7 +47,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTest_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
@@ -65,7 +65,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Cake_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
@@ -81,7 +81,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTestRun_ApiDefaults_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, "ApiDefaults", DefaultArguments.ToArguments())
@@ -168,7 +168,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTestRun_HealthCheckFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -205,7 +205,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTestRun_HttpsEverywhereFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -243,7 +243,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTestRun_SwaggerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
@@ -275,7 +275,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTestRun_DockerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
