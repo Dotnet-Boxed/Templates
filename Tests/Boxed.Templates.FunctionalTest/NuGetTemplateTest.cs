@@ -34,7 +34,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
@@ -58,7 +58,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task Cake_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
@@ -81,7 +81,7 @@ namespace Boxed.Templates.FunctionalTest
             params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(TemplateName, name, arguments.ToArguments())
@@ -104,7 +104,7 @@ namespace Boxed.Templates.FunctionalTest
         public async Task RestoreBuildTest_SignFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
-            using (var tempDirectory = TempDirectory.NewTempDirectory())
+            await using (var tempDirectory = TempDirectory.NewTempDirectory())
             {
                 var project = await tempDirectory
                     .DotnetNewAsync(
