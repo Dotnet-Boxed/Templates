@@ -3,6 +3,11 @@
 # Or you can use the experimental buildx command for a better experience:
 # docker buildx build --progress plain --file "Source\OrleansTemplate.Server\Dockerfile" --tag orleans .
 
+# Base image used by Visual Studio at development time
+# (See https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties)
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
+EXPOSE 80 11111 30000
+
 # SDK image used to build and publish the application
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS sdk
 # To use the debug build configuration pass --build-arg Configuration=Debug
@@ -25,7 +30,7 @@ RUN dotnet test --configuration $Configuration --no-build
 RUN dotnet publish "Source/OrleansTemplate.Server/OrleansTemplate.Server.csproj" --configuration $Configuration --no-build --output /app
 
 # Runtime image used to run the application
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS runtime
+FROM base AS runtime
 # Open Container Initiative (OCI) labels (See https://github.com/opencontainers/image-spec/blob/master/annotations.md).
 LABEL org.opencontainers.image.title="PROJECT-TITLE" \
     org.opencontainers.image.description="PROJECT-DESCRIPTION" \
@@ -44,6 +49,5 @@ RUN apk add --no-cache \
     # Install time zone database to enable use of System.TimeZoneInfo
     tzdata
 WORKDIR /app
-EXPOSE 80 11111 30000
 COPY --from=sdk /app .
 ENTRYPOINT ["dotnet", "OrleansTemplate.Server.dll"]
