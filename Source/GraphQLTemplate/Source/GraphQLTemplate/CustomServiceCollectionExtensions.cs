@@ -209,6 +209,11 @@ namespace GraphQLTemplate
                                 // See https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/http.md
                                 options.Enrich = (activity, eventName, obj) =>
                                 {
+                                    if (!activity.IsAllDataRequested)
+                                    {
+                                        return;
+                                    }
+
                                     if (obj is HttpRequest request)
                                     {
                                         var context = request.HttpContext;
