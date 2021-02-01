@@ -6,7 +6,6 @@ namespace OrleansTemplate.Server
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using OpenTelemetry;
     using OpenTelemetry.Exporter;
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
