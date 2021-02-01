@@ -34,7 +34,6 @@ namespace GraphQLTemplate
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 #if OpenTelemetry
-    using OpenTelemetry;
     using OpenTelemetry.Exporter;
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;

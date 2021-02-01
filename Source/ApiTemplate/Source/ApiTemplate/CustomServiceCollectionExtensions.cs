@@ -44,7 +44,6 @@ namespace ApiTemplate
     using Microsoft.OpenApi.Models;
 #endif
 #if OpenTelemetry
-    using OpenTelemetry;
     using OpenTelemetry.Exporter;
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
