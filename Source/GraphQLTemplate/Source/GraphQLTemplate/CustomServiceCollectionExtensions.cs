@@ -1,10 +1,12 @@
 namespace GraphQLTemplate
 {
     using System;
+    using System.Collections.Generic;
 #if ResponseCompression
     using System.IO.Compression;
 #endif
     using System.Linq;
+    using System.Reflection;
     using Boxed.AspNetCore;
     using GraphQL;
 #if Authorization
@@ -200,7 +202,17 @@ namespace GraphQLTemplate
                 builder =>
                 {
                     builder
-                        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(webHostEnvironment.ApplicationName))
+                        .SetResourceBuilder(ResourceBuilder
+                            .CreateDefault()
+                            .AddService(
+                                webHostEnvironment.ApplicationName,
+                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version)
+                            .AddAttributes(
+                                new KeyValuePair<string, object>[]
+                                {
+                                    new (OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
+                                    new (OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
+                                }))
                         .AddAspNetCoreInstrumentation(
                             options =>
                             {

@@ -7,6 +7,19 @@ namespace GraphQLTemplate.Constants
     public static class OpenTelemetryAttributeName
     {
         /// <summary>
+        /// Constants for deployment semantic attribute names outlined by the OpenTelemetry specifications.
+        /// <see href="https://github.com/open-telemetry/opentelemetry-specification/blob/11cc73939a32e3a2e6f11bdeab843c61cf8594e9/specification/resource/semantic_conventions/deployment_environment.md"/>.
+        /// </summary>
+        public static class Deployment
+        {
+            /// <summary>
+            /// The name of the deployment environment (aka deployment tier).
+            /// </summary>
+            /// <example>staging; production.</example>
+            public const string Environment = "deployment.environment";
+        }
+
+        /// <summary>
         /// Constants for end user semantic attribute names outlined by the OpenTelemetry specifications.
         /// <see href="https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/span-general.md"/>.
         /// </summary>
@@ -83,6 +96,20 @@ namespace GraphQLTemplate.Constants
             /// </summary>
             /// <example>E.g. application/json.</example>
             public const string ResponseContentType = "http.response_content_type";
+        }
+
+        /// <summary>
+        /// Constants for host semantic attribute names outlined by the OpenTelemetry specifications.
+        /// <see href="https://github.com/open-telemetry/opentelemetry-specification/blob/11cc73939a32e3a2e6f11bdeab843c61cf8594e9/specification/resource/semantic_conventions/host.md"/>.
+        /// </summary>
+        public static class Host
+        {
+            /// <summary>
+            /// Name of the host. On Unix systems, it may contain what the hostname command returns, or the fully qualified hostname,
+            /// or another name specified by the user.
+            /// </summary>
+            /// <example>E.g. opentelemetry-test.</example>
+            public const string Name = "host.name";
         }
 
         /// <summary>

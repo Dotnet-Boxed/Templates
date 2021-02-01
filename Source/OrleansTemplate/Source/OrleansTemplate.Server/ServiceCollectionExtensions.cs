@@ -1,7 +1,9 @@
 namespace OrleansTemplate.Server
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +29,17 @@ namespace OrleansTemplate.Server
                 builder =>
                 {
                     builder
-                        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(webHostEnvironment.ApplicationName))
+                        .SetResourceBuilder(ResourceBuilder
+                            .CreateDefault()
+                            .AddService(
+                                webHostEnvironment.ApplicationName,
+                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version)
+                            .AddAttributes(
+                                new KeyValuePair<string, object>[]
+                                {
+                                    new (OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
+                                    new (OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
+                                }))
                         .AddAspNetCoreInstrumentation(
                             options =>
                             {
