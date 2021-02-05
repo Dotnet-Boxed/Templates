@@ -48,7 +48,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="6.0.0" />
-    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="8.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Boxed.AspNetCore.Swagger" Version="9.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="5.2.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.16.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
@@ -67,8 +67,8 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
     <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.6.3" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.0.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
 </Project>
