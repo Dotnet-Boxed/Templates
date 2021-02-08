@@ -20,12 +20,12 @@ namespace ApiTemplate
     {
         public static IServiceCollection AddProjectCommands(this IServiceCollection services) =>
             services
-                .AddSingleton<IDeleteCarCommand, DeleteCarCommand>()
-                .AddSingleton<IGetCarCommand, GetCarCommand>()
-                .AddSingleton<IGetCarPageCommand, GetCarPageCommand>()
-                .AddSingleton<IPatchCarCommand, PatchCarCommand>()
-                .AddSingleton<IPostCarCommand, PostCarCommand>()
-                .AddSingleton<IPutCarCommand, PutCarCommand>();
+                .AddSingleton<DeleteCarCommand>()
+                .AddSingleton<GetCarCommand>()
+                .AddSingleton<GetCarPageCommand>()
+                .AddSingleton<PatchCarCommand>()
+                .AddSingleton<PostCarCommand>()
+                .AddSingleton<PutCarCommand>();
 
         public static IServiceCollection AddProjectMappers(this IServiceCollection services) =>
             services

@@ -10,7 +10,7 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-    public class PatchCarCommand : IPatchCarCommand
+    public class PatchCarCommand
     {
         private readonly IActionContextAccessor actionContextAccessor;
         private readonly IObjectModelValidator objectModelValidator;

@@ -8,7 +8,7 @@ namespace ApiTemplate.Commands
     using Boxed.Mapping;
     using Microsoft.AspNetCore.Mvc;
 
-    public class PostCarCommand : IPostCarCommand
+    public class PostCarCommand
     {
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carToCarMapper;

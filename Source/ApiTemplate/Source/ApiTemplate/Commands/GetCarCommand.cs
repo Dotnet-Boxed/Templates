@@ -12,7 +12,7 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Mvc.Infrastructure;
     using Microsoft.Net.Http.Headers;
 
-    public class GetCarCommand : IGetCarCommand
+    public class GetCarCommand
     {
         private readonly IActionContextAccessor actionContextAccessor;
         private readonly ICarRepository carRepository;

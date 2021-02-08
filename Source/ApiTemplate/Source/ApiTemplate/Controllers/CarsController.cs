@@ -83,7 +83,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier was not found.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> DeleteAsync(
-            [FromServices] IDeleteCarCommand command,
+            [FromServices] DeleteCarCommand command,
             int carId,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
@@ -104,7 +104,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> GetAsync(
-            [FromServices] IGetCarCommand command,
+            [FromServices] GetCarCommand command,
             int carId,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
@@ -126,7 +126,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> GetPageAsync(
-            [FromServices] IGetCarPageCommand command,
+            [FromServices] GetCarPageCommand command,
             [FromQuery] PageOptions pageOptions,
             CancellationToken cancellationToken) => command.ExecuteAsync(pageOptions, cancellationToken);
 
@@ -148,7 +148,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> PatchAsync(
-            [FromServices] IPatchCarCommand command,
+            [FromServices] PatchCarCommand command,
             int carId,
             [FromBody] JsonPatchDocument<SaveCar> patch,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, patch, cancellationToken);
@@ -169,7 +169,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> PostAsync(
-            [FromServices] IPostCarCommand command,
+            [FromServices] PostCarCommand command,
             [FromBody] SaveCar car,
             CancellationToken cancellationToken) => command.ExecuteAsync(car, cancellationToken);
 
@@ -191,7 +191,7 @@ namespace ApiTemplate.Controllers
         [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
 #endif
         public Task<IActionResult> PutAsync(
-            [FromServices] IPutCarCommand command,
+            [FromServices] PutCarCommand command,
             int carId,
             [FromBody] SaveCar car,
             CancellationToken cancellationToken) => command.ExecuteAsync(carId, car, cancellationToken);
