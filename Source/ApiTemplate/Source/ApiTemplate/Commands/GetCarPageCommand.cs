@@ -13,7 +13,7 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    public class GetCarPageCommand : IGetCarPageCommand
+    public class GetCarPageCommand
     {
         private const string LinkHttpHeaderName = "Link";
         private const int DefaultPageSize = 3;

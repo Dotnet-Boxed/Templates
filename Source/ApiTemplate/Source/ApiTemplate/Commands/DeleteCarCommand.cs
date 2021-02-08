@@ -5,7 +5,7 @@ namespace ApiTemplate.Commands
     using ApiTemplate.Repositories;
     using Microsoft.AspNetCore.Mvc;
 
-    public class DeleteCarCommand : IDeleteCarCommand
+    public class DeleteCarCommand
     {
         private readonly ICarRepository carRepository;
 
