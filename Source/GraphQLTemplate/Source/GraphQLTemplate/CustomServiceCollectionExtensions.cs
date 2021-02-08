@@ -210,8 +210,8 @@ namespace GraphQLTemplate
                             .AddAttributes(
                                 new KeyValuePair<string, object>[]
                                 {
-                                    new (OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
-                                    new (OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
+                                    new(OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
+                                    new(OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
                                 }))
                         .AddAspNetCoreInstrumentation(
                             options =>

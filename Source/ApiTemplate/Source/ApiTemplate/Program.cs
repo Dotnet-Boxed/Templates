@@ -28,7 +28,7 @@ namespace ApiTemplate
             }
 
             var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-            hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+            hostEnvironment.ApplicationName = AssemblyInformation.Current.Product;
 
             Log.Logger = CreateLogger(host);
 

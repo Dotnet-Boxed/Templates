@@ -2,9 +2,6 @@ namespace ApiTemplate
 {
     using System;
     using System.Linq;
-#if Versioning
-    using System.Reflection;
-#endif
     using ApiTemplate.Constants;
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
@@ -113,10 +110,7 @@ namespace ApiTemplate
                 options =>
                 {
                     // Set the Swagger UI browser document title.
-                    options.DocumentTitle = typeof(Startup)
-                        .Assembly
-                        .GetCustomAttribute<AssemblyProductAttribute>()
-                        .Product;
+                    options.DocumentTitle = AssemblyInformation.Current.Product;
                     // Set the Swagger UI to render at '/'.
                     options.RoutePrefix = string.Empty;
 

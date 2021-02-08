@@ -6,9 +6,6 @@ namespace ApiTemplate
     using System.IO.Compression;
 #endif
     using System.Linq;
-#if Swagger
-    using System.Reflection;
-#endif
 #if CORS
     using ApiTemplate.Constants;
 #endif
@@ -226,12 +223,12 @@ namespace ApiTemplate
                             .CreateDefault()
                             .AddService(
                                 webHostEnvironment.ApplicationName,
-                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version)
+                                serviceVersion: AssemblyInformation.Current.Version)
                             .AddAttributes(
                                 new KeyValuePair<string, object>[]
                                 {
-                                    new (OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
-                                    new (OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
+                                    new(OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
+                                    new(OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
                                 }))
                         .AddAspNetCoreInstrumentation(
                             options =>
@@ -314,15 +311,11 @@ namespace ApiTemplate
             services.AddSwaggerGen(
                 options =>
                 {
-                    var assembly = typeof(Startup).Assembly;
-                    var assemblyProduct = assembly.GetCustomAttribute<AssemblyProductAttribute>().Product;
-                    var assemblyDescription = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
-
                     options.DescribeAllParametersInCamelCase();
                     options.EnableAnnotations();
 
                     // Add the XML comment file for this assembly, so its contents can be displayed.
-                    options.IncludeXmlCommentsIfExists(assembly);
+                    options.IncludeXmlCommentsIfExists(typeof(Startup).Assembly);
 
 #if Versioning
                     options.OperationFilter<ApiVersionOperationFilter>();
@@ -340,10 +333,10 @@ namespace ApiTemplate
                     {
                         var info = new OpenApiInfo()
                         {
-                            Title = assemblyProduct,
+                            Title = AssemblyInformation.Current.Product,
                             Description = apiVersionDescription.IsDeprecated ?
-                                $"{assemblyDescription} This API version has been deprecated." :
-                                assemblyDescription,
+                                $"{AssemblyInformation.Current.Description} This API version has been deprecated." :
+                                AssemblyInformation.Current.Description,
                             Version = apiVersionDescription.ApiVersion.ToString(),
                         };
                         options.SwaggerDoc(apiVersionDescription.GroupName, info);
@@ -351,8 +344,8 @@ namespace ApiTemplate
 #else
                     var info = new Info()
                     {
-                        Title = assemblyProduct,
-                        Description = assemblyDescription,
+                        Title = AssemblyInformation.Current.Product,
+                        Description = AssemblyInformation.Current.Description,
                         Version = "v1"
                     };
                     options.SwaggerDoc("v1", info);
