@@ -8,9 +8,9 @@ namespace ApiTemplate
 
         public AssemblyInformation(Assembly assembly)
             : this(
-                assembly.GetCustomAttribute<AssemblyProductAttribute>().Product,
-                assembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description,
-                assembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version)
+                assembly.GetCustomAttribute<AssemblyProductAttribute>()!.Product,
+                assembly.GetCustomAttribute<AssemblyDescriptionAttribute>()!.Description,
+                assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version)
         {
         }
     }
