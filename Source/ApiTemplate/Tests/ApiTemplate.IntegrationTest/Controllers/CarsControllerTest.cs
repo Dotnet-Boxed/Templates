@@ -103,7 +103,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.Equal(new DateTimeOffset(2000, 1, 2, 3, 4, 5, TimeSpan.FromHours(6)), response.Content.Headers.LastModified);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
         }
 
@@ -179,7 +179,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
@@ -213,7 +213,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             await this.AssertPageUrlsAsync(
                     response,
                     nextPageUrl: null,
@@ -247,7 +247,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             await this.AssertPageUrlsAsync(
                     response,
                     nextPageUrl: null,
@@ -281,7 +281,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
@@ -315,7 +315,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
                 .ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             await this.AssertPageUrlsAsync(
                     response,
 #if HttpsEverywhere
@@ -352,7 +352,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PostAsJsonAsync("cars", saveCar).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
 #if HttpsEverywhere
             Assert.Equal(new Uri("https://localhost/cars/1"), response.Headers.Location);
@@ -420,7 +420,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
             var response = await this.client.PutAsJsonAsync("cars/1", saveCar).ConfigureAwait(false);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType!.MediaType);
+            Assert.Equal(ContentType.RestfulJson, response.Content.Headers.ContentType?.MediaType);
             var carViewModel = await response.Content.ReadAsAsync<Car>(this.formatters).ConfigureAwait(false);
         }
 
