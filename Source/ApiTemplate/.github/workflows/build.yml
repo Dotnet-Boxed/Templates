@@ -2,7 +2,8 @@ name: Build
 
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
   release:
     types:
@@ -57,6 +58,9 @@ jobs:
 
   docker:
     name: Docker-${{matrix.os}}
+    environment:
+      name: 'Docker Hub'
+      url: https://hub.docker.com/repository/docker/DOCKER_USERNAME/apitemplate
     runs-on: ${{matrix.os}}
     strategy:
       matrix:

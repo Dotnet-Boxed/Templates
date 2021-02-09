@@ -2,7 +2,8 @@ name: Build
 
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
   release:
     types:
@@ -86,6 +87,9 @@ jobs:
     name: 'Push GitHub Packages'
     needs: [build, test]
     if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    environment:
+      name: 'GitHub Packages'
+      url: https://github.com/orgs/Dotnet-Boxed/packages
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
@@ -103,6 +107,9 @@ jobs:
     name: 'Push NuGet Packages'
     needs: [build, test]
     if: github.event_name == 'release'
+    environment:
+      name: 'NuGet'
+      url: https://www.nuget.org/packages/Boxed.Templates/
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
