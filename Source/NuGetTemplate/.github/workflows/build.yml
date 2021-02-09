@@ -2,7 +2,8 @@ name: Build
 
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
   release:
     types:
@@ -58,6 +59,9 @@ jobs:
     name: 'Push GitHub Packages'
     needs: build
     if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    environment:
+      name: 'GitHub Packages'
+      url: https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/packages
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
@@ -75,6 +79,9 @@ jobs:
     name: 'Push NuGet Packages'
     needs: build
     if: github.event_name == 'release'
+    environment:
+      name: 'NuGet'
+      url: https://www.nuget.org/packages/NuGetTemplate
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
