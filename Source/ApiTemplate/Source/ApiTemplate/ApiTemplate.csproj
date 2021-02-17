@@ -68,7 +68,7 @@
     <PackageReference Include="Serilog.Exceptions" Version="6.0.0" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.0.5" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.0.7" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
 </Project>
