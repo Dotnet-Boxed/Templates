@@ -671,7 +671,7 @@
   "postActions": [
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(!SkipOpenToDo)",
+      "condition": "(!SkipOpenToDo) && (OS == \"Windows_NT\")",
       "continueOnError": true,
       "description ": "Open the to-do list for the project in a web browser.",
       "args": {
@@ -679,9 +679,27 @@
         "args": "start TODO.html",
         "redirectStandardOutput": "false"
       },
-      "manualInstructions": [{
-         "text": "Open the TODO.html in a web browser to see a to-do list."
-      }]
+      "manualInstructions": [
+        {
+          "text": "Open the TODO.html in a web browser to see a to-do list."
+        }
+      ]
+    },
+    {
+      "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
+      "condition": "(!SkipOpenToDo) && (OS != \"Windows_NT\")",
+      "continueOnError": true,
+      "description ": "Open the to-do list for the project in a web browser.",
+      "args": {
+        "executable": "bash",
+        "args": "open TODO.html",
+        "redirectStandardOutput": "false"
+      },
+      "manualInstructions": [
+        {
+          "text": "Open the TODO.html in a web browser to see a to-do list."
+        }
+      ]
     }
   ]
 }
