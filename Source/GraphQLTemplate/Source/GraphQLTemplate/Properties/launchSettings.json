@@ -20,7 +20,22 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "environmentVariables": {
-        "Kestrel__Endpoints__Http__Url": "http://*"
+        //#if (HttpsEverywhere)
+        "Kestrel__Endpoints__Http__Url": "http://*",
+        "Kestrel__Endpoints__Https__Url": "https://*",
+
+        // To run the application with Docker over HTTPS we need to use a developer certificate. This can be created and exported to a
+        // file using the dev-certs tool:
+        // dotnet dev-certs https --clean
+        // Windows:   dotnet dev-certs https --export-path %USERPROFILE%\.aspnet\https\ApiTemplate.pfx --password password
+        // Mac/Linux: dotnet dev-certs https --export-path ${HOME}/.aspnet/https/ApiTemplate.pfx  --password password
+        // dotnet dev-certs https --trust
+        // https://docs.microsoft.com/en-us/visualstudio/containers/container-build?view=vs-2019#ssl-enabled-aspnet-core-apps
+        "Kestrel__Certificates__Default__Path": "/root/.aspnet/https/ApiTemplate.pfx",
+        "Kestrel__Certificates__Default__Password": "password"
+        ////#else
+        //"Kestrel__Endpoints__Http__Url": "http:////*"
+        //#endif
       }
     },
     //#endif
