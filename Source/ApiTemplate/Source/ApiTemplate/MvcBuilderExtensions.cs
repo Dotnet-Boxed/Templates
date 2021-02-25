@@ -122,7 +122,7 @@ namespace ApiTemplate
         {
             var services = new ServiceCollection()
                 .AddLogging()
-                .AddMvc()
+                .AddMvcCore()
                 .AddNewtonsoftJson()
                 .Services;
             var serviceProvider = services.BuildServiceProvider();
