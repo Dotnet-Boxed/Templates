@@ -18,7 +18,10 @@
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "publishAllPorts": true
+      "publishAllPorts": true,
+      "environmentVariables": {
+        "Kestrel__Endpoints__Http__Url": "http://*"
+      }
     },
     //#endif
     "WSL 2": {
