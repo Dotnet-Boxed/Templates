@@ -36,11 +36,15 @@ namespace GraphQLTemplate
                 options =>
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
-                    foreach (var keyValuePair in configuration
+                    var cacheProfileOptions = configuration
                         .GetSection(nameof(ApplicationOptions.CacheProfiles))
-                        .Get<CacheProfileOptions>())
+                        .Get<CacheProfileOptions>();
+                    if (cacheProfileOptions != null)
                     {
-                        options.CacheProfiles.Add(keyValuePair);
+                        foreach (var keyValuePair in cacheProfileOptions)
+                        {
+                            options.CacheProfiles.Add(keyValuePair);
+                        }
                     }
 
                     // Remove plain text (text/plain) output formatter.
