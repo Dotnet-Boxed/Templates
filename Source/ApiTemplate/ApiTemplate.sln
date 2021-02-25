@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{57BAE1BC-D418-4A95-B292-C0E9324B0A54}"
 EndProject
+#if (IntegrationTest)
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D57B72FA-A893-400C-AB2E-6919219A38D2}"
 	ProjectSection(SolutionItems) = preProject
 		Tests\.editorconfig = Tests\.editorconfig
 	EndProjectSection
 EndProject
+#endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD2504D-975E-4B64-B938-7DDD19C7DB9D}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
@@ -29,8 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate", "Source\ApiTemplate\ApiTemplate.csproj", "{37F1F839-E685-4E26-B50E-40E3C4896737}"
 EndProject
+#if (IntegrationTest)
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.IntegrationTest", "Tests\ApiTemplate.IntegrationTest\ApiTemplate.IntegrationTest.csproj", "{57839160-3C89-4A5A-BC23-A78F39551C1E}"
 EndProject
+#endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{B4493FEA-D330-453B-ACDA-8CAE2F6451CC}"
 	ProjectSection(SolutionItems) = preProject
 		.github\release-drafter.yml = .github\release-drafter.yml
@@ -68,17 +72,21 @@ Global
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37F1F839-E685-4E26-B50E-40E3C4896737}.Release|Any CPU.Build.0 = Release|Any CPU
+		#if (IntegrationTest)
 		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57839160-3C89-4A5A-BC23-A78F39551C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		#endif
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{37F1F839-E685-4E26-B50E-40E3C4896737} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
+		#if (IntegrationTest)
 		{57839160-3C89-4A5A-BC23-A78F39551C1E} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
+		#endif
 		{B4493FEA-D330-453B-ACDA-8CAE2F6451CC} = {FBD2504D-975E-4B64-B938-7DDD19C7DB9D}
 		{1CBCA0EF-D16C-4BE6-9577-A0FC67E8B5F1} = {B4493FEA-D330-453B-ACDA-8CAE2F6451CC}
 		{E5422D5C-ABD4-4150-BDF6-B823D746D157} = {60E0F62E-605A-48F2-BFCA-C63B45AB6335}

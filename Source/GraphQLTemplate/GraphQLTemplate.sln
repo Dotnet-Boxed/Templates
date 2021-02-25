@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{57BAE1BC-D418-4A95-B292-C0E9324B0A54}"
 EndProject
+#if (IntegrationTest)
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D57B72FA-A893-400C-AB2E-6919219A38D2}"
 	ProjectSection(SolutionItems) = preProject
 		Tests\.editorconfig = Tests\.editorconfig
 	EndProjectSection
 EndProject
+#endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD2504D-975E-4B64-B938-7DDD19C7DB9D}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
@@ -29,8 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate", "Source\GraphQLTemplate\GraphQLTemplate.csproj", "{36941087-72D0-4649-86F6-69AFDC1EC71B}"
 EndProject
+#if (IntegrationTest)
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GraphQLTemplate.IntegrationTest", "Tests\GraphQLTemplate.IntegrationTest\GraphQLTemplate.IntegrationTest.csproj", "{C76FD924-71ED-4A92-A891-D226C0724933}"
 EndProject
+#endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{539EF653-396F-4D8F-862B-F7C9E02DE3E6}"
 	ProjectSection(SolutionItems) = preProject
 		.github\release-drafter.yml = .github\release-drafter.yml
@@ -68,17 +72,21 @@ Global
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36941087-72D0-4649-86F6-69AFDC1EC71B}.Release|Any CPU.Build.0 = Release|Any CPU
+		#if (IntegrationTest)
 		{C76FD924-71ED-4A92-A891-D226C0724933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C76FD924-71ED-4A92-A891-D226C0724933}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C76FD924-71ED-4A92-A891-D226C0724933}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C76FD924-71ED-4A92-A891-D226C0724933}.Release|Any CPU.Build.0 = Release|Any CPU
+		#endif
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{36941087-72D0-4649-86F6-69AFDC1EC71B} = {57BAE1BC-D418-4A95-B292-C0E9324B0A54}
+		#if (IntegrationTest)
 		{C76FD924-71ED-4A92-A891-D226C0724933} = {D57B72FA-A893-400C-AB2E-6919219A38D2}
+		#endif
 		{539EF653-396F-4D8F-862B-F7C9E02DE3E6} = {FBD2504D-975E-4B64-B938-7DDD19C7DB9D}
 		{12D470EA-4FD9-4764-A391-C8FD4534EDE9} = {539EF653-396F-4D8F-862B-F7C9E02DE3E6}
 		{39201BE6-3136-42D1-8B2B-0552FAD18A78} = {60E0F62E-605A-48F2-BFCA-C63B45AB6335}
