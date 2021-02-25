@@ -27,12 +27,12 @@
         // To run the application with Docker over HTTPS we need to use a developer certificate. This can be created and exported to a
         // file using the dev-certs tool:
         // dotnet dev-certs https --clean
-        // Windows:   dotnet dev-certs https --export-path %USERPROFILE%\.aspnet\https\ApiTemplate.pfx --password password
-        // Mac/Linux: dotnet dev-certs https --export-path ${HOME}/.aspnet/https/ApiTemplate.pfx  --password password
+        // Windows (PowerShell): dotnet dev-certs https --export-path $env:APPDATA\ASP.NET\Https\ApiTemplate.pfx --password securepassword
+        // Mac/Linux: dotnet dev-certs https --export-path ${HOME}/.aspnet/https/ApiTemplate.pfx  --password securepassword
         // dotnet dev-certs https --trust
         // https://docs.microsoft.com/en-us/visualstudio/containers/container-build?view=vs-2019#ssl-enabled-aspnet-core-apps
         "Kestrel__Certificates__Default__Path": "/root/.aspnet/https/ApiTemplate.pfx",
-        "Kestrel__Certificates__Default__Password": "password"
+        "Kestrel__Certificates__Default__Password": "securepassword"
         ////#else
         //"Kestrel__Endpoints__Http__Url": "http:////*"
         //#endif
