@@ -6,6 +6,27 @@
 # Base image used by Visual Studio at development time
 # (See https://docs.microsoft.com/en-us/visualstudio/containers/container-msbuild-properties)
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
+# Open Container Initiative (OCI) labels (See https://github.com/opencontainers/image-spec/blob/master/annotations.md).
+LABEL org.opencontainers.image.title="PROJECT-TITLE" \
+    org.opencontainers.image.description="PROJECT-DESCRIPTION" \
+#if (GitHub)
+    org.opencontainers.image.documentation="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
+    org.opencontainers.image.source="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git" \
+    org.opencontainers.image.url="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
+#endif
+    org.opencontainers.image.vendor="PROJECT-AUTHOR"
+# Disable the culture invariant mode which defaults to true in the base alpine image
+# (See https://github.com/dotnet/corefx/blob/8245ee1e8f6063ccc7a3a60cafe821d29e85b02f/Documentation/architecture/globalization-invariant-mode.md)
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+RUN apk add --no-cache \
+    # Install cultures to enable use of System.CultureInfo
+    icu-libs \
+    # Install time zone database to enable use of System.TimeZoneInfo
+    tzdata
+# Set the default locale and language.
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+WORKDIR /app
 #if (HttpsEverywhere)
 EXPOSE 80 443
 ##else
@@ -32,23 +53,6 @@ RUN dotnet publish "Source/GraphQLTemplate/GraphQLTemplate.csproj" --configurati
 
 # Runtime image used to run the application
 FROM base AS runtime
-# Open Container Initiative (OCI) labels (See https://github.com/opencontainers/image-spec/blob/master/annotations.md).
-LABEL org.opencontainers.image.title="PROJECT-TITLE" \
-    org.opencontainers.image.description="PROJECT-DESCRIPTION" \
-#if (GitHub)
-    org.opencontainers.image.documentation="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
-    org.opencontainers.image.source="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git" \
-    org.opencontainers.image.url="https://github.com/GITHUB-USERNAME/GITHUB-PROJECT" \
-#endif
-    org.opencontainers.image.vendor="PROJECT-AUTHOR"
-# Disable the culture invariant mode which defaults to true in the base alpine image
-# (See https://github.com/dotnet/corefx/blob/8245ee1e8f6063ccc7a3a60cafe821d29e85b02f/Documentation/architecture/globalization-invariant-mode.md)
-ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
-RUN apk add --no-cache \
-    # Install cultures to enable use of System.CultureInfo
-    icu-libs \
-    # Install time zone database to enable use of System.TimeZoneInfo
-    tzdata
 WORKDIR /app
 COPY --from=sdk /app .
 ENTRYPOINT ["dotnet", "GraphQLTemplate.dll"]
