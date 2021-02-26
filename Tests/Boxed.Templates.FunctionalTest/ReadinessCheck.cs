@@ -76,7 +76,7 @@ namespace Boxed.Templates.FunctionalTest
 
             try
             {
-                var response = await httpsClient
+                var response = await httpClient
                     .GetAsync(new Uri("/favicon.ico", UriKind.Relative))
                     .ConfigureAwait(false);
                 LogStatusCode(response.StatusCode);

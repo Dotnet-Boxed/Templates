@@ -91,7 +91,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "GraphQLTDefaults"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
                             var httpResponse = await httpClient
@@ -99,32 +99,32 @@ namespace Boxed.Templates.FunctionalTest
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
-                            var httpsResponse = await httpsClient
+                            var httpsResponse = await httpClient
                                 .GetAsync(new Uri("/", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
-                            var statusResponse = await httpsClient
+                            var statusResponse = await httpClient
                                 .GetAsync(new Uri("status", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
 
-                            var statusSelfResponse = await httpsClient
+                            var statusSelfResponse = await httpClient
                                 .GetAsync(new Uri("status/self", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusSelfResponse.StatusCode);
 
-                            var robotsTxtResponse = await httpsClient
+                            var robotsTxtResponse = await httpClient
                                 .GetAsync(new Uri("robots.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
 
-                            var securityTxtResponse = await httpsClient
+                            var securityTxtResponse = await httpClient
                                 .GetAsync(new Uri(".well-known/security.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, securityTxtResponse.StatusCode);
 
-                            var humansTxtResponse = await httpsClient
+                            var humansTxtResponse = await httpClient
                                 .GetAsync(new Uri("humans.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
@@ -156,12 +156,12 @@ namespace Boxed.Templates.FunctionalTest
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var statusResponse = await httpsClient
+                            var statusResponse = await httpClient
                                 .GetAsync(new Uri("status", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotFound, statusResponse.StatusCode);
 
-                            var statusSelfResponse = await httpsClient
+                            var statusSelfResponse = await httpClient
                                 .GetAsync(new Uri("status/self", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
@@ -187,7 +187,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "GraphQLTDefaults"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
                             var introspectionQuery = await httpClient
@@ -261,10 +261,10 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "GraphQLTAuthorizationTrue"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var httpResponse = await httpsClient
+                            var httpResponse = await httpClient
                                 .PostGraphQLAsync(
                                     "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }")
                                 .ConfigureAwait(false);
@@ -302,10 +302,10 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "GraphQLTAuthorizationFalse"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var httpResponse = await httpsClient
+                            var httpResponse = await httpClient
                                 .PostGraphQLAsync(
                                     "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }")
                                 .ConfigureAwait(false);
