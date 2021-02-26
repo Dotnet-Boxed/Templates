@@ -92,7 +92,7 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "ApiDefaults"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
                             var httpResponse = await httpClient
@@ -100,25 +100,25 @@ namespace Boxed.Templates.FunctionalTest
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
 
-                            var statusResponse = await httpsClient
+                            var statusResponse = await httpClient
                                 .GetAsync(new Uri("status", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
                             Assert.Equal(ContentType.Text, statusResponse.Content.Headers.ContentType.MediaType);
 
-                            var statusSelfResponse = await httpsClient
+                            var statusSelfResponse = await httpClient
                                 .GetAsync(new Uri("status/self", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusSelfResponse.StatusCode);
                             Assert.Equal(ContentType.Text, statusSelfResponse.Content.Headers.ContentType.MediaType);
 
-                            var carsResponse = await httpsClient
+                            var carsResponse = await httpClient
                                 .GetAsync(new Uri("cars", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, carsResponse.StatusCode);
                             Assert.Equal(ContentType.RestfulJson, carsResponse.Content.Headers.ContentType.MediaType);
 
-                            var postCarResponse = await httpsClient
+                            var postCarResponse = await httpClient
                                 .PostAsJsonAsync(new Uri("cars", UriKind.Relative), new SaveCar())
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.BadRequest, postCarResponse.StatusCode);
@@ -128,30 +128,30 @@ namespace Boxed.Templates.FunctionalTest
                                 HttpMethod.Get,
                                 new Uri("cars", UriKind.Relative));
                             notAcceptableCarsRequest.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentType.Text));
-                            var notAcceptableCarsResponse = await httpsClient
+                            var notAcceptableCarsResponse = await httpClient
                                 .SendAsync(notAcceptableCarsRequest)
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotAcceptable, notAcceptableCarsResponse.StatusCode);
 
-                            var swaggerJsonResponse = await httpsClient
+                            var swaggerJsonResponse = await httpClient
                                 .GetAsync(new Uri("swagger/v1/swagger.json", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
                             Assert.Equal(ContentType.Json, swaggerJsonResponse.Content.Headers.ContentType.MediaType);
 
-                            var robotsTxtResponse = await httpsClient
+                            var robotsTxtResponse = await httpClient
                                 .GetAsync(new Uri("robots.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
                             Assert.Equal(ContentType.Text, robotsTxtResponse.Content.Headers.ContentType.MediaType);
 
-                            var securityTxtResponse = await httpsClient
+                            var securityTxtResponse = await httpClient
                                 .GetAsync(new Uri(".well-known/security.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, securityTxtResponse.StatusCode);
                             Assert.Equal(ContentType.Text, securityTxtResponse.Content.Headers.ContentType.MediaType);
 
-                            var humansTxtResponse = await httpsClient
+                            var humansTxtResponse = await httpClient
                                 .GetAsync(new Uri("humans.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
@@ -185,12 +185,12 @@ namespace Boxed.Templates.FunctionalTest
                         ReadinessCheck.FaviconAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var statusResponse = await httpsClient
+                            var statusResponse = await httpClient
                                 .GetAsync(new Uri("status", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotFound, statusResponse.StatusCode);
 
-                            var statusSelfResponse = await httpsClient
+                            var statusSelfResponse = await httpClient
                                 .GetAsync(new Uri("status/self", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotFound, statusSelfResponse.StatusCode);
@@ -257,10 +257,10 @@ namespace Boxed.Templates.FunctionalTest
                 await project
                     .DotnetRunAsync(
                         Path.Join("Source", "ApiSwaggerFalse"),
-                        ReadinessCheck.StatusSelfAsync,
+                        ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var swaggerJsonResponse = await httpsClient
+                            var swaggerJsonResponse = await httpClient
                                 .GetAsync(new Uri("swagger/v1/swagger.json", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.NotFound, swaggerJsonResponse.StatusCode);
