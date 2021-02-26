@@ -206,7 +206,7 @@ namespace Boxed.Templates.FunctionalTest
         [Fact]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task RestoreBuildTestRun_HttpsEverywhereFalse_SuccessfulAsync()
+        public async Task RestoreBuildTestRun_HttpsEverywhereTrue_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             await using (var tempDirectory = TempDirectory.NewTempDirectory())
@@ -214,19 +214,19 @@ namespace Boxed.Templates.FunctionalTest
                 var project = await tempDirectory
                     .DotnetNewAsync(
                         TemplateName,
-                        "GraphQLTHttpsEverywhereFalse",
-                        DefaultArguments.ToArguments(new string[] { "https-everywhere=false" }))
+                        "GraphQLTHttpsEverywhereTrue",
+                        DefaultArguments.ToArguments(new string[] { "https-everywhere=true" }))
                     .ConfigureAwait(false);
                 await project.DotnetRestoreAsync().ConfigureAwait(false);
                 await project.DotnetBuildAsync().ConfigureAwait(false);
                 await project.DotnetTestAsync().ConfigureAwait(false);
                 await project
                     .DotnetRunAsync(
-                        Path.Join("Source", "GraphQLTHttpsEverywhereFalse"),
+                        Path.Join("Source", "GraphQLTHttpsEverywhereTrue"),
                         ReadinessCheck.StatusSelfOverHttpAsync,
                         async (httpClient, httpsClient) =>
                         {
-                            var httpResponse = await httpClient
+                            var httpResponse = await httpsClient
                                 .GetAsync(new Uri("/", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
@@ -237,7 +237,7 @@ namespace Boxed.Templates.FunctionalTest
 
                 var dockerfileInfo = files.First(x => x.Name == "Dockerfile");
                 var dockerfile = File.ReadAllText(dockerfileInfo.FullName);
-                Assert.DoesNotContain("443", dockerfile, StringComparison.Ordinal);
+                Assert.Contains("443", dockerfile, StringComparison.Ordinal);
             }
         }
 
