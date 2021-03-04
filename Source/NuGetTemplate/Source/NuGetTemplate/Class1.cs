@@ -1,7 +1,5 @@
 namespace NuGetTemplate
 {
-    using System;
-
     /// <summary>
     /// Some class.
     /// </summary>
