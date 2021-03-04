@@ -9,24 +9,13 @@ namespace ApiTemplate
 #if CORS
     using ApiTemplate.Constants;
 #endif
-#if Swagger && Versioning
-    using ApiTemplate.OperationFilters;
-#endif
     using ApiTemplate.Options;
     using Boxed.AspNetCore;
-#if Swagger
-    using Boxed.AspNetCore.Swagger;
-    using Boxed.AspNetCore.Swagger.OperationFilters;
-    using Boxed.AspNetCore.Swagger.SchemaFilters;
-#endif
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
-#endif
-#if Versioning
-    using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
 #if ResponseCompression
     using Microsoft.AspNetCore.ResponseCompression;
@@ -38,13 +27,13 @@ namespace ApiTemplate
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
-#if Swagger
-    using Microsoft.OpenApi.Models;
-#endif
 #if OpenTelemetry
     using OpenTelemetry.Exporter;
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
+#endif
+#if Swagger
+    using Swashbuckle.AspNetCore.SwaggerGen;
 #endif
 
     /// <summary>
@@ -308,49 +297,9 @@ namespace ApiTemplate
         /// <param name="services">The services.</param>
         /// <returns>The services with Swagger services added.</returns>
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
-            services.AddSwaggerGen(
-                options =>
-                {
-                    options.DescribeAllParametersInCamelCase();
-                    options.EnableAnnotations();
-
-                    // Add the XML comment file for this assembly, so its contents can be displayed.
-                    options.IncludeXmlCommentsIfExists(typeof(Startup).Assembly);
-
-#if Versioning
-                    options.OperationFilter<ApiVersionOperationFilter>();
-#endif
-                    options.OperationFilter<ClaimsOperationFilter>();
-                    options.OperationFilter<ForbiddenResponseOperationFilter>();
-                    options.OperationFilter<UnauthorizedResponseOperationFilter>();
-
-                    // Show a default and example model for JsonPatchDocument<T>.
-                    options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
-
-#if Versioning
-                    var provider = services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
-                    foreach (var apiVersionDescription in provider.ApiVersionDescriptions)
-                    {
-                        var info = new OpenApiInfo()
-                        {
-                            Title = AssemblyInformation.Current.Product,
-                            Description = apiVersionDescription.IsDeprecated ?
-                                $"{AssemblyInformation.Current.Description} This API version has been deprecated." :
-                                AssemblyInformation.Current.Description,
-                            Version = apiVersionDescription.ApiVersion.ToString(),
-                        };
-                        options.SwaggerDoc(apiVersionDescription.GroupName, info);
-                    }
-#else
-                    var info = new Info()
-                    {
-                        Title = AssemblyInformation.Current.Product,
-                        Description = AssemblyInformation.Current.Description,
-                        Version = "v1"
-                    };
-                    options.SwaggerDoc("v1", info);
-#endif
-                });
+            services
+                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                .AddSwaggerGen();
 #endif
     }
 }
