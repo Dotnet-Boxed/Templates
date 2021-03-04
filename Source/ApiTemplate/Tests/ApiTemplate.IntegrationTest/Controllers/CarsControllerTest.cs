@@ -509,7 +509,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
         }
 
         private static List<Models.Car> GetCars() =>
-            new List<Models.Car>()
+            new()
             {
                 new Models.Car() { Created = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero) },
                 new Models.Car() { Created = new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero) },

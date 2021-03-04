@@ -9,7 +9,7 @@ namespace ApiTemplate.Repositories
 
     public class CarRepository : ICarRepository
     {
-        private static readonly List<Car> Cars = new List<Car>()
+        private static readonly List<Car> Cars = new()
         {
             new Car()
             {
