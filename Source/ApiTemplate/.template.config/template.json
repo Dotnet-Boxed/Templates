@@ -53,7 +53,8 @@
         {
           "condition": "(!Swagger)",
           "exclude": [
-            "Source/ApiTemplate/OperationFilters/**/*"
+            "Source/ApiTemplate/OperationFilters/**/*",
+            "Source/ApiTemplate/ConfigureSwaggerOptions.cs"
           ]
         },
         {
