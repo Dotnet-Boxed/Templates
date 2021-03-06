@@ -109,6 +109,7 @@ Task("Test")
             project.ToString(),
             new DotNetCoreTestSettings()
             {
+                Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
                 Configuration = configuration,
                 Filter = string.Join("&", filters),
@@ -120,7 +121,6 @@ Task("Test")
                 NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
-                ArgumentCustomization = x => x.Append("--blame"),
             });
     });
 
