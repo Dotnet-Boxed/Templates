@@ -59,6 +59,7 @@ Task("Test")
             project.ToString(),
             new DotNetCoreTestSettings()
             {
+                Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
                 Configuration = configuration,
                 Loggers = new string[]
@@ -69,7 +70,6 @@ Task("Test")
                 NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = artefactsDirectory,
-                ArgumentCustomization = x => x.Append("--blame"),
             });
     });
 
