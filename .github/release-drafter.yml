@@ -38,3 +38,27 @@ template: |
   ## 👨🏼‍💻 Contributors
 
   $CONTRIBUTORS
+autolabeler:
+  - label: 'maintenance'
+    files:
+      - '.github/**/*'
+      - 'Docs/**/*'
+      - 'Images/**/*'
+      - 'Tests/**/*'
+      - '*'
+  - label: 'template/API'
+    files:
+      - 'Source/ApiTemplate/**/*'
+  - label: 'template/GraphQL'
+    files:
+      - 'Source/GraphQLTemplate/**/*'
+  - label: 'template/NuGet'
+    files:
+      - 'Source/NuGetTemplate/**/*'
+  - label: 'template/Orleans'
+    files:
+      - 'Source/OrleansTemplate/**/*'
+  - label: 'template/Item'
+    files:
+      - 'Source/EditorconfigTemplate/**/*'
+      - 'Source/GitattributesTemplate/**/*'
