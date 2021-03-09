@@ -45,7 +45,6 @@ autolabeler:
       - 'Docs/**/*'
       - 'Images/**/*'
       - 'Tests/**/*'
-      - '*'
   - label: 'template/API'
     files:
       - 'Source/ApiTemplate/**/*'
