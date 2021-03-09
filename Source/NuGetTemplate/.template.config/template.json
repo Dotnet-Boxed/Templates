@@ -152,6 +152,12 @@
       "type": "computed",
       "value": "(Framework == \"net48\") || (Framework == \"net472\") || (Framework == \"net471\") || (Framework == \"net47\") || (Framework == \"net462\") || (Framework == \"net461\") || (Framework == \"net46\")"
     },
+    "Nullable": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Enables C# 8 nullable reference types."
+    },
     "Sign": {
       "type": "parameter",
       "datatype": "bool",
