@@ -13,6 +13,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 #### Framework
 
 - **Framework** (Default=net5.0) - The target framework for the project.
+- **Nullable** (Default=On) - Enables C# 8 nullable reference types.
 - **Sign** (Default=On) - Signs the NuGet package.
 
 #### Project

@@ -5,6 +5,7 @@
     <DotnetFramework>false</DotnetFramework>
     <EditorConfig>true</EditorConfig>
     <MIT>true</MIT>
+    <Nullable>true</Nullable>
     <StyleCop>true</StyleCop>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
@@ -14,6 +15,7 @@
     <LangVersion>latest</LangVersion>
     <EnforceCodeStyleInBuild Condition="'$(EditorConfig)' == 'true'">true</EnforceCodeStyleInBuild>
     <AnalysisLevel>latest</AnalysisLevel>
+    <Nullable Condition="'$(Nullable)' == 'true'">enable</Nullable>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
