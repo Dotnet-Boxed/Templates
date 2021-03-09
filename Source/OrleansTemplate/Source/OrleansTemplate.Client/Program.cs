@@ -34,7 +34,7 @@ namespace OrleansTemplate.Client
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
                 Console.WriteLine("What is your name?");
 #pragma warning restore CA1303 // Do not pass literals as localized parameters
-                var name = Console.ReadLine();
+                var name = Console.ReadLine() ?? "Rehan";
                 var helloGrain = clusterClient.GetGrain<IHelloGrain>(Guid.NewGuid());
                 Console.WriteLine(await helloGrain.SayHelloAsync(name).ConfigureAwait(false));
 
