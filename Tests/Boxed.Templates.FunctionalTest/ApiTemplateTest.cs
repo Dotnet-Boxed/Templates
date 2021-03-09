@@ -104,25 +104,25 @@ namespace Boxed.Templates.FunctionalTest
                                 .GetAsync(new Uri("status", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusResponse.StatusCode);
-                            Assert.Equal(ContentType.Text, statusResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Text, statusResponse.Content.Headers.ContentType?.MediaType);
 
                             var statusSelfResponse = await httpClient
                                 .GetAsync(new Uri("status/self", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, statusSelfResponse.StatusCode);
-                            Assert.Equal(ContentType.Text, statusSelfResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Text, statusSelfResponse.Content.Headers.ContentType?.MediaType);
 
                             var carsResponse = await httpClient
                                 .GetAsync(new Uri("cars", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, carsResponse.StatusCode);
-                            Assert.Equal(ContentType.RestfulJson, carsResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.RestfulJson, carsResponse.Content.Headers.ContentType?.MediaType);
 
                             var postCarResponse = await httpClient
                                 .PostAsJsonAsync(new Uri("cars", UriKind.Relative), new SaveCar())
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.BadRequest, postCarResponse.StatusCode);
-                            Assert.Equal(ContentType.ProblemJson, postCarResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.ProblemJson, postCarResponse.Content.Headers.ContentType?.MediaType);
 
                             var notAcceptableCarsRequest = new HttpRequestMessage(
                                 HttpMethod.Get,
@@ -137,25 +137,25 @@ namespace Boxed.Templates.FunctionalTest
                                 .GetAsync(new Uri("swagger/v1/swagger.json", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, swaggerJsonResponse.StatusCode);
-                            Assert.Equal(ContentType.Json, swaggerJsonResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Json, swaggerJsonResponse.Content.Headers.ContentType?.MediaType);
 
                             var robotsTxtResponse = await httpClient
                                 .GetAsync(new Uri("robots.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, robotsTxtResponse.StatusCode);
-                            Assert.Equal(ContentType.Text, robotsTxtResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Text, robotsTxtResponse.Content.Headers.ContentType?.MediaType);
 
                             var securityTxtResponse = await httpClient
                                 .GetAsync(new Uri(".well-known/security.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, securityTxtResponse.StatusCode);
-                            Assert.Equal(ContentType.Text, securityTxtResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Text, securityTxtResponse.Content.Headers.ContentType?.MediaType);
 
                             var humansTxtResponse = await httpClient
                                 .GetAsync(new Uri("humans.txt", UriKind.Relative))
                                 .ConfigureAwait(false);
                             Assert.Equal(HttpStatusCode.OK, humansTxtResponse.StatusCode);
-                            Assert.Equal(ContentType.Text, humansTxtResponse.Content.Headers.ContentType.MediaType);
+                            Assert.Equal(ContentType.Text, humansTxtResponse.Content.Headers.ContentType?.MediaType);
                         },
                         timeout: TimeSpan.FromMinutes(2))
                     .ConfigureAwait(false);
