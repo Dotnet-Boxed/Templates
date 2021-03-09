@@ -6,10 +6,10 @@ namespace Boxed.Templates.FunctionalTest.Models
     {
         public GraphQLError() => this.Locations = new List<GraphQLErrorLocation>();
 
-        public string Message { get; set; }
+        public string? Message { get; set; }
 
         public List<GraphQLErrorLocation> Locations { get; }
 
-        public GraphQLErrorExtensions Extensions { get; set; }
+        public GraphQLErrorExtensions? Extensions { get; set; }
     }
 }
