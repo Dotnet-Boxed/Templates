@@ -10,7 +10,7 @@ namespace OrleansTemplate.Grains
     public class ReminderGrain : Grain, IReminderGrain, IRemindable
     {
         private const string ReminderName = "SomeReminder";
-        private string reminder;
+        private string? reminder;
 
         public Task SetReminderAsync(string reminder)
         {

@@ -43,7 +43,7 @@ namespace OrleansTemplate.Server.IntegrationTest
         [Fact]
         public async Task SayHello_PassName_SaidHelloPublishedAsync()
         {
-            string hello = null;
+            string? hello = null;
             var helloGrain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
             var streamProvider = this.Cluster.Client.GetStreamProvider(StreamProviderName.Default);
             var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);

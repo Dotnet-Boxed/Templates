@@ -32,14 +32,14 @@ namespace OrleansTemplate.Server
         public static async Task<int> Main(string[] args)
         {
             Log.Logger = CreateBootstrapLogger();
-            IHostEnvironment hostEnvironment = null;
+            IHostEnvironment? hostEnvironment = null;
 
             try
             {
                 Log.Information("Initialising.");
                 var host = CreateHostBuilder(args).Build();
                 hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-                hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+                hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>()!.Product;
 
                 Log.Information(
                     "Started {Application} in {Environment} mode.",
