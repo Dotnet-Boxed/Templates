@@ -15,26 +15,22 @@ namespace GraphQLTemplate
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Serilog;
-    using Serilog.Core;
+    using Serilog.Extensions.Hosting;
 
     public sealed class Program
     {
-        public static Task<int> Main(string[] args) => LogAndRunAsync(CreateHostBuilder(args).Build());
-
-        public static async Task<int> LogAndRunAsync(IHost host)
+        public static async Task<int> Main(string[] args)
         {
-            if (host is null)
-            {
-                throw new ArgumentNullException(nameof(host));
-            }
-
-            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-            hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
-
-            Log.Logger = CreateLogger(host);
+            Log.Logger = CreateBootstrapLogger();
+            IHostEnvironment hostEnvironment = null;
 
             try
             {
+                Log.Information("Initialising.");
+                var host = CreateHostBuilder(args).Build();
+                hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
+                hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>().Product;
+
                 Log.Information(
                     "Started {Application} in {Environment} mode.",
                     hostEnvironment.ApplicationName,
@@ -50,11 +46,19 @@ namespace GraphQLTemplate
             catch (Exception exception)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                Log.Fatal(
-                    exception,
-                    "{Application} terminated unexpectedly in {Environment} mode.",
-                    hostEnvironment.ApplicationName,
-                    hostEnvironment.EnvironmentName);
+                if (hostEnvironment is null)
+                {
+                    Log.Fatal(exception, "Application terminated unexpectedly while initialising.");
+                }
+                else
+                {
+                    Log.Fatal(
+                        exception,
+                        "{Application} terminated unexpectedly in {Environment} mode.",
+                        hostEnvironment.ApplicationName,
+                        hostEnvironment.EnvironmentName);
+                }
+
                 return 1;
             }
             finally
@@ -74,7 +78,7 @@ namespace GraphQLTemplate
                             x => x.AddCommandLine(args)))
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
-                .UseSerilog()
+                .UseSerilog(ConfigureReloadableLogger)
                 .UseDefaultServiceProvider(
                     (context, options) =>
                     {
@@ -139,24 +143,39 @@ namespace GraphQLTemplate
                     args is not null,
                     x => x.AddCommandLine(args));
 
-        private static Logger CreateLogger(IHost host)
-        {
-            var hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-            return new LoggerConfiguration()
-                .ReadFrom.Configuration(host.Services.GetRequiredService<IConfiguration>())
-                .Enrich.WithProperty("Application", hostEnvironment.ApplicationName)
-                .Enrich.WithProperty("Environment", hostEnvironment.EnvironmentName)
-                .WriteTo.Conditional(
-                    x => hostEnvironment.IsDevelopment(),
-                    x => x.Console().WriteTo.Debug())
+        /// <summary>
+        /// Creates a logger used during application initialisation.
+        /// <see href="https://nblumhardt.com/2020/10/bootstrap-logger/"/>.
+        /// </summary>
+        /// <returns>A logger that can load a new configuration.</returns>
+        private static ReloadableLogger CreateBootstrapLogger() =>
+            new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.Debug()
+                .CreateBootstrapLogger();
+
+        /// <summary>
+        /// Configures a logger used during the applications lifetime.
+        /// <see href="https://nblumhardt.com/2020/10/bootstrap-logger/"/>.
+        /// </summary>
+        private static void ConfigureReloadableLogger(
+            HostBuilderContext context,
+            IServiceProvider services,
+            LoggerConfiguration configuration) =>
+            configuration
+                .ReadFrom.Configuration(context.Configuration)
+                .ReadFrom.Services(services)
+                .Enrich.WithProperty("Application", context.HostingEnvironment.ApplicationName)
+                .Enrich.WithProperty("Environment", context.HostingEnvironment.EnvironmentName)
 #if ApplicationInsights
                 .WriteTo.Conditional(
-                    x => hostEnvironment.IsProduction(),
+                    x => context.HostingEnvironment.IsProduction(),
                     x => x.ApplicationInsights(
-                        host.Services.GetRequiredService<TelemetryConfiguration>(),
+                        services.GetRequiredService<TelemetryConfiguration>(),
                         TelemetryConverter.Traces))
 #endif
-                .CreateLogger();
-        }
+                .WriteTo.Conditional(
+                    x => context.HostingEnvironment.IsDevelopment(),
+                    x => x.Console().WriteTo.Debug());
     }
 }
