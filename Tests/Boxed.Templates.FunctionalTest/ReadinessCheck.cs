@@ -8,7 +8,7 @@ namespace Boxed.Templates.FunctionalTest
 
     public static class ReadinessCheck
     {
-        public static async Task<bool> StatusSelfAsync(HttpClient httpClient, HttpClient httpsClient)
+        public static async Task<bool> StatusSelfAsync(HttpClient httpClient, HttpClient? httpsClient)
         {
             if (httpClient is null)
             {
@@ -35,7 +35,7 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        public static async Task<bool> StatusSelfOverHttpAsync(HttpClient httpClient, HttpClient httpsClient)
+        public static async Task<bool> StatusSelfOverHttpAsync(HttpClient httpClient, HttpClient? httpsClient)
         {
             if (httpClient is null)
             {
@@ -62,7 +62,7 @@ namespace Boxed.Templates.FunctionalTest
             }
         }
 
-        public static async Task<bool> FaviconAsync(HttpClient httpClient, HttpClient httpsClient)
+        public static async Task<bool> FaviconAsync(HttpClient httpClient, HttpClient? httpsClient)
         {
             if (httpClient is null)
             {
@@ -90,9 +90,11 @@ namespace Boxed.Templates.FunctionalTest
         }
 
         private static void LogStatusCode(HttpStatusCode statusCode) =>
-            TestLogger.WriteMessage($"Waiting for app to start. Readiness check returned {(int)statusCode}.");
+            TestLogger.WriteMessage?.Invoke(
+                $"Waiting for app to start. Readiness check returned {(int)statusCode}.");
 
         private static void LogException(Exception exception) =>
-            TestLogger.WriteMessage($"Waiting for app to start. Readiness check threw {exception.GetType().Name}.{Environment.NewLine}{exception}");
+            TestLogger.WriteMessage?.Invoke(
+                $"Waiting for app to start. Readiness check threw {exception.GetType().Name}.{Environment.NewLine}{exception}");
     }
 }
