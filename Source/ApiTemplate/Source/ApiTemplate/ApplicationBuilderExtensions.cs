@@ -37,7 +37,13 @@ namespace ApiTemplate
                 .UseStaticFiles(
                     new StaticFileOptions()
                     {
-                        OnPrepareResponse = context => context.Context.ApplyCacheProfile(cacheProfile),
+                        OnPrepareResponse = context =>
+                        {
+                            if (cacheProfile is not null)
+                            {
+                                context.Context.ApplyCacheProfile(cacheProfile);
+                            }
+                        },
                     });
         }
 
