@@ -41,7 +41,7 @@ namespace ApiTemplate.Commands
                 throw new ArgumentNullException(nameof(pageOptions));
             }
 
-            pageOptions.First = pageOptions.First.HasValue && pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
+            pageOptions.First = !pageOptions.First.HasValue && !pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
             var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);
             var createdBefore = Cursor.FromCursor<DateTimeOffset?>(pageOptions.Before);
 
