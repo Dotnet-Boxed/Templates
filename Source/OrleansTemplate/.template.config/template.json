@@ -15,7 +15,7 @@
   "defaultName": "OrleansApplication1",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution"
   },
   "sourceName": "OrleansTemplate",
   "preferNameDirectory": true,

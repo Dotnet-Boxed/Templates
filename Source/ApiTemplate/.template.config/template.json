@@ -15,7 +15,7 @@
   "defaultName": "ApiApplication1",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution"
   },
   "sourceName": "ApiTemplate",
   "preferNameDirectory": true,

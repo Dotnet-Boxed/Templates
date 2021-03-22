@@ -13,7 +13,7 @@
   "defaultName": "NuGetPackage1",
   "tags": {
     "language": "C#",
-    "type": "project"
+    "type": "solution"
   },
   "sourceName": "NuGetTemplate",
   "preferNameDirectory": true,
