@@ -142,7 +142,8 @@
         {
           "condition": "(!OpenTelemetry)",
           "exclude": [
-            "Source/GraphQLTemplate/Constants/OpenTelemetryAttributeName.cs"
+            "Source/GraphQLTemplate/Constants/OpenTelemetryAttributeName.cs",
+            "Source/GraphQLTemplate/Constants/OpenTelemetryHttpFlavour.cs"
           ]
         }
       ]
