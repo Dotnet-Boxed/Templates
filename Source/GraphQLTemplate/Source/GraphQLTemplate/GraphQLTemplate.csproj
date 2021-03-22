@@ -58,8 +58,6 @@
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.0.9" />
     <PackageReference Include="HotChocolate.Data" Version="11.0.9" />
     <PackageReference Include="HotChocolate.Data.Spatial" Version="11.0.9" />
-    <PackageReference Include="HotChocolate.AspNetCore.Playground" Version="10.5.5" />
-    <PackageReference Include="HotChocolate.AspNetCore.Voyager" Version="10.5.5" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="11.0.9" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="11.0.9" Condition="'$(Subscriptions)' == 'true'" />
     <PackageReference Include="HotChocolate.Types.Filters" Version="11.0.9" />

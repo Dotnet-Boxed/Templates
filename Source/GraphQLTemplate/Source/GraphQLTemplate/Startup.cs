@@ -4,9 +4,6 @@ namespace GraphQLTemplate
 #if CORS
     using GraphQLTemplate.Constants;
 #endif
-    using HotChocolate.AspNetCore;
-    using HotChocolate.AspNetCore.Playground;
-    using HotChocolate.AspNetCore.Voyager;
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -132,17 +129,12 @@ namespace GraphQLTemplate
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #endif
-                    })
 #if Subscriptions
-                .UseWebSockets()
+                    })
+                .UseWebSockets();
+#else
+                    });
 #endif
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x
-                        // Add the GraphQL Playground UI to try out the GraphQL API at /.
-                        // TODO: Hot Chocolate 11 fixes a bug which throws when you set the path to /.
-                        .UsePlayground(new PlaygroundOptions() { Path = "/playground", QueryPath = "/graphql" })
-                        // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
-                        .UseVoyager(new VoyagerOptions() { Path = "/voyager", QueryPath = "/graphql" }));
+
     }
 }
