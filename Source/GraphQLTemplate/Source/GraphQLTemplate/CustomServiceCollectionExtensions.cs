@@ -7,10 +7,10 @@ namespace GraphQLTemplate
 #endif
     using System.Linq;
     using Boxed.AspNetCore;
-#if (Authorization || CORS)
+#if (Authorization || CORS || OpenTelemetry)
     using GraphQLTemplate.Constants;
-    using GraphQLTemplate.Directives;
 #endif
+    using GraphQLTemplate.Directives;
     using GraphQLTemplate.Options;
     using GraphQLTemplate.Schemas;
     using HotChocolate.Execution.Options;
@@ -38,7 +38,7 @@ namespace GraphQLTemplate
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
 #endif
-#if PersistedQueries
+#if (Subscriptions || PersistedQueries)
     using StackExchange.Redis;
 #endif
 
