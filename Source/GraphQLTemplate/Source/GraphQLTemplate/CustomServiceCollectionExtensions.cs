@@ -220,11 +220,6 @@ namespace GraphQLTemplate
                                 // See https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/http.md
                                 options.Enrich = (activity, eventName, obj) =>
                                 {
-                                    if (!activity.IsAllDataRequested)
-                                    {
-                                        return;
-                                    }
-
                                     if (obj is HttpRequest request)
                                     {
                                         var context = request.HttpContext;
@@ -251,19 +246,19 @@ namespace GraphQLTemplate
                                     {
                                         if (HttpProtocol.IsHttp10(protocol))
                                         {
-                                            return "1.0";
+                                            return OpenTelemetryHttpFlavour.Http10;
                                         }
                                         else if (HttpProtocol.IsHttp11(protocol))
                                         {
-                                            return "1.1";
+                                            return OpenTelemetryHttpFlavour.Http11;
                                         }
                                         else if (HttpProtocol.IsHttp2(protocol))
                                         {
-                                            return "2.0";
+                                            return OpenTelemetryHttpFlavour.Http20;
                                         }
                                         else if (HttpProtocol.IsHttp3(protocol))
                                         {
-                                            return "3.0";
+                                            return OpenTelemetryHttpFlavour.Http30;
                                         }
 
                                         throw new InvalidOperationException($"Protocol {protocol} not recognised.");
