@@ -13,11 +13,11 @@ namespace GraphQLTemplate.DataLoaders
     {
         private readonly IHumanRepository repository;
 
-        public HumanDataLoader(IHumanRepository repository)
-            : base(new DataLoaderOptions<Guid>()) =>
+        public HumanDataLoader(IBatchScheduler batchScheduler, IHumanRepository repository)
+            : base(batchScheduler, new DataLoaderOptions<Guid>()) =>
             this.repository = repository;
 
-        protected override async Task<IReadOnlyList<Result<Human>>> FetchAsync(
+        protected override async ValueTask<IReadOnlyList<Result<Human>>> FetchAsync(
             IReadOnlyList<Guid> keys,
             CancellationToken cancellationToken)
         {

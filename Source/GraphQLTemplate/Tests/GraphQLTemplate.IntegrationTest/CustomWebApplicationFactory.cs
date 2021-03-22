@@ -30,7 +30,7 @@ namespace GraphQLTemplate.IntegrationTest
                 .CreateLogger();
         }
 
-        public ApplicationOptions ApplicationOptions { get; private set; }
+        public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
         public Mock<IClockService> ClockServiceMock { get; } = new Mock<IClockService>(MockBehavior.Strict);
 

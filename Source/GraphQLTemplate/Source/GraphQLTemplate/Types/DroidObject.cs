@@ -6,7 +6,6 @@ namespace GraphQLTemplate.Types
     using GraphQLTemplate.Repositories;
     using HotChocolate.Resolvers;
     using HotChocolate.Types;
-    using HotChocolate.Types.Relay;
 
     public class DroidObject : ObjectType<Droid>
     {
@@ -27,9 +26,11 @@ namespace GraphQLTemplate.Types
                 .Implements<CharacterInterface>();
 
             descriptor
-                .AsNode()
+                .ImplementsNode()
                 .IdField(x => x.Id)
-                .NodeResolver((context, id) => context.DataLoader<IDroidDataLoader>().LoadAsync(id, context.RequestAborted));
+                .ResolveNode((context, id) => context.DataLoader<IDroidDataLoader>().LoadAsync(id, context.RequestAborted));
+            // Replace with external resolver like so
+            // .ResolveNodeWith<NodeResolver>(t => t.GetNodeAsync(default, default));
             descriptor
                 .Field(x => x.Name)
                 .Type<StringType>()

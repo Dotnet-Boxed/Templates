@@ -1,7 +1,7 @@
 namespace GraphQLTemplate.Options
 {
     using System.ComponentModel.DataAnnotations;
-    using HotChocolate.Execution.Configuration;
+    using HotChocolate.Execution.Options;
 #if ForwardedHeaders
     using Microsoft.AspNetCore.Builder;
 #elif HostFiltering
@@ -20,12 +20,12 @@ namespace GraphQLTemplate.Options
         public CacheProfileOptions CacheProfiles { get; }
 
 #if ResponseCompression
-        public CompressionOptions Compression { get; set; }
+        public CompressionOptions? Compression { get; set; }
 
 #endif
 #if ForwardedHeaders
         [Required]
-        public ForwardedHeadersOptions ForwardedHeaders { get; set; }
+        public ForwardedHeadersOptions? ForwardedHeaders { get; set; }
 
 #elif HostFiltering
         [Required]
@@ -33,13 +33,13 @@ namespace GraphQLTemplate.Options
 
 #endif
         [Required]
-        public QueryExecutionOptions GraphQL { get; set; }
+        public RequestExecutorOptions? GraphQL { get; set; }
 
-        public KestrelServerOptions Kestrel { get; set; }
+        public KestrelServerOptions? Kestrel { get; set; }
 #if (Subscriptions || PersistedQueries)
 
         [Required]
-        public RedisOptions Redis { get; set; }
+        public RedisOptions? Redis { get; set; }
 #endif
     }
 }
