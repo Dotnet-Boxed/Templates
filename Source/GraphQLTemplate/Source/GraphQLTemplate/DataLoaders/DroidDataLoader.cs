@@ -13,11 +13,11 @@ namespace GraphQLTemplate.DataLoaders
     {
         private readonly IDroidRepository repository;
 
-        public DroidDataLoader(IDroidRepository repository)
-            : base(new DataLoaderOptions<Guid>()) =>
+        public DroidDataLoader(IBatchScheduler batchScheduler, IDroidRepository repository)
+            : base(batchScheduler, new DataLoaderOptions<Guid>()) =>
             this.repository = repository;
 
-        protected override async Task<IReadOnlyList<Result<Droid>>> FetchAsync(
+        protected override async ValueTask<IReadOnlyList<Result<Droid>>> FetchAsync(
             IReadOnlyList<Guid> keys,
             CancellationToken cancellationToken)
         {

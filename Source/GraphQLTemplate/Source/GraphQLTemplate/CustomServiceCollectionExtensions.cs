@@ -6,7 +6,6 @@ namespace GraphQLTemplate
     using System.IO.Compression;
 #endif
     using System.Linq;
-    using System.Reflection;
     using Boxed.AspNetCore;
 #if (Authorization || CORS)
     using GraphQLTemplate.Constants;
@@ -14,14 +13,10 @@ namespace GraphQLTemplate
 #endif
     using GraphQLTemplate.Options;
     using GraphQLTemplate.Schemas;
-    using GraphQLTemplate.Types;
-    using HotChocolate;
-#if PersistedQueries
-    using HotChocolate.Execution;
-#endif
-    using HotChocolate.Execution.Configuration;
-    using HotChocolate.Subscriptions;
+    using HotChocolate.Execution.Options;
     using HotChocolate.Types;
+    using HotChocolate.Types.Pagination;
+    using HotChocolate.Types.Relay;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -36,6 +31,7 @@ namespace GraphQLTemplate
     using Microsoft.AspNetCore.Server.Kestrel.Core;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Options;
 #if OpenTelemetry
     using OpenTelemetry.Exporter;
@@ -116,7 +112,7 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<QueryExecutionOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
+                .ConfigureAndValidateSingleton<RequestExecutorOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
 #if PersistedQueries
                 .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetSection(nameof(ApplicationOptions.Redis)))
 #endif
@@ -212,9 +208,7 @@ namespace GraphQLTemplate
                     builder
                         .SetResourceBuilder(ResourceBuilder
                             .CreateDefault()
-                            .AddService(
-                                webHostEnvironment.ApplicationName,
-                                serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version)
+                            .AddService(webHostEnvironment.ApplicationName, serviceVersion: AssemblyInformation.Current.Version)
                             .AddAttributes(
                                 new KeyValuePair<string, object>[]
                                 {
@@ -285,6 +279,7 @@ namespace GraphQLTemplate
                     // TODO: Add OpenTelemetry.Exporter.* NuGet packages and configure them here to export open telemetry span data.
                     //       E.g. Add the OpenTelemetry.Exporter.OpenTelemetryProtocol package to export span data to Jaeger.
                 });
+#endif
 #if Authorization
 
         /// <summary>
@@ -309,57 +304,58 @@ namespace GraphQLTemplate
                         .Get<RedisOptions>()
                         .ConnectionString));
 #endif
+
         public static IServiceCollection AddCustomGraphQL(
             this IServiceCollection services,
             IConfiguration configuration) =>
             services
-                .AddDataLoaderRegistry()
+                .AddGraphQLServer()
+#if Authorization
+                .AddAuthorization()
+#endif
 #if Subscriptions
                 .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
 #endif
 #if PersistedQueries
-                 .AddQueryExecutor(queryExecutionBuilder => queryExecutionBuilder
-                     .AddSha256DocumentHashProvider()
-                     .UseActivePersistedQueryPipeline())
-                 .AddRedisQueryStorage(x => x.GetRequiredService<ConnectionMultiplexer>().GetDatabase())
+                .UseAutomaticPersistedQueryPipeline()
+                .AddRedisQueryStorage(x => x.GetRequiredService<ConnectionMultiplexer>().GetDatabase())
 #endif
-                .AddGraphQL(
-                    serviceProvider => SchemaBuilder.New()
-                        .AddServices(serviceProvider)
-#if Authorization
-                        .AddAuthorizeDirectiveType()
-#endif
-                        .ModifyOptions(
-                            options =>
-                            {
-                                options.DefaultBindingBehavior = BindingBehavior.Explicit;
-
-                                // Required to use custom directives
-                                // https://github.com/ChilliCream/hotchocolate/issues/1470
-                                options.RemoveUnreachableTypes = false;
-
-                                options.UseXmlDocumentation = false;
-                            })
-                        .EnableRelaySupport()
-                        .AddDirectiveType<UpperDirectiveType>()
-                        .AddDirectiveType<LowerDirectiveType>()
-                        .AddDirectiveType<IncludeDirectiveType>()
-                        .AddDirectiveType<SkipDirectiveType>()
-                        .SetSchema<MainSchema>()
-                        .AddQueryType<QueryObject>()
-                        .AddMutationType<MutationObject>()
+                .EnableRelaySupport(
+                    new RelayOptions()
+                    {
+                    })
+                .AddDirectiveType<UpperDirectiveType>()
+                .AddDirectiveType<LowerDirectiveType>()
+                .AddDirectiveType<IncludeDirectiveType>()
+                .AddDirectiveType<SkipDirectiveType>()
+                .SetSchema<MainSchema>()
+                .AddQueryType<QueryObject>()
+                .AddMutationType<MutationObject>()
 #if Subscriptions
-                        .AddSubscriptionType<SubscriptionObject>()
+                .AddSubscriptionType<SubscriptionObject>()
 #endif
-                        .AddType<EpisodeEnumeration>()
-                        .AddType<CharacterInterface>()
-                        .AddType<DroidObject>()
-                        .AddType<HumanObject>()
-                        .AddType<HumanInputObject>()
-                        .AddType(new PaginationAmountType(100))
-                        .Create(),
-                    configuration
-                        .GetSection(nameof(ApplicationOptions.GraphQL))
-                        .Get<QueryExecutionOptions>());
+                .AddProjectGraphQLTypes()
+                .AddProjectDataLoaders()
+                .ModifyOptions(
+                    options =>
+                    {
+                        options.DefaultBindingBehavior = BindingBehavior.Explicit;
+
+                        // options.StrictValidation = true;?
+                        options.UseXmlDocumentation = false;
+                    })
+                .ModifyRequestOptions(
+                    x =>
+                    {
+                    })
+                .SetPagingOptions(
+                    new PagingOptions()
+                    {
+                        DefaultPageSize = 10,
+                        IncludeTotalCount = true,
+                        MaxPageSize = 100,
+                    })
+                .TrimTypes()
+                .Services;
     }
 }

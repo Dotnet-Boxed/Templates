@@ -1,17 +1,10 @@
 namespace GraphQLTemplate.Directives
 {
-    using System;
     using HotChocolate.Types;
 
     public class UpperDirectiveType : DirectiveType
     {
-        protected override void Configure(IDirectiveTypeDescriptor descriptor)
-        {
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
-
+        protected override void Configure(IDirectiveTypeDescriptor descriptor) =>
             descriptor
                 .Name("upper")
                 .Location(DirectiveLocation.Field)
@@ -24,6 +17,5 @@ namespace GraphQLTemplate.Directives
                         context.Result = value.ToUpperInvariant();
                     }
                 });
-        }
     }
 }

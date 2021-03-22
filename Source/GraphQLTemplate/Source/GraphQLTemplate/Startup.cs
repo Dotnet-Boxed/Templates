@@ -81,8 +81,7 @@ namespace GraphQLTemplate
 #endif
                 .AddCustomGraphQL(this.configuration)
                 .AddProjectServices()
-                .AddProjectRepositories()
-                .AddProjectDataLoaders();
+                .AddProjectRepositories();
 
         /// <summary>
         /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
@@ -119,6 +118,7 @@ namespace GraphQLTemplate
                 .UseEndpoints(
                     builder =>
                     {
+                        builder.MapGraphQL();
 #if HealthCheck
 #if CORS
                         builder
@@ -136,8 +136,6 @@ namespace GraphQLTemplate
 #if Subscriptions
                 .UseWebSockets()
 #endif
-                // Use the specified GraphQL schema and make them available at /graphql.
-                .UseGraphQL(new QueryMiddlewareOptions() { Path = "/graphql" })
                 .UseIf(
                     this.webHostEnvironment.IsDevelopment(),
                     x => x

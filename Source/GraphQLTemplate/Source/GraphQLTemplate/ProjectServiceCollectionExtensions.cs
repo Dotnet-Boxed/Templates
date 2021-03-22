@@ -3,7 +3,8 @@ namespace GraphQLTemplate
     using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Services;
-    using HotChocolate;
+    using GraphQLTemplate.Types;
+    using HotChocolate.Execution.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -25,8 +26,16 @@ namespace GraphQLTemplate
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
 
-        public static IServiceCollection AddProjectDataLoaders(this IServiceCollection services) =>
-            services
+        public static IRequestExecutorBuilder AddProjectGraphQLTypes(this IRequestExecutorBuilder builder) =>
+            builder
+                .AddType<EpisodeEnumeration>()
+                .AddType<CharacterInterface>()
+                .AddType<DroidObject>()
+                .AddType<HumanObject>()
+                .AddType<HumanInputObject>();
+
+        public static IRequestExecutorBuilder AddProjectDataLoaders(this IRequestExecutorBuilder builder) =>
+            builder
                 .AddDataLoader<IDroidDataLoader, DroidDataLoader>()
                 .AddDataLoader<IHumanDataLoader, HumanDataLoader>();
     }
