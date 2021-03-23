@@ -17,7 +17,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/graphql",
       "publishAllPorts": true,
       "environmentVariables": {
         //#if (HttpsEverywhere)
@@ -43,9 +43,9 @@
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
+      "launchUrl": "https://localhost:5001/graphql",
       ////#else
-      //"launchUrl": "http:////localhost:5000",
+      //"launchUrl": "http:////localhost:5000/graphql",
       //#endif
       "environmentVariables": {
         //#if (HttpsEverywhere)
@@ -61,9 +61,9 @@
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
+      "launchUrl": "https://localhost:5001/graphql",
       ////#else
-      //"launchUrl": "http:////localhost:5000",
+      //"launchUrl": "http:////localhost:5000/graphql",
       //#endif
       "environmentVariables": {
         //#if (HttpsEverywhere)
@@ -78,7 +78,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -86,7 +86,7 @@
     "IIS Express Production": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
@@ -97,7 +97,7 @@
     "IIS (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -105,7 +105,7 @@
     "IIS Production (Setup Required)": {
       "commandName": "IIS",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
@@ -115,7 +115,7 @@
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       ////#else
@@ -129,7 +129,7 @@
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
-      "launchUrl": "",
+      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       ////#else
