@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Schemas
 {
-    using System;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
@@ -37,11 +36,6 @@ namespace GraphQLTemplate.Schemas
 
         protected override void Configure(IObjectTypeDescriptor<SubscriptionResolvers> descriptor)
         {
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
-
             // descriptor
             //     .Field("humanCreated")
             //     .Description("Subscribe to human created events.")
