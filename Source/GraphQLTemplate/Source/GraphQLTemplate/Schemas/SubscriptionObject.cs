@@ -26,16 +26,14 @@ namespace GraphQLTemplate.Schemas
     {
         private readonly IHumanRepository humanRepository;
 
-        public SubscriptionObject(IHumanRepository humanRepository)
-        {
-            this.humanRepository = humanRepository;
-
-            this.Name = "Subscription";
-            this.Description = "The subscription type, represents all updates can be pushed to the client in real time over web sockets.";
-        }
+        public SubscriptionObject(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
 
         protected override void Configure(IObjectTypeDescriptor<SubscriptionResolvers> descriptor)
         {
+            descriptor
+                .Name("Subscription")
+                .Description("The subscription type, represents all updates can be pushed to the client in real time over web sockets.");
+
             // descriptor
             //     .Field("humanCreated")
             //     .Description("Subscribe to human created events.")
