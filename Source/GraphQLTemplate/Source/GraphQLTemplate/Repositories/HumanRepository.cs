@@ -8,9 +8,14 @@ namespace GraphQLTemplate.Repositories
     using System.Threading;
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
+    using GraphQLTemplate.Services;
 
     public sealed class HumanRepository : IHumanRepository// , IDisposable
     {
+        private readonly IClockService clockService;
+
+        public HumanRepository(IClockService clockService) => this.clockService = clockService;
+
 #if Subscriptions
         // private readonly Subject<Human> whenHumanCreated;
 
@@ -19,32 +24,29 @@ namespace GraphQLTemplate.Repositories
         public IObservable<Human> WhenHumanCreated => null!; // this.whenHumanCreated.AsObservable();
 
 #endif
-        public Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken)
+        public Task<Human> AddHumanAsync(HumanInput humanInput, CancellationToken cancellationToken)
         {
-            if (human is null)
+            var now = this.clockService.UtcNow;
+            var human = new Human()
             {
-                throw new ArgumentNullException(nameof(human));
-            }
-
-            human.Id = Guid.NewGuid();
+                Id = Guid.NewGuid(),
+                Name = humanInput.Name,
+                DateOfBirth = humanInput.DateOfBirth,
+                HomePlanet = humanInput.HomePlanet,
+                Created = now,
+                Modified = now,
+            };
             Database.Humans.Add(human);
 #if Subscriptions
-            // this.whenHumanCreated.OnNext(human);
+            // this.whenHumanCreated.OnNext(newHuman);
 #endif
             return Task.FromResult(human);
         }
 
         // public void Dispose() => this.whenHumanCreated.Dispose();
 
-        public Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken)
-        {
-            if (human is null)
-            {
-                throw new ArgumentNullException(nameof(human));
-            }
-
-            return Task.FromResult(Database.Characters.Where(x => human.Friends.Contains(x.Id)).ToList());
-        }
+        public Task<List<Character>> GetFriendsAsync(Human human, CancellationToken
+            cancellationToken) => Task.FromResult(Database.Characters.Where(x => human.Friends.Contains(x.Id)).ToList());
 
         public Task<IQueryable<Human>> GetHumansAsync(CancellationToken cancellationToken) =>
             Task.FromResult(Database.Humans.AsQueryable());

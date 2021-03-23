@@ -6,6 +6,6 @@ namespace GraphQLTemplate.Models
     {
         public DateTime DateOfBirth { get; set; }
 
-        public string HomePlanet { get; set; }
+        public string HomePlanet { get; set; } = default!;
     }
 }

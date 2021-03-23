@@ -13,7 +13,7 @@ namespace GraphQLTemplate.Models
 
         public Guid Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = default!;
 
         public List<Guid> Friends { get; set; }
 
