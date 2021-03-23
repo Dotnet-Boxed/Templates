@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Types
 {
-    using System;
     using GraphQLTemplate.Models;
     using HotChocolate.Types;
 
@@ -8,11 +7,6 @@ namespace GraphQLTemplate.Types
     {
         protected override void Configure(IEnumTypeDescriptor<Episode> descriptor)
         {
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
-
             descriptor
                 .Name("Episode")
                 .Description("One of the films in the Star Wars Trilogy.");

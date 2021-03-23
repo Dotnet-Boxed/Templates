@@ -8,6 +8,6 @@ namespace GraphQLTemplate.Models
 
         public TimeSpan ChargePeriod { get; set; }
 
-        public string PrimaryFunction { get; set; }
+        public string PrimaryFunction { get; set; } = default!;
     }
 }
