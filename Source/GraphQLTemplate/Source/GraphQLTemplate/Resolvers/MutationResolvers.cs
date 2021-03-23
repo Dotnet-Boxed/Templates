@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Resolvers
 {
-    using System;
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
@@ -22,16 +21,6 @@ namespace GraphQLTemplate.Resolvers
 
         public Task<Human> CreateHumanAsync(IResolverContext context, Human human)
         {
-            if (context is null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (human is null)
-            {
-                throw new ArgumentNullException(nameof(human));
-            }
-
             var now = this.clockService.UtcNow;
             human.Created = now;
             human.Modified = now;

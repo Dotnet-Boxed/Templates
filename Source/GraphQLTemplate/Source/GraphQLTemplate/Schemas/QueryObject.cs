@@ -1,11 +1,9 @@
 namespace GraphQLTemplate.Schemas
 {
-    using System;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Resolvers;
     using GraphQLTemplate.Types;
     using HotChocolate.Types;
-    using HotChocolate.Types.Relay;
 
     /// <summary>
     /// All queries defined in the schema used to retrieve data.
@@ -44,16 +42,14 @@ namespace GraphQLTemplate.Schemas
     /// </example>
     public class QueryObject : ObjectType<QueryResolvers>
     {
+        public QueryObject()
+        {
+            this.Name = "Query";
+            this.Description = "The query type, represents all of the entry points into our object graph.";
+        }
+
         protected override void Configure(IObjectTypeDescriptor<QueryResolvers> descriptor)
         {
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
-
-            // this.Name = "Query";
-            // this.Description = "The query type, represents all of the entry points into our object graph.";
-
             descriptor
                 .Field(x => x.GetDroidsAsync(default!))
                 .Description("Gets droids.")

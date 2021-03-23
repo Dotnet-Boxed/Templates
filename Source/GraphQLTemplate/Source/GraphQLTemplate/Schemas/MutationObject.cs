@@ -1,9 +1,6 @@
 namespace GraphQLTemplate.Schemas
 {
-    using System;
-    using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Resolvers;
-    using GraphQLTemplate.Services;
     using HotChocolate.Types;
 
     /// <summary>
@@ -35,29 +32,16 @@ namespace GraphQLTemplate.Schemas
     /// </example>
     public class MutationObject : ObjectType<MutationResolvers>
     {
-        private readonly IClockService clockService;
-        private readonly IHumanRepository humanRepository;
-
-        public MutationObject(IClockService clockService, IHumanRepository humanRepository)
+        public MutationObject()
         {
-            this.clockService = clockService;
-            this.humanRepository = humanRepository;
-
             this.Name = "Mutation";
             this.Description = "The mutation type, represents all updates we can make to our data.";
         }
 
-        protected override void Configure(IObjectTypeDescriptor<MutationResolvers> descriptor)
-        {
-            if (descriptor is null)
-            {
-                throw new ArgumentNullException(nameof(descriptor));
-            }
-
+        protected override void Configure(IObjectTypeDescriptor<MutationResolvers> descriptor) =>
             descriptor
                 .Field(x => x.CreateHumanAsync(default!, default!))
                 .Description("Create a new human.")
                 .Argument("human", x => x.Description("The human you want to create."));
-        }
     }
 }
