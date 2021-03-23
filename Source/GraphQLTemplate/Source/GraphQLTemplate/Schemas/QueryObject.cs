@@ -42,14 +42,12 @@ namespace GraphQLTemplate.Schemas
     /// </example>
     public class QueryObject : ObjectType<QueryResolvers>
     {
-        public QueryObject()
-        {
-            this.Name = "Query";
-            this.Description = "The query type, represents all of the entry points into our object graph.";
-        }
-
         protected override void Configure(IObjectTypeDescriptor<QueryResolvers> descriptor)
         {
+            descriptor
+                .Name("Query")
+                .Description("The query type, represents all of the entry points into our object graph.");
+
             descriptor
                 .Field(x => x.GetDroidsAsync(default!))
                 .Description("Gets droids.")
