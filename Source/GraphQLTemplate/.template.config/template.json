@@ -285,15 +285,15 @@
     "Subscriptions": {
       "type": "parameter",
       "datatype": "bool",
-      "defaultValue": "true",
-      "description": "Add GraphQL subscriptions to be notified when objects change."
+      "defaultValue": "false",
+      "description": "Add GraphQL subscriptions to be notified when objects change (Requires a running instance of redis)."
     },
     // PersistedQueries
     "PersistedQueries": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
-      "description": "Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query."
+      "description": "Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query (Requires a running instance of redis)."
     },
     // Forwarded Headers
     "ForwardedHeaders": {
