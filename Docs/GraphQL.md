@@ -17,8 +17,8 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### GraphQL
 
 - **Mutations** (Default=On) - Add [GraphQL](http://graphql.org/) mutations to change objects.
-- **Subscriptions** (Default=On) - Add [GraphQL](http://graphql.org/) subscriptions to be notified when objects change.
-- **PersistedQueries** (Default=Off) - Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query.
+- **Subscriptions** (Default=Off) - Add [GraphQL](http://graphql.org/) subscriptions to be notified when objects change (Requires a running instance of redis).
+- **PersistedQueries** (Default=Off) - Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query (Requires a running instance of redis).
 
 #### Project
 
