@@ -313,9 +313,6 @@ namespace GraphQLTemplate
 #if Authorization
                 .AddAuthorization()
 #endif
-#if Subscriptions
-                .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
-#endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
                 .AddRedisQueryStorage(x => x.GetRequiredService<ConnectionMultiplexer>().GetDatabase())
@@ -328,11 +325,14 @@ namespace GraphQLTemplate
                 .AddDirectiveType<LowerDirectiveType>()
                 .AddDirectiveType<IncludeDirectiveType>()
                 .AddDirectiveType<SkipDirectiveType>()
+                // Bind a System.DateTime type to a GraphQL date type by default.
+                .BindRuntimeType<DateTime, DateType>()
                 .SetSchema<MainSchema>()
                 .AddQueryType<QueryObject>()
                 .AddMutationType<MutationObject>()
 #if Subscriptions
-                .AddSubscriptionType<SubscriptionObject>()
+                 .AddSubscriptionType<SubscriptionObject>()
+                .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
 #endif
                 .AddProjectGraphQLTypes()
                 .AddProjectDataLoaders()
