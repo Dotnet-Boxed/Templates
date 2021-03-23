@@ -48,14 +48,8 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Boxed.AspNetCore" Version="6.1.1" />
-    <!--<PackageReference Include="GraphQL" Version="2.4.0" />
-    <PackageReference Include="GraphQL.Authorization" Version="2.1.29" Condition="'$(Authorization)' == 'true'" />
-    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="3.4.0" />
-    <PackageReference Include="GraphQL.Server.Transports.WebSockets" Version="3.4.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="3.4.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="3.4.0" />-->
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.0.9" />
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.0.9" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.0.9" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="11.0.9" />
     <PackageReference Include="HotChocolate.Data.Spatial" Version="11.0.9" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="11.0.9" Condition="'$(PersistedQueries)' == 'true'" />
