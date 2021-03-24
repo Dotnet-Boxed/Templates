@@ -1,8 +1,7 @@
-namespace GraphQLTemplate.Schemas
+namespace GraphQLTemplate.Types
 {
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Resolvers;
-    using GraphQLTemplate.Types;
     using HotChocolate.Types;
 
     /// <summary>
