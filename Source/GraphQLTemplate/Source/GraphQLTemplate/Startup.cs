@@ -3,6 +3,7 @@ namespace GraphQLTemplate
     using Boxed.AspNetCore;
 #if CORS
     using GraphQLTemplate.Constants;
+    using HotChocolate.AspNetCore;
 #endif
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
@@ -116,7 +117,9 @@ namespace GraphQLTemplate
                 .UseEndpoints(
                     builder =>
                     {
-                        builder.MapGraphQL();
+                        var graphQLServerOptions = new GraphQLServerOptions();
+                        graphQLServerOptions.Tool.Enable = this.webHostEnvironment.IsDevelopment();
+                        builder.MapGraphQL().WithOptions(graphQLServerOptions);
 #if HealthCheck
 #if CORS
                         builder
