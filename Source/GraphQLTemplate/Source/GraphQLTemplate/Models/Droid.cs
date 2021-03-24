@@ -2,12 +2,15 @@ namespace GraphQLTemplate.Models
 {
     using System;
 
-    public class Droid : Character
+    public record Droid(
+        Guid Id,
+        string Name,
+        string PrimaryFunction,
+        TimeSpan ChargePeriod,
+        DateTimeOffset Manufactured,
+        DateTimeOffset Created,
+        DateTimeOffset Modified) :
+        Character(Id, Name, Created, Modified)
     {
-        public DateTimeOffset Manufactured { get; set; }
-
-        public TimeSpan ChargePeriod { get; set; }
-
-        public string PrimaryFunction { get; set; } = default!;
     }
 }

@@ -8,14 +8,9 @@ namespace GraphQLTemplate.Repositories
     using System.Threading;
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
-    using GraphQLTemplate.Services;
 
     public sealed class HumanRepository : IHumanRepository// , IDisposable
     {
-        private readonly IClockService clockService;
-
-        public HumanRepository(IClockService clockService) => this.clockService = clockService;
-
 #if Subscriptions
         // private readonly Subject<Human> whenHumanCreated;
 
@@ -24,19 +19,8 @@ namespace GraphQLTemplate.Repositories
         public IObservable<Human> WhenHumanCreated => null!; // this.whenHumanCreated.AsObservable();
 
 #endif
-        public Task<Human> AddHumanAsync(HumanInput humanInput, CancellationToken cancellationToken)
+        public Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken)
         {
-            var now = this.clockService.UtcNow;
-            var human = new Human()
-            {
-                Id = Guid.NewGuid(),
-                Name = humanInput.Name,
-                DateOfBirth = humanInput.DateOfBirth,
-                HomePlanet = humanInput.HomePlanet,
-                Created = now,
-                Modified = now,
-            };
-            human.AppearsIn.AddRange(humanInput.AppearsIn);
             Database.Humans.Add(human);
 #if Subscriptions
             // this.whenHumanCreated.OnNext(newHuman);

@@ -1,6 +1,9 @@
 namespace GraphQLTemplate
 {
+    using Boxed.Mapping;
     using GraphQLTemplate.DataLoaders;
+    using GraphQLTemplate.Mappers;
+    using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Services;
     using GraphQLTemplate.Types;
@@ -17,6 +20,10 @@ namespace GraphQLTemplate
     /// </remarks>
     internal static class ProjectServiceCollectionExtensions
     {
+        public static IServiceCollection AddProjectMappers(this IServiceCollection services) =>
+            services
+                .AddSingleton<IImmutableMapper<HumanInput, Human>, HumanInputToHumanMapper>();
+
         public static IServiceCollection AddProjectServices(this IServiceCollection services) =>
             services
                 .AddSingleton<IClockService, ClockService>();
