@@ -12,7 +12,7 @@ namespace GraphQLTemplate
 #endif
     using GraphQLTemplate.Directives;
     using GraphQLTemplate.Options;
-    using GraphQLTemplate.Schemas;
+    using GraphQLTemplate.Types;
     using HotChocolate.Execution.Options;
     using HotChocolate.Types;
     using HotChocolate.Types.Pagination;
@@ -331,7 +331,7 @@ namespace GraphQLTemplate
                 .AddQueryType<QueryObject>()
                 .AddMutationType<MutationObject>()
 #if Subscriptions
-                 .AddSubscriptionType<SubscriptionObject>()
+                .AddSubscriptionType<SubscriptionObject>()
                 .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
 #endif
                 .AddProjectGraphQLTypes()

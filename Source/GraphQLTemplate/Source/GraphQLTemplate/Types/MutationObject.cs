@@ -1,4 +1,4 @@
-namespace GraphQLTemplate.Schemas
+namespace GraphQLTemplate.Types
 {
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
