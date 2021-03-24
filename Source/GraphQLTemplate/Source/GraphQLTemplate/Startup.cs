@@ -77,6 +77,7 @@ namespace GraphQLTemplate
                 .AddCustomRedis(this.configuration)
 #endif
                 .AddCustomGraphQL(this.configuration)
+                .AddProjectMappers()
                 .AddProjectServices()
                 .AddProjectRepositories();
 

@@ -2,10 +2,14 @@ namespace GraphQLTemplate.Models
 {
     using System;
 
-    public class Human : Character
+    public record Human(
+        Guid Id,
+        string Name,
+        string HomePlanet,
+        DateTime DateOfBirth,
+        DateTimeOffset Created,
+        DateTimeOffset Modified) :
+        Character(Id, Name, Created, Modified)
     {
-        public DateTime DateOfBirth { get; set; }
-
-        public string HomePlanet { get; set; } = default!;
     }
 }
