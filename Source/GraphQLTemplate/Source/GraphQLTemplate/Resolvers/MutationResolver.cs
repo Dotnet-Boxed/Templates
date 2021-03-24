@@ -6,12 +6,12 @@ namespace GraphQLTemplate.Resolvers
     using GraphQLTemplate.Repositories;
     using HotChocolate.Resolvers;
 
-    public class MutationResolvers
+    public class MutationResolver
     {
         private readonly IImmutableMapper<HumanInput, Human> humanInputToHumanMapper;
         private readonly IHumanRepository humanRepository;
 
-        public MutationResolvers(
+        public MutationResolver(
             IImmutableMapper<HumanInput, Human> humanInputToHumanMapper,
             IHumanRepository humanRepository)
         {

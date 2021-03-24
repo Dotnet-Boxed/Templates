@@ -6,12 +6,12 @@ namespace GraphQLTemplate.Resolvers
     using GraphQLTemplate.Repositories;
     using HotChocolate.Resolvers;
 
-    public class QueryResolvers
+    public class QueryResolver
     {
         private readonly IDroidRepository droidRepository;
         private readonly IHumanRepository humanRepository;
 
-        public QueryResolvers(
+        public QueryResolver(
             IDroidRepository droidRepository,
             IHumanRepository humanRepository)
         {

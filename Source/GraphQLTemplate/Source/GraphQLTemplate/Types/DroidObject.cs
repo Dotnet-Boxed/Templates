@@ -1,9 +1,8 @@
 namespace GraphQLTemplate.Types
 {
-    using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
-    using HotChocolate.Resolvers;
+    using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
     public class DroidObject : ObjectType<Droid>
@@ -22,9 +21,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .ImplementsNode()
                 .IdField(x => x.Id)
-                .ResolveNode((context, id) => context.DataLoader<IDroidDataLoader>().LoadAsync(id, context.RequestAborted));
-            // Replace with external resolver like so
-            // .ResolveNodeWith<NodeResolver>(t => t.GetNodeAsync(default, default));
+                .ResolveNodeWith<DroidResolver>(x => x.GetDroidAsync(default!, default!));
             descriptor
                 .Field(x => x.Name)
                 .Description("The name of the droid.");

@@ -30,9 +30,9 @@ namespace GraphQLTemplate.Types
     /// </c>
     /// These can be customized by the client.
     /// </example>
-    public class MutationObject : ObjectType<MutationResolvers>
+    public class MutationObject : ObjectType<MutationResolver>
     {
-        protected override void Configure(IObjectTypeDescriptor<MutationResolvers> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<MutationResolver> descriptor)
         {
             descriptor
                 .Name("Mutation")

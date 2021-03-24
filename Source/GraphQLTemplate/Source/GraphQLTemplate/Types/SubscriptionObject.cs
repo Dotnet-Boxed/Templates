@@ -22,13 +22,13 @@ namespace GraphQLTemplate.Types
     /// </c>
     /// The is an example subscription to be notified when a human is created.
     /// </example>
-    public class SubscriptionObject : ObjectType<SubscriptionResolvers>
+    public class SubscriptionObject : ObjectType<SubscriptionResolver>
     {
         private readonly IHumanRepository humanRepository;
 
         public SubscriptionObject(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
 
-        protected override void Configure(IObjectTypeDescriptor<SubscriptionResolvers> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<SubscriptionResolver> descriptor)
         {
             descriptor
                 .Name("Subscription")
