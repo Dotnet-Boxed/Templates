@@ -1,10 +1,9 @@
 namespace GraphQLTemplate.Types
 {
     using GraphQLTemplate.Constants;
-    using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
-    using HotChocolate.Resolvers;
+    using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
     public class HumanObject : ObjectType<Human>
@@ -26,9 +25,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .ImplementsNode()
                 .IdField(x => x.Id)
-                .ResolveNode((context, id) => context.DataLoader<IHumanDataLoader>().LoadAsync(id, context.RequestAborted));
-            // Replace with external resolver like so
-            // .ResolveNodeWith<NodeResolver>(t => t.GetNodeAsync(default, default));
+                .ResolveNodeWith<HumanResolver>(x => x.GetHumanAsync(default!, default!));
             descriptor
                 .Field(x => x.Name)
                 .Description("The name of the human.");

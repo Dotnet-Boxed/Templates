@@ -39,9 +39,9 @@ namespace GraphQLTemplate.Types
     /// </c>
     /// It retrieves common properties, as well as properties specific to droids and humans.
     /// </example>
-    public class QueryObject : ObjectType<QueryResolvers>
+    public class QueryObject : ObjectType<QueryResolver>
     {
-        protected override void Configure(IObjectTypeDescriptor<QueryResolvers> descriptor)
+        protected override void Configure(IObjectTypeDescriptor<QueryResolver> descriptor)
         {
             descriptor
                 .Name("Query")
