@@ -2,15 +2,12 @@ namespace GraphQLTemplate.Types
 {
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Models;
-    using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
     public class HumanObject : ObjectType<Human>
     {
-        private readonly IHumanRepository humanRepository;
 
-        public HumanObject(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
 
         protected override void Configure(IObjectTypeDescriptor<Human> descriptor)
         {
@@ -45,7 +42,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.Friends)
                 .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
                 .Description("The friends of the character, or an empty list if they have none.")
-                .Resolver(context => this.humanRepository.GetFriendsAsync(context.Parent<Human>(), context.RequestAborted));
+                .ResolveWith<HumanResolver>(x => x.GetFriendsAsync(default!));
         }
     }
 }
