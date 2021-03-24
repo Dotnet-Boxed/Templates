@@ -310,12 +310,20 @@ namespace GraphQLTemplate
             IConfiguration configuration) =>
             services
                 .AddGraphQLServer()
+                .AddFiltering()
+                .AddSorting()
+                .AddApolloTracing()
 #if Authorization
                 .AddAuthorization()
 #endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
-                .AddRedisQueryStorage(x => x.GetRequiredService<ConnectionMultiplexer>().GetDatabase())
+                .AddRedisQueryStorage(x => ConnectionMultiplexer
+                    .Connect(configuration
+                        .GetSection(nameof(ApplicationOptions.Redis))
+                        .Get<RedisOptions>()
+                        .ConnectionString)
+                    .GetDatabase())
 #endif
                 .EnableRelaySupport(
                     new RelayOptions()
@@ -331,8 +339,8 @@ namespace GraphQLTemplate
                 .AddQueryType<QueryObject>()
                 .AddMutationType<MutationObject>()
 #if Subscriptions
-                .AddSubscriptionType<SubscriptionObject>()
-                .AddRedisSubscriptions(x => x.GetRequiredService<ConnectionMultiplexer>())
+                // .AddSubscriptionType<SubscriptionObject>()
+                // .AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>())
 #endif
                 .AddProjectGraphQLTypes()
                 .AddProjectDataLoaders()

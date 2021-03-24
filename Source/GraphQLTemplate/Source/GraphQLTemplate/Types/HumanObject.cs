@@ -7,8 +7,6 @@ namespace GraphQLTemplate.Types
 
     public class HumanObject : ObjectType<Human>
     {
-
-
         protected override void Configure(IObjectTypeDescriptor<Human> descriptor)
         {
             descriptor
