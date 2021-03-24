@@ -31,12 +31,12 @@ namespace GraphQLTemplate.Repositories
             {
                 Id = Guid.NewGuid(),
                 Name = humanInput.Name,
-                AppearsIn = humanInput.AppearsIn,
                 DateOfBirth = humanInput.DateOfBirth,
                 HomePlanet = humanInput.HomePlanet,
                 Created = now,
                 Modified = now,
             };
+            human.AppearsIn.AddRange(humanInput.AppearsIn);
             Database.Humans.Add(human);
 #if Subscriptions
             // this.whenHumanCreated.OnNext(newHuman);
