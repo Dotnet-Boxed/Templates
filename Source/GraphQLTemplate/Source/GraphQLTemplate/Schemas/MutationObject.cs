@@ -9,8 +9,8 @@ namespace GraphQLTemplate.Schemas
     /// <example>
     /// This is an example mutation to create a new human.
     /// <c>
-    /// mutation createHuman($human: HumanInput!) {
-    ///   createHuman(human: $human)
+    /// mutation createHuman($humanInput: HumanInput!) {
+    ///   createHuman(humanInput: $humanInput)
     ///   {
     ///     id
     ///     name
@@ -20,7 +20,7 @@ namespace GraphQLTemplate.Schemas
     /// }
     /// This is an example JSON of the variables you also need to specify to create a new human:
     /// {
-    ///  "human": {
+    ///  "humanInput": {
     ///     "name": "Muhammad Rehan Saeed",
     ///     "homePlanet": "Earth",
     ///     "dateOfBirth": "2000-01-01",
@@ -41,7 +41,7 @@ namespace GraphQLTemplate.Schemas
             descriptor
                 .Field(x => x.CreateHumanAsync(default!, default!))
                 .Description("Create a new human.")
-                .Argument("human", x => x.Description("The human you want to create."));
+                .Argument("humanInput", x => x.Description("The human you want to create."));
         }
     }
 }
