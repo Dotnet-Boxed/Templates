@@ -1,16 +1,11 @@
 namespace GraphQLTemplate.Types
 {
     using GraphQLTemplate.Models;
-    using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
     public class DroidObject : ObjectType<Droid>
     {
-        private readonly IDroidRepository droidRepository;
-
-        public DroidObject(IDroidRepository droidRepository) => this.droidRepository = droidRepository;
-
         protected override void Configure(IObjectTypeDescriptor<Droid> descriptor)
         {
             descriptor
@@ -41,7 +36,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.Friends)
                 .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
                 .Description("The friends of the character, or an empty list if they have none.")
-                .Resolver(context => this.droidRepository.GetFriendsAsync(context.Parent<Droid>(), context.RequestAborted));
+                .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!));
         }
     }
 }
