@@ -314,7 +314,7 @@ namespace GraphQLTemplate
                 .AddSorting()
                 .AddApolloTracing()
 #if Authorization
-                // .AddAuthorization()
+                .AddAuthorization()
 #endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
