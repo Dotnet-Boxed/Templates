@@ -17,7 +17,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/graphql",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "publishAllPorts": true,
       "environmentVariables": {
         //#if (HttpsEverywhere)
@@ -43,9 +43,9 @@
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/graphql",
+      "launchUrl": "https://localhost:5001",
       ////#else
-      //"launchUrl": "http:////localhost:5000/graphql",
+      //"launchUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
         //#if (HttpsEverywhere)
@@ -61,9 +61,9 @@
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001/graphql",
+      "launchUrl": "https://localhost:5001",
       ////#else
-      //"launchUrl": "http:////localhost:5000/graphql",
+      //"launchUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
         //#if (HttpsEverywhere)
