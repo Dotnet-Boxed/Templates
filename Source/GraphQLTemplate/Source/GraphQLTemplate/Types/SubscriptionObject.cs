@@ -1,5 +1,6 @@
 namespace GraphQLTemplate.Types
 {
+    using System;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
@@ -30,17 +31,9 @@ namespace GraphQLTemplate.Types
                 .Description("The subscription type, represents all updates can be pushed to the client in real time over web sockets.");
 
             descriptor
-                .Field(x => x.OnHumanCreatedAsync(default!, default!))
-                .Description("Subscribe to human created events.");
-            // .Argument("homePlanets", x => x.Description("The home planets of the humans created."))
-            //.Subscribe<Human>(
-            //    context =>
-            //    {
-            //        //async foreach (var payload in await serviceBus.OnMessageReceiveAsync())
-            //        //{
-            //        //    yield return payload;
-            //        //}
-            //    });
+                .Field(x => x.OnHumanCreatedAsync(default!, default!, default!))
+                .Description("Subscribe to human created events.")
+                .SubscribeToTopic<Guid>(nameof(SubscriptionResolver.OnHumanCreatedAsync));
         }
     }
 }
