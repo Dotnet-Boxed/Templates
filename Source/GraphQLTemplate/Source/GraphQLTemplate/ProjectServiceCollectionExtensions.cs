@@ -2,12 +2,14 @@ namespace GraphQLTemplate
 {
     using Boxed.Mapping;
     using GraphQLTemplate.DataLoaders;
+    using GraphQLTemplate.Directives;
     using GraphQLTemplate.Mappers;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
     using GraphQLTemplate.Services;
     using GraphQLTemplate.Types;
     using HotChocolate.Execution.Configuration;
+    using HotChocolate.Types;
     using Microsoft.Extensions.DependencyInjection;
 
     /// <summary>
@@ -33,17 +35,28 @@ namespace GraphQLTemplate
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
 
-        public static IRequestExecutorBuilder AddProjectGraphQLTypes(this IRequestExecutorBuilder builder) =>
+        public static IRequestExecutorBuilder AddProjectDirectives(this IRequestExecutorBuilder builder) =>
             builder
-                .AddType<EpisodeEnumeration>()
-                .AddType<CharacterInterface>()
-                .AddType<DroidObject>()
-                .AddType<HumanObject>()
-                .AddType<HumanInputObject>();
+                .AddDirectiveType<UpperDirectiveType>()
+                .AddDirectiveType<LowerDirectiveType>()
+                .AddDirectiveType<IncludeDirectiveType>()
+                .AddDirectiveType<SkipDirectiveType>();
 
         public static IRequestExecutorBuilder AddProjectDataLoaders(this IRequestExecutorBuilder builder) =>
             builder
                 .AddDataLoader<IDroidDataLoader, DroidDataLoader>()
                 .AddDataLoader<IHumanDataLoader, HumanDataLoader>();
+
+        public static IRequestExecutorBuilder AddProjectTypes(this IRequestExecutorBuilder builder) =>
+            builder
+                .SetSchema<MainSchema>()
+                .AddQueryType<QueryObject>()
+                .AddMutationType<MutationObject>()
+                .AddSubscriptionType<SubscriptionObject>()
+                .AddType<EpisodeEnumeration>()
+                .AddType<CharacterInterface>()
+                .AddType<DroidObject>()
+                .AddType<HumanObject>()
+                .AddType<HumanInputObject>();
     }
 }

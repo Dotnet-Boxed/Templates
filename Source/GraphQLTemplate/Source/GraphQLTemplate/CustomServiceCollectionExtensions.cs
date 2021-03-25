@@ -10,9 +10,7 @@ namespace GraphQLTemplate
 #if (Authorization || CORS || OpenTelemetry)
     using GraphQLTemplate.Constants;
 #endif
-    using GraphQLTemplate.Directives;
     using GraphQLTemplate.Options;
-    using GraphQLTemplate.Types;
     using HotChocolate.Execution.Options;
     using HotChocolate.Types;
     using Microsoft.AspNetCore.Builder;
@@ -324,32 +322,20 @@ namespace GraphQLTemplate
                 // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
                 .AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase())
 #endif
-                .AddDirectiveType<UpperDirectiveType>()
-                .AddDirectiveType<LowerDirectiveType>()
-                .AddDirectiveType<IncludeDirectiveType>()
-                .AddDirectiveType<SkipDirectiveType>()
-                // Bind a System.DateTime type to a GraphQL date type by default.
-                .BindRuntimeType<DateTime, DateType>()
-                .SetSchema<MainSchema>()
-                .AddQueryType<QueryObject>()
-                .AddMutationType<MutationObject>()
 #if Subscriptions
-                .AddSubscriptionType<SubscriptionObject>()
                 .AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>())
 #endif
-                .AddProjectGraphQLTypes()
+                // Bind a System.DateTime type to a GraphQL date type by default.
+                .BindRuntimeType<DateTime, DateType>()
+                .AddProjectDirectives()
                 .AddProjectDataLoaders()
-                .ModifyOptions(
-                    options =>
-                    {
-                        // options.StrictValidation = true;?
-                        options.UseXmlDocumentation = false;
-                    })
+                .AddProjectTypes()
+                .TrimTypes()
+                .ModifyOptions(options => options.UseXmlDocumentation = false)
                 .AddMaxComplexityRule(graphQLOptions.MaxAllowedComplexity)
                 .AddMaxExecutionDepthRule(graphQLOptions.MaxAllowedExecutionDepth)
-                .SetRequestOptions(() => graphQLOptions.Request)
                 .SetPagingOptions(graphQLOptions.Paging)
-                .TrimTypes()
+                .SetRequestOptions(() => graphQLOptions.Request)
                 .Services;
         }
     }
