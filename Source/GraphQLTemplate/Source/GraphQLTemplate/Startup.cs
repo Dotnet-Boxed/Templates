@@ -108,6 +108,9 @@ namespace GraphQLTemplate
                 .UseIf(
                     this.webHostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
+#if Subscriptions
+                .UseWebSockets()
+#endif
                 .UseRouting()
 #if CORS
                 .UseCors(CorsPolicyName.AllowAny)
@@ -133,12 +136,7 @@ namespace GraphQLTemplate
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #endif
-#if Subscriptions
-                    })
-                .UseWebSockets();
-#else
                     });
-#endif
 
     }
 }
