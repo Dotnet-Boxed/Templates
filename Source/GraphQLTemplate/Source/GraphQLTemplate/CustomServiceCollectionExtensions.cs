@@ -314,7 +314,7 @@ namespace GraphQLTemplate
                 .AddSorting()
                 .AddApolloTracing()
 #if Authorization
-                .AddAuthorization()
+                // .AddAuthorization()
 #endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
@@ -339,8 +339,8 @@ namespace GraphQLTemplate
                 .AddQueryType<QueryObject>()
                 .AddMutationType<MutationObject>()
 #if Subscriptions
-                // .AddSubscriptionType<SubscriptionObject>()
-                // .AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>())
+                .AddSubscriptionType<SubscriptionObject>()
+                .AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>())
 #endif
                 .AddProjectGraphQLTypes()
                 .AddProjectDataLoaders()
