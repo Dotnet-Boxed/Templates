@@ -136,7 +136,14 @@ namespace GraphQLTemplate
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #endif
-                    });
+                    })
+                .UseIf(
+                    this.webHostEnvironment.IsDevelopment(),
+                    x => x
+                        // Add the GraphQL Playground UI to try out the GraphQL API at /.
+                        .UseGraphQLPlayground("/")
+                        // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
+                        .UseGraphQLVoyager("/voyager"));
 
     }
 }
