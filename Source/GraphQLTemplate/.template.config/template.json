@@ -64,7 +64,7 @@
         },
         // PersistedQueries
         {
-          "condition": "(!Subscriptions && !PersistedQueries)",
+          "condition": "(!PersistedQueries && !Subscriptions)",
           "exclude": [
             "Source/GraphQLTemplate/Options/RedisOptions.cs"
           ]
