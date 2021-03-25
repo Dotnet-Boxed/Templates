@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Types
 {
-    using GraphQLTemplate.Models;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
 
@@ -50,13 +49,13 @@ namespace GraphQLTemplate.Types
             descriptor
                 .Field(x => x.GetDroidsAsync(default!))
                 .Description("Gets droids.")
-                .UsePaging<DroidObject, Droid>()
+                .UsePaging()
                 .UseFiltering()
                 .UseSorting();
             descriptor
                 .Field(x => x.GetHumansAsync(default!))
                 .Description("Gets humans.")
-                .UsePaging<HumanObject, Human>()
+                .UsePaging()
                 .UseFiltering()
                 .UseSorting();
         }
