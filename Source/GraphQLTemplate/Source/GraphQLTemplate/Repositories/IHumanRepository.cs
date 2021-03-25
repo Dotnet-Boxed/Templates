@@ -9,10 +9,6 @@ namespace GraphQLTemplate.Repositories
 
     public interface IHumanRepository
     {
-#if Subscriptions
-        IObservable<Human> WhenHumanCreated { get; }
-
-#endif
         Task<Human> AddHumanAsync(Human human, CancellationToken cancellationToken);
 
         Task<List<Character>> GetFriendsAsync(Human human, CancellationToken cancellationToken);

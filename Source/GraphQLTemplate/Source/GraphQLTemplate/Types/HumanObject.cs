@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Types
 {
-    using GraphQLTemplate.Constants;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
@@ -27,7 +26,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .Field(x => x.DateOfBirth)
 #if Authorization
-                .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
+                // .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
 #endif
                 .Description("The humans date of birth.");
             descriptor
