@@ -318,12 +318,8 @@ namespace GraphQLTemplate
 #endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
-                .AddRedisQueryStorage(x => ConnectionMultiplexer
-                    .Connect(configuration
-                        .GetSection(nameof(ApplicationOptions.Redis))
-                        .Get<RedisOptions>()
-                        .ConnectionString)
-                    .GetDatabase())
+                // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
+                .AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase())
 #endif
                 .EnableRelaySupport(
                     new RelayOptions()
@@ -347,11 +343,11 @@ namespace GraphQLTemplate
                 .ModifyOptions(
                     options =>
                     {
-                        options.DefaultBindingBehavior = BindingBehavior.Explicit;
-
                         // options.StrictValidation = true;?
                         options.UseXmlDocumentation = false;
                     })
+                .AddMaxComplexityRule(100)
+                .AddMaxExecutionDepthRule(100)
                 .ModifyRequestOptions(
                     x =>
                     {
