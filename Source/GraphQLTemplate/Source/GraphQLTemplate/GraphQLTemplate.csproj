@@ -55,8 +55,6 @@
     <PackageReference Include="HotChocolate.Data.Spatial" Version="11.0.9" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="11.0.9" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="11.0.9" Condition="'$(Subscriptions)' == 'true'" />
-    <PackageReference Include="HotChocolate.Types.Filters" Version="11.0.9" />
-    <PackageReference Include="HotChocolate.Types.Sorting" Version="11.0.9" />
     <PackageReference Include="HotChocolate.Types.Spatial" Version="11.0.9" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.17.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
