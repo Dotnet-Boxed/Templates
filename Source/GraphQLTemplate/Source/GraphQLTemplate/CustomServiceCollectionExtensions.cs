@@ -15,8 +15,6 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Types;
     using HotChocolate.Execution.Options;
     using HotChocolate.Types;
-    using HotChocolate.Types.Pagination;
-    using HotChocolate.Types.Relay;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -38,7 +36,7 @@ namespace GraphQLTemplate
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
 #endif
-#if (Subscriptions || PersistedQueries)
+#if (PersistedQueries || Subscriptions)
     using StackExchange.Redis;
 #endif
 
@@ -112,8 +110,10 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<RequestExecutorOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
-#if PersistedQueries
+                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
+                .ConfigureAndValidateSingleton<RequestExecutorOptions>(
+                    configuration.GetSection(nameof(ApplicationOptions.GraphQL)).GetSection(nameof(GraphQLOptions.Request)))
+#if (PersistedQueries || Subscriptions)
                 .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetSection(nameof(ApplicationOptions.Redis)))
 #endif
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
@@ -292,7 +292,7 @@ namespace GraphQLTemplate
                 .AddAuthorization(options => options
                     .AddPolicy(AuthorizationPolicyName.Admin, x => x.RequireAuthenticatedUser()));
 #endif
-#if (Subscriptions || PersistedQueries)
+#if (PersistedQueries || Subscriptions)
 
         public static IServiceCollection AddCustomRedis(
             this IServiceCollection services,
@@ -307,11 +307,14 @@ namespace GraphQLTemplate
 
         public static IServiceCollection AddCustomGraphQL(
             this IServiceCollection services,
-            IConfiguration configuration) =>
-            services
+            IConfiguration configuration)
+        {
+            var graphQLOptions = configuration.GetSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
+            return services
                 .AddGraphQLServer()
                 .AddFiltering()
                 .AddSorting()
+                .EnableRelaySupport()
                 .AddApolloTracing()
 #if Authorization
                 .AddAuthorization()
@@ -321,10 +324,6 @@ namespace GraphQLTemplate
                 // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
                 .AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase())
 #endif
-                .EnableRelaySupport(
-                    new RelayOptions()
-                    {
-                    })
                 .AddDirectiveType<UpperDirectiveType>()
                 .AddDirectiveType<LowerDirectiveType>()
                 .AddDirectiveType<IncludeDirectiveType>()
@@ -346,20 +345,12 @@ namespace GraphQLTemplate
                         // options.StrictValidation = true;?
                         options.UseXmlDocumentation = false;
                     })
-                .AddMaxComplexityRule(100)
-                .AddMaxExecutionDepthRule(100)
-                .ModifyRequestOptions(
-                    x =>
-                    {
-                    })
-                .SetPagingOptions(
-                    new PagingOptions()
-                    {
-                        DefaultPageSize = 10,
-                        IncludeTotalCount = true,
-                        MaxPageSize = 100,
-                    })
+                .AddMaxComplexityRule(graphQLOptions.MaxAllowedComplexity)
+                .AddMaxExecutionDepthRule(graphQLOptions.MaxAllowedExecutionDepth)
+                .SetRequestOptions(() => graphQLOptions.Request)
+                .SetPagingOptions(graphQLOptions.Paging)
                 .TrimTypes()
                 .Services;
+        }
     }
 }
