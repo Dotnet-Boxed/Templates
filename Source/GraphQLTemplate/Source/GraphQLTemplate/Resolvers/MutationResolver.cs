@@ -1,10 +1,10 @@
 namespace GraphQLTemplate.Resolvers
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Boxed.Mapping;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
-    using HotChocolate.Resolvers;
 #if Subscriptions
     using HotChocolate.Subscriptions;
 #endif
@@ -33,15 +33,15 @@ namespace GraphQLTemplate.Resolvers
 #endif
         }
 
-        public async Task<Human> CreateHumanAsync(IResolverContext context, HumanInput humanInput)
+        public async Task<Human> CreateHumanAsync(HumanInput humanInput, CancellationToken cancellationToken)
         {
             var human = this.humanInputToHumanMapper.Map(humanInput);
             human = await this.humanRepository
-                .AddHumanAsync(human, context.RequestAborted)
+                .AddHumanAsync(human, cancellationToken)
                 .ConfigureAwait(false);
 #if Subscriptions
             await this.topicEventSender
-                .SendAsync(nameof(SubscriptionResolver.OnHumanCreatedAsync), human.Id)
+                .SendAsync(nameof(SubscriptionResolver.OnHumanCreatedAsync), human.Id, CancellationToken.None)
                 .ConfigureAwait(false);
 #endif
             return human;

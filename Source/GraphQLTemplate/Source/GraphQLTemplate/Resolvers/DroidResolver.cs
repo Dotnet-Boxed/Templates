@@ -2,11 +2,12 @@ namespace GraphQLTemplate.Resolvers
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
     using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
-    using HotChocolate.Resolvers;
+    using HotChocolate;
 
     public class DroidResolver
     {
@@ -14,10 +15,10 @@ namespace GraphQLTemplate.Resolvers
 
         public DroidResolver(IDroidRepository droidRepository) => this.droidRepository = droidRepository;
 
-        public Task<Droid> GetDroidAsync(IResolverContext context, Guid id) =>
-            context.DataLoader<IDroidDataLoader>().LoadAsync(id, context.RequestAborted);
+        public Task<Droid> GetDroidAsync(IDroidDataLoader droidDataLoader, Guid id, CancellationToken cancellationToken) =>
+            droidDataLoader.LoadAsync(id, cancellationToken);
 
-        public Task<List<Character>> GetFriendsAsync(IResolverContext context) =>
-            this.droidRepository.GetFriendsAsync(context.Parent<Droid>(), context.RequestAborted);
+        public Task<List<Character>> GetFriendsAsync([Parent] Droid droid, CancellationToken cancellationToken) =>
+            this.droidRepository.GetFriendsAsync(droid, cancellationToken);
     }
 }
