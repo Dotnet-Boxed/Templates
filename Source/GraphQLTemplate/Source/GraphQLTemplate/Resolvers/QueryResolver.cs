@@ -1,10 +1,10 @@
 namespace GraphQLTemplate.Resolvers
 {
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
-    using HotChocolate.Resolvers;
 
     public class QueryResolver
     {
@@ -19,10 +19,10 @@ namespace GraphQLTemplate.Resolvers
             this.humanRepository = humanRepository;
         }
 
-        public Task<IQueryable<Droid>> GetDroidsAsync(IResolverContext context) =>
-            this.droidRepository.GetDroidsAsync(context.RequestAborted);
+        public Task<IQueryable<Droid>> GetDroidsAsync(CancellationToken cancellationToken) =>
+            this.droidRepository.GetDroidsAsync(cancellationToken);
 
-        public Task<IQueryable<Human>> GetHumansAsync(IResolverContext context) =>
-            this.humanRepository.GetHumansAsync(context.RequestAborted);
+        public Task<IQueryable<Human>> GetHumansAsync(CancellationToken cancellationToken) =>
+            this.humanRepository.GetHumansAsync(cancellationToken);
     }
 }
