@@ -121,6 +121,7 @@ namespace GraphQLTemplate
                     builder =>
                     {
                         var graphQLServerOptions = new GraphQLServerOptions();
+                        // Add Banana Cake Pop GraphQL client at /graphql.
                         graphQLServerOptions.Tool.Enable = this.webHostEnvironment.IsDevelopment();
                         builder.MapGraphQL().WithOptions(graphQLServerOptions);
 #if HealthCheck
