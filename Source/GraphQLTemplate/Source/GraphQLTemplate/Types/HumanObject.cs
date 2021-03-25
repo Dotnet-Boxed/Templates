@@ -1,5 +1,6 @@
 namespace GraphQLTemplate.Types
 {
+    using GraphQLTemplate.Constants;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Resolvers;
     using HotChocolate.Types;
@@ -19,14 +20,14 @@ namespace GraphQLTemplate.Types
             descriptor
                 .ImplementsNode()
                 .IdField(x => x.Id)
-                .ResolveNodeWith<HumanResolver>(x => x.GetHumanAsync(default!, default!));
+                .ResolveNodeWith<HumanResolver>(x => x.GetHumanAsync(default!, default!, default!));
             descriptor
                 .Field(x => x.Name)
                 .Description("The name of the human.");
             descriptor
                 .Field(x => x.DateOfBirth)
 #if Authorization
-                // .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
+                .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
 #endif
                 .Description("The humans date of birth.");
             descriptor
@@ -39,7 +40,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.Friends)
                 .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
                 .Description("The friends of the character, or an empty list if they have none.")
-                .ResolveWith<HumanResolver>(x => x.GetFriendsAsync(default!));
+                .ResolveWith<HumanResolver>(x => x.GetFriendsAsync(default!, default!));
         }
     }
 }

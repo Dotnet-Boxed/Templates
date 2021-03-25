@@ -16,7 +16,7 @@ namespace GraphQLTemplate.Types
             descriptor
                 .ImplementsNode()
                 .IdField(x => x.Id)
-                .ResolveNodeWith<DroidResolver>(x => x.GetDroidAsync(default!, default!));
+                .ResolveNodeWith<DroidResolver>(x => x.GetDroidAsync(default!, default!, default!));
             descriptor
                 .Field(x => x.Name)
                 .Description("The name of the droid.");
@@ -36,7 +36,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.Friends)
                 .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
                 .Description("The friends of the character, or an empty list if they have none.")
-                .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!));
+                .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!, default!));
         }
     }
 }
