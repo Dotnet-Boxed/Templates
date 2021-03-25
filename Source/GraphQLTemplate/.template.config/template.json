@@ -53,16 +53,18 @@
         {
           "condition": "(!Mutations)",
           "exclude": [
-            "Source/GraphQLTemplate/Schemas/RootMutation.cs"
+            "Source/GraphQLTemplate/Resolvers/MutationResolver.cs",
+            "Source/GraphQLTemplate/Types/MutationObject.cs"
           ]
         },
         {
           "condition": "(!Subscriptions)",
           "exclude": [
-            "Source/GraphQLTemplate/Schemas/RootSubscription.cs"
+            "Source/GraphQLTemplate/Resolvers/SubscriptionResolver.cs",
+            "Source/GraphQLTemplate/Types/SubscriptionObject.cs"
           ]
         },
-        // PersistedQueries
+        // Redis
         {
           "condition": "(!PersistedQueries && !Subscriptions)",
           "exclude": [
