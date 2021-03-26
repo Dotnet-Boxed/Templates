@@ -305,6 +305,7 @@ namespace GraphQLTemplate
 
         public static IServiceCollection AddCustomGraphQL(
             this IServiceCollection services,
+            IWebHostEnvironment webHostEnvironment,
             IConfiguration configuration)
         {
             var graphQLOptions = configuration.GetSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
@@ -319,11 +320,17 @@ namespace GraphQLTemplate
 #endif
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
-                // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
-                .AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase())
+                .AddIfElse(
+                    webHostEnvironment.IsEnvironment("Test"),
+                    x => x.AddInMemoryQueryStorage(),
+                    // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
+                    x => x.AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase()))
 #endif
 #if Subscriptions
-                .AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>())
+                .AddIfElse(
+                    webHostEnvironment.IsEnvironment("Test"),
+                    x => x.AddInMemorySubscriptions(),
+                    x => x.AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>()))
 #endif
                 // Bind a System.DateTime type to a GraphQL date type by default.
                 .BindRuntimeType<DateTime, DateType>()

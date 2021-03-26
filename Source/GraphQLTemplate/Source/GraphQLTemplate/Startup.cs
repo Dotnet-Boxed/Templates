@@ -77,7 +77,7 @@ namespace GraphQLTemplate
 #if (PersistedQueries || Subscriptions)
                 .AddCustomRedis(this.configuration)
 #endif
-                .AddCustomGraphQL(this.configuration)
+                .AddCustomGraphQL(this.webHostEnvironment, this.configuration)
                 .AddProjectMappers()
                 .AddProjectServices()
                 .AddProjectRepositories();
