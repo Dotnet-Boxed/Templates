@@ -12,7 +12,6 @@ namespace GraphQLTemplate
 #endif
     using GraphQLTemplate.Options;
     using HotChocolate.Execution.Options;
-    using HotChocolate.Types;
     using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
     using Microsoft.AspNetCore.HostFiltering;
@@ -332,8 +331,7 @@ namespace GraphQLTemplate
                     x => x.AddInMemorySubscriptions(),
                     x => x.AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>()))
 #endif
-                // Bind a System.DateTime type to a GraphQL date type by default.
-                .BindRuntimeType<DateTime, DateType>()
+                .AddProjectScalarTypes()
                 .AddProjectDirectives()
                 .AddProjectDataLoaders()
                 .AddProjectTypes()
