@@ -320,14 +320,14 @@ namespace GraphQLTemplate
 #if PersistedQueries
                 .UseAutomaticPersistedQueryPipeline()
                 .AddIfElse(
-                    webHostEnvironment.IsEnvironment("Test"),
+                    webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddInMemoryQueryStorage(),
                     // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
                     x => x.AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase()))
 #endif
 #if Subscriptions
                 .AddIfElse(
-                    webHostEnvironment.IsEnvironment("Test"),
+                    webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddInMemorySubscriptions(),
                     x => x.AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>()))
 #endif
