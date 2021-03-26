@@ -51,8 +51,12 @@ namespace GraphQLTemplate
             builder
                 .SetSchema<MainSchema>()
                 .AddQueryType<QueryObject>()
+#if Mutations
                 .AddMutationType<MutationObject>()
+#endif
+#if Subscriptions
                 .AddSubscriptionType<SubscriptionObject>()
+#endif
                 .AddType<EpisodeEnumeration>()
                 .AddType<CharacterInterface>()
                 .AddType<DroidObject>()
