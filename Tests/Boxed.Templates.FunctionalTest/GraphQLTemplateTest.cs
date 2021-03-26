@@ -4,11 +4,8 @@ namespace Boxed.Templates.FunctionalTest
     using System.IO;
     using System.Linq;
     using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using Boxed.DotnetNewTest;
-    using Boxed.Templates.FunctionalTest.Constants;
-    using Boxed.Templates.FunctionalTest.Models;
     using Xunit;
     using Xunit.Abstractions;
 
@@ -42,6 +39,10 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("GraphQLTNoHostFiltering", "host-filtering=false")]
         [InlineData("GraphQLTNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
         [InlineData("GraphQLStyleCop", "style-cop=true")]
+        [InlineData("GraphQLAuthorization", "authorization=true")]
+        [InlineData("GraphQLMutations", "mutations=false")]
+        [InlineData("GraphQLPersistedQueries", "persisted-queries=true")]
+        [InlineData("GraphQLSubscriptions", "subscriptions=true")]
         [InlineData("GraphQLOpenTelemetry", "open-telemetry=true")]
         public async Task RestoreBuildTest_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
@@ -173,39 +174,6 @@ namespace Boxed.Templates.FunctionalTest
         [Fact]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "true")]
-        public async Task RestoreBuildTestRun_QueryGraphQlIntrospection_ReturnsResultsAsync()
-        {
-            await InstallTemplateAsync().ConfigureAwait(false);
-            await using (var tempDirectory = TempDirectory.NewTempDirectory())
-            {
-                var project = await tempDirectory
-                    .DotnetNewAsync(TemplateName, "GraphQLTDefaults", DefaultArguments.ToArguments())
-                    .ConfigureAwait(false);
-                await project.DotnetRestoreAsync().ConfigureAwait(false);
-                await project.DotnetBuildAsync().ConfigureAwait(false);
-                await project.DotnetTestAsync().ConfigureAwait(false);
-                await project
-                    .DotnetRunAsync(
-                        Path.Join("Source", "GraphQLTDefaults"),
-                        ReadinessCheck.StatusSelfOverHttpAsync,
-                        async (httpClient, httpsClient) =>
-                        {
-                            var introspectionQuery = await httpClient
-                                .PostGraphQLAsync(GraphQlQuery.Introspection)
-                                .ConfigureAwait(false);
-                            Assert.Equal(HttpStatusCode.OK, introspectionQuery.StatusCode);
-                            var introspectionContent = await introspectionQuery.Content
-                                .ReadAsAsync<GraphQLResponse>()
-                                .ConfigureAwait(false);
-                            Assert.Empty(introspectionContent.Errors);
-                        })
-                    .ConfigureAwait(false);
-            }
-        }
-
-        [Fact]
-        [Trait("IsUsingDocker", "false")]
-        [Trait("IsUsingDotnetRun", "true")]
         public async Task RestoreBuildTestRun_HttpsEverywhereTrue_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
@@ -238,80 +206,6 @@ namespace Boxed.Templates.FunctionalTest
                 var dockerfileInfo = files.First(x => x.Name == "Dockerfile");
                 var dockerfile = File.ReadAllText(dockerfileInfo.FullName);
                 Assert.Contains("443", dockerfile, StringComparison.Ordinal);
-            }
-        }
-
-        [Fact]
-        [Trait("IsUsingDocker", "false")]
-        [Trait("IsUsingDotnetRun", "true")]
-        public async Task RestoreBuildTestRun_AuthorizationTrue_Returns400BadRequestAsync()
-        {
-            await InstallTemplateAsync().ConfigureAwait(false);
-            await using (var tempDirectory = TempDirectory.NewTempDirectory())
-            {
-                var project = await tempDirectory
-                    .DotnetNewAsync(
-                        TemplateName,
-                        "GraphQLTAuthorizationTrue",
-                        DefaultArguments.ToArguments(new string[] { "authorization=true" }))
-                    .ConfigureAwait(false);
-                await project.DotnetRestoreAsync().ConfigureAwait(false);
-                await project.DotnetBuildAsync().ConfigureAwait(false);
-                await project.DotnetTestAsync().ConfigureAwait(false);
-                await project
-                    .DotnetRunAsync(
-                        Path.Join("Source", "GraphQLTAuthorizationTrue"),
-                        ReadinessCheck.StatusSelfOverHttpAsync,
-                        async (httpClient, httpsClient) =>
-                        {
-                            var httpResponse = await httpClient
-                                .PostGraphQLAsync(
-                                    "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }")
-                                .ConfigureAwait(false);
-                            var response = await httpResponse.Content
-                                .ReadAsAsync<GraphQLResponse>()
-                                .ConfigureAwait(false);
-
-                            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
-                            var error = Assert.Single(response.Errors);
-                            Assert.Equal(
-                                "GraphQL.Validation.ValidationError: You are not authorized to run this query.\nRequired claim 'role' with any value of 'admin' is not present.",
-                                error.Message);
-                        })
-                    .ConfigureAwait(false);
-            }
-        }
-
-        [Fact]
-        [Trait("IsUsingDocker", "false")]
-        [Trait("IsUsingDotnetRun", "true")]
-        public async Task RestoreBuildTestRun_AuthorizationFalse_DateOfBirthReturnedSuccessfullyAsync()
-        {
-            await InstallTemplateAsync().ConfigureAwait(false);
-            await using (var tempDirectory = TempDirectory.NewTempDirectory())
-            {
-                var project = await tempDirectory
-                    .DotnetNewAsync(
-                        TemplateName,
-                        "GraphQLTAuthorizationFalse",
-                        DefaultArguments.ToArguments(new string[] { "authorization=false" }))
-                    .ConfigureAwait(false);
-                await project.DotnetRestoreAsync().ConfigureAwait(false);
-                await project.DotnetBuildAsync().ConfigureAwait(false);
-                await project.DotnetTestAsync().ConfigureAwait(false);
-                await project
-                    .DotnetRunAsync(
-                        Path.Join("Source", "GraphQLTAuthorizationFalse"),
-                        ReadinessCheck.StatusSelfOverHttpAsync,
-                        async (httpClient, httpsClient) =>
-                        {
-                            var httpResponse = await httpClient
-                                .PostGraphQLAsync(
-                                    "query getHuman { human(id: \"94fbd693-2027-4804-bf40-ed427fe76fda\") { dateOfBirth } }")
-                                .ConfigureAwait(false);
-                            Assert.Equal(HttpStatusCode.OK, httpResponse.StatusCode);
-                        })
-                    .ConfigureAwait(false);
             }
         }
 
