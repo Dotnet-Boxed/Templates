@@ -6,11 +6,11 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using Xunit;
     using Xunit.Abstractions;
 
-    public class GraphQLTest : CustomWebApplicationFactory<Startup>
+    public class SchemaTest : CustomWebApplicationFactory<Startup>
     {
         private readonly HttpClient client;
 
-        public GraphQLTest(ITestOutputHelper testOutputHelper)
+        public SchemaTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper) =>
             this.client = this.CreateClient();
 
