@@ -293,13 +293,16 @@ namespace GraphQLTemplate
 
         public static IServiceCollection AddCustomRedis(
             this IServiceCollection services,
+            IWebHostEnvironment webHostEnvironment,
             IConfiguration configuration) =>
-            services.AddSingleton<IConnectionMultiplexer>(
-                ConnectionMultiplexer.Connect(
-                     configuration
-                        .GetSection(nameof(ApplicationOptions.Redis))
-                        .Get<RedisOptions>()
-                        .ConnectionString));
+            services.AddIf(
+                !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+                x => x.AddSingleton<IConnectionMultiplexer>(
+                    ConnectionMultiplexer.Connect(
+                         configuration
+                            .GetSection(nameof(ApplicationOptions.Redis))
+                            .Get<RedisOptions>()
+                            .ConnectionString)));
 #endif
 
         public static IServiceCollection AddCustomGraphQL(
