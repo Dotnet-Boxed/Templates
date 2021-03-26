@@ -68,6 +68,13 @@
       "isVisible": true
     },
     {
+      "id": "PersistedQueries",
+      "name": {
+        "text": "Persisted Queries"
+      },
+      "isVisible": true
+    },
+    {
       "id": "ForwardedHeaders",
       "name": {
         "text": "Forwarded Headers"
