@@ -10,8 +10,7 @@ namespace GraphQLTemplate.Types
     /// This is an example mutation to create a new human.
     /// <c>
     /// mutation createHuman($humanInput: HumanInput!) {
-    ///   createHuman(humanInput: $humanInput)
-    ///   {
+    ///   createHuman(humanInput: $humanInput) {
     ///     id
     ///     name
     ///     dateOfBirth

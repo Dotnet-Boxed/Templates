@@ -10,8 +10,7 @@ namespace GraphQLTemplate.Types
     /// <example>
     /// <c>
     /// subscription onHumanCreated {
-    ///   onHumanCreated(homePlanets: ["Earth"])
-    ///   {
+    ///   onHumanCreated {
     ///     id
     ///     name
     ///     dateOfBirth
