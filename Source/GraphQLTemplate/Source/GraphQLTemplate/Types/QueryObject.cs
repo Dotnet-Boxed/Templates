@@ -53,8 +53,21 @@ namespace GraphQLTemplate.Types
                 .UseFiltering()
                 .UseSorting();
             descriptor
+                .Field(x => x.GetDroidByIdsAsync(default!, default!, default!))
+                .Description("Gets droids by one or more unique identifiers.")
+                .UsePaging()
+                .UseFiltering()
+                .UseSorting();
+
+            descriptor
                 .Field(x => x.GetHumansAsync(default!))
                 .Description("Gets humans.")
+                .UsePaging()
+                .UseFiltering()
+                .UseSorting();
+            descriptor
+                .Field(x => x.GetHumansByIdsAsync(default!, default!, default!))
+                .Description("Gets humans by one or more unique identifiers.")
                 .UsePaging()
                 .UseFiltering()
                 .UseSorting();
