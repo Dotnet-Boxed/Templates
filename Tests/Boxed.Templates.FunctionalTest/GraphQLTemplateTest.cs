@@ -212,7 +212,7 @@ namespace Boxed.Templates.FunctionalTest
         [Fact]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
-        public async Task RestoreBuildTestRun_DockerFalse_SuccessfulAsync()
+        public async Task RestoreBuildTestCake_DockerFalse_SuccessfulAsync()
         {
             await InstallTemplateAsync().ConfigureAwait(false);
             await using (var tempDirectory = TempDirectory.NewTempDirectory())
