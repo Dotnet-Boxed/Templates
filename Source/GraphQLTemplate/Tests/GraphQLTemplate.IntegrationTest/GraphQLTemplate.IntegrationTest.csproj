@@ -27,7 +27,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Label="ProjectcReferences">
+  <ItemGroup Label="Project References">
     <ProjectReference Include="..\..\Source\GraphQLTemplate\GraphQLTemplate.csproj" />
   </ItemGroup>
 
