@@ -19,26 +19,26 @@ namespace GraphQLTemplate.Options
         public CacheProfileOptions CacheProfiles { get; }
 
 #if ResponseCompression
-        public CompressionOptions? Compression { get; set; }
+        public CompressionOptions Compression { get; set; } = default!;
 
 #endif
 #if ForwardedHeaders
         [Required]
-        public ForwardedHeadersOptions? ForwardedHeaders { get; set; }
+        public ForwardedHeadersOptions ForwardedHeaders { get; set; } = default!;
 
 #elif HostFiltering
         [Required]
-        public HostFilteringOptions HostFiltering { get; set; }
+        public HostFilteringOptions HostFiltering { get; set; } = default!;
 
 #endif
         [Required]
         public GraphQLOptions GraphQL { get; set; } = default!;
 
-        public KestrelServerOptions? Kestrel { get; set; }
+        public KestrelServerOptions Kestrel { get; set; } = default!;
 #if (PersistedQueries || Subscriptions)
 
         [Required]
-        public RedisOptions? Redis { get; set; }
+        public RedisOptions Redis { get; set; } = default!;
 #endif
     }
 }
