@@ -59,7 +59,7 @@ namespace Boxed.Templates.FunctionalTest
                     .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
                     .ConfigureAwait(false);
                 await project.DotnetToolRestoreAsync().ConfigureAwait(false);
-                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(5)).ConfigureAwait(false);
+                await project.DotnetCakeAsync(timeout: TimeSpan.FromMinutes(10)).ConfigureAwait(false);
             }
         }
 
