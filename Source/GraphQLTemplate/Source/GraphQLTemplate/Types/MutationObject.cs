@@ -38,7 +38,11 @@ namespace GraphQLTemplate.Types
                 .Description("The mutation type, represents all updates we can make to our data.");
 
             descriptor
-                .Field(x => x.CreateHumanAsync(default!, default!))
+#if Subscriptions
+                .Field(x => x.CreateHumanAsync(default!, default!, default!, default!, default!))
+#else
+                .Field(x => x.CreateHumanAsync(default!, default!, default!, default!))
+#endif
                 .Description("Create a new human.")
                 .Argument("humanInput", x => x.Description("The human you want to create."));
         }

@@ -11,14 +11,13 @@ namespace GraphQLTemplate.Resolvers
 
     public class HumanResolver
     {
-        private readonly IHumanRepository humanRepository;
-
-        public HumanResolver(IHumanRepository humanRepository) => this.humanRepository = humanRepository;
-
         public Task<Human> GetHumanAsync(IHumanDataLoader humanDataLoader, Guid id, CancellationToken cancellationToken) =>
             humanDataLoader.LoadAsync(id, cancellationToken);
 
-        public Task<List<Character>> GetFriendsAsync([Parent] Human human, CancellationToken cancellationToken) =>
-            this.humanRepository.GetFriendsAsync(human, cancellationToken);
+        public Task<List<Character>> GetFriendsAsync(
+            [Service] IHumanRepository humanRepository,
+            [Parent] Human human,
+            CancellationToken cancellationToken) =>
+            humanRepository.GetFriendsAsync(human, cancellationToken);
     }
 }

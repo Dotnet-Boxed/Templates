@@ -11,14 +11,13 @@ namespace GraphQLTemplate.Resolvers
 
     public class DroidResolver
     {
-        private readonly IDroidRepository droidRepository;
-
-        public DroidResolver(IDroidRepository droidRepository) => this.droidRepository = droidRepository;
-
         public Task<Droid> GetDroidAsync(IDroidDataLoader droidDataLoader, Guid id, CancellationToken cancellationToken) =>
             droidDataLoader.LoadAsync(id, cancellationToken);
 
-        public Task<List<Character>> GetFriendsAsync([Parent] Droid droid, CancellationToken cancellationToken) =>
-            this.droidRepository.GetFriendsAsync(droid, cancellationToken);
+        public Task<List<Character>> GetFriendsAsync(
+            [Service] IDroidRepository droidRepository,
+            [Parent] Droid droid,
+            CancellationToken cancellationToken) =>
+            droidRepository.GetFriendsAsync(droid, cancellationToken);
     }
 }

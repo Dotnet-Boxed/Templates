@@ -8,22 +8,14 @@ namespace GraphQLTemplate.Resolvers
     using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Models;
     using GraphQLTemplate.Repositories;
+    using HotChocolate;
 
     public class QueryResolver
     {
-        private readonly IDroidRepository droidRepository;
-        private readonly IHumanRepository humanRepository;
-
-        public QueryResolver(
-            IDroidRepository droidRepository,
-            IHumanRepository humanRepository)
-        {
-            this.droidRepository = droidRepository;
-            this.humanRepository = humanRepository;
-        }
-
-        public Task<IQueryable<Droid>> GetDroidsAsync(CancellationToken cancellationToken) =>
-            this.droidRepository.GetDroidsAsync(cancellationToken);
+        public Task<IQueryable<Droid>> GetDroidsAsync(
+            [Service] IDroidRepository droidRepository,
+            CancellationToken cancellationToken) =>
+            droidRepository.GetDroidsAsync(cancellationToken);
 
         public Task<IReadOnlyList<Droid>> GetDroidByIdsAsync(
             IDroidDataLoader droidDataLoader,
@@ -31,8 +23,10 @@ namespace GraphQLTemplate.Resolvers
             CancellationToken cancellationToken) =>
             droidDataLoader.LoadAsync(ids, cancellationToken);
 
-        public Task<IQueryable<Human>> GetHumansAsync(CancellationToken cancellationToken) =>
-            this.humanRepository.GetHumansAsync(cancellationToken);
+        public Task<IQueryable<Human>> GetHumansAsync(
+            [Service] IHumanRepository humanRepository,
+            CancellationToken cancellationToken) =>
+            humanRepository.GetHumansAsync(cancellationToken);
 
         public Task<IReadOnlyList<Human>> GetHumansByIdsAsync(
             IHumanDataLoader humanDataLoader,
