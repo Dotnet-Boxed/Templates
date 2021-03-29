@@ -47,7 +47,7 @@ namespace GraphQLTemplate.Types
                 .Description("The query type, represents all of the entry points into our object graph.");
 
             descriptor
-                .Field(x => x.GetDroidsAsync(default!))
+                .Field(x => x.GetDroidsAsync(default!, default!))
                 .Description("Gets droids.")
                 .UsePaging()
                 .UseFiltering()
@@ -60,7 +60,7 @@ namespace GraphQLTemplate.Types
                 .UseSorting();
 
             descriptor
-                .Field(x => x.GetHumansAsync(default!))
+                .Field(x => x.GetHumansAsync(default!, default!))
                 .Description("Gets humans.")
                 .UsePaging()
                 .UseFiltering()

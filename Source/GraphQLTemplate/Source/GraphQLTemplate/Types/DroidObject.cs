@@ -36,7 +36,7 @@ namespace GraphQLTemplate.Types
                 .Field(x => x.Friends)
                 .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
                 .Description("The friends of the character, or an empty list if they have none.")
-                .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!, default!));
+                .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!, default!, default!));
         }
     }
 }
