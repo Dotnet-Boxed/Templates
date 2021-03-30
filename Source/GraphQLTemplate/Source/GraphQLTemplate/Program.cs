@@ -95,7 +95,6 @@ namespace GraphQLTemplate
                     (builderContext, options) =>
                     {
                         options.AddServerHeader = false;
-                        options.AllowSynchronousIO = true;
                         options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
                     })
 #if Azure
