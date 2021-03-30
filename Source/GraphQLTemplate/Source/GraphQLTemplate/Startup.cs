@@ -145,6 +145,5 @@ namespace GraphQLTemplate
                         .UseGraphQLPlayground("/")
                         // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
                         .UseGraphQLVoyager("/voyager"));
-
     }
 }
