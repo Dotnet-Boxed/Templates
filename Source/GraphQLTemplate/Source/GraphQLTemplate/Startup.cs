@@ -60,7 +60,7 @@ namespace GraphQLTemplate
                 .AddCustomStrictTransportSecurity()
 #endif
 #if HealthCheck
-                .AddCustomHealthChecks()
+                .AddCustomHealthChecks(this.configuration)
 #endif
 #if OpenTelemetry
                 .AddCustomOpenTelemetryTracing(this.webHostEnvironment)

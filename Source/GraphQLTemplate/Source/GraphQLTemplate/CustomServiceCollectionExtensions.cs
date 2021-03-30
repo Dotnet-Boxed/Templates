@@ -184,10 +184,13 @@ namespace GraphQLTemplate
 #endif
 #if HealthCheck
 
-        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
+        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration) =>
             services
                 .AddHealthChecks()
                 // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+#if (PersistedQueries || Subscriptions)
+                .AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConnectionString)
+#endif
                 .Services;
 #endif
 #if OpenTelemetry
