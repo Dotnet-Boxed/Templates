@@ -325,7 +325,7 @@ namespace GraphQLTemplate
                 .AddIfElse(
                     webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddInMemoryQueryStorage(),
-                    // TODO Hot Chocolate v11.1 will not require a call to .GetApplicationServices() below.
+                    // Hot Chocolate contains a bug which requires us to add .GetApplicationServices() below.
                     x => x.AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase()))
 #endif
 #if Subscriptions
