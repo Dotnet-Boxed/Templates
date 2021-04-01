@@ -184,12 +184,17 @@ namespace GraphQLTemplate
 #endif
 #if HealthCheck
 
-        public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services, IConfiguration configuration) =>
+        public static IServiceCollection AddCustomHealthChecks(
+            this IServiceCollection services,
+            IWebHostEnvironment webHostEnvironment,
+            IConfiguration configuration) =>
             services
                 .AddHealthChecks()
                 // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 #if (PersistedQueries || Subscriptions)
-                .AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConnectionString)
+                .AddIf(
+                    !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+                    x => x.AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConnectionString))
 #endif
                 .Services;
 #endif
