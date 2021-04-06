@@ -33,7 +33,7 @@ namespace GraphQLTemplate
     using OpenTelemetry.Resources;
     using OpenTelemetry.Trace;
 #endif
-#if (PersistedQueries || Subscriptions)
+#if Redis
     using StackExchange.Redis;
 #endif
 
@@ -110,7 +110,7 @@ namespace GraphQLTemplate
                 .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
                 .ConfigureAndValidateSingleton<RequestExecutorOptions>(
                     configuration.GetSection(nameof(ApplicationOptions.GraphQL)).GetSection(nameof(GraphQLOptions.Request)))
-#if (PersistedQueries || Subscriptions)
+#if Redis
                 .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetSection(nameof(ApplicationOptions.Redis)))
 #endif
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
@@ -191,7 +191,7 @@ namespace GraphQLTemplate
             services
                 .AddHealthChecks()
                 // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
-#if (PersistedQueries || Subscriptions)
+#if Redis
                 .AddIf(
                     !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConnectionString))
@@ -297,7 +297,7 @@ namespace GraphQLTemplate
                 .AddAuthorization(options => options
                     .AddPolicy(AuthorizationPolicyName.Admin, x => x.RequireAuthenticatedUser()));
 #endif
-#if (PersistedQueries || Subscriptions)
+#if Redis
 
         public static IServiceCollection AddCustomRedis(
             this IServiceCollection services,

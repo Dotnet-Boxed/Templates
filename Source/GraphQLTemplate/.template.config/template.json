@@ -66,7 +66,7 @@
         },
         // Redis
         {
-          "condition": "(!PersistedQueries && !Subscriptions)",
+          "condition": "(!Redis)",
           "exclude": [
             "Source/GraphQLTemplate/Options/RedisOptions.cs"
           ]
@@ -290,14 +290,16 @@
       "defaultValue": "false",
       "description": "Add GraphQL subscriptions to be notified when objects change (Requires a running instance of redis)."
     },
-    // PersistedQueries
     "PersistedQueries": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Add GraphQL active persisted queries which cache queries in Redis so the client only needs to send a query ID and not a full query (Requires a running instance of redis)."
     },
-    // Forwarded Headers
+    "Redis": {
+      "type": "computed",
+      "value": "(Subscriptions || PersistedQueries)"
+    },
     "ForwardedHeaders": {
       "type": "parameter",
       "datatype": "bool",
