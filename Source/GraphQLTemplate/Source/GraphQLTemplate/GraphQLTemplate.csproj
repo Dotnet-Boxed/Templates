@@ -2,13 +2,14 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;PersistedQueries;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;PersistedQueries;Redis;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <Authorization>true</Authorization>
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
     <OpenTelemetry>true</OpenTelemetry>
     <PersistedQueries>true</PersistedQueries>
+    <Redis>true</Redis>
     <StyleCop>true</StyleCop>
     <Subscriptions>true</Subscriptions>
     <Docker>true</Docker>
@@ -47,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="5.0.2" Condition="'$(PersistedQueries)' == 'true' OR '$(Subscriptions)' == 'true'" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="5.0.2" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="6.2.0" />
     <PackageReference Include="Boxed.Mapping" Version="5.3.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="5.0.1" />

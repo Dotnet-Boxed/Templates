@@ -35,7 +35,7 @@ namespace GraphQLTemplate.Options
         public GraphQLOptions GraphQL { get; set; } = default!;
 
         public KestrelServerOptions Kestrel { get; set; } = default!;
-#if (PersistedQueries || Subscriptions)
+#if Redis
 
         [Required]
         public RedisOptions Redis { get; set; } = default!;
