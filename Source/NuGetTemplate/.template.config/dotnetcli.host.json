@@ -4,6 +4,9 @@
     "Framework": {
       "longName": "framework"
     },
+    "Nullable": {
+      "longName": "nullable"
+    },
     "Sign": {
       "longName": "sign"
     },
