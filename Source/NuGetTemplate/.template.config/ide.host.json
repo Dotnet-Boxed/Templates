@@ -12,6 +12,10 @@
       "isVisible": true
     },
     {
+      "id": "Nullable",
+      "isVisible": true
+    },
+    {
       "id": "Sign",
       "isVisible": true
     },
