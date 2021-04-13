@@ -41,3 +41,14 @@
 
 # Other
 *.exe filter=lfs diff=lfs merge=lfs -text
+
+###############################################################################
+# Behaviour for NPM package files
+#
+# Because NPM writes back a package.json (and the lockfile) you get file
+# changes after each NPM operation on CRLF systems.
+# Set Git to checkout these files with LF line-endings
+###############################################################################
+package.json        text    eol=lf
+package-lock.json   text    eol=lf
+yarn.lock           text    eol=lf
