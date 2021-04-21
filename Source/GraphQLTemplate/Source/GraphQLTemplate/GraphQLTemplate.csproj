@@ -56,7 +56,7 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="11.1.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.1.0" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="11.1.0" />
-    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="11.1.0" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="11.2.1" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="11.1.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="11.1.0" Condition="'$(Subscriptions)' == 'true'" />
     <PackageReference Include="HotChocolate.Types.Scalars" Version="11.1.0" />
