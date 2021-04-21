@@ -26,7 +26,7 @@
 
   <ItemGroup Label="Analyzer Package References">
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.9.60" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.321" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.333" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
