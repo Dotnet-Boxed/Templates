@@ -3,6 +3,9 @@ tag-template: 'Boxed.Templates.$RESOLVED_VERSION'
 change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
 no-changes-template: '- No changes'
 categories:
+  - title: '📚 Documentation'
+    labels:
+      - 'documentation'
   - title: '📦 ASP.NET Core API Boxed'
     labels:
       - 'template/API'
@@ -39,6 +42,9 @@ template: |
 
   $CONTRIBUTORS
 autolabeler:
+  - label: 'documentation'
+    files:
+      - 'Docs/**/*'
   - label: 'maintenance'
     files:
       - '.github/**/*'
