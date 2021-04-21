@@ -66,14 +66,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Add Source'
         run: dotnet nuget add source https://nuget.pkg.github.com/GITHUB-USERNAME/index.json --name GitHub --username GITHUB-USERNAME --password ${{secrets.GITHUB_TOKEN}}
         shell: pwsh
       - name: 'Dotnet NuGet Push'
-        run: dotnet nuget push .\windows-latest\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+        run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
         shell: pwsh
 
   push-nuget:
@@ -86,12 +86,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: 'windows-latest'
       - name: 'Dotnet NuGet Push'
         run: |
-          Get-ChildItem .\windows-latest -Filter *.nupkg |
+          Get-ChildItem .\ -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
           ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
         shell: pwsh
