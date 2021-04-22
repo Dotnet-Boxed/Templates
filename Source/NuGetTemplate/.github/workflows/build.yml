@@ -51,7 +51,7 @@ jobs:
       run: dotnet cake --target=Pack
       shell: pwsh
     - name: 'Publish Artefacts'
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2.2.3
       with:
         name: ${{matrix.os}}
         path: './Artefacts'
