@@ -462,7 +462,8 @@
     "HttpsPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the Kestrel HTTPS endpoint in launchSettings.json."
+      "description": "Port number to use for the Kestrel HTTPS endpoint in launchSettings.json.",
+      "defaultValue": "5001"
     },
     "HttpsPortConstant": {
       "type": "generated",
@@ -483,7 +484,8 @@
     "IISExpressHttpsPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json (Must be between 44300 and 44399)."
+      "description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json (Must be between 44300 and 44399).",
+      "defaultValue": "44300"
     },
     "IISExpressHttpsPortConstant": {
       "type": "generated",
