@@ -1,0 +1,142 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: OpenTelemetry.Instrumentation.AspNetCore
+    versions:
+    - 1.0.0-rc2
+    - 1.0.0-rc3
+    - 1.0.0-rc4
+  - dependency-name: OpenTelemetry.Extensions.Hosting
+    versions:
+    - 1.0.0-rc2
+    - 1.0.0-rc3
+    - 1.0.0-rc4
+  - dependency-name: HotChocolate.Types.Scalars
+    versions:
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.Subscriptions.Redis
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.PersistedQueries.Redis
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.PersistedQueries.InMemory
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.Data
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.AspNetCore.Authorization
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: HotChocolate.AspNetCore
+    versions:
+    - 11.1.0
+    - 11.2.0
+    - 11.2.2
+  - dependency-name: Microsoft.AspNetCore.Mvc.NewtonsoftJson
+    versions:
+    - 5.0.3
+    - 5.0.5
+  - dependency-name: Microsoft.AspNetCore.TestHost
+    versions:
+    - 5.0.3
+    - 5.0.5
+  - dependency-name: Microsoft.AspNetCore.AzureAppServicesIntegration
+    versions:
+    - 5.0.3
+    - 5.0.5
+  - dependency-name: Microsoft.AspNetCore.Mvc.Testing
+    versions:
+    - 5.0.3
+    - 5.0.5
+  - dependency-name: Microsoft.Orleans.Client
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Connections.Security
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.TestingHost
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Persistence.AzureStorage
+    versions:
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Server
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Transactions
+    versions:
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.OrleansTelemetryConsumers.AI
+    versions:
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.CodeGenerator.MSBuild
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Reminders.AzureStorage
+    versions:
+    - 3.4.2
+  - dependency-name: Microsoft.Orleans.Transactions.AzureStorage
+    versions:
+    - 3.4.1
+    - 3.4.2
+  - dependency-name: HotChocolate.Types.Spatial
+    versions:
+    - 11.1.0
+  - dependency-name: HotChocolate.Data.Spatial
+    versions:
+    - 11.1.0
+  - dependency-name: Newtonsoft.Json
+    versions:
+    - 13.0.1
+  - dependency-name: GraphQL.Server.Ui.Voyager
+    versions:
+    - 5.0.0
+  - dependency-name: GraphQL
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: GraphQL.Server.Ui.Playground
+    versions:
+    - 5.0.0
+  - dependency-name: GraphQL.Server.Transports.AspNetCore
+    versions:
+    - 5.0.0
+  - dependency-name: OpenTelemetry.Exporter.Console
+    versions:
+    - 1.0.0-rc2
+    - 1.0.0-rc4
+  - dependency-name: Microsoft.Orleans.OrleansTelemetryConsumers.Counters
+    versions:
+    - 3.4.1
+  - dependency-name: Microsoft.Orleans.Core.Abstractions
+    versions:
+    - 3.4.1
+  - dependency-name: Microsoft.Orleans.OrleansTelemetryConsumers.Linux
+    versions:
+    - 3.4.1
+  - dependency-name: Microsoft.Orleans.Clustering.AzureStorage
+    versions:
+    - 3.4.1
