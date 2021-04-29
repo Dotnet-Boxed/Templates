@@ -97,6 +97,7 @@ namespace GraphQLTemplate
 #elif HostFiltering
                 .UseHostFiltering()
 #endif
+                .UseRouting()
 #if CORS
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
@@ -114,7 +115,6 @@ namespace GraphQLTemplate
 #if Subscriptions
                 .UseWebSockets()
 #endif
-                .UseRouting()
                 .UseStaticFilesWithCacheControl()
                 .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
