@@ -37,6 +37,7 @@ EndProject
 #endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{539EF653-396F-4D8F-862B-F7C9E02DE3E6}"
 	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
 		.github\release-drafter.yml = .github\release-drafter.yml
 	EndProjectSection
 EndProject
