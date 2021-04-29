@@ -109,6 +109,7 @@ namespace ApiTemplate
 #elif HostFiltering
                 .UseHostFiltering()
 #endif
+                .UseRouting()
 #if CORS
                 .UseCors(CorsPolicyName.AllowAny)
 #endif
@@ -126,7 +127,6 @@ namespace ApiTemplate
                 .UseIf(
                     this.webHostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
-                .UseRouting()
                 .UseStaticFilesWithCacheControl()
                 .UseCustomSerilogRequestLogging()
                 .UseEndpoints(
