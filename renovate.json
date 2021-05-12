@@ -3,7 +3,6 @@
     "config:base"
   ],
   "labels": [
-    "dependencies",
-    "patch"
+    "dependencies"
   ]
 }
