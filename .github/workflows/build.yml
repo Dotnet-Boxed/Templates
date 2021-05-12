@@ -33,9 +33,6 @@ jobs:
       with:
         lfs: true
         fetch-depth: 0
-    - name: 'Git Fetch Tags'
-      run: git fetch --tags
-      shell: pwsh
     - name: 'Install .NET Core SDK'
       uses: actions/setup-dotnet@v1
     - name: 'Dotnet Tool Restore'
@@ -66,9 +63,6 @@ jobs:
       with:
         lfs: true
         fetch-depth: 0
-    - name: 'Git Fetch Tags'
-      run: git fetch --tags
-      shell: pwsh
     - name: 'Install .NET Core SDK'
       uses: actions/setup-dotnet@v1
     - name: 'Dotnet Tool Restore'
