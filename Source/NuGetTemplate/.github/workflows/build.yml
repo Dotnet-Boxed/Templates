@@ -60,6 +60,8 @@ jobs:
     environment:
       name: 'GitHub Packages'
       url: https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/packages
+    permissions:
+      packages: write
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
