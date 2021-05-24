@@ -85,6 +85,8 @@ jobs:
     environment:
       name: 'GitHub Packages'
       url: https://github.com/orgs/Dotnet-Boxed/packages
+    permissions:
+      packages: write
     runs-on: windows-latest
     steps:
       - name: 'Download Artefact'
