@@ -18,6 +18,8 @@
   "sourceName": "NuGetTemplate",
   "preferNameDirectory": true,
   "guids": [
+    "D49F5A02-D549-4EF4-8776-89C35A71EB2D",
+    "528E66EB-2232-4534-A20D-9BC8A240BF2F"
   ],
   "primaryOutputs": [
     { "path": "NuGetTemplate.sln" }
