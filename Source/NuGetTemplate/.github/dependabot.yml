@@ -7,7 +7,6 @@ updates:
     directory: "/"
     labels:
       - "dependencies"
-      - "patch"
     open-pull-requests-limit: 10
     schedule:
       interval: "daily"
@@ -15,7 +14,6 @@ updates:
     directory: "/"
     labels:
       - "dependencies"
-      - "patch"
     open-pull-requests-limit: 10
     schedule:
       interval: "daily"
