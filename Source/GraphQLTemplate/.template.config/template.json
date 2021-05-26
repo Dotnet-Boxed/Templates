@@ -20,7 +20,9 @@
   "sourceName": "GraphQLTemplate",
   "preferNameDirectory": true,
   "guids": [
-    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+    "113f2d04-69f0-40c3-8797-ba3f356dd812",
+    "36941087-72D0-4649-86F6-69AFDC1EC71B",
+    "C76FD924-71ED-4A92-A891-D226C0724933"
   ],
   "primaryOutputs": [
     { "path": "GraphQLTemplate.sln" }

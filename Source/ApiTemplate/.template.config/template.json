@@ -20,7 +20,9 @@
   "sourceName": "ApiTemplate",
   "preferNameDirectory": true,
   "guids": [
-    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+    "113f2d04-69f0-40c3-8797-ba3f356dd812",
+    "37F1F839-E685-4E26-B50E-40E3C4896737",
+    "57839160-3C89-4A5A-BC23-A78F39551C1E"
   ],
   "primaryOutputs": [
     { "path": "ApiTemplate.sln" }

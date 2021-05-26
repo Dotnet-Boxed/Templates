@@ -20,7 +20,12 @@
   "sourceName": "OrleansTemplate",
   "preferNameDirectory": true,
   "guids": [
-    "113f2d04-69f0-40c3-8797-ba3f356dd812"
+    "113f2d04-69f0-40c3-8797-ba3f356dd812",
+    "B6993204-7350-4D3E-8C48-6C3914230E9F",
+    "583E0D0E-322C-4C13-81C6-5E3FB785A8AF",
+    "F522EB3C-EF6B-4517-B8D7-F1363E7ADC6E",
+    "2A41B472-8BCE-42D5-A64B-C1ED9C9BA60C",
+    "B186DB6A-88E5-40AB-B3E1-1468C925C9B7"
   ],
   "primaryOutputs": [
     { "path": "OrleansTemplate.sln" }
