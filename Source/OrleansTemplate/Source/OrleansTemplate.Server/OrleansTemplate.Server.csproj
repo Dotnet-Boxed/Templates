@@ -41,19 +41,19 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.4.2">
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.4.2" Condition="'$(TLS)' == 'true'" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="3.4.2" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.4.2" />
-    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.4.2" />
+    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.4.3" Condition="'$(TLS)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="3.4.3" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.4.3" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.4.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.0.1" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc4" Condition="'$(OpenTelemetry)' == 'true'" />
