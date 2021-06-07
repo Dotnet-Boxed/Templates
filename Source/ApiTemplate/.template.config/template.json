@@ -298,7 +298,7 @@
           "description": "Support both reverse proxy web servers."
         }
       ],
-      "defaultValue": "Both",
+      "defaultValue": "None",
       "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site."
     },
     "IIS": {
@@ -358,6 +358,7 @@
     "ApplicationInsightsKey": {
       "type": "parameter",
       "datatype": "string",
+      "defaultValue": "11111111-2222-3333-4444-555555555555",
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
