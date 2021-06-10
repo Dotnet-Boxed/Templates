@@ -53,7 +53,7 @@
     <PackageReference Include="Boxed.Mapping" Version="5.3.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="5.0.2" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="5.0.2" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="11.3.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="11.2.2" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="11.2.2" />
     <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="11.2.2" Condition="'$(PersistedQueries)' == 'true'" />
