@@ -24,7 +24,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="16.10.56" />
     <PackageReference Include="MinVer" PrivateAssets="all" Version="2.5.0" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.333" Condition="'$(StyleCop)' == 'true'" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.354" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
 
 </Project>
