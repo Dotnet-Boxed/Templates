@@ -90,9 +90,15 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 - **IntegrationTest** - Adds an integration test project.
 
-#### Other
+#### Docker
 
 - **Docker** (Default=On) - Adds an optimised Dockerfile to add the ability build a Docker image.
+- **DockerRegistry** - The Docker container registry to push Docker images to.
+  - **GitHubContainerRegistry** (Default) - Push Docker images to the GitHub Container Registry.
+  - **DockerHub** - Push Docker images to Docker Hub.
+
+#### Other
+
 - **robots.txt** (Default=On) - Adds a robots.txt file to tell search engines not to index this site.
 - **humans.txt** (Default=On) - Adds a humans.txt file where you can tell the world who wrote the application. This file is a good place to thank your developers.
 

@@ -184,6 +184,12 @@
       "replaces": "GITHUB-USERNAME",
       "description": "Your GitHub username or organisation name that the project lives under."
     },
+    "GitHubUsernameLowercase": {
+      "type": "derived",
+      "replaces": "GITHUB-USERNAME-LOWERCASE",
+      "valueSource": "GitHubUsername",
+      "valueTransform": "lowerCaseInvariant"
+    },
     "GitHubProject": {
       "type": "parameter",
       "datatype": "string",
@@ -288,6 +294,30 @@
       "description": "Adds an optimised Dockerfile to add the ability build a Docker image.",
       "defaultValue": "true"
     },
+    "DockerRegistry": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "GitHubContainerRegistry",
+          "description": "Push Docker images to the GitHub Container Registry."
+        },
+        {
+          "choice": "DockerHub",
+          "description": "Push Docker images to Docker Hub."
+        }
+      ],
+      "defaultValue": "GitHubContainerRegistry",
+      "description": "The Docker container registry to push Docker images to."
+    },
+    "GitHubContainerRegistry": {
+      "type": "computed",
+      "value": "(DockerRegistry == \"GitHubContainerRegistry\")"
+    },
+    "DockerHub": {
+      "type": "computed",
+      "value": "(DockerRegistry == \"DockerHub\")"
+    },
     "GitHubActions": {
       "type": "parameter",
       "datatype": "bool",
@@ -323,7 +353,7 @@
           "configuration": {
             "actionableIf": [ "<!--#if" ],
             "actionableElse": [ "#else", "<!--#else" ],
-            "actionableElseif": [ "#elseif", "<!--#elseif", "#elif", "<!--#elif" ],
+            "actionableElseif": [ "#elif", "<!--#elif", "#elif", "<!--#elif" ],
             "endif": [ "#endif", "<!--#endif" ],
             "trim": "true",
             "wholeLine": "true",
@@ -349,11 +379,11 @@
           "configuration": {
             "if": [ "#if" ],
             "else": [ "#else" ],
-            "elseif": [ "#elseif" ],
+            "elseif": [ "#elif" ],
             "endif": [ "#endif" ],
             "actionableIf": [ "##if" ],
             "actionableElse": [ "##else" ],
-            "actionableElseif": [ "##elseif" ],
+            "actionableElseif": [ "##elif" ],
             "actions": [ "uncomment", "reduceComment" ],
             "trim": "true",
             "wholeLine": "true",
@@ -385,11 +415,11 @@
           "configuration": {
             "if": [ "#if" ],
             "else": [ "#else" ],
-            "elseif": [ "#elseif" ],
+            "elseif": [ "#elif" ],
             "endif": [ "#endif" ],
             "actionableIf": [ "##if" ],
             "actionableElse": [ "##else" ],
-            "actionableElseif": [ "##elseif" ],
+            "actionableElseif": [ "##elif" ],
             "actions": [ "uncomment", "reduceComment" ],
             "trim": "true",
             "wholeLine": "true",
@@ -421,11 +451,11 @@
           "configuration": {
             "if": [ "#if" ],
             "else": [ "#else" ],
-            "elseif": [ "#elseif" ],
+            "elseif": [ "#elif" ],
             "endif": [ "#endif" ],
             "actionableIf": [ "##if" ],
             "actionableElse": [ "##else" ],
-            "actionableElseif": [ "##elseif" ],
+            "actionableElseif": [ "##elif" ],
             "actions": [ "uncomment", "reduceComment" ],
             "trim": "true",
             "wholeLine": "true",

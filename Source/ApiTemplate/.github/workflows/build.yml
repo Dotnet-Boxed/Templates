@@ -56,9 +56,27 @@ jobs:
 
   docker:
     name: Docker-${{matrix.os}}
+    env:
+      DOCKER_IMAGE_NAME: apitemplate
+#if (GitHubContainerRegistry)
+      DOCKER_REGISTRY: ghcr.io
+      DOCKER_USERNAME: GITHUB-USERNAME-LOWERCASE
+      DOCKER_PASSWORD: ${{secrets.GITHUB_TOKEN}}
+##elif (DockerHub)
+#      DOCKER_REGISTRY: registry.hub.docker.com
+#      DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+#      DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+#endif
     environment:
-      name: 'Docker Hub'
-      url: https://hub.docker.com/repository/docker/DOCKER_USERNAME/apitemplate
+#if (GitHubContainerRegistry)
+      name: 'GitHub Container Registry'
+      url: https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/pkgs/container/apitemplate
+##elif (DockerHub)
+#      name: 'Docker Hub'
+#      url: https://hub.docker.com/repository/docker/DOCKER_USERNAME/apitemplate
+#endif
+    permissions:
+      packages: write
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
@@ -83,12 +101,9 @@ jobs:
       uses: docker/setup-buildx-action@v1
     - name: 'Docker Login'
       if: github.ref == 'refs/heads/main' || github.event_name == 'release'
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: echo $env:DOCKER_PASSWORD | docker login --username "$($env:DOCKER_USERNAME)" --password-stdin
+      run: echo ${{env.DOCKER_PASSWORD}} | docker login ${{env.DOCKER_REGISTRY}} --username ${{env.DOCKER_USERNAME}} --password-stdin
       shell: pwsh
     - name: 'Dotnet Cake DockerBuild'
-      run: dotnet cake --target=DockerBuild --tag=${{secrets.DOCKER_USERNAME}}/apitemplate --push=${{github.ref == 'refs/heads/main' || github.event_name == 'release'}}
+      run: dotnet cake --target=DockerBuild --tag=${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/${{env.DOCKER_IMAGE_NAME}} --push=${{github.ref == 'refs/heads/main' || github.event_name == 'release'}}
       shell: pwsh
 #endif
