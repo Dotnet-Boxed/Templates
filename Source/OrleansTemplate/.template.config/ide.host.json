@@ -101,6 +101,13 @@
       "isVisible": true
     },
     {
+      "id": "DockerRegistry",
+      "name": {
+        "text": "Docker Registry"
+      },
+      "isVisible": true
+    },
+    {
       "id": "GitHubActions",
       "name": {
         "text": "GitHub Actions"

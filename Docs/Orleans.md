@@ -49,9 +49,12 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
   - **None** (Default) - Not using any analytics.
 - **ApplicationInsightsKey** - Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555.
 
-#### Other
+#### Docker
 
 - **Docker** (Default=On) - Adds an optimised Dockerfile to add the ability build a Docker image.
+- **DockerRegistry** - The Docker container registry to push Docker images to.
+  - **GitHubContainerRegistry** (Default) - Push Docker images to the GitHub Container Registry.
+  - **DockerHub** - Push Docker images to Docker Hub.
 
 ## Always On Features
 

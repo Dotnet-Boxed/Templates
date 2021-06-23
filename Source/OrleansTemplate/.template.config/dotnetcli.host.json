@@ -70,6 +70,9 @@
     "Docker": {
       "longName": "docker"
     },
+    "DockerRegistry": {
+      "longName": "docker-registry"
+    },
     "GitHubActions": {
       "longName": "github-actions"
     },
