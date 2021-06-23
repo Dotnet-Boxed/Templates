@@ -44,6 +44,8 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("GraphQLPersistedQueries", "persisted-queries=true")]
         [InlineData("GraphQLSubscriptions", "subscriptions=true")]
         [InlineData("GraphQLOpenTelemetry", "open-telemetry=true")]
+        [InlineData("GraphQLGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
+        [InlineData("GraphQLDockerHub", "docker-registry=DockerHub")]
         public async Task RestoreBuildTest_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);

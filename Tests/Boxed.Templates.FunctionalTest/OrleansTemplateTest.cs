@@ -32,6 +32,8 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("OrleansOpenTelemetry", "open-telemetry=true")]
+        [InlineData("OrleansGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
+        [InlineData("OrleansDockerHub", "docker-registry=DockerHub")]
         public async Task RestoreBuild_OrleansDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);

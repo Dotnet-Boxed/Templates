@@ -44,6 +44,8 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("ApiNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]
         [InlineData("ApiStyleCop", "style-cop=true")]
         [InlineData("ApiOpenTelemetry", "open-telemetry=true")]
+        [InlineData("ApiGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
+        [InlineData("ApiDockerHub", "docker-registry=DockerHub")]
         public async Task RestoreBuildTest_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
