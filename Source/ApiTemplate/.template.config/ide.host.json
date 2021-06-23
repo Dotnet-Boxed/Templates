@@ -29,6 +29,9 @@
     },
     {
       "id": "SourceControl",
+      "name": {
+        "text": "Source Control"
+      },
       "isVisible": true
     },
     {
