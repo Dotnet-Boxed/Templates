@@ -1,0 +1,30 @@
+name: "Bug Report"
+description: "Create a report to help us improve"
+labels: [bug]
+body:
+  - type: textarea
+    id: describe-the-bug
+    attributes:
+      label: "Describe the bug"
+      description: "A clear and concise description of what the bug is."
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: "Steps to reproduce"
+      description: "A link to some code to reproduce the bug can speed up a fix. Alternatively, show steps to reproduce the behaviour."
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: "Expected behaviour"
+      description: "A clear and concise description of what you expected to happen."
+    validations:
+      required: true
