@@ -25,11 +25,13 @@ namespace GraphQLTemplate.IntegrationTest
             this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
             this.Server.AllowSynchronousIO = true;
+#if Serilog
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Debug()
                 .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
                 .CreateLogger();
+#endif
         }
 
         public ApplicationOptions ApplicationOptions { get; private set; } = default!;
