@@ -276,7 +276,8 @@ namespace GraphQLTemplate
 
                     if (webHostEnvironment.IsDevelopment())
                     {
-                        builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Debug);
+                        builder.AddConsoleExporter(
+                            options => options.Targets = ConsoleExporterOutputTargets.Console | ConsoleExporterOutputTargets.Debug);
                     }
 
                     // TODO: Add OpenTelemetry.Instrumentation.* NuGet packages and configure them to collect more span data.

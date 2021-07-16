@@ -275,7 +275,8 @@ namespace ApiTemplate
 
                     if (webHostEnvironment.IsDevelopment())
                     {
-                        builder.AddConsoleExporter(options => options.Targets = ConsoleExporterOutputTargets.Debug);
+                        builder.AddConsoleExporter(
+                            options => options.Targets = ConsoleExporterOutputTargets.Console | ConsoleExporterOutputTargets.Debug);
                     }
 
                     // TODO: Add OpenTelemetry.Instrumentation.* NuGet packages and configure them to collect more span data.
@@ -292,9 +293,9 @@ namespace ApiTemplate
         /// <param name="services">The services.</param>
         /// <returns>The services with Swagger services added.</returns>
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
-            services
-                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
-                .AddSwaggerGen();
+services
+.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+.AddSwaggerGen();
 #endif
     }
 }
