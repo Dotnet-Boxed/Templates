@@ -13,32 +13,42 @@ namespace ApiTemplate
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+#if Serilog
     using Serilog;
     using Serilog.Extensions.Hosting;
+#endif
 
     public static class Program
     {
         public static async Task<int> Main(string[] args)
         {
+#if Serilog
             Log.Logger = CreateBootstrapLogger();
+#endif
             IHostEnvironment? hostEnvironment = null;
 
             try
             {
+#if Serilog
                 Log.Information("Initialising.");
+#endif
                 var host = CreateHostBuilder(args).Build();
                 hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
                 hostEnvironment.ApplicationName = AssemblyInformation.Current.Product;
 
+#if Serilog
                 Log.Information(
                     "Started {Application} in {Environment} mode.",
                     hostEnvironment.ApplicationName,
                     hostEnvironment.EnvironmentName);
+#endif
                 await host.RunAsync().ConfigureAwait(false);
+#if Serilog
                 Log.Information(
                     "Stopped {Application} in {Environment} mode.",
                     hostEnvironment.ApplicationName,
                     hostEnvironment.EnvironmentName);
+#endif
                 return 0;
             }
 #pragma warning disable CA1031 // Do not catch general exception types
@@ -47,23 +57,33 @@ namespace ApiTemplate
             {
                 if (hostEnvironment is null)
                 {
+#if Serilog
                     Log.Fatal(exception, "Application terminated unexpectedly while initialising.");
+#else
+                    Console.WriteLine("Application terminated unexpectedly while initialising.");
+#endif
                 }
                 else
                 {
+#if Serilog
                     Log.Fatal(
                         exception,
                         "{Application} terminated unexpectedly in {Environment} mode.",
                         hostEnvironment.ApplicationName,
                         hostEnvironment.EnvironmentName);
+#else
+                    Console.WriteLine($"{hostEnvironment.ApplicationName} terminated unexpectedly in {hostEnvironment.EnvironmentName} mode.");
+#endif
                 }
 
                 return 1;
             }
+#if Serilog
             finally
             {
                 Log.CloseAndFlush();
             }
+#endif
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -77,7 +97,9 @@ namespace ApiTemplate
                             x => x.AddCommandLine(args)))
                 .ConfigureAppConfiguration((hostingContext, config) =>
                     AddConfiguration(config, hostingContext.HostingEnvironment, args))
+#if Serilog
                 .UseSerilog(ConfigureReloadableLogger)
+#endif
                 .UseDefaultServiceProvider(
                     (context, options) =>
                     {
@@ -138,6 +160,7 @@ namespace ApiTemplate
                 .AddIf(
                     args is not null,
                     x => x.AddCommandLine(args));
+#if Serilog
 
         /// <summary>
         /// Creates a logger used during application initialisation.
@@ -173,5 +196,6 @@ namespace ApiTemplate
                 .WriteTo.Conditional(
                     x => context.HostingEnvironment.IsDevelopment(),
                     x => x.Console().WriteTo.Debug());
+#endif
     }
 }

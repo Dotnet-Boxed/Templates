@@ -34,6 +34,13 @@
     {
       "modifiers": [
         {
+          "condition": "(!Serilog)",
+          "exclude": [
+            "Source/OrleansTemplate.Server/Extensions/TraceIdEnricher.cs",
+            "Source/OrleansTemplate.Server/ApplicationBuilderExtensions.cs"
+          ]
+        },
+        {
           "condition": "(!EditorConfig)",
           "exclude": [
             ".editorconfig"
@@ -214,6 +221,26 @@
       "datatype": "bool",
       "defaultValue": "false",
       "description": "Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard."
+    },
+    "Logging": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Serilog",
+          "description": "Logging using Serilog provides an excellent structured logging experience."
+        },
+        {
+          "choice": "None",
+          "description": "Not using any logging."
+        }
+      ],
+      "defaultValue": "None",
+      "description": "The logging framework to use."
+    },
+    "Serilog": {
+      "type": "computed",
+      "value": "(Logging == \"Serilog\")"
     },
     "Analytics": {
       "type": "parameter",

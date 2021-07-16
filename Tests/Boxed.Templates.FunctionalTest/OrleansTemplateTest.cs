@@ -31,6 +31,7 @@ namespace Boxed.Templates.FunctionalTest
         [Theory]
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
+        [InlineData("OrleansNoSerilog", "logging=None")]
         [InlineData("OrleansOpenTelemetry", "open-telemetry=true")]
         [InlineData("OrleansGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
         [InlineData("OrleansDockerHub", "docker-registry=DockerHub")]

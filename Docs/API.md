@@ -71,10 +71,14 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy.
   - **Both** - Support both reverse proxy web servers.
 
+#### Telemetry
+
+- **Serilog** (Default=On) - Logging using [Serilog](https://serilog.net/) provides an excellent structured logging experience.
+- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
+
 #### Analytics
 
 - **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
-- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.
@@ -130,10 +134,6 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 - **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on your development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
 - **Translates Models to ViewModels** - Using your models which usually come from a database directly in your controllers can result in a mass assignment attack. View models with a translation layer are used to avoid this.
-
-#### Logging
-
-- **Serilog** - Has [Serilog](https://serilog.net/) built in for an excellent structured logging experience.
 
 #### Debugging
 

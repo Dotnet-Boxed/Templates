@@ -9,8 +9,10 @@ namespace GraphQLTemplate.IntegrationTest
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Moq;
+#if Serilog
     using Serilog;
     using Serilog.Events;
+#endif
     using Xunit.Abstractions;
 
     public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>

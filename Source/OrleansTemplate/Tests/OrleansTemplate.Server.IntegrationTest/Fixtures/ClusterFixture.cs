@@ -2,8 +2,10 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
 {
     using System.Threading.Tasks;
     using Orleans.TestingHost;
+#if Serilog
     using Serilog;
     using Serilog.Events;
+#endif
     using Xunit;
     using Xunit.Abstractions;
 
@@ -13,11 +15,13 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures
         {
             this.TestOutputHelper = testOutputHelper;
 
+#if Serilog
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Debug()
                 .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
                 .CreateLogger();
 
+#endif
             this.Cluster = new TestClusterBuilder()
                 .AddClientBuilderConfigurator<TestClientBuilderConfigurator>()
                 .AddSiloBuilderConfigurator<TestSiloConfigurator>()

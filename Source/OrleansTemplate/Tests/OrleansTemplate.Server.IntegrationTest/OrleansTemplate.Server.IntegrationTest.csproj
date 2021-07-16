@@ -1,4 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <!--#if (AuthoringMode)-->
+  <PropertyGroup>
+    <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
+    <DefineConstants>$(DefineConstants);Serilog</DefineConstants>
+    <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <Serilog>true</Serilog>
+  </PropertyGroup>
+  <!--#endif-->
 
   <PropertyGroup Label="Build">
     <TargetFramework>net5.0</TargetFramework>
@@ -10,9 +18,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="Microsoft.Orleans.TestingHost" Version="3.4.3" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
-    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
-    <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" Version="2.4.3">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>

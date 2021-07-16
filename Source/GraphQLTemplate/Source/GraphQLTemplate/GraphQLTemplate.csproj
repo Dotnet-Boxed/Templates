@@ -2,7 +2,7 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;PersistedQueries;Redis;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Serilog;PersistedQueries;Redis;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <Authorization>true</Authorization>
     <ApplicationInsights>true</ApplicationInsights>
@@ -10,6 +10,7 @@
     <OpenTelemetry>true</OpenTelemetry>
     <PersistedQueries>true</PersistedQueries>
     <Redis>true</Redis>
+    <Serilog>true</Serilog>
     <StyleCop>true</StyleCop>
     <Subscriptions>true</Subscriptions>
     <Docker>true</Docker>
@@ -68,14 +69,14 @@
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc7" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc7" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" />
-    <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" />
-    <PackageReference Include="Serilog.Enrichers.Span" Version="1.2.0" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" />
-    <PackageReference Include="Serilog.Exceptions" Version="7.0.0" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Serilog" Version="2.10.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.1.3" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.1" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Span" Version="1.2.0" Condition="'$(Serilog)' == 'true' AND '$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Exceptions" Version="7.0.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(Serilog)' == 'true' AND '$(ApplicationInsights)' == 'true'" />
   </ItemGroup>
 
 </Project>

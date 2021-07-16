@@ -35,6 +35,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("GraphQLTDefaults")]
+        [InlineData("GraphQLNoSerilog", "logging=None")]
         [InlineData("GraphQLTNoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("GraphQLTNoHostFiltering", "host-filtering=false")]
         [InlineData("GraphQLTNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]

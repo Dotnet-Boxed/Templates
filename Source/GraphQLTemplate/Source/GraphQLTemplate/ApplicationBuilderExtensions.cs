@@ -6,11 +6,15 @@ namespace GraphQLTemplate
     using GraphQLTemplate.Constants;
     using GraphQLTemplate.Options;
     using Microsoft.AspNetCore.Builder;
+#if Serilog
     using Microsoft.AspNetCore.Http;
+#endif
     using Microsoft.Extensions.DependencyInjection;
+#if Serilog
     using Serilog;
 #if HealthCheck
     using Serilog.Events;
+#endif
 #endif
 
     internal static partial class ApplicationBuilderExtensions
@@ -43,6 +47,7 @@ namespace GraphQLTemplate
                         },
                     });
         }
+#if Serilog
 
         /// <summary>
         /// Uses custom serilog request logging. Adds additional properties to each log.
@@ -118,5 +123,6 @@ namespace GraphQLTemplate
                     }
 #endif
                 });
+#endif
     }
 }
