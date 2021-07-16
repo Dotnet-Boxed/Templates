@@ -45,7 +45,7 @@ namespace OrleansTemplate.Server
 #endif
                 var host = CreateHostBuilder(args).Build();
                 hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-                hostEnvironment.ApplicationName = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyProductAttribute>()!.Product;
+                hostEnvironment.ApplicationName = AssemblyInformation.Current.Product;
 
 #if Serilog
                 Log.Information(
@@ -66,26 +66,16 @@ namespace OrleansTemplate.Server
             catch (Exception exception)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                if (hostEnvironment is null)
-                {
 #if Serilog
-                    Log.Fatal(exception, "Application terminated unexpectedly while initialising.");
+                Log.Fatal(
+                    exception,
+                    "{Application} terminated unexpectedly in {Environment} mode.",
+                    AssemblyInformation.Current.Product,
+                    hostEnvironment?.EnvironmentName);
 #else
-                    Console.WriteLine("Application terminated unexpectedly while initialising.");
+                Console.WriteLine($"{AssemblyInformation.Current.Product} terminated unexpectedly in {hostEnvironment?.EnvironmentName} mode.");
+                Console.WriteLine(exception.ToString());
 #endif
-                }
-                else
-                {
-#if Serilog
-                    Log.Fatal(
-                        exception,
-                        "{Application} terminated unexpectedly in {Environment} mode.",
-                        hostEnvironment.ApplicationName,
-                        hostEnvironment.EnvironmentName);
-#else
-                    Console.WriteLine($"{hostEnvironment.ApplicationName} terminated unexpectedly in {hostEnvironment.EnvironmentName} mode.");
-#endif
-                }
 
                 return 1;
             }
