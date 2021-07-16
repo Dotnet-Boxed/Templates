@@ -9,8 +9,6 @@
 3. When you get the go ahead, follow the coding guidelines and raise a pull request.
 4. Include a link to the issue in your pull request.
 
-If you have created any custom destructurers, please contribute them even if they are for third party libraries. If they are for exceptions from a third party library e.g. EntityFramework, please contribute a Serilog.Exceptions.EntityFramework project containing all the destructurers for the all the exceptions in EntityFramework.
-
 # Coding Guidelines
 
 - Projects use StyleCop and .editorconfig to produce style warnings. Please fix all warnings in any code you submit.
