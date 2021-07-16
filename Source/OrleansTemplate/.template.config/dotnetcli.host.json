@@ -46,6 +46,9 @@
     "OpenTelemetry": {
       "longName": "open-telemetry"
     },
+    "Logging": {
+      "longName": "logging"
+    },
     "Analytics": {
       "longName": "analytics"
     },

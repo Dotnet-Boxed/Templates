@@ -10,8 +10,10 @@ namespace ApiTemplate.IntegrationTest
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
     using Moq;
+#if Serilog
     using Serilog;
     using Serilog.Events;
+#endif
     using Xunit.Abstractions;
 
     public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
@@ -23,11 +25,13 @@ namespace ApiTemplate.IntegrationTest
 #if HttpsEverywhere
             this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
+#if Serilog
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Debug()
                 .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
                 .CreateLogger();
+#endif
         }
 
         public ApplicationOptions ApplicationOptions { get; private set; } = default!;

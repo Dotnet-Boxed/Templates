@@ -11,9 +11,11 @@ namespace ApiTemplate
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
     using Microsoft.Extensions.DependencyInjection;
+#if Serilog
     using Serilog;
 #if HealthCheck
     using Serilog.Events;
+#endif
 #endif
 
     internal static partial class ApplicationBuilderExtensions
@@ -46,6 +48,7 @@ namespace ApiTemplate
                         },
                     });
         }
+#if Serilog
 
         /// <summary>
         /// Uses custom serilog request logging. Adds additional properties to each log.
@@ -109,6 +112,7 @@ namespace ApiTemplate
                     }
 #endif
                 });
+#endif
 #if Swagger
 
         public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>

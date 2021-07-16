@@ -69,11 +69,15 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
   - **IIS** - A flexible, secure and manageable Web server for hosting anything on the Web using Windows Server. Select this option if you are deploying your site to Azure web apps.
   - **NGINX** - A free, open-source, cross-platform high-performance HTTP server and reverse proxy.
   - **Both** (Default) - Support both reverse proxy web servers.
+  
+#### Telemetry
+
+- **Serilog** (Default=On) - Logging using [Serilog](https://serilog.net/) provides an excellent structured logging experience.
+- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
 
 #### Analytics
 
 - **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
-- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.
@@ -120,10 +124,6 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 - **Kestrel Limits** - Allow configuring Kestrel security limits such as maximum request size via configuration and set sensible stricter defaults.
 - **User Secrets** - This feature is turned on when the site is in development mode to allow storing of secrets on your development machine.
 - **Remove Server HTTP Header** - Removes the Server HTTP header for security and performance.
-
-#### Logging
-
-- **Serilog** - Has [Serilog](https://serilog.net/) built in for an excellent structured logging experience.
 
 #### Debugging
 

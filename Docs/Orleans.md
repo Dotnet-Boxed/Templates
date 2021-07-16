@@ -40,10 +40,14 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
 
 - **TLS** (Default=Off) - Adds TLS transport encryption to secure communication between the client and server.
 
+#### Telemetry
+
+- **Serilog** (Default=On) - Logging using [Serilog](https://serilog.net/) provides an excellent structured logging experience.
+- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
+
 #### Analytics
 
 - **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
-- **OpenTelemetry** (Default=Off) - Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard.
 - **Analytics** - Monitor internal information about how your application is running, as well as external user information.
   - **Application Insights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
   - **None** (Default) - Not using any analytics.
@@ -57,10 +61,6 @@ The [Microsoft Orleans](https://dotnet.github.io/orleans/) project template uses
   - **DockerHub** - Push Docker images to Docker Hub.
 
 ## Always On Features
-
-#### Logging
-
-- **Serilog** - Has [Serilog](https://serilog.net/) built in for an excellent structured logging experience.
 
 #### Dashboard
 

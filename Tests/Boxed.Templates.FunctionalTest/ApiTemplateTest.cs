@@ -39,6 +39,7 @@ namespace Boxed.Templates.FunctionalTest
         [Trait("IsUsingDocker", "false")]
         [Trait("IsUsingDotnetRun", "false")]
         [InlineData("ApiDefaults")]
+        [InlineData("ApiNoSerilog", "logging=None")]
         [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
         [InlineData("ApiNoHostFiltering", "host-filtering=false")]
         [InlineData("ApiNoFwdHdrsOrHostFilter", "forwarded-headers=false", "host-filtering=false")]

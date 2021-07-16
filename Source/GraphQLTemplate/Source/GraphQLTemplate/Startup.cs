@@ -116,7 +116,9 @@ namespace GraphQLTemplate
                 .UseWebSockets()
 #endif
                 .UseStaticFilesWithCacheControl()
+#if Serilog
                 .UseCustomSerilogRequestLogging()
+#endif
                 .UseEndpoints(
                     builder =>
                     {

@@ -42,7 +42,9 @@ namespace OrleansTemplate.Server
         public virtual void Configure(IApplicationBuilder application) =>
             application
                 .UseRouting()
+#if Serilog
                 .UseCustomSerilogRequestLogging()
+#endif
                 .UseEndpoints(
                     builder =>
                     {

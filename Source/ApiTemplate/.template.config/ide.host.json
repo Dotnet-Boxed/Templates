@@ -94,6 +94,10 @@
       "isVisible": true
     },
     {
+      "id": "Logging",
+      "isVisible": true
+    },
+    {
       "id": "Analytics",
       "isVisible": true
     },

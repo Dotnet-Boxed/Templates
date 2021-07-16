@@ -128,7 +128,9 @@ namespace ApiTemplate
                     this.webHostEnvironment.IsDevelopment(),
                     x => x.UseDeveloperExceptionPage())
                 .UseStaticFilesWithCacheControl()
+#if Serilog
                 .UseCustomSerilogRequestLogging()
+#endif
                 .UseEndpoints(
                     builder =>
                     {
