@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Constants
+namespace ApiTemplate.Constants
 {
     public static class CacheProfileName
     {
