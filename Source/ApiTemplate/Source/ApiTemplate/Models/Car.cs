@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Models
+namespace ApiTemplate.Models
 {
     using System;
 
