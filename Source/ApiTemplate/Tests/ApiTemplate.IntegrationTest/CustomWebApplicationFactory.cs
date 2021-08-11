@@ -55,7 +55,7 @@ namespace ApiTemplate.IntegrationTest
 
         protected override void ConfigureWebHost(IWebHostBuilder builder) =>
             builder
-                .UseEnvironment("Test")
+                .UseEnvironment(Constants.EnvironmentName.Test)
                 .ConfigureServices(this.ConfigureServices);
 
         protected virtual void ConfigureServices(IServiceCollection services) =>

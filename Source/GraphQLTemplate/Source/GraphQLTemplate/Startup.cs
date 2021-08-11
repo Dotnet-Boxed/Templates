@@ -68,7 +68,6 @@ namespace GraphQLTemplate
                 .AddHttpContextAccessor()
                 .AddServerTiming()
                 .AddControllers()
-                    .AddCustomJsonOptions(this.webHostEnvironment)
                     .AddCustomMvcOptions(this.configuration)
                 .Services
 #if Authorization

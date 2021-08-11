@@ -23,7 +23,8 @@ namespace ApiTemplate
                 options =>
                 {
                     var jsonSerializerOptions = options.JsonSerializerOptions;
-                    if (webHostEnvironment.IsDevelopment())
+                    if (webHostEnvironment.IsDevelopment() ||
+                        webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test))
                     {
                         // Pretty print the JSON in development for easier debugging.
                         jsonSerializerOptions.WriteIndented = true;
