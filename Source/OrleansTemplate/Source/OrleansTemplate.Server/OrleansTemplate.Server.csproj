@@ -55,7 +55,7 @@
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.4.3" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.4.3" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.4.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" Condition="'$(Docker)' == 'true'" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc7" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc7" Condition="'$(OpenTelemetry)' == 'true'" />
