@@ -71,22 +71,11 @@
       "isVisible": true
     },
     {
-      "id": "Analytics",
-      "isVisible": true,
-      "choices": [
-        {
-          "id": "ApplicationInsights",
-          "name": {
-            "text": "Application Insights"
-          }
-        },
-        {
-          "id": "None",
-          "name": {
-            "text": "None"
-          }
-        }
-      ]
+      "id": "ApplicationInsights",
+      "name": {
+        "text": "Application Insights"
+      },
+      "isVisible": true
     },
     {
       "id": "ApplicationInsightsKey",

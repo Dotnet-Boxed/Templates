@@ -385,25 +385,11 @@
       "type": "computed",
       "value": "(Logging == \"Serilog\")"
     },
-    "Analytics": {
-      "type": "parameter",
-      "datatype": "choice",
-      "choices": [
-        {
-          "choice": "ApplicationInsights",
-          "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
-        },
-        {
-          "choice": "None",
-          "description": "Not using any analytics."
-        }
-      ],
-      "defaultValue": "None",
-      "description": "Monitor internal information about how your application is running, as well as external user information."
-    },
     "ApplicationInsights": {
-      "type": "computed",
-      "value": "(Analytics == \"ApplicationInsights\")"
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
     },
     "ApplicationInsightsKey": {
       "type": "parameter",

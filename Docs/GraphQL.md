@@ -78,9 +78,7 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### Analytics
 
 - **HealthCheck** (Default=On) - A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health.
-- **Analytics** - Monitor internal information about how your application is running, as well as external user information.
-  - **ApplicationInsights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
-  - **None** (Default) - Not using any analytics.
+- **ApplicationInsights** - Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud.
 - **ApplicationInsightsKey** - Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555.
 
 #### Cloud
