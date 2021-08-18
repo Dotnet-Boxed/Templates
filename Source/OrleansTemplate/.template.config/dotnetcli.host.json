@@ -49,8 +49,8 @@
     "Logging": {
       "longName": "logging"
     },
-    "Analytics": {
-      "longName": "analytics"
+    "ApplicationInsights": {
+      "longName": "app-insights"
     },
     "ApplicationInsightsKey": {
       "longName": "app-insights-key"
