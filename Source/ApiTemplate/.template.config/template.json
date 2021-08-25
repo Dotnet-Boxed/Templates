@@ -67,6 +67,12 @@
           ]
         },
         {
+          "condition": "(!Redis)",
+          "exclude": [
+            "Source/ApiTemplate/Options/RedisOptions.cs"
+          ]
+        },
+        {
           "condition": "(!IIS)",
           "exclude": [
             "Source/ApiTemplate/web.config"
@@ -403,6 +409,42 @@
       "datatype": "bool",
       "defaultValue": "true",
       "description": "Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability."
+    },
+    "DistributedCache": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Redis",
+          "description": "Adds a Redis implementation for IDistributedCache."
+        },
+        {
+          "choice": "InMemory",
+          "description": "Adds an in-memory implementation for IDistributedCache."
+        },
+        {
+          "choice": "None",
+          "description": "No distributed cache added."
+        }
+      ],
+      "defaultValue": "None",
+      "description": "Adds distributed caching."
+    },
+    "DistributedCacheRedis": {
+      "type": "computed",
+      "value": "(DistributedCache == \"Redis\")"
+    },
+    "DistributedCacheInMemory": {
+      "type": "computed",
+      "value": "(DistributedCache == \"InMemory\")"
+    },
+    "DistributedCacheNone": {
+      "type": "computed",
+      "value": "(DistributedCache == \"None\")"
+    },
+    "Redis": {
+      "type": "computed",
+      "value": "(DistributedCacheRedis)"
     },
     "XmlFormatter": {
       "type": "parameter",

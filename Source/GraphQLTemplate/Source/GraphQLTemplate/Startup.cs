@@ -47,7 +47,11 @@ namespace GraphQLTemplate
                 // Add Azure Application Insights data collection services to the services container.
                 .AddApplicationInsightsTelemetry(this.configuration)
 #endif
+#if DistributedCacheRedis
+                .AddCustomCaching(this.webHostEnvironment, this.configuration)
+#else
                 .AddCustomCaching()
+#endif
 #if CORS
                 .AddCustomCors()
 #endif

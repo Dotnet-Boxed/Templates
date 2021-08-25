@@ -33,5 +33,10 @@ namespace ApiTemplate.Options
 
 #endif
         public KestrelServerOptions Kestrel { get; set; } = default!;
+#if Redis
+
+        [Required]
+        public RedisOptions Redis { get; set; } = default!;
+#endif
     }
 }

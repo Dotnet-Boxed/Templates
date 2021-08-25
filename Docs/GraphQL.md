@@ -51,6 +51,10 @@ The ASP.NET Core GraphQL project template uses `dotnet new` to enable you to tur
 #### Performance
 
 - **Response Compression** (Default=On) - Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability.
+- **DistributedCache** - Adds [distributed caching](https://docs.microsoft.com/aspnet/core/performance/caching/distributed).
+  - **Redis** - Adds a Redis implementation for `IDistributedCache`.
+  - **InMemory** - Adds an in-memory implementation for `IDistributedCache`.
+  - **None** (Default) - No distributed cache added.
 
 #### Security
 

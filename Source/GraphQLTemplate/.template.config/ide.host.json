@@ -151,6 +151,13 @@
       "isVisible": true
     },
     {
+      "id": "DistributedCache",
+      "name": {
+        "text": "Distributed Cache"
+      },
+      "isVisible": true
+    },
+    {
       "id": "HealthCheck",
       "name": {
         "text": "Health Check"

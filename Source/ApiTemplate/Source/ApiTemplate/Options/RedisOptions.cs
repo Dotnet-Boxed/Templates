@@ -1,4 +1,4 @@
-namespace GraphQLTemplate.Options
+namespace ApiTemplate.Options
 {
     using StackExchange.Redis;
 

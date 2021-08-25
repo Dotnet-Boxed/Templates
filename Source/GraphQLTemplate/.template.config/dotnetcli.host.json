@@ -91,6 +91,9 @@
     "ResponseCompression": {
       "longName": "response-compression"
     },
+    "DistributedCache": {
+      "longName": "distributed-cache"
+    },
     "HealthCheck": {
       "longName": "health-check"
     },

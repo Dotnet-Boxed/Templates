@@ -60,6 +60,9 @@ namespace ApiTemplate.IntegrationTest
 
         protected virtual void ConfigureServices(IServiceCollection services) =>
             services
+#if DistributedCacheRedis
+                .AddDistributedMemoryCache()
+#endif
                 .AddSingleton(this.CarRepositoryMock.Object)
                 .AddSingleton(this.ClockServiceMock.Object);
 

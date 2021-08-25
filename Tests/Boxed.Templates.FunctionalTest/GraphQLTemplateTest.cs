@@ -47,6 +47,8 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("GraphQLOpenTelemetry", "open-telemetry=true")]
         [InlineData("GraphQLGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
         [InlineData("GraphQLDockerHub", "docker-registry=DockerHub")]
+        [InlineData("GraphQLCacheRedis", "distributed-cache=Redis")]
+        [InlineData("GraphQLCacheInMemory", "distributed-cache=InMemory")]
         public async Task RestoreBuildTest_GraphQLDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
