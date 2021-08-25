@@ -57,7 +57,11 @@ namespace GraphQLTemplate.IntegrationTest
                 .ConfigureServices(this.ConfigureServices);
 
         protected virtual void ConfigureServices(IServiceCollection services) =>
-            services.AddSingleton(this.ClockServiceMock.Object);
+            services
+#if DistributedCacheRedis
+                .AddDistributedMemoryCache()
+#endif
+                .AddSingleton(this.ClockServiceMock.Object);
 
         protected override void Dispose(bool disposing)
         {

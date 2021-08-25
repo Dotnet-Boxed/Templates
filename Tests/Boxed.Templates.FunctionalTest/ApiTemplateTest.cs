@@ -47,6 +47,8 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("ApiOpenTelemetry", "open-telemetry=true")]
         [InlineData("ApiGitHubContainerRegistry", "docker-registry=GitHubContainerRegistry")]
         [InlineData("ApiDockerHub", "docker-registry=DockerHub")]
+        [InlineData("ApiCacheRedis", "distributed-cache=Redis")]
+        [InlineData("ApiCacheInMemory", "distributed-cache=InMemory")]
         public async Task RestoreBuildTest_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);

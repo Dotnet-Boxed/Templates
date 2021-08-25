@@ -53,6 +53,10 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 - **Response Caching** (Default=On) - Response caching is allows the use of the `[ResponseCache]` attribute on your action methods. Cache settings (cache profiles) are stored in the configuration file and referred to by name.
 - **Response Compression** (Default=On) - Enables dynamic GZIP response compression of HTTP responses. Not enabled for HTTPS to avoid the BREACH security vulnerability.
+- **DistributedCache** - Adds [distributed caching](https://docs.microsoft.com/aspnet/core/performance/caching/distributed).
+  - **Redis** - Adds a Redis implementation for `IDistributedCache`.
+  - **InMemory** - Adds an in-memory implementation for `IDistributedCache`.
+  - **None** (Default) - No distributed cache added.
 
 #### Security
 

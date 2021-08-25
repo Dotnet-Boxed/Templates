@@ -2,11 +2,12 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Serilog;PersistedQueries;Redis;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
+    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Mutations;Subscriptions;Serilog;PersistedQueries;Redis;DistributedCacheRedis;Authorization;Kestrel;IIS;NGINX;Azure;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;CORS;HumansTxt;SecurityTxt;RobotsTxt;ResponseCompression;StyleCop;Docker;OpenTelemetry</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <Authorization>true</Authorization>
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
+    <DistributedCacheRedis>true</DistributedCacheRedis>
     <OpenTelemetry>true</OpenTelemetry>
     <PersistedQueries>true</PersistedQueries>
     <Redis>true</Redis>
@@ -64,6 +65,7 @@
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="5.0.9" Condition="'$(Azure)' == 'true'" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.1" Condition="'$(DistributedCacheRedis)' == 'true'" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc7" Condition="'$(OpenTelemetry)' == 'true'" />

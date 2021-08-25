@@ -42,24 +42,46 @@ namespace GraphQLTemplate
     /// </summary>
     internal static class CustomServiceCollectionExtensions
     {
+#if DistributedCacheRedis
         /// <summary>
-        /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> and
-        /// <see cref="IMemoryCache"/> types with the services collection or IoC container. The
-        /// <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
-        /// cache, which is shared between multiple instances of the application. Use the <see cref="IMemoryCache"/>
-        /// otherwise.
+        /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
+        /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
+        /// cache, which is shared between multiple instances of the application.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <param name="webHostEnvironment">The environment the application is running under.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The services with caching services added.</returns>
+        public static IServiceCollection AddCustomCaching(
+            this IServiceCollection services,
+            IWebHostEnvironment webHostEnvironment,
+            IConfiguration configuration) =>
+#else
+        /// <summary>
+        /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
+        /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
+        /// cache, which is shared between multiple instances of the application.
         /// </summary>
         /// <param name="services">The services.</param>
         /// <returns>The services with caching services added.</returns>
         public static IServiceCollection AddCustomCaching(this IServiceCollection services) =>
+#endif
             services
+#if DistributedCacheNone
+                .AddMemoryCache();
+#elif DistributedCacheInMemory
                 .AddMemoryCache()
-                // Adds IDistributedCache which is a distributed cache shared between multiple servers. This adds a
-                // default implementation of IDistributedCache which is not distributed. You probably want to use the
-                // Redis cache provider by calling AddDistributedRedisCache.
                 .AddDistributedMemoryCache();
-#if CORS
+#elif DistributedCacheRedis
+                .AddMemoryCache()
+                .AddStackExchangeRedisCache(
+                    options => options.ConfigurationOptions = configuration
+                        .GetSection(nameof(ApplicationOptions.Redis))
+                        .Get<RedisOptions>()
+                        .ConfigurationOptions);
+#endif
 
+#if CORS
         /// <summary>
         /// Add cross-origin resource sharing (CORS) services and configures named CORS policies (See
         /// https://docs.asp.net/en/latest/security/cors.html).
@@ -77,6 +99,7 @@ namespace GraphQLTemplate
                             .AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()));
+
 #endif
 
         /// <summary>
@@ -194,7 +217,7 @@ namespace GraphQLTemplate
 #if Redis
                 .AddIf(
                     !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
-                    x => x.AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConnectionString))
+                    x => x.AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
 #endif
                 .Services;
 #endif
@@ -311,7 +334,7 @@ namespace GraphQLTemplate
                          configuration
                             .GetSection(nameof(ApplicationOptions.Redis))
                             .Get<RedisOptions>()
-                            .ConnectionString)));
+                            .ConfigurationOptions)));
 #endif
 
         public static IServiceCollection AddCustomGraphQL(

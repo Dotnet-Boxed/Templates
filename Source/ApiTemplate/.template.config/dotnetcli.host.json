@@ -88,6 +88,9 @@
     "ResponseCompression": {
       "longName": "response-compression"
     },
+    "DistributedCache": {
+      "longName": "distributed-cache"
+    },
     "XmlFormatter": {
       "longName": "xml-formatter"
     },
