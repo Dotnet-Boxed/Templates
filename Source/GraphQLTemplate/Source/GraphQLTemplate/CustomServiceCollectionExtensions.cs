@@ -296,6 +296,9 @@ namespace GraphQLTemplate
                                 };
                                 options.RecordException = true;
                             });
+#if Redis
+                    builder.AddRedisInstrumentation();
+#endif
 
                     if (webHostEnvironment.IsDevelopment())
                     {
