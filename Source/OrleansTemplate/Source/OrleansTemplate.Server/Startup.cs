@@ -29,6 +29,10 @@ namespace OrleansTemplate.Server
 
         public virtual void ConfigureServices(IServiceCollection services) =>
             services
+#if ApplicationInsights
+                // Add Azure Application Insights data collection services to the services container.
+                .AddApplicationInsightsTelemetry(this.configuration)
+#endif
                 .AddRouting()
 #if OpenTelemetry
                 .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
