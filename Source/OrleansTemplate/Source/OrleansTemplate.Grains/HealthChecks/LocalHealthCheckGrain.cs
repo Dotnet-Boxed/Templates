@@ -8,6 +8,6 @@ namespace OrleansTemplate.Grains
     [StatelessWorker(1)]
     public class LocalHealthCheckGrain : Grain, ILocalHealthCheckGrain
     {
-        public Task CheckAsync() => Task.CompletedTask;
+        public ValueTask CheckAsync() => ValueTask.CompletedTask;
     }
 }

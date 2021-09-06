@@ -8,7 +8,7 @@ namespace OrleansTemplate.Grains
 
     public class HelloGrain : Grain, IHelloGrain
     {
-        public async Task<string> SayHelloAsync(string name)
+        public async ValueTask<string> SayHelloAsync(string name)
         {
             await this.IncrementCounterAsync().ConfigureAwait(true);
             await this.PublishSaidHelloAsync(name).ConfigureAwait(true);
@@ -16,7 +16,7 @@ namespace OrleansTemplate.Grains
             return $"Hello {name}!";
         }
 
-        private Task IncrementCounterAsync()
+        private ValueTask IncrementCounterAsync()
         {
             var counter = this.GrainFactory.GetGrain<ICounterStatelessGrain>(0L);
             return counter.IncrementAsync();

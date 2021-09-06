@@ -16,10 +16,10 @@ namespace OrleansTemplate.Grains
     {
         private long count;
 
-        public Task IncrementAsync()
+        public ValueTask IncrementAsync()
         {
             this.count += 1;
-            return Task.CompletedTask;
+            return ValueTask.CompletedTask;
         }
 
         public override Task OnActivateAsync()
@@ -30,12 +30,12 @@ namespace OrleansTemplate.Grains
             return base.OnActivateAsync();
         }
 
-        private Task OnTimerTickAsync(object arg)
+        private async Task OnTimerTickAsync(object arg)
         {
             var count = this.count;
             this.count = 0;
             var counter = this.GrainFactory.GetGrain<ICounterGrain>(Guid.Empty);
-            return counter.AddCountAsync(count);
+            await counter.AddCountAsync(count).ConfigureAwait(true);
         }
     }
 }
