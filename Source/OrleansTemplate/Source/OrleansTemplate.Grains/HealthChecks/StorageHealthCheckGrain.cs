@@ -10,7 +10,7 @@ namespace OrleansTemplate.Grains.HealthChecks
     [PreferLocalPlacement]
     public class StorageHealthCheckGrain : Grain<Guid>, IStorageHealthCheckGrain
     {
-        public async Task CheckAsync()
+        public async ValueTask CheckAsync()
         {
             try
             {

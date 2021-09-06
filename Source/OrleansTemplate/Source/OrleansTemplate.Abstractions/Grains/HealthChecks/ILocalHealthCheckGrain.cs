@@ -5,6 +5,6 @@ namespace OrleansTemplate.Abstractions.Grains.HealthChecks
 
     public interface ILocalHealthCheckGrain : IGrainWithGuidKey
     {
-        Task CheckAsync();
+        ValueTask CheckAsync();
     }
 }

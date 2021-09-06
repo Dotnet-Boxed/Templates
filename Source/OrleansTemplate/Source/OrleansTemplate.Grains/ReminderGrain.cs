@@ -12,10 +12,10 @@ namespace OrleansTemplate.Grains
         private const string ReminderName = "SomeReminder";
         private string? reminder;
 
-        public Task SetReminderAsync(string reminder)
+        public ValueTask SetReminderAsync(string reminder)
         {
             this.reminder = reminder;
-            return Task.CompletedTask;
+            return ValueTask.CompletedTask;
         }
 
         public override async Task OnActivateAsync()
