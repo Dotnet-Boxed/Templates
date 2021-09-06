@@ -5,6 +5,9 @@ namespace ApiTemplate.Controllers
     using ApiTemplate.Commands;
     using ApiTemplate.Constants;
     using ApiTemplate.ViewModels;
+#if Swagger
+    using Boxed.AspNetCore;
+#endif
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.JsonPatch;
     using Microsoft.AspNetCore.Mvc;
@@ -19,7 +22,16 @@ namespace ApiTemplate.Controllers
     [ApiVersion(ApiVersionName.V1)]
 #endif
 #if Swagger
-    [SwaggerResponse(StatusCodes.Status500InternalServerError, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
+    [SwaggerResponse(
+        StatusCodes.Status500InternalServerError,
+        "The MIME type in the Accept HTTP header is not acceptable.",
+        typeof(ProblemDetails),
+#if AnyXmlSerializer
+        ContentType.ProblemJson,
+        ContentType.ProblemXml)]
+#else
+        ContentType.ProblemJson)]
+#endif
 #endif
 #pragma warning disable CA1822 // Mark members as static
 #pragma warning disable CA1062 // Validate arguments of public methods
@@ -80,7 +92,16 @@ namespace ApiTemplate.Controllers
         [HttpDelete("{carId}", Name = CarsControllerRoute.DeleteCar)]
 #if Swagger
         [SwaggerResponse(StatusCodes.Status204NoContent, "The car with the specified unique identifier was deleted.")]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier was not found.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status404NotFound,
+            "A car with the specified unique identifier was not found.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> DeleteAsync(
             [FromServices] DeleteCarCommand command,
@@ -98,10 +119,40 @@ namespace ApiTemplate.Controllers
         [HttpGet("{carId}", Name = CarsControllerRoute.GetCar)]
         [HttpHead("{carId}", Name = CarsControllerRoute.HeadCar)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "The car with the specified unique identifier.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status304NotModified, "The car has not changed since the date given in the If-Modified-Since HTTP header.", typeof(void))]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status200OK,
+            "The car with the specified unique identifier.",
+            typeof(Car),
+            ContentType.RestfulJson,
+#if AnyXmlSerializer
+            ContentType.Json,
+            ContentType.Xml)]
+#else
+            ContentType.Json)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status304NotModified,
+            "The car has not changed since the date given in the If-Modified-Since HTTP header.")]
+        [SwaggerResponse(
+            StatusCodes.Status404NotFound,
+            "A car with the specified unique identifier could not be found.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status406NotAcceptable,
+            "The MIME type in the Accept HTTP header is not acceptable.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> GetAsync(
             [FromServices] GetCarCommand command,
@@ -120,10 +171,47 @@ namespace ApiTemplate.Controllers
         [HttpGet("", Name = CarsControllerRoute.GetCarPage)]
         [HttpHead("", Name = CarsControllerRoute.HeadCarPage)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "A collection of cars for the specified page.", typeof(Connection<Car>))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The page request parameters are invalid.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "A page with the specified page number was not found.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status200OK,
+            "A collection of cars for the specified page.",
+            typeof(Connection<Car>),
+            ContentType.RestfulJson,
+#if AnyXmlSerializer
+            ContentType.Json,
+            ContentType.Xml)]
+#else
+            ContentType.Json)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status400BadRequest,
+            "The page request parameters are invalid.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status404NotFound,
+            "A page with the specified page number was not found.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status406NotAcceptable,
+            "The MIME type in the Accept HTTP header is not acceptable.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> GetPageAsync(
             [FromServices] GetCarPageCommand command,
@@ -141,11 +229,57 @@ namespace ApiTemplate.Controllers
         /// if a car with the specified unique identifier was not found.</returns>
         [HttpPatch("{carId}", Name = CarsControllerRoute.PatchCar)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "The patched car with the specified unique identifier.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The patch document is invalid.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status200OK,
+            "The patched car with the specified unique identifier.",
+            typeof(Car),
+            ContentType.RestfulJson,
+#if AnyXmlSerializer
+            ContentType.Json,
+            ContentType.Xml)]
+#else
+            ContentType.Json)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status400BadRequest,
+            "The patch document is invalid.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status404NotFound,
+            "A car with the specified unique identifier could not be found.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status406NotAcceptable,
+            "The MIME type in the Accept HTTP header is not acceptable.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status415UnsupportedMediaType,
+            "The MIME type in the Content-Type HTTP header is unsupported.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> PatchAsync(
             [FromServices] PatchCarCommand command,
@@ -163,10 +297,47 @@ namespace ApiTemplate.Controllers
         /// invalid.</returns>
         [HttpPost("", Name = CarsControllerRoute.PostCar)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status201Created, "The car was created.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status201Created,
+            "The car was created.",
+            typeof(Car),
+            ContentType.RestfulJson,
+#if AnyXmlSerializer
+            ContentType.Json,
+            ContentType.Xml)]
+#else
+            ContentType.Json)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status400BadRequest,
+            "The car is invalid.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status406NotAcceptable,
+            "The MIME type in the Accept HTTP header is not acceptable.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status415UnsupportedMediaType,
+            "The MIME type in the Content-Type HTTP header is unsupported.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> PostAsync(
             [FromServices] PostCarCommand command,
@@ -184,11 +355,57 @@ namespace ApiTemplate.Controllers
         /// or a 404 Not Found if a car with the specified unique identifier was not found.</returns>
         [HttpPut("{carId}", Name = CarsControllerRoute.PutCar)]
 #if Swagger
-        [SwaggerResponse(StatusCodes.Status200OK, "The car was updated.", typeof(Car))]
-        [SwaggerResponse(StatusCodes.Status400BadRequest, "The car is invalid.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status404NotFound, "A car with the specified unique identifier could not be found.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status406NotAcceptable, "The MIME type in the Accept HTTP header is not acceptable.", typeof(ProblemDetails))]
-        [SwaggerResponse(StatusCodes.Status415UnsupportedMediaType, "The MIME type in the Content-Type HTTP header is unsupported.", typeof(ProblemDetails))]
+        [SwaggerResponse(
+            StatusCodes.Status200OK,
+            "The car was updated.",
+            typeof(Car),
+            ContentType.RestfulJson,
+#if AnyXmlSerializer
+            ContentType.Json,
+            ContentType.Xml)]
+#else
+            ContentType.Json)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status400BadRequest,
+            "The car is invalid.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status404NotFound,
+            "A car with the specified unique identifier could not be found.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status406NotAcceptable,
+            "The MIME type in the Accept HTTP header is not acceptable.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
+        [SwaggerResponse(
+            StatusCodes.Status415UnsupportedMediaType,
+            "The MIME type in the Content-Type HTTP header is unsupported.",
+            typeof(ProblemDetails),
+#if AnyXmlSerializer
+            ContentType.ProblemJson,
+            ContentType.ProblemXml)]
+#else
+            ContentType.ProblemJson)]
+#endif
 #endif
         public Task<IActionResult> PutAsync(
             [FromServices] PutCarCommand command,

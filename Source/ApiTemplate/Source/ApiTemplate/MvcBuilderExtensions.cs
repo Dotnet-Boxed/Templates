@@ -68,7 +68,7 @@ namespace ApiTemplate
                         .First()
                         .SupportedMediaTypes;
 
-#if (DataContractSerializer || XmlSerializer)
+#if AnyXmlSerializer
                     var xmlInputFormatterMediaTypes = options
                         .InputFormatters
 #if DataContractSerializer
@@ -100,8 +100,8 @@ namespace ApiTemplate
                     // Add ProblemDetails media type (application/problem+json) to the output formatters.
                     // See https://tools.ietf.org/html/rfc7807
                     jsonOutputFormatterMediaTypes.Insert(0, ContentType.ProblemJson);
-#if (DataContractSerializer || XmlSerializer)
-                    xmlOutputFormatterMediaTypes.Insert(0, ContentType.ProblemXml);
+#if AnyXmlSerializer
+                    xmlOutputFormatterMediaTypes.Insert(1, ContentType.ProblemXml);
 #endif
 
                     // Add RESTful JSON media type (application/vnd.restful+json) to the JSON input and output formatters.
