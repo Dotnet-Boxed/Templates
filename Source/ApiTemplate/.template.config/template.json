@@ -474,6 +474,10 @@
       "type": "computed",
       "value": "(XmlFormatter == \"XmlSerializer\")"
     },
+    "AnyXmlSerializer": {
+      "type": "computed",
+      "value": "(XmlFormatter == \"DataContractSerializer\") || (XmlFormatter == \"XmlSerializer\")"
+    },
     "HealthCheck": {
       "type": "parameter",
       "datatype": "bool",
