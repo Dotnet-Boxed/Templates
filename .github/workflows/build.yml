@@ -28,92 +28,92 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2.3.4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: 'Install .NET Core SDK'
-      uses: actions/setup-dotnet@v1.8.1
-    - name: 'Dotnet Tool Restore'
-      run: dotnet tool restore
-      shell: pwsh
-    - name: 'Dotnet Cake Build'
-      run: dotnet cake --target=Build
-      shell: pwsh
-    - name: 'Dotnet Cake Pack'
-      run: dotnet cake --target=Pack
-      shell: pwsh
-    - name: 'Publish Artefacts'
-      uses: actions/upload-artifact@v2.2.4
-      with:
-        name: ${{matrix.os}}
-        path: './Artefacts'
+      - name: "Checkout"
+        uses: actions/checkout@v2.3.4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: "Install .NET Core SDK"
+        uses: actions/setup-dotnet@v1.8.2
+      - name: "Dotnet Tool Restore"
+        run: dotnet tool restore
+        shell: pwsh
+      - name: "Dotnet Cake Build"
+        run: dotnet cake --target=Build
+        shell: pwsh
+      - name: "Dotnet Cake Pack"
+        run: dotnet cake --target=Pack
+        shell: pwsh
+      - name: "Publish Artefacts"
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: ${{matrix.os}}
+          path: "./Artefacts"
 
   test:
     name: Test-${{matrix.template}}-${{matrix.os}}
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        template: ['API', 'GraphQL', 'Orleans', 'NuGet']
+        template: ["API", "GraphQL", "Orleans", "NuGet"]
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2.3.4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: 'Install .NET Core SDK'
-      uses: actions/setup-dotnet@v1.8.1
-    - name: 'Dotnet Tool Restore'
-      run: dotnet tool restore
-      shell: pwsh
-    - name: 'Dotnet Cake Build'
-      run: dotnet cake --target=Build
-      shell: pwsh
-    - name: 'Dotnet Cake InstallDeveloperCertificate'
-      run: dotnet cake --target=InstallDeveloperCertificate
-      shell: pwsh
-    - name: 'Dotnet Cake Test'
-      run: dotnet cake --target=Test --template=${{matrix.template}}
-      shell: pwsh
+      - name: "Checkout"
+        uses: actions/checkout@v2.3.4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: "Install .NET Core SDK"
+        uses: actions/setup-dotnet@v1.8.2
+      - name: "Dotnet Tool Restore"
+        run: dotnet tool restore
+        shell: pwsh
+      - name: "Dotnet Cake Build"
+        run: dotnet cake --target=Build
+        shell: pwsh
+      - name: "Dotnet Cake InstallDeveloperCertificate"
+        run: dotnet cake --target=InstallDeveloperCertificate
+        shell: pwsh
+      - name: "Dotnet Cake Test"
+        run: dotnet cake --target=Test --template=${{matrix.template}}
+        shell: pwsh
 
   push-github-packages:
-    name: 'Push GitHub Packages'
+    name: "Push GitHub Packages"
     needs: [build, test]
     if: github.ref == 'refs/heads/main' || github.event_name == 'release'
     environment:
-      name: 'GitHub Packages'
+      name: "GitHub Packages"
       url: https://github.com/orgs/Dotnet-Boxed/packages
     permissions:
       packages: write
     runs-on: windows-latest
     steps:
-      - name: 'Download Artefact'
+      - name: "Download Artefact"
         uses: actions/download-artifact@v2
         with:
-          name: 'windows-latest'
-      - name: 'Dotnet NuGet Add Source'
+          name: "windows-latest"
+      - name: "Dotnet NuGet Add Source"
         run: dotnet nuget add source https://nuget.pkg.github.com/Dotnet-Boxed/index.json --name GitHub --username RehanSaeed --password ${{secrets.GITHUB_TOKEN}}
         shell: pwsh
-      - name: 'Dotnet NuGet Push'
+      - name: "Dotnet NuGet Push"
         run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
         shell: pwsh
 
   push-nuget:
-    name: 'Push NuGet Packages'
+    name: "Push NuGet Packages"
     needs: [build, test]
     if: github.event_name == 'release'
     environment:
-      name: 'NuGet'
+      name: "NuGet"
       url: https://www.nuget.org/packages/Boxed.Templates/
     runs-on: windows-latest
     steps:
-      - name: 'Download Artefact'
+      - name: "Download Artefact"
         uses: actions/download-artifact@v2
         with:
-          name: 'windows-latest'
-      - name: 'Dotnet NuGet Push'
+          name: "windows-latest"
+      - name: "Dotnet NuGet Push"
         run: |
           Get-ChildItem .\ -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
