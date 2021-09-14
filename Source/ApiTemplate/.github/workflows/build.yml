@@ -28,30 +28,30 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2.3.4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: 'Install .NET Core SDK'
-      uses: actions/setup-dotnet@v1.8.1
-    - name: 'Dotnet Tool Restore'
-      run: dotnet tool restore
-      shell: pwsh
-    - name: 'Dotnet Cake Build'
-      run: dotnet cake --target=Build
-      shell: pwsh
-    - name: 'Dotnet Cake Test'
-      run: dotnet cake --target=Test
-      shell: pwsh
-    - name: 'Dotnet Cake Publish'
-      run: dotnet cake --target=Publish
-      shell: pwsh
-    - name: 'Publish Artefacts'
-      uses: actions/upload-artifact@v2.2.4
-      with:
-        name: ${{matrix.os}}
-        path: './Artefacts'
+      - name: "Checkout"
+        uses: actions/checkout@v2.3.4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: "Install .NET Core SDK"
+        uses: actions/setup-dotnet@v1.8.2
+      - name: "Dotnet Tool Restore"
+        run: dotnet tool restore
+        shell: pwsh
+      - name: "Dotnet Cake Build"
+        run: dotnet cake --target=Build
+        shell: pwsh
+      - name: "Dotnet Cake Test"
+        run: dotnet cake --target=Test
+        shell: pwsh
+      - name: "Dotnet Cake Publish"
+        run: dotnet cake --target=Publish
+        shell: pwsh
+      - name: "Publish Artefacts"
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: ${{matrix.os}}
+          path: "./Artefacts"
 #if (Docker)
 
   docker:
@@ -69,7 +69,7 @@ jobs:
 #endif
     environment:
 #if (GitHubContainerRegistry)
-      name: 'GitHub Container Registry'
+      name: "GitHub Container Registry"
       url: https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/pkgs/container/apitemplate
 ##elif (DockerHub)
 #      name: 'Docker Hub'
@@ -82,28 +82,28 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v2.3.4
-      with:
-        lfs: true
-        fetch-depth: 0
-    - name: 'Install .NET Core SDK'
-      uses: actions/setup-dotnet@v1.8.1
-    - name: 'Dotnet Tool Restore'
-      run: dotnet tool restore
-      shell: pwsh
-    - name: 'Install QEMU'
-      id: qemu
-      uses: docker/setup-qemu-action@v1
-    - name: 'Available platforms'
-      run: echo ${{steps.qemu.outputs.platforms}}
-    - name: 'Install Docker BuildX'
-      uses: docker/setup-buildx-action@v1
-    - name: 'Docker Login'
-      if: github.ref == 'refs/heads/main' || github.event_name == 'release'
-      run: echo ${{env.DOCKER_PASSWORD}} | docker login ${{env.DOCKER_REGISTRY}} --username ${{env.DOCKER_USERNAME}} --password-stdin
-      shell: pwsh
-    - name: 'Dotnet Cake DockerBuild'
-      run: dotnet cake --target=DockerBuild --tag=${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/${{env.DOCKER_IMAGE_NAME}} --push=${{github.ref == 'refs/heads/main' || github.event_name == 'release'}}
-      shell: pwsh
+      - name: "Checkout"
+        uses: actions/checkout@v2.3.4
+        with:
+          lfs: true
+          fetch-depth: 0
+      - name: "Install .NET Core SDK"
+        uses: actions/setup-dotnet@v1.8.2
+      - name: "Dotnet Tool Restore"
+        run: dotnet tool restore
+        shell: pwsh
+      - name: "Install QEMU"
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+      - name: "Available platforms"
+        run: echo ${{steps.qemu.outputs.platforms}}
+      - name: "Install Docker BuildX"
+        uses: docker/setup-buildx-action@v1
+      - name: "Docker Login"
+        if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+        run: echo ${{env.DOCKER_PASSWORD}} | docker login ${{env.DOCKER_REGISTRY}} --username ${{env.DOCKER_USERNAME}} --password-stdin
+        shell: pwsh
+      - name: "Dotnet Cake DockerBuild"
+        run: dotnet cake --target=DockerBuild --tag=${{env.DOCKER_REGISTRY}}/${{env.DOCKER_USERNAME}}/${{env.DOCKER_IMAGE_NAME}} --push=${{github.ref == 'refs/heads/main' || github.event_name == 'release'}}
+        shell: pwsh
 #endif
