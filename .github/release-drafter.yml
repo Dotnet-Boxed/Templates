@@ -1,39 +1,39 @@
-name-template: 'Boxed Templates $RESOLVED_VERSION'
-tag-template: 'Boxed.Templates.$RESOLVED_VERSION'
-change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
-no-changes-template: '- No changes'
+name-template: "Boxed Templates $RESOLVED_VERSION"
+tag-template: "Boxed.Templates.$RESOLVED_VERSION"
+change-template: "- $TITLE by @$AUTHOR (#$NUMBER)"
+no-changes-template: "- No changes"
 categories:
-  - title: '📚 Documentation'
+  - title: "📚 Documentation"
     labels:
-      - 'documentation'
-  - title: '📦 ASP.NET Core API Boxed'
+      - "documentation"
+  - title: "📦 ASP.NET Core API Boxed"
     labels:
-      - 'template/API'
-  - title: '📦 ASP.NET Core GraphQL Boxed'
+      - "template/API"
+  - title: "📦 ASP.NET Core GraphQL Boxed"
     labels:
-      - 'template/GraphQL'
-  - title: '📦 Microsoft Orleans Boxed'
+      - "template/GraphQL"
+  - title: "📦 Microsoft Orleans Boxed"
     labels:
-      - 'template/Orleans'
-  - title: '📦 Microsoft NuGet Package Boxed'
+      - "template/Orleans"
+  - title: "📦 Microsoft NuGet Package Boxed"
     labels:
-      - 'template/NuGet'
-  - title: '📄 Item Templates'
+      - "template/NuGet"
+  - title: "📄 Item Templates"
     labels:
-      - 'template/Item'
-  - title: '🧰 Maintenance'
+      - "template/Item"
+  - title: "🧰 Maintenance"
     labels:
-      - 'maintenance'
+      - "maintenance"
 version-resolver:
   major:
     labels:
-      - 'major'
+      - "major"
   minor:
     labels:
-      - 'minor'
+      - "minor"
   patch:
     labels:
-      - 'patch'
+      - "patch"
   default: patch
 template: |
   $CHANGES
@@ -42,28 +42,28 @@ template: |
 
   $CONTRIBUTORS
 autolabeler:
-  - label: 'documentation'
+  - label: "documentation"
     files:
-      - 'Docs/**/*'
-  - label: 'maintenance'
+      - "Docs/**/*"
+  - label: "maintenance"
     files:
-      - '.github/**/*'
-      - 'Docs/**/*'
-      - 'Images/**/*'
-      - 'Tests/**/*'
-  - label: 'template/API'
+      - ".github/**/*"
+      - "Docs/**/*"
+      - "Images/**/*"
+      - "Tests/**/*"
+  - label: "template/API"
     files:
-      - 'Source/ApiTemplate/**/*'
-  - label: 'template/GraphQL'
+      - "Source/ApiTemplate/**/*"
+  - label: "template/GraphQL"
     files:
-      - 'Source/GraphQLTemplate/**/*'
-  - label: 'template/NuGet'
+      - "Source/GraphQLTemplate/**/*"
+  - label: "template/NuGet"
     files:
-      - 'Source/NuGetTemplate/**/*'
-  - label: 'template/Orleans'
+      - "Source/NuGetTemplate/**/*"
+  - label: "template/Orleans"
     files:
-      - 'Source/OrleansTemplate/**/*'
-  - label: 'template/Item'
+      - "Source/OrleansTemplate/**/*"
+  - label: "template/Item"
     files:
-      - 'Source/EditorconfigTemplate/**/*'
-      - 'Source/GitattributesTemplate/**/*'
+      - "Source/EditorconfigTemplate/**/*"
+      - "Source/GitattributesTemplate/**/*"

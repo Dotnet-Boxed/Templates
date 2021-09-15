@@ -3,14 +3,14 @@
 trigger:
   branches:
     include:
-    - 'main'
+      - "main"
   tags:
     include:
-    - '*'
+      - "*"
 pr:
   branches:
     include:
-    - '*'
+      - "*"
 
 variables:
   # Disable the .NET logo in the console output.
@@ -23,134 +23,134 @@ variables:
   MINVERBUILDMETADATA: build.$(Build.BuildId)
 
 stages:
-- stage: Build
-  jobs:
-  - job: Build
-    strategy:
-      matrix:
-        Linux:
-          matrixName: Ubuntu
-          vmImageName: ubuntu-latest
-        Mac:
-          matrixName: Mac
-          vmImageName: macos-latest
-        Windows:
-          matrixName: Windows
-          vmImageName: windows-latest
-    pool:
-      vmImage: $(vmImageName)
-    timeoutInMinutes: 20
-    steps:
-    - checkout: self
-      lfs: true
-    - task: UseDotNet@2
-      displayName: 'Install .NET Core SDK'
-      inputs:
-        packageType: 'sdk'
-        useGlobalJson: true
-    - pwsh: 'dotnet tool restore'
-      displayName: 'Dotnet Tool Restore'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Build'
-      displayName: 'Dotnet Cake Build'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Pack'
-      displayName: 'Dotnet Cake Pack'
-      failOnStderr: true
-    - publish: './Artefacts'
-      artifact: $(matrixName)
-      displayName: 'Publish Artefacts'
-
-- stage: Test
-  jobs:
-  - job: Test
-    strategy:
-      matrix:
-        'API-Linux':
-          vmImageName: ubuntu-latest
-          template: 'API'
-        'API-MacOS':
-          vmImageName: macos-latest
-          template: 'API'
-        'API-Windows':
-          vmImageName: windows-latest
-          template: 'API'
-        'GraphQL-Linux':
-          vmImageName: ubuntu-latest
-          template: 'GraphQL'
-        'GraphQL-MacOS':
-          vmImageName: macos-latest
-          template: 'GraphQL'
-        'GraphQL-Windows':
-          vmImageName: windows-latest
-          template: 'GraphQL'
-        'Orleans-Linux':
-          vmImageName: ubuntu-latest
-          template: 'Orleans'
-        'Orleans-MacOS':
-          vmImageName: macos-latest
-          template: 'Orleans'
-        'Orleans-Windows':
-          vmImageName: windows-latest
-          template: 'Orleans'
-        'NuGet-Linux':
-          vmImageName: ubuntu-latest
-          template: 'NuGet'
-        'NuGet-MacOS':
-          vmImageName: macos-latest
-          template: 'NuGet'
-        'NuGet-Windows':
-          vmImageName: windows-latest
-          template: 'NuGet'
-    pool:
-      vmImage: $(vmImageName)
-    timeoutInMinutes: 20
-    steps:
-    - checkout: self
-      lfs: true
-    - task: UseDotNet@2
-      displayName: 'Install .NET Core SDK'
-      inputs:
-        packageType: 'sdk'
-        useGlobalJson: true
-    - pwsh: 'dotnet tool restore'
-      displayName: 'Dotnet Tool Restore'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Build'
-      displayName: 'Dotnet Cake Build'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=InstallDeveloperCertificate'
-      displayName: 'Dotnet Cake InstallDeveloperCertificate'
-      failOnStderr: true
-    - pwsh: 'dotnet cake --target=Test --template=$(template)'
-      displayName: 'Dotnet Cake Test'
-      failOnStderr: true
-    - task: PublishTestResults@2
-      displayName: 'Publish Test Results'
-      inputs:
-        testResultsFormat: 'VSTest'
-        testResultsFiles: '**/*.trx'
-    - task: PublishCodeCoverageResults@1
-      inputs:
-        codeCoverageTool: cobertura
-        summaryFileLocation: '**/*.cobertura.xml'
-
-- stage: Deploy
-  jobs:
-  - deployment: AzureArtefacts
-    displayName: 'Azure Artefacts'
-    condition: ne(variables['Build.Reason'], 'PullRequest')
-    pool:
-      vmImage: windows-latest
-    environment: 'Azure Artefacts'
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: NuGetToolInstaller@1
-            displayName: 'NuGet Install'
-          - task: NuGetAuthenticate@0
-            displayName: 'NuGet Authenticate'
-          - pwsh: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://pkgs.dev.azure.com/dotnet-boxed/_packaging/dotnet-boxed/nuget/v3/index.json -ApiKey AzureArtifacts -SkipDuplicate
-            displayName: 'NuGet Push'
+  - stage: Build
+    jobs:
+      - job: Build
+        strategy:
+          matrix:
+            Linux:
+              matrixName: Ubuntu
+              vmImageName: ubuntu-latest
+            Mac:
+              matrixName: Mac
+              vmImageName: macos-latest
+            Windows:
+              matrixName: Windows
+              vmImageName: windows-latest
+        pool:
+          vmImage: $(vmImageName)
+        timeoutInMinutes: 20
+        steps:
+          - checkout: self
+            lfs: true
+          - task: UseDotNet@2
+            displayName: "Install .NET Core SDK"
+            inputs:
+              packageType: "sdk"
+              useGlobalJson: true
+          - pwsh: "dotnet tool restore"
+            displayName: "Dotnet Tool Restore"
             failOnStderr: true
+          - pwsh: "dotnet cake --target=Build"
+            displayName: "Dotnet Cake Build"
+            failOnStderr: true
+          - pwsh: "dotnet cake --target=Pack"
+            displayName: "Dotnet Cake Pack"
+            failOnStderr: true
+          - publish: "./Artefacts"
+            artifact: $(matrixName)
+            displayName: "Publish Artefacts"
+
+  - stage: Test
+    jobs:
+      - job: Test
+        strategy:
+          matrix:
+            "API-Linux":
+              vmImageName: ubuntu-latest
+              template: "API"
+            "API-MacOS":
+              vmImageName: macos-latest
+              template: "API"
+            "API-Windows":
+              vmImageName: windows-latest
+              template: "API"
+            "GraphQL-Linux":
+              vmImageName: ubuntu-latest
+              template: "GraphQL"
+            "GraphQL-MacOS":
+              vmImageName: macos-latest
+              template: "GraphQL"
+            "GraphQL-Windows":
+              vmImageName: windows-latest
+              template: "GraphQL"
+            "Orleans-Linux":
+              vmImageName: ubuntu-latest
+              template: "Orleans"
+            "Orleans-MacOS":
+              vmImageName: macos-latest
+              template: "Orleans"
+            "Orleans-Windows":
+              vmImageName: windows-latest
+              template: "Orleans"
+            "NuGet-Linux":
+              vmImageName: ubuntu-latest
+              template: "NuGet"
+            "NuGet-MacOS":
+              vmImageName: macos-latest
+              template: "NuGet"
+            "NuGet-Windows":
+              vmImageName: windows-latest
+              template: "NuGet"
+        pool:
+          vmImage: $(vmImageName)
+        timeoutInMinutes: 20
+        steps:
+          - checkout: self
+            lfs: true
+          - task: UseDotNet@2
+            displayName: "Install .NET Core SDK"
+            inputs:
+              packageType: "sdk"
+              useGlobalJson: true
+          - pwsh: "dotnet tool restore"
+            displayName: "Dotnet Tool Restore"
+            failOnStderr: true
+          - pwsh: "dotnet cake --target=Build"
+            displayName: "Dotnet Cake Build"
+            failOnStderr: true
+          - pwsh: "dotnet cake --target=InstallDeveloperCertificate"
+            displayName: "Dotnet Cake InstallDeveloperCertificate"
+            failOnStderr: true
+          - pwsh: "dotnet cake --target=Test --template=$(template)"
+            displayName: "Dotnet Cake Test"
+            failOnStderr: true
+          - task: PublishTestResults@2
+            displayName: "Publish Test Results"
+            inputs:
+              testResultsFormat: "VSTest"
+              testResultsFiles: "**/*.trx"
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: cobertura
+              summaryFileLocation: "**/*.cobertura.xml"
+
+  - stage: Deploy
+    jobs:
+      - deployment: AzureArtefacts
+        displayName: "Azure Artefacts"
+        condition: ne(variables['Build.Reason'], 'PullRequest')
+        pool:
+          vmImage: windows-latest
+        environment: "Azure Artefacts"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: NuGetToolInstaller@1
+                  displayName: "NuGet Install"
+                - task: NuGetAuthenticate@0
+                  displayName: "NuGet Authenticate"
+                - pwsh: nuget push $(Agent.BuildDirectory)\Windows\*.nupkg -Source https://pkgs.dev.azure.com/dotnet-boxed/_packaging/dotnet-boxed/nuget/v3/index.json -ApiKey AzureArtifacts -SkipDuplicate
+                  displayName: "NuGet Push"
+                  failOnStderr: true
