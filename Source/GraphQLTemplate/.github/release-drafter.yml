@@ -4,30 +4,30 @@
 # 'minor' or 'patch' to determine which number in the version to increment.
 # You may need to add these labels yourself.
 # See https://github.com/release-drafter/release-drafter
-name-template: '$RESOLVED_VERSION'
-tag-template: '$RESOLVED_VERSION'
-change-template: '- $TITLE by @$AUTHOR (#$NUMBER)'
-no-changes-template: '- No changes'
+name-template: "$RESOLVED_VERSION"
+tag-template: "$RESOLVED_VERSION"
+change-template: "- $TITLE by @$AUTHOR (#$NUMBER)"
+no-changes-template: "- No changes"
 categories:
-  - title: '🚀 New Features'
+  - title: "🚀 New Features"
     labels:
-      - 'enhancement'
-  - title: '🐛 Bug Fixes'
+      - "enhancement"
+  - title: "🐛 Bug Fixes"
     labels:
-      - 'bug'
-  - title: '🧰 Maintenance'
+      - "bug"
+  - title: "🧰 Maintenance"
     labels:
-      - 'maintenance'
+      - "maintenance"
 version-resolver:
   major:
     labels:
-      - 'major'
+      - "major"
   minor:
     labels:
-      - 'minor'
+      - "minor"
   patch:
     labels:
-      - 'patch'
+      - "patch"
   default: patch
 template: |
   $CHANGES
