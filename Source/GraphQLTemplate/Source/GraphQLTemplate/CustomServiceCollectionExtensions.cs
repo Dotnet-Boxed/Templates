@@ -350,7 +350,8 @@ namespace GraphQLTemplate
                 .AddGraphQLServer()
                 .AddFiltering()
                 .AddSorting()
-                .EnableRelaySupport()
+                .AddGlobalObjectIdentification()
+                .AddQueryFieldToMutationPayloads()
                 .AddApolloTracing()
 #if Authorization
                 .AddAuthorization()
@@ -360,8 +361,7 @@ namespace GraphQLTemplate
                 .AddIfElse(
                     webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddInMemoryQueryStorage(),
-                    // Hot Chocolate contains a bug which requires us to add .GetApplicationServices() below.
-                    x => x.AddRedisQueryStorage(x => x.GetApplicationServices().GetRequiredService<IConnectionMultiplexer>().GetDatabase()))
+                    x => x.AddRedisQueryStorage())
 #endif
 #if Subscriptions
                 .AddIfElse(
@@ -375,7 +375,6 @@ namespace GraphQLTemplate
                 .AddProjectTypes()
                 .TrimTypes()
                 .ModifyOptions(options => options.UseXmlDocumentation = false)
-                .AddMaxComplexityRule(graphQLOptions.MaxAllowedComplexity)
                 .AddMaxExecutionDepthRule(graphQLOptions.MaxAllowedExecutionDepth)
                 .SetPagingOptions(graphQLOptions.Paging)
                 .SetRequestOptions(() => graphQLOptions.Request)

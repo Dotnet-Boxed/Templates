@@ -7,9 +7,6 @@ namespace GraphQLTemplate.Options
     public class GraphQLOptions
     {
         [Required]
-        public int MaxAllowedComplexity { get; set; }
-
-        [Required]
         public int MaxAllowedExecutionDepth { get; set; }
 
         [Required]
