@@ -140,6 +140,8 @@ namespace GraphQLTemplate
                             // Map the GraphQL Banana Cake Pop UI to let you navigate your GraphQL API at /banana.
                             builder.MapBananaCakePop("/banana");
                         }
+
+                        // Map health check endpoints.
 #if HealthCheck
 #if CORS
                         builder
