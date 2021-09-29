@@ -3,7 +3,6 @@ namespace GraphQLTemplate
     using Boxed.AspNetCore;
 #if CORS
     using GraphQLTemplate.Constants;
-    using HotChocolate.AspNetCore;
 #endif
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
@@ -125,10 +124,22 @@ namespace GraphQLTemplate
                 .UseEndpoints(
                     builder =>
                     {
-                        var graphQLServerOptions = new GraphQLServerOptions();
-                        // Add Banana Cake Pop GraphQL client at /graphql.
-                        graphQLServerOptions.Tool.Enable = this.webHostEnvironment.IsDevelopment();
-                        builder.MapGraphQL().WithOptions(graphQLServerOptions);
+                        // Map the GraphQL endpoint at /graphql.
+                        builder.MapGraphQLHttp();
+                        // Map the GraphQL subscriptions websocket endpoint at /graphql/ws.
+                        builder.MapGraphQLWebSocket();
+                        // Map the GraphQL schema SDL endpoint at /graphql/sdl
+                        builder.MapGraphQLSchema();
+
+                        if (this.webHostEnvironment.IsDevelopment())
+                        {
+                            // Map the GraphQL Playground UI to try out the GraphQL API at /.
+                            builder.MapGraphQLPlayground("/");
+                            // Map the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
+                            builder.MapGraphQLVoyager("/voyager");
+                            // Map the GraphQL Banana Cake Pop UI to let you navigate your GraphQL API at /banana.
+                            builder.MapBananaCakePop("/banana");
+                        }
 #if HealthCheck
 #if CORS
                         builder
@@ -142,13 +153,6 @@ namespace GraphQLTemplate
                         builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #endif
-                    })
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x
-                        // Add the GraphQL Playground UI to try out the GraphQL API at /.
-                        .UseGraphQLPlayground("/")
-                        // Add the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
-                        .UseGraphQLVoyager("/voyager"));
+                    });
     }
 }
