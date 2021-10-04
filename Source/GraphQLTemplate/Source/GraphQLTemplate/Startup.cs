@@ -4,6 +4,7 @@ namespace GraphQLTemplate
 #if CORS
     using GraphQLTemplate.Constants;
 #endif
+    using HotChocolate.AspNetCore;
     using Microsoft.AspNetCore.Builder;
 #if HealthCheck
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -124,12 +125,10 @@ namespace GraphQLTemplate
                 .UseEndpoints(
                     builder =>
                     {
-                        // Map the GraphQL endpoint at /graphql.
-                        builder.MapGraphQLHttp();
-                        // Map the GraphQL subscriptions websocket endpoint at /graphql/ws.
-                        builder.MapGraphQLWebSocket();
-                        // Map the GraphQL schema SDL endpoint at /graphql/sdl
-                        builder.MapGraphQLSchema();
+                        var options = new GraphQLServerOptions();
+                        options.Tool.Enable = false;
+                        // Map the GraphQL HTTP and web socket endpoint at /graphql.
+                        builder.MapGraphQL().WithOptions(options);
 
                         if (this.webHostEnvironment.IsDevelopment())
                         {
