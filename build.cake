@@ -133,6 +133,10 @@ Task("Pack")
             new DotNetCorePackSettings()
             {
                 Configuration = configuration,
+                MSBuildSettings = new DotNetCoreMSBuildSettings()
+                {
+                    ContinuousIntegrationBuild = !BuildSystem.IsLocalBuild,
+                },
                 NoBuild = true,
                 NoRestore = true,
                 OutputDirectory = artefactsDirectory,
