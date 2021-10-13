@@ -33,6 +33,7 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("NuGetDotnetFramework", "framework=net472")]
         [InlineData("NuGetAnalysisAll", "analysis-mode=AllEnabledByDefault")]
         [InlineData("NuGetAnalysisNone", "analysis-mode=AllDisabledByDefault")]
+        [InlineData("NuGetNoImplicitUsings", "implicit-usings=false")]
         public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);

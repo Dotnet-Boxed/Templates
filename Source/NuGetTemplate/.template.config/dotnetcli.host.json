@@ -58,11 +58,14 @@
     "License": {
       "longName": "license"
     },
-    "TreatWarningsAsErrors": {
-      "longName": "treat-warnings-as-errors"
-    },
     "AnalysisMode": {
       "longName": "analysis-mode"
+    },
+    "ImplicitUsings": {
+      "longName": "implicit-usings"
+    },
+    "TreatWarningsAsErrors": {
+      "longName": "treat-warnings-as-errors"
     },
     "StyleCop": {
       "longName": "style-cop"

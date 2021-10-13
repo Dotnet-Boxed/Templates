@@ -32,6 +32,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
   - **Default** - Enables the default minimum set of code analysis rules.
   - **AllEnabledByDefault** - Enables all code analysis rules.
   - **AllDisabledByDefault** - Disables all code analysis rules.
+- **ImplicitUsings** - Enables implicit using statements in all projects which adds some default System.* namespaces.
 - **TreatWarningsAsErrors** (Default=On) - Treat warnings as errors.
 - **StyleCop** (Default=On) - Adds and enforces StyleCop analysers.
 - **Tests** (Default=On) - Adds a unit test project.
