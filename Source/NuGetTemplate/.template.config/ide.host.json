@@ -117,6 +117,33 @@
       "isVisible": true
     },
     {
+      "id": "AnalysisMode",
+      "name": {
+        "text": "Analysis Mode"
+      },
+      "isVisible": true,
+      "choices": [
+        {
+          "id": "Default",
+          "name": {
+            "text": "Default"
+          }
+        },
+        {
+          "id": "AllEnabledByDefault",
+          "name": {
+            "text": "All Enabled By Default"
+          }
+        },
+        {
+          "id": "AllDisabledByDefault",
+          "name": {
+            "text": "All Disabled By Default"
+          }
+        }
+      ]
+    },
+    {
       "id": "TreatWarningsAsErrors",
       "name": {
         "text": "Treat Warnings As Errors"

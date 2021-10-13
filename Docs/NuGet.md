@@ -28,6 +28,10 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 - **License** - The legal license applied to the source code in this project.
   - **MIT** (Default) - The MIT license.
   - **None** - No license, the source code cannot be legally shared.
+- **AnalysisMode** (Default=Default) - The selection of code analysis rules to enable.
+  - **Default** - Enables the default minimum set of code analysis rules.
+  - **AllEnabledByDefault** - Enables all code analysis rules.
+  - **AllDisabledByDefault** - Disables all code analysis rules.
 - **TreatWarningsAsErrors** (Default=On) - Treat warnings as errors.
 - **StyleCop** (Default=On) - Adds and enforces StyleCop analysers.
 - **Tests** (Default=On) - Adds a unit test project.

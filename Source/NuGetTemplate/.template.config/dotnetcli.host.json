@@ -61,6 +61,9 @@
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
     },
+    "AnalysisMode": {
+      "longName": "analysis-mode"
+    },
     "StyleCop": {
       "longName": "style-cop"
     },
