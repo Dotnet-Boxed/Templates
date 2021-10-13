@@ -29,6 +29,7 @@
     <PackageLicenseExpression Condition="'$(MIT)' == 'true'">MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT</PackageProjectUrl>
     <PackageIcon>Icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReleaseNotes>https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/releases</PackageReleaseNotes>
