@@ -17,6 +17,7 @@
     <AnalysisLevel>latest</AnalysisLevel>
     <AnalysisMode Condition="'$(AnalysisMode)' == 'AllEnabledByDefault'">AllEnabledByDefault</AnalysisMode>
     <AnalysisMode Condition="'$(AnalysisMode)' == 'AllDisabledByDefault'">AllDisabledByDefault</AnalysisMode>
+    <ImplicitUsings Condition="'$(ImplicitUsings)' == 'true'">enable</ImplicitUsings>
     <Nullable Condition="'$(Nullable)' == 'true'">enable</Nullable>
     <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)' == 'true'">true</TreatWarningsAsErrors>
   </PropertyGroup>

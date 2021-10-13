@@ -353,6 +353,12 @@
       ],
       "defaultValue": "Default"
     },
+    "ImplicitUsings": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Enables implicit using statements in all projects which adds some default System.* namespaces."
+    },
     "TreatWarningsAsErrors": {
       "type": "parameter",
       "datatype": "bool",
