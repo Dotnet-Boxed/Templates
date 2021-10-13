@@ -333,6 +333,26 @@
       "type": "computed",
       "value": "(License == \"MIT\")"
     },
+    "AnalysisMode": {
+      "type": "parameter",
+      "description": "The selection of code analysis rules to enable.",
+      "datatype": "choice",
+      "choices": [
+        {
+          "choice": "Default",
+          "description": "Enables the default minimum set of code analysis rules."
+        },
+        {
+          "choice": "AllEnabledByDefault",
+          "description": "Enables all code analysis rules."
+        },
+        {
+          "choice": "AllDisabledByDefault",
+          "description": "Disables all code analysis rules."
+        }
+      ],
+      "defaultValue": "Default"
+    },
     "TreatWarningsAsErrors": {
       "type": "parameter",
       "datatype": "bool",

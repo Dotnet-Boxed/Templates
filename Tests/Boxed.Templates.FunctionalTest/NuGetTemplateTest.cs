@@ -31,6 +31,8 @@ namespace Boxed.Templates.FunctionalTest
         [InlineData("NuGetStyleCop", "style-cop=true")]
         [InlineData("NuGetDotnetCore", "framework=netstandard2.0")]
         [InlineData("NuGetDotnetFramework", "framework=net472")]
+        [InlineData("NuGetAnalysisAll", "analysis-mode=AllEnabledByDefault")]
+        [InlineData("NuGetAnalysisNone", "analysis-mode=AllDisabledByDefault")]
         public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
         {
             await InstallTemplateAsync().ConfigureAwait(false);
