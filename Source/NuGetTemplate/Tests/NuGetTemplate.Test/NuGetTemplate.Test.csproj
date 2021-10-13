@@ -4,11 +4,12 @@
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
     <DefineConstants>$(DefineConstants);</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
-    <Framework>net5.0</Framework>
+    <Framework>net6.0</Framework>
   </PropertyGroup>
   <!--#endif-->
 
   <PropertyGroup Label="Build">
+    <TargetFramework Condition="'$(Framework)' == 'net6.0'">net6.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'net5.0'">net5.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'netstandard2.1'">net5.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'netstandard2.0'">net5.0</TargetFramework>

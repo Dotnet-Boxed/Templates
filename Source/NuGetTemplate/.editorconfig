@@ -1,5 +1,5 @@
-# Version: 3.0.0 (Using https://semver.org/)
-# Updated: 2021-08-09
+# Version: 4.0.0 (Using https://semver.org/)
+# Updated: 2021-10-12
 # See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
 # See https://github.com/RehanSaeed/EditorConfig for updates to this file.
 # See http://EditorConfig.org for more information about .editorconfig files.
@@ -167,6 +167,8 @@ dotnet_diagnostic.IDE0063.severity = suggestion
 csharp_using_directive_placement = inside_namespace:warning
 # Modifier preferences
 csharp_prefer_static_local_function = true:warning
+# Undocumented
+csharp_style_namespace_declarations = file_scoped:warning
 
 ##########################################
 # Unnecessary Code Rules

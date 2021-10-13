@@ -92,6 +92,10 @@
       "datatype": "choice",
       "choices": [
         {
+          "choice": "net6.0",
+          "description": ".NET 6 (net6.0)"
+        },
+        {
           "choice": "net5.0",
           "description": ".NET 5 (net5.0)"
         },
@@ -148,7 +152,7 @@
           "description": ".NET Framework 4.6 (net46)"
         }
       ],
-      "defaultValue": "net5.0"
+      "defaultValue": "net6.0"
     },
     "DotnetFramework": {
       "type": "computed",

@@ -1,9 +1,8 @@
-namespace NuGetTemplate
+namespace NuGetTemplate;
+
+/// <summary>
+/// Some class.
+/// </summary>
+public class Class1
 {
-    /// <summary>
-    /// Some class.
-    /// </summary>
-    public class Class1
-    {
-    }
 }
