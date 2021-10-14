@@ -2,6 +2,7 @@ namespace ApiTemplate.Commands
 {
     using System;
     using System.Globalization;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using ApiTemplate.Repositories;
@@ -10,7 +11,6 @@ namespace ApiTemplate.Commands
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.Net.Http.Headers;
 
     public class GetCarCommand
     {
@@ -37,19 +37,16 @@ namespace ApiTemplate.Commands
             }
 
             var httpContext = this.actionContextAccessor.ActionContext.HttpContext;
-            if (httpContext.Request.Headers.TryGetValue(HeaderNames.IfModifiedSince, out var stringValues))
+            var ifModifiedSince = httpContext.Request.Headers.IfModifiedSince;
+            if (ifModifiedSince.Any() &&
+                DateTimeOffset.TryParse(ifModifiedSince, out var ifModifiedSinceDateTime) &&
+                (ifModifiedSinceDateTime >= car.Modified))
             {
-                if (DateTimeOffset.TryParse(stringValues, out var modifiedSince) &&
-                    (modifiedSince >= car.Modified))
-                {
-                    return new StatusCodeResult(StatusCodes.Status304NotModified);
-                }
+                return new StatusCodeResult(StatusCodes.Status304NotModified);
             }
 
             var carViewModel = this.carMapper.Map(car);
-            httpContext.Response.Headers.Add(
-                HeaderNames.LastModified,
-                car.Modified.ToString("R", CultureInfo.InvariantCulture));
+            httpContext.Response.Headers.LastModified = car.Modified.ToString("R", CultureInfo.InvariantCulture);
             return new OkObjectResult(carViewModel);
         }
     }
