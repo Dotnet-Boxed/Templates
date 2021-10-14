@@ -15,7 +15,6 @@ namespace ApiTemplate.Commands
 
     public class GetCarPageCommand
     {
-        private const string LinkHttpHeaderName = "Link";
         private const int DefaultPageSize = 3;
         private readonly ICarRepository carRepository;
         private readonly IMapper<Models.Car, Car> carMapper;
@@ -107,10 +106,7 @@ namespace ApiTemplate.Commands
             };
             connection.Items.AddRange(carViewModels);
 
-            httpContext.Response.Headers.Add(
-                LinkHttpHeaderName,
-                connection.PageInfo.ToLinkHttpHeaderValue());
-
+            httpContext.Response.Headers.Link = connection.PageInfo.ToLinkHttpHeaderValue();
             return new OkObjectResult(connection);
         }
 
