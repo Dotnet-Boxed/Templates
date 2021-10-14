@@ -113,7 +113,6 @@
     //#endif
     "Kestrel": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "launchUrl": "",
@@ -128,7 +127,6 @@
     },
     "Kestrel Production": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
       "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "launchUrl": "",
