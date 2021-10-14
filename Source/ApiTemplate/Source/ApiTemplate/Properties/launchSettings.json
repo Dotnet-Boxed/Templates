@@ -144,7 +144,7 @@
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
+      "commandLineArgs": "watch",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -153,7 +153,7 @@
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
+      "commandLineArgs": "watch",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
