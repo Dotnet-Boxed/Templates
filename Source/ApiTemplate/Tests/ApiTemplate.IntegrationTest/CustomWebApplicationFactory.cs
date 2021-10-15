@@ -8,7 +8,6 @@ namespace ApiTemplate.IntegrationTest
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Options;
     using Moq;
 #if Serilog
     using Serilog;

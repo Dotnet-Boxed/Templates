@@ -72,7 +72,7 @@ namespace ApiTemplate
 #elif DistributedCacheRedis
                 .AddStackExchangeRedisCache(
                     options => options.ConfigurationOptions = configuration
-                        .GetSection(nameof(ApplicationOptions.Redis))
+                        .GetRequiredSection(nameof(ApplicationOptions.Redis))
                         .Get<RedisOptions>()
                         .ConfigurationOptions);
 #endif
@@ -113,10 +113,10 @@ namespace ApiTemplate
                 // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
 #if ResponseCompression
-                .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
+                .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Compression)))
 #endif
 #if ForwardedHeaders
-                .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+                .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.ForwardedHeaders)))
                 .Configure<ForwardedHeadersOptions>(
                     options =>
                     {
@@ -124,10 +124,10 @@ namespace ApiTemplate
                         options.KnownProxies.Clear();
                     })
 #elif HostFiltering
-                .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
+                .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
-                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
+                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.CacheProfiles)))
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
 #if ResponseCompression
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace ApiTemplate
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
                         var customMimeTypes = configuration
-                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .GetRequiredSection(nameof(ApplicationOptions.Compression))
                             .Get<CompressionOptions>()
                             ?.MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
