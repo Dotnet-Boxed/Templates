@@ -69,10 +69,7 @@ namespace ApiTemplate.Repositories
 
         public Task<Car> AddAsync(Car car, CancellationToken cancellationToken)
         {
-            if (car is null)
-            {
-                throw new ArgumentNullException(nameof(car));
-            }
+            ArgumentNullException.ThrowIfNull(car);
 
             Cars.Add(car);
             car.CarId = Cars.Max(x => x.CarId) + 1;
@@ -143,10 +140,7 @@ namespace ApiTemplate.Repositories
 
         public Task<Car> UpdateAsync(Car car, CancellationToken cancellationToken)
         {
-            if (car is null)
-            {
-                throw new ArgumentNullException(nameof(car));
-            }
+            ArgumentNullException.ThrowIfNull(car);
 
             var existingCar = Cars.First(x => x.CarId == car.CarId);
             existingCar.Cylinders = car.Cylinders;

@@ -10,15 +10,8 @@ namespace ApiTemplate.Repositories
             bool condition,
             Func<IEnumerable<T>, IEnumerable<T>> action)
         {
-            if (enumerable is null)
-            {
-                throw new ArgumentNullException(nameof(enumerable));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(enumerable);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {

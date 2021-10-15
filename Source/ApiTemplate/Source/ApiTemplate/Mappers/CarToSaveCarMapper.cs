@@ -14,15 +14,8 @@ namespace ApiTemplate.Mappers
 
         public void Map(Models.Car source, SaveCar destination)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (destination is null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
 
             destination.Cylinders = source.Cylinders;
             destination.Make = source.Make;
@@ -31,15 +24,8 @@ namespace ApiTemplate.Mappers
 
         public void Map(SaveCar source, Models.Car destination)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (destination is null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
 
             var now = this.clockService.UtcNow;
 
