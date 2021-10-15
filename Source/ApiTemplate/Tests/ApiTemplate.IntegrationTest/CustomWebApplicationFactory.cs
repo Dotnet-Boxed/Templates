@@ -47,7 +47,7 @@ namespace ApiTemplate.IntegrationTest
             using (var serviceScope = this.Services.CreateScope())
             {
                 var serviceProvider = serviceScope.ServiceProvider;
-                this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                this.ApplicationOptions = serviceProvider.GetRequiredService<ApplicationOptions>();
             }
 
             base.ConfigureClient(client);
