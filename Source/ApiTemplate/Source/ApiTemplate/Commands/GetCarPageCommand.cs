@@ -35,10 +35,7 @@ namespace ApiTemplate.Commands
 
         public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
         {
-            if (pageOptions is null)
-            {
-                throw new ArgumentNullException(nameof(pageOptions));
-            }
+            ArgumentNullException.ThrowIfNull(pageOptions);
 
             pageOptions.First = !pageOptions.First.HasValue && !pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
             var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);

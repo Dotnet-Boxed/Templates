@@ -22,15 +22,8 @@ namespace ApiTemplate.Mappers
 
         public void Map(Models.Car source, Car destination)
         {
-            if (source is null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (destination is null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(destination);
 
             destination.CarId = source.CarId;
             destination.Cylinders = source.Cylinders;
