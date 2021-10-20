@@ -1,9 +1,11 @@
 namespace GraphQLTemplate.Options
 {
+    using System.ComponentModel.DataAnnotations;
     using StackExchange.Redis;
 
     public class RedisOptions
     {
+        [Required]
         public string? ConnectionString { get; set; }
 
         public ConfigurationOptions ConfigurationOptions

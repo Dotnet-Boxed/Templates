@@ -19,6 +19,7 @@ namespace GraphQLTemplate.Options
         public CacheProfileOptions CacheProfiles { get; }
 
 #if ResponseCompression
+        [Required]
         public CompressionOptions Compression { get; set; } = default!;
 
 #endif
@@ -34,6 +35,7 @@ namespace GraphQLTemplate.Options
         [Required]
         public GraphQLOptions GraphQL { get; set; } = default!;
 
+        [Required]
         public KestrelServerOptions Kestrel { get; set; } = default!;
 #if Redis
 
