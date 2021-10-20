@@ -2,7 +2,7 @@ namespace GraphQLTemplate.Models
 {
     using System;
 
-    public record Human(
+    public record class Human(
         Guid Id,
         string Name,
         string HomePlanet,
