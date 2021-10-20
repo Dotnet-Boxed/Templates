@@ -39,78 +39,6 @@
       }
     },
     //#endif
-    "WSL 2": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
-      ////#else
-      //"launchUrl": "http:////localhost:5000",
-      //#endif
-      "environmentVariables": {
-        //#if (HttpsEverywhere)
-        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
-        ////#else
-        //"ASPNETCORE_URLS": "http:////localhost:5000",
-        //#endif
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "distributionName": ""
-    },
-    "WSL 2 Production": {
-      "commandName": "WSL2",
-      "launchBrowser": true,
-      //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
-      ////#else
-      //"launchUrl": "http:////localhost:5000",
-      //#endif
-      "environmentVariables": {
-        //#if (HttpsEverywhere)
-        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
-        ////#else
-        //"ASPNETCORE_URLS": "http:////localhost:5000",
-        //#endif
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      },
-      "distributionName": ""
-    },
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express Production": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
-    //#if (IIS)
-    // Run the application using full IIS using its development time support. This requires some setup, see:
-    // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
-    "IIS (Setup Required)": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Production (Setup Required)": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
-    //#endif
     "Kestrel": {
       "commandName": "Project",
       "hotReloadProfile": "aspnetcore",
@@ -154,6 +82,78 @@
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    "WSL 2": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001",
+      ////#else
+      //"launchUrl": "http:////localhost:5000",
+      //#endif
+      "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "distributionName": ""
+    },
+    "WSL 2 Production": {
+      "commandName": "WSL2",
+      "launchBrowser": true,
+      //#if (HttpsEverywhere)
+      "launchUrl": "https://localhost:5001",
+      ////#else
+      //"launchUrl": "http:////localhost:5000",
+      //#endif
+      "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "distributionName": ""
+    },
+    //#if (IIS)
+    // Run the application using full IIS using its development time support. This requires some setup, see:
+    // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
+    "IIS (Setup Required)": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Production (Setup Required)": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    //#endif
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express Production": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
