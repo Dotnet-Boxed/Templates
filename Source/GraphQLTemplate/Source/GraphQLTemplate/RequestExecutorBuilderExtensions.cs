@@ -21,15 +21,8 @@ namespace GraphQLTemplate
             bool condition,
             Func<IRequestExecutorBuilder, IRequestExecutorBuilder> action)
         {
-            if (builder is null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (action is null)
-            {
-                throw new ArgumentNullException(nameof(action));
-            }
+            ArgumentNullException.ThrowIfNull(builder);
+            ArgumentNullException.ThrowIfNull(action);
 
             if (condition)
             {
@@ -58,20 +51,9 @@ namespace GraphQLTemplate
             Func<IRequestExecutorBuilder, IRequestExecutorBuilder> ifAction,
             Func<IRequestExecutorBuilder, IRequestExecutorBuilder> elseAction)
         {
-            if (builder is null)
-            {
-                throw new ArgumentNullException(nameof(builder));
-            }
-
-            if (ifAction is null)
-            {
-                throw new ArgumentNullException(nameof(ifAction));
-            }
-
-            if (elseAction is null)
-            {
-                throw new ArgumentNullException(nameof(elseAction));
-            }
+            ArgumentNullException.ThrowIfNull(builder);
+            ArgumentNullException.ThrowIfNull(ifAction);
+            ArgumentNullException.ThrowIfNull(elseAction);
 
             if (condition)
             {
