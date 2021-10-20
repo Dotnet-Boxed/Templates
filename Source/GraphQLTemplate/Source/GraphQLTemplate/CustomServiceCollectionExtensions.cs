@@ -76,7 +76,7 @@ namespace GraphQLTemplate
                 .AddMemoryCache()
                 .AddStackExchangeRedisCache(
                     options => options.ConfigurationOptions = configuration
-                        .GetSection(nameof(ApplicationOptions.Redis))
+                        .GetRequiredSection(nameof(ApplicationOptions.Redis))
                         .Get<RedisOptions>()
                         .ConfigurationOptions);
 #endif
@@ -115,12 +115,12 @@ namespace GraphQLTemplate
             services
                 // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
-                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetSection(nameof(ApplicationOptions.CacheProfiles)))
+                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.CacheProfiles)))
 #if ResponseCompression
-                .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetSection(nameof(ApplicationOptions.Compression)))
+                .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Compression)))
 #endif
 #if ForwardedHeaders
-                .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetSection(nameof(ApplicationOptions.ForwardedHeaders)))
+                .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.ForwardedHeaders)))
                 .Configure<ForwardedHeadersOptions>(
                     options =>
                     {
@@ -128,15 +128,15 @@ namespace GraphQLTemplate
                         options.KnownProxies.Clear();
                     })
 #elif HostFiltering
-                .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetSection(nameof(ApplicationOptions.HostFiltering)))
+                .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetSection(nameof(ApplicationOptions.GraphQL)))
+                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)))
                 .ConfigureAndValidateSingleton<RequestExecutorOptions>(
-                    configuration.GetSection(nameof(ApplicationOptions.GraphQL)).GetSection(nameof(GraphQLOptions.Request)))
+                    configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).GetRequiredSection(nameof(GraphQLOptions.Request)))
 #if Redis
-                .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetSection(nameof(ApplicationOptions.Redis)))
+                .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)))
 #endif
-                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetSection(nameof(ApplicationOptions.Kestrel)));
+                .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
 #if ResponseCompression
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace GraphQLTemplate
                     {
                         // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
                         var customMimeTypes = configuration
-                            .GetSection(nameof(ApplicationOptions.Compression))
+                            .GetRequiredSection(nameof(ApplicationOptions.Compression))
                             .Get<CompressionOptions>()
                             ?.MimeTypes ?? Enumerable.Empty<string>();
                         options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
@@ -217,7 +217,7 @@ namespace GraphQLTemplate
 #if Redis
                 .AddIf(
                     !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
-                    x => x.AddRedis(configuration.GetSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
+                    x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
 #endif
                 .Services;
 #endif
@@ -335,7 +335,7 @@ namespace GraphQLTemplate
                 x => x.AddSingleton<IConnectionMultiplexer>(
                     ConnectionMultiplexer.Connect(
                          configuration
-                            .GetSection(nameof(ApplicationOptions.Redis))
+                            .GetRequiredSection(nameof(ApplicationOptions.Redis))
                             .Get<RedisOptions>()
                             .ConfigurationOptions)));
 #endif
@@ -345,7 +345,7 @@ namespace GraphQLTemplate
             IWebHostEnvironment webHostEnvironment,
             IConfiguration configuration)
         {
-            var graphQLOptions = configuration.GetSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
+            var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
             return services
                 .AddGraphQLServer()
                 .AddFiltering()
