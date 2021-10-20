@@ -13,7 +13,7 @@ namespace GraphQLTemplate
                 {
                     // Controls how controller actions cache content from the appsettings.json file.
                     var cacheProfileOptions = configuration
-                        .GetSection(nameof(ApplicationOptions.CacheProfiles))
+                        .GetRequiredSection(nameof(ApplicationOptions.CacheProfiles))
                         .Get<CacheProfileOptions>();
                     if (cacheProfileOptions != null)
                     {

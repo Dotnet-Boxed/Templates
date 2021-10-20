@@ -107,7 +107,7 @@ namespace GraphQLTemplate
                     (builderContext, options) =>
                     {
                         options.AddServerHeader = false;
-                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
+                        options.Configure(builderContext.Configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
                     })
 #if Azure
                 .UseAzureAppServices()
