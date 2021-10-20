@@ -7,7 +7,6 @@ namespace GraphQLTemplate.IntegrationTest
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Testing;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Options;
     using Moq;
 #if Serilog
     using Serilog;
@@ -45,7 +44,7 @@ namespace GraphQLTemplate.IntegrationTest
             using (var serviceScope = this.Services.CreateScope())
             {
                 var serviceProvider = serviceScope.ServiceProvider;
-                this.ApplicationOptions = serviceProvider.GetRequiredService<IOptions<ApplicationOptions>>().Value;
+                this.ApplicationOptions = serviceProvider.GetRequiredService<ApplicationOptions>();
             }
 
             base.ConfigureClient(client);
