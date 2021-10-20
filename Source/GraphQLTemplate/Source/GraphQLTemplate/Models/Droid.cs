@@ -2,7 +2,7 @@ namespace GraphQLTemplate.Models
 {
     using System;
 
-    public record Droid(
+    public record class Droid(
         Guid Id,
         string Name,
         string PrimaryFunction,
