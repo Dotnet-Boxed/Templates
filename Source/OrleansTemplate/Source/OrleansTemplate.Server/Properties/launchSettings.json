@@ -11,7 +11,7 @@
     //#endif
     "Development": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
@@ -21,7 +21,7 @@
     },
     "Production": {
       "commandName": "Project",
-      "dotnetRunMessages": "true",
+      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "externalUrlConfiguration": true,
       "launchUrl": "http://localhost:8080",
@@ -34,7 +34,7 @@
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
+      "commandLineArgs": "watch",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Development"
       }
@@ -43,7 +43,7 @@
       "commandName": "Executable",
       "executablePath": "dotnet",
       "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
+      "commandLineArgs": "watch",
       "environmentVariables": {
         "DOTNET_ENVIRONMENT": "Production"
       }
