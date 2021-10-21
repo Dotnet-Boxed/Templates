@@ -30,6 +30,7 @@ namespace ApiTemplate
 #endif
             options.OperationFilter<ClaimsOperationFilter>();
             options.OperationFilter<ForbiddenResponseOperationFilter>();
+            options.OperationFilter<ProblemDetailsOperationFilter>();
             options.OperationFilter<UnauthorizedResponseOperationFilter>();
 
             // Show a default and example model for JsonPatchDocument<T>.
