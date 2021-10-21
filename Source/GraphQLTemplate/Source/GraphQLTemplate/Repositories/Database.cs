@@ -58,7 +58,7 @@ namespace GraphQLTemplate.Repositories
                 Id: new Guid("94fbd693-2027-4804-bf40-ed427fe76fda"),
                 Name: "Luke Skywalker",
                 HomePlanet: "Tatooine",
-                DateOfBirth: new DateTime(3020, 4, 5),
+                DateOfBirth: new DateOnly(3020, 4, 5),
                 Created: created,
                 Modified: created);
             human1.Friends.Add(new Guid("1ae34c3b-c1a0-4b7b-9375-c5a221d49e68"));
@@ -71,7 +71,7 @@ namespace GraphQLTemplate.Repositories
                 Id: new Guid("7f7bf389-2cfb-45f4-b91e-9d95441c1ecc"),
                 Name: "Darth Vader",
                 HomePlanet: "Tatooine",
-                DateOfBirth: new DateTime(3000, 3, 1),
+                DateOfBirth: new DateOnly(3000, 3, 1),
                 Created: created,
                 Modified: created);
             human2.AppearsIn.Add(Episode.NEWHOPE);
