@@ -47,7 +47,7 @@ namespace ApiTemplate.Commands
             }
 
             var saveCar = this.carToSaveCarMapper.Map(car);
-            var modelState = this.actionContextAccessor.ActionContext.ModelState;
+            var modelState = this.actionContextAccessor.ActionContext!.ModelState;
             patch.ApplyTo(saveCar, modelState);
             this.objectModelValidator.Validate(
                 this.actionContextAccessor.ActionContext,

@@ -36,7 +36,7 @@ namespace ApiTemplate.Commands
                 return new NotFoundResult();
             }
 
-            var httpContext = this.actionContextAccessor.ActionContext.HttpContext;
+            var httpContext = this.actionContextAccessor.ActionContext!.HttpContext;
             var ifModifiedSince = httpContext.Request.Headers.IfModifiedSince;
             if (ifModifiedSince.Any() &&
                 DateTimeOffset.TryParse(ifModifiedSince, out var ifModifiedSinceDateTime) &&
