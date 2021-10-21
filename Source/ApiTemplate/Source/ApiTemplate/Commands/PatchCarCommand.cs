@@ -52,7 +52,7 @@ namespace ApiTemplate.Commands
             this.objectModelValidator.Validate(
                 this.actionContextAccessor.ActionContext,
                 validationState: null,
-                prefix: null,
+                prefix: string.Empty,
                 model: saveCar);
             if (!modelState.IsValid)
             {
