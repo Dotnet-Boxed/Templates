@@ -13,7 +13,7 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <!-- Used to store connection strings and other sensitive settings, so you don't have to check them into your source
          control provider. Only use this in Development, it is not intended for Production use.
          See http://docs.asp.net/en/latest/security/app-secrets.html -->
@@ -40,9 +40,9 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="OrleansDashboard" Version="3.5.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0-rc.2.21480.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0-rc.2.21480.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0-rc.2.21480.5" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.5.0" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.5.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
