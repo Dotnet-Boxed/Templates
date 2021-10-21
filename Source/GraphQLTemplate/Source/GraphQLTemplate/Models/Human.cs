@@ -6,7 +6,7 @@ namespace GraphQLTemplate.Models
         Guid Id,
         string Name,
         string HomePlanet,
-        DateOnly DateOfBirth,
+        DateTime DateOfBirth,
         DateTimeOffset Created,
         DateTimeOffset Modified) :
         Character(Id, Name, Created, Modified)
