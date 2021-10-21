@@ -317,9 +317,9 @@ namespace ApiTemplate
         /// <param name="services">The services.</param>
         /// <returns>The services with Swagger services added.</returns>
         public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
-services
-.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
-.AddSwaggerGen();
+            services
+                .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
+                .AddSwaggerGen();
 #endif
     }
 }
