@@ -39,41 +39,52 @@
       }
     },
     //#endif
-    "WSL 2": {
-      "commandName": "WSL2",
+    "Kestrel": {
+      "commandName": "Project",
+      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
+      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       ////#else
-      //"launchUrl": "http:////localhost:5000",
+      //"applicationUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
-        //#if (HttpsEverywhere)
-        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
-        ////#else
-        //"ASPNETCORE_URLS": "http:////localhost:5000",
-        //#endif
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "distributionName": ""
+      }
     },
-    "WSL 2 Production": {
-      "commandName": "WSL2",
+    "Kestrel Production": {
+      "commandName": "Project",
+      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
+      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
-      "launchUrl": "https://localhost:5001",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       ////#else
-      //"launchUrl": "http:////localhost:5000",
+      //"applicationUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
-        //#if (HttpsEverywhere)
-        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
-        ////#else
-        //"ASPNETCORE_URLS": "http:////localhost:5000",
-        //#endif
         "ASPNETCORE_ENVIRONMENT": "Production"
-      },
-      "distributionName": ""
+      }
+    },
+    // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
+    "Watch Kestrel (CTRL+F5)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Watch Kestrel Production (CTRL+F5)": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "watch",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -111,52 +122,41 @@
       }
     },
     //#endif
-    "Kestrel": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
+    "WSL 2": {
+      "commandName": "WSL2",
       "launchBrowser": true,
-      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchUrl": "https://localhost:5001",
       ////#else
-      //"applicationUrl": "http:////localhost:5000",
+      //"launchUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "distributionName": ""
     },
-    "Kestrel Production": {
-      "commandName": "Project",
-      "dotnetRunMessages": "true",
+    "WSL 2 Production": {
+      "commandName": "WSL2",
       "launchBrowser": true,
-      "launchUrl": "graphql",
       //#if (HttpsEverywhere)
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchUrl": "https://localhost:5001",
       ////#else
-      //"applicationUrl": "http:////localhost:5000",
+      //"launchUrl": "http:////localhost:5000",
       //#endif
       "environmentVariables": {
+        //#if (HttpsEverywhere)
+        "ASPNETCORE_URLS": "https://localhost:5001;http://localhost:5000",
+        ////#else
+        //"ASPNETCORE_URLS": "http:////localhost:5000",
+        //#endif
         "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
-    // dotnet watch run must be run without the Visual Studio debugger using CTRL+F5.
-    "Watch Kestrel (CTRL+F5)": {
-      "commandName": "Executable",
-      "executablePath": "dotnet",
-      "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "Watch Kestrel Production (CTRL+F5)": {
-      "commandName": "Executable",
-      "executablePath": "dotnet",
-      "workingDirectory": "$(ProjectDir)",
-      "commandLineArgs": "watch run",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
+      },
+      "distributionName": ""
     }
   }
 }

@@ -86,6 +86,42 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express Production": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    //#if (IIS)
+    // Run the application using full IIS using its development time support. This requires some setup, see:
+    // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
+    "IIS (Setup Required)": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Production (Setup Required)": {
+      "commandName": "IIS",
+      "launchBrowser": true,
+      "launchUrl": "",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    },
+    //#endif
     "WSL 2": {
       "commandName": "WSL2",
       "launchBrowser": true,
@@ -121,42 +157,6 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       },
       "distributionName": ""
-    },
-    //#if (IIS)
-    // Run the application using full IIS using its development time support. This requires some setup, see:
-    // https://blogs.msdn.microsoft.com/webdev/2017/07/13/development-time-iis-support-for-asp-net-core-applications/
-    "IIS (Setup Required)": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Production (Setup Required)": {
-      "commandName": "IIS",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
-    //#endif
-    "IIS Express": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
-    },
-    "IIS Express Production": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
     }
   }
 }
