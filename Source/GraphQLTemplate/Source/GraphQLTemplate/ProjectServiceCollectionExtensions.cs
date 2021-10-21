@@ -1,5 +1,6 @@
 namespace GraphQLTemplate
 {
+    using System;
     using Boxed.Mapping;
     using GraphQLTemplate.DataLoaders;
     using GraphQLTemplate.Directives;
@@ -34,6 +35,11 @@ namespace GraphQLTemplate
             services
                 .AddSingleton<IDroidRepository, DroidRepository>()
                 .AddSingleton<IHumanRepository, HumanRepository>();
+
+        public static IRequestExecutorBuilder AddProjectScalarTypes(this IRequestExecutorBuilder builder) =>
+            builder
+                // Bind a System.DateTime type to a GraphQL date type by default.
+                .BindRuntimeType<DateTime, DateType>();
 
         public static IRequestExecutorBuilder AddProjectDirectives(this IRequestExecutorBuilder builder) =>
             builder

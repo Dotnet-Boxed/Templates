@@ -369,6 +369,7 @@ namespace GraphQLTemplate
                     x => x.AddInMemorySubscriptions(),
                     x => x.AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>()))
 #endif
+                .AddProjectScalarTypes()
                 .AddProjectDirectives()
                 .AddProjectDataLoaders()
                 .AddProjectTypes()
