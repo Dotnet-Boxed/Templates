@@ -23,16 +23,12 @@ namespace ApiTemplate
                 options =>
                 {
                     var jsonSerializerOptions = options.JsonSerializerOptions;
-                    if (webHostEnvironment.IsDevelopment() ||
-                        webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test))
-                    {
-                        // Pretty print the JSON in development for easier debugging.
-                        jsonSerializerOptions.WriteIndented = true;
-                    }
-
                     jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-                    jsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+
+                    // Pretty print the JSON in development for easier debugging.
+                    jsonSerializerOptions.WriteIndented = webHostEnvironment.IsDevelopment() ||
+                        webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
                 });
 
         public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
