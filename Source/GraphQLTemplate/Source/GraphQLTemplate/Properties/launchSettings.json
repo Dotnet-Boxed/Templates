@@ -42,7 +42,6 @@
     "Kestrel": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "launchUrl": "graphql",
       //#if (HttpsEverywhere)
@@ -57,7 +56,6 @@
     "Kestrel Production": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "hotReloadProfile": "aspnetcore",
       "launchBrowser": true,
       "launchUrl": "graphql",
       //#if (HttpsEverywhere)
