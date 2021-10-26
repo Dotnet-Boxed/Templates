@@ -30,7 +30,7 @@ namespace ApiTemplate
                     jsonSerializerOptions.WriteIndented = webHostEnvironment.IsDevelopment() ||
                         webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
 
-                    jsonSerializerOptions.AddProjectSerializerContexts();
+                    jsonSerializerOptions.AddContext<CustomJsonSerializerContext>();
                 });
 
         public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>

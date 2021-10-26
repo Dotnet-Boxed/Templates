@@ -1,6 +1,5 @@
 namespace ApiTemplate
 {
-    using System.Text.Json;
     using ApiTemplate.Commands;
     using ApiTemplate.Mappers;
     using ApiTemplate.Repositories;
@@ -41,12 +40,5 @@ namespace ApiTemplate
         public static IServiceCollection AddProjectServices(this IServiceCollection services) =>
             services
                 .AddSingleton<IClockService, ClockService>();
-
-        public static void AddProjectSerializerContexts(this JsonSerializerOptions jsonSerializerOptions)
-        {
-            jsonSerializerOptions.AddContext<CarJsonSerializerContext>();
-            jsonSerializerOptions.AddContext<ConnectionJsonSerializerContext>();
-            jsonSerializerOptions.AddContext<SaveCarJsonSerializerContext>();
-        }
     }
 }
