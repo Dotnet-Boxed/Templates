@@ -122,7 +122,7 @@
       }
     },
     //#endif
-    "WSL 2": {
+    "WSL": {
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
@@ -140,7 +140,7 @@
       },
       "distributionName": ""
     },
-    "WSL 2 Production": {
+    "WSL Production": {
       "commandName": "WSL2",
       "launchBrowser": true,
       //#if (HttpsEverywhere)
