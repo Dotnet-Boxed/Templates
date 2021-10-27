@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31423.177
@@ -26,7 +26,9 @@ EndProject
 #endif
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FBD2504D-975E-4B64-B938-7DDD19C7DB9D}"
 	ProjectSection(SolutionItems) = preProject
+		#if (Docker)
 		.dockerignore = .dockerignore
+		#endif
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
