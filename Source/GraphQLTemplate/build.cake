@@ -3,7 +3,7 @@ var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
     EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
     "Release";
-//#if (Docker)
+#if (Docker)
 var tag =
     HasArgument("Tag") ? Argument<string>("Tag") :
     EnvironmentVariable("Tag") is not null ? EnvironmentVariable("Tag") :
@@ -16,7 +16,7 @@ var push =
     HasArgument("Push") ? Argument<bool>("Push") :
     EnvironmentVariable("Push") is not null ? bool.Parse(EnvironmentVariable("Push")) :
     false;
-//#endif
+#endif
 
 var artefactsDirectory = Directory("./Artefacts");
 
@@ -88,7 +88,7 @@ Task("Publish")
             });
     });
 
-//#if (Docker)
+#if (Docker)
 Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
@@ -176,12 +176,12 @@ Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
     .IsDependentOn("DockerBuild");
-////#else
-//Task("Default")
-//    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then publishes.")
-//    .IsDependentOn("Build")
-//    .IsDependentOn("Test")
-//    .IsDependentOn("Publish");
-//#endif
+#else
+Task("Default")
+    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then publishes.")
+    .IsDependentOn("Build")
+    .IsDependentOn("Test")
+    .IsDependentOn("Publish");
+#endif
 
 RunTarget(target);
