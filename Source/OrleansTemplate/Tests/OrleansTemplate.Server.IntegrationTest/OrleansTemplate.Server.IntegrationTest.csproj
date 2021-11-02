@@ -18,7 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="Microsoft.Orleans.TestingHost" Version="3.5.0" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.XUnit" Version="2.0.4" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="xunit" Version="2.4.1" />
