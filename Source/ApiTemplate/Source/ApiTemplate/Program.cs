@@ -18,7 +18,7 @@ namespace ApiTemplate
     using Serilog.Extensions.Hosting;
 #endif
 
-    public static class Program
+    public class Program
     {
         public static async Task<int> Main(string[] args)
         {
