@@ -20,7 +20,7 @@ namespace ApiTemplate.IntegrationTest.Controllers
     using Xunit;
     using Xunit.Abstractions;
 
-    public class CarsControllerTest : CustomWebApplicationFactory<Startup>
+    public class CarsControllerTest : CustomWebApplicationFactory<Program>
     {
         private readonly HttpClient client;
         private readonly MediaTypeFormatterCollection formatters;

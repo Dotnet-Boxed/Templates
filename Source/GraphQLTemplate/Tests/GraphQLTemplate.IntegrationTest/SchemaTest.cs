@@ -6,7 +6,7 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SchemaTest : CustomWebApplicationFactory<Startup>
+    public class SchemaTest : CustomWebApplicationFactory<Program>
     {
         private readonly HttpClient client;
 
