@@ -22,44 +22,26 @@
     },
     {
       "id": "EditorConfig",
-      "name": {
-        "text": "Include .editorconfig File"
-      },
       "isVisible": true
     },
     {
       "id": "SourceControl",
-      "name": {
-        "text": "Source Control"
-      },
       "isVisible": true
     },
     {
       "id": "GitHubUsername",
-      "name": {
-        "text": "GitHub Username"
-      },
       "isVisible": true
     },
     {
       "id": "GitHubProject",
-      "name": {
-        "text": "GitHub Project"
-      },
       "isVisible": true
     },
     {
       "id": "ReadMe",
-      "name": {
-        "text": "Include README.md File"
-      },
       "isVisible": true
     },
     {
       "id": "TreatWarningsAsErrors",
-      "name": {
-        "text": "Treat Warnings As Errors"
-      },
       "isVisible": true
     },
     {
@@ -72,16 +54,10 @@
     },
     {
       "id": "ForwardedHeaders",
-      "name": {
-        "text": "Forwarded Headers"
-      },
       "isVisible": true
     },
     {
       "id": "HostFiltering",
-      "name": {
-        "text": "Host Filtering"
-      },
       "isVisible": true
     },
     {
@@ -102,30 +78,18 @@
     },
     {
       "id": "ApplicationInsights",
-      "name": {
-        "text": "Application Insights"
-      },
       "isVisible": true
     },
     {
       "id": "ApplicationInsightsKey",
-      "name": {
-        "text": "Application Insights Key"
-      },
       "isVisible": true
     },
     {
       "id": "HttpsEverywhere",
-      "name": {
-        "text": "HTTPS"
-      },
       "isVisible": true
     },
     {
       "id": "HstsPreload",
-      "name": {
-        "text": "HSTS Preload"
-      },
       "isVisible": true
     },
     {
@@ -134,23 +98,14 @@
     },
     {
       "id": "ResponseCaching",
-      "name": {
-        "text": "Response Caching"
-      },
       "isVisible": true
     },
     {
       "id": "ResponseCompression",
-      "name": {
-        "text": "Response Compression"
-      },
       "isVisible": true
     },
     {
       "id": "DistributedCache",
-      "name": {
-        "text": "Distributed Cache"
-      },
       "isVisible": true
     },
     {
@@ -159,37 +114,34 @@
     },
     {
       "id": "HealthCheck",
-      "name": {
-        "text": "Health Check"
-      },
       "isVisible": true
     },
     {
       "id": "RobotsTxt",
-      "name": {
-        "text": "Include robots.txt File"
-      },
       "isVisible": true
     },
     {
       "id": "SecurityTxt",
-      "name": {
-        "text": "Include security.txt File"
-      },
       "isVisible": true
     },
     {
       "id": "HumansTxt",
-      "name": {
-        "text": "Include humans.txt File"
-      },
+      "isVisible": true
+    },
+    {
+      "id": "HttpPort",
+      "isVisible": true
+    },
+    {
+      "id": "HttpsPort",
+      "isVisible": true
+    },
+    {
+      "id": "IISExpressHttpsPort",
       "isVisible": true
     },
     {
       "id": "IntegrationTest",
-      "name": {
-        "text": "Integration Test"
-      },
       "isVisible": true
     },
     {
@@ -202,30 +154,10 @@
     },
     {
       "id": "DockerRegistry",
-      "name": {
-        "text": "Docker Registry"
-      },
-      "isVisible": true,
-      "choices": [
-        {
-          "id": "GitHubContainerRegistry",
-          "name": {
-            "text": "GitHub Container Registry"
-          }
-        },
-        {
-          "id": "DockerHub",
-          "name": {
-            "text": "Docker Hub"
-          }
-        }
-      ]
+      "isVisible": true
     },
     {
       "id": "GitHubActions",
-      "name": {
-        "text": "GitHub Actions"
-      },
       "isVisible": true
     }
   ]
