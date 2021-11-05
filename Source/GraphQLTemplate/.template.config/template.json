@@ -619,7 +619,8 @@
       "args": {
         "executable": "powershell.exe",
         "args": "start TODO.html",
-        "redirectStandardOutput": "false"
+        "redirectStandardOutput": "false",
+        "redirectStandardError": "false"
       },
       "manualInstructions": [
         {
@@ -635,7 +636,8 @@
       "args": {
         "executable": "bash",
         "args": "open TODO.html",
-        "redirectStandardOutput": "false"
+        "redirectStandardOutput": "false",
+        "redirectStandardError": "false"
       },
       "manualInstructions": [
         {
