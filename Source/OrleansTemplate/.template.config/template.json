@@ -1,12 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": ".NET Boxed",
-  "classifications": [
-    ".NET Boxed",
-    "Cloud",
-    "Service",
-    "Web"
-  ],
+  "classifications": [".NET Boxed", "Cloud", "Service", "Web"],
   "name": "ASP.NET Core Orleans Boxed",
   "description": "A solution and project for creating and publishing a Microsoft Orleans API.",
   "groupIdentity": "Dotnet.Boxed.Orleans",
@@ -27,9 +22,7 @@
     "2A41B472-8BCE-42D5-A64B-C1ED9C9BA60C",
     "B186DB6A-88E5-40AB-B3E1-1468C925C9B7"
   ],
-  "primaryOutputs": [
-    { "path": "OrleansTemplate.sln" }
-  ],
+  "primaryOutputs": [{ "path": "OrleansTemplate.sln" }],
   "sources": [
     {
       "modifiers": [
@@ -42,9 +35,7 @@
         },
         {
           "condition": "(!EditorConfig)",
-          "exclude": [
-            ".editorconfig"
-          ]
+          "exclude": [".editorconfig"]
         },
         {
           "condition": "(!GitHub)",
@@ -58,9 +49,7 @@
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": [
-            "README.md"
-          ]
+          "exclude": ["README.md"]
         },
         {
           "condition": "(!HealthCheck)",
@@ -74,9 +63,7 @@
         },
         {
           "condition": "(!IntegrationTest)",
-          "exclude": [
-            "Tests/ApiTemplate.IntegrationTest/**/*"
-          ]
+          "exclude": ["Tests/ApiTemplate.IntegrationTest/**/*"]
         },
         {
           "condition": "(!Docker)",
@@ -369,9 +356,11 @@
         "args": "start https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator",
         "redirectStandardOutput": "false"
       },
-      "manualInstructions": [{
-         "text": "Install the Azure Storage Emulator from https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator."
-      }]
+      "manualInstructions": [
+        {
+          "text": "Install the Azure Storage Emulator from https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator."
+        }
+      ]
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
@@ -383,9 +372,11 @@
         "args": "start",
         "redirectStandardOutput": "false"
       },
-      "manualInstructions": [{
-         "text": "Run the Azure Storage Emulator."
-      }]
+      "manualInstructions": [
+        {
+          "text": "Run the Azure Storage Emulator."
+        }
+      ]
     }
   ]
 }
