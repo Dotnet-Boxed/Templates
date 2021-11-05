@@ -6,9 +6,6 @@
   "symbolInfo": [
     {
       "id": "Framework",
-      "name": {
-        "text": "Target Framework"
-      },
       "isVisible": true
     },
     {
@@ -41,75 +38,22 @@
     },
     {
       "id": "ReadMe",
-      "name": {
-        "text": "Include README.md File"
-      },
       "isVisible": true
     },
     {
       "id": "EditorConfig",
-      "name": {
-        "text": "Include .editorconfig File"
-      },
       "isVisible": true
     },
     {
       "id": "SourceControl",
-      "name": {
-        "text": "Source Control"
-      },
-      "isVisible": true,
-      "choices": [
-        {
-          "id": "AzureDevOpsServer",
-          "name": {
-            "text": "Azure DevOps Server"
-          }
-        },
-        {
-          "id": "AzureRepos",
-          "name": {
-            "text": "Azure Repos"
-          }
-        },
-        {
-          "id": "Bitbucket",
-          "name": {
-            "text": "Bitbucket"
-          }
-        },
-        {
-          "id": "GitHub",
-          "name": {
-            "text": "GitHub"
-          }
-        },
-        {
-          "id": "GitLab",
-          "name": {
-            "text": "GitLab"
-          }
-        },
-        {
-          "id": "None",
-          "name": {
-            "text": "None"
-          }
-        }
-      ]
+      "isVisible": true
     },
     {
       "id": "GitHubUsername",
-      "name": {
-        "text": "GitHub Username"
-      },
       "isVisible": true
     },
     {
       "id": "GitHubProject",
-      "name": {
-        "text": "GitHub Project"
-      },
       "isVisible": true
     },
     {
@@ -118,43 +62,14 @@
     },
     {
       "id": "AnalysisMode",
-      "name": {
-        "text": "Analysis Mode"
-      },
-      "isVisible": true,
-      "choices": [
-        {
-          "id": "Default",
-          "name": {
-            "text": "Default"
-          }
-        },
-        {
-          "id": "AllEnabledByDefault",
-          "name": {
-            "text": "All Enabled By Default"
-          }
-        },
-        {
-          "id": "AllDisabledByDefault",
-          "name": {
-            "text": "All Disabled By Default"
-          }
-        }
-      ]
+      "isVisible": true
     },
     {
       "id": "ImplicitUsings",
-      "name": {
-        "text": "Implicit Usings"
-      },
       "isVisible": true
     },
     {
       "id": "TreatWarningsAsErrors",
-      "name": {
-        "text": "Treat Warnings As Errors"
-      },
       "isVisible": true
     },
     {
@@ -171,16 +86,10 @@
     },
     {
       "id": "AzurePipelines",
-      "name": {
-        "text": "Azure Pipelines"
-      },
       "isVisible": true
     },
     {
       "id": "GitHubActions",
-      "name": {
-        "text": "GitHub Actions"
-      },
       "isVisible": true
     }
   ]
