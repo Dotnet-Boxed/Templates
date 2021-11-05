@@ -137,6 +137,10 @@
       "isVisible": true
     },
     {
+      "id": "IISExpressHttpPort",
+      "isVisible": true
+    },
+    {
       "id": "IISExpressHttpsPort",
       "isVisible": true
     },
