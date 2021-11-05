@@ -1,12 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/template",
   "author": ".NET Boxed",
-  "classifications": [
-    ".NET Boxed",
-    "Cloud",
-    "Service",
-    "Web"
-  ],
+  "classifications": [".NET Boxed", "Cloud", "Service", "Web"],
   "name": "ASP.NET Core GraphQL Boxed",
   "description": "A solution and project for creating and publishing a GraphQL API.",
   "groupIdentity": "Dotnet.Boxed.GraphQL",
@@ -24,17 +19,13 @@
     "36941087-72D0-4649-86F6-69AFDC1EC71B",
     "C76FD924-71ED-4A92-A891-D226C0724933"
   ],
-  "primaryOutputs": [
-    { "path": "GraphQLTemplate.sln" }
-  ],
+  "primaryOutputs": [{ "path": "GraphQLTemplate.sln" }],
   "sources": [
     {
       "modifiers": [
         {
           "condition": "(!EditorConfig)",
-          "exclude": [
-            ".editorconfig"
-          ]
+          "exclude": [".editorconfig"]
         },
         {
           "condition": "(!GitHub)",
@@ -48,9 +39,7 @@
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": [
-            "README.md"
-          ]
+          "exclude": ["README.md"]
         },
         {
           "condition": "(!Mutations)",
@@ -68,16 +57,12 @@
         },
         {
           "condition": "(!Redis)",
-          "exclude": [
-            "Source/GraphQLTemplate/Options/RedisOptions.cs"
-          ]
+          "exclude": ["Source/GraphQLTemplate/Options/RedisOptions.cs"]
         },
         // ReverseProxyWebServer
         {
           "condition": "(!IIS)",
-          "exclude": [
-            "Source/GraphQLTemplate/web.config"
-          ]
+          "exclude": ["Source/GraphQLTemplate/web.config"]
         },
         {
           "condition": "(!NGINX)",
@@ -94,33 +79,23 @@
         },
         {
           "condition": "(!CORS)",
-          "exclude": [
-            "Source/GraphQLTemplate/Constants/CorsPolicyName.cs"
-          ]
+          "exclude": ["Source/GraphQLTemplate/Constants/CorsPolicyName.cs"]
         },
         {
           "condition": "(!ResponseCompression)",
-          "exclude": [
-            "Source/GraphQLTemplate/Options/CompressionOptions.cs"
-          ]
+          "exclude": ["Source/GraphQLTemplate/Options/CompressionOptions.cs"]
         },
         {
           "condition": "(!RobotsTxt)",
-          "exclude": [
-            "Source/GraphQLTemplate/wwwroot/robots.txt"
-          ]
+          "exclude": ["Source/GraphQLTemplate/wwwroot/robots.txt"]
         },
         {
           "condition": "(!SecurityTxt)",
-          "exclude": [
-            "Source/GraphQLTemplate/wwwroot/.well-known/security.txt"
-          ]
+          "exclude": ["Source/GraphQLTemplate/wwwroot/.well-known/security.txt"]
         },
         {
           "condition": "(!HumansTxt)",
-          "exclude": [
-            "Source/GraphQLTemplate/wwwroot/humans.txt"
-          ]
+          "exclude": ["Source/GraphQLTemplate/wwwroot/humans.txt"]
         },
         {
           "condition": "(!HealthCheck)",
@@ -130,16 +105,11 @@
         },
         {
           "condition": "(!IntegrationTest)",
-          "exclude": [
-            "Tests/ApiTemplate.IntegrationTest/**/*"
-          ]
+          "exclude": ["Tests/ApiTemplate.IntegrationTest/**/*"]
         },
         {
           "condition": "(!Docker)",
-          "exclude": [
-            "Source/GraphQLTemplate/Dockerfile",
-            ".dockerignore"
-          ]
+          "exclude": ["Source/GraphQLTemplate/Dockerfile", ".dockerignore"]
         },
         {
           "condition": "(!GitHubActions)",
