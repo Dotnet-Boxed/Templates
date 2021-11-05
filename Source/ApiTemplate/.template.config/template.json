@@ -540,6 +540,29 @@
       },
       "replaces": "5001"
     },
+    "IISExpressHttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "defaultValue": "44299",
+      "displayName": "IIS Express HTTP Port",
+      "description": "Port number to use for the IIS Express HTTP endpoint in launchSettings.json."
+    },
+    "IISExpressHttpPortConstant": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": {
+        "value": "44299"
+      }
+    },
+    "IISExpressHttpPortReplacer": {
+      "type": "generated",
+      "generator": "coalesce",
+      "parameters": {
+        "sourceVariableName": "IISExpressHttpPort",
+        "fallbackVariableName": "IISExpressHttpPortConstant"
+      },
+      "replaces": "44299"
+    },
     "IISExpressHttpsPort": {
       "type": "parameter",
       "datatype": "integer",

@@ -112,6 +112,9 @@
     "HttpsPort": {
       "longName": "https-port"
     },
+    "IISExpressHttpPort": {
+      "longName": "iis-express-http-port"
+    },
     "IISExpressHttpsPort": {
       "longName": "iis-express-https-port"
     },
