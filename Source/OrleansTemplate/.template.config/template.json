@@ -149,6 +149,7 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
+      "displayName": "Include .editorconfig File",
       "description": "Add a .editorconfig file to set a fixed code style."
     },
     "SourceControl": {
@@ -165,6 +166,7 @@
         }
       ],
       "defaultValue": "GitHub",
+      "displayName": "Source Control",
       "description": "Select which source control provider you are using if any, to add provider specific features."
     },
     "GitHub": {
@@ -176,6 +178,7 @@
       "datatype": "string",
       "defaultValue": "Username",
       "replaces": "GITHUB-USERNAME",
+      "displayName": "GitHub Username",
       "description": "Your GitHub username or organisation name that the project lives under."
     },
     "GitHubUsernameLowercase": {
@@ -189,24 +192,28 @@
       "datatype": "string",
       "defaultValue": "Project",
       "replaces": "GITHUB-PROJECT",
+      "displayName": "GitHub Project",
       "description": "The name of your GitHub project."
     },
     "ReadMe": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
+      "displayName": "Include README.md File",
       "description": "Add a README.md markdown file describing the project."
     },
     "TreatWarningsAsErrors": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
+      "displayName": "Treat Warnings As Errors",
       "description": "Treat warnings as errors."
     },
     "OpenTelemetry": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
+      "displayName": "Open Telemetry",
       "description": "Instrument, generate, collect, and export telemetry data (metrics, logs, and traces) using the Open Telemetry standard."
     },
     "Logging": {
@@ -233,6 +240,7 @@
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
+      "displayName": "Application Insights",
       "description": "Monitor internal information about how your application is running, as well as external user information using the Microsoft Azure cloud."
     },
     "ApplicationInsightsKey": {
@@ -240,19 +248,22 @@
       "datatype": "string",
       "defaultValue": "11111111-2222-3333-4444-555555555555",
       "replaces": "APPLICATION-INSIGHTS-INSTRUMENTATION-KEY",
+      "displayName": "Application Insights Key",
       "description": "Your Application Insights instrumentation key e.g. 11111111-2222-3333-4444-555555555555."
     },
     "HealthCheck": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "true",
+      "displayName": "Health Check",
       "description": "A health-check endpoint that returns the status of this API and its dependencies, giving an indication of its health."
     },
     "HttpPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the HTTP endpoint in launchSettings.json.",
-      "defaultValue": "8080"
+      "defaultValue": "8080",
+      "displayName": "HTTP Port",
+      "description": "Port number to use for the HTTP endpoint in launchSettings.json."
     },
     "HttpPortConstant": {
       "type": "generated",
@@ -273,26 +284,27 @@
     "TLS": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds TLS transport encryption to secure communication between the client and server.",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "description": "Adds TLS transport encryption to secure communication between the client and server."
     },
     "IntegrationTest": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds an integration test project.",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "displayName": "Integration Test",
+      "description": "Adds an integration test project."
     },
     "StyleCop": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine.",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "description": "Adds and enforces StyleCop analysers. NOTE: You may need to sort using statements if you enable this due to limitations in the dotnet new templating engine."
     },
     "Docker": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds an optimised Dockerfile to add the ability build a Docker image.",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "description": "Adds an optimised Dockerfile to add the ability build a Docker image."
     },
     "DockerRegistry": {
       "type": "parameter",
@@ -300,14 +312,17 @@
       "choices": [
         {
           "choice": "GitHubContainerRegistry",
+          "displayName": "GitHub Container Registry",
           "description": "Push Docker images to the GitHub Container Registry."
         },
         {
           "choice": "DockerHub",
+          "displayName": "Docker Hub",
           "description": "Push Docker images to Docker Hub."
         }
       ],
       "defaultValue": "GitHubContainerRegistry",
+      "displayName": "Docker Registry",
       "description": "The Docker container registry to push Docker images to."
     },
     "GitHubContainerRegistry": {
@@ -321,8 +336,9 @@
     "GitHubActions": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Adds GitHub Actions continuous integration, automatic release drafting and CodeQL security scanning.",
-      "defaultValue": "true"
+      "defaultValue": "true",
+      "displayName": "GitHub Actions",
+      "description": "Adds GitHub Actions continuous integration, automatic release drafting and CodeQL security scanning."
     },
 
     "AuthoringMode": {
