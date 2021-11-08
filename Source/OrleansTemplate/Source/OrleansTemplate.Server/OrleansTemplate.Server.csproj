@@ -41,7 +41,7 @@
     <PackageReference Include="OrleansDashboard" Version="3.5.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.5.0" />
     <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.5.0">
