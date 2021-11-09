@@ -13,12 +13,18 @@ namespace ApiTemplate.IntegrationTest
     using Serilog;
     using Serilog.Events;
 #endif
+#if Serilog
     using Xunit.Abstractions;
+#endif
 
     public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
         where TEntryPoint : class
     {
+#if Serilog
         public CustomWebApplicationFactory(ITestOutputHelper testOutputHelper)
+#else
+        public CustomWebApplicationFactory()
+#endif
         {
             this.ClientOptions.AllowAutoRedirect = false;
 #if HttpsEverywhere

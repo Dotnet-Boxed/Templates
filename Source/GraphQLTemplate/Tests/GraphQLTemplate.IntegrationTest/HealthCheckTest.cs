@@ -5,14 +5,20 @@ namespace GraphQLTemplate.IntegrationTest.Controllers
     using System.Net.Http;
     using System.Threading.Tasks;
     using Xunit;
+#if Serilog
     using Xunit.Abstractions;
+#endif
 
     public class HealthCheckTest : CustomWebApplicationFactory<Program>
     {
         private readonly HttpClient client;
 
+#if Serilog
         public HealthCheckTest(ITestOutputHelper testOutputHelper)
             : base(testOutputHelper) =>
+#else
+        public HealthCheckTest() =>
+#endif
             this.client = this.CreateClient();
 
         [Fact]
