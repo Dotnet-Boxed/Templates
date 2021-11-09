@@ -39,23 +39,23 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="OrleansDashboard" Version="3.5.2" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.18.0" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.5.0">
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.CodeGenerator.MSBuild" PrivateAssets="all" Version="3.5.1">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.5.0" Condition="'$(TLS)' == 'true'" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="3.5.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.5.0" />
-    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.5.0" />
+    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="3.5.1" Condition="'$(TLS)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.AI" Version="3.5.1" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.5.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc8" Condition="'$(OpenTelemetry)' == 'true'" />
@@ -64,15 +64,19 @@
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" Condition="'$(Serilog)' == 'true'" />
-    <PackageReference Include="Serilog.Enrichers.Span" Version="1.4.0" Condition="'$(Serilog)' == 'true' AND '$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Span" Version="2.0.0" Condition="'$(Serilog)' == 'true' AND '$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
-    <PackageReference Include="Serilog.Exceptions" Version="7.1.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.0.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(Serilog)' == 'true' AND '$(ApplicationInsights)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\OrleansTemplate.Abstractions\OrleansTemplate.Abstractions.csproj" />
     <ProjectReference Include="..\OrleansTemplate.Grains\OrleansTemplate.Grains.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.0.64" />
   </ItemGroup>
 
 </Project>
