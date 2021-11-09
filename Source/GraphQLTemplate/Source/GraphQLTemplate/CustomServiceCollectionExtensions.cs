@@ -367,7 +367,7 @@ namespace GraphQLTemplate
                 .AddIfElse(
                     webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
                     x => x.AddInMemorySubscriptions(),
-                    x => x.AddRedisSubscriptions(x => x.GetRequiredService<IConnectionMultiplexer>()))
+                    x => x.AddRedisSubscriptions())
 #endif
                 .AddProjectScalarTypes()
                 .AddProjectDirectives()
