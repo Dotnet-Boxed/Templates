@@ -4,6 +4,7 @@ namespace ApiTemplate
     using System.Text.Json;
     using System.Text.Json.Serialization;
     using ApiTemplate.Options;
+    using ApiTemplate.ViewModels;
     using Boxed.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.JsonPatch;
@@ -29,6 +30,8 @@ namespace ApiTemplate
                     // Pretty print the JSON in development for easier debugging.
                     jsonSerializerOptions.WriteIndented = webHostEnvironment.IsDevelopment() ||
                         webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
+
+                    jsonSerializerOptions.AddContext<CustomJsonSerializerContext>();
                 });
 
         public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
