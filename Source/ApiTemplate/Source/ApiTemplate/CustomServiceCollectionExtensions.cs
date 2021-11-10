@@ -112,6 +112,7 @@ namespace ApiTemplate
             services
                 // ConfigureAndValidateSingleton registers IOptions<T> and also T as a singleton to the services collection.
                 .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
+                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.CacheProfiles)))
 #if ResponseCompression
                 .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Compression)))
 #endif
@@ -126,7 +127,7 @@ namespace ApiTemplate
 #elif HostFiltering
                 .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.CacheProfiles)))
+                .ConfigureAndValidateSingleton<HostOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Host)))
                 .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
 #if ResponseCompression
 

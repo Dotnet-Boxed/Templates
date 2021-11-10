@@ -7,6 +7,7 @@ namespace ApiTemplate.Options
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Server.Kestrel.Core;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// All options for the application.
@@ -32,6 +33,9 @@ namespace ApiTemplate.Options
         public HostFilteringOptions HostFiltering { get; set; } = default!;
 
 #endif
+        [Required]
+        public HostOptions Host { get; set; } = default!;
+
         [Required]
         public KestrelServerOptions Kestrel { get; set; } = default!;
 #if Redis
