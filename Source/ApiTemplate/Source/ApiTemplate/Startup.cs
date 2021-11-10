@@ -157,7 +157,9 @@ namespace ApiTemplate
 #if Swagger
                     })
                 .UseSwagger()
-                .UseCustomSwaggerUI();
+                .UseIf(
+                    this.webHostEnvironment.IsDevelopment(),
+                    x => x.UseCustomSwaggerUI());
 #else
                     });
 #endif
