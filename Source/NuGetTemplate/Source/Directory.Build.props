@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.SourceLink.AzureDevOpsServer.Git" PrivateAssets="all" Version="1.0.0" Condition="'$(AzureDevOpsServer)' == 'true'" />
+    <PackageReference Include="Microsoft.SourceLink.AzureDevOpsServer.Git" PrivateAssets="all" Version="1.1.1" Condition="'$(AzureDevOpsServer)' == 'true'" />
     <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" PrivateAssets="all" Version="1.0.0" Condition="'$(AzureRepos)' == 'true'" />
     <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" PrivateAssets="all" Version="1.0.0" Condition="'$(Bitbucket)' == 'true'" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.0.0" Condition="'$(GitHub)' == 'true'" />
