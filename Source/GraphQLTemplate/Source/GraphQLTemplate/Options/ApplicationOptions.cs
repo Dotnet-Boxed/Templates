@@ -7,6 +7,7 @@ namespace GraphQLTemplate.Options
     using Microsoft.AspNetCore.HostFiltering;
 #endif
     using Microsoft.AspNetCore.Server.Kestrel.Core;
+    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// All options for the application.
@@ -34,6 +35,9 @@ namespace GraphQLTemplate.Options
 #endif
         [Required]
         public GraphQLOptions GraphQL { get; set; } = default!;
+
+        [Required]
+        public HostOptions Host { get; set; } = default!;
 
         [Required]
         public KestrelServerOptions Kestrel { get; set; } = default!;
