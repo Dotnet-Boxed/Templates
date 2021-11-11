@@ -6,7 +6,7 @@ namespace OrleansTemplate.Server
     using Serilog;
     using Serilog.Events;
 
-    internal static partial class ApplicationBuilderExtensions
+    internal static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Uses custom serilog request logging. Adds additional properties to each log.
