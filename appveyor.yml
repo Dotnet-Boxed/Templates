@@ -5,7 +5,7 @@ version: "{build}"
 image:
   - macOS
   - Ubuntu
-  - Visual Studio 2019
+  - Visual Studio 2022
 
 environment:
   # Disable the .NET logo in the console output.
