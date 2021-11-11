@@ -38,6 +38,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
+    <PackageReference Include="Boxed.AspNetCore" Version="8.0.0" />
     <PackageReference Include="OrleansDashboard" Version="3.6.1" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.19.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
