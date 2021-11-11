@@ -2,7 +2,6 @@ namespace OrleansTemplate.Server
 {
     using System;
     using System.IO;
-    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Threading.Tasks;
 #if ApplicationInsights
@@ -29,53 +28,33 @@ namespace OrleansTemplate.Server
     using Serilog.Extensions.Hosting;
 #endif
 
-    public static class Program
+    public class Program
     {
         public static async Task<int> Main(string[] args)
         {
 #if Serilog
             Log.Logger = CreateBootstrapLogger();
 #endif
-            IHostEnvironment? hostEnvironment = null;
+            IHost? host = null;
 
             try
             {
 #if Serilog
                 Log.Information("Initialising.");
 #endif
-                var host = CreateHostBuilder(args).Build();
-                hostEnvironment = host.Services.GetRequiredService<IHostEnvironment>();
-                hostEnvironment.ApplicationName = AssemblyInformation.Current.Product;
+                host = CreateHostBuilder(args).Build();
 
-#if Serilog
-                Log.Information(
-                    "Started {Application} in {Environment} mode.",
-                    hostEnvironment.ApplicationName,
-                    hostEnvironment.EnvironmentName);
-#endif
+                host.LogApplicationStarted();
                 await host.RunAsync().ConfigureAwait(false);
-#if Serilog
-                Log.Information(
-                    "Stopped {Application} in {Environment} mode.",
-                    hostEnvironment.ApplicationName,
-                    hostEnvironment.EnvironmentName);
-#endif
+                host.LogApplicationStopped();
+
                 return 0;
             }
 #pragma warning disable CA1031 // Do not catch general exception types
             catch (Exception exception)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-#if Serilog
-                Log.Fatal(
-                    exception,
-                    "{Application} terminated unexpectedly in {Environment} mode.",
-                    AssemblyInformation.Current.Product,
-                    hostEnvironment?.EnvironmentName);
-#else
-                Console.WriteLine($"{AssemblyInformation.Current.Product} terminated unexpectedly in {hostEnvironment?.EnvironmentName} mode.");
-                Console.WriteLine(exception.ToString());
-#endif
+                host!.LogApplicationTerminatedUnexpectedly(exception);
 
                 return 1;
             }
@@ -91,13 +70,13 @@ namespace OrleansTemplate.Server
             new HostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureHostConfiguration(
-                    configurationBuilder => configurationBuilder
-                        .AddEnvironmentVariables(prefix: "DOTNET_")
-                        .AddIf(
-                            args is not null,
-                            x => x.AddCommandLine(args)))
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                    AddConfiguration(config, hostingContext.HostingEnvironment, args))
+                    configurationBuilder => configurationBuilder.AddCustomBootstrapConfiguration(args))
+                .ConfigureAppConfiguration(
+                    (hostingContext, configurationBuilder) =>
+                    {
+                        hostingContext.HostingEnvironment.ApplicationName = AssemblyInformation.Current.Product;
+                        configurationBuilder.AddCustomConfiguration(hostingContext.HostingEnvironment, args);
+                    })
 #if Serilog
                 .UseSerilog(ConfigureReloadableLogger)
 #endif
@@ -176,48 +155,14 @@ namespace OrleansTemplate.Server
                     (builderContext, options) =>
                     {
                         options.AddServerHeader = false;
-                        options.Configure(builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)), reloadOnChange: false);
+                        options.Configure(
+                            builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)),
+                            reloadOnChange: false);
                     })
                 .UseStartup<Startup>();
 
 #endif
-        private static IConfigurationBuilder AddConfiguration(
-            IConfigurationBuilder configurationBuilder,
-            IHostEnvironment hostEnvironment,
-            string[] args) =>
-            configurationBuilder
-                // Add configuration from the appsettings.json file.
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
-                // Add configuration from an optional appsettings.development.json, appsettings.staging.json or
-                // appsettings.production.json file, depending on the environment. These settings override the ones in
-                // the appsettings.json file.
-                .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: false)
-                // Add configuration from files in the specified directory. The name of the file is the key and the
-                // contents the value.
-                .AddKeyPerFile(Path.Combine(Directory.GetCurrentDirectory(), "configuration"), optional: true, reloadOnChange: false)
-                // This reads the configuration keys from the secret store. This allows you to store connection strings
-                // and other sensitive settings, so you don't have to check them into your source control provider.
-                // Only use this in Development, it is not intended for Production use. See
-                // http://docs.asp.net/en/latest/security/app-secrets.html
-                .AddIf(
-                    hostEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostEnvironment.ApplicationName),
-                    x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true, reloadOnChange: false))
-                // Add configuration specific to the Development, Staging or Production environments. This config can
-                // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
-                // override the ones in all of the above config files. See
-                // http://docs.asp.net/en/latest/security/app-secrets.html
-                .AddEnvironmentVariables()
-#if ApplicationInsights
-                // Push telemetry data through the Azure Application Insights pipeline faster in the development and
-                // staging environments, allowing you to view results immediately.
-                .AddApplicationInsightsSettings(developerMode: !hostEnvironment.IsProduction())
-#endif
-                // Add command line options. These take the highest priority.
-                .AddIf(
-                    args is not null,
-                    x => x.AddCommandLine(args));
 #if Serilog
-
         /// <summary>
         /// Creates a logger used during application initialisation.
         /// <see href="https://nblumhardt.com/2020/10/bootstrap-logger/"/>.
@@ -252,6 +197,7 @@ namespace OrleansTemplate.Server
                 .WriteTo.Conditional(
                     x => context.HostingEnvironment.IsDevelopment(),
                     x => x.Console().WriteTo.Debug());
+
 #endif
 
         private static void ConfigureJsonSerializerSettings(JsonSerializerSettings jsonSerializerSettings)
