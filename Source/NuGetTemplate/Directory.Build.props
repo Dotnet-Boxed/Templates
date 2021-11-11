@@ -2,6 +2,7 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <DotnetFramework>false</DotnetFramework>
     <EditorConfig>true</EditorConfig>
     <MIT>true</MIT>

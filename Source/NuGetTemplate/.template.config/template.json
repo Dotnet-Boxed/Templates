@@ -23,8 +23,15 @@
     {
       "modifiers": [
         {
+          "condition": "(AnalysisMode != \"AllEnabledByDefault\")",
+          "exclude": [
+            "Source/NuGetTemplate/AssemblyInfo.cs",
+            "Tests/NuGetTemplate.Test/AssemblyInfo.cs"
+          ]
+        },
+        {
           "condition": "(!EditorConfig)",
-          "exclude": [".editorconfig"]
+          "exclude": [ ".editorconfig" ]
         },
         {
           "condition": "(!GitHub)",
@@ -38,23 +45,23 @@
         },
         {
           "condition": "(License == \"None\")",
-          "exclude": [".github/LICENSE.md"]
+          "exclude": [ ".github/LICENSE.md" ]
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": ["README.md"]
+          "exclude": [ "README.md" ]
         },
         {
           "condition": "(!Tests)",
-          "exclude": ["Tests/NuGetTemplate.Test/**/*"]
+          "exclude": [ "Tests/NuGetTemplate.Test/**/*" ]
         },
         {
           "condition": "(!AppVeyor)",
-          "exclude": ["appveyor.yml"]
+          "exclude": [ "appveyor.yml" ]
         },
         {
           "condition": "(!AzurePipelines)",
-          "exclude": ["azure-pipelines.yml"]
+          "exclude": [ "azure-pipelines.yml" ]
         },
         {
           "condition": "(!GitHubActions)",
