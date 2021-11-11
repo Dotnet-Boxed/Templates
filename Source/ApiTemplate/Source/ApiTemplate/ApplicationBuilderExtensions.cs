@@ -18,7 +18,7 @@ namespace ApiTemplate
 #endif
 #endif
 
-    internal static partial class ApplicationBuilderExtensions
+    internal static class ApplicationBuilderExtensions
     {
         /// <summary>
         /// Uses the static files middleware to serve static files. Also adds the Cache-Control and Pragma HTTP
