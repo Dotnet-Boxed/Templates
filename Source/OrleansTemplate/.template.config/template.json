@@ -29,7 +29,7 @@
         {
           "condition": "(!Serilog)",
           "exclude": [
-            "Source/OrleansTemplate.Server/Extensions/TraceIdEnricher.cs",
+            "Source/OrleansTemplate.Server/TraceIdEnricher.cs",
             "Source/OrleansTemplate.Server/ApplicationBuilderExtensions.cs"
           ]
         },
