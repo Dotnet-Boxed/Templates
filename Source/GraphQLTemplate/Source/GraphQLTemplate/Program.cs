@@ -7,7 +7,6 @@ namespace GraphQLTemplate
 #if ApplicationInsights
     using Microsoft.ApplicationInsights.Extensibility;
 #endif
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
 #if ApplicationInsights
@@ -96,8 +95,6 @@ namespace GraphQLTemplate
 #endif
                 // Used for IIS and IIS Express for in-process hosting. Use UseIISIntegration for out-of-process hosting.
                 .UseIIS()
-                .ConfigureServices(
-                    services => services.Configure<IISServerOptions>(options => options.AllowSynchronousIO = true))
                 .UseStartup<Startup>();
 #if Serilog
 
