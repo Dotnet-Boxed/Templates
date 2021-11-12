@@ -25,7 +25,6 @@ public class OrleansTemplateTest
             throw new ArgumentNullException(nameof(testOutputHelper));
         }
 
-        ConfigurationService.DefaultTimeout = TimeSpan.FromMinutes(3);
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
 
