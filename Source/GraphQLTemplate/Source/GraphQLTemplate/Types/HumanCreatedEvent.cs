@@ -1,6 +1,5 @@
-namespace GraphQLTemplate.Types
+namespace GraphQLTemplate.Types;
+
+public class HumanCreatedEvent : HumanObject
 {
-    public class HumanCreatedEvent : HumanObject
-    {
-    }
 }

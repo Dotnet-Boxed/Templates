@@ -1,9 +1,8 @@
-namespace GraphQLTemplate.Models
+namespace GraphQLTemplate.Models;
+
+public enum Episode
 {
-    public enum Episode
-    {
-        NEWHOPE = 4,
-        EMPIRE = 5,
-        JEDI = 6,
-    }
+    NEWHOPE = 4,
+    EMPIRE = 5,
+    JEDI = 6,
 }

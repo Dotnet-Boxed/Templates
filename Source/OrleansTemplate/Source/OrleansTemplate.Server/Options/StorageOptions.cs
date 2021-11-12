@@ -1,7 +1,6 @@
-namespace OrleansTemplate.Server.Options
+namespace OrleansTemplate.Server.Options;
+
+public class StorageOptions
 {
-    public class StorageOptions
-    {
-        public string ConnectionString { get; set; } = default!;
-    }
+    public string ConnectionString { get; set; } = default!;
 }

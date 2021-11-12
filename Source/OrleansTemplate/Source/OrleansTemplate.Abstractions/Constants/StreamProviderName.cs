@@ -1,7 +1,6 @@
-namespace OrleansTemplate.Abstractions.Constants
+namespace OrleansTemplate.Abstractions.Constants;
+
+public static class StreamProviderName
 {
-    public static class StreamProviderName
-    {
-        public const string Default = nameof(Default);
-    }
+    public const string Default = nameof(Default);
 }

@@ -1,33 +1,32 @@
-namespace GraphQLTemplate.IntegrationTest.Controllers
-{
-    using System.Net;
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using Xunit;
+namespace GraphQLTemplate.IntegrationTest.Controllers;
+
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Xunit;
 #if Serilog
-    using Xunit.Abstractions;
+using Xunit.Abstractions;
 #endif
 
-    public class SchemaTest : CustomWebApplicationFactory<Program>
-    {
-        private readonly HttpClient client;
+public class SchemaTest : CustomWebApplicationFactory<Program>
+{
+    private readonly HttpClient client;
 
 #if Serilog
-        public SchemaTest(ITestOutputHelper testOutputHelper)
-            : base(testOutputHelper) =>
+    public SchemaTest(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) =>
 #else
-        public SchemaTest() =>
+    public SchemaTest() =>
 #endif
             this.client = this.CreateClient();
 
-        [Fact]
-        public async Task GetSchemaDescriptionLanguage_Default_Returns200OkAsync()
-        {
-            var response = await this.client.GetAsync("/graphql?sdl").ConfigureAwait(false);
-            var sdl = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+    [Fact]
+    public async Task GetSchemaDescriptionLanguage_Default_Returns200OkAsync()
+    {
+        var response = await this.client.GetAsync("/graphql?sdl").ConfigureAwait(false);
+        var sdl = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.NotEmpty(sdl);
-        }
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.NotEmpty(sdl);
     }
 }

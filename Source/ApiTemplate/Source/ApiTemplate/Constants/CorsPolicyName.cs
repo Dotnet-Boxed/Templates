@@ -1,7 +1,6 @@
-﻿namespace ApiTemplate.Constants
+﻿namespace ApiTemplate.Constants;
+
+public static class CorsPolicyName
 {
-    public static class CorsPolicyName
-    {
-        public const string AllowAny = nameof(AllowAny);
-    }
+    public const string AllowAny = nameof(AllowAny);
 }

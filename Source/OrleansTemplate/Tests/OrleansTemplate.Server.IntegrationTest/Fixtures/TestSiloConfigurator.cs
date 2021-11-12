@@ -1,25 +1,23 @@
-namespace OrleansTemplate.Server.IntegrationTest.Fixtures
-{
+namespace OrleansTemplate.Server.IntegrationTest.Fixtures;
 #if Serilog
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 #endif
-    using Orleans.Hosting;
-    using Orleans.TestingHost;
-    using OrleansTemplate.Abstractions.Constants;
+using Orleans.Hosting;
+using Orleans.TestingHost;
+using OrleansTemplate.Abstractions.Constants;
 #if Serilog
-    using Serilog.Extensions.Logging;
+using Serilog.Extensions.Logging;
 #endif
 
-    public class TestSiloConfigurator : ISiloConfigurator
-    {
-        public void Configure(ISiloBuilder siloBuilder) =>
-            siloBuilder
+public class TestSiloConfigurator : ISiloConfigurator
+{
+    public void Configure(ISiloBuilder siloBuilder) =>
+        siloBuilder
 #if Serilog
-                .ConfigureServices(services => services.AddSingleton<ILoggerFactory>(x => new SerilogLoggerFactory()))
+            .ConfigureServices(services => services.AddSingleton<ILoggerFactory>(x => new SerilogLoggerFactory()))
 #endif
-                .AddMemoryGrainStorageAsDefault()
-                .AddMemoryGrainStorage("PubSubStore")
-                .AddSimpleMessageStreamProvider(StreamProviderName.Default);
-    }
+            .AddMemoryGrainStorageAsDefault()
+            .AddMemoryGrainStorage("PubSubStore")
+            .AddSimpleMessageStreamProvider(StreamProviderName.Default);
 }

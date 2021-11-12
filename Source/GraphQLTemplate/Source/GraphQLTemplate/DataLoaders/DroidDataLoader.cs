@@ -1,28 +1,27 @@
-namespace GraphQLTemplate.DataLoaders
+namespace GraphQLTemplate.DataLoaders;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using GraphQLTemplate.Models;
+using GraphQLTemplate.Repositories;
+using GreenDonut;
+
+public class DroidDataLoader : BatchDataLoader<Guid, Droid>, IDroidDataLoader
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using GraphQLTemplate.Models;
-    using GraphQLTemplate.Repositories;
-    using GreenDonut;
+    private readonly IDroidRepository repository;
 
-    public class DroidDataLoader : BatchDataLoader<Guid, Droid>, IDroidDataLoader
+    public DroidDataLoader(IDroidRepository repository, IBatchScheduler batchScheduler, DataLoaderOptions options)
+        : base(batchScheduler, options) =>
+        this.repository = repository;
+
+    protected override async Task<IReadOnlyDictionary<Guid, Droid>> LoadBatchAsync(
+        IReadOnlyList<Guid> keys,
+        CancellationToken cancellationToken)
     {
-        private readonly IDroidRepository repository;
-
-        public DroidDataLoader(IDroidRepository repository, IBatchScheduler batchScheduler, DataLoaderOptions options)
-            : base(batchScheduler, options) =>
-            this.repository = repository;
-
-        protected override async Task<IReadOnlyDictionary<Guid, Droid>> LoadBatchAsync(
-            IReadOnlyList<Guid> keys,
-            CancellationToken cancellationToken)
-        {
-            var droids = await this.repository.GetDroidsAsync(keys, cancellationToken).ConfigureAwait(false);
-            return droids.ToDictionary(x => x.Id);
-        }
+        var droids = await this.repository.GetDroidsAsync(keys, cancellationToken).ConfigureAwait(false);
+        return droids.ToDictionary(x => x.Id);
     }
 }

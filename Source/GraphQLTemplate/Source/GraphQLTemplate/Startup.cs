@@ -1,159 +1,158 @@
-namespace GraphQLTemplate
-{
-    using Boxed.AspNetCore;
+namespace GraphQLTemplate;
+
+using Boxed.AspNetCore;
 #if CORS
-    using GraphQLTemplate.Constants;
+using GraphQLTemplate.Constants;
 #endif
-    using HotChocolate.AspNetCore;
-    using Microsoft.AspNetCore.Builder;
+using HotChocolate.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 #if HealthCheck
-    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+/// <summary>
+/// The main start-up class for the application.
+/// </summary>
+public class Startup
+{
+    private readonly IConfiguration configuration;
+    private readonly IWebHostEnvironment webHostEnvironment;
 
     /// <summary>
-    /// The main start-up class for the application.
+    /// Initializes a new instance of the <see cref="Startup"/> class.
     /// </summary>
-    public class Startup
+    /// <param name="configuration">The application configuration, where key value pair settings are stored (See
+    /// http://docs.asp.net/en/latest/fundamentals/configuration.html).</param>
+    /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
+    /// Staging or Production by default (See http://docs.asp.net/en/latest/fundamentals/environments.html).</param>
+    public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
     {
-        private readonly IConfiguration configuration;
-        private readonly IWebHostEnvironment webHostEnvironment;
+        this.configuration = configuration;
+        this.webHostEnvironment = webHostEnvironment;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
-        /// </summary>
-        /// <param name="configuration">The application configuration, where key value pair settings are stored (See
-        /// http://docs.asp.net/en/latest/fundamentals/configuration.html).</param>
-        /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default (See http://docs.asp.net/en/latest/fundamentals/environments.html).</param>
-        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
-        {
-            this.configuration = configuration;
-            this.webHostEnvironment = webHostEnvironment;
-        }
-
-        /// <summary>
-        /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
-        /// called by the ASP.NET runtime (See
-        /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx).
-        /// </summary>
-        /// <param name="services">The services.</param>
-        public virtual void ConfigureServices(IServiceCollection services) =>
-            services
+    /// <summary>
+    /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
+    /// called by the ASP.NET runtime (See
+    /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx).
+    /// </summary>
+    /// <param name="services">The services.</param>
+    public virtual void ConfigureServices(IServiceCollection services) =>
+        services
 #if ApplicationInsights
-                // Add Azure Application Insights data collection services to the services container.
-                .AddApplicationInsightsTelemetry(this.configuration)
+            // Add Azure Application Insights data collection services to the services container.
+            .AddApplicationInsightsTelemetry(this.configuration)
 #endif
 #if DistributedCacheRedis
-                .AddCustomCaching(this.webHostEnvironment, this.configuration)
+            .AddCustomCaching(this.webHostEnvironment, this.configuration)
 #else
-                .AddCustomCaching()
+            .AddCustomCaching()
 #endif
 #if CORS
-                .AddCustomCors()
+            .AddCustomCors()
 #endif
-                .AddCustomOptions(this.configuration)
-                .AddCustomRouting()
+            .AddCustomOptions(this.configuration)
+            .AddCustomRouting()
 #if ResponseCompression
-                .AddCustomResponseCompression(this.configuration)
+            .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
-                .AddCustomStrictTransportSecurity()
+            .AddCustomStrictTransportSecurity()
 #endif
 #if HealthCheck
-                .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
+            .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
 #endif
 #if OpenTelemetry
-                .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
+            .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
 #endif
-                .AddHttpContextAccessor()
-                .AddServerTiming()
-                .AddControllers()
-                    .AddCustomMvcOptions(this.configuration)
-                .Services
+            .AddHttpContextAccessor()
+            .AddServerTiming()
+            .AddControllers()
+                .AddCustomMvcOptions(this.configuration)
+            .Services
 #if Authorization
-                .AddCustomAuthorization()
+            .AddCustomAuthorization()
 #endif
 #if Redis
-                .AddCustomRedis(this.webHostEnvironment, this.configuration)
+            .AddCustomRedis(this.webHostEnvironment, this.configuration)
 #endif
-                .AddCustomGraphQL(this.webHostEnvironment, this.configuration)
-                .AddProjectMappers()
-                .AddProjectServices()
-                .AddProjectRepositories();
+            .AddCustomGraphQL(this.webHostEnvironment, this.configuration)
+            .AddProjectMappers()
+            .AddProjectServices()
+            .AddProjectRepositories();
 
-        /// <summary>
-        /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
-        /// called by the ASP.NET runtime.
-        /// </summary>
-        /// <param name="application">The application builder.</param>
-        public virtual void Configure(IApplicationBuilder application) =>
-            application
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseServerTiming())
+    /// <summary>
+    /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
+    /// called by the ASP.NET runtime.
+    /// </summary>
+    /// <param name="application">The application builder.</param>
+    public virtual void Configure(IApplicationBuilder application) =>
+        application
+            .UseIf(
+                this.webHostEnvironment.IsDevelopment(),
+                x => x.UseServerTiming())
 #if ForwardedHeaders
-                .UseForwardedHeaders()
+            .UseForwardedHeaders()
 #elif HostFiltering
-                .UseHostFiltering()
+            .UseHostFiltering()
 #endif
-                .UseRouting()
+            .UseRouting()
 #if CORS
-                .UseCors(CorsPolicyName.AllowAny)
+            .UseCors(CorsPolicyName.AllowAny)
 #endif
 #if ResponseCompression
-                .UseResponseCompression()
+            .UseResponseCompression()
 #endif
 #if HttpsEverywhere
-                .UseIf(
-                    !this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseHsts())
+            .UseIf(
+                !this.webHostEnvironment.IsDevelopment(),
+                x => x.UseHsts())
 #endif
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperExceptionPage())
+            .UseIf(
+                this.webHostEnvironment.IsDevelopment(),
+                x => x.UseDeveloperExceptionPage())
 #if Subscriptions
-                .UseWebSockets()
+            .UseWebSockets()
 #endif
-                .UseStaticFilesWithCacheControl()
+            .UseStaticFilesWithCacheControl()
 #if Serilog
-                .UseCustomSerilogRequestLogging()
+            .UseCustomSerilogRequestLogging()
 #endif
-                .UseEndpoints(
-                    builder =>
+            .UseEndpoints(
+                builder =>
+                {
+                    var options = new GraphQLServerOptions();
+                    options.Tool.Enable = false;
+                    // Map the GraphQL HTTP and web socket endpoint at /graphql.
+                    builder.MapGraphQL().WithOptions(options);
+
+                    if (this.webHostEnvironment.IsDevelopment())
                     {
-                        var options = new GraphQLServerOptions();
-                        options.Tool.Enable = false;
-                        // Map the GraphQL HTTP and web socket endpoint at /graphql.
-                        builder.MapGraphQL().WithOptions(options);
+                        // Map the GraphQL Playground UI to try out the GraphQL API at /.
+                        builder.MapGraphQLPlayground("/");
+                        // Map the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
+                        builder.MapGraphQLVoyager("/voyager");
+                        // Map the GraphQL Banana Cake Pop UI to let you navigate your GraphQL API at /banana.
+                        builder.MapBananaCakePop("/banana");
+                    }
 
-                        if (this.webHostEnvironment.IsDevelopment())
-                        {
-                            // Map the GraphQL Playground UI to try out the GraphQL API at /.
-                            builder.MapGraphQLPlayground("/");
-                            // Map the GraphQL Voyager UI to let you navigate your GraphQL API as a spider graph at /voyager.
-                            builder.MapGraphQLVoyager("/voyager");
-                            // Map the GraphQL Banana Cake Pop UI to let you navigate your GraphQL API at /banana.
-                            builder.MapBananaCakePop("/banana");
-                        }
-
-                        // Map health check endpoints.
+                    // Map health check endpoints.
 #if HealthCheck
 #if CORS
-                        builder
-                            .MapHealthChecks("/status")
-                            .RequireCors(CorsPolicyName.AllowAny);
-                        builder
-                            .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
-                            .RequireCors(CorsPolicyName.AllowAny);
+                    builder
+                        .MapHealthChecks("/status")
+                        .RequireCors(CorsPolicyName.AllowAny);
+                    builder
+                        .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                        .RequireCors(CorsPolicyName.AllowAny);
 #else
-                        builder.MapHealthChecks("/status");
-                        builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+                    builder.MapHealthChecks("/status");
+                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #endif
-                    });
-    }
+                });
 }

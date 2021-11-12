@@ -1,21 +1,20 @@
-namespace ApiTemplate.Options
+namespace ApiTemplate.Options;
+
+using System.ComponentModel.DataAnnotations;
+using StackExchange.Redis;
+
+public class RedisOptions
 {
-    using System.ComponentModel.DataAnnotations;
-    using StackExchange.Redis;
+    [Required]
+    public string? ConnectionString { get; set; }
 
-    public class RedisOptions
+    public ConfigurationOptions ConfigurationOptions
     {
-        [Required]
-        public string? ConnectionString { get; set; }
-
-        public ConfigurationOptions ConfigurationOptions
+        get
         {
-            get
-            {
-                var options = ConfigurationOptions.Parse(this.ConnectionString);
-                options.ClientName = AssemblyInformation.Current.Product;
-                return options;
-            }
+            var options = ConfigurationOptions.Parse(this.ConnectionString);
+            options.ClientName = AssemblyInformation.Current.Product;
+            return options;
         }
     }
 }

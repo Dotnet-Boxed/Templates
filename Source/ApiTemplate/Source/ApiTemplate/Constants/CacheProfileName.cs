@@ -1,7 +1,6 @@
-namespace ApiTemplate.Constants
+namespace ApiTemplate.Constants;
+
+public static class CacheProfileName
 {
-    public static class CacheProfileName
-    {
-        public const string StaticFiles = nameof(StaticFiles);
-    }
+    public const string StaticFiles = nameof(StaticFiles);
 }

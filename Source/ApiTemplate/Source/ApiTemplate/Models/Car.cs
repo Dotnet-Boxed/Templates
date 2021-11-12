@@ -1,19 +1,18 @@
-namespace ApiTemplate.Models
+namespace ApiTemplate.Models;
+
+using System;
+
+public class Car
 {
-    using System;
+    public int CarId { get; set; }
 
-    public class Car
-    {
-        public int CarId { get; set; }
+    public DateTimeOffset Created { get; set; }
 
-        public DateTimeOffset Created { get; set; }
+    public int Cylinders { get; set; }
 
-        public int Cylinders { get; set; }
+    public string Make { get; set; } = default!;
 
-        public string Make { get; set; } = default!;
+    public string Model { get; set; } = default!;
 
-        public string Model { get; set; } = default!;
-
-        public DateTimeOffset Modified { get; set; }
-    }
+    public DateTimeOffset Modified { get; set; }
 }

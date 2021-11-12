@@ -1,9 +1,9 @@
-namespace Boxed.Templates.FunctionalTest.Constants
+namespace Boxed.Templates.FunctionalTest.Constants;
+
+public static class GraphQlQuery
 {
-    public static class GraphQlQuery
-    {
-        public const string Introspection =
-            @"query IntrospectionQuery {
+    public const string Introspection =
+        @"query IntrospectionQuery {
                 __schema {
                   queryType { name }
                   mutationType { name }
@@ -95,5 +95,4 @@ namespace Boxed.Templates.FunctionalTest.Constants
                 }
               }
             ";
-    }
 }

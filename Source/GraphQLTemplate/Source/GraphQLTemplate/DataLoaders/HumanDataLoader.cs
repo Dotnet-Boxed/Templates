@@ -1,28 +1,27 @@
-namespace GraphQLTemplate.DataLoaders
+namespace GraphQLTemplate.DataLoaders;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using GraphQLTemplate.Models;
+using GraphQLTemplate.Repositories;
+using GreenDonut;
+
+public class HumanDataLoader : BatchDataLoader<Guid, Human>, IHumanDataLoader
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using GraphQLTemplate.Models;
-    using GraphQLTemplate.Repositories;
-    using GreenDonut;
+    private readonly IHumanRepository repository;
 
-    public class HumanDataLoader : BatchDataLoader<Guid, Human>, IHumanDataLoader
+    public HumanDataLoader(IHumanRepository repository, IBatchScheduler batchScheduler, DataLoaderOptions? options)
+        : base(batchScheduler, options) =>
+        this.repository = repository;
+
+    protected override async Task<IReadOnlyDictionary<Guid, Human>> LoadBatchAsync(
+        IReadOnlyList<Guid> keys,
+        CancellationToken cancellationToken)
     {
-        private readonly IHumanRepository repository;
-
-        public HumanDataLoader(IHumanRepository repository, IBatchScheduler batchScheduler, DataLoaderOptions? options)
-            : base(batchScheduler, options) =>
-            this.repository = repository;
-
-        protected override async Task<IReadOnlyDictionary<Guid, Human>> LoadBatchAsync(
-            IReadOnlyList<Guid> keys,
-            CancellationToken cancellationToken)
-        {
-            var droids = await this.repository.GetHumansAsync(keys, cancellationToken).ConfigureAwait(false);
-            return droids.ToDictionary(x => x.Id);
-        }
+        var droids = await this.repository.GetHumansAsync(keys, cancellationToken).ConfigureAwait(false);
+        return droids.ToDictionary(x => x.Id);
     }
 }

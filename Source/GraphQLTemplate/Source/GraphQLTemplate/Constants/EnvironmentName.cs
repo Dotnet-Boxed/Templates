@@ -1,7 +1,6 @@
-namespace GraphQLTemplate.Constants
+namespace GraphQLTemplate.Constants;
+
+public static class EnvironmentName
 {
-    public static class EnvironmentName
-    {
-        public const string Test = nameof(Test);
-    }
+    public const string Test = nameof(Test);
 }

@@ -1,10 +1,9 @@
-namespace OrleansTemplate.Abstractions.Grains
-{
-    using System.Threading.Tasks;
-    using Orleans;
+namespace OrleansTemplate.Abstractions.Grains;
 
-    public interface IHelloGrain : IGrainWithGuidKey
-    {
-        ValueTask<string> SayHelloAsync(string name);
-    }
+using System.Threading.Tasks;
+using Orleans;
+
+public interface IHelloGrain : IGrainWithGuidKey
+{
+    ValueTask<string> SayHelloAsync(string name);
 }

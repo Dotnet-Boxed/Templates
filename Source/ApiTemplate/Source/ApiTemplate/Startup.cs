@@ -1,167 +1,165 @@
-namespace ApiTemplate
-{
+namespace ApiTemplate;
 #if CORS
-    using ApiTemplate.Constants;
+using ApiTemplate.Constants;
 #endif
-    using Boxed.AspNetCore;
-    using Microsoft.AspNetCore.Builder;
+using Boxed.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 #if HealthCheck
-    using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Infrastructure;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+/// <summary>
+/// The main start-up class for the application.
+/// </summary>
+public class Startup
+{
+    private readonly IConfiguration configuration;
+    private readonly IWebHostEnvironment webHostEnvironment;
 
     /// <summary>
-    /// The main start-up class for the application.
+    /// Initializes a new instance of the <see cref="Startup"/> class.
     /// </summary>
-    public class Startup
+    /// <param name="configuration">The application configuration, where key value pair settings are stored. See
+    /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
+    /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
+    /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
+    public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
     {
-        private readonly IConfiguration configuration;
-        private readonly IWebHostEnvironment webHostEnvironment;
+        this.configuration = configuration;
+        this.webHostEnvironment = webHostEnvironment;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Startup"/> class.
-        /// </summary>
-        /// <param name="configuration">The application configuration, where key value pair settings are stored. See
-        /// http://docs.asp.net/en/latest/fundamentals/configuration.html</param>
-        /// <param name="webHostEnvironment">The environment the application is running under. This can be Development,
-        /// Staging or Production by default. See http://docs.asp.net/en/latest/fundamentals/environments.html</param>
-        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
-        {
-            this.configuration = configuration;
-            this.webHostEnvironment = webHostEnvironment;
-        }
-
-        /// <summary>
-        /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
-        /// called by the ASP.NET runtime. See
-        /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
-        /// </summary>
-        /// <param name="services">The services.</param>
-        public virtual void ConfigureServices(IServiceCollection services) =>
-            services
+    /// <summary>
+    /// Configures the services to add to the ASP.NET Core Injection of Control (IoC) container. This method gets
+    /// called by the ASP.NET runtime. See
+    /// http://blogs.msdn.com/b/webdev/archive/2014/06/17/dependency-injection-in-asp-net-vnext.aspx
+    /// </summary>
+    /// <param name="services">The services.</param>
+    public virtual void ConfigureServices(IServiceCollection services) =>
+        services
 #if ApplicationInsights
-                // Add Azure Application Insights data collection services to the services container.
-                .AddApplicationInsightsTelemetry(this.configuration)
+            // Add Azure Application Insights data collection services to the services container.
+            .AddApplicationInsightsTelemetry(this.configuration)
 #endif
 #if DistributedCacheRedis
-                .AddCustomCaching(this.webHostEnvironment, this.configuration)
+            .AddCustomCaching(this.webHostEnvironment, this.configuration)
 #elif DistributedCacheInMemory
-                .AddCustomCaching()
+            .AddCustomCaching()
 #endif
 #if CORS
-                .AddCustomCors()
+            .AddCustomCors()
 #endif
-                .AddCustomOptions(this.configuration)
-                .AddCustomRouting()
+            .AddCustomOptions(this.configuration)
+            .AddCustomRouting()
 #if ResponseCaching
-                .AddResponseCaching()
+            .AddResponseCaching()
 #endif
 #if ResponseCompression
-                .AddCustomResponseCompression(this.configuration)
+            .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
-                .AddCustomStrictTransportSecurity()
+            .AddCustomStrictTransportSecurity()
 #endif
 #if HealthCheck
-                .AddCustomHealthChecks()
+            .AddCustomHealthChecks()
 #endif
 #if OpenTelemetry
-                .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
+            .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
 #endif
 #if Swagger
-                .AddCustomSwagger()
+            .AddCustomSwagger()
 #endif
-                .AddHttpContextAccessor()
-                // Add useful interface for accessing the ActionContext outside a controller.
-                .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
+            .AddHttpContextAccessor()
+            // Add useful interface for accessing the ActionContext outside a controller.
+            .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
 #if Versioning
-                .AddCustomApiVersioning()
+            .AddCustomApiVersioning()
 #endif
-                .AddServerTiming()
-                .AddControllers()
-                    .AddCustomJsonOptions(this.webHostEnvironment)
+            .AddServerTiming()
+            .AddControllers()
+            .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer
-                    // Adds the XML input and output formatter using the DataContractSerializer.
-                    .AddXmlDataContractSerializerFormatters()
+            // Adds the XML input and output formatter using the DataContractSerializer.
+            .AddXmlDataContractSerializerFormatters()
 #elif XmlSerializer
-                    // Adds the XML input and output formatter using the XmlSerializer.
-                    .AddXmlSerializerFormatters()
+            // Adds the XML input and output formatter using the XmlSerializer.
+            .AddXmlSerializerFormatters()
 #endif
-                    .AddCustomMvcOptions(this.configuration)
-                .Services
-                .AddProjectCommands()
-                .AddProjectMappers()
-                .AddProjectRepositories()
-                .AddProjectServices();
+            .AddCustomMvcOptions(this.configuration)
+            .Services
+            .AddProjectCommands()
+            .AddProjectMappers()
+            .AddProjectRepositories()
+            .AddProjectServices();
 
-        /// <summary>
-        /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
-        /// called by the ASP.NET runtime.
-        /// </summary>
-        /// <param name="application">The application builder.</param>
-        public virtual void Configure(IApplicationBuilder application) =>
-            application
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseServerTiming())
+    /// <summary>
+    /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is
+    /// called by the ASP.NET runtime.
+    /// </summary>
+    /// <param name="application">The application builder.</param>
+    public virtual void Configure(IApplicationBuilder application) =>
+        application
+            .UseIf(
+                this.webHostEnvironment.IsDevelopment(),
+                x => x.UseServerTiming())
 #if ForwardedHeaders
-                .UseForwardedHeaders()
+            .UseForwardedHeaders()
 #elif HostFiltering
-                .UseHostFiltering()
+            .UseHostFiltering()
 #endif
-                .UseRouting()
+            .UseRouting()
 #if CORS
-                .UseCors(CorsPolicyName.AllowAny)
+            .UseCors(CorsPolicyName.AllowAny)
 #endif
 #if ResponseCaching
-                .UseResponseCaching()
+            .UseResponseCaching()
 #endif
 #if ResponseCompression
-                .UseResponseCompression()
+            .UseResponseCompression()
 #endif
 #if HttpsEverywhere
-                .UseIf(
-                    !this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseHsts())
+            .UseIf(
+                !this.webHostEnvironment.IsDevelopment(),
+                x => x.UseHsts())
 #endif
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseDeveloperExceptionPage())
-                .UseStaticFilesWithCacheControl()
+            .UseIf(
+                this.webHostEnvironment.IsDevelopment(),
+                x => x.UseDeveloperExceptionPage())
+            .UseStaticFilesWithCacheControl()
 #if Serilog
-                .UseCustomSerilogRequestLogging()
+            .UseCustomSerilogRequestLogging()
 #endif
-                .UseEndpoints(
-                    builder =>
-                    {
+            .UseEndpoints(
+                builder =>
+                {
 #if CORS
-                        builder.MapControllers().RequireCors(CorsPolicyName.AllowAny);
+                    builder.MapControllers().RequireCors(CorsPolicyName.AllowAny);
 #else
-                        builder.MapControllers();
+                    builder.MapControllers();
 #endif
 #if (HealthCheck && CORS)
-                        builder
-                            .MapHealthChecks("/status")
-                            .RequireCors(CorsPolicyName.AllowAny);
-                        builder
-                            .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
-                            .RequireCors(CorsPolicyName.AllowAny);
+                    builder
+                        .MapHealthChecks("/status")
+                        .RequireCors(CorsPolicyName.AllowAny);
+                    builder
+                        .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                        .RequireCors(CorsPolicyName.AllowAny);
 #elif HealthCheck
-                        builder.MapHealthChecks("/status");
-                        builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+                    builder.MapHealthChecks("/status");
+                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #if Swagger
-                    })
-                .UseSwagger()
-                .UseIf(
-                    this.webHostEnvironment.IsDevelopment(),
-                    x => x.UseCustomSwaggerUI());
+                })
+            .UseSwagger()
+            .UseIf(
+                this.webHostEnvironment.IsDevelopment(),
+                x => x.UseCustomSwaggerUI());
 #else
-                    });
+                });
 #endif
-    }
 }
