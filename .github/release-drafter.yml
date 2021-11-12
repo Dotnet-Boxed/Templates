@@ -6,6 +6,12 @@ categories:
   - title: "📚 Documentation"
     labels:
       - "documentation"
+  - title: "🚀 New Features"
+    labels:
+      - "enhancement"
+  - title: "🐛 Bug Fixes"
+    labels:
+      - "bug"
   - title: "📦 ASP.NET Core API Boxed"
     labels:
       - "template/API"
