@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Grains;
 
-using System.Threading.Tasks;
 using Orleans;
 using Orleans.Concurrency;
 using OrleansTemplate.Abstractions.Grains.HealthChecks;

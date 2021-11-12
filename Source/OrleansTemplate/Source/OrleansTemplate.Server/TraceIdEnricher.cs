@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Server;
 
-using System;
 using Orleans.Runtime;
 using Serilog.Core;
 using Serilog.Events;

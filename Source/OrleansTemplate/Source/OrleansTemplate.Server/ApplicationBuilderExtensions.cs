@@ -1,8 +1,5 @@
 namespace OrleansTemplate.Server;
 
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Serilog;
 using Serilog.Events;
 

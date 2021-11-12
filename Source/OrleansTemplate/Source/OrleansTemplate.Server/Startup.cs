@@ -1,10 +1,6 @@
 namespace OrleansTemplate.Server;
 
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using OrleansTemplate.Server.HealthChecks;
 
 #pragma warning disable CA1724 // The type name conflicts with the namespace name 'Orleans.Runtime.Startup'

@@ -1,13 +1,7 @@
 namespace OrleansTemplate.Server;
 
-using System.IO;
 using System.Reflection;
 using Boxed.AspNetCore;
-using Microsoft.Extensions.Configuration;
-#if ApplicationInsights
-using Microsoft.Extensions.DependencyInjection;
-#endif
-using Microsoft.Extensions.Hosting;
 
 /// <summary>
 /// <see cref="IConfigurationBuilder"/> extension methods.

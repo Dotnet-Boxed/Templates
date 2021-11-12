@@ -1,18 +1,9 @@
 namespace OrleansTemplate.Server;
 
-using System;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 #if ApplicationInsights
 using Microsoft.ApplicationInsights.Extensibility;
 #endif
-#if HealthCheck
-using Microsoft.AspNetCore.Hosting;
-#endif
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Orleans;
