@@ -361,6 +361,13 @@
       "displayName": "Implicit Usings",
       "description": "Enables implicit using statements in all projects which adds some default System.* namespaces."
     },
+    "IsTrimmable": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "displayName": "Is Trimmable",
+      "description": "Enables the library for trimming which reduces the size of applications by removing unused code."
+    },
     "TreatWarningsAsErrors": {
       "type": "parameter",
       "datatype": "bool",

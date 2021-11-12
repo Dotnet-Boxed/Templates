@@ -64,6 +64,9 @@
     "ImplicitUsings": {
       "longName": "implicit-usings"
     },
+    "IsTrimmable": {
+      "longName": "trimmable"
+    },
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
     },

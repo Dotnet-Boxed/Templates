@@ -69,6 +69,10 @@
       "isVisible": true
     },
     {
+      "id": "IsTrimmable",
+      "isVisible":  true
+    },
+    {
       "id": "TreatWarningsAsErrors",
       "isVisible": true
     },

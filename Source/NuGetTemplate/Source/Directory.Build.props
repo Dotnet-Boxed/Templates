@@ -3,6 +3,7 @@
   <PropertyGroup>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <GitHub>true</GitHub>
+    <IsTrimmable>true</IsTrimmable>
     <Sign>true</Sign>
   </PropertyGroup>
   <!--#endif-->
@@ -10,6 +11,7 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
   <PropertyGroup Label="Build">
+    <IsTrimmable Condition="'$(IsTrimmable)' == 'true'">true</IsTrimmable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
