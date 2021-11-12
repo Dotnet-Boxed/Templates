@@ -1,14 +1,11 @@
 namespace ApiTemplate.Controllers;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiTemplate.Commands;
 using ApiTemplate.Constants;
 using ApiTemplate.ViewModels;
 #if Swagger
 using Boxed.AspNetCore;
 #endif
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;

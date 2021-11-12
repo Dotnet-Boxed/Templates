@@ -1,13 +1,7 @@
 namespace ApiTemplate;
 
-using System.IO;
 using System.Reflection;
 using Boxed.AspNetCore;
-using Microsoft.Extensions.Configuration;
-#if ApplicationInsights
-using Microsoft.Extensions.DependencyInjection;
-#endif
-using Microsoft.Extensions.Hosting;
 
 public static class ConfigurationBuilderExtensions
 {

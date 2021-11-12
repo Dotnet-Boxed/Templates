@@ -1,9 +1,6 @@
 namespace ApiTemplate.IntegrationTest.Controllers;
 
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 #if Serilog
 using Xunit.Abstractions;

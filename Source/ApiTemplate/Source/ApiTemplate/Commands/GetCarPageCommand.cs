@@ -1,17 +1,11 @@
 namespace ApiTemplate.Commands;
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using ApiTemplate.Constants;
 using ApiTemplate.Repositories;
 using ApiTemplate.ViewModels;
 using Boxed.AspNetCore;
 using Boxed.Mapping;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 public class GetCarPageCommand
 {

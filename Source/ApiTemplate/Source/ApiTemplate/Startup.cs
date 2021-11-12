@@ -1,17 +1,13 @@
 namespace ApiTemplate;
+
 #if CORS
 using ApiTemplate.Constants;
 #endif
 using Boxed.AspNetCore;
-using Microsoft.AspNetCore.Builder;
 #if HealthCheck
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 /// <summary>
 /// The main start-up class for the application.

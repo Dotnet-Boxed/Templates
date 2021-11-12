@@ -1,7 +1,5 @@
 namespace ApiTemplate.ViewModels;
 
-using System;
-
 #if Swagger
 /// <summary>
 /// A make and model of car.

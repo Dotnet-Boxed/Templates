@@ -1,11 +1,8 @@
 namespace ApiTemplate.Mappers;
 
-using System;
 using ApiTemplate.Constants;
 using ApiTemplate.ViewModels;
 using Boxed.Mapping;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 
 public class CarToCarMapper : IMapper<Models.Car, Car>
 {

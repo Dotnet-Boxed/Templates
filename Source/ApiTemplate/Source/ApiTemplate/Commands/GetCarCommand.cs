@@ -1,14 +1,9 @@
 namespace ApiTemplate.Commands;
 
-using System;
 using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using ApiTemplate.Repositories;
 using ApiTemplate.ViewModels;
 using Boxed.Mapping;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 

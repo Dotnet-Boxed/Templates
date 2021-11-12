@@ -1,8 +1,5 @@
 namespace ApiTemplate.Repositories;
 
-using System;
-using System.Collections.Generic;
-
 public static class EnumerableExtensions
 {
     public static IEnumerable<T> If<T>(
