@@ -24,8 +24,25 @@
     {
       "modifiers": [
         {
+          "condition": "(!Controllers)",
+          "exclude": [
+            "Source/ApiTemplate/Commands/**/*",
+            "Source/ApiTemplate/Constants/ApiVersionName",
+            "Source/ApiTemplate/Constants/CarsControllerRoute.cs",
+            "Source/ApiTemplate/Constants/ControllerName.cs",
+            "Source/ApiTemplate/Controllers/**/*",
+            "Source/ApiTemplate/Mappers/**/*",
+            "Source/ApiTemplate/Models/**/*",
+            "Source/ApiTemplate/Repositories/**/*",
+            "Source/ApiTemplate/Services/**/*",
+            "Source/ApiTemplate/ViewModels/**/*",
+            "Source/ApiTemplate/ProjectServiceCollectionExtensions.cs",
+            "Tests/ApiTemplate.IntegrationTest/Controllers/**/*"
+          ]
+        },
+        {
           "condition": "(!EditorConfig)",
-          "exclude": [".editorconfig"]
+          "exclude": [ ".editorconfig" ]
         },
         {
           "condition": "(!GitHub)",
@@ -39,7 +56,7 @@
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": ["README.md"]
+          "exclude": [ "README.md" ]
         },
         {
           "condition": "(!Swagger)",
@@ -57,11 +74,11 @@
         },
         {
           "condition": "(!Redis)",
-          "exclude": ["Source/ApiTemplate/Options/RedisOptions.cs"]
+          "exclude": [ "Source/ApiTemplate/Options/RedisOptions.cs" ]
         },
         {
           "condition": "(!IIS)",
-          "exclude": ["Source/ApiTemplate/web.config"]
+          "exclude": [ "Source/ApiTemplate/web.config" ]
         },
         {
           "condition": "(!NGINX)",
@@ -72,35 +89,35 @@
         },
         {
           "condition": "(!CORS)",
-          "exclude": ["Source/ApiTemplate/Constants/CorsPolicyName.cs"]
+          "exclude": [ "Source/ApiTemplate/Constants/CorsPolicyName.cs" ]
         },
         {
           "condition": "(!ResponseCompression)",
-          "exclude": ["Source/ApiTemplate/Options/CompressionOptions.cs"]
+          "exclude": [ "Source/ApiTemplate/Options/CompressionOptions.cs" ]
         },
         {
           "condition": "(!RobotsTxt)",
-          "exclude": ["Source/ApiTemplate/wwwroot/robots.txt"]
+          "exclude": [ "Source/ApiTemplate/wwwroot/robots.txt" ]
         },
         {
           "condition": "(!SecurityTxt)",
-          "exclude": ["Source/ApiTemplate/wwwroot/.well-known/security.txt"]
+          "exclude": [ "Source/ApiTemplate/wwwroot/.well-known/security.txt" ]
         },
         {
           "condition": "(!HumansTxt)",
-          "exclude": ["Source/ApiTemplate/wwwroot/humans.txt"]
+          "exclude": [ "Source/ApiTemplate/wwwroot/humans.txt" ]
         },
         {
           "condition": "(!HealthCheck)",
-          "exclude": ["Tests/ApiTemplate.IntegrationTest/HealthCheckTest.cs"]
+          "exclude": [ "Tests/ApiTemplate.IntegrationTest/HealthCheckTest.cs" ]
         },
         {
           "condition": "(!IntegrationTest)",
-          "exclude": ["Tests/ApiTemplate.IntegrationTest/**/*"]
+          "exclude": [ "Tests/ApiTemplate.IntegrationTest/**/*" ]
         },
         {
           "condition": "(!Docker)",
-          "exclude": ["Source/ApiTemplate/Dockerfile", ".dockerignore"]
+          "exclude": [ "Source/ApiTemplate/Dockerfile", ".dockerignore" ]
         },
         {
           "condition": "(!GitHubActions)",
@@ -239,6 +256,13 @@
       "description": "Treat warnings as errors."
     },
 
+    "Controllers": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "displayName": "Controllers (Uncheck to use minimal API's)",
+      "description": "Adds an example ASP.NET MVC Controller."
+    },
     "Swagger": {
       "type": "parameter",
       "datatype": "bool",

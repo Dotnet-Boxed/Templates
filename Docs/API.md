@@ -14,6 +14,7 @@ The ASP.NET Core API project template uses `dotnet new` to enable you to turn fe
 
 #### API
 
+- **Controllers** (Default=On) - Adds an example ASP.NET MVC Controller.
 - **Swagger** (Default=On) - Swagger is a format for describing the endpoints in your API and letting you try out your site using its user interface.
 - **Versioning** (Default=On) - Enable API versioning to version API endpoints.
 - **XmlFormatter** - Choose whether to use the XML input/output formatter and which serializer to use.

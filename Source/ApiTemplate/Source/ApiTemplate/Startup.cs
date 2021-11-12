@@ -90,12 +90,16 @@ public class Startup
             // Adds the XML input and output formatter using the XmlSerializer.
             .AddXmlSerializerFormatters()
 #endif
+#if Controllers
             .AddCustomMvcOptions(this.configuration)
             .Services
             .AddProjectCommands()
             .AddProjectMappers()
             .AddProjectRepositories()
             .AddProjectServices();
+#else
+            .AddCustomMvcOptions(this.configuration);
+#endif
 
     /// <summary>
     /// Configures the application and HTTP request pipeline. Configure is called after ConfigureServices is

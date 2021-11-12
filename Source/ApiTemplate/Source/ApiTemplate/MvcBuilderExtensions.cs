@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ApiTemplate.Options;
+#if Controllers
 using ApiTemplate.ViewModels;
+#endif
 using Boxed.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.JsonPatch;
@@ -30,8 +32,10 @@ internal static class MvcBuilderExtensions
                 // Pretty print the JSON in development for easier debugging.
                 jsonSerializerOptions.WriteIndented = webHostEnvironment.IsDevelopment() ||
                 webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
+#if Controllers
 
                 jsonSerializerOptions.AddContext<CustomJsonSerializerContext>();
+#endif
             });
 
     public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>

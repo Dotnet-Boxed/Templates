@@ -43,6 +43,9 @@
     "TreatWarningsAsErrors": {
       "longName": "treat-warnings-as-errors"
     },
+    "Controllers": {
+      "longName": "controllers"
+    },
     "Swagger": {
       "longName": "swagger"
     },

@@ -28,12 +28,12 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 - **License** - The legal license applied to the source code in this project.
   - **MIT** (Default) - The MIT license.
   - **None** - No license, the source code cannot be legally shared.
-- **AnalysisMode** (Default=Default) - The selection of code analysis rules to enable.
-  - **Default** - Enables the default minimum set of code analysis rules.
+- **AnalysisMode** - The selection of code analysis rules to enable.
+  - **Default** (Default) - Enables the default minimum set of code analysis rules.
   - **AllEnabledByDefault** - Enables all code analysis rules.
   - **AllDisabledByDefault** - Disables all code analysis rules.
-- **ImplicitUsings** - Enables implicit using statements in all projects which adds some default System.* namespaces.
-- **IsTrimmable** - Enables the library for trimming which reduces the size of applications by removing unused code.
+- **ImplicitUsings** (Default=On) - Enables implicit using statements in all projects which adds some default System.* namespaces.
+- **IsTrimmable** (Default=Off) - Enables the library for trimming which reduces the size of applications by removing unused code.
 - **TreatWarningsAsErrors** (Default=On) - Treat warnings as errors.
 - **StyleCop** (Default=On) - Adds and enforces StyleCop analysers.
 - **Tests** (Default=On) - Adds a unit test project.
