@@ -21,6 +21,7 @@ public class NuGetTemplateTest
             throw new ArgumentNullException(nameof(testOutputHelper));
         }
 
+        ConfigurationService.DefaultTimeout = TimeSpan.FromMinutes(3);
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
 
