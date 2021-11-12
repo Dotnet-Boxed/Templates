@@ -2,10 +2,11 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Modify these constants to enable/disable a feature to debug the template. Note that this only affects the C#. -->
-    <DefineConstants>$(DefineConstants);TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;Serilog;DistributedCacheRedis;Redis;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer;AnyXmlSerializer;StyleCop;Docker;OpenTelemetry</DefineConstants>
+    <DefineConstants>$(DefineConstants);Controllers;TreatWarningsAsErrors;Kestrel;IIS;NGINX;Azure;Serilog;DistributedCacheRedis;Redis;ApplicationInsights;HealthCheck;HttpsEverywhere;HstsPreload;ForwardedHeaders;HostFiltering;ResponseCaching;ResponseCompression;CORS;HumansTxt;SecurityTxt;RobotsTxt;Swagger;Versioning;DataContractSerializer;AnyXmlSerializer;StyleCop;Docker;OpenTelemetry</DefineConstants>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
     <ApplicationInsights>true</ApplicationInsights>
     <Azure>true</Azure>
+    <Controllers>true</Controllers>
     <DistributedCacheRedis>true</DistributedCacheRedis>
     <Redis>true</Redis>
     <OpenTelemetry>true</OpenTelemetry>

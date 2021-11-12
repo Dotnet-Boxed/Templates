@@ -20,9 +20,9 @@ public class ApiTemplateTest
     private const string SolutionFileName = "ApiTemplate.sln";
     private static readonly string[] DefaultArguments = new string[]
     {
-            "no-open-todo=true",
-            "https-port={HTTPS_PORT}",
-            "http-port={HTTP_PORT}",
+        "no-open-todo=true",
+        "https-port={HTTPS_PORT}",
+        "http-port={HTTP_PORT}",
     };
 
     public ApiTemplateTest(ITestOutputHelper testOutputHelper)
@@ -39,6 +39,7 @@ public class ApiTemplateTest
     [Trait("IsUsingDocker", "false")]
     [Trait("IsUsingDotnetRun", "false")]
     [InlineData("ApiDefaults")]
+    [InlineData("ApiNoControllers", "controllers=false")]
     [InlineData("ApiNoSerilog", "logging=None")]
     [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
     [InlineData("ApiNoHostFiltering", "host-filtering=false")]

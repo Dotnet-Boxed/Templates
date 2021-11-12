@@ -16,9 +16,9 @@ public class GraphQLTemplateTest
     private const string SolutionFileName = "GraphQLTemplate.sln";
     private static readonly string[] DefaultArguments = new string[]
     {
-            "no-open-todo=true",
-            "https-port={HTTPS_PORT}",
-            "http-port={HTTP_PORT}",
+        "no-open-todo=true",
+        "https-port={HTTPS_PORT}",
+        "http-port={HTTP_PORT}",
     };
 
     public GraphQLTemplateTest(ITestOutputHelper testOutputHelper)

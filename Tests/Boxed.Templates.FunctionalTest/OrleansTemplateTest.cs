@@ -13,9 +13,9 @@ public class OrleansTemplateTest
     private const string SolutionFileName = "OrleansTemplate.sln";
     private static readonly string[] DefaultArguments = new string[]
     {
-            "no-install-storage-emulator=true",
-            "no-start-storage-emulator=true",
-            "http-port={HTTP_PORT}",
+        "no-install-storage-emulator=true",
+        "no-start-storage-emulator=true",
+        "http-port={HTTP_PORT}",
     };
 
     public OrleansTemplateTest(ITestOutputHelper testOutputHelper)

@@ -3,12 +3,16 @@ namespace ApiTemplate.IntegrationTest;
 using System;
 using System.Net.Http;
 using ApiTemplate.Options;
+#if Controllers
 using ApiTemplate.Repositories;
 using ApiTemplate.Services;
+#endif
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+#if Controllers
 using Moq;
+#endif
 #if Serilog
 using Serilog;
 using Serilog.Events;
@@ -41,12 +45,14 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
     public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
+#if Controllers
     public Mock<ICarRepository> CarRepositoryMock { get; } = new Mock<ICarRepository>(MockBehavior.Strict);
 
     public Mock<IClockService> ClockServiceMock { get; } = new Mock<IClockService>(MockBehavior.Strict);
 
     public void VerifyAllMocks() => Mock.VerifyAll(this.CarRepositoryMock, this.ClockServiceMock);
 
+#endif
     protected override void ConfigureClient(HttpClient client)
     {
         using (var serviceScope = this.Services.CreateScope())
@@ -63,13 +69,18 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
             .UseEnvironment(Constants.EnvironmentName.Test)
             .ConfigureServices(this.ConfigureServices);
 
-    protected virtual void ConfigureServices(IServiceCollection services) =>
-        services
+    protected virtual void ConfigureServices(IServiceCollection services)
+    {
 #if DistributedCacheRedis
-            .AddDistributedMemoryCache()
+        services.AddDistributedMemoryCache();
 #endif
+#if Controllers
+        services
             .AddSingleton(this.CarRepositoryMock.Object)
             .AddSingleton(this.ClockServiceMock.Object);
+#endif
+    }
+#if Controllers
 
     protected override void Dispose(bool disposing)
     {
@@ -80,4 +91,5 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
         base.Dispose(disposing);
     }
+#endif
 }

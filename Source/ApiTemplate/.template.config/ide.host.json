@@ -45,6 +45,10 @@
       "isVisible": true
     },
     {
+      "id": "Controllers",
+      "isVisible": true
+    },
+    {
       "id": "Swagger",
       "isVisible": true
     },
