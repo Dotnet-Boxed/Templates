@@ -1,7 +1,5 @@
 namespace ApiTemplate.OperationFilters;
 
-using System;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;

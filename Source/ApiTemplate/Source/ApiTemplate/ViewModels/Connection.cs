@@ -1,7 +1,5 @@
 namespace ApiTemplate.ViewModels;
 
-using System.Collections.Generic;
-
 #if Swagger
 /// <summary>
 /// A paged collection of items.

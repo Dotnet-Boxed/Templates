@@ -1,19 +1,13 @@
 namespace ApiTemplate;
 
-using System;
-using System.Collections.Generic;
 #if ResponseCompression
 using System.IO.Compression;
 #endif
-using System.Linq;
 #if CORS
 using ApiTemplate.Constants;
 #endif
 using ApiTemplate.Options;
 using Boxed.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 #if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
 #endif
@@ -23,9 +17,6 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 #if OpenTelemetry
 using OpenTelemetry.Exporter;

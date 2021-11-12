@@ -1,16 +1,11 @@
 namespace ApiTemplate;
 
-using System;
-using System.Linq;
 using ApiTemplate.Constants;
 using ApiTemplate.Options;
 using Boxed.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 #if Versioning
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 #endif
-using Microsoft.Extensions.DependencyInjection;
 #if Serilog
 using Serilog;
 #if HealthCheck

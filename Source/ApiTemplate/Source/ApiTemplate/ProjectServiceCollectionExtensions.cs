@@ -6,7 +6,6 @@ using ApiTemplate.Repositories;
 using ApiTemplate.Services;
 using ApiTemplate.ViewModels;
 using Boxed.Mapping;
-using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods add project services.

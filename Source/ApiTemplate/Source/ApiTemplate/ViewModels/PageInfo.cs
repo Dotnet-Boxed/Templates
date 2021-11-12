@@ -1,8 +1,5 @@
 namespace ApiTemplate.ViewModels;
 
-using System;
-using System.Collections.Generic;
-
 #if Swagger
 /// <summary>
 /// Holds metadata about a page of items.

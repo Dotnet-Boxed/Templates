@@ -1,6 +1,5 @@
 namespace ApiTemplate;
 
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ApiTemplate.Options;
@@ -8,13 +7,9 @@ using ApiTemplate.Options;
 using ApiTemplate.ViewModels;
 #endif
 using Boxed.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 internal static class MvcBuilderExtensions

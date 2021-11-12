@@ -1,6 +1,5 @@
 namespace ApiTemplate.Mappers;
 
-using System;
 using ApiTemplate.Services;
 using ApiTemplate.ViewModels;
 using Boxed.Mapping;

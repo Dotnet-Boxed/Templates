@@ -1,7 +1,5 @@
 namespace ApiTemplate.Commands;
 
-using System.Threading;
-using System.Threading.Tasks;
 using ApiTemplate.Constants;
 using ApiTemplate.Repositories;
 using ApiTemplate.ViewModels;

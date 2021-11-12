@@ -1,7 +1,5 @@
 namespace ApiTemplate.Models;
 
-using System;
-
 public class Car
 {
     public int CarId { get; set; }

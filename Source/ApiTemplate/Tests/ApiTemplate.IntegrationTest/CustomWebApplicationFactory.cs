@@ -1,15 +1,11 @@
 namespace ApiTemplate.IntegrationTest;
 
-using System;
-using System.Net.Http;
 using ApiTemplate.Options;
 #if Controllers
 using ApiTemplate.Repositories;
 using ApiTemplate.Services;
 #endif
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
 #if Controllers
 using Moq;
 #endif
