@@ -1,7 +1,5 @@
 namespace OrleansTemplate.Grains.HealthChecks;
 
-using System;
-using System.Threading.Tasks;
 using Orleans;
 using Orleans.Placement;
 using Orleans.Runtime;

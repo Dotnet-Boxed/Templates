@@ -1,10 +1,6 @@
 namespace OrleansTemplate.Server;
 
-using System;
 using System.Runtime.InteropServices;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 public static class HostExtensions
 {

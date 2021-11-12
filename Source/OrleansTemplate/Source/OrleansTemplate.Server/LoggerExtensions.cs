@@ -1,8 +1,5 @@
 namespace OrleansTemplate.Server;
 
-using System;
-using Microsoft.Extensions.Logging;
-
 /// <summary>
 /// <see cref="ILogger"/> extension methods. Helps log messages using strongly typing and source generators.
 /// </summary>

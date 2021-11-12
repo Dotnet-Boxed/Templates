@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Server;
 
-using System;
 using Orleans.Hosting;
 
 /// <summary>

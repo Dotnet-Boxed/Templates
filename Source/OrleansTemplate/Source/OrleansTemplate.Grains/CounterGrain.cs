@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Grains;
 
-using System.Threading.Tasks;
 using Orleans;
 using OrleansTemplate.Abstractions.Grains;
 
