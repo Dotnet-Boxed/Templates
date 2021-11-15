@@ -66,7 +66,7 @@
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="6.0.0" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.0" Condition="'$(DistributedCacheRedis)' == 'true'" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" Condition="'$(Docker)' == 'true'" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc8" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc8" Condition="'$(OpenTelemetry)' == 'true'" />
