@@ -9,7 +9,7 @@ using OrleansTemplate.Abstractions.Constants;
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
 /// </summary>
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds Open Telemetry services and configures instrumentation and exporters.
@@ -30,8 +30,8 @@ public static class ServiceCollectionExtensions
                         .AddAttributes(
                             new KeyValuePair<string, object>[]
                             {
-                                    new(OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
-                                    new(OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
+                                new(OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
+                                new(OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
                             }))
                     .AddAspNetCoreInstrumentation(
                         options =>

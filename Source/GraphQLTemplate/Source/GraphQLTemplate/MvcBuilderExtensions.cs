@@ -3,7 +3,7 @@ namespace GraphQLTemplate;
 using GraphQLTemplate.Options;
 using Microsoft.AspNetCore.Mvc.Formatters;
 
-public static class MvcBuilderExtensions
+internal static class MvcBuilderExtensions
 {
     public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
         builder.AddMvcOptions(

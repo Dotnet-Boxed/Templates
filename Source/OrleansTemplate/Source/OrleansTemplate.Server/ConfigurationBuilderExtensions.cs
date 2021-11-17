@@ -6,7 +6,7 @@ using Boxed.AspNetCore;
 /// <summary>
 /// <see cref="IConfigurationBuilder"/> extension methods.
 /// </summary>
-public static class ConfigurationBuilderExtensions
+internal static class ConfigurationBuilderExtensions
 {
     public static IConfigurationBuilder AddCustomBootstrapConfiguration(
         this IConfigurationBuilder configurationBuilder, string[] args) =>

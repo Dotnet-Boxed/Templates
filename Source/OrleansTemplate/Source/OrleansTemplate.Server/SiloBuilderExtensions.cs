@@ -20,15 +20,8 @@ public static class SiloBuilderExtensions
         bool condition,
         Func<ISiloBuilder, ISiloBuilder> action)
     {
-        if (siloBuilder is null)
-        {
-            throw new ArgumentNullException(nameof(siloBuilder));
-        }
-
-        if (action is null)
-        {
-            throw new ArgumentNullException(nameof(action));
-        }
+        ArgumentNullException.ThrowIfNull(siloBuilder);
+        ArgumentNullException.ThrowIfNull(action);
 
         if (condition)
         {
@@ -51,20 +44,9 @@ public static class SiloBuilderExtensions
         Func<ISiloBuilder, bool> condition,
         Func<ISiloBuilder, ISiloBuilder> action)
     {
-        if (siloBuilder is null)
-        {
-            throw new ArgumentNullException(nameof(siloBuilder));
-        }
-
-        if (condition is null)
-        {
-            throw new ArgumentNullException(nameof(condition));
-        }
-
-        if (action is null)
-        {
-            throw new ArgumentNullException(nameof(action));
-        }
+        ArgumentNullException.ThrowIfNull(siloBuilder);
+        ArgumentNullException.ThrowIfNull(condition);
+        ArgumentNullException.ThrowIfNull(action);
 
         if (condition(siloBuilder))
         {
