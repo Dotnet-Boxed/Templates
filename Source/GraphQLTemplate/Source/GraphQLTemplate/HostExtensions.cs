@@ -45,7 +45,9 @@ internal static class HostExtensions
                     RuntimeInformation.FrameworkDescription,
                     RuntimeInformation.OSDescription);
             }
+#pragma warning disable CA1031 // Do not catch general exception types
             catch
+#pragma warning restore CA1031 // Do not catch general exception types
             {
                 LogToConsole(exception);
             }
@@ -53,8 +55,11 @@ internal static class HostExtensions
 
         static void LogToConsole(Exception exception)
         {
+            var foregroundColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"{AssemblyInformation.Current.Product} terminated unexpectedly.");
             Console.WriteLine(exception.ToString());
+            Console.ForegroundColor = foregroundColor;
         }
     }
 }
