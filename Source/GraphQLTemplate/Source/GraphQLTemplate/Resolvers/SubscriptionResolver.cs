@@ -1,8 +1,5 @@
 namespace GraphQLTemplate.Resolvers;
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using GraphQLTemplate.DataLoaders;
 using GraphQLTemplate.Models;
 using HotChocolate;

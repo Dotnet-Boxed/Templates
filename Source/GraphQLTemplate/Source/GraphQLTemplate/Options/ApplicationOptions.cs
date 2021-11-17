@@ -1,13 +1,10 @@
 namespace GraphQLTemplate.Options;
 
 using System.ComponentModel.DataAnnotations;
-#if ForwardedHeaders
-using Microsoft.AspNetCore.Builder;
-#elif HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
 #endif
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Hosting;
 
 /// <summary>
 /// All options for the application.

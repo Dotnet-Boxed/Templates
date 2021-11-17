@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Mappers;
 
-using System;
 using Boxed.Mapping;
 using GraphQLTemplate.Models;
 using GraphQLTemplate.Services;
@@ -13,6 +12,8 @@ public class HumanInputToHumanMapper : IImmutableMapper<HumanInput, Human>
 
     public Human Map(HumanInput source)
     {
+        ArgumentNullException.ThrowIfNull(source);
+
         var now = this.clockService.UtcNow;
 
         var human = new Human(

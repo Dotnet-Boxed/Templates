@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.DataLoaders;
 
-using System;
 using GraphQLTemplate.Models;
 using GreenDonut;
 

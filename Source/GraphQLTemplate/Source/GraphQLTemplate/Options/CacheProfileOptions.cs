@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Options;
 
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 /// <summary>
