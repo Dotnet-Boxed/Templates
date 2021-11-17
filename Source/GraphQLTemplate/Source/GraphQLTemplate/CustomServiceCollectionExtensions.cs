@@ -338,6 +338,7 @@ internal static class CustomServiceCollectionExtensions
         var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
         return services
             .AddGraphQLServer()
+            .InitializeOnStartup()
             .AddFiltering()
             .AddSorting()
             .AddGlobalObjectIdentification()
