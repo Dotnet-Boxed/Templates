@@ -1,7 +1,7 @@
 namespace ApiTemplate.Options;
 
 using System.ComponentModel.DataAnnotations;
-#if HostFiltering
+#if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
 #endif
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -25,8 +25,7 @@ public class ApplicationOptions
     [Required]
     public ForwardedHeadersOptions ForwardedHeaders { get; set; } = default!;
 
-#endif
-#if HostFiltering
+#elif HostFiltering
     [Required]
     public HostFilteringOptions HostFiltering { get; set; } = default!;
 
