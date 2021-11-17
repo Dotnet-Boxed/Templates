@@ -1,7 +1,5 @@
 namespace GraphQLTemplate.Models;
 
-using System;
-
 public record class Human(
     Guid Id,
     string Name,

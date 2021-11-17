@@ -2,8 +2,6 @@ namespace GraphQLTemplate;
 
 using GraphQLTemplate.Options;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 public static class MvcBuilderExtensions
 {

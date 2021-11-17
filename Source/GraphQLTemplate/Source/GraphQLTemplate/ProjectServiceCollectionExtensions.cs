@@ -1,6 +1,5 @@
 namespace GraphQLTemplate;
 
-using System;
 using Boxed.Mapping;
 using GraphQLTemplate.DataLoaders;
 using GraphQLTemplate.Directives;
@@ -11,7 +10,6 @@ using GraphQLTemplate.Services;
 using GraphQLTemplate.Types;
 using HotChocolate.Execution.Configuration;
 using HotChocolate.Types;
-using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods add project services.

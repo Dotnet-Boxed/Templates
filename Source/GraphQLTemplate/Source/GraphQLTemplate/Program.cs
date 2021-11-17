@@ -1,18 +1,9 @@
 namespace GraphQLTemplate;
 
-using System;
-using System.IO;
-using System.Threading.Tasks;
 using GraphQLTemplate.Options;
 #if ApplicationInsights
 using Microsoft.ApplicationInsights.Extensibility;
 #endif
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-#if ApplicationInsights
-using Microsoft.Extensions.DependencyInjection;
-#endif
-using Microsoft.Extensions.Hosting;
 #if Serilog
 using Serilog;
 using Serilog.Extensions.Hosting;

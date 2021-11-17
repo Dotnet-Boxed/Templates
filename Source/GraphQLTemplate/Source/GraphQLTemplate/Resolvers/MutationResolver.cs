@@ -1,7 +1,5 @@
 namespace GraphQLTemplate.Resolvers;
 
-using System.Threading;
-using System.Threading.Tasks;
 using Boxed.Mapping;
 using GraphQLTemplate.Models;
 using GraphQLTemplate.Repositories;

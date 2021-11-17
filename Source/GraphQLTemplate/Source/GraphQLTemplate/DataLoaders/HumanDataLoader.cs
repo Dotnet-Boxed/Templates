@@ -1,10 +1,5 @@
 namespace GraphQLTemplate.DataLoaders;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using GraphQLTemplate.Models;
 using GraphQLTemplate.Repositories;
 using GreenDonut;

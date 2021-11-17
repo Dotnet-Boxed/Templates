@@ -1,6 +1,5 @@
 namespace GraphQLTemplate.Types;
 
-using System;
 using GraphQLTemplate.Resolvers;
 using HotChocolate.Types;
 

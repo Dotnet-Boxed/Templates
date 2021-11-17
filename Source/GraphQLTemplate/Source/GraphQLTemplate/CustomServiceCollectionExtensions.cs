@@ -1,32 +1,21 @@
 namespace GraphQLTemplate;
 
-using System;
-using System.Collections.Generic;
 #if ResponseCompression
 using System.IO.Compression;
 #endif
-using System.Linq;
 using Boxed.AspNetCore;
 #if (Authorization || CORS || OpenTelemetry)
 using GraphQLTemplate.Constants;
 #endif
 using GraphQLTemplate.Options;
 using HotChocolate.Execution.Options;
-using Microsoft.AspNetCore.Builder;
 #if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
-#endif
-using Microsoft.AspNetCore.Hosting;
-#if OpenTelemetry
-using Microsoft.AspNetCore.Http;
 #endif
 #if ResponseCompression
 using Microsoft.AspNetCore.ResponseCompression;
 #endif
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 #if OpenTelemetry
 using OpenTelemetry.Exporter;
@@ -217,7 +206,7 @@ internal static class CustomServiceCollectionExtensions
             // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
 #if Redis
             .AddIf(
-                !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+                !webHostEnvironment.IsEnvironment(EnvironmentName.Test),
                 x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
 #endif
             .Services;
@@ -332,7 +321,7 @@ internal static class CustomServiceCollectionExtensions
         IWebHostEnvironment webHostEnvironment,
         IConfiguration configuration) =>
         services.AddIf(
-            !webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+            !webHostEnvironment.IsEnvironment(EnvironmentName.Test),
             x => x.AddSingleton<IConnectionMultiplexer>(
                 ConnectionMultiplexer.Connect(
                      configuration
@@ -360,13 +349,13 @@ internal static class CustomServiceCollectionExtensions
 #if PersistedQueries
             .UseAutomaticPersistedQueryPipeline()
             .AddIfElse(
-                webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+                webHostEnvironment.IsEnvironment(EnvironmentName.Test),
                 x => x.AddInMemoryQueryStorage(),
                 x => x.AddRedisQueryStorage())
 #endif
 #if Subscriptions
             .AddIfElse(
-                webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test),
+                webHostEnvironment.IsEnvironment(EnvironmentName.Test),
                 x => x.AddInMemorySubscriptions(),
                 x => x.AddRedisSubscriptions())
 #endif

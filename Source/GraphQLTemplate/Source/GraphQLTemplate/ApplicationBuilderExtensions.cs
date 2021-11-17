@@ -1,15 +1,8 @@
 namespace GraphQLTemplate;
 
-using System;
-using System.Linq;
 using Boxed.AspNetCore;
 using GraphQLTemplate.Constants;
 using GraphQLTemplate.Options;
-using Microsoft.AspNetCore.Builder;
-#if Serilog
-using Microsoft.AspNetCore.Http;
-#endif
-using Microsoft.Extensions.DependencyInjection;
 #if Serilog
 using Serilog;
 #if HealthCheck

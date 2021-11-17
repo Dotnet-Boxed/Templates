@@ -1,6 +1,5 @@
 namespace GraphQLTemplate;
 
-using System;
 using HotChocolate.Execution.Configuration;
 
 /// <summary>
