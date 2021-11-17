@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using Boxed.AspNetCore;
 
-public static class ConfigurationBuilderExtensions
+internal static class ConfigurationBuilderExtensions
 {
     public static IConfigurationBuilder AddCustomBootstrapConfiguration(
         this IConfigurationBuilder configurationBuilder, string[] args) =>

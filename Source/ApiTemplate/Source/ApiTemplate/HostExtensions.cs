@@ -2,7 +2,7 @@ namespace ApiTemplate;
 
 using System.Runtime.InteropServices;
 
-public static class HostExtensions
+internal static class HostExtensions
 {
     public static void LogApplicationStarted(this IHost host)
     {

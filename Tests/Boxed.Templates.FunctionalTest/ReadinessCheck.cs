@@ -10,15 +10,8 @@ public static class ReadinessCheck
 {
     public static async Task<bool> StatusSelfAsync(HttpClient httpClient, HttpClient httpsClient)
     {
-        if (httpClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpClient));
-        }
-
-        if (httpsClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpsClient));
-        }
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(httpsClient);
 
         try
         {
@@ -37,15 +30,8 @@ public static class ReadinessCheck
 
     public static async Task<bool> StatusSelfOverHttpAsync(HttpClient httpClient, HttpClient httpsClient)
     {
-        if (httpClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpClient));
-        }
-
-        if (httpsClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpsClient));
-        }
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(httpsClient);
 
         try
         {
@@ -64,15 +50,8 @@ public static class ReadinessCheck
 
     public static async Task<bool> FaviconAsync(HttpClient httpClient, HttpClient httpsClient)
     {
-        if (httpClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpClient));
-        }
-
-        if (httpsClient is null)
-        {
-            throw new ArgumentNullException(nameof(httpsClient));
-        }
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(httpsClient);
 
         try
         {

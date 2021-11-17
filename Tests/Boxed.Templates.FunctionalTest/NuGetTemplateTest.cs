@@ -16,10 +16,7 @@ public class NuGetTemplateTest
 
     public NuGetTemplateTest(ITestOutputHelper testOutputHelper)
     {
-        if (testOutputHelper is null)
-        {
-            throw new ArgumentNullException(nameof(testOutputHelper));
-        }
+        ArgumentNullException.ThrowIfNull(testOutputHelper);
 
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
