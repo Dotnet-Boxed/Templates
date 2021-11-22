@@ -23,7 +23,7 @@ internal static class ServiceCollectionExtensions
             {
                 builder
                     .SetResourceBuilder(ResourceBuilder
-                        .CreateDefault()
+                        .CreateEmpty()
                         .AddService(
                             webHostEnvironment.ApplicationName,
                             serviceVersion: typeof(Startup).Assembly.GetCustomAttribute<AssemblyFileVersionAttribute>()!.Version)
@@ -32,7 +32,8 @@ internal static class ServiceCollectionExtensions
                             {
                                 new(OpenTelemetryAttributeName.Deployment.Environment, webHostEnvironment.EnvironmentName),
                                 new(OpenTelemetryAttributeName.Host.Name, Environment.MachineName),
-                            }))
+                            })
+                        .AddEnvironmentVariableDetector())
                     .AddAspNetCoreInstrumentation(
                         options =>
                         {
