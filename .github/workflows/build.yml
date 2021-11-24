@@ -34,15 +34,15 @@ jobs:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core 3.1 SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: "3.1.x"
       - name: "Install .NET Core 5.0 SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: "5.0.x"
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
@@ -72,15 +72,15 @@ jobs:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core 3.1 SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: "3.1.x"
       - name: "Install .NET Core 5.0 SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
         with:
           dotnet-version: "5.0.x"
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v1.8.2
+        uses: actions/setup-dotnet@v1.9.0
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
