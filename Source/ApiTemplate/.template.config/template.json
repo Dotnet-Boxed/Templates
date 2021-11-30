@@ -42,7 +42,7 @@
         },
         {
           "condition": "(!EditorConfig)",
-          "exclude": [ ".editorconfig" ]
+          "exclude": [".editorconfig"]
         },
         {
           "condition": "(!GitHub)",
@@ -56,7 +56,7 @@
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": [ "README.md" ]
+          "exclude": ["README.md"]
         },
         {
           "condition": "(!Swagger)",
@@ -74,11 +74,11 @@
         },
         {
           "condition": "(!Redis)",
-          "exclude": [ "Source/ApiTemplate/Options/RedisOptions.cs" ]
+          "exclude": ["Source/ApiTemplate/Options/RedisOptions.cs"]
         },
         {
           "condition": "(!IIS)",
-          "exclude": [ "Source/ApiTemplate/web.config" ]
+          "exclude": ["Source/ApiTemplate/web.config"]
         },
         {
           "condition": "(!NGINX)",
@@ -89,35 +89,35 @@
         },
         {
           "condition": "(!CORS)",
-          "exclude": [ "Source/ApiTemplate/Constants/CorsPolicyName.cs" ]
+          "exclude": ["Source/ApiTemplate/Constants/CorsPolicyName.cs"]
         },
         {
           "condition": "(!ResponseCompression)",
-          "exclude": [ "Source/ApiTemplate/Options/CompressionOptions.cs" ]
+          "exclude": ["Source/ApiTemplate/Options/CompressionOptions.cs"]
         },
         {
           "condition": "(!RobotsTxt)",
-          "exclude": [ "Source/ApiTemplate/wwwroot/robots.txt" ]
+          "exclude": ["Source/ApiTemplate/wwwroot/robots.txt"]
         },
         {
           "condition": "(!SecurityTxt)",
-          "exclude": [ "Source/ApiTemplate/wwwroot/.well-known/security.txt" ]
+          "exclude": ["Source/ApiTemplate/wwwroot/.well-known/security.txt"]
         },
         {
           "condition": "(!HumansTxt)",
-          "exclude": [ "Source/ApiTemplate/wwwroot/humans.txt" ]
+          "exclude": ["Source/ApiTemplate/wwwroot/humans.txt"]
         },
         {
           "condition": "(!HealthCheck)",
-          "exclude": [ "Tests/ApiTemplate.IntegrationTest/HealthCheckTest.cs" ]
+          "exclude": ["Tests/ApiTemplate.IntegrationTest/HealthCheckTest.cs"]
         },
         {
           "condition": "(!IntegrationTest)",
-          "exclude": [ "Tests/ApiTemplate.IntegrationTest/**/*" ]
+          "exclude": ["Tests/ApiTemplate.IntegrationTest/**/*"]
         },
         {
           "condition": "(!Docker)",
-          "exclude": [ "Source/ApiTemplate/Dockerfile", ".dockerignore" ]
+          "exclude": ["Source/ApiTemplate/Dockerfile", ".dockerignore"]
         },
         {
           "condition": "(!GitHubActions)",
