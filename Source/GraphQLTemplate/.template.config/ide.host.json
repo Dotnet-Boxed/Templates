@@ -6,8 +6,8 @@
   "order": 0,
   "symbolInfo": [
     {
-      "id": "Title",
-      "isVisible": true
+      "id": "SkipOpenToDo",
+      "isVisible": false
     }
   ]
 }
