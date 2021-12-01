@@ -1,8 +1,7 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
-    "Release";
+    EnvironmentVariable("Configuration", "Release");
 
 var artefactsDirectory = Directory("./Artefacts");
 
@@ -20,7 +19,7 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
+        DotNetRestore();
     });
 
 Task("Build")
@@ -28,9 +27,9 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        DotNetCoreBuild(
+        DotNetBuild(
             ".",
-            new DotNetCoreBuildSettings()
+            new DotNetBuildSettings()
             {
                 Configuration = configuration,
                 NoRestore = true,
@@ -41,9 +40,9 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
-        DotNetCoreTest(
+        DotNetTest(
             project.ToString(),
-            new DotNetCoreTestSettings()
+            new DotNetTestSettings()
             {
                 Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
@@ -63,13 +62,13 @@ Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
-        DotNetCorePack(
+        DotNetPack(
             ".",
-            new DotNetCorePackSettings()
+            new DotNetPackSettings()
             {
                 Configuration = configuration,
                 IncludeSymbols = true,
-                MSBuildSettings = new DotNetCoreMSBuildSettings()
+                MSBuildSettings = new DotNetMSBuildSettings()
                 {
                     ContinuousIntegrationBuild = !BuildSystem.IsLocalBuild,
                 },

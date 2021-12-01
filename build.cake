@@ -4,12 +4,10 @@ using System.Security.Cryptography.X509Certificates;
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
-    "Release";
+    EnvironmentVariable("Configuration", "Release");
 var template =
     HasArgument("Template") ? Argument<string>("Template") :
-    EnvironmentVariable("Template") is not null ? EnvironmentVariable("Template") :
-    null;
+    EnvironmentVariable("Template", (string)null);
 
 var artefactsDirectory = Directory("./Artefacts");
 var templatePackProject = Directory("./Source/*.csproj");
@@ -30,7 +28,7 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
+        DotNetRestore();
     });
 
 Task("Build")
@@ -38,9 +36,9 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        DotNetCoreBuild(
+        DotNetBuild(
             ".",
-            new DotNetCoreBuildSettings()
+            new DotNetBuildSettings()
             {
                 Configuration = configuration,
                 NoRestore = true
@@ -105,9 +103,9 @@ Task("Test")
             filters.Add($"Template={template}");
         }
 
-        DotNetCoreTest(
+        DotNetTest(
             project.ToString(),
-            new DotNetCoreTestSettings()
+            new DotNetTestSettings()
             {
                 Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
@@ -128,12 +126,12 @@ Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
     .Does(() =>
     {
-        DotNetCorePack(
+        DotNetPack(
             GetFiles(templatePackProject.ToString()).Single().ToString(),
-            new DotNetCorePackSettings()
+            new DotNetPackSettings()
             {
                 Configuration = configuration,
-                MSBuildSettings = new DotNetCoreMSBuildSettings()
+                MSBuildSettings = new DotNetMSBuildSettings()
                 {
                     ContinuousIntegrationBuild = !BuildSystem.IsLocalBuild,
                 },
@@ -193,7 +191,7 @@ public void StartProcess(string processName, ProcessArgumentBuilder builder)
         {
             Arguments = builder
         });
-    if (exitCode != 0 && !AzurePipelines.IsRunningOnAzurePipelinesHosted)
+    if (exitCode != 0 && !AzurePipelines.IsRunningOnAzurePipelines)
     {
         throw new Exception($"'{command}' failed with exit code {exitCode}.");
     }
