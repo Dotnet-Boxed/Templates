@@ -351,14 +351,16 @@
     "SkipInstallAzureStorageEmulator": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Skips the installation of the Azure Storage Emulator.",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "displayName": "Skip Installing Azure Storage Emulator",
+      "description": "Skips the installation of the Azure Storage Emulator."
     },
-    "SkiStartAzureStorageEmulator": {
+    "SkipStartAzureStorageEmulator": {
       "type": "parameter",
       "datatype": "bool",
-      "description": "Skips the execution of the Azure Storage Emulator.",
-      "defaultValue": "false"
+      "defaultValue": "false",
+      "displayName": "Skip Starting Azure Storage Emulator",
+      "description": "Skips the execution of the Azure Storage Emulator."
     }
   },
   "postActions": [
@@ -381,7 +383,7 @@
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(!SkiStartAzureStorageEmulator)",
+      "condition": "(!SkipStartAzureStorageEmulator)",
       "continueOnError": true,
       "description ": "Run the Azure Storage Emulator.",
       "args": {

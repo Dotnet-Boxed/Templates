@@ -307,6 +307,7 @@
         }
       ],
       "defaultValue": "None",
+      "displayName": "Reverse Proxy Web Server",
       "description": "The internet facing reverse proxy web server you want to use in front of the primary web server to host the site."
     },
     "IIS": {
@@ -331,6 +332,7 @@
         }
       ],
       "defaultValue": "None",
+      "displayName": "Cloud Provider",
       "description": "Select which cloud provider you are using if any, to add cloud specific features."
     },
     "Azure": {
@@ -545,8 +547,9 @@
     "IISExpressHttpsPort": {
       "type": "parameter",
       "datatype": "integer",
-      "description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json (Must be between 44300 and 44399).",
-      "defaultValue": "44300"
+      "defaultValue": "44300",
+      "displayName": "IIS Express HTTPS Port",
+      "description": "Port number to use for the IIS Express HTTPS endpoint in launchSettings.json (Must be between 44300 and 44399)."
     },
     "IISExpressHttpsPortConstant": {
       "type": "generated",

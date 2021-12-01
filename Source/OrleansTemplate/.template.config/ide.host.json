@@ -6,8 +6,12 @@
   "order": 0,
   "symbolInfo": [
     {
-      "id": "Title",
-      "isVisible": true
+      "id": "SkipInstallAzureStorageEmulator",
+      "isVisible": false
+    },
+    {
+      "id": "SkipStartAzureStorageEmulator",
+      "isVisible": false
     }
   ]
 }
