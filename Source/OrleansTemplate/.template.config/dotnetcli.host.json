@@ -82,7 +82,7 @@
     "SkipInstallAzureStorageEmulator": {
       "longName": "no-install-storage-emulator"
     },
-    "SkiStartAzureStorageEmulator": {
+    "SkipStartAzureStorageEmulator": {
       "longName": "no-start-storage-emulator"
     }
   }
