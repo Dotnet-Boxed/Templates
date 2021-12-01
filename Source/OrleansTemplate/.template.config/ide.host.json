@@ -3,5 +3,11 @@
   "defaultSymbolVisibility": true,
   "icon": "icon.png",
   "learnMoreLink": "https://github.com/Dotnet-Boxed/Templates/blob/main/Docs/Orleans.md",
-  "order": 0
+  "order": 0,
+  "symbolInfo": [
+    {
+      "id": "Title",
+      "isVisible": true
+    }
+  ]
 }
