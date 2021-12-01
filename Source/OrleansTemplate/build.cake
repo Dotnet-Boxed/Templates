@@ -1,21 +1,17 @@
 var target = Argument("Target", "Default");
 var configuration =
     HasArgument("Configuration") ? Argument<string>("Configuration") :
-    EnvironmentVariable("Configuration") is not null ? EnvironmentVariable("Configuration") :
-    "Release";
+    EnvironmentVariable("Configuration", "Release");
 #if (Docker)
 var tag =
     HasArgument("Tag") ? Argument<string>("Tag") :
-    EnvironmentVariable("Tag") is not null ? EnvironmentVariable("Tag") :
-    null;
+    EnvironmentVariable("Tag", (string)null);
 var platform =
     HasArgument("Platform") ? Argument<string>("Platform") :
-    EnvironmentVariable("Platform") is not null ? EnvironmentVariable("Platform") :
-    "linux/amd64,linux/arm64";
+    EnvironmentVariable("Platform", "linux/amd64,linux/arm64");
 var push =
     HasArgument("Push") ? Argument<bool>("Push") :
-    EnvironmentVariable("Push") is not null ? bool.Parse(EnvironmentVariable("Push")) :
-    false;
+    EnvironmentVariable("Push", false);
 #endif
 
 var artefactsDirectory = Directory("./Artefacts");
@@ -34,7 +30,7 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
     {
-        DotNetCoreRestore();
+        DotNetRestore();
     });
 
 Task("Build")
@@ -42,9 +38,9 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
     {
-        DotNetCoreBuild(
+        DotNetBuild(
             ".",
-            new DotNetCoreBuildSettings()
+            new DotNetBuildSettings()
             {
                 Configuration = configuration,
                 NoRestore = true,
@@ -55,9 +51,9 @@ Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
     .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
     {
-        DotNetCoreTest(
+        DotNetTest(
             project.ToString(),
-            new DotNetCoreTestSettings()
+            new DotNetTestSettings()
             {
                 Blame = true,
                 Collectors = new string[] { "XPlat Code Coverage" },
@@ -77,9 +73,9 @@ Task("Publish")
     .Description("Publishes the solution.")
     .DoesForEach(GetFiles("./Source/**/*.csproj"), project =>
     {
-        DotNetCorePublish(
+        DotNetPublish(
             project.ToString(),
-            new DotNetCorePublishSettings()
+            new DotNetPublishSettings()
             {
                 Configuration = configuration,
                 NoBuild = true,
@@ -88,7 +84,6 @@ Task("Publish")
             });
     });
 
-#if (Docker)
 Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
@@ -176,12 +171,6 @@ Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
     .IsDependentOn("DockerBuild");
-#else
-Task("Default")
-    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then publishes.")
-    .IsDependentOn("Build")
-    .IsDependentOn("Test")
-    .IsDependentOn("Publish");
-#endif
+
 
 RunTarget(target);
