@@ -48,7 +48,7 @@ jobs:
         run: dotnet cake --target=Pack
         shell: pwsh
       - name: "Publish Artefacts"
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.0
         with:
           name: ${{matrix.os}}
           path: "./Artefacts"
@@ -65,7 +65,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: "Download Artefact"
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v2.1.0
         with:
           name: "windows-latest"
       - name: "Dotnet NuGet Add Source"
@@ -85,7 +85,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: "Download Artefact"
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v2.1.0
         with:
           name: "windows-latest"
       - name: "Dotnet NuGet Push"
