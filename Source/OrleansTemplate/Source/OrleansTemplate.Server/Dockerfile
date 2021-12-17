@@ -43,13 +43,16 @@ COPY "Source/OrleansTemplate.Grains/*.csproj" "Source/OrleansTemplate.Grains/"
 COPY "Source/OrleansTemplate.Server/*.csproj" "Source/OrleansTemplate.Server/"
 COPY "Tests/OrleansTemplate.Server.IntegrationTest/*.csproj" "Tests/OrleansTemplate.Server.IntegrationTest/"
 # Run the restore and cache the packages on the host for faster subsequent builds.
-RUN dotnet restore
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet restore
 COPY . .
 # To view the files that have been copied into the container file system for debugging purposes uncomment this line
 # RUN apk add --no-cache tree && tree
-RUN dotnet build --configuration $Configuration --no-restore
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet build --configuration $Configuration --no-restore
 RUN dotnet test --configuration $Configuration --no-build
-RUN dotnet publish "Source/OrleansTemplate.Server/OrleansTemplate.Server.csproj" --configuration $Configuration --no-build --output /app
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish "Source/OrleansTemplate.Server/OrleansTemplate.Server.csproj" --configuration $Configuration --no-build --output /app
 
 # Runtime image used to run the application
 FROM base AS runtime
