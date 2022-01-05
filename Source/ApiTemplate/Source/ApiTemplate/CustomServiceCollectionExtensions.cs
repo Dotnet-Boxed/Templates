@@ -69,16 +69,9 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureRedisCacheOptions>()
 #endif
 #if ResponseCompression
-            .ConfigureOptions<ConfigureResponseCompressionOptions>();
+            .ConfigureOptions<ConfigureResponseCompressionOptions>()
 #endif
-
-    /// <summary>
-    /// Add custom routing settings which determines how URL's are generated.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <returns>The services with routing services added.</returns>
-    public static IServiceCollection AddCustomRouting(this IServiceCollection services) =>
-        services.AddRouting(options => options.LowercaseUrls = true);
+            .ConfigureOptions<ConfigureRouteOptions>();
 #if HttpsEverywhere
 
     /// <summary>
