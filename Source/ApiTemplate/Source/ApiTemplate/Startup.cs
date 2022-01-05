@@ -60,7 +60,7 @@ public class Startup
             .AddResponseCaching()
 #endif
 #if HttpsEverywhere
-            .AddCustomStrictTransportSecurity()
+            .AddHsts(options => { })
 #endif
 #if HealthCheck
             .AddCustomHealthChecks()

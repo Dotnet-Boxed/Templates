@@ -59,7 +59,7 @@ public class Startup
 #endif
             .AddRouting()
 #if HttpsEverywhere
-            .AddCustomStrictTransportSecurity()
+            .AddHsts(options => { })
 #endif
 #if HealthCheck
             .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
