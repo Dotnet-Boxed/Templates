@@ -1,8 +1,5 @@
 namespace ApiTemplate;
 
-#if Versioning
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
-#endif
 #if Serilog
 using Serilog;
 #if HealthCheck
@@ -73,35 +70,6 @@ internal static class ApplicationBuilderExtensions
 
                     return false;
                 }
-#endif
-            });
-#endif
-#if Swagger
-
-    public static IApplicationBuilder UseCustomSwaggerUI(this IApplicationBuilder application) =>
-        application.UseSwaggerUI(
-            options =>
-            {
-                // Set the Swagger UI browser document title.
-                options.DocumentTitle = AssemblyInformation.Current.Product;
-                // Set the Swagger UI to render at '/'.
-                options.RoutePrefix = string.Empty;
-
-                options.DisplayOperationId();
-                options.DisplayRequestDuration();
-
-#if Versioning
-                var provider = application.ApplicationServices.GetRequiredService<IApiVersionDescriptionProvider>();
-                foreach (var apiVersionDescription in provider
-                    .ApiVersionDescriptions
-                    .OrderByDescending(x => x.ApiVersion))
-                {
-                    options.SwaggerEndpoint(
-                        $"/swagger/{apiVersionDescription.GroupName}/swagger.json",
-                        $"Version {apiVersionDescription.ApiVersion}");
-                }
-#else
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Version 1");
 #endif
             });
 #endif
