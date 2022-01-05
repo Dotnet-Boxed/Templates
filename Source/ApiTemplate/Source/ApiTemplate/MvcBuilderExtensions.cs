@@ -1,11 +1,6 @@
 namespace ApiTemplate;
 
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using ApiTemplate.Options;
-#if Controllers
-using ApiTemplate.ViewModels;
-#endif
 using Boxed.AspNetCore;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -14,25 +9,6 @@ using Microsoft.Extensions.Options;
 
 internal static class MvcBuilderExtensions
 {
-    public static IMvcBuilder AddCustomJsonOptions(
-        this IMvcBuilder builder,
-        IWebHostEnvironment webHostEnvironment) =>
-        builder.AddJsonOptions(
-            options =>
-            {
-                var jsonSerializerOptions = options.JsonSerializerOptions;
-                jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
-
-                // Pretty print the JSON in development for easier debugging.
-                jsonSerializerOptions.WriteIndented = webHostEnvironment.IsDevelopment() ||
-                webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
-#if Controllers
-
-                jsonSerializerOptions.AddContext<CustomJsonSerializerContext>();
-#endif
-            });
-
     public static IMvcBuilder AddCustomMvcOptions(this IMvcBuilder builder, IConfiguration configuration) =>
         builder.AddMvcOptions(
             options =>
