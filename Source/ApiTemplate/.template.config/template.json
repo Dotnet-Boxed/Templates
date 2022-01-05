@@ -61,8 +61,8 @@
         {
           "condition": "(!Swagger)",
           "exclude": [
-            "Source/ApiTemplate/OperationFilters/**/*",
-            "Source/ApiTemplate/ConfigureSwaggerOptions.cs"
+            "Source/ApiTemplate/ConfigureOptions/ConfigureSwaggerGenOptions.cs",
+            "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },
         {
@@ -70,7 +70,6 @@
           "exclude": [
             "Source/ApiTemplate/ConfigureOptions/ConfigureApiVersioningOptions.cs",
             "Source/ApiTemplate/Constants/ApiVersionName.cs",
-            "Source/ApiTemplate/OperationFilters/**/*",
             "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },

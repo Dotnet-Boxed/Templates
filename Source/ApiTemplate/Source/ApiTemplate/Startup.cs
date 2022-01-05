@@ -69,7 +69,7 @@ public class Startup
             .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
 #endif
 #if Swagger
-            .AddCustomSwagger()
+            .AddSwaggerGen()
 #endif
             .AddHttpContextAccessor()
             // Add useful interface for accessing the ActionContext outside a controller.

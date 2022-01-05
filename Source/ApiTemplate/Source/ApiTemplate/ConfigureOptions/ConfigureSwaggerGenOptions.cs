@@ -9,11 +9,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
+public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 {
     private readonly IApiVersionDescriptionProvider provider;
 
-    public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) =>
+    public ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider provider) =>
         this.provider = provider;
 
     public void Configure(SwaggerGenOptions options)

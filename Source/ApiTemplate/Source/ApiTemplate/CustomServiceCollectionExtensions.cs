@@ -16,9 +16,6 @@ using OpenTelemetry.Exporter;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 #endif
-#if Swagger
-using Swashbuckle.AspNetCore.SwaggerGen;
-#endif
 
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods which extend ASP.NET Core services.
@@ -76,6 +73,9 @@ internal static class CustomServiceCollectionExtensions
 #endif
 #if ResponseCompression
             .ConfigureOptions<ConfigureResponseCompressionOptions>()
+#endif
+#if Swagger
+            .ConfigureOptions<ConfigureSwaggerGenOptions>()
 #endif
             .ConfigureOptions<ConfigureRouteOptions>();
 #if HealthCheck
@@ -179,17 +179,5 @@ internal static class CustomServiceCollectionExtensions
                 // TODO: Add OpenTelemetry.Exporter.* NuGet packages and configure them here to export open telemetry span data.
                 //       E.g. Add the OpenTelemetry.Exporter.OpenTelemetryProtocol package to export span data to Jaeger.
             });
-#endif
-#if Swagger
-
-    /// <summary>
-    /// Adds Swagger services and configures the Swagger services.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <returns>The services with Swagger services added.</returns>
-    public static IServiceCollection AddCustomSwagger(this IServiceCollection services) =>
-        services
-            .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>()
-            .AddSwaggerGen();
 #endif
 }
