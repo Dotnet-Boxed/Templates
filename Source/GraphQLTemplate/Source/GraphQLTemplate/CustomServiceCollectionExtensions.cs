@@ -77,7 +77,8 @@ internal static class CustomServiceCollectionExtensions
 #if ResponseCompression
             .ConfigureOptions<ConfigureResponseCompressionOptions>()
 #endif
-            .ConfigureOptions<ConfigureRouteOptions>();
+            .ConfigureOptions<ConfigureRouteOptions>()
+            .ConfigureOptions<ConfigureStaticFileOptions>();
 #if HealthCheck
 
     public static IServiceCollection AddCustomHealthChecks(

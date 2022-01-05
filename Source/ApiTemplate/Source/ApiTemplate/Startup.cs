@@ -131,7 +131,7 @@ public class Startup
             .UseIf(
                 this.webHostEnvironment.IsDevelopment(),
                 x => x.UseDeveloperExceptionPage())
-            .UseStaticFilesWithCacheControl()
+            .UseStaticFiles()
 #if Serilog
             .UseCustomSerilogRequestLogging()
 #endif
