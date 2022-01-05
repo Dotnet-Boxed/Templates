@@ -159,7 +159,7 @@ public class Startup
             .UseSwagger()
             .UseIf(
                 this.webHostEnvironment.IsDevelopment(),
-                x => x.UseCustomSwaggerUI());
+                x => x.UseSwaggerUI());
 #else
                 });
 #endif

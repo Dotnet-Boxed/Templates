@@ -77,6 +77,7 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureRouteOptions>()
 #if Swagger
             .ConfigureOptions<ConfigureSwaggerGenOptions>()
+            .ConfigureOptions<ConfigureSwaggerUIOptions>()
 #endif
             .ConfigureOptions<ConfigureStaticFileOptions>();
 #if HealthCheck
