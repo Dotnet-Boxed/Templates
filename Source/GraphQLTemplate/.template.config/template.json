@@ -25,7 +25,7 @@
       "modifiers": [
         {
           "condition": "(!EditorConfig)",
-          "exclude": [".editorconfig"]
+          "exclude": [ ".editorconfig" ]
         },
         {
           "condition": "(!GitHub)",
@@ -39,7 +39,7 @@
         },
         {
           "condition": "(!ReadMe)",
-          "exclude": ["README.md"]
+          "exclude": [ "README.md" ]
         },
         {
           "condition": "(!Mutations)",
@@ -65,7 +65,7 @@
         // ReverseProxyWebServer
         {
           "condition": "(!IIS)",
-          "exclude": ["Source/GraphQLTemplate/web.config"]
+          "exclude": [ "Source/GraphQLTemplate/web.config" ]
         },
         {
           "condition": "(!NGINX)",
@@ -95,16 +95,20 @@
           ]
         },
         {
+          "condition": "(!HstsPreload)",
+          "exclude": [ "Source/GraphQLTemplate/ConfigureOptions/ConfigureHstsOptions.cs" ]
+        },
+        {
           "condition": "(!RobotsTxt)",
-          "exclude": ["Source/GraphQLTemplate/wwwroot/robots.txt"]
+          "exclude": [ "Source/GraphQLTemplate/wwwroot/robots.txt" ]
         },
         {
           "condition": "(!SecurityTxt)",
-          "exclude": ["Source/GraphQLTemplate/wwwroot/.well-known/security.txt"]
+          "exclude": [ "Source/GraphQLTemplate/wwwroot/.well-known/security.txt" ]
         },
         {
           "condition": "(!HumansTxt)",
-          "exclude": ["Source/GraphQLTemplate/wwwroot/humans.txt"]
+          "exclude": [ "Source/GraphQLTemplate/wwwroot/humans.txt" ]
         },
         {
           "condition": "(!HealthCheck)",
@@ -114,11 +118,11 @@
         },
         {
           "condition": "(!IntegrationTest)",
-          "exclude": ["Tests/ApiTemplate.IntegrationTest/**/*"]
+          "exclude": [ "Tests/ApiTemplate.IntegrationTest/**/*" ]
         },
         {
           "condition": "(!Docker)",
-          "exclude": ["Source/GraphQLTemplate/Dockerfile", ".dockerignore"]
+          "exclude": [ "Source/GraphQLTemplate/Dockerfile", ".dockerignore" ]
         },
         {
           "condition": "(!GitHubActions)",
