@@ -80,10 +80,18 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureRouteOptions>();
 #if HealthCheck
 
-    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
+    public static IServiceCollection AddCustomHealthChecks(
+        this IServiceCollection services,
+        IWebHostEnvironment webHostEnvironment,
+        IConfiguration configuration) =>
         services
             .AddHealthChecks()
             // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
+#if Redis
+            .AddIf(
+                !webHostEnvironment.IsEnvironment(EnvironmentName.Test),
+                x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
+#endif
             .Services;
 #endif
 #if OpenTelemetry
@@ -117,51 +125,52 @@ internal static class CustomServiceCollectionExtensions
                             // Enrich spans with additional request and response meta data.
                             // See https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/http.md
                             options.Enrich = (activity, eventName, obj) =>
-                        {
-                            if (obj is HttpRequest request)
                             {
-                                var context = request.HttpContext;
-                                activity.AddTag(OpenTelemetryAttributeName.Http.Flavor, GetHttpFlavour(request.Protocol));
-                                activity.AddTag(OpenTelemetryAttributeName.Http.Scheme, request.Scheme);
-                                activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
-                                activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
-                                activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
+                                if (obj is HttpRequest request)
+                                {
+                                    var context = request.HttpContext;
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.Flavor, GetHttpFlavour(request.Protocol));
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.Scheme, request.Scheme);
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
 
-                                var user = context.User;
-                                if (user.Identity?.Name is not null)
-                                {
-                                    activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
-                                    activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
+                                    var user = context.User;
+                                    if (user.Identity?.Name is not null)
+                                    {
+                                        activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
+                                        activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
+                                    }
                                 }
-                            }
-                            else if (obj is HttpResponse response)
-                            {
-                                activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
-                                activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
-                            }
-
-                            static string GetHttpFlavour(string protocol)
-                            {
-                                if (HttpProtocol.IsHttp10(protocol))
+                                else if (obj is HttpResponse response)
                                 {
-                                    return OpenTelemetryHttpFlavour.Http10;
-                                }
-                                else if (HttpProtocol.IsHttp11(protocol))
-                                {
-                                    return OpenTelemetryHttpFlavour.Http11;
-                                }
-                                else if (HttpProtocol.IsHttp2(protocol))
-                                {
-                                    return OpenTelemetryHttpFlavour.Http20;
-                                }
-                                else if (HttpProtocol.IsHttp3(protocol))
-                                {
-                                    return OpenTelemetryHttpFlavour.Http30;
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
+                                    activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
                                 }
 
-                                throw new InvalidOperationException($"Protocol {protocol} not recognised.");
-                            }
-                        };
+                                static string GetHttpFlavour(string protocol)
+                                {
+                                    if (HttpProtocol.IsHttp10(protocol))
+                                    {
+                                        return OpenTelemetryHttpFlavour.Http10;
+                                    }
+                                    else if (HttpProtocol.IsHttp11(protocol))
+                                    {
+                                        return OpenTelemetryHttpFlavour.Http11;
+                                    }
+                                    else if (HttpProtocol.IsHttp2(protocol))
+                                    {
+                                        return OpenTelemetryHttpFlavour.Http20;
+                                    }
+                                    else if (HttpProtocol.IsHttp3(protocol))
+                                    {
+                                        return OpenTelemetryHttpFlavour.Http30;
+                                    }
+
+                                    throw new InvalidOperationException($"Protocol {protocol} not recognised.");
+                                }
+                            };
+
                             options.RecordException = true;
                         });
 #if Redis
