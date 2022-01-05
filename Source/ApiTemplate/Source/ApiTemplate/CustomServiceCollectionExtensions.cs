@@ -74,10 +74,11 @@ internal static class CustomServiceCollectionExtensions
 #if ResponseCompression
             .ConfigureOptions<ConfigureResponseCompressionOptions>()
 #endif
+            .ConfigureOptions<ConfigureRouteOptions>()
 #if Swagger
             .ConfigureOptions<ConfigureSwaggerGenOptions>()
 #endif
-            .ConfigureOptions<ConfigureRouteOptions>();
+            .ConfigureOptions<ConfigureStaticFileOptions>();
 #if HealthCheck
 
     public static IServiceCollection AddCustomHealthChecks(

@@ -116,7 +116,7 @@ public class Startup
 #if Subscriptions
             .UseWebSockets()
 #endif
-            .UseStaticFilesWithCacheControl()
+            .UseStaticFiles()
 #if Serilog
             .UseCustomSerilogRequestLogging()
 #endif
