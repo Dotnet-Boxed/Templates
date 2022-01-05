@@ -61,6 +61,9 @@ internal static class CustomServiceCollectionExtensions
 
     public static IServiceCollection AddCustomConfigureOptions(this IServiceCollection services) =>
         services
+#if Versioning
+            .ConfigureOptions<ConfigureApiVersioningOptions>()
+#endif
 #if CORS
             .ConfigureOptions<ConfigureCorsOptions>()
 #endif
@@ -82,18 +85,6 @@ internal static class CustomServiceCollectionExtensions
             .AddHealthChecks()
             // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
             .Services;
-#endif
-#if Versioning
-
-    public static IServiceCollection AddCustomApiVersioning(this IServiceCollection services) =>
-        services
-            .AddApiVersioning(
-                options =>
-                {
-                    options.AssumeDefaultVersionWhenUnspecified = true;
-                    options.ReportApiVersions = true;
-                })
-            .AddVersionedApiExplorer(x => x.GroupNameFormat = "'v'VVV"); // Version format: 'v'major[.minor][-status]
 #endif
 #if OpenTelemetry
 
