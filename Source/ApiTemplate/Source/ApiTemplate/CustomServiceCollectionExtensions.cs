@@ -3,6 +3,7 @@ namespace ApiTemplate;
 #if ResponseCompression
 using System.IO.Compression;
 #endif
+using ApiTemplate.ConfigureOptions;
 #if CORS
 using ApiTemplate.Constants;
 #endif
@@ -120,6 +121,11 @@ internal static class CustomServiceCollectionExtensions
 #endif
             .ConfigureAndValidateSingleton<HostOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Host)))
             .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
+
+    public static IServiceCollection AddCustomConfigureOptions(
+        this IServiceCollection services) =>
+        services
+            .ConfigureOptions<ConfigureJsonOptions>();
 #if ResponseCompression
 
     /// <summary>

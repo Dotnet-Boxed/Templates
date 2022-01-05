@@ -38,6 +38,8 @@ public class Startup
     /// <param name="services">The services.</param>
     public virtual void ConfigureServices(IServiceCollection services) =>
         services
+            .AddCustomOptions(this.configuration)
+            .AddCustomConfigureOptions()
 #if ApplicationInsights
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
@@ -50,7 +52,6 @@ public class Startup
 #if CORS
             .AddCustomCors()
 #endif
-            .AddCustomOptions(this.configuration)
             .AddCustomRouting()
 #if ResponseCaching
             .AddResponseCaching()
@@ -78,7 +79,6 @@ public class Startup
 #endif
             .AddServerTiming()
             .AddControllers()
-            .AddCustomJsonOptions(this.webHostEnvironment)
 #if DataContractSerializer
             // Adds the XML input and output formatter using the DataContractSerializer.
             .AddXmlDataContractSerializerFormatters()
