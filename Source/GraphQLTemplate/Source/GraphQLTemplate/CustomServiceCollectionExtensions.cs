@@ -4,6 +4,7 @@ namespace GraphQLTemplate;
 using System.IO.Compression;
 #endif
 using Boxed.AspNetCore;
+using GraphQLTemplate.ConfigureOptions;
 #if (Authorization || CORS || OpenTelemetry)
 using GraphQLTemplate.Constants;
 #endif
@@ -31,45 +32,6 @@ using StackExchange.Redis;
 /// </summary>
 internal static class CustomServiceCollectionExtensions
 {
-#if DistributedCacheRedis
-    /// <summary>
-    /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
-    /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
-    /// cache, which is shared between multiple instances of the application.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <param name="webHostEnvironment">The environment the application is running under.</param>
-    /// <param name="configuration">The configuration.</param>
-    /// <returns>The services with caching services added.</returns>
-    public static IServiceCollection AddCustomCaching(
-        this IServiceCollection services,
-        IWebHostEnvironment webHostEnvironment,
-        IConfiguration configuration) =>
-#else
-    /// <summary>
-    /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
-    /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
-    /// cache, which is shared between multiple instances of the application.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <returns>The services with caching services added.</returns>
-    public static IServiceCollection AddCustomCaching(this IServiceCollection services) =>
-#endif
-        services
-#if DistributedCacheNone
-            .AddMemoryCache();
-#elif DistributedCacheInMemory
-            .AddMemoryCache()
-            .AddDistributedMemoryCache();
-#elif DistributedCacheRedis
-            .AddMemoryCache()
-            .AddStackExchangeRedisCache(
-                options => options.ConfigurationOptions = configuration
-                    .GetRequiredSection(nameof(ApplicationOptions.Redis))
-                    .Get<RedisOptions>()
-                    .ConfigurationOptions);
-#endif
-
 #if CORS
     /// <summary>
     /// Add cross-origin resource sharing (CORS) services and configures named CORS policies (See
@@ -106,10 +68,10 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureAndValidateSingleton<ApplicationOptions>(configuration)
             .ConfigureAndValidateSingleton<CacheProfileOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.CacheProfiles)))
 #if ResponseCompression
-                .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Compression)))
+            .ConfigureAndValidateSingleton<CompressionOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Compression)))
 #endif
 #if ForwardedHeaders
-                .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.ForwardedHeaders)))
+            .ConfigureAndValidateSingleton<ForwardedHeadersOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.ForwardedHeaders)))
             .Configure<ForwardedHeadersOptions>(
                 options =>
                 {
@@ -117,16 +79,22 @@ internal static class CustomServiceCollectionExtensions
                     options.KnownProxies.Clear();
                 })
 #elif HostFiltering
-                .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
+            .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
-                .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)))
+            .ConfigureAndValidateSingleton<GraphQLOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)))
             .ConfigureAndValidateSingleton<RequestExecutorOptions>(
                 configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).GetRequiredSection(nameof(GraphQLOptions.Request)))
 #if Redis
-                .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)))
+            .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)))
 #endif
-                .ConfigureAndValidateSingleton<HostOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Host)))
+            .ConfigureAndValidateSingleton<HostOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Host)))
             .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
+
+    public static IServiceCollection AddCustomConfigureOptions(this IServiceCollection services) =>
+        services
+#if Redis
+            .ConfigureOptions<ConfigureRedisCacheOptions>();
+#endif
 #if ResponseCompression
 
     /// <summary>
