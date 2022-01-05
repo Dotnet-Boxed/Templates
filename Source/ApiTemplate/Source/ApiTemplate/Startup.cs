@@ -63,7 +63,7 @@ public class Startup
             .AddHsts(options => { })
 #endif
 #if HealthCheck
-            .AddCustomHealthChecks()
+            .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
 #endif
 #if OpenTelemetry
             .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
