@@ -82,7 +82,10 @@
         },
         {
           "condition": "(!CORS)",
-          "exclude": ["Source/GraphQLTemplate/Constants/CorsPolicyName.cs"]
+          "exclude": [
+            "Source/GraphQLTemplate/ConfigureOptions/ConfigureCorsOptions.cs",
+            "Source/GraphQLTemplate/Constants/CorsPolicyName.cs"
+          ]
         },
         {
           "condition": "(!ResponseCompression)",

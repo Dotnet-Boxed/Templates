@@ -52,7 +52,7 @@ public class Startup
             .AddStackExchangeRedisCache(options => { })
 #endif
 #if CORS
-            .AddCustomCors()
+            .AddCors()
 #endif
             .AddCustomRouting()
 #if ResponseCompression
