@@ -54,10 +54,10 @@ public class Startup
 #if CORS
             .AddCors()
 #endif
-            .AddCustomRouting()
 #if ResponseCompression
-            .AddCustomResponseCompression(this.configuration)
+            .AddResponseCompression()
 #endif
+            .AddCustomRouting()
 #if HttpsEverywhere
             .AddCustomStrictTransportSecurity()
 #endif

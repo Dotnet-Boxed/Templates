@@ -52,12 +52,12 @@ public class Startup
 #if CORS
             .AddCors()
 #endif
+#if ResponseCompression
+            .AddResponseCompression()
+#endif
             .AddCustomRouting()
 #if ResponseCaching
             .AddResponseCaching()
-#endif
-#if ResponseCompression
-            .AddCustomResponseCompression(this.configuration)
 #endif
 #if HttpsEverywhere
             .AddCustomStrictTransportSecurity()

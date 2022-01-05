@@ -89,7 +89,10 @@
         },
         {
           "condition": "(!ResponseCompression)",
-          "exclude": ["Source/GraphQLTemplate/Options/CompressionOptions.cs"]
+          "exclude": [
+            "Source/GraphQLTemplate/ConfigureOptions/ConfigureResponseCompressionOptions.cs",
+            "Source/GraphQLTemplate/Options/CompressionOptions.cs"
+          ]
         },
         {
           "condition": "(!RobotsTxt)",

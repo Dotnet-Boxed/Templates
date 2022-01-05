@@ -1,8 +1,5 @@
 namespace GraphQLTemplate;
 
-#if ResponseCompression
-using System.IO.Compression;
-#endif
 using Boxed.AspNetCore;
 using GraphQLTemplate.ConfigureOptions;
 #if (Authorization || CORS || OpenTelemetry)
@@ -12,9 +9,6 @@ using GraphQLTemplate.Options;
 using HotChocolate.Execution.Options;
 #if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
-#endif
-#if ResponseCompression
-using Microsoft.AspNetCore.ResponseCompression;
 #endif
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Options;
@@ -75,36 +69,10 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureCorsOptions>()
 #endif
 #if Redis
-            .ConfigureOptions<ConfigureRedisCacheOptions>();
+            .ConfigureOptions<ConfigureRedisCacheOptions>()
 #endif
 #if ResponseCompression
-
-    /// <summary>
-    /// Adds dynamic response compression to enable GZIP compression of responses. This is turned off for HTTPS
-    /// requests by default to avoid the BREACH security vulnerability.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <param name="configuration">The configuration.</param>
-    /// <returns>The services with caching services added.</returns>
-    public static IServiceCollection AddCustomResponseCompression(
-        this IServiceCollection services,
-        IConfiguration configuration) =>
-        services
-            .Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
-            .Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Optimal)
-            .AddResponseCompression(
-                options =>
-                {
-                    // Add additional MIME types (other than the built in defaults) to enable GZIP compression for.
-                    var customMimeTypes = configuration
-                        .GetRequiredSection(nameof(ApplicationOptions.Compression))
-                        .Get<CompressionOptions>()
-                        ?.MimeTypes ?? Enumerable.Empty<string>();
-                    options.MimeTypes = customMimeTypes.Concat(ResponseCompressionDefaults.MimeTypes);
-
-                    options.Providers.Add<BrotliCompressionProvider>();
-                    options.Providers.Add<GzipCompressionProvider>();
-                });
+            .ConfigureOptions<ConfigureResponseCompressionOptions>();
 #endif
 
     /// <summary>
