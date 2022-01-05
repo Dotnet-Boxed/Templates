@@ -75,7 +75,8 @@ public class Startup
             // Add useful interface for accessing the ActionContext outside a controller.
             .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
 #if Versioning
-            .AddCustomApiVersioning()
+            .AddApiVersioning()
+            .AddVersionedApiExplorer()
 #endif
             .AddServerTiming()
             .AddControllers()

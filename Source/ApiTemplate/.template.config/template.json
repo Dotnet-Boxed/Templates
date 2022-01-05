@@ -68,7 +68,9 @@
         {
           "condition": "(!Versioning)",
           "exclude": [
-            "Constants/ApiVersionName.cs",
+            "Source/ApiTemplate/ConfigureOptions/ConfigureApiVersioningOptions.cs",
+            "Source/ApiTemplate/Constants/ApiVersionName.cs",
+            "Source/ApiTemplate/OperationFilters/**/*",
             "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },
