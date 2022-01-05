@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.HostFiltering;
 using Microsoft.AspNetCore.ResponseCompression;
 #endif
 using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 #if OpenTelemetry
@@ -33,43 +32,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 /// </summary>
 internal static class CustomServiceCollectionExtensions
 {
-#if (!DistributedCacheNone)
-#if DistributedCacheInMemory
-    /// <summary>
-    /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
-    /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
-    /// cache, which is shared between multiple instances of the application.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <returns>The services with caching services added.</returns>
-    public static IServiceCollection AddCustomCaching(this IServiceCollection services) =>
-#elif DistributedCacheRedis
-    /// <summary>
-    /// Configures caching for the application. Registers the <see cref="IDistributedCache"/> types with the services collection or
-    /// IoC container. The <see cref="IDistributedCache"/> is intended to be used in cloud hosted scenarios where there is a shared
-    /// cache, which is shared between multiple instances of the application.
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <param name="webHostEnvironment">The environment the application is running under.</param>
-    /// <param name="configuration">The configuration.</param>
-    /// <returns>The services with caching services added.</returns>
-    public static IServiceCollection AddCustomCaching(
-        this IServiceCollection services,
-        IWebHostEnvironment webHostEnvironment,
-        IConfiguration configuration) =>
-#endif
-        services
-#if DistributedCacheInMemory
-            .AddDistributedMemoryCache();
-#elif DistributedCacheRedis
-            .AddStackExchangeRedisCache(
-                options => options.ConfigurationOptions = configuration
-                    .GetRequiredSection(nameof(ApplicationOptions.Redis))
-                    .Get<RedisOptions>()
-                    .ConfigurationOptions);
-#endif
-
-#endif
 #if CORS
     /// <summary>
     /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
@@ -120,12 +82,17 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureAndValidateSingleton<HostFilteringOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.HostFiltering)))
 #endif
             .ConfigureAndValidateSingleton<HostOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Host)))
+#if Redis
+            .ConfigureAndValidateSingleton<RedisOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)))
+#endif
             .ConfigureAndValidateSingleton<KestrelServerOptions>(configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)));
 
-    public static IServiceCollection AddCustomConfigureOptions(
-        this IServiceCollection services) =>
+    public static IServiceCollection AddCustomConfigureOptions(this IServiceCollection services) =>
         services
-            .ConfigureOptions<ConfigureJsonOptions>();
+            .ConfigureOptions<ConfigureJsonOptions>()
+#if Redis
+            .ConfigureOptions<ConfigureRedisCacheOptions>();
+#endif
 #if ResponseCompression
 
     /// <summary>

@@ -8,6 +8,7 @@ using HotChocolate.AspNetCore;
 #if HealthCheck
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// The main start-up class for the application.
@@ -38,19 +39,21 @@ public class Startup
     /// <param name="services">The services.</param>
     public virtual void ConfigureServices(IServiceCollection services) =>
         services
+            .AddCustomOptions(this.configuration)
+            .AddCustomConfigureOptions()
 #if ApplicationInsights
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-#if DistributedCacheRedis
-            .AddCustomCaching(this.webHostEnvironment, this.configuration)
-#else
-            .AddCustomCaching()
+            .AddMemoryCache()
+#if DistributedCacheInMemory
+            .AddDistributedMemoryCache()
+#elif DistributedCacheRedis
+            .AddStackExchangeRedisCache(options => { })
 #endif
 #if CORS
             .AddCustomCors()
 #endif
-            .AddCustomOptions(this.configuration)
             .AddCustomRouting()
 #if ResponseCompression
             .AddCustomResponseCompression(this.configuration)

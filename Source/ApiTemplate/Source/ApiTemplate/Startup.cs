@@ -44,10 +44,10 @@ public class Startup
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-#if DistributedCacheRedis
-            .AddCustomCaching(this.webHostEnvironment, this.configuration)
-#elif DistributedCacheInMemory
-            .AddCustomCaching()
+#if DistributedCacheInMemory
+            .AddDistributedMemoryCache()
+#elif DistributedCacheRedis
+            .AddStackExchangeRedisCache(options => { })
 #endif
 #if CORS
             .AddCustomCors()

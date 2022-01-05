@@ -57,7 +57,10 @@
         },
         {
           "condition": "(!Redis)",
-          "exclude": ["Source/GraphQLTemplate/Options/RedisOptions.cs"]
+          "exclude": [
+            "Source/GraphQLTemplate/ConfigureOptions/ConfigureRedisCacheOptions.cs",
+            "Source/GraphQLTemplate/Options/RedisOptions.cs"
+          ]
         },
         // ReverseProxyWebServer
         {

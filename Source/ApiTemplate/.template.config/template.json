@@ -74,7 +74,10 @@
         },
         {
           "condition": "(!Redis)",
-          "exclude": ["Source/ApiTemplate/Options/RedisOptions.cs"]
+          "exclude": [
+            "Source/ApiTemplate/ConfigureOptions/ConfigureRedisCacheOptions.cs",
+            "Source/ApiTemplate/Options/RedisOptions.cs"
+          ]
         },
         {
           "condition": "(!IIS)",
