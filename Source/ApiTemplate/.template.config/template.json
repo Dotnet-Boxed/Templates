@@ -99,7 +99,10 @@
         },
         {
           "condition": "(!ResponseCompression)",
-          "exclude": ["Source/ApiTemplate/Options/CompressionOptions.cs"]
+          "exclude": [
+            "Source/ApiTemplate/ConfigureOptions/ConfigureResponseCompressionOptions.cs",
+            "Source/ApiTemplate/Options/CompressionOptions.cs"
+          ]
         },
         {
           "condition": "(!RobotsTxt)",
