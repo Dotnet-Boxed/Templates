@@ -32,27 +32,6 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 /// </summary>
 internal static class CustomServiceCollectionExtensions
 {
-#if CORS
-    /// <summary>
-    /// Add cross-origin resource sharing (CORS) services and configures named CORS policies. See
-    /// https://docs.asp.net/en/latest/security/cors.html
-    /// </summary>
-    /// <param name="services">The services.</param>
-    /// <returns>The services with CORS services added.</returns>
-    public static IServiceCollection AddCustomCors(this IServiceCollection services) =>
-        services.AddCors(
-            options =>
-                // Create named CORS policies here which you can consume using application.UseCors("PolicyName")
-                // or a [EnableCors("PolicyName")] attribute on your controller or action.
-                options.AddPolicy(
-                    CorsPolicyName.AllowAny,
-                    x => x
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()));
-
-#endif
-
     /// <summary>
     /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
     /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.
@@ -89,6 +68,9 @@ internal static class CustomServiceCollectionExtensions
 
     public static IServiceCollection AddCustomConfigureOptions(this IServiceCollection services) =>
         services
+#if CORS
+            .ConfigureOptions<ConfigureCorsOptions>()
+#endif
             .ConfigureOptions<ConfigureJsonOptions>()
 #if Redis
             .ConfigureOptions<ConfigureRedisCacheOptions>();

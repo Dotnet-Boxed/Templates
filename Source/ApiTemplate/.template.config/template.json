@@ -92,7 +92,10 @@
         },
         {
           "condition": "(!CORS)",
-          "exclude": ["Source/ApiTemplate/Constants/CorsPolicyName.cs"]
+          "exclude": [
+            "Source/ApiTemplate/ConfigureOptions/ConfigureCorsOptions.cs",
+            "Source/ApiTemplate/Constants/CorsPolicyName.cs"
+          ]
         },
         {
           "condition": "(!ResponseCompression)",
