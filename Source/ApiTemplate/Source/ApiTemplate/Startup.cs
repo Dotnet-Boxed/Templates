@@ -55,7 +55,7 @@ public class Startup
 #if ResponseCompression
             .AddResponseCompression()
 #endif
-            .AddCustomRouting()
+            .AddRouting()
 #if ResponseCaching
             .AddResponseCaching()
 #endif

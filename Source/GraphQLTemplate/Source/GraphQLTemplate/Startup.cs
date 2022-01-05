@@ -57,7 +57,7 @@ public class Startup
 #if ResponseCompression
             .AddResponseCompression()
 #endif
-            .AddCustomRouting()
+            .AddRouting()
 #if HttpsEverywhere
             .AddCustomStrictTransportSecurity()
 #endif

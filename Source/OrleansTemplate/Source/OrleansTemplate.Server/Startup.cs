@@ -29,7 +29,7 @@ public class Startup
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-            .AddRouting()
+            .AddRouting(options => options.LowercaseUrls = true)
 #if OpenTelemetry
             .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
 #endif
