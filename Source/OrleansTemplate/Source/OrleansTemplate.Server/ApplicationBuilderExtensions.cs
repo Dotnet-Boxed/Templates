@@ -41,7 +41,7 @@ internal static class ApplicationBuilderExtensions
 
                 static LogEventLevel GetLevel(HttpContext httpContext, double elapsedMilliseconds, Exception exception)
                 {
-                    if (exception == null && httpContext.Response.StatusCode <= 499)
+                    if (exception is null && httpContext.Response.StatusCode <= 499)
                     {
                         if (IsHealthCheckEndpoint(httpContext))
                         {
