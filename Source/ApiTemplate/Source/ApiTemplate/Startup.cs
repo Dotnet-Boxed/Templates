@@ -38,8 +38,6 @@ public class Startup
     /// <param name="services">The services.</param>
     public virtual void ConfigureServices(IServiceCollection services) =>
         services
-            .AddCustomOptions(this.configuration)
-            .AddCustomConfigureOptions()
 #if ApplicationInsights
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
@@ -88,14 +86,16 @@ public class Startup
             .AddXmlSerializerFormatters()
 #endif
 #if Controllers
-            .AddCustomMvcOptions(this.configuration)
             .Services
+            .AddCustomOptions(this.configuration)
+            .AddCustomConfigureOptions()
             .AddProjectCommands()
             .AddProjectMappers()
             .AddProjectRepositories()
             .AddProjectServices();
 #else
-            .AddCustomMvcOptions(this.configuration);
+            .AddCustomOptions(this.configuration)
+            .AddCustomConfigureOptions();
 #endif
 
     /// <summary>

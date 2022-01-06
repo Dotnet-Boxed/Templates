@@ -39,8 +39,6 @@ public class Startup
     /// <param name="services">The services.</param>
     public virtual void ConfigureServices(IServiceCollection services) =>
         services
-            .AddCustomOptions(this.configuration)
-            .AddCustomConfigureOptions()
 #if ApplicationInsights
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
@@ -69,9 +67,6 @@ public class Startup
 #endif
             .AddHttpContextAccessor()
             .AddServerTiming()
-            .AddControllers()
-                .AddCustomMvcOptions(this.configuration)
-            .Services
 #if Authorization
             .AddCustomAuthorization()
 #endif
@@ -79,6 +74,8 @@ public class Startup
             .AddCustomRedis(this.webHostEnvironment, this.configuration)
 #endif
             .AddCustomGraphQL(this.webHostEnvironment, this.configuration)
+            .AddCustomOptions(this.configuration)
+            .AddCustomConfigureOptions()
             .AddProjectMappers()
             .AddProjectServices()
             .AddProjectRepositories();
