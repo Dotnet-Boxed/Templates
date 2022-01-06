@@ -27,10 +27,11 @@
           "condition": "(!Controllers)",
           "exclude": [
             "Source/ApiTemplate/Commands/**/*",
+            "Source/ApiTemplate/ConfigureOptions/**/*",
             "Source/ApiTemplate/Constants/ApiVersionName",
             "Source/ApiTemplate/Constants/CarsControllerRoute.cs",
             "Source/ApiTemplate/Constants/ControllerName.cs",
-            "Source/ApiTemplate/Controllers/**/*",
+            "Source/ApiTemplate/Controllers/ConfigureMvcOptions.cs",
             "Source/ApiTemplate/Mappers/**/*",
             "Source/ApiTemplate/Models/**/*",
             "Source/ApiTemplate/Repositories/**/*",

@@ -61,6 +61,9 @@ internal static class CustomServiceCollectionExtensions
 #if Versioning
             .ConfigureOptions<ConfigureApiVersioningOptions>()
 #endif
+#if Controllers
+            .ConfigureOptions<ConfigureMvcOptions>()
+#endif
 #if CORS
             .ConfigureOptions<ConfigureCorsOptions>()
 #endif
