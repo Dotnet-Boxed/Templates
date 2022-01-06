@@ -9,6 +9,9 @@ using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
 using Microsoft.Extensions.DependencyInjection;
+#if Serilog
+using Serilog;
+#endif
 
 /// <summary>
 /// The main start-up class for the application.
@@ -115,7 +118,7 @@ public class Startup
 #endif
             .UseStaticFiles()
 #if Serilog
-            .UseCustomSerilogRequestLogging()
+            .UseSerilogRequestLogging()
 #endif
             .UseEndpoints(
                 builder =>

@@ -1,7 +1,13 @@
 namespace OrleansTemplate.Server;
 
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+#if Serilog
+using OrleansTemplate.ConfigureOptions;
+#endif
 using OrleansTemplate.Server.HealthChecks;
+#if Serilog
+using Serilog;
+#endif
 
 #pragma warning disable CA1724 // The type name conflicts with the namespace name 'Orleans.Runtime.Startup'
 public class Startup
@@ -25,6 +31,9 @@ public class Startup
 
     public virtual void ConfigureServices(IServiceCollection services) =>
         services
+#if Serilog
+            .ConfigureOptions<ConfigureRequestLoggingOptions>()
+#endif
 #if ApplicationInsights
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
@@ -43,7 +52,7 @@ public class Startup
         application
             .UseRouting()
 #if Serilog
-            .UseCustomSerilogRequestLogging()
+            .UseSerilogRequestLogging()
 #endif
             .UseEndpoints(
                 builder =>

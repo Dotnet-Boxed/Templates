@@ -2,7 +2,7 @@ namespace GraphQLTemplate;
 
 using Boxed.AspNetCore;
 using GraphQLTemplate.ConfigureOptions;
-#if (Authorization || CORS || OpenTelemetry)
+#if ((HealthCheck && Redis) || OpenTelemetry || Authorization || Redis)
 using GraphQLTemplate.Constants;
 #endif
 using GraphQLTemplate.Options;
@@ -73,6 +73,9 @@ internal static class CustomServiceCollectionExtensions
 #endif
 #if Redis
             .ConfigureOptions<ConfigureRedisCacheOptions>()
+#endif
+#if Serilog
+            .ConfigureOptions<ConfigureRequestLoggingOptions>()
 #endif
 #if ResponseCompression
             .ConfigureOptions<ConfigureResponseCompressionOptions>()

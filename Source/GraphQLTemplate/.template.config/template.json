@@ -62,7 +62,10 @@
             "Source/GraphQLTemplate/Options/RedisOptions.cs"
           ]
         },
-        // ReverseProxyWebServer
+        {
+          "condition": "(!Serilog)",
+          "exclude": [ "Source/GraphQLTemplate/ConfigureOptions/ConfigureRequestLoggingOptions.cs" ]
+        },
         {
           "condition": "(!IIS)",
           "exclude": [ "Source/GraphQLTemplate/web.config" ]
