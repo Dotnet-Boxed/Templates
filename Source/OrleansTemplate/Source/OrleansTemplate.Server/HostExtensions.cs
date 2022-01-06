@@ -28,7 +28,7 @@ internal static class HostExtensions
 
     public static void LogApplicationTerminatedUnexpectedly(this IHost host, Exception exception)
     {
-        if (host == null)
+        if (host is null)
         {
             LogToConsole(exception);
         }
