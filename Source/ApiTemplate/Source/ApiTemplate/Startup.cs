@@ -8,6 +8,9 @@ using Boxed.AspNetCore;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+#if Serilog
+using Serilog;
+#endif
 
 /// <summary>
 /// The main start-up class for the application.
@@ -133,7 +136,7 @@ public class Startup
                 x => x.UseDeveloperExceptionPage())
             .UseStaticFiles()
 #if Serilog
-            .UseCustomSerilogRequestLogging()
+            .UseSerilogRequestLogging()
 #endif
             .UseEndpoints(
                 builder =>

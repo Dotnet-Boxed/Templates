@@ -1,7 +1,7 @@
 namespace ApiTemplate;
 
 using ApiTemplate.ConfigureOptions;
-#if CORS
+#if ((HealthCheck && Redis) || OpenTelemetry)
 using ApiTemplate.Constants;
 #endif
 using ApiTemplate.Options;
@@ -73,6 +73,9 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureJsonOptions>()
 #if Redis
             .ConfigureOptions<ConfigureRedisCacheOptions>()
+#endif
+#if Serilog
+            .ConfigureOptions<ConfigureRequestLoggingOptions>()
 #endif
 #if ResponseCompression
             .ConfigureOptions<ConfigureResponseCompressionOptions>()

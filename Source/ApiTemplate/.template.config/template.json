@@ -82,6 +82,10 @@
           ]
         },
         {
+          "condition": "(!Serilog)",
+          "exclude": [ "Source/ApiTemplate/ConfigureOptions/ConfigureRequestLoggingOptions.cs" ]
+        },
+        {
           "condition": "(!IIS)",
           "exclude": [ "Source/ApiTemplate/web.config" ]
         },
