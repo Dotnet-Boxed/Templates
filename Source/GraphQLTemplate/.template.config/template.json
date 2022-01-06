@@ -80,6 +80,7 @@
         {
           "condition": "(!Authorization)",
           "exclude": [
+            "Source/GraphQLTemplate/ConfigureOptions/ConfigureAuthorizationOptions.cs",
             "Source/GraphQLTemplate/Constants/AuthorizationPolicyName.cs"
           ]
         },

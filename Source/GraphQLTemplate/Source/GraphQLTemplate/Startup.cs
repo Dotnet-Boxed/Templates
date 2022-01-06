@@ -71,7 +71,7 @@ public class Startup
             .AddHttpContextAccessor()
             .AddServerTiming()
 #if Authorization
-            .AddCustomAuthorization()
+            .AddAuthorization()
 #endif
 #if Redis
             .AddCustomRedis(this.webHostEnvironment, this.configuration)
