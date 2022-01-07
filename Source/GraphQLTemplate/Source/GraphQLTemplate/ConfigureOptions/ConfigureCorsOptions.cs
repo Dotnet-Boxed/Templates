@@ -4,6 +4,10 @@ using GraphQLTemplate.Constants;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Options;
 
+/// <summary>
+/// Configures cross-origin resource sharing (CORS) policies.
+/// See https://docs.asp.net/en/latest/security/cors.html.
+/// </summary>
 public class ConfigureCorsOptions : IConfigureOptions<CorsOptions>
 {
     public void Configure(CorsOptions options) =>
