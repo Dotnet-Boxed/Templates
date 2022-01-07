@@ -80,6 +80,7 @@ public class Startup
             .AddVersionedApiExplorer()
 #endif
             .AddServerTiming()
+#if Controllers
             .AddControllers()
 #if DataContractSerializer
             // Adds the XML input and output formatter using the DataContractSerializer.
@@ -88,7 +89,6 @@ public class Startup
             // Adds the XML input and output formatter using the XmlSerializer.
             .AddXmlSerializerFormatters()
 #endif
-#if Controllers
             .Services
             .AddCustomOptions(this.configuration)
             .AddCustomConfigureOptions()
