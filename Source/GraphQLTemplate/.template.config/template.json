@@ -56,9 +56,14 @@
           ]
         },
         {
+          "condition": "(!DistributedCacheRedis)",
+          "exclude": [
+            "Source/GraphQLTemplate/ConfigureOptions/ConfigureRedisCacheOptions.cs"
+          ]
+        },
+        {
           "condition": "(!Redis)",
           "exclude": [
-            "Source/GraphQLTemplate/ConfigureOptions/ConfigureRedisCacheOptions.cs",
             "Source/GraphQLTemplate/Options/RedisOptions.cs"
           ]
         },
