@@ -27,11 +27,11 @@
           "condition": "(!Controllers)",
           "exclude": [
             "Source/ApiTemplate/Commands/**/*",
-            "Source/ApiTemplate/ConfigureOptions/**/*",
+            "Source/ApiTemplate/ConfigureOptions/ConfigureMvcOptions.cs",
             "Source/ApiTemplate/Constants/ApiVersionName",
             "Source/ApiTemplate/Constants/CarsControllerRoute.cs",
             "Source/ApiTemplate/Constants/ControllerName.cs",
-            "Source/ApiTemplate/Controllers/ConfigureMvcOptions.cs",
+            "Source/ApiTemplate/Controllers/**/*",
             "Source/ApiTemplate/Mappers/**/*",
             "Source/ApiTemplate/Models/**/*",
             "Source/ApiTemplate/Repositories/**/*",
@@ -63,6 +63,7 @@
           "condition": "(!Swagger)",
           "exclude": [
             "Source/ApiTemplate/ConfigureOptions/ConfigureSwaggerGenOptions.cs",
+            "Source/ApiTemplate/ConfigureOptions/ConfigureSwaggerUIOptions.cs",
             "Source/ApiTemplate/OperationFilters/**/*"
           ]
         },

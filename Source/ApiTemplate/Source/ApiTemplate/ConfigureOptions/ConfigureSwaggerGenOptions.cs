@@ -1,21 +1,27 @@
 namespace ApiTemplate;
 
+#if Versioning
 using ApiTemplate.OperationFilters;
+#endif
 using Boxed.AspNetCore.Swagger;
 using Boxed.AspNetCore.Swagger.OperationFilters;
 using Boxed.AspNetCore.Swagger.SchemaFilters;
+#if Versioning
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+#endif
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
 {
+#if Versioning
     private readonly IApiVersionDescriptionProvider provider;
 
     public ConfigureSwaggerGenOptions(IApiVersionDescriptionProvider provider) =>
         this.provider = provider;
 
+#endif
     public void Configure(SwaggerGenOptions options)
     {
         options.DescribeAllParametersInCamelCase();
@@ -49,11 +55,11 @@ public class ConfigureSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
             options.SwaggerDoc(apiVersionDescription.GroupName, info);
         }
 #else
-        var info = new Info()
+        var info = new OpenApiInfo()
         {
             Title = AssemblyInformation.Current.Product,
             Description = AssemblyInformation.Current.Description,
-            Version = "v1"
+            Version = "v1",
         };
         options.SwaggerDoc("v1", info);
 #endif

@@ -37,6 +37,11 @@ public class ApiTemplateTest
     [Trait("IsUsingDotnetRun", "false")]
     [InlineData("ApiDefaults")]
     [InlineData("ApiNoControllers", "controllers=false")]
+    [InlineData("ApiNoCors", "cors=false")]
+    [InlineData("ApiResponseCaching", "response-caching=false")]
+    [InlineData("ApiResponseCompression", "response-compression=false")]
+    [InlineData("ApiHstsPreload", "hsts-preload=false")]
+    [InlineData("ApiNoVersioning", "versioning=false")]
     [InlineData("ApiNoSerilog", "logging=None")]
     [InlineData("ApiNoForwardedHeaders", "forwarded-headers=false")]
     [InlineData("ApiNoHostFiltering", "host-filtering=false")]
@@ -47,6 +52,8 @@ public class ApiTemplateTest
     [InlineData("ApiDockerHub", "docker-registry=DockerHub")]
     [InlineData("ApiCacheRedis", "distributed-cache=Redis")]
     [InlineData("ApiCacheInMemory", "distributed-cache=InMemory")]
+    [InlineData("ApiDataContractSerializer", "xml-formatter=DataContractSerializer")]
+    [InlineData("ApiXmlSerializer", "xml-formatter=XmlSerializer")]
     public async Task RestoreBuildTest_ApiDefaults_SuccessfulAsync(string name, params string[] arguments)
     {
         await InstallTemplateAsync().ConfigureAwait(false);

@@ -9,6 +9,8 @@ using System.Text.Json.Serialization;
 [JsonSerializable(typeof(Car[]))]
 [JsonSerializable(typeof(Connection<Car>[]))]
 [JsonSerializable(typeof(SaveCar[]))]
+#else
+[JsonSerializable(typeof(object[]))]
 #endif
 internal partial class CustomJsonSerializerContext : JsonSerializerContext
 {
