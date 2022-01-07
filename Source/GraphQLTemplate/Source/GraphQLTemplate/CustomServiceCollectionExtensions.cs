@@ -74,7 +74,7 @@ internal static class CustomServiceCollectionExtensions
 #if HstsPreload
             .ConfigureOptions<ConfigureHstsOptions>()
 #endif
-#if Redis
+#if DistributedCacheRedis
             .ConfigureOptions<ConfigureRedisCacheOptions>()
 #endif
 #if Serilog
