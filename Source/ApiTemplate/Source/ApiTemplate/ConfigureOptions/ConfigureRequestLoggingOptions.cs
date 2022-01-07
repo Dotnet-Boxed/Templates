@@ -5,6 +5,10 @@ using Serilog;
 using Serilog.AspNetCore;
 using Serilog.Events;
 
+/// <summary>
+/// Configures serilog HTTP request logging. Adds additional properties to each log.
+/// See https://github.com/serilog/serilog-aspnetcore.
+/// </summary>
 public class ConfigureRequestLoggingOptions : IConfigureOptions<RequestLoggingOptions>
 {
     private const string MessageTemplate = "{Protocol} {RequestMethod} {RequestPath} responded {StatusCode} {ContentType} in {Elapsed:0.0000} ms";

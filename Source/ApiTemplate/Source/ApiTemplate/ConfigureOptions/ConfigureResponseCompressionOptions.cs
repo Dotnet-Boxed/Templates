@@ -5,6 +5,10 @@ using ApiTemplate.Options;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Options;
 
+/// <summary>
+/// Configures dynamic GZIP and Brotli response compression. This is turned off for HTTPS requests by default to avoid
+/// the BREACH security vulnerability.
+/// </summary>
 public class ConfigureResponseCompressionOptions :
     IConfigureOptions<ResponseCompressionOptions>,
     IConfigureOptions<BrotliCompressionProviderOptions>,
