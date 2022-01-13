@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  pull_request_target:
     types:
+      - edited
       - opened
       - reopened
       - synchronize
@@ -19,6 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Draft Release"
-        uses: release-drafter/release-drafter@v5
+        uses: release-drafter/release-drafter@v5.16.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
