@@ -79,11 +79,11 @@
     "GitHubActions": {
       "longName": "github-actions"
     },
-    "SkipInstallAzureStorageEmulator": {
-      "longName": "no-install-storage-emulator"
+    "SkipInstallAzuriteEmulator": {
+      "longName": "no-install-azurite-emulator"
     },
-    "SkipStartAzureStorageEmulator": {
-      "longName": "no-start-storage-emulator"
+    "SkipStartAzuriteEmulator": {
+      "longName": "no-start-azurite-emulator"
     }
   }
 }
