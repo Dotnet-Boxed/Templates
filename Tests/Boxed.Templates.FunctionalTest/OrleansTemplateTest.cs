@@ -13,8 +13,8 @@ public class OrleansTemplateTest
     private const string SolutionFileName = "OrleansTemplate.sln";
     private static readonly string[] DefaultArguments = new string[]
     {
-        "no-install-storage-emulator=true",
-        "no-start-storage-emulator=true",
+        "no-install-azurite-emulator=true",
+        "no-start-azurite-emulator=true",
         "http-port={HTTP_PORT}",
     };
 
