@@ -176,10 +176,11 @@ internal static class CustomServiceCollectionExtensions
                             }
                         };
                             options.RecordException = true;
-                        });
+                        })
 #if Redis
-                builder.AddRedisInstrumentation();
+                    .AddRedisInstrumentation()
 #endif
+                    .AddHotChocolateInstrumentation();
 
                 if (webHostEnvironment.IsDevelopment())
                 {
@@ -217,6 +218,9 @@ internal static class CustomServiceCollectionExtensions
         var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
         return services
             .AddGraphQLServer()
+#if OpenTelemetry
+            .AddInstrumentation()
+#endif
             .InitializeOnStartup()
             .AddFiltering()
             .AddSorting()
