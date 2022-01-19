@@ -349,14 +349,14 @@
         "value": "false"
       }
     },
-    "SkipInstallAzureStorageEmulator": {
+    "SkipInstallAzuriteEmulator": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
       "displayName": "Skip Installing Azure Storage Emulator",
       "description": "Skips the installation of the Azure Storage Emulator."
     },
-    "SkipStartAzureStorageEmulator": {
+    "SkipStartAzuriteEmulator": {
       "type": "parameter",
       "datatype": "bool",
       "defaultValue": "false",
@@ -367,35 +367,35 @@
   "postActions": [
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(!SkipInstallAzureStorageEmulator)",
+      "condition": "(!SkipInstallAzuriteEmulator)",
       "continueOnError": true,
-      "description ": "Install the Azure Storage Emulator where data is stored at development time.",
+      "description ": "Install the Azurite Emulator where data is stored at development time.",
       "args": {
         "executable": "powershell.exe",
-        "args": "start https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator",
+        "args": "start https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite",
         "redirectStandardOutput": "false",
         "redirectStandardError": "false"
       },
       "manualInstructions": [
         {
-          "text": "Install the Azure Storage Emulator from https://docs.microsoft.com/en-us/azure/storage/common/storage-use-emulator."
+          "text": "Install the Azurite Emulator from https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azurite."
         }
       ]
     },
     {
       "actionId": "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2",
-      "condition": "(!SkipStartAzureStorageEmulator)",
+      "condition": "(!SkipStartAzuriteEmulator)",
       "continueOnError": true,
-      "description ": "Run the Azure Storage Emulator.",
+      "description ": "Run the Azurite Emulator.",
       "args": {
-        "executable": "C:\\Program Files (x86)\\Microsoft SDKs\\Azure\\Storage Emulator\\AzureStorageEmulator.exe",
+        "executable": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\Common7\\IDE\\Extensions\\Microsoft\\Azure Storage Emulator\\azurite.exe",
         "args": "start",
         "redirectStandardOutput": "false",
         "redirectStandardError": "false"
       },
       "manualInstructions": [
         {
-          "text": "Run the Azure Storage Emulator."
+          "text": "Run the Azurite Emulator."
         }
       ]
     }

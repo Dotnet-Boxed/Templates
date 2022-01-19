@@ -6,11 +6,11 @@
   "order": 0,
   "symbolInfo": [
     {
-      "id": "SkipInstallAzureStorageEmulator",
+      "id": "SkipInstallAzuriteEmulator",
       "isVisible": false
     },
     {
-      "id": "SkipStartAzureStorageEmulator",
+      "id": "SkipStartAzuriteEmulator",
       "isVisible": false
     }
   ]
