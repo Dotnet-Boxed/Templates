@@ -20,6 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Draft Release"
-        uses: release-drafter/release-drafter@v5.17.5
+        uses: release-drafter/release-drafter@v5.17.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
