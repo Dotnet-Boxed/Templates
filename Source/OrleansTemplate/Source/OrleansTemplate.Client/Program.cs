@@ -64,12 +64,13 @@ public static class Program
 
     private static IClientBuilder CreateClientBuilder() =>
         new ClientBuilder()
-            .UseAzureStorageClustering(options => options.ConnectionString = "UseDevelopmentStorage=true")
-            .Configure<ClusterOptions>(options =>
-            {
-                options.ClusterId = Cluster.ClusterId;
-                options.ServiceId = Cluster.ServiceId;
-            })
+            .UseAzureStorageClustering(options => options.ConfigureTableServiceClient("UseDevelopmentStorage=true"))
+            .Configure<ClusterOptions>(
+                options =>
+                {
+                    options.ClusterId = Cluster.ClusterId;
+                    options.ServiceId = Cluster.ServiceId;
+                })
             .ConfigureApplicationParts(
                 parts => parts
                     .AddApplicationPart(typeof(ICounterGrain).Assembly)
