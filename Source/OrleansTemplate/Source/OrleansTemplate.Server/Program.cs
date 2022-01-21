@@ -101,7 +101,7 @@ public class Program
                 })
             .UseSiloUnobservedExceptionsHandler()
             .UseAzureStorageClustering(
-                options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
+                options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .ConfigureEndpoints(
                 EndpointOptions.DEFAULT_SILO_PORT,
                 EndpointOptions.DEFAULT_GATEWAY_PORT,
@@ -113,21 +113,21 @@ public class Program
             .AddAzureTableGrainStorageAsDefault(
                 options =>
                 {
-                    options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString;
+                    options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString);
                     options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                     options.UseJson = true;
                 })
             .UseAzureTableReminderService(
-                options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
+                options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .UseTransactions(withStatisticsReporter: true)
             .AddAzureTableTransactionalStateStorageAsDefault(
-                options => options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString)
+                options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .AddSimpleMessageStreamProvider(StreamProviderName.Default)
             .AddAzureTableGrainStorage(
                 "PubSubStore",
                 options =>
                 {
-                    options.ConnectionString = GetStorageOptions(context.Configuration).ConnectionString;
+                    options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString);
                     options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
                     options.UseJson = true;
                 })
