@@ -67,7 +67,7 @@ public class Startup
             .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
 #endif
 #if OpenTelemetry
-            .AddCustomOpenTelemetryTracing(this.webHostEnvironment)
+            .AddOpenTelemetryTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
 #endif
 #if Swagger
             .AddSwaggerGen()

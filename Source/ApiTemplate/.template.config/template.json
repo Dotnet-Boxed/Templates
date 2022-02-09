@@ -152,7 +152,8 @@
           "condition": "(!OpenTelemetry)",
           "exclude": [
             "Source/ApiTemplate/Constants/OpenTelemetryAttributeName.cs",
-            "Source/ApiTemplate/Constants/OpenTelemetryHttpFlavour.cs"
+            "Source/ApiTemplate/Constants/OpenTelemetryHttpFlavour.cs",
+            "Source/ApiTemplate/TracerProviderBuilderExtensions.cs"
           ]
         }
       ]
