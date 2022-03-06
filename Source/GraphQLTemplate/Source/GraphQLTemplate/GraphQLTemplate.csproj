@@ -55,14 +55,14 @@
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="5.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="5.2.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="12.6.1" />
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.6.1" Condition="'$(Authorization)' == 'true'" />
-    <PackageReference Include="HotChocolate.Data" Version="12.6.1" />
-    <PackageReference Include="HotChocolate.Diagnostics" Version="12.6.1" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="12.6.1" Condition="'$(PersistedQueries)' == 'true'" />
-    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="12.6.1" Condition="'$(PersistedQueries)' == 'true'" />
-    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="12.6.1" Condition="'$(Subscriptions)' == 'true'" />
-    <PackageReference Include="HotChocolate.Types.Scalars" Version="12.6.1" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.6.2" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.6.2" Condition="'$(Authorization)' == 'true'" />
+    <PackageReference Include="HotChocolate.Data" Version="12.6.2" />
+    <PackageReference Include="HotChocolate.Diagnostics" Version="12.6.2" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="12.6.2" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="12.6.2" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="12.6.2" Condition="'$(Subscriptions)' == 'true'" />
+    <PackageReference Include="HotChocolate.Types.Scalars" Version="12.6.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="6.0.2" Condition="'$(Azure)' == 'true'" />
