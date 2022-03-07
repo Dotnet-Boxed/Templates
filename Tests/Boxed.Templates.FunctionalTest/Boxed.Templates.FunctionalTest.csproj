@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Boxed.DotnetNewTest" Version="5.0.0" />
+    <PackageReference Include="Boxed.DotnetNewTest" Version="5.0.0+build.457" />
     <PackageReference Include="coverlet.collector" PrivateAssets="all" Version="3.1.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
