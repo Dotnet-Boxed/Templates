@@ -54,7 +54,7 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.2" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="10.0.0" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
+    <PackageReference Include="Boxed.Mapping" Version="6.0.0+build.458" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="6.0.2" Condition="'$(Azure)' == 'true'" />
