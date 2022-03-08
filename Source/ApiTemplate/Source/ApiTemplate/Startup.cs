@@ -158,8 +158,8 @@ public class Startup
                     builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
 #endif
 #if Swagger
+                    builder.MapSwagger();
                 })
-            .UseSwagger()
             .UseIf(
                 this.webHostEnvironment.IsDevelopment(),
                 x => x.UseSwaggerUI());
