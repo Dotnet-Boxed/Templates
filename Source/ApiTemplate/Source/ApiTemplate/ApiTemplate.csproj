@@ -74,8 +74,8 @@
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Exceptions" Version="8.1.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="3.1.0" Condition="'$(Serilog)' == 'true' AND '$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" Condition="'$(Swagger)' == 'true'" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.2.3" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" Condition="'$(Swagger)' == 'true'" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
 </Project>
