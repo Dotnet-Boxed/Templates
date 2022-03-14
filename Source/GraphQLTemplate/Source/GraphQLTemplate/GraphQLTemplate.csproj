@@ -55,7 +55,7 @@
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="5.2.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="5.2.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="12.6.2" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="12.7.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.6.2" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="12.6.2" />
     <PackageReference Include="HotChocolate.Diagnostics" Version="12.6.2" Condition="'$(OpenTelemetry)' == 'true'" />
