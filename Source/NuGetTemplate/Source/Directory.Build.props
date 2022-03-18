@@ -12,7 +12,7 @@
 
   <PropertyGroup Label="Build">
     <IsTrimmable Condition="'$(IsTrimmable)' == 'true'">true</IsTrimmable>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GenerateDocumentationFile Condition="'$(Comments)' == 'true'">true</GenerateDocumentationFile>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 

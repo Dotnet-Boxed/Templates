@@ -40,6 +40,9 @@
     "ContactXmlEncoded": {
       "isHidden": true
     },
+    "Comments": {
+      "longName": "comments"
+    },
     "ReadMe": {
       "longName": "readme"
     },
