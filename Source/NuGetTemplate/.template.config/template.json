@@ -226,6 +226,13 @@
       "valueSource": "Contact",
       "valueTransform": "xmlEncode"
     },
+    "Comments": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "displayName": "Comments",
+      "description": "Require comments on all code."
+    },
     "ReadMe": {
       "type": "parameter",
       "datatype": "bool",

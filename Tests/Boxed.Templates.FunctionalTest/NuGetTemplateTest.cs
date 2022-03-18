@@ -32,6 +32,7 @@ public class NuGetTemplateTest
     [InlineData("NuGetAnalysisNone", "analysis-mode=AllDisabledByDefault")]
     [InlineData("NuGetNoImplicitUsings", "implicit-usings=false")]
     [InlineData("NuGetTrimmable", "trimmable=true")]
+    [InlineData("NuGetNoComments", "comments=false")]
     public async Task RestoreBuildTest_NuGetDefaults_SuccessfulAsync(string name, params string[] arguments)
     {
         await InstallTemplateAsync().ConfigureAwait(false);

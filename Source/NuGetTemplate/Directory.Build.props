@@ -5,6 +5,7 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <DotnetFramework>false</DotnetFramework>
     <EditorConfig>true</EditorConfig>
+    <ImplicitUsings>true</ImplicitUsings>
     <MIT>true</MIT>
     <Nullable>true</Nullable>
     <StyleCop>true</StyleCop>
