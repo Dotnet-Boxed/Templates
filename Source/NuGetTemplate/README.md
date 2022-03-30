@@ -3,7 +3,7 @@
 # PROJECT-TITLE
 
 <!--#if GitHubActions-->
-[![GitHub Actions Status](https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/workflows/Build/badge.svg?branch=main)](https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/actions) [![NuGetTemplate NuGet Package Downloads](https://img.shields.io/nuget/dt/NuGetTemplate)](https://www.nuget.org/packages/NuGetTemplate)
+[![NuGetTemplate NuGet Package](https://img.shields.io/nuget/v/NuGetTemplate.svg)](https://www.nuget.org/packages/NuGetTemplate/) [![NuGetTemplate NuGet Package Downloads](https://img.shields.io/nuget/dt/NuGetTemplate)](https://www.nuget.org/packages/NuGetTemplate) [![GitHub Actions Status](https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/workflows/Build/badge.svg?branch=main)](https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/actions)
 
 [![GitHub Actions Build History](https://buildstats.info/github/chart/GITHUB-USERNAME/GITHUB-PROJECT?branch=main&includeBuildsFromPullRequest=false)](https://github.com/GITHUB-USERNAME/GITHUB-PROJECT/actions)
 
