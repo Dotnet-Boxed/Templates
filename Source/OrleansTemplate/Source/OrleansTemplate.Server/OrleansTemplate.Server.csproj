@@ -55,7 +55,7 @@
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.6.0" />
-    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.6.0" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.6.2" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.6.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.15.0" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
