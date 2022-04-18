@@ -53,7 +53,7 @@
     <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Counters" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.OrleansTelemetryConsumers.Linux" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="3.6.0" />
-    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.6.0" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="3.6.2" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="3.6.0" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="3.6.0" />
