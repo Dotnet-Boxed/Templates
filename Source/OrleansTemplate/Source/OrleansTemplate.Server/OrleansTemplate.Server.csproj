@@ -77,7 +77,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46" />
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32" />
   </ItemGroup>
 
 </Project>
