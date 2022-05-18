@@ -53,7 +53,7 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
-    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.0.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="6.0.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.9.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.9.0" Condition="'$(Authorization)' == 'true'" />
