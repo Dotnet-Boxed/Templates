@@ -5,7 +5,9 @@ using GraphQLTemplate.ConfigureOptions;
 #if ((HealthCheck && Redis) || Redis || PersistedQueries || Subscriptions)
 using GraphQLTemplate.Constants;
 #endif
+using GraphQLTemplate.Directives;
 using GraphQLTemplate.Options;
+using GraphQLTemplate.Types;
 using HotChocolate.Execution.Options;
 #if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
@@ -145,10 +147,12 @@ internal static class CustomServiceCollectionExtensions
                 x => x.AddInMemorySubscriptions(),
                 x => x.AddRedisSubscriptions())
 #endif
-            .AddProjectScalarTypes()
-            .AddProjectDirectives()
-            .AddProjectDataLoaders()
-            .AddProjectTypes()
+            .SetSchema<MainSchema>()
+            .AddDirectiveType<UpperDirectiveType>()
+            .AddDirectiveType<LowerDirectiveType>()
+            .AddDirectiveType<IncludeDirectiveType>()
+            .AddDirectiveType<SkipDirectiveType>()
+            .AddGraphQLTemplateTypes()
             .TrimTypes()
             .ModifyOptions(options => options.UseXmlDocumentation = false)
             .AddMaxExecutionDepthRule(graphQLOptions.MaxAllowedExecutionDepth)
