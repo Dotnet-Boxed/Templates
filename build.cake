@@ -108,7 +108,7 @@ Task("Test")
             new DotNetTestSettings()
             {
                 Blame = true,
-                Collectors = new string[] { "XPlat Code Coverage" },
+                Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
                 Configuration = configuration,
                 Filter = string.Join("&", filters),
                 Loggers = new string[]
