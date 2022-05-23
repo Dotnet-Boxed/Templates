@@ -1,15 +1,10 @@
 namespace GraphQLTemplate;
 
 using Boxed.Mapping;
-using GraphQLTemplate.DataLoaders;
-using GraphQLTemplate.Directives;
 using GraphQLTemplate.Mappers;
 using GraphQLTemplate.Models;
 using GraphQLTemplate.Repositories;
 using GraphQLTemplate.Services;
-using GraphQLTemplate.Types;
-using HotChocolate.Execution.Configuration;
-using HotChocolate.Types;
 
 /// <summary>
 /// <see cref="IServiceCollection"/> extension methods add project services.
@@ -33,37 +28,4 @@ internal static class ProjectServiceCollectionExtensions
         services
             .AddSingleton<IDroidRepository, DroidRepository>()
             .AddSingleton<IHumanRepository, HumanRepository>();
-
-    public static IRequestExecutorBuilder AddProjectScalarTypes(this IRequestExecutorBuilder builder) =>
-        builder
-            // Bind a System.DateTime type to a GraphQL date type by default.
-            .BindRuntimeType<DateTime, DateType>();
-
-    public static IRequestExecutorBuilder AddProjectDirectives(this IRequestExecutorBuilder builder) =>
-        builder
-            .AddDirectiveType<UpperDirectiveType>()
-            .AddDirectiveType<LowerDirectiveType>()
-            .AddDirectiveType<IncludeDirectiveType>()
-            .AddDirectiveType<SkipDirectiveType>();
-
-    public static IRequestExecutorBuilder AddProjectDataLoaders(this IRequestExecutorBuilder builder) =>
-        builder
-            .AddDataLoader<IDroidDataLoader, DroidDataLoader>()
-            .AddDataLoader<IHumanDataLoader, HumanDataLoader>();
-
-    public static IRequestExecutorBuilder AddProjectTypes(this IRequestExecutorBuilder builder) =>
-        builder
-            .SetSchema<MainSchema>()
-            .AddQueryType<QueryObject>()
-#if Mutations
-            .AddMutationType<MutationObject>()
-#endif
-#if Subscriptions
-            .AddSubscriptionType<SubscriptionObject>()
-#endif
-            .AddType<EpisodeEnumeration>()
-            .AddType<CharacterInterface>()
-            .AddType<DroidObject>()
-            .AddType<HumanObject>()
-            .AddType<HumanInputObject>();
 }
