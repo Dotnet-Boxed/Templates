@@ -33,14 +33,13 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-      - name: "Install .NET SDK 3.1 & 5.0"
-        uses: actions/setup-dotnet@v2.0.0
+      - name: "Install .NET SDK"
+        uses: actions/setup-dotnet@v2.1.0
         with:
           dotnet-version: |
             3.1.x
             5.0.x
-      - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v2.0.0
+          global-json-file: "./global.json"
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
@@ -69,14 +68,13 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-      - name: "Install .NET SDK 3.1 & 5.0"
-        uses: actions/setup-dotnet@v2.0.0
+      - name: "Install .NET SDK"
+        uses: actions/setup-dotnet@v2.1.0
         with:
           dotnet-version: |
             3.1.x
             5.0.x
-      - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v2.0.0
+          global-json-file: "./global.json"
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
