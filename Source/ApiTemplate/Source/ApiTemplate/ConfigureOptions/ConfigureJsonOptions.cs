@@ -1,13 +1,13 @@
 namespace ApiTemplate.ConfigureOptions;
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
 #if Controllers
 using ApiTemplate.ViewModels;
 #endif
 using Microsoft.AspNetCore.Hosting;
-using System.Text.Json.Serialization;
-using System.Text.Json;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 public class ConfigureJsonOptions : IConfigureOptions<JsonOptions>
 {

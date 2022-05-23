@@ -1,8 +1,8 @@
 namespace GraphQLTemplate.ConfigureOptions;
 
+using Boxed.AspNetCore;
 using GraphQLTemplate.Constants;
 using GraphQLTemplate.Options;
-using Boxed.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Options;
