@@ -1,7 +1,5 @@
 namespace ApiTemplate.ViewModels;
 
-using System.ComponentModel.DataAnnotations;
-
 #if Swagger
 /// <summary>
 /// The options used to request a page.
@@ -15,7 +13,6 @@ public class PageOptions
     /// </summary>
     /// <example>10</example>
 #endif
-    [Range(1, 20)]
     public int? First { get; set; }
 
 #if Swagger
@@ -24,7 +21,6 @@ public class PageOptions
     /// </summary>
     /// <example></example>
 #endif
-    [Range(1, 20)]
     public int? Last { get; set; }
 
 #if Swagger

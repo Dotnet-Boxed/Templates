@@ -1,7 +1,5 @@
 namespace ApiTemplate.ViewModels;
 
-using System.ComponentModel.DataAnnotations;
-
 #if Swagger
 /// <summary>
 /// A make and model of car.
@@ -15,7 +13,6 @@ public class SaveCar
     /// </summary>
     /// <example>6</example>
 #endif
-    [Range(1, 20)]
     public int Cylinders { get; set; }
 
 #if Swagger
@@ -24,7 +21,6 @@ public class SaveCar
     /// </summary>
     /// <example>Honda</example>
 #endif
-    [Required]
     public string Make { get; set; } = default!;
 
 #if Swagger
@@ -33,6 +29,5 @@ public class SaveCar
     /// </summary>
     /// <example>Civic</example>
 #endif
-    [Required]
     public string Model { get; set; } = default!;
 }
