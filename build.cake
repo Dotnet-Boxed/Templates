@@ -191,7 +191,7 @@ public void StartProcess(string processName, ProcessArgumentBuilder builder)
         {
             Arguments = builder
         });
-    if (exitCode != 0 && !AzurePipelines.IsRunningOnAzurePipelines)
+    if (exitCode != 0)
     {
         throw new Exception($"'{command}' failed with exit code {exitCode}.");
     }
