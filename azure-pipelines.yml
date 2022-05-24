@@ -79,36 +79,36 @@ stages:
             "API-Linux":
               vmImageName: ubuntu-latest
               template: "API"
-            "API-MacOS":
-              vmImageName: macos-latest
-              template: "API"
+            # "API-MacOS":
+            #   vmImageName: macos-latest
+            #   template: "API"
             "API-Windows":
               vmImageName: windows-latest
               template: "API"
             "GraphQL-Linux":
               vmImageName: ubuntu-latest
               template: "GraphQL"
-            "GraphQL-MacOS":
-              vmImageName: macos-latest
-              template: "GraphQL"
+            # "GraphQL-MacOS":
+            #   vmImageName: macos-latest
+            #   template: "GraphQL"
             "GraphQL-Windows":
               vmImageName: windows-latest
               template: "GraphQL"
             "Orleans-Linux":
               vmImageName: ubuntu-latest
               template: "Orleans"
-            "Orleans-MacOS":
-              vmImageName: macos-latest
-              template: "Orleans"
+            # "Orleans-MacOS":
+            #   vmImageName: macos-latest
+            #   template: "Orleans"
             "Orleans-Windows":
               vmImageName: windows-latest
               template: "Orleans"
             "NuGet-Linux":
               vmImageName: ubuntu-latest
               template: "NuGet"
-            "NuGet-MacOS":
-              vmImageName: macos-latest
-              template: "NuGet"
+            # "NuGet-MacOS":
+            #   vmImageName: macos-latest
+            #   template: "NuGet"
             "NuGet-Windows":
               vmImageName: windows-latest
               template: "NuGet"
