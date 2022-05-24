@@ -84,6 +84,7 @@ public class Startup
             .AddVersionedApiExplorer()
 #endif
             .AddServerTiming()
+            .AddCustomFluentValidation()
 #if Controllers
             .AddControllers()
 #if DataContractSerializer

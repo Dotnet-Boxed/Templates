@@ -333,6 +333,23 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
             .ConfigureAwait(false);
     }
 
+    [Theory]
+    [InlineData("First")]
+    [InlineData("Last")]
+    public async Task GetPage_Invalid_Returns400BadRequestAsync(string direction)
+    {
+        var response = await this.client
+            .GetAsync(new Uri($"/cars?{direction}=21", UriKind.Relative))
+            .ConfigureAwait(false);
+
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        Assert.Equal(1, problemDetails.Errors.Count);
+        Assert.Equal(new string[] { $"'{direction}' must be between 1 and 20. You entered 21." }, problemDetails.Errors[direction]);
+    }
+
     [Fact]
     public async Task PostCar_Valid_Returns201CreatedAsync()
     {
@@ -366,8 +383,13 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         var response = await this.client.PostAsJsonAsync("cars", new SaveCar()).ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        Assert.Equal(3, problemDetails.Errors.Count);
+        Assert.Equal(new string[] { "'Cylinders' must be between 1 and 20. You entered 0." }, problemDetails.Errors[nameof(SaveCar.Cylinders)]);
+        Assert.Equal(new string[] { "'Make' must not be empty." }, problemDetails.Errors[nameof(SaveCar.Make)]);
+        Assert.Equal(new string[] { "'Model' must not be empty." }, problemDetails.Errors[nameof(SaveCar.Model)]);
     }
 
     [Fact]
@@ -381,8 +403,11 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        Assert.Equal(1, problemDetails.Errors.Count);
+        Assert.Equal(new string[] { "A non-empty request body is required." }, problemDetails.Errors[string.Empty]);
     }
 
     [Fact]
@@ -396,8 +421,10 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         var response = await this.client.SendAsync(request).ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status415UnsupportedMediaType, problemDetails.Status);
+        Assert.Empty(problemDetails.Errors);
     }
 
     [Fact]
@@ -437,8 +464,10 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         var response = await this.client.PutAsJsonAsync("cars/999", saveCar).ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
+        Assert.Empty(problemDetails.Errors);
     }
 
     [Fact]
@@ -447,8 +476,13 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         var response = await this.client.PutAsJsonAsync("cars/1", new SaveCar()).ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status400BadRequest, problemDetails.Status);
+        Assert.Equal(3, problemDetails.Errors.Count);
+        Assert.Equal(new string[] { "'Cylinders' must be between 1 and 20. You entered 0." }, problemDetails.Errors[nameof(SaveCar.Cylinders)]);
+        Assert.Equal(new string[] { "'Make' must not be empty." }, problemDetails.Errors[nameof(SaveCar.Make)]);
+        Assert.Equal(new string[] { "'Model' must not be empty." }, problemDetails.Errors[nameof(SaveCar.Model)]);
     }
 
     [Fact]
@@ -465,8 +499,10 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
             .ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-        var problemDetails = await response.Content.ReadAsAsync<ProblemDetails>(this.formatters).ConfigureAwait(false);
+        Assert.Equal(ContentType.ProblemJson, response.Content.Headers.ContentType?.MediaType);
+        var problemDetails = await response.Content.ReadAsAsync<ValidationProblemDetails>(this.formatters).ConfigureAwait(false);
         Assert.Equal(StatusCodes.Status404NotFound, problemDetails.Status);
+        Assert.Empty(problemDetails.Errors);
     }
 
     [Fact]
