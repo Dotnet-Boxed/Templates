@@ -29,7 +29,6 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 #if HttpsEverywhere
         this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
-        this.Server.AllowSynchronousIO = true;
 #if Serilog
 
         Log.Logger = new LoggerConfiguration()
