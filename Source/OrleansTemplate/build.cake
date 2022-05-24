@@ -84,6 +84,7 @@ Task("Publish")
             });
     });
 
+#if (Docker)
 Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
@@ -171,6 +172,12 @@ Task("Default")
     .IsDependentOn("Build")
     .IsDependentOn("Test")
     .IsDependentOn("DockerBuild");
-
+#else
+Task("Default")
+    .Description("Cleans, restores NuGet packages, builds the solution, runs unit tests and then publishes.")
+    .IsDependentOn("Build")
+    .IsDependentOn("Test")
+    .IsDependentOn("Publish");
+#endif
 
 RunTarget(target);

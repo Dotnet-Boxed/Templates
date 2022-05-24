@@ -84,10 +84,14 @@ internal static class CustomServiceCollectionExtensions
             .ConfigureOptions<ConfigureStaticFileOptions>();
 #if HealthCheck
 
+#if Redis
     public static IServiceCollection AddCustomHealthChecks(
         this IServiceCollection services,
         IWebHostEnvironment webHostEnvironment,
         IConfiguration configuration) =>
+#else
+    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services) =>
+#endif
         services
             .AddHealthChecks()
             // Add health checks for external dependencies here. See https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks
@@ -116,7 +120,9 @@ internal static class CustomServiceCollectionExtensions
 
     public static IServiceCollection AddCustomGraphQL(
         this IServiceCollection services,
+#if (PersistedQueries || Subscriptions)
         IWebHostEnvironment webHostEnvironment,
+#endif
         IConfiguration configuration)
     {
         var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();

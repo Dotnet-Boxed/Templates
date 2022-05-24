@@ -63,7 +63,11 @@ public class Startup
             .AddHsts(options => { })
 #endif
 #if HealthCheck
+#if Redis
             .AddCustomHealthChecks(this.webHostEnvironment, this.configuration)
+#else
+            .AddCustomHealthChecks()
+#endif
 #endif
 #if OpenTelemetry
             .AddOpenTelemetryTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
@@ -76,7 +80,11 @@ public class Startup
 #if Redis
             .AddCustomRedis(this.webHostEnvironment, this.configuration)
 #endif
+#if (PersistedQueries || Subscriptions)
             .AddCustomGraphQL(this.webHostEnvironment, this.configuration)
+#else
+            .AddCustomGraphQL(this.configuration)
+#endif
             .AddCustomOptions(this.configuration)
             .AddCustomConfigureOptions()
             .AddProjectMappers()

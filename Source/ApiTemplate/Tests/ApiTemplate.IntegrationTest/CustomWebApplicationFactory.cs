@@ -66,8 +66,10 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>
         builder
-            .UseEnvironment(Constants.EnvironmentName.Test)
-            .ConfigureServices(this.ConfigureServices);
+#if (DistributedCacheRedis || Controllers)
+            .ConfigureServices(this.ConfigureServices)
+#endif
+            .UseEnvironment(Constants.EnvironmentName.Test);
 #if (DistributedCacheRedis && Controllers)
 
     protected virtual void ConfigureServices(IServiceCollection services) =>

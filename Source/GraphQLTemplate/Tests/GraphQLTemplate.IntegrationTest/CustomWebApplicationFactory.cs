@@ -21,22 +21,26 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 {
 #if Serilog
     public CustomWebApplicationFactory(ITestOutputHelper testOutputHelper)
-#else
-    public CustomWebApplicationFactory()
-#endif
     {
         this.ClientOptions.AllowAutoRedirect = false;
 #if HttpsEverywhere
         this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
-#if Serilog
 
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Debug()
             .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
             .CreateLogger();
-#endif
     }
+#elif HttpsEverywhere
+    public CustomWebApplicationFactory()
+    {
+        this.ClientOptions.AllowAutoRedirect = false;
+        this.ClientOptions.BaseAddress = new Uri("https://localhost");
+    }
+#else
+    public CustomWebApplicationFactory() => this.ClientOptions.AllowAutoRedirect = false;
+#endif
 
     public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
