@@ -22,22 +22,26 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 {
 #if Serilog
     public CustomWebApplicationFactory(ITestOutputHelper testOutputHelper)
-#else
-    public CustomWebApplicationFactory()
-#endif
     {
         this.ClientOptions.AllowAutoRedirect = false;
 #if HttpsEverywhere
         this.ClientOptions.BaseAddress = new Uri("https://localhost");
 #endif
-#if Serilog
 
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Debug()
             .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
             .CreateLogger();
-#endif
     }
+#elif HttpsEverywhere
+    public CustomWebApplicationFactory()
+    {
+        this.ClientOptions.AllowAutoRedirect = false;
+        this.ClientOptions.BaseAddress = new Uri("https://localhost");
+    }
+#else
+    public CustomWebApplicationFactory() => this.ClientOptions.AllowAutoRedirect = false;
+#endif
 
     public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
@@ -64,18 +68,25 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
         builder
             .UseEnvironment(Constants.EnvironmentName.Test)
             .ConfigureServices(this.ConfigureServices);
+#if (DistributedCacheRedis && Controllers)
 
-    protected virtual void ConfigureServices(IServiceCollection services)
-    {
-#if DistributedCacheRedis
-        services.AddDistributedMemoryCache();
-#endif
-#if Controllers
+    protected virtual void ConfigureServices(IServiceCollection services) =>
+        services
+            .AddDistributedMemoryCache()
+            .AddSingleton(this.CarRepositoryMock.Object)
+            .AddSingleton(this.ClockServiceMock.Object);
+#elif DistributedCacheRedis
+
+    protected virtual void ConfigureServices(IServiceCollection services) =>
+        services
+            .AddDistributedMemoryCache();
+#elif Controllers
+
+    protected virtual void ConfigureServices(IServiceCollection services) =>
         services
             .AddSingleton(this.CarRepositoryMock.Object)
             .AddSingleton(this.ClockServiceMock.Object);
 #endif
-    }
 #if Controllers
 
     protected override void Dispose(bool disposing)
