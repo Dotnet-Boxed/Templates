@@ -84,8 +84,8 @@ public class Startup
             .AddVersionedApiExplorer()
 #endif
             .AddServerTiming()
-            .AddCustomFluentValidation()
 #if Controllers
+            .AddCustomFluentValidation()
             .AddControllers()
 #if DataContractSerializer
             // Adds the XML input and output formatter using the DataContractSerializer.

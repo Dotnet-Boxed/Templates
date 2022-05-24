@@ -36,6 +36,7 @@
             "Source/ApiTemplate/Models/**/*",
             "Source/ApiTemplate/Repositories/**/*",
             "Source/ApiTemplate/Services/**/*",
+            "Source/ApiTemplate/Validators/**/*",
             "Source/ApiTemplate/ViewModels/**/*",
             "Source/ApiTemplate/ProjectServiceCollectionExtensions.cs",
             "Tests/ApiTemplate.IntegrationTest/Controllers/**/*"
