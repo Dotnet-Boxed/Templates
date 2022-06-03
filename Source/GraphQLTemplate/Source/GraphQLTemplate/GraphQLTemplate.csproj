@@ -60,7 +60,7 @@
     <PackageReference Include="HotChocolate.Data" Version="12.9.0" />
     <PackageReference Include="HotChocolate.Diagnostics" Version="12.9.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="12.9.0" Condition="'$(PersistedQueries)' == 'true'" />
-    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="12.9.0" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="12.10.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="12.9.0" Condition="'$(Subscriptions)' == 'true'" />
     <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="12.9.0" />
     <PackageReference Include="HotChocolate.Types.Scalars" Version="12.9.0" />
