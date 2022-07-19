@@ -54,7 +54,7 @@
     <PackageReference Include="Boxed.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="6.1.1" />
-    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="6.1.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="6.1.1" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="12.12.1" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.12.1" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="12.12.1" />
