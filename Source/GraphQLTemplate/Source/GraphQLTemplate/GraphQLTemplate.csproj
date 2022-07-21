@@ -64,7 +64,7 @@
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="12.12.1" Condition="'$(Subscriptions)' == 'true'" />
     <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="12.12.1" />
     <PackageReference Include="HotChocolate.Types.Scalars" Version="12.12.1" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" Condition="'$(ApplicationInsights)' == 'true'" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="6.0.7" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.7" Condition="'$(DistributedCacheRedis)' == 'true'" />
