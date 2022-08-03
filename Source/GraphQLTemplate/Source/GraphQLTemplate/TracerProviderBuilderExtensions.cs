@@ -67,8 +67,6 @@ public static class TracerProviderBuilderExtensions
         if (obj is HttpRequest request)
         {
             var context = request.HttpContext;
-            activity.AddTag(OpenTelemetryAttributeName.Http.Flavor, OpenTelemetryHttpFlavour.GetHttpFlavour(request.Protocol));
-            activity.AddTag(OpenTelemetryAttributeName.Http.Scheme, request.Scheme);
             activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
             activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
             activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);

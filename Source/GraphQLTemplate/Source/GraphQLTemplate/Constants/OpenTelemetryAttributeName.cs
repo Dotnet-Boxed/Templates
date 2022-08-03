@@ -52,18 +52,6 @@ public static class OpenTelemetryAttributeName
     public static class Http
     {
         /// <summary>
-        /// The URI scheme identifying the used protocol.
-        /// </summary>
-        /// <example>E.g. http or https.</example>
-        public const string Scheme = "http.scheme";
-
-        /// <summary>
-        /// Kind of HTTP protocol used.
-        /// </summary>
-        /// <example>E.g. 1.0, 1.1, 2.0, SPDY or QUIC.</example>
-        public const string Flavor = "http.flavor";
-
-        /// <summary>
         /// The IP address of the original client behind all proxies, if known (e.g. from X-Forwarded-For).
         /// </summary>
         /// <example>E.g. 83.164.160.102.</example>
