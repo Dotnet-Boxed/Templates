@@ -63,8 +63,6 @@ public static class TracerProviderBuilderExtensions
         if (obj is HttpRequest request)
         {
             var context = request.HttpContext;
-            activity.AddTag(OpenTelemetryAttributeName.Http.Flavor, GetHttpFlavour(request.Protocol));
-            activity.AddTag(OpenTelemetryAttributeName.Http.Scheme, request.Scheme);
             activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
             activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
             activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
@@ -81,27 +79,5 @@ public static class TracerProviderBuilderExtensions
             activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
             activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
         }
-    }
-
-    private static string GetHttpFlavour(string protocol)
-    {
-        if (HttpProtocol.IsHttp10(protocol))
-        {
-            return OpenTelemetryHttpFlavour.Http10;
-        }
-        else if (HttpProtocol.IsHttp11(protocol))
-        {
-            return OpenTelemetryHttpFlavour.Http11;
-        }
-        else if (HttpProtocol.IsHttp2(protocol))
-        {
-            return OpenTelemetryHttpFlavour.Http20;
-        }
-        else if (HttpProtocol.IsHttp3(protocol))
-        {
-            return OpenTelemetryHttpFlavour.Http30;
-        }
-
-        throw new InvalidOperationException($"Protocol {protocol} not recognised.");
     }
 }

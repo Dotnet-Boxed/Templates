@@ -86,7 +86,6 @@
           "condition": "(!OpenTelemetry)",
           "exclude": [
             "Source/OrleansTemplate.Abstractions/Constants/OpenTelemetryAttributeName.cs",
-            "Source/OrleansTemplate.Abstractions/Constants/OpenTelemetryHttpFlavour.cs",
             "Source/OrleansTemplate.Server/TracerProviderBuilderExtensions.cs"
           ]
         }
