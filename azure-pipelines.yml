@@ -145,7 +145,7 @@ stages:
           - pwsh: "dotnet cake --target=Test --template=$(template)"
             displayName: "Dotnet Cake Test"
             failOnStderr: true
-          - task: PublishTestResults@2
+          - task: PublishTestResults@2.203.0
             displayName: "Publish Test Results"
             inputs:
               testResultsFormat: "VSTest"
