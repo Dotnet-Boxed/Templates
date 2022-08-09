@@ -43,7 +43,7 @@ stages:
         steps:
           - checkout: self
             lfs: true
-          - task: UseDotNet@2
+          - task: UseDotNet@2.207.2
             displayName: "Install .NET Core SDK"
             inputs:
               packageType: "sdk"
