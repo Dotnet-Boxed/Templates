@@ -89,7 +89,10 @@ Task("DockerBuild")
     .Description("Builds a Docker image.")
     .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
     {
-        tag = tag ?? dockerfile.GetDirectory().GetDirectoryName().ToLower();
+        var imageName = dockerfile.GetDirectory().GetDirectoryName().ToLower();
+        if(imageName == ".devcontainer") return;
+        tag = tag ?? imageName;
+        
         var version = GetVersion();
         var gitCommitSha = GetGitCommitSha();
 
