@@ -37,7 +37,7 @@ public class PutCarCommand
         {
             var modelState = this.actionContextAccessor.ActionContext!.ModelState;
             validationResult.AddToModelState(modelState, null);
-            return new BadRequestObjectResult(modelState);
+            return new BadRequestObjectResult(new ValidationProblemDetails(modelState));
         }
 
         var car = await this.carRepository.GetAsync(carId, cancellationToken).ConfigureAwait(false);
