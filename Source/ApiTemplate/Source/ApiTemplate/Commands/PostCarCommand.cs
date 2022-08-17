@@ -38,7 +38,7 @@ public class PostCarCommand
         {
             var modelState = this.actionContextAccessor.ActionContext!.ModelState;
             validationResult.AddToModelState(modelState, null);
-            return new BadRequestObjectResult(modelState);
+            return new BadRequestObjectResult(new ValidationProblemDetails(modelState));
         }
 
         var car = this.saveCarToCarMapper.Map(saveCar);

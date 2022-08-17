@@ -52,7 +52,7 @@ public class PatchCarCommand
         if (!validationResult.IsValid)
         {
             validationResult.AddToModelState(modelState, null);
-            return new BadRequestObjectResult(modelState);
+            return new BadRequestObjectResult(new ValidationProblemDetails(modelState));
         }
 
         this.saveCarToCarMapper.Map(saveCar, car);
