@@ -6,9 +6,6 @@ using ApiTemplate.Constants;
 #endif
 using ApiTemplate.Options;
 using Boxed.AspNetCore;
-#if Controllers
-using FluentValidation.AspNetCore;
-#endif
 #if (!ForwardedHeaders && HostFiltering)
 using Microsoft.AspNetCore.HostFiltering;
 #endif
@@ -20,17 +17,6 @@ using Microsoft.Extensions.Options;
 /// </summary>
 internal static class CustomServiceCollectionExtensions
 {
-#if Controllers
-    public static IServiceCollection AddCustomFluentValidation(this IServiceCollection services) =>
-        services
-            .AddFluentValidation(
-                x =>
-                {
-                    x.RegisterValidatorsFromAssemblyContaining<Startup>(lifetime: ServiceLifetime.Singleton);
-                    x.DisableDataAnnotationsValidation = true;
-                });
-
-#endif
     /// <summary>
     /// Configures the settings by binding the contents of the appsettings.json file to the specified Plain Old CLR
     /// Objects (POCO) and adding <see cref="IOptions{T}"/> objects to the services collection.

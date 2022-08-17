@@ -4,6 +4,7 @@ namespace ApiTemplate;
 using ApiTemplate.Constants;
 #endif
 using Boxed.AspNetCore;
+using FluentValidation;
 #if HealthCheck
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
@@ -85,8 +86,8 @@ public class Startup
 #endif
             .AddServerTiming()
 #if Controllers
-            .AddCustomFluentValidation()
-            .AddControllers()
+            .AddValidatorsFromAssemblyContaining<Startup>(lifetime: ServiceLifetime.Singleton)
+            .AddControllers(x => x.ModelValidatorProviders.Clear())
 #if DataContractSerializer
             // Adds the XML input and output formatter using the DataContractSerializer.
             .AddXmlDataContractSerializerFormatters()

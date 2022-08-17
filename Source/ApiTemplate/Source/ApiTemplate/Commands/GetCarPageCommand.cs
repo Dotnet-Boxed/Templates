@@ -5,31 +5,46 @@ using ApiTemplate.Repositories;
 using ApiTemplate.ViewModels;
 using Boxed.AspNetCore;
 using Boxed.Mapping;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class GetCarPageCommand
 {
     private const int DefaultPageSize = 3;
+
+    private readonly IActionContextAccessor actionContextAccessor;
     private readonly ICarRepository carRepository;
     private readonly IMapper<Models.Car, Car> carMapper;
-    private readonly IHttpContextAccessor httpContextAccessor;
+    private readonly IValidator<PageOptions> pageOptionsValidator;
     private readonly LinkGenerator linkGenerator;
 
     public GetCarPageCommand(
+        IActionContextAccessor actionContextAccessor,
         ICarRepository carRepository,
         IMapper<Models.Car, Car> carMapper,
-        IHttpContextAccessor httpContextAccessor,
+        IValidator<PageOptions> pageOptionsValidator,
         LinkGenerator linkGenerator)
     {
+        this.actionContextAccessor = actionContextAccessor;
         this.carRepository = carRepository;
         this.carMapper = carMapper;
-        this.httpContextAccessor = httpContextAccessor;
+        this.pageOptionsValidator = pageOptionsValidator;
         this.linkGenerator = linkGenerator;
     }
 
     public async Task<IActionResult> ExecuteAsync(PageOptions pageOptions, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(pageOptions);
+
+        var validationResult = this.pageOptionsValidator.Validate(pageOptions);
+        if (!validationResult.IsValid)
+        {
+            var modelState = this.actionContextAccessor.ActionContext!.ModelState;
+            validationResult.AddToModelState(modelState, null);
+            return new BadRequestObjectResult(modelState);
+        }
 
         pageOptions.First = !pageOptions.First.HasValue && !pageOptions.Last.HasValue ? DefaultPageSize : pageOptions.First;
         var createdAfter = Cursor.FromCursor<DateTimeOffset?>(pageOptions.After);
@@ -54,7 +69,7 @@ public class GetCarPageCommand
         var (startCursor, endCursor) = Cursor.GetFirstAndLastCursor(cars, x => x.Created);
         var carViewModels = this.carMapper.MapList(cars);
 
-        var httpContext = this.httpContextAccessor.HttpContext!;
+        var httpContext = this.actionContextAccessor.ActionContext!.HttpContext!;
         var connection = new Connection<Car>()
         {
             PageInfo = new PageInfo()
