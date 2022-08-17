@@ -13,7 +13,10 @@ var push =
     HasArgument("Push") ? Argument<bool>("Push") :
     EnvironmentVariable("Push", false);
 #endif
-
+#if (Docker)
+// Add directory names to exclude from the DockerBuild
+var foldersToExcludeFromDockerfileBuild = new[] { ".devcontainer" };
+#endif
 var artefactsDirectory = Directory("./Artefacts");
 
 Task("Clean")
@@ -85,14 +88,21 @@ Task("Publish")
     });
 
 #if (Docker)
+
+Func<IFileSystemInfo, bool>  excludeDockerfilesInFolders = fileSystemInfo => !foldersToExcludeFromDockerfileBuild.Any(d=> fileSystemInfo.Path.FullPath.EndsWith(d, StringComparison.OrdinalIgnoreCase));
+
 Task("DockerBuild")
     .Description("Builds a Docker image.")
-    .DoesForEach(GetFiles("./**/Dockerfile"), dockerfile =>
+    .DoesForEach(
+        GetFiles(
+            "./**/Dockerfile",
+             new GlobberSettings
+                {
+                    Predicate = excludeDockerfilesInFolders
+                }), 
+    dockerfile =>
     {
-        var imageName = dockerfile.GetDirectory().GetDirectoryName().ToLower();
-        if(imageName == ".devcontainer") return;
-        tag = tag ?? imageName;
-        
+        tag = tag ?? dockerfile.GetDirectory().GetDirectoryName().ToLower();
         var version = GetVersion();
         var gitCommitSha = GetGitCommitSha();
 
