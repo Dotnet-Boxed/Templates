@@ -115,7 +115,11 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         Assert.Equal(4, carViewModel.Cylinders);
         Assert.Equal("Honda", carViewModel.Make);
         Assert.Equal("Civic", carViewModel.Model);
+#if HttpsEverywhere
         Assert.Equal(new Uri("https://localhost/cars/1"), carViewModel.Url);
+#else
+        Assert.Equal(new Uri("http://localhost/cars/1"), carViewModel.Url);
+#endif
     }
 
     [Fact]
@@ -395,7 +399,11 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         Assert.Equal(4, carViewModel.Cylinders);
         Assert.Equal("Honda", carViewModel.Make);
         Assert.Equal("Civic", carViewModel.Model);
+#if HttpsEverywhere
         Assert.Equal(new Uri("https://localhost/cars/1"), carViewModel.Url);
+#else
+        Assert.Equal(new Uri("http://localhost/cars/1"), carViewModel.Url);
+#endif
     }
 
     [Fact]
@@ -481,7 +489,11 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         Assert.Equal(4, carViewModel.Cylinders);
         Assert.Equal("Honda", carViewModel.Make);
         Assert.Equal("Civic", carViewModel.Model);
+#if HttpsEverywhere
         Assert.Equal(new Uri("https://localhost/cars/1"), carViewModel.Url);
+#else
+        Assert.Equal(new Uri("http://localhost/cars/1"), carViewModel.Url);
+#endif
     }
 
     [Fact]
@@ -587,7 +599,11 @@ public class CarsControllerTest : CustomWebApplicationFactory<Program>
         Assert.Equal(4, carViewModel.Cylinders);
         Assert.Equal("Honda", carViewModel.Make);
         Assert.Equal("Civic Type-R", carViewModel.Model);
+#if HttpsEverywhere
         Assert.Equal(new Uri("https://localhost/cars/1"), carViewModel.Url);
+#else
+        Assert.Equal(new Uri("http://localhost/cars/1"), carViewModel.Url);
+#endif
     }
 
     private static List<Models.Car> GetCars() =>
