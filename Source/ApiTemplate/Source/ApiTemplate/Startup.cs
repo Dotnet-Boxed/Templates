@@ -4,7 +4,9 @@ namespace ApiTemplate;
 using ApiTemplate.Constants;
 #endif
 using Boxed.AspNetCore;
+#if Controllers
 using FluentValidation;
+#endif
 #if HealthCheck
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 #endif
