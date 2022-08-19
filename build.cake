@@ -85,42 +85,44 @@ Task("InstallDeveloperCertificate")
 
 Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
-    .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
-    {
-        var filters = new List<string>();
-        if (!isDotnetRunEnabled)
+    .DoesForEach(
+        GetFiles("./Tests/**/*.csproj"),
+        project =>
         {
-            filters.Add("IsUsingDotnetRun=false");
-        }
-
-        if (!isDockerEnabled)
-        {
-            filters.Add("IsUsingDocker=false");
-        }
-
-        if (template is not null)
-        {
-            filters.Add($"Template={template}");
-        }
-
-        DotNetTest(
-            project.ToString(),
-            new DotNetTestSettings()
+            var filters = new List<string>();
+            if (!isDotnetRunEnabled)
             {
-                Blame = true,
-                Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
-                Configuration = configuration,
-                Filter = string.Join("&", filters),
-                Loggers = new string[]
+                filters.Add("IsUsingDotnetRun=false");
+            }
+
+            if (!isDockerEnabled)
+            {
+                filters.Add("IsUsingDocker=false");
+            }
+
+            if (template is not null)
+            {
+                filters.Add($"Template={template}");
+            }
+
+            DotNetTest(
+                project.ToString(),
+                new DotNetTestSettings()
                 {
-                    $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
-                    $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
-                },
-                NoBuild = true,
-                NoRestore = true,
-                ResultsDirectory = artefactsDirectory,
-            });
-    });
+                    Blame = true,
+                    Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
+                    Configuration = configuration,
+                    Filter = string.Join("&", filters),
+                    Loggers = new string[]
+                    {
+                        $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                        $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
+                    },
+                    NoBuild = true,
+                    NoRestore = true,
+                    ResultsDirectory = artefactsDirectory,
+                });
+        });
 
 Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
