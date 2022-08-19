@@ -38,25 +38,27 @@ Task("Build")
 
 Task("Test")
     .Description("Runs unit tests and outputs test results to the artefacts directory.")
-    .DoesForEach(GetFiles("./Tests/**/*.csproj"), project =>
-    {
-        DotNetTest(
-            project.ToString(),
-            new DotNetTestSettings()
-            {
-                Blame = true,
-                Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
-                Configuration = configuration,
-                Loggers = new string[]
+    .DoesForEach(
+        GetFiles("./Tests/**/*.csproj"),
+        project =>
+        {
+            DotNetTest(
+                project.ToString(),
+                new DotNetTestSettings()
                 {
-                    $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
-                    $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
-                },
-                NoBuild = true,
-                NoRestore = true,
-                ResultsDirectory = artefactsDirectory,
-            });
-    });
+                    Blame = true,
+                    Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
+                    Configuration = configuration,
+                    Loggers = new string[]
+                    {
+                        $"trx;LogFileName={project.GetFilenameWithoutExtension()}.trx",
+                        $"html;LogFileName={project.GetFilenameWithoutExtension()}.html",
+                    },
+                    NoBuild = true,
+                    NoRestore = true,
+                    ResultsDirectory = artefactsDirectory,
+                });
+        });
 
 Task("Pack")
     .Description("Creates NuGet packages and outputs them to the artefacts directory.")
