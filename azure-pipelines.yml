@@ -43,17 +43,17 @@ stages:
         steps:
           - checkout: self
             lfs: true
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core 3.1 SDK"
             inputs:
               packageType: "sdk"
               version: 3.1.x
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core 5.0 SDK"
             inputs:
               packageType: "sdk"
               version: 5.0.x
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core SDK"
             inputs:
               packageType: "sdk"
@@ -118,17 +118,17 @@ stages:
         steps:
           - checkout: self
             lfs: true
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core 3.1 SDK"
             inputs:
               packageType: "sdk"
               version: 3.1.x
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core 5.0 SDK"
             inputs:
               packageType: "sdk"
               version: 5.0.x
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core SDK"
             inputs:
               packageType: "sdk"
@@ -145,12 +145,12 @@ stages:
           - pwsh: "dotnet cake --target=Test --template=$(template)"
             displayName: "Dotnet Cake Test"
             failOnStderr: true
-          - task: PublishTestResults@2.203.0
+          - task: PublishTestResults@2
             displayName: "Publish Test Results"
             inputs:
               testResultsFormat: "VSTest"
               testResultsFiles: "**/*.trx"
-          - task: PublishCodeCoverageResults@2.198.0
+          - task: PublishCodeCoverageResults@1
             inputs:
               codeCoverageTool: cobertura
               summaryFileLocation: "**/*.cobertura.xml"

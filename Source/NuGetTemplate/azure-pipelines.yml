@@ -43,7 +43,7 @@ stages:
         steps:
           - checkout: self
             lfs: true
-          - task: UseDotNet@2.207.2
+          - task: UseDotNet@2
             displayName: "Install .NET Core SDK"
             inputs:
               packageType: "sdk"
@@ -60,12 +60,12 @@ stages:
           - pwsh: "dotnet cake --target=Pack"
             displayName: "Dotnet Cake Pack"
             failOnStderr: true
-          - task: PublishTestResults@2.203.0
+          - task: PublishTestResults@2
             displayName: "Publish Test Results"
             inputs:
               testResultsFormat: "VSTest"
               testResultsFiles: "**/*.trx"
-          - task: PublishCodeCoverageResults@2.198.0
+          - task: PublishCodeCoverageResults@1
             inputs:
               codeCoverageTool: cobertura
               summaryFileLocation: "**/*.cobertura.xml"
