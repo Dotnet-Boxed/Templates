@@ -51,7 +51,7 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" Condition="'$(Redis)' == 'true'" />
-    <PackageReference Include="Boxed.AspNetCore" Version="8.1.0+build.662" />
+    <PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.0.0" />
@@ -79,7 +79,7 @@
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Span" Version="2.3.0" Condition="'$(Serilog)' == 'true' AND '$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
-    <PackageReference Include="Serilog.Exceptions" Version="8.4.0+build.694" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.4.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" Condition="'$(Serilog)' == 'true' AND '$(ApplicationInsights)' == 'true'" />
   </ItemGroup>
 

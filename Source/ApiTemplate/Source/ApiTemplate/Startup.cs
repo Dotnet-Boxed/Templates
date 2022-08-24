@@ -146,6 +146,7 @@ public class Startup
 #if Serilog
             .UseSerilogRequestLogging()
 #endif
+            .UseRequestCanceled()
             .UseEndpoints(
                 builder =>
                 {
