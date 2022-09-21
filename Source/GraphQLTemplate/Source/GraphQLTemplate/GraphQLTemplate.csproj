@@ -62,7 +62,7 @@
     <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="12.13.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="12.13.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="12.13.0" Condition="'$(Subscriptions)' == 'true'" />
-    <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="12.13.0" />
+    <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="12.14.0" />
     <PackageReference Include="HotChocolate.Types.Scalars" Version="12.13.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
