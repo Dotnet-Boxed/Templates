@@ -52,7 +52,7 @@ public class Program
 #if Serilog
         finally
         {
-            Log.CloseAndFlush();
+            await Log.CloseAndFlushAsync().ConfigureAwait(false);
         }
 #endif
     }
