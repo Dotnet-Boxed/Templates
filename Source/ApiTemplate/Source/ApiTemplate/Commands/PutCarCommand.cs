@@ -36,7 +36,7 @@ public class PutCarCommand
         if (!validationResult.IsValid)
         {
             var modelState = this.actionContextAccessor.ActionContext!.ModelState;
-            validationResult.AddToModelState(modelState, null);
+            validationResult.AddToModelState(modelState);
             return new BadRequestObjectResult(new ValidationProblemDetails(modelState));
         }
 

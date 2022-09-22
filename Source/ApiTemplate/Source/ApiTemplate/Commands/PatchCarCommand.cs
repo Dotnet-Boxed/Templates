@@ -51,7 +51,7 @@ public class PatchCarCommand
         var validationResult = this.saveCarValidator.Validate(saveCar);
         if (!validationResult.IsValid)
         {
-            validationResult.AddToModelState(modelState, null);
+            validationResult.AddToModelState(modelState);
             return new BadRequestObjectResult(new ValidationProblemDetails(modelState));
         }
 
