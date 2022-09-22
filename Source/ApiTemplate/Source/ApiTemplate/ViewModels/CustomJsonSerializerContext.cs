@@ -12,6 +12,6 @@ using System.Text.Json.Serialization;
 #else
 [JsonSerializable(typeof(object[]))]
 #endif
-internal partial class CustomJsonSerializerContext : JsonSerializerContext
+internal sealed partial class CustomJsonSerializerContext : JsonSerializerContext
 {
 }
