@@ -181,18 +181,13 @@ Task("DockerBuild")
 
             string GetGitCommitSha()
             {
-                var exitCode = StartProcess(
+                StartProcess(
                     "git",
                     new ProcessSettings()
                         .WithArguments(x => x.Append("rev-parse HEAD"))
                         .SetRedirectStandardOutput(true),
                     out var shaLines);
-                if (exitCode != 0)
-                {
-                    throw new Exception($"git rev-parse failed with non zero exit code {exitCode}.");
-                }
-
-                return shaLines.LastOrDefault();
+                return shaLines?.LastOrDefault() ?? string.Empty;
             }
         });
 
