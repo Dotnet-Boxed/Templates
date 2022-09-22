@@ -43,12 +43,6 @@
     <Copyright>Copyright © PROJECT-AUTHOR-XML. All rights Reserved</Copyright>
   </PropertyGroup>
 
-  <ItemGroup Label="Files">
-    <Content Include="wwwroot\.well-known\security.txt">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
   <ItemGroup Label="Package References">
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
