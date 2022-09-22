@@ -2,7 +2,6 @@
   <!--#if (AuthoringMode)-->
   <PropertyGroup>
     <!-- Workaround to build this project: https://github.com/dotnet/templating/issues/1438 -->
-    <GitHub>true</GitHub>
     <IsTrimmable>true</IsTrimmable>
     <Sign>true</Sign>
   </PropertyGroup>
@@ -13,7 +12,6 @@
   <PropertyGroup Label="Build">
     <IsTrimmable Condition="'$(IsTrimmable)' == 'true'">true</IsTrimmable>
     <GenerateDocumentationFile Condition="'$(Comments)' == 'true'">true</GenerateDocumentationFile>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Label="Signing" Condition="'$(Sign)' == 'true'">
@@ -21,21 +19,8 @@
     <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
-  <PropertyGroup Label="Source Link">
-    <!-- Optional: Declare that the Repository URL can be published to NuSpec -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!-- Optional: Embed source files that are not tracked by the source control manager to the PDB -->
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <!-- Optional: Include PDB in the built .nupkg -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
-
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.SourceLink.AzureDevOpsServer.Git" PrivateAssets="all" Version="1.1.1" Condition="'$(AzureDevOpsServer)' == 'true'" />
-    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" PrivateAssets="all" Version="1.1.1" Condition="'$(AzureRepos)' == 'true'" />
-    <PackageReference Include="Microsoft.SourceLink.Bitbucket.Git" PrivateAssets="all" Version="1.1.1" Condition="'$(Bitbucket)' == 'true'" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="all" Version="1.1.1" Condition="'$(GitHub)' == 'true'" />
-    <PackageReference Include="Microsoft.SourceLink.GitLab" PrivateAssets="all" Version="1.1.1" Condition="'$(GitLab)' == 'true'" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup Label="Files">

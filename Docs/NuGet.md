@@ -42,11 +42,7 @@ The NuGet package project template uses `dotnet new` to enable you to turn featu
 #### Source Control
 
 - **SourceControl** - Select which source control provider you are using if any, to add provider specific features.
-  - **AzureDevOpsServer** - Adds source link.
-  - **AzureRepos** - Adds source link.
-  - **Bitbucket** - Adds source link.
   - **GitHub** (Default) - Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates.
-  - **GitLab** - Adds source link.
   - **None** - No source control provider is being used.
 - **GitHubUsername** - Your GitHub username or organisation name that the project lives under.
 - **GitHubProject** - The name of your GitHub project.
