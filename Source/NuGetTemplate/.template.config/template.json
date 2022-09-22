@@ -252,26 +252,8 @@
       "datatype": "choice",
       "choices": [
         {
-          "choice": "AzureDevOpsServer",
-          "displayName": "Azure DevOps Server",
-          "description": "Adds source link."
-        },
-        {
-          "choice": "AzureRepos",
-          "displayName": "Azure Repos",
-          "description": "Adds source link."
-        },
-        {
-          "choice": "Bitbucket",
-          "description": "Adds source link."
-        },
-        {
           "choice": "GitHub",
           "description": "Adds source link, .github directory containing a code of conduct, contributing guide, pull request template and issue templates."
-        },
-        {
-          "choice": "GitLab",
-          "description": "Adds source link."
         },
         {
           "choice": "None",
@@ -282,25 +264,9 @@
       "displayName": "Source Control",
       "description": "Select which source control provider you are using if any, to add provider specific features."
     },
-    "AzureDevOpsServer": {
-      "type": "computed",
-      "value": "(SourceControl == \"AzureDevOpsServer\")"
-    },
-    "AzureRepos": {
-      "type": "computed",
-      "value": "(SourceControl == \"AzureRepos\")"
-    },
-    "Bitbucket": {
-      "type": "computed",
-      "value": "(SourceControl == \"Bitbucket\")"
-    },
     "GitHub": {
       "type": "computed",
       "value": "(SourceControl == \"GitHub\")"
-    },
-    "GitLab": {
-      "type": "computed",
-      "value": "(SourceControl == \"GitLab\")"
     },
     "GitHubUsername": {
       "type": "parameter",
