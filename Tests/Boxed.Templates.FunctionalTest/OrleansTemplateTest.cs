@@ -22,7 +22,6 @@ public class OrleansTemplateTest
     {
         ArgumentNullException.ThrowIfNull(testOutputHelper);
 
-        ConfigurationService.DefaultTimeout = TimeSpan.FromMinutes(3);
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
 
@@ -41,7 +40,7 @@ public class OrleansTemplateTest
             var project = await tempDirectory
                 .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
         }
     }

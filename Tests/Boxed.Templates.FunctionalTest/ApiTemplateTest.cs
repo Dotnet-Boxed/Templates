@@ -29,7 +29,6 @@ public class ApiTemplateTest
     {
         ArgumentNullException.ThrowIfNull(testOutputHelper);
 
-        ConfigurationService.DefaultTimeout = TimeSpan.FromMinutes(3);
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
 
@@ -63,7 +62,7 @@ public class ApiTemplateTest
             var project = await tempDirectory
                 .DotnetNewAsync(TemplateName, name, DefaultArguments.ToArguments(arguments))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
         }
@@ -97,7 +96,7 @@ public class ApiTemplateTest
             var project = await tempDirectory
                 .DotnetNewAsync(TemplateName, "ApiDefaults", DefaultArguments.ToArguments())
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
             await project
@@ -187,7 +186,7 @@ public class ApiTemplateTest
                     "ApiHealthCheckFalse",
                     DefaultArguments.ToArguments(new string[] { "health-check=false" }))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
             await project
@@ -224,7 +223,7 @@ public class ApiTemplateTest
                     "ApiHttpsEverywhereTrue",
                     DefaultArguments.ToArguments(new string[] { "https-everywhere=true" }))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
             await project
@@ -262,7 +261,7 @@ public class ApiTemplateTest
                     "ApiSwaggerFalse",
                     DefaultArguments.ToArguments(new string[] { "swagger=false" }))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
             await project
@@ -294,7 +293,7 @@ public class ApiTemplateTest
                     "ApiDockerFalse",
                     DefaultArguments.ToArguments(new string[] { "docker=false" }))
                 .ConfigureAwait(false);
-            await project.DotnetRestoreAsync().ConfigureAwait(false);
+            await project.DotnetRestoreWithRetryAsync().ConfigureAwait(false);
             await project.DotnetBuildAsync().ConfigureAwait(false);
             await project.DotnetTestAsync().ConfigureAwait(false);
             await project.DotnetToolRestoreAsync().ConfigureAwait(false);
