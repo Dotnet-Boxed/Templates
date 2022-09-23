@@ -25,6 +25,7 @@ public class GraphQLTemplateTest
     {
         ArgumentNullException.ThrowIfNull(testOutputHelper);
 
+        ConfigurationService.DefaultTimeout = TimeSpan.FromMinutes(3);
         TestLogger.WriteMessage = testOutputHelper.WriteLine;
     }
 
