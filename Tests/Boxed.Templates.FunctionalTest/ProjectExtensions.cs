@@ -20,6 +20,11 @@ public static class ProjectExtensions
             catch (Exception exception)
             {
                 TestLogger.WriteMessage?.Invoke($"Retry {i} failed with exception:{Environment.NewLine}{exception}");
+
+                if (i == DefaultRetries - 1)
+                {
+                    throw;
+                }
             }
         }
     }
