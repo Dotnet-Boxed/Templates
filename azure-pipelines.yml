@@ -150,7 +150,7 @@ stages:
             inputs:
               testResultsFormat: "VSTest"
               testResultsFiles: "**/*.trx"
-          - task: PublishCodeCoverageResults@1
+          - task: PublishCodeCoverageResults@2.198.0
             inputs:
               codeCoverageTool: cobertura
               summaryFileLocation: "**/*.cobertura.xml"
