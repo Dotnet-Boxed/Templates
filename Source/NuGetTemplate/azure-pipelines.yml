@@ -60,7 +60,7 @@ stages:
           - pwsh: "dotnet cake --target=Pack"
             displayName: "Dotnet Cake Pack"
             failOnStderr: true
-          - task: PublishTestResults@2
+          - task: PublishTestResults@2.210.0
             displayName: "Publish Test Results"
             inputs:
               testResultsFormat: "VSTest"
