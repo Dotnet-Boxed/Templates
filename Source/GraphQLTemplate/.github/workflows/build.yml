@@ -29,12 +29,12 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3
         with:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v2.1.0
+        uses: actions/setup-dotnet@v3
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
@@ -48,7 +48,7 @@ jobs:
         run: dotnet cake --target=Publish
         shell: pwsh
       - name: "Publish Artefacts"
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3
         with:
           name: ${{matrix.os}}
           path: "./Artefacts"
@@ -83,22 +83,22 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3
         with:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v2.1.0
+        uses: actions/setup-dotnet@v3
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
       - name: "Install QEMU"
         id: qemu
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
       - name: "Available platforms"
         run: echo ${{steps.qemu.outputs.platforms}}
       - name: "Install Docker BuildX"
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
       - name: "Docker Login"
         if: github.ref == 'refs/heads/main' || github.event_name == 'release'
         run: echo ${{env.DOCKER_PASSWORD}} | docker login ${{env.DOCKER_REGISTRY}} --username ${{env.DOCKER_USERNAME}} --password-stdin

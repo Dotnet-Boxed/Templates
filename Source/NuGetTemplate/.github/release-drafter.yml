@@ -3,7 +3,7 @@
 # release-drafter also generates a version for your release based on GitHub labels. You can add a label of 'major',
 # 'minor' or 'patch' to determine which number in the version to increment.
 # You may need to add these labels yourself.
-# See https://github.com/release-drafter/release-drafter
+# See https://github.com/release-drafter/release-drafter@v5
 name-template: "$RESOLVED_VERSION"
 tag-template: "$RESOLVED_VERSION"
 change-template: "- $TITLE by @$AUTHOR (#$NUMBER)"
