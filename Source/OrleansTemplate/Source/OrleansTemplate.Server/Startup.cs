@@ -40,7 +40,9 @@ public class Startup
 #endif
             .AddRouting(options => options.LowercaseUrls = true)
 #if OpenTelemetry
-            .AddOpenTelemetryTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
+            .AddOpenTelemetry()
+                .WithTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
+            .Services
 #endif
             .AddHealthChecks()
             .AddCheck<ClusterHealthCheck>(nameof(ClusterHealthCheck))

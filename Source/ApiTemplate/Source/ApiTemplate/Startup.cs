@@ -74,7 +74,9 @@ public class Startup
 #endif
 #endif
 #if OpenTelemetry
-            .AddOpenTelemetryTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
+            .AddOpenTelemetry()
+                .WithTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
+            .Services
 #endif
 #if Swagger
             .AddSwaggerGen()
