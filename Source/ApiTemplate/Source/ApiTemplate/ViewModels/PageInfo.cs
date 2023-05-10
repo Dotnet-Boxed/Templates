@@ -1,5 +1,7 @@
 namespace ApiTemplate.ViewModels;
 
+using System.Globalization;
+
 #if Swagger
 /// <summary>
 /// Holds metadata about a page of items.
@@ -103,5 +105,5 @@ public class PageInfo
     }
 
     private static string GetLinkValueItem(string rel, Uri url) =>
-        FormattableString.Invariant($"<{url}>; rel=\"{rel}\"");
+        string.Create(CultureInfo.InvariantCulture, $"<{url}>; rel=\"{rel}\"");
 }
