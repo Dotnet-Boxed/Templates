@@ -1,5 +1,6 @@
 namespace OrleansTemplate.Server;
 
+using System.Globalization;
 using System.Runtime.InteropServices;
 #if ApplicationInsights
 using Microsoft.ApplicationInsights.Extensibility;
@@ -161,8 +162,8 @@ public class Program
     /// <returns>A logger that can load a new configuration.</returns>
     private static ReloadableLogger CreateBootstrapLogger() =>
         new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.Debug()
+            .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
             .CreateBootstrapLogger();
 
     /// <summary>
@@ -187,7 +188,10 @@ public class Program
 #endif
             .WriteTo.Conditional(
                 x => context.HostingEnvironment.IsDevelopment(),
-                x => x.Console().WriteTo.Debug());
+                x => x
+                    .Console(formatProvider: CultureInfo.InvariantCulture)
+                    .WriteTo
+                    .Debug(formatProvider: CultureInfo.InvariantCulture));
 
 #endif
 
@@ -198,5 +202,5 @@ public class Program
     }
 
     private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
-        configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>();
+        configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
 }

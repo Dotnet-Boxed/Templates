@@ -1,6 +1,7 @@
 namespace GraphQLTemplate.IntegrationTest;
 
 using System;
+using System.Globalization;
 using System.Net.Http;
 using GraphQLTemplate.Options;
 using GraphQLTemplate.Services;
@@ -28,8 +29,8 @@ public class AppWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntr
 #endif
 
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Debug()
-            .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose, formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
     }
 #elif HttpsEverywhere

@@ -1,5 +1,6 @@
 namespace OrleansTemplate.Server.IntegrationTest.Fixtures;
 
+using System.Globalization;
 using System.Threading.Tasks;
 using Orleans.TestingHost;
 #if Serilog
@@ -17,8 +18,8 @@ public class ClusterFixture : IAsyncLifetime
 
 #if Serilog
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Debug()
-            .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose)
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.TestOutput(testOutputHelper, LogEventLevel.Verbose, formatProvider: CultureInfo.InvariantCulture)
             .CreateLogger();
 
 #endif
