@@ -9,6 +9,7 @@
   <!--#endif-->
 
   <PropertyGroup Label="Build">
+    <TargetFramework Condition="'$(Framework)' == 'net7.0'">net7.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'net6.0'">net6.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'net5.0'">net5.0</TargetFramework>
     <TargetFramework Condition="'$(Framework)' == 'netstandard2.1'">netstandard2.1</TargetFramework>

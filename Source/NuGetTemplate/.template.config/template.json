@@ -81,6 +81,10 @@
       "datatype": "choice",
       "choices": [
         {
+          "choice": "net7.0",
+          "description": ".NET 7 (net7.0)"
+        },
+        {
           "choice": "net6.0",
           "description": ".NET 6 (net6.0)"
         },
@@ -141,7 +145,7 @@
           "description": ".NET Framework 4.6 (net46)"
         }
       ],
-      "defaultValue": "net6.0",
+      "defaultValue": "net7.0",
       "displayName": "Target Framework",
       "description": "The target framework for the project."
     },
