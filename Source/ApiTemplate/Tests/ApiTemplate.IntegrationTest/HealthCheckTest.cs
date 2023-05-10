@@ -6,7 +6,7 @@ using Xunit;
 using Xunit.Abstractions;
 #endif
 
-public class HealthCheckTest : CustomWebApplicationFactory<Program>
+public class HealthCheckTest : AppWebApplicationFactory<Program>
 {
     private readonly HttpClient client;
 
