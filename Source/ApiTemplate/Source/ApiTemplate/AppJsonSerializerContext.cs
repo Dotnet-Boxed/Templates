@@ -1,6 +1,7 @@
-namespace ApiTemplate.ViewModels;
+namespace ApiTemplate;
 
 using System.Text.Json.Serialization;
+using ApiTemplate.ViewModels;
 
 /// <summary>
 /// Enables faster serialization and de-serialization with fewer allocations by generating source code.
