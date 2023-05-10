@@ -12,7 +12,7 @@ internal static class ConfigurationBuilderExtensions
             .AddEnvironmentVariables(prefix: "DOTNET_")
             .AddIf(
                 args is not null,
-                x => x.AddCommandLine(args));
+                x => x.AddCommandLine(args!));
 
     public static IConfigurationBuilder AddCustomConfiguration(
         this IConfigurationBuilder configurationBuilder,
@@ -43,5 +43,5 @@ internal static class ConfigurationBuilderExtensions
             // Add command line options. These take the highest priority.
             .AddIf(
                 args is not null,
-                x => x.AddCommandLine(args));
+                x => x.AddCommandLine(args!));
 }

@@ -1,5 +1,6 @@
 namespace GraphQLTemplate;
 
+using System.Globalization;
 using GraphQLTemplate.Options;
 #if ApplicationInsights
 using Microsoft.ApplicationInsights.Extensibility;
@@ -96,8 +97,8 @@ public sealed class Program
     /// <returns>A logger that can load a new configuration.</returns>
     private static ReloadableLogger CreateBootstrapLogger() =>
         new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.Debug()
+            .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
+            .WriteTo.Debug(formatProvider: CultureInfo.InvariantCulture)
             .CreateBootstrapLogger();
 
     /// <summary>
@@ -122,6 +123,9 @@ public sealed class Program
 #endif
             .WriteTo.Conditional(
                 x => context.HostingEnvironment.IsDevelopment(),
-                x => x.Console().WriteTo.Debug());
+                x => x
+                    .Console(formatProvider: CultureInfo.InvariantCulture)
+                    .WriteTo
+                    .Debug(formatProvider: CultureInfo.InvariantCulture));
 #endif
 }

@@ -98,7 +98,7 @@ internal static class AppServiceCollectionExtensions
 #if Redis
             .AddIf(
                 !webHostEnvironment.IsEnvironment(EnvironmentName.Test),
-                x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
+                x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>()!.ConfigurationOptions.ToString()))
 #endif
             .Services;
 #endif
@@ -114,7 +114,7 @@ internal static class AppServiceCollectionExtensions
                 ConnectionMultiplexer.Connect(
                      configuration
                         .GetRequiredSection(nameof(ApplicationOptions.Redis))
-                        .Get<RedisOptions>()
+                        .Get<RedisOptions>()!
                         .ConfigurationOptions)));
 #endif
 
@@ -125,7 +125,7 @@ internal static class AppServiceCollectionExtensions
 #endif
         IConfiguration configuration)
     {
-        var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>();
+        var graphQLOptions = configuration.GetRequiredSection(nameof(ApplicationOptions.GraphQL)).Get<GraphQLOptions>()!;
         return services
             .AddGraphQLServer()
 #if OpenTelemetry

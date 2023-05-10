@@ -97,7 +97,7 @@ internal static class AppServiceCollectionExtensions
 #if Redis
             .AddIf(
                 !webHostEnvironment.IsEnvironment(EnvironmentName.Test),
-                x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>().ConfigurationOptions.ToString()))
+                x => x.AddRedis(configuration.GetRequiredSection(nameof(ApplicationOptions.Redis)).Get<RedisOptions>()!.ConfigurationOptions.ToString()))
 #endif
             .Services;
 #endif
