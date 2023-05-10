@@ -101,7 +101,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> DeleteAsync(
-        [FromServices] DeleteCarCommand command,
+        DeleteCarCommand command,
         int carId,
         CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
@@ -152,7 +152,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> GetAsync(
-        [FromServices] GetCarCommand command,
+        GetCarCommand command,
         int carId,
         CancellationToken cancellationToken) => command.ExecuteAsync(carId, cancellationToken);
 
@@ -211,7 +211,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> GetPageAsync(
-        [FromServices] GetCarPageCommand command,
+        GetCarPageCommand command,
         [FromQuery] PageOptions pageOptions,
         CancellationToken cancellationToken) => command.ExecuteAsync(pageOptions, cancellationToken);
 
@@ -279,7 +279,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> PatchAsync(
-        [FromServices] PatchCarCommand command,
+        PatchCarCommand command,
         int carId,
         [FromBody] JsonPatchDocument<SaveCar> patch,
         CancellationToken cancellationToken) => command.ExecuteAsync(carId, patch, cancellationToken);
@@ -337,7 +337,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> PostAsync(
-        [FromServices] PostCarCommand command,
+        PostCarCommand command,
         [FromBody] SaveCar car,
         CancellationToken cancellationToken) => command.ExecuteAsync(car, cancellationToken);
 
@@ -405,7 +405,7 @@ public class CarsController : ControllerBase
 #endif
 #endif
     public Task<IActionResult> PutAsync(
-        [FromServices] PutCarCommand command,
+        PutCarCommand command,
         int carId,
         [FromBody] SaveCar car,
         CancellationToken cancellationToken) => command.ExecuteAsync(carId, car, cancellationToken);
