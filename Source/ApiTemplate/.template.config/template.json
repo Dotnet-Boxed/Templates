@@ -38,6 +38,7 @@
             "Source/ApiTemplate/Services/**/*",
             "Source/ApiTemplate/Validators/**/*",
             "Source/ApiTemplate/ViewModels/**/*",
+            "Source/ApiTemplate/AppJsonSerializerContext.cs",
             "Source/ApiTemplate/ProjectServiceCollectionExtensions.cs",
             "Tests/ApiTemplate.IntegrationTest/Controllers/**/*"
           ]
