@@ -15,7 +15,7 @@ using Xunit;
 using Xunit.Abstractions;
 #endif
 
-public class CarsControllerTest : CustomWebApplicationFactory<Program>
+public class CarsControllerTest : AppWebApplicationFactory<Program>
 {
     private readonly HttpClient client;
     private readonly MediaTypeFormatterCollection formatters;

@@ -1,13 +1,14 @@
-namespace GraphQLTemplate.IntegrationTest;
+namespace ApiTemplate.IntegrationTest;
 
-using System;
-using System.Net.Http;
-using GraphQLTemplate.Options;
-using GraphQLTemplate.Services;
-using Microsoft.AspNetCore.Hosting;
+using ApiTemplate.Options;
+#if Controllers
+using ApiTemplate.Repositories;
+using ApiTemplate.Services;
+#endif
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.DependencyInjection;
+#if Controllers
 using Moq;
+#endif
 #if Serilog
 using Serilog;
 using Serilog.Events;
@@ -16,11 +17,11 @@ using Serilog.Events;
 using Xunit.Abstractions;
 #endif
 
-public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+public class AppWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
     where TEntryPoint : class
 {
 #if Serilog
-    public CustomWebApplicationFactory(ITestOutputHelper testOutputHelper)
+    public AppWebApplicationFactory(ITestOutputHelper testOutputHelper)
     {
         this.ClientOptions.AllowAutoRedirect = false;
 #if HttpsEverywhere
@@ -44,10 +45,14 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
     public ApplicationOptions ApplicationOptions { get; private set; } = default!;
 
+#if Controllers
+    public Mock<ICarRepository> CarRepositoryMock { get; } = new Mock<ICarRepository>(MockBehavior.Strict);
+
     public Mock<IClockService> ClockServiceMock { get; } = new Mock<IClockService>(MockBehavior.Strict);
 
-    public void VerifyAllMocks() => Mock.VerifyAll(this.ClockServiceMock);
+    public void VerifyAllMocks() => Mock.VerifyAll(this.CarRepositoryMock, this.ClockServiceMock);
 
+#endif
     protected override void ConfigureClient(HttpClient client)
     {
         using (var serviceScope = this.Services.CreateScope())
@@ -61,15 +66,30 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
     protected override void ConfigureWebHost(IWebHostBuilder builder) =>
         builder
-            .UseEnvironment(Constants.EnvironmentName.Test)
-            .ConfigureServices(this.ConfigureServices);
+#if (DistributedCacheRedis || Controllers)
+            .ConfigureServices(this.ConfigureServices)
+#endif
+            .UseEnvironment(Constants.EnvironmentName.Test);
+#if (DistributedCacheRedis && Controllers)
 
     protected virtual void ConfigureServices(IServiceCollection services) =>
         services
-#if DistributedCacheRedis
             .AddDistributedMemoryCache()
-#endif
+            .AddSingleton(this.CarRepositoryMock.Object)
             .AddSingleton(this.ClockServiceMock.Object);
+#elif DistributedCacheRedis
+
+    protected virtual void ConfigureServices(IServiceCollection services) =>
+        services
+            .AddDistributedMemoryCache();
+#elif Controllers
+
+    protected virtual void ConfigureServices(IServiceCollection services) =>
+        services
+            .AddSingleton(this.CarRepositoryMock.Object)
+            .AddSingleton(this.ClockServiceMock.Object);
+#endif
+#if Controllers
 
     protected override void Dispose(bool disposing)
     {
@@ -80,4 +100,5 @@ public class CustomWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TE
 
         base.Dispose(disposing);
     }
+#endif
 }

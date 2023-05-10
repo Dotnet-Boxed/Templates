@@ -8,7 +8,7 @@ using Xunit;
 using Xunit.Abstractions;
 #endif
 
-public class SchemaTest : CustomWebApplicationFactory<Program>
+public class SchemaTest : AppWebApplicationFactory<Program>
 {
     private readonly HttpClient client;
 

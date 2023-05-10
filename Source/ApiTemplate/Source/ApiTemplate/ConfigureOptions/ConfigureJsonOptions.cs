@@ -27,7 +27,7 @@ public class ConfigureJsonOptions : IConfigureOptions<JsonOptions>
             this.webHostEnvironment.IsEnvironment(Constants.EnvironmentName.Test);
 #if Controllers
 
-        jsonSerializerOptions.AddContext<CustomJsonSerializerContext>();
+        jsonSerializerOptions.AddContext<AppJsonSerializerContext>();
 #endif
     }
 }
