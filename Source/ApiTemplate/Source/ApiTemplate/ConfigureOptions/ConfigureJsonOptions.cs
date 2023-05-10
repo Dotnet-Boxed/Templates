@@ -2,9 +2,6 @@ namespace ApiTemplate.ConfigureOptions;
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
-#if Controllers
-using ApiTemplate.ViewModels;
-#endif
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
