@@ -38,7 +38,7 @@
 
   <Target Name="Versioning" BeforeTargets="MinVer">
     <PropertyGroup Label="Build">
-      <MinVerDefaultPreReleasePhase>preview</MinVerDefaultPreReleasePhase>
+      <MinVerDefaultPreReleaseIdentifiers>preview.0</MinVerDefaultPreReleaseIdentifiers>
       <MinVerTagPrefix>$(PackageId).</MinVerTagPrefix>
       <MinVerVerbosity>normal</MinVerVerbosity>
     </PropertyGroup>
