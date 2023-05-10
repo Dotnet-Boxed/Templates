@@ -16,7 +16,8 @@ public static class TracerProviderBuilderExtensions
             .AddAspNetCoreInstrumentation(
                 options =>
                 {
-                    options.Enrich = Enrich;
+                    options.EnrichWithHttpRequest = EnrichWithHttpRequest;
+                    options.EnrichWithHttpResponse = EnrichWithHttpResponse;
                     options.RecordException = true;
                 })
             .AddIf(
@@ -55,29 +56,31 @@ public static class TracerProviderBuilderExtensions
             .AddEnvironmentVariableDetector();
 
     /// <summary>
-    /// Enrich spans with additional request and response meta data.
+    /// Enrich spans with additional request meta data.
     /// See https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/http.md.
     /// </summary>
-    private static void Enrich(Activity activity, string eventName, object obj)
+    private static void EnrichWithHttpRequest(Activity activity, HttpRequest request)
     {
-        if (obj is HttpRequest request)
-        {
-            var context = request.HttpContext;
-            activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
-            activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
-            activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
+        var context = request.HttpContext;
+        activity.AddTag(OpenTelemetryAttributeName.Http.ClientIP, context.Connection.RemoteIpAddress);
+        activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentLength, request.ContentLength);
+        activity.AddTag(OpenTelemetryAttributeName.Http.RequestContentType, request.ContentType);
 
-            var user = context.User;
-            if (user.Identity?.Name is not null)
-            {
-                activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
-                activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
-            }
-        }
-        else if (obj is HttpResponse response)
+        var user = context.User;
+        if (user.Identity?.Name is not null)
         {
-            activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
-            activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
+            activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
+            activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
         }
+    }
+
+    /// <summary>
+    /// Enrich spans with additional response meta data.
+    /// See https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/trace/semantic_conventions/http.md.
+    /// </summary>
+    private static void EnrichWithHttpResponse(Activity activity, HttpResponse response)
+    {
+        activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentLength, response.ContentLength);
+        activity.AddTag(OpenTelemetryAttributeName.Http.ResponseContentType, response.ContentType);
     }
 }
