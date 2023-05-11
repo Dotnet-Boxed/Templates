@@ -42,7 +42,8 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development",
+        "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true"
       }
     },
     "Watch Production (CTRL+F5)": {
@@ -51,7 +52,8 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch",
       "environmentVariables": {
-        "DOTNET_ENVIRONMENT": "Production"
+        "DOTNET_ENVIRONMENT": "Production",
+        "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true"
       }
     }
   }

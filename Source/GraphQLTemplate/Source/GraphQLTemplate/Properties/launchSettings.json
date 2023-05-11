@@ -74,7 +74,8 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true"
       }
     },
     "Watch Kestrel Production (CTRL+F5)": {
@@ -83,7 +84,8 @@
       "workingDirectory": "$(ProjectDir)",
       "commandLineArgs": "watch",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "DOTNET_WATCH_RESTART_ON_RUDE_EDIT": "true"
       }
     },
     "IIS Express": {
