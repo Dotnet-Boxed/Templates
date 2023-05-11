@@ -19,27 +19,27 @@ public class HumanObject : ObjectType<Human>
 #endif
         descriptor
             .ImplementsNode()
-            .IdField(x => x.Id)
-            .ResolveNodeWith<HumanResolver>(x => x.GetHumanAsync(default!, default!, default!));
+            .IdField(static x => x.Id)
+            .ResolveNodeWith<HumanResolver>(static x => x.GetHumanAsync(default!, default!, default!));
         descriptor
-            .Field(x => x.Name)
+            .Field(static x => x.Name)
             .Description("The name of the human.");
         descriptor
-            .Field(x => x.DateOfBirth)
+            .Field(static x => x.DateOfBirth)
 #if Authorization
             .Authorize(AuthorizationPolicyName.Admin) // Require authorization to access the date of birth field.
 #endif
             .Description("The humans date of birth.");
         descriptor
-            .Field(x => x.HomePlanet)
+            .Field(static x => x.HomePlanet)
             .Description("The home planet of the human.");
         descriptor
-            .Field(x => x.AppearsIn)
+            .Field(static x => x.AppearsIn)
             .Description("Which movie they appear in.");
         descriptor
-            .Field(x => x.Friends)
+            .Field(static x => x.Friends)
             .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
             .Description("The friends of the character, or an empty list if they have none.")
-            .ResolveWith<HumanResolver>(x => x.GetFriendsAsync(default!, default!, default!));
+            .ResolveWith<HumanResolver>(static x => x.GetFriendsAsync(default!, default!, default!));
     }
 }

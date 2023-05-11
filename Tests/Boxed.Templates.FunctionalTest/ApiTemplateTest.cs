@@ -103,7 +103,7 @@ public class ApiTemplateTest
                 .DotnetRunAsync(
                     Path.Join("Source", "ApiDefaults"),
                     ReadinessCheck.StatusSelfOverHttpAsync,
-                    async (httpClient, httpsClient) =>
+                    static async (httpClient, httpsClient) =>
                     {
                         var httpResponse = await httpClient
                             .GetAsync(new Uri("status", UriKind.Relative))
@@ -193,7 +193,7 @@ public class ApiTemplateTest
                 .DotnetRunAsync(
                     Path.Join("Source", "ApiHealthCheckFalse"),
                     ReadinessCheck.FaviconAsync,
-                    async (httpClient, httpsClient) =>
+                    static async (httpClient, httpsClient) =>
                     {
                         var statusResponse = await httpClient
                             .GetAsync(new Uri("status", UriKind.Relative))
@@ -230,7 +230,7 @@ public class ApiTemplateTest
                 .DotnetRunAsync(
                     Path.Join("Source", "ApiHttpsEverywhereTrue"),
                     ReadinessCheck.StatusSelfOverHttpAsync,
-                    async (httpClient, httpsClient) =>
+                    static async (httpClient, httpsClient) =>
                     {
                         var statusResponse = await httpsClient
                             .GetAsync(new Uri("status", UriKind.Relative))
@@ -241,7 +241,7 @@ public class ApiTemplateTest
 
             var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
-            var dockerfileInfo = files.First(x => x.Name == "Dockerfile");
+            var dockerfileInfo = files.First(static x => x.Name == "Dockerfile");
             var dockerfile = File.ReadAllText(dockerfileInfo.FullName);
             Assert.Contains("443", dockerfile, StringComparison.Ordinal);
         }
@@ -268,7 +268,7 @@ public class ApiTemplateTest
                 .DotnetRunAsync(
                     Path.Join("Source", "ApiSwaggerFalse"),
                     ReadinessCheck.StatusSelfOverHttpAsync,
-                    async (httpClient, httpsClient) =>
+                    static async (httpClient, httpsClient) =>
                     {
                         var swaggerJsonResponse = await httpClient
                             .GetAsync(new Uri("swagger/v1/swagger.json", UriKind.Relative))
@@ -301,10 +301,10 @@ public class ApiTemplateTest
 
             var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
-            Assert.DoesNotContain(files, x => x.Name == ".dockerignore");
-            Assert.DoesNotContain(files, x => x.Name == "Dockerfile");
+            Assert.DoesNotContain(files, static x => x.Name == ".dockerignore");
+            Assert.DoesNotContain(files, static x => x.Name == "Dockerfile");
 
-            var cake = await File.ReadAllTextAsync(files.Single(x => x.Name == "build.cake").FullName).ConfigureAwait(false);
+            var cake = await File.ReadAllTextAsync(files.Single(static x => x.Name == "build.cake").FullName).ConfigureAwait(false);
 
             Assert.DoesNotContain(cake, "Docker", StringComparison.Ordinal);
         }

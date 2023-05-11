@@ -38,7 +38,7 @@ public class Startup
             // Add Azure Application Insights data collection services to the services container.
             .AddApplicationInsightsTelemetry(this.configuration)
 #endif
-            .AddRouting(options => options.LowercaseUrls = true)
+            .AddRouting(static options => options.LowercaseUrls = true)
 #if OpenTelemetry
             .AddOpenTelemetry()
                 .WithTracing(builder => builder.AddCustomTracing(this.webHostEnvironment))
@@ -57,9 +57,9 @@ public class Startup
             .UseSerilogRequestLogging()
 #endif
             .UseEndpoints(
-                builder =>
+                static builder =>
                 {
                     builder.MapHealthChecks("/status");
-                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = static _ => false });
                 });
 }

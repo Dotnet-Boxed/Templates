@@ -28,7 +28,7 @@ public class ConfigureSwaggerUIOptions : IConfigureOptions<SwaggerUIOptions>
 #if Versioning
         foreach (var apiVersionDescription in this.apiVersionDescriptionProvider
             .ApiVersionDescriptions
-            .OrderByDescending(x => x.ApiVersion))
+            .OrderByDescending(static x => x.ApiVersion))
         {
             options.SwaggerEndpoint(
                 $"/swagger/{apiVersionDescription.GroupName}/swagger.json",

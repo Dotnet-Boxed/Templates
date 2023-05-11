@@ -8,7 +8,7 @@ public class UpperDirectiveType : DirectiveType
         descriptor
             .Name("upper")
             .Location(DirectiveLocation.Field)
-            .Use((next, directive) => async context =>
+            .Use(static (next, directive) => async context =>
             {
                 await next.Invoke(context).ConfigureAwait(false);
 

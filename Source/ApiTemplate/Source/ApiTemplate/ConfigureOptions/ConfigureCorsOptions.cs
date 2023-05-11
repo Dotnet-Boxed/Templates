@@ -15,7 +15,7 @@ public class ConfigureCorsOptions : IConfigureOptions<CorsOptions>
         // or a [EnableCors("PolicyName")] attribute on your controller or action.
         options.AddPolicy(
             CorsPolicyName.AllowAny,
-            x => x
+            static x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());

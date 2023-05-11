@@ -12,17 +12,17 @@ public class CharacterInterface : InterfaceType<Character>
             .Description("A character from the Star Wars universe");
 
         descriptor
-            .Field(x => x.Id)
+            .Field(static x => x.Id)
             .Type<NonNullType<IdType>>()
             .Description("The unique identifier of the character.");
         descriptor
-            .Field(x => x.Name)
+            .Field(static x => x.Name)
             .Description("The name of the character.");
         descriptor
-            .Field(x => x.AppearsIn)
+            .Field(static x => x.AppearsIn)
             .Description("Which movie they appear in.");
         descriptor
-            .Field(x => x.Friends)
+            .Field(static x => x.Friends)
             .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
             .Description("The friends of the character, or an empty list if they have none.");
     }

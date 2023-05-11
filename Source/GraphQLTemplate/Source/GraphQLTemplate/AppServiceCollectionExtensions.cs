@@ -144,14 +144,14 @@ internal static class AppServiceCollectionExtensions
             .UseAutomaticPersistedQueryPipeline()
             .AddIfElse(
                 webHostEnvironment.IsEnvironment(EnvironmentName.Test),
-                x => x.AddInMemoryQueryStorage(),
-                x => x.AddRedisQueryStorage())
+                static x => x.AddInMemoryQueryStorage(),
+                static x => x.AddRedisQueryStorage())
 #endif
 #if Subscriptions
             .AddIfElse(
                 webHostEnvironment.IsEnvironment(EnvironmentName.Test),
-                x => x.AddInMemorySubscriptions(),
-                x => x.AddRedisSubscriptions())
+                static x => x.AddInMemorySubscriptions(),
+                static x => x.AddRedisSubscriptions())
 #endif
             .SetSchema<MainSchema>()
             .AddDirectiveType<UpperDirectiveType>()
@@ -160,7 +160,7 @@ internal static class AppServiceCollectionExtensions
             .AddDirectiveType<SkipDirectiveType>()
             .AddGraphQLTemplateTypes()
             .TrimTypes()
-            .ModifyOptions(options => options.UseXmlDocumentation = false)
+            .ModifyOptions(static options => options.UseXmlDocumentation = false)
             .AddMaxExecutionDepthRule(graphQLOptions.MaxAllowedExecutionDepth)
             .SetPagingOptions(graphQLOptions.Paging)
             .SetRequestOptions(() => graphQLOptions.Request)

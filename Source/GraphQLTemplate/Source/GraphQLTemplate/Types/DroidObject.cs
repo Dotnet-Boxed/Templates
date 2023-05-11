@@ -15,27 +15,27 @@ public class DroidObject : ObjectType<Droid>
 
         descriptor
             .ImplementsNode()
-            .IdField(x => x.Id)
-            .ResolveNodeWith<DroidResolver>(x => x.GetDroidAsync(default!, default!, default!));
+            .IdField(static x => x.Id)
+            .ResolveNodeWith<DroidResolver>(static x => x.GetDroidAsync(default!, default!, default!));
         descriptor
-            .Field(x => x.Name)
+            .Field(static x => x.Name)
             .Description("The name of the droid.");
         descriptor
-            .Field(x => x.ChargePeriod)
+            .Field(static x => x.ChargePeriod)
             .Description("The time the droid can go without charging its batteries.");
         descriptor
-           .Field(x => x.Manufactured)
+           .Field(static x => x.Manufactured)
            .Description("The date the droid was manufactured.");
         descriptor
-            .Field(x => x.PrimaryFunction)
+            .Field(static x => x.PrimaryFunction)
             .Description("The primary function of the droid.");
         descriptor
-            .Field(x => x.AppearsIn)
+            .Field(static x => x.AppearsIn)
             .Description("Which movie they appear in.");
         descriptor
-            .Field(x => x.Friends)
+            .Field(static x => x.Friends)
             .Type<NonNullType<ListType<NonNullType<CharacterInterface>>>>()
             .Description("The friends of the character, or an empty list if they have none.")
-            .ResolveWith<DroidResolver>(x => x.GetFriendsAsync(default!, default!, default!));
+            .ResolveWith<DroidResolver>(static x => x.GetFriendsAsync(default!, default!, default!));
     }
 }

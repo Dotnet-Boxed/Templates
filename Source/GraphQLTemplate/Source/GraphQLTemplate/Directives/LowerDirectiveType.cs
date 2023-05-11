@@ -8,7 +8,7 @@ public class LowerDirectiveType : DirectiveType
         descriptor
             .Name("lower")
             .Location(DirectiveLocation.Field)
-            .Use((next, directive) => async context =>
+            .Use(static (next, directive) => async context =>
             {
                 await next.Invoke(context).ConfigureAwait(false);
 

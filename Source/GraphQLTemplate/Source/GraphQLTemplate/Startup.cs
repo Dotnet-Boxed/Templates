@@ -50,7 +50,7 @@ public class Startup
 #if DistributedCacheInMemory
             .AddDistributedMemoryCache()
 #elif DistributedCacheRedis
-            .AddStackExchangeRedisCache(options => { })
+            .AddStackExchangeRedisCache(static options => { })
 #endif
 #if CORS
             .AddCors()
@@ -60,7 +60,7 @@ public class Startup
 #endif
             .AddRouting()
 #if HttpsEverywhere
-            .AddHsts(options => { })
+            .AddHsts(static options => { })
 #endif
 #if HealthCheck
 #if Redis
@@ -102,7 +102,7 @@ public class Startup
         application
             .UseIf(
                 this.webHostEnvironment.IsDevelopment(),
-                x => x.UseServerTiming())
+                static x => x.UseServerTiming())
 #if ForwardedHeaders
             .UseForwardedHeaders()
 #elif HostFiltering
@@ -118,11 +118,11 @@ public class Startup
 #if HttpsEverywhere
             .UseIf(
                 !this.webHostEnvironment.IsDevelopment(),
-                x => x.UseHsts())
+                static x => x.UseHsts())
 #endif
             .UseIf(
                 this.webHostEnvironment.IsDevelopment(),
-                x => x.UseDeveloperExceptionPage())
+                static x => x.UseDeveloperExceptionPage())
 #if Subscriptions
             .UseWebSockets()
 #endif
@@ -156,11 +156,11 @@ public class Startup
                         .MapHealthChecks("/status")
                         .RequireCors(CorsPolicyName.AllowAny);
                     builder
-                        .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false })
+                        .MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = static _ => false })
                         .RequireCors(CorsPolicyName.AllowAny);
 #else
                     builder.MapHealthChecks("/status");
-                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = _ => false });
+                    builder.MapHealthChecks("/status/self", new HealthCheckOptions() { Predicate = static _ => false });
 #endif
 #endif
                 });

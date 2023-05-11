@@ -67,7 +67,7 @@ public class CarRepository : ICarRepository
         ArgumentNullException.ThrowIfNull(car);
 
         Cars.Add(car);
-        car.CarId = Cars.Max(x => x.CarId) + 1;
+        car.CarId = Cars.Max(static x => x.CarId) + 1;
         return Task.FromResult(car);
     }
 
@@ -93,7 +93,7 @@ public class CarRepository : ICarRepository
         DateTimeOffset? createdBefore,
         CancellationToken cancellationToken) =>
         Task.FromResult(Cars
-            .OrderBy(x => x.Created)
+            .OrderBy(static x => x.Created)
             .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
             .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
             .If(first.HasValue, x => x.Take(first!.Value))
@@ -105,7 +105,7 @@ public class CarRepository : ICarRepository
         DateTimeOffset? createdBefore,
         CancellationToken cancellationToken) =>
         Task.FromResult(Cars
-            .OrderBy(x => x.Created)
+            .OrderBy(static x => x.Created)
             .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
             .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
             .If(last.HasValue, x => x.TakeLast(last!.Value))
@@ -116,7 +116,7 @@ public class CarRepository : ICarRepository
         DateTimeOffset? createdAfter,
         CancellationToken cancellationToken) =>
         Task.FromResult(Cars
-            .OrderBy(x => x.Created)
+            .OrderBy(static x => x.Created)
             .If(createdAfter.HasValue, x => x.Where(y => y.Created > createdAfter!.Value))
             .If(first.HasValue, x => x.Skip(first!.Value))
             .Any());
@@ -126,7 +126,7 @@ public class CarRepository : ICarRepository
         DateTimeOffset? createdBefore,
         CancellationToken cancellationToken) =>
         Task.FromResult(Cars
-            .OrderBy(x => x.Created)
+            .OrderBy(static x => x.Created)
             .If(createdBefore.HasValue, x => x.Where(y => y.Created < createdBefore!.Value))
             .If(last.HasValue, x => x.SkipLast(last!.Value))
             .Any());

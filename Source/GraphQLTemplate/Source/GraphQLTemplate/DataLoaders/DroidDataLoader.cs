@@ -17,6 +17,6 @@ public class DroidDataLoader : BatchDataLoader<Guid, Droid>, IDroidDataLoader
         CancellationToken cancellationToken)
     {
         var droids = await this.repository.GetDroidsAsync(keys, cancellationToken).ConfigureAwait(false);
-        return droids.ToDictionary(x => x.Id);
+        return droids.ToDictionary(static x => x.Id);
     }
 }

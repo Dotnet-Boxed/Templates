@@ -73,7 +73,7 @@ public class Program
             .UseSerilog(ConfigureReloadableLogger)
 #endif
             .UseDefaultServiceProvider(
-                (context, options) =>
+                static (context, options) =>
                 {
                     var isDevelopment = context.HostingEnvironment.IsDevelopment();
                     options.ValidateScopes = isDevelopment;
@@ -90,7 +90,7 @@ public class Program
         ISiloBuilder siloBuilder) =>
         siloBuilder
             .ConfigureServices(
-                (context, services) =>
+                static (context, services) =>
                 {
                     services.Configure<ApplicationOptions>(context.Configuration);
                     services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
@@ -107,7 +107,7 @@ public class Program
                 EndpointOptions.DEFAULT_SILO_PORT,
                 EndpointOptions.DEFAULT_GATEWAY_PORT,
                 listenOnAnyHostAddress: !context.HostingEnvironment.IsDevelopment())
-            .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
+            .ConfigureApplicationParts(static parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
 #if ApplicationInsights
             .AddApplicationInsightsTelemetryConsumer()
 #endif
@@ -134,17 +134,17 @@ public class Program
                 })
             .UseIf(
                 RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-                x => x.UseLinuxEnvironmentStatistics())
+                static x => x.UseLinuxEnvironmentStatistics())
             .UseIf(
                 RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
-                x => x.UsePerfCounterEnvironmentStatistics())
+                static x => x.UsePerfCounterEnvironmentStatistics())
             .UseDashboard();
 
 #if HealthCheck
     private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
         webHostBuilder
             .UseKestrel(
-                (builderContext, options) =>
+                static (builderContext, options) =>
                 {
                     options.AddServerHeader = false;
                     options.Configure(
@@ -188,7 +188,7 @@ public class Program
 #endif
             .WriteTo.Conditional(
                 x => context.HostingEnvironment.IsDevelopment(),
-                x => x
+                static x => x
                     .Console(formatProvider: CultureInfo.InvariantCulture)
                     .WriteTo
                     .Debug(formatProvider: CultureInfo.InvariantCulture));

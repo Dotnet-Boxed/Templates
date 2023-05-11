@@ -64,21 +64,21 @@ public static class Program
 
     private static IClientBuilder CreateClientBuilder() =>
         new ClientBuilder()
-            .UseAzureStorageClustering(options => options.ConfigureTableServiceClient("UseDevelopmentStorage=true"))
+            .UseAzureStorageClustering(static options => options.ConfigureTableServiceClient("UseDevelopmentStorage=true"))
             .Configure<ClusterOptions>(
-                options =>
+                static options =>
                 {
                     options.ClusterId = Cluster.ClusterId;
                     options.ServiceId = Cluster.ServiceId;
                 })
             .ConfigureApplicationParts(
-                parts => parts
+                static parts => parts
                     .AddApplicationPart(typeof(ICounterGrain).Assembly)
                     .WithReferences())
 #if TLS
             .AddSimpleMessageStreamProvider(StreamProviderName.Default)
             .UseTls(
-                options =>
+                static options =>
                 {
                     // TODO: Configure a certificate.
                     options.LocalCertificate = null;

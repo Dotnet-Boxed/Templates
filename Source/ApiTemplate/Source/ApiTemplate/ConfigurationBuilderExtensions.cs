@@ -33,7 +33,7 @@ internal static class ConfigurationBuilderExtensions
             // http://docs.asp.net/en/latest/security/app-secrets.html
             .AddIf(
                 hostEnvironment.IsDevelopment() && !string.IsNullOrEmpty(hostEnvironment.ApplicationName),
-                x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true, reloadOnChange: false))
+                static x => x.AddUserSecrets(Assembly.GetExecutingAssembly(), optional: true, reloadOnChange: false))
             // Add configuration specific to the Development, Staging or Production environments. This config can
             // be stored on the machine being deployed to or if you are using Azure, in the cloud. These settings
             // override the ones in all of the above config files. See

@@ -72,7 +72,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task Delete_CarFound_Returns204NoContentAsync()
     {
         var car = new Models.Car();
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
         this.CarRepositoryMock.Setup(x => x.DeleteAsync(car, It.IsAny<CancellationToken>())).Returns(Task.CompletedTask);
 
         var response = await this.client.DeleteAsync(new Uri("/cars/1", UriKind.Relative)).ConfigureAwait(false);
@@ -83,7 +83,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task Delete_CarNotFound_Returns404NotFoundAsync()
     {
-        this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
 
         var response = await this.client.DeleteAsync(new Uri("/cars/999", UriKind.Relative)).ConfigureAwait(false);
 
@@ -103,7 +103,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
             Model = "Civic",
             Modified = new DateTimeOffset(2000, 1, 2, 3, 4, 5, TimeSpan.FromHours(6)),
         };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client.GetAsync(new Uri("/cars/1", UriKind.Relative)).ConfigureAwait(false);
 
@@ -125,7 +125,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task Get_CarNotFound_Returns404NotFoundAsync()
     {
-        this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
 
         var response = await this.client.GetAsync(new Uri("/cars/999", UriKind.Relative)).ConfigureAwait(false);
 
@@ -137,7 +137,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task Get_InvalidAcceptHeader_Returns406NotAcceptableAsync()
     {
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
         using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(ContentType.Text));
 
@@ -152,7 +152,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task Get_CarNotModifiedSince_Returns304NotModifiedAsync()
     {
         var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 23, 59, 59, TimeSpan.Zero) };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
         using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
         request.Headers.IfModifiedSince = new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero);
 
@@ -165,7 +165,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task Get_CarHasBeenModifiedSince_Returns200OKAsync()
     {
         var car = new Models.Car() { Modified = new DateTimeOffset(2000, 1, 1, 0, 0, 1, TimeSpan.Zero) };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
         using var request = new HttpRequestMessage(HttpMethod.Get, "/cars/1");
         request.Headers.IfModifiedSince = new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero);
 
@@ -182,13 +182,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     {
         var cars = GetCars();
         this.CarRepositoryMock
-            .Setup(x => x.GetCarsAsync(3, null, null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetCarsAsync(3, null, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Take(3).ToList());
         this.CarRepositoryMock
-            .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Count);
         this.CarRepositoryMock
-            .Setup(x => x.GetHasNextPageAsync(3, null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetHasNextPageAsync(3, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
@@ -214,13 +214,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     {
         var cars = GetCars();
         this.CarRepositoryMock
-            .Setup(x => x.GetCarsAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetCarsAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Skip(3).Take(3).ToList());
         this.CarRepositoryMock
-            .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Count);
         this.CarRepositoryMock
-            .Setup(x => x.GetHasNextPageAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetHasNextPageAsync(3, new DateTimeOffset(2000, 1, 3, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         var response = await this.client
@@ -250,13 +250,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     {
         var cars = GetCars();
         this.CarRepositoryMock
-            .Setup(x => x.GetCarsReverseAsync(3, null, null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetCarsReverseAsync(3, null, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.TakeLast(3).ToList());
         this.CarRepositoryMock
-            .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Count);
         this.CarRepositoryMock
-            .Setup(x => x.GetHasPreviousPageAsync(3, null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetHasPreviousPageAsync(3, null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         var response = await this.client.GetAsync(new Uri(path, UriKind.Relative)).ConfigureAwait(false);
@@ -282,13 +282,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     {
         var cars = GetCars();
         this.CarRepositoryMock
-            .Setup(x => x.GetCarsReverseAsync(3, null, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetCarsReverseAsync(3, null, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.SkipLast(3).TakeLast(3).ToList());
         this.CarRepositoryMock
-            .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Count);
         this.CarRepositoryMock
-            .Setup(x => x.GetHasPreviousPageAsync(3, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetHasPreviousPageAsync(3, new DateTimeOffset(2000, 1, 2, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
             .ReturnsAsync(false);
 
         var response = await this.client
@@ -316,13 +316,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     {
         var cars = GetCars();
         this.CarRepositoryMock
-            .Setup(x => x.GetCarsAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetCarsAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), null, It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Skip(1).Take(2).ToList());
         this.CarRepositoryMock
-            .Setup(x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetTotalCountAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(cars.Count);
         this.CarRepositoryMock
-            .Setup(x => x.GetHasNextPageAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetHasNextPageAsync(2, new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero), It.IsAny<CancellationToken>()))
             .ReturnsAsync(true);
 
         var response = await this.client
@@ -380,9 +380,9 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
             Model = "Civic",
         };
         var car = new Models.Car() { CarId = 1, Cylinders = 4, Make = "Honda", Model = "Civic" };
-        this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+        this.ClockServiceMock.SetupGet(static x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
         this.CarRepositoryMock
-            .Setup(x => x.AddAsync(It.IsAny<Models.Car>(), It.IsAny<CancellationToken>()))
+            .Setup(static x => x.AddAsync(It.IsAny<Models.Car>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(car);
 
         var response = await this.client.PostAsJsonAsync("cars", saveCar).ConfigureAwait(false);
@@ -475,9 +475,9 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
         };
         var car = new Models.Car() { CarId = 1 };
         this.CarRepositoryMock
-            .Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>()))
+            .Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>()))
             .ReturnsAsync(car);
-        this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+        this.ClockServiceMock.SetupGet(static x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
         this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client.PutAsJsonAsync("cars/1", saveCar).ConfigureAwait(false);
@@ -505,7 +505,7 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
             Make = "Honda",
             Model = "Civic",
         };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
 
         var response = await this.client.PutAsJsonAsync("cars/999", saveCar).ConfigureAwait(false);
 
@@ -535,10 +535,10 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task PatchCar_CarNotFound_Returns404NotFoundAsync()
     {
         var patch = new JsonPatchDocument<SaveCar>();
-        patch.Remove(x => x.Make);
+        patch.Remove(static x => x.Make);
         var json = JsonConvert.SerializeObject(patch);
         using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
-        this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
 
         var response = await this.client
             .PatchAsync(new Uri("cars/999", UriKind.Relative), content)
@@ -555,11 +555,11 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task PatchCar_InvalidCar_Returns400BadRequestAsync()
     {
         var patch = new JsonPatchDocument<SaveCar>();
-        patch.Remove(x => x.Make);
+        patch.Remove(static x => x.Make);
         var json = JsonConvert.SerializeObject(patch);
         using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
         var car = new Models.Car() { CarId = 1, Cylinders = 4, Make = "Honda", Model = "Civic" };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client
             .PatchAsync(new Uri("cars/1", UriKind.Relative), content)
@@ -581,12 +581,12 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     public async Task PatchCar_ValidCar_Returns200OkAsync()
     {
         var patch = new JsonPatchDocument<SaveCar>();
-        patch.Add(x => x.Model, "Civic Type-R");
+        patch.Add(static x => x.Model, "Civic Type-R");
         var json = JsonConvert.SerializeObject(patch);
         using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
         var car = new Models.Car() { CarId = 1, Cylinders = 4, Make = "Honda", Model = "Civic" };
-        this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
-        this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
+        this.CarRepositoryMock.Setup(static x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
+        this.ClockServiceMock.SetupGet(static x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
         this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client

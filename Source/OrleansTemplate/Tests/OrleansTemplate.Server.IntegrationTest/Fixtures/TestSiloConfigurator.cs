@@ -15,7 +15,7 @@ public class TestSiloConfigurator : ISiloConfigurator
     public void Configure(ISiloBuilder siloBuilder) =>
         siloBuilder
 #if Serilog
-            .ConfigureServices(services => services.AddSingleton<ILoggerFactory>(x => new SerilogLoggerFactory()))
+            .ConfigureServices(services => services.AddSingleton<ILoggerFactory>(static x => new SerilogLoggerFactory()))
 #endif
             .AddMemoryGrainStorageAsDefault()
             .AddMemoryGrainStorage("PubSubStore")

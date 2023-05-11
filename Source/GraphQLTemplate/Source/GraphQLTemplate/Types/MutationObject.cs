@@ -39,9 +39,9 @@ public class MutationObject : ObjectType<MutationResolver>
 
         descriptor
 #if Subscriptions
-            .Field(x => x.CreateHumanAsync(default!, default!, default!, default!, default!))
+            .Field(static x => x.CreateHumanAsync(default!, default!, default!, default!, default!))
 #else
-            .Field(x => x.CreateHumanAsync(default!, default!, default!, default!))
+            .Field(static x => x.CreateHumanAsync(default!, default!, default!, default!))
 #endif
             .Description("Create a new human.")
             .Argument("humanInput", x => x.Description("The human you want to create."));

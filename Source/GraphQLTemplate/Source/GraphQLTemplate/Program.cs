@@ -63,7 +63,7 @@ public sealed class Program
             .UseSerilog(ConfigureReloadableLogger)
 #endif
             .UseDefaultServiceProvider(
-                (context, options) =>
+                static (context, options) =>
                 {
                     var isDevelopment = context.HostingEnvironment.IsDevelopment();
                     options.ValidateScopes = isDevelopment;
@@ -75,7 +75,7 @@ public sealed class Program
     private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
         webHostBuilder
             .UseKestrel(
-                (builderContext, options) =>
+                static (builderContext, options) =>
                 {
                     options.AddServerHeader = false;
                     options.Configure(
@@ -123,7 +123,7 @@ public sealed class Program
 #endif
             .WriteTo.Conditional(
                 x => context.HostingEnvironment.IsDevelopment(),
-                x => x
+                static x => x
                     .Console(formatProvider: CultureInfo.InvariantCulture)
                     .WriteTo
                     .Debug(formatProvider: CultureInfo.InvariantCulture));

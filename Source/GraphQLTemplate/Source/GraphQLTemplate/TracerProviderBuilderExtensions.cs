@@ -14,7 +14,7 @@ public static class TracerProviderBuilderExtensions
         builder
             .SetResourceBuilder(GetResourceBuilder(webHostEnvironment))
             .AddAspNetCoreInstrumentation(
-                options =>
+                static options =>
                 {
                     options.EnrichWithHttpRequest = EnrichWithHttpRequest;
                     options.EnrichWithHttpResponse = EnrichWithHttpResponse;
@@ -26,8 +26,8 @@ public static class TracerProviderBuilderExtensions
             .AddHotChocolateInstrumentation()
             .AddIf(
                  webHostEnvironment.IsDevelopment(),
-                 x => x.AddConsoleExporter(
-                     options => options.Targets = ConsoleExporterOutputTargets.Console | ConsoleExporterOutputTargets.Debug));
+                 static x => x.AddConsoleExporter(
+                     static options => options.Targets = ConsoleExporterOutputTargets.Console | ConsoleExporterOutputTargets.Debug));
 
     public static TracerProviderBuilder AddIf(
         this TracerProviderBuilder builder,
@@ -74,7 +74,7 @@ public static class TracerProviderBuilderExtensions
         if (user.Identity?.Name is not null)
         {
             activity.AddTag(OpenTelemetryAttributeName.EndUser.Id, user.Identity.Name);
-            activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(x => x.Value)));
+            activity.AddTag(OpenTelemetryAttributeName.EndUser.Scope, string.Join(',', user.Claims.Select(static x => x.Value)));
         }
     }
 

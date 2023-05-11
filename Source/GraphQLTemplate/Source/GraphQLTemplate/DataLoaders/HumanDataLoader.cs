@@ -17,6 +17,6 @@ public class HumanDataLoader : BatchDataLoader<Guid, Human>, IHumanDataLoader
         CancellationToken cancellationToken)
     {
         var droids = await this.repository.GetHumansAsync(keys, cancellationToken).ConfigureAwait(false);
-        return droids.ToDictionary(x => x.Id);
+        return droids.ToDictionary(static x => x.Id);
     }
 }

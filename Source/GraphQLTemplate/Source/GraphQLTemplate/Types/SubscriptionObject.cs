@@ -29,7 +29,7 @@ public class SubscriptionObject : ObjectType<SubscriptionResolver>
             .Description("The subscription type, represents all updates can be pushed to the client in real time over web sockets.");
 
         descriptor
-            .Field(x => x.OnHumanCreatedAsync(default!, default!, default!))
+            .Field(static x => x.OnHumanCreatedAsync(default!, default!, default!))
             .Description("Subscribe to human created events.")
             .SubscribeToTopic<Guid>(nameof(SubscriptionResolver.OnHumanCreatedAsync));
     }

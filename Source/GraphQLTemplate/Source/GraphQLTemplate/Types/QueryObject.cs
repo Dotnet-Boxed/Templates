@@ -47,26 +47,26 @@ public class QueryObject : ObjectType<QueryResolver>
             .Description("The query type, represents all of the entry points into our object graph.");
 
         descriptor
-            .Field(x => x.GetDroidsAsync(default!, default!))
+            .Field(static x => x.GetDroidsAsync(default!, default!))
             .Description("Gets droids.")
             .UsePaging()
             .UseFiltering()
             .UseSorting();
         descriptor
-            .Field(x => x.GetDroidByIdsAsync(default!, default!, default!))
+            .Field(static x => x.GetDroidByIdsAsync(default!, default!, default!))
             .Description("Gets droids by one or more unique identifiers.")
             .UsePaging()
             .UseFiltering()
             .UseSorting();
 
         descriptor
-            .Field(x => x.GetHumansAsync(default!, default!))
+            .Field(static x => x.GetHumansAsync(default!, default!))
             .Description("Gets humans.")
             .UsePaging()
             .UseFiltering()
             .UseSorting();
         descriptor
-            .Field(x => x.GetHumansByIdsAsync(default!, default!, default!))
+            .Field(static x => x.GetHumansByIdsAsync(default!, default!, default!))
             .Description("Gets humans by one or more unique identifiers.")
             .UsePaging()
             .UseFiltering()

@@ -66,7 +66,7 @@ public class GetCarPageCommand
             return new NotFoundResult();
         }
 
-        var (startCursor, endCursor) = Cursor.GetFirstAndLastCursor(cars, x => x.Created);
+        var (startCursor, endCursor) = Cursor.GetFirstAndLastCursor(cars, static x => x.Created);
         var carViewModels = this.carMapper.MapList(cars);
 
         var httpContext = this.actionContextAccessor.ActionContext!.HttpContext!;

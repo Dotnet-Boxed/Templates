@@ -18,8 +18,8 @@ public class ConfigureStaticFileOptions : IConfigureOptions<StaticFileOptions>
 
     public ConfigureStaticFileOptions(CacheProfileOptions cacheProfileOptions) =>
         this.cacheProfile = cacheProfileOptions
-            .Where(x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
-            .Select(x => x.Value)
+            .Where(static x => string.Equals(x.Key, CacheProfileName.StaticFiles, StringComparison.Ordinal))
+            .Select(static x => x.Value)
             .SingleOrDefault();
 
     public void Configure(StaticFileOptions options) =>

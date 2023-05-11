@@ -120,7 +120,7 @@ public class NuGetTemplateTest
 
             var files = new DirectoryInfo(project.DirectoryPath).GetFiles("*.*", SearchOption.AllDirectories);
 
-            var csprojFile = files.Single(x => x.Name == "NuGetSignFalse.csproj");
+            var csprojFile = files.Single(static x => x.Name == "NuGetSignFalse.csproj");
             var csproj = File.ReadAllText(csprojFile.FullName);
             Assert.DoesNotContain("Sign", csproj, StringComparison.Ordinal);
         }
