@@ -1,6 +1,6 @@
 namespace OrleansTemplate.Grains;
 
-using Orleans;
+using System.Threading;
 using Orleans.Runtime;
 using OrleansTemplate.Abstractions.Constants;
 using OrleansTemplate.Abstractions.Grains;
@@ -16,7 +16,7 @@ public class ReminderGrain : Grain, IReminderGrain, IRemindable
         return ValueTask.CompletedTask;
     }
 
-    public override async Task OnActivateAsync()
+    public override async Task OnActivateAsync(CancellationToken cancellationToken)
     {
         // Reminders are timers that are persisted to storage, so they are resilient if the node goes down. They
         // should not be used for high-frequency timers their period should be measured in minutes, hours or days.
@@ -25,7 +25,7 @@ public class ReminderGrain : Grain, IReminderGrain, IRemindable
                 TimeSpan.FromSeconds(150),
                 TimeSpan.FromSeconds(60))
             .ConfigureAwait(true);
-        await base.OnActivateAsync().ConfigureAwait(true);
+        await base.OnActivateAsync(cancellationToken).ConfigureAwait(true);
     }
 
     public async Task ReceiveReminder(string reminderName, TickStatus status)
@@ -42,7 +42,7 @@ public class ReminderGrain : Grain, IReminderGrain, IRemindable
     private Task PublishReminderAsync(string reminder)
     {
         var streamProvider = this.GetStreamProvider(StreamProviderName.Default);
-        var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.Reminder);
+        var stream = streamProvider.GetStream<string>(StreamId.Create(StreamName.Reminder, Guid.Empty));
         return stream.OnNextAsync(reminder);
     }
 }

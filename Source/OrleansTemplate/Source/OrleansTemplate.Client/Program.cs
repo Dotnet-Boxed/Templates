@@ -1,8 +1,8 @@
 namespace OrleansTemplate.Client;
 
-using Orleans;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Orleans.Configuration;
-using Orleans.Hosting;
 using Orleans.Runtime;
 using Orleans.Streams;
 using OrleansTemplate.Abstractions.Constants;
@@ -14,8 +14,10 @@ public static class Program
     {
         try
         {
-            var clusterClient = CreateClientBuilder().Build();
-            await clusterClient.Connect().ConfigureAwait(false);
+            var host = CreateHostBuilder().Build();
+            var task = host.RunAsync().ConfigureAwait(false);
+
+            var clusterClient = host.Services.GetRequiredService<IClusterClient>();
 
             // Set a trace ID, so that requests can be identified.
             RequestContext.Set("TraceId", Guid.NewGuid());
@@ -24,9 +26,9 @@ public static class Program
             await reminderGrain.SetReminderAsync("Don't forget to say hello!").ConfigureAwait(false);
 
             var streamProvider = clusterClient.GetStreamProvider(StreamProviderName.Default);
-            var saidHelloStream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
+            var saidHelloStream = streamProvider.GetStream<string>(StreamId.Create(StreamName.SaidHello, Guid.Empty));
             var saidHelloSubscription = await saidHelloStream.SubscribeAsync(OnSaidHelloAsync).ConfigureAwait(false);
-            var reminderStream = streamProvider.GetStream<string>(Guid.Empty, StreamName.Reminder);
+            var reminderStream = streamProvider.GetStream<string>(StreamId.Create(StreamName.Reminder, Guid.Empty));
             var reminderSubscription = await reminderStream.SubscribeAsync(OnReminderAsync).ConfigureAwait(false);
 
 #pragma warning disable CA1303 // Do not pass literals as localized parameters
@@ -44,7 +46,7 @@ public static class Program
 #pragma warning restore CA1031 // Do not catch general exception types
         {
             Console.WriteLine(exception.ToString());
-            return -1;
+            return 1;
         }
 
         return 0;
@@ -62,8 +64,12 @@ public static class Program
         return Task.CompletedTask;
     }
 
-    private static IClientBuilder CreateClientBuilder() =>
-        new ClientBuilder()
+    private static IHostBuilder CreateHostBuilder() =>
+        new HostBuilder()
+            .UseOrleansClient(CreateOrleansClient);
+
+    private static void CreateOrleansClient(IClientBuilder clientBuilder) =>
+        clientBuilder
             .UseAzureStorageClustering(options => options.ConfigureTableServiceClient("UseDevelopmentStorage=true"))
             .Configure<ClusterOptions>(
                 options =>
@@ -71,12 +77,8 @@ public static class Program
                     options.ClusterId = Cluster.ClusterId;
                     options.ServiceId = Cluster.ServiceId;
                 })
-            .ConfigureApplicationParts(
-                parts => parts
-                    .AddApplicationPart(typeof(ICounterGrain).Assembly)
-                    .WithReferences())
 #if TLS
-            .AddSimpleMessageStreamProvider(StreamProviderName.Default)
+            .AddBroadcastChannel(StreamProviderName.Default)
             .UseTls(
                 options =>
                 {
@@ -87,6 +89,7 @@ public static class Program
                     options.AllowAnyRemoteCertificate();
                 });
 #else
-            .AddSimpleMessageStreamProvider(StreamProviderName.Default);
+            .AddBroadcastChannel(StreamProviderName.Default);
 #endif
+
 }

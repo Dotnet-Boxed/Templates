@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Grains;
 
-using Orleans;
 using OrleansTemplate.Abstractions.Grains;
 
 public class CounterGrain : Grain<long>, ICounterGrain

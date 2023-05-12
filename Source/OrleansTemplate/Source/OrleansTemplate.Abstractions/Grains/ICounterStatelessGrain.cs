@@ -1,7 +1,5 @@
 namespace OrleansTemplate.Abstractions.Grains;
 
-using Orleans;
-
 /// <summary>
 /// Holds the total count on a given silo and then feeds this forward to the <see cref="ICounterGrain"/>.
 /// </summary>

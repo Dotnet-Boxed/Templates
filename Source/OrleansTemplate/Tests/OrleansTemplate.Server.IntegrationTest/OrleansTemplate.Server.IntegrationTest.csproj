@@ -17,6 +17,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="Microsoft.Orleans.BroadcastChannel" Version="7.1.2" />
+    <PackageReference Include="Microsoft.Orleans.Streaming" Version="7.1.2" />
     <PackageReference Include="Microsoft.Orleans.TestingHost" Version="7.1.2" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" Condition="'$(Serilog)' == 'true'" />

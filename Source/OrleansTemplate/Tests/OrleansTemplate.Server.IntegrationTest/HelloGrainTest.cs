@@ -2,6 +2,7 @@ namespace OrleansTemplate.Server.IntegrationTest;
 
 using System;
 using System.Threading.Tasks;
+using Orleans.Runtime;
 using Orleans.Streams;
 using OrleansTemplate.Abstractions.Constants;
 using OrleansTemplate.Abstractions.Grains;
@@ -46,7 +47,7 @@ public class HelloGrainTest : ClusterFixture
         string? hello = null;
         var helloGrain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
         var streamProvider = this.Cluster.Client.GetStreamProvider(StreamProviderName.Default);
-        var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
+        var stream = streamProvider.GetStream<string>(StreamId.Create(StreamName.SaidHello, Guid.Empty));
         var subscription = await stream
             .SubscribeAsync(
                 (x, token) =>

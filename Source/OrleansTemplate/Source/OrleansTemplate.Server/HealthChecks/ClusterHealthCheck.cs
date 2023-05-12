@@ -1,7 +1,6 @@
 namespace OrleansTemplate.Server.HealthChecks;
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Orleans;
 using Orleans.Runtime;
 
 /// <summary>
@@ -29,7 +28,7 @@ public class ClusterHealthCheck : IHealthCheck
         try
         {
             var hosts = await manager.GetHosts().ConfigureAwait(false);
-            var count = hosts.Values.Count(x => x.IsUnavailable());
+            var count = hosts.Values.Count(x => x.IsTerminating() || x == SiloStatus.None);
             return count > 0 ? HealthCheckResult.Degraded(count + DegradedMessage) : HealthCheckResult.Healthy();
         }
 #pragma warning disable CA1031 // Do not catch general exception types
