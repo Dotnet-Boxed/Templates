@@ -49,15 +49,15 @@
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.4.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.4.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
-    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.0.5" Condition="'$(Authorization)' == 'true'" />
-    <PackageReference Include="HotChocolate.Data" Version="13.0.5" />
-    <PackageReference Include="HotChocolate.Diagnostics" Version="13.0.5" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="13.0.5" Condition="'$(PersistedQueries)' == 'true'" />
-    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="13.0.5" Condition="'$(PersistedQueries)' == 'true'" />
-    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="13.0.5" Condition="'$(Subscriptions)' == 'true'" />
-    <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="13.0.5" />
-    <PackageReference Include="HotChocolate.Types.Scalars" Version="13.0.5" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.1.0" />
+    <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.1.0" Condition="'$(Authorization)' == 'true'" />
+    <PackageReference Include="HotChocolate.Data" Version="13.1.0" />
+    <PackageReference Include="HotChocolate.Diagnostics" Version="13.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="13.1.0" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="13.1.0" Condition="'$(PersistedQueries)' == 'true'" />
+    <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="13.1.0" Condition="'$(Subscriptions)' == 'true'" />
+    <PackageReference Include="HotChocolate.Types.Analyzers" PrivateAssets="all" Version="13.1.0" />
+    <PackageReference Include="HotChocolate.Types.Scalars" Version="13.1.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.5" Condition="'$(Azure)' == 'true'" />
