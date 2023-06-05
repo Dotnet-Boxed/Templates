@@ -52,7 +52,7 @@
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.1.0" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.1.0" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="13.1.0" />
-    <PackageReference Include="HotChocolate.Diagnostics" Version="13.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="HotChocolate.Diagnostics" Version="13.2.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="HotChocolate.PersistedQueries.InMemory" Version="13.1.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.PersistedQueries.Redis" Version="13.1.0" Condition="'$(PersistedQueries)' == 'true'" />
     <PackageReference Include="HotChocolate.Subscriptions.Redis" Version="13.1.0" Condition="'$(Subscriptions)' == 'true'" />
