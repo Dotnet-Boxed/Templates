@@ -9,5 +9,7 @@ public class ApplicationOptions
 
     public KestrelServerOptions Kestrel { get; set; } = default!;
 
+    public QueueOptions Queue { get; set; } = default!;
+
     public StorageOptions Storage { get; set; } = default!;
 }

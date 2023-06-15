@@ -7,6 +7,7 @@ using System.Text.Json.Serialization;
 using Microsoft.ApplicationInsights.Extensibility;
 #endif
 using Orleans.Configuration;
+using Orleans.Hosting;
 using Orleans.Serialization;
 using OrleansTemplate.Abstractions.Constants;
 using OrleansTemplate.Server.Options;
@@ -98,7 +99,23 @@ public class Program
             .UseTransactions()
             .AddAzureTableTransactionalStateStorageAsDefault(
                 options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
-            .AddBroadcastChannel(StreamProviderName.Default)
+            .AddAzureQueueStreams(
+                StreamProviderName.Default,
+                (SiloAzureQueueStreamConfigurator configurator) =>
+                {
+                    var queueOptions = GetQueueOptions(context.Configuration);
+
+                    configurator.ConfigureAzureQueue(
+                        x => x.Configure(options =>
+                        {
+                            options.ConfigureQueueServiceClient(queueOptions.ConnectionString);
+                            options.QueueNames = queueOptions.QueueNames;
+                        }));
+                    configurator.ConfigureCacheSize(queueOptions.CacheSize);
+                    configurator.ConfigurePullingAgent(
+                        x => x.Configure(
+                            options => options.GetQueueMsgsTimerPeriod = queueOptions.TimerPeriod));
+                })
             .AddAzureTableGrainStorage(
                 "PubSubStore",
                 options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
@@ -173,6 +190,9 @@ public class Program
         jsonSerializerOptions.AddContext<AppJsonSerializerContext>();
         return jsonSerializerOptions;
     }
+
+    private static QueueOptions GetQueueOptions(IConfiguration configuration) =>
+        configuration.GetSection(nameof(ApplicationOptions.Queue)).Get<QueueOptions>()!;
 
     private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
         configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
