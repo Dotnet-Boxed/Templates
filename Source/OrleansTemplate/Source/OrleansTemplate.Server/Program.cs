@@ -126,7 +126,9 @@ public class Program
             .Configure<ApplicationOptions>(context.Configuration)
             .Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)))
             .Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)))
-            .AddSerializer(serializerBuilder => serializerBuilder.AddJsonSerializer(x => true, CreateJsonSerializerOptions()));
+            .AddSerializer(serializerBuilder => serializerBuilder.AddJsonSerializer(
+                type => type.Namespace is not null && type.Namespace.StartsWith("OrleansTemplate", StringComparison.Ordinal),
+                CreateJsonSerializerOptions()));
 
 #if HealthCheck
     private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
