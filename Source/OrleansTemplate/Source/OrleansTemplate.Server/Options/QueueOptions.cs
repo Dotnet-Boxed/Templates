@@ -6,7 +6,9 @@ public class QueueOptions
 
     public int CacheSize { get; set; } = default!;
 
-    public List<string> QueueNames { get; set; } = new List<string>();
+    public string QueueNames { get; set; } = default!;
+
+    public List<string> QueueNamesCollection => new(this.QueueNames.Split(','));
 
     public TimeSpan TimerPeriod { get; set; } = default!;
 }

@@ -109,7 +109,7 @@ public class Program
                         x => x.Configure(options =>
                         {
                             options.ConfigureQueueServiceClient(queueOptions.ConnectionString);
-                            options.QueueNames = queueOptions.QueueNames;
+                            options.QueueNames = queueOptions.QueueNamesCollection;
                         }));
                     configurator.ConfigureCacheSize(queueOptions.CacheSize);
                     configurator.ConfigurePullingAgent(
@@ -124,8 +124,8 @@ public class Program
     private static void ConfigureServices(HostBuilderContext context, IServiceCollection services) =>
         services
             .Configure<ApplicationOptions>(context.Configuration)
-            .Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)))
-            .Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)))
+            .Configure<ClusterOptions>(context.Configuration.GetRequiredSection(nameof(ApplicationOptions.Cluster)))
+            .Configure<StorageOptions>(context.Configuration.GetRequiredSection(nameof(ApplicationOptions.Storage)))
             .AddSerializer(serializerBuilder => serializerBuilder.AddJsonSerializer(
                 type => type.Namespace is not null && type.Namespace.StartsWith("OrleansTemplate", StringComparison.Ordinal),
                 CreateJsonSerializerOptions()));
@@ -138,7 +138,7 @@ public class Program
                 {
                     options.AddServerHeader = false;
                     options.Configure(
-                        builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)),
+                        builderContext.Configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)),
                         reloadOnChange: false);
                 })
             .UseStartup<Startup>();
@@ -194,8 +194,8 @@ public class Program
     }
 
     private static QueueOptions GetQueueOptions(IConfiguration configuration) =>
-        configuration.GetSection(nameof(ApplicationOptions.Queue)).Get<QueueOptions>()!;
+        configuration.GetRequiredSection(nameof(ApplicationOptions.Queue)).Get<QueueOptions>()!;
 
     private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
-        configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
+        configuration.GetRequiredSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
 }
