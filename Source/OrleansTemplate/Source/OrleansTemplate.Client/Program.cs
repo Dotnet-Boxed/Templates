@@ -1,5 +1,6 @@
 namespace OrleansTemplate.Client;
 
+using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans.Configuration;
@@ -40,6 +41,10 @@ public static class Program
 
             await saidHelloSubscription.UnsubscribeAsync().ConfigureAwait(false);
             await reminderSubscription.UnsubscribeAsync().ConfigureAwait(false);
+        }
+        catch (SiloUnavailableException)
+        {
+            Console.WriteLine("Lost connection to the cluster.");
         }
 #pragma warning disable CA1031 // Do not catch general exception types
         catch (Exception exception)
