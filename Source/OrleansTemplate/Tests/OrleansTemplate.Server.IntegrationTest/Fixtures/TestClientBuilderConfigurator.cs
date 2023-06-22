@@ -7,5 +7,5 @@ using OrleansTemplate.Abstractions.Constants;
 public class TestClientBuilderConfigurator : IClientBuilderConfigurator
 {
     public void Configure(IConfiguration configuration, IClientBuilder clientBuilder) =>
-        clientBuilder.AddBroadcastChannel(StreamProviderName.Default);
+        clientBuilder.AddMemoryStreams(StreamProviderName.Default);
 }

@@ -18,5 +18,5 @@ public class TestSiloConfigurator : ISiloConfigurator
 #endif
             .AddMemoryGrainStorageAsDefault()
             .AddMemoryGrainStorage("PubSubStore")
-            .AddBroadcastChannel(StreamProviderName.Default);
+            .AddMemoryStreams(StreamProviderName.Default);
 }
