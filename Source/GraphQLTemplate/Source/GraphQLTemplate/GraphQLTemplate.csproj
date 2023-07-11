@@ -49,7 +49,7 @@
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.4.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.4.0" />
-    <PackageReference Include="HotChocolate.AspNetCore" Version="13.1.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="13.3.2" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.1.0" Condition="'$(Authorization)' == 'true'" />
     <PackageReference Include="HotChocolate.Data" Version="13.1.0" />
     <PackageReference Include="HotChocolate.Diagnostics" Version="13.1.0" Condition="'$(OpenTelemetry)' == 'true'" />
