@@ -73,8 +73,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" Condition="'$(Swagger)' == 'true'" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Endpoints\" />
-  </ItemGroup>
-
 </Project>
