@@ -40,9 +40,9 @@
 
   <ItemGroup Label="Package References">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" PrivateAssets="all" Version="1.0.3" Condition="'$(DotnetFramework)' == 'true'" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="17.5.22" />
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" PrivateAssets="all" Version="17.6.40" />
     <PackageReference Include="MinVer" PrivateAssets="all" Version="4.3.0" />
-    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.435" Condition="'$(StyleCop)' == 'true'" />
+    <PackageReference Include="StyleCop.Analyzers" PrivateAssets="all" Version="1.2.0-beta.507" Condition="'$(StyleCop)' == 'true'" />
   </ItemGroup>
 
 </Project>

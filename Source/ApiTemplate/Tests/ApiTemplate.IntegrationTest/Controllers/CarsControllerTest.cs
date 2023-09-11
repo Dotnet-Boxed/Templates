@@ -3,13 +3,10 @@ namespace ApiTemplate.IntegrationTest.Controllers;
 using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
-using System.Text;
 using ApiTemplate.ViewModels;
 using Boxed.AspNetCore;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Newtonsoft.Json;
 using Xunit;
 #if Serilog
 using Xunit.Abstractions;
@@ -534,14 +531,10 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task PatchCar_CarNotFound_Returns404NotFoundAsync()
     {
-        var patch = new JsonPatchDocument<SaveCar>();
-        patch.Remove(x => x.Make);
-        var json = JsonConvert.SerializeObject(patch);
-        using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
         this.CarRepositoryMock.Setup(x => x.GetAsync(999, It.IsAny<CancellationToken>())).ReturnsAsync((Models.Car?)null);
 
         var response = await this.client
-            .PatchAsync(new Uri("cars/999", UriKind.Relative), content)
+            .PatchAsJsonAsync(new Uri("cars/999", UriKind.Relative), new { Make = (string?)null })
             .ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -554,15 +547,11 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task PatchCar_InvalidCar_Returns400BadRequestAsync()
     {
-        var patch = new JsonPatchDocument<SaveCar>();
-        patch.Remove(x => x.Make);
-        var json = JsonConvert.SerializeObject(patch);
-        using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
         var car = new Models.Car() { CarId = 1, Cylinders = 4, Make = "Honda", Model = "Civic" };
         this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client
-            .PatchAsync(new Uri("cars/1", UriKind.Relative), content)
+            .PatchAsJsonAsync(new Uri("cars/1", UriKind.Relative), new { Make = (string?)null })
             .ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
@@ -580,17 +569,13 @@ public class CarsControllerTest : AppWebApplicationFactory<Program>
     [Fact]
     public async Task PatchCar_ValidCar_Returns200OkAsync()
     {
-        var patch = new JsonPatchDocument<SaveCar>();
-        patch.Add(x => x.Model, "Civic Type-R");
-        var json = JsonConvert.SerializeObject(patch);
-        using var content = new StringContent(json, Encoding.UTF8, ContentType.JsonPatch);
         var car = new Models.Car() { CarId = 1, Cylinders = 4, Make = "Honda", Model = "Civic" };
         this.CarRepositoryMock.Setup(x => x.GetAsync(1, It.IsAny<CancellationToken>())).ReturnsAsync(car);
         this.ClockServiceMock.SetupGet(x => x.UtcNow).Returns(new DateTimeOffset(2000, 1, 1, 0, 0, 0, TimeSpan.Zero));
         this.CarRepositoryMock.Setup(x => x.UpdateAsync(car, It.IsAny<CancellationToken>())).ReturnsAsync(car);
 
         var response = await this.client
-            .PatchAsync(new Uri("cars/1", UriKind.Relative), content)
+            .PatchAsJsonAsync(new Uri("cars/1", UriKind.Relative), new { Model = "Civic Type-R" })
             .ConfigureAwait(false);
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
