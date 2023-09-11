@@ -45,20 +45,20 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="6.0.4" Condition="'$(Redis)' == 'true'" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="7.0.0" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="10.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.5" Condition="'$(Azure)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.10" Condition="'$(Azure)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" Condition="'$(Versioning)' == 'true'" />
-    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.5" Condition="'$(DistributedCacheRedis)' == 'true'" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" Condition="'$(Docker)' == 'true'" />
-    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.5.1" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.5.1" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.10" Condition="'$(DistributedCacheRedis)' == 'true'" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" Condition="'$(Docker)' == 'true'" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.10" Condition="'$(OpenTelemetry)' == 'true' AND '$(Redis)' == 'true'" />
     <PackageReference Include="Serilog" Version="3.0.1" Condition="'$(Serilog)' == 'true'" />

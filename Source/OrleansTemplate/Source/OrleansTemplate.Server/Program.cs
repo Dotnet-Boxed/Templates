@@ -1,19 +1,15 @@
 namespace OrleansTemplate.Server;
 
 using System.Globalization;
-using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 #if ApplicationInsights
 using Microsoft.ApplicationInsights.Extensibility;
 #endif
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
-using Orleans.Runtime;
-using Orleans.Statistics;
+using Orleans.Serialization;
 using OrleansTemplate.Abstractions.Constants;
-using OrleansTemplate.Grains;
 using OrleansTemplate.Server.Options;
 #if Serilog
 using Serilog;
@@ -86,59 +82,53 @@ public class Program
             .UseConsoleLifetime();
 
     private static void ConfigureSiloBuilder(
-        Microsoft.Extensions.Hosting.HostBuilderContext context,
+        HostBuilderContext context,
         ISiloBuilder siloBuilder) =>
         siloBuilder
-            .ConfigureServices(
-                (context, services) =>
-                {
-                    services.Configure<ApplicationOptions>(context.Configuration);
-                    services.Configure<ClusterOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Cluster)));
-                    services.Configure<StorageOptions>(context.Configuration.GetSection(nameof(ApplicationOptions.Storage)));
-#if ApplicationInsights
-                    services.Configure<ApplicationInsightsTelemetryConsumerOptions>(
-                    context.Configuration.GetSection(nameof(ApplicationOptions.ApplicationInsights)));
-#endif
-                })
-            .UseSiloUnobservedExceptionsHandler()
+            .ConfigureServices(services => ConfigureServices(context, services))
             .UseAzureStorageClustering(
                 options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .ConfigureEndpoints(
                 EndpointOptions.DEFAULT_SILO_PORT,
                 EndpointOptions.DEFAULT_GATEWAY_PORT,
                 listenOnAnyHostAddress: !context.HostingEnvironment.IsDevelopment())
-            .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(HelloGrain).Assembly).WithReferences())
-#if ApplicationInsights
-            .AddApplicationInsightsTelemetryConsumer()
-#endif
             .AddAzureTableGrainStorageAsDefault(
-                options =>
-                {
-                    options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString);
-                    options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
-                    options.UseJson = true;
-                })
+                options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .UseAzureTableReminderService(
                 options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
-            .UseTransactions(withStatisticsReporter: true)
+            .UseTransactions()
             .AddAzureTableTransactionalStateStorageAsDefault(
                 options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
-            .AddSimpleMessageStreamProvider(StreamProviderName.Default)
+            .AddAzureQueueStreams(
+                StreamProviderName.Default,
+                (SiloAzureQueueStreamConfigurator configurator) =>
+                {
+                    var queueOptions = GetQueueOptions(context.Configuration);
+
+                    configurator.ConfigureAzureQueue(
+                        x => x.Configure(options =>
+                        {
+                            options.ConfigureQueueServiceClient(queueOptions.ConnectionString);
+                            options.QueueNames = queueOptions.QueueNamesCollection;
+                        }));
+                    configurator.ConfigureCacheSize(queueOptions.CacheSize);
+                    configurator.ConfigurePullingAgent(
+                        x => x.Configure(
+                            options => options.GetQueueMsgsTimerPeriod = queueOptions.TimerPeriod));
+                })
             .AddAzureTableGrainStorage(
                 "PubSubStore",
-                options =>
-                {
-                    options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString);
-                    options.ConfigureJsonSerializerSettings = ConfigureJsonSerializerSettings;
-                    options.UseJson = true;
-                })
-            .UseIf(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Linux),
-                x => x.UseLinuxEnvironmentStatistics())
-            .UseIf(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows),
-                x => x.UsePerfCounterEnvironmentStatistics())
+                options => options.ConfigureTableServiceClient(GetStorageOptions(context.Configuration).ConnectionString))
             .UseDashboard();
+
+    private static void ConfigureServices(HostBuilderContext context, IServiceCollection services) =>
+        services
+            .Configure<ApplicationOptions>(context.Configuration)
+            .Configure<ClusterOptions>(context.Configuration.GetRequiredSection(nameof(ApplicationOptions.Cluster)))
+            .Configure<StorageOptions>(context.Configuration.GetRequiredSection(nameof(ApplicationOptions.Storage)))
+            .AddSerializer(serializerBuilder => serializerBuilder.AddJsonSerializer(
+                type => type.Namespace is not null && type.Namespace.StartsWith("OrleansTemplate", StringComparison.Ordinal),
+                CreateJsonSerializerOptions()));
 
 #if HealthCheck
     private static void ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder) =>
@@ -148,7 +138,7 @@ public class Program
                 {
                     options.AddServerHeader = false;
                     options.Configure(
-                        builderContext.Configuration.GetSection(nameof(ApplicationOptions.Kestrel)),
+                        builderContext.Configuration.GetRequiredSection(nameof(ApplicationOptions.Kestrel)),
                         reloadOnChange: false);
                 })
             .UseStartup<Startup>();
@@ -171,7 +161,7 @@ public class Program
     /// <see href="https://nblumhardt.com/2020/10/bootstrap-logger/"/>.
     /// </summary>
     private static void ConfigureReloadableLogger(
-        Microsoft.Extensions.Hosting.HostBuilderContext context,
+        HostBuilderContext context,
         IServiceProvider services,
         LoggerConfiguration configuration) =>
         configuration
@@ -194,13 +184,18 @@ public class Program
                     .Debug(formatProvider: CultureInfo.InvariantCulture));
 
 #endif
-
-    private static void ConfigureJsonSerializerSettings(JsonSerializerSettings jsonSerializerSettings)
+    private static JsonSerializerOptions CreateJsonSerializerOptions()
     {
-        jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        jsonSerializerSettings.DateParseHandling = DateParseHandling.DateTimeOffset;
+        var jsonSerializerOptions = new JsonSerializerOptions();
+        jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        jsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+        jsonSerializerOptions.AddContext<AppJsonSerializerContext>();
+        return jsonSerializerOptions;
     }
 
+    private static QueueOptions GetQueueOptions(IConfiguration configuration) =>
+        configuration.GetRequiredSection(nameof(ApplicationOptions.Queue)).Get<QueueOptions>()!;
+
     private static StorageOptions GetStorageOptions(IConfiguration configuration) =>
-        configuration.GetSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
+        configuration.GetRequiredSection(nameof(ApplicationOptions.Storage)).Get<StorageOptions>()!;
 }

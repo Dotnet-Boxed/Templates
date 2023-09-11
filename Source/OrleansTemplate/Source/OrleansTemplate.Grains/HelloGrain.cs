@@ -1,6 +1,6 @@
 namespace OrleansTemplate.Grains;
 
-using Orleans;
+using Orleans.Runtime;
 using OrleansTemplate.Abstractions.Constants;
 using OrleansTemplate.Abstractions.Grains;
 
@@ -23,7 +23,7 @@ public class HelloGrain : Grain, IHelloGrain
     private Task PublishSaidHelloAsync(string name)
     {
         var streamProvider = this.GetStreamProvider(StreamProviderName.Default);
-        var stream = streamProvider.GetStream<string>(Guid.Empty, StreamName.SaidHello);
+        var stream = streamProvider.GetStream<string>(StreamId.Create(StreamName.SaidHello, Guid.Empty));
         return stream.OnNextAsync(name);
     }
 }

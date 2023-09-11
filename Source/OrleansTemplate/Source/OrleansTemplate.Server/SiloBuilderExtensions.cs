@@ -1,7 +1,5 @@
 namespace OrleansTemplate.Server;
 
-using Orleans.Hosting;
-
 /// <summary>
 /// <see cref="ISiloBuilder"/> extension methods.
 /// </summary>

@@ -1,7 +1,6 @@
 namespace OrleansTemplate.Server.HealthChecks;
 
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Orleans;
 using OrleansTemplate.Abstractions.Grains.HealthChecks;
 
 /// <summary>
