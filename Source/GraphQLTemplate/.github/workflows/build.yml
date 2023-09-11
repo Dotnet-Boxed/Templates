@@ -29,12 +29,12 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3.6.0
         with:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v3.0.3
+        uses: actions/setup-dotnet@v3.2.0
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
@@ -48,7 +48,7 @@ jobs:
         run: dotnet cake --target=Publish
         shell: pwsh
       - name: "Publish Artefacts"
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: ${{matrix.os}}
           path: "./Artefacts"
@@ -102,12 +102,12 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3.6.0
         with:
           lfs: true
           fetch-depth: 0
       - name: "Install .NET Core SDK"
-        uses: actions/setup-dotnet@v3.0.3
+        uses: actions/setup-dotnet@v3.2.0
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
