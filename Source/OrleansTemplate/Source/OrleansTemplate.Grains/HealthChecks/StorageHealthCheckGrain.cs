@@ -1,6 +1,5 @@
 namespace OrleansTemplate.Grains.HealthChecks;
 
-using Orleans;
 using Orleans.Placement;
 using Orleans.Runtime;
 using OrleansTemplate.Abstractions.Grains.HealthChecks;

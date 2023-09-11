@@ -3,7 +3,6 @@ namespace OrleansTemplate.Server.IntegrationTest.Fixtures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 #endif
-using Orleans.Hosting;
 using Orleans.TestingHost;
 using OrleansTemplate.Abstractions.Constants;
 #if Serilog
@@ -19,5 +18,5 @@ public class TestSiloConfigurator : ISiloConfigurator
 #endif
             .AddMemoryGrainStorageAsDefault()
             .AddMemoryGrainStorage("PubSubStore")
-            .AddSimpleMessageStreamProvider(StreamProviderName.Default);
+            .AddMemoryStreams(StreamProviderName.Default);
 }

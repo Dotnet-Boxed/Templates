@@ -1,7 +1,5 @@
 namespace OrleansTemplate.Abstractions.Grains;
 
-using Orleans;
-
 /// <summary>
 /// Holds the total count.
 /// </summary>

@@ -1,6 +1,6 @@
 namespace OrleansTemplate.Grains;
 
-using Orleans;
+using System.Threading;
 using Orleans.Concurrency;
 using OrleansTemplate.Abstractions.Grains;
 
@@ -20,12 +20,12 @@ public class CounterStatelessGrain : Grain, ICounterStatelessGrain
         return ValueTask.CompletedTask;
     }
 
-    public override Task OnActivateAsync()
+    public override Task OnActivateAsync(CancellationToken cancellationToken)
     {
         // Timers are stored in-memory so are not resilient to nodes going down. They should be used for short
         // high-frequency timers their period should be measured in seconds.
         this.RegisterTimer(this.OnTimerTickAsync, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
-        return base.OnActivateAsync();
+        return base.OnActivateAsync(cancellationToken);
     }
 
     private async Task OnTimerTickAsync(object arg)
