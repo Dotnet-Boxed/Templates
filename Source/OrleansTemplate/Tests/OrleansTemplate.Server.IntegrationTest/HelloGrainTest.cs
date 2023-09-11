@@ -44,7 +44,7 @@ public class HelloGrainTest : ClusterFixture
     [Fact]
     public async Task SayHello_PassName_SaidHelloPublishedAsync()
     {
-        string? hello = null;
+        var taskCompletionSource = new TaskCompletionSource<string>();
         var helloGrain = this.Cluster.GrainFactory.GetGrain<IHelloGrain>(Guid.NewGuid());
         var streamProvider = this.Cluster.Client.GetStreamProvider(StreamProviderName.Default);
         var stream = streamProvider.GetStream<string>(StreamId.Create(StreamName.SaidHello, Guid.Empty));
@@ -52,13 +52,15 @@ public class HelloGrainTest : ClusterFixture
             .SubscribeAsync(
                 (x, token) =>
                 {
-                    hello = x;
+                    taskCompletionSource.SetResult(x);
                     return Task.CompletedTask;
                 })
             .ConfigureAwait(false);
 
         await helloGrain.SayHelloAsync("Rehan").ConfigureAwait(false);
 
-        Assert.Equal("Rehan", hello);
+        var actual = await taskCompletionSource.Task.WaitAsync(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+
+        Assert.Equal("Rehan", actual);
     }
 }
