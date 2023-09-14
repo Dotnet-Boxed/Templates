@@ -73,7 +73,7 @@ public class ConfigureRequestLoggingOptions : IConfigureOptions<RequestLoggingOp
     }
 #if HealthCheck
 
-    private static LogEventLevel GetLevel(HttpContext httpContext, double elapsedMilliseconds, Exception exception)
+    private static LogEventLevel GetLevel(HttpContext httpContext, double elapsedMilliseconds, Exception? exception)
     {
         if (exception is null && httpContext.Response.StatusCode <= 499)
         {

@@ -1,4 +1,5 @@
 namespace OrleansTemplate.Server.IntegrationTest.Fixtures;
+
 #if Serilog
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

@@ -12,7 +12,7 @@ public class RedisOptions
     {
         get
         {
-            var options = ConfigurationOptions.Parse(this.ConnectionString);
+            var options = ConfigurationOptions.Parse(this.ConnectionString!);
             options.ClientName = AssemblyInformation.Current.Product;
             return options;
         }
