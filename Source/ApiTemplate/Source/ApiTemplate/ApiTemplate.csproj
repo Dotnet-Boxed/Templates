@@ -45,7 +45,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="7.0.0" Condition="'$(Redis)' == 'true'" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="7.0.1" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
     <PackageReference Include="Boxed.AspNetCore.Swagger" Version="10.0.0" Condition="'$(Swagger)' == 'true'" />
     <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
