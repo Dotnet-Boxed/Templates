@@ -24,11 +24,11 @@ public class CounterStatelessGrain : Grain, ICounterStatelessGrain
     {
         // Timers are stored in-memory so are not resilient to nodes going down. They should be used for short
         // high-frequency timers their period should be measured in seconds.
-        this.RegisterTimer(this.OnTimerTickAsync, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+        this.RegisterTimer(this.OnTimerTickAsync, null!, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
         return base.OnActivateAsync(cancellationToken);
     }
 
-    private async Task OnTimerTickAsync(object arg)
+    private async Task OnTimerTickAsync(object state)
     {
         var count = this.count;
         this.count = 0;
