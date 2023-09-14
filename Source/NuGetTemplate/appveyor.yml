@@ -38,7 +38,7 @@ build_script:
   - pwsh: dotnet cake --target=Test
   - pwsh: dotnet cake --target=Pack
 
-test: off
+test: false
 
 artifacts:
   - name: NuGet Packages
