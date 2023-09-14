@@ -29,6 +29,11 @@ dotnet_diagnostic.SA1602.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1633.md
 dotnet_diagnostic.SA1633.severity = none
 
+# IDE0005: Remove all unused usings
+# Justification: Bug in Roslyn compiler is causing error on projects with generating docs disabled.
+# https://github.com/dotnet/roslyn/issues/41640
+dotnet_diagnostic.IDE0005.severity = none
+
 ##########################################
 # Custom
 ##########################################
