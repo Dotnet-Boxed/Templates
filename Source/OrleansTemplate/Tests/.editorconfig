@@ -7,3 +7,8 @@
 # Justification: Test method names contain underscores
 # https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
 dotnet_diagnostic.CA1707.severity = none
+
+# IDE0005: Remove all unused usings
+# Justification: Bug in Roslyn compiler is causing error on projects with generating docs disabled.
+# https://github.com/dotnet/roslyn/issues/41640
+dotnet_diagnostic.IDE0005.severity = none
