@@ -46,7 +46,7 @@
   <ItemGroup Label="Package References">
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="7.0.1" Condition="'$(Redis)' == 'true'" />
     <PackageReference Include="Boxed.AspNetCore" Version="8.1.2" />
-    <PackageReference Include="Boxed.Mapping" Version="6.0.0" />
+    <PackageReference Include="Boxed.Mapping" Version="7.0.0" />
     <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.6.0" />
     <PackageReference Include="GraphQL.Server.Ui.Voyager" Version="7.6.0" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.5.1" />
