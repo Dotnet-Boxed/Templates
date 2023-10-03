@@ -60,7 +60,7 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog" Version="3.0.1" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" Condition="'$(Serilog)' == 'true'" />
-    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" Condition="'$(Serilog)' == 'true'" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.3.0" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Process" Version="2.0.2" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Span" Version="3.1.0" Condition="'$(Serilog)' == 'true' AND '$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="Serilog.Enrichers.Thread" Version="3.1.0" Condition="'$(Serilog)' == 'true'" />
