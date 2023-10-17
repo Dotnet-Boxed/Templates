@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.Orleans.Reminders" Version="7.2.1" />
+    <PackageReference Include="Microsoft.Orleans.Reminders" Version="7.2.2" />
     <PackageReference Include="Microsoft.Orleans.Sdk" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Streaming" Version="7.2.1" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
