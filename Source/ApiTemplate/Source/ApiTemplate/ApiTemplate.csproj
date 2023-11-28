@@ -52,7 +52,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.ApplicationInsights.HostingStartup" Version="2.2.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.11" Condition="'$(Azure)' == 'true'" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.14" Condition="'$(Azure)' == 'true'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" Condition="'$(Versioning)' == 'true'" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="7.0.11" Condition="'$(DistributedCacheRedis)' == 'true'" />
