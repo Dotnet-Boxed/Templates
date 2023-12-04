@@ -51,7 +51,7 @@
     <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Streaming.AzureStorage" Version="7.2.1" />
+    <PackageReference Include="Microsoft.Orleans.Streaming.AzureStorage" Version="7.2.4" />
     <PackageReference Include="Microsoft.Orleans.Transactions" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="7.2.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" Condition="'$(Docker)' == 'true'" />
