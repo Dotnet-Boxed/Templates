@@ -48,7 +48,7 @@
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="7.2.1" Condition="'$(TLS)' == 'true'" />
     <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="7.2.1" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="7.2.4" />
     <PackageReference Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Streaming.AzureStorage" Version="7.2.1" />
