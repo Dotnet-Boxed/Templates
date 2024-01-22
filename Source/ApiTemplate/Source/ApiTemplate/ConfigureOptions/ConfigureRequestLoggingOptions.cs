@@ -18,7 +18,7 @@ public class ConfigureRequestLoggingOptions : IConfigureOptions<RequestLoggingOp
     private const string SchemePropertyName = "Scheme";
     private const string QueryStringPropertyName = "QueryString";
     private const string EndpointNamePropertyName = "EndpointName";
-    private const string ContentTypePropertyName = "ContentType";    
+    private const string ContentTypePropertyName = "ContentType";
     private const string RemoteIPPropertyName = "RemoteIP";
 
     private const string HealthCheckEndpointDisplayName = "Health checks";
