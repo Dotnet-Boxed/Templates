@@ -19,6 +19,7 @@ public class ConfigureRequestLoggingOptions : IConfigureOptions<RequestLoggingOp
     private const string QueryStringPropertyName = "QueryString";
     private const string EndpointNamePropertyName = "EndpointName";
     private const string ContentTypePropertyName = "ContentType";
+    private const string RemoteIPPropertyName = "RemoteIP";
 
     private const string HealthCheckEndpointDisplayName = "Health checks";
 
@@ -39,6 +40,7 @@ public class ConfigureRequestLoggingOptions : IConfigureOptions<RequestLoggingOp
         diagnosticContext.Set(HostPropertyName, request.Host);
         diagnosticContext.Set(ProtocolPropertyName, request.Protocol);
         diagnosticContext.Set(SchemePropertyName, request.Scheme);
+        diagnosticContext.Set(RemoteIPPropertyName, httpContext.Connection.RemoteIpAddress);
 
         var queryString = request.QueryString;
         if (queryString.HasValue)
