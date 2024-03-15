@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.BroadcastChannel" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Client" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Streaming" Version="7.2.1" />
