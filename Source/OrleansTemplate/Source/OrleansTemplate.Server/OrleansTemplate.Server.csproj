@@ -41,9 +41,9 @@
     <PackageReference Include="Boxed.AspNetCore" Version="9.0.1" />
     <PackageReference Include="OrleansDashboard" Version="7.2.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" Condition="'$(ApplicationInsights)' == 'true'" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="Microsoft.Orleans.BroadcastChannel" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="7.2.1" />
     <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="7.2.1" Condition="'$(TLS)' == 'true'" />
