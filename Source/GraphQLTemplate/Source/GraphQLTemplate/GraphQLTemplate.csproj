@@ -65,7 +65,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.14" Condition="'$(OpenTelemetry)' == 'true'" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.0.0-rc9.10" Condition="'$(OpenTelemetry)' == 'true' AND '$(Redis)' == 'true'" />
     <PackageReference Include="Serilog" Version="3.0.1" Condition="'$(Serilog)' == 'true'" />
     <PackageReference Include="Serilog.AspNetCore" Version="7.0.0" Condition="'$(Serilog)' == 'true'" />
