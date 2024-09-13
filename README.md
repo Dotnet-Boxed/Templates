@@ -26,7 +26,7 @@ Project templates with batteries included, providing the minimum amount of code 
 ## How can I install it?
 
 1. Install the latest [.NET Core SDK](https://dot.net).
-2. Run `dotnet new --install Boxed.Templates` to install the project templates.
+2. Run `dotnet new install Boxed.Templates` to install the project templates.
 
 ## How can I use it?
 
