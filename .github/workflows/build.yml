@@ -29,7 +29,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.2.1
         with:
           lfs: true
           fetch-depth: 0
@@ -64,7 +64,7 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.2.1
         with:
           lfs: true
           fetch-depth: 0
