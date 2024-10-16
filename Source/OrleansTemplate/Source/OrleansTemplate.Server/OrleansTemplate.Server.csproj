@@ -44,16 +44,16 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Orleans.BroadcastChannel" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="7.2.1" Condition="'$(TLS)' == 'true'" />
-    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Streaming.AzureStorage" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Transactions" Version="7.2.1" />
-    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="7.2.1" />
+    <PackageReference Include="Microsoft.Orleans.BroadcastChannel" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Connections.Security" Version="7.2.7" Condition="'$(TLS)' == 'true'" />
+    <PackageReference Include="Microsoft.Orleans.Persistence.AzureStorage" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Reminders.AzureStorage" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Streaming.AzureStorage" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Transactions" Version="7.2.7" />
+    <PackageReference Include="Microsoft.Orleans.Transactions.AzureStorage" Version="7.2.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" Condition="'$(Docker)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.6.0" Condition="'$(OpenTelemetry)' == 'true'" />
